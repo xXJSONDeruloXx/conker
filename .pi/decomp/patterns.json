@@ -369,5 +369,14 @@
     "example_functions": [
       "func_15073C50"
     ]
+  },
+  {
+    "id": "byte-addressed-struct-offset",
+    "description": "For byte offsets within a struct-array element, cast the struct element address to s32/void* and add the byte stride term; this preserves IDO's separate array-index stride and intra-element byte offset strength reductions.",
+    "trigger": "Target computes one address as base + idx*sizeof(struct) + arg*constant, with separate shift/sub chains for the outer struct stride and inner byte offset.",
+    "solution": "Use `(void *)((s32)&ARRAY[idx] + (inner * CONST))` instead of flattening the global as a byte array when the target still shows the outer struct-array stride.",
+    "example_functions": [
+      "func_10008C6C"
+    ]
   }
 ]

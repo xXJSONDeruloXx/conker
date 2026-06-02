@@ -4439,9 +4439,9 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 21,
-    "lastScore": 0.3939393939393939,
-    "status": "pending",
+    "attempts": 23,
+    "lastScore": 0.2308,
+    "status": "skipped",
     "history": [
       {
         "code": "void func_15125628(void) {\n    if (D_800DBFF4[0] != 0) {\n        D_800DBFF4[0]--;\n    }\n    if (D_800DBFF4[1] != 0) {\n        D_800DBFF4[1]--;\n    }\n    if (D_800DBFF4[2] != 0) {\n        D_800DBFF4[2]--;\n    }\n    if (D_800DBFF4[3] != 0) {\n        D_800DBFF4[3]--;\n    }\n}",
@@ -4844,6 +4844,62 @@
         "reason": "length_mismatch (target=26, generated=33)",
         "diffs": [],
         "timestamp": "2026-06-02T20:25:10.911Z"
+      },
+      {
+        "code": "void func_15125628(void) {\n    u32 temp_v0;\n    s32 temp_t6;\n    s32 temp_t7;\n    s32 temp_t8;\n    s32 temp_t9;\n\n    temp_v0 = D_800DBFF4[0];\n    temp_t6 = temp_v0 - 1;\n    if (temp_v0 != 0) {\n        D_800DBFF4[0] = temp_t6;\n    }\n    temp_v0 = D_800DBFF5;\n    temp_t7 = temp_v0 - 1;\n    if (temp_v0 != 0) {\n        D_800DBFF5 = temp_t7;\n    }\n    temp_v0 = D_800DBFF6[0];\n    temp_t8 = temp_v0 - 1;\n    if (temp_v0 != 0) {\n        D_800DBFF6[0] = temp_t8;\n    }\n    temp_v0 = D_800DBFF6[1];\n    temp_t9 = temp_v0 - 1;\n    if (temp_v0 != 0) {\n        D_800DBFF6[1] = temp_t9;\n    }\n}",
+        "score": 0.2308,
+        "reason": "structural_diffs=20",
+        "diffs": [
+          "structural: target=lui at, HI(D_800DBFF4) got=lui v1, HI(D_800DBFF6)",
+          "structural: target=beqz v0, L0 got=addiu v1, v1, LO(D_800DBFF6)",
+          "structural: target=addiu t6, v0, -1 got=beqz v0, L0",
+          "structural: target=sb t6, LO(D_800DBFF4)(at) got=addiu t6, v0, -1",
+          "structural: target=lui v0, HI(D_800DBFF5) got=lui at, HI(D_800DBFF4)",
+          "structural: target=lbu v0, LO(D_800DBFF5)(v0) got=sb t6, LO(D_800DBFF4)(at)",
+          "structural: target=lui at, HI(D_800DBFF5) got=lui v0, HI(D_800DBFF5)",
+          "structural: target=beqz v0, L1 got=lbu v0, LO(D_800DBFF5)(v0)",
+          "structural: target=addiu t7, v0, -1 got=lui at, HI(D_800DBFF5)",
+          "structural: target=sb t7, LO(D_800DBFF5)(at) got=beqz v0, L1",
+          "structural: target=lui v0, HI(D_800DBFF6) got=addiu t7, v0, -1",
+          "structural: target=lbu v0, LO(D_800DBFF6)(v0) got=sb t7, LO(D_800DBFF5)(at)",
+          "structural: target=lui at, HI(D_800DBFF6) got=lbu v0, 0(v1)",
+          "structural: target=beqz v0, L2 got=lui at, HI(D_800DBFF6)",
+          "structural: target=addiu t8, v0, -1 got=beqz v0, L2",
+          "structural: target=sb t8, LO(D_800DBFF6)(at) got=addiu t8, v0, -1",
+          "structural: target=lui v0, HI(D_800DBFF6 + 0x1) got=sb t8, LO(D_800DBFF6)(at)",
+          "structural: target=lbu v0, LO(D_800DBFF6 + 0x1)(v0) got=lbu v0, 1(v1)",
+          "structural: target=lui at, HI(D_800DBFF6 + 0x1) got=lui at, HI(D_800DBFF6)",
+          "structural: target=sb t9, LO(D_800DBFF6 + 0x1)(at) got=sb t9, 1(at)"
+        ],
+        "timestamp": "2026-06-02T20:26:03.415Z"
+      },
+      {
+        "code": "void func_15125628(void) {\n    u32 temp_v0;\n    s32 temp_t6;\n    s32 temp_t7;\n    s32 temp_t8;\n    s32 temp_t9;\n\n    temp_v0 = D_800DBFF4[0];\n    temp_t6 = temp_v0 - 1;\n    if (temp_v0 != 0) {\n        D_800DBFF4[0] = temp_t6;\n    }\n    temp_v0 = D_800DBFF5;\n    temp_t7 = temp_v0 - 1;\n    if (temp_v0 != 0) {\n        D_800DBFF5 = temp_t7;\n    }\n    temp_v0 = D_800DBFF6[0];\n    temp_t8 = temp_v0 - 1;\n    if (temp_v0 != 0) {\n        D_800DBFF6[0] = temp_t8;\n    }\n    temp_v0 = D_800DBFF6[1];\n    temp_t9 = temp_v0 - 1;\n    if (temp_v0 != 0) {\n        D_800DBFF6[1] = temp_t9;\n    }\n}",
+        "score": 0.2308,
+        "reason": "structural_diffs=20",
+        "diffs": [
+          "structural: target=lui at, HI(D_800DBFF4) got=lui v1, HI(D_800DBFF6)",
+          "structural: target=beqz v0, L0 got=addiu v1, v1, LO(D_800DBFF6)",
+          "structural: target=addiu t6, v0, -1 got=beqz v0, L0",
+          "structural: target=sb t6, LO(D_800DBFF4)(at) got=addiu t6, v0, -1",
+          "structural: target=lui v0, HI(D_800DBFF5) got=lui at, HI(D_800DBFF4)",
+          "structural: target=lbu v0, LO(D_800DBFF5)(v0) got=sb t6, LO(D_800DBFF4)(at)",
+          "structural: target=lui at, HI(D_800DBFF5) got=lui v0, HI(D_800DBFF5)",
+          "structural: target=beqz v0, L1 got=lbu v0, LO(D_800DBFF5)(v0)",
+          "structural: target=addiu t7, v0, -1 got=lui at, HI(D_800DBFF5)",
+          "structural: target=sb t7, LO(D_800DBFF5)(at) got=beqz v0, L1",
+          "structural: target=lui v0, HI(D_800DBFF6) got=addiu t7, v0, -1",
+          "structural: target=lbu v0, LO(D_800DBFF6)(v0) got=sb t7, LO(D_800DBFF5)(at)",
+          "structural: target=lui at, HI(D_800DBFF6) got=lbu v0, 0(v1)",
+          "structural: target=beqz v0, L2 got=lui at, HI(D_800DBFF6)",
+          "structural: target=addiu t8, v0, -1 got=beqz v0, L2",
+          "structural: target=sb t8, LO(D_800DBFF6)(at) got=addiu t8, v0, -1",
+          "structural: target=lui v0, HI(D_800DBFF6 + 0x1) got=sb t8, LO(D_800DBFF6)(at)",
+          "structural: target=lbu v0, LO(D_800DBFF6 + 0x1)(v0) got=lbu v0, 1(v1)",
+          "structural: target=lui at, HI(D_800DBFF6 + 0x1) got=lui at, HI(D_800DBFF6)",
+          "structural: target=sb t9, LO(D_800DBFF6 + 0x1)(at) got=sb t9, 1(at)"
+        ],
+        "timestamp": "2026-06-02T20:26:41.281Z"
       }
     ]
   },

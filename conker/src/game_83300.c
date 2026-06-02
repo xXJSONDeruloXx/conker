@@ -1010,7 +1010,13 @@ void func_1505E060(u8 *arg0) {
 #pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_1506045C.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_15060778.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_15060A30.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_15060A9C.s")
+void func_15060A9C(s32 arg0, struct127 *arg1) {
+    if (arg1->camera == NULL) {
+        func_10010630(arg0, arg1, 0x5DC0, 0x1F4, 0x9C4);
+    } else {
+        func_15060778(arg0, arg1, 0x5DC0, 0, 0x1F4, 0x9C4, 0);
+    }
+}
 
 void func_15060B04(s32 arg0, struct127 *arg1, s32 arg2) {
     if (arg1->camera == NULL) {
