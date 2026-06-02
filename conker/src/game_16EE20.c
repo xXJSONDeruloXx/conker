@@ -96,7 +96,23 @@ s32 func_151422F8(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15142314.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_151423D8.s")
+f32 func_151423D8(u8 arg0) {
+    s32 temp_v1;
+    s32 temp_v0 = arg0;
+    u16 temp_t0;
+
+    if (temp_v0 & 0x40) {
+        temp_v1 = 0x40 - (temp_v0 & 0x3F);
+    } else {
+        temp_v1 = temp_v0 & 0x3F;
+    }
+
+    temp_t0 = temp_v0 & 0xC0;
+    if ((temp_t0 == 0) || (temp_t0 == 0xC0)) {
+        return D_8009A220[temp_v1];
+    }
+    return -D_8009A220[temp_v1];
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15142444.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_151424F4.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15142600.s")
