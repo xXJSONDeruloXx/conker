@@ -3263,8 +3263,8 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 9,
-    "lastScore": 0.9231,
+    "attempts": 12,
+    "lastScore": 0.3462,
     "status": "pending",
     "history": [
       {
@@ -3378,6 +3378,51 @@
           "structural: target=lw v1, 28(sp) got=lw v1, 24(sp)"
         ],
         "timestamp": "2026-06-02T19:33:35.997Z"
+      },
+      {
+        "code": "s32 func_1000FE88(struct15 *arg0, s32 arg1, s32 *arg2) {\n    struct15 *temp_v1;\n    u16 temp_a0;\n\n    if (arg1 < *arg2) {\n        temp_v1 = (struct15 *)((s32)arg0 + (arg1 * 0x30));\n        temp_a0 = temp_v1->unk24;\n        if (temp_a0 != 0) {\n            func_100111C8(temp_a0);\n        }\n        temp_v1->unk10 |= 0x80;\n        return 0;\n    }\n    return 1;\n}",
+        "score": 0.9231,
+        "reason": "structural_diffs=2",
+        "diffs": [
+          "structural: target=addiu sp, sp, -32 got=addiu sp, sp, -40",
+          "structural: target=addiu sp, sp, 32 got=addiu sp, sp, 40"
+        ],
+        "timestamp": "2026-06-02T19:33:52.930Z"
+      },
+      {
+        "code": "s32 func_1000FE88(struct15 *arg0, s32 arg1, s32 *arg2) {\n    struct15 *temp_v1;\n    register u16 temp_a0;\n\n    if (arg1 < *arg2) {\n        temp_v1 = (struct15 *)((s32)arg0 + (arg1 * 0x30));\n        temp_a0 = temp_v1->unk24;\n        if (temp_a0 != 0) {\n            func_100111C8(temp_a0);\n        }\n        temp_v1->unk10 |= 0x80;\n        return 0;\n    }\n    return 1;\n}",
+        "score": 0.9231,
+        "reason": "structural_diffs=2",
+        "diffs": [
+          "structural: target=addiu sp, sp, -32 got=addiu sp, sp, -40",
+          "structural: target=addiu sp, sp, 32 got=addiu sp, sp, 40"
+        ],
+        "timestamp": "2026-06-02T19:34:11.078Z"
+      },
+      {
+        "code": "s32 func_1000FE88(struct15 *arg0, s32 arg1, s32 *arg2) {\n    volatile struct15 *temp_v1;\n\n    if (arg1 < *arg2) {\n        temp_v1 = (struct15 *)((s32)arg0 + (arg1 * 0x30));\n        if (temp_v1->unk24 != 0) {\n            func_100111C8(temp_v1->unk24);\n        }\n        temp_v1->unk10 |= 0x80;\n        return 0;\n    }\n    return 1;\n}",
+        "score": 0.3462,
+        "reason": "structural_diffs=17",
+        "diffs": [
+          "structural: target=move a3, a0 got=lw t6, 0(a2)",
+          "structural: target=lw t6, 0(a2) got=sll t7, a1, 2",
+          "structural: target=sll t7, a1, 2 got=subu t7, t7, a1",
+          "structural: target=subu t7, t7, a1 got=slt at, a1, t6",
+          "structural: target=slt at, a1, t6 got=beqz at, L0",
+          "structural: target=beqz at, L0 got=li v0, 1",
+          "structural: target=li v0, 1 got=sll t7, t7, 4",
+          "structural: target=sll t7, t7, 4 got=addu v1, a0, t7",
+          "structural: target=addu v1, a3, t7 got=lhu t8, 36(v1)",
+          "structural: target=lhu a0, 36(v1) got=beqzl t8, L1",
+          "structural: target=beqzl a0, L1 got=lw t9, 16(v1)",
+          "structural: target=lw t8, 16(v1) got=lhu a0, 36(v1)",
+          "structural: target=sw v1, 28(sp) got=sw v1, 24(sp)",
+          "structural: target=lw v1, 28(sp) got=lw v1, 24(sp)",
+          "structural: target=lw t8, 16(v1) got=lw t9, 16(v1)",
+          "structural: target=ori t9, t8, 128 got=ori t0, t9, 128",
+          "structural: target=sw t9, 16(v1) got=sw t0, 16(v1)"
+        ],
+        "timestamp": "2026-06-02T19:34:36.306Z"
       }
     ]
   },
