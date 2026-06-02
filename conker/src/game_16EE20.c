@@ -213,7 +213,10 @@ f32 func_15143E64(f32 *arg0) {
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_1514470C.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15144A74.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15144AA8.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15144B34.s")
+void *func_15144B34(s32 arg0) {
+    return (void *)((arg0 * 0x9A0) + (s32)D_800DBFF0 + 0x2F8);
+}
+
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15144B68.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15144BC8.s")
 
