@@ -200,7 +200,12 @@ s16 func_15143044(u8 arg0, s32 arg1) {
 
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_151436B4.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_1514373C.s")
+void func_1514373C(f32 angle, f32 radius, f32 *outX, f32 *outY) {
+    f32 c = cosf(angle);
+    f32 s = sinf(angle);
+    *outX = radius * s;
+    *outY = radius * c;
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15143794.s")
 void func_15143834(s16 arg0, s16 arg1, f32 arg2) {
     func_15143794(arg0, arg1, arg2);
