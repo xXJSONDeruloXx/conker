@@ -1039,6 +1039,20 @@ export default function (pi: ExtensionAPI) {
 				await pi.exec("git", ["push"]);
 			}
 
+			// Detect plateau: last 5+ attempts all within ±0.05 of each other
+			let plateauWarning = "";
+			if (entry?.history && entry.history.length >= 5) {
+				const tail = entry.history.slice(-5);
+				const scores = tail.map((h: AttemptRecord) => h.score);
+				const min = Math.min(...scores);
+				const max = Math.max(...scores);
+				if (max - min <= 0.05 && max < 0.9) {
+					plateauWarning = `\n\n⚠️ PLATEAU: Last ${tail.length} attempts scored [${scores.map((s: number) => s.toFixed(2)).join(", ")}]`
+						+ `\n   No improvement trend (range: ${min.toFixed(2)}-${max.toFixed(2)}). This approach may be fundamentally misaligned.`
+						+ `\n   Consider: decomp_chunk_done to move on, or try a completely different type/struct assumption.`;
+				}
+			}
+
 			// Build response with prior attempt context
 			const keptNote = params.keep ? "\n\n⚠️ Patch LEFT IN PLACE (keep=true). git checkout to revert when done." : "";
 			const priorHint = (entry?.history?.length ?? 0) > 1
@@ -1049,7 +1063,7 @@ export default function (pi: ExtensionAPI) {
 				content: [
 					{
 						type: "text",
-						text: `✗ Non-match${params.keep ? " (kept)" : " (reverted)"}. Score: ${scoreData.score}\nReason: ${scoreData.reason}\n\nDiff:\n${diffSummary}\n\nGenerated ASM:\n\`\`\`\n${rawGeneratedAsm}\n\`\`\`${keptNote}${priorHint}`,
+						text: `✗ Non-match${params.keep ? " (kept)" : " (reverted)"}. Score: ${scoreData.score}\nReason: ${scoreData.reason}\n\nDiff:\n${diffSummary}\n\nGenerated ASM:\n\`\`\`\n${rawGeneratedAsm}\n\`\`\`${plateauWarning}${keptNote}${priorHint}`,
 					},
 				],
 				details: scoreData,
