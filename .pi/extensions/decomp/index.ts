@@ -15,6 +15,14 @@ import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
 import { Type } from "typebox";
 import { StringEnum } from "@earendil-works/pi-ai";
 
+interface AttemptRecord {
+	code: string;
+	score: number;
+	reason: string;
+	diffs: string[];
+	timestamp: string;
+}
+
 interface QueueEntry {
 	function: string;
 	file: string;
@@ -25,6 +33,7 @@ interface QueueEntry {
 	attempts: number;
 	lastScore: number;
 	status: "pending" | "matched" | "skipped";
+	history?: AttemptRecord[];
 }
 
 interface Pattern {
@@ -41,6 +50,10 @@ interface DecompState {
 	matched: number;
 	totalAsm: number;
 }
+
+const MAX_HISTORY_PER_FUNC = 5;
+const MAX_CODE_IN_HISTORY = 1500; // chars of C code to keep per attempt
+const AUTO_SKIP_AFTER = 5; // auto-skip after this many consecutive failures
 
 let state: DecompState = {
 	queue: [],
@@ -327,9 +340,28 @@ export default function (pi: ExtensionAPI) {
 				}
 			}
 
+			// Surface prior attempt history so the LLM doesn't repeat mistakes
+			if (next.history && next.history.length > 0) {
+				output.push("", "### ⚠️ Prior Failed Attempts (DO NOT REPEAT THESE)");
+				for (let i = 0; i < next.history.length; i++) {
+					const h = next.history[i];
+					output.push(`\n**Attempt ${i + 1}** (score: ${h.score.toFixed(3)}, reason: ${h.reason})`);
+					output.push("```c");
+					output.push(h.code);
+					output.push("```");
+					if (h.diffs.length > 0) {
+						output.push("Diffs:");
+						for (const d of h.diffs) {
+							output.push(`  - ${d}`);
+						}
+					}
+				}
+				output.push("", "**You must try a DIFFERENT approach.** Study the diffs above and change your strategy.");
+			}
+
 			return {
 				content: [{ type: "text", text: output.join("\n") }],
-				details: { function: next.function, file: next.file },
+				details: { function: next.function, file: next.file, hasHistory: (next.history?.length ?? 0) > 0 },
 			};
 		},
 	});
@@ -432,12 +464,44 @@ export default function (pi: ExtensionAPI) {
 				timeout: 30000,
 			});
 
+			// Early reject: if generated is wildly oversized, the code probably includes
+			// multiple functions or struct definitions that shouldn't be there
 			let scoreData: any = { match: false, score: 0, reason: "diff_failed" };
 			try {
 				scoreData = JSON.parse(diffResult.stdout);
 			} catch {}
 
-			// Update queue entry
+			if (scoreData.generated_instructions && scoreData.target_instructions) {
+				const ratio = scoreData.generated_instructions / scoreData.target_instructions;
+				if (ratio > 3) {
+					fs.writeFileSync(srcPath, original);
+					const entry = state.queue.find((e: QueueEntry) => e.function === params.function);
+					if (entry) {
+						entry.attempts++;
+						entry.lastScore = 0;
+						if (!entry.history) entry.history = [];
+						entry.history.push({
+							code: params.code.slice(0, MAX_CODE_IN_HISTORY),
+							score: 0,
+							reason: `generated ${scoreData.generated_instructions} instr for ${scoreData.target_instructions} target (${ratio.toFixed(1)}x oversized)`,
+							diffs: [],
+							timestamp: new Date().toISOString(),
+						});
+						if (entry.history.length > MAX_HISTORY_PER_FUNC) entry.history = entry.history.slice(-MAX_HISTORY_PER_FUNC);
+						if (entry.attempts >= AUTO_SKIP_AFTER) entry.status = "skipped";
+					}
+					saveQueue(ctx.cwd);
+					return {
+						content: [{
+							type: "text",
+							text: `✗ REJECTED: Generated ${scoreData.generated_instructions} instructions for a ${scoreData.target_instructions}-instruction target (${ratio.toFixed(1)}x oversized).\n\nYour code likely includes extra functions, struct definitions, or headers that shouldn't be in the function body. Provide ONLY the single function.`,
+						}],
+						details: { ...scoreData, rejected: "oversized" },
+					};
+				}
+			}
+
+			// Update queue entry (scoreData already parsed above)
 			const entry = state.queue.find((e) => e.function === params.function);
 			if (entry) {
 				entry.attempts++;
@@ -457,12 +521,7 @@ export default function (pi: ExtensionAPI) {
 				};
 			}
 
-			// Non-match: revert
-			fs.writeFileSync(srcPath, original);
-			saveQueue(ctx.cwd);
-			latestCtx = ctx;
-			refreshWidget();
-
+			// Non-match: save attempt to history
 			const diffSummary = scoreData.diffs
 				? scoreData.diffs
 						.slice(0, 10)
@@ -470,11 +529,43 @@ export default function (pi: ExtensionAPI) {
 						.join("\n")
 				: "(no diff detail)";
 
+			if (entry) {
+				if (!entry.history) entry.history = [];
+				entry.history.push({
+					code: params.code.slice(0, MAX_CODE_IN_HISTORY),
+					score: scoreData.score || 0,
+					reason: scoreData.reason || "unknown",
+					diffs: (scoreData.diffs || []).slice(0, 5).map((d: any) => `${d.type}: target=${d.target} got=${d.generated}`),
+					timestamp: new Date().toISOString(),
+				});
+				// Keep only last N attempts
+				if (entry.history.length > MAX_HISTORY_PER_FUNC) {
+					entry.history = entry.history.slice(-MAX_HISTORY_PER_FUNC);
+				}
+
+				// Auto-skip after too many failures
+				if (entry.attempts >= AUTO_SKIP_AFTER && entry.status === "pending") {
+					entry.status = "skipped";
+				}
+			}
+
+			// Revert source
+			fs.writeFileSync(srcPath, original);
+			saveQueue(ctx.cwd);
+			latestCtx = ctx;
+			refreshWidget();
+
+			// Build response with prior attempt context
+			const autoSkipped = entry?.status === "skipped" ? "\n\n⚠️ AUTO-SKIPPED after 5 failures. Moving to next candidate." : "";
+			const priorHint = (entry?.history?.length ?? 0) > 1
+				? `\n\nPrior attempts (${entry!.history!.length}): scores=[${entry!.history!.map((h: AttemptRecord) => h.score.toFixed(2)).join(", ")}]`
+				: "";
+
 			return {
 				content: [
 					{
 						type: "text",
-						text: `✗ Non-match (reverted). Score: ${scoreData.score}\nReason: ${scoreData.reason}\n\nDiff:\n${diffSummary}`,
+						text: `✗ Non-match (reverted). Score: ${scoreData.score}\nReason: ${scoreData.reason}\n\nDiff:\n${diffSummary}${priorHint}${autoSkipped}`,
 					},
 				],
 				details: scoreData,
