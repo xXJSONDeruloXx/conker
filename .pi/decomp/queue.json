@@ -1214,7 +1214,7 @@
     "instructions": 28,
     "difficulty": "low",
     "tags": [],
-    "attempts": 12,
+    "attempts": 15,
     "lastScore": 0.48214285714285715,
     "status": "pending",
     "history": [
@@ -1301,6 +1301,27 @@
         "reason": "length_mismatch (target=28, generated=27)",
         "diffs": [],
         "timestamp": "2026-06-02T21:09:30.235Z"
+      },
+      {
+        "code": "void func_10003BD0(void) {\n    volatile s32 *temp_a1;\n\n    D_800380B4 = (temp_a1 = (s32 *)&D_800380BC, (struct54 *)&D_800E9D10);\n    D_800380B4->unk0 = NULL;\n    D_800380B4->unk4 = NULL;\n    D_800380B4->unk8 = D_80038098 - (u32)&D_800E9D10 - 0x14;\n    D_800380B4->unkC = 0;\n    D_800380B4->unk10 = 0;\n    *temp_a1 = (s32)D_800380B4;\n    D_800380B8 = D_800380B4;\n    D_800380B0 = D_800380B4;\n}",
+        "score": 0.48214285714285715,
+        "reason": "length_mismatch (target=28, generated=27)",
+        "diffs": [],
+        "timestamp": "2026-06-02T21:09:51.519Z"
+      },
+      {
+        "code": "void func_10003BD0(s32 arg0, s32 *arg1) {\n    arg1 = (s32 *)&D_800380BC;\n    D_800380B4 = (struct54 *)&D_800E9D10;\n    D_800380B4->unk0 = NULL;\n    D_800380B4->unk4 = NULL;\n    D_800380B4->unk8 = D_80038098 - (u32)&D_800E9D10 - 0x14;\n    D_800380B4->unkC = 0;\n    D_800380B4->unk10 = 0;\n    *arg1 = (s32)D_800380B4;\n    D_800380B8 = D_800380B4;\n    D_800380B0 = D_800380B4;\n}",
+        "score": 0.4827586206896552,
+        "reason": "length_mismatch (target=28, generated=29)",
+        "diffs": [],
+        "timestamp": "2026-06-02T21:10:40.312Z"
+      },
+      {
+        "code": "void func_10003BD0(void) {\n    s32 **temp_a1 = &D_800380BC;\n\n    D_800380B4 = (struct54 *)&D_800E9D10;\n    D_800380B4->unk0 = NULL;\n    D_800380B4->unk4 = NULL;\n    D_800380B4->unk8 = D_80038098 - (u32)&D_800E9D10 - 0x14;\n    D_800380B4->unkC = 0;\n    D_800380B4->unk10 = 0;\n    *(volatile s32 **)temp_a1 = (s32 *)D_800380B4;\n    D_800380B8 = D_800380B4;\n    D_800380B0 = D_800380B4;\n}",
+        "score": 0.48214285714285715,
+        "reason": "length_mismatch (target=28, generated=27)",
+        "diffs": [],
+        "timestamp": "2026-06-02T21:11:04.733Z"
       }
     ]
   },
