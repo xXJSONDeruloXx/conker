@@ -1214,8 +1214,8 @@
     "instructions": 28,
     "difficulty": "low",
     "tags": [],
-    "attempts": 6,
-    "lastScore": 0.48214285714285715,
+    "attempts": 9,
+    "lastScore": 0.39285714285714285,
     "status": "pending",
     "history": [
       {
@@ -1259,6 +1259,27 @@
         "reason": "length_mismatch (target=28, generated=27)",
         "diffs": [],
         "timestamp": "2026-06-02T21:06:22.413Z"
+      },
+      {
+        "code": "void func_10003BD0(void) {\n    D_800380B4 = (struct54 *)&D_800E9D10;\n    D_800380B4->unk0 = NULL;\n    D_800380B4->unk4 = NULL;\n    D_800380B4->unk8 = D_80038098 - (u32)&D_800E9D10 - 0x14;\n    D_800380B4->unkC = 0;\n    D_800380B4->unk10 = 0;\n    D_800380BC[0] = (s32)D_800380B4;\n    D_800380B8 = D_800380B4;\n    D_800380B0 = D_800380B4;\n}",
+        "score": 0.48214285714285715,
+        "reason": "length_mismatch (target=28, generated=27)",
+        "diffs": [],
+        "timestamp": "2026-06-02T21:07:24.627Z"
+      },
+      {
+        "code": "void func_10003BD0(void) {\n    s32 temp_v1 = (s32)&D_800380B4;\n    s32 temp_a0 = (s32)&D_800E9D10;\n    s32 temp_a1 = (s32)&D_800380BC;\n    s32 temp_v0;\n\n    *(s32 *)temp_v1 = temp_a0;\n    *(s32 *)temp_a0 = 0;\n    *(s32 *)(*(s32 *)temp_v1 + 4) = 0;\n    *(s32 *)(*(s32 *)temp_v1 + 8) = D_80038098 - temp_a0 - 0x14;\n    *(s32 *)(*(s32 *)temp_v1 + 0xC) = 0;\n    *(s32 *)(*(s32 *)temp_v1 + 0x10) = 0;\n    temp_v0 = *(s32 *)temp_v1;\n    *(s32 *)temp_a1 = temp_v0;\n    D_800380B8 = (struct54 *)temp_v0;\n    D_800380B0 = (struct54 *)temp_v0;\n}",
+        "score": 0.48214285714285715,
+        "reason": "length_mismatch (target=28, generated=27)",
+        "diffs": [],
+        "timestamp": "2026-06-02T21:07:58.756Z"
+      },
+      {
+        "code": "void func_10003BD0(void) {\n    struct54 **temp_v1 = &D_800380B4;\n    struct54 *temp_a0 = (struct54 *)&D_800E9D10;\n    s32 *temp_a1 = (s32 *)&D_800380BC;\n    s32 temp_v0;\n\n    *(s32 *)temp_v1 = (s32)temp_a0;\n    *(s32 *)temp_a0 = 0;\n    *(s32 *)(*(s32 *)temp_v1 + 4) = 0;\n    *(s32 *)(*(s32 *)temp_v1 + 8) = D_80038098 - (s32)temp_a0 - 0x14;\n    *(s32 *)(*(s32 *)temp_v1 + 0xC) = 0;\n    *(s32 *)(*(s32 *)temp_v1 + 0x10) = 0;\n    temp_v0 = *(s32 *)temp_v1;\n    *temp_a1 = temp_v0;\n    D_800380B8 = (struct54 *)temp_v0;\n    D_800380B0 = (struct54 *)temp_v0;\n}",
+        "score": 0.39285714285714285,
+        "reason": "length_mismatch (target=28, generated=22)",
+        "diffs": [],
+        "timestamp": "2026-06-02T21:08:20.282Z"
       }
     ]
   },
