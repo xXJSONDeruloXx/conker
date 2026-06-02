@@ -5344,7 +5344,7 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 6,
+    "attempts": 9,
     "lastScore": 0.7407,
     "status": "pending",
     "history": [
@@ -5434,6 +5434,43 @@
           "structural: target=addu at, at, t2 got=addu at, at, t1"
         ],
         "timestamp": "2026-06-02T21:00:01.311Z"
+      },
+      {
+        "code": "f32 func_151423D8(u8 arg0) {\n    s32 temp_v1;\n    s32 temp_v0 = arg0;\n    register s32 temp_t0;\n\n    if (temp_v0 & 0x40) {\n        temp_v1 = 0x40 - (temp_v0 & 0x3F);\n    } else {\n        temp_v1 = temp_v0 & 0x3F;\n    }\n\n    temp_t0 = temp_v0 & 0xC0;\n    if ((temp_t0 == 0) || (temp_t0 == 0xC0)) {\n        return D_8009A220[temp_v1];\n    }\n    return -D_8009A220[temp_v1];\n}",
+        "score": 0.7407,
+        "reason": "structural_diffs=7",
+        "diffs": [
+          "structural: target=andi t0, v0, 192 got=andi a0, v0, 192",
+          "structural: target=beqz t0, L2 got=beqz a0, L2",
+          "structural: target=bne t0, at, L3 got=bne a0, at, L3",
+          "structural: target=sll t2, v1, 2 got=sll t1, v1, 2",
+          "structural: target=sll t1, v1, 2 got=sll t0, v1, 2",
+          "structural: target=addu at, at, t1 got=addu at, at, t0",
+          "structural: target=addu at, at, t2 got=addu at, at, t1"
+        ],
+        "timestamp": "2026-06-02T21:00:23.797Z"
+      },
+      {
+        "code": "f32 func_151423D8(u8 arg0) {\n    s32 temp_v1;\n    s32 temp_v0 = arg0;\n    s32 temp_t0;\n\n    if (temp_v0 & 0x40) {\n        temp_v1 = 0x40 - (temp_v0 & 0x3F);\n    } else {\n        temp_v1 = temp_v0 & 0x3F;\n    }\n\n    temp_t0 = temp_v0 & 0xC0;\n    return ((temp_t0 == 0) || (temp_t0 == 0xC0)) ? D_8009A220[temp_v1] : -D_8009A220[temp_v1];\n}",
+        "score": 0.48214285714285715,
+        "reason": "length_mismatch (target=27, generated=28)",
+        "diffs": [],
+        "timestamp": "2026-06-02T21:00:37.158Z"
+      },
+      {
+        "code": "f32 func_151423D8(u8 arg0) {\n    s32 temp_v1;\n    s32 temp_v0 = arg0;\n    s32 temp_t0;\n\n    if (temp_v0 & 0x40) {\n        temp_v1 = 0x40 - (temp_v0 & 0x3F);\n    } else {\n        temp_v1 = temp_v0 & 0x3F;\n    }\n\n    temp_t0 = temp_v0 & 0xC0;\n    if ((temp_t0 == 0) || (temp_t0 == 0xC0)) {\n        return *(f32 *)((u8 *)D_8009A220 + (temp_v1 * 4));\n    }\n    return -*(f32 *)((u8 *)D_8009A220 + (temp_v1 * 4));\n}",
+        "score": 0.7407,
+        "reason": "structural_diffs=7",
+        "diffs": [
+          "structural: target=andi t0, v0, 192 got=andi a0, v0, 192",
+          "structural: target=beqz t0, L2 got=beqz a0, L2",
+          "structural: target=bne t0, at, L3 got=bne a0, at, L3",
+          "structural: target=sll t2, v1, 2 got=sll t1, v1, 2",
+          "structural: target=sll t1, v1, 2 got=sll t0, v1, 2",
+          "structural: target=addu at, at, t1 got=addu at, at, t0",
+          "structural: target=addu at, at, t2 got=addu at, at, t1"
+        ],
+        "timestamp": "2026-06-02T21:00:53.833Z"
       }
     ]
   },
