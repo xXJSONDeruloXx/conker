@@ -5634,9 +5634,9 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 9,
+    "attempts": 10,
     "lastScore": 0.48214285714285715,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "void func_15004CE0(s8 *arg0, s32 arg1) {\n    s32 i = 0;\n    s8 *ptr = arg0;\n    u32 temp;\n\n    if (*arg0 != -0x21) {\n        do {\n            if (*ptr == -0x24) {\n                if ((u8)ptr[3] == 0xE) {\n                    temp = *(u32 *)(ptr + 4);\n                    if (temp < 0x80000000U) {\n                        *(u32 *)(ptr + 4) = temp + arg1;\n                    }\n                }\n            }\n            i++;\n            ptr = arg0 + (i << 3);\n        } while (*ptr != -0x21);\n    }\n}",
@@ -5700,6 +5700,13 @@
         "reason": "length_mismatch (target=28, generated=27)",
         "diffs": [],
         "timestamp": "2026-06-02T21:21:22.713Z"
+      },
+      {
+        "code": "void func_15004CE0(s8 *arg0, s32 arg1) {\n    s32 i = 0;\n    s8 *ptr = arg0;\n    u32 temp;\n\n    if (arg0[0] != -0x21) {\n        do {\n            ptr = arg0 + (i << 3);\n            if (ptr[0] == -0x24) {\n                if ((u8)ptr[3] == 0xE) {\n                    temp = *(u32 *)(ptr + 4);\n                    if (temp < 0x80000000U) {\n                        *(u32 *)(ptr + 4) = temp + arg1;\n                    }\n                }\n            }\n            i++;\n        } while (arg0[i << 3] != -0x21);\n    }\n    return;\n    asm(\"nop\");\n}",
+        "score": 0.48214285714285715,
+        "reason": "length_mismatch (target=28, generated=27)",
+        "diffs": [],
+        "timestamp": "2026-06-02T21:21:45.136Z"
       }
     ]
   },
@@ -5800,9 +5807,43 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.4642857142857143,
+    "status": "pending",
+    "history": [
+      {
+        "code": "s32 func_15141564(struct210 *arg0) {\n    f32 *temp_v1;\n\n    temp_v1 = (f32 *)((s32)arg0 + 0x170);\n    *(f32 *)((s32)arg0 + 0x158) = temp_v1[0] + (temp_v1[1] * sinf(*(f32 *)((s32)arg0 + 0x178)));\n    temp_v1[2] = temp_v1[2] + (temp_v1[3] * D_800BE9A4);\n    temp_v1[2] = func_15144B68(temp_v1[2]);\n    return 1;\n}",
+        "score": 0.6429,
+        "reason": "structural_diffs=10",
+        "diffs": [
+          "structural: target=addiu sp, sp, -40 got=addiu sp, sp, -32",
+          "structural: target=sw a0, 40(sp) got=sw a0, 32(sp)",
+          "structural: target=lw a0, 40(sp) got=lw a0, 32(sp)",
+          "structural: target=lwc1 f6, 4(v1) got=lwc1 f4, 4(v1)",
+          "structural: target=lwc1 f4, 0(v1) got=lwc1 f8, 0(v1)",
+          "structural: target=mul.s f8, f6, f0 got=mul.s f6, f0, f4",
+          "structural: target=add.s f10, f4, f8 got=add.s f10, f6, f8",
+          "structural: target=lwc1 f4, 8(v1) got=lwc1 f6, 8(v1)",
+          "structural: target=mul.s f6, f16, f18 got=mul.s f4, f16, f18",
+          "structural: target=addiu sp, sp, 40 got=addiu sp, sp, 32"
+        ],
+        "timestamp": "2026-06-02T21:25:25.209Z"
+      },
+      {
+        "code": "s32 func_15141564(struct210 *arg0) {\n    f32 temp_f0;\n    f32 *temp_v1;\n    f32 temp_f6;\n    f32 temp_f4;\n    f32 temp_f18;\n    f32 temp_f16;\n    f32 temp_f4_2;\n\n    temp_f0 = sinf(*(f32 *)((s32)arg0 + 0x178));\n    temp_v1 = (f32 *)((s32)arg0 + 0x170);\n    temp_f6 = temp_v1[1];\n    temp_f4 = temp_v1[0];\n    *(f32 *)((s32)arg0 + 0x158) = temp_f4 + (temp_f6 * temp_f0);\n    temp_f18 = D_800BE9A4;\n    temp_f16 = temp_v1[3];\n    temp_f4_2 = temp_v1[2];\n    temp_v1[2] = temp_f4_2 + (temp_f16 * temp_f18);\n    temp_v1[2] = func_15144B68(temp_v1[2]);\n    return 1;\n}",
+        "score": 0.48214285714285715,
+        "reason": "length_mismatch (target=28, generated=27)",
+        "diffs": [],
+        "timestamp": "2026-06-02T21:25:49.875Z"
+      },
+      {
+        "code": "s32 func_15141564(struct210 *arg0) {\n    f32 *temp_v1;\n    f32 temp_f0;\n\n    temp_f0 = sinf(*(f32 *)((s32)arg0 + 0x178));\n    temp_v1 = (f32 *)((s32)arg0 + 0x170);\n    *(f32 *)((s32)arg0 + 0x158) = temp_v1[0] + (temp_v1[1] * temp_f0);\n    temp_v1[2] = temp_v1[2] + (temp_v1[3] * D_800BE9A4);\n    temp_v1[2] = func_15144B68(temp_v1[2]);\n    return 1;\n}",
+        "score": 0.4642857142857143,
+        "reason": "length_mismatch (target=28, generated=26)",
+        "diffs": [],
+        "timestamp": "2026-06-02T21:26:23.624Z"
+      }
+    ]
   },
   {
     "function": "func_15040CC8",
