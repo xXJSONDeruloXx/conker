@@ -5142,8 +5142,8 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 36,
-    "lastScore": 0.1613,
+    "attempts": 39,
+    "lastScore": 0.484375,
     "status": "pending",
     "history": [
       {
@@ -5523,6 +5523,48 @@
           "structural: target=and t9, t8, t3 got=and a1, t7, t4"
         ],
         "timestamp": "2026-06-02T23:09:22.257Z"
+      },
+      {
+        "code": "void func_15168F08(Gfx *arg0, s32 arg1, s32 arg2) {\n    s32 i = 0;\n    Gfx *ptr = arg0;\n    s32 temp;\n\n    arg2 = arg1;\n    if (*(volatile s8 *)&arg0->words.w0 != -0x21) {\n        arg1 = *(volatile s8 *)&arg0->words.w0;\n        do {\n            i++;\n            if ((arg1 == 1) || ((arg1 == -0x24) && (*((u8 *)&ptr->words.w0 + 3) == 0xE))) {\n                temp = ptr->words.w1 & 0x00FFFFFF;\n                *(volatile s32 *)&ptr->words.w1 = temp;\n                *(volatile s32 *)&ptr->words.w1 = temp + arg2;\n            }\n            ptr = arg0 + i;\n            arg1 = *(s8 *)&ptr->words.w0;\n        } while (arg1 != -0x21);\n    }\n}",
+        "score": 0.2581,
+        "reason": "structural_diffs=23",
+        "diffs": [
+          "structural: target=move a2, a1 got=li t0, -33",
+          "structural: target=li a3, -33 got=lb t6, 0(a0)",
+          "structural: target=lb t6, 0(a0) got=move v0, zero",
+          "structural: target=move v0, zero got=move v1, a0",
+          "structural: target=move v1, a0 got=beq t0, t6, L0",
+          "structural: target=beq a3, t6, L0 got=move a2, a1",
+          "structural: target=lui t3, 255 got=lui t4, 255",
+          "structural: target=ori t3, t3, 65535 got=ori t4, t4, 65535",
+          "structural: target=li t2, 14 got=li t3, 14",
+          "structural: target=li t1, -36 got=li t2, -36",
+          "structural: target=li t0, 1 got=li t1, 1",
+          "structural: target=beq t0, a1, L1 got=beq a1, t1, L1",
+          "structural: target=bnel t1, a1, L2 got=bnel a1, t2, L2",
+          "structural: target=sll t6, v0, 3 got=sll t5, v0, 3",
+          "structural: target=bnel t2, t7, L2 got=bnel t3, t7, L2",
+          "structural: target=sll t6, v0, 3 got=sll t5, v0, 3",
+          "structural: target=and t9, t8, t3 got=and a1, t8, t4",
+          "structural: target=sw t9, 4(v1) got=sw a1, 4(v1)",
+          "structural: target=addu t5, t9, a2 got=addu t9, a1, a2",
+          "structural: target=sw t5, 4(v1) got=sw t9, 4(v1)"
+        ],
+        "timestamp": "2026-06-02T23:10:08.775Z"
+      },
+      {
+        "code": "void func_15168F08(Gfx *arg0, s32 arg1, s32 arg2, s32 arg3) {\n    s32 i = 0;\n    Gfx *ptr = arg0;\n    s32 temp;\n\n    if ((arg2 = arg1, arg3 = -0x21, *(volatile s8 *)&arg0->words.w0) != arg3) {\n        arg1 = *(volatile s8 *)&arg0->words.w0;\n        do {\n            i++;\n            if ((arg1 == 1) || ((arg1 == -0x24) && (*((u8 *)&ptr->words.w0 + 3) == 0xE))) {\n                temp = ptr->words.w1 & 0x00FFFFFF;\n                *(volatile s32 *)&ptr->words.w1 = temp;\n                *(volatile s32 *)&ptr->words.w1 = temp + arg2;\n            }\n            ptr = arg0 + i;\n            arg1 = *(s8 *)&ptr->words.w0;\n        } while (arg1 != arg3);\n    }\n}",
+        "score": 0.484375,
+        "reason": "length_mismatch (target=31, generated=32)",
+        "diffs": [],
+        "timestamp": "2026-06-02T23:10:55.569Z"
+      },
+      {
+        "code": "void func_15168F08(Gfx *arg0, s32 arg1, s32 arg2, s32 arg3) {\n    s32 i = 0;\n    Gfx *ptr = arg0;\n    s32 temp;\n\n    arg2 = arg1;\n    arg3 = -0x21;\n    if (arg3 == *(volatile s8 *)&arg0->words.w0) {\n        return;\n    }\n    arg1 = *(volatile s8 *)&arg0->words.w0;\n    do {\n        i++;\n        if ((arg1 == 1) || ((arg1 == -0x24) && (*((u8 *)&ptr->words.w0 + 3) == 0xE))) {\n            temp = ptr->words.w1 & 0x00FFFFFF;\n            *(volatile s32 *)&ptr->words.w1 = temp;\n            *(volatile s32 *)&ptr->words.w1 = temp + arg2;\n        }\n        ptr = arg0 + i;\n        arg1 = *(s8 *)&ptr->words.w0;\n    } while (arg1 != arg3);\n}",
+        "score": 0.484375,
+        "reason": "length_mismatch (target=31, generated=32)",
+        "diffs": [],
+        "timestamp": "2026-06-02T23:11:33.864Z"
       }
     ]
   },
