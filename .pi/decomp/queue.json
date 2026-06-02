@@ -896,9 +896,32 @@
     "instructions": 23,
     "difficulty": "low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.41304347826086957,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_151635A8(struct225 *arg0, s32 arg1, u8 arg2) {\n    if (D_8008B370[arg0->unk25] != NULL) {\n        D_8008B370[arg0->unk25](arg2);\n    }\n}",
+        "score": 0.41304347826086957,
+        "reason": "length_mismatch (target=23, generated=19)",
+        "diffs": [],
+        "timestamp": "2026-06-02T18:32:25.111Z"
+      },
+      {
+        "code": "void func_151635A8(struct225 *arg0, s32 arg1, u8 arg2) {\n    s32 (*func)(s32);\n    \n    func = D_8008B370[arg0->unk25];\n    if (func != NULL) {\n        D_8008B370[arg0->unk25](arg2);\n    }\n}",
+        "score": 0.41304347826086957,
+        "reason": "length_mismatch (target=23, generated=19)",
+        "diffs": [],
+        "timestamp": "2026-06-02T18:32:42.438Z"
+      },
+      {
+        "code": "void func_151635A8(struct225 *arg0, s32 arg1, u8 arg2) {\n    if (D_8008B370[arg0->unk25]) {\n        D_8008B370[arg0->unk25](arg2);\n    }\n}",
+        "score": 0.41304347826086957,
+        "reason": "length_mismatch (target=23, generated=19)",
+        "diffs": [],
+        "timestamp": "2026-06-02T18:32:56.481Z"
+      }
+    ]
   },
   {
     "function": "func_1516706C",
@@ -2658,9 +2681,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1,
+    "status": "matched"
   },
   {
     "function": "func_151380B4",
