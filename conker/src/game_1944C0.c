@@ -3,6 +3,8 @@
 #include "functions.h"
 #include "variables.h"
 
+void func_15168B10(s32 arg0, s32 arg1);
+
 extern u8 D_800DCE50[];
 extern u8 D_800D2DAB;
 
@@ -37,7 +39,10 @@ extern u8 D_800D2DAB;
 #pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_1516865C.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_15168800.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_15168870.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_15168A2C.s")
+void func_15168A2C(s32 arg0) {
+    func_15168B10(arg0, 0);
+}
+
 #pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_15168A4C.s")
 void func_15168A9C(struct12 *arg0) {
     s32 temp_v0 = *((u8 *)arg0 + 1);
