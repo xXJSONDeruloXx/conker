@@ -5807,8 +5807,8 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 15,
-    "lastScore": 0.75,
+    "attempts": 17,
+    "lastScore": 0.5,
     "status": "pending",
     "history": [
       {
@@ -6016,6 +6016,45 @@
           "structural: target=add.s f8, f4, f6 got=add.s f8, f6, f4"
         ],
         "timestamp": "2026-06-02T21:30:33.777Z"
+      },
+      {
+        "code": "s32 func_15141564(struct210 *arg0) {\n    struct211 *temp_v1;\n    s32 unused[2];\n\n    temp_v1 = (struct211 *)((s32)arg0 + 0x170);\n    *(f32 *)((s32)arg0 + 0x158) = temp_v1->unk0 + (temp_v1->unk4 * sinf(temp_v1->unk8));\n    temp_v1->unk8 = temp_v1->unk8 + (D_800BE9A4 * temp_v1->unkC);\n    temp_v1->unk8 = func_15144B68(temp_v1->unk8);\n    return 1;\n}",
+        "score": 0.6786,
+        "reason": "structural_diffs=9",
+        "diffs": [
+          "structural: target=lwc1 f6, 4(v1) got=lwc1 f4, 4(v1)",
+          "structural: target=lwc1 f4, 0(v1) got=lwc1 f8, 0(v1)",
+          "structural: target=mul.s f8, f6, f0 got=mul.s f6, f0, f4",
+          "structural: target=add.s f10, f4, f8 got=add.s f10, f6, f8",
+          "structural: target=lwc1 f18, LO(D_800BE9A4)(at) got=lwc1 f18, 12(v1)",
+          "structural: target=lwc1 f16, 12(v1) got=lwc1 f16, LO(D_800BE9A4)(at)",
+          "structural: target=lwc1 f4, 8(v1) got=lwc1 f6, 8(v1)",
+          "structural: target=mul.s f6, f16, f18 got=mul.s f4, f16, f18",
+          "structural: target=add.s f8, f4, f6 got=add.s f8, f6, f4"
+        ],
+        "timestamp": "2026-06-02T21:30:49.428Z"
+      },
+      {
+        "code": "s32 func_15141564(struct210 *arg0) {\n    struct211 *temp_v1;\n    f32 temp_f4;\n    s32 unused[2];\n\n    temp_v1 = (struct211 *)((s32)arg0 + 0x170);\n    *(f32 *)((s32)arg0 + 0x158) = temp_v1->unk0 + (temp_v1->unk4 * sinf(temp_v1->unk8));\n    temp_f4 = temp_v1->unk8;\n    temp_v1->unk8 = temp_f4 + (temp_v1->unkC * D_800BE9A4);\n    temp_v1->unk8 = func_15144B68(temp_v1->unk8);\n    return 1;\n}",
+        "score": 0.5,
+        "reason": "structural_diffs=14",
+        "diffs": [
+          "structural: target=addiu sp, sp, -40 got=addiu sp, sp, -48",
+          "structural: target=sw a0, 40(sp) got=sw a0, 48(sp)",
+          "structural: target=lw a0, 40(sp) got=lw a0, 48(sp)",
+          "structural: target=lwc1 f6, 4(v1) got=lwc1 f4, 4(v1)",
+          "structural: target=lwc1 f4, 0(v1) got=lwc1 f8, 0(v1)",
+          "structural: target=mul.s f8, f6, f0 got=mul.s f6, f0, f4",
+          "structural: target=add.s f10, f4, f8 got=add.s f10, f6, f8",
+          "structural: target=lwc1 f4, 8(v1) got=lwc1 f2, 8(v1)",
+          "structural: target=mul.s f6, f16, f18 got=mul.s f4, f16, f18",
+          "structural: target=add.s f8, f4, f6 got=add.s f6, f4, f2",
+          "structural: target=swc1 f8, 8(v1) got=swc1 f6, 8(v1)",
+          "structural: target=sw v1, 24(sp) got=sw v1, 28(sp)",
+          "structural: target=lw v1, 24(sp) got=lw v1, 28(sp)",
+          "structural: target=addiu sp, sp, 40 got=addiu sp, sp, 48"
+        ],
+        "timestamp": "2026-06-02T21:31:15.959Z"
       }
     ]
   },
