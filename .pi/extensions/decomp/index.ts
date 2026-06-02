@@ -931,7 +931,17 @@ export default function (pi: ExtensionAPI) {
 				details: {},
 			});
 
-			// Diff
+			// Extract raw generated asm before diff (for inclusion in response)
+			const rawAsmResult = await pi.exec("docker", [
+				"run", "--rm", "--platform", "linux/amd64",
+				"-v", `${ctx.cwd}:/conker`, "-w", "/conker",
+				"conker-build-min-amd64",
+				"bash", "-lc",
+				`mips-linux-gnu-objdump -dr conker/build/src/${params.file.replace(".c", ".c.o")} | sed -n '/<${params.function}>/,/^$/p' | sed '\$d'`,
+			], { signal, timeout: 30000 });
+			const rawGeneratedAsm = rawAsmResult.stdout?.trim() || "(could not extract)";
+
+			// Diff (normalized scoring)
 			const diffResult = await pi.exec("bash", ["tools/conker-diff.sh", params.function, params.file], {
 				signal,
 				timeout: 30000,
@@ -1030,7 +1040,7 @@ export default function (pi: ExtensionAPI) {
 			}
 
 			// Build response with prior attempt context
-			const keptNote = params.keep ? "\n\n⚠️ Patch LEFT IN PLACE (keep=true). Use decomp_inspect to view raw asm, then git checkout to revert when done." : "";
+			const keptNote = params.keep ? "\n\n⚠️ Patch LEFT IN PLACE (keep=true). git checkout to revert when done." : "";
 			const priorHint = (entry?.history?.length ?? 0) > 1
 				? `\n\nPrior attempts (${entry!.history!.length}): scores=[${entry!.history!.map((h: AttemptRecord) => h.score.toFixed(2)).join(", ")}]`
 				: "";
@@ -1039,7 +1049,7 @@ export default function (pi: ExtensionAPI) {
 				content: [
 					{
 						type: "text",
-						text: `✗ Non-match${params.keep ? " (kept)" : " (reverted)"}. Score: ${scoreData.score}\nReason: ${scoreData.reason}\n\nDiff:\n${diffSummary}${keptNote}${priorHint}`,
+						text: `✗ Non-match${params.keep ? " (kept)" : " (reverted)"}. Score: ${scoreData.score}\nReason: ${scoreData.reason}\n\nDiff:\n${diffSummary}\n\nGenerated ASM:\n\`\`\`\n${rawGeneratedAsm}\n\`\`\`${keptNote}${priorHint}`,
 					},
 				],
 				details: scoreData,
