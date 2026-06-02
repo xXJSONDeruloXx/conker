@@ -2809,8 +2809,8 @@
     "instructions": 29,
     "difficulty": "low",
     "tags": [],
-    "attempts": 6,
-    "lastScore": 0.3918918918918919,
+    "attempts": 9,
+    "lastScore": 0.453125,
     "status": "pending",
     "history": [
       {
@@ -2854,6 +2854,27 @@
         "reason": "length_mismatch (target=29, generated=37)",
         "diffs": [],
         "timestamp": "2026-06-02T21:37:43.564Z"
+      },
+      {
+        "code": "void func_100100E0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {\n    s32 *var_v0;\n    s32 *end;\n\n    var_v0 = (s32 *)D_80041FE0;\n    if (D_80042760 > 0) {\n        end = var_v0 + (D_80042760 * 12);\n        do {\n            if ((arg0 == var_v0[5]) && (arg1 == var_v0[6]) && (arg2 == var_v0[7])) {\n                var_v0[5] = arg3;\n                var_v0[6] = arg4;\n                var_v0[7] = arg5;\n            }\n            var_v0 += 12;\n        } while (var_v0 < end);\n    }\n}",
+        "score": 0.4264705882352941,
+        "reason": "length_mismatch (target=29, generated=34)",
+        "diffs": [],
+        "timestamp": "2026-06-02T21:38:38.202Z"
+      },
+      {
+        "code": "void func_100100E0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {\n    struct15 *temp;\n    struct15 *end;\n\n    if (D_80042760 > 0) {\n        for (temp = D_80041FE0, end = D_80041FE0 + D_80042760; temp < end; temp++) {\n            if ((arg0 == temp->unk14) && (arg1 == temp->unk18) && (arg2 == temp->unk1C)) {\n                temp->unk14 = arg3;\n                temp->unk18 = arg4;\n                temp->unk1C = arg5;\n            }\n        }\n    }\n}",
+        "score": 0.3918918918918919,
+        "reason": "length_mismatch (target=29, generated=37)",
+        "diffs": [],
+        "timestamp": "2026-06-02T21:39:04.606Z"
+      },
+      {
+        "code": "void func_100100E0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {\n    s32 i;\n    struct15 *temp;\n\n    for (i = 0; i < D_80042760; i++) {\n        temp = &D_80041FE0[i];\n        if ((arg0 == temp->unk14) && (arg1 == temp->unk18) && (arg2 == temp->unk1C)) {\n            temp->unk14 = arg3;\n            temp->unk18 = arg4;\n            temp->unk1C = arg5;\n        }\n    }\n}",
+        "score": 0.453125,
+        "reason": "length_mismatch (target=29, generated=32)",
+        "diffs": [],
+        "timestamp": "2026-06-02T21:39:29.082Z"
       }
     ]
   },
