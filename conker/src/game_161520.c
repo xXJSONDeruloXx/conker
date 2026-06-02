@@ -2,6 +2,8 @@
 #include "functions.h"
 #include "variables.h"
 
+void func_15145EA4(s32 *, s32 *, s32, s32);
+
 extern f32 D_800A4828;
 
 // requires jump table
@@ -126,7 +128,16 @@ void func_1513530C(struct102 *arg0) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_161520/func_151353A8.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_161520/func_15135424.s")
+void func_15135424(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    s32 local1[2];
+    s32 local2[2];
+    
+    local1[0] = arg1;
+    local1[1] = arg2;
+    local2[0] = arg3;
+    local2[1] = arg4;
+    func_15145EA4(local1, local2, arg0, 2);
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_161520/func_15135480.s")
 
