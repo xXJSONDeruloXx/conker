@@ -1502,9 +1502,9 @@
     "instructions": 24,
     "difficulty": "low",
     "tags": [],
-    "attempts": 2,
-    "lastScore": 0.35416666666666663,
-    "status": "pending",
+    "attempts": 3,
+    "lastScore": 1,
+    "status": "matched",
     "history": [
       {
         "code": "void func_15004A4C(void) {\n    s32 i;\n    \n    for (i = 0; i < D_800DBEF0; i++) {\n        D_800DBEF8[i] = 0;\n        D_800DBEFC[i] = 0;\n    }\n}",
@@ -2657,9 +2657,32 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.4166666666666667,
+    "status": "pending",
+    "history": [
+      {
+        "code": "s32 func_15143DA8(s32 *arg0, s32 arg1, s32 arg2) {\n    s32 tmp;\n    \n    if (arg2 < arg1) {\n        tmp = arg1 ^ arg2;\n        arg2 = arg2 ^ tmp;\n        arg1 = tmp ^ arg2;\n    }\n    \n    if (*arg0 < arg1) {\n        *arg0 = arg1;\n        return 1;\n    }\n    if (arg2 < *arg0) {\n        *arg0 = arg2;\n        return 2;\n    }\n    return 0;\n}",
+        "score": 0.4166666666666667,
+        "reason": "length_mismatch (target=24, generated=20)",
+        "diffs": [],
+        "timestamp": "2026-06-02T18:57:43.303Z"
+      },
+      {
+        "code": "s32 func_15143DA8(s32 *arg0, s32 arg1, s32 arg2) {\n    s32 val;\n    s32 tmp;\n    \n    if (arg2 < arg1) {\n        tmp = arg1 ^ arg2;\n        arg2 ^= tmp;\n        arg1 = tmp ^ arg2;\n    }\n    \n    val = *arg0;\n    if (val < arg1) {\n        *arg0 = arg1;\n        return 1;\n    }\n    if (arg2 < val) {\n        *arg0 = arg2;\n        return 2;\n    }\n    return 0;\n}",
+        "score": 0.4166666666666667,
+        "reason": "length_mismatch (target=24, generated=20)",
+        "diffs": [],
+        "timestamp": "2026-06-02T18:57:59.430Z"
+      },
+      {
+        "code": "s32 func_15143DA8(s32 *arg0, s32 min, s32 max) {\n    s32 tmp;\n    s32 val;\n    \n    if (max < min) {\n        tmp = min ^ max;\n        max = max ^ tmp;\n        min = tmp ^ max;\n    }\n    \n    val = *arg0;\n    if (val < min) {\n        *arg0 = min;\n        return 1;\n    } else if (max < val) {\n        *arg0 = max;\n        return 2;\n    }\n    return 0;\n}",
+        "score": 0.4166666666666667,
+        "reason": "length_mismatch (target=24, generated=20)",
+        "diffs": [],
+        "timestamp": "2026-06-02T18:58:22.996Z"
+      }
+    ]
   },
   {
     "function": "func_1000FE88",
