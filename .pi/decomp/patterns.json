@@ -342,5 +342,14 @@
     "example_functions": [
       "func_15137E10"
     ]
+  },
+  {
+    "id": "u8-cast-s16-argument-stack-reload",
+    "description": "Casting a saved s16 argument to u8 while also using it as s16 can produce lbu/lh reloads from the caller argument stack slots.",
+    "trigger": "Target stores $a0 to stack, then uses both lbu offset+3 and lh offset+2 before calls.",
+    "solution": "Declare the parameter as s16 and cast to u8 at the call sites; use a temp float to preserve the first call result across the second call.",
+    "example_functions": [
+      "func_15143874"
+    ]
   }
 ]
