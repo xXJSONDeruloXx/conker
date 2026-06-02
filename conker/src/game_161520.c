@@ -110,7 +110,10 @@ void func_15134CD4(f32 arg0, f32 arg1, s32 arg2, s32 arg3) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_161520/func_15134E48.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_161520/func_151352EC.s")
+void func_151352EC(struct102 *arg0) {
+    func_15169804(arg0);
+}
+
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_161520/func_1513530C.s")
 
