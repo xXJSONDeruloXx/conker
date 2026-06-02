@@ -468,5 +468,14 @@
     "example_functions": [
       "func_16001678"
     ]
+  },
+  {
+    "id": "local-declaration-order-stack-slot",
+    "description": "Changing local declaration order can move the surviving spill between adjacent stack slots without changing instruction logic.",
+    "trigger": "Near-match differs only by `sw/lw` of a live local at `sp+0x1C` versus target `sp+0x18`.",
+    "solution": "Declare a short-lived local before the across-call local so IDO assigns the across-call spill to the lower adjacent stack slot.",
+    "example_functions": [
+      "func_1513532C"
+    ]
   }
 ]

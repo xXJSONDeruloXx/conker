@@ -6581,9 +6581,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 8,
-    "lastScore": 0.9355,
-    "status": "pending",
+    "attempts": 9,
+    "lastScore": 1,
+    "status": "matched",
     "history": [
       {
         "code": "void func_1513532C(struct102 *arg0) {\n    s32 idx = *(u8 *)((s32)arg0 + 0x50);\n    u16 temp_a0;\n\n    if (idx < 0) {\n        idx = 0;\n    }\n    if (idx >= 6) {\n        idx = 0;\n    }\n\n    temp_a0 = *(u16 *)((s32)arg0 + 0x44);\n    if (temp_a0 != 0) {\n        func_100111C8(temp_a0);\n        *(u16 *)((s32)arg0 + 0x44) = 0;\n    }\n    D_80089B70[idx](arg0);\n}",

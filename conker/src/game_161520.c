@@ -2,6 +2,8 @@
 #include "functions.h"
 #include "variables.h"
 
+extern void (*D_80089B88[])(struct102 *);
+
 extern void (*D_80089B70[])(struct102 *);
 
 extern u8 D_800A3FD8[];
@@ -148,7 +150,24 @@ void func_1513532C(struct102 *arg0) {
     D_80089B70[idx](arg0);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_161520/func_151353A8.s")
+void func_151353A8(struct102 *arg0) {
+    u16 temp_a0;
+    s32 idx = *(u8 *)((s32)arg0 + 0x50);
+
+    if (idx < 0) {
+        idx = 0;
+    } else if (idx < 6) {
+    } else {
+        idx = 0;
+    }
+
+    temp_a0 = *(u16 *)((s32)arg0 + 0x44);
+    if (temp_a0 != 0) {
+        func_100111C8(temp_a0);
+        *(u16 *)((s32)arg0 + 0x44) = 0;
+    }
+    D_80089B88[idx](arg0);
+}
 
 void func_15135424(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     s32 local1[2];
