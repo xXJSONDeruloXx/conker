@@ -5908,9 +5908,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1,
+    "status": "matched"
   },
   {
     "function": "__n_nextSampleTime",
@@ -6091,9 +6091,20 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 0.963,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_15060A30(u16 arg0, struct127 *arg1) {\n    if (arg1->camera == NULL) {\n        func_10010344(arg0, arg1, 0x6D60, 0x1F4, 0x9C4);\n    } else {\n        func_15060778(arg0, arg1, 0x5DC0, 0, 0x1F4, 0x9C4, 1);\n    }\n}",
+        "score": 0.963,
+        "reason": "structural_diffs=1",
+        "diffs": [
+          "structural: target=lw a0, 40(sp) got=lhu a0, 42(sp)"
+        ],
+        "timestamp": "2026-06-02T21:03:11.298Z"
+      }
+    ]
   },
   {
     "function": "_n_freePVoice",
