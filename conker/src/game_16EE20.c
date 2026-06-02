@@ -207,7 +207,14 @@ s32 func_15143E08(struct127 *arg0) {
     return (((s32) arg0->unk7A >> 8) + 64) & 0xFF;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15143E24.s")
+s32 func_15143E24(struct127 *arg0) {
+    struct126 *temp_v1 = arg0->unk31C;
+    if (temp_v1 != NULL) {
+        return (s16)((arg0->unk7A - temp_v1->unk12) >> 8);
+    }
+    return (s16)(arg0->unk7A >> 8);
+}
+
 f32 func_15143E64(f32 *arg0) {
     f32 temp_f2 = arg0[0];
     f32 temp_f12 = arg0[1];
