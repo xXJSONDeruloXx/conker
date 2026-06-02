@@ -141,7 +141,13 @@ void func_15135424(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_161520/func_15135480.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_161520/func_1513555C.s")
+void func_1513555C(struct102 *arg0, u8 *arg1, u8 arg2) {
+    if (arg2 == 0 || arg2 == 0x12) {
+        if (*(s32 *)arg1 == *(s32 *)((u8 *)arg0 + 0x1C) || arg1[4] == ((u8 *)arg0)[0x18]) {
+            func_1516972C(arg0);
+        }
+    }
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_161520/func_151355B8.s")
 
