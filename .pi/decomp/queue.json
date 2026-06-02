@@ -5807,8 +5807,8 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 6,
-    "lastScore": 0.4286,
+    "attempts": 9,
+    "lastScore": 0.75,
     "status": "pending",
     "history": [
       {
@@ -5896,6 +5896,50 @@
           "structural: target=addiu sp, sp, 40 got=addiu sp, sp, 48"
         ],
         "timestamp": "2026-06-02T21:27:22.389Z"
+      },
+      {
+        "code": "s32 func_15141564(struct210 *arg0) {\n    struct211 *temp_v1;\n    s32 unused[2];\n\n    temp_v1 = (struct211 *)((s32)arg0 + 0x170);\n    *(f32 *)((s32)arg0 + 0x158) = temp_v1->unk0 + (temp_v1->unk4 * sinf(*(f32 *)((s32)arg0 + 0x178)));\n    temp_v1->unk8 += temp_v1->unkC * D_800BE9A4;\n    temp_v1->unk8 = func_15144B68(temp_v1->unk8);\n    return 1;\n}",
+        "score": 0.75,
+        "reason": "structural_diffs=7",
+        "diffs": [
+          "structural: target=lwc1 f6, 4(v1) got=lwc1 f4, 4(v1)",
+          "structural: target=lwc1 f4, 0(v1) got=lwc1 f8, 0(v1)",
+          "structural: target=mul.s f8, f6, f0 got=mul.s f6, f0, f4",
+          "structural: target=add.s f10, f4, f8 got=add.s f10, f6, f8",
+          "structural: target=lwc1 f4, 8(v1) got=lwc1 f6, 8(v1)",
+          "structural: target=mul.s f6, f16, f18 got=mul.s f4, f16, f18",
+          "structural: target=add.s f8, f4, f6 got=add.s f8, f6, f4"
+        ],
+        "timestamp": "2026-06-02T21:27:49.608Z"
+      },
+      {
+        "code": "s32 func_15141564(struct210 *arg0) {\n    struct211 *temp_v1;\n    s32 unused[2];\n\n    temp_v1 = (struct211 *)((s32)arg0 + 0x170);\n    *(f32 *)((s32)arg0 + 0x158) = (temp_v1->unk4 * sinf(*(f32 *)((s32)arg0 + 0x178))) + temp_v1->unk0;\n    temp_v1->unk8 = (temp_v1->unkC * D_800BE9A4) + temp_v1->unk8;\n    temp_v1->unk8 = func_15144B68(temp_v1->unk8);\n    return 1;\n}",
+        "score": 0.7857,
+        "reason": "structural_diffs=6",
+        "diffs": [
+          "structural: target=lwc1 f6, 4(v1) got=lwc1 f4, 4(v1)",
+          "structural: target=lwc1 f4, 0(v1) got=lwc1 f8, 0(v1)",
+          "structural: target=mul.s f8, f6, f0 got=mul.s f6, f0, f4",
+          "structural: target=add.s f10, f4, f8 got=add.s f10, f6, f8",
+          "structural: target=lwc1 f4, 8(v1) got=lwc1 f6, 8(v1)",
+          "structural: target=mul.s f6, f16, f18 got=mul.s f4, f16, f18"
+        ],
+        "timestamp": "2026-06-02T21:28:09.283Z"
+      },
+      {
+        "code": "s32 func_15141564(struct210 *arg0) {\n    volatile struct211 *temp_v1;\n    s32 unused[2];\n\n    temp_v1 = (struct211 *)((s32)arg0 + 0x170);\n    *(f32 *)((s32)arg0 + 0x158) = temp_v1->unk0 + (temp_v1->unk4 * sinf(*(f32 *)((s32)arg0 + 0x178)));\n    temp_v1->unk8 = temp_v1->unk8 + (temp_v1->unkC * D_800BE9A4);\n    temp_v1->unk8 = func_15144B68(temp_v1->unk8);\n    return 1;\n}",
+        "score": 0.75,
+        "reason": "structural_diffs=7",
+        "diffs": [
+          "structural: target=lwc1 f6, 4(v1) got=lwc1 f4, 4(v1)",
+          "structural: target=lwc1 f4, 0(v1) got=lwc1 f8, 0(v1)",
+          "structural: target=mul.s f8, f6, f0 got=mul.s f6, f0, f4",
+          "structural: target=add.s f10, f4, f8 got=add.s f10, f6, f8",
+          "structural: target=lwc1 f4, 8(v1) got=lwc1 f6, 8(v1)",
+          "structural: target=mul.s f6, f16, f18 got=mul.s f4, f16, f18",
+          "structural: target=add.s f8, f4, f6 got=add.s f8, f6, f4"
+        ],
+        "timestamp": "2026-06-02T21:28:22.660Z"
       }
     ]
   },
