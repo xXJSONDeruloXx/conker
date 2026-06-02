@@ -319,7 +319,29 @@ int func_1600160C(s32 arg0, s32 arg1) {
 }
 
 // contains delay slot
-#pragma GLOBAL_ASM("asm/nonmatchings/debugger/debugger/func_16001678.s")
+void func_16001678(void) {
+    s32 *ptr = (s32 *)D_8002AAE8[D_16003888];
+    s32 width = D_160038A8;
+    s32 count;
+    s32 *end;
+
+    if (width == 0x124) {
+        count = 0xD7;
+    } else {
+        count = 0x108;
+    }
+
+    end = ptr + ((width >> 1) * count);
+    if (ptr < end) {
+        do {
+            ptr += 4;
+            ptr[-4] = 0x10001;
+            ptr[-3] = 0x10001;
+            ptr[-2] = 0x10001;
+            ptr[-1] = 0x10001;
+        } while (ptr < end);
+    }
+}
 
 s32 func_160016F4(s32 arg0) {
     return arg0;

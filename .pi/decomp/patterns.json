@@ -450,5 +450,14 @@
     "example_functions": [
       "func_151640C0"
     ]
+  },
+  {
+    "id": "array-index-shapes-base-plus-index-registers",
+    "description": "Using pointer subscript syntax can match IDO register allocation for base+scaled-index addressing where raw pointer arithmetic assigns different temporaries.",
+    "trigger": "Target loads index and base from stack, shifts index into a fresh temp, then adds base+shift before a load in a call delay slot; raw `(base + index*4 + off)` has swapped temporaries.",
+    "solution": "Type the base as an array pointer and write `base[index + constant]` (or equivalent subscript) instead of manual byte arithmetic. This can produce the desired index register, shift register, base register, and call delay-slot load.",
+    "example_functions": [
+      "func_1001BE1C"
+    ]
   }
 ]
