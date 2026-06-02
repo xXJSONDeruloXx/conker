@@ -2809,9 +2809,32 @@
     "instructions": 29,
     "difficulty": "low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.453125,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_100100E0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {\n    struct15 *var_v0;\n    struct15 *end;\n\n    var_v0 = D_80041FE0;\n    if (D_80042760 > 0) {\n        end = &D_80041FE0[D_80042760];\n        do {\n            if ((arg0 == var_v0->unk14) && (arg1 == var_v0->unk18) && (arg2 == var_v0->unk1C)) {\n                var_v0->unk14 = arg3;\n                var_v0->unk18 = arg4;\n                var_v0->unk1C = arg5;\n            }\n            var_v0++;\n        } while (var_v0 < end);\n    }\n}",
+        "score": 0.4264705882352941,
+        "reason": "length_mismatch (target=29, generated=34)",
+        "diffs": [],
+        "timestamp": "2026-06-02T21:35:49.230Z"
+      },
+      {
+        "code": "void func_100100E0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {\n    s32 temp_v1;\n    struct15 *var_v0;\n    struct15 *var_t1;\n\n    temp_v1 = D_80042760;\n    var_v0 = D_80041FE0;\n    if (temp_v1 > 0) {\n        var_t1 = var_v0 + temp_v1;\n        do {\n            if ((arg0 == var_v0->unk14) && (arg1 == var_v0->unk18) && (arg2 == var_v0->unk1C)) {\n                var_v0->unk14 = arg3;\n                var_v0->unk18 = arg4;\n                var_v0->unk1C = arg5;\n            }\n            var_v0++;\n        } while (var_v0 < var_t1);\n    }\n}",
+        "score": 0.4264705882352941,
+        "reason": "length_mismatch (target=29, generated=34)",
+        "diffs": [],
+        "timestamp": "2026-06-02T21:36:16.600Z"
+      },
+      {
+        "code": "void func_100100E0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {\n    struct15 *var_v0;\n\n    var_v0 = D_80041FE0;\n    if (D_80042760 > 0) {\n        do {\n            if ((arg0 == var_v0->unk14) && (arg1 == var_v0->unk18) && (arg2 == var_v0->unk1C)) {\n                var_v0->unk14 = arg3;\n                var_v0->unk18 = arg4;\n                var_v0->unk1C = arg5;\n            }\n            var_v0++;\n        } while (var_v0 < &D_80041FE0[D_80042760]);\n    }\n}",
+        "score": 0.453125,
+        "reason": "length_mismatch (target=29, generated=32)",
+        "diffs": [],
+        "timestamp": "2026-06-02T21:36:37.410Z"
+      }
+    ]
   },
   {
     "function": "func_150492CC",
@@ -6619,9 +6642,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1,
+    "status": "matched"
   },
   {
     "function": "func_15042D94",
