@@ -1486,9 +1486,9 @@
     "instructions": 28,
     "difficulty": "low",
     "tags": [],
-    "attempts": 2,
-    "lastScore": 0.48214285714285715,
-    "status": "pending",
+    "attempts": 3,
+    "lastScore": 1,
+    "status": "matched",
     "history": [
       {
         "code": "s32 func_151368A8(struct102 *arg0) {\n    s16 temp_v0 = arg0->unk1C;\n    s32 temp_v1;\n\n    if (temp_v0 < 0x20) {\n        temp_v1 = temp_v0 << 3;\n        if (temp_v1 < *((u8 *)arg0 + 0x5C)) {\n            *((u8 *)arg0 + 0x5C) = temp_v1;\n        }\n    }\n\n    *(f32 *)((s32)arg0 + 0x2C) += *(f32 *)((s32)arg0 + 0x128) * D_800BE9A4;\n    *(f32 *)((s32)arg0 + 0x30) += *(f32 *)((s32)arg0 + 0x128) * D_800BE9A4;\n    return 1;\n}",

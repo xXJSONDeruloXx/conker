@@ -423,5 +423,14 @@
     "example_functions": [
       "func_15060A30"
     ]
+  },
+  {
+    "id": "volatile-global-float-pointer-address-hoist",
+    "description": "Use a volatile f32 pointer local for repeated global float reads when target hoists `%hi/%lo` into a GPR and reloads through that pointer instead of using direct `%lo($at)` float loads.",
+    "trigger": "Target loads `lui/addiu` of a float global into a temp/arg register before branches, then uses `lwc1 offset(reg)` multiple times; non-volatile direct reads compile to `%hi` in `$at` near first use and `lwc1 %lo($at)`.",
+    "solution": "Declare `volatile f32 *temp = &GLOBAL;` and read `*temp` at each use. This keeps the address in a GPR and preserves repeated memory loads/scheduling.",
+    "example_functions": [
+      "func_151368A8"
+    ]
   }
 ]
