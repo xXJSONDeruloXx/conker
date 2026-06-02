@@ -405,5 +405,14 @@
     "example_functions": [
       "func_15049260"
     ]
+  },
+  {
+    "id": "u16-mask-temp-register-shift",
+    "description": "For small u8 quadrant/table helpers, declaring a masked quadrant temp as u16 can shift IDO allocation from $a0 to $t0 while preserving the same andi/branch sequence.",
+    "trigger": "Target uses `andi t0, v0, mask` where equivalent s32 temp compiles as `andi a0, v0, mask`, cascading address temp register shifts.",
+    "solution": "Use a u16 local for the masked temp (e.g. `u16 temp_t0 = temp_v0 & 0xC0;`) while keeping the index as s32.",
+    "example_functions": [
+      "func_151423D8"
+    ]
   }
 ]
