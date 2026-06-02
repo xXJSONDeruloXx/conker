@@ -288,5 +288,14 @@
     "example_functions": [
       "func_1513FA2C"
     ]
+  },
+  {
+    "id": "stack-float-pair-wrapper",
+    "description": "Wrappers that pass a stack pair of `1.0f` values can match directly with a local `f32[2]` and sign-extended s16 argument.",
+    "trigger": "Target sign-extends an argument into a3, stores `1.0f` twice on stack, sets a1 to a small constant, passes stack pointer as a2, and calls helper.",
+    "solution": "Use signature with `s16` second argument, local `f32 pair[2]` assigned to `1.0f`, and call helper `(arg0, constant, pair, arg1)`.",
+    "example_functions": [
+      "func_1513FA70"
+    ]
   }
 ]
