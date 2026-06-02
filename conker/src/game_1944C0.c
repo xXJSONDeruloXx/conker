@@ -3,6 +3,8 @@
 #include "functions.h"
 #include "variables.h"
 
+void *func_15167A68(s32, s32, s32, s32, s32, s32);
+
 extern void (*D_8008CA20[])(struct127 *);
 
 void func_15168B10(s32 arg0, s32 arg1);
@@ -100,7 +102,16 @@ void func_15168BAC(struct127 *arg0) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_15168BE4.s")
+void func_15168BE4(void *arg0, u8 arg1, s32 arg2) {
+    void *temp_v0;
+
+    if (*(s32 *)((s32)arg0 + 0x40) != 0) {
+        temp_v0 = func_15167A68(0x10, arg2, 0xF0, 1, arg1, 1);
+        if (temp_v0 != NULL) {
+            bcopy(arg0, (void *)((s32)temp_v0 + 0x90), 0x60);
+        }
+    }
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_15168C4C.s")
 void func_15168E34(s32 *arg0, s32 arg1) {
     s32 temp_v0 = *arg0;
