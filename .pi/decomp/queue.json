@@ -813,9 +813,46 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 5,
+    "lastScore": 0.4473684210526316,
+    "status": "skipped",
+    "history": [
+      {
+        "code": "void func_150721A4(void) {\n    s32 temp_v1 = D_800D1580;\n    func_1506160C(D_800D154C, (temp_v1 >> 16) & 0xFF, temp_v1 & 0xFF, (temp_v1 >> 8) & 0xFF, 0);\n}\n",
+        "score": 0.425,
+        "reason": "length_mismatch (target=17, generated=20)",
+        "diffs": [],
+        "timestamp": "2026-06-02T17:18:09.235Z"
+      },
+      {
+        "code": "void func_150721A4(void) {\n    s32 temp_v1 = D_800D1580;\n    s32 temp_t6 = temp_v1 >> 8;\n    s32 temp_t7 = temp_v1 >> 16;\n    func_1506160C(D_800D154C, temp_t7 & 0xFF, temp_v1 & 0xFF, temp_t6 & 0xFF, 0);\n}\n",
+        "score": 0.425,
+        "reason": "length_mismatch (target=17, generated=20)",
+        "diffs": [],
+        "timestamp": "2026-06-02T17:18:35.696Z"
+      },
+      {
+        "code": "void func_150721A4(void) {\n    func_1506160C(D_800D154C, (D_800D1580 >> 16) & 0xFF, D_800D1580 & 0xFF, (D_800D1580 >> 8) & 0xFF, 0);\n}\n",
+        "score": 0.425,
+        "reason": "length_mismatch (target=17, generated=20)",
+        "diffs": [],
+        "timestamp": "2026-06-02T17:18:47.965Z"
+      },
+      {
+        "code": "void func_150721A4(void) {\n    s32 temp_v1 = D_800D1580;\n    struct127 *temp_a0 = D_800D154C;\n    s32 temp_a1 = (temp_v1 >> 16) & 0xFF;\n    s32 temp_a3 = (temp_v1 >> 8) & 0xFF;\n    s32 temp_a2 = temp_v1 & 0xFF;\n    func_1506160C(temp_a0, temp_a1, temp_a2, temp_a3, 0);\n}\n",
+        "score": 0.425,
+        "reason": "length_mismatch (target=17, generated=20)",
+        "diffs": [],
+        "timestamp": "2026-06-02T17:19:03.619Z"
+      },
+      {
+        "code": "void func_150721A4(void) {\n    s32 temp_v1 = D_800D1580;\n    u8 temp_a1 = temp_v1 >> 16;\n    u8 temp_a3 = temp_v1 >> 8;\n    u8 temp_a2 = temp_v1;\n    func_1506160C(D_800D154C, temp_a1, temp_a2, temp_a3, 0);\n}\n",
+        "score": 0.4473684210526316,
+        "reason": "length_mismatch (target=17, generated=19)",
+        "diffs": [],
+        "timestamp": "2026-06-02T17:19:14.926Z"
+      }
+    ]
   },
   {
     "function": "func_1600160C",
