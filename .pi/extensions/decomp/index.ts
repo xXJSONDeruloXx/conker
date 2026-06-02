@@ -288,14 +288,14 @@ export default function (pi: ExtensionAPI) {
 		name: "decomp_queue",
 		label: "Decomp Queue",
 		description:
-			"Manage the decompilation candidate queue. Actions: next (get next candidate with context), list (show queue stats), skip (skip current), stats (overall progress).",
+			"Manage the decompilation candidate queue. Actions: next (get next candidate with context), list (show queue stats), skip (skip current), stats (overall progress), promote (promote .s segments to C files to unlock more functions), retry-skipped (reset skipped back to pending).",
 		promptSnippet: "Query and manage the matching-decompilation candidate queue",
 		promptGuidelines: [
 			"Use decomp_queue with action 'next' to get the next function to decompile, including its target assembly and surrounding context.",
 			"Use decomp_queue with action 'stats' for an overview of decomp progress.",
 		],
 		parameters: Type.Object({
-			action: StringEnum(["next", "list", "skip", "stats", "refresh", "retry-skipped"] as const),
+			action: StringEnum(["next", "list", "skip", "stats", "refresh", "retry-skipped", "promote"] as const),
 			filter: Type.Optional(
 				Type.Object({
 					maxInstructions: Type.Optional(Type.Number({ description: "Max instruction count" })),
@@ -311,6 +311,148 @@ export default function (pi: ExtensionAPI) {
 		async execute(_toolCallId, params, _signal, _onUpdate, ctx) {
 			const fs = require("node:fs");
 			const path = require("node:path");
+
+			if (params.action === "promote") {
+				// Promote pure .s segments to C files via splat yaml edit + re-extract
+				const yamlPath = path.join(ctx.cwd, "conker/conker.us.yaml");
+				let yaml: string;
+				try {
+					yaml = fs.readFileSync(yamlPath, "utf-8");
+				} catch {
+					return { content: [{ type: "text", text: "Cannot read conker/conker.us.yaml" }], details: {} };
+				}
+
+				// Find all `[0xOFFSET, asm]` entries (no name = pure segment)
+				const asmSegments: { offset: string; line: string }[] = [];
+				for (const line of yaml.split("\n")) {
+					const m = line.match(/^(\s*-\s*\[0x([0-9A-Fa-f]+),\s*asm\])\s*$/);
+					if (m) {
+						asmSegments.push({ offset: m[2], line: m[1] });
+					}
+				}
+
+				if (asmSegments.length === 0) {
+					return { content: [{ type: "text", text: "No promotable segments found (all already have names or are C)." }], details: {} };
+				}
+
+				// Count functions in each segment
+				const segmentInfo: { offset: string; functions: number; line: string }[] = [];
+				for (const seg of asmSegments) {
+					const asmFile = path.join(ctx.cwd, `conker/asm/${seg.offset}.s`);
+					let funcCount = 0;
+					try {
+						const content = fs.readFileSync(asmFile, "utf-8");
+						funcCount = (content.match(/^glabel\s+/gm) || []).length;
+					} catch {}
+					segmentInfo.push({ offset: seg.offset, functions: funcCount, line: seg.line });
+				}
+
+				// If a specific segment was requested via filter, promote just that one
+				const targetOffset = params.function; // reuse function param as segment offset
+				if (targetOffset) {
+					const seg = segmentInfo.find((s) => s.offset.toLowerCase() === targetOffset.toLowerCase());
+					if (!seg) {
+						return { content: [{ type: "text", text: `Segment 0x${targetOffset} not found in promotable list.` }], details: {} };
+					}
+
+					// Determine region from VRAM
+					const offsetNum = parseInt(seg.offset, 16);
+					const prefix = offsetNum < 0x10000 ? "init" : offsetNum >= 0x250000 ? "debugger" : "game";
+					const newName = `${prefix}_${seg.offset}`;
+					const oldLine = seg.line;
+					const newLine = oldLine.replace(
+						`[0x${seg.offset}, asm]`,
+						`[0x${seg.offset}, c, ${newName}]`,
+					);
+
+					yaml = yaml.replace(oldLine, newLine);
+					fs.writeFileSync(yamlPath, yaml);
+
+					// Re-run extraction
+					const extractResult = await pi.exec("docker", [
+						"run", "--rm", "--platform", "linux/amd64",
+						"-v", `${ctx.cwd}:/conker`, "-w", "/conker",
+						"conker-build-min-amd64",
+						"bash", "-lc", "cd conker && make extract 2>&1 | tail -20",
+					], { timeout: 120000 });
+
+					// Verify build still passes
+					const buildResult = await pi.exec("docker", [
+						"run", "--rm", "--platform", "linux/amd64",
+						"-v", `${ctx.cwd}:/conker`, "-w", "/conker",
+						"conker-build-min-amd64",
+						"bash", "-lc", "make -C conker -j$(nproc) 2>&1 | tail -10",
+					], { timeout: 180000 });
+
+					if (!buildResult.stdout.includes("conker.us.bin: OK")) {
+						// Revert yaml
+						yaml = yaml.replace(newLine, oldLine);
+						fs.writeFileSync(yamlPath, yaml);
+						return {
+							content: [{ type: "text", text: `Promote failed (reverted): build broken after promoting 0x${seg.offset}\n${buildResult.stdout}` }],
+							details: { error: "build_failed" },
+						};
+					}
+
+					// Re-run strip_splat_metadata if needed
+					await pi.exec("python3", ["tools/strip_splat_metadata.py"], { timeout: 30000 });
+
+					// Refresh queue with new candidates
+					const newSrcPath = path.join(ctx.cwd, `conker/src/${newName}.c`);
+					let newFunctions = 0;
+					if (fs.existsSync(newSrcPath)) {
+						const src = fs.readFileSync(newSrcPath, "utf-8");
+						const pragmas = src.match(/#pragma\s+GLOBAL_ASM/g) || [];
+						newFunctions = pragmas.length;
+
+						// Add new entries to queue
+						const funcNames = [...src.matchAll(/#pragma\s+GLOBAL_ASM\("asm\/nonmatchings\/[^/]+\/([^"]+)\.s"\)/g)];
+						for (const match of funcNames) {
+							const funcName = match[1];
+							if (!state.queue.find((e) => e.function === funcName)) {
+								state.queue.push({
+									function: funcName,
+									file: `${newName}.c`,
+									region: prefix,
+									instructions: 0, // will be filled on first attempt
+									difficulty: "unknown",
+									tags: ["promoted"],
+									attempts: 0,
+									lastScore: 0,
+									status: "pending",
+								});
+							}
+						}
+						saveQueue(ctx.cwd);
+					}
+
+					// Commit promotion
+					await pi.exec("git", ["add", "-A"]);
+					await pi.exec("git", ["commit", "-m", `chore(decomp): promote segment 0x${seg.offset} to C (${newFunctions} functions)`]);
+					await pi.exec("git", ["push"]);
+
+					return {
+						content: [{
+							type: "text",
+							text: `✓ Promoted 0x${seg.offset} → ${newName}.c (${newFunctions} new functions added to queue)\nTotal queue: ${state.queue.length}`,
+						}],
+						details: { promoted: seg.offset, newName, newFunctions },
+					};
+				}
+
+				// No specific target — list promotable segments
+				segmentInfo.sort((a, b) => a.functions - b.functions);
+				const totalFuncs = segmentInfo.reduce((sum, s) => sum + s.functions, 0);
+				const listing = segmentInfo.slice(0, 30).map((s) => `  0x${s.offset}: ${s.functions} functions`).join("\n");
+
+				return {
+					content: [{
+						type: "text",
+						text: `${segmentInfo.length} promotable segments (${totalFuncs} total functions):\n\n${listing}\n\nTo promote one: decomp_queue promote with function="OFFSET" (e.g. "100810")`,
+					}],
+					details: { count: segmentInfo.length, totalFunctions: totalFuncs },
+				};
+			}
 
 			if (params.action === "retry-skipped") {
 				const skipped = state.queue.filter((e) => e.status === "skipped");
