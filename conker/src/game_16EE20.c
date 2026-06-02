@@ -122,7 +122,10 @@ f32 func_15142A80(f32 arg0) {
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15142AC0.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15142B04.s")
+f32 func_15142B04(f32 arg0) {
+    return (((2.0f - arg0) * (arg0 + 1.0f)) * arg0) * 0.5f;
+}
+
 f32 func_15142B44(f32 arg0) {
     return ((arg0 + 1.0f) * (arg0 - 1.0f) * arg0) * D_800A5628;
 }
