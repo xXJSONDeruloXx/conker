@@ -150,7 +150,16 @@ void func_15168F84(s32 arg0, s32 *arg1, s32 *arg2) {
 #pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_15169260.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_1516944C.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_151695F0.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_1516962C.s")
+void func_1516962C(s32 arg0, struct127 *arg1, u8 arg2) {
+    struct {
+        s32 unk0;
+        u8 unk4;
+    } sp18;
+    sp18.unk0 = (s32)arg1;
+    sp18.unk4 = arg1->unique_id;
+    func_1516944C(arg0, (s32)&sp18, arg2);
+}
+
 s32 func_15169668(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     D_800D2DAB = 1;
     return arg0;
