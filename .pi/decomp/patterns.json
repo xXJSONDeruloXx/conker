@@ -459,5 +459,14 @@
     "example_functions": [
       "func_1001BE1C"
     ]
+  },
+  {
+    "id": "preincrement-unrolled-fill-loop",
+    "description": "Unrolled pointer fill loops can match a branch-delay preincrement by writing `ptr += stride; ptr[-n] = value; ...` inside a guarded do/while.",
+    "trigger": "Target has an initial pointer/end sltu guard, loop label with `addiu ptr, stride` in branch delay, then stores to negative offsets before a bnez backedge.",
+    "solution": "Use `if (ptr < end) { do { ptr += 4; ptr[-4] = value; ptr[-3] = value; ptr[-2] = value; ptr[-1] = value; } while (ptr < end); }` with `end` computed as a typed pointer.",
+    "example_functions": [
+      "func_16001678"
+    ]
   }
 ]

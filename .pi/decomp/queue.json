@@ -6581,8 +6581,8 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 6,
-    "lastScore": 0.467741935483871,
+    "attempts": 8,
+    "lastScore": 0.9355,
     "status": "pending",
     "history": [
       {
@@ -6650,6 +6650,31 @@
         "reason": "length_mismatch (target=31, generated=29)",
         "diffs": [],
         "timestamp": "2026-06-02T22:43:26.877Z"
+      },
+      {
+        "code": "void func_1513532C(struct102 *arg0) {\n    s32 idx = *(volatile u8 *)((s32)arg0 + 0x50);\n    u16 temp_a0;\n\n    if (idx < 0) {\n        idx = 0;\n    }\n    if (idx >= 6) {\n        idx = 0;\n    }\n\n    temp_a0 = *(u16 *)((s32)arg0 + 0x44);\n    if (temp_a0 != 0) {\n        func_100111C8(temp_a0);\n        *(u16 *)((s32)arg0 + 0x44) = 0;\n    }\n    D_80089B70[idx](arg0);\n}",
+        "score": 0.7742,
+        "reason": "structural_diffs=7",
+        "diffs": [
+          "structural: target=bgez v0, L0 got=bgezl v0, L0",
+          "structural: target=b L1 got=move v0, zero",
+          "structural: target=move v0, zero got=slti at, v0, 6",
+          "structural: target=bnezl at, L2 got=bnezl at, L1",
+          "structural: target=beqzl a0, L3 got=beqzl a0, L2",
+          "structural: target=sw v0, 24(sp) got=sw v0, 28(sp)",
+          "structural: target=lw v0, 24(sp) got=lw v0, 28(sp)"
+        ],
+        "timestamp": "2026-06-02T22:43:52.015Z"
+      },
+      {
+        "code": "void func_1513532C(struct102 *arg0) {\n    s32 idx = *(u8 *)((s32)arg0 + 0x50);\n    u16 temp_a0;\n\n    if (idx < 0) {\n        idx = 0;\n    } else if (idx < 6) {\n    } else {\n        idx = 0;\n    }\n\n    temp_a0 = *(u16 *)((s32)arg0 + 0x44);\n    if (temp_a0 != 0) {\n        func_100111C8(temp_a0);\n        *(u16 *)((s32)arg0 + 0x44) = 0;\n    }\n    D_80089B70[idx](arg0);\n}",
+        "score": 0.9355,
+        "reason": "structural_diffs=2",
+        "diffs": [
+          "structural: target=sw v0, 24(sp) got=sw v0, 28(sp)",
+          "structural: target=lw v0, 24(sp) got=lw v0, 28(sp)"
+        ],
+        "timestamp": "2026-06-02T22:44:32.097Z"
       }
     ]
   },
