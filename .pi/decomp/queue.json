@@ -748,7 +748,7 @@
     "tags": [],
     "attempts": 6,
     "lastScore": 0.9048,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "void func_1516706C(void) {\n    void (**ptr)(void) = D_8008CB64;\n    void (**end)(void) = D_8008CB70;\n    void (*func)(void) = *ptr;\n\n    do {\n        if (func != NULL) {\n            func();\n            ptr++;\n        } else {\n            ptr++;\n        }\n        if (ptr != end) {\n            func = *ptr;\n        }\n    } while (ptr != end);\n}\n",
@@ -1685,9 +1685,80 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.2857,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_151417C4(u8 arg0, u8 arg1) {\n    struct {\n        s32 unk0;\n        s32 unk4;\n        u8 unk8;\n    } sp1C;\n\n    sp1C.unk0 = D_8008A074[0];\n    sp1C.unk4 = D_8008A074[1];\n    sp1C.unk8 = arg0;\n    func_15169260((s32)&sp1C, 2, (s32)&sp1C.unk8, arg1);\n}\n",
+        "score": 0.3333,
+        "reason": "structural_diffs=14",
+        "diffs": [
+          "structural: target=sw a0, 40(sp) got=lui v0, HI(D_8008A074)",
+          "structural: target=addiu a0, sp, 28 got=addiu v0, v0, LO(D_8008A074)",
+          "structural: target=sw a1, 44(sp) got=sw a0, 40(sp)",
+          "structural: target=andi a3, a1, 255 got=sw a1, 44(sp)",
+          "structural: target=lui t6, HI(D_8008A074) got=andi a3, a1, 255",
+          "structural: target=addiu t6, t6, LO(D_8008A074) got=lw t6, 0(v0)",
+          "structural: target=lw at, 0(t6) got=lw t7, 4(v0)",
+          "structural: target=li a1, 2 got=lbu t8, 43(sp)",
+          "structural: target=addiu a2, sp, 36 got=addiu a0, sp, 28",
+          "structural: target=sw at, 0(a0) got=li a1, 2",
+          "structural: target=lw t9, 4(t6) got=addiu a2, sp, 36",
+          "structural: target=sw t9, 4(a0) got=sw t6, 28(sp)",
+          "structural: target=lbu t0, 43(sp) got=sw t7, 32(sp)",
+          "structural: target=sb t0, 36(sp) got=sb t8, 36(sp)"
+        ],
+        "timestamp": "2026-06-02T18:01:20.191Z"
+      },
+      {
+        "code": "void func_151417C4(u8 arg0, u8 arg1) {\n    s32 sp1C[2];\n    u8 sp24;\n    s32 *temp_a0;\n    s32 *temp_t6;\n\n    temp_a0 = sp1C;\n    temp_t6 = D_8008A074;\n    temp_a0[0] = temp_t6[0];\n    temp_a0[1] = temp_t6[1];\n    sp24 = arg0;\n    func_15169260((s32)temp_a0, 2, (s32)&sp24, arg1);\n}\n",
+        "score": 0.2381,
+        "reason": "structural_diffs=16",
+        "diffs": [
+          "structural: target=addiu sp, sp, -40 got=addiu sp, sp, -48",
+          "structural: target=sw a0, 40(sp) got=lui v0, HI(D_8008A074)",
+          "structural: target=addiu a0, sp, 28 got=addiu v0, v0, LO(D_8008A074)",
+          "structural: target=sw a1, 44(sp) got=sw a0, 48(sp)",
+          "structural: target=andi a3, a1, 255 got=sw a1, 52(sp)",
+          "structural: target=lui t6, HI(D_8008A074) got=andi a3, a1, 255",
+          "structural: target=addiu t6, t6, LO(D_8008A074) got=lw t6, 0(v0)",
+          "structural: target=lw at, 0(t6) got=lw t7, 4(v0)",
+          "structural: target=li a1, 2 got=lbu t8, 51(sp)",
+          "structural: target=addiu a2, sp, 36 got=addiu a0, sp, 40",
+          "structural: target=sw at, 0(a0) got=li a1, 2",
+          "structural: target=lw t9, 4(t6) got=addiu a2, sp, 39",
+          "structural: target=sw t9, 4(a0) got=sw t6, 40(sp)",
+          "structural: target=lbu t0, 43(sp) got=sw t7, 44(sp)",
+          "structural: target=sb t0, 36(sp) got=sb t8, 39(sp)",
+          "structural: target=addiu sp, sp, 40 got=addiu sp, sp, 48"
+        ],
+        "timestamp": "2026-06-02T18:14:16.728Z"
+      },
+      {
+        "code": "void func_151417C4(u8 arg0, u8 arg1) {\n    struct {\n        s32 unk0;\n        s32 unk4;\n        u8 unk8;\n    } sp1C;\n    s32 temp_a0;\n\n    temp_a0 = (s32)&sp1C;\n    ((s32 *)temp_a0)[0] = D_8008A074[0];\n    ((s32 *)temp_a0)[1] = D_8008A074[1];\n    sp1C.unk8 = arg0;\n    func_15169260(temp_a0, 2, (s32)&sp1C.unk8, arg1);\n}\n",
+        "score": 0.2857,
+        "reason": "structural_diffs=15",
+        "diffs": [
+          "structural: target=addiu sp, sp, -40 got=addiu sp, sp, -48",
+          "structural: target=sw a0, 40(sp) got=lui v1, HI(D_8008A074)",
+          "structural: target=addiu a0, sp, 28 got=addiu v1, v1, LO(D_8008A074)",
+          "structural: target=sw a1, 44(sp) got=sw a0, 48(sp)",
+          "structural: target=andi a3, a1, 255 got=sw a1, 52(sp)",
+          "structural: target=lui t6, HI(D_8008A074) got=andi a3, a1, 255",
+          "structural: target=addiu t6, t6, LO(D_8008A074) got=lw t6, 0(v1)",
+          "structural: target=lw at, 0(t6) got=addiu a0, sp, 36",
+          "structural: target=addiu a2, sp, 36 got=sw t6, 0(a0)",
+          "structural: target=sw at, 0(a0) got=lw t7, 4(v1)",
+          "structural: target=lw t9, 4(t6) got=addiu a2, sp, 44",
+          "structural: target=sw t9, 4(a0) got=sw t7, 4(a0)",
+          "structural: target=lbu t0, 43(sp) got=lbu t8, 51(sp)",
+          "structural: target=sb t0, 36(sp) got=sb t8, 44(sp)",
+          "structural: target=addiu sp, sp, 40 got=addiu sp, sp, 48"
+        ],
+        "timestamp": "2026-06-02T18:14:34.477Z"
+      }
+    ]
   },
   {
     "function": "func_150A7770",
