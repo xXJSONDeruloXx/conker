@@ -896,9 +896,9 @@
     "instructions": 23,
     "difficulty": "low",
     "tags": [],
-    "attempts": 6,
+    "attempts": 8,
     "lastScore": 0.41304347826086957,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "void func_151635A8(struct225 *arg0, s32 arg1, u8 arg2) {\n    if (D_8008B370[arg0->unk25] != NULL) {\n        D_8008B370[arg0->unk25](arg2);\n    }\n}",
@@ -941,6 +941,20 @@
         "reason": "length_mismatch (target=23, generated=19)",
         "diffs": [],
         "timestamp": "2026-06-02T18:35:47.480Z"
+      },
+      {
+        "code": "void func_151635A8(struct225 *arg0, s32 arg1, u8 arg2) {\n    void (*func)();\n    \n    func = (void (*)())D_8008B370[arg0->unk25];\n    if (func != NULL) {\n        func();\n    }\n}",
+        "score": 0.3695652173913043,
+        "reason": "length_mismatch (target=23, generated=17)",
+        "diffs": [],
+        "timestamp": "2026-06-02T18:36:41.110Z"
+      },
+      {
+        "code": "void func_151635A8(struct225 *arg0, s32 arg1, u8 arg2) {\n    s32 (**table)(s32) = D_8008B370;\n    if (table[arg0->unk25] != NULL) {\n        table[arg0->unk25](arg2);\n    }\n}",
+        "score": 0.41304347826086957,
+        "reason": "length_mismatch (target=23, generated=19)",
+        "diffs": [],
+        "timestamp": "2026-06-02T18:36:51.714Z"
       }
     ]
   },
@@ -1107,9 +1121,39 @@
     "instructions": 23,
     "difficulty": "low",
     "tags": [],
-    "attempts": 0,
+    "attempts": 4,
     "lastScore": 0,
-    "status": "pending"
+    "status": "skipped",
+    "history": [
+      {
+        "code": "void func_15167010(void) {\n    struct115 *ptr;\n    struct115 *end;\n\n    ptr = D_8008B4A8;\n    end = (struct115 *)((u8 *)D_8008B4A8 + 0x1484);\n    \n    do {\n        if (ptr->unk18 != NULL) {\n            ptr->unk18(NULL);\n        }\n        ptr++;\n    } while (ptr < end);\n}",
+        "score": 0,
+        "reason": "generated 1340 instr for 23 target (58.3x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-02T18:38:03.415Z"
+      },
+      {
+        "code": "void func_15167010(void) {\n    struct115 *ptr;\n    struct115 *end;\n\n    ptr = D_8008B4A8;\n    end = (struct115 *)((u8 *)D_8008B4A8 + 0x1484);\n    \n    do {\n        if (ptr->unk18) {\n            ptr->unk18(0);\n        }\n        ptr++;\n    } while (ptr < end);\n}",
+        "score": 0,
+        "reason": "generated 1340 instr for 23 target (58.3x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-02T18:38:17.995Z"
+      },
+      {
+        "code": "void func_15167010(void) {\n    u8 *ptr;\n    u8 *end;\n    void (*func)(void);\n\n    ptr = (u8 *)D_8008B4A8;\n    end = (u8 *)D_8008B4A8 + 0x1484;\n    \n    do {\n        func = *(void (**)(void))(ptr + 0x18);\n        if (func != NULL) {\n            func();\n        }\n        ptr += 0x34;\n    } while (ptr < end);\n}",
+        "score": 0,
+        "reason": "generated 1340 instr for 23 target (58.3x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-02T18:38:28.436Z"
+      },
+      {
+        "code": "void func_15167010(void) {\n    s32 i;\n\n    for (i = 0; i < 101; i++) {\n        if (D_8008B4A8[i].unk18 != NULL) {\n            D_8008B4A8[i].unk18(0);\n        }\n    }\n}",
+        "score": 0,
+        "reason": "generated 1339 instr for 23 target (58.2x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-02T18:38:53.475Z"
+      }
+    ]
   },
   {
     "function": "func_1513B0B8",
@@ -1162,9 +1206,32 @@
     "instructions": 23,
     "difficulty": "low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.4782608695652174,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_150747E4(void) {\n    u8 val = D_800D154C->unk65;\n    \n    if (val != 0) {\n        u8 *entry = (u8 *)D_800CC2D0 + (val - 1) * 812;\n        *(s32 *)(entry + 0x218) = 0;\n        *(u8 *)(entry + 0x232) = (u8)D_800D1580;\n    }\n}",
+        "score": 0.4782608695652174,
+        "reason": "length_mismatch (target=23, generated=22)",
+        "diffs": [],
+        "timestamp": "2026-06-02T18:40:57.172Z"
+      },
+      {
+        "code": "void func_150747E4(void) {\n    u8 val = D_800D154C->unk65;\n    s32 tmp = D_800D1580;\n    \n    if (val != 0) {\n        u8 *entry = (u8 *)D_800CC2D0 + (val - 1) * 812;\n        *(s32 *)(entry + 0x218) = 0;\n        *(u8 *)(entry + 0x232) = (u8)tmp;\n    }\n}",
+        "score": 0.4782608695652174,
+        "reason": "length_mismatch (target=23, generated=22)",
+        "diffs": [],
+        "timestamp": "2026-06-02T18:41:12.957Z"
+      },
+      {
+        "code": "void func_150747E4(void) {\n    u8 *base = (u8 *)D_800CC2D0;\n    u8 val = D_800D154C->unk65;\n    \n    if (val != 0) {\n        u8 *entry = &base[(val - 1) * 812];\n        *(s32 *)(entry + 0x218) = 0;\n        entry[0x232] = (u8)D_800D1580;\n    }\n}",
+        "score": 0.4782608695652174,
+        "reason": "length_mismatch (target=23, generated=22)",
+        "diffs": [],
+        "timestamp": "2026-06-02T18:41:32.476Z"
+      }
+    ]
   },
   {
     "function": "func_15144B68",
