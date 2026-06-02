@@ -54,6 +54,8 @@ interface DecompState {
 const COMMIT_HISTORY_EVERY = 3; // commit queue.json every N failed attempts to preserve findings
 const LOOP_POLL_MS = 5000; // fallback timer interval for loop advancement
 const LOOP_STATE_FILE = ".pi/decomp/loop-state.json";
+const AUTO_PROMOTE_THRESHOLD = 20; // auto-promote segments when pending drops below this
+const AUTO_PROMOTE_BATCH = 5; // promote this many segments at a time
 
 interface LoopState {
 	enabled: boolean;
@@ -117,6 +119,128 @@ function saveLoopState(cwd: string): void {
 	fs.writeFileSync(path.join(cwd, LOOP_STATE_FILE), JSON.stringify(loopState, null, 2));
 }
 
+async function autoPromoteIfNeeded(pi: any, cwd: string): Promise<string | null> {
+	const fs = require("node:fs");
+	const path = require("node:path");
+	const re = require;
+
+	const pending = state.queue.filter((e) => e.status === "pending").length;
+	if (pending >= AUTO_PROMOTE_THRESHOLD) return null;
+
+	// Find promotable segments from yaml
+	const yamlPath = path.join(cwd, "conker/conker.us.yaml");
+	if (!fs.existsSync(yamlPath)) return null;
+	let yaml = fs.readFileSync(yamlPath, "utf-8");
+
+	const segmentRegex = /^(\s*-\s*\[0x([0-9A-Fa-f]+),\s*asm\])\s*$/gm;
+	const segments: { offset: string; line: string; funcs: number }[] = [];
+	let match;
+	while ((match = segmentRegex.exec(yaml)) !== null) {
+		const offset = match[2];
+		const asmFile = path.join(cwd, `conker/asm/${offset}.s`);
+		let funcCount = 0;
+		if (fs.existsSync(asmFile)) {
+			const content = fs.readFileSync(asmFile, "utf-8");
+			funcCount = (content.match(/^glabel\s+/gm) || []).length;
+		}
+		if (funcCount > 0) {
+			segments.push({ offset, line: match[1], funcs: funcCount });
+		}
+	}
+
+	if (segments.length === 0) return null;
+
+	// Sort by function count (smallest first for quick wins)
+	segments.sort((a, b) => a.funcs - b.funcs);
+
+	// Promote a batch
+	const toPromote = segments.slice(0, AUTO_PROMOTE_BATCH);
+	let totalPromoted = 0;
+	const promoted: string[] = [];
+
+	for (const seg of toPromote) {
+		const offsetNum = parseInt(seg.offset, 16);
+		const prefix = offsetNum < 0x10000 ? "init" : offsetNum >= 0x250000 ? "debugger" : "game";
+		const newName = `${prefix}_${seg.offset}`;
+		const oldLine = seg.line;
+		const newLine = oldLine.replace(
+			`[0x${seg.offset}, asm]`,
+			`[0x${seg.offset}, c, ${newName}]`,
+		);
+
+		yaml = yaml.replace(oldLine, newLine);
+		promoted.push(`0x${seg.offset} → ${newName} (${seg.funcs} funcs)`);
+		totalPromoted += seg.funcs;
+	}
+
+	// Write updated yaml
+	fs.writeFileSync(yamlPath, yaml);
+
+	// Run extraction
+	const extractResult = await pi.exec("docker", [
+		"run", "--rm", "--platform", "linux/amd64",
+		"-v", `${cwd}:/conker`, "-w", "/conker",
+		"conker-build-min-amd64",
+		"bash", "-lc", "cd conker && make extract 2>&1 | tail -5",
+	], { timeout: 180000 });
+
+	// Strip metadata
+	await pi.exec("python3", ["tools/strip_splat_metadata.py"], { timeout: 30000 });
+
+	// Verify build
+	const buildResult = await pi.exec("docker", [
+		"run", "--rm", "--platform", "linux/amd64",
+		"-v", `${cwd}:/conker`, "-w", "/conker",
+		"conker-build-min-amd64",
+		"bash", "-lc", "make -C conker -j$(nproc) 2>&1 | tail -5",
+	], { timeout: 180000 });
+
+	if (!buildResult.stdout.includes("conker.us.bin: OK")) {
+		// Revert yaml
+		const origYaml = fs.readFileSync(yamlPath, "utf-8");
+		// Can't easily revert splits, so just report failure
+		return `Auto-promote failed: build broken. Manual intervention needed.`;
+	}
+
+	// Add new functions to queue
+	for (const seg of toPromote) {
+		const offsetNum = parseInt(seg.offset, 16);
+		const prefix = offsetNum < 0x10000 ? "init" : offsetNum >= 0x250000 ? "debugger" : "game";
+		const newName = `${prefix}_${seg.offset}`;
+		const srcPath = path.join(cwd, `conker/src/${newName}.c`);
+		if (fs.existsSync(srcPath)) {
+			const src = fs.readFileSync(srcPath, "utf-8");
+			const funcMatches = [...src.matchAll(/#pragma\s+GLOBAL_ASM\("asm\/nonmatchings\/[^/]+\/([^"]+)\.s"\)/g)];
+			for (const fm of funcMatches) {
+				const funcName = fm[1];
+				if (!state.queue.find((e) => e.function === funcName)) {
+					state.queue.push({
+						function: funcName,
+						file: `${newName}.c`,
+						region: prefix,
+						instructions: 0,
+						difficulty: "unknown",
+						tags: ["promoted"],
+						attempts: 0,
+						lastScore: 0,
+						status: "pending",
+					});
+				}
+			}
+		}
+	}
+	saveQueue(cwd);
+
+	// Commit promotion
+	await pi.exec("git", ["add", "-A"]);
+	await pi.exec("git", ["commit", "-m",
+		`chore(decomp): auto-promote ${toPromote.length} segments (${totalPromoted} new functions)\n\n${promoted.join("\n")}`
+	]);
+	await pi.exec("git", ["push"]);
+
+	return `Auto-promoted ${toPromote.length} segments (${totalPromoted} functions). Queue now: ${state.queue.filter(e => e.status === "pending").length} pending.`;
+}
+
 function buildChunkPrompt(chunkNum: number): string {
 	const matched = state.queue.filter((e) => e.status === "matched").length;
 	const pending = state.queue.filter((e) => e.status === "pending").length;
@@ -156,6 +280,7 @@ function buildChunkPrompt(chunkNum: number): string {
 		"- Read `decomp_diff` output before every retry.",
 		"- Never provide code that includes multiple functions, struct definitions, or header content.",
 		"- The full ROM SHA-1 match is the ONLY acceptance criterion.",
+		"- If decomp_queue next says it auto-promoted segments, new candidates are already in the queue.",
 	].join("\n");
 }
 
@@ -570,6 +695,16 @@ export default function (pi: ExtensionAPI) {
 			}
 
 			// action === "next"
+			// Auto-promote segments if queue is running low
+			const pendingCount = state.queue.filter((e) => e.status === "pending").length;
+			if (pendingCount < AUTO_PROMOTE_THRESHOLD) {
+				const promoteResult = await autoPromoteIfNeeded(pi, ctx.cwd);
+				if (promoteResult) {
+					// Notify via the response that we auto-promoted
+					if (ctx.hasUI) ctx.ui.notify(promoteResult, "info");
+				}
+			}
+
 			let candidates = state.queue.filter((e) => e.status === "pending");
 			if (params.filter?.region) candidates = candidates.filter((e) => e.region === params.filter!.region);
 			if (params.filter?.maxInstructions)
