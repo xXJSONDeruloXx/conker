@@ -5142,7 +5142,7 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 42,
+    "attempts": 45,
     "lastScore": 0.484375,
     "status": "pending",
     "history": [
@@ -5586,6 +5586,27 @@
         "reason": "length_mismatch (target=31, generated=32)",
         "diffs": [],
         "timestamp": "2026-06-02T23:13:38.174Z"
+      },
+      {
+        "code": "void func_15168F08(Gfx *arg0, s32 arg1) {\n    s32 i = 0;\n    Gfx *ptr = arg0;\n    s32 temp_a2 = arg1;\n    s32 end = -0x21;\n\n    if (*(volatile s8 *)&arg0->words.w0 != end) {\n        arg1 = *(volatile s8 *)&arg0->words.w0;\n        do {\n            i++;\n            if ((arg1 == 1) || ((arg1 == -0x24) && (*((u8 *)&ptr->words.w0 + 3) == 0xE))) {\n                *(s32 *)&ptr->words.w1 &= 0x00FFFFFF;\n                *(s32 *)&ptr->words.w1 += temp_a2;\n            }\n            ptr = arg0 + i;\n            arg1 = *(s8 *)&ptr->words.w0;\n        } while (arg1 != end);\n    }\n}",
+        "score": 0.484375,
+        "reason": "length_mismatch (target=31, generated=32)",
+        "diffs": [],
+        "timestamp": "2026-06-02T23:14:32.302Z"
+      },
+      {
+        "code": "void func_15168F08(Gfx *arg0, s32 arg1) {\n    s32 i = 0;\n    Gfx *ptr = arg0;\n    s32 temp_a2 = arg1;\n    s32 end = -0x21;\n\n    if (*(s8 *)&arg0->words.w0 != end) {\n        arg1 = *(s8 *)&arg0->words.w0;\n        do {\n            i++;\n            if ((1 == arg1) || ((-0x24 == arg1) && (*((u8 *)&ptr->words.w0 + 3) == 0xE))) {\n                *(s32 *)&ptr->words.w1 &= 0x00FFFFFF;\n                *(s32 *)&ptr->words.w1 += temp_a2;\n            }\n            ptr = arg0 + i;\n            arg1 = *(s8 *)&ptr->words.w0;\n        } while (end != arg1);\n    }\n}",
+        "score": 0.484375,
+        "reason": "length_mismatch (target=31, generated=32)",
+        "diffs": [],
+        "timestamp": "2026-06-02T23:15:07.171Z"
+      },
+      {
+        "code": "void func_15168F08(Gfx *arg0, s32 arg1) {\n    s32 i = 0;\n    Gfx *ptr = arg0;\n    s32 temp_a2 = arg1;\n    s32 end = -0x21;\n\n    if (*(volatile s8 *)&arg0->words.w0 != end) {\n        arg1 = *(volatile s8 *)&arg0->words.w0;\n        do {\n            i++;\n            if ((1 == arg1) || ((-0x24 == arg1) && (*((u8 *)&ptr->words.w0 + 3) == 0xE))) {\n                *(s32 *)&ptr->words.w1 &= 0x00FFFFFF;\n                *(s32 *)&ptr->words.w1 += temp_a2;\n            }\n            ptr = arg0 + i;\n            arg1 = *(s8 *)&ptr->words.w0;\n        } while (end != arg1);\n    }\n}",
+        "score": 0.484375,
+        "reason": "length_mismatch (target=31, generated=32)",
+        "diffs": [],
+        "timestamp": "2026-06-02T23:15:41.919Z"
       }
     ]
   },
