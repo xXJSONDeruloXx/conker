@@ -1331,6 +1331,165 @@ export default function (pi: ExtensionAPI) {
 	});
 
 	// ═══════════════════════════════════════════════════════════════
+	// TOOL: decomp_permute
+	// ═══════════════════════════════════════════════════════════════
+	pi.registerTool({
+		name: "decomp_permute",
+		label: "Decomp Permute",
+		description:
+			"Run decomp-permuter on a near-miss function. Takes the best C attempt from history (or provided code), assembles a target .o, and brute-force permutes statement order, expression shapes, and variable types to find an exact match. Best for functions scoring 0.8+ where the LLM can't converge on exact codegen.",
+		promptSnippet: "Brute-force permute a near-miss C function to find an exact match",
+		promptGuidelines: [
+			"Use decomp_permute on functions with score ≥ 0.8 where decomp_attempt has plateaued. It runs thousands of random permutations to find the exact match.",
+			"decomp_permute uses the best attempt from history by default. Provide code= to override with a specific starting point.",
+		],
+		parameters: Type.Object({
+			function: Type.String({ description: "Function name to permute" }),
+			file: Type.String({ description: "Source file basename, e.g. game_1944C0.c" }),
+			code: Type.Optional(Type.String({ description: "Starting C code (default: best attempt from history)" })),
+			iterations: Type.Optional(Type.Number({ description: "Number of permutation iterations (default: 2000)" })),
+		}),
+
+		async execute(_toolCallId, params, signal, onUpdate, ctx) {
+			const fs = require("node:fs");
+			const path = require("node:path");
+			const iterations = params.iterations || 2000;
+
+			// Get the best C attempt from history (or use provided code)
+			let baseCode = params.code;
+			if (!baseCode) {
+				const entry = state.queue.find((e) => e.function === params.function);
+				if (!entry?.history?.length) {
+					return {
+						content: [{ type: "text", text: `No attempt history for ${params.function}. Run decomp_attempt first to establish a baseline.` }],
+						details: { error: "no_history" },
+					};
+				}
+				// Pick the highest-scoring attempt
+				const best = entry.history.reduce((a: AttemptRecord, b: AttemptRecord) => a.score > b.score ? a : b);
+				baseCode = best.code;
+				onUpdate?.({
+					content: [{ type: "text", text: `Using best attempt (score: ${best.score.toFixed(3)}) as permuter base.` }],
+					details: {},
+				});
+			}
+
+			// Set up permuter working directory
+			const workDir = path.join(ctx.cwd, `.pi/decomp/permuter/${params.function}`);
+			fs.mkdirSync(workDir, { recursive: true });
+
+			// 1. Write base.c — the single function with includes
+			const baseC = [
+				'#include <ultra64.h>',
+				'#include "functions.h"',
+				'#include "variables.h"',
+				'',
+				baseCode,
+				'',
+			].join('\n');
+			fs.writeFileSync(path.join(workDir, "base.c"), baseC);
+
+			// 2. Create target.o by assembling the target .s
+			const targetS = path.join(ctx.cwd, "conker/asm/nonmatchings", params.file.replace(".c", ""), `${params.function}.s`);
+			if (!fs.existsSync(targetS)) {
+				return {
+					content: [{ type: "text", text: `Target assembly not found: ${targetS}` }],
+					details: { error: "no_target" },
+				};
+			}
+
+			// Need to wrap the target .s with a proper prelude for the assembler
+			const targetAsmContent = fs.readFileSync(targetS, "utf-8");
+			const wrappedAsm = `.set noat\n.set noreorder\n.set gp=64\n\n${targetAsmContent}\n`;
+			fs.writeFileSync(path.join(workDir, "target.s"), wrappedAsm);
+
+			// Assemble target.o inside Docker
+			const asmResult = await pi.exec("docker", [
+				"run", "--rm", "--platform", "linux/amd64",
+				"-v", `${ctx.cwd}:/conker`, "-w", `/conker/.pi/decomp/permuter/${params.function}`,
+				"conker-build-min-amd64",
+				"bash", "-lc",
+				"mips-linux-gnu-as -EB -march=vr4300 -mabi=32 -o target.o target.s",
+			], { signal, timeout: 30000 });
+
+			if (asmResult.code !== 0) {
+				return {
+					content: [{ type: "text", text: `Failed to assemble target.o:\n${asmResult.stderr}\n${asmResult.stdout}` }],
+					details: { error: "asm_failed" },
+				};
+			}
+
+			// 3. Write compile.sh (wrapper that calls our permuter-compile.sh)
+			const compileScript = [
+				'#!/bin/bash',
+				'/conker/tools/permuter-compile.sh "$@"',
+			].join('\n');
+			fs.writeFileSync(path.join(workDir, "compile.sh"), compileScript, { mode: 0o755 });
+
+			// 4. Write settings.toml
+			const settings = [
+				'[compiler]',
+				'arch = "mips"',
+				'',
+				'[scorer]',
+				'algorithm = "levenshtein"',
+			].join('\n');
+			fs.writeFileSync(path.join(workDir, "settings.toml"), settings);
+
+			onUpdate?.({
+				content: [{ type: "text", text: `Permuter set up. Running ${iterations} iterations...` }],
+				details: {},
+			});
+
+			// 5. Run the permuter inside Docker
+			const permResult = await pi.exec("docker", [
+				"run", "--rm", "--platform", "linux/amd64",
+				"-v", `${ctx.cwd}:/conker`, "-w", "/conker",
+				"conker-build-min-amd64",
+				"bash", "-lc",
+				`cd .pi/decomp/permuter/${params.function} && python3 /conker/tools/decomp-permuter/permuter.py . --iterations ${iterations} --best-only 2>&1 | tail -30`,
+			], { signal, timeout: 600000 }); // 10 min max
+
+			const output = permResult.stdout || "";
+			const stderr = permResult.stderr || "";
+
+			// Check if a score-0 match was found
+			const scoreMatch = output.match(/score\s+0\b|\bscore:\s*0\b|\[0\]/i);
+			const bestScoreMatch = output.match(/best.*?score[:\s]+(\d+)/i);
+			const bestScore = bestScoreMatch ? parseInt(bestScoreMatch[1]) : null;
+
+			if (scoreMatch || bestScore === 0) {
+				// Perfect match found! Read the winning source
+				let winningCode = "(check .pi/decomp/permuter/" + params.function + "/)";
+				const outputDir = path.join(workDir, "output");
+				if (fs.existsSync(outputDir)) {
+					const outputs = fs.readdirSync(outputDir).filter((f: string) => f.endsWith(".c")).sort();
+					if (outputs.length > 0) {
+						winningCode = fs.readFileSync(path.join(outputDir, outputs[0]), "utf-8");
+					}
+				}
+
+				return {
+					content: [{
+						type: "text",
+						text: `✅ PERMUTER FOUND A MATCH (score 0)!\n\nWinning code:\n\`\`\`c\n${winningCode}\n\`\`\`\n\nRun decomp_attempt with this code, then decomp_accept to commit.`,
+					}],
+					details: { matched: true, bestScore: 0, code: winningCode },
+				};
+			}
+
+			// No perfect match — report best result
+			return {
+				content: [{
+					type: "text",
+					text: `Permuter completed ${iterations} iterations. Best score: ${bestScore ?? "unknown"}\n\nOutput:\n${output.slice(-500)}\n${stderr ? `\nErrors:\n${stderr.slice(-200)}` : ""}\n\nPermuter working dir: .pi/decomp/permuter/${params.function}/\nYou can add PERM_* macros to base.c and rerun for targeted permutations.`,
+				}],
+				details: { matched: false, bestScore, iterations },
+			};
+		},
+	});
+
+	// ═══════════════════════════════════════════════════════════════
 	// TOOL: decomp_status
 	// ═══════════════════════════════════════════════════════════════
 	pi.registerTool({
