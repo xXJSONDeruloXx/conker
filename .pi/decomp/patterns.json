@@ -360,5 +360,14 @@
     "example_functions": [
       "func_1000CBF0"
     ]
+  },
+  {
+    "id": "byte-pointer-stride-for-struct-field-array",
+    "description": "When an f32 symbol actually points to a field within an array of large structs, indexing the f32 array can introduce an extra scaled-index temp register; byte-pointer arithmetic with the full struct stride keeps the offset in one register.",
+    "trigger": "Target computes a large byte stride (e.g. 0x32C) directly and then lwc1 from a field symbol, while f32_array[index] generates the same math plus a final scale into a different register.",
+    "solution": "Use *(f32 *)((u8 *)FIELD_SYMBOL + index * STRUCT_SIZE) and cast the float result to the signed destination width before assigning to an unsigned field if the target uses trunc.w.s.",
+    "example_functions": [
+      "func_15073C50"
+    ]
   }
 ]
