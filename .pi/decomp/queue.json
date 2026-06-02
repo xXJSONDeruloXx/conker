@@ -4620,9 +4620,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 7,
-    "lastScore": 0.48214285714285715,
-    "status": "pending",
+    "attempts": 8,
+    "lastScore": 1,
+    "status": "matched",
     "history": [
       {
         "code": "s32 func_151380B4(u8 *arg0, s32 arg1, s32 arg2) {\n    s32 temp_v0 = *(s32 *)(arg0 + 0x1D4);\n\n    if (temp_v0 != 0) {\n        if ((arg0[0x74] & 0xF) != 0xF) {\n            func_15143134(&D_800A3FD8[arg1 << 4], arg2, temp_v0 + 0x300);\n            return 1;\n        }\n    }\n    return 0;\n}",
@@ -5344,9 +5344,61 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.5556,
+    "status": "pending",
+    "history": [
+      {
+        "code": "f32 func_151423D8(u8 arg0) {\n    s32 temp_v1;\n    s32 temp_v0 = arg0;\n    s32 temp_t0;\n\n    if (temp_v0 & 0x40) {\n        temp_v1 = 0x40 - (temp_v0 & 0x3F);\n    } else {\n        temp_v1 = temp_v0 & 0x3F;\n    }\n\n    temp_t0 = temp_v0 & 0xC0;\n    if ((temp_t0 == 0) || (temp_t0 == 0xC0)) {\n        return D_8009A220[temp_v1];\n    }\n    return -D_8009A220[temp_v1];\n}",
+        "score": 0.7407,
+        "reason": "structural_diffs=7",
+        "diffs": [
+          "structural: target=andi t0, v0, 192 got=andi a0, v0, 192",
+          "structural: target=beqz t0, L2 got=beqz a0, L2",
+          "structural: target=bne t0, at, L3 got=bne a0, at, L3",
+          "structural: target=sll t2, v1, 2 got=sll t1, v1, 2",
+          "structural: target=sll t1, v1, 2 got=sll t0, v1, 2",
+          "structural: target=addu at, at, t1 got=addu at, at, t0",
+          "structural: target=addu at, at, t2 got=addu at, at, t1"
+        ],
+        "timestamp": "2026-06-02T20:57:49.793Z"
+      },
+      {
+        "code": "f32 func_151423D8(u8 arg0) {\n    s32 temp_v1;\n    s32 temp_v0 = arg0;\n\n    if (temp_v0 & 0x40) {\n        temp_v1 = 0x40 - (temp_v0 & 0x3F);\n    } else {\n        temp_v1 = temp_v0 & 0x3F;\n    }\n\n    switch (temp_v0 & 0xC0) {\n    case 0:\n    case 0xC0:\n        return D_8009A220[temp_v1];\n    default:\n        return -D_8009A220[temp_v1];\n    }\n}",
+        "score": 0.7407,
+        "reason": "structural_diffs=7",
+        "diffs": [
+          "structural: target=andi t0, v0, 192 got=andi a0, v0, 192",
+          "structural: target=beqz t0, L2 got=beqz a0, L2",
+          "structural: target=bne t0, at, L3 got=bne a0, at, L3",
+          "structural: target=sll t2, v1, 2 got=sll t1, v1, 2",
+          "structural: target=sll t1, v1, 2 got=sll t0, v1, 2",
+          "structural: target=addu at, at, t1 got=addu at, at, t0",
+          "structural: target=addu at, at, t2 got=addu at, at, t1"
+        ],
+        "timestamp": "2026-06-02T20:58:13.590Z"
+      },
+      {
+        "code": "f32 func_151423D8(u8 arg0) {\n    s32 temp_v1;\n    s32 temp_v0 = arg0;\n    s32 temp_t0;\n\n    if (temp_v0 & 0x40) {\n        temp_v1 = 0x40 - (temp_v0 & 0x3F);\n    } else {\n        temp_v1 = temp_v0 & 0x3F;\n    }\n\n    temp_t0 = temp_v0 & 0xC0;\n    if ((temp_t0 != 0) && (temp_t0 != 0xC0)) {\n        return -D_8009A220[temp_v1];\n    }\n    return D_8009A220[temp_v1];\n}",
+        "score": 0.5556,
+        "reason": "structural_diffs=12",
+        "diffs": [
+          "structural: target=andi t0, v0, 192 got=andi a0, v0, 192",
+          "structural: target=beqz t0, L2 got=beqz a0, L2",
+          "structural: target=bne t0, at, L3 got=beq a0, at, L2",
+          "structural: target=sll t2, v1, 2 got=sll t0, v1, 2",
+          "structural: target=sll t1, v1, 2 got=lui at, HI(D_8009A220)",
+          "structural: target=lui at, HI(D_8009A220) got=addu at, at, t0",
+          "structural: target=addu at, at, t1 got=lwc1 f0, LO(D_8009A220)(at)",
+          "structural: target=lwc1 f0, LO(D_8009A220)(at) got=neg.s f0, f0",
+          "structural: target=lui at, HI(D_8009A220) got=sll t1, v1, 2",
+          "structural: target=addu at, at, t2 got=lui at, HI(D_8009A220)",
+          "structural: target=lwc1 f0, LO(D_8009A220)(at) got=addu at, at, t1",
+          "structural: target=neg.s f0, f0 got=lwc1 f0, LO(D_8009A220)(at)"
+        ],
+        "timestamp": "2026-06-02T20:58:35.725Z"
+      }
+    ]
   },
   {
     "function": "func_15004CE0",
