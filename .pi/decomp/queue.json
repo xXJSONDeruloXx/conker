@@ -5807,8 +5807,8 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 3,
-    "lastScore": 0.4642857142857143,
+    "attempts": 6,
+    "lastScore": 0.4286,
     "status": "pending",
     "history": [
       {
@@ -5842,6 +5842,60 @@
         "reason": "length_mismatch (target=28, generated=26)",
         "diffs": [],
         "timestamp": "2026-06-02T21:26:23.624Z"
+      },
+      {
+        "code": "s32 func_15141564(struct210 *arg0) {\n    f32 *temp_v1;\n\n    temp_v1 = (f32 *)((s32)arg0 + 0x170);\n    *(f32 *)((s32)arg0 + 0x158) = temp_v1[0] + (sinf(*(f32 *)((s32)arg0 + 0x178)) * temp_v1[1]);\n    temp_v1[2] = temp_v1[2] + (D_800BE9A4 * temp_v1[3]);\n    temp_v1[2] = func_15144B68(temp_v1[2]);\n    return 1;\n}",
+        "score": 0.7143,
+        "reason": "structural_diffs=8",
+        "diffs": [
+          "structural: target=lwc1 f6, 4(v1) got=lwc1 f4, 4(v1)",
+          "structural: target=lwc1 f4, 0(v1) got=lwc1 f8, 0(v1)",
+          "structural: target=mul.s f8, f6, f0 got=mul.s f6, f4, f0",
+          "structural: target=add.s f10, f4, f8 got=add.s f10, f6, f8",
+          "structural: target=lwc1 f4, 8(v1) got=lwc1 f6, 8(v1)",
+          "structural: target=mul.s f6, f16, f18 got=mul.s f4, f16, f18",
+          "structural: target=sw v1, 24(sp) got=sw v1, 28(sp)",
+          "structural: target=lw v1, 24(sp) got=lw v1, 28(sp)"
+        ],
+        "timestamp": "2026-06-02T21:26:41.766Z"
+      },
+      {
+        "code": "s32 func_15141564(struct210 *arg0) {\n    f32 *temp_v1;\n    s32 unused[2];\n\n    temp_v1 = (f32 *)((s32)arg0 + 0x170);\n    *(f32 *)((s32)arg0 + 0x158) = temp_v1[0] + (temp_v1[1] * sinf(*(f32 *)((s32)arg0 + 0x178)));\n    temp_v1[2] = temp_v1[2] + (temp_v1[3] * D_800BE9A4);\n    temp_v1[2] = func_15144B68(temp_v1[2]);\n    return 1;\n}",
+        "score": 0.7857,
+        "reason": "structural_diffs=6",
+        "diffs": [
+          "structural: target=lwc1 f6, 4(v1) got=lwc1 f4, 4(v1)",
+          "structural: target=lwc1 f4, 0(v1) got=lwc1 f8, 0(v1)",
+          "structural: target=mul.s f8, f6, f0 got=mul.s f6, f0, f4",
+          "structural: target=add.s f10, f4, f8 got=add.s f10, f6, f8",
+          "structural: target=lwc1 f4, 8(v1) got=lwc1 f6, 8(v1)",
+          "structural: target=mul.s f6, f16, f18 got=mul.s f4, f16, f18"
+        ],
+        "timestamp": "2026-06-02T21:27:04.555Z"
+      },
+      {
+        "code": "s32 func_15141564(struct210 *arg0) {\n    f32 *temp_v1;\n    f32 temp_f8;\n    s32 unused[2];\n\n    temp_v1 = (f32 *)((s32)arg0 + 0x170);\n    temp_f8 = temp_v1[1] * sinf(*(f32 *)((s32)arg0 + 0x178));\n    *(f32 *)((s32)arg0 + 0x158) = temp_v1[0] + temp_f8;\n    temp_v1[2] = temp_v1[2] + (temp_v1[3] * D_800BE9A4);\n    temp_v1[2] = func_15144B68(temp_v1[2]);\n    return 1;\n}",
+        "score": 0.4286,
+        "reason": "structural_diffs=16",
+        "diffs": [
+          "structural: target=addiu sp, sp, -40 got=addiu sp, sp, -48",
+          "structural: target=sw a0, 40(sp) got=sw a0, 48(sp)",
+          "structural: target=lw a0, 40(sp) got=lw a0, 48(sp)",
+          "structural: target=lwc1 f6, 4(v1) got=lwc1 f4, 4(v1)",
+          "structural: target=lwc1 f4, 0(v1) got=lwc1 f6, 0(v1)",
+          "structural: target=mul.s f8, f6, f0 got=mul.s f2, f0, f4",
+          "structural: target=add.s f10, f4, f8 got=add.s f8, f6, f2",
+          "structural: target=swc1 f10, 344(a0) got=swc1 f8, 344(a0)",
+          "structural: target=lwc1 f18, LO(D_800BE9A4)(at) got=lwc1 f16, LO(D_800BE9A4)(at)",
+          "structural: target=lwc1 f16, 12(v1) got=lwc1 f10, 12(v1)",
+          "structural: target=mul.s f6, f16, f18 got=mul.s f18, f10, f16",
+          "structural: target=add.s f8, f4, f6 got=add.s f6, f18, f4",
+          "structural: target=swc1 f8, 8(v1) got=swc1 f6, 8(v1)",
+          "structural: target=sw v1, 24(sp) got=sw v1, 28(sp)",
+          "structural: target=lw v1, 24(sp) got=lw v1, 28(sp)",
+          "structural: target=addiu sp, sp, 40 got=addiu sp, sp, 48"
+        ],
+        "timestamp": "2026-06-02T21:27:22.389Z"
       }
     ]
   },
