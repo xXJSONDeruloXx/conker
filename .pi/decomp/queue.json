@@ -1317,9 +1317,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 3,
+    "attempts": 5,
     "lastScore": 0.34210526315789475,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "void func_1513A594(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {\n    func_1513A5E0(arg1, arg3 & 0xFF, arg4);\n    if (*(s32 *)((s32)arg0 + 0x1D4) != 0) {\n    }\n}\n",
@@ -1341,6 +1341,20 @@
         "reason": "length_mismatch (target=19, generated=13)",
         "diffs": [],
         "timestamp": "2026-06-02T17:31:54.827Z"
+      },
+      {
+        "code": "void func_1513A594(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {\n    func_1513A5E0(arg1, arg3 & 0xFF, arg4);\n    if (*(s32 *)((s32)arg0 + 0x1D4) == 0) {\n        goto done;\n    }\ndone:\n    return;\n}\n",
+        "score": 0.34210526315789475,
+        "reason": "length_mismatch (target=19, generated=13)",
+        "diffs": [],
+        "timestamp": "2026-06-02T17:32:16.770Z"
+      },
+      {
+        "code": "void func_1513A594(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {\n    func_1513A5E0(arg1, arg3 & 0xFF, arg4);\n    if (*(volatile s32 *)((s32)arg0 + 0x1D4) == 0) {\n        goto done;\n    }\ndone:\n    return;\n}\n",
+        "score": 0.34210526315789475,
+        "reason": "length_mismatch (target=19, generated=13)",
+        "diffs": [],
+        "timestamp": "2026-06-02T17:32:29.456Z"
       }
     ]
   },

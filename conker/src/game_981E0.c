@@ -3,6 +3,9 @@
 #include "functions.h"
 #include "variables.h"
 
+void func_15188810(struct127 *arg0, s32 arg1, s32 arg2);
+void func_15188A9C(struct127 *arg0);
+
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_1506AD30.s")
 
@@ -797,7 +800,17 @@ void func_1506EE38(void) {
     D_800D154C->unk25C &= ~D_800D1580;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_1506EE60.s")
+void func_1506EE60(void) {
+    s32 temp_v0 = D_800D1580;
+    s32 temp_a1 = temp_v0 & 0xFFFF;
+
+    if (temp_v0 != 0) {
+        func_15188810(D_800D154C, temp_a1, temp_v0 >> 16);
+        return;
+    }
+    func_15188A9C(D_800D154C);
+}
+
 // NON-MATCHING: same issue as earlier
 // void func_1506EE60(void) {
 //     s32 temp_a1;

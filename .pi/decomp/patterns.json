@@ -315,5 +315,14 @@
     "example_functions": [
       "func_15043B70"
     ]
+  },
+  {
+    "id": "range-wrap-do-while",
+    "description": "Range wrapping helpers with subtract/add loops match when written as guarded do/while loops using a named span temporary.",
+    "trigger": "Target computes `span = high - low + 1`, repeatedly subtracts while value > high, then repeatedly adds while value < low.",
+    "solution": "Use `if` guards around `do { value +/-= span; } while (...)` loops with `span` as a named local.",
+    "example_functions": [
+      "func_151444DC"
+    ]
   }
 ]
