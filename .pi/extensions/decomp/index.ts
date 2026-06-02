@@ -52,6 +52,17 @@ interface DecompState {
 }
 
 const COMMIT_HISTORY_EVERY = 3; // commit queue.json every N failed attempts to preserve findings
+const LOOP_POLL_MS = 5000; // fallback timer interval for loop advancement
+const LOOP_STATE_FILE = ".pi/decomp/loop-state.json";
+
+interface LoopState {
+	enabled: boolean;
+	chunk: number;
+	status: "idle" | "running" | "advancing" | "compacting" | "stopped";
+	lastChunkSummary: string;
+	consecutiveNoProgress: number;
+	updatedAt: string;
+}
 
 let state: DecompState = {
 	queue: [],
@@ -60,12 +71,22 @@ let state: DecompState = {
 	totalAsm: 0,
 };
 
+let loopState: LoopState = {
+	enabled: false,
+	chunk: 0,
+	status: "idle",
+	lastChunkSummary: "",
+	consecutiveNoProgress: 0,
+	updatedAt: new Date().toISOString(),
+};
+
 function loadState(cwd: string): void {
 	const fs = require("node:fs");
 	const path = require("node:path");
 
 	const queuePath = path.join(cwd, ".pi/decomp/queue.json");
 	const patternsPath = path.join(cwd, ".pi/decomp/patterns.json");
+	const loopPath = path.join(cwd, LOOP_STATE_FILE);
 
 	try {
 		if (fs.existsSync(queuePath)) {
@@ -79,8 +100,63 @@ function loadState(cwd: string): void {
 		}
 	} catch {}
 
+	try {
+		if (fs.existsSync(loopPath)) {
+			loopState = { ...loopState, ...JSON.parse(fs.readFileSync(loopPath, "utf-8")) };
+		}
+	} catch {}
+
 	state.matched = state.queue.filter((e) => e.status === "matched").length;
 	state.totalAsm = state.queue.length;
+}
+
+function saveLoopState(cwd: string): void {
+	const fs = require("node:fs");
+	const path = require("node:path");
+	loopState.updatedAt = new Date().toISOString();
+	fs.writeFileSync(path.join(cwd, LOOP_STATE_FILE), JSON.stringify(loopState, null, 2));
+}
+
+function buildChunkPrompt(chunkNum: number): string {
+	const matched = state.queue.filter((e) => e.status === "matched").length;
+	const pending = state.queue.filter((e) => e.status === "pending").length;
+	const patterns = state.patterns.length;
+
+	const strategyNudge = loopState.consecutiveNoProgress >= 3
+		? [
+			"",
+			"## Strategy adjustment required",
+			`The last ${loopState.consecutiveNoProgress} chunks made no progress.`,
+			"Switch to a different difficulty tier, region, or function family.",
+			"Try: decomp_queue next with a different filter (region, difficulty).",
+			"",
+		  ].join("\n")
+		: "";
+
+	return [
+		`# Conker Decomp — Chunk ${chunkNum}`,
+		`Progress: ${matched}/${state.queue.length} matched (${pending} pending, ${patterns} patterns)`,
+		strategyNudge,
+		"",
+		"## Instructions",
+		"",
+		"1. Call `decomp_queue next` to get the next candidate (includes target asm, context, and any prior failed attempts)",
+		"2. Study the target assembly carefully. Check prior attempts if shown — do NOT repeat them.",
+		"3. Write C and call `decomp_attempt` to test it.",
+		"4. If non-match: read the diff, call `decomp_diff` for focused analysis, then retry with a different approach.",
+		"5. If match: call `decomp_accept` to verify full ROM SHA and commit.",
+		"6. When done with this function (matched or decided to move on), call `decomp_chunk_done` with a summary.",
+		"",
+		"## Rules",
+		"- ONE function per chunk. Match it or move on.",
+		"- Always call `decomp_chunk_done` when finished — this triggers context reset for the next chunk.",
+		"- Use the pattern library (/skill:n64-decomp) for IDO codegen rules.",
+		"- If score ≥ 0.9, you're close — try declaration reordering, type changes, or expression reshaping.",
+		"- If score < 0.3 after 3 attempts, skip this candidate and try the next one.",
+		"- Read `decomp_diff` output before every retry.",
+		"- Never provide code that includes multiple functions, struct definitions, or header content.",
+		"- The full ROM SHA-1 match is the ONLY acceptance criterion.",
+	].join("\n");
 }
 
 function saveQueue(cwd: string): void {
@@ -135,10 +211,60 @@ export default function (pi: ExtensionAPI) {
 		}));
 	}
 
+	let loopTimer: any = undefined;
+
+	function ensureTimer() {
+		if (loopTimer) return;
+		loopTimer = setInterval(() => {
+			const ctx = latestCtx;
+			if (!ctx) return;
+			if (!loopState.enabled) return;
+			if (loopState.status === "compacting" || loopState.status === "advancing") return;
+			if (!ctx.isIdle()) return;
+			if (ctx.hasPendingMessages()) return;
+
+			// Agent is idle but didn't call decomp_chunk_done — advance anyway
+			loopState.status = "advancing";
+			loopState.chunk++;
+			loopState.consecutiveNoProgress++;
+			saveLoopState(ctx.cwd);
+			refreshWidget();
+
+			try {
+				pi.sendUserMessage(buildChunkPrompt(loopState.chunk));
+				loopState.status = "running";
+				saveLoopState(ctx.cwd);
+			} catch {
+				try {
+					pi.sendUserMessage(buildChunkPrompt(loopState.chunk), { deliverAs: "followUp" });
+					loopState.status = "running";
+					saveLoopState(ctx.cwd);
+				} catch {
+					loopState.status = "idle";
+					loopState.chunk--;
+					saveLoopState(ctx.cwd);
+				}
+			}
+		}, LOOP_POLL_MS);
+	}
+
+	// Static compaction — bypass LLM summary. Queue history IS the memory.
+	pi.on("session_before_compact", (event: any) => {
+		if (!loopState.enabled) return undefined;
+		return {
+			compaction: {
+				summary: `[Conker decomp loop chunk ${loopState.chunk} complete. Progress: ${state.matched}/${state.queue.length} matched. Queue history in .pi/decomp/queue.json is the persistent memory — re-read via decomp_queue next.]`,
+				firstKeptEntryId: event.preparation.firstKeptEntryId,
+				tokensBefore: event.preparation.tokensBefore,
+			},
+		};
+	});
+
 	// Load state on session start
 	pi.on("session_start", async (_event, ctx) => {
 		latestCtx = ctx;
 		loadState(ctx.cwd);
+		ensureTimer();
 		refreshWidget();
 	});
 
@@ -146,6 +272,13 @@ export default function (pi: ExtensionAPI) {
 	pi.on("agent_end", async (_event, ctx) => {
 		latestCtx = ctx;
 		refreshWidget();
+	});
+
+	pi.on("session_shutdown", async () => {
+		if (loopTimer) {
+			clearInterval(loopTimer);
+			loopTimer = undefined;
+		}
 	});
 
 	// ═══════════════════════════════════════════════════════════════
@@ -875,6 +1008,144 @@ export default function (pi: ExtensionAPI) {
 				],
 				details: { matched, pending, skipped, attempted },
 			};
+		},
+	});
+
+	// ═══════════════════════════════════════════════════════════════
+	// TOOL: decomp_chunk_done
+	// ═══════════════════════════════════════════════════════════════
+	pi.registerTool({
+		name: "decomp_chunk_done",
+		label: "Decomp Chunk Done",
+		description:
+			"Signal that this decomp chunk is complete. If the loop is enabled, context is compacted and the next chunk starts immediately with fresh context. Always call this when done with a function (matched or moving on).",
+		promptSnippet: "Signal chunk complete — triggers context reset and next function",
+		promptGuidelines: [
+			"Always call decomp_chunk_done when finished with a function (matched, moved on, or stuck). Do not send any other response after calling it.",
+		],
+		parameters: Type.Object({
+			summary: Type.String({ description: "1-3 sentence summary: what was tried, outcome, any patterns discovered" }),
+			matched: Type.Optional(Type.Boolean({ description: "Whether a function was successfully matched this chunk" })),
+			patternDiscovered: Type.Optional(Type.String({ description: "New IDO pattern discovered (will be added to library)" })),
+		}),
+
+		async execute(_toolCallId, params, _signal, _onUpdate, ctx) {
+			loopState.lastChunkSummary = params.summary;
+
+			if (params.matched) {
+				loopState.consecutiveNoProgress = 0;
+			} else {
+				loopState.consecutiveNoProgress++;
+			}
+
+			if (!loopState.enabled) {
+				// Single-shot mode — just acknowledge
+				loopState.status = "idle";
+				saveLoopState(ctx.cwd);
+				refreshWidget();
+				return {
+					content: [{ type: "text", text: `Chunk ${loopState.chunk} done (loop off). ${params.summary}` }],
+					details: { done: true, loopEnabled: false },
+				};
+			}
+
+			// Loop enabled — compact then advance
+			const nextChunk = loopState.chunk + 1;
+			loopState.status = "compacting";
+			saveLoopState(ctx.cwd);
+			refreshWidget();
+
+			const doAdvance = () => {
+				loopState.chunk = nextChunk;
+				loopState.status = "running";
+				saveLoopState(ctx.cwd);
+				refreshWidget();
+				try {
+					pi.sendUserMessage(buildChunkPrompt(nextChunk));
+				} catch {
+					try {
+						pi.sendUserMessage(buildChunkPrompt(nextChunk), { deliverAs: "followUp" });
+					} catch {
+						loopState.status = "idle";
+						saveLoopState(ctx.cwd);
+					}
+				}
+			};
+
+			ctx.compact({
+				onComplete: doAdvance,
+				onError: doAdvance, // advance even if compaction fails
+			});
+
+			return {
+				content: [{
+					type: "text",
+					text: `Chunk ${loopState.chunk} complete. Compacting → starting chunk ${nextChunk}.\n${params.summary}`,
+				}],
+				details: { done: true, loopEnabled: true, nextChunk },
+			};
+		},
+	});
+
+	// ═══════════════════════════════════════════════════════════════
+	// COMMAND: /decomp-loop
+	// ═══════════════════════════════════════════════════════════════
+	pi.registerCommand("decomp-loop", {
+		description: "Manage the autonomous decomp loop [start|stop|status|reset]",
+		handler: async (args, ctx) => {
+			const sub = (args || "").trim().toLowerCase();
+
+			if (sub === "start") {
+				await ctx.waitForIdle();
+				loopState.enabled = true;
+				loopState.chunk++;
+				loopState.status = "running";
+				loopState.consecutiveNoProgress = 0;
+				saveLoopState(ctx.cwd);
+				ensureTimer();
+				refreshWidget();
+				ctx.ui.notify(`Decomp loop started at chunk ${loopState.chunk}`, "info");
+				pi.sendUserMessage(buildChunkPrompt(loopState.chunk));
+				return;
+			}
+
+			if (sub === "stop") {
+				loopState.enabled = false;
+				loopState.status = "stopped";
+				saveLoopState(ctx.cwd);
+				refreshWidget();
+				ctx.ui.notify("Decomp loop stopped", "info");
+				return;
+			}
+
+			if (sub === "status" || !sub) {
+				const msg = [
+					`Loop: ${loopState.enabled ? "ON" : "OFF"}`,
+					`Chunk: ${loopState.chunk}`,
+					`Status: ${loopState.status}`,
+					`No-progress streak: ${loopState.consecutiveNoProgress}`,
+					`Last: ${loopState.lastChunkSummary || "(none)"}`,
+				].join(" | ");
+				ctx.ui.notify(msg, "info");
+				return;
+			}
+
+			if (sub === "reset") {
+				loopState = {
+					enabled: false,
+					chunk: 0,
+					status: "idle",
+					lastChunkSummary: "",
+					consecutiveNoProgress: 0,
+					updatedAt: new Date().toISOString(),
+				};
+				saveLoopState(ctx.cwd);
+				refreshWidget();
+				ctx.ui.notify("Decomp loop state reset", "info");
+				return;
+			}
+
+			ctx.ui.notify("Usage: /decomp-loop [start|stop|status|reset]", "warning");
 		},
 	});
 }
