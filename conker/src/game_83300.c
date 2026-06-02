@@ -1015,7 +1015,17 @@ void func_15060B70(s32 arg0, void *arg1) {
     func_10010154(arg0, arg1, 0x6D60, 0x1F4, 0x9C4);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_15060BA4.s")
+s32 func_15060BA4(struct127 *arg0, s32 arg1) {
+    if (arg0->health == 6) {
+        return 0;
+    }
+    arg0->health += arg1;
+    if (arg0->health >= 7) {
+        arg0->health = 6;
+    }
+    return 1;
+}
+
 #pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_15060BE0.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_15060D54.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_15060F28.s")
