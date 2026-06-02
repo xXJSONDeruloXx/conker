@@ -6472,8 +6472,8 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 21,
-    "lastScore": 0.9,
+    "attempts": 24,
+    "lastScore": 0.4838709677419355,
     "status": "pending",
     "history": [
       {
@@ -6713,6 +6713,47 @@
           "structural: target=lwc1 f0, 0(a0) got=lwc1 f2, LO(D_800A56C4)(at)"
         ],
         "timestamp": "2026-06-02T22:17:35.479Z"
+      },
+      {
+        "code": "s32 func_1514672C(struct17 *arg0) {\n    struct17 *temp = arg0;\n\n    if ((D_800A56C4 < fabsf(temp->unk0)) || (D_800A56C4 < fabsf(temp->unk8)) || (D_800A56C4 < temp->unk4) || (temp->unk4 < D_800A56C8)) {\n        return 0;\n    }\n    return 1;\n}",
+        "score": 0.9,
+        "reason": "structural_diffs=3",
+        "diffs": [
+          "structural: target=lui at, HI(D_800A56C4) got=lwc1 f0, 0(a0)",
+          "structural: target=lwc1 f2, LO(D_800A56C4)(at) got=lui at, HI(D_800A56C4)",
+          "structural: target=lwc1 f0, 0(a0) got=lwc1 f2, LO(D_800A56C4)(at)"
+        ],
+        "timestamp": "2026-06-02T22:18:09.981Z"
+      },
+      {
+        "code": "s32 func_1514672C(struct17 *arg0) {\n    if (D_800A56C4 < fabsf(arg0->unk0)) {\n        goto ret0;\n    }\n    if (D_800A56C4 < fabsf(arg0->unk8)) {\n        goto ret0;\n    }\n    if (D_800A56C4 < arg0->unk4) {\n        goto ret0;\n    }\n    if (arg0->unk4 < D_800A56C8) {\n        goto ret0;\n    }\n    return 1;\nret0:\n    return 0;\n}",
+        "score": 0.5,
+        "reason": "structural_diffs=15",
+        "diffs": [
+          "structural: target=lui at, HI(D_800A56C4) got=lwc1 f0, 0(a0)",
+          "structural: target=lwc1 f2, LO(D_800A56C4)(at) got=lui at, HI(D_800A56C4)",
+          "structural: target=lwc1 f0, 0(a0) got=lwc1 f2, LO(D_800A56C4)(at)",
+          "structural: target=bc1t L0 got=bc1tl L0",
+          "structural: target=nop got=move v0, zero",
+          "structural: target=bc1t L0 got=bc1tl L0",
+          "structural: target=nop got=move v0, zero",
+          "structural: target=bc1t L0 got=bc1tl L0",
+          "structural: target=nop got=move v0, zero",
+          "structural: target=li v0, 1 got=c.lt.s f0, f4",
+          "structural: target=c.lt.s f0, f4 got=nop",
+          "structural: target=nop got=bc1tl L0",
+          "structural: target=bc1f L1 got=move v0, zero",
+          "structural: target=nop got=jr ra",
+          "structural: target=jr ra got=li v0, 1"
+        ],
+        "timestamp": "2026-06-02T22:18:35.841Z"
+      },
+      {
+        "code": "s32 func_1514672C(struct17 *arg0) {\n    return ((D_800A56C4 < fabsf(arg0->unk0)) || (D_800A56C4 < fabsf(arg0->unk8)) || (D_800A56C4 < arg0->unk4) || (arg0->unk4 < D_800A56C8)) ? 0 : 1;\n}",
+        "score": 0.4838709677419355,
+        "reason": "length_mismatch (target=30, generated=31)",
+        "diffs": [],
+        "timestamp": "2026-06-02T22:20:46.791Z"
       }
     ]
   },
