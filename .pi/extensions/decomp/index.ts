@@ -164,7 +164,7 @@ export default function (pi: ExtensionAPI) {
 			"Use decomp_queue with action 'stats' for an overview of decomp progress.",
 		],
 		parameters: Type.Object({
-			action: StringEnum(["next", "list", "skip", "stats", "refresh"] as const),
+			action: StringEnum(["next", "list", "skip", "stats", "refresh", "retry-skipped"] as const),
 			filter: Type.Optional(
 				Type.Object({
 					maxInstructions: Type.Optional(Type.Number({ description: "Max instruction count" })),
@@ -180,6 +180,32 @@ export default function (pi: ExtensionAPI) {
 		async execute(_toolCallId, params, _signal, _onUpdate, ctx) {
 			const fs = require("node:fs");
 			const path = require("node:path");
+
+			if (params.action === "retry-skipped") {
+				const skipped = state.queue.filter((e) => e.status === "skipped");
+				if (skipped.length === 0) {
+					return { content: [{ type: "text", text: "No skipped functions to retry." }], details: {} };
+				}
+
+				// Reset all skipped back to pending (history stays)
+				for (const entry of skipped) {
+					entry.status = "pending";
+					entry.attempts = 0; // reset attempt counter so it gets another 5 tries
+					// history is preserved! the LLM will see prior failed attempts
+				}
+				saveQueue(ctx.cwd);
+
+				const summary = skipped.slice(0, 10).map((e) =>
+					`${e.function} (${e.history?.length ?? 0} prior attempts, best: ${e.lastScore.toFixed(2)})`
+				);
+				return {
+					content: [{
+						type: "text",
+						text: `Reset ${skipped.length} skipped functions to pending (history preserved):\n${summary.join("\n")}`,
+					}],
+					details: { count: skipped.length },
+				};
+			}
 
 			if (params.action === "refresh") {
 				// Regenerate queue from analyze_decomp_candidates.py
@@ -555,6 +581,13 @@ export default function (pi: ExtensionAPI) {
 			latestCtx = ctx;
 			refreshWidget();
 
+			// Commit the queue with history on skip (findings for future work)
+			if (entry?.status === "skipped") {
+				await pi.exec("git", ["add", ".pi/decomp/queue.json"]);
+				await pi.exec("git", ["commit", "-m", `chore(decomp): skip ${params.function} after ${entry.attempts} attempts (best: ${entry.lastScore.toFixed(2)})`]);
+				await pi.exec("git", ["push"]);
+			}
+
 			// Build response with prior attempt context
 			const autoSkipped = entry?.status === "skipped" ? "\n\n⚠️ AUTO-SKIPPED after 5 failures. Moving to next candidate." : "";
 			const priorHint = (entry?.history?.length ?? 0) > 1
@@ -638,9 +671,9 @@ export default function (pi: ExtensionAPI) {
 				};
 			}
 
-			// Commit and push
+			// Commit source + queue state (preserves history of what was tried) and push
 			const desc = params.description || `match ${params.function}`;
-			await pi.exec("git", ["add", `conker/src/${params.file}`]);
+			await pi.exec("git", ["add", `conker/src/${params.file}`, ".pi/decomp/queue.json", ".pi/decomp/patterns.json"]);
 			await pi.exec("git", ["commit", "-m", `feat(decomp): ${desc}`]);
 			await pi.exec("git", ["push"], { timeout: 30000 });
 
