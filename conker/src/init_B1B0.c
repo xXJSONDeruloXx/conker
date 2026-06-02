@@ -271,7 +271,23 @@ void func_1000CBA8(s32 arg0) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000CBF0.s")
+void func_1000CBF0(s32 arg0, s32 arg1, s32 arg2) {
+    struct151 **slot;
+    s32 i;
+
+    for (i = 0; i != 3; i++) {
+        if (arg2 & (1 << i)) {
+            slot = &D_800417B0[i];
+            if (*slot != NULL) {
+                (*slot)->unk5A = arg0;
+                (*slot)->unk5C = arg1;
+                if (arg1 == 0) {
+                    (*slot)->unk58 = arg0;
+                }
+            }
+        }
+    }
+}
 // NON-MATCHING: JUSTREG? need some love
 // void func_1000CBF0(s32 *arg0, s32 *arg1, s32 arg2) {
 //     struct151 *tmp;
