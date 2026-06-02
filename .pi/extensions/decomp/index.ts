@@ -847,7 +847,7 @@ export default function (pi: ExtensionAPI) {
 		promptSnippet: "Try a C implementation for a GLOBAL_ASM function — compiles, diffs, scores, auto-reverts on mismatch",
 		promptGuidelines: [
 			"Use decomp_attempt to test a C function body against the original assembly. It compiles only the owning TU (~3s), not the full ROM.",
-			"decomp_attempt auto-reverts non-matching attempts. Only call decomp_accept after it reports match=true.",
+			"decomp_attempt auto-reverts non-matching attempts by default. Use keep=true to leave the patch in place for inspection with decomp_inspect.",
 		],
 		parameters: Type.Object({
 			function: Type.String({ description: "Function name, e.g. func_15169668" }),
@@ -855,6 +855,9 @@ export default function (pi: ExtensionAPI) {
 			code: Type.String({ description: "Complete C function body to replace the pragma" }),
 			externs: Type.Optional(
 				Type.Array(Type.String(), { description: "Additional extern declarations to add at top of file" }),
+			),
+			keep: Type.Optional(
+				Type.Boolean({ description: "Keep the patch in place on non-match (don't auto-revert). Use with decomp_inspect to study generated asm." }),
 			),
 		}),
 
@@ -1011,8 +1014,10 @@ export default function (pi: ExtensionAPI) {
 
 			}
 
-			// Revert source
-			fs.writeFileSync(srcPath, original);
+			// Revert source (unless keep=true)
+			if (!params.keep) {
+				fs.writeFileSync(srcPath, original);
+			}
 			saveQueue(ctx.cwd);
 			latestCtx = ctx;
 			refreshWidget();
@@ -1025,6 +1030,7 @@ export default function (pi: ExtensionAPI) {
 			}
 
 			// Build response with prior attempt context
+			const keptNote = params.keep ? "\n\n⚠️ Patch LEFT IN PLACE (keep=true). Use decomp_inspect to view raw asm, then git checkout to revert when done." : "";
 			const priorHint = (entry?.history?.length ?? 0) > 1
 				? `\n\nPrior attempts (${entry!.history!.length}): scores=[${entry!.history!.map((h: AttemptRecord) => h.score.toFixed(2)).join(", ")}]`
 				: "";
@@ -1033,7 +1039,7 @@ export default function (pi: ExtensionAPI) {
 				content: [
 					{
 						type: "text",
-						text: `✗ Non-match (reverted). Score: ${scoreData.score}\nReason: ${scoreData.reason}\n\nDiff:\n${diffSummary}${priorHint}`,
+						text: `✗ Non-match${params.keep ? " (kept)" : " (reverted)"}. Score: ${scoreData.score}\nReason: ${scoreData.reason}\n\nDiff:\n${diffSummary}${keptNote}${priorHint}`,
 					},
 				],
 				details: scoreData,
@@ -1227,6 +1233,75 @@ export default function (pi: ExtensionAPI) {
 			return {
 				content: [{ type: "text", text: analysis.join("\n") }],
 				details: scoreData,
+			};
+		},
+	});
+
+	// ═══════════════════════════════════════════════════════════════
+	// TOOL: decomp_inspect
+	// ═══════════════════════════════════════════════════════════════
+	pi.registerTool({
+		name: "decomp_inspect",
+		label: "Decomp Inspect",
+		description:
+			"Show the raw generated assembly for a function from the current compiled .o file. Use after decomp_attempt with keep=true, or after any successful compilation, to study what the compiler actually produced.",
+		promptSnippet: "View raw generated assembly from the compiled object file for a function",
+		promptGuidelines: [
+			"Use decomp_inspect after decomp_attempt with keep=true to see the full raw objdump output of a compiled function.",
+			"decomp_inspect shows the actual compiler output without normalization — use it to study register allocation, scheduling, and delay slots.",
+		],
+		parameters: Type.Object({
+			function: Type.String({ description: "Function name to inspect" }),
+			file: Type.String({ description: "Source file basename, e.g. game_1944C0.c" }),
+			showTarget: Type.Optional(Type.Boolean({ description: "Also show the target assembly side-by-side (default: true)" })),
+		}),
+
+		async execute(_toolCallId, params, signal, _onUpdate, ctx) {
+			const fs = require("node:fs");
+			const path = require("node:path");
+			const showTarget = params.showTarget !== false;
+
+			// Extract generated asm from compiled .o
+			const objResult = await pi.exec("docker", [
+				"run", "--rm", "--platform", "linux/amd64",
+				"-v", `${ctx.cwd}:/conker`, "-w", "/conker",
+				"conker-build-min-amd64",
+				"bash", "-lc",
+				`mips-linux-gnu-objdump -dr conker/build/src/${params.file.replace(".c", ".c.o")} | sed -n '/<${params.function}>/,/^$/p' | sed '\$d'`,
+			], { signal, timeout: 30000 });
+
+			if (!objResult.stdout.trim()) {
+				return {
+					content: [{ type: "text", text: `Function ${params.function} not found in compiled object. Is the source patched and compiled?` }],
+					details: { error: "not_found" },
+				};
+			}
+
+			const output: string[] = [
+				`## Generated Assembly: ${params.function}`,
+				"```",
+				objResult.stdout.trim(),
+				"```",
+			];
+
+			// Optionally show target for side-by-side comparison
+			if (showTarget) {
+				const targetPath = path.join(ctx.cwd, "conker/asm/nonmatchings", params.file.replace(".c", ""), `${params.function}.s`);
+				try {
+					const targetAsm = fs.readFileSync(targetPath, "utf-8");
+					output.push("", "## Target Assembly", "```", targetAsm.trim(), "```");
+				} catch {
+					output.push("", "(target assembly file not found)");
+				}
+			}
+
+			// Count instructions for quick comparison
+			const genLines = objResult.stdout.split("\n").filter((l: string) => /^\s*[0-9a-f]+:/.test(l) && !l.includes("R_MIPS")).length;
+			output.push("", `Generated: ${genLines} instructions`);
+
+			return {
+				content: [{ type: "text", text: output.join("\n") }],
+				details: { generatedInstructions: genLines },
 			};
 		},
 	});
