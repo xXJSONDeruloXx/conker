@@ -301,15 +301,43 @@ function savePatterns(cwd: string): void {
 export default function (pi: ExtensionAPI) {
 	let latestCtx: any = undefined;
 
+	function readProjectProgress(cwd: string): { cFuncs: number; asmFuncs: number; cBytes: number; asmBytes: number } {
+		const fs = require("node:fs");
+		const path = require("node:path");
+		const csvPath = path.join(cwd, "conker/progress.csv");
+		let cFuncs = 0, asmFuncs = 0, cBytes = 0, asmBytes = 0;
+		try {
+			if (!fs.existsSync(csvPath)) return { cFuncs, asmFuncs, cBytes, asmBytes };
+			const lines = fs.readFileSync(csvPath, "utf-8").split("\n");
+			for (const line of lines) {
+				const parts = line.split(",");
+				if (parts.length < 7) continue;
+				const func = parts[3];
+				if (!func || func === "function" || func.startsWith(".") || func.startsWith("D_")) continue;
+				const lang = parts[6]?.trim();
+				const length = parseInt(parts[5]);
+				if (isNaN(length)) continue;
+				if (lang === "c") { cFuncs++; cBytes += length; }
+				else if (lang === "asm") { asmFuncs++; asmBytes += length; }
+			}
+		} catch {}
+		return { cFuncs, asmFuncs, cBytes, asmBytes };
+	}
+
 	function refreshWidget() {
 		const ctx = latestCtx;
 		if (!ctx?.hasUI) return;
 
 		const pending = state.queue.filter((e) => e.status === "pending").length;
-		const matched = state.queue.filter((e) => e.status === "matched").length;
-		const skipped = state.queue.filter((e) => e.status === "skipped").length;
-		const total = state.queue.length;
-		const pct = total > 0 ? ((matched / total) * 100).toFixed(1) : "0.0";
+		const queueMatched = state.queue.filter((e) => e.status === "matched").length;
+		const progress = readProjectProgress(ctx.cwd);
+		const totalFuncs = progress.cFuncs + progress.asmFuncs;
+		const totalBytes = progress.cBytes + progress.asmBytes;
+		const bytePct = totalBytes > 0 ? (progress.cBytes / totalBytes) * 100 : 0;
+
+		const loopLabel = loopState.enabled
+			? `loop ON  chunk ${loopState.chunk}`
+			: "loop OFF";
 
 		ctx.ui.setWidget("decomp-progress", (_tui: any, theme: any) => ({
 			render(width: number) {
@@ -317,20 +345,28 @@ export default function (pi: ExtensionAPI) {
 					const filled = Math.round((percent / 100) * w);
 					return theme.fg("success", "█".repeat(filled)) + theme.fg("dim", "░".repeat(w - filled));
 				};
-				const pctNum = total > 0 ? (matched / total) * 100 : 0;
-				const line1 = [
-					theme.fg("accent", theme.bold("◆ Conker Decomp")),
-					theme.fg("success", `${matched}`),
-					theme.fg("dim", "/"),
-					theme.fg("muted", `${total}`),
-					theme.fg("success", `(${pct}%)`),
-					bar(pctNum, 12),
-					theme.fg("dim", "│"),
-					theme.fg("muted", `pending: ${pending}`),
-					theme.fg("dim", "│"),
-					theme.fg("muted", `patterns: ${state.patterns.length}`),
+				const divider = theme.fg("dim", "─".repeat(Math.min(width, 65)));
+				const line1 = theme.fg("accent", theme.bold("◆ Conker Decomp")) + " " + divider;
+				const line2 = [
+					theme.fg("muted", "  progress"),
+					theme.fg("success", `${bytePct.toFixed(1)}%`),
+					bar(bytePct, 14),
+					theme.fg("success", `${progress.cFuncs}`),
+					theme.fg("dim", "C /"),
+					theme.fg("warning", `${progress.asmFuncs}`),
+					theme.fg("dim", "ASM /"),
+					theme.fg("muted", `${totalFuncs} total`),
 				].join(" ");
-				return [line1];
+				const line3 = [
+					theme.fg(loopState.enabled ? "success" : "dim", `  ${loopLabel}`),
+					theme.fg("dim", "│"),
+					theme.fg("accent", `+${queueMatched} matched`),
+					theme.fg("dim", "│"),
+					theme.fg("muted", `${pending} pending`),
+					theme.fg("dim", "│"),
+					theme.fg("muted", `${state.patterns.length} patterns`),
+				].join(" ");
+				return [line1, line2, line3];
 			},
 			invalidate() {},
 		}));
