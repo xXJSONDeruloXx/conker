@@ -2442,8 +2442,8 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 9,
-    "lastScore": 0.7727,
+    "attempts": 12,
+    "lastScore": 0.4772727272727273,
     "status": "pending",
     "history": [
       {
@@ -2520,6 +2520,36 @@
           "structural: target=nop got=addiu sp, sp, 24"
         ],
         "timestamp": "2026-06-02T18:26:29.961Z"
+      },
+      {
+        "code": "s32 *func_100043B4(s32 *arg0, u32 arg1) {\n    OSIntMask mask;\n    s32 val;\n    \n    mask = osSetIntMask(1);\n    val = (arg0[-1] & 0xFFFFFF) | (arg1 << 24);\n    arg0[-1] = val;\n    osSetIntMask(mask);\n    return arg0 - 3;\n}",
+        "score": 0.6364,
+        "reason": "structural_diffs=8",
+        "diffs": [
+          "structural: target=lw v1, 24(sp) got=lw a1, 24(sp)",
+          "structural: target=lw t6, -4(v1) got=lw t6, -4(a1)",
+          "structural: target=or t0, t7, t9 got=or v1, t7, t9",
+          "structural: target=sw t0, -4(v1) got=jal osSetIntMask",
+          "structural: target=jal osSetIntMask got=sw v1, -4(a1)",
+          "structural: target=addiu v1, v1, -12 got=lw v0, 24(sp)",
+          "structural: target=addiu sp, sp, 24 got=addiu v0, v0, -12",
+          "structural: target=nop got=addiu sp, sp, 24"
+        ],
+        "timestamp": "2026-06-02T18:26:51.419Z"
+      },
+      {
+        "code": "s32 *func_100043B4(s32 *arg0, u32 arg1) {\n    OSIntMask mask = osSetIntMask(1);\n    arg0[-1] = (arg0[-1] & 0xFFFFFF) | (arg1 << 24);\n    arg0 -= 3;\n    osSetIntMask(mask);\n    return arg0;\n}",
+        "score": 0.44,
+        "reason": "length_mismatch (target=22, generated=25)",
+        "diffs": [],
+        "timestamp": "2026-06-02T18:27:01.471Z"
+      },
+      {
+        "code": "void func_100043B4(s32 *arg0, u32 arg1) {\n    OSIntMask mask = osSetIntMask(1);\n    arg0[-1] = (arg0[-1] & 0xFFFFFF) | (arg1 << 24);\n    osSetIntMask(mask);\n}\n\n#pragma weak func_100043B4",
+        "score": 0.4772727272727273,
+        "reason": "length_mismatch (target=22, generated=21)",
+        "diffs": [],
+        "timestamp": "2026-06-02T18:27:37.506Z"
       }
     ]
   },
