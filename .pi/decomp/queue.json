@@ -2431,8 +2431,8 @@
     "instructions": 25,
     "difficulty": "low",
     "tags": [],
-    "attempts": 3,
-    "lastScore": 0.4032258064516129,
+    "attempts": 6,
+    "lastScore": 0.4,
     "status": "pending",
     "history": [
       {
@@ -2455,6 +2455,52 @@
         "reason": "length_mismatch (target=25, generated=31)",
         "diffs": [],
         "timestamp": "2026-06-02T19:13:59.861Z"
+      },
+      {
+        "code": "void func_1000CBF0(s32 arg0, s32 arg1, s32 arg2) {\n    s32 i = 0;\n    struct151 *temp;\n\n    do {\n        if (arg2 & (1 << i)) {\n            temp = D_800417B0[i];\n            if (temp != NULL) {\n                temp->unk5A = arg0;\n                D_800417B0[i]->unk5C = arg1;\n                if (arg1 == 0) {\n                    D_800417B0[i]->unk58 = arg0;\n                }\n            }\n        }\n        i++;\n    } while (i != 3);\n}",
+        "score": 0.68,
+        "reason": "structural_diffs=8",
+        "diffs": [
+          "structural: target=addiu t0, t0, LO(D_800417B0) got=move v0, zero",
+          "structural: target=move v0, zero got=addiu t0, t0, LO(D_800417B0)",
+          "structural: target=addu v1, t0, t9 got=addu a0, t0, t9",
+          "structural: target=lw a0, 0(v1) got=lw v1, 0(a0)",
+          "structural: target=beqzl a0, L1 got=beqzl v1, L1",
+          "structural: target=sh a3, 90(a0) got=sh a3, 90(v1)",
+          "structural: target=lw t2, 0(v1) got=lw t2, 0(a0)",
+          "structural: target=lw t3, 0(v1) got=lw t3, 0(a0)"
+        ],
+        "timestamp": "2026-06-02T19:14:22.588Z"
+      },
+      {
+        "code": "void func_1000CBF0(s32 arg0, s32 arg1, s32 arg2) {\n    struct151 **base = D_800417B0;\n    s32 i = 0;\n    struct151 **slot;\n\n    do {\n        if (arg2 & (1 << i)) {\n            slot = &base[i];\n            if (*slot != NULL) {\n                (*slot)->unk5A = arg0;\n                (*slot)->unk5C = arg1;\n                if (arg1 == 0) {\n                    (*slot)->unk58 = arg0;\n                }\n            }\n        }\n        i++;\n    } while (i != 3);\n}",
+        "score": 0.48,
+        "reason": "length_mismatch (target=25, generated=24)",
+        "diffs": [],
+        "timestamp": "2026-06-02T19:14:33.969Z"
+      },
+      {
+        "code": "void func_1000CBF0(s32 arg0, s32 arg1, s32 arg2) {\n    s32 temp_arg0 = arg0;\n    struct151 **base = D_800417B0;\n    s32 i = 0;\n    struct151 **slot;\n\n    do {\n        if (arg2 & (1 << i)) {\n            slot = &base[i];\n            arg0 = (s32) *slot;\n            if (arg0 != 0) {\n                ((struct151 *) arg0)->unk5A = temp_arg0;\n                (*slot)->unk5C = arg1;\n                if (arg1 == 0) {\n                    (*slot)->unk58 = temp_arg0;\n                }\n            }\n        }\n        i++;\n    } while (i != 3);\n}",
+        "score": 0.4,
+        "reason": "structural_diffs=15",
+        "diffs": [
+          "structural: target=move a3, a0 got=lui t0, HI(D_800417B0)",
+          "structural: target=lui t0, HI(D_800417B0) got=move v0, a0",
+          "structural: target=addiu t0, t0, LO(D_800417B0) got=move v1, zero",
+          "structural: target=move v0, zero got=addiu t0, t0, LO(D_800417B0)",
+          "structural: target=sllv t7, t6, v0 got=sllv t7, t6, v1",
+          "structural: target=sll t9, v0, 2 got=sll t9, v1, 2",
+          "structural: target=addu v1, t0, t9 got=addu a3, t9, t0",
+          "structural: target=lw a0, 0(v1) got=lw a0, 0(a3)",
+          "structural: target=addiu v0, v0, 1 got=addiu v1, v1, 1",
+          "structural: target=sh a3, 90(a0) got=sh v0, 90(a0)",
+          "structural: target=lw t2, 0(v1) got=lw t2, 0(a3)",
+          "structural: target=lw t3, 0(v1) got=lw t3, 0(a3)",
+          "structural: target=sh a3, 88(t3) got=sh v0, 88(t3)",
+          "structural: target=addiu v0, v0, 1 got=addiu v1, v1, 1",
+          "structural: target=bnel v0, t1, L2 got=bnel v1, t1, L2"
+        ],
+        "timestamp": "2026-06-02T19:14:54.061Z"
       }
     ]
   },
