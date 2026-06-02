@@ -2776,8 +2776,8 @@
     "instructions": 32,
     "difficulty": "medium-low",
     "tags": [],
-    "attempts": 9,
-    "lastScore": 0.484375,
+    "attempts": 12,
+    "lastScore": 0.21621621621621623,
     "status": "pending",
     "history": [
       {
@@ -2842,6 +2842,27 @@
         "reason": "length_mismatch (target=32, generated=31)",
         "diffs": [],
         "timestamp": "2026-06-02T23:40:15.467Z"
+      },
+      {
+        "code": "void func_15010600(void) {\n    u8 *temp_v1;\n    u8 *temp_a0;\n    s32 i;\n\n    temp_v1 = &D_800D9920;\n    temp_a0 = D_800D9930;\n    temp_v1[1] = 0;\n    temp_v1[0] = 0;\n    for (i = 8; i < 22; i++) {\n        temp_v1[i] = 0;\n        temp_a0[i] = 0;\n    }\n}",
+        "score": 0.46875,
+        "reason": "length_mismatch (target=32, generated=30)",
+        "diffs": [],
+        "timestamp": "2026-06-02T23:41:10.435Z"
+      },
+      {
+        "code": "void func_15010600(void) {\n    u8 *temp_v1;\n    u8 *temp_a0;\n    u8 *temp_v0;\n\n    D_800D9921 = 0;\n    D_800D9920 = 0;\n    D_800D9928 = 0;\n    D_800D9938 = 0;\n    D_800D9929 = 0;\n    D_800D9939 = 0;\n\n    temp_v1 = D_800D992A;\n    temp_a0 = D_800D993A;\n    temp_v0 = &D_800D9946[0];\n\n    while (1) {\n        temp_a0 += 4;\n        temp_v1[1] = 0;\n        temp_a0[-3] = 0;\n        temp_v1[2] = 0;\n        temp_a0[-2] = 0;\n        temp_v1[3] = 0;\n        temp_a0[-1] = 0;\n        temp_v1 += 4;\n        temp_v1[-4] = 0;\n        temp_a0[-4] = 0;\n        if (temp_a0 == temp_v0) {\n            break;\n        }\n    }\n}",
+        "score": 0.484375,
+        "reason": "length_mismatch (target=32, generated=31)",
+        "diffs": [],
+        "timestamp": "2026-06-02T23:41:56.520Z"
+      },
+      {
+        "code": "void func_15010600(void) {\n    u8 *temp_v0;\n    u8 *temp_v1;\n    u8 *temp_a0;\n\n    D_800D9921 = 0;\n    D_800D9920 = 0;\n    D_800D9928 = 0;\n    D_800D9938 = 0;\n    D_800D9929 = 0;\n    D_800D9939 = 0;\n\n    temp_v1 = D_800D992A;\n    temp_a0 = D_800D993A;\n    temp_v0 = D_800D9946;\n\n    do {\n        temp_a0 += 4;\n        temp_v1[1] = 0;\n        temp_a0[-3] = 0;\n        temp_v1[2] = 0;\n        temp_a0[-2] = 0;\n        temp_v1[3] = 0;\n        temp_a0[-1] = 0;\n        temp_v1 += 4;\n        temp_v1[-4] = 0;\n        temp_a0[-4] = 0;\n    } while (temp_a0 != temp_v0);\n}",
+        "score": 0.21621621621621623,
+        "reason": "length_mismatch (target=32, generated=74)",
+        "diffs": [],
+        "timestamp": "2026-06-02T23:42:36.759Z"
       }
     ]
   },
