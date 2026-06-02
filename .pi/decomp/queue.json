@@ -813,9 +813,93 @@
     "instructions": 25,
     "difficulty": "low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.16,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_1507A100(void) {\n    s16 val = ((s8)D_800D1892 << 8) | D_800D1893;\n    u8 *base = (u8 *)D_800D2104[D_800D154C->unk13F];\n    *(s16 *)(base + D_800D1890 * 8 + D_800D1891 * 2 + 8) = val;\n}",
+        "score": 0.16,
+        "reason": "structural_diffs=21",
+        "diffs": [
+          "structural: target=lui t0, HI(D_800D154C) got=lui t2, HI(D_800D154C)",
+          "structural: target=lw t0, LO(D_800D154C)(t0) got=lw t2, LO(D_800D154C)(t2)",
+          "structural: target=lui t8, HI(D_800D1893) got=lbu t3, 319(t2)",
+          "structural: target=lbu t8, LO(D_800D1893)(t8) got=lui t1, HI(D_800D2104)",
+          "structural: target=lbu t1, 319(t0) got=lw t1, LO(D_800D2104)(t1)",
+          "structural: target=lui t9, HI(D_800D2104) got=lui t8, HI(D_800D1893)",
+          "structural: target=lw t9, LO(D_800D2104)(t9) got=sll t7, t6, 8",
+          "structural: target=sll t7, t6, 8 got=lbu t8, LO(D_800D1893)(t8)",
+          "structural: target=lui t5, HI(D_800D1890) got=lui t6, HI(D_800D1890)",
+          "structural: target=or v0, t7, t8 got=sll t4, t3, 2",
+          "structural: target=sll t2, t1, 2 got=lbu t6, LO(D_800D1890)(t6)",
+          "structural: target=lbu t5, LO(D_800D1890)(t5) got=lui t9, HI(D_800D1891)",
+          "structural: target=lui t8, HI(D_800D1891) got=addu t5, t1, t4",
+          "structural: target=addu t3, t9, t2 got=lw v1, 0(t5)",
+          "structural: target=lw t4, 0(t3) got=lbu t9, LO(D_800D1891)(t9)",
+          "structural: target=lbu t8, LO(D_800D1891)(t8) got=or v0, t7, t8",
+          "structural: target=sll t6, t5, 3 got=sll t7, t6, 3",
+          "structural: target=addu t7, t4, t6 got=addu t8, v1, t7",
+          "structural: target=sll t0, t8, 1 got=sll t0, t9, 1",
+          "structural: target=addu t1, t7, t0 got=addu t2, t8, t0"
+        ],
+        "timestamp": "2026-06-02T18:59:37.191Z"
+      },
+      {
+        "code": "void func_1507A100(void) {\n    u8 idx = D_800D154C->unk13F;\n    s16 val = ((s8)D_800D1892 << 8) | D_800D1893;\n    u8 *base = (u8 *)D_800D2104[idx];\n    *(s16 *)(base + D_800D1890 * 8 + D_800D1891 * 2 + 8) = val;\n}",
+        "score": 0.28,
+        "reason": "structural_diffs=18",
+        "diffs": [
+          "structural: target=lui t0, HI(D_800D154C) got=lui t6, HI(D_800D154C)",
+          "structural: target=lw t0, LO(D_800D154C)(t0) got=lw t6, LO(D_800D154C)(t6)",
+          "structural: target=lui t6, HI(D_800D1892) got=lui t7, HI(D_800D1892)",
+          "structural: target=lb t6, LO(D_800D1892)(t6) got=lb t7, LO(D_800D1892)(t7)",
+          "structural: target=lui t8, HI(D_800D1893) got=lui t9, HI(D_800D1893)",
+          "structural: target=lbu t8, LO(D_800D1893)(t8) got=lbu t9, LO(D_800D1893)(t9)",
+          "structural: target=lbu t1, 319(t0) got=lbu v0, 319(t6)",
+          "structural: target=lui t9, HI(D_800D2104) got=lui t2, HI(D_800D2104)",
+          "structural: target=lw t9, LO(D_800D2104)(t9) got=lw t2, LO(D_800D2104)(t2)",
+          "structural: target=sll t7, t6, 8 got=sll t8, t7, 8",
+          "structural: target=or v0, t7, t8 got=or t1, t8, t9",
+          "structural: target=sll t2, t1, 2 got=sll t3, v0, 2",
+          "structural: target=addu t3, t9, t2 got=addu t4, t2, t3",
+          "structural: target=lw t4, 0(t3) got=lw a0, 0(t4)",
+          "structural: target=addu t7, t4, t6 got=addu t7, a0, t6",
+          "structural: target=sll t0, t8, 1 got=sll t9, t8, 1",
+          "structural: target=addu t1, t7, t0 got=addu t0, t7, t9",
+          "structural: target=sh v0, 8(t1) got=sh t1, 8(t0)"
+        ],
+        "timestamp": "2026-06-02T18:59:49.164Z"
+      },
+      {
+        "code": "void func_1507A100(void) {\n    *(s16 *)((u8 *)D_800D2104[D_800D154C->unk13F] + D_800D1890 * 8 + D_800D1891 * 2 + 8) = ((s8)D_800D1892 << 8) | D_800D1893;\n}",
+        "score": 0.16,
+        "reason": "structural_diffs=21",
+        "diffs": [
+          "structural: target=lui t0, HI(D_800D154C) got=lui t1, HI(D_800D154C)",
+          "structural: target=lw t0, LO(D_800D154C)(t0) got=lw t1, LO(D_800D154C)(t1)",
+          "structural: target=lui t8, HI(D_800D1893) got=lbu t2, 319(t1)",
+          "structural: target=lbu t8, LO(D_800D1893)(t8) got=lui t0, HI(D_800D2104)",
+          "structural: target=lbu t1, 319(t0) got=lw t0, LO(D_800D2104)(t0)",
+          "structural: target=lui t9, HI(D_800D2104) got=lui t8, HI(D_800D1893)",
+          "structural: target=lw t9, LO(D_800D2104)(t9) got=sll t7, t6, 8",
+          "structural: target=sll t7, t6, 8 got=lbu t8, LO(D_800D1893)(t8)",
+          "structural: target=lui t5, HI(D_800D1890) got=lui t6, HI(D_800D1890)",
+          "structural: target=or v0, t7, t8 got=sll t3, t2, 2",
+          "structural: target=sll t2, t1, 2 got=lbu t6, LO(D_800D1890)(t6)",
+          "structural: target=lbu t5, LO(D_800D1890)(t5) got=lui t1, HI(D_800D1891)",
+          "structural: target=lui t8, HI(D_800D1891) got=addu t4, t0, t3",
+          "structural: target=addu t3, t9, t2 got=lw t5, 0(t4)",
+          "structural: target=lw t4, 0(t3) got=lbu t1, LO(D_800D1891)(t1)",
+          "structural: target=lbu t8, LO(D_800D1891)(t8) got=or t9, t7, t8",
+          "structural: target=sll t6, t5, 3 got=sll t7, t6, 3",
+          "structural: target=addu t7, t4, t6 got=addu t8, t5, t7",
+          "structural: target=sll t0, t8, 1 got=sll t2, t1, 1",
+          "structural: target=addu t1, t7, t0 got=addu t0, t8, t2"
+        ],
+        "timestamp": "2026-06-02T19:00:07.439Z"
+      }
+    ]
   },
   {
     "function": "func_150ADA68",
@@ -2657,9 +2741,9 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 3,
-    "lastScore": 0.4166666666666667,
-    "status": "pending",
+    "attempts": 4,
+    "lastScore": 1,
+    "status": "matched",
     "history": [
       {
         "code": "s32 func_15143DA8(s32 *arg0, s32 arg1, s32 arg2) {\n    s32 tmp;\n    \n    if (arg2 < arg1) {\n        tmp = arg1 ^ arg2;\n        arg2 = arg2 ^ tmp;\n        arg1 = tmp ^ arg2;\n    }\n    \n    if (*arg0 < arg1) {\n        *arg0 = arg1;\n        return 1;\n    }\n    if (arg2 < *arg0) {\n        *arg0 = arg2;\n        return 2;\n    }\n    return 0;\n}",
