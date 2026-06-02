@@ -6763,7 +6763,7 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 18,
+    "attempts": 21,
     "lastScore": 0.4827586206896552,
     "status": "pending",
     "history": [
@@ -6911,6 +6911,27 @@
         "reason": "length_mismatch (target=29, generated=28)",
         "diffs": [],
         "timestamp": "2026-06-02T21:59:12.663Z"
+      },
+      {
+        "code": "void func_151640C0(struct225 *arg0, void *arg1, u8 arg2) {\n    struct225 *sp18;\n    s32 temp_v1;\n    s32 temp_v0;\n    s32 temp_a0;\n    s32 temp_a1;\n    u8 temp_a3;\n    u8 temp_a2;\n\n    sp18 = arg0;\n    if (arg2 == 0x29) {\n        temp_v1 = *(s32 *)((s32)arg1 + 4);\n        temp_v0 = (s32)arg0;\n        temp_a0 = *(s32 *)temp_v1;\n        temp_a1 = *(s32 *)(temp_v0 + 0x18);\n        temp_a3 = *(u8 *)(temp_v1 + 4);\n        temp_v0 += 0x18;\n        temp_a2 = *(u8 *)(temp_v0 + 4);\n        if ((temp_a1 == temp_a0) || (temp_a3 == temp_a2) || (temp_a3 == *(u8 *)(temp_a1 + 0x3B))) {\n            func_1516972C(sp18);\n        }\n    }\n}",
+        "score": 0.4827586206896552,
+        "reason": "length_mismatch (target=29, generated=28)",
+        "diffs": [],
+        "timestamp": "2026-06-02T21:59:38.038Z"
+      },
+      {
+        "code": "void func_151640C0(struct225 *arg0, void *arg1, u8 arg2) {\n    volatile struct225 *sp18;\n    s32 temp_v1;\n    s32 temp_v0;\n    s32 temp_a0;\n    s32 temp_a1;\n    u8 temp_a3;\n    u8 temp_a2;\n\n    sp18 = arg0;\n    if (arg2 == 0x29) {\n        temp_v1 = *(s32 *)((s32)arg1 + 4);\n        temp_v0 = (s32)arg0;\n        temp_a0 = *(s32 *)temp_v1;\n        temp_a1 = *(s32 *)(temp_v0 + 0x18);\n        temp_a3 = *(u8 *)(temp_v1 + 4);\n        temp_v0 += 0x18;\n        temp_a2 = *(u8 *)(temp_v0 + 4);\n        if ((temp_a1 == temp_a0) || (temp_a3 == temp_a2) || (temp_a3 == *(u8 *)(temp_a1 + 0x3B))) {\n            func_1516972C(sp18);\n        }\n    }\n}",
+        "score": 0.4827586206896552,
+        "reason": "length_mismatch (target=29, generated=28)",
+        "diffs": [],
+        "timestamp": "2026-06-02T21:59:58.271Z"
+      },
+      {
+        "code": "void func_151640C0(struct225 *arg0, void *arg1, u8 arg2) {\n    struct225 **sp18;\n    s32 temp_v1;\n    s32 temp_v0;\n    s32 temp_a0;\n    s32 temp_a1;\n    u8 temp_a3;\n    u8 temp_a2;\n\n    sp18 = &arg0;\n    if (arg2 == 0x29) {\n        temp_v1 = *(s32 *)((s32)arg1 + 4);\n        temp_v0 = (s32)arg0;\n        temp_a0 = *(s32 *)temp_v1;\n        temp_a1 = *(s32 *)(temp_v0 + 0x18);\n        temp_a3 = *(u8 *)(temp_v1 + 4);\n        temp_v0 += 0x18;\n        temp_a2 = *(u8 *)(temp_v0 + 4);\n        if ((temp_a1 == temp_a0) || (temp_a3 == temp_a2) || (temp_a3 == *(u8 *)(temp_a1 + 0x3B))) {\n            func_1516972C(*sp18);\n        }\n    }\n}",
+        "score": 0.4827586206896552,
+        "reason": "length_mismatch (target=29, generated=28)",
+        "diffs": [],
+        "timestamp": "2026-06-02T22:00:21.014Z"
       }
     ]
   },
