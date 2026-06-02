@@ -7176,7 +7176,7 @@
     ],
     "attempts": 3,
     "lastScore": 0.9355,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "void func_15015F40(s16 arg0, s32 arg1) {\n    switch (arg1) {\n    case 0x1A:\n    case 0x24:\n    case 0x2B:\n    case 0x2D:\n    case 0x30:\n    case 0x33:\n    case 0x34:\n    case 0x3F:\n        D_800BE616 = 1;\n        D_800BE9E8 = func_151E5FAC() - 1;\n        break;\n    default:\n        D_800BE616 = 0;\n        D_800BE9E8 = arg0 - 1;\n        break;\n    }\n}",
