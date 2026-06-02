@@ -144,7 +144,6 @@ def queue_row(row: dict[str, Any]) -> dict[str, Any]:
         "difficultyScore": row["difficulty"],
     }
 
-
 def collect(repo_root: Path) -> list[dict[str, Any]]:
     conker_root = repo_root / "conker"
     rows: list[dict[str, Any]] = []

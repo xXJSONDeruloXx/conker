@@ -50,6 +50,13 @@ def canonicalize_instruction(instr: str) -> str:
     if m2:
         instr = f"move {m2.group(1)}, {m2.group(2)}"
 
+    # "not REG, REG2" is the assembler alias for "nor REG, REG2, zero".
+    # Target splat assembly commonly uses the alias while objdump prints the
+    # canonical instruction, so normalize both spellings before comparing.
+    m2 = re.match(r'not (\w+), (\w+)$', instr)
+    if m2:
+        instr = f"nor {m2.group(1)}, {m2.group(2)}, zero"
+
     # "addiu REG, zero, IMM" → "li REG, IMM"
     m2 = re.match(r'addiu (\w+), zero, (.+)$', instr)
     if m2:

@@ -50,7 +50,7 @@
     "instructions": 11,
     "difficulty": "low",
     "tags": [],
-    "attempts": 17,
+    "attempts": 26,
     "lastScore": 0.1818,
     "status": "skipped",
     "history": [
@@ -312,6 +312,234 @@
           "structural: target=sh t7, 0(v0) got=sh v1, 3074(t7)"
         ],
         "timestamp": "2026-06-03T04:53:00.261Z"
+      },
+      {
+        "code": "u32 func_100038E0(void) {\n    D_80038070 = 0xBC000C02;\n    D_80038074 = 0x4040;\n    *(u16 *)0xBC000C02 = 0x4040;\n    return 0xBC000C02;\n}",
+        "score": 0.4583333333333333,
+        "reason": "length_mismatch (target=11, generated=12)",
+        "diffs": [],
+        "timestamp": "2026-08-04T15:49:26.365220+00:00"
+      },
+      {
+        "code": "void func_100038E0(void) {\n    D_80038070 = 0xBC000C02;\n    D_80038074 = 0x4040;\n    *(u16 *)0xBC000C02 = 0x4040;\n}",
+        "score": 0.1818,
+        "reason": "structural_diffs=9",
+        "diffs": [
+          {
+            "line": 0,
+            "type": "structural",
+            "target": "lui v0, 48128",
+            "generated": "li v0, 16448"
+          },
+          {
+            "line": 1,
+            "type": "structural",
+            "target": "ori v0, v0, 3074",
+            "generated": "lui t6, 48128"
+          },
+          {
+            "line": 2,
+            "type": "structural",
+            "target": "lui at, HI(D_80038070)",
+            "generated": "ori t6, t6, 3074"
+          },
+          {
+            "line": 3,
+            "type": "structural",
+            "target": "sw v0, LO(D_80038070)(at)",
+            "generated": "lui at, HI(D_80038070)"
+          },
+          {
+            "line": 4,
+            "type": "structural",
+            "target": "lui at, HI(D_80038074)",
+            "generated": "sw t6, LO(D_80038070)(at)"
+          },
+          {
+            "line": 5,
+            "type": "structural",
+            "target": "li t6, 16448",
+            "generated": "lui at, HI(D_80038074)"
+          },
+          {
+            "line": 6,
+            "type": "structural",
+            "target": "sh t6, LO(D_80038074)(at)",
+            "generated": "sh v0, LO(D_80038074)(at)"
+          },
+          {
+            "line": 7,
+            "type": "structural",
+            "target": "li t7, 16448",
+            "generated": "lui t7, 48128"
+          },
+          {
+            "line": 8,
+            "type": "structural",
+            "target": "sh t7, 0(v0)",
+            "generated": "sh v0, 3074(t7)"
+          }
+        ],
+        "timestamp": "2026-08-04T15:49:47.549381+00:00"
+      },
+      {
+        "code": "void func_100038E0(void) {\n    u32 addr = 0xBC000C02;\n\n    D_80038070 = addr;\n    D_80038074 = 0x4040;\n    *(u16 *)addr = 0x4040;\n}",
+        "score": 0.1818,
+        "reason": "structural_diffs=9",
+        "diffs": [
+          {
+            "line": 0,
+            "type": "structural",
+            "target": "lui v0, 48128",
+            "generated": "li v0, 16448"
+          },
+          {
+            "line": 1,
+            "type": "structural",
+            "target": "ori v0, v0, 3074",
+            "generated": "lui t6, 48128"
+          },
+          {
+            "line": 2,
+            "type": "structural",
+            "target": "lui at, HI(D_80038070)",
+            "generated": "ori t6, t6, 3074"
+          },
+          {
+            "line": 3,
+            "type": "structural",
+            "target": "sw v0, LO(D_80038070)(at)",
+            "generated": "lui at, HI(D_80038070)"
+          },
+          {
+            "line": 4,
+            "type": "structural",
+            "target": "lui at, HI(D_80038074)",
+            "generated": "sw t6, LO(D_80038070)(at)"
+          },
+          {
+            "line": 5,
+            "type": "structural",
+            "target": "li t6, 16448",
+            "generated": "lui at, HI(D_80038074)"
+          },
+          {
+            "line": 6,
+            "type": "structural",
+            "target": "sh t6, LO(D_80038074)(at)",
+            "generated": "sh v0, LO(D_80038074)(at)"
+          },
+          {
+            "line": 7,
+            "type": "structural",
+            "target": "li t7, 16448",
+            "generated": "lui t7, 48128"
+          },
+          {
+            "line": 8,
+            "type": "structural",
+            "target": "sh t7, 0(v0)",
+            "generated": "sh v0, 3074(t7)"
+          }
+        ],
+        "timestamp": "2026-08-04T15:50:09.037934+00:00"
+      },
+      {
+        "code": "u32 func_100038E0(void) {\n    u32 addr = 0xBC000C02;\n\n    D_80038070 = addr;\n    D_80038074 = 0x4040;\n    *(u16 *)addr = 0x4040;\n    return addr;\n}",
+        "score": 0.4583333333333333,
+        "reason": "length_mismatch (target=11, generated=12)",
+        "diffs": [],
+        "timestamp": "2026-08-04T15:50:31.172545+00:00"
+      },
+      {
+        "code": "void func_100038E0(void) {\n    D_80038070 = 0xBC000C02;\n    D_80038074 = 0x4040;\n    *(u16 *)D_80038070 = 0x4040;\n}",
+        "score": 0.4583333333333333,
+        "reason": "length_mismatch (target=11, generated=12)",
+        "diffs": [],
+        "timestamp": "2026-08-04T15:50:41.222477+00:00"
+      },
+      {
+        "code": "s32 func_100038E0(void) {\n    D_80038070 = 0xBC000C02;\n    D_80038074 = 0x4040;\n    *(u16 *)D_80038070 = 0x4040;\n    return D_80038070;\n}",
+        "score": 0.4230769230769231,
+        "reason": "length_mismatch (target=11, generated=13)",
+        "diffs": [],
+        "timestamp": "2026-08-04T15:52:53.919823+00:00"
+      },
+      {
+        "code": "void func_100038E0(void) {\n    u16 *addr = (u16 *)0xBC000C02;\n\n    *(u16 **)&D_80038070 = addr;\n    D_80038074 = 0x4040;\n    *addr = 0x4040;\n}",
+        "score": 0.45454545454545453,
+        "reason": "length_mismatch (target=11, generated=10)",
+        "diffs": [],
+        "timestamp": "2026-08-04T15:53:08.777475+00:00"
+      },
+      {
+        "code": "void func_100038E0(void) {\n    u16 *addr = (u16 *)0xBC000C02;\n    u32 value1 = 0x4040;\n    u32 value2 = 0x4040;\n\n    *(u16 **)&D_80038070 = addr;\n    D_80038074 = value1;\n    *addr = value2;\n}",
+        "score": 0.45454545454545453,
+        "reason": "length_mismatch (target=11, generated=10)",
+        "diffs": [],
+        "timestamp": "2026-08-04T15:53:37.204416+00:00"
+      },
+      {
+        "code": "void func_100038E0(void) {\n    u16 *addr = (u16 *)0xBC000C02;\n    u32 value1 = 0x4040;\n    u32 value2 = 0x4040;\n\n    *(u16 **)&D_80038070 = addr;\n    D_80038074 = value1;\n    D_BC000C02 = value2;\n}",
+        "score": 0.1818,
+        "reason": "structural_diffs=9",
+        "diffs": [
+          {
+            "line": 0,
+            "type": "structural",
+            "target": "lui v0, 48128",
+            "generated": "li v0, 16448"
+          },
+          {
+            "line": 1,
+            "type": "structural",
+            "target": "ori v0, v0, 3074",
+            "generated": "lui t6, 48128"
+          },
+          {
+            "line": 2,
+            "type": "structural",
+            "target": "lui at, HI(D_80038070)",
+            "generated": "ori t6, t6, 3074"
+          },
+          {
+            "line": 3,
+            "type": "structural",
+            "target": "sw v0, LO(D_80038070)(at)",
+            "generated": "lui at, HI(D_80038070)"
+          },
+          {
+            "line": 4,
+            "type": "structural",
+            "target": "lui at, HI(D_80038074)",
+            "generated": "sw t6, LO(D_80038070)(at)"
+          },
+          {
+            "line": 5,
+            "type": "structural",
+            "target": "li t6, 16448",
+            "generated": "lui at, HI(D_80038074)"
+          },
+          {
+            "line": 6,
+            "type": "structural",
+            "target": "sh t6, LO(D_80038074)(at)",
+            "generated": "sh v0, LO(D_80038074)(at)"
+          },
+          {
+            "line": 7,
+            "type": "structural",
+            "target": "li t7, 16448",
+            "generated": "lui at, HI(D_BC000C02)"
+          },
+          {
+            "line": 8,
+            "type": "structural",
+            "target": "sh t7, 0(v0)",
+            "generated": "sh v0, LO(D_BC000C02)(at)"
+          }
+        ],
+        "timestamp": "2026-08-04T15:53:51.543835+00:00"
       }
     ]
   },
@@ -922,8 +1150,8 @@
     "instructions": 16,
     "difficulty": "low",
     "tags": [],
-    "attempts": 30,
-    "lastScore": 0.4375,
+    "attempts": 33,
+    "lastScore": 0.24242424242424243,
     "status": "skipped",
     "history": [
       {
@@ -1135,6 +1363,27 @@
         "reason": "length_mismatch (target=16, generated=14)",
         "diffs": [],
         "timestamp": "2026-06-03T07:02:36.624Z"
+      },
+      {
+        "code": "typedef struct {\n    u64 words[8];\n} Func150A7B80Data;\n\nvoid func_150A7B80(Func150A7B80Data *arg0) {\n    s32 one = 1;\n\n    arg0->words[0] = 0;\n    arg0->words[1] = 0;\n    arg0->words[2] = 0;\n    arg0->words[3] = 0;\n    arg0->words[4] = 0;\n    arg0->words[5] = 0;\n    arg0->words[6] = 0;\n    arg0->words[7] = 0;\n    ((s16 *)arg0)[0] = one;\n    ((s16 *)arg0)[5] = one;\n    ((s16 *)arg0)[10] = one;\n    ((s16 *)arg0)[15] = one;\n}",
+        "score": 0.24242424242424243,
+        "reason": "length_mismatch (target=16, generated=33)",
+        "diffs": [],
+        "timestamp": "2026-08-04T15:51:00.567366+00:00"
+      },
+      {
+        "code": "void func_150A7B80(u64 *arg0) {\n    s32 one = 1;\n\n    arg0[0] = 0;\n    arg0[1] = 0;\n    arg0[2] = 0;\n    arg0[3] = 0;\n    arg0[4] = 0;\n    arg0[5] = 0;\n    arg0[6] = 0;\n    arg0[7] = 0;\n    ((s16 *)arg0)[0] = one;\n    ((s16 *)arg0)[5] = one;\n    ((s16 *)arg0)[10] = one;\n    ((s16 *)arg0)[15] = one;\n}",
+        "score": 0.24242424242424243,
+        "reason": "length_mismatch (target=16, generated=33)",
+        "diffs": [],
+        "timestamp": "2026-08-04T15:51:37.315945+00:00"
+      },
+      {
+        "code": "void func_150A7B80(s64 *arg0) {\n    s32 one = 1;\n\n    arg0[0] = 0;\n    arg0[1] = 0;\n    arg0[2] = 0;\n    arg0[3] = 0;\n    arg0[4] = 0;\n    arg0[5] = 0;\n    arg0[6] = 0;\n    arg0[7] = 0;\n    ((s16 *)arg0)[0] = one;\n    ((s16 *)arg0)[5] = one;\n    ((s16 *)arg0)[10] = one;\n    ((s16 *)arg0)[15] = one;\n}",
+        "score": 0.24242424242424243,
+        "reason": "length_mismatch (target=16, generated=33)",
+        "diffs": [],
+        "timestamp": "2026-08-04T15:51:47.772540+00:00"
       }
     ]
   },
@@ -1145,8 +1394,8 @@
     "instructions": 9,
     "difficulty": "trivial",
     "tags": [],
-    "attempts": 4,
-    "lastScore": 0,
+    "attempts": 6,
+    "lastScore": 0.3333,
     "status": "skipped",
     "history": [
       {
@@ -1176,6 +1425,94 @@
         "reason": "generated 603 instr for 9 target (67.0x oversized)",
         "diffs": [],
         "timestamp": "2026-06-03T04:43:30.188Z"
+      },
+      {
+        "code": "void func_10001420(void) {\n    s32 *tmp = &D_80043B40;\n    s32 cnt = 4064;\n\n    do {\n        *tmp++ = 0;\n    } while ((s32)tmp < (u32)&D_80043B40 + cnt);\n}",
+        "score": 0.3333,
+        "reason": "structural_diffs=6",
+        "diffs": [
+          {
+            "line": 1,
+            "type": "structural",
+            "target": "addiu a1, t6, LO(D_80043B40)",
+            "generated": "addiu v0, t6, LO(D_80043B40)"
+          },
+          {
+            "line": 2,
+            "type": "structural",
+            "target": "addiu a0, a1, 4064",
+            "generated": "addiu a0, v0, 4064"
+          },
+          {
+            "line": 3,
+            "type": "structural",
+            "target": "addiu a1, a1, 4",
+            "generated": "addiu v0, v0, 4"
+          },
+          {
+            "line": 4,
+            "type": "structural",
+            "target": "sltu at, a1, a0",
+            "generated": "sltu at, v0, a0"
+          },
+          {
+            "line": 5,
+            "type": "structural",
+            "target": "bnez at, L0",
+            "generated": "bnez at, c"
+          },
+          {
+            "line": 6,
+            "type": "structural",
+            "target": "sw zero, -4(a1)",
+            "generated": "sw zero, -4(v0)"
+          }
+        ],
+        "timestamp": "2026-08-04T15:52:09.381393+00:00"
+      },
+      {
+        "code": "void func_10001420(void) {\n    register s32 *tmp = &D_80043B40;\n    s32 cnt = 4064;\n\n    do {\n        *tmp++ = 0;\n    } while ((s32)tmp < (u32)&D_80043B40 + cnt);\n}",
+        "score": 0.3333,
+        "reason": "structural_diffs=6",
+        "diffs": [
+          {
+            "line": 1,
+            "type": "structural",
+            "target": "addiu a1, t6, LO(D_80043B40)",
+            "generated": "addiu v0, t6, LO(D_80043B40)"
+          },
+          {
+            "line": 2,
+            "type": "structural",
+            "target": "addiu a0, a1, 4064",
+            "generated": "addiu a0, v0, 4064"
+          },
+          {
+            "line": 3,
+            "type": "structural",
+            "target": "addiu a1, a1, 4",
+            "generated": "addiu v0, v0, 4"
+          },
+          {
+            "line": 4,
+            "type": "structural",
+            "target": "sltu at, a1, a0",
+            "generated": "sltu at, v0, a0"
+          },
+          {
+            "line": 5,
+            "type": "structural",
+            "target": "bnez at, L0",
+            "generated": "bnez at, c"
+          },
+          {
+            "line": 6,
+            "type": "structural",
+            "target": "sw zero, -4(a1)",
+            "generated": "sw zero, -4(v0)"
+          }
+        ],
+        "timestamp": "2026-08-04T15:52:31.784958+00:00"
       }
     ]
   },
@@ -1284,8 +1621,8 @@
     "instructions": 17,
     "difficulty": "low",
     "tags": [],
-    "attempts": 8,
-    "lastScore": 0,
+    "attempts": 14,
+    "lastScore": 0.4117647058823529,
     "status": "skipped",
     "history": [
       {
@@ -1357,6 +1694,34 @@
         "reason": "generated 4891 instr for 17 target (287.7x oversized)",
         "diffs": [],
         "timestamp": "2026-06-03T08:04:34.545Z"
+      },
+      {
+        "code": "void func_1508F060(void) {\n    D_800D246D = 0;\n    D_800D247D = 0;\n    D_800D2460[2][0x1D] = 0;\n    D_800D2460[2][0x2D] = 0;\n    D_800D2460[2][0x3D] = 0;\n    D_800D2460[2][0x0D] = 0;\n    D_800D24C0 = 0;\n}",
+        "score": 0.0017378859129012492,
+        "reason": "length_mismatch (target=17, generated=4891)",
+        "diffs": [],
+        "timestamp": "2026-08-04T15:44:41.598573+00:00"
+      },
+      {
+        "code": "void func_1508F060(void) {\n    D_800D246D = 0;\n    D_800D247D = 0;\n    D_800D2460[2][0x1D] = 0;\n    D_800D2460[2][0x2D] = 0;\n    D_800D2460[2][0x3D] = 0;\n    D_800D2460[2][0x0D] = 0;\n    D_800D24C0 = 0;\n}",
+        "score": 0.4117647058823529,
+        "reason": "length_mismatch (target=17, generated=14)",
+        "diffs": [],
+        "timestamp": "2026-08-04T15:47:16.857301+00:00"
+      },
+      {
+        "code": "void func_1508F060(void) {\n    s32 i;\n\n    D_800D246D = 0;\n    D_800D247D = 0;\n    i = 2;\n    D_800D2460[i][0x1D] = 0;\n    D_800D2460[i][0x2D] = 0;\n    D_800D2460[i][0x3D] = 0;\n    D_800D2460[i][0x0D] = 0;\n    D_800D24C0 = 0;\n}",
+        "score": 0.4117647058823529,
+        "reason": "length_mismatch (target=17, generated=14)",
+        "diffs": [],
+        "timestamp": "2026-08-04T15:48:09.499239+00:00"
+      },
+      {
+        "code": "void func_1508F060(void) {\n    s32 i;\n    u8 *ptr;\n\n    D_800D246D = 0;\n    D_800D247D = 0;\n    i = 2;\n    ptr = D_800D2460[i];\n    ptr[0x1D] = 0;\n    ptr[0x2D] = 0;\n    ptr[0x3D] = 0;\n    ptr[0x0D] = 0;\n    D_800D24C0 = 0;\n}",
+        "score": 0.4117647058823529,
+        "reason": "length_mismatch (target=17, generated=14)",
+        "diffs": [],
+        "timestamp": "2026-08-04T15:48:53.035117+00:00"
       }
     ]
   },
@@ -1457,8 +1822,8 @@
     "instructions": 20,
     "difficulty": "low",
     "tags": [],
-    "attempts": 38,
-    "lastScore": 0.9,
+    "attempts": 50,
+    "lastScore": 0.0,
     "status": "skipped",
     "history": [
       {
@@ -2104,6 +2469,209 @@
           "structural: target=or t8, t7, t6 got=or t8, t7, v1"
         ],
         "timestamp": "2026-06-03T09:56:31.096Z"
+      },
+      {
+        "code": "void func_15079F6C(void) {\n    u16 tmp0;\n    u16 tmp1;\n\n    tmp0 = D_800D1890 << 8;\n    tmp1 = D_800D1891;\n    D_800D154C->unk224 = tmp0 | tmp1;\n    D_800D154C->unk22B = D_800D1892;\n    D_800D154C->unk226 = D_800D1893;\n}",
+        "score": 0.9,
+        "reason": "structural_diffs=2",
+        "diffs": [
+          {
+            "line": 5,
+            "type": "structural",
+            "target": "lbu t6, LO(D_800D1891)(v1)",
+            "generated": "lbu v1, LO(D_800D1891)(v1)"
+          },
+          {
+            "line": 8,
+            "type": "structural",
+            "target": "or t8, t7, t6",
+            "generated": "or t8, t7, v1"
+          }
+        ],
+        "timestamp": "2026-08-04T15:54:33.152388+00:00"
+      },
+      {
+        "code": "void func_15079F6C(void) {\n    u16 tmp0;\n    u16 tmp1;\n    u8 *tmp1Ptr;\n\n    tmp0 = D_800D1890 << 8;\n    tmp1Ptr = &D_800D1891;\n    tmp1 = *tmp1Ptr;\n    D_800D154C->unk224 = tmp0 | tmp1;\n    D_800D154C->unk22B = D_800D1892;\n    D_800D154C->unk226 = D_800D1893;\n}",
+        "score": 0.9,
+        "reason": "structural_diffs=2",
+        "diffs": [
+          {
+            "line": 5,
+            "type": "structural",
+            "target": "lbu t6, LO(D_800D1891)(v1)",
+            "generated": "lbu v1, LO(D_800D1891)(v1)"
+          },
+          {
+            "line": 8,
+            "type": "structural",
+            "target": "or t8, t7, t6",
+            "generated": "or t8, t7, v1"
+          }
+        ],
+        "timestamp": "2026-08-04T15:54:51.710156+00:00"
+      },
+      {
+        "code": "void func_15079F6C(void) {\n    D_800D154C->unk224 = (D_800D1890 << 8) | D_800D1891;\n    D_800D154C->unk22B = D_800D1892;\n    D_800D154C->unk226 = D_800D1893;\n}",
+        "score": 0.1,
+        "reason": "structural_diffs=18",
+        "diffs": [
+          {
+            "line": 0,
+            "type": "structural",
+            "target": "lui a0, HI(D_800D154C)",
+            "generated": "lui v0, HI(D_800D154C)"
+          },
+          {
+            "line": 1,
+            "type": "structural",
+            "target": "addiu a0, a0, LO(D_800D154C)",
+            "generated": "addiu v0, v0, LO(D_800D154C)"
+          },
+          {
+            "line": 2,
+            "type": "structural",
+            "target": "lui v0, HI(D_800D1890)",
+            "generated": "lui t6, HI(D_800D1890)"
+          },
+          {
+            "line": 3,
+            "type": "structural",
+            "target": "lbu v0, LO(D_800D1890)(v0)",
+            "generated": "lbu t6, LO(D_800D1890)(t6)"
+          },
+          {
+            "line": 4,
+            "type": "structural",
+            "target": "lui v1, HI(D_800D1891)",
+            "generated": "lui t8, HI(D_800D1891)"
+          },
+          {
+            "line": 5,
+            "type": "structural",
+            "target": "lbu t6, LO(D_800D1891)(v1)",
+            "generated": "lbu t8, LO(D_800D1891)(t8)"
+          },
+          {
+            "line": 6,
+            "type": "structural",
+            "target": "lw t9, 0(a0)",
+            "generated": "lw t0, 0(v0)"
+          },
+          {
+            "line": 7,
+            "type": "structural",
+            "target": "sll t7, v0, 8",
+            "generated": "sll t7, t6, 8"
+          },
+          {
+            "line": 8,
+            "type": "structural",
+            "target": "or t8, t7, t6",
+            "generated": "or t9, t7, t8"
+          },
+          {
+            "line": 9,
+            "type": "structural",
+            "target": "sh t8, 548(t9)",
+            "generated": "sh t9, 548(t0)"
+          },
+          {
+            "line": 10,
+            "type": "structural",
+            "target": "lui t0, HI(D_800D1892)",
+            "generated": "lui t1, HI(D_800D1892)"
+          },
+          {
+            "line": 11,
+            "type": "structural",
+            "target": "lbu t0, LO(D_800D1892)(t0)",
+            "generated": "lbu t1, LO(D_800D1892)(t1)"
+          },
+          {
+            "line": 12,
+            "type": "structural",
+            "target": "lw t1, 0(a0)",
+            "generated": "lw t2, 0(v0)"
+          },
+          {
+            "line": 13,
+            "type": "structural",
+            "target": "lui t2, HI(D_800D1893)",
+            "generated": "lui t3, HI(D_800D1893)"
+          },
+          {
+            "line": 14,
+            "type": "structural",
+            "target": "sb t0, 555(t1)",
+            "generated": "sb t1, 555(t2)"
+          },
+          {
+            "line": 15,
+            "type": "structural",
+            "target": "lw t3, 0(a0)",
+            "generated": "lw t4, 0(v0)"
+          },
+          {
+            "line": 16,
+            "type": "structural",
+            "target": "lbu t2, LO(D_800D1893)(t2)",
+            "generated": "lbu t3, LO(D_800D1893)(t3)"
+          },
+          {
+            "line": 17,
+            "type": "structural",
+            "target": "sb t2, 550(t3)",
+            "generated": "sb t3, 550(t4)"
+          }
+        ],
+        "timestamp": "2026-08-04T15:55:03.380178+00:00"
+      },
+      {
+        "code": "void func_15079F6C(void) {\n    u16 tmp0;\n    u8 tmp1;\n\n    tmp0 = D_800D1890 << 8;\n    tmp1 = D_800D1891;\n    D_800D154C->unk224 = tmp0 | tmp1;\n    D_800D154C->unk22B = D_800D1892;\n    D_800D154C->unk226 = D_800D1893;\n}",
+        "score": 0.9,
+        "reason": "structural_diffs=2",
+        "diffs": [
+          {
+            "line": 5,
+            "type": "structural",
+            "target": "lbu t6, LO(D_800D1891)(v1)",
+            "generated": "lbu v1, LO(D_800D1891)(v1)"
+          },
+          {
+            "line": 8,
+            "type": "structural",
+            "target": "or t8, t7, t6",
+            "generated": "or t8, t7, v1"
+          }
+        ],
+        "timestamp": "2026-08-04T15:55:13.559039+00:00"
+      },
+      {
+        "code": "void func_15079F6C(void) {\n    u16 tmp0;\n    u32 tmp1;\n\n    tmp0 = D_800D1890 << 8;\n    tmp1 = D_800D1891;\n    D_800D154C->unk224 = tmp0 | tmp1;\n    D_800D154C->unk22B = D_800D1892;\n    D_800D154C->unk226 = D_800D1893;\n}",
+        "score": 0.9,
+        "reason": "structural_diffs=2",
+        "diffs": [
+          {
+            "line": 5,
+            "type": "structural",
+            "target": "lbu t6, LO(D_800D1891)(v1)",
+            "generated": "lbu v1, LO(D_800D1891)(v1)"
+          },
+          {
+            "line": 8,
+            "type": "structural",
+            "target": "or t8, t7, t6",
+            "generated": "or t8, t7, v1"
+          }
+        ],
+        "timestamp": "2026-08-04T15:55:29.951138+00:00"
+      },
+      {
+        "code": "void func_15079F6C(void) {\n    u16 tmp0;\n    register u32 tmp1 asm(\"$t6\");\n\n    tmp0 = D_800D1890 << 8;\n    tmp1 = D_800D1891;\n    D_800D154C->unk224 = tmp0 | tmp1;\n    D_800D154C->unk22B = D_800D1892;\n    D_800D154C->unk226 = D_800D1893;\n}",
+        "score": 0.0,
+        "reason": "compile_error",
+        "diffs": [],
+        "timestamp": "2026-08-04T15:55:38.260924+00:00"
       }
     ]
   },
@@ -2114,7 +2682,7 @@
     "instructions": 20,
     "difficulty": "low",
     "tags": [],
-    "attempts": 18,
+    "attempts": 23,
     "lastScore": 0.475,
     "status": "skipped",
     "history": [
@@ -2257,6 +2825,27 @@
         "reason": "length_mismatch (target=20, generated=19)",
         "diffs": [],
         "timestamp": "2026-06-03T10:07:38.996Z"
+      },
+      {
+        "code": "void func_150A7CB0(s32 *arg0, s32 arg1, s32 arg2, s32 arg3) {\n    arg0[0] = arg1;\n    arg0[1] = 0;\n    arg0[2] = 0;\n    arg0[3] = 0;\n    arg0[4] = 0;\n    arg0[5] = arg2;\n    arg0[6] = 0;\n    arg0[7] = 0;\n    arg0[8] = 0;\n    arg0[9] = 0;\n    arg0[10] = arg3;\n    arg0[11] = 0;\n    arg0[12] = 0;\n    arg0[13] = 0;\n    ((f32 *)arg0)[15] = 1.0f;\n    arg0[14] = 0;\n}",
+        "score": 0.475,
+        "reason": "length_mismatch (target=20, generated=19)",
+        "diffs": [],
+        "timestamp": "2026-08-04T15:58:00.313662+00:00"
+      },
+      {
+        "code": "void func_150A7CB0(s32 *arg0, s32 arg1, s32 arg2, s32 arg3) {\n    arg0[0] = arg1;\n    arg0[1] = 0;\n    arg0[2] = 0;\n    arg0[3] = 0;\n    arg0[4] = 0;\n    arg0[5] = arg2;\n    arg0[6] = 0;\n    arg0[7] = 0;\n    arg0[8] = 0;\n    arg0[9] = 0;\n    arg0[10] = arg3;\n    arg0[11] = 0;\n    arg0[12] = 0;\n    arg0[13] = 0;\n    ((f32 *)arg0)[15] = 1.0f;\ndummy_label_123:;\n    arg0[14] = 0;\n}",
+        "score": 0.475,
+        "reason": "length_mismatch (target=20, generated=19)",
+        "diffs": [],
+        "timestamp": "2026-08-04T15:58:17.829847+00:00"
+      },
+      {
+        "code": "void func_150A7CB0(f32 arg0[4][4], s32 arg1, s32 arg2, s32 arg3) {\n    ((s32 *)arg0)[0] = arg1;\n    ((s32 *)arg0)[1] = 0;\n    ((s32 *)arg0)[2] = 0;\n    ((s32 *)arg0)[3] = 0;\n    ((s32 *)arg0)[4] = 0;\n    ((s32 *)arg0)[5] = arg2;\n    ((s32 *)arg0)[6] = 0;\n    ((s32 *)arg0)[7] = 0;\n    ((s32 *)arg0)[8] = 0;\n    ((s32 *)arg0)[9] = 0;\n    ((s32 *)arg0)[10] = arg3;\n    ((s32 *)arg0)[11] = 0;\n    ((s32 *)arg0)[12] = 0;\n    ((s32 *)arg0)[13] = 0;\n    arg0[3][3] = 1.0f;\ndummy_label_123:;\n    ((s32 *)arg0)[14] = 0;\n}",
+        "score": 0.475,
+        "reason": "length_mismatch (target=20, generated=19)",
+        "diffs": [],
+        "timestamp": "2026-08-04T15:58:39.963220+00:00"
       }
     ]
   },
@@ -2267,8 +2856,8 @@
     "instructions": 20,
     "difficulty": "low",
     "tags": [],
-    "attempts": 4,
-    "lastScore": 0.47619047619047616,
+    "attempts": 7,
+    "lastScore": 0.475,
     "status": "skipped",
     "history": [
       {
@@ -2312,6 +2901,13 @@
         "reason": "length_mismatch (target=20, generated=21)",
         "diffs": [],
         "timestamp": "2026-06-03T10:10:28.011Z"
+      },
+      {
+        "code": "void func_150A7DA0(f32 arg0[4][4], s32 arg1, s32 arg2, s32 arg3) {\n    if (0) {};\n    ((s32 *)arg0)[1] = 0;\n    arg0[0][0] = 1.0f;\ndummy_label_418035:;\n    ((s32 *)arg0)[2] = 0;\n    ((s32 *)arg0)[3] = 0;\n    ((s32 *)arg0)[4] = 0;\n    arg0[1][1] = 1.0f;\n    ((s32 *)arg0)[6] = 0;\n    ((s32 *)arg0)[7] = 0;\n    ((s32 *)arg0)[8] = 0;\n    ((s32 *)arg0)[9] = 0;\n    arg0[2][2] = 1.0f;\n    ((s32 *)arg0)[11] = 0;\n    ((s32 *)arg0)[12] = arg1;\n    ((s32 *)arg0)[13] = arg2;\n    ((s32 *)arg0)[14] = arg3;\n    arg0[3][3] = 1.0f;\n}",
+        "score": 0.475,
+        "reason": "length_mismatch (target=20, generated=19)",
+        "diffs": [],
+        "timestamp": "2026-08-04T15:59:55.674012+00:00"
       }
     ]
   },
@@ -2377,9 +2973,9 @@
     "instructions": 21,
     "difficulty": "low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0.2381,
-    "status": "skipped",
+    "attempts": 4,
+    "lastScore": 1.0,
+    "status": "matched",
     "history": [
       {
         "code": "void func_1507A428(void) {\n    D_800D154C->unk94 = ~(((D_800D1890 << 0x18) | (D_800D1891 << 0x10) | (D_800D1892 << 8) | D_800D1893) | 1);\n}\n",
@@ -2428,6 +3024,27 @@
           "structural: target=sw t0, 148(t8) got=sw t6, 148(t8)"
         ],
         "timestamp": "2026-06-02T17:56:13.843Z"
+      },
+      {
+        "code": "void func_1507A428(void) {\n    s32 temp;\n\n    temp = ((D_800D1890 & 0xFF) << 0x18) |\n           ((D_800D1891 & 0xFF) << 0x10) |\n           ((D_800D1892 & 0xFF) << 8) |\n           (D_800D1893 & 0xFF);\n    D_800D154C->unk94 = ~(temp | 1);\n}",
+        "score": 0.9524,
+        "reason": "structural_diffs=1",
+        "diffs": [
+          {
+            "line": 17,
+            "type": "structural",
+            "target": "not t0, t0",
+            "generated": "nor t0, t0, zero"
+          }
+        ],
+        "timestamp": "2026-08-04T15:55:59.047600+00:00"
+      },
+      {
+        "code": "void func_1507A428(void) {\n    s32 temp;\n\n    temp = ((D_800D1890 & 0xFF) << 0x18) |\n           ((D_800D1891 & 0xFF) << 0x10) |\n           ((D_800D1892 & 0xFF) << 8) |\n           (D_800D1893 & 0xFF);\n    D_800D154C->unk94 = ~(temp | 1);\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-04T15:56:37.625877+00:00"
       }
     ]
   },
@@ -2438,9 +3055,9 @@
     "instructions": 21,
     "difficulty": "low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0.2381,
-    "status": "skipped",
+    "attempts": 4,
+    "lastScore": 1.0,
+    "status": "matched",
     "history": [
       {
         "code": "void func_1507A4D4(void) {\n    D_800D154C->unk94 |= (D_800D1890 << 0x18) | (D_800D1891 << 0x10) | (D_800D1892 << 8) | D_800D1893;\n}\n",
@@ -2492,6 +3109,135 @@
           "structural: target=sw t8, 148(v1) got=sw t6, 148(v1)"
         ],
         "timestamp": "2026-06-02T17:56:58.356Z"
+      },
+      {
+        "code": "void func_1507A4D4(void) {\n    D_800D154C->unk94 |= ((D_800D1890 & 0xFF) << 0x18) |\n                          ((D_800D1891 & 0xFF) << 0x10) |\n                          ((D_800D1892 & 0xFF) << 8) |\n                          (D_800D1893 & 0xFF);\n}",
+        "score": 0.0952,
+        "reason": "structural_diffs=19",
+        "diffs": [
+          {
+            "line": 0,
+            "type": "structural",
+            "target": "lui t6, HI(D_800D1890)",
+            "generated": "lui v0, HI(D_800D154C)"
+          },
+          {
+            "line": 1,
+            "type": "structural",
+            "target": "lbu t7, LO(D_800D1890)(t6)",
+            "generated": "lw v0, LO(D_800D154C)(v0)"
+          },
+          {
+            "line": 2,
+            "type": "structural",
+            "target": "lui t9, HI(D_800D1891)",
+            "generated": "lui t7, HI(D_800D1890)"
+          },
+          {
+            "line": 3,
+            "type": "structural",
+            "target": "lbu t0, LO(D_800D1891)(t9)",
+            "generated": "lbu t8, LO(D_800D1890)(t7)"
+          },
+          {
+            "line": 4,
+            "type": "structural",
+            "target": "lui t3, HI(D_800D1892)",
+            "generated": "lw t6, 148(v0)"
+          },
+          {
+            "line": 5,
+            "type": "structural",
+            "target": "lui v1, HI(D_800D154C)",
+            "generated": "lui t1, HI(D_800D1891)"
+          },
+          {
+            "line": 6,
+            "type": "structural",
+            "target": "lbu t4, LO(D_800D1892)(t3)",
+            "generated": "lbu t2, LO(D_800D1891)(t1)"
+          },
+          {
+            "line": 7,
+            "type": "structural",
+            "target": "lw v1, LO(D_800D154C)(v1)",
+            "generated": "lui t5, HI(D_800D1892)"
+          },
+          {
+            "line": 8,
+            "type": "structural",
+            "target": "sll t8, t7, 24",
+            "generated": "sll t9, t8, 24"
+          },
+          {
+            "line": 9,
+            "type": "structural",
+            "target": "lui t7, HI(D_800D1893)",
+            "generated": "lbu t7, LO(D_800D1892)(t5)"
+          },
+          {
+            "line": 10,
+            "type": "structural",
+            "target": "sll t1, t0, 16",
+            "generated": "or t0, t6, t9"
+          },
+          {
+            "line": 11,
+            "type": "structural",
+            "target": "lbu t9, LO(D_800D1893)(t7)",
+            "generated": "lui t9, HI(D_800D1893)"
+          },
+          {
+            "line": 12,
+            "type": "structural",
+            "target": "lw t0, 148(v1)",
+            "generated": "lbu t1, LO(D_800D1893)(t9)"
+          },
+          {
+            "line": 13,
+            "type": "structural",
+            "target": "or t2, t8, t1",
+            "generated": "sll t3, t2, 16"
+          },
+          {
+            "line": 14,
+            "type": "structural",
+            "target": "sll t5, t4, 8",
+            "generated": "or t4, t0, t3"
+          },
+          {
+            "line": 15,
+            "type": "structural",
+            "target": "or t6, t2, t5",
+            "generated": "sll t8, t7, 8"
+          },
+          {
+            "line": 16,
+            "type": "structural",
+            "target": "or v0, t6, t9",
+            "generated": "or t6, t4, t8"
+          },
+          {
+            "line": 17,
+            "type": "structural",
+            "target": "or t8, t0, v0",
+            "generated": "or t2, t6, t1"
+          },
+          {
+            "line": 18,
+            "type": "structural",
+            "target": "sw t8, 148(v1)",
+            "generated": "sw t2, 148(v0)"
+          }
+        ],
+        "timestamp": "2026-08-04T15:57:01.227403+00:00"
+      },
+      {
+        "code": "void func_1507A4D4(void) {\n    s32 temp;\n\n    temp = ((D_800D1890 & 0xFF) << 0x18) |\n           ((D_800D1891 & 0xFF) << 0x10) |\n           ((D_800D1892 & 0xFF) << 8) |\n           (D_800D1893 & 0xFF);\n    D_800D154C->unk94 |= temp;\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-04T15:57:12.697381+00:00"
       }
     ]
   },
@@ -5675,7 +6421,7 @@
         "score": 0.98,
         "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
         "diffs": [
-          "ROM SHA mismatch — likely 1-2 instruction/relocation differences not caught by normalizer"
+          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
         ],
         "timestamp": "2026-06-02T19:00:00.000Z"
       }
@@ -6798,7 +7544,7 @@
         "score": 0.98,
         "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
         "diffs": [
-          "ROM SHA mismatch — likely 1-2 instruction/relocation differences not caught by normalizer"
+          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
         ],
         "timestamp": "2026-06-02T19:00:00.000Z"
       }
@@ -6847,7 +7593,7 @@
         "score": 0.98,
         "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
         "diffs": [
-          "ROM SHA mismatch — likely 1-2 instruction/relocation differences not caught by normalizer"
+          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
         ],
         "timestamp": "2026-06-02T19:00:00.000Z"
       }
@@ -8203,7 +8949,7 @@
         "score": 0.98,
         "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
         "diffs": [
-          "ROM SHA mismatch — likely 1-2 instruction/relocation differences not caught by normalizer"
+          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
         ],
         "timestamp": "2026-06-02T19:00:00.000Z"
       }
@@ -10469,7 +11215,7 @@
         "score": 0.98,
         "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
         "diffs": [
-          "ROM SHA mismatch — likely 1-2 instruction/relocation differences not caught by normalizer"
+          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
         ],
         "timestamp": "2026-06-02T19:00:00.000Z"
       }
@@ -10703,7 +11449,7 @@
         "score": 0.98,
         "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
         "diffs": [
-          "ROM SHA mismatch — likely 1-2 instruction/relocation differences not caught by normalizer"
+          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
         ],
         "timestamp": "2026-06-02T19:00:00.000Z"
       }
@@ -11713,7 +12459,7 @@
         "score": 0.98,
         "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
         "diffs": [
-          "ROM SHA mismatch — likely 1-2 instruction/relocation differences not caught by normalizer"
+          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
         ],
         "timestamp": "2026-06-02T19:00:00.000Z"
       }
@@ -11757,7 +12503,7 @@
         "score": 0.98,
         "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
         "diffs": [
-          "ROM SHA mismatch — likely 1-2 instruction/relocation differences not caught by normalizer"
+          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
         ],
         "timestamp": "2026-06-02T19:00:00.000Z"
       }
@@ -12423,7 +13169,7 @@
         "score": 0.98,
         "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
         "diffs": [
-          "ROM SHA mismatch — likely 1-2 instruction/relocation differences not caught by normalizer"
+          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
         ],
         "timestamp": "2026-06-02T19:00:00.000Z"
       }
@@ -13975,7 +14721,7 @@
         "score": 0.98,
         "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
         "diffs": [
-          "ROM SHA mismatch — likely 1-2 instruction/relocation differences not caught by normalizer"
+          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
         ],
         "timestamp": "2026-06-02T19:00:00.000Z"
       }
@@ -14043,7 +14789,7 @@
         "score": 0.98,
         "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
         "diffs": [
-          "ROM SHA mismatch — likely 1-2 instruction/relocation differences not caught by normalizer"
+          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
         ],
         "timestamp": "2026-06-02T19:00:00.000Z"
       }
@@ -16299,7 +17045,7 @@
         "score": 0.98,
         "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
         "diffs": [
-          "ROM SHA mismatch — likely 1-2 instruction/relocation differences not caught by normalizer"
+          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
         ],
         "timestamp": "2026-06-02T19:00:00.000Z"
       }
@@ -17169,7 +17915,7 @@
         "score": 0.98,
         "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
         "diffs": [
-          "ROM SHA mismatch — likely 1-2 instruction/relocation differences not caught by normalizer"
+          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
         ],
         "timestamp": "2026-06-02T19:00:00.000Z"
       }
@@ -17341,7 +18087,7 @@
         "score": 0.98,
         "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
         "diffs": [
-          "ROM SHA mismatch — likely 1-2 instruction/relocation differences not caught by normalizer"
+          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
         ],
         "timestamp": "2026-06-02T19:00:00.000Z"
       }
@@ -17365,7 +18111,7 @@
         "score": 0.98,
         "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
         "diffs": [
-          "ROM SHA mismatch — likely 1-2 instruction/relocation differences not caught by normalizer"
+          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
         ],
         "timestamp": "2026-06-02T19:00:00.000Z"
       }
@@ -19161,7 +19907,7 @@
         "score": 0.9,
         "reason": "transmuter_best=3",
         "diffs": [
-          "transmuter: initial=3→best=3, iters=0, compiled=0, errors=0, forks=0",
+          "transmuter: initial=3\u2192best=3, iters=0, compiled=0, errors=0, forks=0",
           "config: timeout=60s, maxCompiles=3000, concurrency=4, profile=ido",
           "NOTE: 0 compiled = all mutations hit compile errors. Source may have constructs incompatible with isolated compilation."
         ],
@@ -19532,7 +20278,7 @@
         "score": 0.98,
         "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
         "diffs": [
-          "ROM SHA mismatch — likely 1-2 instruction/relocation differences not caught by normalizer"
+          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
         ],
         "timestamp": "2026-06-02T19:00:00.000Z"
       }
@@ -19785,7 +20531,7 @@
         "score": 0.98,
         "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
         "diffs": [
-          "ROM SHA mismatch — likely 1-2 instruction/relocation differences not caught by normalizer"
+          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
         ],
         "timestamp": "2026-06-02T19:00:00.000Z"
       }
@@ -19880,7 +20626,7 @@
         "score": 0.98,
         "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
         "diffs": [
-          "ROM SHA mismatch — likely 1-2 instruction/relocation differences not caught by normalizer"
+          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
         ],
         "timestamp": "2026-06-02T19:00:00.000Z"
       }
@@ -19923,7 +20669,7 @@
         "score": 0.98,
         "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
         "diffs": [
-          "ROM SHA mismatch — likely 1-2 instruction/relocation differences not caught by normalizer"
+          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
         ],
         "timestamp": "2026-06-02T19:00:00.000Z"
       }
@@ -20179,7 +20925,7 @@
         "score": 0.98,
         "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
         "diffs": [
-          "ROM SHA mismatch — likely 1-2 instruction/relocation differences not caught by normalizer"
+          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
         ],
         "timestamp": "2026-06-02T19:00:00.000Z"
       }
@@ -20395,7 +21141,7 @@
         "score": 0.98,
         "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
         "diffs": [
-          "ROM SHA mismatch — likely 1-2 instruction/relocation differences not caught by normalizer"
+          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
         ],
         "timestamp": "2026-06-02T19:00:00.000Z"
       }
@@ -20433,7 +21179,7 @@
         "score": 0.98,
         "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
         "diffs": [
-          "ROM SHA mismatch — likely 1-2 instruction/relocation differences not caught by normalizer"
+          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
         ],
         "timestamp": "2026-06-02T19:00:00.000Z"
       }
@@ -20605,7 +21351,7 @@
         "score": -0.6666666666666667,
         "reason": "transmuter_best=50",
         "diffs": [
-          "transmuter: initial=50→best=50, iters=0, compiled=0, errors=0, forks=0",
+          "transmuter: initial=50\u2192best=50, iters=0, compiled=0, errors=0, forks=0",
           "fork_rules: delete-stmt, duplicate-assignment, modify-condition, commutative-swap, reorder-stmts, expand-expr, randomize-type, add-mask, remove-cast, cast-expr, xor-zero, self-assignment, temp-for-expr, sameline",
           "last_fork_rule: delete-stmt",
           "config: timeout=60s, maxCompiles=3000, concurrency=4, profile=ido",
@@ -21049,7 +21795,7 @@
         "score": 0.98,
         "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
         "diffs": [
-          "ROM SHA mismatch — likely 1-2 instruction/relocation differences not caught by normalizer"
+          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
         ],
         "timestamp": "2026-06-02T19:00:00.000Z"
       }
@@ -21088,7 +21834,7 @@
         "score": 0.98,
         "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
         "diffs": [
-          "ROM SHA mismatch — likely 1-2 instruction/relocation differences not caught by normalizer"
+          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
         ],
         "timestamp": "2026-06-02T19:00:00.000Z"
       }
@@ -21353,7 +22099,7 @@
         "score": 1,
         "reason": "transmuter_match",
         "diffs": [
-          "transmuter: initial=6→best=6, iters=0, compiled=0, errors=0, forks=0",
+          "transmuter: initial=6\u2192best=6, iters=0, compiled=0, errors=0, forks=0",
           "fork_rules: cast-expr",
           "last_fork_rule: cast-expr",
           "config: timeout=60s, maxCompiles=3000, concurrency=4, profile=ido",
@@ -22674,7 +23420,7 @@
         "score": 0.9,
         "reason": "transmuter_best=3",
         "diffs": [
-          "transmuter: initial=3→best=3, iters=0, compiled=0, errors=0, forks=0",
+          "transmuter: initial=3\u2192best=3, iters=0, compiled=0, errors=0, forks=0",
           "config: timeout=90s, maxCompiles=5000, concurrency=4, profile=ido",
           "NOTE: 0 compiled = all mutations hit compile errors. Source may have constructs incompatible with isolated compilation."
         ],
@@ -23456,7 +24202,7 @@
         "score": -0.30000000000000004,
         "reason": "transmuter_best=39",
         "diffs": [
-          "transmuter: initial=39→best=39, iters=0, compiled=0, errors=0, forks=0",
+          "transmuter: initial=39\u2192best=39, iters=0, compiled=0, errors=0, forks=0",
           "fork_rules: expand-expr, randomize-type, long-chain-assignment, delete-stmt, insert-block, add-mask, comma-expr, float-literal",
           "last_fork_rule: expand-expr",
           "config: timeout=60s, maxCompiles=5000, concurrency=4, profile=ido",
@@ -23525,7 +24271,7 @@
         "score": 0.30000000000000004,
         "reason": "transmuter_best=21",
         "diffs": [
-          "transmuter: initial=32→best=21, iters=3149, compiled=1180, errors=1820, forks=18",
+          "transmuter: initial=32\u2192best=21, iters=3149, compiled=1180, errors=1820, forks=18",
           "fork_rules: expand-expr, temp-for-expr, refer-to-var, reorder-stmts, randomize-type, commutative-swap, delete-stmt, struct-ref-swap",
           "last_fork_rule: expand-expr",
           "config: timeout=120s, maxCompiles=3000, concurrency=7, profile=ido, isolate=true, reduce=false, depth=1"
@@ -23593,7 +24339,7 @@
         "score": -0.2333333333333334,
         "reason": "transmuter_best=37",
         "diffs": [
-          "transmuter: initial=40→best=37, iters=3228, compiled=368, errors=2632, forks=5",
+          "transmuter: initial=40\u2192best=37, iters=3228, compiled=368, errors=2632, forks=5",
           "fork_rules: reorder-stmts, delete-stmt, insert-block",
           "last_fork_rule: reorder-stmts",
           "config: timeout=120s, maxCompiles=3000, concurrency=7, profile=ido, isolate=true, reduce=false, depth=1",
@@ -24273,7 +25019,7 @@
         "score": 0.3666666666666667,
         "reason": "transmuter_best=19",
         "diffs": [
-          "transmuter: initial=19→best=19, iters=0, compiled=0, errors=0, forks=0",
+          "transmuter: initial=19\u2192best=19, iters=0, compiled=0, errors=0, forks=0",
           "fork_rules: cast-expr, modify-condition",
           "last_fork_rule: cast-expr",
           "config: timeout=60s, maxCompiles=3000, concurrency=4, profile=ido",
@@ -30532,7 +31278,7 @@
         "score": 0.8333333333333334,
         "reason": "transmuter_best=5",
         "diffs": [
-          "transmuter: initial=55→best=5, iters=3400, compiled=1609, errors=1391, forks=69",
+          "transmuter: initial=55\u2192best=5, iters=3400, compiled=1609, errors=1391, forks=69",
           "fork_rules: randomize-type, remove-cast, cast-expr, reorder-stmts, expand-expr, add-mask, refer-to-var, insert-block, delete-stmt, pad-var-decl, modify-condition",
           "last_fork_rule: randomize-type",
           "config: timeout=120s, maxCompiles=3000, concurrency=7, profile=ido, isolate=true, reduce=false, depth=1"
@@ -30552,7 +31298,7 @@
         "score": 0.8333333333333334,
         "reason": "transmuter_best=5",
         "diffs": [
-          "transmuter: initial=5→best=5, iters=19239, compiled=1595, errors=1405, forks=0",
+          "transmuter: initial=5\u2192best=5, iters=19239, compiled=1595, errors=1405, forks=0",
           "config: timeout=120s, maxCompiles=3000, concurrency=7, profile=ido, isolate=true, reduce=false, depth=1"
         ],
         "timestamp": "2026-06-12T12:30:11.229Z"
@@ -30615,7 +31361,7 @@
         "score": 0.8333333333333334,
         "reason": "transmuter_best=5",
         "diffs": [
-          "transmuter: initial=5→best=5, iters=5032, compiled=1044, errors=956, forks=0",
+          "transmuter: initial=5\u2192best=5, iters=5032, compiled=1044, errors=956, forks=0",
           "config: timeout=60s, maxCompiles=2000, concurrency=7, profile=ido, isolate=true, reduce=false, depth=1"
         ],
         "timestamp": "2026-06-12T22:03:14.060Z"
@@ -31530,7 +32276,7 @@
         "score": -0.03333333333333344,
         "reason": "transmuter_best=31",
         "diffs": [
-          "transmuter: initial=31→best=31, iters=0, compiled=0, errors=0, forks=0",
+          "transmuter: initial=31\u2192best=31, iters=0, compiled=0, errors=0, forks=0",
           "fork_rules: delete-stmt, randomize-type, reorder-stmts, duplicate-assignment, cast-expr, self-assignment, remove-cast, sameline, insert-block",
           "last_fork_rule: delete-stmt",
           "config: timeout=60s, maxCompiles=5000, concurrency=4, profile=ido",
@@ -33688,7 +34434,7 @@
         "score": -1.2666666666666666,
         "reason": "transmuter_best=68",
         "diffs": [
-          "transmuter: initial=82→best=68, iters=2029, compiled=1610, errors=390, forks=147",
+          "transmuter: initial=82\u2192best=68, iters=2029, compiled=1610, errors=390, forks=147",
           "fork_rules: delete-stmt, add-mask, modify-condition, cast-expr, reorder-stmts, refer-to-var, insert-block, randomize-type, mult-zero, xor-zero",
           "last_fork_rule: delete-stmt",
           "config: timeout=60s, maxCompiles=2000, concurrency=7, profile=ido, isolate=true, reduce=false, depth=1"
@@ -34270,7 +35016,7 @@
         "score": -1.3333333333333335,
         "reason": "transmuter_best=70",
         "diffs": [
-          "transmuter: initial=104→best=70, iters=2007, compiled=1411, errors=589, forks=167",
+          "transmuter: initial=104\u2192best=70, iters=2007, compiled=1411, errors=589, forks=167",
           "fork_rules: refer-to-var, delete-stmt, modify-condition, mult-zero, cast-expr, reorder-stmts, insert-block, randomize-type, temp-for-expr, add-mask, expand-expr, xor-zero",
           "last_fork_rule: refer-to-var",
           "config: timeout=60s, maxCompiles=2000, concurrency=7, profile=ido, isolate=true, reduce=false, depth=1"
@@ -34290,7 +35036,7 @@
         "score": -1.3333333333333335,
         "reason": "transmuter_best=70",
         "diffs": [
-          "transmuter: initial=104→best=70, iters=2023, compiled=1261, errors=739, forks=166",
+          "transmuter: initial=104\u2192best=70, iters=2023, compiled=1261, errors=739, forks=166",
           "fork_rules: delete-stmt, refer-to-var, reorder-stmts, insert-block, modify-condition, randomize-type, expand-expr, add-mask, mult-zero, xor-zero, temp-for-expr",
           "last_fork_rule: delete-stmt",
           "config: timeout=120s, maxCompiles=2000, concurrency=7, profile=ido, isolate=true, reduce=false, depth=1"
@@ -34310,7 +35056,7 @@
         "score": -1.3333333333333335,
         "reason": "transmuter_best=70",
         "diffs": [
-          "transmuter: initial=89→best=70, iters=2088, compiled=1615, errors=385, forks=148",
+          "transmuter: initial=89\u2192best=70, iters=2088, compiled=1615, errors=385, forks=148",
           "fork_rules: reorder-decls, delete-stmt, refer-to-var, randomize-type, reorder-stmts, modify-condition, duplicate-assignment, cast-expr, temp-for-expr, self-assignment, add-mask",
           "last_fork_rule: reorder-decls",
           "config: timeout=60s, maxCompiles=2000, concurrency=7, profile=ido, isolate=true, reduce=false, depth=1"
@@ -37036,7 +37782,7 @@
         "score": 0.19999999999999996,
         "reason": "transmuter_best=24",
         "diffs": [
-          "transmuter: initial=28→best=24, iters=3169, compiled=2087, errors=913, forks=20",
+          "transmuter: initial=28\u2192best=24, iters=3169, compiled=2087, errors=913, forks=20",
           "fork_rules: add-mask, cast-expr, modify-condition, delete-stmt",
           "last_fork_rule: add-mask",
           "config: timeout=120s, maxCompiles=3000, concurrency=7, profile=ido, isolate=true, reduce=false, depth=1"
@@ -37064,7 +37810,7 @@
         "score": 0.19999999999999996,
         "reason": "transmuter_best=24",
         "diffs": [
-          "transmuter: initial=28→best=24, iters=2137, compiled=1486, errors=514, forks=16",
+          "transmuter: initial=28\u2192best=24, iters=2137, compiled=1486, errors=514, forks=16",
           "fork_rules: modify-condition, add-mask, cast-expr",
           "last_fork_rule: modify-condition",
           "config: timeout=120s, maxCompiles=2000, concurrency=7, profile=ido, isolate=true, reduce=false, depth=1"
@@ -37169,7 +37915,7 @@
         "score": -0.7,
         "reason": "transmuter_best=51",
         "diffs": [
-          "transmuter: initial=77→best=51, iters=2163, compiled=1325, errors=675, forks=213",
+          "transmuter: initial=77\u2192best=51, iters=2163, compiled=1325, errors=675, forks=213",
           "fork_rules: modify-condition, delete-stmt, duplicate-assignment, remove-cast, expand-expr, insert-block, randomize-type, refer-to-var, add-mask, cast-expr, temp-for-expr, reorder-stmts",
           "last_fork_rule: modify-condition",
           "config: timeout=60s, maxCompiles=2000, concurrency=7, profile=ido, isolate=true, reduce=false, depth=1"
@@ -37372,7 +38118,7 @@
         "score": 0.033333333333333326,
         "reason": "transmuter_best=29",
         "diffs": [
-          "transmuter: initial=64→best=29, iters=3438, compiled=1800, errors=1200, forks=127",
+          "transmuter: initial=64\u2192best=29, iters=3438, compiled=1800, errors=1200, forks=127",
           "fork_rules: expand-expr, delete-stmt, refer-to-var, xor-zero, reorder-stmts, add-mask, insert-block, randomize-type, temp-for-expr, comma-expr, cast-expr",
           "last_fork_rule: expand-expr",
           "config: timeout=120s, maxCompiles=3000, concurrency=7, profile=ido, isolate=true, reduce=false, depth=1"
@@ -37541,7 +38287,7 @@
         "score": -0.43333333333333335,
         "reason": "transmuter_best=43",
         "diffs": [
-          "transmuter: initial=63→best=43, iters=2012, compiled=1347, errors=653, forks=74",
+          "transmuter: initial=63\u2192best=43, iters=2012, compiled=1347, errors=653, forks=74",
           "fork_rules: delete-stmt, reorder-stmts, modify-condition, remove-cast, cast-expr, add-mask, expand-expr, temp-for-expr, chain-assignment",
           "last_fork_rule: delete-stmt",
           "config: timeout=60s, maxCompiles=2000, concurrency=8, profile=ido, isolate=true, reduce=false, depth=1"
@@ -38721,7 +39467,7 @@
         "score": -3.2,
         "reason": "transmuter_best=126",
         "diffs": [
-          "transmuter: initial=126→best=126, iters=5689301, compiled=0, errors=0, forks=0",
+          "transmuter: initial=126\u2192best=126, iters=5689301, compiled=0, errors=0, forks=0",
           "config: timeout=120s, maxCompiles=3000, concurrency=7, profile=ido, isolate=true, reduce=false, depth=1",
           "NOTE: 0 compiled = no mutations reached a successful compile; possible dedupe, invalid mutation output, or isolation removed mutatable structure.",
           "debug_artifacts: .pi/decomp/transmuter-debug/func_1001F79C/2026-06-12T14-24-25-313Z",
@@ -38734,7 +39480,7 @@
         "score": -3.2,
         "reason": "transmuter_best=126",
         "diffs": [
-          "transmuter: initial=126→best=126, iters=3035568, compiled=0, errors=0, forks=0",
+          "transmuter: initial=126\u2192best=126, iters=3035568, compiled=0, errors=0, forks=0",
           "config: timeout=60s, maxCompiles=2000, concurrency=7, profile=ido, isolate=true, reduce=false, depth=1",
           "NOTE: 0 compiled = no mutations reached a successful compile; possible dedupe, invalid mutation output, or isolation removed mutatable structure.",
           "debug_artifacts: .pi/decomp/transmuter-debug/func_1001F79C/2026-06-12T20-01-56-870Z",
@@ -38755,7 +39501,7 @@
         "score": -3.033333333333333,
         "reason": "transmuter_best=121",
         "diffs": [
-          "transmuter: initial=121→best=121, iters=5998023, compiled=0, errors=0, forks=0",
+          "transmuter: initial=121\u2192best=121, iters=5998023, compiled=0, errors=0, forks=0",
           "config: timeout=120s, maxCompiles=3000, concurrency=7, profile=ido, isolate=true, reduce=false, depth=1",
           "NOTE: 0 compiled = no mutations reached a successful compile; possible dedupe, invalid mutation output, or isolation removed mutatable structure.",
           "debug_artifacts: .pi/decomp/transmuter-debug/func_1001F79C/2026-06-12T21-27-58-890Z",
@@ -38768,7 +39514,7 @@
         "score": -3.033333333333333,
         "reason": "transmuter_best=121",
         "diffs": [
-          "transmuter: initial=121→best=121, iters=2887582, compiled=0, errors=0, forks=0",
+          "transmuter: initial=121\u2192best=121, iters=2887582, compiled=0, errors=0, forks=0",
           "config: timeout=60s, maxCompiles=2000, concurrency=7, profile=ido, isolate=true, reduce=false, depth=1",
           "NOTE: 0 compiled = no mutations reached a successful compile; possible dedupe, invalid mutation output, or isolation removed mutatable structure.",
           "debug_artifacts: .pi/decomp/transmuter-debug/func_1001F79C/2026-06-13T00-35-12-182Z",
@@ -38781,7 +39527,7 @@
         "score": -3.033333333333333,
         "reason": "transmuter_best=121",
         "diffs": [
-          "transmuter: initial=121→best=121, iters=2842369, compiled=0, errors=0, forks=0",
+          "transmuter: initial=121\u2192best=121, iters=2842369, compiled=0, errors=0, forks=0",
           "config: timeout=60s, maxCompiles=2000, concurrency=7, profile=ido, isolate=false, reduce=false, depth=1",
           "NOTE: 0 compiled = no mutations reached a successful compile; possible dedupe, invalid mutation output, or isolation removed mutatable structure.",
           "debug_artifacts: .pi/decomp/transmuter-debug/func_1001F79C/2026-06-13T00-36-36-118Z",
@@ -38970,7 +39716,7 @@
         "score": -0.6333333333333333,
         "reason": "transmuter_best=49",
         "diffs": [
-          "transmuter: initial=55→best=49, iters=22010, compiled=1557, errors=443, forks=4",
+          "transmuter: initial=55\u2192best=49, iters=22010, compiled=1557, errors=443, forks=4",
           "fork_rules: delete-stmt, reorder-stmts",
           "last_fork_rule: delete-stmt",
           "config: timeout=60s, maxCompiles=2000, concurrency=7, profile=ido, isolate=true, reduce=false, depth=1"
@@ -39577,7 +40323,7 @@
         "score": -0.6666666666666667,
         "reason": "transmuter_best=50",
         "diffs": [
-          "transmuter: initial=65→best=50, iters=3008, compiled=1918, errors=1082, forks=161",
+          "transmuter: initial=65\u2192best=50, iters=3008, compiled=1918, errors=1082, forks=161",
           "fork_rules: reorder-decls, refer-to-var, expand-expr, modify-condition, delete-stmt, pad-var-decl, add-mask, temp-for-expr, insert-block, reorder-stmts",
           "last_fork_rule: reorder-decls",
           "config: timeout=120s, maxCompiles=3000, concurrency=7, profile=ido, isolate=true, reduce=false, depth=1"
@@ -41537,7 +42283,7 @@
         "score": -0.2333333333333334,
         "reason": "transmuter_best=37",
         "diffs": [
-          "transmuter: initial=48→best=37, iters=2175, compiled=1314, errors=686, forks=20",
+          "transmuter: initial=48\u2192best=37, iters=2175, compiled=1314, errors=686, forks=20",
           "fork_rules: xor-zero, reorder-stmts, add-mask, insert-block, cast-expr, mult-zero, delete-stmt",
           "last_fork_rule: xor-zero",
           "config: timeout=120s, maxCompiles=2000, concurrency=7, profile=ido, isolate=true, reduce=false, depth=1"
@@ -41557,7 +42303,7 @@
         "score": -0.2333333333333334,
         "reason": "transmuter_best=37",
         "diffs": [
-          "transmuter: initial=48→best=37, iters=3175, compiled=2043, errors=957, forks=33",
+          "transmuter: initial=48\u2192best=37, iters=3175, compiled=2043, errors=957, forks=33",
           "fork_rules: reorder-stmts, xor-zero, delete-stmt, add-mask, insert-block, mult-zero",
           "last_fork_rule: reorder-stmts",
           "config: timeout=120s, maxCompiles=3000, concurrency=7, profile=ido, isolate=true, reduce=false, depth=1"
@@ -41577,7 +42323,7 @@
         "score": -0.33333333333333326,
         "reason": "transmuter_best=40",
         "diffs": [
-          "transmuter: initial=48→best=40, iters=2103, compiled=1435, errors=565, forks=27",
+          "transmuter: initial=48\u2192best=40, iters=2103, compiled=1435, errors=565, forks=27",
           "fork_rules: reorder-stmts, mult-zero, delete-stmt, xor-zero, add-mask, insert-block, refer-to-var",
           "last_fork_rule: reorder-stmts",
           "config: timeout=60s, maxCompiles=2000, concurrency=7, profile=ido, isolate=true, reduce=false, depth=1"

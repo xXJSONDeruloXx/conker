@@ -27,7 +27,7 @@ fi
 GEN=$(docker run --rm --platform linux/amd64 \
   -v "$PWD:/conker" -w /conker \
   conker-build-min-amd64 \
-  bash -lc "mips-linux-gnu-objdump -dr ${OBJ} | sed -n '/<${FUNC}>/,/^$/p' | sed '\$d'")
+  bash -lc "mips-linux-gnu-objdump -dr ${OBJ} | sed -n '/<${FUNC}>:/,/^$/p' | sed '\$d'")
 
 # Run normalizer/scorer
 echo "$GEN" | python3 tools/conker-normalize-asm.py "$TARGET"

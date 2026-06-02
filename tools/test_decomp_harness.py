@@ -123,6 +123,24 @@ class HarnessTests(unittest.TestCase):
         with self.assertRaises(harness.HarnessError):
             harness.parse_diff_output("not json")
 
+    def test_assembler_not_alias_matches_objdump_nor(self) -> None:
+        target = self.root / "target.s"
+        target.write_text(
+            "glabel func_1\n"
+            "    /* 0 0 01004027 */  not $t0, $t0\n"
+        )
+        generated = "00000000 <func_1>:\n"
+        generated += "   0:\t01004027\tnor\tt0,t0,zero\n"
+        normalizer = Path(__file__).with_name("conker-normalize-asm.py")
+        result = subprocess.run(
+            [sys.executable, str(normalizer), str(target)],
+            input=generated,
+            text=True,
+            capture_output=True,
+            check=True,
+        )
+        self.assertTrue(json.loads(result.stdout)["match"])
+
     def test_verify_targets_mounted_repository_root(self) -> None:
         real_run_process = harness.run_process
         calls = []
