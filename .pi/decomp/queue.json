@@ -2776,7 +2776,7 @@
     "instructions": 32,
     "difficulty": "medium-low",
     "tags": [],
-    "attempts": 6,
+    "attempts": 8,
     "lastScore": 0.484375,
     "status": "pending",
     "history": [
@@ -2821,6 +2821,20 @@
         "reason": "length_mismatch (target=32, generated=31)",
         "diffs": [],
         "timestamp": "2026-06-02T23:25:01.038Z"
+      },
+      {
+        "code": "void func_15010600(void) {\n    struct UBYTES4 *temp_v1;\n    struct UBYTES4 *temp_a0;\n    struct UBYTES4 *temp_v0;\n\n    D_800D9921 = 0;\n    D_800D9920 = 0;\n    D_800D9928 = 0;\n    D_800D9938 = 0;\n    D_800D9929 = 0;\n    D_800D9939 = 0;\n\n    temp_v1 = (struct UBYTES4 *) D_800D992A;\n    temp_a0 = (struct UBYTES4 *) D_800D993A;\n    temp_v0 = (struct UBYTES4 *) D_800D9946;\n\n    do {\n        temp_a0++;\n        temp_v1->unk1 = 0;\n        temp_a0[-1].unk1 = 0;\n        temp_v1->unk2 = 0;\n        temp_a0[-1].unk2 = 0;\n        temp_v1->unk3 = 0;\n        temp_a0[-1].unk3 = 0;\n        temp_v1++;\n        temp_v1[-1].unk0 = 0;\n        temp_a0[-1].unk0 = 0;\n    } while (temp_a0 != temp_v0);\n}",
+        "score": 0.21621621621621623,
+        "reason": "length_mismatch (target=32, generated=74)",
+        "diffs": [],
+        "timestamp": "2026-06-02T23:26:17.628Z"
+      },
+      {
+        "code": "void func_15010600(void) {\n    struct UBYTES4 *temp_v1;\n    struct UBYTES4 *temp_a0;\n    struct UBYTES4 *temp_v0;\n\n    D_800D9921 = 0;\n    D_800D9920 = 0;\n    D_800D9928 = 0;\n    D_800D9938 = 0;\n    D_800D9929 = 0;\n    D_800D9939 = 0;\n\n    temp_v1 = (struct UBYTES4 *) D_800D992A;\n    temp_a0 = (struct UBYTES4 *) D_800D993A;\n    temp_v0 = (struct UBYTES4 *) D_800D9946;\nloop:\n    temp_a0++;\n    temp_v1->unk1 = 0;\n    temp_a0[-1].unk1 = 0;\n    temp_v1->unk2 = 0;\n    temp_a0[-1].unk2 = 0;\n    temp_v1->unk3 = 0;\n    temp_a0[-1].unk3 = 0;\n    temp_v1++;\n    temp_v1[-1].unk0 = 0;\n    temp_a0[-1].unk0 = 0;\n    if (temp_a0 != temp_v0) {\n        goto loop;\n    }\n}",
+        "score": 0.484375,
+        "reason": "length_mismatch (target=32, generated=31)",
+        "diffs": [],
+        "timestamp": "2026-06-02T23:26:53.619Z"
       }
     ]
   },
@@ -3833,9 +3847,18 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 0.48484848484848486,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_1507D158(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {\n    func_1509BFB0(3, D_800CC40F[arg0 * sizeof(struct127)] | 0x2000, arg1, arg2, arg3, arg4);\n}",
+        "score": 0.48484848484848486,
+        "reason": "length_mismatch (target=32, generated=33)",
+        "diffs": [],
+        "timestamp": "2026-06-02T23:28:38.875Z"
+      }
+    ]
   },
   {
     "function": "func_151DADA0",
