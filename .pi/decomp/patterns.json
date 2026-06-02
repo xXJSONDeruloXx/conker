@@ -441,5 +441,14 @@
     "example_functions": [
       "func_10010F88"
     ]
+  },
+  {
+    "id": "home-args-via-address-for-register-shaping",
+    "description": "Taking addresses of incoming pointer parameters can force IDO to home them in their argument stack slots, freeing arg registers for target temporaries and enabling stack reloads in delay slots.",
+    "trigger": "Near-matching leaf/callback function preserves an incoming arg in a free argument register (e.g. `move a3,a0`) while target stores/reloads `a0`/`a1` from stack home slots.",
+    "solution": "Use local pointer-to-parameter variables such as `sp18 = &arg0; sp1C = &arg1;` and reference `*sp18`/`*sp1C` at use sites. Then adjust assignment/order and commuted comparisons to match `lbu` register allocation and `beq` operand order.",
+    "example_functions": [
+      "func_151640C0"
+    ]
   }
 ]
