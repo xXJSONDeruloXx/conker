@@ -333,5 +333,14 @@
     "example_functions": [
       "func_1506EE60"
     ]
+  },
+  {
+    "id": "random-float-affine-field-store",
+    "description": "Random float helpers that assign an affine-scaled result to a field can match directly with constants in target order and a final global scale.",
+    "trigger": "Target calls a float RNG helper, multiplies by a float constant, adds another constant, multiplies by a global float, stores to a field, and returns 1.",
+    "solution": "Write `field = ((rng() * A) + B) * GLOBAL; return 1;` with the field at the target offset and the global declared as `extern f32` if needed.",
+    "example_functions": [
+      "func_15137E10"
+    ]
   }
 ]
