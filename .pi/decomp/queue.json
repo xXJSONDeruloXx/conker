@@ -3418,9 +3418,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1,
+    "status": "matched"
   },
   {
     "function": "func_15163504",
@@ -4349,9 +4349,25 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 2,
+    "lastScore": 0.35526315789473684,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_15049260(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8) {\n    func_150AAD98(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);\n}",
+        "score": 0.3148148148148148,
+        "reason": "length_mismatch (target=27, generated=17)",
+        "diffs": [],
+        "timestamp": "2026-06-02T20:46:23.148Z"
+      },
+      {
+        "code": "void func_15049260(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8) {\n    s32 sp0[9];\n    s32 *src;\n    s32 *dst;\n\n    src = &arg0;\n    dst = sp0;\n    do {\n        *dst++ = *src++;\n        *dst++ = *src++;\n        *dst++ = *src++;\n    } while (src != &arg0 + 9);\n    func_150AAD98(sp0[0], sp0[1], sp0[2], sp0[3], sp0[4], sp0[5], sp0[6], sp0[7], sp0[8]);\n}",
+        "score": 0.35526315789473684,
+        "reason": "length_mismatch (target=27, generated=38)",
+        "diffs": [],
+        "timestamp": "2026-06-02T20:47:39.811Z"
+      }
+    ]
   },
   {
     "function": "func_1516441C",

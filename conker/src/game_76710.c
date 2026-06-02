@@ -3,9 +3,13 @@
 #include "functions.h"
 #include "variables.h"
 
+void func_150AAD98(struct179);
+
 
 // wtf?
-#pragma GLOBAL_ASM("asm/nonmatchings/game_76710/func_15049260.s")
+void func_15049260(struct179 arg0) {
+    func_150AAD98(arg0);
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_76710/func_150492CC.s")
 // void func_150492CC(f32 arg0, f32 arg1, f32 arg2) {
