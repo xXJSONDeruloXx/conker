@@ -5142,7 +5142,7 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 12,
+    "attempts": 15,
     "lastScore": 0.484375,
     "status": "pending",
     "history": [
@@ -5271,6 +5271,48 @@
         "reason": "length_mismatch (target=31, generated=32)",
         "diffs": [],
         "timestamp": "2026-06-02T22:31:54.271Z"
+      },
+      {
+        "code": "void func_15168F08(Gfx *arg0, s32 arg1) {\n    s32 i = 0;\n    Gfx *ptr = arg0;\n    s32 temp_a2 = arg1;\n    s32 temp;\n\n    arg1 = *(volatile s8 *)&arg0->words.w0;\n    if (arg1 != -0x21) {\n        do {\n            i++;\n            if ((arg1 == 1) || ((arg1 == -0x24) && (*((u8 *)&ptr->words.w0 + 3) == 0xE))) {\n                temp = ptr->words.w1 & 0xFFFFFF;\n                *(volatile s32 *)&ptr->words.w1 = temp;\n                *(volatile s32 *)&ptr->words.w1 = temp + temp_a2;\n            }\n            ptr = arg0 + i;\n            arg1 = *(s8 *)&ptr->words.w0;\n        } while (arg1 != -0x21);\n    }\n}",
+        "score": 0.4838709677419355,
+        "reason": "length_mismatch (target=31, generated=30)",
+        "diffs": [],
+        "timestamp": "2026-06-02T22:32:33.752Z"
+      },
+      {
+        "code": "void func_15168F08(Gfx *arg0, s32 arg1) {\n    s32 i = 0;\n    Gfx *ptr = arg0;\n    s32 temp_a2 = arg1;\n    s32 end = -0x21;\n    s32 temp;\n\n    arg1 = *(volatile s8 *)&arg0->words.w0;\n    if (arg1 != end) {\n        do {\n            i++;\n            if ((arg1 == 1) || ((arg1 == -0x24) && (*((u8 *)&ptr->words.w0 + 3) == 0xE))) {\n                temp = ptr->words.w1 & 0xFFFFFF;\n                *(volatile s32 *)&ptr->words.w1 = temp;\n                *(volatile s32 *)&ptr->words.w1 = temp + temp_a2;\n            }\n            ptr = arg0 + i;\n            arg1 = *(s8 *)&ptr->words.w0;\n        } while (arg1 != end);\n    }\n}",
+        "score": 0.2581,
+        "reason": "structural_diffs=23",
+        "diffs": [
+          "structural: target=li a3, -33 got=lb a1, 0(a0)",
+          "structural: target=lb t6, 0(a0) got=li at, -33",
+          "structural: target=beq a3, t6, L0 got=beq a1, at, L0",
+          "structural: target=lui t3, 255 got=li a3, -33",
+          "structural: target=lb a1, 0(a0) got=lui t4, 255",
+          "structural: target=ori t3, t3, 65535 got=ori t4, t4, 65535",
+          "structural: target=li t2, 14 got=li t3, 14",
+          "structural: target=li t1, -36 got=li t2, -36",
+          "structural: target=li t0, 1 got=li t1, 1",
+          "structural: target=beq t0, a1, L1 got=beq a1, t1, L1",
+          "structural: target=bnel t1, a1, L2 got=bnel a1, t2, L2",
+          "structural: target=sll t6, v0, 3 got=sll t9, v0, 3",
+          "structural: target=lbu t7, 3(v1) got=lbu t6, 3(v1)",
+          "structural: target=bnel t2, t7, L2 got=bnel t3, t6, L2",
+          "structural: target=sll t6, v0, 3 got=sll t9, v0, 3",
+          "structural: target=lw t8, 4(v1) got=lw t7, 4(v1)",
+          "structural: target=and t9, t8, t3 got=and a1, t7, t4",
+          "structural: target=sw t9, 4(v1) got=sw a1, 4(v1)",
+          "structural: target=addu t5, t9, a2 got=addu t8, a1, a2",
+          "structural: target=sw t5, 4(v1) got=sw t8, 4(v1)"
+        ],
+        "timestamp": "2026-06-02T22:33:02.696Z"
+      },
+      {
+        "code": "void func_15168F08(Gfx *arg0, s32 arg1) {\n    s32 i = 0;\n    Gfx *ptr = arg0;\n    s32 temp_a2;\n    s32 end = -0x21;\n    s32 temp;\n\n    if ((temp_a2 = arg1, *(volatile s8 *)&arg0->words.w0) != end) {\n        arg1 = *(volatile s8 *)&arg0->words.w0;\n        do {\n            i++;\n            if ((arg1 == 1) || ((arg1 == -0x24) && (*((u8 *)&ptr->words.w0 + 3) == 0xE))) {\n                temp = ptr->words.w1 & 0xFFFFFF;\n                *(volatile s32 *)&ptr->words.w1 = temp;\n                *(volatile s32 *)&ptr->words.w1 = temp + temp_a2;\n            }\n            ptr = arg0 + i;\n            arg1 = *(s8 *)&ptr->words.w0;\n        } while (arg1 != end);\n    }\n}",
+        "score": 0.484375,
+        "reason": "length_mismatch (target=31, generated=32)",
+        "diffs": [],
+        "timestamp": "2026-06-02T22:33:36.599Z"
       }
     ]
   },
