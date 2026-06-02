@@ -225,6 +225,15 @@ s32 func_15136A1C(struct102 *arg0) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_161520/func_1513ABB8.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_161520/func_1513B0B8.s")
+void func_1513B0B8(void *arg0, s32 arg1, u8 arg2) {
+    s32 *temp_v0 = (s32 *)((s32)arg0 + 0x170);
+
+    if (arg2 == 0x45) {
+        if (--(*temp_v0) < 0) {
+            *(s32 *)((s32)arg0 + 0x60) |= 0x80;
+        }
+    }
+}
+
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_161520/func_1513B0F8.s")
