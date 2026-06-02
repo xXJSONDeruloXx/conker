@@ -4349,9 +4349,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 2,
-    "lastScore": 0.35526315789473684,
-    "status": "pending",
+    "attempts": 3,
+    "lastScore": 1,
+    "status": "matched",
     "history": [
       {
         "code": "void func_15049260(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8) {\n    func_150AAD98(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);\n}",
@@ -4620,9 +4620,32 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.48214285714285715,
+    "status": "pending",
+    "history": [
+      {
+        "code": "s32 func_151380B4(u8 *arg0, s32 arg1, s32 arg2) {\n    s32 temp_v0 = *(s32 *)(arg0 + 0x1D4);\n\n    if (temp_v0 != 0) {\n        if ((arg0[0x74] & 0xF) != 0xF) {\n            func_15143134(&D_800A3FD8[arg1 << 4], arg2, temp_v0 + 0x300);\n            return 1;\n        }\n    }\n    return 0;\n}",
+        "score": 0.46296296296296297,
+        "reason": "length_mismatch (target=27, generated=25)",
+        "diffs": [],
+        "timestamp": "2026-06-02T20:52:51.522Z"
+      },
+      {
+        "code": "s32 func_151380B4(u8 *arg0, s32 arg1, s32 arg2) {\n    s32 temp_v0;\n    u8 temp_t6;\n\n    temp_v0 = *(s32 *)(arg0 + 0x1D4);\n    if (temp_v0 != 0) {\n        temp_t6 = arg0[0x74];\n    } else {\n        return 0;\n    }\n\n    if ((temp_t6 & 0xF) == 0xF) {\n        return 0;\n    } else {\n        func_15143134(&D_800A3FD8[arg1 << 4], arg2, temp_v0 + 0x300);\n        return 1;\n    }\n}",
+        "score": 0.48214285714285715,
+        "reason": "length_mismatch (target=27, generated=28)",
+        "diffs": [],
+        "timestamp": "2026-06-02T20:53:21.083Z"
+      },
+      {
+        "code": "s32 func_151380B4(u8 *arg0, s32 arg1, s32 arg2) {\n    s32 temp_v0 = *(s32 *)(arg0 + 0x1D4);\n    u8 temp_t6;\n\n    if (temp_v0 != 0) {\n        goto nonzero;\n    }\n    return 0;\n\nnonzero:\n    temp_t6 = arg0[0x74];\n    if ((temp_t6 & 0xF) != 0xF) {\n        goto do_call;\n    }\n    return 0;\n\ndo_call:\n    func_15143134(&D_800A3FD8[arg1 << 4], arg2, temp_v0 + 0x300);\n    return 1;\n}",
+        "score": 0.48214285714285715,
+        "reason": "length_mismatch (target=27, generated=28)",
+        "diffs": [],
+        "timestamp": "2026-06-02T20:53:45.438Z"
+      }
+    ]
   },
   {
     "function": "func_15136A50",
