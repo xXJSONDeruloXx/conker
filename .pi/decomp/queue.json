@@ -461,9 +461,59 @@
     "instructions": 21,
     "difficulty": "low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 2,
+    "lastScore": 0.2381,
+    "status": "skipped",
+    "history": [
+      {
+        "code": "void func_1507A428(void) {\n    D_800D154C->unk94 = ~(((D_800D1890 << 0x18) | (D_800D1891 << 0x10) | (D_800D1892 << 8) | D_800D1893) | 1);\n}\n",
+        "score": 0.2381,
+        "reason": "structural_diffs=16",
+        "diffs": [
+          "structural: target=lbu t7, LO(D_800D1890)(t6) got=lui t8, HI(D_800D1891)",
+          "structural: target=lui t9, HI(D_800D1891) got=lbu t8, LO(D_800D1891)(t8)",
+          "structural: target=lbu t0, LO(D_800D1891)(t9) got=lbu t6, LO(D_800D1890)(t6)",
+          "structural: target=lui t3, HI(D_800D1892) got=lui t1, HI(D_800D1892)",
+          "structural: target=lbu t4, LO(D_800D1892)(t3) got=lbu t1, LO(D_800D1892)(t1)",
+          "structural: target=sll t8, t7, 24 got=lui t4, HI(D_800D1893)",
+          "structural: target=lui t7, HI(D_800D1893) got=lbu t4, LO(D_800D1893)(t4)",
+          "structural: target=sll t1, t0, 16 got=sll t9, t8, 16",
+          "structural: target=lbu t9, LO(D_800D1893)(t7) got=sll t7, t6, 24",
+          "structural: target=or t2, t8, t1 got=or t0, t7, t9",
+          "structural: target=sll t5, t4, 8 got=sll t2, t1, 8",
+          "structural: target=or t6, t2, t5 got=or t3, t0, t2",
+          "structural: target=or v0, t6, t9 got=or t5, t3, t4",
+          "structural: target=ori t0, v0, 1 got=ori t6, t5, 1",
+          "structural: target=not t0, t0 got=nor t6, t6, zero",
+          "structural: target=sw t0, 148(t8) got=sw t6, 148(t8)"
+        ],
+        "timestamp": "2026-06-02T17:55:42.921Z"
+      },
+      {
+        "code": "void func_1507A428(void) {\n    D_800D154C->unk94 = ~(((((D_800D1890 << 0x18) | (D_800D1891 << 0x10)) | (D_800D1892 << 8)) | D_800D1893) | 1);\n}\n",
+        "score": 0.2381,
+        "reason": "structural_diffs=16",
+        "diffs": [
+          "structural: target=lbu t7, LO(D_800D1890)(t6) got=lui t8, HI(D_800D1891)",
+          "structural: target=lui t9, HI(D_800D1891) got=lbu t8, LO(D_800D1891)(t8)",
+          "structural: target=lbu t0, LO(D_800D1891)(t9) got=lbu t6, LO(D_800D1890)(t6)",
+          "structural: target=lui t3, HI(D_800D1892) got=lui t1, HI(D_800D1892)",
+          "structural: target=lbu t4, LO(D_800D1892)(t3) got=lbu t1, LO(D_800D1892)(t1)",
+          "structural: target=sll t8, t7, 24 got=lui t4, HI(D_800D1893)",
+          "structural: target=lui t7, HI(D_800D1893) got=lbu t4, LO(D_800D1893)(t4)",
+          "structural: target=sll t1, t0, 16 got=sll t9, t8, 16",
+          "structural: target=lbu t9, LO(D_800D1893)(t7) got=sll t7, t6, 24",
+          "structural: target=or t2, t8, t1 got=or t0, t7, t9",
+          "structural: target=sll t5, t4, 8 got=sll t2, t1, 8",
+          "structural: target=or t6, t2, t5 got=or t3, t0, t2",
+          "structural: target=or v0, t6, t9 got=or t5, t3, t4",
+          "structural: target=ori t0, v0, 1 got=ori t6, t5, 1",
+          "structural: target=not t0, t0 got=nor t6, t6, zero",
+          "structural: target=sw t0, 148(t8) got=sw t6, 148(t8)"
+        ],
+        "timestamp": "2026-06-02T17:56:13.843Z"
+      }
+    ]
   },
   {
     "function": "func_1507A4D4",
@@ -472,9 +522,62 @@
     "instructions": 21,
     "difficulty": "low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 2,
+    "lastScore": 0.2381,
+    "status": "skipped",
+    "history": [
+      {
+        "code": "void func_1507A4D4(void) {\n    D_800D154C->unk94 |= (D_800D1890 << 0x18) | (D_800D1891 << 0x10) | (D_800D1892 << 8) | D_800D1893;\n}\n",
+        "score": 0.0952,
+        "reason": "structural_diffs=19",
+        "diffs": [
+          "structural: target=lui t6, HI(D_800D1890) got=lui v0, HI(D_800D154C)",
+          "structural: target=lbu t7, LO(D_800D1890)(t6) got=lw v0, LO(D_800D154C)(v0)",
+          "structural: target=lui t9, HI(D_800D1891) got=lui t7, HI(D_800D1890)",
+          "structural: target=lbu t0, LO(D_800D1891)(t9) got=lbu t7, LO(D_800D1890)(t7)",
+          "structural: target=lui t3, HI(D_800D1892) got=lui t0, HI(D_800D1891)",
+          "structural: target=lui v1, HI(D_800D154C) got=lbu t0, LO(D_800D1891)(t0)",
+          "structural: target=lbu t4, LO(D_800D1892)(t3) got=lw t6, 148(v0)",
+          "structural: target=lw v1, LO(D_800D154C)(v1) got=lui t3, HI(D_800D1892)",
+          "structural: target=sll t8, t7, 24 got=lbu t3, LO(D_800D1892)(t3)",
+          "structural: target=lui t7, HI(D_800D1893) got=sll t8, t7, 24",
+          "structural: target=sll t1, t0, 16 got=lui t7, HI(D_800D1893)",
+          "structural: target=lbu t9, LO(D_800D1893)(t7) got=lbu t7, LO(D_800D1893)(t7)",
+          "structural: target=lw t0, 148(v1) got=sll t1, t0, 16",
+          "structural: target=or t2, t8, t1 got=or t9, t6, t8",
+          "structural: target=sll t5, t4, 8 got=or t2, t9, t1",
+          "structural: target=or t6, t2, t5 got=sll t4, t3, 8",
+          "structural: target=or v0, t6, t9 got=or t5, t2, t4",
+          "structural: target=or t8, t0, v0 got=or t6, t5, t7",
+          "structural: target=sw t8, 148(v1) got=sw t6, 148(v0)"
+        ],
+        "timestamp": "2026-06-02T17:56:44.361Z"
+      },
+      {
+        "code": "void func_1507A4D4(void) {\n    s32 temp = (D_800D1890 << 0x18) | (D_800D1891 << 0x10) | (D_800D1892 << 8) | D_800D1893;\n    D_800D154C->unk94 |= temp;\n}\n",
+        "score": 0.2381,
+        "reason": "structural_diffs=16",
+        "diffs": [
+          "structural: target=lbu t7, LO(D_800D1890)(t6) got=lui t8, HI(D_800D1891)",
+          "structural: target=lui t9, HI(D_800D1891) got=lbu t8, LO(D_800D1891)(t8)",
+          "structural: target=lbu t0, LO(D_800D1891)(t9) got=lbu t6, LO(D_800D1890)(t6)",
+          "structural: target=lui t3, HI(D_800D1892) got=lui t1, HI(D_800D1892)",
+          "structural: target=lbu t4, LO(D_800D1892)(t3) got=lbu t1, LO(D_800D1892)(t1)",
+          "structural: target=sll t8, t7, 24 got=lui t4, HI(D_800D1893)",
+          "structural: target=lui t7, HI(D_800D1893) got=lbu t4, LO(D_800D1893)(t4)",
+          "structural: target=sll t1, t0, 16 got=sll t9, t8, 16",
+          "structural: target=lbu t9, LO(D_800D1893)(t7) got=sll t7, t6, 24",
+          "structural: target=lw t0, 148(v1) got=lw t5, 148(v1)",
+          "structural: target=or t2, t8, t1 got=or t0, t7, t9",
+          "structural: target=sll t5, t4, 8 got=sll t2, t1, 8",
+          "structural: target=or t6, t2, t5 got=or t3, t0, t2",
+          "structural: target=or v0, t6, t9 got=or v0, t3, t4",
+          "structural: target=or t8, t0, v0 got=or t6, t5, v0",
+          "structural: target=sw t8, 148(v1) got=sw t6, 148(v1)"
+        ],
+        "timestamp": "2026-06-02T17:56:58.356Z"
+      }
+    ]
   },
   {
     "function": "func_1506EF5C",
@@ -643,9 +746,32 @@
     "instructions": 21,
     "difficulty": "low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.4375,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_1516706C(void) {\n    void (**ptr)(void) = D_8008CB64;\n    void (**end)(void) = D_8008CB70;\n    void (*func)(void) = *ptr;\n\n    do {\n        if (func != NULL) {\n            func();\n            ptr++;\n        } else {\n            ptr++;\n        }\n        if (ptr != end) {\n            func = *ptr;\n        }\n    } while (ptr != end);\n}\n",
+        "score": 0.328125,
+        "reason": "length_mismatch (target=21, generated=32)",
+        "diffs": [],
+        "timestamp": "2026-06-02T17:57:45.276Z"
+      },
+      {
+        "code": "void func_1516706C(void) {\n    void (**ptr)(void);\n    void (*func)(void);\n\n    for (ptr = D_8008CB64; ptr != D_8008CB70; ptr++) {\n        func = *ptr;\n        if (func != NULL) {\n            func();\n        }\n    }\n}\n",
+        "score": 0.4565217391304348,
+        "reason": "length_mismatch (target=21, generated=23)",
+        "diffs": [],
+        "timestamp": "2026-06-02T17:57:56.088Z"
+      },
+      {
+        "code": "void func_1516706C(void) {\n    void (**ptr)(void) = D_8008CB64;\n    void (**end)(void) = D_8008CB70;\n    void (*func)(void) = *ptr;\n\n    while (ptr != end) {\n        if (func != NULL) {\n            func();\n        }\n        ptr++;\n        func = *ptr;\n    }\n}\n",
+        "score": 0.4375,
+        "reason": "length_mismatch (target=21, generated=24)",
+        "diffs": [],
+        "timestamp": "2026-06-02T17:58:20.200Z"
+      }
+    ]
   },
   {
     "function": "func_15168A4C",
@@ -3114,9 +3240,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
+    "attempts": 5,
     "lastScore": 0.475,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "void func_150717E0(s32 arg0) {\n    struct127 *temp_v0;\n    struct {\n        struct127 *unk0;\n        u8 unk4;\n    } sp20;\n    void *sp18;\n\n    temp_v0 = func_15083E90(0x12);\n    sp18 = &sp20;\n    if (temp_v0 != NULL) {\n        sp20.unk0 = temp_v0;\n        sp20.unk4 = temp_v0->unique_id;\n        func_15131D4C((s32)sp18, 0x43);\n        func_151494E0((s32)sp18, 0x43);\n    }\n}\n",
@@ -3138,6 +3264,20 @@
         "reason": "length_mismatch (target=20, generated=19)",
         "diffs": [],
         "timestamp": "2026-06-02T17:53:52.971Z"
+      },
+      {
+        "code": "void func_150717E0(s32 arg0, ...) {\n    struct127 *temp_v0;\n    struct {\n        struct127 *unk0;\n        u8 unk4;\n    } sp20;\n    void *temp_a0;\n\n    temp_v0 = func_15083E90(0x12);\n    temp_a0 = &sp20;\n    if (temp_v0 != NULL) {\n        sp20.unk0 = temp_v0;\n        sp20.unk4 = temp_v0->unique_id;\n        func_15131D4C((s32)temp_a0, 0x43);\n        func_151494E0((s32)temp_a0, 0x43);\n    }\n}\n",
+        "score": 0.45454545454545453,
+        "reason": "length_mismatch (target=20, generated=22)",
+        "diffs": [],
+        "timestamp": "2026-06-02T17:54:09.575Z"
+      },
+      {
+        "code": "void func_150717E0(arg0)\ns32 arg0;\n{\n    struct127 *temp_v0;\n    struct {\n        struct127 *unk0;\n        u8 unk4;\n    } sp20;\n    void *temp_a0;\n\n    temp_v0 = func_15083E90(0x12);\n    temp_a0 = &sp20;\n    if (temp_v0 != NULL) {\n        sp20.unk0 = temp_v0;\n        sp20.unk4 = temp_v0->unique_id;\n        func_15131D4C((s32)temp_a0, 0x43);\n        func_151494E0((s32)temp_a0, 0x43);\n    }\n}\n",
+        "score": 0.475,
+        "reason": "length_mismatch (target=20, generated=19)",
+        "diffs": [],
+        "timestamp": "2026-06-02T17:54:25.514Z"
       }
     ]
   },
