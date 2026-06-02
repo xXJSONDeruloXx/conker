@@ -2,6 +2,9 @@
 #include "functions.h"
 #include "variables.h"
 
+extern u8 D_800A3FD8[];
+void func_15143134(void *, s32, s32);
+
 void func_15145EA4(s32 *, s32 *, s32, s32);
 
 extern f32 D_800A4828;
@@ -214,7 +217,22 @@ s32 func_15137E10(struct259 *arg0) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_161520/func_15137F30.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_161520/func_151380B4.s")
+s32 func_151380B4(u8 *arg0, s32 arg1, s32 arg2) {
+    s32 temp_v0 = *(s32 *)(arg0 + 0x1D4);
+
+    if (temp_v0 != 0) {
+        goto nonzero;
+    }
+    return 0;
+
+nonzero:
+    if ((arg0[0x74] & 0xF) == 0xF) {
+        return 0;
+    }
+
+    func_15143134(&D_800A3FD8[arg1 << 4], arg2, temp_v0 + 0x300);
+    return 1;
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_161520/func_15138120.s")
 

@@ -396,5 +396,14 @@
     "example_functions": [
       "func_151411E4"
     ]
+  },
+  {
+    "id": "by-value-struct-forward-copy-loop",
+    "description": "A wrapper that takes a 0x24-byte struct by value and forwards it to another by-value callee can compile to an incoming-argument-home to outgoing-argument-area copy loop using $at, then reload a0-a3 from sp before the call.",
+    "trigger": "Target stores a0-a3 to sp+frame arg home slots, loops copying 0x24 bytes from sp+frame to sp+0 in 0xC-byte chunks, then loads a0-a3 from sp+0..0xC and calls the callee.",
+    "solution": "Identify an existing struct type whose sizeof matches the copied byte count (here struct179 is 0x24) and write `void wrapper(struct179 arg0) { callee(arg0); }` with the callee prototype taking the same struct by value.",
+    "example_functions": [
+      "func_15049260"
+    ]
   }
 ]

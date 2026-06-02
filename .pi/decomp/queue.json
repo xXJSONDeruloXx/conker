@@ -4620,7 +4620,7 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 6,
+    "attempts": 7,
     "lastScore": 0.48214285714285715,
     "status": "pending",
     "history": [
@@ -4665,6 +4665,13 @@
         "reason": "length_mismatch (target=27, generated=28)",
         "diffs": [],
         "timestamp": "2026-06-02T20:54:57.943Z"
+      },
+      {
+        "code": "s32 func_151380B4(u8 *arg0, s32 arg1, s32 arg2) {\n    s32 temp_v0 = *(s32 *)(arg0 + 0x1D4);\n    u8 *temp_t9;\n\n    if (temp_v0 != 0) {\n        goto nonzero;\n    }\n    return 0;\n\nnonzero:\n    temp_t9 = D_800A3FD8;\n    if ((arg0[0x74] & 0xF) != 0xF) {\n        goto do_call;\n    }\n    return 0;\n\ndo_call:\n    func_15143134(temp_t9 + (arg1 << 4), arg2, temp_v0 + 0x300);\n    return 1;\n}",
+        "score": 0.48214285714285715,
+        "reason": "length_mismatch (target=27, generated=28)",
+        "diffs": [],
+        "timestamp": "2026-06-02T20:55:20.951Z"
       }
     ]
   },
