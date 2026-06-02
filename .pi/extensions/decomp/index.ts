@@ -51,9 +51,7 @@ interface DecompState {
 	totalAsm: number;
 }
 
-const MAX_HISTORY_PER_FUNC = 5;
-const MAX_CODE_IN_HISTORY = 1500; // chars of C code to keep per attempt
-const AUTO_SKIP_AFTER = 5; // auto-skip after this many consecutive failures
+const COMMIT_HISTORY_EVERY = 3; // commit queue.json every N failed attempts to preserve findings
 
 let state: DecompState = {
 	queue: [],
@@ -507,14 +505,13 @@ export default function (pi: ExtensionAPI) {
 						entry.lastScore = 0;
 						if (!entry.history) entry.history = [];
 						entry.history.push({
-							code: params.code.slice(0, MAX_CODE_IN_HISTORY),
+							code: params.code,
 							score: 0,
 							reason: `generated ${scoreData.generated_instructions} instr for ${scoreData.target_instructions} target (${ratio.toFixed(1)}x oversized)`,
 							diffs: [],
 							timestamp: new Date().toISOString(),
 						});
-						if (entry.history.length > MAX_HISTORY_PER_FUNC) entry.history = entry.history.slice(-MAX_HISTORY_PER_FUNC);
-						if (entry.attempts >= AUTO_SKIP_AFTER) entry.status = "skipped";
+
 					}
 					saveQueue(ctx.cwd);
 					return {
@@ -558,21 +555,14 @@ export default function (pi: ExtensionAPI) {
 			if (entry) {
 				if (!entry.history) entry.history = [];
 				entry.history.push({
-					code: params.code.slice(0, MAX_CODE_IN_HISTORY),
+					code: params.code,
 					score: scoreData.score || 0,
 					reason: scoreData.reason || "unknown",
-					diffs: (scoreData.diffs || []).slice(0, 5).map((d: any) => `${d.type}: target=${d.target} got=${d.generated}`),
+					diffs: (scoreData.diffs || []).map((d: any) => `${d.type}: target=${d.target} got=${d.generated}`),
 					timestamp: new Date().toISOString(),
 				});
 				// Keep only last N attempts
-				if (entry.history.length > MAX_HISTORY_PER_FUNC) {
-					entry.history = entry.history.slice(-MAX_HISTORY_PER_FUNC);
-				}
 
-				// Auto-skip after too many failures
-				if (entry.attempts >= AUTO_SKIP_AFTER && entry.status === "pending") {
-					entry.status = "skipped";
-				}
 			}
 
 			// Revert source
@@ -581,15 +571,14 @@ export default function (pi: ExtensionAPI) {
 			latestCtx = ctx;
 			refreshWidget();
 
-			// Commit the queue with history on skip (findings for future work)
-			if (entry?.status === "skipped") {
+			// Periodically commit queue history to repo so findings persist
+			if (entry && entry.attempts > 0 && entry.attempts % COMMIT_HISTORY_EVERY === 0) {
 				await pi.exec("git", ["add", ".pi/decomp/queue.json"]);
-				await pi.exec("git", ["commit", "-m", `chore(decomp): skip ${params.function} after ${entry.attempts} attempts (best: ${entry.lastScore.toFixed(2)})`]);
+				await pi.exec("git", ["commit", "-m", `chore(decomp): save attempt history for ${params.function} (${entry.attempts} attempts, best: ${entry.lastScore.toFixed(2)})`]);
 				await pi.exec("git", ["push"]);
 			}
 
 			// Build response with prior attempt context
-			const autoSkipped = entry?.status === "skipped" ? "\n\n⚠️ AUTO-SKIPPED after 5 failures. Moving to next candidate." : "";
 			const priorHint = (entry?.history?.length ?? 0) > 1
 				? `\n\nPrior attempts (${entry!.history!.length}): scores=[${entry!.history!.map((h: AttemptRecord) => h.score.toFixed(2)).join(", ")}]`
 				: "";
@@ -598,7 +587,7 @@ export default function (pi: ExtensionAPI) {
 				content: [
 					{
 						type: "text",
-						text: `✗ Non-match (reverted). Score: ${scoreData.score}\nReason: ${scoreData.reason}\n\nDiff:\n${diffSummary}${priorHint}${autoSkipped}`,
+						text: `✗ Non-match (reverted). Score: ${scoreData.score}\nReason: ${scoreData.reason}\n\nDiff:\n${diffSummary}${priorHint}`,
 					},
 				],
 				details: scoreData,
