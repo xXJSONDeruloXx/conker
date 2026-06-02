@@ -2204,9 +2204,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 1,
-    "lastScore": 0.4091,
-    "status": "pending",
+    "attempts": 2,
+    "lastScore": 1,
+    "status": "matched",
     "history": [
       {
         "code": "s32 func_16001B34(u8 *arg0, s32 arg1, s32 arg2, s32 arg3) {\n    s32 idx;\n\n    idx = func_16001BB4(func_16001B8C, arg0, arg1, &arg2);\n    if (idx >= 0) {\n        arg0[idx] = 0;\n    }\n    return idx;\n}",
@@ -2442,9 +2442,32 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.4772727272727273,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_100043B4(s32 *arg0, u32 arg1) {\n    OSIntMask mask = osSetIntMask(1);\n    *(arg0 - 1) = (*(arg0 - 1) & 0xFFFFFF) | (arg1 << 24);\n    osSetIntMask(mask);\n}",
+        "score": 0.4772727272727273,
+        "reason": "length_mismatch (target=22, generated=21)",
+        "diffs": [],
+        "timestamp": "2026-06-02T18:22:57.627Z"
+      },
+      {
+        "code": "void func_100043B4(s32 *arg0, u32 arg1) {\n    OSIntMask mask = osSetIntMask(1);\n    arg0[-1] = (arg0[-1] & 0xFFFFFF) | (arg1 << 24);\n    osSetIntMask(mask);\n    (void)(arg0 - 3);\n}",
+        "score": 0.4772727272727273,
+        "reason": "length_mismatch (target=22, generated=21)",
+        "diffs": [],
+        "timestamp": "2026-06-02T18:23:09.031Z"
+      },
+      {
+        "code": "void func_100043B4(s32 *arg0, u32 arg1) {\n    s32 *temp;\n    OSIntMask mask = osSetIntMask(1);\n    arg0[-1] = (arg0[-1] & 0xFFFFFF) | (arg1 << 24);\n    temp = arg0 - 3;\n    osSetIntMask(mask);\n}",
+        "score": 0.4772727272727273,
+        "reason": "length_mismatch (target=22, generated=21)",
+        "diffs": [],
+        "timestamp": "2026-06-02T18:23:25.470Z"
+      }
+    ]
   },
   {
     "function": "func_15079A98",
