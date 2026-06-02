@@ -2809,8 +2809,8 @@
     "instructions": 29,
     "difficulty": "low",
     "tags": [],
-    "attempts": 3,
-    "lastScore": 0.453125,
+    "attempts": 6,
+    "lastScore": 0.3918918918918919,
     "status": "pending",
     "history": [
       {
@@ -2833,6 +2833,27 @@
         "reason": "length_mismatch (target=29, generated=32)",
         "diffs": [],
         "timestamp": "2026-06-02T21:36:37.410Z"
+      },
+      {
+        "code": "void func_100100E0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {\n    s32 var_v0;\n    s32 end;\n\n    var_v0 = (s32)D_80041FE0;\n    if (D_80042760 > 0) {\n        end = var_v0 + (D_80042760 * 0x30);\n        do {\n            if ((arg0 == *(s32 *)(var_v0 + 0x14)) && (arg1 == *(s32 *)(var_v0 + 0x18)) && (arg2 == *(s32 *)(var_v0 + 0x1C))) {\n                *(s32 *)(var_v0 + 0x14) = arg3;\n                *(s32 *)(var_v0 + 0x18) = arg4;\n                *(s32 *)(var_v0 + 0x1C) = arg5;\n            }\n            var_v0 += 0x30;\n        } while ((u32)var_v0 < (u32)end);\n    }\n}",
+        "score": 0.4264705882352941,
+        "reason": "length_mismatch (target=29, generated=34)",
+        "diffs": [],
+        "timestamp": "2026-06-02T21:37:01.905Z"
+      },
+      {
+        "code": "void func_100100E0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {\n    register struct15 *var_v0;\n    register struct15 *end;\n\n    var_v0 = D_80041FE0;\n    if (D_80042760 > 0) {\n        end = &D_80041FE0[D_80042760];\n        do {\n            if ((arg0 == var_v0->unk14) && (arg1 == var_v0->unk18) && (arg2 == var_v0->unk1C)) {\n                var_v0->unk14 = arg3;\n                var_v0->unk18 = arg4;\n                var_v0->unk1C = arg5;\n            }\n            var_v0++;\n        } while (var_v0 < end);\n    }\n}",
+        "score": 0.4264705882352941,
+        "reason": "length_mismatch (target=29, generated=34)",
+        "diffs": [],
+        "timestamp": "2026-06-02T21:37:19.488Z"
+      },
+      {
+        "code": "void func_100100E0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {\n    struct15 *var_v0;\n    s32 temp_v1;\n    s32 temp_t0;\n    struct15 *end;\n\n    var_v0 = D_80041FE0;\n    if (D_80042760 > 0) {\n        end = &D_80041FE0[D_80042760];\n        temp_v1 = arg4;\n        temp_t0 = arg5;\n        do {\n            if ((arg0 == var_v0->unk14) && (arg1 == var_v0->unk18) && (arg2 == var_v0->unk1C)) {\n                var_v0->unk14 = arg3;\n                var_v0->unk18 = temp_v1;\n                var_v0->unk1C = temp_t0;\n            }\n            var_v0++;\n        } while (var_v0 < end);\n    }\n}",
+        "score": 0.3918918918918919,
+        "reason": "length_mismatch (target=29, generated=37)",
+        "diffs": [],
+        "timestamp": "2026-06-02T21:37:43.564Z"
       }
     ]
   },
