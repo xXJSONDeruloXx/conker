@@ -974,9 +974,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 1,
-    "lastScore": 0.2222,
-    "status": "pending",
+    "attempts": 2,
+    "lastScore": 1,
+    "status": "matched",
     "history": [
       {
         "code": "void func_10002088(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {\n    D_80035500 = 0;\n    func_100020D0(func_10002070, 0, arg0, &arg1);\n}\n",
