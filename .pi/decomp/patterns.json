@@ -414,5 +414,14 @@
     "example_functions": [
       "func_151423D8"
     ]
+  },
+  {
+    "id": "mixed-s32-u16-call-arg-reload",
+    "description": "When a parameter is passed unchanged to one callee as s32 but to another callee with a u16 prototype, keep the wrapper parameter as s32. IDO homes it once, uses lw for the s32 call path, and reloads lhu only for the u16 call path.",
+    "trigger": "Target homes $a0 then has both `lw a0, argslot(sp)` before one branch/call and `lhu a0, argslot+2(sp)` before a call to a u16-typed helper.",
+    "solution": "Declare wrapper arg as s32 and rely on the callee prototype/implicit conversion for the u16 call instead of declaring the wrapper arg as u16.",
+    "example_functions": [
+      "func_15060A30"
+    ]
   }
 ]
