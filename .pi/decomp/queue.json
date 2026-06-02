@@ -3573,8 +3573,8 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 18,
-    "lastScore": 0.4814814814814815,
+    "attempts": 21,
+    "lastScore": 0.40384615384615385,
     "status": "pending",
     "history": [
       {
@@ -3702,6 +3702,27 @@
         "reason": "length_mismatch (target=26, generated=27)",
         "diffs": [],
         "timestamp": "2026-06-02T19:54:48.071Z"
+      },
+      {
+        "code": "void func_15168B44(s32 arg0) {\n    s32 temp_v1 = *(s32 *)(arg0 + 0x14);\n    u16 temp_t6 = temp_v1 & 0xFFFF;\n\n    if (temp_t6 == 0) {\n        u8 temp_a2 = *(u8 *)(arg0 + 0x3F);\n        u16 temp_t2 = (temp_v1 >> 16) & 0xFFFF;\n\n        if (temp_t2 < temp_a2) {\n            *(u8 *)(arg0 + 0x3F) = temp_a2 - temp_t2;\n            *(s16 *)(arg0 + 0x38) = 0x1E;\n            return;\n        }\n        *(s16 *)(arg0 + 0x38) = 0;\n        return;\n    }\n\n    {\n        s32 temp_t1;\n        *(s32 *)(arg0 + 0x14) &= 0xFFFF0000;\n        temp_t1 = *(s32 *)(arg0 + 0x14) | ((temp_t6 - 1) & 0xFFFF);\n        *(s16 *)(arg0 + 0x38) = 0x1E;\n        *(s32 *)(arg0 + 0x14) = temp_t1;\n    }\n}",
+        "score": 0.4482758620689655,
+        "reason": "length_mismatch (target=26, generated=29)",
+        "diffs": [],
+        "timestamp": "2026-06-02T19:55:17.011Z"
+      },
+      {
+        "code": "void func_15168B44(s32 arg0) {\n    s32 temp_v1;\n    s32 temp_v0;\n    s16 temp_t8;\n    u16 temp_t6;\n    s32 temp_t1;\n    u8 temp_a2;\n    u16 temp_t2;\n\n    temp_v1 = *(s32 *)(arg0 + 0x14);\n    temp_t8 = 0x1E;\n    temp_t6 = temp_v1 & 0xFFFF;\n    temp_v0 = temp_t6 - 1;\n\n    if (temp_t6 != 0) {\n        *(s32 *)(arg0 + 0x14) &= 0xFFFF0000;\n        temp_t1 = *(s32 *)(arg0 + 0x14) | (temp_v0 & 0xFFFF);\n        *(s16 *)(arg0 + 0x38) = temp_t8;\n        *(s32 *)(arg0 + 0x14) = temp_t1;\n        return;\n    }\n\n    temp_a2 = *(u8 *)(arg0 + 0x3F);\n    temp_v0 = temp_v1 >> 16;\n    temp_t2 = temp_v0 & 0xFFFF;\n\n    if (temp_t2 < temp_a2) {\n        *(u8 *)(arg0 + 0x3F) = temp_a2 - temp_t2;\n        *(s16 *)(arg0 + 0x38) = 0x1E;\n        return;\n    }\n    *(s16 *)(arg0 + 0x38) = 0;\n}",
+        "score": 0.4814814814814815,
+        "reason": "length_mismatch (target=26, generated=27)",
+        "diffs": [],
+        "timestamp": "2026-06-02T19:55:56.622Z"
+      },
+      {
+        "code": "void func_15168B44(s32 arg0) {\n    s32 temp_v1 = *(s32 *)(arg0 + 0x14);\n    u16 temp_t6 = temp_v1 & 0xFFFF;\n\n    if (temp_t6 != 0) {\n        ((Aclearbuff *)(arg0 + 0x14))->dmem = temp_t6 - 1;\n        *(s16 *)(arg0 + 0x38) = 0x1E;\n        return;\n    }\n\n    {\n        u8 temp_a2 = *(u8 *)(arg0 + 0x3F);\n        u16 temp_t2 = (temp_v1 >> 16) & 0xFFFF;\n\n        if (temp_t2 < temp_a2) {\n            *(u8 *)(arg0 + 0x3F) = temp_a2 - temp_t2;\n            *(s16 *)(arg0 + 0x38) = 0x1E;\n            return;\n        }\n        *(s16 *)(arg0 + 0x38) = 0;\n    }\n}",
+        "score": 0.40384615384615385,
+        "reason": "length_mismatch (target=26, generated=21)",
+        "diffs": [],
+        "timestamp": "2026-06-02T19:56:51.132Z"
       }
     ]
   },
