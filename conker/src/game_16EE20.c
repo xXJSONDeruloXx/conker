@@ -103,7 +103,16 @@ void func_151429E0(u8 arg0, u8 *arg1, u8 *arg2, u8 *arg3) {
     *arg2 = ptr[1];
     *arg3 = ptr[2];
 }
-#pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15142A5C.s")
+s32 func_15142A5C(struct127 *arg0) {
+    void *temp_v0 = arg0->unk2D0;
+    s32 ret = 0;
+
+    if (*(s16 *)((s32)temp_v0 + 0x3C) > 0) {
+        return 1;
+    }
+    return ret;
+}
+
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15142A80.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15142AC0.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15142B04.s")
