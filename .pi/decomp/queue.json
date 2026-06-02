@@ -7672,9 +7672,9 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 5,
-    "lastScore": 0.48484848484848486,
-    "status": "pending",
+    "attempts": 6,
+    "lastScore": 1,
+    "status": "matched",
     "history": [
       {
         "code": "int func_150027F8(s8 *arg0) {\n    s32 var_v0;\n    s32 var_v1;\n    s32 temp_a1;\n\n    if (arg0 != NULL) {\n        temp_a1 = arg0[0];\n        var_v0 = 0;\n        var_v1 = 0;\n        if (temp_a1 != -0x21) {\n            do {\n                var_v0++;\n                if ((temp_a1 >> 4) == 1) {\n                    var_v1 += 4;\n                } else if (temp_a1 == 6) {\n                    var_v1 += 2;\n                } else if (temp_a1 == 5) {\n                    var_v1 += 1;\n                }\n                temp_a1 = arg0[var_v0 * 8];\n            } while (temp_a1 != -0x21);\n        }\n        return var_v1;\n    }\n    return 0;\n}",
@@ -8730,9 +8730,32 @@
       "handwritten",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.45714285714285713,
+    "status": "pending",
+    "history": [
+      {
+        "code": "s32 func_150AD9A0(s32 arg0, s32 arg1, s32 arg2) {\n    s32 temp_v0;\n\n    temp_v0 = arg0 >> 31;\n    arg0 = (arg0 ^ temp_v0) - temp_v0;\n    temp_v0 = arg1 >> 31;\n    arg1 = (arg1 ^ temp_v0) - temp_v0;\n    temp_v0 = arg2 >> 31;\n    arg2 = (arg2 ^ temp_v0) - temp_v0;\n\n    if (arg0 < arg1) {\n        arg1 ^= arg0;\n        arg0 ^= arg1;\n        arg1 ^= arg0;\n    }\n    if (arg0 < arg2) {\n        temp_v0 = arg2 ^ arg0;\n        arg0 ^= temp_v0;\n        arg2 = temp_v0 ^ arg0;\n    }\n    if (arg1 < arg2) {\n        arg2 ^= arg1;\n        arg1 ^= arg2;\n        arg2 ^= arg1;\n    }\n    temp_v0 = 0xB;\n    return (((arg1 * temp_v0) >> 5) + (arg2 >> 2)) + arg0;\n}",
+        "score": 0.45714285714285713,
+        "reason": "length_mismatch (target=32, generated=35)",
+        "diffs": [],
+        "timestamp": "2026-06-02T23:35:55.625Z"
+      },
+      {
+        "code": "s32 func_150AD9A0(s32 arg0, s32 arg1, s32 arg2) {\n    s32 temp_v0;\n\n    temp_v0 = arg0 >> 31;\n    arg0 ^= temp_v0;\n    arg0 -= temp_v0;\n    temp_v0 = arg1 >> 31;\n    arg1 ^= temp_v0;\n    arg1 -= temp_v0;\n    temp_v0 = arg2 >> 31;\n    arg2 ^= temp_v0;\n    arg2 -= temp_v0;\n\n    if (arg0 < arg1) {\n        arg1 ^= arg0;\n        arg0 ^= arg1;\n        arg1 ^= arg0;\n    }\n    if (arg0 < arg2) {\n        temp_v0 = arg2 ^ arg0;\n        arg0 ^= temp_v0;\n        arg2 = temp_v0 ^ arg0;\n    }\n    if (arg1 < arg2) {\n        arg2 ^= arg1;\n        arg1 ^= arg2;\n        arg2 ^= arg1;\n    }\n    temp_v0 = 0xB;\n    return ((((u32) (arg1 * temp_v0)) >> 5) + (((u32) arg2) >> 2)) + arg0;\n}",
+        "score": 0.45714285714285713,
+        "reason": "length_mismatch (target=32, generated=35)",
+        "diffs": [],
+        "timestamp": "2026-06-02T23:37:45.973Z"
+      },
+      {
+        "code": "s32 func_150AD9A0(s32 arg0, s32 arg1, s32 arg2) {\n    s32 temp_v0;\n\n    arg0 = (arg0 ^ (arg0 >> 31)) - (arg0 >> 31);\n    arg1 = (arg1 ^ (arg1 >> 31)) - (arg1 >> 31);\n    arg2 = (arg2 ^ (arg2 >> 31)) - (arg2 >> 31);\n\n    if (arg0 < arg1) {\n        arg1 ^= arg0;\n        arg0 ^= arg1;\n        arg1 ^= arg0;\n    }\n    if (arg0 < arg2) {\n        temp_v0 = arg2 ^ arg0;\n        arg0 ^= temp_v0;\n        arg2 = temp_v0 ^ arg0;\n    }\n    if (arg1 < arg2) {\n        arg2 ^= arg1;\n        arg1 ^= arg2;\n        arg2 ^= arg1;\n    }\n    temp_v0 = 0xB;\n    return (((u32)(arg1 * temp_v0)) >> 5) + (((u32)arg2) >> 2) + arg0;\n}",
+        "score": 0.45714285714285713,
+        "reason": "length_mismatch (target=32, generated=35)",
+        "diffs": [],
+        "timestamp": "2026-06-02T23:38:16.346Z"
+      }
+    ]
   },
   {
     "function": "func_1000FD38",
