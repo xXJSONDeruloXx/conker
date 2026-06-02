@@ -62,7 +62,22 @@ void func_150AED4C(struct114 *arg0) {
     arg0->unk36 = arg0->unk34;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_DBA60/func_150AED9C.s")
+s32 func_150AED9C(void *arg0) {
+    void *temp_v0 = *(void **)((s32)arg0 + 0x98);
+    s32 temp_v1 = *(s16 *)((s32)arg0 + 0x1C) << 3;
+    s32 temp_t7;
+
+    if (temp_v1 >= 0x100) {
+        temp_v1 = 0xFF;
+    }
+    temp_t7 = temp_v1 & 0xFF;
+    *(u8 *)((s32)temp_v0 + 0x1B) = temp_v1;
+    if (temp_t7 < 0) {
+        return 0;
+    }
+    return 1;
+}
+
 
 s32 func_150AEDD8(struct202 *arg0) {
     if (arg0->unk1C < 0x20) {
