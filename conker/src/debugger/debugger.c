@@ -301,7 +301,22 @@ void func_16001338(u8 arg0, u8 arg1, u8 arg2) {
 #pragma GLOBAL_ASM("asm/nonmatchings/debugger/debugger/func_160014F0.s")
 
 // splat into framebuffer
-#pragma GLOBAL_ASM("asm/nonmatchings/debugger/debugger/func_1600160C.s")
+int func_1600160C(s32 arg0, s32 arg1) {
+    s32 temp_v0;
+    s32 temp_v1;
+
+    arg1 = D_160038A8;
+    temp_v0 = arg0 & 0xFFE0;
+    temp_v1 = temp_v0;
+    if (arg1 != 0x124) {
+        temp_v1 = (temp_v0 >> 2) + temp_v0;
+    }
+    temp_v1 = (temp_v1 >> 2) * (arg1 << 1);
+    temp_v1 += (arg0 & 0x1F) << 4;
+    temp_v1 += arg1 << 2;
+    temp_v1 += 0x10;
+    return D_8002AAE8[D_16003888] + temp_v1;
+}
 
 // contains delay slot
 #pragma GLOBAL_ASM("asm/nonmatchings/debugger/debugger/func_16001678.s")

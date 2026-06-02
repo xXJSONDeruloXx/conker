@@ -1815,8 +1815,8 @@
     "instructions": 27,
     "difficulty": "low",
     "tags": [],
-    "attempts": 12,
-    "lastScore": 0.5556,
+    "attempts": 14,
+    "lastScore": 0.4815,
     "status": "pending",
     "history": [
       {
@@ -2030,6 +2030,35 @@
           "structural: target=addu v0, t4, v1 got=addu v0, a3, v1"
         ],
         "timestamp": "2026-06-02T20:39:42.299Z"
+      },
+      {
+        "code": "int func_1600160C(s32 arg0, s32 arg1) {\n    s32 temp_v0;\n    s32 temp_v1;\n    s32 temp_t7;\n    s32 temp_t8;\n    s32 temp_t2;\n    s32 temp_t9;\n    s32 temp_t4;\n    s32 temp_t0;\n    s32 temp_t1;\n\n    arg1 = D_160038A8;\n    temp_v0 = arg0 & 0xFFE0;\n    temp_v1 = temp_v0;\n    if (arg1 != 0x124) {\n        temp_v1 = (temp_v0 >> 2) + temp_v0;\n    }\n    temp_t7 = temp_v1 >> 2;\n    temp_t8 = arg1 << 1;\n    temp_v1 = temp_t7 * temp_t8;\n    temp_t2 = *(volatile u8 *)&D_16003888;\n    temp_t9 = arg0 & 0x1F;\n    temp_t4 = *((volatile s32 *)D_8002AAE8 + temp_t2);\n    temp_t0 = temp_t9 << 4;\n    temp_t1 = arg1 << 2;\n    temp_v1 += temp_t0;\n    temp_v1 += temp_t1;\n    temp_v1 += 0x10;\n    return temp_t4 + temp_v1;\n}",
+        "score": 0.48214285714285715,
+        "reason": "length_mismatch (target=27, generated=28)",
+        "diffs": [],
+        "timestamp": "2026-06-02T20:40:30.594Z"
+      },
+      {
+        "code": "int func_1600160C(s32 arg0, s32 arg1) {\n    s32 temp_v0;\n    s32 temp_v1;\n\n    arg1 = D_160038A8;\n    temp_v0 = arg0 & 0xFFE0;\n    temp_v1 = temp_v0;\n    if (arg1 != 0x124) {\n        temp_v1 = (temp_v0 >> 2) + temp_v0;\n    }\n    return D_8002AAE8[D_16003888] + ((((temp_v1 >> 2) * (arg1 << 1)) + ((arg0 & 0x1F) << 4)) + (arg1 << 2) + 0x10);\n}",
+        "score": 0.4815,
+        "reason": "structural_diffs=14",
+        "diffs": [
+          "structural: target=lui t2, HI(D_16003888) got=lui t0, HI(D_16003888)",
+          "structural: target=lbu t2, LO(D_16003888)(t2) got=lbu t0, LO(D_16003888)(t0)",
+          "structural: target=andi t9, a0, 31 got=lui t2, HI(D_8002AAE8)",
+          "structural: target=lui t4, HI(D_8002AAE8) got=andi t4, a0, 31",
+          "structural: target=sll t3, t2, 2 got=sll t1, t0, 2",
+          "structural: target=sll t0, t9, 4 got=addu t2, t2, t1",
+          "structural: target=addu t4, t4, t3 got=lw t2, LO(D_8002AAE8)(t2)",
+          "structural: target=lw t4, LO(D_8002AAE8)(t4) got=sll t5, t4, 4",
+          "structural: target=sll t1, a1, 2 got=sll t7, a1, 2",
+          "structural: target=mflo v1 got=mflo t9",
+          "structural: target=addu v1, v1, t0 got=addu t3, t2, t9",
+          "structural: target=addu v1, v1, t1 got=addu t6, t3, t5",
+          "structural: target=addiu v1, v1, 16 got=addu v0, t6, t7",
+          "structural: target=addu v0, t4, v1 got=addiu v0, v0, 16"
+        ],
+        "timestamp": "2026-06-02T20:40:53.105Z"
       }
     ]
   },
