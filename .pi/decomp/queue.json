@@ -2776,7 +2776,7 @@
     "instructions": 32,
     "difficulty": "medium-low",
     "tags": [],
-    "attempts": 8,
+    "attempts": 9,
     "lastScore": 0.484375,
     "status": "pending",
     "history": [
@@ -2835,6 +2835,13 @@
         "reason": "length_mismatch (target=32, generated=31)",
         "diffs": [],
         "timestamp": "2026-06-02T23:26:53.619Z"
+      },
+      {
+        "code": "void func_15010600(void) {\n    u8 *temp_a0;\n    u8 *temp_v1;\n    s32 i;\n\n    temp_v1 = &D_800D9920;\n    temp_a0 = D_800D9930;\n    for (i = 0; i < 11; i++) {\n        temp_a0[i] = temp_v1[i] = 0;\n    }\n}",
+        "score": 0.484375,
+        "reason": "length_mismatch (target=32, generated=31)",
+        "diffs": [],
+        "timestamp": "2026-06-02T23:40:15.467Z"
       }
     ]
   },
@@ -8732,7 +8739,7 @@
     ],
     "attempts": 3,
     "lastScore": 0.45714285714285713,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "s32 func_150AD9A0(s32 arg0, s32 arg1, s32 arg2) {\n    s32 temp_v0;\n\n    temp_v0 = arg0 >> 31;\n    arg0 = (arg0 ^ temp_v0) - temp_v0;\n    temp_v0 = arg1 >> 31;\n    arg1 = (arg1 ^ temp_v0) - temp_v0;\n    temp_v0 = arg2 >> 31;\n    arg2 = (arg2 ^ temp_v0) - temp_v0;\n\n    if (arg0 < arg1) {\n        arg1 ^= arg0;\n        arg0 ^= arg1;\n        arg1 ^= arg0;\n    }\n    if (arg0 < arg2) {\n        temp_v0 = arg2 ^ arg0;\n        arg0 ^= temp_v0;\n        arg2 = temp_v0 ^ arg0;\n    }\n    if (arg1 < arg2) {\n        arg2 ^= arg1;\n        arg1 ^= arg2;\n        arg2 ^= arg1;\n    }\n    temp_v0 = 0xB;\n    return (((arg1 * temp_v0) >> 5) + (arg2 >> 2)) + arg0;\n}",
