@@ -58,7 +58,16 @@ void func_15167AD8(void *arg0, u8 arg1, s32 arg2) {
 #pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_15167E0C.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_15168118.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_1516865C.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_15168800.s")
+void *func_15168800(void *arg0, u8 arg1, s32 arg2) {
+    void *temp_v0;
+
+    temp_v0 = func_15167A68(0xE, arg2, 0xB8, 1, arg1, 1);
+    if (temp_v0 == NULL) {
+        return NULL;
+    }
+    bcopy(arg0, (void *)((s32)temp_v0 + 0x10), 0xA8);
+    return temp_v0;
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_15168870.s")
 void func_15168A2C(s32 arg0) {
     func_15168B10(arg0, 0);
