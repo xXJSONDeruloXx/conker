@@ -6581,9 +6581,48 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.484375,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_1513532C(struct102 *arg0) {\n    s32 idx = *(u8 *)((s32)arg0 + 0x50);\n    u16 temp_a0;\n\n    if (idx < 0) {\n        idx = 0;\n    }\n    if (idx >= 6) {\n        idx = 0;\n    }\n\n    temp_a0 = *(u16 *)((s32)arg0 + 0x44);\n    if (temp_a0 != 0) {\n        func_100111C8(temp_a0);\n        *(u16 *)((s32)arg0 + 0x44) = 0;\n    }\n    D_80089B70[idx](arg0);\n}",
+        "score": 0.7742,
+        "reason": "structural_diffs=7",
+        "diffs": [
+          "structural: target=bgez v0, L0 got=bgezl v0, L0",
+          "structural: target=b L1 got=move v0, zero",
+          "structural: target=move v0, zero got=slti at, v0, 6",
+          "structural: target=bnezl at, L2 got=bnezl at, L1",
+          "structural: target=beqzl a0, L3 got=beqzl a0, L2",
+          "structural: target=sw v0, 24(sp) got=sw v0, 28(sp)",
+          "structural: target=lw v0, 24(sp) got=lw v0, 28(sp)"
+        ],
+        "timestamp": "2026-06-02T22:41:08.494Z"
+      },
+      {
+        "code": "void func_1513532C(struct102 *arg0) {\n    s32 idx = *(u8 *)((s32)arg0 + 0x50);\n    u16 temp_a0;\n\n    if (idx >= 0) {\n        if (idx >= 6) {\n            idx = 0;\n        }\n    } else {\n        idx = 0;\n    }\n\n    temp_a0 = *(u16 *)((s32)arg0 + 0x44);\n    if (temp_a0 != 0) {\n        func_100111C8(temp_a0);\n        *(u16 *)((s32)arg0 + 0x44) = 0;\n    }\n    D_80089B70[idx](arg0);\n}",
+        "score": 0.7742,
+        "reason": "structural_diffs=7",
+        "diffs": [
+          "structural: target=bgez v0, L0 got=bltz v0, L0",
+          "structural: target=b L1 got=bnezl at, L1",
+          "structural: target=move v0, zero got=lhu a0, 68(a1)",
+          "structural: target=bnezl at, L2 got=b L2",
+          "structural: target=lhu a0, 68(a1) got=move v0, zero",
+          "structural: target=sw v0, 24(sp) got=sw v0, 28(sp)",
+          "structural: target=lw v0, 24(sp) got=lw v0, 28(sp)"
+        ],
+        "timestamp": "2026-06-02T22:41:40.848Z"
+      },
+      {
+        "code": "void func_1513532C(struct102 *arg0) {\n    s32 idx = *(u8 *)((s32)arg0 + 0x50);\n    u16 temp_a0;\n\n    if (idx >= 0) {\n        goto nonnegative;\n    }\n    idx = 0;\n    goto range_done;\nnonnegative:\n    if (idx < 6) {\n        goto range_done;\n    }\n    idx = 0;\nrange_done:\n    temp_a0 = *(u16 *)((s32)arg0 + 0x44);\n    if (temp_a0 != 0) {\n        func_100111C8(temp_a0);\n        *(u16 *)((s32)arg0 + 0x44) = 0;\n    }\n    D_80089B70[idx](arg0);\n}",
+        "score": 0.484375,
+        "reason": "length_mismatch (target=31, generated=32)",
+        "diffs": [],
+        "timestamp": "2026-06-02T22:42:05.023Z"
+      }
+    ]
   },
   {
     "function": "func_151353A8",
