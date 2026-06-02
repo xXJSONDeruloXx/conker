@@ -387,5 +387,14 @@
     "example_functions": [
       "func_1600160C"
     ]
+  },
+  {
+    "id": "volatile-field-condition-reload",
+    "description": "Use a volatile raw field load when the target checks a field, leaves the branch delay empty, then reloads the same field for a call instead of reusing the condition value.",
+    "trigger": "Target has `lw temp, offset(obj); beqz temp, label; nop; lw a0, offset(obj); jal ...` while non-volatile C reuses the first load and moves it into a0 in the branch delay.",
+    "solution": "Cast the raw field access in both the condition and the call argument to `volatile s32 *`, e.g. `if (*(volatile s32 *)(base + off) != 0) helper(*(volatile s32 *)(base + off));`.",
+    "example_functions": [
+      "func_151411E4"
+    ]
   }
 ]

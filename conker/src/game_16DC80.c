@@ -3,6 +3,8 @@
 #include "functions.h"
 #include "variables.h"
 
+extern void (*D_80089FE4[])(struct210 *);
+
 extern s32 D_800DC9F0;
 extern void (*D_80089F9C[])(struct210 *);
 void func_1517E134(s32);
@@ -31,7 +33,16 @@ void func_151411E4(struct210 *arg0) {
     D_80089F9C[*(u8 *)((u8 *) temp_a1 + 0x168)](temp_a1);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_16DC80/func_15141250.s")
+void func_15141250(struct210 *arg0) {
+    struct210 *temp_a1;
+
+    temp_a1 = arg0;
+    if (*(volatile s32 *)((u8 *) temp_a1 + 0x154) != 0) {
+        func_1517E134(*(volatile s32 *)((u8 *) temp_a1 + 0x154));
+    }
+    D_800DC9F0--;
+    D_80089FE4[*(u8 *)((u8 *) temp_a1 + 0x168)](temp_a1);
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16DC80/func_151412BC.s")
 
