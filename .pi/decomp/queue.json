@@ -2776,9 +2776,32 @@
     "instructions": 32,
     "difficulty": "medium-low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.21621621621621623,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_15010600(void) {\n    u8 *temp_v1;\n    u8 *temp_a0;\n    u8 *temp_v0;\n\n    D_800D9921 = 0;\n    D_800D9920 = 0;\n    D_800D9928 = 0;\n    D_800D9938 = 0;\n    D_800D9929 = 0;\n    D_800D9939 = 0;\n\n    temp_v1 = D_800D992A;\n    temp_a0 = D_800D993A;\n    temp_v0 = D_800D993A + 0xC;\n\n    do {\n        temp_a0 += 4;\n        temp_v1[1] = 0;\n        temp_a0[-3] = 0;\n        temp_v1[2] = 0;\n        temp_a0[-2] = 0;\n        temp_v1[3] = 0;\n        temp_a0[-1] = 0;\n        temp_v1 += 4;\n        temp_v1[-4] = 0;\n        temp_a0[-4] = 0;\n    } while (temp_a0 != temp_v0);\n}",
+        "score": 0.2191780821917808,
+        "reason": "length_mismatch (target=32, generated=73)",
+        "diffs": [],
+        "timestamp": "2026-06-02T23:20:41.205Z"
+      },
+      {
+        "code": "void func_15010600(void) {\n    u8 *temp_v1;\n    u8 *temp_a0;\n    u8 *temp_v0;\n\n    D_800D9921 = 0;\n    D_800D9920 = 0;\n    D_800D9928 = 0;\n    D_800D9938 = 0;\n    D_800D9929 = 0;\n    D_800D9939 = 0;\n\n    temp_v1 = D_800D992A;\n    temp_a0 = D_800D993A;\n    temp_v0 = D_800D9946;\n\n    do {\n        temp_a0 += 4;\n        temp_v1[1] = 0;\n        temp_a0[-3] = 0;\n        temp_v1[2] = 0;\n        temp_a0[-2] = 0;\n        temp_v1[3] = 0;\n        temp_a0[-1] = 0;\n        temp_v1 += 4;\n        temp_v1[-4] = 0;\n        temp_a0[-4] = 0;\n    } while (temp_a0 != temp_v0);\n}",
+        "score": 0.21621621621621623,
+        "reason": "length_mismatch (target=32, generated=74)",
+        "diffs": [],
+        "timestamp": "2026-06-02T23:21:14.727Z"
+      },
+      {
+        "code": "void func_15010600(void) {\n    volatile u8 *temp_v1;\n    volatile u8 *temp_a0;\n    volatile u8 *temp_v0;\n\n    D_800D9921 = 0;\n    D_800D9920 = 0;\n    D_800D9928 = 0;\n    D_800D9938 = 0;\n    D_800D9929 = 0;\n    D_800D9939 = 0;\n\n    temp_v1 = D_800D992A;\n    temp_a0 = D_800D993A;\n    temp_v0 = D_800D9946;\n\n    do {\n        temp_a0 += 4;\n        temp_v1[1] = 0;\n        temp_a0[-3] = 0;\n        temp_v1[2] = 0;\n        temp_a0[-2] = 0;\n        temp_v1[3] = 0;\n        temp_a0[-1] = 0;\n        temp_v1 += 4;\n        temp_v1[-4] = 0;\n        temp_a0[-4] = 0;\n    } while (temp_a0 != temp_v0);\n}",
+        "score": 0.21621621621621623,
+        "reason": "length_mismatch (target=32, generated=74)",
+        "diffs": [],
+        "timestamp": "2026-06-02T23:21:51.450Z"
+      }
+    ]
   },
   {
     "function": "guMtxXFMF",
@@ -5142,9 +5165,9 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 48,
-    "lastScore": 0.32978723404255317,
-    "status": "pending",
+    "attempts": 49,
+    "lastScore": 0.484375,
+    "status": "skipped",
     "history": [
       {
         "code": "void func_15168F08(s8 *arg0, s32 arg1) {\n    s32 i = 0;\n    s8 *ptr = arg0;\n\n    if (*ptr != -0x21) {\n        do {\n            i++;\n            if ((*ptr == 1) || ((*ptr == -0x24) && ((u8)ptr[3] == 0xE))) {\n                *(s32 *)(ptr + 4) &= 0xFFFFFF;\n                *(s32 *)(ptr + 4) += arg1;\n            }\n            ptr = arg0 + (i * 8);\n        } while (*ptr != -0x21);\n    }\n}",
@@ -5628,6 +5651,13 @@
         "reason": "length_mismatch (target=31, generated=47)",
         "diffs": [],
         "timestamp": "2026-06-02T23:17:33.493Z"
+      },
+      {
+        "code": "void func_15168F08(s8 *arg0, s32 arg1) {\n    s32 i = 0;\n    s8 *ptr = arg0;\n    s32 temp_a2 = arg1;\n    s32 end = -0x21;\n\n    if (*(volatile s8 *)arg0 != end) {\n        arg1 = *(volatile s8 *)arg0;\n        do {\n            i++;\n            if ((1 == arg1) || ((-0x24 == arg1) && ((u8)ptr[3] == 0xE))) {\n                *(s32 *)(ptr + 4) &= 0x00FFFFFF;\n                *(s32 *)(ptr + 4) += temp_a2;\n            }\n            ptr = (s8 *)((s32)arg0 + (i << 3));\n            arg1 = *ptr;\n        } while (end != arg1);\n    }\n}",
+        "score": 0.484375,
+        "reason": "length_mismatch (target=31, generated=32)",
+        "diffs": [],
+        "timestamp": "2026-06-02T23:18:03.355Z"
       }
     ]
   },
