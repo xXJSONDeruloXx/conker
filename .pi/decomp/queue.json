@@ -5634,7 +5634,7 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 6,
+    "attempts": 9,
     "lastScore": 0.48214285714285715,
     "status": "pending",
     "history": [
@@ -5679,6 +5679,27 @@
         "reason": "length_mismatch (target=28, generated=27)",
         "diffs": [],
         "timestamp": "2026-06-02T21:20:02.935Z"
+      },
+      {
+        "code": "void func_15004CE0(s8 *arg0, s32 arg1) {\n    s32 temp_v0 = 0;\n    s8 *temp_v1 = arg0;\n\n    if (*(volatile s8 *)arg0 != -0x21) {\n        s32 temp_a2 = arg1;\n        arg1 = *arg0;\n        do {\n            if (arg1 == -0x24) {\n                if ((u8)temp_v1[3] == 0xE) {\n                    arg1 = *(u32 *)(temp_v1 + 4);\n                    if ((u32)arg1 < 0x80000000U) {\n                        *(u32 *)(temp_v1 + 4) = arg1 + temp_a2;\n                    }\n                }\n            }\n            temp_v0++;\n            temp_v1 = arg0 + (temp_v0 << 3);\n            arg1 = *temp_v1;\n        } while (arg1 != -0x21);\n    }\n}",
+        "score": 0.48214285714285715,
+        "reason": "length_mismatch (target=28, generated=27)",
+        "diffs": [],
+        "timestamp": "2026-06-02T21:20:30.879Z"
+      },
+      {
+        "code": "void func_15004CE0(s8 *arg0, s32 arg1) {\n    s32 i = 0;\n    s8 *ptr = arg0;\n    u32 temp;\n\n    if (arg0[0] != -0x21) {\n        do {\n            ptr = arg0 + (i << 3);\n            if (ptr[0] == -0x24) {\n                if ((u8)ptr[3] == 0xE) {\n                    temp = *(u32 *)(ptr + 4);\n                    if (temp < 0x80000000U) {\n                        *(u32 *)(ptr + 4) = temp + arg1;\n                    }\n                }\n            }\n            i++;\n        } while (arg0[i << 3] != -0x21);\n    }\n}",
+        "score": 0.48214285714285715,
+        "reason": "length_mismatch (target=28, generated=27)",
+        "diffs": [],
+        "timestamp": "2026-06-02T21:20:50.966Z"
+      },
+      {
+        "code": "void func_15004CE0(s8 *arg0, s32 arg1) {\n    s32 i = 0;\n    s8 *ptr = arg0;\n    u32 temp;\n\n    if (arg0[0] != -0x21) {\n        do {\n            ptr = arg0 + (i << 3);\n            if (ptr[0] == -0x24) {\n                if ((u8)ptr[3] == 0xE) {\n                    temp = *(u32 *)(ptr + 4);\n                    if (temp < 0x80000000U) {\n                        *(u32 *)(ptr + 4) = temp + arg1;\n                    }\n                }\n            }\n            i++;\n        } while (arg0[i << 3] != -0x21);\n    }\n    return;\n}",
+        "score": 0.48214285714285715,
+        "reason": "length_mismatch (target=28, generated=27)",
+        "diffs": [],
+        "timestamp": "2026-06-02T21:21:22.713Z"
       }
     ]
   },
