@@ -3847,9 +3847,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 1,
-    "lastScore": 0.48484848484848486,
-    "status": "pending",
+    "attempts": 2,
+    "lastScore": 1,
+    "status": "matched",
     "history": [
       {
         "code": "void func_1507D158(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {\n    func_1509BFB0(3, D_800CC40F[arg0 * sizeof(struct127)] | 0x2000, arg1, arg2, arg3, arg4);\n}",
@@ -7672,9 +7672,53 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.0625,
+    "status": "pending",
+    "history": [
+      {
+        "code": "int func_150027F8(s8 *arg0) {\n    s32 var_v0;\n    s32 var_v1;\n    s32 temp_a1;\n\n    if (arg0 != NULL) {\n        temp_a1 = arg0[0];\n        var_v0 = 0;\n        var_v1 = 0;\n        if (temp_a1 != -0x21) {\n            do {\n                var_v0++;\n                if ((temp_a1 >> 4) == 1) {\n                    var_v1 += 4;\n                } else if (temp_a1 == 6) {\n                    var_v1 += 2;\n                } else if (temp_a1 == 5) {\n                    var_v1 += 1;\n                }\n                temp_a1 = arg0[var_v0 * 8];\n            } while (temp_a1 != -0x21);\n        }\n        return var_v1;\n    }\n    return 0;\n}",
+        "score": 0.453125,
+        "reason": "length_mismatch (target=32, generated=29)",
+        "diffs": [],
+        "timestamp": "2026-06-02T23:31:08.602Z"
+      },
+      {
+        "code": "int func_150027F8(s32 arg0) {\n    s32 var_v0;\n    s32 var_v1;\n    s32 temp_a1;\n\n    if (arg0 != 0) {\n        temp_a1 = *(s8 *)arg0;\n        var_v0 = 0;\n        var_v1 = 0;\n        if (temp_a1 != -0x21) {\n            do {\n                var_v0++;\n                if ((temp_a1 >> 4) == 1) {\n                    var_v1 += 4;\n                } else if (temp_a1 == 6) {\n                    var_v1 += 2;\n                } else if (temp_a1 == 5) {\n                    var_v1 += 1;\n                }\n                temp_a1 = *(s8 *)(arg0 + (var_v0 << 3));\n            } while (temp_a1 != -0x21);\n        }\n        return var_v1;\n    }\n    return 0;\n}",
+        "score": 0.484375,
+        "reason": "length_mismatch (target=32, generated=31)",
+        "diffs": [],
+        "timestamp": "2026-06-02T23:31:40.059Z"
+      },
+      {
+        "code": "int func_150027F8(s32 arg0, s32 arg1) {\n    s32 var_v0;\n    s32 var_v1;\n\n    if (arg0 != 0) {\n        arg1 = *(s8 *)arg0;\n        var_v0 = 0;\n        var_v1 = 0;\n        if (arg1 != -0x21) {\n            do {\n                var_v0++;\n                if ((arg1 >> 4) == 1) {\n                    var_v1 += 4;\n                } else if (arg1 == 6) {\n                    var_v1 += 2;\n                } else if (arg1 == 5) {\n                    var_v1 += 1;\n                }\n                arg1 = *(s8 *)(arg0 + (var_v0 << 3));\n            } while (arg1 != -0x21);\n        }\n        return var_v1;\n    }\n    return 0;\n}",
+        "score": 0.0625,
+        "reason": "structural_diffs=30",
+        "diffs": [
+          "structural: target=bnezl a0, L0 got=sw a1, 4(sp)",
+          "structural: target=lb a1, 0(a0) got=beqz a0, L0",
+          "structural: target=jr ra got=move v0, zero",
+          "structural: target=move v0, zero got=lb v0, 0(a0)",
+          "structural: target=lb a1, 0(a0) got=li a2, -33",
+          "structural: target=li a2, -33 got=move v1, zero",
+          "structural: target=move v0, zero got=beq v0, a2, L1",
+          "structural: target=beq a1, a2, L1 got=move a1, zero",
+          "structural: target=move v1, zero got=li t1, 5",
+          "structural: target=li t1, 5 got=li t0, 6",
+          "structural: target=li t0, 6 got=li a3, 1",
+          "structural: target=li a3, 1 got=sra t6, v0, 4",
+          "structural: target=sra t6, a1, 4 got=bne a3, t6, L2",
+          "structural: target=bne a3, t6, L2 got=addiu v1, v1, 1",
+          "structural: target=addiu v0, v0, 1 got=b L3",
+          "structural: target=b L3 got=addiu a1, a1, 4",
+          "structural: target=addiu v1, v1, 4 got=bne v0, t0, L4",
+          "structural: target=bne a1, t0, L4 got=nop",
+          "structural: target=nop got=b L3",
+          "structural: target=b L3 got=addiu a1, a1, 2"
+        ],
+        "timestamp": "2026-06-02T23:32:22.816Z"
+      }
+    ]
   },
   {
     "function": "func_15134CEC",
