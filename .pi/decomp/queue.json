@@ -1325,7 +1325,7 @@
     "tags": [],
     "attempts": 6,
     "lastScore": 0.4,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "f32 func_15144B68(f32 arg0) {\n    f32 range = D_800A56A4;\n    f32 val = arg0;\n    \n    if (range < val) {\n        do {\n            val -= range;\n        } while (range < val);\n    }\n    if (val < 0.0f) {\n        do {\n            val += range;\n        } while (val < 0.0f);\n    }\n    return val;\n}",
@@ -1502,9 +1502,25 @@
     "instructions": 24,
     "difficulty": "low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 2,
+    "lastScore": 0.35416666666666663,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_15004A4C(void) {\n    s32 i;\n    \n    for (i = 0; i < D_800DBEF0; i++) {\n        D_800DBEF8[i] = 0;\n        D_800DBEFC[i] = 0;\n    }\n}",
+        "score": 0.33333333333333337,
+        "reason": "length_mismatch (target=24, generated=16)",
+        "diffs": [],
+        "timestamp": "2026-06-02T18:55:25.289Z"
+      },
+      {
+        "code": "void func_15004A4C(void) {\n    s32 i;\n    \n    for (i = 0; i < D_800DBEF0; i++) {\n        ((s32 *)D_800DBEF8)[i] = 0;\n        ((s8 *)D_800DBEFC)[i] = 0;\n    }\n}",
+        "score": 0.35416666666666663,
+        "reason": "length_mismatch (target=24, generated=17)",
+        "diffs": [],
+        "timestamp": "2026-06-02T18:55:38.409Z"
+      }
+    ]
   },
   {
     "function": "func_15134C98",
