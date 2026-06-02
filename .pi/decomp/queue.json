@@ -6472,8 +6472,8 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 9,
-    "lastScore": 0.7333,
+    "attempts": 12,
+    "lastScore": 0.9,
     "status": "pending",
     "history": [
       {
@@ -6567,6 +6567,36 @@
           "structural: target=c.lt.s f0, f4 got=c.lt.s f0, f6"
         ],
         "timestamp": "2026-06-02T22:11:44.822Z"
+      },
+      {
+        "code": "s32 func_1514672C(volatile struct17 *arg0) {\n    if ((D_800A56C4 < fabsf(arg0->unk0)) || (D_800A56C4 < fabsf(arg0->unk8)) || (D_800A56C4 < arg0->unk4) || (arg0->unk4 < D_800A56C8)) {\n        return 0;\n    }\n    return 1;\n}",
+        "score": 0.4838709677419355,
+        "reason": "length_mismatch (target=30, generated=31)",
+        "diffs": [],
+        "timestamp": "2026-06-02T22:12:08.961Z"
+      },
+      {
+        "code": "s32 func_1514672C(struct17 *arg0) {\n    f32 temp_f2 = D_800A56C4;\n    f32 temp_f0 = arg0->unk0;\n\n    if ((temp_f2 < fabsf(temp_f0)) || (temp_f2 < fabsf(arg0->unk8)) || (temp_f2 < arg0->unk4) || (arg0->unk4 < D_800A56C8)) {\n        return 0;\n    }\n    return 1;\n}",
+        "score": 0.8667,
+        "reason": "structural_diffs=4",
+        "diffs": [
+          "structural: target=lui at, HI(D_800A56C4) got=lwc1 f12, 0(a0)",
+          "structural: target=lwc1 f2, LO(D_800A56C4)(at) got=lui at, HI(D_800A56C4)",
+          "structural: target=lwc1 f0, 0(a0) got=lwc1 f2, LO(D_800A56C4)(at)",
+          "structural: target=abs.s f0, f0 got=abs.s f0, f12"
+        ],
+        "timestamp": "2026-06-02T22:12:30.925Z"
+      },
+      {
+        "code": "s32 func_1514672C(struct17 *arg0) {\n    if (((D_800A56C4 + 0.0f) < fabsf(arg0->unk0)) || (D_800A56C4 < fabsf(arg0->unk8)) || (D_800A56C4 < arg0->unk4) || (arg0->unk4 < D_800A56C8)) {\n        return 0;\n    }\n    return 1;\n}",
+        "score": 0.9,
+        "reason": "structural_diffs=3",
+        "diffs": [
+          "structural: target=lui at, HI(D_800A56C4) got=lwc1 f0, 0(a0)",
+          "structural: target=lwc1 f2, LO(D_800A56C4)(at) got=lui at, HI(D_800A56C4)",
+          "structural: target=lwc1 f0, 0(a0) got=lwc1 f2, LO(D_800A56C4)(at)"
+        ],
+        "timestamp": "2026-06-02T22:12:51.859Z"
       }
     ]
   },
