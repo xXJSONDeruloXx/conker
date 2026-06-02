@@ -1586,7 +1586,9 @@ void func_15073C48(void) {
 }
 
 // ???
-#pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_15073C50.s")
+void func_15073C50(void) {
+    D_800D154C->unk224 = (s16)(*(f32 *)((u8 *)D_800CC2E8 + (D_800D154C->unk222 * 0x32C)) + (f32) D_800D1580);
+}
 
 void func_15073CB8(void) {
     struct127 *tmp = func_1505F0AC(0x53);

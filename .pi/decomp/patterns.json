@@ -351,5 +351,14 @@
     "example_functions": [
       "func_15143874"
     ]
+  },
+  {
+    "id": "for-loop-base-address-scheduling",
+    "description": "A for loop can schedule global base address completion before zeroing the loop counter where an equivalent do/while keeps the move-zero before addiu.",
+    "trigger": "Only diff is lui/addiu global base versus loop counter zero initialization order near function entry.",
+    "solution": "Try a for (i = 0; i != limit; i++) loop instead of do/while when the body already matches but entry scheduling has addiu before move zero.",
+    "example_functions": [
+      "func_1000CBF0"
+    ]
   }
 ]
