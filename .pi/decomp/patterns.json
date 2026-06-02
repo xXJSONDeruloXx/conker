@@ -324,5 +324,14 @@
     "example_functions": [
       "func_151444DC"
     ]
+  },
+  {
+    "id": "global-word-split-branch-call",
+    "description": "Loading a global word into a local and naming the low halfword can match branch calls that pass low/high portions to different helpers.",
+    "trigger": "Target loads global word, computes `low = word & 0xFFFF` in branch delay, calls one helper with low/high when nonzero, otherwise another helper.",
+    "solution": "Use `temp = GLOBAL; low = temp & 0xFFFF; if (temp != 0) helper(obj, low, temp >> 16); else other(obj);`.",
+    "example_functions": [
+      "func_1506EE60"
+    ]
   }
 ]
