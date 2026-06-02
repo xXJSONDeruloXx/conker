@@ -6,9 +6,9 @@
     "instructions": 6,
     "difficulty": "trivial",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1,
+    "status": "matched"
   },
   {
     "function": "func_15134CD4",
@@ -17,9 +17,9 @@
     "instructions": 6,
     "difficulty": "trivial",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1,
+    "status": "matched"
   },
   {
     "function": "func_15135658",
@@ -28,9 +28,9 @@
     "instructions": 6,
     "difficulty": "trivial",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1,
+    "status": "matched"
   },
   {
     "function": "func_150ADACC",
@@ -39,9 +39,9 @@
     "instructions": 9,
     "difficulty": "trivial",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 2,
+    "lastScore": 0.375,
+    "status": "skipped"
   },
   {
     "function": "func_100038E0",
@@ -50,9 +50,9 @@
     "instructions": 11,
     "difficulty": "low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 5,
+    "lastScore": 0.1818,
+    "status": "skipped"
   },
   {
     "function": "func_15144A74",
@@ -61,9 +61,9 @@
     "instructions": 13,
     "difficulty": "low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 7,
+    "lastScore": 0.5385,
+    "status": "skipped"
   },
   {
     "function": "func_15144B34",
@@ -72,9 +72,9 @@
     "instructions": 13,
     "difficulty": "low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 1,
+    "status": "matched"
   },
   {
     "function": "func_15142B44",
@@ -83,9 +83,9 @@
     "instructions": 14,
     "difficulty": "low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1,
+    "status": "matched"
   },
   {
     "function": "func_15072DA0",
@@ -94,9 +94,9 @@
     "instructions": 14,
     "difficulty": "low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1,
+    "status": "matched"
   },
   {
     "function": "func_15136A1C",
@@ -105,9 +105,9 @@
     "instructions": 13,
     "difficulty": "low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1,
+    "status": "matched"
   },
   {
     "function": "func_1513F6E8",
@@ -116,9 +116,9 @@
     "instructions": 16,
     "difficulty": "low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1,
+    "status": "matched"
   },
   {
     "function": "func_15142A80",
@@ -127,9 +127,9 @@
     "instructions": 16,
     "difficulty": "low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1,
+    "status": "matched"
   },
   {
     "function": "func_15142B04",
@@ -138,9 +138,9 @@
     "instructions": 16,
     "difficulty": "low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1,
+    "status": "matched"
   },
   {
     "function": "func_151927C0",
@@ -149,9 +149,9 @@
     "instructions": 16,
     "difficulty": "low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 4,
+    "lastScore": 0.46875,
+    "status": "skipped"
   },
   {
     "function": "func_15079A58",
@@ -160,9 +160,9 @@
     "instructions": 16,
     "difficulty": "low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 4,
+    "lastScore": 0.46875,
+    "status": "skipped"
   },
   {
     "function": "func_1507A3E8",
@@ -171,9 +171,9 @@
     "instructions": 16,
     "difficulty": "low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 4,
+    "lastScore": 0.125,
+    "status": "skipped"
   },
   {
     "function": "func_150A7B80",
@@ -182,9 +182,9 @@
     "instructions": 16,
     "difficulty": "low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 2,
+    "lastScore": 0.24242424242424243,
+    "status": "skipped"
   },
   {
     "function": "func_10001420",
@@ -193,9 +193,9 @@
     "instructions": 9,
     "difficulty": "trivial",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 4,
+    "lastScore": 0.007462686567164201,
+    "status": "skipped"
   },
   {
     "function": "func_1506196C",
@@ -204,9 +204,9 @@
     "instructions": 15,
     "difficulty": "low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 7,
+    "lastScore": 0.9333,
+    "status": "skipped"
   },
   {
     "function": "func_15142AC0",
@@ -336,9 +336,9 @@
     "instructions": 9,
     "difficulty": "trivial",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 4,
+    "lastScore": 1,
+    "status": "matched"
   },
   {
     "function": "func_1514143C",
@@ -347,9 +347,9 @@
     "instructions": 15,
     "difficulty": "low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 4,
+    "lastScore": 0.4666666666666667,
+    "status": "skipped"
   },
   {
     "function": "func_15168BAC",
@@ -358,9 +358,9 @@
     "instructions": 14,
     "difficulty": "low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1,
+    "status": "matched"
   },
   {
     "function": "func_15143E24",
@@ -369,9 +369,9 @@
     "instructions": 16,
     "difficulty": "low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 4,
+    "lastScore": 1,
+    "status": "matched"
   },
   {
     "function": "func_1507A100",
@@ -404,9 +404,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1,
+    "status": "matched"
   },
   {
     "function": "func_1513530C",
@@ -417,9 +417,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1,
+    "status": "matched"
   },
   {
     "function": "func_15168A2C",
@@ -430,9 +430,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1,
+    "status": "matched"
   },
   {
     "function": "func_1515D030",
@@ -509,9 +509,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 6,
+    "lastScore": 0.4285714285714286,
+    "status": "skipped"
   },
   {
     "function": "func_15167010",
@@ -531,9 +531,9 @@
     "instructions": 16,
     "difficulty": "low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 5,
+    "lastScore": 1,
+    "status": "matched"
   },
   {
     "function": "func_1000B294",
@@ -599,9 +599,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 4,
+    "lastScore": 0.4666666666666667,
+    "status": "skipped"
   },
   {
     "function": "func_1516962C",
@@ -612,9 +612,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 1,
+    "status": "matched"
   },
   {
     "function": "func_1505EEB0",
@@ -647,9 +647,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1,
+    "status": "matched"
   },
   {
     "function": "func_15004A4C",
@@ -671,9 +671,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 5,
+    "lastScore": 0.4666666666666667,
+    "status": "skipped"
   },
   {
     "function": "func_1513FA2C",
@@ -797,9 +797,9 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 1,
+    "status": "matched"
   },
   {
     "function": "func_150AED9C",
@@ -810,9 +810,9 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 1,
+    "status": "matched"
   },
   {
     "function": "func_150C251C",
@@ -823,9 +823,9 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1,
+    "status": "matched"
   },
   {
     "function": "func_1516434C",
@@ -871,9 +871,9 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 4,
+    "lastScore": 0.4375,
+    "status": "skipped"
   },
   {
     "function": "func_151696DC",
@@ -930,9 +930,9 @@
     "tags": [
       "handwritten"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 5,
+    "lastScore": 0.19047619047619047,
+    "status": "skipped"
   },
   {
     "function": "func_15010600",

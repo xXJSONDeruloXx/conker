@@ -4,55 +4,271 @@
     "description": "Tables accessed with complex index math should be declared as extern u8 TABLE[] and byte-offset computed manually",
     "trigger": "Target uses sll/subu/addu chain for array offset, not simple indexed load",
     "solution": "Declare table as u8[], compute offset as (field1 * stride1) + (field2 * stride2)",
-    "example_functions": ["func_15168A9C", "func_151429E0"]
+    "example_functions": [
+      "func_15168A9C",
+      "func_151429E0"
+    ]
   },
   {
     "id": "u8-arg-stack-reload",
     "description": "When target loads arg from stack with lbu, the parameter should be u8 not s32",
     "trigger": "Target has lbu from stack offset matching an argument position",
     "solution": "Change parameter type to u8",
-    "example_functions": ["func_151429E0"]
+    "example_functions": [
+      "func_151429E0"
+    ]
   },
   {
     "id": "declaration-order-register",
     "description": "IDO allocates registers in declaration order. Reordering locals swaps register assignments",
     "trigger": "Generated asm has correct instructions but swapped register numbers",
     "solution": "Reorder local variable declarations to match target register numbering",
-    "example_functions": ["func_151696DC", "func_15143E64"]
+    "example_functions": [
+      "func_151696DC",
+      "func_15143E64"
+    ]
   },
   {
     "id": "fpr-naming-order",
     "description": "Naming float locals explicitly steers FPR allocation to match target load order",
     "trigger": "Float expression produces correct result but FP registers differ from target",
     "solution": "Name float locals matching their FPR (temp_f2, temp_f12, temp_f14) in target load order",
-    "example_functions": ["func_15143E64"]
+    "example_functions": [
+      "func_15143E64"
+    ]
   },
   {
     "id": "pointer-do-while-strlen",
     "description": "Pointer-based do/while produces tighter loop matching for string/byte iterations",
     "trigger": "Target uses pointer increment + branch-likely for byte loop",
     "solution": "Use explicit pointer variable with do { ptr++; } while (*ptr != 0) instead of index",
-    "example_functions": ["func_16001B00"]
+    "example_functions": [
+      "func_16001B00"
+    ]
   },
   {
     "id": "branch-chain-if-return",
     "description": "Cascading if/return chains match IDO's branch layout for switch-like functions",
     "trigger": "Target has sequential bne/beqz with jr $ra in delay slots",
     "solution": "Use if (arg == N) { *out1 = X; *out2 = Y; return; } pattern",
-    "example_functions": ["func_15168F84"]
+    "example_functions": [
+      "func_15168F84"
+    ]
   },
   {
     "id": "conditional-assign-branch-likely",
     "description": "Assignment in if-condition can produce beql/bnel that matches branch-likely targets",
     "trigger": "Target uses branch-likely (beql/bnel) with store in delay slot",
     "solution": "Use (temp = *src) != NULL pattern or assignment-in-condition",
-    "example_functions": ["func_15168A9C"]
+    "example_functions": [
+      "func_15168A9C"
+    ]
   },
   {
     "id": "implicit-arg-passthrough",
     "description": "Callers that don't explicitly pass $a0 rely on it surviving into the callee",
     "trigger": "Callers call func() with no args but the callee clearly uses $a0",
     "solution": "Declare the parameter in the callee signature; callers keep $a0 from context",
-    "example_functions": ["func_151696DC"]
+    "example_functions": [
+      "func_151696DC"
+    ]
+  },
+  {
+    "id": "empty-float-arg-homing",
+    "description": "Empty IDO functions with float arguments can still home f12/f14 and integer args to stack before returning.",
+    "trigger": "Target body only stores $f12/$f14 and $a2/$a3 to stack then jr ra.",
+    "solution": "Use an empty function with signature f32, f32, s32, s32 so IDO emits argument homing stores.",
+    "example_functions": [
+      "func_151348F0"
+    ]
+  },
+  {
+    "id": "empty-float-arg-homing",
+    "description": "Empty IDO functions with float arguments can still home f12/f14 and integer args to stack before returning.",
+    "trigger": "Target body only stores $f12/$f14 and $a2/$a3 to stack then jr ra.",
+    "solution": "Use an empty function with signature f32, f32, s32, s32 so IDO emits argument homing stores.",
+    "example_functions": [
+      "func_15134CD4"
+    ]
+  },
+  {
+    "id": "simple-float-field-return-one",
+    "description": "Small setters that write a float constant and return 1 compile directly when using the correct struct field offset.",
+    "trigger": "Target loads 1.0f, stores to offset 0x74($a0), loads v0=1, returns.",
+    "solution": "Use a typed struct with f32 field at offset 0x74, assign 1.0f, then return 1.",
+    "example_functions": [
+      "func_15135658"
+    ]
+  },
+  {
+    "id": "void-wrapper-single-call",
+    "description": "Simple void wrappers compile to a small stack frame, jal, and return.",
+    "trigger": "Target only saves ra, calls one function with original a0, restores ra, returns.",
+    "solution": "Use a void function taking the same argument type and directly call the target helper.",
+    "example_functions": [
+      "func_151352EC"
+    ]
+  },
+  {
+    "id": "void-wrapper-single-call",
+    "description": "Simple void wrappers compile to a small stack frame, jal, and return.",
+    "trigger": "Target only saves ra, calls one function with original a0, restores ra, returns.",
+    "solution": "Use a void function taking the same argument type and directly call the target helper.",
+    "example_functions": [
+      "func_1513530C"
+    ]
+  },
+  {
+    "id": "wrapper-call-with-zero-arg-delay-slot",
+    "description": "Wrappers passing a constant zero as a later argument often schedule the zeroing instruction in the jal delay slot.",
+    "trigger": "Target saves ra, calls helper, and has `or $a1, $zero, $zero` in the jal delay slot.",
+    "solution": "Declare the callee prototype before the wrapper and call `helper(arg0, 0)`.",
+    "example_functions": [
+      "func_15168A2C"
+    ]
+  },
+  {
+    "id": "pointer-field-halfword-predicate",
+    "description": "For tiny predicates, keep only the pointer and return-value locals; naming the loaded halfword can shift it into v1 instead of t6.",
+    "trigger": "Target loads a pointer field, sets v0=0, branches on `lh` from pointer+offset, and returns 1 if positive.",
+    "solution": "Load the pointer into a local, initialize `ret = 0`, and use the halfword load directly in the `if` condition.",
+    "example_functions": [
+      "func_15142A5C"
+    ]
+  },
+  {
+    "id": "offset-first-pointer-addition",
+    "description": "For byte-offset helper expressions, putting scaled index before the base pointer can preserve target register allocation and addition order.",
+    "trigger": "Target computes scaled index in t6, loads global base into t7, then `addu v0, t6, t7`.",
+    "solution": "Write return expression as `(index * stride) + (s32)GLOBAL + field_offset`, not `(s32)GLOBAL + (index * stride) + field_offset`.",
+    "example_functions": [
+      "func_15144B34"
+    ]
+  },
+  {
+    "id": "always-return-one-conditional-byte-clamp",
+    "description": "Functions that conditionally update a byte field but always return 1 can match branch-likely exits when written with nested conditions and a final return.",
+    "trigger": "Target has two `beql` branches whose delay slot sets `v0=1`, optional byte store, and final return 1.",
+    "solution": "Use nested `if` conditions for the optional store and a single final `return 1`; keep the shifted intermediate named.",
+    "example_functions": [
+      "func_15136A1C"
+    ]
+  },
+  {
+    "id": "float-polynomial-with-global-scale",
+    "description": "Simple float polynomial expressions can match directly when preserving operation grouping and global scale last.",
+    "trigger": "Target computes `(x + 1.0f) * (x - 1.0f) * x * global_float`.",
+    "solution": "Write `((arg0 + 1.0f) * (arg0 - 1.0f) * arg0) * GLOBAL` with the global declared as `extern f32`.",
+    "example_functions": [
+      "func_15142B44"
+    ]
+  },
+  {
+    "id": "two-statement-halfword-mask-or-global",
+    "description": "Separate mask and OR assignments to a halfword field can force IDO to reload the global pointer between stores.",
+    "trigger": "Target loads global pointer, masks `lhu` field with immediate, stores, reloads pointer, ORs with global value, stores again.",
+    "solution": "Write two separate compound assignments: `ptr->field &= mask; ptr->field |= GLOBAL;`.",
+    "example_functions": [
+      "func_15072DA0"
+    ]
+  },
+  {
+    "id": "u8-indexed-function-pointer-dispatch",
+    "description": "Raw byte fields can be used as nonzero indices into function pointer tables; keeping the byte local yields the branch and scaled table call shape.",
+    "trigger": "Target `lbu`s a byte field, branches if zero, scales by 4, loads function pointer table entry, and `jalr`s it.",
+    "solution": "Load the byte with a raw `u8` pointer cast, check nonzero, and call `TABLE[index](arg0)` with an extern function pointer array.",
+    "example_functions": [
+      "func_15168BAC"
+    ]
+  },
+  {
+    "id": "stack-payload-local-struct-wrapper",
+    "description": "Small wrappers that build a pointer/id payload on stack often match better with an anonymous local struct than raw array/byte casts.",
+    "trigger": "Target stores pointer at stack+0x18, stores byte id at stack+0x1C in the jal delay slot, and passes stack+0x18 to callee.",
+    "solution": "Use a local struct `{ s32 unk0; u8 unk4; }`, assign fields, and pass `&local` cast as required by existing prototype.",
+    "example_functions": [
+      "func_1516962C"
+    ]
+  },
+  {
+    "id": "u8-field-increment-clamp-branch-delay",
+    "description": "For byte field increment/clamp helpers, compound assignment can preserve the branch-delay sum and double-store shape.",
+    "trigger": "Target loads u8 field, early-returns if sentinel, computes field+arg in branch delay, stores byte, clamps to max sentinel, returns 1.",
+    "solution": "Write `if (field == sentinel) return 0; field += arg; if (field >= limit) field = sentinel; return 1;` using the struct u8 field directly.",
+    "example_functions": [
+      "func_15060BA4"
+    ]
+  },
+  {
+    "id": "impossible-signed-byte-mask-branch",
+    "description": "IDO may preserve an apparently impossible signed branch after masking with 0xFF when written as a negative check on the masked local.",
+    "trigger": "Target shifts a halfword, clamps to 0xFF, stores low byte, then `andi` followed by `bgez` to return 1 with a return-0 alternative.",
+    "solution": "Load pointer before shifted value for v0/v1 allocation, assign `masked = value & 0xFF`, store byte, then write `if (masked < 0) return 0; return 1;`.",
+    "example_functions": [
+      "func_150AED9C"
+    ]
+  },
+  {
+    "id": "impossible-signed-byte-mask-branch",
+    "description": "IDO may preserve an apparently impossible signed branch after masking with 0xFF when written as a negative check on the masked local.",
+    "trigger": "Target shifts a halfword, clamps to 0xFF, stores low byte, then `andi` followed by `bgez` to return 1 with a return-0 alternative.",
+    "solution": "Load pointer before shifted value for v0/v1 allocation, assign `masked = value & 0xFF`, store byte, then write `if (masked < 0) return 0; return 1;`.",
+    "example_functions": [
+      "func_150C251C"
+    ]
+  },
+  {
+    "id": "float-field-compound-update-reloads-global",
+    "description": "Two compound float field updates using the same scale can force IDO to reload a global float between stores.",
+    "trigger": "Target loads a float field once, updates two fields by `value * global`, returns 1, and reloads the global for the second update.",
+    "solution": "Load the shared field into a local and write two separate compound `+= local * GLOBAL` assignments using raw field offsets if struct is incomplete.",
+    "example_functions": [
+      "func_1513F6E8"
+    ]
+  },
+  {
+    "id": "float-polynomial-with-global-scale",
+    "description": "Simple float polynomial expressions can match directly when preserving operation grouping and global scale last.",
+    "trigger": "Target computes `(1.0f - x) * (x - 2.0f) * x * global_float`.",
+    "solution": "Write `(((1.0f - arg0) * (arg0 - 2.0f)) * arg0) * GLOBAL` with the global declared as `extern f32`.",
+    "example_functions": [
+      "func_15142A80"
+    ]
+  },
+  {
+    "id": "float-polynomial-with-literal-scale",
+    "description": "Simple float polynomial expressions with literal scale match when preserving grouping and literal multiplication last.",
+    "trigger": "Target computes `(2.0f - x) * (x + 1.0f) * x * 0.5f`.",
+    "solution": "Write `(((2.0f - arg0) * (arg0 + 1.0f)) * arg0) * 0.5f`.",
+    "example_functions": [
+      "func_15142B04"
+    ]
+  },
+  {
+    "id": "direct-return-branch-likely-halfword-shift",
+    "description": "For small branch-likely return helpers, direct return expressions can preserve v0 temporaries better than named intermediates.",
+    "trigger": "Target branches on nullable pointer, returns sign-extended shifted halfword or shifted difference against a pointed halfword.",
+    "solution": "Load nullable pointer into a local, then use direct `return (s16)((field - ptr->field) >> 8)` / `return (s16)(field >> 8)` expressions without naming the arithmetic result.",
+    "example_functions": [
+      "func_15143E24"
+    ]
+  },
+  {
+    "id": "predecrement-pointer-field-branch-delay",
+    "description": "Predecrementing a pointer-selected field can preserve the address computation in a branch delay slot and use temp registers instead of v1.",
+    "trigger": "Target checks a u8 command, computes `arg0 + offset` in the branch delay, predecrements the pointed word, stores it, and sets a flag if negative.",
+    "solution": "Compute the field pointer before the `if`, then write `if (--(*ptr) < 0) flags |= mask;`.",
+    "example_functions": [
+      "func_1513B0B8"
+    ]
+  },
+  {
+    "id": "s16-s16-f32-wrapper",
+    "description": "Mixed integer/float wrapper with a third float argument can emit stack homing plus `mtc1`/`mfc1` around sign-extending the s16 args.",
+    "trigger": "Target homes a0/a1, sign-extends them via sll/sra, moves a2 bits through f12, and calls a helper.",
+    "solution": "Use signature `(s16, s16, f32)` and directly call the helper with the same arguments, adding a matching extern prototype if needed.",
+    "example_functions": [
+      "func_15143834"
+    ]
   }
 ]
