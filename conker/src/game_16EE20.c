@@ -3,6 +3,8 @@
 #include "functions.h"
 #include "variables.h"
 
+extern u8 D_8008A160[];
+
 
 void func_15141970(struct37 *arg0) {
     func_1514EDF0(arg0, arg0->unk2C);
@@ -94,7 +96,13 @@ s32 func_151422F8(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15142600.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15142838.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15142914.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_151429E0.s")
+void func_151429E0(u8 arg0, u8 *arg1, u8 *arg2, u8 *arg3) {
+    u8 *ptr = &D_8008A160[(arg0 * 12) + ((func_150ADA20() & 3) * 3)];
+
+    *arg1 = ptr[0];
+    *arg2 = ptr[1];
+    *arg3 = ptr[2];
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15142A5C.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15142A80.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15142AC0.s")
@@ -105,7 +113,9 @@ s32 func_151422F8(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15142CF0.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15142E24.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15142FBC.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15143044.s")
+s16 func_15143044(u8 arg0, s32 arg1) {
+    return 0x7FFF - arg0;
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_1514306C.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15143134.s")
 
@@ -176,7 +186,13 @@ s32 func_15143E08(struct127 *arg0) {
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15143E24.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15143E64.s")
+f32 func_15143E64(f32 *arg0) {
+    f32 temp_f2 = arg0[0];
+    f32 temp_f12 = arg0[1];
+    f32 temp_f14 = arg0[2];
+
+    return sqrtf((temp_f2 * temp_f2) + (temp_f12 * temp_f12) + (temp_f14 * temp_f14));
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15143E94.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_1514401C.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_151441A4.s")
