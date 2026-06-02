@@ -432,5 +432,14 @@
     "example_functions": [
       "func_151368A8"
     ]
+  },
+  {
+    "id": "prototype-for-wrapper-arg-scheduling",
+    "description": "Adding an exact callee prototype can change wrapper argument reload scheduling to match target, especially for u16/s16/u8 promoted args.",
+    "trigger": "Simple wrapper call without callee prototype matches semantics but delays lhu/lh/lbu argument reloads or orders them differently before jal.",
+    "solution": "Declare the callee with the exact typed signature so IDO schedules sign/zero-extension reloads into argument registers in target order.",
+    "example_functions": [
+      "func_10010F88"
+    ]
   }
 ]
