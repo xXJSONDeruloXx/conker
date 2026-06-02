@@ -255,7 +255,7 @@
     "tags": [],
     "attempts": 0,
     "lastScore": 0,
-    "status": "pending"
+    "status": "skipped"
   },
   {
     "function": "func_15079F6C",
@@ -874,9 +874,46 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 5,
+    "lastScore": 0.18367346938775508,
+    "status": "skipped",
+    "history": [
+      {
+        "code": "void func_150104F0(void) {\n    u8 *temp_v1 = D_800D9950;\n    s32 temp_v0 = 0;\n    void *ret;\n\n    temp_v1[1] = temp_v0;\n    temp_v1[0] = temp_v0;\n    temp_v1[2] = 0;\n    ret = func_151149AC(0xF6);\n    *(f32 *)((s32)ret + 0x7C) = 2.0f;\n    D_80088980 = 0;\n}\n",
+        "score": 0.18367346938775508,
+        "reason": "length_mismatch (target=18, generated=49)",
+        "diffs": [],
+        "timestamp": "2026-06-02T17:21:22.630Z"
+      },
+      {
+        "code": "void func_150104F0(void) {\n    D_800D9950[1] = 0;\n    D_800D9950[0] = 0;\n    D_800D9950[2] = 0;\n    func_151149AC(0xF6)->unk7C = 2.0f;\n    D_80088980 = 0;\n}\n",
+        "score": 0.18367346938775508,
+        "reason": "length_mismatch (target=18, generated=49)",
+        "diffs": [],
+        "timestamp": "2026-06-02T17:21:43.439Z"
+      },
+      {
+        "code": "void func_150104F0(void) {\n    u8 *temp_v1 = D_800D9950;\n    s32 ret;\n\n    temp_v1[1] = 0;\n    temp_v1[0] = 0;\n    temp_v1[2] = 0;\n    ret = func_151149AC(0xF6);\n    *(f32 *)(ret + 0x7C) = 2.0f;\n    D_80088980 = 0;\n}\n",
+        "score": 0.18367346938775508,
+        "reason": "length_mismatch (target=18, generated=49)",
+        "diffs": [],
+        "timestamp": "2026-06-02T17:22:04.553Z"
+      },
+      {
+        "code": "void func_150104F0(void) {\n    s32 ret;\n\n    D_800D9950[1] = 0;\n    D_800D9950[0] = 0;\n    D_800D9950[2] = 0;\n    ret = func_151149AC(0xF6);\n    *(f32 *)(ret + 0x7C) = 2.0f;\n    D_80088980 = 0;\n}\n",
+        "score": 0.18367346938775508,
+        "reason": "length_mismatch (target=18, generated=49)",
+        "diffs": [],
+        "timestamp": "2026-06-02T17:22:34.830Z"
+      },
+      {
+        "code": "void func_150104F0(void) {\n    u8 *temp_v1 = D_800D9950;\n\n    temp_v1[1] = 0;\n    temp_v1[0] = 0;\n    temp_v1[2] = 0;\n    *(f32 *)(func_151149AC(0xF6) + 0x7C) = 2.0f;\n    D_80088980 = 0;\n}\n",
+        "score": 0.18367346938775508,
+        "reason": "length_mismatch (target=18, generated=49)",
+        "diffs": [],
+        "timestamp": "2026-06-02T17:22:45.735Z"
+      }
+    ]
   },
   {
     "function": "func_15141928",
