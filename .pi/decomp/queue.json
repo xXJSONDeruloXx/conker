@@ -1214,9 +1214,32 @@
     "instructions": 28,
     "difficulty": "low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.48214285714285715,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_10003BD0(void) {\n    D_800380B4 = (struct54 *)&D_800E9D10;\n    D_800380B4->unk0 = NULL;\n    D_800380B4->unk4 = NULL;\n    D_800380B4->unk8 = D_80038098 - (u32)&D_800E9D10 - 0x14;\n    D_800380B4->unkC = 0;\n    D_800380B4->unk10 = 0;\n    D_800380BC = (s32 *)D_800380B4;\n    D_800380B8 = D_800380B4;\n    D_800380B0 = D_800380B4;\n}",
+        "score": 0.48214285714285715,
+        "reason": "length_mismatch (target=28, generated=27)",
+        "diffs": [],
+        "timestamp": "2026-06-02T21:04:31.692Z"
+      },
+      {
+        "code": "void func_10003BD0(void) {\n    struct54 **temp_v1 = &D_800380B4;\n    struct54 *temp_a0 = (struct54 *)&D_800E9D10;\n    s32 **temp_a1 = &D_800380BC;\n    struct54 *temp_v0;\n\n    *temp_v1 = temp_a0;\n    temp_a0->unk0 = NULL;\n    (*temp_v1)->unk4 = NULL;\n    (*temp_v1)->unk8 = D_80038098 - (u32)temp_a0 - 0x14;\n    (*temp_v1)->unkC = 0;\n    (*temp_v1)->unk10 = 0;\n    temp_v0 = *temp_v1;\n    *temp_a1 = (s32 *)temp_v0;\n    D_800380B8 = temp_v0;\n    D_800380B0 = temp_v0;\n}",
+        "score": 0.39285714285714285,
+        "reason": "length_mismatch (target=28, generated=22)",
+        "diffs": [],
+        "timestamp": "2026-06-02T21:04:47.926Z"
+      },
+      {
+        "code": "void func_10003BD0(void) {\n    s32 *temp_a1 = (s32 *)&D_800380BC;\n\n    D_800380B4 = (struct54 *)&D_800E9D10;\n    D_800380B4->unk0 = NULL;\n    D_800380B4->unk4 = NULL;\n    D_800380B4->unk8 = D_80038098 - (u32)&D_800E9D10 - 0x14;\n    D_800380B4->unkC = 0;\n    D_800380B4->unk10 = 0;\n    *temp_a1 = (s32)D_800380B4;\n    D_800380B8 = D_800380B4;\n    D_800380B0 = D_800380B4;\n}",
+        "score": 0.48214285714285715,
+        "reason": "length_mismatch (target=28, generated=27)",
+        "diffs": [],
+        "timestamp": "2026-06-02T21:05:06.888Z"
+      }
+    ]
   },
   {
     "function": "func_15169040",
@@ -6091,9 +6114,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 1,
-    "lastScore": 0.963,
-    "status": "pending",
+    "attempts": 2,
+    "lastScore": 1,
+    "status": "matched",
     "history": [
       {
         "code": "void func_15060A30(u16 arg0, struct127 *arg1) {\n    if (arg1->camera == NULL) {\n        func_10010344(arg0, arg1, 0x6D60, 0x1F4, 0x9C4);\n    } else {\n        func_15060778(arg0, arg1, 0x5DC0, 0, 0x1F4, 0x9C4, 1);\n    }\n}",
