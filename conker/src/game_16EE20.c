@@ -3,6 +3,8 @@
 #include "functions.h"
 #include "variables.h"
 
+extern f32 D_800A5628;
+
 extern u8 D_8008A160[];
 
 
@@ -116,7 +118,10 @@ s32 func_15142A5C(struct127 *arg0) {
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15142A80.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15142AC0.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15142B04.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15142B44.s")
+f32 func_15142B44(f32 arg0) {
+    return ((arg0 + 1.0f) * (arg0 - 1.0f) * arg0) * D_800A5628;
+}
+
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15142B7C.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15142C10.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15142CF0.s")
