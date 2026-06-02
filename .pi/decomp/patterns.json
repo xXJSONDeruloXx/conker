@@ -378,5 +378,14 @@
     "example_functions": [
       "func_10008C6C"
     ]
+  },
+  {
+    "id": "implicit-arg-product-local-direct-base",
+    "description": "For implicit-arg leaf helpers, keep the multiply/offset accumulator as a named local but leave the framebuffer/table base as a direct return expression; this can preserve mflo into v1 while avoiding a2/a3 register allocation for base loads.",
+    "trigger": "Target uses an implicit a0/a1 helper, mflo into v1 accumulator, and direct indexed global base load in t-registers; fully naming the base/index temps shifts them into a2/a3.",
+    "solution": "Use a dummy second parameter assigned from the global if target uses a1, update the accumulator local with += statements, and return GLOBAL[index] + accumulator directly.",
+    "example_functions": [
+      "func_1600160C"
+    ]
   }
 ]

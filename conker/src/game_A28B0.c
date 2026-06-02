@@ -3,6 +3,8 @@
 #include "functions.h"
 #include "variables.h"
 
+void func_151669A0(s32, s32, s32, f32, u8, s32);
+
 
 void func_15075400(s32 arg0) {
     s32 tmp;
@@ -371,7 +373,9 @@ void func_150762B0(void) {
     func_1000CBA8(D_800D1890);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_A28B0/func_150762D4.s")
+void func_150762D4(void) {
+    func_151669A0((s32) D_800D154C->x_position, (s32) (D_800D154C->y_position + 100.0f), (s32) D_800D154C->z_position, 0.45f, 0xFF, 0);
+}
 // void func_151669A0(s32 arg0, s32 arg1, s32 arg2, f32 arg3, u8 arg4, s32 arg5);
 // void func_150762D4(void) {
 //     func_151669A0(&D_800D154C->x_position, (s32)D_800D154C->y_position + 100.0f, D_800D154C->z_position, 0.44999998807907104f, 0xFF, 0);
