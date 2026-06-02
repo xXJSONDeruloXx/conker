@@ -234,7 +234,24 @@ f32 func_15143E64(f32 *arg0) {
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_1514401C.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_151441A4.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_151442FC.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_151444DC.s")
+s32 func_151444DC(s32 arg0, s32 arg1, s32 arg2) {
+    s32 temp_v0;
+
+    if (arg1 < arg0) {
+        temp_v0 = (arg1 - arg2) + 1;
+        do {
+            arg0 -= temp_v0;
+        } while (arg1 < arg0);
+    }
+    if (arg0 < arg2) {
+        temp_v0 = (arg1 - arg2) + 1;
+        do {
+            arg0 += temp_v0;
+        } while (arg0 < arg2);
+    }
+    return arg0;
+}
+
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15144528.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15144598.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_1514462C.s")

@@ -306,5 +306,14 @@
     "example_functions": [
       "func_10002088"
     ]
+  },
+  {
+    "id": "leaf-unused-first-arg-loop",
+    "description": "Leaf helpers with an unused first argument may still home `$a0` to `0($sp)` while operating on later arguments.",
+    "trigger": "Target starts with `sw a0, 0(sp)` and loops over a1/a2/a3 without a stack frame.",
+    "solution": "Keep the unused first parameter in the signature and implement the loop using later arguments; IDO preserves the argument home store.",
+    "example_functions": [
+      "func_15043B70"
+    ]
   }
 ]
