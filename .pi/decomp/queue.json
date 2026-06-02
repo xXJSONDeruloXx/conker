@@ -874,9 +874,9 @@
     "instructions": 22,
     "difficulty": "low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1,
+    "status": "matched"
   },
   {
     "function": "func_15073C50",
@@ -2204,9 +2204,32 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 0.4091,
+    "status": "pending",
+    "history": [
+      {
+        "code": "s32 func_16001B34(u8 *arg0, s32 arg1, s32 arg2, s32 arg3) {\n    s32 idx;\n\n    idx = func_16001BB4(func_16001B8C, arg0, arg1, &arg2);\n    if (idx >= 0) {\n        arg0[idx] = 0;\n    }\n    return idx;\n}",
+        "score": 0.4091,
+        "reason": "structural_diffs=13",
+        "diffs": [
+          "structural: target=addiu sp, sp, -32 got=addiu sp, sp, -24",
+          "structural: target=sw ra, 20(sp) got=sw a2, 32(sp)",
+          "structural: target=sw a0, 32(sp) got=move a2, a1",
+          "structural: target=sw a1, 36(sp) got=sw ra, 20(sp)",
+          "structural: target=sw a2, 40(sp) got=sw a0, 24(sp)",
+          "structural: target=sw a3, 44(sp) got=sw a1, 28(sp)",
+          "structural: target=lui a0, HI(func_16001B8C) got=sw a3, 36(sp)",
+          "structural: target=addiu a0, a0, LO(func_16001B8C) got=lui a0, HI(func_16001B8C)",
+          "structural: target=lw a1, 32(sp) got=addiu a0, a0, LO(func_16001B8C)",
+          "structural: target=lw a2, 36(sp) got=lw a1, 24(sp)",
+          "structural: target=addiu a3, sp, 40 got=addiu a3, sp, 32",
+          "structural: target=lw t6, 32(sp) got=lw t6, 24(sp)",
+          "structural: target=addiu sp, sp, 32 got=addiu sp, sp, 24"
+        ],
+        "timestamp": "2026-06-02T18:21:09.171Z"
+      }
+    ]
   },
   {
     "function": "func_151400D0",
