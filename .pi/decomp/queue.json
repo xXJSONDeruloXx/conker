@@ -4439,8 +4439,8 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 12,
-    "lastScore": 0.4807692307692308,
+    "attempts": 15,
+    "lastScore": 0.8462,
     "status": "pending",
     "history": [
       {
@@ -4687,6 +4687,32 @@
         "reason": "length_mismatch (target=26, generated=25)",
         "diffs": [],
         "timestamp": "2026-06-02T20:19:57.450Z"
+      },
+      {
+        "code": "void func_15125628(void) {\n    s32 temp_v0;\n\n    temp_v0 = (&D_800DBFF5)[-1];\n    if (temp_v0 != 0) {\n        D_800DBFF4[0] = temp_v0 - 1;\n    }\n    temp_v0 = D_800DBFF5;\n    if (temp_v0 != 0) {\n        D_800DBFF5 = temp_v0 - 1;\n    }\n    temp_v0 = D_800DBFF6;\n    if (temp_v0 != 0) {\n        D_800DBFF6 = temp_v0 - 1;\n    }\n    temp_v0 = D_800DBFF7;\n    if (temp_v0 != 0) {\n        D_800DBFF7 = temp_v0 - 1;\n    }\n}",
+        "score": 0.4807692307692308,
+        "reason": "length_mismatch (target=26, generated=25)",
+        "diffs": [],
+        "timestamp": "2026-06-02T20:20:32.906Z"
+      },
+      {
+        "code": "void func_15125628(void) {\n    s32 temp_v0;\n\n    temp_v0 = D_800DBFF4[0];\n    if (temp_v0 != 0) {\n        *(volatile u8 *)(&D_800DBFF5 - 1) = temp_v0 - 1;\n    }\n    temp_v0 = D_800DBFF5;\n    if (temp_v0 != 0) {\n        *(volatile u8 *)(&D_800DBFF6 - 1) = temp_v0 - 1;\n    }\n    temp_v0 = D_800DBFF6;\n    if (temp_v0 != 0) {\n        *(volatile u8 *)(&D_800DBFF7 - 1) = temp_v0 - 1;\n    }\n    temp_v0 = (&D_800DBFF6)[1];\n    if (temp_v0 != 0) {\n        *(volatile u8 *)&D_800DBFF7 = temp_v0 - 1;\n    }\n}",
+        "score": 0.43333333333333335,
+        "reason": "length_mismatch (target=26, generated=30)",
+        "diffs": [],
+        "timestamp": "2026-06-02T20:21:14.483Z"
+      },
+      {
+        "code": "void func_15125628(void) {\n    u32 temp_v0;\n    s32 temp_t6;\n    s32 temp_t7;\n    s32 temp_t8;\n    s32 temp_t9;\n\n    temp_v0 = D_800DBFF4[0];\n    temp_t6 = temp_v0 - 1;\n    if (temp_v0 != 0) {\n        D_800DBFF4[0] = temp_t6;\n    }\n    temp_v0 = D_800DBFF5;\n    temp_t7 = temp_v0 - 1;\n    if (temp_v0 != 0) {\n        D_800DBFF5 = temp_t7;\n    }\n    temp_v0 = D_800DBFF6;\n    temp_t8 = temp_v0 - 1;\n    if (temp_v0 != 0) {\n        D_800DBFF6 = temp_t8;\n    }\n    temp_v0 = D_800DBFF7;\n    temp_t9 = temp_v0 - 1;\n    if (temp_v0 != 0) {\n        D_800DBFF7 = temp_t9;\n    }\n}",
+        "score": 0.8462,
+        "reason": "structural_diffs=4",
+        "diffs": [
+          "structural: target=lui v0, HI(D_800DBFF6 + 0x1) got=lui v0, HI(D_800DBFF7)",
+          "structural: target=lbu v0, LO(D_800DBFF6 + 0x1)(v0) got=lbu v0, LO(D_800DBFF7)(v0)",
+          "structural: target=lui at, HI(D_800DBFF6 + 0x1) got=lui at, HI(D_800DBFF7)",
+          "structural: target=sb t9, LO(D_800DBFF6 + 0x1)(at) got=sb t9, LO(D_800DBFF7)(at)"
+        ],
+        "timestamp": "2026-06-02T20:22:21.150Z"
       }
     ]
   },
