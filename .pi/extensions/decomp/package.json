@@ -1,0 +1,11 @@
+{
+  "name": "conker-decomp",
+  "version": "0.1.0",
+  "private": true,
+  "description": "N64 matching decompilation harness for Conker",
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*",
+    "@earendil-works/pi-tui": "*",
+    "typebox": "*"
+  }
+}

@@ -1,0 +1,58 @@
+[
+  {
+    "id": "byte-addressed-table",
+    "description": "Tables accessed with complex index math should be declared as extern u8 TABLE[] and byte-offset computed manually",
+    "trigger": "Target uses sll/subu/addu chain for array offset, not simple indexed load",
+    "solution": "Declare table as u8[], compute offset as (field1 * stride1) + (field2 * stride2)",
+    "example_functions": ["func_15168A9C", "func_151429E0"]
+  },
+  {
+    "id": "u8-arg-stack-reload",
+    "description": "When target loads arg from stack with lbu, the parameter should be u8 not s32",
+    "trigger": "Target has lbu from stack offset matching an argument position",
+    "solution": "Change parameter type to u8",
+    "example_functions": ["func_151429E0"]
+  },
+  {
+    "id": "declaration-order-register",
+    "description": "IDO allocates registers in declaration order. Reordering locals swaps register assignments",
+    "trigger": "Generated asm has correct instructions but swapped register numbers",
+    "solution": "Reorder local variable declarations to match target register numbering",
+    "example_functions": ["func_151696DC", "func_15143E64"]
+  },
+  {
+    "id": "fpr-naming-order",
+    "description": "Naming float locals explicitly steers FPR allocation to match target load order",
+    "trigger": "Float expression produces correct result but FP registers differ from target",
+    "solution": "Name float locals matching their FPR (temp_f2, temp_f12, temp_f14) in target load order",
+    "example_functions": ["func_15143E64"]
+  },
+  {
+    "id": "pointer-do-while-strlen",
+    "description": "Pointer-based do/while produces tighter loop matching for string/byte iterations",
+    "trigger": "Target uses pointer increment + branch-likely for byte loop",
+    "solution": "Use explicit pointer variable with do { ptr++; } while (*ptr != 0) instead of index",
+    "example_functions": ["func_16001B00"]
+  },
+  {
+    "id": "branch-chain-if-return",
+    "description": "Cascading if/return chains match IDO's branch layout for switch-like functions",
+    "trigger": "Target has sequential bne/beqz with jr $ra in delay slots",
+    "solution": "Use if (arg == N) { *out1 = X; *out2 = Y; return; } pattern",
+    "example_functions": ["func_15168F84"]
+  },
+  {
+    "id": "conditional-assign-branch-likely",
+    "description": "Assignment in if-condition can produce beql/bnel that matches branch-likely targets",
+    "trigger": "Target uses branch-likely (beql/bnel) with store in delay slot",
+    "solution": "Use (temp = *src) != NULL pattern or assignment-in-condition",
+    "example_functions": ["func_15168A9C"]
+  },
+  {
+    "id": "implicit-arg-passthrough",
+    "description": "Callers that don't explicitly pass $a0 rely on it surviving into the callee",
+    "trigger": "Callers call func() with no args but the callee clearly uses $a0",
+    "solution": "Declare the parameter in the callee signature; callers keep $a0 from context",
+    "example_functions": ["func_151696DC"]
+  }
+]
