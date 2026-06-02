@@ -169,7 +169,10 @@ really-clean: clean
 	rm -f *auto.txt
 	rm -rf conker.us.bin conker.eu.bin conker.ects.bin conker.debug.bin
 
-extract: $(BUILD_DIR)/splat
+extract: $(BUILD_DIR)/splat postprocess-asm
+
+postprocess-asm: $(BUILD_DIR)/splat
+	$(PYTHON) ../tools/strip_splat_metadata.py asm
 
 # sanity check base bin
 check: $(BASENAME).$(VERSION).ok
@@ -301,5 +304,5 @@ progress.debugger.csv: $(TARGET).elf
 
 
 # settings
-.PHONY: all clean default
+.PHONY: all clean default extract postprocess-asm
 SHELL = /bin/bash -e -o pipefail

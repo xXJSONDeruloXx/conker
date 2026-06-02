@@ -19,3 +19,19 @@
     .global \label
     \label:
 .endm
+
+# splat/spimdisasm may emit matching/nonmatching metadata pseudo-macros.
+# They are comments for GNU as purposes. GLOBAL_ASM include files are also
+# post-processed by tools/strip_splat_metadata.py because asm-processor expects
+# text blocks to start with glabel.
+.macro matching label, size
+.endm
+
+.macro nonmatching label, size
+.endm
+
+.macro endlabel label
+.endm
+
+.macro enddlabel label
+.endm
