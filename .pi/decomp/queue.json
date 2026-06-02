@@ -3573,7 +3573,7 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 39,
+    "attempts": 42,
     "lastScore": 0.5385,
     "status": "pending",
     "history": [
@@ -3960,6 +3960,55 @@
           "structural: target=subu t3, a2, t2 got=subu t3, a1, t2"
         ],
         "timestamp": "2026-06-02T20:06:44.971Z"
+      },
+      {
+        "code": "void func_15168B44(s32 arg0) {\n    s32 temp_v0;\n    s32 temp_v1 = *(s32 *)(arg0 + 0x14);\n    u16 temp_t6 = temp_v1 & 0xFFFF;\n\n    if (temp_t6 != 0) {\n        s32 temp_t1;\n        *(volatile s32 *)(arg0 + 0x14) = ((temp_v0 = temp_t6 - 1), temp_v1 & 0xFFFF0000);\n        temp_t1 = *(s32 *)(arg0 + 0x14) | (temp_v0 & 0xFFFF);\n        *(s16 *)(arg0 + 0x38) = 0x1E;\n        *(volatile s32 *)(arg0 + 0x14) = temp_t1;\n        return;\n    }\n\n    {\n        u8 temp_a2 = *(u8 *)(arg0 + 0x3F);\n        u16 temp_t2;\n        temp_v0 = *(s32 *)(arg0 + 0x14) >> 16;\n        temp_t2 = temp_v0 & 0xFFFF;\n\n        if (temp_t2 < temp_a2) {\n            *(u8 *)(arg0 + 0x3F) = temp_a2 - temp_t2;\n            *(s16 *)(arg0 + 0x38) = 0x1E;\n            return;\n        }\n        *(s16 *)(arg0 + 0x38) = 0;\n    }\n}",
+        "score": 0.43333333333333335,
+        "reason": "length_mismatch (target=26, generated=30)",
+        "diffs": [],
+        "timestamp": "2026-06-02T20:07:18.112Z"
+      },
+      {
+        "code": "void func_15168B44(s32 arg0) {\n    s32 temp_v0;\n    s32 temp_v1 = *(s32 *)(arg0 + 0x14);\n    u16 temp_t6 = temp_v1 & 0xFFFF;\n\n    if ((temp_t6 != 0) && (temp_v0 = temp_t6 - 1, 1)) {\n        s32 temp_t1;\n        *(s32 *)(arg0 + 0x14) &= 0xFFFF0000;\n        temp_t1 = *(s32 *)(arg0 + 0x14) | (temp_v0 & 0xFFFF);\n        *(s16 *)(arg0 + 0x38) = 0x1E;\n        *(s32 *)(arg0 + 0x14) = temp_t1;\n        return;\n    }\n\n    {\n        u8 temp_a2 = *(u8 *)(arg0 + 0x3F);\n        u16 temp_t2;\n        temp_v0 = *(s32 *)(arg0 + 0x14) >> 16;\n        temp_t2 = temp_v0 & 0xFFFF;\n\n        if (temp_t2 < temp_a2) {\n            *(u8 *)(arg0 + 0x3F) = temp_a2 - temp_t2;\n            *(s16 *)(arg0 + 0x38) = 0x1E;\n            return;\n        }\n        *(s16 *)(arg0 + 0x38) = 0;\n    }\n}",
+        "score": 0.4615,
+        "reason": "structural_diffs=14",
+        "diffs": [
+          "structural: target=li t8, 30 got=lui at, 65535",
+          "structural: target=lui at, 65535 got=li t1, 30",
+          "structural: target=addiu v0, t6, -1 got=and t7, v1, at",
+          "structural: target=and t9, v1, at got=addiu t9, t6, -1",
+          "structural: target=andi t7, v0, 65535 got=andi t0, t9, 65535",
+          "structural: target=sw t9, 20(a0) got=sw t7, 20(a0)",
+          "structural: target=or t1, t9, t7 got=or v0, t7, t0",
+          "structural: target=sh t8, 56(a0) got=sh t1, 56(a0)",
+          "structural: target=sw t1, 20(a0) got=sw v0, 20(a0)",
+          "structural: target=lbu a2, 63(a0) got=lbu a1, 63(a0)",
+          "structural: target=sra v0, v1, 16 got=sra a2, v1, 16",
+          "structural: target=andi t2, v0, 65535 got=andi t2, a2, 65535",
+          "structural: target=slt at, t2, a2 got=slt at, t2, a1",
+          "structural: target=subu t3, a2, t2 got=subu t3, a1, t2"
+        ],
+        "timestamp": "2026-06-02T20:07:47.065Z"
+      },
+      {
+        "code": "void func_15168B44(s32 arg0) {\n    s32 temp_v0;\n    s32 temp_v1 = *(s32 *)(arg0 + 0x14);\n    u16 temp_t6 = temp_v1 & 0xFFFF;\n\n    if (temp_t6 != 0) {\n        s32 temp_t1;\n        ((struct WORD *)(arg0 + 0x14))->unk0 = ((temp_v0 = temp_t6 - 1), temp_v1 & 0xFFFF0000);\n        temp_t1 = *(s32 *)(arg0 + 0x14) | (temp_v0 & 0xFFFF);\n        *(s16 *)(arg0 + 0x38) = 0x1E;\n        *(s32 *)(arg0 + 0x14) = temp_t1;\n        return;\n    }\n\n    {\n        u8 temp_a2 = *(u8 *)(arg0 + 0x3F);\n        u16 temp_t2;\n        temp_v0 = *(s32 *)(arg0 + 0x14) >> 16;\n        temp_t2 = temp_v0 & 0xFFFF;\n\n        if (temp_t2 < temp_a2) {\n            *(u8 *)(arg0 + 0x3F) = temp_a2 - temp_t2;\n            *(s16 *)(arg0 + 0x38) = 0x1E;\n            return;\n        }\n        *(s16 *)(arg0 + 0x38) = 0;\n    }\n}",
+        "score": 0.5385,
+        "reason": "structural_diffs=12",
+        "diffs": [
+          "structural: target=li t8, 30 got=li t7, 30",
+          "structural: target=addiu v0, t6, -1 got=move v0, v1",
+          "structural: target=and t9, v1, at got=addiu t9, t6, -1",
+          "structural: target=andi t7, v0, 65535 got=andi t0, t9, 65535",
+          "structural: target=sw t9, 20(a0) got=and t8, v0, at",
+          "structural: target=or t1, t9, t7 got=or t1, t8, t0",
+          "structural: target=sh t8, 56(a0) got=sh t7, 56(a0)",
+          "structural: target=lbu a2, 63(a0) got=lbu a1, 63(a0)",
+          "structural: target=sra v0, v1, 16 got=sra a2, v1, 16",
+          "structural: target=andi t2, v0, 65535 got=andi t2, a2, 65535",
+          "structural: target=slt at, t2, a2 got=slt at, t2, a1",
+          "structural: target=subu t3, a2, t2 got=subu t3, a1, t2"
+        ],
+        "timestamp": "2026-06-02T20:08:15.291Z"
       }
     ]
   },
