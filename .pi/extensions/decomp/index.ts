@@ -547,10 +547,11 @@ export default function (pi: ExtensionAPI) {
 				};
 			}
 
-			// Commit
+			// Commit and push
 			const desc = params.description || `match ${params.function}`;
 			await pi.exec("git", ["add", `conker/src/${params.file}`]);
 			await pi.exec("git", ["commit", "-m", `feat(decomp): ${desc}`]);
+			await pi.exec("git", ["push"], { timeout: 30000 });
 
 			// Update queue
 			const entry = state.queue.find((e) => e.function === params.function);
