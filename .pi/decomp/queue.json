@@ -1206,8 +1206,8 @@
     "instructions": 23,
     "difficulty": "low",
     "tags": [],
-    "attempts": 6,
-    "lastScore": 0.2609,
+    "attempts": 9,
+    "lastScore": 0.4791666666666667,
     "status": "pending",
     "history": [
       {
@@ -1269,6 +1269,27 @@
           "structural: target=sb t9, 562(a0) got=sb t0, 562(v0)"
         ],
         "timestamp": "2026-06-02T18:42:36.143Z"
+      },
+      {
+        "code": "void func_150747E4(void) {\n    u8 *base;\n    u8 val;\n    u8 *entry;\n\n    base = (u8 *)D_800CC2D0;\n    val = D_800D154C->unk65;\n    if (val != 0) {\n        entry = &base[(val - 1) * 812];\n        *(s32 *)(entry + 0x218) = 0;\n        entry[0x232] = (u8)D_800D1580;\n    }\n}",
+        "score": 0.4782608695652174,
+        "reason": "length_mismatch (target=23, generated=22)",
+        "diffs": [],
+        "timestamp": "2026-06-02T18:42:53.875Z"
+      },
+      {
+        "code": "void func_150747E4(void) {\n    u8 val;\n\n    val = D_800D154C->unk65;\n    if (val != 0) {\n        struct127 *entry = &D_800CC2D0[val - 1];\n        entry->unk218 = 0;\n        entry->unk232 = (u8)D_800D1580;\n    }\n}",
+        "score": 0.4782608695652174,
+        "reason": "length_mismatch (target=23, generated=22)",
+        "diffs": [],
+        "timestamp": "2026-06-02T18:43:05.571Z"
+      },
+      {
+        "code": "void func_150747E4(void) {\n    u8 val;\n    u8 idx;\n    struct127 *entry;\n\n    val = D_800D154C->unk65;\n    if (val != 0) {\n        idx = val - 1;\n        entry = &D_800CC2D0[idx];\n        entry->unk218 = 0;\n        entry->unk232 = (u8)D_800D1580;\n    }\n}",
+        "score": 0.4791666666666667,
+        "reason": "length_mismatch (target=23, generated=24)",
+        "diffs": [],
+        "timestamp": "2026-06-02T18:43:19.326Z"
       }
     ]
   },
