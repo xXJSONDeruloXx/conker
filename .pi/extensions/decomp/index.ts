@@ -87,20 +87,54 @@ function savePatterns(cwd: string): void {
 }
 
 export default function (pi: ExtensionAPI) {
+	let latestCtx: any = undefined;
+
+	function refreshWidget() {
+		const ctx = latestCtx;
+		if (!ctx?.hasUI) return;
+
+		const pending = state.queue.filter((e) => e.status === "pending").length;
+		const matched = state.queue.filter((e) => e.status === "matched").length;
+		const skipped = state.queue.filter((e) => e.status === "skipped").length;
+		const total = state.queue.length;
+		const pct = total > 0 ? ((matched / total) * 100).toFixed(1) : "0.0";
+
+		ctx.ui.setWidget("decomp-progress", (_tui: any, theme: any) => ({
+			render(width: number) {
+				const bar = (percent: number, w: number) => {
+					const filled = Math.round((percent / 100) * w);
+					return theme.fg("success", "█".repeat(filled)) + theme.fg("dim", "░".repeat(w - filled));
+				};
+				const pctNum = total > 0 ? (matched / total) * 100 : 0;
+				const line1 = [
+					theme.fg("accent", theme.bold("◆ Conker Decomp")),
+					theme.fg("success", `${matched}`),
+					theme.fg("dim", "/"),
+					theme.fg("muted", `${total}`),
+					theme.fg("success", `(${pct}%)`),
+					bar(pctNum, 12),
+					theme.fg("dim", "│"),
+					theme.fg("muted", `pending: ${pending}`),
+					theme.fg("dim", "│"),
+					theme.fg("muted", `patterns: ${state.patterns.length}`),
+				].join(" ");
+				return [line1];
+			},
+			invalidate() {},
+		}));
+	}
+
 	// Load state on session start
 	pi.on("session_start", async (_event, ctx) => {
+		latestCtx = ctx;
 		loadState(ctx.cwd);
+		refreshWidget();
+	});
 
-		if (ctx.hasUI) {
-			const pending = state.queue.filter((e) => e.status === "pending").length;
-			const matched = state.queue.filter((e) => e.status === "matched").length;
-			const total = state.queue.length;
-			const pct = total > 0 ? ((matched / total) * 100).toFixed(1) : "0.0";
-
-			ctx.ui.setWidget("decomp-progress", [
-				`┌ decomp: ${matched}/${total} matched (${pct}%) │ pending: ${pending} │ patterns: ${state.patterns.length} ┐`,
-			]);
-		}
+	// Refresh widget after every agent turn completes
+	pi.on("agent_end", async (_event, ctx) => {
+		latestCtx = ctx;
+		refreshWidget();
 	});
 
 	// ═══════════════════════════════════════════════════════════════
@@ -197,6 +231,8 @@ export default function (pi: ExtensionAPI) {
 				if (entry) {
 					entry.status = "skipped";
 					saveQueue(ctx.cwd);
+					latestCtx = ctx;
+					refreshWidget();
 				}
 				return { content: [{ type: "text", text: `Skipped ${funcName}` }], details: {} };
 			}
@@ -424,6 +460,8 @@ export default function (pi: ExtensionAPI) {
 			// Non-match: revert
 			fs.writeFileSync(srcPath, original);
 			saveQueue(ctx.cwd);
+			latestCtx = ctx;
+			refreshWidget();
 
 			const diffSummary = scoreData.diffs
 				? scoreData.diffs
@@ -531,7 +569,10 @@ export default function (pi: ExtensionAPI) {
 				savePatterns(ctx.cwd);
 			}
 
-			// Update widget
+			// Refresh widget
+			latestCtx = ctx;
+			refreshWidget();
+
 			const matched = state.queue.filter((e) => e.status === "matched").length;
 			const total = state.queue.length;
 			const pct = total > 0 ? ((matched / total) * 100).toFixed(1) : "0.0";
