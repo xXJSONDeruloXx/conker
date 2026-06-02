@@ -3191,9 +3191,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1,
+    "status": "matched"
   },
   {
     "function": "func_15142FBC",
@@ -3396,9 +3396,18 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 0.4814814814814815,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_151411E4(struct210 *arg0) {\n    struct210 *temp_a1;\n\n    temp_a1 = arg0;\n    if (*(s32 *)((u8 *) temp_a1 + 0x154) != 0) {\n        func_1517E134(*(s32 *)((u8 *) temp_a1 + 0x154));\n    }\n    D_800DC9F0--;\n    D_80089F9C[*(u8 *)((u8 *) temp_a1 + 0x168)](temp_a1);\n}",
+        "score": 0.4814814814814815,
+        "reason": "length_mismatch (target=27, generated=26)",
+        "diffs": [],
+        "timestamp": "2026-06-02T20:44:13.687Z"
+      }
+    ]
   },
   {
     "function": "func_15141250",
