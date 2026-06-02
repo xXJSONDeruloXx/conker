@@ -7672,8 +7672,8 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 3,
-    "lastScore": 0.0625,
+    "attempts": 5,
+    "lastScore": 0.48484848484848486,
     "status": "pending",
     "history": [
       {
@@ -7717,6 +7717,20 @@
           "structural: target=b L3 got=addiu a1, a1, 2"
         ],
         "timestamp": "2026-06-02T23:32:22.816Z"
+      },
+      {
+        "code": "int func_150027F8(s32 arg0) {\n    s32 var_v0;\n    s32 var_v1;\n    s32 temp_a1;\n\n    if (arg0 != 0) {\n        var_v0 = 0;\n        var_v1 = 0;\n        temp_a1 = *(s8 *)arg0;\n        if (temp_a1 != -0x21) {\n            do {\n                var_v0++;\n                if ((temp_a1 >> 4) == 1) {\n                    var_v1 += 4;\n                } else if (temp_a1 == 6) {\n                    var_v1 += 2;\n                } else if (temp_a1 == 5) {\n                    var_v1 += 1;\n                }\n                temp_a1 = *(s8 *)(arg0 + (var_v0 << 3));\n            } while (temp_a1 != -0x21);\n        }\n        return var_v1;\n    }\n    return 0;\n}",
+        "score": 0.484375,
+        "reason": "length_mismatch (target=32, generated=31)",
+        "diffs": [],
+        "timestamp": "2026-06-02T23:33:14.984Z"
+      },
+      {
+        "code": "int func_150027F8(s32 arg0) {\n    s32 var_v0;\n    s32 var_v1;\n    s32 temp_a1;\n\n    if (arg0 != 0) {\n        temp_a1 = *(s8 *)arg0;\n        goto non_null;\n    }\n    return 0;\n\nnon_null:\n    var_v0 = 0;\n    var_v1 = 0;\n    if (temp_a1 != -0x21) {\n        do {\n            var_v0++;\n            if ((temp_a1 >> 4) == 1) {\n                var_v1 += 4;\n            } else if (temp_a1 == 6) {\n                var_v1 += 2;\n            } else if (temp_a1 == 5) {\n                var_v1 += 1;\n            }\n            temp_a1 = *(s8 *)(arg0 + (var_v0 << 3));\n        } while (temp_a1 != -0x21);\n    }\n    return var_v1;\n}",
+        "score": 0.48484848484848486,
+        "reason": "length_mismatch (target=32, generated=33)",
+        "diffs": [],
+        "timestamp": "2026-06-02T23:34:08.711Z"
       }
     ]
   },
