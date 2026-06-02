@@ -6687,9 +6687,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1,
+    "status": "matched"
   },
   {
     "function": "func_151420F8",
@@ -7174,9 +7174,41 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.9355,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_15015F40(s16 arg0, s32 arg1) {\n    switch (arg1) {\n    case 0x1A:\n    case 0x24:\n    case 0x2B:\n    case 0x2D:\n    case 0x30:\n    case 0x33:\n    case 0x34:\n    case 0x3F:\n        D_800BE616 = 1;\n        D_800BE9E8 = func_151E5FAC() - 1;\n        break;\n    default:\n        D_800BE616 = 0;\n        D_800BE9E8 = arg0 - 1;\n        break;\n    }\n}",
+        "score": 0.9355,
+        "reason": "structural_diffs=2",
+        "diffs": [
+          "structural: target=lui at, HI(jtbl_800966C0) got=lui at, HI(.rodata)",
+          "structural: target=lw t8, LO(jtbl_800966C0)(at) got=lw t8, LO(.rodata)(at)"
+        ],
+        "timestamp": "2026-06-02T22:48:23.232Z"
+      },
+      {
+        "code": "void func_15015F40(s16 arg0, s32 arg1) {\n    switch (arg1) {\n    case 0x1A:\n    case 0x24:\n    case 0x2B:\n    case 0x2D:\n    case 0x30:\n    case 0x33:\n    case 0x34:\n    case 0x3F:\n        D_800BE616 = 1;\n        D_800BE9E8 = func_151E5FAC() - 1;\n        break;\n    default:\n        D_800BE616 = 0;\n        D_800BE9E8 = arg0 - 1;\n        break;\n    }\n}",
+        "score": 0.9355,
+        "reason": "structural_diffs=2",
+        "diffs": [
+          "structural: target=lui at, HI(jtbl_800966C0) got=lui at, HI(.rodata)",
+          "structural: target=lw t8, LO(jtbl_800966C0)(at) got=lw t8, LO(.rodata)(at)"
+        ],
+        "timestamp": "2026-06-02T22:54:15.726Z"
+      },
+      {
+        "code": "void func_15015F40(s16 arg0, s32 arg1) {\n    switch (arg1) {\n    case 0x1A:\n    case 0x24:\n    case 0x2B:\n    case 0x2D:\n    case 0x30:\n    case 0x33:\n    case 0x34:\n    case 0x3F:\n        D_800BE616 = 1;\n        D_800BE9E8 = func_151E5FAC() - 1;\n        break;\n    default:\n        D_800BE616 = 0;\n        D_800BE9E8 = arg0 - 1;\n        break;\n    }\n}",
+        "score": 0.9355,
+        "reason": "structural_diffs=2",
+        "diffs": [
+          "structural: target=lui at, HI(jtbl_800966C0) got=lui at, HI(.rodata)",
+          "structural: target=lw t8, LO(jtbl_800966C0)(at) got=lw t8, LO(.rodata)(at)"
+        ],
+        "timestamp": "2026-06-02T22:55:17.371Z"
+      }
+    ]
   },
   {
     "function": "func_15042E3C",
