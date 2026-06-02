@@ -750,9 +750,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1,
+    "status": "matched"
   },
   {
     "function": "func_151D343C",
@@ -763,9 +763,46 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 5,
+    "lastScore": 0.47058823529411764,
+    "status": "skipped",
+    "history": [
+      {
+        "code": "void func_151D343C(s32 arg0, s32 arg1) {\n    s32 sp1C[1];\n\n    sp1C[0] = D_800AB168[0];\n    func_15169260((s32)sp1C, 1, arg0, arg1 & 0xFF);\n}\n",
+        "score": 0.47058823529411764,
+        "reason": "length_mismatch (target=17, generated=16)",
+        "diffs": [],
+        "timestamp": "2026-06-02T17:16:43.492Z"
+      },
+      {
+        "code": "void func_151D343C(s32 arg0, u8 arg1) {\n    s32 sp1C[1];\n\n    sp1C[0] = D_800AB168[0];\n    func_15169260((s32)sp1C, 1, arg0, arg1);\n}\n",
+        "score": 0.4411764705882353,
+        "reason": "length_mismatch (target=17, generated=15)",
+        "diffs": [],
+        "timestamp": "2026-06-02T17:16:53.622Z"
+      },
+      {
+        "code": "void func_151D343C(s32 arg0, u8 arg1) {\n    s32 sp1C[1];\n    s32 temp = arg1 & 0xFF;\n\n    sp1C[0] = D_800AB168[0];\n    func_15169260((s32)sp1C, 1, arg0, temp);\n}\n",
+        "score": 0.4411764705882353,
+        "reason": "length_mismatch (target=17, generated=15)",
+        "diffs": [],
+        "timestamp": "2026-06-02T17:17:13.295Z"
+      },
+      {
+        "code": "void func_151D343C(s32 arg0, s32 arg1) {\n    s32 sp1C;\n\n    sp1C = D_800AB168[0];\n    func_15169260((s32)&sp1C, 1, arg0, arg1 & 0xFF);\n}\n",
+        "score": 0.47058823529411764,
+        "reason": "length_mismatch (target=17, generated=16)",
+        "diffs": [],
+        "timestamp": "2026-06-02T17:17:29.239Z"
+      },
+      {
+        "code": "void func_151D343C(s32 arg0, s32 arg1) {\n    struct { s32 unk0; } sp1C;\n\n    sp1C.unk0 = D_800AB168[0];\n    func_15169260((s32)&sp1C, 1, arg0, arg1 & 0xFF);\n}\n",
+        "score": 0.47058823529411764,
+        "reason": "length_mismatch (target=17, generated=16)",
+        "diffs": [],
+        "timestamp": "2026-06-02T17:17:38.965Z"
+      }
+    ]
   },
   {
     "function": "func_150721A4",
