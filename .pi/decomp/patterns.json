@@ -270,5 +270,14 @@
     "example_functions": [
       "func_15143834"
     ]
+  },
+  {
+    "id": "float-polynomial-with-literal-scale",
+    "description": "Simple float polynomial expressions with literal scale match when preserving grouping and literal multiplication last.",
+    "trigger": "Target computes `(x + 1.0f) * (x - 1.0f) * (x - 2.0f) * 0.5f`.",
+    "solution": "Write `(((arg0 + 1.0f) * (arg0 - 1.0f)) * (arg0 - 2.0f)) * 0.5f`.",
+    "example_functions": [
+      "func_15142AC0"
+    ]
   }
 ]
