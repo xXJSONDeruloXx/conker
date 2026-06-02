@@ -331,16 +331,9 @@ export default function (pi: ExtensionAPI) {
 		const pending = state.queue.filter((e) => e.status === "pending").length;
 		const queueMatched = state.queue.filter((e) => e.status === "matched").length;
 		const progress = readProjectProgress(ctx.cwd);
-		// progress.csv may be stale — adjust with queue delta
-		// Each matched function moves from ASM to C
-		const adjustedC = progress.cFuncs + queueMatched;
-		const adjustedAsm = progress.asmFuncs - queueMatched;
-		const totalFuncs = adjustedC + adjustedAsm;
+		const totalFuncs = progress.cFuncs + progress.asmFuncs;
 		const totalBytes = progress.cBytes + progress.asmBytes;
-		// Rough byte estimate: use avg function size for matched count
-		const avgFuncBytes = totalFuncs > 0 ? totalBytes / totalFuncs : 100;
-		const adjustedCBytes = progress.cBytes + (queueMatched * avgFuncBytes);
-		const bytePct = totalBytes > 0 ? (adjustedCBytes / totalBytes) * 100 : 0;
+		const bytePct = totalBytes > 0 ? (progress.cBytes / totalBytes) * 100 : 0;
 
 		const loopLabel = loopState.enabled
 			? `loop ON  chunk ${loopState.chunk}`
@@ -358,9 +351,9 @@ export default function (pi: ExtensionAPI) {
 					theme.fg("muted", "  progress"),
 					theme.fg("success", `${bytePct.toFixed(1)}%`),
 					bar(bytePct, 14),
-					theme.fg("success", `${adjustedC}`),
+					theme.fg("success", `${progress.cFuncs}`),
 					theme.fg("dim", "C /"),
-					theme.fg("warning", `${adjustedAsm}`),
+					theme.fg("warning", `${progress.asmFuncs}`),
 					theme.fg("dim", "ASM /"),
 					theme.fg("muted", `${totalFuncs} total`),
 				].join(" ");
@@ -1143,7 +1136,15 @@ export default function (pi: ExtensionAPI) {
 				};
 			}
 
-			// Commit source + queue state (preserves history of what was tried) and push
+			// Regenerate progress.csv so widget shows accurate numbers
+			await pi.exec("docker", [
+				"run", "--rm", "--platform", "linux/amd64",
+				"-v", `${ctx.cwd}:/conker`, "-w", "/conker",
+				"conker-build-min-amd64",
+				"bash", "-lc", "make -C conker progress",
+			], { timeout: 30000 });
+
+			// Commit source + queue state + fresh progress (preserves history of what was tried) and push
 			const desc = params.description || `match ${params.function}`;
 			await pi.exec("git", ["add", `conker/src/${params.file}`, ".pi/decomp/queue.json", ".pi/decomp/patterns.json"]);
 			await pi.exec("git", ["commit", "-m", `feat(decomp): ${desc}`]);
