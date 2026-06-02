@@ -2450,8 +2450,8 @@
     "instructions": 26,
     "difficulty": "low",
     "tags": [],
-    "attempts": 9,
-    "lastScore": 0.4807692307692308,
+    "attempts": 12,
+    "lastScore": 0.4814814814814815,
     "status": "pending",
     "history": [
       {
@@ -2579,6 +2579,48 @@
         "reason": "length_mismatch (target=26, generated=25)",
         "diffs": [],
         "timestamp": "2026-06-02T19:27:52.606Z"
+      },
+      {
+        "code": "void func_1507488C(void) {\n    register struct127 *temp_a2 = D_800D154C;\n    register s32 temp_v1 = D_800D1580;\n    register u8 temp_a1 = temp_v1 & 1;\n\n    if (((&temp_a2->unk2E4)[(temp_v1 >> 16) & 0xFF] & ((temp_v1 >> 8) & 0xFF)) != 0) {\n        temp_a1 = ((temp_v1 & 1) ^ 1) & 0xFF;\n    }\n    if (temp_a1 != 0) {\n        temp_a2->unk138 += temp_v1 >> 24;\n    }\n}",
+        "score": 0.4807692307692308,
+        "reason": "length_mismatch (target=26, generated=25)",
+        "diffs": [],
+        "timestamp": "2026-06-02T19:28:21.371Z"
+      },
+      {
+        "code": "void func_1507488C(void) {\n    struct127 *temp_a2 = D_800D154C;\n    s32 temp_v1 = D_800D1580;\n    u8 temp_v0 = temp_v1 >> 16;\n    u8 temp_a0 = temp_v1 >> 8;\n    s32 temp_a1 = temp_v1;\n    s32 temp_t8;\n\n    temp_t8 = temp_a1 & 1;\n    if (((&temp_a2->unk2E4)[temp_v0] & temp_a0) != 0) {\n        temp_a1 = (temp_t8 ^ 1) & 0xFF;\n    } else {\n        temp_a1 = temp_t8;\n    }\n    if (temp_a1 != 0) {\n        temp_a2->unk138 += temp_v1 >> 24;\n    }\n}",
+        "score": 0.2308,
+        "reason": "structural_diffs=20",
+        "diffs": [
+          "structural: target=lui a2, HI(D_800D154C) got=lui v0, HI(D_800D154C)",
+          "structural: target=lw a2, LO(D_800D154C)(a2) got=lw v0, LO(D_800D154C)(v0)",
+          "structural: target=sra v0, v1, 16 got=sra t6, v1, 16",
+          "structural: target=andi t6, v0, 255 got=andi t7, t6, 255",
+          "structural: target=sll t9, t6, 2 got=sll t8, t7, 2",
+          "structural: target=addu t0, a2, t9 got=addu t9, v0, t8",
+          "structural: target=lw t1, 740(t0) got=lw t0, 740(t9)",
+          "structural: target=sra a0, v1, 8 got=sra t1, v1, 8",
+          "structural: target=andi t7, a0, 255 got=andi t2, t1, 255",
+          "structural: target=move a1, v1 got=and t3, t0, t2",
+          "structural: target=andi t8, a1, 1 got=beqz t3, L0",
+          "structural: target=and t2, t1, t7 got=andi a0, v1, 1",
+          "structural: target=beqz t2, L0 got=andi a0, v1, 1",
+          "structural: target=move a1, t8 got=xori t4, a0, 1",
+          "structural: target=xori t3, t8, 1 got=b L0",
+          "structural: target=andi a1, t3, 255 got=andi a0, t4, 255",
+          "structural: target=beqz a1, L1 got=beqz a0, L1",
+          "structural: target=lbu t5, 312(a2) got=lbu t6, 312(v0)",
+          "structural: target=addu t8, t5, t7 got=addu t8, t6, t7",
+          "structural: target=sb t8, 312(a2) got=sb t8, 312(v0)"
+        ],
+        "timestamp": "2026-06-02T19:28:42.175Z"
+      },
+      {
+        "code": "void func_1507488C(void) {\n    s32 temp_v1;\n    s32 temp_v0;\n    s32 temp_a0;\n    s32 temp_a1;\n    struct127 *temp_a2;\n    s32 temp_t8;\n\n    temp_v1 = D_800D1580;\n    temp_v0 = temp_v1 >> 16;\n    temp_a0 = temp_v1 >> 8;\n    temp_a1 = temp_v1;\n    temp_a2 = D_800D154C;\n    temp_t8 = temp_a1 & 1;\n    if (((&temp_a2->unk2E4)[temp_v0 & 0xFF] & (temp_a0 & 0xFF)) != 0) {\n        temp_a1 = (temp_t8 ^ 1) & 0xFF;\n    } else {\n        temp_a1 = temp_t8;\n    }\n    if (temp_a1 != 0) {\n        temp_a2->unk138 += temp_v1 >> 24;\n    }\n}",
+        "score": 0.4814814814814815,
+        "reason": "length_mismatch (target=26, generated=27)",
+        "diffs": [],
+        "timestamp": "2026-06-02T19:28:59.593Z"
       }
     ]
   },
