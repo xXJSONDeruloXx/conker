@@ -978,9 +978,9 @@
     "instructions": 26,
     "difficulty": "low",
     "tags": [],
-    "attempts": 2,
-    "lastScore": 0.7308,
-    "status": "pending",
+    "attempts": 3,
+    "lastScore": 1,
+    "status": "matched",
     "history": [
       {
         "code": "void func_15073C50(void) {\n    D_800D154C->unk224 = D_800CC2E8[D_800D154C->unk222 * 203] + (f32) D_800D1580;\n}",
@@ -1310,9 +1310,32 @@
     "instructions": 26,
     "difficulty": "low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.4482758620689655,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_151F3D78(void) {\n    s32 temp;\n    s32 (*func)(s32, s32, s32);\n\n    func = ((s32 (*)(s32 *)) (*(s32 *)((u8 *)n_syn + 0x24)))(&temp);\n    func(D_800E0D80 + D_800E0DE4, 0x810, 0);\n}",
+        "score": 0.46153846153846156,
+        "reason": "length_mismatch (target=26, generated=24)",
+        "diffs": [],
+        "timestamp": "2026-06-02T19:20:07.998Z"
+      },
+      {
+        "code": "void func_151F3D78(void) {\n    s32 temp;\n    s32 (*func)(s32, s32, s32);\n\n    func = ((s32 (*)(s32 *)) (*(s32 *)((u8 *)n_syn + 0x24)))(&temp);\n    func(D_800E0D80 + D_800E0DE4, 0x810, 0);\n    return;\n}",
+        "score": 0.4807692307692308,
+        "reason": "length_mismatch (target=26, generated=25)",
+        "diffs": [],
+        "timestamp": "2026-06-02T19:20:52.957Z"
+      },
+      {
+        "code": "void func_151F3D78(void) {\n    s32 temp;\n    s32 (*func)(s32, s32, s32);\n\n    func = ((s32 (*)(s32 *)) (*(s32 *)((u8 *)n_syn + 0x24)))(&temp);\n    func(D_800E0D80 + D_800E0DE4, 0x810, 0);\n    asm(\"nop\");\n    asm(\"nop\");\n}",
+        "score": 0.4482758620689655,
+        "reason": "length_mismatch (target=26, generated=29)",
+        "diffs": [],
+        "timestamp": "2026-06-02T19:22:15.878Z"
+      }
+    ]
   },
   {
     "function": "func_151368A8",
