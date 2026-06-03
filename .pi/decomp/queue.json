@@ -3936,8 +3936,8 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 6,
-    "lastScore": 0.425,
+    "attempts": 9,
+    "lastScore": 0.4473684210526316,
     "status": "pending",
     "history": [
       {
@@ -4016,6 +4016,27 @@
         "reason": "length_mismatch (target=17, generated=20)",
         "diffs": [],
         "timestamp": "2026-06-03T07:37:41.545Z"
+      },
+      {
+        "code": "void func_150721A4(void) {\n    s32 temp_v1;\n\n    temp_v1 = *(volatile s32 *)&D_800D1580;\n    func_1506160C(D_800D154C, (u8)(temp_v1 >> 16), (u8)temp_v1, (u8)(temp_v1 >> 8), 0);\n}\n",
+        "score": 0.425,
+        "reason": "length_mismatch (target=17, generated=20)",
+        "diffs": [],
+        "timestamp": "2026-06-03T07:38:14.169Z"
+      },
+      {
+        "code": "void func_150721A4(void) {\n    s32 temp_t6;\n    s32 temp_t7;\n    s32 temp_v1;\n\n    temp_v1 = D_800D1580;\n    temp_t6 = temp_v1 >> 8;\n    temp_t7 = temp_v1 >> 16;\n    func_1506160C(D_800D154C, (u8)temp_t7, (u8)temp_v1, (u8)temp_t6, 0);\n}\n",
+        "score": 0.4473684210526316,
+        "reason": "length_mismatch (target=17, generated=19)",
+        "diffs": [],
+        "timestamp": "2026-06-03T07:38:37.178Z"
+      },
+      {
+        "code": "void func_150721A4(void) {\n    s32 temp_v1;\n\n    temp_v1 = D_800D1580;\n    func_1506160C(D_800D154C, (u8)(temp_v1 >> 16), temp_v1, temp_v1 >> 8, 0);\n}\n",
+        "score": 0.4473684210526316,
+        "reason": "length_mismatch (target=17, generated=19)",
+        "diffs": [],
+        "timestamp": "2026-06-03T07:38:58.480Z"
       }
     ]
   },
