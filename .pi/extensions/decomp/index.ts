@@ -276,6 +276,8 @@ function buildChunkPrompt(chunkNum: number): string {
 		"- Always call `decomp_chunk_done` when finished — this triggers context reset for the next chunk.",
 		"- Use the pattern library (/skill:n64-decomp) for IDO codegen rules.",
 		"- If score ≥ 0.9, you're close — try declaration reordering, type changes, or expression reshaping.",
+		"- If score ≥ 0.8 and plateaued, use decomp_permute to brute-force the last few instructions.",
+		"- Every few chunks, try: decomp_queue next with filter={nearMiss: true} to revisit high-scoring near-misses with the permuter.",
 		"- If score < 0.3 after 3 attempts, skip this candidate and try the next one.",
 		"- Read `decomp_diff` output before every retry.",
 		"- Never provide code that includes multiple functions, struct definitions, or header content.",
@@ -483,6 +485,7 @@ export default function (pi: ExtensionAPI) {
 					difficulty: Type.Optional(
 						StringEnum(["trivial", "low", "medium-low", "medium", "hard"] as const),
 					),
+					nearMiss: Type.Optional(Type.Boolean({ description: "Only return functions with prior attempts scoring >= 0.8 (best permuter candidates)" })),
 				}),
 			),
 			function: Type.Optional(Type.String({ description: "Function name for skip action" })),
@@ -784,9 +787,22 @@ export default function (pi: ExtensionAPI) {
 				candidates = candidates.filter((e) => e.instructions <= params.filter!.maxInstructions!);
 			if (params.filter?.difficulty)
 				candidates = candidates.filter((e) => e.difficulty === params.filter!.difficulty);
-
-			// Sort: fewer instructions first, fewer attempts first
-			candidates.sort((a, b) => a.instructions - b.instructions || a.attempts - b.attempts);
+			if (params.filter?.nearMiss) {
+				candidates = candidates.filter((e) => {
+					if (!e.history || e.history.length === 0) return false;
+					const best = Math.max(...e.history.map((h: AttemptRecord) => h.score));
+					return best >= 0.8;
+				});
+				// Sort near-misses by best score descending (closest to match first)
+				candidates.sort((a, b) => {
+					const bestA = Math.max(...(a.history || []).map((h: AttemptRecord) => h.score));
+					const bestB = Math.max(...(b.history || []).map((h: AttemptRecord) => h.score));
+					return bestB - bestA;
+				});
+			} else {
+				// Default sort: fewer instructions first, fewer attempts first
+				candidates.sort((a, b) => a.instructions - b.instructions || a.attempts - b.attempts);
+			}
 
 			if (candidates.length === 0) {
 				return { content: [{ type: "text", text: "No pending candidates matching filter." }], details: {} };
