@@ -438,24 +438,53 @@ export default function (pi: ExtensionAPI) {
 	});
 
 	// Load state on session start
-	// Guard: block direct mutations to conker/src/ via bash (must use decomp_accept)
+	// Guard: block ALL direct mutations to conker/src/ and conker/include/
 	pi.on("tool_call", async (event: any, ctx: any) => {
-		if (event.toolName === "bash") {
+		const toolName = event.toolName;
+
+		// Block Pi's write/edit tools on protected paths
+		if (toolName === "write" || toolName === "edit") {
+			const targetPath = event.input?.path || "";
+			if (/conker\/src|conker\/include/.test(targetPath)) {
+				if (ctx?.hasUI) ctx.ui.notify("\u26d4 Blocked: use decomp_attempt for source changes", "warning");
+				return { block: true, reason: "Direct write/edit to conker/src/ and conker/include/ is blocked. Use decomp_attempt (which auto-reverts) or decomp_accept (which verifies ROM SHA-1)." };
+			}
+		}
+
+		// Block bash mutations
+		if (toolName === "bash") {
 			const cmd = event.input?.command || "";
 			const touchesSrc = /conker\/src|conker\/include/.test(cmd);
 			if (!touchesSrc) return undefined;
 
-			const isAllowed = /cherry-pick|revert|recover|grep|cat|find|ls|head|tail|sed -n|wc|diff|log/.test(cmd);
-			if (isAllowed) return undefined;
+			// Allow read-only operations
+			const isReadOnly = /grep|cat|find|ls|head|tail|sed -n|wc|diff|log|show|status|blame/.test(cmd);
+			if (isReadOnly) return undefined;
+
+			// Allow recovery operations
+			const isRecovery = /cherry-pick|revert|recover/.test(cmd);
+			if (isRecovery) return undefined;
+
+			// Block --no-verify (hook bypass)
+			if (/--no-verify|-n/.test(cmd) && /git\s+commit/.test(cmd)) {
+				if (ctx?.hasUI) ctx.ui.notify("\u26d4 Blocked: --no-verify is not allowed", "warning");
+				return { block: true, reason: "git commit --no-verify is blocked. The pre-commit ROM verification hook cannot be bypassed." };
+			}
+
+			// Block hook manipulation
+			if (/\.githooks|core\.hooksPath|pre-commit/.test(cmd) && /(rm|mv|chmod|sed|echo|cat.*>|config)/.test(cmd)) {
+				if (ctx?.hasUI) ctx.ui.notify("\u26d4 Blocked: hook manipulation not allowed", "warning");
+				return { block: true, reason: "Modifying or disabling git hooks is blocked. The ROM verification hook is mandatory." };
+			}
 
 			// Block git add/commit on protected paths
 			const isGitMutation = /&&\s*git\s+(add|commit)|^\s*(cd\s+[^;&]+&&\s*)?git\s+(add|commit)/.test(cmd);
 			// Block file mutations (sed -i, python writing, rm, etc)
 			const isFileMutation = /(sed\s+-i|perl\s+-pi|python3?\s|node\s|rm\s|mv\s|cp\s|chmod|tee\s|truncate|dd\b)/.test(cmd)
-				|| />>?\s*[^|]/.test(cmd); // redirect to file
+				|| />>?\s*[^|]/.test(cmd);
 
 			if (isGitMutation || isFileMutation) {
-				if (ctx?.hasUI) ctx.ui.notify("\u26d4 Blocked: use decomp_attempt/decomp_accept for source changes (ROM SHA gate required)", "warning");
+				if (ctx?.hasUI) ctx.ui.notify("\u26d4 Blocked: use decomp_attempt/decomp_accept for source changes", "warning");
 				return { block: true, reason: "Direct mutations to conker/src/ and conker/include/ are blocked. Use decomp_attempt (which auto-reverts) or decomp_accept (which verifies ROM SHA-1)." };
 			}
 		}
