@@ -3936,7 +3936,7 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 15,
+    "attempts": 18,
     "lastScore": 0.4473684210526316,
     "status": "pending",
     "history": [
@@ -4079,6 +4079,27 @@
         "reason": "length_mismatch (target=17, generated=19)",
         "diffs": [],
         "timestamp": "2026-06-03T07:42:30.926Z"
+      },
+      {
+        "code": "void func_150721A4(void) {\n    s32 temp_v1;\n\n    temp_v1 = ((struct00 *)&D_800D1580)->unk0;\n    func_1506160C(D_800D154C, (u8)(temp_v1 >> 16), (u8)temp_v1, (u8)(temp_v1 >> 8), 0);\n}\n",
+        "score": 0.4473684210526316,
+        "reason": "length_mismatch (target=17, generated=19)",
+        "diffs": [],
+        "timestamp": "2026-06-03T07:42:54.193Z"
+      },
+      {
+        "code": "void func_150721A4(void) {\n    s32 temp_v1;\n\n    temp_v1 = D_800D1580;\n    func_1506160C(D_800D154C, temp_v1 >> 16, temp_v1, temp_v1 >> 8, 0);\n}\n",
+        "score": 0.4473684210526316,
+        "reason": "length_mismatch (target=17, generated=19)",
+        "diffs": [],
+        "timestamp": "2026-06-03T07:43:30.989Z"
+      },
+      {
+        "code": "void func_150721A4(void) {\n    s32 temp_v1;\n    u16 temp_t6;\n    u16 temp_t7;\n\n    temp_v1 = D_800D1580;\n    temp_t6 = temp_v1 >> 8;\n    temp_t7 = temp_v1 >> 16;\n    func_1506160C(D_800D154C, temp_t7 & 0xFF, temp_v1 & 0xFF, temp_t6 & 0xFF, 0);\n}\n",
+        "score": 0.4473684210526316,
+        "reason": "length_mismatch (target=17, generated=19)",
+        "diffs": [],
+        "timestamp": "2026-06-03T07:44:05.868Z"
       }
     ]
   },
