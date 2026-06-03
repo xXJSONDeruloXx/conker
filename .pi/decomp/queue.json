@@ -12036,8 +12036,8 @@
     "instructions": 37,
     "difficulty": "medium-low",
     "tags": [],
-    "attempts": 3,
-    "lastScore": 0.4868421052631579,
+    "attempts": 6,
+    "lastScore": 0.1622,
     "status": "pending",
     "history": [
       {
@@ -12073,6 +12073,74 @@
         "reason": "length_mismatch (target=37, generated=38)",
         "diffs": [],
         "timestamp": "2026-06-03T21:29:10.228Z"
+      },
+      {
+        "code": "s32 *func_15142B7C(s32 *arg0, s32 arg1, s32 arg2) {\n    s32 *temp_v0;\n\n    temp_v0 = arg0;\n    if ((~D_800DD200 & arg2) != 0) {\n        temp_v0[0] = ((~arg2) & 0xFFFFFF) | 0xD9000000;\n        arg0 = (s32 *)((s32)arg0 + 8);\n        temp_v0[1] = 0;\n        D_800DD200 = D_800DD200 | arg2;\n    }\n    if ((~D_800DD1FC & arg1) != 0) {\n        temp_v0 = arg0;\n        arg0 = (s32 *)((s32)arg0 + 8);\n        temp_v0[0] = 0xD9FFFFFF;\n        temp_v0[1] = arg1;\n        D_800DD1FC = D_800DD1FC | arg1;\n    }\n    return arg0;\n}",
+        "score": 0.6757,
+        "reason": "structural_diffs=12",
+        "diffs": [
+          "structural: target=not t9, a2 got=nor t9, a2, zero",
+          "structural: target=not t7, t6 got=nor t7, t6, zero",
+          "structural: target=addiu a0, a0, 8 got=sw zero, 4(v0)",
+          "structural: target=sw zero, 4(v0) got=lw t2, 0(v1)",
+          "structural: target=lw t2, 0(v1) got=addiu a0, a0, 8",
+          "structural: target=ori t7, t7, 65535 got=move v0, a0",
+          "structural: target=not t5, t4 got=nor t5, t4, zero",
+          "structural: target=move v0, a0 got=ori t7, t7, 65535",
+          "structural: target=addiu a0, a0, 8 got=sw t7, 0(v0)",
+          "structural: target=sw t7, 0(v0) got=sw a1, 4(v0)",
+          "structural: target=sw a1, 4(v0) got=lw t8, 0(v1)",
+          "structural: target=lw t8, 0(v1) got=addiu a0, a0, 8"
+        ],
+        "timestamp": "2026-06-03T21:30:39.981Z"
+      },
+      {
+        "code": "Gfx *func_15142B7C(Gfx *arg0, s32 arg1, s32 arg2) {\n    Gfx *temp_v0;\n\n    temp_v0 = arg0;\n    if ((~D_800DD200 & arg2) != 0) {\n        temp_v0->words.w0 = ((~arg2) & 0xFFFFFF) | 0xD9000000;\n        arg0++;\n        temp_v0->words.w1 = 0;\n        D_800DD200 = D_800DD200 | arg2;\n    }\n    if ((~D_800DD1FC & arg1) != 0) {\n        temp_v0 = arg0;\n        arg0++;\n        temp_v0->words.w0 = 0xD9FFFFFF;\n        temp_v0->words.w1 = arg1;\n        D_800DD1FC = D_800DD1FC | arg1;\n    }\n    return arg0;\n}",
+        "score": 0.6757,
+        "reason": "structural_diffs=12",
+        "diffs": [
+          "structural: target=not t9, a2 got=nor t9, a2, zero",
+          "structural: target=not t7, t6 got=nor t7, t6, zero",
+          "structural: target=addiu a0, a0, 8 got=sw zero, 4(v0)",
+          "structural: target=sw zero, 4(v0) got=lw t2, 0(v1)",
+          "structural: target=lw t2, 0(v1) got=addiu a0, a0, 8",
+          "structural: target=ori t7, t7, 65535 got=move v0, a0",
+          "structural: target=not t5, t4 got=nor t5, t4, zero",
+          "structural: target=move v0, a0 got=ori t7, t7, 65535",
+          "structural: target=addiu a0, a0, 8 got=sw t7, 0(v0)",
+          "structural: target=sw t7, 0(v0) got=sw a1, 4(v0)",
+          "structural: target=sw a1, 4(v0) got=lw t8, 0(v1)",
+          "structural: target=lw t8, 0(v1) got=addiu a0, a0, 8"
+        ],
+        "timestamp": "2026-06-03T21:31:01.916Z"
+      },
+      {
+        "code": "Gfx *func_15142B7C(Gfx *arg0, s32 arg1, s32 arg2) {\n    if ((~D_800DD200 & arg2) != 0) {\n        gDPSetOtherMode(arg0, (~arg2) & 0xFFFFFF, 0);\n        arg0++;\n        D_800DD200 = D_800DD200 | arg2;\n    }\n    if ((~D_800DD1FC & arg1) != 0) {\n        gDPSetOtherMode(arg0, 0xFFFFFF, arg1);\n        arg0++;\n        D_800DD1FC = D_800DD1FC | arg1;\n    }\n    return arg0;\n}",
+        "score": 0.1622,
+        "reason": "structural_diffs=31",
+        "diffs": [
+          "structural: target=lui v1, HI(D_800DD200) got=lui v0, HI(D_800DD200)",
+          "structural: target=addiu v1, v1, LO(D_800DD200) got=addiu v0, v0, LO(D_800DD200)",
+          "structural: target=lw t6, 0(v1) got=lw t6, 0(v0)",
+          "structural: target=move v0, a0 got=lui at, 255",
+          "structural: target=not t9, a2 got=ori at, at, 65535",
+          "structural: target=not t7, t6 got=nor t7, t6, zero",
+          "structural: target=lui at, 255 got=nor t9, a2, zero",
+          "structural: target=ori at, at, 65535 got=and t0, t9, at",
+          "structural: target=and t0, t9, at got=and t1, t0, at",
+          "structural: target=lui at, 55552 got=lui at, 61184",
+          "structural: target=or t1, t0, at got=or t2, t1, at",
+          "structural: target=sw t1, 0(v0) got=sw t2, 0(a0)",
+          "structural: target=addiu a0, a0, 8 got=sw zero, 4(a0)",
+          "structural: target=sw zero, 4(v0) got=lw t3, 0(v0)",
+          "structural: target=lw t2, 0(v1) got=addiu a0, a0, 8",
+          "structural: target=or t3, t2, a2 got=or t4, t3, a2",
+          "structural: target=sw t3, 0(v1) got=sw t4, 0(v0)",
+          "structural: target=lui v1, HI(D_800DD1FC) got=lui v0, HI(D_800DD1FC)",
+          "structural: target=addiu v1, v1, LO(D_800DD1FC) got=addiu v0, v0, LO(D_800DD1FC)",
+          "structural: target=lw t4, 0(v1) got=lw t5, 0(v0)"
+        ],
+        "timestamp": "2026-06-03T21:31:31.864Z"
       }
     ]
   },
