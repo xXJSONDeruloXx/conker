@@ -15851,8 +15851,8 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 6,
-    "lastScore": 0.2683,
+    "attempts": 9,
+    "lastScore": 0.9268,
     "status": "pending",
     "history": [
       {
@@ -16001,6 +16001,60 @@
           "structural: target=sw t0, 0(v1) got=sw a2, 0(t0)"
         ],
         "timestamp": "2026-06-03T22:57:17.108Z"
+      },
+      {
+        "code": "void func_15002754(void) {\n    s32 count;\n    s32 idx;\n\n    count = D_800DBE38;\n    idx = D_800DBE50;\n    D_800DBDD8[idx] = D_800B0DC0 = ALIGN4(D_800B0DC0);\n    D_800DBDE8[idx] = D_800B0DC0 = D_800B0DC0 + count * 12;\n    D_800DBDF8[idx] = D_800B0DC0 = D_800B0DC0 + count * 8;\n    D_800B0DC0 = D_800B0DC0 + count * 4;\n    func_1510F800(idx);\n    D_800DBE38 = 0;\n}",
+        "score": 0.4634,
+        "reason": "structural_diffs=22",
+        "diffs": [
+          "structural: target=li at, -4 got=lui a1, HI(D_800DBE38)",
+          "structural: target=lui a2, HI(D_800DBE38) got=lw a1, LO(D_800DBE38)(a1)",
+          "structural: target=addiu t7, t6, 3 got=lui a0, HI(D_800DBE50)",
+          "structural: target=and t8, t7, at got=lw a0, LO(D_800DBE50)(a0)",
+          "structural: target=sw t8, 0(v1) got=li at, -4",
+          "structural: target=lw a2, LO(D_800DBE38)(a2) got=addiu t7, t6, 3",
+          "structural: target=lui a0, HI(D_800DBE50) got=and t8, t7, at",
+          "structural: target=lw a0, LO(D_800DBE50)(a0) got=sll t9, a1, 2",
+          "structural: target=sll t9, a2, 2 got=lui at, HI(D_800DBDD8)",
+          "structural: target=lui at, HI(D_800DBDD8) got=subu t9, t9, a1",
+          "structural: target=subu t9, t9, a2 got=sll a2, a0, 2",
+          "structural: target=sll a1, a0, 2 got=addu at, at, a2",
+          "structural: target=addu at, at, a1 got=sw t8, 0(v1)",
+          "structural: target=addu t0, t8, t9 got=addu t0, t9, t8",
+          "structural: target=sw t0, 0(v1) got=addu at, at, a2",
+          "structural: target=addu at, at, a1 got=sw t0, 0(v1)",
+          "structural: target=sll t1, a2, 3 got=sll t1, a1, 3",
+          "structural: target=addu t2, t0, t1 got=addu t2, t1, t0",
+          "structural: target=sw t2, 0(v1) got=addu at, at, a2",
+          "structural: target=addu at, at, a1 got=sw t2, 0(v1)"
+        ],
+        "timestamp": "2026-06-03T22:57:58.231Z"
+      },
+      {
+        "code": "void func_15002754(void) {\n    s32 count;\n    s32 idx;\n\n    D_800DBDD8[D_800DBE50] = D_800B0DC0 = ALIGN4(D_800B0DC0);\n    count = D_800DBE38;\n    idx = D_800DBE50;\n    D_800DBDE8[idx] = D_800B0DC0 = D_800B0DC0 + count * 12;\n    D_800DBDF8[idx] = D_800B0DC0 = D_800B0DC0 + count * 8;\n    D_800B0DC0 = D_800B0DC0 + count * 4;\n    func_1510F800(idx);\n    D_800DBE38 = 0;\n}",
+        "score": 0.8293,
+        "reason": "structural_diffs=7",
+        "diffs": [
+          "structural: target=addu t0, t8, t9 got=addu t0, t9, t8",
+          "structural: target=sw t0, 0(v1) got=addu at, at, a1",
+          "structural: target=addu at, at, a1 got=sw t0, 0(v1)",
+          "structural: target=addu t2, t0, t1 got=addu t2, t1, t0",
+          "structural: target=sw t2, 0(v1) got=addu at, at, a1",
+          "structural: target=addu at, at, a1 got=sw t2, 0(v1)",
+          "structural: target=addu t4, t2, t3 got=addu t4, t3, t2"
+        ],
+        "timestamp": "2026-06-03T22:58:19.029Z"
+      },
+      {
+        "code": "void func_15002754(void) {\n    s32 count;\n    s32 idx;\n\n    D_800DBDD8[D_800DBE50] = D_800B0DC0 = ALIGN4(D_800B0DC0);\n    count = D_800DBE38;\n    idx = D_800DBE50;\n    D_800B0DC0 = count * 12 + D_800B0DC0;\n    D_800DBDE8[idx] = D_800B0DC0;\n    D_800B0DC0 = count * 8 + D_800B0DC0;\n    D_800DBDF8[idx] = D_800B0DC0;\n    D_800B0DC0 = count * 4 + D_800B0DC0;\n    func_1510F800(idx);\n    D_800DBE38 = 0;\n}",
+        "score": 0.9268,
+        "reason": "structural_diffs=3",
+        "diffs": [
+          "structural: target=addu t0, t8, t9 got=addu t0, t9, t8",
+          "structural: target=addu t2, t0, t1 got=addu t2, t1, t0",
+          "structural: target=addu t4, t2, t3 got=addu t4, t3, t2"
+        ],
+        "timestamp": "2026-06-03T22:58:52.522Z"
       }
     ]
   },
