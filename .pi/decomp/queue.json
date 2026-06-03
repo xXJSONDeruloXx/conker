@@ -6992,7 +6992,7 @@
     "instructions": 20,
     "difficulty": "low",
     "tags": [],
-    "attempts": 21,
+    "attempts": 24,
     "lastScore": 0.45,
     "status": "pending",
     "history": [
@@ -7343,6 +7343,43 @@
           "structural: target=sll t6, v0, 2 got=sll t6, v1, 2"
         ],
         "timestamp": "2026-06-03T11:02:20.160Z"
+      },
+      {
+        "code": "void func_151696DC(arg0)\nstruct102 *arg0;\n{\n    s32 temp_v0 = 0;\n    s32 temp_v1 = D_800DD190;\n    u8 *temp_a2 = D_800DD198;\n    struct102 **temp_a1;\n\n    for (; temp_v0 < temp_v1; temp_v0 = (s8)(temp_v0 + 1)) {\n        temp_a1 = (struct102 **)&temp_a2[temp_v0 << 2];\n        if (arg0 == *temp_a1) {\n            *temp_a1 = *(struct102 **)((s32)arg0 + 8);\n        }\n    }\n}",
+        "score": 0.85,
+        "reason": "structural_diffs=3",
+        "diffs": [
+          "structural: target=addiu a2, a2, LO(D_800DD198) got=move v0, zero",
+          "structural: target=move v0, zero got=addiu a2, a2, LO(D_800DD198)",
+          "structural: target=addu a1, a2, t6 got=addu a1, t6, a2"
+        ],
+        "timestamp": "2026-06-03T11:02:39.095Z"
+      },
+      {
+        "code": "void func_151696DC(arg0)\nstruct102 *arg0;\n{\n    s32 temp_v0;\n    s32 temp_v1 = D_800DD190 + (temp_v0 * 0);\n    u8 *temp_a2 = D_800DD198;\n    struct102 **temp_a1;\n\n    for (temp_v0 = 0; temp_v0 < temp_v1; temp_v0 = (s8)(temp_v0 + 1)) {\n        temp_a1 = (struct102 **)&temp_a2[temp_v0 << 2];\n        if (arg0 == *temp_a1) {\n            *temp_a1 = *(struct102 **)((s32)arg0 + 8);\n        }\n    }\n}",
+        "score": 0.47619047619047616,
+        "reason": "length_mismatch (target=20, generated=21)",
+        "diffs": [],
+        "timestamp": "2026-06-03T11:03:07.305Z"
+      },
+      {
+        "code": "void func_151696DC(arg0)\nstruct102 *arg0;\n{\n    s32 temp_v0 = 0;\n    s32 temp_v1 = D_800DD190;\n    u8 *temp_a2 = D_800DD198;\n    struct102 **temp_a1;\n\n    for (temp_v0 = 0; temp_v0 < temp_v1; temp_v0 = (s8)(temp_v0 + 1)) {\n        temp_a1 = (struct102 **)&temp_a2[temp_v0 << 2];\n        if (arg0 == *temp_a1) {\n            *temp_a1 = *(struct102 **)((s32)arg0 + 8);\n        }\n    }\n}",
+        "score": 0.45,
+        "reason": "structural_diffs=11",
+        "diffs": [
+          "structural: target=lui v1, HI(D_800DD190) got=lui v0, HI(D_800DD190)",
+          "structural: target=lb v1, LO(D_800DD190)(v1) got=lb v0, LO(D_800DD190)(v0)",
+          "structural: target=blez v1, L0 got=blez v0, L0",
+          "structural: target=move v0, zero got=move v1, zero",
+          "structural: target=sll t6, v0, 2 got=sll t6, v1, 2",
+          "structural: target=addu a1, a2, t6 got=addu a1, t6, a2",
+          "structural: target=addiu v0, v0, 1 got=addiu v1, v1, 1",
+          "structural: target=sll t9, v0, 24 got=sll t9, v1, 24",
+          "structural: target=sra v0, t9, 24 got=sra v1, t9, 24",
+          "structural: target=slt at, v0, v1 got=slt at, v1, v0",
+          "structural: target=sll t6, v0, 2 got=sll t6, v1, 2"
+        ],
+        "timestamp": "2026-06-03T11:03:25.861Z"
       }
     ]
   },
