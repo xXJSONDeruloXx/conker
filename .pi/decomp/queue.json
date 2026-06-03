@@ -13763,9 +13763,27 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 2,
+    "lastScore": 0.973,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_15136A50(s32 arg0, s32 arg1, s32 arg2, s16 arg3, u8 arg4, s32 arg5) {\n    s32 sp1C;\n    s32 sp20;\n    s32 sp24;\n    f32 sp28;\n    f32 sp2C;\n    s16 sp30;\n    s8 sp32;\n    s8 sp33;\n    s8 sp34;\n    s8 sp35;\n\n    sp1C = arg0;\n    sp20 = arg1;\n    sp24 = arg2;\n    sp28 = D_800A461C;\n    sp2C = D_800A4620;\n    sp30 = arg3;\n    sp32 = 5;\n    sp33 = 5;\n    sp34 = 2;\n    sp35 = -1;\n    func_15134908(&sp1C, 0, arg4, arg5);\n}",
+        "score": 0.22972972972972971,
+        "reason": "length_mismatch (target=37, generated=17)",
+        "diffs": [],
+        "timestamp": "2026-06-03T21:32:18.373Z"
+      },
+      {
+        "code": "void func_15136A50(s32 arg0, s32 arg1, s32 arg2, s16 arg3, u8 arg4, s32 arg5) {\n    u8 sp1C[0x1A];\n\n    *(s32 *)&sp1C[0] = arg0;\n    *(s32 *)&sp1C[4] = arg1;\n    *(s32 *)&sp1C[8] = arg2;\n    *(f32 *)&sp1C[0xC] = D_800A461C;\n    *(f32 *)&sp1C[0x10] = D_800A4620;\n    *(s16 *)&sp1C[0x14] = arg3;\n    sp1C[0x16] = 5;\n    sp1C[0x17] = 5;\n    sp1C[0x18] = 2;\n    sp1C[0x19] = -1;\n    func_15134908(sp1C, 0, arg4, arg5);\n}",
+        "score": 0.973,
+        "reason": "structural_diffs=1",
+        "diffs": [
+          "structural: target=li t3, -1 got=li t3, 255"
+        ],
+        "timestamp": "2026-06-03T21:32:32.935Z"
+      }
+    ]
   },
   {
     "function": "func_150C2804",
