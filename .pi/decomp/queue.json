@@ -20716,8 +20716,8 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 12,
-    "lastScore": 0.8913,
+    "attempts": 15,
+    "lastScore": 0.8696,
     "status": "pending",
     "history": [
       {
@@ -20880,6 +20880,47 @@
           "structural: target=beqz v0, L3 got=beqz t0, L3"
         ],
         "timestamp": "2026-06-03T13:19:12.914Z"
+      },
+      {
+        "code": "void func_16000F8C(s32 arg0, f32 arg1) {\n    u8 buf[0x28];\n    u32 temp_t9;\n\n    if ((arg0 >= (D_160038A0 << 5)) && (arg0 < 0x341)) {\n        *(f32 *)&buf[0x24] = arg1;\n        temp_t9 = (u32)(*(s32 *)&buf[0x24] & 0x7F800000) >> 0x17;\n        if ((temp_t9 == 0) || (temp_t9 >= 0xFF)) {\n            if (((*(s32 *)&buf[0x24]) * 2) != 0) {\n                func_160012B0(arg0, D_160047D0);\n                return;\n            }\n        }\n        func_16001B34(buf - 8, (s32)D_160047D4, D_160047DC, D_160047E0, (f64)arg1);\n        func_160012B0(arg0, buf - 8);\n    }\n}",
+        "score": 0.7391,
+        "reason": "structural_diffs=12",
+        "diffs": [
+          "structural: target=addiu sp, sp, -88 got=addiu sp, sp, -80",
+          "structural: target=sw a0, 88(sp) got=sw a0, 80(sp)",
+          "structural: target=lw t6, 88(sp) got=lw t6, 80(sp)",
+          "structural: target=swc1 f12, 84(sp) got=swc1 f12, 76(sp)",
+          "structural: target=lw v1, 84(sp) got=lw v1, 76(sp)",
+          "structural: target=sll v0, v1, 1 got=sll t0, v1, 1",
+          "structural: target=beqz v0, L3 got=beqz t0, L3",
+          "structural: target=lw a0, 88(sp) got=lw a0, 80(sp)",
+          "structural: target=addiu a0, sp, 40 got=addiu a0, sp, 32",
+          "structural: target=lw a0, 88(sp) got=lw a0, 80(sp)",
+          "structural: target=addiu a1, sp, 40 got=addiu a1, sp, 32",
+          "structural: target=addiu sp, sp, 88 got=addiu sp, sp, 80"
+        ],
+        "timestamp": "2026-06-03T13:20:16.416Z"
+      },
+      {
+        "code": "void func_16000F8C(s32 arg0, f32 arg1) {\n    u8 buf[0x30];\n    u32 temp_t9;\n\n    if ((arg0 >= (D_160038A0 << 5)) && (arg0 < 0x341)) {\n        *(f32 *)&buf[0x2C] = arg1;\n        temp_t9 = (u32)(*(s32 *)&buf[0x2C] & 0x7F800000) >> 0x17;\n        if ((temp_t9 == 0) || (temp_t9 >= 0xFF)) {\n            if (((*(s32 *)&buf[0x2C]) * 2) != 0) {\n                func_160012B0(arg0, D_160047D0);\n                return;\n            }\n        }\n        func_16001B34(buf, (s32)D_160047D4, D_160047DC, D_160047E0, (f64)arg1);\n        func_160012B0(arg0, buf);\n    }\n}",
+        "score": 0.4891304347826087,
+        "reason": "length_mismatch (target=46, generated=45)",
+        "diffs": [],
+        "timestamp": "2026-06-03T13:20:37.696Z"
+      },
+      {
+        "code": "void func_16000F8C(s32 arg0, f32 arg1) {\n    volatile u8 pad[8];\n    u8 buf[0x28];\n    u32 temp_t9;\n\n    if ((arg0 >= (D_160038A0 << 5)) && (arg0 < 0x341)) {\n        *(f32 *)&buf[0x24] = arg1;\n        temp_t9 = (u32)(*(s32 *)&buf[0x24] & 0x7F800000) >> 0x17;\n        if ((temp_t9 == 0) || (temp_t9 >= 0xFF)) {\n            if (((*(s32 *)&buf[0x24]) * 2) != 0) {\n                func_160012B0(arg0, D_160047D0);\n                return;\n            }\n        }\n        func_16001B34(buf - 8, (s32)D_160047D4, D_160047DC, D_160047E0, (f64)arg1);\n        func_160012B0(arg0, buf - 8);\n    }\n}",
+        "score": 0.8696,
+        "reason": "structural_diffs=6",
+        "diffs": [
+          "structural: target=swc1 f12, 84(sp) got=swc1 f12, 76(sp)",
+          "structural: target=lw v1, 84(sp) got=lw v1, 76(sp)",
+          "structural: target=sll v0, v1, 1 got=sll t0, v1, 1",
+          "structural: target=beqz v0, L3 got=beqz t0, L3",
+          "structural: target=addiu a0, sp, 40 got=addiu a0, sp, 32",
+          "structural: target=addiu a1, sp, 40 got=addiu a1, sp, 32"
+        ],
+        "timestamp": "2026-06-03T13:21:08.437Z"
       }
     ]
   },
