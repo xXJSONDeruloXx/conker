@@ -3936,8 +3936,8 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 24,
-    "lastScore": 0.6471,
+    "attempts": 27,
+    "lastScore": 0.4473684210526316,
     "status": "pending",
     "history": [
       {
@@ -4177,6 +4177,27 @@
           "structural: target=andi a2, v1, 255 got=andi a2, v0, 255"
         ],
         "timestamp": "2026-06-03T07:46:36.321Z"
+      },
+      {
+        "code": "void func_150721A4(void) {\n    s32 temp_v1;\n    u16 temp_t6;\n    u8 temp_t7;\n\n    temp_v1 = D_800D1580;\n    temp_t6 = temp_v1 >> 8;\n    temp_t7 = temp_v1 >> 16;\n    func_1506160C(D_800D154C, temp_t7, (u8)temp_v1, temp_t6 & 0xFF, 0);\n}\n",
+        "score": 0.4722222222222222,
+        "reason": "length_mismatch (target=17, generated=18)",
+        "diffs": [],
+        "timestamp": "2026-06-03T07:47:01.010Z"
+      },
+      {
+        "code": "void func_150721A4(void) {\n    s32 temp_v1;\n    u8 temp_t6;\n    u16 temp_t7;\n\n    temp_v1 = D_800D1580;\n    temp_t6 = temp_v1 >> 8;\n    temp_t7 = temp_v1 >> 16;\n    func_1506160C(D_800D154C, temp_t7 & 0xFF, (u8)temp_v1, temp_t6, 0);\n}\n",
+        "score": 0.4722222222222222,
+        "reason": "length_mismatch (target=17, generated=18)",
+        "diffs": [],
+        "timestamp": "2026-06-03T07:47:19.193Z"
+      },
+      {
+        "code": "void func_150721A4(void) {\n    s32 temp_v1;\n    u8 temp_t6;\n    u8 temp_t7;\n\n    temp_v1 = D_800D1580;\n    temp_t6 = temp_v1 >> 8;\n    temp_t7 = temp_v1 >> 16;\n    func_1506160C(D_800D154C, temp_t7, (u8)temp_v1, temp_t6, 0);\n}\n",
+        "score": 0.4473684210526316,
+        "reason": "length_mismatch (target=17, generated=19)",
+        "diffs": [],
+        "timestamp": "2026-06-03T07:47:40.614Z"
       }
     ]
   },
