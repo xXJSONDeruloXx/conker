@@ -9869,9 +9869,9 @@
     "instructions": 33,
     "difficulty": "medium-low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 1,
-    "status": "pending",
+    "attempts": 1,
+    "lastScore": 0.8485,
+    "status": "skipped",
     "history": [
       {
         "code": "void func_150492CC(f32 arg0, f32 arg1, f32 arg2) {\n    D_800CC220 = arg0;\n    D_800CC224 = arg1;\n    D_800CC228 = arg2;\n    D_800CC22C = arg0 / 2;\n    D_800CC230 = arg1 / 2;\n    D_800CC234 = arg2 / 2;\n\n    if (arg0 == 0.0f) {\n        arg0 = D_80099080;\n    }\n\n    D_800CC238 = arg1 / arg0;\n    D_800CC23C = arg2 / arg0;\n}",
@@ -9985,6 +9985,19 @@
           "structural: target=swc1 f8, LO(D_800CC238 + 0x4)(at) got=swc1 f8, 0(v0)"
         ],
         "timestamp": "2026-06-02T23:55:51.693Z"
+      },
+      {
+        "code": "void func_150492CC(f32 arg0, f32 arg1, f32 arg2) {\n    D_800CC220 = arg0;\n    D_800CC224 = arg1;\n    D_800CC228 = arg2;\n    D_800CC22C = arg0 / 2;\n    D_800CC230 = arg1 / 2;\n    D_800CC234 = arg2 / 2;\n\n    if (arg0 == 0.0f) {\n        arg0 = D_80099080;\n    }\n\n    D_800CC238 = arg1 / arg0;\n    ((struct17 *)&D_800CC238)->unk4 = arg2 / arg0;\n}",
+        "score": 0.8485,
+        "reason": "structural_diffs=5",
+        "diffs": [
+          "structural: target=lui at, HI(D_800CC238) got=lui v0, HI(D_800CC238)",
+          "structural: target=div.s f8, f6, f12 got=addiu v0, v0, LO(D_800CC238)",
+          "structural: target=swc1 f18, LO(D_800CC238)(at) got=div.s f8, f6, f12",
+          "structural: target=lui at, HI(D_800CC238 + 0x4) got=swc1 f18, 0(v0)",
+          "structural: target=swc1 f8, LO(D_800CC238 + 0x4)(at) got=swc1 f8, 4(v0)"
+        ],
+        "timestamp": "2026-06-03T20:14:13.977Z"
       }
     ]
   },
@@ -11440,8 +11453,8 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0.7879,
+    "attempts": 2,
+    "lastScore": 0.9697,
     "status": "pending",
     "history": [
       {
@@ -11711,6 +11724,32 @@
           "structural: target=sb t4, 529(v0) got=sb t2, 529(v0)"
         ],
         "timestamp": "2026-06-03T00:50:09.912Z"
+      },
+      {
+        "code": "void func_1505DFDC(struct127 *arg0) {\n    s32 temp_t7;\n    u8 *temp_v0;\n    u16 *temp_v1;\n\n    temp_v0 = (u8 *) arg0->unk2D0;\n    arg0->unk84.uh = (u32)0xFFFF;\n    if (temp_v0 != NULL) {\n        temp_t7 = arg0->id;\n        *(s32 *)(temp_v0 + 0x28) = 0;\n        bzero(temp_v0 + 0x40, 0x3A0);\n        temp_v1 = &D_800C4ED0[temp_t7];\n        *(u8 *)(temp_v0 + 0x41) = *temp_v1 + 1;\n        *(s32 *)(temp_v0 + 0x30) = 0;\n        *(s32 *)(temp_v0 + 0x34) = 0;\n        *(u8 *)(temp_v0 + 0x211) = *temp_v1 + 1;\n    }\n}",
+        "score": 0.7273,
+        "reason": "structural_diffs=9",
+        "diffs": [
+          "structural: target=ori t6, zero, 65535 got=li t6, 65535",
+          "structural: target=addu v1, t9, t0 got=lw v0, 24(sp)",
+          "structural: target=lhu t1, 0(v1) got=addu v1, t9, t0",
+          "structural: target=lw v0, 24(sp) got=lhu t1, 0(v1)",
+          "structural: target=addiu t2, t1, 1 got=sw zero, 48(v0)",
+          "structural: target=sb t2, 65(v0) got=sw zero, 52(v0)",
+          "structural: target=lhu t3, 0(v1) got=addiu t2, t1, 1",
+          "structural: target=sw zero, 48(v0) got=sb t2, 65(v0)",
+          "structural: target=sw zero, 52(v0) got=lhu t3, 0(v1)"
+        ],
+        "timestamp": "2026-06-03T20:16:47.129Z"
+      },
+      {
+        "code": "void func_1505DFDC(struct127 *arg0) {\n    extern u16 D_800C4ED0[];\n    s32 temp_t7;\n    u8 *temp_v0;\n    s32 temp_t1;\n    s32 temp_t3;\n\n    temp_v0 = arg0->unk2D0;\n    arg0->unk84.uh = 0xFFFF;\n    if (temp_v0 != NULL) {\n        temp_t7 = arg0->id;\n        *(s32 *)(temp_v0 + 0x28) = 0;\n        bzero(temp_v0 + 0x40, 0x3A0);\n        temp_t1 = D_800C4ED0[temp_t7];\n        *(temp_v0 + 0x41) = (temp_t1 & 0xFFFF) + 1;\n        temp_t3 = D_800C4ED0[temp_t7];\n        *(s32 *)(temp_v0 + 0x30) = 0;\n        *(s32 *)(temp_v0 + 0x34) = 0;\n        *(temp_v0 + 0x211) = (unsigned char)temp_t3 + 1;\n    }\n}",
+        "score": 0.9697,
+        "reason": "structural_diffs=1",
+        "diffs": [
+          "structural: target=ori t6, zero, 65535 got=li t6, 65535"
+        ],
+        "timestamp": "2026-06-03T20:19:43.684Z"
       }
     ]
   },
@@ -15134,9 +15173,9 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 0,
+    "attempts": 1,
     "lastScore": 0.48214285714285715,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "void func_15004CE0(s8 *arg0, s32 arg1) {\n    s32 i = 0;\n    s8 *ptr = arg0;\n    u32 temp;\n\n    if (*arg0 != -0x21) {\n        do {\n            if (*ptr == -0x24) {\n                if ((u8)ptr[3] == 0xE) {\n                    temp = *(u32 *)(ptr + 4);\n                    if (temp < 0x80000000U) {\n                        *(u32 *)(ptr + 4) = temp + arg1;\n                    }\n                }\n            }\n            i++;\n            ptr = arg0 + (i << 3);\n        } while (*ptr != -0x21);\n    }\n}",
@@ -15207,6 +15246,13 @@
         "reason": "length_mismatch (target=28, generated=27)",
         "diffs": [],
         "timestamp": "2026-06-02T21:21:45.136Z"
+      },
+      {
+        "code": "void func_15004CE0(s8 *arg0, s32 arg1) {\n    s32 i = 0;\n    s8 *ptr = arg0;\n    int temp;\n\n    if ((0, arg0)[0] != -0x21) {\n        do {\n            ptr = (0, arg0) + ((0, i) << 3);\n            if (ptr[0] == -0x24) {\n                if ((u8)(0, ptr)[3] == 0xE) {\n                    temp = *(u32 *)(ptr + 4);\n                    if (temp < 0x80000000U) {\n                        *(u32 *)((0, ptr) + 4) = (0, temp) + arg1;\n                    }\n                }\n            }\n            i++;\n        } while (arg0[i << 3] != -0x21);\n    }\n    return;\n    asm(\"nop\");\n}",
+        "score": 0.48214285714285715,
+        "reason": "length_mismatch (target=28, generated=27)",
+        "diffs": [],
+        "timestamp": "2026-06-03T20:08:31.944Z"
       }
     ]
   },
@@ -16240,7 +16286,7 @@
     ],
     "attempts": 0,
     "lastScore": 0.9,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "s32 func_1514672C(struct17 *arg0) {\n    if ((D_800A56C4 < fabsf(arg0->unk0)) || (D_800A56C4 < fabsf(arg0->unk8)) || (D_800A56C4 < arg0->unk4) || (arg0->unk4 < D_800A56C8)) {\n        return 0;\n    }\n    return 1;\n}",
