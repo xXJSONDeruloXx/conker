@@ -3174,9 +3174,9 @@
     "instructions": 33,
     "difficulty": "medium-low",
     "tags": [],
-    "attempts": 6,
-    "lastScore": 0.8485,
-    "status": "pending",
+    "attempts": 11,
+    "lastScore": 1,
+    "status": "skipped",
     "history": [
       {
         "code": "void func_150492CC(f32 arg0, f32 arg1, f32 arg2) {\n    D_800CC220 = arg0;\n    D_800CC224 = arg1;\n    D_800CC228 = arg2;\n    D_800CC22C = arg0 / 2;\n    D_800CC230 = arg1 / 2;\n    D_800CC234 = arg2 / 2;\n\n    if (arg0 == 0.0f) {\n        arg0 = D_80099080;\n    }\n\n    D_800CC238 = arg1 / arg0;\n    D_800CC23C = arg2 / arg0;\n}",
@@ -3251,6 +3251,45 @@
           "structural: target=swc1 f8, LO(D_800CC238 + 0x4)(at) got=swc1 f8, 4(v0)"
         ],
         "timestamp": "2026-06-02T23:54:32.121Z"
+      },
+      {
+        "code": "void func_150492CC(f32 arg0, f32 arg1, f32 arg2) {\n    D_800CC220 = arg0;\n    D_800CC224 = arg1;\n    D_800CC228 = arg2;\n    D_800CC22C = arg0 / 2;\n    D_800CC230 = arg1 / 2;\n    D_800CC234 = arg2 / 2;\n\n    if (arg0 == 0.0f) {\n        arg0 = D_80099080;\n    }\n\n    D_800CC238[0] = arg1 / arg0;\n    D_800CC238[1] = arg2 / arg0;\n}",
+        "score": 0.8485,
+        "reason": "structural_diffs=5",
+        "diffs": [
+          "structural: target=lui at, HI(D_800CC238) got=lui v0, HI(D_800CC238)",
+          "structural: target=div.s f8, f6, f12 got=addiu v0, v0, LO(D_800CC238)",
+          "structural: target=swc1 f18, LO(D_800CC238)(at) got=div.s f8, f6, f12",
+          "structural: target=lui at, HI(D_800CC238 + 0x4) got=swc1 f18, 0(v0)",
+          "structural: target=swc1 f8, LO(D_800CC238 + 0x4)(at) got=swc1 f8, 4(v0)"
+        ],
+        "timestamp": "2026-06-02T23:55:11.094Z"
+      },
+      {
+        "code": "void func_150492CC(f32 arg0, f32 arg1, f32 arg2) {\n    D_800CC220 = arg0;\n    D_800CC224 = arg1;\n    D_800CC228 = arg2;\n    D_800CC22C = arg0 / 2;\n    D_800CC230 = arg1 / 2;\n    D_800CC234 = arg2 / 2;\n\n    if (arg0 == 0.0f) {\n        arg0 = D_80099080;\n    }\n\n    (&D_800CC238)[1] = arg2 / arg0;\n    D_800CC238 = arg1 / arg0;\n}",
+        "score": 0.4545,
+        "reason": "structural_diffs=18",
+        "diffs": [
+          "structural: target=div.s f8, f14, f0 got=lwc1 f18, 8(sp)",
+          "structural: target=swc1 f6, LO(D_800CC22C)(at) got=div.s f8, f14, f0",
+          "structural: target=lui at, HI(D_800CC230) got=swc1 f6, LO(D_800CC22C)(at)",
+          "structural: target=c.eq.s f12, f16 got=lui at, HI(D_800CC230)",
+          "structural: target=div.s f10, f4, f0 got=c.eq.s f12, f16",
+          "structural: target=swc1 f8, LO(D_800CC230)(at) got=div.s f10, f4, f0",
+          "structural: target=lui at, HI(D_800CC234) got=swc1 f8, LO(D_800CC230)(at)",
+          "structural: target=bc1f L0 got=lui at, HI(D_800CC234)",
+          "structural: target=swc1 f10, LO(D_800CC234)(at) got=bc1f L0",
+          "structural: target=lui at, HI(D_80099080) got=swc1 f10, LO(D_800CC234)(at)",
+          "structural: target=lwc1 f12, LO(D_80099080)(at) got=lui at, HI(D_80099080)",
+          "structural: target=lwc1 f6, 8(sp) got=lwc1 f12, LO(D_80099080)(at)",
+          "structural: target=div.s f18, f14, f12 got=div.s f6, f18, f12",
+          "structural: target=lui at, HI(D_800CC238) got=lui v0, HI(D_800CC238)",
+          "structural: target=div.s f8, f6, f12 got=addiu v0, v0, LO(D_800CC238)",
+          "structural: target=swc1 f18, LO(D_800CC238)(at) got=div.s f8, f14, f12",
+          "structural: target=lui at, HI(D_800CC238 + 0x4) got=swc1 f6, 4(v0)",
+          "structural: target=swc1 f8, LO(D_800CC238 + 0x4)(at) got=swc1 f8, 0(v0)"
+        ],
+        "timestamp": "2026-06-02T23:55:51.693Z"
       }
     ]
   },
@@ -7206,9 +7245,32 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.4714285714285714,
+    "status": "pending",
+    "history": [
+      {
+        "code": "s32 func_1000FF90(s32 arg0, s32 arg1, s32 arg2) {\n    s32 i;\n    struct15 *tmp;\n\n    tmp = D_80041FE0;\n    for (i = 0; i < D_80042760; i++, tmp++) {\n        if (arg0 == tmp->unk14) {\n            if ((arg1 == tmp->unk18) || (arg1 == -1)) {\n                if ((arg2 == tmp->unk1C) || (arg2 == -1)) {\n                    if ((tmp->unk10 & 0x80) == 0) {\n                        return i;\n                    }\n                }\n            }\n        }\n    }\n    return -1;\n}",
+        "score": 0.4714285714285714,
+        "reason": "length_mismatch (target=35, generated=33)",
+        "diffs": [],
+        "timestamp": "2026-06-03T00:06:14.270Z"
+      },
+      {
+        "code": "s32 func_1000FF90(s32 arg0, s32 arg1, s32 arg2) {\n    s32 temp_a3;\n    s32 temp_v0;\n    struct15 *temp_a1;\n    s32 i;\n    s32 temp_t1;\n    s32 temp_t0;\n\n    temp_a3 = arg1;\n    temp_v0 = D_80042760;\n    temp_a1 = D_80041FE0;\n    if (temp_v0 > 0) {\n        temp_t1 = -1;\n        temp_t0 = -1;\n        for (i = 0; i < temp_v0; i++, temp_a1++) {\n            if (arg0 == temp_a1->unk14) {\n                if ((temp_a3 == temp_a1->unk18) || (temp_a3 == temp_t0)) {\n                    if ((arg2 == temp_a1->unk1C) || (arg2 == temp_t1)) {\n                        if ((temp_a1->unk10 & 0x80) == 0) {\n                            return i;\n                        }\n                    }\n                }\n            }\n        }\n    }\n    return -1;\n}",
+        "score": 0,
+        "reason": "generated 122 instr for 35 target (3.5x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T00:06:53.676Z"
+      },
+      {
+        "code": "s32 func_1000FF90(s32 arg0, s32 arg1, s32 arg2) {\n    s32 temp_arg1;\n    s32 i;\n    struct15 *tmp;\n\n    temp_arg1 = arg1;\n    tmp = D_80041FE0;\n    for (i = 0; i < D_80042760; i++, tmp++) {\n        if (arg0 == tmp->unk14) {\n            if ((temp_arg1 == tmp->unk18) || (temp_arg1 == -1)) {\n                if ((arg2 == tmp->unk1C) || (arg2 == -1)) {\n                    if ((tmp->unk10 & 0x80) == 0) {\n                        return i;\n                    }\n                }\n            }\n        }\n    }\n    return -1;\n}",
+        "score": 0.4714285714285714,
+        "reason": "length_mismatch (target=35, generated=33)",
+        "diffs": [],
+        "timestamp": "2026-06-03T00:07:28.956Z"
+      }
+    ]
   },
   {
     "function": "func_15142314",
