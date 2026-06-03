@@ -2322,7 +2322,7 @@
     "instructions": 20,
     "difficulty": "low",
     "tags": [],
-    "attempts": 0,
+    "attempts": 3,
     "lastScore": 0.47619047619047616,
     "status": "pending",
     "history": [
@@ -2339,6 +2339,27 @@
         "reason": "length_mismatch (target=20, generated=21)",
         "diffs": [],
         "timestamp": "2026-06-02T17:40:29.253Z"
+      },
+      {
+        "code": "void guMtxIdentF(f32 mf[4][4]) {\n    s32 *m;\n\n    m = (s32 *)mf;\n    m[0] = 0x3F800000;\n    m[1] = 0;\n    m[2] = 0;\n    m[3] = 0;\n    m[4] = 0;\n    m[5] = 0x3F800000;\n    m[6] = 0;\n    m[7] = 0;\n    m[8] = 0;\n    m[9] = 0;\n    m[10] = 0x3F800000;\n    m[11] = 0;\n    m[12] = 0;\n    m[13] = 0;\n    m[14] = 0;\n    m[15] = 0x3F800000;\n}\n",
+        "score": 0.475,
+        "reason": "length_mismatch (target=20, generated=19)",
+        "diffs": [],
+        "timestamp": "2026-06-03T10:25:37.469Z"
+      },
+      {
+        "code": "void guMtxIdentF(f32 mf[4][4]) {\n    f32 zero;\n    f32 one;\n\n    zero = 0.0f;\n    one = 1.0f;\n    mf[0][0] = one;\n    mf[0][1] = zero;\n    mf[0][2] = zero;\n    mf[0][3] = zero;\n    mf[1][0] = zero;\n    mf[1][1] = one;\n    mf[1][2] = zero;\n    mf[1][3] = zero;\n    mf[2][0] = zero;\n    mf[2][1] = zero;\n    mf[2][2] = one;\n    mf[2][3] = zero;\n    mf[3][0] = zero;\n    mf[3][1] = zero;\n    mf[3][2] = zero;\n    mf[3][3] = one;\n}\n",
+        "score": 0.45454545454545453,
+        "reason": "length_mismatch (target=20, generated=22)",
+        "diffs": [],
+        "timestamp": "2026-06-03T10:25:51.579Z"
+      },
+      {
+        "code": "void guMtxIdentF(f32 mf[4][4]) {\n    f32 one;\n    s32 *m;\n\n    one = 1.0f;\n    m = (s32 *)mf;\n    m[1] = 0;\n    m[2] = 0;\n    m[3] = 0;\n    m[4] = 0;\n    m[6] = 0;\n    m[7] = 0;\n    m[8] = 0;\n    m[9] = 0;\n    m[11] = 0;\n    m[12] = 0;\n    m[13] = 0;\n    m[14] = 0;\n    mf[0][0] = one;\n    mf[1][1] = one;\n    mf[2][2] = one;\n    mf[3][3] = one;\n}\n",
+        "score": 0.47619047619047616,
+        "reason": "length_mismatch (target=20, generated=21)",
+        "diffs": [],
+        "timestamp": "2026-06-03T10:26:15.257Z"
       }
     ]
   },
@@ -7151,9 +7172,9 @@
     "instructions": 29,
     "difficulty": "low",
     "tags": [],
-    "attempts": 12,
+    "attempts": 13,
     "lastScore": 0.48333333333333334,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "void func_100100E0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {\n    struct15 *var_v0;\n    struct15 *end;\n\n    var_v0 = D_80041FE0;\n    if (D_80042760 > 0) {\n        end = &D_80041FE0[D_80042760];\n        do {\n            if ((arg0 == var_v0->unk14) && (arg1 == var_v0->unk18) && (arg2 == var_v0->unk1C)) {\n                var_v0->unk14 = arg3;\n                var_v0->unk18 = arg4;\n                var_v0->unk1C = arg5;\n            }\n            var_v0++;\n        } while (var_v0 < end);\n    }\n}",
@@ -7441,6 +7462,13 @@
         "reason": "length_mismatch (target=29, generated=30)",
         "diffs": [],
         "timestamp": "2026-06-03T10:22:43.189Z"
+      },
+      {
+        "code": "void func_100100E0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {\n    s32 temp_a0;\n    s32 temp_a1;\n    s32 temp_a2;\n    s32 temp_a3;\n    struct15 *var_v0;\n    struct15 *end;\n\n    temp_a0 = arg0;\n    temp_a1 = arg1;\n    temp_a2 = arg2;\n    temp_a3 = arg3;\n    var_v0 = (struct15 *)&D_80041FE0[0].unk0;\n    if (D_80042760 > 0) {\n        end = var_v0 + D_80042760;\n        do {\n            if ((temp_a0 == var_v0->unk14) && (temp_a1 == var_v0->unk18) && (temp_a2 == var_v0->unk1C)) {\n                var_v0->unk14 = temp_a3;\n                var_v0->unk18 = arg4;\n                var_v0->unk1C = arg5;\n            }\n            var_v0++;\n        } while (var_v0 < end);\n    }\n}\n",
+        "score": 0.48333333333333334,
+        "reason": "length_mismatch (target=29, generated=30)",
+        "diffs": [],
+        "timestamp": "2026-06-03T10:23:01.983Z"
       }
     ]
   },
