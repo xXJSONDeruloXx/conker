@@ -9542,7 +9542,7 @@
     "tags": [],
     "attempts": 3,
     "lastScore": 0.47619047619047616,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "void guMtxXFMF(f32 arg0[4][4], f32 arg1, f32 arg2, f32 arg3, f32 *arg4, f32 *arg5, f32 *arg6) {\n    *arg4 = (arg0[0][0] * arg1) + (arg0[1][0] * arg2) + (arg0[2][0] * arg3) + arg0[3][0];\n    *arg5 = (arg0[0][1] * arg1) + (arg0[1][1] * arg2) + (arg0[2][1] * arg3) + arg0[3][1];\n    *arg6 = (arg0[0][2] * arg1) + (arg0[1][2] * arg2) + (arg0[2][2] * arg3) + arg0[3][2];\n}",
@@ -9574,9 +9574,32 @@
     "instructions": 40,
     "difficulty": "medium-low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.3875,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_150A7D00(Mtx *arg0, f32 arg1, f32 arg2, f32 arg3) {\n    s32 temp_a1;\n    s32 temp_a2;\n    s32 temp_a3;\n    s16 *ptr;\n\n    ptr = (s16 *)arg0;\n    temp_a1 = arg1 * 65536.0f;\n    temp_a2 = arg2 * 65536.0f;\n    temp_a3 = arg3 * 65536.0f;\n    ((s64 *)arg0)[0] = 0;\n    ((s64 *)arg0)[1] = 0;\n    ((s64 *)arg0)[2] = 0;\n    ((s64 *)arg0)[3] = 0;\n    ((s64 *)arg0)[4] = 0;\n    ((s64 *)arg0)[5] = 0;\n    ((s64 *)arg0)[6] = 0;\n    ((s64 *)arg0)[7] = 0;\n    ptr[0] = 1;\n    ptr[5] = 1;\n    ptr[10] = 1;\n    ptr[15] = 1;\n    ptr[12] = (u32)temp_a1 >> 16;\n    ptr[13] = (u32)temp_a2 >> 16;\n    ptr[14] = (u32)temp_a3 >> 16;\n    ptr[28] = temp_a1;\n    ptr[29] = temp_a2;\n    ptr[30] = temp_a3;\n}",
+        "score": 0.3448275862068966,
+        "reason": "length_mismatch (target=40, generated=58)",
+        "diffs": [],
+        "timestamp": "2026-06-03T22:28:54.584Z"
+      },
+      {
+        "code": "void func_150A7D00(Mtx *arg0, f32 arg1, f32 arg2, f32 arg3) {\n    ((u64 *)arg0)[0] = 0;\n    ((u64 *)arg0)[1] = 0;\n    ((u64 *)arg0)[2] = 0;\n    ((u64 *)arg0)[3] = 0;\n    ((u64 *)arg0)[4] = 0;\n    ((u64 *)arg0)[5] = 0;\n    ((u64 *)arg0)[6] = 0;\n    ((u64 *)arg0)[7] = 0;\n}",
+        "score": 0.3875,
+        "reason": "length_mismatch (target=40, generated=31)",
+        "diffs": [],
+        "timestamp": "2026-06-03T22:29:28.996Z"
+      },
+      {
+        "code": "void func_150A7D00(Mtx *arg0, f32 arg1, f32 arg2, f32 arg3) {\n    ((vu64 *)arg0)[0] = 0;\n    ((vu64 *)arg0)[1] = 0;\n    ((vu64 *)arg0)[2] = 0;\n    ((vu64 *)arg0)[3] = 0;\n    ((vu64 *)arg0)[4] = 0;\n    ((vu64 *)arg0)[5] = 0;\n    ((vu64 *)arg0)[6] = 0;\n    ((vu64 *)arg0)[7] = 0;\n}",
+        "score": 0.3875,
+        "reason": "length_mismatch (target=40, generated=31)",
+        "diffs": [],
+        "timestamp": "2026-06-03T22:29:41.653Z"
+      }
+    ]
   },
   {
     "function": "func_100100E0",
