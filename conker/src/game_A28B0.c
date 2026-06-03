@@ -1282,7 +1282,11 @@ void func_15079F50(void) {
 // }
 
 // D_800D2104!
-#pragma GLOBAL_ASM("asm/nonmatchings/game_A28B0/func_1507A100.s")
+s32 func_1507A100(void) {
+    s32 val = ((s8)D_800D1892 << 8) | D_800D1893;
+    *(s16 *)((u8 *)D_800D2104[D_800D154C->unk13F] + (D_800D1890 * 8) + (D_800D1891 * 2) + 8) = val;
+    return val;
+}
 
 s32 func_1507A164(void) {
     s32 tmp = D_800CC30C[0] + (s8)D_800D1892;
