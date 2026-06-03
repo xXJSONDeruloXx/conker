@@ -6310,8 +6310,8 @@
     "instructions": 20,
     "difficulty": "low",
     "tags": [],
-    "attempts": 9,
-    "lastScore": 0.47619047619047616,
+    "attempts": 12,
+    "lastScore": 0.75,
     "status": "pending",
     "history": [
       {
@@ -6411,6 +6411,33 @@
         "reason": "length_mismatch (target=20, generated=21)",
         "diffs": [],
         "timestamp": "2026-06-03T10:42:38.711Z"
+      },
+      {
+        "code": "u8 func_151464B8(s16 *arg0) {\n    s32 i = 0;\n    s32 mask = 0;\n    s32 temp_a0;\n\n    for (; i <= D_80082FA0; i++) {\n        mask = (s16)(mask | (1 << i));\n    }\n    temp_a0 = arg0[1] & mask;\n    return temp_a0 < 1U;\n}",
+        "score": 0.47619047619047616,
+        "reason": "length_mismatch (target=20, generated=21)",
+        "diffs": [],
+        "timestamp": "2026-06-03T10:43:08.405Z"
+      },
+      {
+        "code": "s32 func_151464B8(void *arg0) {\n    s32 i = 0;\n    s32 mask = 0;\n    s32 temp_a0;\n\n    for (; i <= D_80082FA0; i++) {\n        mask = (s16)(mask | (1 << i));\n    }\n    temp_a0 = *(s16 *)((s32)arg0 + 2) & mask;\n    return temp_a0 < 1U;\n}",
+        "score": 0.475,
+        "reason": "length_mismatch (target=20, generated=19)",
+        "diffs": [],
+        "timestamp": "2026-06-03T10:43:27.178Z"
+      },
+      {
+        "code": "u8 func_151464B8(void *arg0) {\n    s32 i = 0;\n    s32 mask = 0;\n    s32 temp_t0;\n    s32 temp_a0;\n    s32 temp_t1;\n\n    for (; i <= D_80082FA0; i++) {\n        mask = (s16)(mask | (1 << i));\n    }\n    temp_t0 = *(s16 *)((s32)arg0 + 2);\n    temp_a0 = temp_t0 & mask;\n    temp_t1 = temp_a0 < 1U;\n    return temp_t1;\n}",
+        "score": 0.75,
+        "reason": "structural_diffs=5",
+        "diffs": [
+          "structural: target=or v1, v1, t7 got=or v1, t7, v1",
+          "structural: target=lh t0, 2(a2) got=lh a0, 2(a2)",
+          "structural: target=and a0, t0, v1 got=and v0, a0, v1",
+          "structural: target=sltiu t1, a0, 1 got=sltiu t0, v0, 1",
+          "structural: target=andi v0, t1, 255 got=andi v0, t0, 255"
+        ],
+        "timestamp": "2026-06-03T10:43:54.054Z"
       }
     ]
   },
