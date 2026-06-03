@@ -558,5 +558,14 @@
     "example_functions": [
       "func_16002D2C"
     ]
+  },
+  {
+    "id": "for-comma-init-register-order",
+    "description": "Compact for-loop comma initializers can steer IDO register allocation and entry scheduling for loop index/count/base setup.",
+    "trigger": "A near-match has correct loop body but either count/index registers are swapped or entry `addiu base` and `move index,zero` are ordered differently.",
+    "solution": "Use a `for (index = 0, limit = GLOBAL_COUNT, base = GLOBAL_BASE; index < limit; index = (s8)(index + 1))` header and compute the byte offset inside the loop to preserve index in v0, count in v1, base in a2, and base-address addiu before the branch delay zero init.",
+    "example_functions": [
+      "func_151696DC"
+    ]
   }
 ]

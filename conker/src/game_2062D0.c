@@ -179,7 +179,28 @@ void func_151D9FC0(u8 arg0, f32 arg1, u8 arg2, s32 arg3, s32 arg4, u8 arg5, s32 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_2062D0/func_151DA08C.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_2062D0/func_151DA368.s")
 // TODO when we know what arg0 is...
-#pragma GLOBAL_ASM("asm/nonmatchings/game_2062D0/func_151DA6A8.s")
+s32 func_151DA6A8(void *arg0) {
+    f32 *temp_v0;
+    s32 temp_v1;
+    s32 temp_a1;
+    f32 temp_f0;
+
+    if ((*(s32 *)((s32)arg0 + 0x58) & 1) != 0) {
+        temp_v0 = (f32 *)((s32)arg0 + 0x128);
+        temp_v1 = D_800BE9E4;
+        temp_a1 = temp_v1;
+        temp_v1--;
+        if (temp_a1 != 0) {
+            temp_f0 = temp_v0[5];
+            do {
+                temp_v0[4] *= temp_f0;
+                temp_a1 = temp_v1;
+                temp_v1--;
+            } while (temp_a1 != 0);
+        }
+    }
+    return 1;
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/game_2062D0/func_151DA6F8.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_2062D0/func_151DA938.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_2062D0/func_151DAA88.s")
