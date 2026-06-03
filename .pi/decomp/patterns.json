@@ -756,5 +756,14 @@
     "example_functions": [
       "func_15142914"
     ]
+  },
+  {
+    "id": "fp-assignment-vs-stack-slot-order",
+    "description": "For IDO FP locals, computation statement order and local declaration order can independently affect FPR allocation and spill-slot assignment. Declare locals in the spill-slot order, but assign them in the target load/sub scheduling order.",
+    "trigger": "Near-match where FP instructions are correct except early load/sub FPR names or spill offsets around a call are swapped.",
+    "solution": "Keep f32 local declarations in the order needed for stack spills, then reorder the initial assignment statements to match target load scheduling.",
+    "example_functions": [
+      "func_1505DF10"
+    ]
   }
 ]

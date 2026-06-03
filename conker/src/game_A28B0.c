@@ -782,7 +782,24 @@ void func_150779A8(void) {
     D_800D154C->unk223 = 0xB;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_A28B0/func_150779D4.s")
+void func_150779D4(void) {
+    struct127 *tmp;
+    u8 idx;
+    f32 temp_f2;
+
+    idx = 0;
+    if (D_800D1892 != 0) {
+        idx = D_800D154C->unk222;
+    }
+    if (D_800C3E78 != idx) {
+        tmp = &D_800CC2D0[idx];
+        if ((tmp->interaction_state != 1) || (tmp->unk65 == 0)) {
+            if (func_1505A6F8(D_800D154C, tmp) < (temp_f2 = D_800D1893 << 3)) {
+                func_15075400(D_800D1890);
+            }
+        }
+    }
+}
 // NON-MATCHING: JUSTREG! using $f6 not $f2
 // void func_150779D4(void) {
 //     struct127 *tmp;
