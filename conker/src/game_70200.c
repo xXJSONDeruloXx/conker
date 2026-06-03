@@ -97,7 +97,25 @@ s32 func_15043A20(void *arg0, s32 arg1, s32 arg2, void *arg3, s32 arg4) {
     }
     return arg2;
 }
-#pragma GLOBAL_ASM("asm/nonmatchings/game_70200/func_15043AC8.s")
+s32 func_15043AC8(void *arg0, s32 arg1, s32 arg2, void *arg3, s32 arg4) {
+    s32 chunk;
+
+    while (arg4 != 0) {
+        if (arg1 < arg2 + arg4) {
+            chunk = arg1 - arg2;
+        } else {
+            chunk = arg4;
+        }
+        memcpy(arg3, (s8 *)arg0 + arg2, chunk);
+        arg2 += chunk;
+        arg3 = (s8 *)arg3 + chunk;
+        arg4 -= chunk;
+        if (arg2 >= arg1) {
+            arg2 = 0;
+        }
+    }
+    return arg2;
+}
 
 s32 func_15043B70(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 temp_v0;
