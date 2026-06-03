@@ -3936,7 +3936,7 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 21,
+    "attempts": 24,
     "lastScore": 0.6471,
     "status": "pending",
     "history": [
@@ -4142,6 +4142,41 @@
           "structural: target=andi a2, v1, 255 got=andi a2, v0, 255"
         ],
         "timestamp": "2026-06-03T07:45:29.981Z"
+      },
+      {
+        "code": "void func_150721A4(void) {\n    s32 temp_v1;\n    u16 temp_t7;\n    u16 temp_t6;\n\n    temp_v1 = D_800D1580;\n    temp_t6 = temp_v1 >> 8;\n    temp_t7 = temp_v1 >> 16;\n    func_1506160C(D_800D154C, temp_t7 & 0xFF, (u8)temp_v1, temp_t6 & 0xFF, 0);\n}\n",
+        "score": 0.6471,
+        "reason": "structural_diffs=6",
+        "diffs": [
+          "structural: target=lw v1, LO(D_800D1580)(v0) got=lw v0, LO(D_800D1580)(v0)",
+          "structural: target=sra t6, v1, 8 got=sra t6, v0, 16",
+          "structural: target=sra t7, v1, 16 got=sra t9, v0, 8",
+          "structural: target=andi a1, t7, 255 got=andi a3, t9, 255",
+          "structural: target=andi a3, t6, 255 got=andi a1, t6, 255",
+          "structural: target=andi a2, v1, 255 got=andi a2, v0, 255"
+        ],
+        "timestamp": "2026-06-03T07:45:54.107Z"
+      },
+      {
+        "code": "void func_150721A4(void) {\n    s32 temp_v1;\n    u16 temp_t6;\n    s32 temp_t7;\n\n    temp_v1 = D_800D1580;\n    temp_t6 = temp_v1 >> 8;\n    temp_t7 = temp_v1 >> 16;\n    func_1506160C(D_800D154C, temp_t7 & 0xFF, (u8)temp_v1, temp_t6 & 0xFF, 0);\n}\n",
+        "score": 0.4722222222222222,
+        "reason": "length_mismatch (target=17, generated=18)",
+        "diffs": [],
+        "timestamp": "2026-06-03T07:46:16.877Z"
+      },
+      {
+        "code": "void func_150721A4(void) {\n    s32 temp_v1;\n    s32 temp_t6;\n    u16 temp_t7;\n\n    temp_v1 = D_800D1580;\n    temp_t6 = temp_v1 >> 8;\n    temp_t7 = temp_v1 >> 16;\n    func_1506160C(D_800D154C, temp_t7 & 0xFF, (u8)temp_v1, temp_t6 & 0xFF, 0);\n}\n",
+        "score": 0.6471,
+        "reason": "structural_diffs=6",
+        "diffs": [
+          "structural: target=lw v1, LO(D_800D1580)(v0) got=lw v0, LO(D_800D1580)(v0)",
+          "structural: target=sra t6, v1, 8 got=sra t6, v0, 16",
+          "structural: target=sra t7, v1, 16 got=sra t8, v0, 8",
+          "structural: target=andi a1, t7, 255 got=andi a3, t8, 255",
+          "structural: target=andi a3, t6, 255 got=andi a1, t6, 255",
+          "structural: target=andi a2, v1, 255 got=andi a2, v0, 255"
+        ],
+        "timestamp": "2026-06-03T07:46:36.321Z"
       }
     ]
   },
