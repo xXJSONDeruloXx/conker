@@ -1653,8 +1653,8 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 42,
-    "lastScore": 0.4285714285714286,
+    "attempts": 45,
+    "lastScore": 0.375,
     "status": "pending",
     "history": [
       {
@@ -2010,6 +2010,27 @@
         "reason": "length_mismatch (target=12, generated=14)",
         "diffs": [],
         "timestamp": "2026-06-03T05:06:41.827Z"
+      },
+      {
+        "code": "void func_15169040(s32 arg0, s32 arg1) {\n    arg1 &= 0xFF;\n    func_15169070(0, 0x68, arg0, arg1);\n}",
+        "score": 0.4,
+        "reason": "length_mismatch (target=12, generated=15)",
+        "diffs": [],
+        "timestamp": "2026-06-03T05:07:01.954Z"
+      },
+      {
+        "code": "void func_15169040(s32 arg0, s32 arg1) {\n    func_15169070(0, 0x68, arg0, arg1 & 0xFF);\n}",
+        "score": 0.4285714285714286,
+        "reason": "length_mismatch (target=12, generated=14)",
+        "diffs": [],
+        "timestamp": "2026-06-03T05:07:18.076Z"
+      },
+      {
+        "code": "void func_15169040(s32 arg0, s32 arg1, s32 arg2) {\n    func_15169070(0, 0x68, arg0, arg1 & 0xFF);\n}",
+        "score": 0.375,
+        "reason": "length_mismatch (target=12, generated=16)",
+        "diffs": [],
+        "timestamp": "2026-06-03T05:07:34.157Z"
       }
     ]
   },
