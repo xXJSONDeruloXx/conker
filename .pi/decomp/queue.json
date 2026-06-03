@@ -6079,8 +6079,8 @@
     "instructions": 24,
     "difficulty": "low",
     "tags": [],
-    "attempts": 6,
-    "lastScore": 0.48,
+    "attempts": 9,
+    "lastScore": 0.9167,
     "status": "pending",
     "history": [
       {
@@ -6206,6 +6206,33 @@
         "reason": "length_mismatch (target=24, generated=25)",
         "diffs": [],
         "timestamp": "2026-06-03T12:40:36.447Z"
+      },
+      {
+        "code": "f32 func_15144B68(f32 arg0) {\n    f32 range = D_800A56A4[0];\n    f32 val = arg0;\n\n    if (range < val) {\n        do {\n            val -= range;\n        } while (range < val);\n    }\n    if (val < 0.0f) {\n        do {\n            val += range;\n        } while (val < 0.0f);\n    }\n    return val;\n}",
+        "score": 0.9167,
+        "reason": "structural_diffs=2",
+        "diffs": [
+          "structural: target=c.lt.s f0, f12 got=mov.s f2, f12",
+          "structural: target=mov.s f2, f12 got=c.lt.s f0, f12"
+        ],
+        "timestamp": "2026-06-03T12:40:53.380Z"
+      },
+      {
+        "code": "f32 func_15144B68(f32 arg0) {\n    f32 range = D_800A56A4;\n    f32 val;\n    f32 zero = 0.0f;\n\n    if (range < arg0) {\n        val = arg0;\n        do {\n            val -= range;\n        } while (range < val);\n    } else {\n        val = arg0;\n    }\n    if (val < zero) {\n        do {\n            val += range;\n        } while (val < zero);\n    }\n    return val;\n}",
+        "score": 0.41379310344827586,
+        "reason": "length_mismatch (target=24, generated=29)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:41:23.908Z"
+      },
+      {
+        "code": "f32 func_15144B68(f32 arg0) {\n    f32 val = arg0;\n    f32 range = D_800A56A4;\n\n    if (range < val) {\n        do {\n            val -= range;\n        } while (range < val);\n    }\n    if (val < 0.0f) {\n        do {\n            val += range;\n        } while (val < 0.0f);\n    }\n    return val;\n}",
+        "score": 0.9167,
+        "reason": "structural_diffs=2",
+        "diffs": [
+          "structural: target=c.lt.s f0, f12 got=mov.s f2, f12",
+          "structural: target=mov.s f2, f12 got=c.lt.s f0, f12"
+        ],
+        "timestamp": "2026-06-03T12:41:38.146Z"
       }
     ]
   },
