@@ -673,7 +673,28 @@ void func_15077190(void) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_A28B0/func_150771F0.s")
+void func_150771F0(void) {
+    s32 phi_a1;
+    u8 temp_a2;
+    u8 temp_a3;
+
+    if (D_800D1893 == 0) {
+        temp_a2 = D_800D1890;
+        temp_a3 = D_800D1891;
+        if (D_800D1892 != 0) {
+            phi_a1 = 1;
+        } else {
+            phi_a1 = 2;
+        }
+        func_1506160C(D_800D154C, phi_a1, temp_a2, temp_a3, 0);
+    } else {
+        if (D_800D1892 == 0) {
+            func_1502EA60(D_800D154C, D_800D1890);
+        } else {
+            func_1502EA7C(D_800D154C, D_800D1890);
+        }
+    }
+}
 // NON-MATCHING: something isnt right...
 // void func_150771F0(void) {
 //     s32 phi_a1;

@@ -21519,8 +21519,8 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 6,
-    "lastScore": 0.4880952380952381,
+    "attempts": 8,
+    "lastScore": 0.41000000000000003,
     "status": "pending",
     "history": [
       {
@@ -21592,6 +21592,31 @@
         "reason": "length_mismatch (target=41, generated=42)",
         "diffs": [],
         "timestamp": "2026-06-03T23:13:50.997Z"
+      },
+      {
+        "code": "void func_1513B798(struct102 *arg0) {\n    s32 temp_v0;\n    u8 temp_v1;\n\n    temp_v1 = 0;\n    if ((((u8 *)arg0)[0x10] & 1) != 0) {\n        *(s16 *)((s32)arg0 + 0x14) = *(s16 *)((s32)arg0 + 0x14) - D_800BE9E4;\n        if (*(s16 *)((s32)arg0 + 0x14) < 0) {\n            temp_v1 = 1;\n        }\n    }\n    if (temp_v1 == 0) {\n        temp_v0 = ((s8 *)arg0)[0x11];\n        if (temp_v0 != -1) {\n            if (D_80089C18[temp_v0](arg0) == 0) {\n                temp_v1 = 1;\n            }\n        }\n    }\n    if (temp_v1 != 0) {\n        func_1516972C(arg0);\n    }\n}",
+        "score": 0.7561,
+        "reason": "structural_diffs=10",
+        "diffs": [
+          "structural: target=addiu sp, sp, -32 got=addiu sp, sp, -40",
+          "structural: target=move v1, zero got=move v0, zero",
+          "structural: target=li v1, 1 got=li v0, 1",
+          "structural: target=bnez v1, L1 got=bnez v0, L1",
+          "structural: target=nop got=move v1, v0",
+          "structural: target=sb v1, 27(sp) got=sw v1, 28(sp)",
+          "structural: target=sw a0, 32(sp) got=sw a0, 40(sp)",
+          "structural: target=lbu v1, 27(sp) got=lw v1, 28(sp)",
+          "structural: target=lw a0, 32(sp) got=lw a0, 40(sp)",
+          "structural: target=addiu sp, sp, 32 got=addiu sp, sp, 40"
+        ],
+        "timestamp": "2026-06-03T23:14:10.761Z"
+      },
+      {
+        "code": "void func_1513B798(struct102 *arg0) {\n    s32 temp_v1;\n    s32 temp_v0;\n\n    temp_v1 = 0;\n    if ((((u8 *)arg0)[0x10] & 1) != 0) {\n        *(s16 *)((s32)arg0 + 0x14) = *(s16 *)((s32)arg0 + 0x14) - D_800BE9E4;\n        if (*(s16 *)((s32)arg0 + 0x14) < 0) {\n            temp_v1 = 1;\n        }\n    }\n    if (temp_v1 == 0) {\n        temp_v0 = ((s8 *)arg0)[0x11];\n        if (temp_v0 != -1) {\n            *(u8 *)((s32)&temp_v1 - 1) = temp_v1;\n            temp_v0 = D_80089C18[temp_v0](arg0);\n            temp_v1 = *(u8 *)((s32)&temp_v1 - 1);\n            if (temp_v0 == 0) {\n                temp_v1 = 1;\n            }\n        }\n    }\n    if (temp_v1 != 0) {\n        func_1516972C(arg0);\n    }\n}",
+        "score": 0.41000000000000003,
+        "reason": "length_mismatch (target=41, generated=50)",
+        "diffs": [],
+        "timestamp": "2026-06-03T23:15:07.475Z"
       }
     ]
   },
@@ -23130,9 +23155,31 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 0.7073,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_150771F0(void) {\n    s32 phi_a1;\n\n    if (D_800D1893 == 0) {\n        if (D_800D1892 != 0) {\n            phi_a1 = 1;\n        } else {\n            phi_a1 = 2;\n        }\n        func_1506160C(D_800D154C, phi_a1, D_800D1890, D_800D1891, 0);\n    } else {\n        if (D_800D1892 == 0) {\n            func_1502EA60(D_800D154C, D_800D1890);\n        } else {\n            func_1502EA7C(D_800D154C, D_800D1890);\n        }\n    }\n}",
+        "score": 0.7073,
+        "reason": "structural_diffs=12",
+        "diffs": [
+          "structural: target=lui a2, HI(D_800D1890) got=lui t7, HI(D_800D1892)",
+          "structural: target=lui t7, HI(D_800D1892) got=lui a0, HI(D_800D154C)",
+          "structural: target=lui a3, HI(D_800D1891) got=li a1, 2",
+          "structural: target=lbu a2, LO(D_800D1890)(a2) got=lui a2, HI(D_800D1890)",
+          "structural: target=lbu a3, LO(D_800D1891)(a3) got=lui a3, HI(D_800D1891)",
+          "structural: target=b L2 got=b L1",
+          "structural: target=li a1, 2 got=lw a0, LO(D_800D154C)(a0)",
+          "structural: target=lui a0, HI(D_800D154C) got=lbu a2, LO(D_800D1890)(a2)",
+          "structural: target=lw a0, LO(D_800D154C)(a0) got=lbu a3, LO(D_800D1891)(a3)",
+          "structural: target=b L3 got=b L2",
+          "structural: target=bnez t8, L4 got=bnez t8, L3",
+          "structural: target=b L3 got=b L2"
+        ],
+        "timestamp": "2026-06-03T23:16:07.539Z"
+      }
+    ]
   },
   {
     "function": "func_1000BAFC",

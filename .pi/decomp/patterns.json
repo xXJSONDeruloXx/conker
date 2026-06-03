@@ -729,5 +729,14 @@
     "example_functions": [
       "func_15079A98"
     ]
+  },
+  {
+    "id": "global-cursor-plus-equals",
+    "description": "For IDO to emit `addu current, current, offset` when updating a global cursor and preserving intermediate stores, use assignment-expression for the initial aligned store, then `global += offset` as separate statements before mirroring to side arrays.",
+    "trigger": "Target updates a global cursor multiple times, stores each intermediate value, and has only operand-order/scheduling diffs around `addu` updates.",
+    "solution": "Use `array[index] = GLOBAL = ALIGNn(GLOBAL);` for the first value, then `GLOBAL += computed_size; array[index] = GLOBAL;` instead of `GLOBAL = GLOBAL + computed_size` or temp-local accumulation.",
+    "example_functions": [
+      "func_15002754"
+    ]
   }
 ]
