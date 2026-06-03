@@ -3,6 +3,9 @@
 #include "functions.h"
 #include "variables.h"
 
+extern void (*D_8008CB64[])(void);
+extern void (*D_8008CB70[])(void);
+
 void func_15168A4C(struct12 *arg0, s32 arg1);
 
 void func_15169040(void *, u8);
@@ -30,7 +33,20 @@ extern u8 D_800D2DAB;
 //     }
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_1516706C.s")
+void func_1516706C(void) {
+    void (**ptr)(void);
+    void (**end)(void);
+    void (*func)(void);
+
+    ptr = D_8008CB64, end = D_8008CB70;
+    do {
+        func = *ptr;
+        if (func != NULL) {
+            func();
+        }
+        ptr++;
+    } while (ptr != end);
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_151670C0.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_151671E8.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_15167310.s")

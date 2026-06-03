@@ -567,5 +567,14 @@
     "example_functions": [
       "func_151696DC"
     ]
+  },
+  {
+    "id": "assign-pointer-before-count-for-v0-v1-loop",
+    "description": "Assigning a pointer local before a loop-count global can reserve `$v0` for the pointer while IDO still hoists the global `%hi/%lo` load into `$v1`, matching tight loops that use `$v0` as a base pointer and `$v1` as a decrementing counter.",
+    "trigger": "A near-match has identical loop/control flow but swaps the pointer base and loop counter between `$v0`/`$v1`.",
+    "solution": "Declare the pointer local before the count local and assign the pointer expression before loading the count/global in C; IDO may still schedule the global load first but keeps pointer in `$v0` and counter in `$v1`.",
+    "example_functions": [
+      "func_151DA6A8"
+    ]
   }
 ]
