@@ -7956,9 +7956,39 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 0.2941,
+    "status": "pending",
+    "history": [
+      {
+        "code": "s32 func_151420F8(struct127 *arg0) {\n    s32 sp18[6];\n\n    sp18[0] = D_800A5200[0];\n    sp18[1] = D_800A5200[1];\n    sp18[2] = D_800A5200[2];\n    sp18[3] = D_800A5200[3];\n    sp18[4] = D_800A5200[4];\n    sp18[5] = D_800A5200[5];\n    if (func_150A2AEC(((s32)arg0 - (s32)D_800CC2D0) / 0x32C, 6, sp18, arg0) == -1) {\n        return 0;\n    }\n    return 1;\n}",
+        "score": 0.2941,
+        "reason": "structural_diffs=24",
+        "diffs": [
+          "structural: target=sw ra, 20(sp) got=lui v0, HI(D_800A5200)",
+          "structural: target=addiu a2, sp, 24 got=addiu v0, v0, LO(D_800A5200)",
+          "structural: target=move a3, a0 got=sw ra, 20(sp)",
+          "structural: target=lui t6, HI(D_800A5200) got=move a3, a0",
+          "structural: target=addiu t6, t6, LO(D_800A5200) got=lui t2, HI(D_800CC2D0)",
+          "structural: target=lw at, 0(t6) got=addiu t2, t2, LO(D_800CC2D0)",
+          "structural: target=lui t0, HI(D_800CC2D0) got=subu a0, a3, t2",
+          "structural: target=addiu t0, t0, LO(D_800CC2D0) got=li at, 812",
+          "structural: target=sw at, 0(a2) got=div zero, a0, at",
+          "structural: target=lw t9, 4(t6) got=lw t6, 0(v0)",
+          "structural: target=subu a0, a3, t0 got=lw t7, 4(v0)",
+          "structural: target=li a1, 6 got=lw t8, 8(v0)",
+          "structural: target=sw t9, 4(a2) got=lw t9, 12(v0)",
+          "structural: target=lw at, 8(t6) got=lw t0, 16(v0)",
+          "structural: target=sw at, 8(a2) got=lw t1, 20(v0)",
+          "structural: target=lw t9, 12(t6) got=mflo a0",
+          "structural: target=sw t9, 12(a2) got=li a1, 6",
+          "structural: target=lw at, 16(t6) got=addiu a2, sp, 24",
+          "structural: target=sw at, 16(a2) got=sw t6, 24(sp)",
+          "structural: target=li at, 812 got=sw t7, 28(sp)"
+        ],
+        "timestamp": "2026-06-03T04:26:51.184Z"
+      }
+    ]
   },
   {
     "function": "func_1000FF90",
@@ -9862,7 +9892,7 @@
     ],
     "attempts": 0,
     "lastScore": 0,
-    "status": "pending"
+    "status": "skipped"
   },
   {
     "function": "func_151D2E5C",
@@ -11543,9 +11573,9 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 3,
-    "lastScore": 0.48936170212765956,
-    "status": "pending",
+    "attempts": 5,
+    "lastScore": 0.44565217391304346,
+    "status": "skipped",
     "history": [
       {
         "code": "s32 func_16002D2C(s16 *arg0, u16 *arg1) {\n    s16 exp;\n    s16 result;\n\n    exp = (s16)((*arg1 & 0x7FF0) >> 4);\n    if (exp == 0x7FF) {\n        *arg0 = 0;\n        result = 2;\n        if ((arg1[0] & 0xF) != 0) {\n            return result;\n        }\n        if (arg1[1] != 0) {\n            return result;\n        }\n        if (arg1[2] != 0) {\n            return result;\n        }\n        if (arg1[3] == 0) {\n            result = 1;\n        }\n        return result;\n    }\n    if (exp > 0) {\n        *arg1 = (*arg1 & 0x800F) | 0x3FF0;\n        *arg0 = exp - 0x3FE;\n        return -1;\n    }\n    if (exp < 0) {\n        return 2;\n    }\n    *arg0 = 0;\n    return 0;\n}",
@@ -11567,6 +11597,20 @@
         "reason": "length_mismatch (target=46, generated=47)",
         "diffs": [],
         "timestamp": "2026-06-03T04:09:54.906Z"
+      },
+      {
+        "code": "s32 func_16002D2C(s16 *arg0, u16 *arg1) {\n    u16 first;\n    s16 exp;\n    s16 result;\n\n    first = *arg1;\n    exp = (s16)((first & 0x7FF0) >> 4);\n    if (exp == 0x7FF) {\n        *arg0 = 0;\n        result = 2;\n        if (((*arg1 & 0xF) == 0) && (arg1[1] == 0) && (arg1[2] == 0) && (arg1[3] == 0)) {\n            result = 1;\n        }\n        return (s16)result;\n    }\n    if (exp > 0) {\n        *arg1 = (first & 0x800F) | 0x3FF0;\n        *arg0 = exp - 0x3FE;\n        return -1;\n    }\n    if (exp < 0) {\n        return 2;\n    }\n    *arg0 = 0;\n    return 0;\n}",
+        "score": 0.44565217391304346,
+        "reason": "length_mismatch (target=46, generated=41)",
+        "diffs": [],
+        "timestamp": "2026-06-03T04:12:11.227Z"
+      },
+      {
+        "code": "s32 func_16002D2C(s16 *arg0, u16 *arg1) {\n    u16 first;\n    s16 exp;\n    s16 result;\n\n    first = *arg1;\n    exp = (s16)((first & 0x7FF0) >> 4);\n    if (exp == 0x7FF) {\n        *arg0 = 0;\n        result = 2;\n        if ((*arg1 & 0xF) != 0) goto ret;\n        if (arg1[1] != 0) goto ret;\n        if (arg1[2] != 0) goto ret;\n        if (arg1[3] != 0) goto ret;\n        result = 1;\nret:\n        return (s16)result;\n    }\n    if (exp > 0) {\n        *arg1 = (first & 0x800F) | 0x3FF0;\n        *arg0 = exp - 0x3FE;\n        return -1;\n    }\n    if (exp < 0) {\n        return 2;\n    }\n    *arg0 = 0;\n    return 0;\n}",
+        "score": 0.44565217391304346,
+        "reason": "length_mismatch (target=46, generated=41)",
+        "diffs": [],
+        "timestamp": "2026-06-03T04:13:09.521Z"
       }
     ]
   },
