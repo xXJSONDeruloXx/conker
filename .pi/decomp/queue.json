@@ -1509,7 +1509,7 @@
         "score": 0.98,
         "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
         "diffs": [
-          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
+          "ROM SHA mismatch — likely 1-2 instruction/relocation differences not caught by normalizer"
         ],
         "timestamp": "2026-06-02T19:00:00.000Z"
       }
@@ -1794,7 +1794,7 @@
         "score": 0.98,
         "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
         "diffs": [
-          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
+          "ROM SHA mismatch — likely 1-2 instruction/relocation differences not caught by normalizer"
         ],
         "timestamp": "2026-06-02T19:00:00.000Z"
       }
@@ -1843,7 +1843,7 @@
         "score": 0.98,
         "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
         "diffs": [
-          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
+          "ROM SHA mismatch — likely 1-2 instruction/relocation differences not caught by normalizer"
         ],
         "timestamp": "2026-06-02T19:00:00.000Z"
       }
@@ -2493,7 +2493,7 @@
         "score": 0.98,
         "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
         "diffs": [
-          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
+          "ROM SHA mismatch — likely 1-2 instruction/relocation differences not caught by normalizer"
         ],
         "timestamp": "2026-06-02T19:00:00.000Z"
       }
@@ -3580,7 +3580,7 @@
         "score": 0.98,
         "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
         "diffs": [
-          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
+          "ROM SHA mismatch — likely 1-2 instruction/relocation differences not caught by normalizer"
         ],
         "timestamp": "2026-06-02T19:00:00.000Z"
       }
@@ -3814,7 +3814,7 @@
         "score": 0.98,
         "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
         "diffs": [
-          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
+          "ROM SHA mismatch — likely 1-2 instruction/relocation differences not caught by normalizer"
         ],
         "timestamp": "2026-06-02T19:00:00.000Z"
       }
@@ -4273,7 +4273,7 @@
         "score": 0.98,
         "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
         "diffs": [
-          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
+          "ROM SHA mismatch — likely 1-2 instruction/relocation differences not caught by normalizer"
         ],
         "timestamp": "2026-06-02T19:00:00.000Z"
       }
@@ -4317,7 +4317,7 @@
         "score": 0.98,
         "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
         "diffs": [
-          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
+          "ROM SHA mismatch — likely 1-2 instruction/relocation differences not caught by normalizer"
         ],
         "timestamp": "2026-06-02T19:00:00.000Z"
       }
@@ -4332,7 +4332,7 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 3,
+    "attempts": 6,
     "lastScore": 0.4852941176470588,
     "status": "pending",
     "history": [
@@ -4356,6 +4356,27 @@
         "reason": "length_mismatch (target=34, generated=33)",
         "diffs": [],
         "timestamp": "2026-06-03T01:31:57.537Z"
+      },
+      {
+        "code": "s32 func_151DADA0(u8 *arg0) {\n    u8 temp_t9;\n    s8 temp_t6;\n    u8 temp_a0;\n    f32 temp_f0;\n\n    temp_t6 = (s8)arg0[0x111];\n    temp_t9 = arg0[0x110];\n    temp_a0 = temp_t9 + temp_t6 * D_800BE9E4;\n    arg0[0x110] = temp_a0;\n    temp_f0 = func_151423D8((u8)(temp_a0 - 0x40));\n    *(f32 *)(arg0 + 0x4C) = *(f32 *)(arg0 + 0x114) * temp_f0 + 1.0f;\n    *(f32 *)(arg0 + 0x50) = 1.299999952f - *(f32 *)(arg0 + 0x118) * temp_f0;\n    return 1;\n}",
+        "score": 0.4852941176470588,
+        "reason": "length_mismatch (target=34, generated=33)",
+        "diffs": [],
+        "timestamp": "2026-06-03T03:43:56.862Z"
+      },
+      {
+        "code": "s32 func_151DADA0(u8 *arg0) {\n    u8 *temp_v1;\n    u8 temp_a0;\n    f32 temp_f0;\n    f32 temp_f4;\n    f32 temp_f18;\n\n    arg0[0x110] = temp_a0 = arg0[0x110] + (s8)arg0[0x111] * D_800BE9E4;\n    temp_f0 = func_151423D8((u8)(temp_a0 - 0x40));\n    temp_v1 = arg0 + 0x110;\n    temp_f4 = *(f32 *)(temp_v1 + 4);\n    *(f32 *)(arg0 + 0x4C) = temp_f4 * temp_f0 + 1.0f;\n    temp_f18 = *(f32 *)(temp_v1 + 8);\n    *(f32 *)(arg0 + 0x50) = 1.299999952f - temp_f18 * temp_f0;\n    return 1;\n}",
+        "score": 0.4852941176470588,
+        "reason": "length_mismatch (target=34, generated=33)",
+        "diffs": [],
+        "timestamp": "2026-06-03T03:44:48.953Z"
+      },
+      {
+        "code": "s32 func_151DADA0(u8 *arg0) {\n    u8 temp_a0;\n    f32 *temp_v1;\n    f32 temp_f4;\n    f32 temp_f0;\n    f32 temp_f18;\n    f32 temp_f16;\n\n    arg0[0x110] = temp_a0 = arg0[0x110] + (s8)arg0[0x111] * D_800BE9E4;\n    temp_f0 = func_151423D8((u8)(temp_a0 - 0x40));\n    temp_v1 = (f32 *)(arg0 + 0x110);\n    temp_f4 = temp_v1[1];\n    *(f32 *)(arg0 + 0x4C) = temp_f4 * temp_f0 + 1.0f;\n    temp_f18 = temp_v1[2];\n    temp_f16 = D_800AB4B0;\n    *(f32 *)(arg0 + 0x50) = temp_f16 - temp_f18 * temp_f0;\n    return 1;\n}",
+        "score": 0.4852941176470588,
+        "reason": "length_mismatch (target=34, generated=33)",
+        "diffs": [],
+        "timestamp": "2026-06-03T03:45:12.956Z"
       }
     ]
   },
@@ -4751,7 +4772,7 @@
         "score": 0.98,
         "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
         "diffs": [
-          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
+          "ROM SHA mismatch — likely 1-2 instruction/relocation differences not caught by normalizer"
         ],
         "timestamp": "2026-06-02T19:00:00.000Z"
       }
@@ -5929,7 +5950,7 @@
         "score": 0.98,
         "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
         "diffs": [
-          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
+          "ROM SHA mismatch — likely 1-2 instruction/relocation differences not caught by normalizer"
         ],
         "timestamp": "2026-06-02T19:00:00.000Z"
       }
@@ -5979,7 +6000,7 @@
         "score": 0.98,
         "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
         "diffs": [
-          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
+          "ROM SHA mismatch — likely 1-2 instruction/relocation differences not caught by normalizer"
         ],
         "timestamp": "2026-06-02T19:00:00.000Z"
       }
@@ -7240,7 +7261,7 @@
         "score": 0.98,
         "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
         "diffs": [
-          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
+          "ROM SHA mismatch — likely 1-2 instruction/relocation differences not caught by normalizer"
         ],
         "timestamp": "2026-06-02T19:00:00.000Z"
       }
@@ -7682,7 +7703,7 @@
         "score": 0.98,
         "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
         "diffs": [
-          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
+          "ROM SHA mismatch — likely 1-2 instruction/relocation differences not caught by normalizer"
         ],
         "timestamp": "2026-06-02T19:00:00.000Z"
       }
@@ -7810,7 +7831,7 @@
         "score": 0.98,
         "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
         "diffs": [
-          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
+          "ROM SHA mismatch — likely 1-2 instruction/relocation differences not caught by normalizer"
         ],
         "timestamp": "2026-06-02T19:00:00.000Z"
       }
@@ -7834,7 +7855,7 @@
         "score": 0.98,
         "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
         "diffs": [
-          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
+          "ROM SHA mismatch — likely 1-2 instruction/relocation differences not caught by normalizer"
         ],
         "timestamp": "2026-06-02T19:00:00.000Z"
       }
@@ -8750,7 +8771,7 @@
         "score": 0.98,
         "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
         "diffs": [
-          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
+          "ROM SHA mismatch — likely 1-2 instruction/relocation differences not caught by normalizer"
         ],
         "timestamp": "2026-06-02T19:00:00.000Z"
       }
@@ -8867,7 +8888,7 @@
         "score": 0.98,
         "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
         "diffs": [
-          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
+          "ROM SHA mismatch — likely 1-2 instruction/relocation differences not caught by normalizer"
         ],
         "timestamp": "2026-06-02T19:00:00.000Z"
       }
@@ -8918,7 +8939,7 @@
         "score": 0.98,
         "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
         "diffs": [
-          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
+          "ROM SHA mismatch — likely 1-2 instruction/relocation differences not caught by normalizer"
         ],
         "timestamp": "2026-06-02T19:00:00.000Z"
       }
@@ -8961,7 +8982,7 @@
         "score": 0.98,
         "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
         "diffs": [
-          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
+          "ROM SHA mismatch — likely 1-2 instruction/relocation differences not caught by normalizer"
         ],
         "timestamp": "2026-06-02T19:00:00.000Z"
       }
@@ -9217,7 +9238,7 @@
         "score": 0.98,
         "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
         "diffs": [
-          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
+          "ROM SHA mismatch — likely 1-2 instruction/relocation differences not caught by normalizer"
         ],
         "timestamp": "2026-06-02T19:00:00.000Z"
       }
@@ -9302,7 +9323,7 @@
         "score": 0.98,
         "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
         "diffs": [
-          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
+          "ROM SHA mismatch — likely 1-2 instruction/relocation differences not caught by normalizer"
         ],
         "timestamp": "2026-06-02T19:00:00.000Z"
       }
@@ -9340,7 +9361,7 @@
         "score": 0.98,
         "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
         "diffs": [
-          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
+          "ROM SHA mismatch — likely 1-2 instruction/relocation differences not caught by normalizer"
         ],
         "timestamp": "2026-06-02T19:00:00.000Z"
       }
@@ -9443,7 +9464,7 @@
         "score": 0.98,
         "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
         "diffs": [
-          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
+          "ROM SHA mismatch — likely 1-2 instruction/relocation differences not caught by normalizer"
         ],
         "timestamp": "2026-06-02T19:00:00.000Z"
       }
@@ -9482,7 +9503,7 @@
         "score": 0.98,
         "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
         "diffs": [
-          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
+          "ROM SHA mismatch — likely 1-2 instruction/relocation differences not caught by normalizer"
         ],
         "timestamp": "2026-06-02T19:00:00.000Z"
       }
