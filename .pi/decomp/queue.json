@@ -19902,7 +19902,7 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 6,
+    "attempts": 9,
     "lastScore": 0.875,
     "status": "pending",
     "history": [
@@ -19977,6 +19977,45 @@
           "structural: target=sw t6, 16(a0) got=sw t5, 16(a0)"
         ],
         "timestamp": "2026-06-03T22:42:38.875Z"
+      },
+      {
+        "code": "void func_151355B8(struct102 *arg0, u8 *arg1, u8 arg2) {\n    s32 tmp;\n\n    switch (arg2) {\n    case 0:\n        if ((*(s32 *)arg1 == *(s32 *)((s32)arg0 + 0x1C)) || (arg1[4] == *(u8 *)((s32)arg0 + 0x18))) {\n            func_1516972C(arg0);\n        }\n        break;\n    case 3:\n        if ((*(s32 *)arg1 == *(s32 *)((s32)arg0 + 0x1C)) || (arg1[4] == *(u8 *)((s32)arg0 + 0x18))) {\n            tmp = ((struct00 *)arg0)->unk10 & ~1;\n            ((volatile struct00 *)arg0)->unk10 = tmp;\n            ((volatile struct00 *)arg0)->unk10 = tmp;\n        }\n        break;\n    }\n}",
+        "score": 0.875,
+        "reason": "structural_diffs=5",
+        "diffs": [
+          "structural: target=lw t5, 16(a0) got=lw v0, 16(a0)",
+          "structural: target=lw t5, 16(a0) got=lw v0, 16(a0)",
+          "structural: target=and t6, t5, at got=and t5, v0, at",
+          "structural: target=sw t6, 16(a0) got=sw t5, 16(a0)",
+          "structural: target=sw t6, 16(a0) got=sw t5, 16(a0)"
+        ],
+        "timestamp": "2026-06-03T22:42:56.774Z"
+      },
+      {
+        "code": "void func_151355B8(struct102 *arg0, u8 *arg1, u8 arg2) {\n    u32 tmp;\n\n    switch (arg2) {\n    case 0:\n        if ((*(s32 *)arg1 == *(s32 *)((s32)arg0 + 0x1C)) || (arg1[4] == *(u8 *)((s32)arg0 + 0x18))) {\n            func_1516972C(arg0);\n        }\n        break;\n    case 3:\n        if ((*(s32 *)arg1 == *(s32 *)((s32)arg0 + 0x1C)) || (arg1[4] == *(u8 *)((s32)arg0 + 0x18))) {\n            tmp = *(u32 *)((s32)arg0 + 0x10) & 0xFFFFFFFE;\n            *(volatile u32 *)((s32)arg0 + 0x10) = tmp;\n            *(volatile u32 *)((s32)arg0 + 0x10) = tmp;\n        }\n        break;\n    }\n}",
+        "score": 0.875,
+        "reason": "structural_diffs=5",
+        "diffs": [
+          "structural: target=lw t5, 16(a0) got=lw v0, 16(a0)",
+          "structural: target=lw t5, 16(a0) got=lw v0, 16(a0)",
+          "structural: target=and t6, t5, at got=and t5, v0, at",
+          "structural: target=sw t6, 16(a0) got=sw t5, 16(a0)",
+          "structural: target=sw t6, 16(a0) got=sw t5, 16(a0)"
+        ],
+        "timestamp": "2026-06-03T22:44:30.541Z"
+      },
+      {
+        "code": "void func_151355B8(struct102 *arg0, u8 *arg1, u8 arg2) {\n    volatile s32 *ptr;\n    s32 tmp;\n\n    switch (arg2) {\n    case 0:\n        if ((*(s32 *)arg1 == *(s32 *)((s32)arg0 + 0x1C)) || (arg1[4] == *(u8 *)((s32)arg0 + 0x18))) {\n            func_1516972C(arg0);\n        }\n        break;\n    case 3:\n        if ((*(s32 *)arg1 == *(s32 *)((s32)arg0 + 0x1C)) || (arg1[4] == *(u8 *)((s32)arg0 + 0x18))) {\n            ptr = &((volatile s32 *)arg0)[4];\n            tmp = ptr[0] & -2;\n            ptr[0] = tmp;\n            ptr[0] = tmp;\n        }\n        break;\n    }\n}",
+        "score": 0.875,
+        "reason": "structural_diffs=5",
+        "diffs": [
+          "structural: target=lw t5, 16(a0) got=lw v0, 16(a0)",
+          "structural: target=lw t5, 16(a0) got=lw v0, 16(a0)",
+          "structural: target=and t6, t5, at got=and t5, v0, at",
+          "structural: target=sw t6, 16(a0) got=sw t5, 16(a0)",
+          "structural: target=sw t6, 16(a0) got=sw t5, 16(a0)"
+        ],
+        "timestamp": "2026-06-03T22:45:02.025Z"
       }
     ]
   },
