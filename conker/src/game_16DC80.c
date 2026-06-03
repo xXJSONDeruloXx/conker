@@ -26,7 +26,17 @@ void func_151411C4(struct210 *arg0) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16DC80/func_15141478.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_16DC80/func_15141564.s")
+s32 func_15141564(struct210 *arg0) {
+    struct211 *temp_v1;
+    f32 tmp;
+    s32 pad1;
+    temp_v1 = (struct211 *)((s32)arg0 + 0x170);
+    tmp = sinf(temp_v1->unk8);
+    *(f32 *)((s32)arg0 + 0x158) = temp_v1->unk0 + (temp_v1->unk4 * tmp);
+    temp_v1->unk8 += temp_v1->unkC * D_800BE9A4;
+    temp_v1->unk8 = func_15144B68(temp_v1->unk8);
+    return 1;
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16DC80/func_151415D4.s")
 
