@@ -3843,9 +3843,9 @@
     "instructions": 34,
     "difficulty": "medium-low",
     "tags": [],
-    "attempts": 12,
-    "lastScore": 0.3529,
-    "status": "pending",
+    "attempts": 14,
+    "lastScore": 0.4852941176470588,
+    "status": "skipped",
     "history": [
       {
         "code": "Gfx *func_15142FBC(Gfx *arg0, s32 arg1, s32 arg2, u8 *arg3) {\n    s32 temp_t6;\n    s32 temp_t7;\n    s32 temp_t0;\n    s32 temp_t8;\n\n    temp_t6 = D_800DD218;\n    temp_t0 = arg1 | 0xF;\n    if (arg1 != temp_t6) {\n        temp_t8 = *arg3;\n        goto block_check;\n    }\n    temp_t7 = D_800DD21C;\n    if (arg2 == temp_t7) {\n        return arg0;\n    }\n    temp_t8 = *arg3;\nblock_check:\n    if (temp_t8 == 1) {\n        arg0->words.w0 = 0xE7000000;\n        arg0->words.w1 = 0;\n        arg0++;\n        *arg3 = 0;\n    }\n    arg0->words.w0 = ((u32)(temp_t0 & 0xFFFFFF)) | 0xEF000000;\n    arg0->words.w1 = arg2;\n    arg0++;\n    D_800DD218 = arg1;\n    D_800DD21C = arg2;\n    return arg0;\n}",
@@ -4009,6 +4009,20 @@
           "structural: target=addiu a0, a0, 8 got=sw a1, 0(t0)"
         ],
         "timestamp": "2026-06-03T01:01:09.254Z"
+      },
+      {
+        "code": "Gfx *func_15142FBC(Gfx *arg0, s32 arg1, s32 arg2, u8 *arg3) {\n    s32 temp_t0;\n    u8 temp_t8;\n\n    temp_t0 = arg1 | 0xF;\n    if (arg1 != D_800DD218 || arg2 != D_800DD21C) {\n        temp_t8 = *arg3;\n        if (temp_t8 == 1) {\n            arg0->words.w0 = 0xE7000000;\n            arg0->words.w1 = 0;\n            arg0++;\n            *arg3 = 0;\n        }\n        arg0->words.w0 = ((u32)(temp_t0 & 0xFFFFFF)) | 0xEF000000;\n        arg0->words.w1 = arg2;\n        arg0++;\n        D_800DD218 = arg1;\n        D_800DD21C = arg2;\n    }\n    return arg0;\n}",
+        "score": 0.4852941176470588,
+        "reason": "length_mismatch (target=34, generated=33)",
+        "diffs": [],
+        "timestamp": "2026-06-03T01:04:02.904Z"
+      },
+      {
+        "code": "Gfx *func_15142FBC(Gfx *arg0, u32 arg1, u32 arg2, u8 *arg3) {\n    s32 temp_t0;\n    u8 temp_t8;\n\n    temp_t0 = arg1 | 0xF;\n    if (arg1 != D_800DD218 || arg2 != D_800DD21C) {\n        temp_t8 = *arg3;\n        if (temp_t8 == 1) {\n            arg0->words.w0 = 0xE7000000;\n            arg0->words.w1 = 0;\n            arg0++;\n            *arg3 = 0;\n        }\n        arg0->words.w0 = ((u32)(temp_t0 & 0xFFFFFF)) | 0xEF000000;\n        arg0->words.w1 = arg2;\n        arg0++;\n        D_800DD218 = arg1;\n        D_800DD21C = arg2;\n    }\n    return arg0;\n}",
+        "score": 0.4852941176470588,
+        "reason": "length_mismatch (target=34, generated=33)",
+        "diffs": [],
+        "timestamp": "2026-06-03T01:04:30.834Z"
       }
     ]
   },
@@ -4240,9 +4254,32 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.4852941176470588,
+    "status": "pending",
+    "history": [
+      {
+        "code": "s32 func_151DADA0(struct127 *arg0) {\n    struct127 *temp_a1;\n    u8 temp_a0;\n    f32 temp_f0;\n\n    temp_a1 = arg0;\n    temp_a0 = ((u8 *) temp_a1)[0x110] + (((s8 *) temp_a1)[0x111] * D_800BE9E4);\n    ((u8 *) temp_a1)[0x110] = temp_a0;\n    temp_f0 = func_151423D8((u8) (temp_a0 - 0x40));\n    temp_a1->animation_speed = (temp_a1->unk114 * temp_f0) + 1.0f;\n    *(f32 *) ((u8 *) temp_a1 + 0x50) = D_800AB4B0 - (temp_a1->unk118 * temp_f0);\n    return 1;\n}",
+        "score": 0.4852941176470588,
+        "reason": "length_mismatch (target=34, generated=33)",
+        "diffs": [],
+        "timestamp": "2026-06-03T01:23:10.241Z"
+      },
+      {
+        "code": "s32 func_151DADA0(struct127 *arg0) {\n    struct127 *temp_a1;\n    s32 temp_a0;\n    f32 temp_f0;\n    f32 *temp_v1;\n\n    temp_a1 = arg0;\n    temp_a0 = ((u8 *) temp_a1)[0x110] + (((s8 *) temp_a1)[0x111] * D_800BE9E4);\n    ((u8 *) temp_a1)[0x110] = temp_a0;\n    temp_f0 = func_151423D8((u8) (temp_a0 - 0x40));\n    temp_v1 = (f32 *) ((u8 *) temp_a1 + 0x110);\n    temp_a1->animation_speed = (temp_v1[1] * temp_f0) + 1.0f;\n    *(f32 *) ((u8 *) temp_a1 + 0x50) = D_800AB4B0 - (temp_v1[2] * temp_f0);\n    return 1;\n}",
+        "score": 0.4852941176470588,
+        "reason": "length_mismatch (target=34, generated=33)",
+        "diffs": [],
+        "timestamp": "2026-06-03T01:27:08.852Z"
+      },
+      {
+        "code": "s32 func_151DADA0(s32 arg0) {\n    s32 temp_a1;\n    s32 temp_v1;\n    f32 temp_f0;\n\n    temp_a1 = arg0;\n    arg0 = (*(u8 *)(temp_a1 + 0x110)) + ((*(s8 *)(temp_a1 + 0x111)) * D_800BE9E4);\n    *(u8 *)(temp_a1 + 0x110) = arg0;\n    arg0 = (u8)(arg0 - 0x40);\n    temp_f0 = func_151423D8(arg0);\n    temp_v1 = temp_a1 + 0x110;\n    *(f32 *)(temp_a1 + 0x4C) = (*(f32 *)(temp_v1 + 4) * temp_f0) + 1.0f;\n    *(f32 *)(temp_a1 + 0x50) = D_800AB4B0 - (*(f32 *)(temp_v1 + 8) * temp_f0);\n    return 1;\n}",
+        "score": 0.4852941176470588,
+        "reason": "length_mismatch (target=34, generated=33)",
+        "diffs": [],
+        "timestamp": "2026-06-03T01:31:57.537Z"
+      }
+    ]
   },
   {
     "function": "func_151411E4",
