@@ -711,5 +711,14 @@
     "example_functions": [
       "func_15144598"
     ]
+  },
+  {
+    "id": "threshold-or-sentinel-random-dispatch",
+    "description": "For float threshold/sentinel checks that choose a random dispatch ID, keep the object pointer in a local, use an OR condition, and invert the small integer range test to preserve IDO's bnez branch and delay-slot reload shape.",
+    "trigger": "Target loads a global struct pointer into a1, compares (field - float_const) with y_position or field with a float sentinel, then optionally calls random and maps rand&3 to two ID ranges before a common call.",
+    "solution": "Use a struct pointer local, `if (((field - CONST) < y) || (SENTINEL == field))`, set default a0 in else, and for rand mapping write `if (v >= 2) high else low`.",
+    "example_functions": [
+      "func_1506DC10"
+    ]
   }
 ]
