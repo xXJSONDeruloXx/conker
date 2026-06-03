@@ -7383,9 +7383,9 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1,
+    "status": "matched"
   },
   {
     "function": "func_15077404",
@@ -9696,7 +9696,7 @@
     ],
     "attempts": 0,
     "lastScore": 0,
-    "status": "pending"
+    "status": "skipped"
   },
   {
     "function": "func_1514462C",
@@ -11543,9 +11543,32 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.48936170212765956,
+    "status": "pending",
+    "history": [
+      {
+        "code": "s32 func_16002D2C(s16 *arg0, u16 *arg1) {\n    s16 exp;\n    s16 result;\n\n    exp = (s16)((*arg1 & 0x7FF0) >> 4);\n    if (exp == 0x7FF) {\n        *arg0 = 0;\n        result = 2;\n        if ((arg1[0] & 0xF) != 0) {\n            return result;\n        }\n        if (arg1[1] != 0) {\n            return result;\n        }\n        if (arg1[2] != 0) {\n            return result;\n        }\n        if (arg1[3] == 0) {\n            result = 1;\n        }\n        return result;\n    }\n    if (exp > 0) {\n        *arg1 = (*arg1 & 0x800F) | 0x3FF0;\n        *arg0 = exp - 0x3FE;\n        return -1;\n    }\n    if (exp < 0) {\n        return 2;\n    }\n    *arg0 = 0;\n    return 0;\n}",
+        "score": 0.48936170212765956,
+        "reason": "length_mismatch (target=46, generated=47)",
+        "diffs": [],
+        "timestamp": "2026-06-03T04:08:36.959Z"
+      },
+      {
+        "code": "s32 func_16002D2C(s16 *arg0, u16 *arg1) {\n    u16 first;\n    s16 exp;\n    s16 result;\n\n    first = *arg1;\n    exp = (s16)((first & 0x7FF0) >> 4);\n    if (exp == 0x7FF) {\n        *arg0 = 0;\n        result = 2;\n        if ((arg1[0] & 0xF) == 0 && arg1[1] == 0 && arg1[2] == 0 && arg1[3] == 0) {\n            result = 1;\n        }\n        return result;\n    }\n    if (exp > 0) {\n        *arg1 = (first & 0x800F) | 0x3FF0;\n        *arg0 = exp - 0x3FE;\n        return -1;\n    }\n    if (exp < 0) {\n        return 2;\n    }\n    *arg0 = 0;\n    return 0;\n}",
+        "score": 0.44565217391304346,
+        "reason": "length_mismatch (target=46, generated=41)",
+        "diffs": [],
+        "timestamp": "2026-06-03T04:08:49.028Z"
+      },
+      {
+        "code": "s16 func_16002D2C(s16 *arg0, u16 *arg1) {\n    u16 first;\n    s16 exp;\n    s16 result;\n\n    first = *arg1;\n    exp = (s16)((first & 0x7FF0) >> 4);\n    if (exp == 0x7FF) {\n        *arg0 = 0;\n        result = 2;\n        if ((arg1[0] & 0xF) != 0) return result;\n        if (arg1[1] != 0) return result;\n        if (arg1[2] != 0) return result;\n        if (arg1[3] != 0) return result;\n        result = 1;\n        return result;\n    }\n    if (exp > 0) {\n        *arg1 = (first & 0x800F) | 0x3FF0;\n        *arg0 = exp - 0x3FE;\n        return -1;\n    }\n    if (exp < 0) {\n        return 2;\n    }\n    *arg0 = 0;\n    return 0;\n}",
+        "score": 0.48936170212765956,
+        "reason": "length_mismatch (target=46, generated=47)",
+        "diffs": [],
+        "timestamp": "2026-06-03T04:09:54.906Z"
+      }
+    ]
   },
   {
     "function": "func_1506D958",
