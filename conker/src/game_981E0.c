@@ -3,6 +3,9 @@
 #include "functions.h"
 #include "variables.h"
 
+extern f32 D_80099D50;
+void func_15060A9C(s32, struct127 *);
+
 extern f32 D_8009A108;
 extern f32 D_8009A10C;
 extern f32 D_8009A110;
@@ -525,7 +528,25 @@ void func_1506DBD4(void) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_1506DC10.s")
+void func_1506DC10(void) {
+    struct127 *temp_a1;
+    s32 temp_a0;
+    s32 temp_v1;
+
+    temp_a1 = D_800D154C;
+    if (((temp_a1->unk118 - 60.0f) < temp_a1->y_position) || (D_80099D50 == temp_a1->unk118)) {
+        temp_v1 = func_150ADA20() & 3;
+        if (temp_v1 >= 2) {
+            temp_a0 = temp_v1 + 0x612;
+        } else {
+            temp_a0 = temp_v1 + 0x8F;
+        }
+        temp_a1 = D_800D154C;
+    } else {
+        temp_a0 = 9;
+    }
+    func_15060A9C(temp_a0, temp_a1);
+}
 
 void func_1506DCA4(void) {
     D_800D154C->unk2E8 = D_800D1580;

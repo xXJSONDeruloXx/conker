@@ -702,5 +702,14 @@
     "example_functions": [
       "func_150C2804"
     ]
+  },
+  {
+    "id": "switch-fallthrough-branch-shape",
+    "description": "A small switch with grouped cases can produce IDO's desired sequence of beq/beqzl branches and shared common-case code where equivalent if/else/goto forms choose branch-likely inversions or duplicate code.",
+    "trigger": "Target tests a masked mode value against 0, 1, and 2, with cases 0/1 sharing a tail and default falling through before case 2.",
+    "solution": "Use switch(masked) with case 2 first, grouped case 0/case 1 for shared code, and default last; adjust multiply operand order to control lh register order.",
+    "example_functions": [
+      "func_15144598"
+    ]
   }
 ]
