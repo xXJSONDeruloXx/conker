@@ -2625,7 +2625,7 @@
     "instructions": 28,
     "difficulty": "low",
     "tags": [],
-    "attempts": 9,
+    "attempts": 12,
     "lastScore": 0.48214285714285715,
     "status": "pending",
     "history": [
@@ -2824,6 +2824,27 @@
         "reason": "length_mismatch (target=28, generated=27)",
         "diffs": [],
         "timestamp": "2026-06-03T09:30:39.436Z"
+      },
+      {
+        "code": "void func_10003BD0(s32 unused, s32 *arg1) {\n    struct54 *temp_a0;\n    struct54 *temp_v0;\n\n    arg1 = (s32 *)&D_800380BC;\n    temp_a0 = (struct54 *)&D_800E9D10;\n    D_800380B4 = temp_a0;\n    ((volatile struct54 *)temp_a0)->unk0 = NULL;\n    ((volatile struct54 *)D_800380B4)->unk4 = NULL;\n    ((volatile struct54 *)D_800380B4)->unk8 = D_80038098 - (u32)temp_a0 - 0x14;\n    ((volatile struct54 *)D_800380B4)->unkC = 0;\n    ((volatile struct54 *)D_800380B4)->unk10 = 0;\n    temp_v0 = D_800380B4;\n    *arg1 = (s32)temp_v0;\n    D_800380B8 = temp_v0;\n    D_800380B0 = temp_v0;\n}\n",
+        "score": 0.4827586206896552,
+        "reason": "length_mismatch (target=28, generated=29)",
+        "diffs": [],
+        "timestamp": "2026-06-03T09:31:15.761Z"
+      },
+      {
+        "code": "void func_10003BD0(register s32 unused, register s32 *arg1) {\n    struct54 *temp_a0;\n    struct54 *temp_v0;\n\n    arg1 = (s32 *)&D_800380BC;\n    temp_a0 = (struct54 *)&D_800E9D10;\n    D_800380B4 = temp_a0;\n    ((volatile struct54 *)temp_a0)->unk0 = NULL;\n    ((volatile struct54 *)D_800380B4)->unk4 = NULL;\n    ((volatile struct54 *)D_800380B4)->unk8 = D_80038098 - (u32)temp_a0 - 0x14;\n    ((volatile struct54 *)D_800380B4)->unkC = 0;\n    ((volatile struct54 *)D_800380B4)->unk10 = 0;\n    temp_v0 = D_800380B4;\n    *arg1 = (s32)temp_v0;\n    D_800380B8 = temp_v0;\n    D_800380B0 = temp_v0;\n}\n",
+        "score": 0.4827586206896552,
+        "reason": "length_mismatch (target=28, generated=29)",
+        "diffs": [],
+        "timestamp": "2026-06-03T09:31:37.069Z"
+      },
+      {
+        "code": "void func_10003BD0(void) {\n    volatile s32 *temp_a1;\n    struct54 *temp_a0;\n    struct54 *temp_v0;\n\n    temp_a1 = (volatile s32 *)&D_800380BC;\n    temp_a0 = (struct54 *)&D_800E9D10;\n    D_800380B4 = temp_a0;\n    ((volatile struct54 *)temp_a0)->unk0 = NULL;\n    ((volatile struct54 *)D_800380B4)->unk4 = NULL;\n    ((volatile struct54 *)D_800380B4)->unk8 = D_80038098 - (u32)temp_a0 - 0x14;\n    ((volatile struct54 *)D_800380B4)->unkC = 0;\n    ((volatile struct54 *)D_800380B4)->unk10 = 0;\n    temp_v0 = D_800380B4;\n    *temp_a1 = (s32)temp_v0;\n    D_800380B8 = temp_v0;\n    D_800380B0 = temp_v0;\n}\n",
+        "score": 0.48214285714285715,
+        "reason": "length_mismatch (target=28, generated=27)",
+        "diffs": [],
+        "timestamp": "2026-06-03T09:32:15.562Z"
       }
     ]
   },
