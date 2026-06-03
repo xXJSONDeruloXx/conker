@@ -6079,8 +6079,8 @@
     "instructions": 24,
     "difficulty": "low",
     "tags": [],
-    "attempts": 15,
-    "lastScore": 0.9167,
+    "attempts": 18,
+    "lastScore": 0.8333,
     "status": "pending",
     "history": [
       {
@@ -6292,6 +6292,32 @@
           "structural: target=mov.s f2, f12 got=c.lt.s f0, f12"
         ],
         "timestamp": "2026-06-03T12:45:50.469Z"
+      },
+      {
+        "code": "f32 func_15144B68(f32 arg0) {\n    f32 range = D_800A56A4;\n    f32 val = (range < arg0) ? arg0 : arg0;\n\n    if (range < val) {\n        do {\n            val -= range;\n        } while (range < val);\n    }\n    if (val < 0.0f) {\n        do {\n            val += range;\n        } while (val < 0.0f);\n    }\n    return val;\n}",
+        "score": 0.4,
+        "reason": "length_mismatch (target=24, generated=30)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:46:22.449Z"
+      },
+      {
+        "code": "f32 func_15144B68(f32 arg0) {\n    f32 range = D_800A56A4;\n    f32 val;\n\n    if ((range < arg0) ? ((val = arg0), 1) : ((val = arg0), 0)) {\n        do {\n            val -= range;\n        } while (range < val);\n    }\n    if (val < 0.0f) {\n        do {\n            val += range;\n        } while (val < 0.0f);\n    }\n    return val;\n}",
+        "score": 0.3870967741935484,
+        "reason": "length_mismatch (target=24, generated=31)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:46:39.172Z"
+      },
+      {
+        "code": "f32 func_15144B68(f32 arg0) {\n    f32 range = D_800A56A4[0];\n    f32 val = arg0;\n\n    if (range < val) {\n        do {\n            val -= range;\n        } while (range < val);\n    }\n    if (val < 0.0f) {\n        do {\n            val += range;\n        } while (val < 0.0f);\n    }\n    return val;\n}",
+        "score": 0.8333,
+        "reason": "structural_diffs=4",
+        "diffs": [
+          "structural: target=lui at, HI(D_800A56A4) got=lui at, HI(.rodata)",
+          "structural: target=lwc1 f0, LO(D_800A56A4)(at) got=lwc1 f0, LO(.rodata)(at)",
+          "structural: target=c.lt.s f0, f12 got=mov.s f2, f12",
+          "structural: target=mov.s f2, f12 got=c.lt.s f0, f12"
+        ],
+        "timestamp": "2026-06-03T12:46:57.126Z"
       }
     ]
   },
