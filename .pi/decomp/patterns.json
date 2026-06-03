@@ -540,5 +540,14 @@
     "example_functions": [
       "func_1505EEB0"
     ]
+  },
+  {
+    "id": "array-initializer-copy-with-pointer-prototype",
+    "description": "One-word local array initialized from a global array can emit an aggregate copy through $at; declaring the callee's first argument as a pointer lets IDO keep the stack local address in $a0 and store the copied word in the jal delay slot.",
+    "trigger": "Wrapper builds a 1-word stack payload from a global array, then passes its address to a helper; scalar assignment uses a temp register and/or wrong scheduling, while array initializer uses `lw $at` and delay-slot `sw $at, 0($a0)`.",
+    "solution": "Use `s32 local[1] = GLOBAL_ARRAY;` and call a helper prototype whose first parameter is `s32 *`/pointer, not raw `s32`, so the local address is assigned directly to `$a0`.",
+    "example_functions": [
+      "func_151D343C"
+    ]
   }
 ]

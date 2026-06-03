@@ -63,6 +63,34 @@ s32 func_16001B8C(u8 *arg0, u8 *arg1, u32 arg2) {
 #pragma GLOBAL_ASM("asm/nonmatchings/debugger_257350/func_160021FC.s")
 // contains delay slot
 #pragma GLOBAL_ASM("asm/nonmatchings/debugger_257350/func_1600288C.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/debugger_257350/func_16002D2C.s")
+s16 func_16002D2C(s16 *arg0, struct05 *arg1) {
+    s16 temp_v1 = (arg1->unk0 & 0x7FF0) >> 4;
+
+    if (temp_v1 == 0x7FF) {
+        s32 ret;
+        *arg0 = 0;
+        if ((arg1->unk0 & 0xF) || (arg1->unk2) || (arg1->unk4) || (arg1->unk6)) {
+            ret = 2;
+        }
+        else {
+            ret = 1;
+        }
+        return ret;
+    }
+
+    if (temp_v1 > 0) {
+        arg1->unk0 = (arg1->unk0 & 0x800F) | 0x3FF0;
+        *arg0 = temp_v1 - 0x3FE;
+        return -1;
+    }
+
+    if (temp_v1 < 0) {
+      return 2;
+    }
+
+    *arg0 = 0;
+    return 0;
+}
+
 #pragma GLOBAL_ASM("asm/nonmatchings/debugger_257350/func_16002DE4.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/debugger_257350/func_160033A8.s")
