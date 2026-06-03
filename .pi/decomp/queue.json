@@ -2114,7 +2114,7 @@
     "instructions": 20,
     "difficulty": "low",
     "tags": [],
-    "attempts": 9,
+    "attempts": 12,
     "lastScore": 0.475,
     "status": "pending",
     "history": [
@@ -2194,6 +2194,27 @@
         "reason": "length_mismatch (target=20, generated=19)",
         "diffs": [],
         "timestamp": "2026-06-03T10:03:23.381Z"
+      },
+      {
+        "code": "void func_150A7CB0(f32 mtx[4][4], s32 x, s32 y, s32 z) {\n    f32 *fptr;\n    volatile s32 *iptr;\n\n    ((s32 *)mtx)[0] = x;\n    ((s32 *)mtx)[1] = 0;\n    ((s32 *)mtx)[2] = 0;\n    ((s32 *)mtx)[3] = 0;\n    ((s32 *)mtx)[4] = 0;\n    ((s32 *)mtx)[5] = y;\n    ((s32 *)mtx)[6] = 0;\n    ((s32 *)mtx)[7] = 0;\n    ((s32 *)mtx)[8] = 0;\n    ((s32 *)mtx)[9] = 0;\n    ((s32 *)mtx)[10] = z;\n    ((s32 *)mtx)[11] = 0;\n    ((s32 *)mtx)[12] = 0;\n    ((s32 *)mtx)[13] = 0;\n    fptr = &mtx[3][3];\n    iptr = (s32 *)&mtx[3][2];\n    *fptr = 1.0f;\n    if ((*iptr = 0) == 0) {\n        return;\n    }\n}\n",
+        "score": 0.475,
+        "reason": "length_mismatch (target=20, generated=19)",
+        "diffs": [],
+        "timestamp": "2026-06-03T10:03:53.361Z"
+      },
+      {
+        "code": "void func_150A7CB0(f32 mtx[4][4], s32 x, s32 y, s32 z) {\n    volatile s32 *iptr;\n    volatile f32 *fptr;\n\n    iptr = (s32 *)mtx;\n    fptr = (f32 *)mtx;\n    iptr[0] = x;\n    iptr[1] = 0;\n    iptr[2] = 0;\n    iptr[3] = 0;\n    iptr[4] = 0;\n    iptr[5] = y;\n    iptr[6] = 0;\n    iptr[7] = 0;\n    iptr[8] = 0;\n    iptr[9] = 0;\n    iptr[10] = z;\n    iptr[11] = 0;\n    iptr[12] = 0;\n    iptr[13] = 0;\n    fptr[15] = 1.0f;\n    if ((iptr[14] = 0) == 0) {\n        return;\n    }\n}\n",
+        "score": 0.475,
+        "reason": "length_mismatch (target=20, generated=19)",
+        "diffs": [],
+        "timestamp": "2026-06-03T10:04:21.564Z"
+      },
+      {
+        "code": "void func_150A7CB0(f32 mtx[4][4], s32 x, s32 y, s32 z) {\n    f32 one;\n    volatile s32 *iptr;\n    volatile f32 *fptr;\n\n    one = 1.0f;\n    iptr = (s32 *)mtx;\n    fptr = (f32 *)mtx;\n    iptr[0] = x;\n    iptr[1] = 0;\n    iptr[2] = 0;\n    iptr[3] = 0;\n    iptr[4] = 0;\n    iptr[5] = y;\n    iptr[6] = 0;\n    iptr[7] = 0;\n    iptr[8] = 0;\n    iptr[9] = 0;\n    iptr[10] = z;\n    iptr[11] = 0;\n    iptr[12] = 0;\n    iptr[13] = 0;\n    fptr[15] = one;\n    if ((iptr[14] = 0) == 0) {\n        return;\n    }\n}\n",
+        "score": 0.475,
+        "reason": "length_mismatch (target=20, generated=19)",
+        "diffs": [],
+        "timestamp": "2026-06-03T10:04:43.434Z"
       }
     ]
   },
