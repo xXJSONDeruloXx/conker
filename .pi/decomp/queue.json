@@ -2502,7 +2502,7 @@
     "instructions": 22,
     "difficulty": "low",
     "tags": [],
-    "attempts": 3,
+    "attempts": 6,
     "lastScore": 0.1364,
     "status": "pending",
     "history": [
@@ -2691,6 +2691,67 @@
           "structural: target=sb t1, 645(t0) got=sb v1, 645(t3)"
         ],
         "timestamp": "2026-06-03T11:39:22.556Z"
+      },
+      {
+        "code": "void func_1506EF5C(s32 arg0, s32 arg1, struct127 **arg2) {\n    s32 temp_t1;\n    s32 temp_v0;\n    s32 temp_t6;\n\n    arg2 = &D_800D154C;\n    temp_t1 = D_800D1580;\n    (*arg2)->unk282 = 0xFFFF;\n    (*arg2)->unk276 = 5;\n    temp_v0 = temp_t1 >> 16;\n    temp_t6 = (temp_v0 & 0xFF) << 1;\n    *(((u8 *)*arg2) + temp_t6 + 0x284) = temp_t1 >> 8;\n    *(((u8 *)*arg2) + temp_t6 + 0x285) = temp_t1;\n}",
+        "score": 0.44,
+        "reason": "length_mismatch (target=22, generated=25)",
+        "diffs": [],
+        "timestamp": "2026-06-03T11:39:49.877Z"
+      },
+      {
+        "code": "void func_1506EF5C(void) {\n    s32 temp_t1;\n    struct127 **temp_a2;\n    struct127 *temp_t3;\n    s32 temp_v0;\n    s32 temp_t6;\n\n    temp_a2 = &D_800D154C;\n    temp_t3 = *temp_a2;\n    temp_t1 = D_800D1580;\n    temp_t3->unk282 = 0xFFFF;\n    (*temp_a2)->unk276 = 5;\n    temp_v0 = temp_t1 >> 16;\n    temp_t6 = (temp_v0 & 0xFF) << 1;\n    *(((u8 *)*temp_a2) + temp_t6 + 0x284) = temp_t1 >> 8;\n    *(((u8 *)*temp_a2) + temp_t6 + 0x285) = temp_t1;\n}",
+        "score": 0.1364,
+        "reason": "structural_diffs=19",
+        "diffs": [
+          "structural: target=lui a2, HI(D_800D154C) got=lui a1, HI(D_800D154C)",
+          "structural: target=addiu a2, a2, LO(D_800D154C) got=addiu a1, a1, LO(D_800D154C)",
+          "structural: target=lw t3, 0(a2) got=lw v0, 0(a1)",
+          "structural: target=lw t1, LO(D_800D1580)(v1) got=lw v1, LO(D_800D1580)(v1)",
+          "structural: target=ori t2, zero, 65535 got=li t6, -1",
+          "structural: target=sh t2, 642(t3) got=sh t6, 642(v0)",
+          "structural: target=lw t5, 0(a2) got=lw t8, 0(a1)",
+          "structural: target=li t4, 5 got=li t7, 5",
+          "structural: target=sra v0, t1, 16 got=sra a0, v1, 16",
+          "structural: target=sb t4, 630(t5) got=sb t7, 630(t8)",
+          "structural: target=lw t7, 0(a2) got=lw t2, 0(a1)",
+          "structural: target=andi t6, v0, 255 got=andi t9, a0, 255",
+          "structural: target=sll t6, t6, 1 got=sll t0, t9, 1",
+          "structural: target=sra t9, t1, 8 got=sra t1, v1, 8",
+          "structural: target=addu t8, t7, t6 got=addu t3, t2, t0",
+          "structural: target=sb t9, 644(t8) got=sb t1, 644(t3)",
+          "structural: target=lw t9, 0(a2) got=lw t4, 0(a1)",
+          "structural: target=addu t0, t9, t6 got=addu t5, t4, t0",
+          "structural: target=sb t1, 645(t0) got=sb v1, 645(t5)"
+        ],
+        "timestamp": "2026-06-03T11:40:29.054Z"
+      },
+      {
+        "code": "void func_1506EF5C(void) {\n    s32 temp_v0;\n    s32 temp_t1;\n    struct127 **temp_a2;\n    struct127 *temp_t3;\n    s32 temp_t6;\n\n    temp_a2 = &D_800D154C;\n    temp_t3 = *temp_a2;\n    temp_t1 = D_800D1580;\n    temp_t3->unk282 = 0xFFFF;\n    (*temp_a2)->unk276 = 5;\n    temp_v0 = temp_t1 >> 16;\n    temp_t6 = (temp_v0 & 0xFF) << 1;\n    *(((u8 *)*temp_a2) + temp_t6 + 0x284) = temp_t1 >> 8;\n    *(((u8 *)*temp_a2) + temp_t6 + 0x285) = temp_t1;\n}",
+        "score": 0.1364,
+        "reason": "structural_diffs=19",
+        "diffs": [
+          "structural: target=lui a2, HI(D_800D154C) got=lui a1, HI(D_800D154C)",
+          "structural: target=addiu a2, a2, LO(D_800D154C) got=addiu a1, a1, LO(D_800D154C)",
+          "structural: target=lw t3, 0(a2) got=lw v0, 0(a1)",
+          "structural: target=lw t1, LO(D_800D1580)(v1) got=lw v1, LO(D_800D1580)(v1)",
+          "structural: target=ori t2, zero, 65535 got=li t6, -1",
+          "structural: target=sh t2, 642(t3) got=sh t6, 642(v0)",
+          "structural: target=lw t5, 0(a2) got=lw t8, 0(a1)",
+          "structural: target=li t4, 5 got=li t7, 5",
+          "structural: target=sra v0, t1, 16 got=sra a0, v1, 16",
+          "structural: target=sb t4, 630(t5) got=sb t7, 630(t8)",
+          "structural: target=lw t7, 0(a2) got=lw t2, 0(a1)",
+          "structural: target=andi t6, v0, 255 got=andi t9, a0, 255",
+          "structural: target=sll t6, t6, 1 got=sll t0, t9, 1",
+          "structural: target=sra t9, t1, 8 got=sra t1, v1, 8",
+          "structural: target=addu t8, t7, t6 got=addu t3, t2, t0",
+          "structural: target=sb t9, 644(t8) got=sb t1, 644(t3)",
+          "structural: target=lw t9, 0(a2) got=lw t4, 0(a1)",
+          "structural: target=addu t0, t9, t6 got=addu t5, t4, t0",
+          "structural: target=sb t1, 645(t0) got=sb v1, 645(t5)"
+        ],
+        "timestamp": "2026-06-03T11:40:45.748Z"
       }
     ]
   },
