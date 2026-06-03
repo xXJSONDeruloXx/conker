@@ -2625,7 +2625,7 @@
     "instructions": 28,
     "difficulty": "low",
     "tags": [],
-    "attempts": 3,
+    "attempts": 6,
     "lastScore": 0.48214285714285715,
     "status": "pending",
     "history": [
@@ -2782,6 +2782,27 @@
         "reason": "length_mismatch (target=28, generated=27)",
         "diffs": [],
         "timestamp": "2026-06-03T09:26:29.074Z"
+      },
+      {
+        "code": "void func_10003BD0(void) {\n    struct54 *temp_a0;\n    struct54 *temp_v0;\n    struct54 * volatile *temp_a1;\n\n    temp_a1 = (struct54 * volatile *)&D_800380BC;\n    temp_a0 = (struct54 *)&D_800E9D10;\n    (*(struct54 * volatile *)&D_800380B4) = temp_a0;\n    temp_a0->unk0 = NULL;\n    (*(struct54 * volatile *)&D_800380B4)->unk4 = NULL;\n    (*(struct54 * volatile *)&D_800380B4)->unk8 = D_80038098 - (u32)temp_a0 - 0x14;\n    (*(struct54 * volatile *)&D_800380B4)->unkC = 0;\n    (*(struct54 * volatile *)&D_800380B4)->unk10 = 0;\n    temp_v0 = (*(struct54 * volatile *)&D_800380B4);\n    *temp_a1 = temp_v0;\n    D_800380B8 = temp_v0;\n    D_800380B0 = temp_v0;\n}\n",
+        "score": 0.48214285714285715,
+        "reason": "length_mismatch (target=28, generated=27)",
+        "diffs": [],
+        "timestamp": "2026-06-03T09:26:59.281Z"
+      },
+      {
+        "code": "void func_10003BD0(void) {\n    struct54 * volatile *temp_v1;\n    struct54 *temp_a0;\n    s32 * volatile *temp_a1;\n    struct54 *temp_v0;\n\n    temp_v1 = (struct54 * volatile *)&D_800380B4;\n    temp_a0 = (struct54 *)&D_800E9D10;\n    temp_a1 = (s32 * volatile *)&D_800380BC;\n    *temp_v1 = temp_a0;\n    temp_a0->unk0 = NULL;\n    (*temp_v1)->unk4 = NULL;\n    (*temp_v1)->unk8 = D_80038098 - (u32)temp_a0 - 0x14;\n    (*temp_v1)->unkC = 0;\n    (*temp_v1)->unk10 = 0;\n    temp_v0 = *temp_v1;\n    *temp_a1 = (s32 *)temp_v0;\n    D_800380B8 = temp_v0;\n    D_800380B0 = temp_v0;\n}\n",
+        "score": 0.48214285714285715,
+        "reason": "length_mismatch (target=28, generated=27)",
+        "diffs": [],
+        "timestamp": "2026-06-03T09:27:43.860Z"
+      },
+      {
+        "code": "void func_10003BD0(void) {\n    struct54 * volatile *temp_v1;\n    struct54 *temp_a0;\n    s32 * volatile *temp_a1;\n    struct54 *temp_v0;\n\n    temp_v1 = (struct54 * volatile *)&D_800380B4;\n    temp_a0 = (struct54 *)&D_800E9D10;\n    temp_a1 = (s32 * volatile *)&D_800380BC;\n    *temp_v1 = temp_a0;\n    ((volatile struct54 *)temp_a0)->unk0 = NULL;\n    (*temp_v1)->unk4 = NULL;\n    (*temp_v1)->unk8 = D_80038098 - (u32)temp_a0 - 0x14;\n    (*temp_v1)->unkC = 0;\n    (*temp_v1)->unk10 = 0;\n    temp_v0 = *temp_v1;\n    *temp_a1 = (s32 *)temp_v0;\n    D_800380B8 = temp_v0;\n    D_800380B0 = temp_v0;\n}\n",
+        "score": 0.48214285714285715,
+        "reason": "length_mismatch (target=28, generated=27)",
+        "diffs": [],
+        "timestamp": "2026-06-03T09:28:18.360Z"
       }
     ]
   },
