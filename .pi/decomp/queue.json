@@ -1284,9 +1284,9 @@
     "instructions": 17,
     "difficulty": "low",
     "tags": [],
-    "attempts": 3,
+    "attempts": 8,
     "lastScore": 0,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "void func_1508F060(void) {\n    s32 idx = 2;\n    u8 *ptr;\n\n    D_800D246D = 0;\n    D_800D247D = 0;\n    ptr = D_800D2460[idx];\n    ptr[0x1D] = 0;\n    ptr[0x2D] = 0;\n    ptr[0x3D] = 0;\n    ptr[0xD] = 0;\n    D_800D24C0 = 0;\n}\n",
@@ -1322,6 +1322,41 @@
         "reason": "generated 4891 instr for 17 target (287.7x oversized)",
         "diffs": [],
         "timestamp": "2026-06-03T07:21:20.920Z"
+      },
+      {
+        "code": "void func_1508F060(void) {\n    s32 temp_v0;\n    volatile u8 *temp_v1;\n\n    D_800D246D = 0;\n    D_800D247D = 0;\n    temp_v0 = 2;\n    temp_v1 = (volatile u8 *)D_800D2460 + (temp_v0 << 4);\n    temp_v1[0x1D] = 0;\n    temp_v1[0x2D] = 0;\n    temp_v1[0x3D] = 0;\n    temp_v1[0xD] = 0;\n    D_800D24C0 = 0;\n}\n",
+        "score": 0,
+        "reason": "generated 4891 instr for 17 target (287.7x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T07:56:17.668Z"
+      },
+      {
+        "code": "void func_1508F060(void) {\n    s32 temp_v0;\n    u8 (*temp_t7)[16];\n    u8 *temp_v1;\n\n    D_800D246D = 0;\n    temp_v0 = 2;\n    D_800D247D = 0;\n    temp_t7 = D_800D2460;\n    temp_v1 = (u8 *)temp_t7[temp_v0];\n    temp_v1[0x1D] = 0;\n    temp_v1[0x2D] = 0;\n    temp_v1[0x3D] = 0;\n    temp_v1[0x0D] = 0;\n    D_800D24C0 = 0;\n}\n",
+        "score": 0,
+        "reason": "generated 4891 instr for 17 target (287.7x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T08:00:18.677Z"
+      },
+      {
+        "code": "void func_1508F060(void) {\n    u8 *temp_v1;\n\n    D_800D246D = 0;\n    D_800D247D = 0;\n    temp_v1 = D_800D2460[2];\n    temp_v1[0x1D] = 0;\n    temp_v1[0x2D] = 0;\n    temp_v1[0x3D] = 0;\n    temp_v1[0x0D] = 0;\n    D_800D24C0 = 0;\n}\n",
+        "score": 0,
+        "reason": "generated 4891 instr for 17 target (287.7x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T08:01:51.127Z"
+      },
+      {
+        "code": "void func_1508F060(void) {\n    s32 temp_v0;\n    u8 (*temp_t7)[16];\n    u8 *temp_v1;\n\n    D_800D246D = 0;\n    temp_v0 = 2;\n    temp_t7 = D_800D2460;\n    D_800D247D = 0;\n    temp_v1 = (u8 *)temp_t7 + (temp_v0 << 4);\n    temp_v1[0x1D] = 0;\n    temp_v1[0x2D] = 0;\n    temp_v1[0x3D] = 0;\n    temp_v1[0x0D] = 0;\n    D_800D24C0 = 0;\n}\n",
+        "score": 0,
+        "reason": "generated 4891 instr for 17 target (287.7x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T08:03:07.374Z"
+      },
+      {
+        "code": "void func_1508F060(void) {\n    D_800D246D = 0;\n    D_800D247D = 0;\n    D_800D2460[2][0x1D] = 0;\n    D_800D2460[2][0x2D] = 0;\n    D_800D2460[2][0x3D] = 0;\n    D_800D2460[2][0x0D] = 0;\n    D_800D24C0 = 0;\n}\n\nvoid func_1508F060_end(void) {\n}\n",
+        "score": 0,
+        "reason": "generated 4891 instr for 17 target (287.7x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T08:04:34.545Z"
       }
     ]
   },
@@ -1332,9 +1367,32 @@
     "instructions": 18,
     "difficulty": "low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.4722222222222222,
+    "status": "pending",
+    "history": [
+      {
+        "code": "u8 func_150ADA20(void) {\n    u64 tmp;\n\n    tmp = D_800885B0;\n    tmp = (((tmp & 1) << 32) | (tmp >> 1)) ^ ((tmp << 12) & 0xFFFFFFFF);\n    tmp ^= (tmp >> 20) & 0xFFF;\n    D_800885B0 = tmp;\n    return tmp;\n}\n",
+        "score": 0,
+        "reason": "generated 60 instr for 18 target (3.3x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T08:06:14.367Z"
+      },
+      {
+        "code": "u8 func_150ADA20(void) {\n    u64 tmp0;\n    u64 tmp2;\n\n    tmp0 = D_800885B0;\n    tmp2 = ((tmp0 << 63) >> 31) | ((tmp0 << 31) >> 32);\n    tmp0 = (tmp0 << 44) >> 32;\n    tmp2 ^= tmp0;\n    tmp0 = (tmp2 >> 20) & 0xFFF;\n    tmp0 ^= tmp2;\n    D_800885B0 = tmp0;\n    return tmp0;\n}\n",
+        "score": 0,
+        "reason": "generated 69 instr for 18 target (3.8x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T08:06:40.660Z"
+      },
+      {
+        "code": "u8 func_150ADA20(void) {\n    u32 tmp;\n\n    tmp = D_800885B0;\n    tmp = ((tmp >> 1) | (tmp << 31)) ^ (tmp << 12);\n    tmp ^= (tmp >> 20) & 0xFFF;\n    D_800885B0 = tmp;\n    return tmp;\n}\n",
+        "score": 0.4722222222222222,
+        "reason": "length_mismatch (target=18, generated=17)",
+        "diffs": [],
+        "timestamp": "2026-06-03T08:08:01.275Z"
+      }
+    ]
   },
   {
     "function": "func_15079F6C",
@@ -3879,9 +3937,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 6,
-    "lastScore": 0.47058823529411764,
-    "status": "pending",
+    "attempts": 7,
+    "lastScore": 1,
+    "status": "matched",
     "history": [
       {
         "code": "void func_151D343C(s32 arg0, s32 arg1) {\n    s32 sp1C[1];\n\n    sp1C[0] = D_800AB168[0];\n    func_15169260((s32)sp1C, 1, arg0, arg1 & 0xFF);\n}\n",
