@@ -7407,8 +7407,8 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 3,
-    "lastScore": 0.9444,
+    "attempts": 6,
+    "lastScore": 0.4736842105263158,
     "status": "pending",
     "history": [
       {
@@ -7434,6 +7434,50 @@
           "structural: target=addiu s0, s0, LO(D_800425E0) got=addiu s1, s1, LO(D_800426A0)"
         ],
         "timestamp": "2026-06-03T03:58:22.477Z"
+      },
+      {
+        "code": "s32 func_1000F4D8(u16 arg0) {\n    struct120 *end = (struct120 *)&D_800426A0;\n    struct120 *p = D_800425E0;\n    arg0 = arg0 & 0x7FFF;\n    do {\n        if (p->unk8 != 0 && (p->unk4 & 0x7FFF) == arg0 && func_100173C4(&p->unk8) != 0) {\n            return 1;\n        }\n        p++;\n    } while (p != end);\n    return 0;\n}",
+        "score": 0.7222,
+        "reason": "structural_diffs=10",
+        "diffs": [
+          "structural: target=sw s2, 32(sp) got=sw s1, 28(sp)",
+          "structural: target=andi s2, a0, 65535 got=andi s1, a0, 65535",
+          "structural: target=sw s1, 28(sp) got=sw s2, 32(sp)",
+          "structural: target=move t6, s2 got=lui s2, HI(D_800426A0)",
+          "structural: target=lui s1, HI(D_800426A0) got=move t6, s1",
+          "structural: target=andi s2, t6, 32767 got=addiu s2, s2, LO(D_800426A0)",
+          "structural: target=addiu s1, s1, LO(D_800426A0) got=addiu s0, s0, LO(D_800425E0)",
+          "structural: target=addiu s0, s0, LO(D_800425E0) got=andi s1, t6, 32767",
+          "structural: target=bnel s2, t0, L0 got=bnel s1, t0, L0",
+          "structural: target=bnel s0, s1, L2 got=bnel s0, s2, L2"
+        ],
+        "timestamp": "2026-06-03T03:58:37.458Z"
+      },
+      {
+        "code": "s32 func_1000F4D8(u16 arg0) {\n    struct120 *p = &D_800425E0[0];\n    struct120 *end = &D_800425E0[16];\n    arg0 = arg0 & 0x7FFF;\n    do {\n        if (p->unk8 != 0 && (p->unk4 & 0x7FFF) == arg0 && func_100173C4(&p->unk8) != 0) {\n            return 1;\n        }\n        p++;\n    } while (p != end);\n    return 0;\n}",
+        "score": 0.6944,
+        "reason": "structural_diffs=11",
+        "diffs": [
+          "structural: target=sw s2, 32(sp) got=sw s1, 28(sp)",
+          "structural: target=andi s2, a0, 65535 got=andi s1, a0, 65535",
+          "structural: target=sw s1, 28(sp) got=sw s2, 32(sp)",
+          "structural: target=move t6, s2 got=lui s0, HI(D_800425E0)",
+          "structural: target=lui s0, HI(D_800425E0) got=lui s2, HI(D_800425E0)",
+          "structural: target=lui s1, HI(D_800426A0) got=move t6, s1",
+          "structural: target=andi s2, t6, 32767 got=addiu s0, s0, LO(D_800425E0)",
+          "structural: target=addiu s1, s1, LO(D_800426A0) got=addiu s2, s2, 192",
+          "structural: target=addiu s0, s0, LO(D_800425E0) got=andi s1, t6, 32767",
+          "structural: target=bnel s2, t0, L0 got=bnel s1, t0, L0",
+          "structural: target=bnel s0, s1, L2 got=bnel s0, s2, L2"
+        ],
+        "timestamp": "2026-06-03T03:59:24.281Z"
+      },
+      {
+        "code": "s32 func_1000F4D8(u16 arg0) {\n    struct120 *p;\n    arg0 = arg0 & 0x7FFF;\n    for (p = D_800425E0; p != (struct120 *)&D_800426A0; p++) {\n        if (p->unk8 != 0 && (p->unk4 & 0x7FFF) == arg0 && func_100173C4(&p->unk8) != 0) {\n            return 1;\n        }\n    }\n    return 0;\n}",
+        "score": 0.4736842105263158,
+        "reason": "length_mismatch (target=36, generated=38)",
+        "diffs": [],
+        "timestamp": "2026-06-03T03:59:50.322Z"
       }
     ]
   },
