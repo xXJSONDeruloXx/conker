@@ -6683,8 +6683,8 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 6,
-    "lastScore": 0.4838709677419355,
+    "attempts": 9,
+    "lastScore": 0.484375,
     "status": "pending",
     "history": [
       {
@@ -7281,6 +7281,27 @@
         "reason": "length_mismatch (target=31, generated=30)",
         "diffs": [],
         "timestamp": "2026-06-03T05:11:19.132Z"
+      },
+      {
+        "code": "void func_15168F08(Gfx *arg0, s32 arg1) {\n    s32 temp_a2;\n    s32 end;\n    s32 first;\n    s32 i;\n    Gfx *ptr;\n    s32 temp;\n\n    if ((temp_a2 = arg1, end = -0x21, first = *(s8 *)&arg0->words.w0, i = 0, ptr = arg0, end != first)) {\n        arg1 = *(volatile s8 *)&arg0->words.w0;\n        do {\n            i++;\n            if ((arg1 == 1) || ((arg1 == -0x24) && (*((u8 *)&ptr->words.w0 + 3) == 0xE))) {\n                temp = ptr->words.w1 & 0x00FFFFFF;\n                *(volatile s32 *)&ptr->words.w1 = temp;\n                *(volatile s32 *)&ptr->words.w1 = temp + temp_a2;\n            }\n            ptr = arg0 + i;\n            arg1 = *(s8 *)&ptr->words.w0;\n        } while (end != arg1);\n    }\n}",
+        "score": 0.484375,
+        "reason": "length_mismatch (target=31, generated=32)",
+        "diffs": [],
+        "timestamp": "2026-06-03T05:11:59.515Z"
+      },
+      {
+        "code": "void func_15168F08(Gfx *arg0, s32 arg1) {\n    s32 temp_a2;\n    s32 end;\n    s32 mask;\n    s32 i;\n    Gfx *ptr;\n    s32 temp;\n\n    temp_a2 = arg1;\n    end = -0x21;\n    mask = 0x00FFFFFF;\n    i = 0;\n    ptr = arg0;\n    if (*(s8 *)&arg0->words.w0 != end) {\n        arg1 = *(s8 *)&arg0->words.w0;\n        do {\n            i++;\n            if ((arg1 == 1) || ((arg1 == -0x24) && (*((u8 *)&ptr->words.w0 + 3) == 0xE))) {\n                temp = ptr->words.w1 & mask;\n                *(volatile s32 *)&ptr->words.w1 = temp;\n                *(volatile s32 *)&ptr->words.w1 = temp + temp_a2;\n            }\n            ptr = arg0 + i;\n            arg1 = *(s8 *)&ptr->words.w0;\n        } while (end != arg1);\n    }\n}",
+        "score": 0.484375,
+        "reason": "length_mismatch (target=31, generated=32)",
+        "diffs": [],
+        "timestamp": "2026-06-03T05:12:51.416Z"
+      },
+      {
+        "code": "void func_15168F08(Gfx *arg0, s32 arg1) {\n    s32 i;\n    Gfx *ptr;\n    s32 temp_a2;\n    s32 end;\n    s32 mask;\n    s32 temp;\n\n    i = 0;\n    ptr = arg0;\n    temp_a2 = arg1;\n    end = -0x21;\n    mask = 0x00FFFFFF;\n    if (*(s8 *)&arg0->words.w0 != end) {\n        arg1 = *(s8 *)&arg0->words.w0;\n        do {\n            i++;\n            if ((arg1 == 1) || ((arg1 == -0x24) && (*((u8 *)&ptr->words.w0 + 3) == 0xE))) {\n                temp = ptr->words.w1 & mask;\n                *(volatile s32 *)&ptr->words.w1 = temp;\n                *(volatile s32 *)&ptr->words.w1 = temp + temp_a2;\n            }\n            ptr = arg0 + i;\n            arg1 = *(s8 *)&ptr->words.w0;\n        } while (end != arg1);\n    }\n}",
+        "score": 0.484375,
+        "reason": "length_mismatch (target=31, generated=32)",
+        "diffs": [],
+        "timestamp": "2026-06-03T05:13:07.952Z"
       }
     ]
   },
