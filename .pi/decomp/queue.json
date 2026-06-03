@@ -20439,9 +20439,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 6,
-    "lastScore": 0.9744,
-    "status": "pending",
+    "attempts": 7,
+    "lastScore": 0.8462,
+    "status": "skipped",
     "history": [
       {
         "code": "func_15002560(arg0, arg1)\ns32 arg0;\ns32 arg1;\n{\n    s32 temp_s1;\n    s32 temp_s0;\n    s16 temp_v0;\n\n    while (arg0 != 0) {\n        if (*(s16 *)(arg0 + 4) == 0) {\n            if (arg1 != 0) {\n                temp_v0 = arg1 - arg0;\n            } else {\n                temp_v0 = 0;\n            }\n            *(s16 *)(arg0 + 4) = temp_v0;\n        }\n        temp_v0 = *(s16 *)(arg0 + 0xC);\n        if (temp_v0 == 0) {\n            break;\n        }\n        temp_s1 = arg0 + temp_v0;\n        if (*(s16 *)(temp_s1 + 4) != 0) {\n            do {\n                temp_s0 = temp_s1 + *(s16 *)(temp_s1 + 4);\n                func_15002560(temp_s1, temp_s0);\n                temp_s1 = temp_s0;\n            } while (*(s16 *)(temp_s0 + 4) != 0);\n        }\n        arg0 = temp_s1;\n    }\n}",
@@ -20499,6 +20499,20 @@
           "structural: target=addu s0, s1, t8 got=addu s0, t8, s1"
         ],
         "timestamp": "2026-06-03T22:22:38.259Z"
+      },
+      {
+        "code": "func_15002560(arg0, arg1)\ns32 arg0;\ns32 arg1;\n{\n    s32 temp_s1;\n    s32 temp_t8;\n    s32 temp_s0;\n    s32 temp_v0;\n\nloop:\n    if (arg0 == 0) {\n        return;\n    }\n    if (*(s16 *)(arg0 + 4) == 0) {\n        if (arg1 != 0) {\n            temp_v0 = arg1 - arg0;\n        } else {\n            temp_v0 = 0;\n        }\n        *(s16 *)(arg0 + 4) = temp_v0;\n    }\n    temp_v0 = *(s16 *)(arg0 + 0xC);\n    if (temp_v0 == 0) {\n        return;\n    }\n    temp_s1 = arg0 + temp_v0;\n    if (*(s16 *)(temp_s1 + 4) != 0) {\n        do {\n            temp_t8 = *(s16 *)(temp_s1 + 4);\n            temp_s0 = temp_s1 + temp_t8;\n            func_15002560(temp_s1, temp_s0);\n            temp_s1 = temp_s0;\n        } while (*(s16 *)(temp_s0 + 4) != 0);\n    }\n    arg0 = temp_s1;\n    goto loop;\n}",
+        "score": 0.8462,
+        "reason": "structural_diffs=6",
+        "diffs": [
+          "structural: target=lh t8, 4(s1) got=lh v0, 4(s1)",
+          "structural: target=addu s0, s1, t8 got=addu a1, s1, v0",
+          "structural: target=move a1, s0 got=move s0, a1",
+          "structural: target=lh t9, 4(s0) got=lh t8, 4(s0)",
+          "structural: target=bnezl t9, L5 got=bnezl t8, L5",
+          "structural: target=lh t8, 4(s1) got=lh v0, 4(s1)"
+        ],
+        "timestamp": "2026-06-03T22:23:02.589Z"
       }
     ]
   },
@@ -21012,9 +21026,26 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 0.8205,
+    "status": "pending",
+    "history": [
+      {
+        "code": "struct224 *func_151D2BA4(void *arg0, struct00 *arg1, s32 arg2, u8 arg3, s32 arg4) {\n    struct224 *ret;\n\n    ret = func_15167A68(0x3D, arg4, arg2 + 0x48, 1, arg3, 1);\n    if (ret == NULL) {\n        return NULL;\n    }\n    memcpy(&ret->unk10, arg0, 0x24);\n    ret->unk34 = arg1->unk0;\n    ret->unk38 = arg1->unk4;\n    ret->unk3C = arg1->unk8;\n    func_151D3308(ret);\n    return ret;\n}",
+        "score": 0.8205,
+        "reason": "structural_diffs=7",
+        "diffs": [
+          "structural: target=lw t8, 44(sp) got=lw v1, 44(sp)",
+          "structural: target=lw at, 0(t8) got=lw t8, 0(v1)",
+          "structural: target=sw at, 52(a0) got=sw t8, 52(a0)",
+          "structural: target=lw t1, 4(t8) got=lw t9, 4(v1)",
+          "structural: target=sw t1, 56(a0) got=sw t9, 56(a0)",
+          "structural: target=lw at, 8(t8) got=lw t0, 8(v1)",
+          "structural: target=sw at, 60(a0) got=sw t0, 60(a0)"
+        ],
+        "timestamp": "2026-06-03T22:24:08.112Z"
+      }
+    ]
   },
   {
     "function": "func_15161F4C",

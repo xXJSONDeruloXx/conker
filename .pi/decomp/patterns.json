@@ -720,5 +720,14 @@
     "example_functions": [
       "func_1506DC10"
     ]
+  },
+  {
+    "id": "struct-array-stride-multiply-interleaving",
+    "description": "IDO can interleave struct-array index stride multiplication with unrelated pointer-array loads when using a direct `&array[index]` expression and a pointer-array global access.",
+    "trigger": "Target computes arg0 * 0x32C through shift/sub/add chains while also loading a pointer from a global pointer table indexed by an object field.",
+    "solution": "Use typed struct array indexing for the large object array (`&D_800CC2D0[arg0]`) and cast the pointer table element to the node struct type (`(struct169 *)D_800D2104[D_800D154C->field]`), then pass float expressions directly.",
+    "example_functions": [
+      "func_15079A98"
+    ]
   }
 ]

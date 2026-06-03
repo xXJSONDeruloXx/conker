@@ -26,7 +26,18 @@ void func_151D2B4C(s32 arg0) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_1FFF60/func_151D2BA4.s")
+struct224 *func_151D2BA4(void *arg0, struct00 *arg1, s32 arg2, u8 arg3, s32 arg4) {
+    struct224 *ret;
+
+    ret = func_15167A68(0x3D, arg4, arg2 + 0x48, 1, arg3, 1);
+    if (ret == NULL) {
+        return NULL;
+    }
+    memcpy(&ret->unk10, arg0, 0x24);
+    *(struct17 *)((s32)ret + 0x34) = *(struct17 *)arg1;
+    func_151D3308(ret);
+    return ret;
+}
 // s32 func_15167A68(s32, s32, s32, s32, s32, s32);
 // NON-MATCHING: JUSTREG
 // struct224 *func_151D2BA4(s32 arg0, struct00 *arg1, s32 arg2, u8 arg3, s32 arg4) {
