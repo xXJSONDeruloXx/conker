@@ -15777,7 +15777,7 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 6,
+    "attempts": 9,
     "lastScore": 0.4285714285714286,
     "status": "pending",
     "history": [
@@ -15822,6 +15822,27 @@
         "reason": "length_mismatch (target=36, generated=42)",
         "diffs": [],
         "timestamp": "2026-06-03T21:04:10.645Z"
+      },
+      {
+        "code": "f32 func_150489B0(u8 arg0) {\n    f32 ret;\n    s32 temp;\n\n    temp = arg0;\n    if (temp >= 65) {\n        if (temp >= 129) {\n            if (temp >= 193) {\n                ret = D_8009A620[0 - temp];\n            } else {\n                ret = -D_8009A020[temp];\n            }\n        } else {\n            ret = -D_8009A420[0 - temp];\n        }\n    } else {\n        ret = D_8009A220[temp];\n    }\n\n    return ret;\n}",
+        "score": 0.4285714285714286,
+        "reason": "length_mismatch (target=36, generated=42)",
+        "diffs": [],
+        "timestamp": "2026-06-03T21:04:28.631Z"
+      },
+      {
+        "code": "f32 func_150489B0(u8 arg0) {\n    f32 ret;\n    s32 temp;\n\n    if (arg0 >= 65) {\n        temp = arg0;\n        if (temp >= 129) {\n            if (temp >= 193) {\n                ret = D_8009A620[0 - temp];\n            } else {\n                ret = -D_8009A020[temp];\n            }\n        } else {\n            ret = -D_8009A420[0 - temp];\n        }\n    } else {\n        ret = D_8009A220[arg0];\n    }\n\n    return ret;\n}",
+        "score": 0.4285714285714286,
+        "reason": "length_mismatch (target=36, generated=42)",
+        "diffs": [],
+        "timestamp": "2026-06-03T21:04:39.969Z"
+      },
+      {
+        "code": "f32 func_150489B0(arg0)\nu8 arg0;\n{\n    f32 ret;\n    s32 temp;\n\n    if (arg0 >= 65) {\n        temp = arg0;\n        if (temp >= 129) {\n            if (temp >= 193) {\n                ret = D_8009A620[0 - temp];\n            } else {\n                ret = -D_8009A020[temp];\n            }\n        } else {\n            ret = -D_8009A420[0 - temp];\n        }\n    } else {\n        ret = D_8009A220[arg0];\n    }\n\n    return ret;\n}",
+        "score": 0.4285714285714286,
+        "reason": "length_mismatch (target=36, generated=42)",
+        "diffs": [],
+        "timestamp": "2026-06-03T21:06:09.666Z"
       }
     ]
   },
