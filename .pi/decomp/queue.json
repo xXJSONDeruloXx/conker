@@ -1653,7 +1653,7 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 9,
+    "attempts": 12,
     "lastScore": 0.4285714285714286,
     "status": "pending",
     "history": [
@@ -1735,6 +1735,27 @@
         "reason": "length_mismatch (target=12, generated=14)",
         "diffs": [],
         "timestamp": "2026-06-03T04:56:04.412Z"
+      },
+      {
+        "code": "void func_15169040(s32 arg0, s32 arg1) {\n    func_15169070(0, 0x68, arg0, arg1 &= 0xFF);\n}",
+        "score": 0.46153846153846156,
+        "reason": "length_mismatch (target=12, generated=13)",
+        "diffs": [],
+        "timestamp": "2026-06-03T04:56:38.444Z"
+      },
+      {
+        "code": "void func_15169040(s32 arg0, s32 arg1) {\n    arg1 &= 0xFF;\n    func_15169070(0, 0x68, arg0, arg1);\n}",
+        "score": 0.46153846153846156,
+        "reason": "length_mismatch (target=12, generated=13)",
+        "diffs": [],
+        "timestamp": "2026-06-03T04:56:52.006Z"
+      },
+      {
+        "code": "void func_15169040(s32 arg0, s32 arg1) {\n    u32 temp_a3 = arg1;\n\n    func_15169070(0, 0x68, arg0, temp_a3 & 0xFF);\n}",
+        "score": 0.4285714285714286,
+        "reason": "length_mismatch (target=12, generated=14)",
+        "diffs": [],
+        "timestamp": "2026-06-03T04:57:08.328Z"
       }
     ]
   },
