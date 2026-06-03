@@ -578,15 +578,6 @@
     ]
   },
   {
-    "id": "force-lbu-arg-home-byte-via-address-cast",
-    "description": "When IDO saves an s32 argument to its home stack slot and later loads only the low byte with `lbu`, force the byte reload by taking the argument address and indexing the big-endian low byte.",
-    "trigger": "Near-match differs only by `lw arg_home(sp)` before an `sb`, while target uses `lbu arg_home+3(sp)` from the saved s32 argument.",
-    "solution": "Keep the parameter as `s32`, then assign through `*((u8 *)&arg + 3)` (big-endian low byte) instead of `(u8)arg` or direct assignment.",
-    "example_functions": [
-      "func_151417C4"
-    ]
-  },
-  {
     "id": "not-nor-alias-target-asm",
     "description": "Target asm may print `not rd, rs` while generated objdump prints the identical opcode as `nor rd, rs, zero`, producing a false single structural diff despite matching machine code.",
     "trigger": "Near-match has a single diff `target=not rd, rs -> got=nor rd, rs, zero` and the raw opcode comments/objdump word are identical (e.g. 0x0040C027).",

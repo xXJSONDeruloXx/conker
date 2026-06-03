@@ -43,21 +43,7 @@ s32 func_15141564(struct210 *arg0) {
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16DC80/func_151416E8.s")
 
 // ???
-void func_151417C4(s32 arg0, u8 arg1) {
-    typedef struct {
-        s32 unk0;
-        s32 unk4;
-    } tempstruct;
-    struct {
-        s32 unk0;
-        s32 unk4;
-        u8 unk8;
-    } sp1C;
-
-    *(tempstruct *)&sp1C = *(tempstruct *)D_8008A074;
-    sp1C.unk8 = *((u8 *)&arg0 + 3);
-    func_15169260((s32 *)&sp1C, 2, (s32)&sp1C.unk8, arg1);
-}
+#pragma GLOBAL_ASM("asm/nonmatchings/game_16DC80/func_151417C4.s")
 
 s32 func_15141818(s32 arg0, s32 arg1) {
     return 0;
