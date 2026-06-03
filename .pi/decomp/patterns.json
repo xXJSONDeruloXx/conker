@@ -486,5 +486,14 @@
     "example_functions": [
       "func_1506196C"
     ]
+  },
+  {
+    "id": "prototype-u8-callee-scheduling",
+    "description": "A missing callee prototype can make IDO treat a u8 argument as default int at the call site, delaying the mask and using an extra temp register; declaring the callee with a u8 parameter restores early argument homing/masking and exact scheduling.",
+    "trigger": "Small wrapper around a call has correct logic but generated asm masks a u8 call argument late or via a3 instead of target's early `sw a1; andi t6,a1,0xff; move a1,t6`.",
+    "solution": "Add an extern/prototype for the called function with the narrow u8 parameter, then write the wrapper naturally.",
+    "example_functions": [
+      "func_151695F0"
+    ]
   }
 ]
