@@ -1244,8 +1244,8 @@
     "instructions": 15,
     "difficulty": "low",
     "tags": [],
-    "attempts": 9,
-    "lastScore": 0.4666666666666667,
+    "attempts": 12,
+    "lastScore": 0.4,
     "status": "pending",
     "history": [
       {
@@ -1316,6 +1316,43 @@
         "reason": "length_mismatch (target=15, generated=14)",
         "diffs": [],
         "timestamp": "2026-06-03T06:08:27.202Z"
+      },
+      {
+        "code": "void func_1514143C(struct210 *arg0) {\n    struct224 *temp_v0 = (struct224 *)((s32)arg0 + 0x110);\n\n    if (*(volatile s32 *)((s32)arg0 + 0x154) != 0) {\n        ((struct17 *)temp_v0->unk44)->unk0 = arg0->unk34;\n        ((struct17 *)temp_v0->unk44)->unk4 = arg0->unk38;\n        ((struct17 *)temp_v0->unk44)->unk8 = *(f32 *)((s32)arg0 + 0x3C);\n    }\n}",
+        "score": 0.6667,
+        "reason": "structural_diffs=5",
+        "diffs": [
+          "structural: target=beqz t6, L0 got=addiu v0, a0, 272",
+          "structural: target=nop got=beqz t6, L0",
+          "structural: target=addiu v0, a0, 272 got=nop",
+          "structural: target=lw t7, 68(v0) got=lwc1 f4, 52(a0)",
+          "structural: target=lwc1 f4, 52(a0) got=lw t7, 68(v0)"
+        ],
+        "timestamp": "2026-06-03T06:08:51.391Z"
+      },
+      {
+        "code": "void func_1514143C(struct210 *arg0) {\n    struct224 *temp_v0;\n    struct17 *temp_t7;\n    struct17 *temp_t8;\n    struct17 *temp_t9;\n\n    if (*(volatile s32 *)((s32)arg0 + 0x154) != 0) {\n        temp_v0 = (struct224 *)((s32)arg0 + 0x110);\n        temp_t7 = (struct17 *)temp_v0->unk44;\n        temp_t7->unk0 = arg0->unk34;\n        temp_t8 = (struct17 *)temp_v0->unk44;\n        temp_t8->unk4 = arg0->unk38;\n        temp_t9 = (struct17 *)temp_v0->unk44;\n        temp_t9->unk8 = *(f32 *)((s32)arg0 + 0x3C);\n    }\n}",
+        "score": 0.4666666666666667,
+        "reason": "length_mismatch (target=15, generated=14)",
+        "diffs": [],
+        "timestamp": "2026-06-03T06:09:14.970Z"
+      },
+      {
+        "code": "void func_1514143C(struct210 *arg0) {\n    struct224 *temp_v0 = (struct224 *)((s32)arg0 + 0x110);\n    struct17 *temp_t7;\n    struct17 *temp_t8;\n    struct17 *temp_t9;\n\n    if (*(volatile s32 *)((s32)arg0 + 0x154) != 0) {\n        temp_t7 = (struct17 *)temp_v0->unk44;\n        temp_t7->unk0 = arg0->unk34;\n        temp_t8 = (struct17 *)temp_v0->unk44;\n        temp_t8->unk4 = arg0->unk38;\n        temp_t9 = (struct17 *)temp_v0->unk44;\n        temp_t9->unk8 = *(f32 *)((s32)arg0 + 0x3C);\n    }\n}",
+        "score": 0.4,
+        "reason": "structural_diffs=9",
+        "diffs": [
+          "structural: target=beqz t6, L0 got=addiu v0, a0, 272",
+          "structural: target=nop got=beqz t6, L0",
+          "structural: target=addiu v0, a0, 272 got=nop",
+          "structural: target=lw t7, 68(v0) got=lw v1, 68(v0)",
+          "structural: target=swc1 f4, 0(t7) got=swc1 f4, 0(v1)",
+          "structural: target=lw t8, 68(v0) got=lw a1, 68(v0)",
+          "structural: target=swc1 f6, 4(t8) got=swc1 f6, 4(a1)",
+          "structural: target=lw t9, 68(v0) got=lw a2, 68(v0)",
+          "structural: target=swc1 f8, 8(t9) got=swc1 f8, 8(a2)"
+        ],
+        "timestamp": "2026-06-03T06:09:35.966Z"
       }
     ]
   },
