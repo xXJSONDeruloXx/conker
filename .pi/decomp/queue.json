@@ -20292,7 +20292,7 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
+    "attempts": 6,
     "lastScore": 0.9268,
     "status": "pending",
     "history": [
@@ -20320,6 +20320,43 @@
           "structural: target=addiu s0, s0, LO(D_800419A8) got=addiu s3, s3, LO(D_800417B0)"
         ],
         "timestamp": "2026-06-03T23:01:38.467Z"
+      },
+      {
+        "code": "void func_1000DEC4(void) {\n    struct137 *ptr;\n    struct151 **table;\n    struct137 *end;\n    s32 neg;\n\n    end = (struct137 *)D_80041E58;\n    table = D_800417B0;\n    ptr = D_800419A8;\n    neg = -1;\n    do {\n        if (neg == ptr->unk0) {\n            if (neg != ptr->unk4) {\n                ptr->unk4 = neg;\n            }\n        } else {\n            if (func_1000853C(ptr->unk0) == 0) {\n                table[ptr->unk0] = 0;\n                ptr->unk0 = neg;\n                ptr->unk4 = neg;\n            }\n        }\n        ptr++;\n        *(s32 *)((s32)ptr - 4) = 0;\n    } while (ptr != end);\n}",
+        "score": 0.878,
+        "reason": "structural_diffs=5",
+        "diffs": [
+          "structural: target=lui s0, HI(D_800419A8) got=lui s2, HI(D_80041E58)",
+          "structural: target=lui s3, HI(D_800417B0) got=lui s0, HI(D_800419A8)",
+          "structural: target=lui s2, HI(D_80041E58) got=lui s3, HI(D_800417B0)",
+          "structural: target=addiu s3, s3, LO(D_800417B0) got=addiu s0, s0, LO(D_800419A8)",
+          "structural: target=addiu s0, s0, LO(D_800419A8) got=addiu s3, s3, LO(D_800417B0)"
+        ],
+        "timestamp": "2026-06-03T23:02:07.151Z"
+      },
+      {
+        "code": "void func_1000DEC4(void) {\n    struct137 *ptr;\n    struct137 *end;\n    struct151 **table;\n    s32 neg;\n\n    end = (struct137 *)D_80041E58;\n    table = D_800417B0;\n    ptr = D_800419A8;\n    neg = -1;\n    do {\n        if (neg == ptr->unk0) {\n            if (neg != ptr->unk4) {\n                ptr->unk4 = neg;\n            }\n        } else {\n            if (func_1000853C(ptr->unk0) == 0) {\n                table[ptr->unk0] = 0;\n                ptr->unk0 = neg;\n                ptr->unk4 = neg;\n            }\n        }\n        ptr++;\n        *(s32 *)((s32)ptr - 4) = 0;\n    } while (ptr != end);\n}",
+        "score": 0.878,
+        "reason": "structural_diffs=5",
+        "diffs": [
+          "structural: target=lui s0, HI(D_800419A8) got=lui s2, HI(D_80041E58)",
+          "structural: target=lui s3, HI(D_800417B0) got=lui s0, HI(D_800419A8)",
+          "structural: target=lui s2, HI(D_80041E58) got=lui s3, HI(D_800417B0)",
+          "structural: target=addiu s3, s3, LO(D_800417B0) got=addiu s0, s0, LO(D_800419A8)",
+          "structural: target=addiu s0, s0, LO(D_800419A8) got=addiu s3, s3, LO(D_800417B0)"
+        ],
+        "timestamp": "2026-06-03T23:03:06.819Z"
+      },
+      {
+        "code": "void func_1000DEC4(void) {\n    struct137 *ptr;\n    s32 neg;\n\n    ptr = ((s32)D_80041E58, (s32)D_800417B0, D_800419A8);\n    neg = -1;\n    do {\n        if (neg == ptr->unk0) {\n            if (neg != ptr->unk4) {\n                ptr->unk4 = neg;\n            }\n        } else {\n            if (func_1000853C(ptr->unk0) == 0) {\n                D_800417B0[ptr->unk0] = 0;\n                ptr->unk0 = neg;\n                ptr->unk4 = neg;\n            }\n        }\n        ptr++;\n        *(s32 *)((s32)ptr - 4) = 0;\n    } while (ptr != (struct137 *)D_80041E58);\n}",
+        "score": 0.9268,
+        "reason": "structural_diffs=3",
+        "diffs": [
+          "structural: target=addiu s2, s2, LO(D_80041E58) got=addiu s0, s0, LO(D_800419A8)",
+          "structural: target=addiu s3, s3, LO(D_800417B0) got=addiu s2, s2, LO(D_80041E58)",
+          "structural: target=addiu s0, s0, LO(D_800419A8) got=addiu s3, s3, LO(D_800417B0)"
+        ],
+        "timestamp": "2026-06-03T23:03:33.081Z"
       }
     ]
   },
