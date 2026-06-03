@@ -19207,8 +19207,8 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 6,
-    "lastScore": 0.4791666666666667,
+    "attempts": 8,
+    "lastScore": 0.4167,
     "status": "pending",
     "history": [
       {
@@ -19273,6 +19273,41 @@
         "reason": "length_mismatch (target=48, generated=46)",
         "diffs": [],
         "timestamp": "2026-06-03T13:28:17.306Z"
+      },
+      {
+        "code": "void func_160006CC(s32 *arg0) {\n    u8 buf[4];\n    register s32 *regs;\n    register u8 *bufp;\n    register u8 *ptr;\n    register s32 pos;\n\n    regs = arg0;\n    bufp = buf;\n    *(s32 *)bufp = *(s32 *)D_16003B48;\n    ptr = D_160037F0;\n    pos = 0x123;\n    func_16001338(0xC0, 0xC0, 0xFF);\n    bufp[0] = D_160037F0[0];\n    do {\n        bufp[1] = ptr[1];\n        func_160012B0(pos, bufp);\n        pos += 3;\n        func_16001044(pos, 0, regs[ptr[2] + 1]);\n        pos += 0xD;\n        ptr += 3;\n    } while (bufp[0] = ptr[0]);\n}",
+        "score": 0.4791666666666667,
+        "reason": "length_mismatch (target=48, generated=46)",
+        "diffs": [],
+        "timestamp": "2026-06-03T13:28:43.530Z"
+      },
+      {
+        "code": "void func_160006CC(s32 *arg0) {\n    u8 buf[4];\n    register s32 *regs;\n    register u8 *bufp;\n    register u8 *ptr;\n    register s32 pos;\n\n    regs = arg0;\n    bufp = buf;\n    *(s32 *)bufp = *(volatile s32 *)D_16003B48;\n    ptr = D_160037F0;\n    pos = 0x123;\n    func_16001338(0xC0, 0xC0, 0xFF);\n    bufp[0] = *(volatile u8 *)D_160037F0;\n    do {\n        bufp[1] = ptr[1];\n        func_160012B0(pos, bufp);\n        pos += 3;\n        func_16001044(pos, 0, regs[ptr[2] + 1]);\n        pos += 0xD;\n        ptr += 3;\n    } while (bufp[0] = ptr[0]);\n}",
+        "score": 0.4167,
+        "reason": "structural_diffs=28",
+        "diffs": [
+          "structural: target=sw s2, 28(sp) got=move s3, a0",
+          "structural: target=move s2, a0 got=sw ra, 36(sp)",
+          "structural: target=addiu s3, sp, 60 got=sw s2, 28(sp)",
+          "structural: target=sw ra, 36(sp) got=sw s1, 24(sp)",
+          "structural: target=sw s1, 24(sp) got=sw s0, 20(sp)",
+          "structural: target=sw s0, 20(sp) got=lui t6, HI(D_16003B48)",
+          "structural: target=lui t6, HI(D_16003B48) got=addiu t6, t6, LO(D_16003B48)",
+          "structural: target=addiu t6, t6, LO(D_16003B48) got=lw t7, 0(t6)",
+          "structural: target=lw at, 0(t6) got=lui s1, HI(D_160037F0)",
+          "structural: target=lui s1, HI(D_160037F0) got=addiu s1, s1, LO(D_160037F0)",
+          "structural: target=addiu s1, s1, LO(D_160037F0) got=li a0, 192",
+          "structural: target=li a0, 192 got=li a1, 192",
+          "structural: target=li a1, 192 got=li a2, 255",
+          "structural: target=li a2, 255 got=jal func_16001338",
+          "structural: target=jal func_16001338 got=sw t7, 60(sp)",
+          "structural: target=sw at, 0(s3) got=lui t8, HI(D_160037F0)",
+          "structural: target=lui t0, HI(D_160037F0) got=addiu t8, t8, LO(D_160037F0)",
+          "structural: target=addiu t0, t0, LO(D_160037F0) got=lbu t9, 0(t8)",
+          "structural: target=lbu v0, 0(t0) got=addiu s2, sp, 60",
+          "structural: target=sb v0, 60(sp) got=sb t9, 0(s2)"
+        ],
+        "timestamp": "2026-06-03T13:29:09.055Z"
       }
     ]
   },
