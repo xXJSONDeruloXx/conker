@@ -6310,7 +6310,7 @@
     "instructions": 20,
     "difficulty": "low",
     "tags": [],
-    "attempts": 24,
+    "attempts": 27,
     "lastScore": 0.45454545454545453,
     "status": "pending",
     "history": [
@@ -6533,6 +6533,27 @@
         "reason": "length_mismatch (target=20, generated=22)",
         "diffs": [],
         "timestamp": "2026-06-03T10:47:28.546Z"
+      },
+      {
+        "code": "u8 func_151464B8(void *arg0) {\n    s32 i = 0;\n    s32 mask = 0;\n    s32 temp_a0;\n\n    for (; i <= D_80082FA0; i++) {\n        mask |= 1 << i;\n        mask = (s16)mask;\n    }\n    return ((temp_a0 = (*(s16 *)((s32)arg0 + 2) & mask)) == 0);\n}",
+        "score": 0.47619047619047616,
+        "reason": "length_mismatch (target=20, generated=21)",
+        "diffs": [],
+        "timestamp": "2026-06-03T10:47:44.445Z"
+      },
+      {
+        "code": "s8 func_151464B8(void *arg0) {\n    s32 i = 0;\n    s32 mask = 0;\n    s32 temp_a0;\n\n    for (; i <= D_80082FA0; i++) {\n        mask |= 1 << i;\n        mask = (s16)mask;\n    }\n    temp_a0 = *(s16 *)((s32)arg0 + 2) & mask;\n    return temp_a0 < 1U;\n}",
+        "score": 0.47619047619047616,
+        "reason": "length_mismatch (target=20, generated=21)",
+        "diffs": [],
+        "timestamp": "2026-06-03T10:48:18.440Z"
+      },
+      {
+        "code": "u8 func_151464B8(void *arg0, s32 unused) {\n    s32 i = 0;\n    s32 mask = 0;\n    s32 temp_a0;\n\n    for (; i <= D_80082FA0; i++) {\n        mask |= 1 << i;\n        mask = (s16)mask;\n    }\n    temp_a0 = *(s16 *)((s32)arg0 + 2) & mask;\n    return temp_a0 < 1U;\n}",
+        "score": 0.45454545454545453,
+        "reason": "length_mismatch (target=20, generated=22)",
+        "diffs": [],
+        "timestamp": "2026-06-03T10:48:39.911Z"
       }
     ]
   },
