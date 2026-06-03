@@ -15732,8 +15732,8 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 12,
-    "lastScore": 0.47619047619047616,
+    "attempts": 15,
+    "lastScore": 0.7,
     "status": "pending",
     "history": [
       {
@@ -15909,6 +15909,41 @@
         "reason": "length_mismatch (target=20, generated=21)",
         "diffs": [],
         "timestamp": "2026-06-03T11:21:12.345Z"
+      },
+      {
+        "code": "void func_150717E0(s32 arg0) {\n    struct127 *temp_v0;\n    s32 sp18;\n    s32 pad;\n    s32 sp20[1];\n    s32 temp_a0;\n\n    temp_v0 = func_15083E90(0x12);\n    temp_a0 = (s32)sp20;\n    if (temp_v0 != NULL) {\n        sp20[0] = (s32)temp_v0;\n        sp18 = temp_a0;\n        *(u8 *)(temp_a0 + 4) = temp_v0->unique_id;\n        func_15131D4C(temp_a0, 0x43);\n        func_151494E0(sp18, 0x43);\n    }\n}",
+        "score": 0.47619047619047616,
+        "reason": "length_mismatch (target=20, generated=21)",
+        "diffs": [],
+        "timestamp": "2026-06-03T11:21:38.472Z"
+      },
+      {
+        "code": "void func_150717E0(s32 arg0) {\n    struct127 *temp_v0;\n    s32 sp18;\n    s32 temp;\n    struct {\n        s32 unk0;\n        u8 unk4;\n    } sp20;\n\n    temp_v0 = func_15083E90(0x12);\n    if (temp_v0 != NULL) {\n        temp = (s32)temp_v0;\n        sp18 = (s32)&sp20;\n        sp20.unk0 = temp;\n        sp20.unk4 = temp_v0->unique_id;\n        func_15131D4C(sp18, 0x43);\n        func_151494E0(sp18, 0x43);\n    }\n}",
+        "score": 0.7,
+        "reason": "structural_diffs=6",
+        "diffs": [
+          "structural: target=addiu sp, sp, -40 got=addiu sp, sp, -48",
+          "structural: target=sw a0, 40(sp) got=sw a0, 48(sp)",
+          "structural: target=addiu a0, sp, 32 got=addiu a0, sp, 28",
+          "structural: target=sw v0, 32(sp) got=sw v0, 28(sp)",
+          "structural: target=sb t6, 36(sp) got=sb t6, 32(sp)",
+          "structural: target=addiu sp, sp, 40 got=addiu sp, sp, 48"
+        ],
+        "timestamp": "2026-06-03T11:22:24.954Z"
+      },
+      {
+        "code": "void func_150717E0(s32 arg0) {\n    struct127 *temp_v0;\n    s32 temp;\n    s32 sp18;\n    struct {\n        s32 unk0;\n        u8 unk4;\n    } sp20;\n\n    temp_v0 = func_15083E90(0x12);\n    if (temp_v0 != NULL) {\n        temp = (s32)temp_v0;\n        sp18 = (s32)&sp20;\n        sp20.unk0 = temp;\n        sp20.unk4 = temp_v0->unique_id;\n        func_15131D4C(sp18, 0x43);\n        func_151494E0(sp18, 0x43);\n    }\n}",
+        "score": 0.7,
+        "reason": "structural_diffs=6",
+        "diffs": [
+          "structural: target=addiu sp, sp, -40 got=addiu sp, sp, -48",
+          "structural: target=sw a0, 40(sp) got=sw a0, 48(sp)",
+          "structural: target=addiu a0, sp, 32 got=addiu a0, sp, 28",
+          "structural: target=sw v0, 32(sp) got=sw v0, 28(sp)",
+          "structural: target=sb t6, 36(sp) got=sb t6, 32(sp)",
+          "structural: target=addiu sp, sp, 40 got=addiu sp, sp, 48"
+        ],
+        "timestamp": "2026-06-03T11:22:41.664Z"
       }
     ]
   },
