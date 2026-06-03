@@ -37,3 +37,6 @@ conker/ctx.c
 tools/decomp-permuter
 tools/gfxdis
 .pi/decomp/permuter/
+tools/ido-native/
+session-*.json
+*-[0-9]*.c
