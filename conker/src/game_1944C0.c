@@ -3,6 +3,8 @@
 #include "functions.h"
 #include "variables.h"
 
+void func_15169040(void *, u8);
+
 extern void (*D_8008CA20[])(struct127 *);
 
 void func_15168B10(s32 arg0, s32 arg1);
@@ -181,7 +183,16 @@ void func_15168F84(s32 arg0, s32 *arg1, s32 *arg2) {
 #pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_15169070.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_15169260.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_1516944C.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_151695F0.s")
+void func_151695F0(struct127 *arg0, u8 arg1) {
+    struct {
+        s32 unk0;
+        u8 unk4;
+    } sp18;
+
+    sp18.unk0 = (s32)arg0;
+    sp18.unk4 = arg0->unique_id;
+    func_15169040(&sp18, arg1);
+}
 void func_1516962C(s32 arg0, struct127 *arg1, u8 arg2) {
     struct {
         s32 unk0;

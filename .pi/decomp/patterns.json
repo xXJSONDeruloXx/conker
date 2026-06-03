@@ -477,5 +477,14 @@
     "example_functions": [
       "func_1513532C"
     ]
+  },
+  {
+    "id": "li-ori-alias-target-asm",
+    "description": "Some split target asm uses `ori $at,$zero,imm` for an immediate load while generated objdump displays the identical opcode as `li $at,imm`; if this is the only diff and raw opcode matches, temporarily canonicalize the nonmatching asm alias to prove the C match, then restore before accept so only C is committed.",
+    "trigger": "Score ~0.93 with a single diff `target=ori at, zero, imm -> got=li at, imm` and identical raw opcode (e.g. 0x3401FE01).",
+    "solution": "Verify all raw opcodes are otherwise identical; for the attempt only, change the target asm mnemonic to `li` with the same immediate, run decomp_attempt to get match=true, restore the asm file, then run the ROM SHA gate.",
+    "example_functions": [
+      "func_1506196C"
+    ]
   }
 ]
