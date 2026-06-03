@@ -3,8 +3,6 @@
 #include "functions.h"
 #include "variables.h"
 
-void *func_15167A68(s32, s32, s32, s32, s32, s32);
-
 extern void (*D_8008CA20[])(struct127 *);
 
 void func_15168B10(s32 arg0, s32 arg1);
@@ -33,41 +31,15 @@ extern u8 D_800D2DAB;
 #pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_151671E8.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_15167310.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_151674F8.s")
-void *func_15167A68(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
-    void *temp_v0;
-
-    temp_v0 = (void *)func_10003C6C(arg2, 1, arg3, 0, (u8)arg5);
-    if (temp_v0 != NULL) {
-        *(u8 *)((s32)temp_v0 + 1) = arg1;
-        func_15168A4C(temp_v0, arg0);
-        *(u8 *)((s32)temp_v0 + 0xC) = *((u8 *)&arg4 + 3);
-    }
-    return temp_v0;
-}
-void func_15167AD8(void *arg0, u8 arg1, s32 arg2) {
-    void *temp_v0 = func_15167A68(3, arg2, 0x28, 0, arg1, 1);
-
-    if (temp_v0 != NULL) {
-        bcopy(arg0, (void *)((s32)temp_v0 + 0x10), 0x18);
-        *(u8 *)((s32)temp_v0 + 0x23) = 0xFF;
-    }
-}
+#pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_15167A68.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_15167AD8.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_15167B44.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_15167C58.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_15167D84.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_15167E0C.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_15168118.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_1516865C.s")
-void *func_15168800(void *arg0, u8 arg1, s32 arg2) {
-    void *temp_v0;
-
-    temp_v0 = func_15167A68(0xE, arg2, 0xB8, 1, arg1, 1);
-    if (temp_v0 == NULL) {
-        return NULL;
-    }
-    bcopy(arg0, (void *)((s32)temp_v0 + 0x10), 0xA8);
-    return temp_v0;
-}
+#pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_15168800.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_15168870.s")
 void func_15168A2C(s32 arg0) {
     func_15168B10(arg0, 0);
@@ -128,16 +100,7 @@ void func_15168BAC(struct127 *arg0) {
     }
 }
 
-void func_15168BE4(void *arg0, u8 arg1, s32 arg2) {
-    void *temp_v0;
-
-    if (*(s32 *)((s32)arg0 + 0x40) != 0) {
-        temp_v0 = func_15167A68(0x10, arg2, 0xF0, 1, arg1, 1);
-        if (temp_v0 != NULL) {
-            bcopy(arg0, (void *)((s32)temp_v0 + 0x90), 0x60);
-        }
-    }
-}
+#pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_15168BE4.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_15168C4C.s")
 void func_15168E34(s32 *arg0, s32 arg1) {
     s32 temp_v0 = *arg0;

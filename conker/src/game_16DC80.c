@@ -3,12 +3,6 @@
 #include "functions.h"
 #include "variables.h"
 
-extern void (*D_80089FE4[])(struct210 *);
-
-extern s32 D_800DC9F0;
-extern void (*D_80089F9C[])(struct210 *);
-void func_1517E134(s32);
-
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16DC80/func_151407D0.s")
 
@@ -22,27 +16,9 @@ void func_151411C4(struct210 *arg0) {
     func_1513CAA0(arg0);
 }
 
-void func_151411E4(struct210 *arg0) {
-    struct210 *temp_a1;
+#pragma GLOBAL_ASM("asm/nonmatchings/game_16DC80/func_151411E4.s")
 
-    temp_a1 = arg0;
-    if (*(volatile s32 *)((u8 *) temp_a1 + 0x154) != 0) {
-        func_1517E134(*(volatile s32 *)((u8 *) temp_a1 + 0x154));
-    }
-    D_800DC9F0--;
-    D_80089F9C[*(u8 *)((u8 *) temp_a1 + 0x168)](temp_a1);
-}
-
-void func_15141250(struct210 *arg0) {
-    struct210 *temp_a1;
-
-    temp_a1 = arg0;
-    if (*(volatile s32 *)((u8 *) temp_a1 + 0x154) != 0) {
-        func_1517E134(*(volatile s32 *)((u8 *) temp_a1 + 0x154));
-    }
-    D_800DC9F0--;
-    D_80089FE4[*(u8 *)((u8 *) temp_a1 + 0x168)](temp_a1);
-}
+#pragma GLOBAL_ASM("asm/nonmatchings/game_16DC80/func_15141250.s")
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16DC80/func_151412BC.s")
 
@@ -50,20 +26,7 @@ void func_15141250(struct210 *arg0) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16DC80/func_15141478.s")
 
-s32 func_15141564(struct210 *arg0) {
-    struct211 *temp_v1;
-    f32 tmp;
-    s32 pad1;
-
-    temp_v1 = (struct211 *)((s32)arg0 + 0x170);
-    tmp = sinf(temp_v1->unk8);
-    *(f32 *)((s32)arg0 + 0x158) = temp_v1->unk0 + (temp_v1->unk4 * tmp);
-
-    temp_v1->unk8 += temp_v1->unkC * D_800BE9A4;
-    temp_v1->unk8 = func_15144B68(temp_v1->unk8);
-
-    return 1;
-}
+#pragma GLOBAL_ASM("asm/nonmatchings/game_16DC80/func_15141564.s")
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16DC80/func_151415D4.s")
 

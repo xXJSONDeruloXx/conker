@@ -1131,31 +1131,7 @@ s32 func_15163F50(struct225 *arg0, struct225 *arg1) {
 
 // ???
 #pragma GLOBAL_ASM("asm/nonmatchings/game_18D770/func_15163FEC.s")
-void func_151640C0(struct225 *arg0, void *arg1, u8 arg2) {
-    struct225 **sp18;
-    void **sp1C;
-    s32 temp_v1;
-    s32 temp_v0;
-    s32 temp_a0;
-    s32 temp_a1;
-    u8 temp_a3;
-    u8 temp_a2;
-
-    sp18 = &arg0;
-    sp1C = &arg1;
-    if (arg2 == 0x29) {
-        temp_v1 = *(s32 *)((s32)*sp1C + 4);
-        temp_v0 = (s32)*sp18;
-        temp_a0 = *(s32 *)temp_v1;
-        temp_a1 = *(s32 *)(temp_v0 + 0x18);
-        temp_v0 += 0x18;
-        temp_a2 = *(u8 *)(temp_v0 + 4);
-        temp_a3 = *(u8 *)(temp_v1 + 4);
-        if ((temp_a1 == temp_a0) || (temp_a2 == temp_a3) || (temp_a3 == *(u8 *)(temp_a1 + 0x3B))) {
-            func_1516972C(*sp18);
-        }
-    }
-}
+#pragma GLOBAL_ASM("asm/nonmatchings/game_18D770/func_151640C0.s")
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_18D770/func_15164134.s")
 

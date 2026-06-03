@@ -248,13 +248,7 @@ void __n_resetPerfChanState(N_ALSeqPlayer *seqp, s32 chan) {
 //     return sp18;
 // }
 
-void func_1001BE1C(void *arg0, s32 *arg1, s32 arg2) {
-    if (arg2 == -1) {
-        (*(void (**)(s32 *))((s32)arg0 + 0x30))(arg1);
-    } else {
-        (*(void (**)(s32))((s32)arg0 + 0x30))(arg1[arg2 + 4]);
-    }
-}
+#pragma GLOBAL_ASM("asm/nonmatchings/init_1AAE0/func_1001BE1C.s")
 // void func_1001BE1C(void *arg0, s32 arg1, s32 arg2) {
 //     if (arg2 == -1) {
 //         arg0->unk30(arg1);

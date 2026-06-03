@@ -968,16 +968,7 @@ f32 func_1505D34C(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 *arg4) {
 #pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_1505DDA8.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_1505DF10.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_1505DFDC.s")
-void func_1505E060(u8 *arg0) {
-    *(u16 *)(arg0 + 0x6) = *(u16 *)(arg0 + 0x4);
-    *(f32 *)(arg0 + 0xC) = *(f32 *)(arg0 + 0x8);
-    *(f32 *)(arg0 + 0x14) = *(f32 *)(arg0 + 0x10);
-    *(f32 *)(arg0 + 0x24) = *(f32 *)(arg0 + 0x20);
-    *(f32 *)(arg0 + 0x1C) = *(f32 *)(arg0 + 0x18);
-    *(s8 *)(arg0 + 0x39) = *(s8 *)(arg0 + 0x38);
-    *(s32 *)(arg0 + 0x2C) = *(s32 *)(arg0 + 0x28);
-    bcopy(arg0 + 0x40, arg0 + 0x210, 0x1D0);
-}
+#pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_1505E060.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_1505E0C4.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_1505E650.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_1505E7CC.s")
@@ -1009,20 +1000,8 @@ void func_1505E060(u8 *arg0) {
 #pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_1505F298.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_1506045C.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_15060778.s")
-void func_15060A30(s32 arg0, struct127 *arg1) {
-    if (arg1->camera == NULL) {
-        func_10010344(arg0, arg1, 0x6D60, 0x1F4, 0x9C4);
-    } else {
-        func_15060778(arg0, arg1, 0x5DC0, 0, 0x1F4, 0x9C4, 1);
-    }
-}
-void func_15060A9C(s32 arg0, struct127 *arg1) {
-    if (arg1->camera == NULL) {
-        func_10010630(arg0, arg1, 0x5DC0, 0x1F4, 0x9C4);
-    } else {
-        func_15060778(arg0, arg1, 0x5DC0, 0, 0x1F4, 0x9C4, 0);
-    }
-}
+#pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_15060A30.s")
+#pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_15060A9C.s")
 
 void func_15060B04(s32 arg0, struct127 *arg1, s32 arg2) {
     if (arg1->camera == NULL) {
