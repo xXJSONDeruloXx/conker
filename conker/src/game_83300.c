@@ -1065,7 +1065,15 @@ void func_150615DC(struct127 *arg0) {
 #pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_1506160C.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_150617BC.s")
 // ???
-#pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_1506196C.s")
+s32 func_1506196C(u8 *arg0, s32 arg1) {
+    s32 temp_v1 = arg0[7] * (arg0 + arg1)[0xB];
+    if (temp_v1 == 0xFE01) {
+        temp_v1 = 0xFF;
+    } else {
+        temp_v1 = temp_v1 >> 8;
+    }
+    return temp_v1;
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_150619A8.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_15061B4C.s")
