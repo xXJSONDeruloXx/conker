@@ -693,5 +693,14 @@
     "example_functions": [
       "func_15136A50"
     ]
+  },
+  {
+    "id": "stack-byte-descriptor-wrapper",
+    "description": "Small wrapper builds a byte buffer descriptor on the stack, writes three input words, two float globals, a halfword argument, and four byte constants, then calls func_15134908.",
+    "trigger": "Target has 0x38 stack frame, saves a0-a3, builds local data at sp+0x1C..0x35, reads arg3 halfword from sp+0x46, arg4 byte from sp+0x4B, arg5 word from sp+0x4C, and calls func_15134908(sp+0x1C,0,arg4,arg5).",
+    "solution": "Use a local u8 buffer of size 0x1A and raw offset stores; for a -1 byte constant use *(s8 *)&buf[offset] = -1 to emit li -1.",
+    "example_functions": [
+      "func_150C2804"
+    ]
   }
 ]

@@ -3,6 +3,8 @@
 #include "functions.h"
 #include "variables.h"
 
+extern f32 D_800A5694;
+
 struct s6_unk { s32 a, b, c, d, e, f; };
 extern struct s6_unk D_800A5200;
 extern s32 func_150A2AEC(s32, s32, void *, void *);
@@ -332,7 +334,25 @@ f32 func_15144528(f32 arg0, f32 arg1, f32 arg2) {
     }
     return arg0;
 }
-#pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15144598.s")
+f32 func_15144598(struct134 *arg0) {
+    s32 temp_v0;
+    f32 temp_f2;
+
+    switch (((u8 *)arg0)[0x15] & 3) {
+    case 2:
+        temp_f2 = (f32)(*(s16 *)((s32)arg0 + 0xA) * *(s16 *)((s32)arg0 + 6)) * 4.0f;
+        break;
+    case 0:
+    case 1:
+        temp_v0 = *(s16 *)((s32)arg0 + 6);
+        temp_f2 = (f32)(temp_v0 * temp_v0) * D_800A5694;
+        break;
+    default:
+        temp_f2 = 1.0f;
+        break;
+    }
+    return temp_f2;
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_1514462C.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_1514470C.s")
 f32 func_15144A74(struct17 *arg0, struct17 *arg1) {
