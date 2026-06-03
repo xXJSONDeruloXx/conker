@@ -237,7 +237,7 @@ async function autoPromoteIfNeeded(pi: any, cwd: string): Promise<string | null>
 	await pi.exec("git", ["commit", "-m",
 		`chore(decomp): auto-promote ${toPromote.length} segments (${totalPromoted} new functions)\n\n${promoted.join("\n")}`
 	]);
-	await pi.exec("git", ["push"]);
+	await gitPushWithRetry(pi);
 
 	return `Auto-promoted ${toPromote.length} segments (${totalPromoted} functions). Queue now: ${state.queue.filter(e => e.status === "pending").length} pending.`;
 }
@@ -299,6 +299,15 @@ function savePatterns(cwd: string): void {
 	const path = require("node:path");
 	const patternsPath = path.join(cwd, ".pi/decomp/patterns.json");
 	fs.writeFileSync(patternsPath, JSON.stringify(state.patterns, null, 2));
+}
+
+async function gitPushWithRetry(pi: any): Promise<void> {
+	const result = await pi.exec("git", ["push"], { timeout: 30000 });
+	if (result.code !== 0) {
+		// Push failed (likely non-fast-forward) — pull rebase and retry
+		await pi.exec("git", ["pull", "--rebase"], { timeout: 30000 });
+		await pi.exec("git", ["push"], { timeout: 30000 });
+	}
 }
 
 export default function (pi: ExtensionAPI) {
@@ -622,7 +631,7 @@ export default function (pi: ExtensionAPI) {
 					// Commit promotion
 					await pi.exec("git", ["add", "-A"]);
 					await pi.exec("git", ["commit", "-m", `chore(decomp): promote segment 0x${seg.offset} to C (${newFunctions} functions)`]);
-					await pi.exec("git", ["push"]);
+					await gitPushWithRetry(pi);
 
 					return {
 						content: [{
@@ -1225,7 +1234,7 @@ export default function (pi: ExtensionAPI) {
 			if (entry && entry.attempts > 0 && entry.attempts % COMMIT_HISTORY_EVERY === 0) {
 				await pi.exec("git", ["add", ".pi/decomp/queue.json"]);
 				await pi.exec("git", ["commit", "-m", `chore(decomp): save attempt history for ${params.function} (${entry.attempts} attempts, best: ${entry.lastScore.toFixed(2)})`]);
-				await pi.exec("git", ["push"]);
+				await gitPushWithRetry(pi);
 			}
 
 			// Detect plateau: last 5+ attempts all within ±0.05 of each other
@@ -1340,7 +1349,7 @@ export default function (pi: ExtensionAPI) {
 			const desc = params.description || `match ${params.function}`;
 			await pi.exec("git", ["add", `conker/src/${params.file}`, ".pi/decomp/queue.json", ".pi/decomp/patterns.json"]);
 			await pi.exec("git", ["commit", "-m", `feat(decomp): ${desc}`]);
-			await pi.exec("git", ["push"], { timeout: 30000 });
+			await gitPushWithRetry(pi);
 
 			// Remove allow file after successful commit
 			try { fs.unlinkSync(allowFile); } catch {}
