@@ -1330,6 +1330,14 @@ export default function (pi: ExtensionAPI) {
 				}
 			}
 
+			// Auto-permuter suggestion: if this attempt scored high, strongly suggest permuter
+			let permuterHint = "";
+			if ((scoreData.score || 0) >= 0.8 && !plateauWarning.includes("permuter")) {
+				permuterHint = `\n\n🎯 HIGH SCORE (${scoreData.score?.toFixed(3)}) — this is a strong permuter candidate!`
+					+ `\n   The code is semantically correct but codegen doesn’t match exactly.`
+					+ `\n   → Call \`decomp_permute ${params.function}\` to brute-force the last few instructions.`;
+			}
+
 			// Build response with prior attempt context
 			const priorHint = (entry?.history?.length ?? 0) > 1
 				? `\n\nPrior attempts (${entry!.history!.length}): scores=[${entry!.history!.map((h: AttemptRecord) => h.score.toFixed(2)).join(", ")}]`
@@ -1339,7 +1347,7 @@ export default function (pi: ExtensionAPI) {
 				content: [
 					{
 						type: "text",
-						text: `✗ Non-match (reverted). Score: ${scoreData.score}\nReason: ${scoreData.reason}\n\nDiff:\n${diffSummary}\n\nGenerated ASM:\n\`\`\`\n${rawGeneratedAsm}\n\`\`\`${plateauWarning}${priorHint}`,
+						text: `✗ Non-match (reverted). Score: ${scoreData.score}\nReason: ${scoreData.reason}\n\nDiff:\n${diffSummary}\n\nGenerated ASM:\n\`\`\`\n${rawGeneratedAsm}\n\`\`\`${permuterHint}${plateauWarning}${priorHint}`,
 					},
 				],
 				details: scoreData,
