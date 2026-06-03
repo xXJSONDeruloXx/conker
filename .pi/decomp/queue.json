@@ -50,9 +50,9 @@
     "instructions": 11,
     "difficulty": "low",
     "tags": [],
-    "attempts": 15,
+    "attempts": 17,
     "lastScore": 0.1818,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "s32 func_100038E0(void) {\n    s32 temp_v0 = 0xBC000C02;\n\n    D_80038070 = temp_v0;\n    D_80038074 = (u16)0x4040;\n    *(u16 *)temp_v0 = (u16)0x4040;\n    return temp_v0;\n}",
@@ -278,6 +278,40 @@
           "structural: target=sh t7, 0(v0) got=sh v0, 3074(t7)"
         ],
         "timestamp": "2026-06-03T04:52:12.698Z"
+      },
+      {
+        "code": "s32 func_100038E0(void) {\n    s32 temp_v0 = 0xBC000C02;\n\n    D_80038070 = temp_v0;\n    D_80038074 = 0x4040;\n    *(u16 *)(temp_v0 + 0) = 0x4040;\n    return temp_v0;\n}",
+        "score": 0.1818,
+        "reason": "structural_diffs=9",
+        "diffs": [
+          "structural: target=lui v0, 48128 got=li v1, 16448",
+          "structural: target=ori v0, v0, 3074 got=lui t6, 48128",
+          "structural: target=lui at, HI(D_80038070) got=ori v0, t6, 3074",
+          "structural: target=sw v0, LO(D_80038070)(at) got=lui at, HI(D_80038070)",
+          "structural: target=lui at, HI(D_80038074) got=sw v0, LO(D_80038070)(at)",
+          "structural: target=li t6, 16448 got=lui at, HI(D_80038074)",
+          "structural: target=sh t6, LO(D_80038074)(at) got=sh v1, LO(D_80038074)(at)",
+          "structural: target=li t7, 16448 got=lui t7, 48128",
+          "structural: target=sh t7, 0(v0) got=sh v1, 3074(t7)"
+        ],
+        "timestamp": "2026-06-03T04:52:45.333Z"
+      },
+      {
+        "code": "s32 func_100038E0(void) {\n    u16 *temp_v0 = (u16 *)0xBC000000;\n\n    temp_v0 += 0x601;\n    D_80038070 = (u32)temp_v0;\n    D_80038074 = 0x4040;\n    *temp_v0 = 0x4040;\n    return (s32)temp_v0;\n}",
+        "score": 0.1818,
+        "reason": "structural_diffs=9",
+        "diffs": [
+          "structural: target=lui v0, 48128 got=li v1, 16448",
+          "structural: target=ori v0, v0, 3074 got=lui t6, 48128",
+          "structural: target=lui at, HI(D_80038070) got=ori v0, t6, 3074",
+          "structural: target=sw v0, LO(D_80038070)(at) got=lui at, HI(D_80038070)",
+          "structural: target=lui at, HI(D_80038074) got=sw v0, LO(D_80038070)(at)",
+          "structural: target=li t6, 16448 got=lui at, HI(D_80038074)",
+          "structural: target=sh t6, LO(D_80038074)(at) got=sh v1, LO(D_80038074)(at)",
+          "structural: target=li t7, 16448 got=lui t7, 48128",
+          "structural: target=sh t7, 0(v0) got=sh v1, 3074(t7)"
+        ],
+        "timestamp": "2026-06-03T04:53:00.261Z"
       }
     ]
   },
@@ -1619,9 +1653,40 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
+    "attempts": 3,
     "lastScore": 0.4285714285714286,
-    "status": "pending"
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_15169040(s32 arg0, u8 arg1) {\n    func_15169070(0, 0x68, arg0, arg1);\n}",
+        "score": 0.75,
+        "reason": "structural_diffs=3",
+        "diffs": [
+          "structural: target=andi a3, a1, 255 got=move a0, zero",
+          "structural: target=move a0, zero got=li a1, 104",
+          "structural: target=li a1, 104 got=lbu a3, 31(sp)"
+        ],
+        "timestamp": "2026-06-03T04:54:02.424Z"
+      },
+      {
+        "code": "void func_15169040(s32 arg0, s32 arg1) {\n    func_15169070(0, 0x68, arg0, (u8)arg1);\n}",
+        "score": 0.75,
+        "reason": "structural_diffs=3",
+        "diffs": [
+          "structural: target=andi a3, a1, 255 got=move a0, zero",
+          "structural: target=move a0, zero got=li a1, 104",
+          "structural: target=li a1, 104 got=lbu a3, 31(sp)"
+        ],
+        "timestamp": "2026-06-03T04:54:17.676Z"
+      },
+      {
+        "code": "void func_15169040(s32 arg0, s32 arg1) {\n    func_15169070(0, 0x68, arg0, arg1 & 0xFF);\n}",
+        "score": 0.4285714285714286,
+        "reason": "length_mismatch (target=12, generated=14)",
+        "diffs": [],
+        "timestamp": "2026-06-03T04:54:31.266Z"
+      }
+    ]
   },
   {
     "function": "func_15167010",
