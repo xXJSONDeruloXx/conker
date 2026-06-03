@@ -2267,9 +2267,9 @@
     "instructions": 20,
     "difficulty": "low",
     "tags": [],
-    "attempts": 3,
+    "attempts": 4,
     "lastScore": 0.47619047619047616,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "void func_150A7DA0(f32 *arg0, s32 arg1, s32 arg2, s32 arg3) {\n    f32 one = 1.0f;\n\n    ((s32 *)arg0)[1] = 0;\n    arg0[0] = one;\n    ((s32 *)arg0)[2] = 0;\n    ((s32 *)arg0)[3] = 0;\n    ((s32 *)arg0)[4] = 0;\n    arg0[5] = one;\n    ((s32 *)arg0)[6] = 0;\n    ((s32 *)arg0)[7] = 0;\n    ((s32 *)arg0)[8] = 0;\n    ((s32 *)arg0)[9] = 0;\n    arg0[10] = one;\n    ((s32 *)arg0)[11] = 0;\n    ((s32 *)arg0)[12] = arg1;\n    ((s32 *)arg0)[13] = arg2;\n    ((s32 *)arg0)[14] = arg3;\n    arg0[15] = one;\n}\n",
@@ -2305,6 +2305,13 @@
         "reason": "length_mismatch (target=20, generated=21)",
         "diffs": [],
         "timestamp": "2026-06-03T10:09:56.381Z"
+      },
+      {
+        "code": "void func_150A7DA0(f32 arg0[4][4], s32 arg1, s32 arg2, s32 arg3) {\n    register f32 one;\n\n    one = 1.0f;\n    ((s32 *)arg0)[1] = 0;\n    arg0[0][0] = one;\n    ((s32 *)arg0)[2] = 0;\n    ((s32 *)arg0)[3] = 0;\n    ((s32 *)arg0)[4] = 0;\n    arg0[1][1] = one;\n    ((s32 *)arg0)[6] = 0;\n    ((s32 *)arg0)[7] = 0;\n    ((s32 *)arg0)[8] = 0;\n    ((s32 *)arg0)[9] = 0;\n    arg0[2][2] = one;\n    ((s32 *)arg0)[11] = 0;\n    ((s32 *)arg0)[12] = arg1;\n    ((s32 *)arg0)[13] = arg2;\n    ((s32 *)arg0)[14] = arg3;\n    arg0[3][3] = one;\n}\n",
+        "score": 0.47619047619047616,
+        "reason": "length_mismatch (target=20, generated=21)",
+        "diffs": [],
+        "timestamp": "2026-06-03T10:10:28.011Z"
       }
     ]
   },
@@ -6920,7 +6927,7 @@
     "instructions": 32,
     "difficulty": "medium-low",
     "tags": [],
-    "attempts": 0,
+    "attempts": 3,
     "lastScore": 0.484375,
     "status": "pending",
     "history": [
@@ -7070,6 +7077,27 @@
         "reason": "length_mismatch (target=32, generated=31)",
         "diffs": [],
         "timestamp": "2026-06-02T23:48:25.163Z"
+      },
+      {
+        "code": "void func_15010600(void) {\n    u8 *temp_v1;\n    u8 *temp_a0;\n    u8 *temp_v0;\n\n    D_800D9921 = 0;\n    D_800D9920 = 0;\n    D_800D9928 = 0;\n    D_800D9938 = 0;\n    D_800D9929 = 0;\n\n    temp_v1 = D_800D992A;\n    temp_a0 = D_800D993A;\n    temp_v0 = D_800D9946;\n    D_800D9939 = 0;\nloop:\n    temp_a0 += 4;\n    temp_v1[1] = 0;\n    temp_a0[-3] = 0;\n    temp_v1[2] = 0;\n    temp_a0[-2] = 0;\n    temp_v1[3] = 0;\n    temp_a0[-1] = 0;\n    temp_v1 += 4;\n    temp_v1[-4] = 0;\n    temp_a0[-4] = 0;\n    if (temp_v0 != temp_a0) {\n        goto loop;\n    }\n}\n",
+        "score": 0.484375,
+        "reason": "length_mismatch (target=32, generated=31)",
+        "diffs": [],
+        "timestamp": "2026-06-03T10:13:08.583Z"
+      },
+      {
+        "code": "void func_15010600(void) {\n    u8 *temp_v0;\n    u8 *temp_v1;\n    u8 *temp_a0;\n\n    D_800D9921 = 0;\n    D_800D9920 = 0;\n    D_800D9928 = 0;\n    D_800D9938 = 0;\n    D_800D9929 = 0;\n\n    temp_v1 = D_800D992A;\n    temp_a0 = D_800D993A;\n    temp_v0 = D_800D9946;\n    D_800D9939 = 0;\nloop:\n    temp_a0 += 4;\n    temp_v1[1] = 0;\n    temp_a0[-3] = 0;\n    temp_v1[2] = 0;\n    temp_a0[-2] = 0;\n    temp_v1[3] = 0;\n    temp_a0[-1] = 0;\n    temp_v1 += 4;\n    temp_v1[-4] = 0;\n    temp_a0[-4] = 0;\n    if (temp_a0 != temp_v0) {\n        goto loop;\n    }\n}\n",
+        "score": 0.484375,
+        "reason": "length_mismatch (target=32, generated=31)",
+        "diffs": [],
+        "timestamp": "2026-06-03T10:13:36.865Z"
+      },
+      {
+        "code": "void func_15010600(void) {\n    u8 *temp_v0;\n    u8 *temp_v1;\n    u8 *temp_a0;\n\n    D_800D9921 = 0;\n    D_800D9920 = 0;\n    D_800D9928 = 0;\n    D_800D9938 = 0;\n    D_800D9929 = 0;\n\n    temp_v0 = D_800D9946;\n    temp_v1 = D_800D992A;\n    temp_a0 = D_800D993A;\n    D_800D9939 = 0;\nloop:\n    temp_a0 += 4;\n    temp_v1[1] = 0;\n    temp_a0[-3] = 0;\n    temp_v1[2] = 0;\n    temp_a0[-2] = 0;\n    temp_v1[3] = 0;\n    temp_a0[-1] = 0;\n    temp_v1 += 4;\n    temp_v1[-4] = 0;\n    temp_a0[-4] = 0;\n    if (temp_a0 != temp_v0) {\n        goto loop;\n    }\n}\n",
+        "score": 0.484375,
+        "reason": "length_mismatch (target=32, generated=31)",
+        "diffs": [],
+        "timestamp": "2026-06-03T10:14:06.035Z"
       }
     ]
   },
