@@ -268,7 +268,21 @@ void *func_15144B34(s32 arg0) {
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15144B68.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15144BC8.s")
+f32 func_15144BC8(f32 arg0) {
+    f32 range = 360.0f;
+    f32 val = arg0;
+    if (range < val) {
+        do {
+            val -= range;
+        } while (range < val);
+    }
+    if (val < 0.0f) {
+        do {
+            val += range;
+        } while (val < 0.0f);
+    }
+    return val;
+}
 
 s32 func_15144C2C(s16 arg0) {
     s16 tmp1 = arg0;
