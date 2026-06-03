@@ -569,8 +569,8 @@
     "instructions": 16,
     "difficulty": "low",
     "tags": [],
-    "attempts": 3,
-    "lastScore": 0.625,
+    "attempts": 4,
+    "lastScore": 0.9375,
     "status": "pending",
     "history": [
       {
@@ -626,6 +626,15 @@
           "structural: target=addu t9, t7, t8 got=addu t9, t6, t8"
         ],
         "timestamp": "2026-06-03T06:33:46.690Z"
+      },
+      {
+        "code": "void func_15079A58(void) {\n    (*(s16 **)&D_800D2110)[D_800D154C->unk13F] = (D_800D1890 << 8) | D_800D1891;\n}",
+        "score": 0.9375,
+        "reason": "structural_diffs=1",
+        "diffs": [
+          "structural: target=addu t9, t7, t8 got=or t9, t7, t8"
+        ],
+        "timestamp": "2026-06-03T06:34:11.946Z"
       }
     ]
   },

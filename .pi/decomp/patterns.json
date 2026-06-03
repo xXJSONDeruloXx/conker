@@ -504,5 +504,14 @@
     "example_functions": [
       "func_15134C98"
     ]
+  },
+  {
+    "id": "split-shift-add-for-65537-multiply",
+    "description": "When multiplying a sign-extended halfword-ish temp by 65537, writing it as a split left-shift temp plus add can force IDO to keep the shifted value and final sum in separate registers.",
+    "trigger": "Target has `sll temp, value, 16` followed by `addu result, temp, value`, but `value * 65537` reuses the temp register for the final add.",
+    "solution": "Introduce a second local for `value << 16` and assign `shifted + value` instead of using `value * 65537`.",
+    "example_functions": [
+      "func_151927C0"
+    ]
   }
 ]
