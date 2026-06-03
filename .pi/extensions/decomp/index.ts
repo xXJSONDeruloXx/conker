@@ -429,20 +429,25 @@ export default function (pi: ExtensionAPI) {
 	});
 
 	// Load state on session start
-	// Guard: block direct git commits to conker/src/ via bash (must use decomp_accept)
-	// Only blocks actual git add/commit commands, not greps/reads that mention them
+	// Guard: block direct mutations to conker/src/ via bash (must use decomp_accept)
 	pi.on("tool_call", async (event: any, ctx: any) => {
 		if (event.toolName === "bash") {
 			const cmd = event.input?.command || "";
-			// Only match commands that START with git (or cd ... && git)
-			// Don't match grep/find/cat/read that happen to contain "git commit" in patterns
-			const isGitCmd = /^\s*(cd\s+[^;&&]+\s*&&\s*)?git\s+(add|commit)/.test(cmd)
-				|| /&&\s*git\s+(add|commit)/.test(cmd);
-			const touchesSrc = /conker\/src/.test(cmd);
-			const isAllowed = /cherry-pick|revert|recover/.test(cmd);
-			if (isGitCmd && touchesSrc && !isAllowed) {
-				if (ctx?.hasUI) ctx.ui.notify("\u26d4 Blocked: use decomp_accept to commit source changes (ROM SHA gate required)", "warning");
-				return { block: true, reason: "Direct git commits to conker/src/ are blocked. Use decomp_accept which verifies the full ROM SHA-1 before committing." };
+			const touchesSrc = /conker\/src|conker\/include/.test(cmd);
+			if (!touchesSrc) return undefined;
+
+			const isAllowed = /cherry-pick|revert|recover|grep|cat|find|ls|head|tail|sed -n|wc|diff|log/.test(cmd);
+			if (isAllowed) return undefined;
+
+			// Block git add/commit on protected paths
+			const isGitMutation = /&&\s*git\s+(add|commit)|^\s*(cd\s+[^;&]+&&\s*)?git\s+(add|commit)/.test(cmd);
+			// Block file mutations (sed -i, python writing, rm, etc)
+			const isFileMutation = /(sed\s+-i|perl\s+-pi|python3?\s|node\s|rm\s|mv\s|cp\s|chmod|tee\s|truncate|dd\b)/.test(cmd)
+				|| />>?\s*[^|]/.test(cmd); // redirect to file
+
+			if (isGitMutation || isFileMutation) {
+				if (ctx?.hasUI) ctx.ui.notify("\u26d4 Blocked: use decomp_attempt/decomp_accept for source changes (ROM SHA gate required)", "warning");
+				return { block: true, reason: "Direct mutations to conker/src/ and conker/include/ are blocked. Use decomp_attempt (which auto-reverts) or decomp_accept (which verifies ROM SHA-1)." };
 			}
 		}
 		return undefined;
@@ -1328,10 +1333,17 @@ export default function (pi: ExtensionAPI) {
 			], { timeout: 30000 });
 
 			// Commit source + queue state + fresh progress (preserves history of what was tried) and push
+			// Create allow file to bypass pre-commit hook
+			const allowFile = path.join(ctx.cwd, ".pi/decomp/commit-allow");
+			fs.writeFileSync(allowFile, `${params.function} ${new Date().toISOString()}`);
+
 			const desc = params.description || `match ${params.function}`;
 			await pi.exec("git", ["add", `conker/src/${params.file}`, ".pi/decomp/queue.json", ".pi/decomp/patterns.json"]);
 			await pi.exec("git", ["commit", "-m", `feat(decomp): ${desc}`]);
 			await pi.exec("git", ["push"], { timeout: 30000 });
+
+			// Remove allow file after successful commit
+			try { fs.unlinkSync(allowFile); } catch {}
 
 			// Update queue
 			const entry = state.queue.find((e) => e.function === params.function);

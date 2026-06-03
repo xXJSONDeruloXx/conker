@@ -37,3 +37,4 @@ conker/ctx.c
 tools/decomp-permuter
 tools/gfxdis
 .pi/decomp/permuter/
+.pi/decomp/commit-allow

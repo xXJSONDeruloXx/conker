@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+repo_root="$(git rev-parse --show-toplevel)"
+
+# Allow cherry-picks and reverts
+if [ -f "$repo_root/.git/CHERRY_PICK_HEAD" ] || [ -f "$repo_root/.git/REVERT_HEAD" ]; then
+  exit 0
+fi
+
+# Allow if decomp_accept created the allow file
+if [ -f "$repo_root/.pi/decomp/commit-allow" ]; then
+  exit 0
+fi
+
+# Check if any staged changes touch conker/src/
+staged="$(git diff --cached --name-only --diff-filter=ACMR -- conker/src/ conker/include/ 2>/dev/null || true)"
+if [ -z "$staged" ]; then
+  exit 0
+fi
+
+echo "⛔ Blocked: staged changes in conker/src/ or conker/include/ require decomp_accept (full ROM SHA gate)." >&2
+echo "Staged protected files:" >&2
+echo "$staged" >&2
+echo "" >&2
+echo "If this is a recovery/manual fix, create .pi/decomp/commit-allow to bypass." >&2
+exit 1
