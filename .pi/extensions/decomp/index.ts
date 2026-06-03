@@ -778,6 +778,133 @@ export default function (pi: ExtensionAPI) {
 				}
 			} catch {}
 
+			// ── Context enrichment: auto-resolve types, symbols, callees ──
+			const enrichment: string[] = [];
+
+			// 1. Extract referenced symbols (D_*) from target asm
+			const symbolRefs = [...new Set(
+				(targetAsm.match(/%(?:hi|lo)\(([^)]+)\)/g) || [])
+					.map((m: string) => m.replace(/%(?:hi|lo)\(/, "").replace(")", ""))
+			)];
+
+			// Look up symbol types from variables.h and undefined_syms
+			if (symbolRefs.length > 0) {
+				const varsPath = path.join(ctx.cwd, "conker/include/variables.h");
+				const undefPath = path.join(ctx.cwd, "conker/undefined_syms_auto.txt");
+				let varsContent = "";
+				let undefContent = "";
+				try { varsContent = fs.readFileSync(varsPath, "utf-8"); } catch {}
+				try { undefContent = fs.readFileSync(undefPath, "utf-8"); } catch {}
+
+				const symbolDecls: string[] = [];
+				for (const sym of symbolRefs) {
+					// Check variables.h
+					const varMatch = varsContent.match(new RegExp(`^.*\\b${sym}\\b.*$`, "m"));
+					if (varMatch) {
+						symbolDecls.push(varMatch[0].trim());
+					} else {
+						// Check undefined_syms_auto.txt
+						const undefMatch = undefContent.match(new RegExp(`^.*\\b${sym}\\b.*$`, "m"));
+						if (undefMatch) {
+							symbolDecls.push(`// ${undefMatch[0].trim()} (undefined_syms_auto)`);
+						}
+					}
+				}
+				if (symbolDecls.length > 0) {
+					enrichment.push("### Symbol Declarations", "```c", ...symbolDecls, "```", "");
+				}
+			}
+
+			// 2. Extract callee prototypes (jal targets)
+			const jalTargets = [...new Set(
+				(targetAsm.match(/jal\s+(\w+)/g) || [])
+					.map((m: string) => m.replace("jal", "").trim())
+					.filter((f: string) => f.startsWith("func_") || !f.startsWith("0"))
+			)];
+
+			if (jalTargets.length > 0) {
+				const funcsPath = path.join(ctx.cwd, "conker/include/functions.h");
+				let funcsContent = "";
+				try { funcsContent = fs.readFileSync(funcsPath, "utf-8"); } catch {}
+
+				const calleeProtos: string[] = [];
+				for (const target of jalTargets) {
+					const protoMatch = funcsContent.match(new RegExp(`^.*\\b${target}\\b.*$`, "m"));
+					if (protoMatch) {
+						calleeProtos.push(protoMatch[0].trim());
+					}
+				}
+				if (calleeProtos.length > 0) {
+					enrichment.push("### Callee Prototypes", "```c", ...calleeProtos, "```", "");
+				}
+			}
+
+			// 3. Detect struct types from symbol declarations and include relevant struct defs
+			const structsPath = path.join(ctx.cwd, "conker/include/structs.h");
+			let structsContent = "";
+			try { structsContent = fs.readFileSync(structsPath, "utf-8"); } catch {}
+
+			const referencedStructs = new Set<string>();
+			// From symbol declarations (e.g. "extern struct127 *D_800D154C")
+			for (const line of enrichment) {
+				const structMatch = line.match(/\b(struct\d+)\b/g);
+				if (structMatch) structMatch.forEach((s: string) => referencedStructs.add(s));
+			}
+			// From surrounding C context
+			const ctxStructs = srcContext.match(/\b(struct\d+)\b/g);
+			if (ctxStructs) ctxStructs.forEach((s: string) => referencedStructs.add(s));
+
+			if (referencedStructs.size > 0 && structsContent) {
+				const structDefs: string[] = [];
+				for (const structName of referencedStructs) {
+					// Find the struct definition
+					const defPatterns = [
+						new RegExp(`^struct ${structName} \\{`, "m"),
+						new RegExp(`^typedef struct \\{[\\s\\S]*?\\} ${structName};`, "m"),
+						new RegExp(`^typedef struct ${structName}`, "m"),
+					];
+					for (const pat of defPatterns) {
+						const match = structsContent.match(pat);
+						if (match) {
+							const startIdx = match.index!;
+							// Find the closing brace
+							let braceDepth = 0;
+							let endIdx = startIdx;
+							for (let i = startIdx; i < structsContent.length; i++) {
+								if (structsContent[i] === "{") braceDepth++;
+								if (structsContent[i] === "}") {
+									braceDepth--;
+									if (braceDepth === 0) {
+										// Include up to the semicolon after closing brace
+										endIdx = structsContent.indexOf(";", i) + 1;
+										break;
+									}
+								}
+							}
+							if (endIdx > startIdx) {
+								structDefs.push(structsContent.slice(startIdx, endIdx));
+							}
+							break;
+						}
+					}
+				}
+				if (structDefs.length > 0) {
+					enrichment.push("### Struct Definitions", "```c", ...structDefs, "```", "");
+				}
+			}
+
+			// 4. Include recently matched functions from same file (for type/pattern reference)
+			const sameFileMatched = state.queue.filter(
+				(e) => e.file === next.file && e.status === "matched" && e.history?.length
+			).slice(-2);
+			if (sameFileMatched.length > 0) {
+				enrichment.push("### Recently Matched in Same File (reference)");
+				for (const m of sameFileMatched) {
+					const bestAttempt = m.history!.reduce((a: AttemptRecord, b: AttemptRecord) => a.score > b.score ? a : b);
+					enrichment.push(`**${m.function}** (matched):`, "```c", bestAttempt.code, "```", "");
+				}
+			}
+
 			// Find relevant patterns
 			const relevantPatterns = state.patterns.filter(
 				(p) =>
@@ -799,6 +926,8 @@ export default function (pi: ExtensionAPI) {
 				"```c",
 				srcContext || "(none found)",
 				"```",
+				"",
+				...enrichment,
 			];
 
 			if (relevantPatterns.length > 0) {
