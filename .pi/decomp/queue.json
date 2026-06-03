@@ -13794,9 +13794,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1,
+    "status": "matched"
   },
   {
     "function": "func_16001678",
@@ -14964,9 +14964,53 @@
     "instructions": 37,
     "difficulty": "medium-low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.4868421052631579,
+    "status": "pending",
+    "history": [
+      {
+        "code": "f32 func_15144598(struct134 *arg0) {\n    s32 temp_v0;\n    f32 temp_f2;\n\n    temp_v0 = ((u8 *)arg0)[0x15] & 3;\n    if (temp_v0 == 0) {\n        temp_v0 = *(s16 *)((s32)arg0 + 6);\n        temp_f2 = (f32)(temp_v0 * temp_v0) * D_800A5694;\n    } else if (temp_v0 == 1) {\n        temp_v0 = *(s16 *)((s32)arg0 + 6);\n        temp_f2 = (f32)(temp_v0 * temp_v0) * D_800A5694;\n    } else if (temp_v0 == 2) {\n        temp_f2 = (f32)(*(s16 *)((s32)arg0 + 6) * *(s16 *)((s32)arg0 + 0xA)) * 4.0f;\n    } else {\n        temp_f2 = 1.0f;\n    }\n    return temp_f2;\n}",
+        "score": 0.37,
+        "reason": "length_mismatch (target=37, generated=50)",
+        "diffs": [],
+        "timestamp": "2026-06-03T21:34:50.354Z"
+      },
+      {
+        "code": "f32 func_15144598(struct134 *arg0) {\n    s32 temp_v0;\n    f32 temp_f2;\n\n    temp_v0 = ((u8 *)arg0)[0x15] & 3;\n    if (temp_v0 != 0) {\n        if (temp_v0 == 1) {\n        } else if (temp_v0 == 2) {\n            temp_f2 = (f32)(*(s16 *)((s32)arg0 + 6) * *(s16 *)((s32)arg0 + 0xA)) * 4.0f;\n            return temp_f2;\n        } else {\n            temp_f2 = 1.0f;\n            return temp_f2;\n        }\n    }\n    temp_v0 = *(s16 *)((s32)arg0 + 6);\n    return (f32)(temp_v0 * temp_v0) * D_800A5694;\n}",
+        "score": 0.2703,
+        "reason": "structural_diffs=27",
+        "diffs": [
+          "structural: target=beq t6, at, L2 got=bnel t6, at, L2",
+          "structural: target=mtc1 at, f2 got=lh t7, 10(a0)",
+          "structural: target=b L3 got=lh t8, 6(a0)",
+          "structural: target=mov.s f0, f2 got=lui at, 16512",
+          "structural: target=lh t7, 6(a0) got=mtc1 at, f8",
+          "structural: target=lh t8, 10(a0) got=multu t7, t8",
+          "structural: target=lui at, 16512 got=mflo t9",
+          "structural: target=mtc1 at, f8 got=mtc1 t9, f4",
+          "structural: target=multu t7, t8 got=nop",
+          "structural: target=mflo t9 got=cvt.s.w f6, f4",
+          "structural: target=mtc1 t9, f4 got=mul.s f0, f6, f8",
+          "structural: target=nop got=jr ra",
+          "structural: target=cvt.s.w f6, f4 got=nop",
+          "structural: target=mul.s f2, f6, f8 got=lui at, 16256",
+          "structural: target=b L3 got=mtc1 at, f0",
+          "structural: target=mov.s f0, f2 got=jr ra",
+          "structural: target=lh v0, 6(a0) got=nop",
+          "structural: target=lui at, HI(D_800A5694) got=lh v0, 6(a0)",
+          "structural: target=lwc1 f18, LO(D_800A5694)(at) got=lui at, HI(D_800A5694)",
+          "structural: target=multu v0, v0 got=lwc1 f18, LO(D_800A5694)(at)"
+        ],
+        "timestamp": "2026-06-03T21:35:14.611Z"
+      },
+      {
+        "code": "f32 func_15144598(struct134 *arg0) {\n    s32 temp_v0;\n    f32 temp_f2;\n\n    temp_v0 = ((u8 *)arg0)[0x15] & 3;\n    if (temp_v0 == 0) {\n        goto common;\n    }\n    if (temp_v0 == 1) {\n        goto common;\n    }\n    if (temp_v0 == 2) {\n        goto case2;\n    }\n    temp_f2 = 1.0f;\n    goto done;\ncase2:\n    temp_f2 = (f32)(*(s16 *)((s32)arg0 + 6) * *(s16 *)((s32)arg0 + 0xA)) * 4.0f;\n    goto done;\ncommon:\n    temp_v0 = *(s16 *)((s32)arg0 + 6);\n    temp_f2 = (f32)(temp_v0 * temp_v0) * D_800A5694;\ndone:\n    return temp_f2;\n}",
+        "score": 0.4868421052631579,
+        "reason": "length_mismatch (target=37, generated=38)",
+        "diffs": [],
+        "timestamp": "2026-06-03T21:35:32.572Z"
+      }
+    ]
   },
   {
     "function": "func_15125628",
