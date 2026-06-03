@@ -507,8 +507,8 @@
     "instructions": 16,
     "difficulty": "low",
     "tags": [],
-    "attempts": 6,
-    "lastScore": 0.34782608695652173,
+    "attempts": 7,
+    "lastScore": 0.46875,
     "status": "pending",
     "history": [
       {
@@ -552,6 +552,13 @@
         "reason": "length_mismatch (target=16, generated=23)",
         "diffs": [],
         "timestamp": "2026-06-03T06:25:39.889Z"
+      },
+      {
+        "code": "void func_151927C0(struct114 *arg0) {\n    s32 tmp0;\n    s32 tmp1;\n    tmp0 = (s16)((arg0->unk14 & 0xFF) >> 1);\n    tmp1 = tmp0 << 16;\n    arg0->unk38 = 300;\n    arg0->unk3A = 10;\n    arg0->unk14 = tmp1 + tmp0;\n    arg0->unk3B = 0;\n}",
+        "score": 0.46875,
+        "reason": "length_mismatch (target=16, generated=15)",
+        "diffs": [],
+        "timestamp": "2026-06-03T06:29:42.527Z"
       }
     ]
   },

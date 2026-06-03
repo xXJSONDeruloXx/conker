@@ -495,5 +495,14 @@
     "example_functions": [
       "func_151695F0"
     ]
+  },
+  {
+    "id": "u8-argument-forwarding-wrapper",
+    "description": "Wrappers that forward a narrow u8 argument to another function emit an early argument-home plus `andi`/move before the conditional logic when both caller and callee prototypes use u8.",
+    "trigger": "Target stores/masks an incoming non-a0 argument before branch checks, then conditionally calls another function with the original args.",
+    "solution": "Declare the wrapper parameter and callee prototype with `u8` for that argument and write the conditional call naturally.",
+    "example_functions": [
+      "func_15134C98"
+    ]
   }
 ]
