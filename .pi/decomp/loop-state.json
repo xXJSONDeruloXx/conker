@@ -1,8 +1,8 @@
 {
   "enabled": false,
-  "chunk": 308,
+  "chunk": 310,
   "status": "stopped",
-  "lastChunkSummary": "Matched debugger medium-low candidate func_16000F8C and accepted full ROM SHA. Key shape was a 0x28 local byte buffer addressed as `buf - 8` for output, with an intentional out-of-bounds `buf[0x24]` float scratch to land at stack+0x54; removing the named original-bit local let IDO load float bits into `$v1` and using a named shift result forced `$v0`. Committed as \"Match debugger float print helper\".",
+  "lastChunkSummary": "Matched and accepted func_15125628 as an unrolled four-byte countdown using an explicit shared load temp plus distinct decrement temps to force the branch-delay `addiu`/conditional `sb` shape. Also had to repair the broken baseline first by removing a stray committed `# test` directive; the accepted commit adds the missing D_800DBFF7 symbol and decompiles the function.",
   "consecutiveNoProgress": 0,
-  "updatedAt": "2026-06-03T13:29:17.565Z"
+  "updatedAt": "2026-06-03T20:01:37.350Z"
 }

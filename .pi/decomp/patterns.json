@@ -612,5 +612,14 @@
     "example_functions": [
       "func_151635A8"
     ]
+  },
+  {
+    "id": "global-byte-countdown-explicit-temps",
+    "description": "For repeated nonzero byte countdowns, naming the loaded byte and decrement temps forces IDO to emit lbu, pre-branch lui at, branch with addiu delay slot, and sb with successive temp registers.",
+    "trigger": "Unrolled sequence of `if (global != 0) global--` where target computes `global - 1` in the branch delay slot before the conditional store.",
+    "solution": "Use a shared `u32 temp_v0` for each byte load and distinct `s32 temp_tN` decrement locals assigned before each `if`; store the named decrement local inside the `if`.",
+    "example_functions": [
+      "func_15125628"
+    ]
   }
 ]
