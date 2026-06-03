@@ -10,6 +10,15 @@ FUNC="$3"
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 IDO="$SCRIPT_DIR/ido-native"
+# IDO requires .c extension
+if [[ "$INPUT" != *.c ]]; then
+  TMP_DIR=$(mktemp -d)
+  TMP_INPUT="$TMP_DIR/src.c"
+  cp "$INPUT" "$TMP_INPUT"
+else
+  TMP_DIR=""
+  TMP_INPUT="$INPUT"
+fi
 
 # Compile with IDO 5.3 (same flags as conker/Makefile)
 "$IDO/cc" -c -32 -G 0 -Xfullwarn -Xcpluscomm -signed -nostdinc -non_shared -Wab,-r4300_mul \
@@ -22,4 +31,6 @@ IDO="$SCRIPT_DIR/ido-native"
   -I "$PROJECT_ROOT/conker/src/libultra/os" \
   -I "$PROJECT_ROOT/conker/src/libultra/audio" \
   -O2 -g3 -mips2 -o32 \
-  -o "$OUTPUT" "$INPUT"
+  -o "$OUTPUT" "$TMP_INPUT"
+
+[ -n "$TMP_DIR" ] && rm -rf "$TMP_DIR"

@@ -1743,11 +1743,26 @@ export default function (pi: ExtensionAPI) {
 			}
 
 			// Write the base source file for Transmuter
+			// Include standard headers + extract undefined_syms referenced in the code
+			const undefSymsPath = path.join(ctx.cwd, "conker/undefined_syms_auto.txt");
+			const undefSyms2 = path.join(ctx.cwd, "conker/undefined_syms.us.txt");
+			let extraExterns = "";
+			try {
+				const allSyms = (fs.readFileSync(undefSymsPath, "utf-8") + "\n" + fs.readFileSync(undefSyms2, "utf-8"))
+					.split("\n").map((l: string) => l.match(/^([A-Za-z_]\w*)/)?.[1]).filter(Boolean);
+				// Only include externs for symbols actually referenced in the code
+				const neededSyms = allSyms.filter((s: string) => baseCode.includes(s));
+				if (neededSyms.length > 0) {
+					extraExterns = neededSyms.map((s: string) => `extern s32 ${s};`).join("\n") + "\n";
+				}
+			} catch {}
+
 			const baseC = [
 				'#include <ultra64.h>',
 				'#include "functions.h"',
 				'#include "variables.h"',
 				'',
+				extraExterns,
 				baseCode,
 				'',
 			].join('\n');
