@@ -984,7 +984,17 @@ void func_1505E060(u8 *arg0) {
 #pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_1505E874.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_1505ED34.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_1505EEB0.s")
+struct127 *func_1505EEB0(s32 state, s32 *arg1) {
+    struct127 *ptr;
+    s32 i;
+
+    for (ptr = D_800CC2D0, i = 0; (i < 25) && (state != ptr->interaction_state); i++, ptr++) {
+    }
+
+    *arg1 = i;
+    return ptr;
+}
+
 // I HATE LOOPS.
 // struct127 *func_1505EEB0(s32 state, s32 *arg1) {
 //     struct127 *tmp = D_800CC2D0;

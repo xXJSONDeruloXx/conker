@@ -3478,8 +3478,8 @@
     "instructions": 17,
     "difficulty": "low",
     "tags": [],
-    "attempts": 30,
-    "lastScore": 0.3695652173913043,
+    "attempts": 31,
+    "lastScore": 0.4118,
     "status": "pending",
     "history": [
       {
@@ -3739,6 +3739,24 @@
         "reason": "length_mismatch (target=17, generated=23)",
         "diffs": [],
         "timestamp": "2026-06-03T07:31:50.213Z"
+      },
+      {
+        "code": "struct127 *func_1505EEB0(s32 state, s32 *arg1) {\n    struct127 *ptr;\n    s32 i;\n\n    for (i = 0, ptr = D_800CC2D0; (i < 25) && (state != ptr->interaction_state); i++, ptr++) {\n    }\n\n    *arg1 = i;\n    return ptr;\n}\n",
+        "score": 0.4118,
+        "reason": "structural_diffs=10",
+        "diffs": [
+          "structural: target=lui v1, HI(D_800CC2D0) got=lui a2, HI(D_800CC2D0)",
+          "structural: target=addiu v1, v1, LO(D_800CC2D0) got=addiu a2, a2, LO(D_800CC2D0)",
+          "structural: target=move a2, zero got=move v1, zero",
+          "structural: target=addiu a2, a2, 1 got=addiu v1, v1, 1",
+          "structural: target=slti at, a2, 25 got=slti at, v1, 25",
+          "structural: target=addiu v1, v1, 812 got=addiu a2, a2, 812",
+          "structural: target=lw t7, 0(v1) got=lw t7, 0(a2)",
+          "structural: target=addiu a2, a2, 1 got=addiu v1, v1, 1",
+          "structural: target=sw a2, 0(a1) got=sw v1, 0(a1)",
+          "structural: target=move v0, v1 got=move v0, a2"
+        ],
+        "timestamp": "2026-06-03T07:32:06.427Z"
       }
     ]
   },
