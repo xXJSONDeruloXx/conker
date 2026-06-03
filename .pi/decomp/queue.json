@@ -507,8 +507,8 @@
     "instructions": 16,
     "difficulty": "low",
     "tags": [],
-    "attempts": 3,
-    "lastScore": 0.46875,
+    "attempts": 6,
+    "lastScore": 0.34782608695652173,
     "status": "pending",
     "history": [
       {
@@ -531,6 +531,27 @@
         "reason": "length_mismatch (target=16, generated=15)",
         "diffs": [],
         "timestamp": "2026-06-03T06:24:13.807Z"
+      },
+      {
+        "code": "void func_151927C0(struct114 *arg0) {\n    s32 tmp0;\n    s32 tmp1;\n    tmp0 = (s16)((arg0->unk14 & 0xFF) >> 1);\n    tmp1 = tmp0 << 16;\n    arg0->unk38 = 300;\n    arg0->unk3A = 10;\n    arg0->unk14 = tmp1 + tmp0;\n    arg0->unk3B = 0;\n    __asm__(\"nop\");\n}",
+        "score": 0.34782608695652173,
+        "reason": "length_mismatch (target=16, generated=23)",
+        "diffs": [],
+        "timestamp": "2026-06-03T06:24:34.960Z"
+      },
+      {
+        "code": "void func_151927C0(struct114 *arg0) {\n    s32 tmp0;\n    s32 tmp1;\n    tmp0 = (s16)((arg0->unk14 & 0xFF) >> 1);\n    tmp1 = tmp0 << 16;\n    arg0->unk38 = 300;\n    arg0->unk3A = 10;\n    arg0->unk14 = tmp1 + tmp0;\n    arg0->unk3B = 0;\n    goto end;\nend:\n    ;\n}",
+        "score": 0.46875,
+        "reason": "length_mismatch (target=16, generated=15)",
+        "diffs": [],
+        "timestamp": "2026-06-03T06:25:14.795Z"
+      },
+      {
+        "code": "void func_151927C0(struct114 *arg0) {\n    s32 tmp0;\n    s32 tmp1;\n    tmp0 = (s16)((arg0->unk14 & 0xFF) >> 1);\n    tmp1 = tmp0 << 16;\n    arg0->unk38 = 300;\n    arg0->unk3A = 10;\n    arg0->unk14 = tmp1 + tmp0;\n    arg0->unk3B = 0;\n    asm(\"nop\");\n}",
+        "score": 0.34782608695652173,
+        "reason": "length_mismatch (target=16, generated=23)",
+        "diffs": [],
+        "timestamp": "2026-06-03T06:25:39.889Z"
       }
     ]
   },
