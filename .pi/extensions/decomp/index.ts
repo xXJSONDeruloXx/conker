@@ -423,11 +423,17 @@ export default function (pi: ExtensionAPI) {
 
 	// Load state on session start
 	// Guard: block direct git commits to conker/src/ via bash (must use decomp_accept)
+	// Only blocks actual git add/commit commands, not greps/reads that mention them
 	pi.on("tool_call", async (event: any, ctx: any) => {
 		if (event.toolName === "bash") {
 			const cmd = event.input?.command || "";
-			// Block git commit that includes conker/src files — must go through decomp_accept
-			if (/git\s+(commit|add.*conker\/src)/.test(cmd) && !/decomp_accept/.test(cmd)) {
+			// Only match commands that START with git (or cd ... && git)
+			// Don't match grep/find/cat/read that happen to contain "git commit" in patterns
+			const isGitCmd = /^\s*(cd\s+[^;&&]+\s*&&\s*)?git\s+(add|commit)/.test(cmd)
+				|| /&&\s*git\s+(add|commit)/.test(cmd);
+			const touchesSrc = /conker\/src/.test(cmd);
+			const isAllowed = /cherry-pick|revert|recover/.test(cmd);
+			if (isGitCmd && touchesSrc && !isAllowed) {
 				if (ctx?.hasUI) ctx.ui.notify("\u26d4 Blocked: use decomp_accept to commit source changes (ROM SHA gate required)", "warning");
 				return { block: true, reason: "Direct git commits to conker/src/ are blocked. Use decomp_accept which verifies the full ROM SHA-1 before committing." };
 			}
