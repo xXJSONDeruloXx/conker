@@ -19904,7 +19904,7 @@
     ],
     "attempts": 9,
     "lastScore": 0.875,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "void func_151355B8(struct102 *arg0, u8 *arg1, u8 arg2) {\n    volatile s32 *word;\n    s32 tmp;\n\n    if (arg2 == 0) {\n        if ((*(s32 *)arg1 == *(s32 *)((s32)arg0 + 0x1C)) || (arg1[4] == *(u8 *)((s32)arg0 + 0x18))) {\n            func_1516972C(arg0);\n        }\n    } else if (arg2 == 3) {\n        if ((*(s32 *)arg1 == *(s32 *)((s32)arg0 + 0x1C)) || (arg1[4] == *(u8 *)((s32)arg0 + 0x18))) {\n            word = (volatile s32 *)((s32)arg0 + 0x10);\n            tmp = *word & ~1;\n            *word = tmp;\n            *word = tmp;\n        }\n    }\n}",
@@ -20145,9 +20145,32 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.31746031746031744,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_1000F1A8(void) {\n    s32 i;\n    struct120 *ptr;\n\n    D_80042760 = 0;\n    D_80041FD9 = 1;\n    D_80041FD8 = 0;\n    bzero(D_800425E0, 0x180);\n    ptr = D_800425E0;\n    i = 0;\n    do {\n        ptr[3].unk2 = i + 0x13;\n        ptr[2].unk2 = i + 0x12;\n        ptr[1].unk2 = i + 0x11;\n        ptr[0].unk2 = i + 0x10;\n        i += 4;\n        ptr += 4;\n    } while (i != 0x10);\n    D_80041F50 = 0;\n    func_100176EC();\n    D_80041F61 = 0;\n    D_80041F60 = 0;\n}",
+        "score": 0.31746031746031744,
+        "reason": "length_mismatch (target=40, generated=63)",
+        "diffs": [],
+        "timestamp": "2026-06-03T22:46:32.071Z"
+      },
+      {
+        "code": "void func_1000F1A8(void) {\n    s32 i;\n    s32 end;\n    struct120 *ptr;\n\n    D_80042760 = 0;\n    D_80041FD9 = 1;\n    D_80041FD8 = 0;\n    bzero(D_800425E0, 0x180);\n    ptr = D_800425E0;\n    i = 0;\n    end = 0x10;\n    while (i != end) {\n        ptr[3].unk2 = i + 0x13;\n        ptr[2].unk2 = i + 0x12;\n        ptr[1].unk2 = i + 0x11;\n        ptr[0].unk2 = i + 0x10;\n        i += 4;\n        ptr += 4;\n    }\n    D_80041F50 = 0;\n    func_100176EC();\n    D_80041F61 = 0;\n    D_80041F60 = 0;\n}",
+        "score": 0.2564102564102564,
+        "reason": "length_mismatch (target=40, generated=78)",
+        "diffs": [],
+        "timestamp": "2026-06-03T22:46:59.732Z"
+      },
+      {
+        "code": "void func_1000F1A8(void) {\n    s32 i;\n    volatile struct120 *ptr;\n\n    D_80042760 = 0;\n    D_80041FD9 = 1;\n    D_80041FD8 = 0;\n    bzero(D_800425E0, 0x180);\n    ptr = D_800425E0;\n    i = 0;\n    do {\n        ptr[3].unk2 = i + 0x13;\n        ptr[2].unk2 = i + 0x12;\n        ptr[1].unk2 = i + 0x11;\n        ptr[0].unk2 = i + 0x10;\n        i += 4;\n        ptr += 4;\n    } while (i != 0x10);\n    D_80041F50 = 0;\n    func_100176EC();\n    D_80041F61 = 0;\n    D_80041F60 = 0;\n}",
+        "score": 0.31746031746031744,
+        "reason": "length_mismatch (target=40, generated=63)",
+        "diffs": [],
+        "timestamp": "2026-06-03T22:47:13.735Z"
+      }
+    ]
   },
   {
     "function": "func_1501AE94",
