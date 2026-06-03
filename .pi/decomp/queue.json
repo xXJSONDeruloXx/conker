@@ -16748,9 +16748,57 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.8333,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_150770E4(void) {\n    if (D_800CC30C[D_800D154C->unk222 * 203] < D_800D1892) {\n        func_15075400(D_800D1893);\n    }\n}",
+        "score": 0.8333,
+        "reason": "structural_diffs=6",
+        "diffs": [
+          "structural: target=lui t9, HI(D_800D1892) got=lui t0, HI(D_800D1892)",
+          "structural: target=lbu t9, LO(D_800D1892)(t9) got=lbu t0, LO(D_800D1892)(t0)",
+          "structural: target=mtc1 t9, f6 got=mtc1 t0, f6",
+          "structural: target=sll t8, t8, 2 got=sll t9, t8, 2",
+          "structural: target=addu at, at, t8 got=addu at, at, t9",
+          "structural: target=bgez t9, L0 got=bgez t0, L0"
+        ],
+        "timestamp": "2026-06-03T21:08:05.846Z"
+      },
+      {
+        "code": "void func_150770E4(void) {\n    s32 idx;\n\n    idx = D_800D154C->unk222 * 203;\n    if (D_800CC30C[idx] < D_800D1892) {\n        func_15075400(D_800D1893);\n    }\n}",
+        "score": 0.7222,
+        "reason": "structural_diffs=10",
+        "diffs": [
+          "structural: target=lbu t7, 546(t6) got=lbu v0, 546(t6)",
+          "structural: target=sll t8, t7, 2 got=sll t7, v0, 2",
+          "structural: target=subu t8, t8, t7 got=subu t7, t7, v0",
+          "structural: target=sll t8, t8, 2 got=sll t7, t7, 2",
+          "structural: target=addu t8, t8, t7 got=addu t7, t7, v0",
+          "structural: target=sll t8, t8, 2 got=sll t7, t7, 2",
+          "structural: target=subu t8, t8, t7 got=subu t7, t7, v0",
+          "structural: target=sll t8, t8, 2 got=sll t7, t7, 2",
+          "structural: target=subu t8, t8, t7 got=subu t7, t7, v0",
+          "structural: target=sll t8, t8, 2 got=sll t8, t7, 2"
+        ],
+        "timestamp": "2026-06-03T21:08:31.936Z"
+      },
+      {
+        "code": "void func_150770E4(void) {\n    u32 val;\n\n    val = D_800D1892;\n    if (D_800CC30C[D_800D154C->unk222 * 203] < val) {\n        func_15075400(D_800D1893);\n    }\n}",
+        "score": 0.8333,
+        "reason": "structural_diffs=6",
+        "diffs": [
+          "structural: target=lui t9, HI(D_800D1892) got=lui v0, HI(D_800D1892)",
+          "structural: target=lbu t9, LO(D_800D1892)(t9) got=lbu v0, LO(D_800D1892)(v0)",
+          "structural: target=mtc1 t9, f6 got=mtc1 v0, f6",
+          "structural: target=sll t8, t8, 2 got=sll t9, t8, 2",
+          "structural: target=addu at, at, t8 got=addu at, at, t9",
+          "structural: target=bgez t9, L0 got=bgez v0, L0"
+        ],
+        "timestamp": "2026-06-03T21:08:41.114Z"
+      }
+    ]
   },
   {
     "function": "func_15123934",
