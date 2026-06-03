@@ -10921,8 +10921,8 @@
     "instructions": 34,
     "difficulty": "medium-low",
     "tags": [],
-    "attempts": 6,
-    "lastScore": 0.4852941176470588,
+    "attempts": 9,
+    "lastScore": 0.47058823529411764,
     "status": "pending",
     "history": [
       {
@@ -11143,6 +11143,27 @@
         "reason": "length_mismatch (target=34, generated=33)",
         "diffs": [],
         "timestamp": "2026-06-03T20:27:18.719Z"
+      },
+      {
+        "code": "Gfx *func_15142FBC(Gfx *arg0, s32 arg1, s32 arg2, u8 *arg3) {\n    Gfx *ret;\n    s32 temp_t0;\n    s32 temp_t8;\n    Gfx *temp_v0;\n\n    ret = arg0;\n    temp_t0 = arg1 | 0xF;\n    if ((arg1 != D_800DD218) || (arg2 != D_800DD21C)) {\n        temp_v0 = arg0;\n        temp_t8 = *arg3;\n        if (temp_t8 == 1) {\n            arg0++;\n            temp_v0->words.w0 = 0xE7000000;\n            temp_v0->words.w1 = 0;\n            *arg3 = 0;\n        }\n        temp_v0 = arg0;\n        temp_v0->words.w0 = ((u32)(temp_t0 & 0xFFFFFF)) | 0xEF000000;\n        temp_v0->words.w1 = arg2;\n        arg0++;\n        D_800DD218 = arg1;\n        D_800DD21C = arg2;\n        ret = arg0;\n    }\n    return ret;\n}",
+        "score": 0.4852941176470588,
+        "reason": "length_mismatch (target=34, generated=33)",
+        "diffs": [],
+        "timestamp": "2026-06-03T20:27:49.801Z"
+      },
+      {
+        "code": "Gfx *func_15142FBC(Gfx *arg0, s32 arg1, s32 arg2, u8 *arg3) {\n    s32 temp_t6;\n    s32 temp_t7;\n    s32 temp_t0;\n    s32 temp_t8;\n    Gfx *ret;\n\n    ret = arg0;\n    temp_t6 = D_800DD218;\n    temp_t0 = arg1 | 0xF;\n    if (arg1 != temp_t6) {\n        temp_t8 = *arg3;\n        goto block_check;\n    }\n    temp_t7 = D_800DD21C;\n    if (arg2 == temp_t7) {\n        goto block_return;\n    }\n    temp_t8 = *arg3;\nblock_check:\n    if (temp_t8 == 1) {\n        ret = arg0;\n        arg0++;\n        ret->words.w0 = 0xE7000000;\n        ret->words.w1 = 0;\n        *arg3 = 0;\n    }\n    ret = arg0;\n    ret->words.w0 = ((u32)(temp_t0 & 0xFFFFFF)) | 0xEF000000;\n    ret->words.w1 = arg2;\n    arg0++;\n    D_800DD218 = arg1;\n    D_800DD21C = arg2;\n    ret = arg0;\nblock_return:\n    return ret;\n}",
+        "score": 0.4857142857142857,
+        "reason": "length_mismatch (target=34, generated=35)",
+        "diffs": [],
+        "timestamp": "2026-06-03T20:28:05.967Z"
+      },
+      {
+        "code": "Gfx *func_15142FBC(Gfx *arg0, s32 arg1, s32 arg2, u8 *arg3) {\n    s32 temp_t6;\n    s32 temp_t7;\n    s32 temp_t0;\n    s32 temp_t8;\n    Gfx *ret;\n\n    ret = arg0;\n    temp_t6 = D_800DD218;\n    temp_t0 = arg1 | 0xF;\n    if ((arg1 != temp_t6) || (arg2 != (temp_t7 = D_800DD21C))) {\n        temp_t8 = *arg3;\n        if (temp_t8 == 1) {\n            ret = arg0;\n            arg0++;\n            ret->words.w0 = 0xE7000000;\n            ret->words.w1 = 0;\n            *arg3 = 0;\n        }\n        ret = arg0;\n        ret->words.w0 = ((u32)(temp_t0 & 0xFFFFFF)) | 0xEF000000;\n        ret->words.w1 = arg2;\n        arg0++;\n        D_800DD218 = arg1;\n        D_800DD21C = arg2;\n        ret = arg0;\n    }\n    return ret;\n}",
+        "score": 0.47058823529411764,
+        "reason": "length_mismatch (target=34, generated=32)",
+        "diffs": [],
+        "timestamp": "2026-06-03T20:28:24.979Z"
       }
     ]
   },
