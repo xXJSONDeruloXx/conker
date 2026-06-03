@@ -3,6 +3,11 @@
 #include "functions.h"
 #include "variables.h"
 
+extern f32 D_8009A108;
+extern f32 D_8009A10C;
+extern f32 D_8009A110;
+void func_15194408(struct127 *, struct127 *);
+
 void func_15188810(struct127 *arg0, s32 arg1, s32 arg2);
 void func_15188A9C(struct127 *arg0);
 
@@ -1813,7 +1818,16 @@ void func_15074F30(struct127 *arg0, struct127 *arg1, s32 arg2) {
     arg0->unk218 = 0;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_15074F48.s")
+void func_15074F48(struct127 *arg0, struct127 *arg1, s32 arg2) {
+    f32 sp1C;
+    f32 sp18;
+
+    sp1C = D_8009A108 - arg0->x_position;
+    sp18 = arg0->z_position - D_8009A10C;
+    arg1->unk76 = func_1505A630(sp1C, sp18, 0);
+    arg1->xz_velocity = sqrtf((sp1C * sp1C) + (sp18 * sp18)) * D_8009A110;
+    func_15194408(arg0, arg1);
+}
 
 void func_15074FD4(struct127 *arg0, struct127 *arg1, s32 arg2) {
     if (arg1->interaction_state == 1) {
