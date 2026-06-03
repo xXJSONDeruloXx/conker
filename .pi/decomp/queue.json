@@ -22339,7 +22339,7 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
+    "attempts": 4,
     "lastScore": 0.4524,
     "status": "pending",
     "history": [
@@ -22405,6 +22405,34 @@
           "structural: target=addiu a1, sp, 48 got=addiu a1, sp, 56"
         ],
         "timestamp": "2026-06-03T23:24:46.949Z"
+      },
+      {
+        "code": "void *func_1515D088(void *arg0) {\n    void *ret;\n    s32 sp30[3];\n    s32 temp_t7;\n    s32 temp_v0;\n\n    temp_t7 = *(s32 *)((s32)arg0 + 0x18);\n    temp_v0 = temp_t7 & 0xFF;\n    *(s8 *)&sp30[2] = temp_t7;\n    if ((temp_v0 < 0) || (temp_v0 >= 2)) {\n        return NULL;\n    }\n    sp30[0] = (s32)arg0;\n    *(f32 *)&sp30[1] = 0.0f;\n    ret = func_151491F4(0x12C, -1, 0x11, 0, 0xD, 0xC, 0xFF, 1);\n    if (ret != NULL) {\n        memcpy((s8 *)ret + 0x28, sp30, 0xC);\n    }\n    return ret;\n}",
+        "score": 0.4524,
+        "reason": "structural_diffs=23",
+        "diffs": [
+          "structural: target=addiu sp, sp, -64 got=addiu sp, sp, -72",
+          "structural: target=sw a0, 64(sp) got=sw a0, 72(sp)",
+          "structural: target=lw t6, 64(sp) got=lw t6, 72(sp)",
+          "structural: target=lw t7, 24(t6) got=lw v0, 24(t6)",
+          "structural: target=andi v0, t7, 255 got=andi v1, v0, 255",
+          "structural: target=bltz v0, L0 got=bltz v1, L0",
+          "structural: target=sb t7, 56(sp) got=sb v0, 64(sp)",
+          "structural: target=slti at, v0, 2 got=slti at, v1, 2",
+          "structural: target=lw t8, 64(sp) got=lw t7, 72(sp)",
+          "structural: target=li t9, 13 got=li t8, 13",
+          "structural: target=li t0, 12 got=li t9, 12",
+          "structural: target=li t1, 255 got=li t0, 255",
+          "structural: target=li t2, 1 got=li t1, 1",
+          "structural: target=sw t8, 48(sp) got=sw t7, 56(sp)",
+          "structural: target=sw t2, 28(sp) got=sw t1, 28(sp)",
+          "structural: target=sw t1, 24(sp) got=sw t0, 24(sp)",
+          "structural: target=sw t0, 20(sp) got=sw t9, 20(sp)",
+          "structural: target=sw t9, 16(sp) got=sw t8, 16(sp)",
+          "structural: target=swc1 f4, 52(sp) got=swc1 f4, 60(sp)",
+          "structural: target=addiu a1, sp, 48 got=addiu a1, sp, 56"
+        ],
+        "timestamp": "2026-06-03T23:25:11.381Z"
       }
     ]
   },
@@ -22998,9 +23026,18 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 0.29577464788732394,
+    "status": "pending",
+    "history": [
+      {
+        "code": "u32 func_1505E7CC(s32 arg0, struct127 *arg1) {\n    s32 idx;\n    s32 *ptr;\n    u32 count;\n    u8 *base;\n    u32 i;\n\n    idx = arg1->id;\n    if (idx == 0xFF) {\n        return 0;\n    }\n    ptr = (s32 *)D_800D1588[idx];\n    if (ptr == NULL) {\n        return 0;\n    }\n    count = ptr[-1];\n    if (count == 0) {\n        return 0;\n    }\n    count = count / 0x18;\n    base = (u8 *)ptr[-2];\n    if (base == NULL) {\n        return 0;\n    }\n    for (i = 0; i < count; i++) {\n        if (arg0 == base[0]) {\n            return i;\n        }\n        base += 0x18;\n    }\n    return 0;\n}",
+        "score": 0.29577464788732394,
+        "reason": "length_mismatch (target=42, generated=71)",
+        "diffs": [],
+        "timestamp": "2026-06-03T23:27:21.102Z"
+      }
+    ]
   },
   {
     "function": "func_16002D2C",

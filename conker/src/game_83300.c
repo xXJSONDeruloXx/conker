@@ -1000,7 +1000,44 @@ void func_1505E060(u8 *arg0) {
 }
 #pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_1505E0C4.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_1505E650.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_1505E7CC.s")
+u32 func_1505E7CC(s32 arg0, struct127 *arg1) {
+    s32 idx;
+    s32 *ptr;
+    u32 count;
+    u8 *base;
+    u8 *entry;
+    u32 i;
+
+    idx = arg1->id;
+    if (idx == 0xFF) {
+        return 0;
+    }
+    ptr = (s32 *)D_800D1588[idx];
+    if (ptr == NULL) {
+        return 0;
+    }
+    count = ptr[-1];
+    if (count == 0) {
+        return 0;
+    }
+    count = count / 0x18;
+    base = (u8 *)ptr[-2];
+    if (base == NULL) {
+        return 0;
+    }
+    if (count != 0) {
+        i = 0;
+        entry = base;
+        do {
+            if (arg0 == entry[0]) {
+                return i;
+            }
+            i++;
+            entry += 0x18;
+        } while (i < count);
+    }
+    return 0;
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_1505E874.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_1505ED34.s")
 
