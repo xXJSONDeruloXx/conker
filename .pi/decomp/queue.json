@@ -5471,8 +5471,8 @@
     "instructions": 23,
     "difficulty": "low",
     "tags": [],
-    "attempts": 21,
-    "lastScore": 0.42592592592592593,
+    "attempts": 24,
+    "lastScore": 0.4782608695652174,
     "status": "pending",
     "history": [
       {
@@ -5823,6 +5823,27 @@
         "reason": "length_mismatch (target=23, generated=27)",
         "diffs": [],
         "timestamp": "2026-06-03T12:23:22.116Z"
+      },
+      {
+        "code": "void func_150747E4(void) {\n    s32 val;\n    s32 idx;\n    struct127 *entry;\n\n    val = D_800D154C->unk65;\n    if (val != 0) {\n        idx = (u32)(val - 1);\n        entry = &D_800CC2D0[idx];\n        entry->unk232 = (u8)D_800D1580;\n        entry->unk218 = 0;\n    }\n}",
+        "score": 0.4782608695652174,
+        "reason": "length_mismatch (target=23, generated=22)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:23:35.511Z"
+      },
+      {
+        "code": "void func_150747E4(void) {\n    s32 val;\n    s32 idx;\n    struct127 *entry;\n\n    val = D_800D154C->unk65;\n    if (val != 0) {\n        idx = val + -1;\n        entry = &D_800CC2D0[idx];\n        entry->unk232 = (u8)D_800D1580;\n        entry->unk218 = 0;\n    }\n}",
+        "score": 0.4782608695652174,
+        "reason": "length_mismatch (target=23, generated=22)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:23:43.241Z"
+      },
+      {
+        "code": "void func_150747E4(void) {\n    u8 val;\n    struct127 *entry;\n\n    val = D_800D154C->unk65;\n    if (val != 0) {\n        entry = &D_800CC2D0[val - 1];\n        entry->unk232 = (u8)D_800D1580;\n        entry->unk218 = 0;\n    }\n}",
+        "score": 0.4782608695652174,
+        "reason": "length_mismatch (target=23, generated=22)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:23:51.464Z"
       }
     ]
   },
