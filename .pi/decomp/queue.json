@@ -17308,9 +17308,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1,
+    "status": "matched"
   },
   {
     "function": "func_15145128",
@@ -18839,9 +18839,20 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 0.9722,
+    "status": "pending",
+    "history": [
+      {
+        "code": "struct224 *func_151D2F00(void *arg0, s32 arg1, u8 arg2, s32 arg3) {\n    struct224 *ret;\n\n    ret = func_15167A68(0x3E, arg3, arg1 + 0x30, 1, arg2, 1);\n    if (ret == NULL) {\n        return NULL;\n    }\n    memcpy(&ret->unk10, arg0, 0x10);\n    ret->unk20 = 0;\n    ret->unk24 = 0;\n    ret->unk28 = 0;\n    *(u8 *)((s32)ret + 0x18) &= 0xFD;\n    return ret;\n}",
+        "score": 0.9722,
+        "reason": "structural_diffs=1",
+        "diffs": [
+          "structural: target=andi t9, t8, 65533 got=andi t9, t8, 253"
+        ],
+        "timestamp": "2026-06-03T21:12:15.340Z"
+      }
+    ]
   },
   {
     "function": "func_1001AFEC",

@@ -666,5 +666,14 @@
     "example_functions": [
       "func_150770E4"
     ]
+  },
+  {
+    "id": "varargs-copy-loop",
+    "description": "For IDO varargs wrappers, use libc/stdarg.h va_list/va_start/va_arg instead of hand-written stack pointer math; IDO emits the repeated align-and-load sequence and may unroll fixed-size loops.",
+    "trigger": "Target stores a0-a3 to stack, initializes a pointer to the first variadic argument slot, repeatedly aligns with +3/&-4 or +7/&-4, copies words into a local array, then calls another function.",
+    "solution": "Include libc/stdarg.h and implement a normal variadic function using va_list, va_start, and a fixed loop of va_arg(ap, s32) into a local array.",
+    "example_functions": [
+      "func_15042E3C"
+    ]
   }
 ]
