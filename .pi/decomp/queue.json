@@ -5263,7 +5263,7 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 9,
+    "attempts": 12,
     "lastScore": 0.18367346938775508,
     "status": "pending",
     "history": [
@@ -5364,6 +5364,27 @@
         "reason": "length_mismatch (target=18, generated=49)",
         "diffs": [],
         "timestamp": "2026-06-03T09:00:45.157Z"
+      },
+      {
+        "code": "void func_150104F0(void) {\n    s32 i;\n    void *temp_v0;\n\n    for (i = 1; i >= 0; i--) {\n        D_800D9950[i] = 0;\n    }\n    D_800D9950[2] = 0;\n    temp_v0 = func_151149AC(0xF6);\n    *(f32 *)((s32)temp_v0 + 0x7C) = 2.0f;\n    D_80088980 = 0;\n}\n",
+        "score": 0.16666666666666669,
+        "reason": "length_mismatch (target=18, generated=54)",
+        "diffs": [],
+        "timestamp": "2026-06-03T09:01:56.972Z"
+      },
+      {
+        "code": "void *func_150104F0(void) {\n    void *temp_v0;\n    u8 *temp_v1;\n\n    temp_v1 = D_800D9950;\n    temp_v0 = NULL;\n    temp_v1[1] = (s32)temp_v0;\n    temp_v1[0] = (s32)temp_v0;\n    temp_v1[2] = 0;\n    temp_v0 = func_151149AC(0xF6);\n    *(f32 *)((s32)temp_v0 + 0x7C) = 2.0f;\n    D_80088980 = 0;\n    return temp_v0;\n}\n",
+        "score": 0.18367346938775508,
+        "reason": "length_mismatch (target=18, generated=49)",
+        "diffs": [],
+        "timestamp": "2026-06-03T09:02:38.018Z"
+      },
+      {
+        "code": "void func_150104F0(void) {\n    s32 temp_v0;\n    u8 *temp_v1;\n    void *ret;\n\n    temp_v1 = D_800D9950;\n    temp_v0 = temp_v1 - D_800D9950;\n    temp_v1[1] = temp_v0;\n    temp_v1[0] = temp_v0;\n    temp_v1[2] = 0;\n    ret = func_151149AC(0xF6);\n    *(f32 *)((s32)ret + 0x7C) = 2.0f;\n    D_80088980 = 0;\n}\n",
+        "score": 0.18367346938775508,
+        "reason": "length_mismatch (target=18, generated=49)",
+        "diffs": [],
+        "timestamp": "2026-06-03T09:03:00.875Z"
       }
     ]
   },
