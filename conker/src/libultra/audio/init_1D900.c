@@ -34,7 +34,16 @@ s32 func_1001D9B0(s16 arg0) {
 }
 
 // this is not right.
-#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/init_1D900/func_1001DA28.s")
+s32 func_1001DA28(s16 arg0) {
+    N_ALMainBus *sp4;
+
+    sp4 = n_syn->mainBus;
+    if (sp4->filter.handler == func_1001E530) {
+        return (s32) n_syn->auxBus[arg0].fx_array[AL_MAX_AUX_BUS_SOURCES - 1];
+    } else {
+        return 0;
+    }
+}
 // s32 func_1001DA28(s16 arg0) {
 //     N_ALMainBus *sp4;
 //
