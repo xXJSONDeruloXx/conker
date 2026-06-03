@@ -18340,9 +18340,32 @@
     "instructions": 52,
     "difficulty": "medium",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.49038461538461536,
+    "status": "pending",
+    "history": [
+      {
+        "code": "s32 *func_150C3160(s32 *arg0, void *arg1) {\n    s32 temp_v0;\n    s32 temp_v1;\n    s32 temp_a0;\n    f32 temp_f0;\n\n    temp_v0 = *(s32 *)((s32)arg1 + 0x2E8);\n    if (temp_v0 == 0) {\n        temp_f0 = 1.0f;\n    } else {\n        temp_f0 = (f32)*(s32 *)((s32)arg1 + 0x2E4) / (f32)temp_v0;\n    }\n    temp_f0 = 1.0f - temp_f0;\n    temp_a0 = 2 - *(s32 *)((s32)arg1 + 0x2EC);\n    temp_v1 = (s32)((500.0f * temp_f0) + 2.0f);\n    *(s32 *)((s32)arg1 + 0x2EC) = temp_v1 / 3;\n    arg1 = arg0;\n    while (temp_a0 < 0) {\n        temp_a0 += 0x40;\n    }\n    ((s32 *)arg1)[0] = 0xF2000000 | ((temp_v1 & 0xFFF) << 12) | (temp_a0 & 0xFFF);\n    arg0 += 2;\n    ((s32 *)arg1)[1] = 0x041FE03E;\n    return arg0;\n}",
+        "score": 0.49038461538461536,
+        "reason": "length_mismatch (target=52, generated=51)",
+        "diffs": [],
+        "timestamp": "2026-06-03T23:53:11.576Z"
+      },
+      {
+        "code": "s32 *func_150C3160(s32 *arg0, void *arg1) {\n    s32 temp_a0;\n    s32 temp_v1;\n    s32 temp_v0;\n    f32 temp_f0;\n\n    temp_v0 = *(s32 *)((s32)arg1 + 0x2E8);\n    if (temp_v0 != 0) {\n        temp_f0 = (f32)*(s32 *)((s32)arg1 + 0x2E4) / (f32)temp_v0;\n    } else {\n        temp_f0 = 1.0f;\n    }\n    temp_f0 = 1.0f - temp_f0;\n    temp_a0 = 2 - *(s32 *)((s32)arg1 + 0x2EC);\n    temp_v1 = (s32)((500.0f * temp_f0) + 2.0f);\n    *(s32 *)((s32)arg1 + 0x2EC) = temp_v1 / 3;\n    arg1 = arg0;\n    while (temp_a0 < 0) {\n        temp_a0 += 0x40;\n    }\n    ((s32 *)arg1)[0] = 0xF2000000 | ((temp_v1 & 0xFFF) << 12) | (temp_a0 & 0xFFF);\n    ((s32 *)arg1)[1] = 0x041FE03E;\n    return arg0 + 2;\n}",
+        "score": 0.4807692307692308,
+        "reason": "length_mismatch (target=52, generated=50)",
+        "diffs": [],
+        "timestamp": "2026-06-03T23:53:46.182Z"
+      },
+      {
+        "code": "s32 *func_150C3160(s32 *arg0, void *arg1) {\n    s32 temp_v0;\n    s32 temp_v1;\n    s32 temp_a0;\n    f32 temp_f0;\n\n    temp_v0 = *(s32 *)((s32)arg1 + 0x2E8);\n    if (temp_v0 != 0) {\n        temp_f0 = (f32)*(s32 *)((s32)arg1 + 0x2E4) / (f32)temp_v0;\n    } else {\n        temp_f0 = 1.0f;\n    }\n    temp_f0 = 1.0f - temp_f0;\n    temp_v1 = (s32)((500.0f * temp_f0) + 2.0f);\n    temp_a0 = 2 - *(s32 *)((s32)arg1 + 0x2EC);\n    *(s32 *)((s32)arg1 + 0x2EC) = temp_v1 / 3;\n    arg1 = arg0;\n    while (temp_a0 < 0) {\n        temp_a0 += 0x40;\n    }\n    ((s32 *)arg1)[0] = 0xF2000000 | ((temp_v1 & 0xFFF) << 12) | (temp_a0 & 0xFFF);\n    arg0 += 2;\n    ((s32 *)arg1)[1] = 0x041FE03E;\n    return arg0;\n}",
+        "score": 0.49038461538461536,
+        "reason": "length_mismatch (target=52, generated=51)",
+        "diffs": [],
+        "timestamp": "2026-06-03T23:54:30.479Z"
+      }
+    ]
   },
   {
     "function": "func_15015F40",
@@ -23873,9 +23896,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 6,
-    "lastScore": 0.2353,
-    "status": "pending",
+    "attempts": 7,
+    "lastScore": 0.4636363636363636,
+    "status": "skipped",
     "history": [
       {
         "code": "void func_1505A184(u16 arg0, f32 arg1, f32 arg2, f32 *arg3, f32 *arg4, f32 *arg5) {\n    f32 temp_f20;\n    f32 temp_f12;\n    f32 temp_f0;\n\n    temp_f20 = arg1 * 0.5f;\n    temp_f12 = arg2 * D_800994B8;\n    *arg5 = func_150AD78C(temp_f12) * -temp_f20;\n    temp_f20 = func_150AD780(temp_f12) * temp_f20;\n    temp_f12 = arg0 * D_800994BC;\n    temp_f0 = func_150AD780(temp_f12);\n    *arg3 = temp_f0 * temp_f20;\n    *arg4 = -func_150AD78C(temp_f12) * temp_f20;\n}",
@@ -23981,6 +24004,13 @@
           "structural: target=mtc1 at, f4 got=cvt.s.w f4, f18"
         ],
         "timestamp": "2026-06-03T23:50:40.321Z"
+      },
+      {
+        "code": "void func_1505A184(u16 arg0, f32 arg1, f32 arg2, f32 *arg3, f32 *arg4, f32 *arg5) {\n    f32 temp_f0;\n\n    arg1 *= 0.5f;\n    *(volatile f32 *)&arg2 = arg2 * D_800994B8;\n    *arg5 = func_150AD78C(*(volatile f32 *)&arg2) * -arg1;\n    arg1 = func_150AD780(*(volatile f32 *)&arg2) * arg1;\n    *(volatile f32 *)&arg2 = arg0 * D_800994BC;\n    temp_f0 = func_150AD780(*(volatile f32 *)&arg2);\n    *arg3 = temp_f0 * arg1;\n    *arg4 = -func_150AD78C(*(volatile f32 *)&arg2) * arg1;\n}",
+        "score": 0.4636363636363636,
+        "reason": "length_mismatch (target=51, generated=55)",
+        "diffs": [],
+        "timestamp": "2026-06-03T23:51:29.751Z"
       }
     ]
   },
