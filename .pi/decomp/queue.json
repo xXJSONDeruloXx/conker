@@ -18190,9 +18190,9 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 3,
-    "lastScore": 0.45,
-    "status": "pending",
+    "attempts": 5,
+    "lastScore": 0.4375,
+    "status": "skipped",
     "history": [
       {
         "code": "s32 func_1000FEF0(u16 arg0, struct127 *arg1, s32 arg2) {\n    s32 i;\n    struct15 *tmp;\n\n    if (arg0 != 0) {\n        for (i = 0; i < D_80042760; i++) {\n            tmp = &D_80041FE0[i];\n            if ((arg0 == tmp->unk24) && (arg1 == (struct127 *)tmp->unk18) && (arg2 == tmp->unk1C) && ((tmp->unk10 & 0x80) == 0)) {\n                return i;\n            }\n        }\n    }\n    return -1;\n}",
@@ -18214,6 +18214,20 @@
         "reason": "length_mismatch (target=40, generated=36)",
         "diffs": [],
         "timestamp": "2026-06-03T22:31:47.252Z"
+      },
+      {
+        "code": "func_1000FEF0(arg0, arg1, arg2)\nu16 arg0;\nstruct127 *arg1;\ns32 arg2;\n{\n    s32 i;\n    struct15 *tmp;\n\n    if (arg0 != 0) {\n        for (i = 0; i < D_80042760; i++) {\n            tmp = &D_80041FE0[i];\n            if ((arg0 == tmp->unk24) && (arg1 == (struct127 *)tmp->unk18) && (arg2 == tmp->unk1C) && ((tmp->unk10 & 0x80) == 0)) {\n                return i;\n            }\n        }\n    }\n    return -1;\n}",
+        "score": 0.425,
+        "reason": "length_mismatch (target=40, generated=34)",
+        "diffs": [],
+        "timestamp": "2026-06-03T22:32:27.078Z"
+      },
+      {
+        "code": "s32 func_1000FEF0(s32 arg0, struct127 *arg1, s32 arg2) {\n    s32 count;\n    s32 i;\n    struct15 *ptr;\n    s32 temp_a1;\n    struct127 *temp_a3;\n    s32 temp_s0;\n\n    arg0 = (u16)arg0;\n    temp_s0 = arg2;\n    temp_a3 = arg1;\n    if (arg0 == 0) {\n        return -1;\n    }\n    count = D_80042760;\n    i = 0;\n    temp_a1 = arg0;\n    if (count <= 0) {\n        return -1;\n    }\n    ptr = D_80041FE0;\n    do {\n        if ((temp_a1 == ptr->unk24) && (temp_a3 == (struct127 *)ptr->unk18) && (temp_s0 == ptr->unk1C) && ((ptr->unk10 & 0x80) == 0)) {\n            return i;\n        }\n        i++;\n        ptr++;\n    } while (i < count);\n    return -1;\n}",
+        "score": 0.4375,
+        "reason": "length_mismatch (target=40, generated=35)",
+        "diffs": [],
+        "timestamp": "2026-06-03T22:32:56.350Z"
       }
     ]
   },
@@ -19942,7 +19956,7 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 8,
+    "attempts": 9,
     "lastScore": 0.8974,
     "status": "pending",
     "history": [
@@ -20052,6 +20066,18 @@
           "structural: target=negu t0, t9 got=negu t0, a0"
         ],
         "timestamp": "2026-06-03T22:17:56.119Z"
+      },
+      {
+        "code": "void *func_15134DAC(void *arg0, s32 arg1) {\n    void *temp_v0;\n    void *sp24;\n    f32 zero;\n    s32 temp_t9;\n\n    temp_v0 = func_15167A68(0x29, 0, arg1 + 0x80, 1, 0xFF, 1);\n    if (temp_v0 == NULL) {\n        return NULL;\n    }\n    sp24 = temp_v0;\n    memcpy((void *)((s32)temp_v0 + 0x18), arg0, 0x3C);\n    temp_t9 = *(s16 *)((s32)arg0 + 0x28);\n    zero = 0.0f;\n    *(s32 *)((s32)sp24 + 0x10) = 1;\n    *(s16 *)((s32)sp24 + 0x54) = -temp_t9;\n    *(s32 *)((s32)sp24 + 0x14) = 0;\n    *(f32 *)((s32)sp24 + 0x70) = zero;\n    *(f32 *)((s32)sp24 + 0x74) = zero;\n    *(f32 *)((s32)sp24 + 0x78) = zero;\n    return sp24;\n}",
+        "score": 0.8974,
+        "reason": "structural_diffs=4",
+        "diffs": [
+          "structural: target=lh t9, 40(t8) got=lh a0, 40(t8)",
+          "structural: target=li t1, 1 got=li t9, 1",
+          "structural: target=sw t1, 16(v0) got=sw t9, 16(v0)",
+          "structural: target=negu t0, t9 got=negu t0, a0"
+        ],
+        "timestamp": "2026-06-03T22:34:17.247Z"
       }
     ]
   },
