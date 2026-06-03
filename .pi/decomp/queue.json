@@ -1457,7 +1457,7 @@
     "instructions": 20,
     "difficulty": "low",
     "tags": [],
-    "attempts": 0,
+    "attempts": 3,
     "lastScore": 0.9,
     "status": "pending",
     "history": [
@@ -1563,6 +1563,33 @@
           "structural: target=or t8, t7, t6 got=or t8, t7, v1"
         ],
         "timestamp": "2026-06-02T17:35:34.255Z"
+      },
+      {
+        "code": "void func_15079F6C(void) {\n    u16 tmp0;\n    u16 tmp1;\n\n    tmp0 = (*(volatile u8 *)&D_800D1890) << 8;\n    tmp1 = *(volatile u8 *)&D_800D1891;\n    D_800D154C->unk224 = tmp0 | tmp1;\n    D_800D154C->unk22B = *(volatile u8 *)&D_800D1892;\n    D_800D154C->unk226 = *(volatile u8 *)&D_800D1893;\n}\n",
+        "score": 0.4,
+        "reason": "length_mismatch (target=20, generated=25)",
+        "diffs": [],
+        "timestamp": "2026-06-03T09:38:24.508Z"
+      },
+      {
+        "code": "void func_15079F6C(void) {\n    u16 tmp0;\n    u8 tmp1;\n\n    tmp0 = D_800D1890 << 8;\n    tmp1 = D_800D1891;\n    D_800D154C->unk224 = tmp0 | tmp1;\n    D_800D154C->unk22B = D_800D1892;\n    D_800D154C->unk226 = D_800D1893;\n}\n",
+        "score": 0.9,
+        "reason": "structural_diffs=2",
+        "diffs": [
+          "structural: target=lbu t6, LO(D_800D1891)(v1) got=lbu v1, LO(D_800D1891)(v1)",
+          "structural: target=or t8, t7, t6 got=or t8, t7, v1"
+        ],
+        "timestamp": "2026-06-03T09:38:43.411Z"
+      },
+      {
+        "code": "void func_15079F6C(void) {\n    register u8 *ptr;\n    u16 tmp0;\n    u16 tmp1;\n\n    tmp0 = D_800D1890 << 8;\n    ptr = &D_800D1891;\n    tmp1 = *ptr;\n    D_800D154C->unk224 = tmp0 | tmp1;\n    D_800D154C->unk22B = D_800D1892;\n    D_800D154C->unk226 = D_800D1893;\n}\n",
+        "score": 0.9,
+        "reason": "structural_diffs=2",
+        "diffs": [
+          "structural: target=lbu t6, LO(D_800D1891)(v1) got=lbu v1, LO(D_800D1891)(v1)",
+          "structural: target=or t8, t7, t6 got=or t8, t7, v1"
+        ],
+        "timestamp": "2026-06-03T09:39:04.340Z"
       }
     ]
   },
@@ -15809,9 +15836,9 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 5,
-    "lastScore": 0.44565217391304346,
-    "status": "pending",
+    "attempts": 6,
+    "lastScore": 1,
+    "status": "matched",
     "history": [
       {
         "code": "s32 func_16002D2C(s16 *arg0, u16 *arg1) {\n    s16 exp;\n    s16 result;\n\n    exp = (s16)((*arg1 & 0x7FF0) >> 4);\n    if (exp == 0x7FF) {\n        *arg0 = 0;\n        result = 2;\n        if ((arg1[0] & 0xF) != 0) {\n            return result;\n        }\n        if (arg1[1] != 0) {\n            return result;\n        }\n        if (arg1[2] != 0) {\n            return result;\n        }\n        if (arg1[3] == 0) {\n            result = 1;\n        }\n        return result;\n    }\n    if (exp > 0) {\n        *arg1 = (*arg1 & 0x800F) | 0x3FF0;\n        *arg0 = exp - 0x3FE;\n        return -1;\n    }\n    if (exp < 0) {\n        return 2;\n    }\n    *arg0 = 0;\n    return 0;\n}",
