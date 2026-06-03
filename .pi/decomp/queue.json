@@ -18696,9 +18696,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 2,
-    "lastScore": 0.4852941176470588,
-    "status": "pending",
+    "attempts": 3,
+    "lastScore": 1,
+    "status": "matched",
     "history": [
       {
         "code": "void *func_15167D84(void *arg0, s32 arg1, s32 arg2, s8 arg3, u8 arg4, s32 arg5) {\n    void *temp_v0;\n    s32 temp_a0;\n\n    if (arg1 == 0) {\n        temp_a0 = 5;\n    } else {\n        temp_a0 = 0x42;\n    }\n    temp_v0 = func_15167A68(temp_a0, arg5, arg2 + 0x50, 0, arg4, 1);\n    if (temp_v0 == NULL) {\n        return NULL;\n    }\n    bcopy(arg0, (void *)((s32)temp_v0 + 0x10), 0x38);\n    *(s8 *)((s32)temp_v0 + 0x48) = arg3;\n    return temp_v0;\n}",

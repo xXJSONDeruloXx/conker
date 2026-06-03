@@ -224,7 +224,22 @@ s16 func_15143044(u8 arg0, s32 arg1) {
 // }
 
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_151436B4.s")
+void func_151436B4(f32 arg0, f32 arg1, f32 arg2, f32 *arg3) {
+    f32 temp_f18;
+    f32 temp_f6;
+    f32 temp_f4;
+    f32 temp_f0;
+    f32 temp_f2;
+
+    temp_f18 = cosf(arg0);
+    temp_f6 = sinf(arg0);
+    temp_f4 = cosf(arg1);
+    temp_f0 = sinf(arg1);
+    temp_f2 = arg2 * temp_f4;
+    arg3[0] = temp_f2 * temp_f6;
+    arg3[1] = -arg2 * temp_f0;
+    arg3[2] = temp_f2 * temp_f18;
+}
 void func_1514373C(f32 angle, f32 radius, f32 *outX, f32 *outY) {
     f32 c = cosf(angle);
     f32 s = sinf(angle);

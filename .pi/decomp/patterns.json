@@ -630,5 +630,14 @@
     "example_functions": [
       "func_1505DFDC"
     ]
+  },
+  {
+    "id": "return-null-temp-preserve-v0",
+    "description": "Return the call result temp directly in a NULL early return to avoid emitting an explicit move zero.",
+    "trigger": "Target null-return path branches to epilogue with `lw ra` in the delay slot, while `return NULL` emits `move v0, zero`.",
+    "solution": "Use `if (temp_v0 == NULL) return temp_v0;` instead of `return NULL;` so IDO preserves the already-zero call result register.",
+    "example_functions": [
+      "func_15167D84"
+    ]
   }
 ]
