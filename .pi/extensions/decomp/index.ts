@@ -1829,62 +1829,61 @@ export default function (pi: ExtensionAPI) {
 	// ═══════════════════════════════════════════════════════════════
 	// COMMAND: /decomp-loop
 	// ═══════════════════════════════════════════════════════════════
-	pi.registerCommand("decomp-loop", {
-		description: "Manage the autonomous decomp loop [start|stop|status|reset]",
-		handler: async (args, ctx) => {
-			const sub = (args || "").trim().toLowerCase();
+	pi.registerCommand("decomp-start", {
+		description: "Start the autonomous decomp loop",
+		handler: async (_args, ctx) => {
+			await ctx.waitForIdle();
+			loopState.enabled = true;
+			loopState.chunk++;
+			loopState.status = "running";
+			loopState.consecutiveNoProgress = 0;
+			saveLoopState(ctx.cwd);
+			ensureTimer();
+			refreshWidget();
+			ctx.ui.notify(`Decomp loop started at chunk ${loopState.chunk}`, "info");
+			pi.sendUserMessage(buildChunkPrompt(loopState.chunk));
+		},
+	});
 
-			if (sub === "start") {
-				await ctx.waitForIdle();
-				loopState.enabled = true;
-				loopState.chunk++;
-				loopState.status = "running";
-				loopState.consecutiveNoProgress = 0;
-				saveLoopState(ctx.cwd);
-				ensureTimer();
-				refreshWidget();
-				ctx.ui.notify(`Decomp loop started at chunk ${loopState.chunk}`, "info");
-				pi.sendUserMessage(buildChunkPrompt(loopState.chunk));
-				return;
-			}
+	pi.registerCommand("decomp-stop", {
+		description: "Stop the autonomous decomp loop after current chunk",
+		handler: async (_args, ctx) => {
+			loopState.enabled = false;
+			loopState.status = "stopped";
+			saveLoopState(ctx.cwd);
+			refreshWidget();
+			ctx.ui.notify("Decomp loop stopped", "info");
+		},
+	});
 
-			if (sub === "stop") {
-				loopState.enabled = false;
-				loopState.status = "stopped";
-				saveLoopState(ctx.cwd);
-				refreshWidget();
-				ctx.ui.notify("Decomp loop stopped", "info");
-				return;
-			}
+	pi.registerCommand("decomp-status", {
+		description: "Show decomp loop status",
+		handler: async (_args, ctx) => {
+			const msg = [
+				`Loop: ${loopState.enabled ? "ON" : "OFF"}`,
+				`Chunk: ${loopState.chunk}`,
+				`Status: ${loopState.status}`,
+				`No-progress streak: ${loopState.consecutiveNoProgress}`,
+				`Last: ${loopState.lastChunkSummary || "(none)"}`,
+			].join(" | ");
+			ctx.ui.notify(msg, "info");
+		},
+	});
 
-			if (sub === "status" || !sub) {
-				const msg = [
-					`Loop: ${loopState.enabled ? "ON" : "OFF"}`,
-					`Chunk: ${loopState.chunk}`,
-					`Status: ${loopState.status}`,
-					`No-progress streak: ${loopState.consecutiveNoProgress}`,
-					`Last: ${loopState.lastChunkSummary || "(none)"}`,
-				].join(" | ");
-				ctx.ui.notify(msg, "info");
-				return;
-			}
-
-			if (sub === "reset") {
-				loopState = {
-					enabled: false,
-					chunk: 0,
-					status: "idle",
-					lastChunkSummary: "",
-					consecutiveNoProgress: 0,
-					updatedAt: new Date().toISOString(),
-				};
-				saveLoopState(ctx.cwd);
-				refreshWidget();
-				ctx.ui.notify("Decomp loop state reset", "info");
-				return;
-			}
-
-			ctx.ui.notify("Usage: /decomp-loop [start|stop|status|reset]", "warning");
+	pi.registerCommand("decomp-reset", {
+		description: "Reset decomp loop state",
+		handler: async (_args, ctx) => {
+			loopState = {
+				enabled: false,
+				chunk: 0,
+				status: "idle",
+				lastChunkSummary: "",
+				consecutiveNoProgress: 0,
+				updatedAt: new Date().toISOString(),
+			};
+			saveLoopState(ctx.cwd);
+			refreshWidget();
+			ctx.ui.notify("Decomp loop state reset", "info");
 		},
 	});
 }
