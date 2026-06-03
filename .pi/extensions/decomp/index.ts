@@ -488,7 +488,7 @@ export default function (pi: ExtensionAPI) {
 			function: Type.Optional(Type.String({ description: "Function name for skip action" })),
 		}),
 
-		async execute(_toolCallId, params, _signal, _onUpdate, ctx) {
+		async execute(_toolCallId, params, signal, _onUpdate, ctx) {
 			const fs = require("node:fs");
 			const path = require("node:path");
 
