@@ -1653,8 +1653,8 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 18,
-    "lastScore": 0.4285714285714286,
+    "attempts": 21,
+    "lastScore": 0.75,
     "status": "pending",
     "history": [
       {
@@ -1806,6 +1806,31 @@
         "reason": "length_mismatch (target=12, generated=14)",
         "diffs": [],
         "timestamp": "2026-06-03T04:59:06.600Z"
+      },
+      {
+        "code": "void func_15169040(s32 arg0, u32 arg1) {\n    func_15169070(0, 0x68, arg0, (arg1 << 24) >> 24);\n}",
+        "score": 0.4285714285714286,
+        "reason": "length_mismatch (target=12, generated=14)",
+        "diffs": [],
+        "timestamp": "2026-06-03T04:59:27.733Z"
+      },
+      {
+        "code": "void func_15169040(s32 arg0, s32 arg1, ...) {\n    func_15169070(0, 0x68, arg0, arg1 & 0xFF);\n}",
+        "score": 0.3529411764705882,
+        "reason": "length_mismatch (target=12, generated=17)",
+        "diffs": [],
+        "timestamp": "2026-06-03T04:59:56.728Z"
+      },
+      {
+        "code": "void func_15169040(s32 arg0, s32 arg1) {\n    u8 temp_a3 = arg1;\n\n    func_15169070(0, 0x68, arg0, temp_a3);\n}",
+        "score": 0.75,
+        "reason": "structural_diffs=3",
+        "diffs": [
+          "structural: target=andi a3, a1, 255 got=move a0, zero",
+          "structural: target=move a0, zero got=li a1, 104",
+          "structural: target=li a1, 104 got=lbu a3, 31(sp)"
+        ],
+        "timestamp": "2026-06-03T05:00:11.845Z"
       }
     ]
   },
