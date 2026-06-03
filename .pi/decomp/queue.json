@@ -20292,8 +20292,8 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 6,
-    "lastScore": 0.9268,
+    "attempts": 8,
+    "lastScore": 0.878,
     "status": "pending",
     "history": [
       {
@@ -20357,6 +20357,32 @@
           "structural: target=addiu s0, s0, LO(D_800419A8) got=addiu s3, s3, LO(D_800417B0)"
         ],
         "timestamp": "2026-06-03T23:03:33.081Z"
+      },
+      {
+        "code": "void func_1000DEC4(void) {\n    struct137 *ptr;\n    struct151 **table;\n    struct137 *end;\n    s32 neg;\n\n    ptr = D_800419A8;\n    table = D_800417B0;\n    end = (struct137 *)D_80041E58;\n    neg = -1;\n    do {\n        if (neg == ptr->unk0) {\n            if (neg != ptr->unk4) {\n                ptr->unk4 = neg;\n            }\n        } else {\n            if (func_1000853C(ptr->unk0) == 0) {\n                table[ptr->unk0] = 0;\n                ptr->unk0 = neg;\n                ptr->unk4 = neg;\n            }\n        }\n        ptr++;\n        *(s32 *)((s32)ptr - 4) = 0;\n    } while (ptr != end);\n}",
+        "score": 0.878,
+        "reason": "structural_diffs=5",
+        "diffs": [
+          "structural: target=lui s3, HI(D_800417B0) got=lui s2, HI(D_80041E58)",
+          "structural: target=lui s2, HI(D_80041E58) got=lui s3, HI(D_800417B0)",
+          "structural: target=addiu s2, s2, LO(D_80041E58) got=addiu s0, s0, LO(D_800419A8)",
+          "structural: target=addiu s3, s3, LO(D_800417B0) got=addiu s2, s2, LO(D_80041E58)",
+          "structural: target=addiu s0, s0, LO(D_800419A8) got=addiu s3, s3, LO(D_800417B0)"
+        ],
+        "timestamp": "2026-06-03T23:03:56.400Z"
+      },
+      {
+        "code": "void func_1000DEC4(void) {\n    struct137 *ptr;\n    struct137 *end;\n    struct151 **table;\n    s32 neg;\n\n    ptr = D_800419A8;\n    table = D_800417B0;\n    end = (struct137 *)D_80041E58;\n    neg = -1;\n    do {\n        if (neg == ptr->unk0) {\n            if (neg != ptr->unk4) {\n                ptr->unk4 = neg;\n            }\n        } else {\n            if (func_1000853C(ptr->unk0) == 0) {\n                table[ptr->unk0] = 0;\n                ptr->unk0 = neg;\n                ptr->unk4 = neg;\n            }\n        }\n        ptr++;\n        *(s32 *)((s32)ptr - 4) = 0;\n    } while (ptr != end);\n}",
+        "score": 0.878,
+        "reason": "structural_diffs=5",
+        "diffs": [
+          "structural: target=lui s3, HI(D_800417B0) got=lui s2, HI(D_80041E58)",
+          "structural: target=lui s2, HI(D_80041E58) got=lui s3, HI(D_800417B0)",
+          "structural: target=addiu s2, s2, LO(D_80041E58) got=addiu s0, s0, LO(D_800419A8)",
+          "structural: target=addiu s3, s3, LO(D_800417B0) got=addiu s2, s2, LO(D_80041E58)",
+          "structural: target=addiu s0, s0, LO(D_800419A8) got=addiu s3, s3, LO(D_800417B0)"
+        ],
+        "timestamp": "2026-06-03T23:04:08.558Z"
       }
     ]
   },
@@ -20408,9 +20434,43 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.878,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_151D2E5C(struct16 *arg0, struct223 *arg1, u8 arg2) {\n    s32 temp_v0;\n    s32 temp_v1;\n    u8 temp_a2;\n    u8 temp_a3;\n\n    if (arg2 == 0) {\n        temp_v0 = arg0->unk10;\n        temp_v1 = arg1->unk0;\n        temp_a2 = arg0->unk14;\n        temp_a3 = arg1->unk4.ub;\n        if ((temp_v0 == temp_v1) || (temp_a3 == temp_a2)) {\n            func_1516972C((struct102 *)arg0);\n        }\n    } else if (arg2 == 0x2D) {\n        temp_v0 = arg1->unk0;\n        temp_v1 = arg0->unk10;\n        if (temp_v0 == temp_v1) {\n            arg0->unk10 = arg1->unk4.w;\n            arg0->unk14 = arg1->unk9;\n        } else if (arg1->unk4.w == temp_v1) {\n            arg0->unk10 = temp_v0;\n            arg0->unk14 = arg1->unk8;\n        }\n    }\n}",
+        "score": 0.9512,
+        "reason": "structural_diffs=2",
+        "diffs": [
+          "structural: target=bnel a3, a2, L2 got=bnel a2, a3, L2",
+          "structural: target=bnel t9, v1, L2 got=bnel v1, t9, L2"
+        ],
+        "timestamp": "2026-06-03T23:06:05.066Z"
+      },
+      {
+        "code": "void func_151D2E5C(struct16 *arg0, struct223 *arg1, u8 arg2) {\n    s32 temp_v0;\n    s32 temp_v1;\n    u8 temp_a2;\n    u8 temp_a3;\n\n    if (arg2 == 0) {\n        temp_v0 = arg0->unk10;\n        temp_v1 = arg1->unk0;\n        temp_a2 = arg0->unk14;\n        temp_a3 = arg1->unk4.ub;\n        if ((temp_v0 == temp_v1) || (temp_a2 == temp_a3)) {\n            func_1516972C((struct102 *)arg0);\n        }\n    } else if (arg2 == 0x2D) {\n        temp_v0 = arg1->unk0;\n        temp_v1 = arg0->unk10;\n        if (temp_v0 == temp_v1) {\n            arg0->unk10 = arg1->unk4.w;\n            arg0->unk14 = arg1->unk9;\n        } else if (temp_v1 == arg1->unk4.w) {\n            arg0->unk10 = temp_v0;\n            arg0->unk14 = arg1->unk8;\n        }\n    }\n}",
+        "score": 0.9756,
+        "reason": "structural_diffs=1",
+        "diffs": [
+          "structural: target=bnel t9, v1, L2 got=bnel v1, t9, L2"
+        ],
+        "timestamp": "2026-06-03T23:06:31.625Z"
+      },
+      {
+        "code": "void func_151D2E5C(struct16 *arg0, struct223 *arg1, u8 arg2) {\n    s32 temp_v0;\n    s32 temp_v1;\n    s32 temp_t9;\n    u8 temp_a2;\n    u8 temp_a3;\n\n    if (arg2 == 0) {\n        temp_v0 = arg0->unk10;\n        temp_v1 = arg1->unk0;\n        temp_a2 = arg0->unk14;\n        temp_a3 = arg1->unk4.ub;\n        if ((temp_v0 == temp_v1) || (temp_a2 == temp_a3)) {\n            func_1516972C((struct102 *)arg0);\n        }\n    } else if (arg2 == 0x2D) {\n        temp_v0 = arg1->unk0;\n        temp_v1 = arg0->unk10;\n        if (temp_v0 == temp_v1) {\n            arg0->unk10 = arg1->unk4.w;\n            arg0->unk14 = arg1->unk9;\n        } else {\n            temp_t9 = arg1->unk4.w;\n            if (temp_t9 == temp_v1) {\n                arg0->unk10 = temp_v0;\n                arg0->unk14 = arg1->unk8;\n            }\n        }\n    }\n}",
+        "score": 0.878,
+        "reason": "structural_diffs=5",
+        "diffs": [
+          "structural: target=lw t9, 4(a1) got=lw a2, 4(a1)",
+          "structural: target=lw t9, 4(a1) got=lw a2, 4(a1)",
+          "structural: target=bnel t9, v1, L2 got=bnel a2, v1, L2",
+          "structural: target=lbu t0, 8(a1) got=lbu t9, 8(a1)",
+          "structural: target=sb t0, 20(a0) got=sb t9, 20(a0)"
+        ],
+        "timestamp": "2026-06-03T23:07:00.859Z"
+      }
+    ]
   },
   {
     "function": "func_151D324C",
