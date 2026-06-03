@@ -7865,9 +7865,9 @@
     "instructions": 30,
     "difficulty": "low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1,
+    "status": "matched"
   },
   {
     "function": "func_1000CBF0",
