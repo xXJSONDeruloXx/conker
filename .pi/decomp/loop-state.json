@@ -1,0 +1,8 @@
+{
+  "enabled": false,
+  "chunk": 64,
+  "status": "stopped",
+  "lastChunkSummary": "Attempted func_15142FBC (GBI display list command writer). Got best score 0.56 with 15 structural diffs. The function has complex register allocation issues - target uses t8 for flag, t0 for a1|0xF, v1 for D_800DD218 base, and v0 for the arg0 copy - but IDO's register allocator consistently assigns different registers. The correct code shape is: `if (a1 != D_800DD218 || a2 != D_800DD21C)` compound check with bnel/beql pattern, temp_v0 for arg0 copy before E7 write, second temp_v0 before EF write, advance arg0 before stores. Length issue (33 vs 34) seems tied to the register allocation problem. Skipped after 14 attempts.",
+  "consecutiveNoProgress": 3,
+  "updatedAt": "2026-06-03T02:09:06.462Z"
+}

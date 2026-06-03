@@ -3,8 +3,6 @@
 #include "functions.h"
 #include "variables.h"
 
-extern void func_1512C490(struct108 *arg0);
-
 extern f32 D_800A34B0[4][2];
 extern f32 D_800A34D0;
 extern f32 D_800A34D4;
@@ -461,22 +459,7 @@ s32 func_151253CC(struct108 *arg0) {
 }
 
 // no idea what going on here
-s32 func_15125490(struct108 *arg0) {
-    struct127 *temp_v0 = arg0->unk3D0;
-    s32 temp_v1;
-
-    if (temp_v0->in_water == 1) {
-        temp_v1 = (s32) fabsf(temp_v0->y_position - temp_v0->unk118);
-        if (temp_v1 < 100) {
-            return 0;
-        }
-        if (temp_v1 >= 301) {
-            return 1;
-        }
-    } else {
-        return 0;
-    }
-}
+#pragma GLOBAL_ASM("asm/nonmatchings/game_14FF90/func_15125490.s")
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_14FF90/func_151254F4.s")
 // NON-MATCHING: first statements in wrong order
@@ -656,26 +639,7 @@ void func_15127FEC(struct108 *arg0, s32 arg1, s32 arg2) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_14FF90/func_15128030.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_14FF90/func_151283B8.s")
-void func_151284C4(struct108 *arg0) {
-    struct127 *temp_v0;
-    u8 temp_v1;
-
-    func_1512C490(arg0);
-    temp_v0 = arg0->unk3D0;
-    temp_v1 = arg0->unk23C;
-    arg0->unk2B0 = temp_v0->x_position;
-    arg0->unk2B4 = temp_v0->y_position;
-    arg0->unk2B8 = temp_v0->z_position;
-    if (temp_v1 != 0) {
-        arg0->unk23C = temp_v1 - 1;
-    }
-    if (arg0->unk84 & 8) {
-        if ((s16)arg0->unk5FE <= 0) {
-            arg0->unk5FE = 0x3C;
-            func_15128774(arg0, arg0->unk3D0);
-        }
-    }
-}
+#pragma GLOBAL_ASM("asm/nonmatchings/game_14FF90/func_151284C4.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_14FF90/func_15128540.s")
 
 void func_15128680(struct108 *arg0) {
