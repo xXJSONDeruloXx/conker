@@ -145,7 +145,20 @@ s32 func_1501407C(s32 arg0) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_40490/func_15014144.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_40490/func_15014220.s")
+s32 func_15014220(struct134 *arg0) {
+    s32 sp34[3];
+    struct260 *temp_v0;
+
+    arg0->unk16 |= 4;
+    *(f32 *)&sp34[0] = 0.0f;
+    sp34[1] = (s32) arg0;
+    ((u8 *)sp34)[8] = 1;
+    temp_v0 = func_15149130(0x12C, -1, 0x26, -1, 0, 0x24, (struct37 *)0xC, 0xFF, 0);
+    if (temp_v0 != 0) {
+        memcpy((u8 *)temp_v0 + 0x28, sp34, 0xC);
+    }
+    return 1;
+}
 s32 func_150142AC(struct134 *arg0) {
     s32 idx;
 
