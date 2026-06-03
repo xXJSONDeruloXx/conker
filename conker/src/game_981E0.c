@@ -1659,7 +1659,20 @@ void func_15074644(void) {
 #pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_15074664.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_150746F0.s")
 // ?
-#pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_150747E4.s")
+void func_150747E4(void) {
+    s32 val;
+    s32 idx;
+    struct127 *entry;
+
+    val = D_800D154C->unk65;
+    if (val != 0) {
+        idx = val - 1;
+        val = 0;
+        entry = &D_800CC2D0[idx];
+        entry->unk232 = (u8)D_800D1580;
+        entry->unk218 = val;
+    }
+}
 
 void func_15074840(void) {
     if (D_800D154C->unk31C != 0) {

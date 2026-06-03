@@ -603,5 +603,14 @@
     "example_functions": [
       "func_1507A47C"
     ]
+  },
+  {
+    "id": "typed-fnptr-table-volatile-index-reload",
+    "description": "Callback dispatch wrappers that pass through original arguments may need the table cast to the exact function-pointer signature and the index field read through a volatile raw byte pointer so IDO reloads the index/table entry before `jalr`.",
+    "trigger": "Target masks a narrow argument, materializes a function-pointer table base, tests `table[obj->byte]`, then reloads `obj->byte` and `table[...]` before `jalr` with original arguments still in a0/a1/a2.",
+    "solution": "Cast the existing table to `void (**)(orig_arg_types...)`, read the byte index as `*(volatile u8 *)((s32)obj + offset)` in both the condition and call expression, and call `temp_table[index](args...)`.",
+    "example_functions": [
+      "func_151635A8"
+    ]
   }
 ]
