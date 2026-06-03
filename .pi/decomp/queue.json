@@ -5471,8 +5471,8 @@
     "instructions": 23,
     "difficulty": "low",
     "tags": [],
-    "attempts": 6,
-    "lastScore": 0.2609,
+    "attempts": 9,
+    "lastScore": 0.5652,
     "status": "pending",
     "history": [
       {
@@ -5641,6 +5641,38 @@
           "structural: target=sb t9, 562(a0) got=sb t0, 562(v0)"
         ],
         "timestamp": "2026-06-03T12:19:49.997Z"
+      },
+      {
+        "code": "void func_150747E4(void) {\n    s32 val;\n    s32 idx;\n    s32 offset;\n    u8 *entry;\n\n    val = D_800D154C->unk65;\n    if (val != 0) {\n        idx = val - 1;\n        offset = idx << 2;\n        offset -= idx;\n        offset <<= 2;\n        offset += idx;\n        offset <<= 2;\n        offset -= idx;\n        offset <<= 2;\n        offset -= idx;\n        offset <<= 2;\n        entry = (u8 *)D_800CC2D0 + offset;\n        *(s32 *)(entry + 0x218) = 0;\n        *(u8 *)(entry + 0x232) = (u8)D_800D1580;\n    }\n}",
+        "score": 0.42592592592592593,
+        "reason": "length_mismatch (target=23, generated=27)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:20:04.918Z"
+      },
+      {
+        "code": "void func_150747E4(void) {\n    s32 val;\n    register s32 idx;\n    s32 offset;\n    u8 *entry;\n\n    val = D_800D154C->unk65;\n    if (val != 0) {\n        idx = val - 1;\n        offset = idx << 2;\n        offset -= idx;\n        offset <<= 2;\n        offset += idx;\n        offset <<= 2;\n        offset -= idx;\n        offset <<= 2;\n        offset -= idx;\n        offset <<= 2;\n        entry = (u8 *)D_800CC2D0 + offset;\n        *(s32 *)(entry + 0x218) = 0;\n        *(u8 *)(entry + 0x232) = (u8)D_800D1580;\n    }\n}",
+        "score": 0.42592592592592593,
+        "reason": "length_mismatch (target=23, generated=27)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:20:16.323Z"
+      },
+      {
+        "code": "void func_150747E4(void) {\n    s32 val;\n    s32 tmp;\n    struct127 *entry;\n\n    val = D_800D154C->unk65;\n    if (val != 0) {\n        val--;\n        tmp = D_800D1580;\n        entry = &D_800CC2D0[val];\n        entry->unk218 = 0;\n        entry->unk232 = (u8)tmp;\n    }\n}",
+        "score": 0.5652,
+        "reason": "structural_diffs=10",
+        "diffs": [
+          "structural: target=addiu t8, t8, LO(D_800CC2D0) got=lui v1, HI(D_800D1580)",
+          "structural: target=lui t9, HI(D_800D1580) got=addiu t8, t8, LO(D_800CC2D0)",
+          "structural: target=addiu v1, v0, -1 got=addiu v0, v0, -1",
+          "structural: target=sll t7, v1, 2 got=sll t7, v0, 2",
+          "structural: target=subu t7, t7, v1 got=subu t7, t7, v0",
+          "structural: target=addu t7, t7, v1 got=addu t7, t7, v0",
+          "structural: target=subu t7, t7, v1 got=subu t7, t7, v0",
+          "structural: target=subu t7, t7, v1 got=subu t7, t7, v0",
+          "structural: target=lw t9, LO(D_800D1580)(t9) got=lw v1, LO(D_800D1580)(v1)",
+          "structural: target=sb t9, 562(a0) got=sb v1, 562(a0)"
+        ],
+        "timestamp": "2026-06-03T12:20:37.285Z"
       }
     ]
   },
