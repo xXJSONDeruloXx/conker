@@ -20434,7 +20434,7 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
+    "attempts": 6,
     "lastScore": 0.878,
     "status": "pending",
     "history": [
@@ -20469,6 +20469,37 @@
           "structural: target=sb t0, 20(a0) got=sb t9, 20(a0)"
         ],
         "timestamp": "2026-06-03T23:07:00.859Z"
+      },
+      {
+        "code": "void func_151D2E5C(struct16 *arg0, struct223 *arg1, u8 arg2) {\n    s32 temp_v0;\n    s32 temp_v1;\n    u8 temp_a2;\n    u8 temp_a3;\n\n    if (arg2 == 0) {\n        temp_v0 = arg0->unk10;\n        temp_v1 = arg1->unk0;\n        temp_a2 = arg0->unk14;\n        temp_a3 = arg1->unk4.ub;\n        if ((temp_v0 == temp_v1) || (temp_a2 == temp_a3)) {\n            func_1516972C((struct102 *)arg0);\n        }\n    } else if (arg2 == 0x2D) {\n        temp_v0 = arg1->unk0;\n        temp_v1 = arg0->unk10;\n        if (temp_v0 == temp_v1) {\n            arg0->unk10 = arg1->unk4.w;\n            arg0->unk14 = arg1->unk9;\n        } else {\n            if (arg1->unk4.w != temp_v1) {\n                return;\n            }\n            arg0->unk10 = temp_v0;\n            arg0->unk14 = arg1->unk8;\n        }\n    }\n}",
+        "score": 0.9756,
+        "reason": "structural_diffs=1",
+        "diffs": [
+          "structural: target=bnel t9, v1, L2 got=bnel v1, t9, L2"
+        ],
+        "timestamp": "2026-06-03T23:07:21.391Z"
+      },
+      {
+        "code": "void func_151D2E5C(struct16 *arg0, struct223 *arg1, u8 arg2) {\n    s32 temp_v0;\n    s32 temp_v1;\n    u8 temp_a2;\n    u8 temp_a3;\n\n    if (arg2 == 0) {\n        temp_v0 = arg0->unk10;\n        temp_v1 = arg1->unk0;\n        temp_a2 = arg0->unk14;\n        temp_a3 = arg1->unk4.ub;\n        if ((temp_v0 == temp_v1) || (temp_a2 == temp_a3)) {\n            func_1516972C((struct102 *)arg0);\n        }\n    } else if (arg2 == 0x2D) {\n        temp_v0 = arg1->unk0;\n        if (temp_v0 == arg0->unk10) {\n            arg0->unk10 = arg1->unk4.w;\n            arg0->unk14 = arg1->unk9;\n        } else if (arg1->unk4.w == arg0->unk10) {\n            arg0->unk10 = temp_v0;\n            arg0->unk14 = arg1->unk8;\n        }\n    }\n}",
+        "score": 0.9756,
+        "reason": "structural_diffs=1",
+        "diffs": [
+          "structural: target=bnel t9, v1, L2 got=bnel v1, t9, L2"
+        ],
+        "timestamp": "2026-06-03T23:07:45.230Z"
+      },
+      {
+        "code": "void func_151D2E5C(struct16 *arg0, struct223 *arg1, u8 arg2) {\n    s32 temp_v0;\n    s32 temp_v1;\n    u8 temp_a2;\n    u8 temp_a3;\n    s32 temp_t9;\n\n    if (arg2 == 0) {\n        temp_v0 = arg0->unk10;\n        temp_v1 = arg1->unk0;\n        temp_a2 = arg0->unk14;\n        temp_a3 = arg1->unk4.ub;\n        if ((temp_v0 == temp_v1) || (temp_a2 == temp_a3)) {\n            func_1516972C((struct102 *)arg0);\n        }\n    } else if (arg2 == 0x2D) {\n        temp_v0 = arg1->unk0;\n        temp_v1 = arg0->unk10;\n        if (temp_v0 == temp_v1) {\n            arg0->unk10 = arg1->unk4.w;\n            arg0->unk14 = arg1->unk9;\n        } else {\n            temp_t9 = arg1->unk4.w;\n            if (temp_t9 == temp_v1) {\n                arg0->unk10 = temp_v0;\n                arg0->unk14 = arg1->unk8;\n            }\n        }\n    }\n}",
+        "score": 0.878,
+        "reason": "structural_diffs=5",
+        "diffs": [
+          "structural: target=lw t9, 4(a1) got=lw a2, 4(a1)",
+          "structural: target=lw t9, 4(a1) got=lw a2, 4(a1)",
+          "structural: target=bnel t9, v1, L2 got=bnel a2, v1, L2",
+          "structural: target=lbu t0, 8(a1) got=lbu t9, 8(a1)",
+          "structural: target=sb t0, 20(a0) got=sb t9, 20(a0)"
+        ],
+        "timestamp": "2026-06-03T23:09:21.103Z"
       }
     ]
   },
