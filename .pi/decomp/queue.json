@@ -2116,7 +2116,7 @@
     "tags": [],
     "attempts": 18,
     "lastScore": 0.475,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "void func_150A7CB0(s32 *arg0, s32 arg1, s32 arg2, s32 arg3) {\n    f32 one = 1.0f;\n\n    arg0[0] = arg1;\n    arg0[1] = 0;\n    arg0[2] = 0;\n    arg0[3] = 0;\n    arg0[4] = 0;\n    arg0[5] = arg2;\n    arg0[6] = 0;\n    arg0[7] = 0;\n    arg0[8] = 0;\n    arg0[9] = 0;\n    arg0[10] = arg3;\n    arg0[11] = 0;\n    arg0[12] = 0;\n    arg0[13] = 0;\n    ((f32 *)arg0)[15] = one;\n    arg0[14] = 0;\n}\n",
@@ -2267,7 +2267,7 @@
     "instructions": 20,
     "difficulty": "low",
     "tags": [],
-    "attempts": 0,
+    "attempts": 3,
     "lastScore": 0.47619047619047616,
     "status": "pending",
     "history": [
@@ -2284,6 +2284,27 @@
         "reason": "length_mismatch (target=20, generated=21)",
         "diffs": [],
         "timestamp": "2026-06-02T17:38:52.112Z"
+      },
+      {
+        "code": "void func_150A7DA0(f32 arg0[4][4], s32 arg1, s32 arg2, s32 arg3) {\n    if (0) {}\n    ((s32 *)arg0)[1] = 0;\n    arg0[0][0] = 1.0f;\ndummy_label_418035:\n    ((s32 *)arg0)[2] = 0;\n    ((s32 *)arg0)[3] = 0;\n    ((s32 *)arg0)[4] = 0;\n    arg0[1][1] = 1.0f;\n    ((s32 *)arg0)[6] = 0;\n    ((s32 *)arg0)[7] = 0;\n    ((s32 *)arg0)[8] = 0;\n    ((s32 *)arg0)[9] = 0;\n    arg0[2][2] = 1.0f;\n    ((s32 *)arg0)[11] = 0;\n    ((s32 *)arg0)[12] = arg1;\n    ((s32 *)arg0)[13] = arg2;\n    ((s32 *)arg0)[14] = arg3;\n    arg0[3][3] = 1.0f;\n}\n",
+        "score": 0.475,
+        "reason": "length_mismatch (target=20, generated=19)",
+        "diffs": [],
+        "timestamp": "2026-06-03T10:09:13.468Z"
+      },
+      {
+        "code": "void func_150A7DA0(f32 arg0[4][4], s32 arg1, s32 arg2, s32 arg3) {\n    f32 one = 1.0f;\n\n    if (0) {}\n    ((s32 *)arg0)[1] = 0;\n    arg0[0][0] = one;\ndummy_label_418035:\n    ((s32 *)arg0)[2] = 0;\n    ((s32 *)arg0)[3] = 0;\n    ((s32 *)arg0)[4] = 0;\n    arg0[1][1] = one;\n    ((s32 *)arg0)[6] = 0;\n    ((s32 *)arg0)[7] = 0;\n    ((s32 *)arg0)[8] = 0;\n    ((s32 *)arg0)[9] = 0;\n    arg0[2][2] = one;\n    ((s32 *)arg0)[11] = 0;\n    ((s32 *)arg0)[12] = arg1;\n    ((s32 *)arg0)[13] = arg2;\n    ((s32 *)arg0)[14] = arg3;\n    arg0[3][3] = one;\n}\n",
+        "score": 0.475,
+        "reason": "length_mismatch (target=20, generated=19)",
+        "diffs": [],
+        "timestamp": "2026-06-03T10:09:36.810Z"
+      },
+      {
+        "code": "void func_150A7DA0(s32 *arg0, s32 arg1, s32 arg2, s32 arg3) {\n    f32 one = 1.0f;\n\n    arg0[1] = 0;\n    ((f32 *)arg0)[0] = one;\n    arg0[2] = 0;\n    arg0[3] = 0;\n    arg0[4] = 0;\n    ((f32 *)arg0)[5] = one;\n    arg0[6] = 0;\n    arg0[7] = 0;\n    arg0[8] = 0;\n    arg0[9] = 0;\n    ((f32 *)arg0)[10] = one;\n    arg0[11] = 0;\n    arg0[12] = arg1;\n    arg0[13] = arg2;\n    arg0[14] = arg3;\n    ((f32 *)arg0)[15] = one;\n}\n",
+        "score": 0.47619047619047616,
+        "reason": "length_mismatch (target=20, generated=21)",
+        "diffs": [],
+        "timestamp": "2026-06-03T10:09:56.381Z"
       }
     ]
   },
