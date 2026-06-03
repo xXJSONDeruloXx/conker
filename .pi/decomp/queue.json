@@ -4241,8 +4241,8 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 3,
-    "lastScore": 0.4375,
+    "attempts": 6,
+    "lastScore": 0.625,
     "status": "pending",
     "history": [
       {
@@ -4273,6 +4273,41 @@
         "reason": "length_mismatch (target=16, generated=14)",
         "diffs": [],
         "timestamp": "2026-06-03T07:05:51.511Z"
+      },
+      {
+        "code": "s32 func_150142AC(struct134 *arg0) {\n    s32 idx;\n\n    idx = ((u8 *)arg0)[0x1B];\n    arg0->unk16 |= 4;\n    if (idx < 0) {\n        goto ret;\n    }\n    if (idx < 3) {\n        goto store;\n    }\nret:\n    return 1;\nstore:\n    D_800D9AA0[idx] = arg0;\n    return 1;\n}",
+        "score": 0.47058823529411764,
+        "reason": "length_mismatch (target=16, generated=17)",
+        "diffs": [],
+        "timestamp": "2026-06-03T07:06:28.873Z"
+      },
+      {
+        "code": "s32 func_150142AC(struct134 *arg0) {\n    s32 idx;\n\n    idx = ((u8 *)arg0)[0x1B];\n    arg0->unk16 |= 4;\n    if (idx < 0) {\n        goto ret;\n    }\n    if (idx >= 3) {\n        goto ret;\n    }\n    D_800D9AA0[idx] = arg0;\n    return 1;\nret:\n    return 1;\n}",
+        "score": 0.625,
+        "reason": "structural_diffs=6",
+        "diffs": [
+          "structural: target=bnez at, L1 got=beqz at, L0",
+          "structural: target=jr ra got=lui at, HI(D_800D9AA0)",
+          "structural: target=li v0, 1 got=addu at, at, t8",
+          "structural: target=lui at, HI(D_800D9AA0) got=sw a0, LO(D_800D9AA0)(at)",
+          "structural: target=addu at, at, t8 got=jr ra",
+          "structural: target=sw a0, LO(D_800D9AA0)(at) got=li v0, 1"
+        ],
+        "timestamp": "2026-06-03T07:06:56.168Z"
+      },
+      {
+        "code": "s32 func_150142AC(struct134 *arg0) {\n    s32 idx;\n\n    idx = ((u8 *)arg0)[0x1B];\n    arg0->unk16 |= 4;\n    if (idx < 0) {\n        goto ret;\n    }\n    if (idx < 3) {\n        D_800D9AA0[idx] = arg0;\n        return 1;\n    }\nret:\n    return 1;\n}",
+        "score": 0.625,
+        "reason": "structural_diffs=6",
+        "diffs": [
+          "structural: target=bnez at, L1 got=beqz at, L0",
+          "structural: target=jr ra got=lui at, HI(D_800D9AA0)",
+          "structural: target=li v0, 1 got=addu at, at, t8",
+          "structural: target=lui at, HI(D_800D9AA0) got=sw a0, LO(D_800D9AA0)(at)",
+          "structural: target=addu at, at, t8 got=jr ra",
+          "structural: target=sw a0, LO(D_800D9AA0)(at) got=li v0, 1"
+        ],
+        "timestamp": "2026-06-03T07:07:16.300Z"
       }
     ]
   },
