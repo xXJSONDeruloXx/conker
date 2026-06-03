@@ -3213,8 +3213,8 @@
     "instructions": 24,
     "difficulty": "low",
     "tags": [],
-    "attempts": 12,
-    "lastScore": 0.4444444444444444,
+    "attempts": 15,
+    "lastScore": 0.3333,
     "status": "pending",
     "history": [
       {
@@ -3307,6 +3307,61 @@
         "reason": "length_mismatch (target=24, generated=27)",
         "diffs": [],
         "timestamp": "2026-06-03T08:24:00.072Z"
+      },
+      {
+        "code": "void func_1000B294(s32 *arg0) {\n    struct151 *entry;\n    struct151 **ptr;\n    struct151 *child;\n    struct151 **end;\n\n    entry = D_800417B0[0];\n    ptr = D_800417B0;\n    end = (struct151 **)&D_800417BC;\n    do {\n        if (entry != NULL) {\n            if (entry->unk10 == arg0) {\n                entry->unk10 = (s32 *)entry;\n                entry = *ptr;\n            }\n            child = (struct151 *)entry->unk60;\n            if (child != NULL) {\n                if (child->unk10 == arg0) {\n                    child->unk10 = (s32 *)child;\n                }\n            }\n        }\n        ptr++;\n    } while ((ptr != end) && ((entry = *ptr), 1));\n}\n",
+        "score": 0.4444444444444444,
+        "reason": "length_mismatch (target=24, generated=27)",
+        "diffs": [],
+        "timestamp": "2026-06-03T08:24:32.618Z"
+      },
+      {
+        "code": "void func_1000B294(s32 *arg0) {\n    struct151 **ptr;\n    struct151 **end;\n    struct151 *entry;\n    struct151 *child;\n\n    ptr = D_800417B0;\n    end = (struct151 **)&D_800417BC;\nloop:\n    entry = *ptr;\n    if (entry != NULL) {\n        if (entry->unk10 == arg0) {\n            entry->unk10 = (s32 *)entry;\n            entry = *ptr;\n        }\n        child = (struct151 *)entry->unk60;\n        if (child != NULL) {\n            if (child->unk10 == arg0) {\n                child->unk10 = (s32 *)child;\n            }\n        }\n    }\n    ptr++;\n    if (ptr != end) {\n        goto loop;\n    }\n}\n",
+        "score": 0.3333,
+        "reason": "structural_diffs=16",
+        "diffs": [
+          "structural: target=lui v1, HI(D_800417B0) got=lui v0, HI(D_800417B0)",
+          "structural: target=addiu a2, a2, LO(D_800417BC) got=addiu v0, v0, LO(D_800417B0)",
+          "structural: target=addiu v1, v1, LO(D_800417B0) got=addiu a2, a2, LO(D_800417BC)",
+          "structural: target=lw v0, 0(v1) got=lw v1, 0(v0)",
+          "structural: target=beqzl v0, L0 got=beqzl v1, L0",
+          "structural: target=addiu v1, v1, 4 got=addiu v0, v0, 4",
+          "structural: target=lw t6, 16(v0) got=lw t6, 16(v1)",
+          "structural: target=lw a1, 96(v0) got=lw a1, 96(v1)",
+          "structural: target=sw v0, 16(v0) got=sw v1, 16(v1)",
+          "structural: target=lw v0, 0(v1) got=lw v1, 0(v0)",
+          "structural: target=lw a1, 96(v0) got=lw a1, 96(v1)",
+          "structural: target=addiu v1, v1, 4 got=addiu v0, v0, 4",
+          "structural: target=addiu v1, v1, 4 got=addiu v0, v0, 4",
+          "structural: target=addiu v1, v1, 4 got=addiu v0, v0, 4",
+          "structural: target=bnel v1, a2, L2 got=bnel v0, a2, L2",
+          "structural: target=lw v0, 0(v1) got=lw v1, 0(v0)"
+        ],
+        "timestamp": "2026-06-03T08:25:03.203Z"
+      },
+      {
+        "code": "void func_1000B294(s32 *arg0) {\n    struct151 *entry;\n    struct151 **ptr;\n    struct151 *child;\n    struct151 **end;\n\n    ptr = D_800417B0;\n    end = (struct151 **)&D_800417BC;\nloop:\n    entry = *ptr;\n    if (entry != NULL) {\n        if (entry->unk10 == arg0) {\n            entry->unk10 = (s32 *)entry;\n            entry = *ptr;\n        }\n        child = (struct151 *)entry->unk60;\n        if (child != NULL) {\n            if (child->unk10 == arg0) {\n                child->unk10 = (s32 *)child;\n            }\n        }\n    }\n    ptr++;\n    if (ptr != end) {\n        goto loop;\n    }\n}\n",
+        "score": 0.3333,
+        "reason": "structural_diffs=16",
+        "diffs": [
+          "structural: target=lui v1, HI(D_800417B0) got=lui v0, HI(D_800417B0)",
+          "structural: target=addiu a2, a2, LO(D_800417BC) got=addiu v0, v0, LO(D_800417B0)",
+          "structural: target=addiu v1, v1, LO(D_800417B0) got=addiu a2, a2, LO(D_800417BC)",
+          "structural: target=lw v0, 0(v1) got=lw v1, 0(v0)",
+          "structural: target=beqzl v0, L0 got=beqzl v1, L0",
+          "structural: target=addiu v1, v1, 4 got=addiu v0, v0, 4",
+          "structural: target=lw t6, 16(v0) got=lw t6, 16(v1)",
+          "structural: target=lw a1, 96(v0) got=lw a1, 96(v1)",
+          "structural: target=sw v0, 16(v0) got=sw v1, 16(v1)",
+          "structural: target=lw v0, 0(v1) got=lw v1, 0(v0)",
+          "structural: target=lw a1, 96(v0) got=lw a1, 96(v1)",
+          "structural: target=addiu v1, v1, 4 got=addiu v0, v0, 4",
+          "structural: target=addiu v1, v1, 4 got=addiu v0, v0, 4",
+          "structural: target=addiu v1, v1, 4 got=addiu v0, v0, 4",
+          "structural: target=bnel v1, a2, L2 got=bnel v0, a2, L2",
+          "structural: target=lw v0, 0(v1) got=lw v1, 0(v0)"
+        ],
+        "timestamp": "2026-06-03T08:25:27.504Z"
       }
     ]
   },
