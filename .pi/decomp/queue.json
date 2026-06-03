@@ -922,8 +922,8 @@
     "instructions": 16,
     "difficulty": "low",
     "tags": [],
-    "attempts": 24,
-    "lastScore": 0.4375,
+    "attempts": 27,
+    "lastScore": 0.38095238095238093,
     "status": "pending",
     "history": [
       {
@@ -1093,6 +1093,27 @@
         "reason": "length_mismatch (target=16, generated=14)",
         "diffs": [],
         "timestamp": "2026-06-03T06:58:48.192Z"
+      },
+      {
+        "code": "void func_150A7B80(s64 *arg0) {\n    volatile s16 *ptr;\n\n    ptr = (volatile s16 *)arg0;\n    arg0[0] = 0;\n    arg0[1] = 0;\n    arg0[2] = 0;\n    arg0[3] = 0;\n    arg0[4] = 0;\n    arg0[5] = 0;\n    arg0[6] = 0;\n    arg0[7] = 0;\n    ptr[0] = 1;\n    ptr[5] = 1;\n    ptr[10] = 1;\n    ptr[15] = 1;\n}",
+        "score": 0.4375,
+        "reason": "length_mismatch (target=16, generated=14)",
+        "diffs": [],
+        "timestamp": "2026-06-03T06:59:10.084Z"
+      },
+      {
+        "code": "void func_150A7B80(s64 *arg0) {\n    arg0[0] = 0;\n    arg0[1] = 0;\n    arg0[2] = 0;\n    arg0[3] = 0;\n    arg0[4] = 0;\n    arg0[5] = 0;\n    arg0[6] = 0;\n    arg0[7] = 0;\n    ((s16 *)arg0)[0] = 1;\n    ((s16 *)arg0)[5] = 1;\n    ((s16 *)arg0)[10] = 1;\n    ((s16 *)arg0)[15] = 1;\n}",
+        "score": 0.47058823529411764,
+        "reason": "length_mismatch (target=16, generated=17)",
+        "diffs": [],
+        "timestamp": "2026-06-03T07:00:54.752Z"
+      },
+      {
+        "code": "void func_150A7B80(s64 *arg0) {\n    s32 temp = 1;\n\n    arg0[0] = 0;\n    arg0[1] = 0;\n    arg0[2] = 0;\n    arg0[3] = 0;\n    arg0[4] = 0;\n    arg0[5] = 0;\n    arg0[6] = 0;\n    arg0[7] = 0;\n    ((s16 *)arg0)[0] = temp;\n    ((s16 *)arg0)[5] = temp;\n    ((s16 *)arg0)[10] = temp;\n    ((s16 *)arg0)[15] = temp;\n}",
+        "score": 0.38095238095238093,
+        "reason": "length_mismatch (target=16, generated=21)",
+        "diffs": [],
+        "timestamp": "2026-06-03T07:01:19.682Z"
       }
     ]
   },
