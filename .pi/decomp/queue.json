@@ -7361,9 +7361,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 1,
-    "lastScore": 0.4857142857142857,
-    "status": "pending",
+    "attempts": 2,
+    "lastScore": 1,
+    "status": "matched",
     "history": [
       {
         "code": "s32 func_151239CC(struct108 *arg0, s32 arg1) {\n    if (arg0->unk20C[arg1] != 0) {\n        arg0->unk0 = arg0->unk2[arg1];\n        arg0->unk2C  = *(s32*)((u8*)arg0 + arg1 * 4 + 0x30);\n        arg0->unkDC  = *(s32*)((u8*)arg0 + arg1 * 4 + 0xE0);\n        arg0->unk84  = *(s32*)((u8*)arg0 + arg1 * 4 + 0x88);\n        arg0->unk134 = *(s32*)((u8*)arg0 + arg1 * 4 + 0x138);\n        arg0->unk1B4 = arg0->unk1B6[arg1];\n        arg0->unk1E0 = *(s16*)((u8*)arg0 + arg1 * 2 + 0x1E2);\n        func_15124B18(arg0);\n        arg0->unk20C[arg1] = 0;\n        return 1;\n    }\n    return 0;\n}",
@@ -7407,9 +7407,35 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.9444,
+    "status": "pending",
+    "history": [
+      {
+        "code": "s32 func_1000F4D8(u16 arg0) {\n    s32 mask = arg0 & 0x7FFF;\n    struct120 *p = D_800425E0;\n    struct120 *end = D_800425E0 + 16;\n    do {\n        if (p->unk8 != 0 && (p->unk4 & 0x7FFF) == mask && func_100173C4(&p->unk8) != 0) {\n            return 1;\n        }\n        p++;\n    } while (p != end);\n    return 0;\n}",
+        "score": 0.4861111111111111,
+        "reason": "length_mismatch (target=36, generated=35)",
+        "diffs": [],
+        "timestamp": "2026-06-03T03:55:32.515Z"
+      },
+      {
+        "code": "s32 func_1000F4D8(u16 arg0) {\n    s32 mask = arg0 & 0x7FFF;\n    struct120 *p = D_800425E0;\n    do {\n        if (p->unk8 != 0 && (p->unk4 & 0x7FFF) == mask && func_100173C4(&p->unk8) != 0) {\n            return 1;\n        }\n        p++;\n    } while (p != (struct120 *)&D_800426A0);\n    return 0;\n}",
+        "score": 0.4861111111111111,
+        "reason": "length_mismatch (target=36, generated=35)",
+        "diffs": [],
+        "timestamp": "2026-06-03T03:57:46.148Z"
+      },
+      {
+        "code": "s32 func_1000F4D8(u16 arg0) {\n    struct120 *p;\n    arg0 = arg0 & 0x7FFF;\n    p = D_800425E0;\n    do {\n        if (p->unk8 != 0 && (p->unk4 & 0x7FFF) == arg0 && func_100173C4(&p->unk8) != 0) {\n            return 1;\n        }\n        p++;\n    } while (p != (struct120 *)&D_800426A0);\n    return 0;\n}",
+        "score": 0.9444,
+        "reason": "structural_diffs=2",
+        "diffs": [
+          "structural: target=addiu s1, s1, LO(D_800426A0) got=addiu s0, s0, LO(D_800425E0)",
+          "structural: target=addiu s0, s0, LO(D_800425E0) got=addiu s1, s1, LO(D_800426A0)"
+        ],
+        "timestamp": "2026-06-03T03:58:22.477Z"
+      }
+    ]
   },
   {
     "function": "func_150489B0",
