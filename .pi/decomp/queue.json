@@ -3478,8 +3478,8 @@
     "instructions": 17,
     "difficulty": "low",
     "tags": [],
-    "attempts": 3,
-    "lastScore": 0.33999999999999997,
+    "attempts": 6,
+    "lastScore": 0.38636363636363635,
     "status": "pending",
     "history": [
       {
@@ -3537,6 +3537,27 @@
         "reason": "length_mismatch (target=17, generated=25)",
         "diffs": [],
         "timestamp": "2026-06-03T07:23:30.185Z"
+      },
+      {
+        "code": "struct127 *func_1505EEB0(s32 state, s32 *arg1) {\n    struct127 *ptr = D_800CC2D0;\n    s32 i;\n\n    if (state == D_800CC2D0[0].interaction_state) {\n        i = 0;\n    } else {\n        i = 1;\nloop:\n        if (i < 25) {\n            ptr += 1;\n            if (state != ptr->interaction_state) {\n                i += 1;\n                goto loop;\n            }\n        } else {\n            ptr += 1;\n        }\n    }\n\n    *arg1 = i;\n    return ptr;\n}\n",
+        "score": 0.3269230769230769,
+        "reason": "length_mismatch (target=17, generated=26)",
+        "diffs": [],
+        "timestamp": "2026-06-03T07:24:29.392Z"
+      },
+      {
+        "code": "struct127 *func_1505EEB0(s32 state, s32 *arg1, s32 i) {\n    struct127 *ptr = D_800CC2D0;\n\n    i = 0;\n    if (state != ptr->interaction_state) {\n        i += 1;\nloop:\n        if (i < 25) {\n            ptr += 1;\n            if (state != ptr->interaction_state) {\n                i += 1;\n                goto loop;\n            }\n        } else {\n            ptr += 1;\n        }\n    }\n\n    *arg1 = i;\n    return ptr;\n}\n",
+        "score": 0.35416666666666663,
+        "reason": "length_mismatch (target=17, generated=24)",
+        "diffs": [],
+        "timestamp": "2026-06-03T07:24:47.535Z"
+      },
+      {
+        "code": "struct127 *func_1505EEB0(s32 state, s32 *arg1) {\n    struct127 *ptr = D_800CC2D0;\n    s32 i = 0;\n\n    if (state != ptr->interaction_state) {\n        do {\n            i += 1;\n            if (i < 25) {\n                ptr += 1;\n            } else {\n                ptr += 1;\n                break;\n            }\n        } while (state != ptr->interaction_state);\n    }\n\n    *arg1 = i;\n    return ptr;\n}\n",
+        "score": 0.38636363636363635,
+        "reason": "length_mismatch (target=17, generated=22)",
+        "diffs": [],
+        "timestamp": "2026-06-03T07:25:01.218Z"
       }
     ]
   },
