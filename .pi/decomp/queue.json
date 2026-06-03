@@ -3421,8 +3421,8 @@
     "instructions": 23,
     "difficulty": "low",
     "tags": [],
-    "attempts": 9,
-    "lastScore": 0.5217,
+    "attempts": 10,
+    "lastScore": 0.6087,
     "status": "pending",
     "history": [
       {
@@ -3561,6 +3561,23 @@
           "structural: target=lw t9, 0(t3) got=lw t9, 0(t1)"
         ],
         "timestamp": "2026-06-03T11:50:42.039Z"
+      },
+      {
+        "code": "void func_151635A8(struct225 *arg0, s32 arg1, u8 arg2) {\n    s32 *temp_v0;\n    s32 temp_t9;\n\n    temp_v0 = (s32 *)D_8008B370;\n    temp_t9 = (s32)temp_v0 + (*(volatile u8 *)((s32)arg0 + 0x25) << 2);\n    if (*(volatile s32 *)temp_t9 != 0) {\n        temp_t9 = (s32)temp_v0 + (*(volatile u8 *)((s32)arg0 + 0x25) << 2);\n        ((void (*)(struct225 *, s32, u8))(*(volatile s32 *)temp_t9))(arg0, arg1, arg2);\n    }\n}",
+        "score": 0.6087,
+        "reason": "structural_diffs=9",
+        "diffs": [
+          "structural: target=lui v0, HI(D_8008B370) got=lui v1, HI(D_8008B370)",
+          "structural: target=addiu v0, v0, LO(D_8008B370) got=addiu v1, v1, LO(D_8008B370)",
+          "structural: target=addu t9, v0, t8 got=addu v0, t8, v1",
+          "structural: target=lw t0, 0(t9) got=lw t9, 0(v0)",
+          "structural: target=beqzl t0, L0 got=beqzl t9, L0",
+          "structural: target=lbu t1, 37(a0) got=lbu t0, 37(a0)",
+          "structural: target=sll t2, t1, 2 got=sll t1, t0, 2",
+          "structural: target=addu t3, v0, t2 got=addu v0, t1, v1",
+          "structural: target=lw t9, 0(t3) got=lw t9, 0(v0)"
+        ],
+        "timestamp": "2026-06-03T11:51:06.615Z"
       }
     ]
   },

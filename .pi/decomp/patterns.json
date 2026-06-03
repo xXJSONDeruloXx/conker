@@ -594,5 +594,14 @@
     "example_functions": [
       "func_151417C4"
     ]
+  },
+  {
+    "id": "not-nor-alias-target-asm",
+    "description": "Target asm may print `not rd, rs` while generated objdump prints the identical opcode as `nor rd, rs, zero`, producing a false single structural diff despite matching machine code.",
+    "trigger": "Near-match has a single diff `target=not rd, rs -> got=nor rd, rs, zero` and the raw opcode comments/objdump word are identical (e.g. 0x0040C027).",
+    "solution": "Verify the raw opcode is identical, temporarily canonicalize the target asm alias to `nor rd, rs, $zero` to get decomp_attempt match=true, restore the target asm alias, then run the ROM SHA gate.",
+    "example_functions": [
+      "func_1507A47C"
+    ]
   }
 ]

@@ -916,7 +916,14 @@ struct225 *func_15163414(Header *header, f32* arg1, f32* arg2, f32* arg3, s8 arg
 //     return ret;
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_18D770/func_151635A8.s")
+void func_151635A8(struct225 *arg0, s32 arg1, u8 arg2) {
+    void (**temp_v0)(struct225 *, s32, u8);
+
+    temp_v0 = (void (**)(struct225 *, s32, u8))D_8008B370;
+    if (temp_v0[*(volatile u8 *)((s32)arg0 + 0x25)] != NULL) {
+        temp_v0[*(volatile u8 *)((s32)arg0 + 0x25)](arg0, arg1, arg2);
+    }
+}
 // NON-MATCHING: similar issue to func_15163504
 // void func_151635A8(struct225 *arg0, s32 arg1, u8 arg2) {
 //     s32 (*func)(s32) = D_8008B370[arg0->unk25];
