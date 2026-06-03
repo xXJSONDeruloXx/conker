@@ -422,6 +422,19 @@ export default function (pi: ExtensionAPI) {
 	});
 
 	// Load state on session start
+	// Guard: block direct git commits to conker/src/ via bash (must use decomp_accept)
+	pi.on("tool_call", async (event: any, ctx: any) => {
+		if (event.toolName === "bash") {
+			const cmd = event.input?.command || "";
+			// Block git commit that includes conker/src files — must go through decomp_accept
+			if (/git\s+(commit|add.*conker\/src)/.test(cmd) && !/decomp_accept/.test(cmd)) {
+				if (ctx?.hasUI) ctx.ui.notify("\u26d4 Blocked: use decomp_accept to commit source changes (ROM SHA gate required)", "warning");
+				return { block: true, reason: "Direct git commits to conker/src/ are blocked. Use decomp_accept which verifies the full ROM SHA-1 before committing." };
+			}
+		}
+		return undefined;
+	});
+
 	pi.on("session_start", async (_event, ctx) => {
 		latestCtx = ctx;
 		loadState(ctx.cwd);
