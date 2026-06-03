@@ -1244,8 +1244,8 @@
     "instructions": 15,
     "difficulty": "low",
     "tags": [],
-    "attempts": 18,
-    "lastScore": 0.375,
+    "attempts": 21,
+    "lastScore": 0.4666666666666667,
     "status": "pending",
     "history": [
       {
@@ -1407,6 +1407,27 @@
         "reason": "length_mismatch (target=15, generated=20)",
         "diffs": [],
         "timestamp": "2026-06-03T06:13:11.418Z"
+      },
+      {
+        "code": "void func_1514143C(struct210 *arg0) {\n    struct224 *temp_v0;\n\n    if (((struct224 *)&arg0->unk110)->unk44 != 0) {\n        temp_v0 = (struct224 *)&arg0->unk110;\n        ((struct17 *)temp_v0->unk44)->unk0 = arg0->unk34;\n        ((struct17 *)temp_v0->unk44)->unk4 = arg0->unk38;\n        ((struct17 *)temp_v0->unk44)->unk8 = *(f32 *)((s32)arg0 + 0x3C);\n    }\n}",
+        "score": 0.43333333333333335,
+        "reason": "length_mismatch (target=15, generated=13)",
+        "diffs": [],
+        "timestamp": "2026-06-03T06:13:42.671Z"
+      },
+      {
+        "code": "void func_1514143C(struct210 *arg0) {\n    struct224 *temp_v0;\n\n    if (((volatile struct224 *)&arg0->unk110)->unk44 != 0) {\n        temp_v0 = (struct224 *)&arg0->unk110;\n        ((struct17 *)temp_v0->unk44)->unk0 = arg0->unk34;\n        ((struct17 *)temp_v0->unk44)->unk4 = arg0->unk38;\n        ((struct17 *)temp_v0->unk44)->unk8 = *(f32 *)((s32)arg0 + 0x3C);\n    }\n}",
+        "score": 0.4666666666666667,
+        "reason": "length_mismatch (target=15, generated=14)",
+        "diffs": [],
+        "timestamp": "2026-06-03T06:14:00.967Z"
+      },
+      {
+        "code": "void func_1514143C(struct210 *arg0) {\n    struct224 *temp_v0;\n\n    if (*(volatile s32 *)((s32)arg0 + 0x154) != 0) {\n        temp_v0 = (struct224 *)((s32)arg0 + 0x100);\n        temp_v0 = (struct224 *)((s32)temp_v0 + 0x10);\n        ((struct17 *)temp_v0->unk44)->unk0 = arg0->unk34;\n        ((struct17 *)temp_v0->unk44)->unk4 = arg0->unk38;\n        ((struct17 *)temp_v0->unk44)->unk8 = *(f32 *)((s32)arg0 + 0x3C);\n    }\n}",
+        "score": 0.4666666666666667,
+        "reason": "length_mismatch (target=15, generated=14)",
+        "diffs": [],
+        "timestamp": "2026-06-03T06:14:30.420Z"
       }
     ]
   },
