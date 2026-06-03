@@ -513,5 +513,14 @@
     "example_functions": [
       "func_151927C0"
     ]
+  },
+  {
+    "id": "cast-array-symbol-to-loaded-pointer",
+    "description": "When a symbol is declared as an array but target does `lui` + `lw symbol` before indexed access, cast the symbol address to a pointer-to-pointer and index through the loaded pointer.",
+    "trigger": "Global table access target has `lw base, %lo(SYMBOL)(base)` followed by manual index scaling instead of `addiu base, %lo(SYMBOL)`.",
+    "solution": "Use `(*(T **)&SYMBOL)[index] = value;` (or equivalent) so IDO loads the pointer stored at the symbol, while keeping the expression direct for scheduling.",
+    "example_functions": [
+      "func_15079A58"
+    ]
   }
 ]

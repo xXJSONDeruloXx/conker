@@ -1342,7 +1342,9 @@ void func_1507A3CC(void) {
 }
 
 //  what is up with these??
-#pragma GLOBAL_ASM("asm/nonmatchings/game_A28B0/func_1507A3E8.s")
+s32 func_1507A3E8(void) {
+    return ((D_800D1890 & 0xFF) << 0x18) | ((D_800D1891 & 0xFF) << 0x10) | ((D_800D1892 & 0xFF) << 8) | (D_800D1893 & 0xFF);
+}
 // s32 func_1507A3E8(void) {
 //     return (D_800D1890 << 0x18) | (D_800D1891 << 0x10) | (D_800D1892 << 8) | D_800D1893;
 // }
