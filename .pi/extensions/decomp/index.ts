@@ -12,6 +12,7 @@
  */
 
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
+import { truncateToWidth, visibleWidth } from "@earendil-works/pi-tui";
 import { Type } from "typebox";
 import { StringEnum } from "@earendil-works/pi-ai";
 
@@ -343,12 +344,16 @@ export default function (pi: ExtensionAPI) {
 
 		ctx.ui.setWidget("decomp-progress", (_tui: any, theme: any) => ({
 			render(width: number) {
+				const safeWidth = Math.max(0, width);
+				const fit = (line: string) => truncateToWidth(line, safeWidth, "");
 				const bar = (percent: number, w: number) => {
 					const filled = Math.round((percent / 100) * w);
 					return theme.fg("success", "█".repeat(filled)) + theme.fg("dim", "░".repeat(w - filled));
 				};
-				const divider = theme.fg("dim", "─".repeat(Math.min(width, 65)));
-				const line1 = theme.fg("accent", theme.bold("◆ Conker Decomp")) + " " + divider;
+				const title = theme.fg("accent", theme.bold("◆ Conker Decomp"));
+				const dividerWidth = Math.max(0, safeWidth - visibleWidth(title) - 1);
+				const divider = theme.fg("dim", "─".repeat(Math.min(dividerWidth, 65)));
+				const line1 = dividerWidth > 0 ? `${title} ${divider}` : title;
 				const line2 = [
 					theme.fg("muted", "  progress"),
 					theme.fg("success", `${bytePct.toFixed(1)}%`),
@@ -368,7 +373,7 @@ export default function (pi: ExtensionAPI) {
 					theme.fg("dim", "│"),
 					theme.fg("muted", `${state.patterns.length} patterns`),
 				].join(" ");
-				return [line1, line2, line3];
+				return [line1, line2, line3].map(fit);
 			},
 			invalidate() {},
 		}));
