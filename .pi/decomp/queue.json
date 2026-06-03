@@ -4134,9 +4134,63 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.7879,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_1505DFDC(struct127 *arg0) {\n    u8 *temp_v0;\n    s32 temp_t7;\n\n    temp_v0 = (u8 *) arg0->unk2D0;\n    arg0->unk84.uh = 0xFFFF;\n    if (temp_v0 != NULL) {\n        temp_t7 = arg0->id;\n        *(s32 *)(temp_v0 + 0x28) = 0;\n        bzero(temp_v0 + 0x40, 0x3A0);\n        *(u8 *)(temp_v0 + 0x41) = D_800C4ED0[temp_t7] + 1;\n        *(s32 *)(temp_v0 + 0x30) = 0;\n        *(s32 *)(temp_v0 + 0x34) = 0;\n        *(u8 *)(temp_v0 + 0x211) = D_800C4ED0[temp_t7] + 1;\n    }\n}",
+        "score": 0.6364,
+        "reason": "structural_diffs=12",
+        "diffs": [
+          "structural: target=ori t6, zero, 65535 got=li t6, 65535",
+          "structural: target=sw t7, 28(sp) got=sw t7, 24(sp)",
+          "structural: target=sw v0, 24(sp) got=sw v0, 28(sp)",
+          "structural: target=lw t8, 28(sp) got=lw t8, 24(sp)",
+          "structural: target=addu v1, t9, t0 got=lw v0, 28(sp)",
+          "structural: target=lhu t1, 0(v1) got=addu v1, t9, t0",
+          "structural: target=lw v0, 24(sp) got=lhu t1, 0(v1)",
+          "structural: target=addiu t2, t1, 1 got=sw zero, 48(v0)",
+          "structural: target=sb t2, 65(v0) got=sw zero, 52(v0)",
+          "structural: target=lhu t3, 0(v1) got=addiu t2, t1, 1",
+          "structural: target=sw zero, 48(v0) got=sb t2, 65(v0)",
+          "structural: target=sw zero, 52(v0) got=lhu t3, 0(v1)"
+        ],
+        "timestamp": "2026-06-03T00:32:31.226Z"
+      },
+      {
+        "code": "void func_1505DFDC(struct127 *arg0) {\n    s32 temp_t7;\n    u8 *temp_v0;\n\n    temp_v0 = (u8 *) arg0->unk2D0;\n    arg0->unk84.uh = 0xFFFF;\n    if (temp_v0 != NULL) {\n        temp_t7 = arg0->id;\n        *(s32 *)(temp_v0 + 0x28) = 0;\n        bzero(temp_v0 + 0x40, 0x3A0);\n        *(u8 *)(temp_v0 + 0x41) = D_800C4ED0[temp_t7] + 1;\n        *(s32 *)(temp_v0 + 0x30) = 0;\n        *(s32 *)(temp_v0 + 0x34) = 0;\n        *(u8 *)(temp_v0 + 0x211) = D_800C4ED0[temp_t7] + 1;\n    }\n}",
+        "score": 0.7273,
+        "reason": "structural_diffs=9",
+        "diffs": [
+          "structural: target=ori t6, zero, 65535 got=li t6, 65535",
+          "structural: target=addu v1, t9, t0 got=lw v0, 24(sp)",
+          "structural: target=lhu t1, 0(v1) got=addu v1, t9, t0",
+          "structural: target=lw v0, 24(sp) got=lhu t1, 0(v1)",
+          "structural: target=addiu t2, t1, 1 got=sw zero, 48(v0)",
+          "structural: target=sb t2, 65(v0) got=sw zero, 52(v0)",
+          "structural: target=lhu t3, 0(v1) got=addiu t2, t1, 1",
+          "structural: target=sw zero, 48(v0) got=sb t2, 65(v0)",
+          "structural: target=sw zero, 52(v0) got=lhu t3, 0(v1)"
+        ],
+        "timestamp": "2026-06-03T00:33:22.501Z"
+      },
+      {
+        "code": "void func_1505DFDC(struct127 *arg0) {\n    s32 temp_t7;\n    u8 *temp_v0;\n    s32 temp_t1;\n    s32 temp_t3;\n\n    temp_v0 = (u8 *) arg0->unk2D0;\n    arg0->unk84.uh = 0xFFFF;\n    if (temp_v0 != NULL) {\n        temp_t7 = arg0->id;\n        *(s32 *)(temp_v0 + 0x28) = 0;\n        bzero(temp_v0 + 0x40, 0x3A0);\n        temp_t1 = D_800C4ED0[temp_t7];\n        *(u8 *)(temp_v0 + 0x41) = temp_t1 + 1;\n        temp_t3 = D_800C4ED0[temp_t7];\n        *(s32 *)(temp_v0 + 0x30) = 0;\n        *(s32 *)(temp_v0 + 0x34) = 0;\n        *(u8 *)(temp_v0 + 0x211) = temp_t3 + 1;\n    }\n}",
+        "score": 0.7879,
+        "reason": "structural_diffs=7",
+        "diffs": [
+          "structural: target=ori t6, zero, 65535 got=li t6, 65535",
+          "structural: target=lhu t1, 0(v1) got=lhu a0, 0(v1)",
+          "structural: target=addiu t2, t1, 1 got=addiu t1, a0, 1",
+          "structural: target=sb t2, 65(v0) got=sb t1, 65(v0)",
+          "structural: target=lhu t3, 0(v1) got=lhu a1, 0(v1)",
+          "structural: target=addiu t4, t3, 1 got=addiu t2, a1, 1",
+          "structural: target=sb t4, 529(v0) got=sb t2, 529(v0)"
+        ],
+        "timestamp": "2026-06-03T00:34:01.936Z"
+      }
+    ]
   },
   {
     "function": "func_15142B7C",
@@ -7245,9 +7299,9 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 33,
-    "lastScore": 0.36458333333333337,
-    "status": "pending",
+    "attempts": 34,
+    "lastScore": 0.9143,
+    "status": "skipped",
     "history": [
       {
         "code": "s32 func_1000FF90(s32 arg0, s32 arg1, s32 arg2) {\n    s32 i;\n    struct15 *tmp;\n\n    tmp = D_80041FE0;\n    for (i = 0; i < D_80042760; i++, tmp++) {\n        if (arg0 == tmp->unk14) {\n            if ((arg1 == tmp->unk18) || (arg1 == -1)) {\n                if ((arg2 == tmp->unk1C) || (arg2 == -1)) {\n                    if ((tmp->unk10 & 0x80) == 0) {\n                        return i;\n                    }\n                }\n            }\n        }\n    }\n    return -1;\n}",
@@ -7531,6 +7585,17 @@
         "reason": "length_mismatch (target=35, generated=48)",
         "diffs": [],
         "timestamp": "2026-06-03T00:28:23.876Z"
+      },
+      {
+        "code": "s32 func_1000FF90(arg0, arg1, arg2, arg3)\ns32 arg0;\ns32 arg1;\ns32 arg2;\nregister s32 arg3;\n{\n    s32 i;\n\n    arg3 = arg1;\n    arg1 = (s32) D_80041FE0;\n    for (i = 0; i < D_80042760; i++, arg1 += sizeof(struct15)) {\n        if (arg0 == ((struct15 *) arg1)->unk14) {\n            if ((arg3 == ((struct15 *) arg1)->unk18) || (arg3 == -1)) {\n                if ((arg2 == ((struct15 *) arg1)->unk1C) || ((u32) arg2 == 0xFFFFFFFFU)) {\n                    if ((((struct15 *) arg1)->unk10 & 0x80) == 0) {\n                        return i;\n                    }\n                }\n            }\n        }\n    }\n    return -1;\n}",
+        "score": 0.9143,
+        "reason": "structural_diffs=3",
+        "diffs": [
+          "structural: target=move a3, a1 got=lui v0, HI(D_80042760)",
+          "structural: target=lui v0, HI(D_80042760) got=lw v0, LO(D_80042760)(v0)",
+          "structural: target=lw v0, LO(D_80042760)(v0) got=move a3, a1"
+        ],
+        "timestamp": "2026-06-03T00:29:02.909Z"
       }
     ]
   },
