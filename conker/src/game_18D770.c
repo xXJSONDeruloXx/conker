@@ -905,7 +905,18 @@ struct225 *func_15163414(Header *header, f32* arg1, f32* arg2, f32* arg3, s8 arg
     return temp_v0;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_18D770/func_15163504.s")
+s32 func_15163504(struct225 *arg0) {
+    s32 ret;
+
+    ret = 1;
+    arg0->unk14->unkE = *(f32 *)*(s32 *)((s32)arg0 + 0x18);
+    arg0->unk14->unk10 = *(f32 *)*(s32 *)((s32)arg0 + 0x1C);
+    arg0->unk14->unk12 = *(f32 *)*(s32 *)((s32)arg0 + 0x20);
+    if (*(volatile s8 *)((s32)arg0 + 0x24) != -1) {
+        return D_8008B36C[*(volatile s8 *)((s32)arg0 + 0x24)]();
+    }
+    return ret;
+}
 // NON-MATCHING: something is missing..
 // s32 func_15163504(struct225 *arg0) {
 //     s32 ret = 1;

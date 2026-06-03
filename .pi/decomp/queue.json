@@ -11804,8 +11804,8 @@
     "instructions": 41,
     "difficulty": "medium-low",
     "tags": [],
-    "attempts": 3,
-    "lastScore": 0.47560975609756095,
+    "attempts": 5,
+    "lastScore": 0.878,
     "status": "pending",
     "history": [
       {
@@ -11828,6 +11828,36 @@
         "reason": "length_mismatch (target=41, generated=39)",
         "diffs": [],
         "timestamp": "2026-06-03T22:51:27.028Z"
+      },
+      {
+        "code": "s32 func_15163504(struct225 *arg0) {\n    s32 ret;\n\n    ret = 1;\n    arg0->unk14->unkE = arg0->unk18->unk0;\n    arg0->unk14->unk10 = arg0->unk18->unk4;\n    arg0->unk14->unk12 = arg0->unk18->unk8;\n    if (*(volatile s8 *)((s32)arg0 + 0x24) != -1) {\n        ret = D_8008B36C[*(volatile s8 *)((s32)arg0 + 0x24)]();\n    }\n    return ret;\n}",
+        "score": 0.7805,
+        "reason": "structural_diffs=9",
+        "diffs": [
+          "structural: target=li v0, 1 got=li v1, 1",
+          "structural: target=lw t0, 28(a0) got=lw t0, 24(a0)",
+          "structural: target=lwc1 f8, 0(t0) got=lwc1 f8, 4(t0)",
+          "structural: target=lw t4, 32(a0) got=lw t4, 24(a0)",
+          "structural: target=lwc1 f16, 0(t4) got=lwc1 f16, 8(t4)",
+          "structural: target=beq t8, at, L0 got=beql t8, at, L0",
+          "structural: target=nop got=move v0, v1",
+          "structural: target=b L1 got=move v1, v0",
+          "structural: target=lw ra, 20(sp) got=move v0, v1"
+        ],
+        "timestamp": "2026-06-03T22:51:49.171Z"
+      },
+      {
+        "code": "s32 func_15163504(struct225 *arg0) {\n    s32 ret;\n\n    ret = 1;\n    arg0->unk14->unkE = *(f32 *)*(s32 *)((s32)arg0 + 0x18);\n    arg0->unk14->unk10 = *(f32 *)*(s32 *)((s32)arg0 + 0x1C);\n    arg0->unk14->unk12 = *(f32 *)*(s32 *)((s32)arg0 + 0x20);\n    if (*(volatile s8 *)((s32)arg0 + 0x24) != -1) {\n        ret = D_8008B36C[*(volatile s8 *)((s32)arg0 + 0x24)]();\n    }\n    return ret;\n}",
+        "score": 0.878,
+        "reason": "structural_diffs=5",
+        "diffs": [
+          "structural: target=li v0, 1 got=li v1, 1",
+          "structural: target=beq t8, at, L0 got=beql t8, at, L0",
+          "structural: target=nop got=move v0, v1",
+          "structural: target=b L1 got=move v1, v0",
+          "structural: target=lw ra, 20(sp) got=move v0, v1"
+        ],
+        "timestamp": "2026-06-03T22:52:07.390Z"
       }
     ]
   },
