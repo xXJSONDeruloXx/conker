@@ -684,5 +684,14 @@
     "example_functions": [
       "func_151D2F00"
     ]
+  },
+  {
+    "id": "signed-byte-minus-one-store",
+    "description": "When storing -1 through a byte array, cast the target byte to s8 to make IDO materialize li -1 instead of li 255 before sb.",
+    "trigger": "Target uses addiu reg,zero,-1 then sb to a byte slot, but assigning -1 into a u8 array emits li 255.",
+    "solution": "Use *(s8 *)&array[offset] = -1; for the -1 byte store while keeping the surrounding byte buffer layout.",
+    "example_functions": [
+      "func_15136A50"
+    ]
   }
 ]

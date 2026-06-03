@@ -3,6 +3,10 @@
 #include "functions.h"
 #include "variables.h"
 
+extern f32 D_800A0280;
+extern f32 D_800A0284;
+void func_15134908(void *, s32, u8, s32);
+
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_EF410/func_150C1F60.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_EF410/func_150C2290.s")
@@ -119,7 +123,21 @@ s32 func_150C251C(void *arg0) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_EF410/func_150C2558.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_EF410/func_150C2700.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_EF410/func_150C2804.s")
+void func_150C2804(s32 arg0, s32 arg1, s32 arg2, s16 arg3, u8 arg4, s32 arg5) {
+    u8 sp1C[0x1A];
+
+    *(s32 *)&sp1C[0] = arg0;
+    *(s32 *)&sp1C[4] = arg1;
+    *(s32 *)&sp1C[8] = arg2;
+    *(f32 *)&sp1C[0xC] = D_800A0280;
+    *(f32 *)&sp1C[0x10] = D_800A0284;
+    *(s16 *)&sp1C[0x14] = arg3;
+    sp1C[0x16] = 5;
+    sp1C[0x17] = 6;
+    sp1C[0x18] = 3;
+    *(s8 *)&sp1C[0x19] = -1;
+    func_15134908(sp1C, 0, arg4, arg5);
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/game_EF410/func_150C2898.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_EF410/func_150C29F0.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_EF410/func_150C2C00.s")
