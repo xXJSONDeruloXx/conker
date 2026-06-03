@@ -1457,9 +1457,9 @@
     "instructions": 20,
     "difficulty": "low",
     "tags": [],
-    "attempts": 36,
-    "lastScore": 0.4,
-    "status": "pending",
+    "attempts": 38,
+    "lastScore": 0.9,
+    "status": "skipped",
     "history": [
       {
         "code": "void func_15079F6C(void) {\n    struct127 **temp_a0 = &D_800D154C;\n    (*temp_a0)->unk224 = (D_800D1890 << 8) | D_800D1891;\n    (*temp_a0)->unk22B = D_800D1892;\n    (*temp_a0)->unk226 = D_800D1893;\n}\n",
@@ -2073,6 +2073,37 @@
           "structural: target=sb t2, 550(t3) got=sb t3, 550(t4)"
         ],
         "timestamp": "2026-06-03T09:55:40.954Z"
+      },
+      {
+        "code": "void func_15079F6C(void) {\n    u16 tmp0;\n    u16 tmp1;\n    u8 tmp2;\n\n    tmp0 = D_800D1890 << 8;\n    tmp1 = D_800D1891;\n    D_800D154C->unk224 = tmp0 | tmp1;\n    tmp2 = D_800D1892;\n    D_800D154C->unk22B = tmp2;\n    D_800D154C->unk226 = D_800D1893;\n}\n",
+        "score": 0.35,
+        "reason": "structural_diffs=13",
+        "diffs": [
+          "structural: target=lui a0, HI(D_800D154C) got=lui a1, HI(D_800D154C)",
+          "structural: target=addiu a0, a0, LO(D_800D154C) got=addiu a1, a1, LO(D_800D154C)",
+          "structural: target=lbu t6, LO(D_800D1891)(v1) got=lbu v1, LO(D_800D1891)(v1)",
+          "structural: target=lw t9, 0(a0) got=lw t9, 0(a1)",
+          "structural: target=or t8, t7, t6 got=or t8, t7, v1",
+          "structural: target=lui t0, HI(D_800D1892) got=lui a0, HI(D_800D1892)",
+          "structural: target=lbu t0, LO(D_800D1892)(t0) got=lbu a0, LO(D_800D1892)(a0)",
+          "structural: target=lw t1, 0(a0) got=lw t0, 0(a1)",
+          "structural: target=lui t2, HI(D_800D1893) got=lui t1, HI(D_800D1893)",
+          "structural: target=sb t0, 555(t1) got=sb a0, 555(t0)",
+          "structural: target=lw t3, 0(a0) got=lw t2, 0(a1)",
+          "structural: target=lbu t2, LO(D_800D1893)(t2) got=lbu t1, LO(D_800D1893)(t1)",
+          "structural: target=sb t2, 550(t3) got=sb t1, 550(t2)"
+        ],
+        "timestamp": "2026-06-03T09:56:06.557Z"
+      },
+      {
+        "code": "void func_15079F6C(void) {\n    u8 *ptr;\n    u16 tmp0;\n    u16 tmp1;\n\n    tmp0 = D_800D1890 << 8;\n    ptr = &D_800D1891;\n    tmp1 = *ptr;\n    D_800D154C->unk224 = tmp0 | tmp1;\n    ptr = &D_800D1892;\n    D_800D154C->unk22B = *ptr;\n    ptr = &D_800D1893;\n    D_800D154C->unk226 = *ptr;\n}\n",
+        "score": 0.9,
+        "reason": "structural_diffs=2",
+        "diffs": [
+          "structural: target=lbu t6, LO(D_800D1891)(v1) got=lbu v1, LO(D_800D1891)(v1)",
+          "structural: target=or t8, t7, t6 got=or t8, t7, v1"
+        ],
+        "timestamp": "2026-06-03T09:56:31.096Z"
       }
     ]
   },
@@ -2083,7 +2114,7 @@
     "instructions": 20,
     "difficulty": "low",
     "tags": [],
-    "attempts": 0,
+    "attempts": 3,
     "lastScore": 0.475,
     "status": "pending",
     "history": [
@@ -2100,6 +2131,27 @@
         "reason": "length_mismatch (target=20, generated=19)",
         "diffs": [],
         "timestamp": "2026-06-02T17:37:49.709Z"
+      },
+      {
+        "code": "void func_150A7CB0(s32 *arg0, s32 arg1, s32 arg2, s32 arg3) {\n    f32 one = 1.0f;\n\n    arg0[0] = arg1;\n    arg0[1] = 0;\n    arg0[2] = 0;\n    arg0[3] = 0;\n    arg0[4] = 0;\n    arg0[5] = arg2;\n    arg0[6] = 0;\n    arg0[7] = 0;\n    arg0[8] = 0;\n    arg0[9] = 0;\n    arg0[10] = arg3;\n    arg0[11] = 0;\n    arg0[12] = 0;\n    arg0[13] = 0;\n    ((f32 *)arg0)[15] = one;\ndummy_label_123:\n    arg0[14] = 0;\n}\n",
+        "score": 0.475,
+        "reason": "length_mismatch (target=20, generated=19)",
+        "diffs": [],
+        "timestamp": "2026-06-03T09:58:07.984Z"
+      },
+      {
+        "code": "void func_150A7CB0(s32 *arg0, s32 arg1, s32 arg2, s32 arg3) {\n    f32 one = 1.0f;\n\n    arg0[0] = arg1;\n    arg0[1] = 0;\n    arg0[2] = 0;\n    arg0[3] = 0;\n    arg0[4] = 0;\n    arg0[5] = arg2;\n    arg0[6] = 0;\n    arg0[7] = 0;\n    arg0[8] = 0;\n    arg0[9] = 0;\n    arg0[10] = arg3;\n    arg0[11] = 0;\n    arg0[12] = 0;\n    arg0[13] = 0;\n    ((f32 *)arg0)[15] = one;\n    goto dummy_label_123;\ndummy_label_123:\n    arg0[14] = 0;\n}\n",
+        "score": 0.475,
+        "reason": "length_mismatch (target=20, generated=19)",
+        "diffs": [],
+        "timestamp": "2026-06-03T09:59:31.604Z"
+      },
+      {
+        "code": "void func_150A7CB0(f32 mtx[4][4], s32 x, s32 y, s32 z) {\n    ((s32 *)mtx)[0] = x;\n    ((s32 *)mtx)[1] = 0;\n    ((s32 *)mtx)[2] = 0;\n    ((s32 *)mtx)[3] = 0;\n    ((s32 *)mtx)[4] = 0;\n    ((s32 *)mtx)[5] = y;\n    ((s32 *)mtx)[6] = 0;\n    ((s32 *)mtx)[7] = 0;\n    ((s32 *)mtx)[8] = 0;\n    ((s32 *)mtx)[9] = 0;\n    ((s32 *)mtx)[10] = z;\n    ((s32 *)mtx)[11] = 0;\n    ((s32 *)mtx)[12] = 0;\n    ((s32 *)mtx)[13] = 0;\n    mtx[3][3] = 1.0f;\n    ((s32 *)mtx)[14] = 0;\n}\n",
+        "score": 0.475,
+        "reason": "length_mismatch (target=20, generated=19)",
+        "diffs": [],
+        "timestamp": "2026-06-03T10:00:10.585Z"
       }
     ]
   },
