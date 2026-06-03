@@ -33,4 +33,4 @@ fi
   -O2 -g3 -mips2 -o32 \
   -o "$OUTPUT" "$TMP_INPUT"
 
-[ -n "$TMP_DIR" ] && rm -rf "$TMP_DIR"
+[ -n "$TMP_DIR" ] && rm -rf "$TMP_DIR" || true
