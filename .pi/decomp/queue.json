@@ -1244,8 +1244,8 @@
     "instructions": 15,
     "difficulty": "low",
     "tags": [],
-    "attempts": 6,
-    "lastScore": 0.46875,
+    "attempts": 9,
+    "lastScore": 0.4666666666666667,
     "status": "pending",
     "history": [
       {
@@ -1289,6 +1289,33 @@
         "reason": "length_mismatch (target=15, generated=16)",
         "diffs": [],
         "timestamp": "2026-06-03T06:06:34.556Z"
+      },
+      {
+        "code": "void func_1514143C(struct210 *arg0) {\n    volatile s32 *temp_v0;\n\n    if (*(volatile s32 *)((s32)arg0 + 0x154) != 0) {\n        temp_v0 = &arg0->unk110;\n        *(f32 *)(temp_v0[0x11] + 0) = arg0->unk34;\n        *(f32 *)(temp_v0[0x11] + 4) = arg0->unk38;\n        *(f32 *)(temp_v0[0x11] + 8) = *(f32 *)((s32)arg0 + 0x3C);\n    }\n}",
+        "score": 0.4666666666666667,
+        "reason": "length_mismatch (target=15, generated=14)",
+        "diffs": [],
+        "timestamp": "2026-06-03T06:07:23.704Z"
+      },
+      {
+        "code": "void func_1514143C(struct210 *arg0) {\n    struct04 *temp_v0 = (struct04 *)((s32)arg0 + 0x110);\n\n    if (*(volatile s32 *)((s32)arg0 + 0x154) != 0) {\n        *(f32 *)(temp_v0->unk44 + 0) = arg0->unk34;\n        *(f32 *)(temp_v0->unk44 + 4) = arg0->unk38;\n        *(f32 *)(temp_v0->unk44 + 8) = *(f32 *)((s32)arg0 + 0x3C);\n    }\n}",
+        "score": 0.6667,
+        "reason": "structural_diffs=5",
+        "diffs": [
+          "structural: target=beqz t6, L0 got=addiu v0, a0, 272",
+          "structural: target=nop got=beqz t6, L0",
+          "structural: target=addiu v0, a0, 272 got=nop",
+          "structural: target=lw t7, 68(v0) got=lwc1 f4, 52(a0)",
+          "structural: target=lwc1 f4, 52(a0) got=lw t7, 68(v0)"
+        ],
+        "timestamp": "2026-06-03T06:07:52.772Z"
+      },
+      {
+        "code": "void func_1514143C(struct210 *arg0) {\n    struct224 *temp_v0;\n\n    if (*(volatile s32 *)((s32)arg0 + 0x154) != 0) {\n        temp_v0 = (struct224 *)((s32)arg0 + 0x110);\n        ((struct17 *)temp_v0->unk44)->unk0 = arg0->unk34;\n        ((struct17 *)temp_v0->unk44)->unk4 = arg0->unk38;\n        ((struct17 *)temp_v0->unk44)->unk8 = *(f32 *)((s32)arg0 + 0x3C);\n    }\n}",
+        "score": 0.4666666666666667,
+        "reason": "length_mismatch (target=15, generated=14)",
+        "diffs": [],
+        "timestamp": "2026-06-03T06:08:27.202Z"
       }
     ]
   },
