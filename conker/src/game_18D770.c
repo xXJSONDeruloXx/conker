@@ -2,6 +2,9 @@
 #include "functions.h"
 #include "variables.h"
 
+void func_1516441C(struct225 *, void *);
+void func_15145CD0(s32, void *, void *, s32);
+
 s32 func_151149AC(u32);
 
 struct225 *func_151602C0(Header *header, Header2 *header2, s32 arg2, s32 arg3, s32 arg4, s32 arg5, u8 arg6, u8 arg7, s32 offset, u8 arg9, s32 argA);
@@ -1221,7 +1224,18 @@ s32 func_151643F8(struct225 *arg0) {
 }
 
 // ???
-#pragma GLOBAL_ASM("asm/nonmatchings/game_18D770/func_1516441C.s")
+void func_1516441C(struct225 *arg0, void *arg1) {
+    void *sp2C;
+    f32 *sp28;
+    f32 sp1C[3];
+
+    sp2C = arg1;
+    sp28 = sp1C;
+    func_15145CD0(*(s32 *)((s32)arg1 + 0xC), &sp2C, &sp28, 1);
+    arg0->unk14->unkE = sp1C[0];
+    arg0->unk14->unk10 = sp1C[1];
+    arg0->unk14->unk12 = sp1C[2];
+}
 
 s32 func_151644A8(struct242 *arg0) {
     f32 temp_f0;

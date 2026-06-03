@@ -10618,9 +10618,9 @@
     "instructions": 35,
     "difficulty": "medium-low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1,
+    "status": "matched"
   },
   {
     "function": "func_1001BE1C",
@@ -12995,9 +12995,27 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 0.7714,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_1516441C(struct225 *arg0, void *arg1) {\n    f32 sp1C[3];\n    f32 *sp28;\n    void *sp2C;\n\n    sp2C = arg1;\n    sp28 = sp1C;\n    func_15145CD0(*(s32 *)((s32)arg1 + 0xC), &sp2C, &sp28, 1);\n    arg0->unk14->unkE = sp1C[0];\n    arg0->unk14->unk10 = sp1C[1];\n    arg0->unk14->unk12 = sp1C[2];\n}",
+        "score": 0.7714,
+        "reason": "structural_diffs=8",
+        "diffs": [
+          "structural: target=addiu t7, sp, 28 got=addiu t7, sp, 36",
+          "structural: target=sw t7, 40(sp) got=sw t7, 32(sp)",
+          "structural: target=sw t6, 44(sp) got=sw t6, 28(sp)",
+          "structural: target=addiu a1, sp, 44 got=addiu a1, sp, 28",
+          "structural: target=addiu a2, sp, 40 got=addiu a2, sp, 32",
+          "structural: target=lwc1 f4, 28(sp) got=lwc1 f4, 36(sp)",
+          "structural: target=lwc1 f8, 32(sp) got=lwc1 f8, 40(sp)",
+          "structural: target=lwc1 f16, 36(sp) got=lwc1 f16, 44(sp)"
+        ],
+        "timestamp": "2026-06-03T20:36:20.594Z"
+      }
+    ]
   },
   {
     "function": "func_100043B4",
