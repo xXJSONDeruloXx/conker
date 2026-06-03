@@ -14455,8 +14455,8 @@
     "instructions": 36,
     "difficulty": "medium-low",
     "tags": [],
-    "attempts": 9,
-    "lastScore": 0.6389,
+    "attempts": 12,
+    "lastScore": 0.4166666666666667,
     "status": "pending",
     "history": [
       {
@@ -14641,6 +14641,41 @@
           "structural: target=slt at, a3, t9 got=slt at, a3, t8"
         ],
         "timestamp": "2026-06-03T21:20:40.702Z"
+      },
+      {
+        "code": "void func_15143D18(s32 *arg0, s32 *arg1, s32 arg2, s32 arg3) {\n    s32 temp_v0;\n    s32 temp_a0;\n    s32 tmp;\n    s32 newmax;\n\n    if (arg3 < arg2) {\n        tmp = arg2 ^ arg3;\n        newmax = arg3 ^ tmp;\n        arg3 = newmax;\n        arg2 = tmp ^ newmax;\n    }\n    tmp = *arg1;\n    newmax = *arg0;\n    if (tmp < newmax) {\n        temp_v0 = newmax ^ tmp;\n        *arg0 = temp_v0;\n        temp_a0 = *arg1 ^ temp_v0;\n        *arg1 = temp_a0;\n        newmax = *arg0 ^ temp_a0;\n        *arg0 = newmax;\n    }\n    if (newmax < arg2) {\n        *arg0 = arg2;\n    }\n    if (arg3 < *arg1) {\n        *arg1 = arg3;\n    }\n}",
+        "score": 0.6389,
+        "reason": "structural_diffs=13",
+        "diffs": [
+          "structural: target=lw v1, 0(s0) got=lw v0, 0(s0)",
+          "structural: target=lw a1, 0(s1) got=lw a0, 0(s1)",
+          "structural: target=slt at, v1, a1 got=slt at, v0, a0",
+          "structural: target=xor v0, a1, v1 got=xor v1, a0, v0",
+          "structural: target=sw v0, 0(s1) got=sw v1, 0(s1)",
+          "structural: target=xor a0, t6, v0 got=xor a1, t6, v1",
+          "structural: target=sw a0, 0(s0) got=sw a1, 0(s0)",
+          "structural: target=xor a1, t7, a0 got=xor a0, t7, a1",
+          "structural: target=sw a1, 0(s1) got=sw a0, 0(s1)",
+          "structural: target=slt at, a1, a2 got=slt at, a0, a2",
+          "structural: target=lw t9, 0(s0) got=lw t8, 0(s0)",
+          "structural: target=lw t9, 0(s0) got=lw t8, 0(s0)",
+          "structural: target=slt at, a3, t9 got=slt at, a3, t8"
+        ],
+        "timestamp": "2026-06-03T21:21:06.979Z"
+      },
+      {
+        "code": "void func_15143D18(s32 *arg0, s32 arg1, s32 arg2, s32 arg3) {\n    s32 *ptr;\n    s32 temp_v1;\n    s32 temp_v0;\n    s32 temp_a0;\n\n    ptr = (s32 *)arg1;\n    if (arg3 < arg2) {\n        temp_v1 = arg2 ^ arg3;\n        arg1 = arg3 ^ temp_v1;\n        arg3 = arg1;\n        arg2 = temp_v1 ^ arg1;\n    }\n    temp_v1 = *ptr;\n    arg1 = *arg0;\n    if (temp_v1 < arg1) {\n        temp_v0 = arg1 ^ temp_v1;\n        *arg0 = temp_v0;\n        temp_a0 = *ptr ^ temp_v0;\n        *ptr = temp_a0;\n        arg1 = *arg0 ^ temp_a0;\n        *arg0 = arg1;\n    }\n    if (arg1 < arg2) {\n        *arg0 = arg2;\n    }\n    if (arg3 < *ptr) {\n        *ptr = arg3;\n    }\n}",
+        "score": 0.4722222222222222,
+        "reason": "length_mismatch (target=36, generated=34)",
+        "diffs": [],
+        "timestamp": "2026-06-03T21:21:27.860Z"
+      },
+      {
+        "code": "void func_15143D18(s32 *arg0, s32 arg1, s32 arg2, s32 arg3) {\n    s32 *ptr1;\n    s32 *ptr0;\n    s32 temp_v1;\n    s32 temp_v0;\n    s32 temp_a0;\n\n    ptr1 = (s32 *)arg1;\n    ptr0 = arg0;\n    if (arg3 < arg2) {\n        temp_v1 = arg2 ^ arg3;\n        arg1 = arg3 ^ temp_v1;\n        arg3 = arg1;\n        arg2 = temp_v1 ^ arg1;\n    }\n    temp_v1 = *ptr1;\n    arg1 = *ptr0;\n    if (temp_v1 < arg1) {\n        temp_v0 = arg1 ^ temp_v1;\n        *ptr0 = temp_v0;\n        temp_a0 = *ptr1 ^ temp_v0;\n        *ptr1 = temp_a0;\n        arg1 = *ptr0 ^ temp_a0;\n        *ptr0 = arg1;\n    }\n    if (arg1 < arg2) {\n        *ptr0 = arg2;\n    }\n    if (arg3 < *ptr1) {\n        *ptr1 = arg3;\n    }\n}",
+        "score": 0.4166666666666667,
+        "reason": "length_mismatch (target=36, generated=30)",
+        "diffs": [],
+        "timestamp": "2026-06-03T21:22:02.308Z"
       }
     ]
   },
