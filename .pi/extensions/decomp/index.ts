@@ -284,8 +284,8 @@ function buildChunkPrompt(chunkNum: number): string {
 		"- Functions with 8+ failed attempts are auto-rotated: `decomp_queue next` will skip them this session.",
 		"- Use the pattern library (/skill:n64-decomp) for IDO codegen rules.",
 		"- If score ≥ 0.9, you're close — try declaration reordering, type changes, or expression reshaping.",
-		"- If score ≥ 0.8 and plateaued, use decomp_permute to brute-force the last few instructions.",
-		"- Every few chunks, try: decomp_queue next with filter={nearMiss: true} to revisit high-scoring near-misses with the permuter.",
+		"- If plateaued (3+ attempts, no improvement), use decomp_permute regardless of score — Transmuter can fix codegen issues at ANY score level.",
+		"- Every few chunks, try: decomp_queue next with filter={nearMiss: true} to revisit near-misses with the permuter.",
 		"- If score < 0.3 after 3 attempts, skip this candidate and try the next one.",
 		"- Read `decomp_diff` output before every retry.",
 		"- Never provide code that includes multiple functions, struct definitions, or header content.",
@@ -1331,12 +1331,22 @@ export default function (pi: ExtensionAPI) {
 			}
 
 			// Auto-permuter suggestion: if this attempt scored high, strongly suggest permuter
+			// Suggest Transmuter when: score > 0 AND (high score OR plateaued after 3+ attempts)
 			let permuterHint = "";
-			if ((scoreData.score || 0) >= 0.8 && !plateauWarning.includes("permuter")) {
-				permuterHint = `\n\n🎯 HIGH SCORE (${scoreData.score?.toFixed(3)}) — this is a strong permuter candidate!`
-					+ `\n   The code is semantically correct but codegen doesn’t match exactly.`
-					+ `\n   → Call \`decomp_permute\` with function="${params.function}" file="${params.file}" to brute-force the last few instructions.`
-					+ `\n   Note: Transmuter compiles in isolation. After it finds a match, verify with decomp_attempt (full TU build).`;
+			const sessionCount = sessionAttemptCounts.get(params.function)?.count || 0;
+			const shouldSuggestPermuter = (scoreData.score || 0) > 0 && (
+				(scoreData.score || 0) >= 0.8 || // High score — always suggest
+				(sessionCount >= 3 && !plateauWarning) // 3+ attempts this session without plateau warning already covering it
+			);
+			if (shouldSuggestPermuter && !plateauWarning.includes("permuter")) {
+				const instrDiff = scoreData.target_instructions && scoreData.generated_instructions
+					? Math.abs(scoreData.target_instructions - scoreData.generated_instructions)
+					: null;
+				const instrHint = instrDiff !== null ? ` (${instrDiff} instruction${instrDiff === 1 ? "" : "s"} off)` : "";
+				permuterHint = `\n\n🎯 TRANSMUTER CANDIDATE${instrHint} — code compiles, structure looks right, codegen doesn’t match.`
+					+ `\n   Transmuter’s 49 AST-aware mutation rules (sameline, pad-var-decl, reorder-stmts, etc.) can brute-force this.`
+					+ `\n   → Call \`decomp_permute\` with function="${params.function}" file="${params.file}"`
+					+ `\n   Note: Verify the result with decomp_attempt after (IDO codegen is context-sensitive).`;
 			}
 
 			// Build response with prior attempt context
@@ -1754,10 +1764,11 @@ export default function (pi: ExtensionAPI) {
 			"Run Transmuter mutation search on a near-miss function. Uses 49 AST-aware rules with Thompson Sampling, IDO profile, and multi-branch search to brute-force the last few instructions. Runs natively (~40 compiles/sec). Best for functions scoring 0.8+ where the LLM can't converge on exact codegen.",
 		promptSnippet: "Brute-force mutate a near-miss C function using Transmuter (49 rules, adaptive sampling, IDO profile)",
 		promptGuidelines: [
-			"Use decomp_permute on functions with score ≥ 0.8 where decomp_attempt has plateaued. Transmuter runs multi-branch mutation search with IDO-tuned rules.",
+			"Use decomp_permute whenever you've plateaued (3+ attempts without improvement) at ANY score level. Transmuter's mutations can fix 1-instruction differences that LLMs can't.",
+			"Common wins: 'sameline' (combining statements), 'pad-var-decl' (unused variable for stack), 'reorder-stmts' (swap adjacent lines), 'temp-for-expr' (extract into temp).",
 			"decomp_permute uses the best attempt from history by default. Provide code= to override with a specific starting point.",
-			"Transmuter typically finds matches in 3-30 seconds for near-misses (score ≥ 0.9). Give it up to 60s.",
-			"IMPORTANT: Transmuter compiles the function in isolation (not the full TU). After it finds a match, you MUST verify with decomp_attempt to confirm the match holds in the full translation unit context. IDO codegen is context-sensitive.",
+			"Transmuter typically finds matches in 3-60 seconds. Near-misses (1-3 instructions off) are fastest.",
+			"IMPORTANT: Transmuter compiles in isolation (not the full TU). After it finds a match, MUST verify with decomp_attempt (IDO codegen is context-sensitive).",
 			"If the Transmuter match includes externs not in the source file, pass them via decomp_attempt's externs parameter.",
 		],
 		parameters: Type.Object({
