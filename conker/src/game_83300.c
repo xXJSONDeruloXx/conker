@@ -968,7 +968,16 @@ f32 func_1505D34C(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 *arg4) {
 #pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_1505DDA8.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_1505DF10.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_1505DFDC.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_1505E060.s")
+void func_1505E060(u8 *arg0) {
+    *(u16 *)(arg0 + 0x6) = *(u16 *)(arg0 + 0x4);
+    *(f32 *)(arg0 + 0xC) = *(f32 *)(arg0 + 0x8);
+    *(f32 *)(arg0 + 0x14) = *(f32 *)(arg0 + 0x10);
+    *(f32 *)(arg0 + 0x24) = *(f32 *)(arg0 + 0x20);
+    *(f32 *)(arg0 + 0x1C) = *(f32 *)(arg0 + 0x18);
+    *(s8 *)(arg0 + 0x39) = *(s8 *)(arg0 + 0x38);
+    *(s32 *)(arg0 + 0x2C) = *(s32 *)(arg0 + 0x28);
+    bcopy(arg0 + 0x40, arg0 + 0x210, 0x1D0);
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_1505E0C4.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_1505E650.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_1505E7CC.s")
