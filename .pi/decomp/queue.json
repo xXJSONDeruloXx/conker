@@ -3421,9 +3421,9 @@
     "instructions": 23,
     "difficulty": "low",
     "tags": [],
-    "attempts": 10,
-    "lastScore": 0.6087,
-    "status": "pending",
+    "attempts": 11,
+    "lastScore": 1,
+    "status": "matched",
     "history": [
       {
         "code": "void func_151635A8(struct225 *arg0, s32 arg1, u8 arg2) {\n    if (D_8008B370[arg0->unk25] != NULL) {\n        D_8008B370[arg0->unk25](arg2);\n    }\n}",
@@ -4350,7 +4350,7 @@
     "instructions": 23,
     "difficulty": "low",
     "tags": [],
-    "attempts": 0,
+    "attempts": 48,
     "lastScore": 0,
     "status": "pending",
     "history": [
@@ -4381,6 +4381,342 @@
         "reason": "generated 1339 instr for 23 target (58.2x oversized)",
         "diffs": [],
         "timestamp": "2026-06-02T18:38:53.475Z"
+      },
+      {
+        "code": "void func_15167010(void) {\n    void *temp_s0;\n    void *temp_s2;\n    void (*temp_v0)(void);\n\n    temp_s0 = D_8008B4A8;\n    temp_s2 = (void *)((s32)temp_s0 + 0x1484);\n    do {\n        temp_v0 = *(void (**)(void))((s32)temp_s0 + 0x18);\n        if (temp_v0 != NULL) {\n            temp_v0();\n        }\n        temp_s0 = (void *)((s32)temp_s0 + 0x34);\n    } while ((u32)temp_s0 < (u32)temp_s2);\n}",
+        "score": 0,
+        "reason": "generated 1340 instr for 23 target (58.3x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T11:52:45.225Z"
+      },
+      {
+        "code": "void func_15167010(void) {\n    volatile u8 *temp_s0;\n    volatile u8 *temp_s2;\n    void (*temp_v0)(void);\n\n    temp_s0 = (volatile u8 *)D_8008B4A8;\n    temp_s2 = temp_s0 + 0x1484;\n    do {\n        temp_v0 = *(void (**)(void))((s32)temp_s0 + 0x18);\n        if (temp_v0 != NULL) {\n            temp_v0();\n        }\n        temp_s0 += 0x34;\n    } while ((u32)temp_s0 < (u32)temp_s2);\n}",
+        "score": 0,
+        "reason": "generated 1340 instr for 23 target (58.3x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T11:53:22.590Z"
+      },
+      {
+        "code": "void func_15167010(void) {\n    u8 *temp_s0;\n    u8 *temp_s2;\n    void (*temp_v0)(void);\n\n    temp_s0 = (u8 *)D_8008B4A8;\n    temp_s2 = temp_s0 + 0x1484;\n    temp_v0 = *(void (**)(void))(temp_s0 + 0x18);\nloop:\n    if (temp_v0 != NULL) {\n        temp_v0();\n    }\n    temp_s0 += 0x34;\n    if (temp_s0 < temp_s2) {\n        temp_v0 = *(void (**)(void))(temp_s0 + 0x18);\n        goto loop;\n    }\n}",
+        "score": 0,
+        "reason": "generated 1343 instr for 23 target (58.4x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T11:53:44.837Z"
+      },
+      {
+        "code": "void func_15167010(void) {\n    u8 * volatile temp_s0;\n    u8 *temp_s2;\n    void (*temp_v0)(void);\n\n    temp_s0 = (u8 *)D_8008B4A8;\n    temp_s2 = temp_s0 + 0x1484;\n    do {\n        temp_v0 = *(void (**)(void))(temp_s0 + 0x18);\n        if (temp_v0 != NULL) {\n            temp_v0();\n        }\n        temp_s0 += 0x34;\n    } while (temp_s0 < temp_s2);\n}",
+        "score": 0,
+        "reason": "generated 1344 instr for 23 target (58.4x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T11:54:11.970Z"
+      },
+      {
+        "code": "void func_15167010(void) {\n    struct115 *ptr;\n    struct115 *end;\n    void (*func)(void);\n\n    ptr = D_8008B4A8;\n    end = (struct115 *)((s32)D_8008B4A8 + 0x1484);\n    do {\n        func = (void (*)(void))ptr->unk18;\n        if (func != NULL) {\n            func();\n        }\n        ptr++;\n    } while (ptr != end);\n}",
+        "score": 0,
+        "reason": "generated 1339 instr for 23 target (58.2x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T11:55:20.025Z"
+      },
+      {
+        "code": "void func_15167010(void) {\n    struct115 *ptr;\n    struct115 *end;\n    void (*func)(void);\n\n    ptr = D_8008B4A8;\n    end = (struct115 *)((s32)ptr + 0x1484);\n    do {\n        func = (void (*)(void))ptr->unk18;\n        if (func != NULL) {\n            func();\n        }\n        ptr++;\n    } while (ptr < end);\n}",
+        "score": 0,
+        "reason": "generated 1340 instr for 23 target (58.3x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T11:56:21.044Z"
+      },
+      {
+        "code": "void func_15167010(void) {\n    struct115 *ptr;\n    struct115 *end;\n\n    ptr = D_8008B4A8;\n    end = (struct115 *)((s32)ptr + 0x1484);\n    do {\n        if (ptr->unk18 != NULL) {\n            ptr->unk18(NULL);\n        }\n        ptr++;\n    } while (ptr < end);\n}",
+        "score": 0,
+        "reason": "generated 1340 instr for 23 target (58.3x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T11:56:49.477Z"
+      },
+      {
+        "code": "void func_15167010(void) {\n    struct115 *ptr;\n    void (*func)(void);\n    struct115 *end;\n\n    ptr = D_8008B4A8;\n    end = (struct115 *)((s32)ptr + 0x1484);\n    do {\n        func = (void (*)(void))ptr->unk18;\n        if (func != NULL) {\n            func();\n        }\n        ptr++;\n    } while (ptr < end);\n}",
+        "score": 0,
+        "reason": "generated 1340 instr for 23 target (58.3x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T11:57:17.238Z"
+      },
+      {
+        "code": "void func_15167010(void) {\n    struct115 *ptr;\n    struct115 *end;\n    void (*func)(void);\n\n    ptr = D_8008B4A8;\n    end = ptr;\n    end = (struct115 *)((s32)end + 0x1484);\n    do {\n        func = (void (*)(void))ptr->unk18;\n        if (func != NULL) {\n            func();\n        }\n        ptr++;\n    } while (ptr < end);\n}",
+        "score": 0,
+        "reason": "generated 1340 instr for 23 target (58.3x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T11:57:59.853Z"
+      },
+      {
+        "code": "void func_15167010(void) {\n    u8 *ptr;\n    u8 *end;\n    void (*func)(void);\n\n    ptr = (u8 *)D_8008B4A8;\n    end = ptr + 0x1484;\n    do {\n        func = *(void (**)(void))(ptr + 0x18);\n        if (func != NULL) {\n            func();\n        }\n        ptr += 0x34;\n    } while (ptr < end);\n}",
+        "score": 0,
+        "reason": "generated 1340 instr for 23 target (58.3x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T11:58:20.501Z"
+      },
+      {
+        "code": "void func_15167010(void) {\n    s32 i;\n    void (*func)(void);\n\n    for (i = 0; i < 0x1484; i += 0x34) {\n        func = *(void (**)(void))((u8 *)D_8008B4A8 + i + 0x18);\n        if (func != NULL) {\n            func();\n        }\n    }\n}",
+        "score": 0,
+        "reason": "generated 1342 instr for 23 target (58.3x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T11:58:50.717Z"
+      },
+      {
+        "code": "void func_15167010(void) {\n    void *temp_s0;\n    void *temp_s2;\n    void (*temp_v0)(void);\n\n    temp_s0 = D_8008B4A8;\n    temp_s2 = (void *)((s32)temp_s0 + 0x1484);\n    do {\n        temp_v0 = *(void (**)(void))((s32)temp_s0 + 0x18);\n        if (temp_v0 != NULL) {\n            temp_v0();\n        }\n        temp_s0 = (void *)((s32)temp_s0 + 0x34);\n    } while ((u32)temp_s0 < (u32)temp_s2);\n}",
+        "score": 0,
+        "reason": "generated 1340 instr for 23 target (58.3x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T11:59:30.110Z"
+      },
+      {
+        "code": "void func_15167010(void) {\n    u8 *ptr;\n    u8 *unused;\n    u8 *end;\n    void (*func)(void);\n\n    ptr = (u8 *)D_8008B4A8;\n    unused = ptr;\n    end = ptr + 0x1484;\n    do {\n        func = *(void (**)(void))(ptr + 0x18);\n        if (func != NULL) {\n            func();\n        }\n        ptr += 0x34;\n    } while (ptr < end);\n}",
+        "score": 0,
+        "reason": "generated 1340 instr for 23 target (58.3x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T11:59:47.517Z"
+      },
+      {
+        "code": "void func_15167010(s32 arg0) {\n    u8 *ptr;\n    u8 *end;\n    void (*func)(void);\n\n    ptr = (u8 *)D_8008B4A8;\n    end = ptr + 0x1484;\n    do {\n        func = *(void (**)(void))(ptr + 0x18);\n        if (func != NULL) {\n            func();\n        }\n        ptr += 0x34;\n    } while (ptr < end);\n}",
+        "score": 0,
+        "reason": "generated 1341 instr for 23 target (58.3x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:00:09.258Z"
+      },
+      {
+        "code": "void func_15167010(void) {\n    struct115 *ptr;\n    struct115 *end;\n    void (*func)(void);\n\n    ptr = D_8008B4A8;\n    end = (struct115 *)((s32)ptr + 0x1484);\n    do {\n        func = (void (*)(void))ptr->unk18;\n        if (func != NULL) {\n            func();\n        }\n        ptr++;\n    } while (ptr < end);\n}",
+        "score": 0,
+        "reason": "generated 1340 instr for 23 target (58.3x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:01:13.373Z"
+      },
+      {
+        "code": "void func_15167010(void) {\n    register struct115 *ptr;\n    register struct115 *end;\n    register void (*func)(void);\n\n    ptr = D_8008B4A8;\n    end = (struct115 *)((s32)ptr + 0x1484);\n    do {\n        func = (void (*)(void))ptr->unk18;\n        if (func != NULL) {\n            func();\n        }\n        ptr++;\n    } while (ptr < end);\n}",
+        "score": 0,
+        "reason": "generated 1340 instr for 23 target (58.3x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:01:27.583Z"
+      },
+      {
+        "code": "void func_15167010(void) {\n    struct115 *ptr;\n    struct115 *end;\n    void (*func)(void);\n\n    for (ptr = D_8008B4A8, end = (struct115 *)((u8 *)D_8008B4A8 + 0x1484); ptr < end; ptr++) {\n        func = (void (*)(void))ptr->unk18;\n        if (func != NULL) {\n            func();\n        }\n    }\n}",
+        "score": 0,
+        "reason": "generated 1340 instr for 23 target (58.3x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:01:39.267Z"
+      },
+      {
+        "code": "void func_15167010(void) {\n    u8 *ptr;\n    register volatile u8 *unused;\n    u8 *end;\n    void (*func)(void);\n\n    ptr = (u8 *)D_8008B4A8;\n    unused = ptr;\n    end = ptr + 0x1484;\n    do {\n        func = *(void (**)(void))(ptr + 0x18);\n        if (func != NULL) {\n            func();\n        }\n        ptr += 0x34;\n    } while (ptr < end);\n}",
+        "score": 0,
+        "reason": "generated 1340 instr for 23 target (58.3x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:03:04.472Z"
+      },
+      {
+        "code": "void func_15167010(void) {\n    u8 *ptr;\n    register volatile u8 *unused;\n    register volatile u8 *unused2;\n    u8 *end;\n    void (*func)(void);\n\n    ptr = (u8 *)D_8008B4A8;\n    unused = ptr;\n    unused2 = ptr;\n    end = ptr + 0x1484;\n    do {\n        func = *(void (**)(void))(ptr + 0x18);\n        if (func != NULL) {\n            func();\n        }\n        ptr += 0x34;\n    } while (ptr < end);\n}",
+        "score": 0,
+        "reason": "generated 1340 instr for 23 target (58.3x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:03:26.821Z"
+      },
+      {
+        "code": "void func_15167010(void) {\n    u8 *ptr;\n    u8 *end;\n    void (*func)(void);\n\n    ptr = (u8 *)D_8008B4A8;\n    end = ptr;\n    end += 0x1484;\n    do {\n        func = *(void (**)(void))(ptr + 0x18);\n        if (func != NULL) {\n            func();\n        }\n        ptr += 0x34;\n    } while (ptr < end);\n}",
+        "score": 0,
+        "reason": "generated 1340 instr for 23 target (58.3x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:03:43.140Z"
+      },
+      {
+        "code": "void func_15167010(void) {\n    u8 *ptr;\n    u8 *end;\n    register volatile u8 *unused;\n    void (*func)(void);\n\n    ptr = (u8 *)D_8008B4A8;\n    unused = ptr;\n    unused;\n    end = ptr + 0x1484;\n    do {\n        func = *(void (**)(void))(ptr + 0x18);\n        if (func != NULL) {\n            func();\n        }\n        ptr += 0x34;\n    } while (ptr < end);\n}",
+        "score": 0,
+        "reason": "generated 1340 instr for 23 target (58.3x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:04:01.155Z"
+      },
+      {
+        "code": "void func_15167010(void) {\n    u8 *ptr;\n    u8 *end;\n    void (*func)(void);\n\n    for (ptr = (u8 *)D_8008B4A8, end = ptr + 0x1484; ptr < end; ptr += 0x34) {\n        func = *(void (**)(void))(ptr + 0x18);\n        if (func != NULL) {\n            func();\n        }\n    }\n}",
+        "score": 0,
+        "reason": "generated 1340 instr for 23 target (58.3x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:04:20.469Z"
+      },
+      {
+        "code": "void func_15167010(void) {\n    u8 *ptr;\n    u8 *end;\n    void (*func)(void);\n\n    ptr = (u8 *)D_8008B4A8;\n    end = (u8 *)((s32)ptr + 0x1484);\n    do {\n        func = *(void (**)(void))(ptr + 0x18);\n        if (func != NULL) {\n            func();\n        }\n        ptr += 0x34;\n    } while (ptr < end);\n}",
+        "score": 0,
+        "reason": "generated 1340 instr for 23 target (58.3x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:04:34.760Z"
+      },
+      {
+        "code": "void func_15167010(void) {\n    u8 *base;\n    u8 *ptr;\n    u8 *end;\n    void (*func)(void);\n\n    base = (u8 *)D_8008B4A8;\n    ptr = base;\n    end = base + 0x1484;\n    do {\n        func = *(void (**)(void))(ptr + 0x18);\n        if (func != NULL) {\n            func();\n        }\n        ptr += 0x34;\n    } while (ptr < end);\n}",
+        "score": 0,
+        "reason": "generated 1340 instr for 23 target (58.3x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:04:51.758Z"
+      },
+      {
+        "code": "void func_15167010(s32 arg0) {\n    u8 *ptr;\n    u8 *end;\n    void (*func)(void);\n\n    ptr = (u8 *)D_8008B4A8;\n    end = (u8 *)((s32)ptr + 0x1484);\n    do {\n        func = *(void (**)(void))(ptr + 0x18);\n        if (func != NULL) {\n            func();\n        }\n        ptr += 0x34;\n    } while (ptr < end);\n}",
+        "score": 0,
+        "reason": "generated 1341 instr for 23 target (58.3x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:05:15.443Z"
+      },
+      {
+        "code": "void func_15167010(void) {\n    void (*func)(void);\n    s32 i;\n\n    for (i = 0; i < 24; i++)\n    {\n        func = D_8008B4A8[i].unk18;\n        if (func != NULL) {\n            func();\n        }\n    }\n}",
+        "score": 0,
+        "reason": "generated 1339 instr for 23 target (58.2x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:06:33.485Z"
+      },
+      {
+        "code": "void func_15167010(void) {\n    struct115 *ptr;\n    struct115 *end;\n    s32 i;\n    void (*func)(void);\n\n    ptr = D_8008B4A8;\n    end = &D_8008B4A8[101];\n    for (i = 0; ptr < end; i++) {\n        func = (void (*)(void))ptr->unk18;\n        if (func != NULL) {\n            func();\n        }\n        ptr++;\n    }\n}",
+        "score": 0,
+        "reason": "generated 1340 instr for 23 target (58.3x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:06:53.578Z"
+      },
+      {
+        "code": "void func_15167010(void) {\n    struct115 *base;\n    struct115 *ptr;\n    struct115 *end;\n    void (*func)(void);\n\n    base = D_8008B4A8;\n    ptr = base;\n    end = base + 101;\n    do {\n        func = (void (*)(void))ptr->unk18;\n        if (func != NULL) {\n            func();\n        }\n        ptr++;\n    } while (ptr < end);\n}",
+        "score": 0,
+        "reason": "generated 1340 instr for 23 target (58.3x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:07:17.885Z"
+      },
+      {
+        "code": "void func_15167010(void) {\n    u8 *base;\n    u8 *ptr;\n    u8 *end;\n    void (*func)(void);\n\n    base = (u8 *)D_8008B4A8;\n    ptr = base;\n    end = (u8 *)((s32)base + 0x1484);\n    do {\n        func = *(void (**)(void))(ptr + 0x18);\n        if (func != NULL) {\n            func();\n        }\n        ptr += 0x34;\n    } while (ptr < end);\n}",
+        "score": 0,
+        "reason": "generated 1340 instr for 23 target (58.3x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:07:56.810Z"
+      },
+      {
+        "code": "void func_15167010(void) {\n    u8 *ptr;\n    u8 *end;\n    s32 i;\n    void (*func)(void);\n\n    ptr = (u8 *)D_8008B4A8;\n    end = ptr + 0x1484;\n    i = 0;\n    do {\n        func = *(void (**)(void))(ptr + 0x18);\n        if (func != NULL) {\n            func();\n        }\n        ptr += 0x34;\n        i++;\n    } while (ptr < end);\n}",
+        "score": 0,
+        "reason": "generated 1340 instr for 23 target (58.3x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:08:14.522Z"
+      },
+      {
+        "code": "void func_15167010(void) {\n    void (*func)(void);\n    s32 i;\n\n    for (i = 0; i < 101; i++) {\n        func = (void (*)(void))D_8008B4A8[i].unk18;\n        if (func != NULL) {\n            func();\n        }\n    }\n}",
+        "score": 0,
+        "reason": "generated 1339 instr for 23 target (58.2x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:08:37.029Z"
+      },
+      {
+        "code": "void func_15167010(void) {\n    register volatile s32 unused;\n    u8 *ptr;\n    u8 *end;\n    void (*func)(void);\n\n    ptr = (u8 *)D_8008B4A8;\n    end = ptr + 0x1484;\n    do {\n        func = *(void (**)(void))(ptr + 0x18);\n        if (func != NULL) {\n            func();\n        }\n        ptr += 0x34;\n    } while (ptr < end);\n}",
+        "score": 0,
+        "reason": "generated 1340 instr for 23 target (58.3x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:08:53.529Z"
+      },
+      {
+        "code": "void func_15167010(void) {\n    u8 *ptr;\n    void (*func)(void);\n    u8 *end;\n\n    ptr = (u8 *)D_8008B4A8;\n    end = ptr + 0x1484;\n    do {\n        func = *(void (**)(void))(ptr + 0x18);\n        if (func != NULL) {\n            func();\n        }\n        ptr += 0x34;\n    } while (ptr < end);\n}",
+        "score": 0,
+        "reason": "generated 1340 instr for 23 target (58.3x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:09:29.671Z"
+      },
+      {
+        "code": "void func_15167010(void) {\n    void (*func)(void);\n    s32 i;\n\n    for (i = 0; i < 24; i++) {\n        func = D_8008B4A8[i].unk18;\n        if (func != NULL) {\n            func();\n        }\n    }\n}",
+        "score": 0,
+        "reason": "generated 1339 instr for 23 target (58.2x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:10:22.183Z"
+      },
+      {
+        "code": "void func_15167010(void) {\n    u8 *ptr;\n    u8 *end;\n    void (*func)(void);\n\n    ptr = (u8 *)D_8008B4A8;\n    end = ptr;\n    end += 0x1484;\n    do {\n        func = *(void (**)(void))(ptr + 0x18);\n        if (func != NULL) {\n            func();\n        }\n        ptr += 0x34;\n    } while (ptr < end);\n}",
+        "score": 0,
+        "reason": "generated 1340 instr for 23 target (58.3x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:10:39.093Z"
+      },
+      {
+        "code": "void func_15167010(void) {\n    void (*func)(void);\n    s32 i;\n\n    for (i = 0; i < 101; i++) {\n        func = D_8008B4A8[i].unk18;\n        if (func != NULL) {\n            func();\n        }\n    }\n}",
+        "score": 0,
+        "reason": "generated 1339 instr for 23 target (58.2x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:10:56.666Z"
+      },
+      {
+        "code": "void func_15167010(void) {\n    u8 *ptr;\n    u8 *dummy;\n    u8 *end;\n    void (*func)(void);\n\n    ptr = (u8 *)D_8008B4A8;\n    dummy = ptr;\n    end = dummy + 0x1484;\n    do {\n        func = *(void (**)(void))(ptr + 0x18);\n        if (func != NULL) {\n            func();\n        }\n        ptr += 0x34;\n    } while (ptr < end);\n}",
+        "score": 0,
+        "reason": "generated 1340 instr for 23 target (58.3x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:11:12.219Z"
+      },
+      {
+        "code": "void func_15167010(void) {\n    register volatile s32 dummy = 0;\n    u8 *ptr;\n    u8 *end;\n    void (*func)(void);\n\n    ptr = (u8 *)D_8008B4A8;\n    end = ptr + 0x1484;\n    do {\n        func = *(void (**)(void))(ptr + 0x18);\n        if (func != NULL) {\n            func();\n        }\n        ptr += 0x34;\n    } while (ptr < end);\n}",
+        "score": 0,
+        "reason": "generated 1341 instr for 23 target (58.3x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:11:34.970Z"
+      },
+      {
+        "code": "void func_15167010(s32 unused) {\n    u8 *ptr;\n    u8 *end;\n    void (*func)(void);\n\n    ptr = (u8 *)D_8008B4A8;\n    end = ptr + 0x1484;\n    do {\n        func = *(void (**)(void))(ptr + 0x18);\n        if (func != NULL) {\n            func();\n        }\n        ptr += 0x34;\n    } while (ptr < end);\n}",
+        "score": 0,
+        "reason": "generated 1341 instr for 23 target (58.3x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:11:51.052Z"
+      },
+      {
+        "code": "void func_15167010(void) {\n    struct115 *ptr;\n    struct115 *end;\n    void (*func)(void);\n\n    ptr = D_8008B4A8;\n    end = ptr + 101;\n    do {\n        func = ptr->unk18;\n        if (func != NULL) {\n            func();\n        }\n        ptr++;\n    } while (ptr < end);\n}",
+        "score": 0,
+        "reason": "generated 1340 instr for 23 target (58.3x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:13:08.913Z"
+      },
+      {
+        "code": "void func_15167010(void) {\n    struct115 *ptr;\n    struct115 *end;\n    void (*func)(void);\n    s32 i;\n\n    ptr = D_8008B4A8;\n    end = ptr + 101;\n    for (i = 0; ptr < end; i++, ptr++) {\n        func = ptr->unk18;\n        if (func != NULL) {\n            func();\n        }\n    }\n}",
+        "score": 0,
+        "reason": "generated 1340 instr for 23 target (58.3x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:13:30.659Z"
+      },
+      {
+        "code": "void func_15167010(void) {\n    u8 *ptr;\n    u8 *end;\n    void (*func)(void);\n\n    ptr = (u8 *)D_8008B4A8;\n    end = ptr + 0x1484;\n    do {\n        func = *(void (**)(void))(ptr + 0x18);\n        if (func != NULL) {\n            func();\n        }\n        ptr += 0x34;\n    } while ((u32)ptr < (u32)end);\n}",
+        "score": 0,
+        "reason": "generated 1340 instr for 23 target (58.3x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:13:51.108Z"
+      },
+      {
+        "code": "void func_15167010(void) {\n    u8 *ptr;\n    u8 *end;\n    void (*func)(void);\n\n    ptr = (u8 *)D_8008B4A8;\n    end = ptr + 0x1484;\n    do {\n        func = *(void (**)(void))(ptr + 0x18);\n        if (func != NULL) {\n            func();\n        }\n        ptr += 0x34;\n    } while (ptr < end);\n}",
+        "score": 0,
+        "reason": "generated 1340 instr for 23 target (58.3x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:14:15.353Z"
+      },
+      {
+        "code": "void func_15167010(void) {\n    u8 *ptr;\n    u8 *end;\n    void (*func)(void);\n\n    ptr = (u8 *)D_8008B4A8;\n    end = ptr;\n    end += 0x1484;\n    do {\n        func = *(void (**)(void))(ptr + 0x18);\n        if (func != NULL) {\n            func();\n        }\n        ptr += 0x34;\n    } while (ptr < end);\n}",
+        "score": 0,
+        "reason": "generated 1340 instr for 23 target (58.3x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:14:29.568Z"
+      },
+      {
+        "code": "void func_15167010(void) {\n    u8 *ptr;\n    s32 end;\n    void (*func)(void);\n\n    ptr = (u8 *)D_8008B4A8;\n    end = (s32)ptr + 0x1484;\n    do {\n        func = *(void (**)(void))(ptr + 0x18);\n        if (func != NULL) {\n            func();\n        }\n        ptr += 0x34;\n    } while ((s32)ptr < end);\n}",
+        "score": 0,
+        "reason": "generated 1340 instr for 23 target (58.3x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:14:44.142Z"
+      },
+      {
+        "code": "void func_15167010(void) {\n    void (*func)(void);\n    s32 i;\n\n    for (i = 0; i < 101; i++) {\n        func = D_8008B4A8[i].unk18;\n        if (func != NULL) {\n            func();\n        }\n    }\n}",
+        "score": 0,
+        "reason": "generated 1339 instr for 23 target (58.2x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:15:16.163Z"
+      },
+      {
+        "code": "void func_15167010(void) {\n    register u8 *ptr;\n    register s32 end;\n    void (*func)(void);\n\n    ptr = (u8 *)D_8008B4A8;\n    end = (s32)ptr + 0x1484;\n    do {\n        func = *(void (**)(void))(ptr + 0x18);\n        if (func != NULL) {\n            func();\n        }\n        ptr += 0x34;\n    } while ((u32)ptr < (u32)end);\n}",
+        "score": 0,
+        "reason": "generated 1340 instr for 23 target (58.3x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:15:31.674Z"
+      },
+      {
+        "code": "void func_15167010(void) {\n    void (*func)(void);\n    s32 i;\n\n    for (i = 0; i < 101; i++) {\n        func = D_8008B4A8[i].unk18;\n        if (func != NULL) {\n            func();\n        }\n    }\n}",
+        "score": 0,
+        "reason": "generated 1339 instr for 23 target (58.2x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:16:58.990Z"
       }
     ]
   },
@@ -5135,7 +5471,7 @@
     "instructions": 23,
     "difficulty": "low",
     "tags": [],
-    "attempts": 0,
+    "attempts": 3,
     "lastScore": 0.4782608695652174,
     "status": "pending",
     "history": [
@@ -5233,6 +5569,27 @@
         "reason": "length_mismatch (target=23, generated=22)",
         "diffs": [],
         "timestamp": "2026-06-02T18:43:58.548Z"
+      },
+      {
+        "code": "void func_150747E4(void) {\n    u8 val = D_800D154C->unk65;\n    \n    if (val != 0) {\n        u8 *entry = (u8 *)D_800CC2D0 + (val - 1) * 812;\n        *(s32 *)(entry + 0x218) = 0;\n        *(u8 *)(entry + 0x232) = (u8)D_800D1580;\n    }\n}",
+        "score": 0.4782608695652174,
+        "reason": "length_mismatch (target=23, generated=22)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:18:46.534Z"
+      },
+      {
+        "code": "void func_150747E4(void) {\n    u8 val;\n    u8 idx;\n    struct127 *entry;\n\n    val = D_800D154C->unk65;\n    if (val != 0) {\n        idx = val - 1;\n        entry = &D_800CC2D0[idx];\n        entry->unk218 = 0;\n        entry->unk232 = (u8)D_800D1580;\n    }\n}",
+        "score": 0.4791666666666667,
+        "reason": "length_mismatch (target=23, generated=24)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:18:58.207Z"
+      },
+      {
+        "code": "void func_150747E4(void) {\n    u8 val;\n    s32 idx;\n    struct127 *entry;\n\n    val = D_800D154C->unk65;\n    if (val != 0) {\n        idx = val - 1;\n        entry = &D_800CC2D0[idx];\n        entry->unk218 = 0;\n        entry->unk232 = (u8)D_800D1580;\n    }\n}",
+        "score": 0.4782608695652174,
+        "reason": "length_mismatch (target=23, generated=22)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:19:06.171Z"
       }
     ]
   },
