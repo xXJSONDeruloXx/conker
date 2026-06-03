@@ -11295,9 +11295,95 @@
     "instructions": 37,
     "difficulty": "medium-low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.0811,
+    "status": "pending",
+    "history": [
+      {
+        "code": "s32 func_1515CF9C(void *arg0, void *arg1) {\n    s32 count;\n    s8 temp_v0;\n    s32 temp_v1;\n    void *temp_t1;\n\n    count = ((u8 *)arg0)[0x25];\n    temp_v0 = ((s8 *)arg0)[0x2C];\n    if (temp_v0 < (count - 1)) {\n        temp_v1 = *(s32 *)((s32)arg0 + 0x94);\n        ((s8 *)arg0)[0x2C] = temp_v0 + 1;\n        temp_t1 = (void *)(temp_v1 + (((s8 *)arg0)[0x2E] << 4));\n        *(s32 *)((s32)temp_t1 + 0) = *(s32 *)((s32)arg0 + 0x10);\n        *(s32 *)((s32)temp_t1 + 4) = *(s32 *)((s32)arg0 + 0x14);\n        *(s32 *)((s32)temp_t1 + 8) = *(s32 *)((s32)arg0 + 0x18);\n        *(f32 *)(temp_v1 + (((s8 *)arg0)[0x2E] << 4) + 0xC) = *(f32 *)((s32)arg1 + 8);\n        ((s8 *)arg0)[0x2E] = ((s8 *)arg0)[0x2E] + 1;\n        if (((u8 *)arg0)[0x25] == ((s8 *)arg0)[0x2E]) {\n            ((s8 *)arg0)[0x2E] = 0;\n        }\n    } else {\n        ((s8 *)arg1)[0x39] = -1;\n    }\n    return 1;\n}",
+        "score": 0.0811,
+        "reason": "structural_diffs=34",
+        "diffs": [
+          "structural: target=lbu t6, 37(a0) got=move a2, a1",
+          "structural: target=lb v0, 44(a0) got=lbu v0, 37(a0)",
+          "structural: target=li t2, -1 got=lb v1, 44(a0)",
+          "structural: target=addiu t7, t6, -1 got=li t0, -1",
+          "structural: target=slt at, v0, t7 got=addiu t6, v0, -1",
+          "structural: target=beqz at, L0 got=slt at, v1, t6",
+          "structural: target=addiu t8, v0, 1 got=beqz at, L0",
+          "structural: target=lb t9, 46(a0) got=addiu t7, v1, 1",
+          "structural: target=lw v1, 148(a0) got=lb t8, 46(a0)",
+          "structural: target=lw at, 16(a0) got=lw v0, 148(a0)",
+          "structural: target=sll t0, t9, 4 got=lw t0, 16(a0)",
+          "structural: target=sb t8, 44(a0) got=sll t9, t8, 4",
+          "structural: target=addu t1, v1, t0 got=sb t7, 44(a0)",
+          "structural: target=sw at, 0(t1) got=addu a1, t9, v0",
+          "structural: target=lw t3, 20(a0) got=sw t0, 0(a1)",
+          "structural: target=sw t3, 4(t1) got=lw t1, 20(a0)",
+          "structural: target=lw at, 24(a0) got=sw t1, 4(a1)",
+          "structural: target=sw at, 8(t1) got=lw t2, 24(a0)",
+          "structural: target=lb t4, 46(a0) got=sw t2, 8(a1)",
+          "structural: target=lwc1 f4, 8(a1) got=lb t3, 46(a0)"
+        ],
+        "timestamp": "2026-06-03T21:25:07.436Z"
+      },
+      {
+        "code": "s32 func_1515CF9C(void *arg0, void *arg1) {\n    s32 temp_v1;\n    s8 temp_v0;\n    void *temp_t1;\n\n    temp_v0 = ((s8 *)arg0)[0x2C];\n    if (temp_v0 < (((u8 *)arg0)[0x25] - 1)) {\n        temp_v1 = *(s32 *)((s32)arg0 + 0x94);\n        ((s8 *)arg0)[0x2C] = temp_v0 + 1;\n        temp_t1 = (void *)(temp_v1 + (((s8 *)arg0)[0x2E] << 4));\n        *(s32 *)((s32)temp_t1 + 0) = *(s32 *)((s32)arg0 + 0x10);\n        *(s32 *)((s32)temp_t1 + 4) = *(s32 *)((s32)arg0 + 0x14);\n        *(s32 *)((s32)temp_t1 + 8) = *(s32 *)((s32)arg0 + 0x18);\n        *(f32 *)(temp_v1 + (((s8 *)arg0)[0x2E] << 4) + 0xC) = *(f32 *)((s32)arg1 + 8);\n        ((s8 *)arg0)[0x2E] = ((s8 *)arg0)[0x2E] + 1;\n        if (((u8 *)arg0)[0x25] == ((s8 *)arg0)[0x2E]) {\n            ((s8 *)arg0)[0x2E] = 0;\n        }\n    } else {\n        ((s8 *)arg1)[0x39] = -1;\n    }\n    return 1;\n}",
+        "score": 0.0811,
+        "reason": "structural_diffs=34",
+        "diffs": [
+          "structural: target=lbu t6, 37(a0) got=move a2, a1",
+          "structural: target=lb v0, 44(a0) got=lbu t6, 37(a0)",
+          "structural: target=li t2, -1 got=lb v0, 44(a0)",
+          "structural: target=addiu t7, t6, -1 got=li t1, -1",
+          "structural: target=slt at, v0, t7 got=addiu t7, t6, -1",
+          "structural: target=beqz at, L0 got=slt at, v0, t7",
+          "structural: target=addiu t8, v0, 1 got=beqz at, L0",
+          "structural: target=lb t9, 46(a0) got=addiu t8, v0, 1",
+          "structural: target=lw v1, 148(a0) got=lb t9, 46(a0)",
+          "structural: target=lw at, 16(a0) got=lw v1, 148(a0)",
+          "structural: target=sll t0, t9, 4 got=lw t1, 16(a0)",
+          "structural: target=sb t8, 44(a0) got=sll t0, t9, 4",
+          "structural: target=addu t1, v1, t0 got=sb t8, 44(a0)",
+          "structural: target=sw at, 0(t1) got=addu a1, t0, v1",
+          "structural: target=lw t3, 20(a0) got=sw t1, 0(a1)",
+          "structural: target=sw t3, 4(t1) got=lw t2, 20(a0)",
+          "structural: target=lw at, 24(a0) got=sw t2, 4(a1)",
+          "structural: target=sw at, 8(t1) got=lw t3, 24(a0)",
+          "structural: target=lb t4, 46(a0) got=sw t3, 8(a1)",
+          "structural: target=lwc1 f4, 8(a1) got=lb t4, 46(a0)"
+        ],
+        "timestamp": "2026-06-03T21:25:25.640Z"
+      },
+      {
+        "code": "s32 func_1515CF9C(void *arg0, void *arg1) {\n    s32 temp_v1;\n    s8 temp_v0;\n    s32 offset;\n\n    temp_v0 = ((s8 *)arg0)[0x2C];\n    if (temp_v0 < (((u8 *)arg0)[0x25] - 1)) {\n        temp_v1 = *(s32 *)((s32)arg0 + 0x94);\n        ((s8 *)arg0)[0x2C] = temp_v0 + 1;\n        offset = ((s8 *)arg0)[0x2E] << 4;\n        *(s32 *)(temp_v1 + offset + 0) = *(s32 *)((s32)arg0 + 0x10);\n        *(s32 *)(temp_v1 + offset + 4) = *(s32 *)((s32)arg0 + 0x14);\n        *(s32 *)(temp_v1 + offset + 8) = *(s32 *)((s32)arg0 + 0x18);\n        *(f32 *)(temp_v1 + (((s8 *)arg0)[0x2E] << 4) + 0xC) = *(f32 *)((s32)arg1 + 8);\n        ((s8 *)arg0)[0x2E] = ((s8 *)arg0)[0x2E] + 1;\n        if (((u8 *)arg0)[0x25] == ((s8 *)arg0)[0x2E]) {\n            ((s8 *)arg0)[0x2E] = 0;\n        }\n    } else {\n        ((s8 *)arg1)[0x39] = -1;\n    }\n    return 1;\n}",
+        "score": 0.0811,
+        "reason": "structural_diffs=34",
+        "diffs": [
+          "structural: target=lbu t6, 37(a0) got=move a3, a1",
+          "structural: target=lb v0, 44(a0) got=lbu t6, 37(a0)",
+          "structural: target=li t2, -1 got=lb v0, 44(a0)",
+          "structural: target=addiu t7, t6, -1 got=li t0, -1",
+          "structural: target=slt at, v0, t7 got=addiu t7, t6, -1",
+          "structural: target=beqz at, L0 got=slt at, v0, t7",
+          "structural: target=addiu t8, v0, 1 got=beqz at, L0",
+          "structural: target=lb t9, 46(a0) got=addiu t8, v0, 1",
+          "structural: target=lw v1, 148(a0) got=lb a1, 46(a0)",
+          "structural: target=lw at, 16(a0) got=lw v1, 148(a0)",
+          "structural: target=sll t0, t9, 4 got=lw t0, 16(a0)",
+          "structural: target=sb t8, 44(a0) got=sll t9, a1, 4",
+          "structural: target=addu t1, v1, t0 got=sb t8, 44(a0)",
+          "structural: target=sw at, 0(t1) got=addu a2, v1, t9",
+          "structural: target=lw t3, 20(a0) got=sw t0, 0(a2)",
+          "structural: target=sw t3, 4(t1) got=lw t1, 20(a0)",
+          "structural: target=lw at, 24(a0) got=sw t1, 4(a2)",
+          "structural: target=sw at, 8(t1) got=lw t2, 24(a0)",
+          "structural: target=lb t4, 46(a0) got=sw t2, 8(a2)",
+          "structural: target=lwc1 f4, 8(a1) got=lb t3, 46(a0)"
+        ],
+        "timestamp": "2026-06-03T21:25:44.360Z"
+      }
+    ]
   },
   {
     "function": "func_16001B34",
@@ -14455,9 +14541,9 @@
     "instructions": 36,
     "difficulty": "medium-low",
     "tags": [],
-    "attempts": 12,
+    "attempts": 14,
     "lastScore": 0.4166666666666667,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "void func_15143D18(s32 *arg0, s32 *arg1, s32 arg2, s32 arg3) {\n    s32 tmp;\n    s32 newmax;\n\n    if (arg3 < arg2) {\n        tmp = arg2 ^ arg3;\n        newmax = arg3 ^ tmp;\n        arg3 = newmax;\n        arg2 = tmp ^ newmax;\n    }\n    if (*arg1 < *arg0) {\n        *arg0 = *arg0 ^ *arg1;\n        *arg1 = *arg1 ^ *arg0;\n        *arg0 = *arg0 ^ *arg1;\n    }\n    if (*arg0 < arg2) {\n        *arg0 = arg2;\n    }\n    if (arg3 < *arg1) {\n        *arg1 = arg3;\n    }\n}",
@@ -14676,6 +14762,20 @@
         "reason": "length_mismatch (target=36, generated=30)",
         "diffs": [],
         "timestamp": "2026-06-03T21:22:02.308Z"
+      },
+      {
+        "code": "void func_15143D18(s32 *arg0, s32 *arg1, s32 arg2, s32 arg3) {\n    s32 *ptr1;\n    s32 temp_v1;\n    s32 temp_v0;\n    s32 temp_a0;\n\n    ptr1 = arg1;\n    if (arg3 < arg2) {\n        temp_v1 = arg2 ^ arg3;\n        arg1 = (s32 *)(arg3 ^ temp_v1);\n        arg3 = (s32)arg1;\n        arg2 = temp_v1 ^ (s32)arg1;\n    }\n    temp_v1 = *ptr1;\n    arg1 = (s32 *)*arg0;\n    if (temp_v1 < (s32)arg1) {\n        temp_v0 = (s32)arg1 ^ temp_v1;\n        *arg0 = temp_v0;\n        temp_a0 = *ptr1 ^ temp_v0;\n        *ptr1 = temp_a0;\n        arg1 = (s32 *)(*arg0 ^ temp_a0);\n        *arg0 = (s32)arg1;\n    }\n    if ((s32)arg1 < arg2) {\n        *arg0 = arg2;\n    }\n    if (arg3 < *ptr1) {\n        *ptr1 = arg3;\n    }\n}",
+        "score": 0.4722222222222222,
+        "reason": "length_mismatch (target=36, generated=34)",
+        "diffs": [],
+        "timestamp": "2026-06-03T21:22:24.762Z"
+      },
+      {
+        "code": "void func_15143D18(s32 *arg0, s32 *arg1, s32 arg2, s32 arg3) {\n    register s32 *ptr1;\n    register s32 *ptr0;\n    s32 temp_v1;\n    s32 temp_v0;\n    s32 temp_a0;\n\n    ptr1 = arg1;\n    ptr0 = arg0;\n    if (arg3 < arg2) {\n        temp_v1 = arg2 ^ arg3;\n        arg1 = (s32 *)(arg3 ^ temp_v1);\n        arg3 = (s32)arg1;\n        arg2 = temp_v1 ^ (s32)arg1;\n    }\n    temp_v1 = *ptr1;\n    arg1 = (s32 *)*ptr0;\n    if (temp_v1 < (s32)arg1) {\n        temp_v0 = (s32)arg1 ^ temp_v1;\n        *ptr0 = temp_v0;\n        temp_a0 = *ptr1 ^ temp_v0;\n        *ptr1 = temp_a0;\n        arg1 = (s32 *)(*ptr0 ^ temp_a0);\n        *ptr0 = (s32)arg1;\n    }\n    if ((s32)arg1 < arg2) {\n        *ptr0 = arg2;\n    }\n    if (arg3 < *ptr1) {\n        *ptr1 = arg3;\n    }\n}",
+        "score": 0.4166666666666667,
+        "reason": "length_mismatch (target=36, generated=30)",
+        "diffs": [],
+        "timestamp": "2026-06-03T21:22:55.522Z"
       }
     ]
   },
@@ -15683,9 +15783,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 10,
-    "lastScore": 0.9444,
-    "status": "pending",
+    "attempts": 11,
+    "lastScore": 0.7222,
+    "status": "skipped",
     "history": [
       {
         "code": "s32 func_1000F4D8(u16 arg0) {\n    s32 mask = arg0 & 0x7FFF;\n    struct120 *p = D_800425E0;\n    struct120 *end = D_800425E0 + 16;\n    do {\n        if (p->unk8 != 0 && (p->unk4 & 0x7FFF) == mask && func_100173C4(&p->unk8) != 0) {\n            return 1;\n        }\n        p++;\n    } while (p != end);\n    return 0;\n}",
@@ -15876,6 +15976,24 @@
           "structural: target=addiu s0, s0, LO(D_800425E0) got=addiu s1, s1, LO(D_800426A0)"
         ],
         "timestamp": "2026-06-03T21:17:39.546Z"
+      },
+      {
+        "code": "s32 func_1000F4D8(u16 arg0) {\n    struct120 *p;\n    register struct120 *end;\n\n    arg0 = arg0 & 0x7FFF;\n    end = (struct120 *)&D_800426A0;\n    p = D_800425E0;\n    do {\n        if (p->unk8 != 0 && (p->unk4 & 0x7FFF) == arg0 && func_100173C4(&p->unk8) != 0) {\n            return 1;\n        }\n        p++;\n    } while (p != end);\n    return 0;\n}",
+        "score": 0.7222,
+        "reason": "structural_diffs=10",
+        "diffs": [
+          "structural: target=sw s2, 32(sp) got=sw s1, 28(sp)",
+          "structural: target=andi s2, a0, 65535 got=andi s1, a0, 65535",
+          "structural: target=sw s1, 28(sp) got=sw s2, 32(sp)",
+          "structural: target=move t6, s2 got=move t6, s1",
+          "structural: target=lui s0, HI(D_800425E0) got=lui s2, HI(D_800426A0)",
+          "structural: target=lui s1, HI(D_800426A0) got=lui s0, HI(D_800425E0)",
+          "structural: target=andi s2, t6, 32767 got=andi s1, t6, 32767",
+          "structural: target=addiu s1, s1, LO(D_800426A0) got=addiu s2, s2, LO(D_800426A0)",
+          "structural: target=bnel s2, t0, L0 got=bnel s1, t0, L0",
+          "structural: target=bnel s0, s1, L2 got=bnel s0, s2, L2"
+        ],
+        "timestamp": "2026-06-03T21:23:50.220Z"
       }
     ]
   },
