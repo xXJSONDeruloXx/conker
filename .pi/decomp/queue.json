@@ -322,9 +322,9 @@
     "instructions": 13,
     "difficulty": "low",
     "tags": [],
-    "attempts": 8,
-    "lastScore": 0.8462,
-    "status": "pending",
+    "attempts": 9,
+    "lastScore": 1,
+    "status": "matched",
     "history": [
       {
         "code": "f32 func_15144A74(f32 *arg0, f32 *arg1) {\n    return (arg0[0] * arg1[0]) + (arg0[1] * arg1[1]) + (arg0[2] * arg1[2]);\n}",
@@ -592,9 +592,48 @@
     "instructions": 15,
     "difficulty": "low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0.9333,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.6667,
+    "status": "pending",
+    "history": [
+      {
+        "code": "s32 func_1506196C(u8 *arg0, s32 arg1) {\n    s32 temp_v1 = arg0[arg1 + 0xB] * arg0[7];\n    if (temp_v1 == 0xFE01) {\n        return 0xFF;\n    }\n    return temp_v1 >> 8;\n}",
+        "score": 0.43333333333333335,
+        "reason": "length_mismatch (target=15, generated=13)",
+        "diffs": [],
+        "timestamp": "2026-06-03T05:58:06.931Z"
+      },
+      {
+        "code": "s32 func_1506196C(u8 *arg0, s32 arg1) {\n    s32 temp_v1 = arg0[arg1 + 0xB] * arg0[7];\n    if (temp_v1 != 0xFE01) {\n        temp_v1 = temp_v1 >> 8;\n    } else {\n        temp_v1 = 0xFF;\n    }\n    return temp_v1;\n}",
+        "score": 0.4,
+        "reason": "structural_diffs=9",
+        "diffs": [
+          "structural: target=addu t6, a0, a1 got=addu t7, a0, a1",
+          "structural: target=lbu t7, 11(t6) got=lbu t8, 11(t7)",
+          "structural: target=lbu t8, 7(a0) got=lbu t6, 7(a0)",
+          "structural: target=ori at, zero, 65025 got=li at, 65025",
+          "structural: target=multu t7, t8 got=multu t6, t8",
+          "structural: target=bnel v1, at, L0 got=beql v1, at, L0",
+          "structural: target=move v1, t9 got=li v1, 255",
+          "structural: target=li v1, 255 got=move v1, t9",
+          "structural: target=move v1, t9 got=li v1, 255"
+        ],
+        "timestamp": "2026-06-03T05:58:32.653Z"
+      },
+      {
+        "code": "s32 func_1506196C(u8 *arg0, s32 arg1) {\n    s32 temp_v1 = arg0[arg1 + 0xB] * arg0[7];\n    if (temp_v1 == 0xFE01) {\n        temp_v1 = 0xFF;\n    } else {\n        temp_v1 = temp_v1 >> 8;\n    }\n    return temp_v1;\n}",
+        "score": 0.6667,
+        "reason": "structural_diffs=5",
+        "diffs": [
+          "structural: target=addu t6, a0, a1 got=addu t7, a0, a1",
+          "structural: target=lbu t7, 11(t6) got=lbu t8, 11(t7)",
+          "structural: target=lbu t8, 7(a0) got=lbu t6, 7(a0)",
+          "structural: target=ori at, zero, 65025 got=li at, 65025",
+          "structural: target=multu t7, t8 got=multu t6, t8"
+        ],
+        "timestamp": "2026-06-03T05:59:02.562Z"
+      }
+    ]
   },
   {
     "function": "func_15142AC0",
