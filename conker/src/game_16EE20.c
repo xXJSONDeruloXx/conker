@@ -338,7 +338,22 @@ f32 func_15144528(f32 arg0, f32 arg1, f32 arg2) {
 f32 func_15144A74(struct17 *arg0, struct17 *arg1) {
     return ((arg0->unk0 * arg1->unk0) + (arg0->unk4 * arg1->unk4)) + (arg0->unk8 * arg1->unk8);
 }
-#pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15144AA8.s")
+f32 func_15144AA8(s32 arg0) {
+    f32 range = 360.0f;
+    f32 val = D_800DBFF0[arg0].unk380;
+
+    if (range < val) {
+        do {
+            val -= range;
+        } while (range < val);
+    }
+    if (val < 0.0f) {
+        do {
+            val += range;
+        } while (val < 0.0f);
+    }
+    return val;
+}
 void *func_15144B34(s32 arg0) {
     return (void *)((arg0 * 0x9A0) + (s32)D_800DBFF0 + 0x2F8);
 }

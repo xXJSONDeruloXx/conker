@@ -639,5 +639,14 @@
     "example_functions": [
       "func_15167D84"
     ]
+  },
+  {
+    "id": "o32-third-float-in-a2",
+    "description": "For functions with more than two float parameters under o32, the third float argument is passed in integer register a2 and spilled/reloaded as a float.",
+    "trigger": "Target stores `$a2` to the stack then uses `lwc1` to load it as an f32 after calls.",
+    "solution": "Use signature `f32 arg0, f32 arg1, f32 arg2, ...`; IDO will spill a2 and reload it with `lwc1` for the third float.",
+    "example_functions": [
+      "func_151436B4"
+    ]
   }
 ]
