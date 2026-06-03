@@ -14455,7 +14455,7 @@
     "instructions": 36,
     "difficulty": "medium-low",
     "tags": [],
-    "attempts": 6,
+    "attempts": 8,
     "lastScore": 0.6389,
     "status": "pending",
     "history": [
@@ -14576,6 +14576,50 @@
           "structural: target=slt at, a3, t9 got=slt at, a3, t8"
         ],
         "timestamp": "2026-06-03T20:52:09.893Z"
+      },
+      {
+        "code": "void func_15143D18(s32 *arg1, s32 *arg0, s32 arg2, s32 arg3) {\n    s32 tmp;\n    s32 newmax;\n\n    if (arg3 < arg2) {\n        tmp = arg2 ^ arg3;\n        newmax = arg3 ^ tmp;\n        arg3 = newmax;\n        arg2 = tmp ^ newmax;\n    }\n    if (*arg0 < *arg1) {\n        *arg1 = *arg1 ^ *arg0;\n        *arg0 = *arg0 ^ *arg1;\n        *arg1 = *arg1 ^ *arg0;\n    }\n    if (*arg1 < arg2) {\n        *arg1 = arg2;\n    }\n    if (arg3 < *arg0) {\n        *arg0 = arg3;\n    }\n}",
+        "score": 0.5833,
+        "reason": "structural_diffs=15",
+        "diffs": [
+          "structural: target=lw v1, 0(s0) got=lw v0, 0(s0)",
+          "structural: target=lw a1, 0(s1) got=lw v1, 0(s1)",
+          "structural: target=slt at, v1, a1 got=slt at, v0, v1",
+          "structural: target=xor v0, a1, v1 got=xor t6, v0, v1",
+          "structural: target=sw v0, 0(s1) got=sw t6, 0(s1)",
+          "structural: target=lw t6, 0(s0) got=lw t8, 0(s0)",
+          "structural: target=xor a0, t6, v0 got=xor t9, t6, t8",
+          "structural: target=sw a0, 0(s0) got=sw t9, 0(s0)",
+          "structural: target=lw t7, 0(s1) got=lw t1, 0(s1)",
+          "structural: target=xor a1, t7, a0 got=xor v1, t9, t1",
+          "structural: target=sw a1, 0(s1) got=sw v1, 0(s1)",
+          "structural: target=slt at, a1, a2 got=slt at, v1, a2",
+          "structural: target=lw t9, 0(s0) got=lw t3, 0(s0)",
+          "structural: target=lw t9, 0(s0) got=lw t3, 0(s0)",
+          "structural: target=slt at, a3, t9 got=slt at, a3, t3"
+        ],
+        "timestamp": "2026-06-03T20:52:27.024Z"
+      },
+      {
+        "code": "void func_15143D18(s32 *arg0, s32 *arg1, s32 arg2, s32 arg3) {\n    s32 tmp;\n    s32 newmax;\n    register s32 temp_v1;\n    register s32 temp_a1;\n    register s32 temp_v0;\n    register s32 temp_a0;\n\n    if (arg3 < arg2) {\n        tmp = arg2 ^ arg3;\n        newmax = arg3 ^ tmp;\n        arg3 = newmax;\n        arg2 = tmp ^ newmax;\n    }\n    temp_v1 = *arg1;\n    temp_a1 = *arg0;\n    if (temp_v1 < temp_a1) {\n        temp_v0 = temp_a1 ^ temp_v1;\n        *arg0 = temp_v0;\n        temp_a0 = *arg1 ^ temp_v0;\n        *arg1 = temp_a0;\n        temp_a1 = *arg0 ^ temp_a0;\n        *arg0 = temp_a1;\n    }\n    if (temp_a1 < arg2) {\n        *arg0 = arg2;\n    }\n    if (arg3 < *arg1) {\n        *arg1 = arg3;\n    }\n}",
+        "score": 0.6389,
+        "reason": "structural_diffs=13",
+        "diffs": [
+          "structural: target=lw v1, 0(s0) got=lw v0, 0(s0)",
+          "structural: target=lw a1, 0(s1) got=lw v1, 0(s1)",
+          "structural: target=slt at, v1, a1 got=slt at, v0, v1",
+          "structural: target=xor v0, a1, v1 got=xor a0, v1, v0",
+          "structural: target=sw v0, 0(s1) got=sw a0, 0(s1)",
+          "structural: target=xor a0, t6, v0 got=xor a1, t6, a0",
+          "structural: target=sw a0, 0(s0) got=sw a1, 0(s0)",
+          "structural: target=xor a1, t7, a0 got=xor v1, t7, a1",
+          "structural: target=sw a1, 0(s1) got=sw v1, 0(s1)",
+          "structural: target=slt at, a1, a2 got=slt at, v1, a2",
+          "structural: target=lw t9, 0(s0) got=lw t8, 0(s0)",
+          "structural: target=lw t9, 0(s0) got=lw t8, 0(s0)",
+          "structural: target=slt at, a3, t9 got=slt at, a3, t8"
+        ],
+        "timestamp": "2026-06-03T20:52:38.373Z"
       }
     ]
   },
@@ -15583,8 +15627,8 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0.4861111111111111,
+    "attempts": 3,
+    "lastScore": 0.9444,
     "status": "pending",
     "history": [
       {
@@ -15661,6 +15705,41 @@
         "reason": "length_mismatch (target=36, generated=35)",
         "diffs": [],
         "timestamp": "2026-06-03T04:00:12.707Z"
+      },
+      {
+        "code": "s32 func_1000F4D8(u16 arg0) {\n    struct120 *p;\n    struct120 *end;\n\n    arg0 = arg0 & 0x7FFF;\n    p = D_800425E0;\n    end = (struct120 *)&D_800426A0;\n    do {\n        if (p->unk8 != 0 && (p->unk4 & 0x7FFF) == arg0 && func_100173C4(&p->unk8) != 0) {\n            return 1;\n        }\n        p++;\n    } while (p != end);\n    return 0;\n}",
+        "score": 0.7222,
+        "reason": "structural_diffs=10",
+        "diffs": [
+          "structural: target=sw s2, 32(sp) got=sw s1, 28(sp)",
+          "structural: target=andi s2, a0, 65535 got=andi s1, a0, 65535",
+          "structural: target=sw s1, 28(sp) got=sw s2, 32(sp)",
+          "structural: target=move t6, s2 got=move t6, s1",
+          "structural: target=lui s1, HI(D_800426A0) got=lui s2, HI(D_800426A0)",
+          "structural: target=andi s2, t6, 32767 got=andi s1, t6, 32767",
+          "structural: target=addiu s1, s1, LO(D_800426A0) got=addiu s0, s0, LO(D_800425E0)",
+          "structural: target=addiu s0, s0, LO(D_800425E0) got=addiu s2, s2, LO(D_800426A0)",
+          "structural: target=bnel s2, t0, L0 got=bnel s1, t0, L0",
+          "structural: target=bnel s0, s1, L2 got=bnel s0, s2, L2"
+        ],
+        "timestamp": "2026-06-03T20:53:05.358Z"
+      },
+      {
+        "code": "s32 func_1000F4D8(u16 arg0) {\n    struct120 *p;\n    struct120 *end;\n    register s32 mask;\n\n    mask = arg0 & 0x7FFF;\n    p = D_800425E0;\n    end = (struct120 *)&D_800426A0;\n    do {\n        if (p->unk8 != 0 && (p->unk4 & 0x7FFF) == mask && func_100173C4(&p->unk8) != 0) {\n            return 1;\n        }\n        p++;\n    } while (p != end);\n    return 0;\n}",
+        "score": 0.4861111111111111,
+        "reason": "length_mismatch (target=36, generated=35)",
+        "diffs": [],
+        "timestamp": "2026-06-03T20:53:37.254Z"
+      },
+      {
+        "code": "s32 func_1000F4D8(u16 arg0) {\n    struct120 *p;\n    arg0 = arg0 & 0x7FFF;\n    p = D_800425E0;\n    do {\n        if (p->unk8 != 0 && (p->unk4 & 0x7FFF) == arg0 && func_100173C4(&p->unk8) != 0) {\n            return 1;\n        }\n        p++;\n    } while ((struct120 *)&D_800426A0 != p);\n    return 0;\n}",
+        "score": 0.9444,
+        "reason": "structural_diffs=2",
+        "diffs": [
+          "structural: target=addiu s1, s1, LO(D_800426A0) got=addiu s0, s0, LO(D_800425E0)",
+          "structural: target=addiu s0, s0, LO(D_800425E0) got=addiu s1, s1, LO(D_800426A0)"
+        ],
+        "timestamp": "2026-06-03T20:53:47.601Z"
       }
     ]
   },
