@@ -301,6 +301,73 @@ function savePatterns(cwd: string): void {
 	fs.writeFileSync(patternsPath, JSON.stringify(state.patterns, null, 2));
 }
 
+const PROTECTED_SRC_PREFIX = "conker/src";
+const DECOMP_COMMIT_ALLOW_FILE = ".pi/decomp/commit-allow.json";
+const GITHOOKS_PATH = ".githooks";
+const PRE_COMMIT_HOOK = `${GITHOOKS_PATH}/pre-commit`;
+
+function runGit(cwd: string, args: string[]): string {
+	const { execFileSync } = require("node:child_process");
+	try {
+		return execFileSync("git", args, { cwd, encoding: "utf-8" }).trim();
+	} catch {
+		return "";
+	}
+}
+
+function listProtectedSourcePaths(cwd: string, staged: boolean): string[] {
+	const args = staged
+		? ["diff", "--cached", "--name-only", "--diff-filter=ACMR", "--", PROTECTED_SRC_PREFIX]
+		: ["diff", "--name-only", "--diff-filter=ACMR", "--", PROTECTED_SRC_PREFIX];
+	const output = runGit(cwd, args);
+	return output ? output.split("\n").map((s) => s.trim()).filter(Boolean) : [];
+}
+
+function ensureProtectedSourceCommitHook(cwd: string): void {
+	const fs = require("node:fs");
+	const path = require("node:path");
+	const { execFileSync } = require("node:child_process");
+
+	const hookPath = path.join(cwd, PRE_COMMIT_HOOK);
+	fs.mkdirSync(path.dirname(hookPath), { recursive: true });
+
+	const hookSource = `#!/usr/bin/env bash
+set -euo pipefail
+
+repo_root="$(git rev-parse --show-toplevel)"
+allow_file="$repo_root/${DECOMP_COMMIT_ALLOW_FILE}"
+
+if [ -f "$repo_root/.git/CHERRY_PICK_HEAD" ] || [ -f "$repo_root/.git/REVERT_HEAD" ]; then
+  exit 0
+fi
+
+staged="$(git diff --cached --name-only --diff-filter=ACMR -- ${PROTECTED_SRC_PREFIX})"
+if [ -z "$staged" ]; then
+  exit 0
+fi
+
+if [ -f "$allow_file" ]; then
+  exit 0
+fi
+
+echo "Blocked commit: staged changes in ${PROTECTED_SRC_PREFIX} require decomp_accept (full ROM gate)." >&2
+echo "$staged" >&2
+exit 1
+`;
+
+	if (!fs.existsSync(hookPath) || fs.readFileSync(hookPath, "utf-8") !== hookSource) {
+		fs.writeFileSync(hookPath, hookSource);
+		fs.chmodSync(hookPath, 0o755);
+	}
+
+	const hooksPath = runGit(cwd, ["config", "--get", "core.hooksPath"]);
+	if (!hooksPath || hooksPath === GITHOOKS_PATH) {
+		try {
+			execFileSync("git", ["config", "core.hooksPath", GITHOOKS_PATH], { cwd, stdio: "ignore" });
+		} catch {}
+	}
+}
+
 export default function (pi: ExtensionAPI) {
 	let latestCtx: any = undefined;
 
@@ -429,20 +496,33 @@ export default function (pi: ExtensionAPI) {
 	});
 
 	// Load state on session start
-	// Guard: block direct git commits to conker/src/ via bash (must use decomp_accept)
-	// Only blocks actual git add/commit commands, not greps/reads that mention them
+	// Guard: block direct git staging/commits to protected source files via bash.
 	pi.on("tool_call", async (event: any, ctx: any) => {
 		if (event.toolName === "bash") {
 			const cmd = event.input?.command || "";
-			// Only match commands that START with git (or cd ... && git)
-			// Don't match grep/find/cat/read that happen to contain "git commit" in patterns
-			const isGitCmd = /^\s*(cd\s+[^;&&]+\s*&&\s*)?git\s+(add|commit)/.test(cmd)
-				|| /&&\s*git\s+(add|commit)/.test(cmd);
-			const touchesSrc = /conker\/src/.test(cmd);
-			const isAllowed = /cherry-pick|revert|recover/.test(cmd);
-			if (isGitCmd && touchesSrc && !isAllowed) {
-				if (ctx?.hasUI) ctx.ui.notify("\u26d4 Blocked: use decomp_accept to commit source changes (ROM SHA gate required)", "warning");
-				return { block: true, reason: "Direct git commits to conker/src/ are blocked. Use decomp_accept which verifies the full ROM SHA-1 before committing." };
+			const isGitAdd = /(^|&&|;)\s*(cd\s+[^;&]+\s*&&\s*)?git\s+add\b/.test(cmd);
+			const isGitCommit = /(^|&&|;)\s*(cd\s+[^;&]+\s*&&\s*)?git\s+commit\b/.test(cmd);
+			const isAllowedRecovery = /(^|&&|;)\s*(cd\s+[^;&]+\s*&&\s*)?git\s+(cherry-pick|revert)\b/.test(cmd);
+			if ((isGitAdd || isGitCommit) && !isAllowedRecovery) {
+				const stagedProtected = listProtectedSourcePaths(ctx.cwd, true);
+				const unstagedProtected = listProtectedSourcePaths(ctx.cwd, false);
+				const commitAll = isGitCommit && /\s(-a|--all)\b/.test(cmd);
+				const addWouldTouchProtected = isGitAdd && (
+					/conker\/src(?:\/|["'\s]|$)/.test(cmd)
+					|| unstagedProtected.length > 0
+				);
+				const commitWouldTouchProtected = stagedProtected.length > 0 || (commitAll && unstagedProtected.length > 0);
+
+				if (addWouldTouchProtected || commitWouldTouchProtected) {
+					const details = stagedProtected.length > 0
+						? `staged: ${stagedProtected.join(", ")}`
+						: `unstaged: ${unstagedProtected.join(", ")}`;
+					if (ctx?.hasUI) ctx.ui.notify("\u26d4 Blocked: protected conker/src changes must go through decomp_accept", "warning");
+					return {
+						block: true,
+						reason: `Direct git staging/commits touching ${PROTECTED_SRC_PREFIX} are blocked. Use decomp_accept for matched functions or revert/stash the source changes first (${details}).`,
+					};
+				}
 			}
 		}
 		return undefined;
@@ -451,6 +531,7 @@ export default function (pi: ExtensionAPI) {
 	pi.on("session_start", async (_event, ctx) => {
 		latestCtx = ctx;
 		loadState(ctx.cwd);
+		ensureProtectedSourceCommitHook(ctx.cwd);
 		ensureTimer();
 		refreshWidget();
 	});
@@ -1284,8 +1365,9 @@ export default function (pi: ExtensionAPI) {
 		async execute(_toolCallId, params, signal, _onUpdate, ctx) {
 			const fs = require("node:fs");
 			const path = require("node:path");
+			const allowFile = path.join(ctx.cwd, DECOMP_COMMIT_ALLOW_FILE);
 
-			// Full ROM build
+			// Full ROM build + replace + final ROM verify
 			const buildResult = await pi.exec(
 				"docker",
 				[
@@ -1300,12 +1382,12 @@ export default function (pi: ExtensionAPI) {
 					"conker-build-min-amd64",
 					"bash",
 					"-lc",
-					"rm -f conker/build/conker.us.ok conker/build/conker.us.bin && make -C conker -j$(nproc) 2>&1 | tail -20",
+					"rm -f conker/build/conker.us.ok build/conker.us.z64 && make -C conker -j$(nproc) && make -C conker replace && make -j$(nproc)",
 				],
-				{ signal, timeout: 120000 },
+				{ signal, timeout: 180000 },
 			);
 
-			if (!buildResult.stdout.includes("build/conker.us.bin: OK")) {
+			if (!buildResult.stdout.includes("build/conker.us.z64: OK")) {
 				// Revert
 				await pi.exec("git", ["checkout", "--", `conker/src/${params.file}`]);
 				return {
@@ -1329,9 +1411,20 @@ export default function (pi: ExtensionAPI) {
 
 			// Commit source + queue state + fresh progress (preserves history of what was tried) and push
 			const desc = params.description || `match ${params.function}`;
-			await pi.exec("git", ["add", `conker/src/${params.file}`, ".pi/decomp/queue.json", ".pi/decomp/patterns.json"]);
-			await pi.exec("git", ["commit", "-m", `feat(decomp): ${desc}`]);
-			await pi.exec("git", ["push"], { timeout: 30000 });
+			fs.mkdirSync(path.dirname(allowFile), { recursive: true });
+			fs.writeFileSync(
+				allowFile,
+				JSON.stringify({ function: params.function, file: params.file, createdAt: new Date().toISOString() }, null, 2),
+			);
+			try {
+				await pi.exec("git", ["add", `conker/src/${params.file}`, ".pi/decomp/queue.json", ".pi/decomp/patterns.json"]);
+				await pi.exec("git", ["commit", "-m", `feat(decomp): ${desc}`]);
+				await pi.exec("git", ["push"], { timeout: 30000 });
+			} finally {
+				if (fs.existsSync(allowFile)) {
+					fs.unlinkSync(allowFile);
+				}
+			}
 
 			// Update queue
 			const entry = state.queue.find((e) => e.function === params.function);

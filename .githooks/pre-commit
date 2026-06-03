@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+repo_root="$(git rev-parse --show-toplevel)"
+allow_file="$repo_root/.pi/decomp/commit-allow.json"
+
+if [ -f "$repo_root/.git/CHERRY_PICK_HEAD" ] || [ -f "$repo_root/.git/REVERT_HEAD" ]; then
+  exit 0
+fi
+
+staged="$(git diff --cached --name-only --diff-filter=ACMR -- conker/src)"
+if [ -z "$staged" ]; then
+  exit 0
+fi
+
+if [ -f "$allow_file" ]; then
+  exit 0
+fi
+
+echo "Blocked commit: staged changes in conker/src require decomp_accept (full ROM gate)." >&2
+echo "$staged" >&2
+exit 1
