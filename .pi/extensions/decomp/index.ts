@@ -847,7 +847,7 @@ export default function (pi: ExtensionAPI) {
 		promptSnippet: "Try a C implementation for a GLOBAL_ASM function — compiles, diffs, scores, auto-reverts on mismatch",
 		promptGuidelines: [
 			"Use decomp_attempt to test a C function body against the original assembly. It compiles only the owning TU (~3s), not the full ROM.",
-			"decomp_attempt auto-reverts non-matching attempts by default. Use keep=true to leave the patch in place for inspection with decomp_inspect.",
+			"decomp_attempt always auto-reverts on non-match. The full raw generated ASM is included in every non-match response — no need to inspect separately.",
 		],
 		parameters: Type.Object({
 			function: Type.String({ description: "Function name, e.g. func_15169668" }),
@@ -855,9 +855,6 @@ export default function (pi: ExtensionAPI) {
 			code: Type.String({ description: "Complete C function body to replace the pragma" }),
 			externs: Type.Optional(
 				Type.Array(Type.String(), { description: "Additional extern declarations to add at top of file" }),
-			),
-			keep: Type.Optional(
-				Type.Boolean({ description: "Keep the patch in place on non-match (don't auto-revert). Use with decomp_inspect to study generated asm." }),
 			),
 		}),
 
@@ -1024,10 +1021,8 @@ export default function (pi: ExtensionAPI) {
 
 			}
 
-			// Revert source (unless keep=true)
-			if (!params.keep) {
-				fs.writeFileSync(srcPath, original);
-			}
+			// Revert source
+			fs.writeFileSync(srcPath, original);
 			saveQueue(ctx.cwd);
 			latestCtx = ctx;
 			refreshWidget();
@@ -1054,7 +1049,6 @@ export default function (pi: ExtensionAPI) {
 			}
 
 			// Build response with prior attempt context
-			const keptNote = params.keep ? "\n\n⚠️ Patch LEFT IN PLACE (keep=true). git checkout to revert when done." : "";
 			const priorHint = (entry?.history?.length ?? 0) > 1
 				? `\n\nPrior attempts (${entry!.history!.length}): scores=[${entry!.history!.map((h: AttemptRecord) => h.score.toFixed(2)).join(", ")}]`
 				: "";
@@ -1063,7 +1057,7 @@ export default function (pi: ExtensionAPI) {
 				content: [
 					{
 						type: "text",
-						text: `✗ Non-match${params.keep ? " (kept)" : " (reverted)"}. Score: ${scoreData.score}\nReason: ${scoreData.reason}\n\nDiff:\n${diffSummary}\n\nGenerated ASM:\n\`\`\`\n${rawGeneratedAsm}\n\`\`\`${plateauWarning}${keptNote}${priorHint}`,
+						text: `✗ Non-match (reverted). Score: ${scoreData.score}\nReason: ${scoreData.reason}\n\nDiff:\n${diffSummary}\n\nGenerated ASM:\n\`\`\`\n${rawGeneratedAsm}\n\`\`\`${plateauWarning}${priorHint}`,
 					},
 				],
 				details: scoreData,
@@ -1276,11 +1270,11 @@ export default function (pi: ExtensionAPI) {
 		name: "decomp_inspect",
 		label: "Decomp Inspect",
 		description:
-			"Show the raw generated assembly for a function from the current compiled .o file. Use after decomp_attempt with keep=true, or after any successful compilation, to study what the compiler actually produced.",
-		promptSnippet: "View raw generated assembly from the compiled object file for a function",
+			"Show the raw generated assembly for a function from the current compiled .o file. Use only when you need to re-examine a previously compiled state (e.g. after a manual edit). Note: decomp_attempt already includes raw generated ASM in every response.",
+		promptSnippet: "View raw generated assembly from the compiled object file (rarely needed — decomp_attempt already shows this)",
 		promptGuidelines: [
-			"Use decomp_inspect after decomp_attempt with keep=true to see the full raw objdump output of a compiled function.",
-			"decomp_inspect shows the actual compiler output without normalization — use it to study register allocation, scheduling, and delay slots.",
+			"decomp_inspect is rarely needed since decomp_attempt already includes the full raw generated ASM in every non-match response.",
+			"Only use decomp_inspect if you manually edited a file and compiled via bash, not for the normal attempt loop.",
 		],
 		parameters: Type.Object({
 			function: Type.String({ description: "Function name to inspect" }),
