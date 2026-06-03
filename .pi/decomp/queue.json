@@ -19144,9 +19144,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 1,
-    "lastScore": 0.4375,
-    "status": "pending",
+    "attempts": 2,
+    "lastScore": 1,
+    "status": "matched",
     "history": [
       {
         "code": "void func_15042D94(s16 arg0, s16 arg1, u8 arg2, s32 arg3, ...) {\n    va_list ap;\n    s32 args[16];\n    s32 i;\n\n    D_800CBD74 = arg2;\n    D_800CBD70 = arg0;\n    D_800CBD72 = arg1;\n\n    va_start(ap, arg3);\n    for (i = 0; i < 16; i++) {\n        args[i] = va_arg(ap, s32);\n    }\n    func_15042ECC(arg3, args);\n}",
@@ -19166,9 +19166,32 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.4523809523809524,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_150049A4(s8 *arg0, s32 arg1, s32 arg2) {\n    s8 *ptr;\n    s32 i;\n    s32 code;\n\n    ptr = arg0;\n    i = 0;\n    if (*arg0 != -0x21) {\n        code = *arg0;\n        do {\n            i++;\n            if (code == -0x24) {\n                if ((u8)ptr[3] == 0xE) {\n                    *(s32 *)(ptr + 4) = *(s32 *)(ptr + 4) + arg2;\n                }\n            } else if (code == 1) {\n                *(s32 *)(ptr + 4) = *(s32 *)(ptr + 4) + arg1;\n            } else if (code == 0xDE) {\n                *(s32 *)(ptr + 4) = *(s32 *)(ptr + 4) + arg1;\n            }\n            ptr = arg0 + (i * 8);\n            code = *ptr;\n        } while (code != -0x21);\n    }\n}",
+        "score": 0.4285714285714286,
+        "reason": "length_mismatch (target=42, generated=36)",
+        "diffs": [],
+        "timestamp": "2026-06-03T23:18:48.752Z"
+      },
+      {
+        "code": "void func_150049A4(s8 *arg0, s32 arg1, s32 arg2) {\n    s8 *ptr;\n    s32 i;\n    s32 code;\n    register s32 temp_s0;\n\n    temp_s0 = arg2;\n    ptr = arg0;\n    i = 0;\n    if (*arg0 != -0x21) {\n        code = *arg0;\n        do {\n            i++;\n            if (code == -0x24) {\n                if ((u8)ptr[3] == 0xE) {\n                    *(s32 *)(ptr + 4) = *(s32 *)(ptr + 4) + temp_s0;\n                }\n            } else if (code == 1) {\n                *(s32 *)(ptr + 4) = *(s32 *)(ptr + 4) + arg1;\n            } else if (code == 0xDE) {\n                *(s32 *)(ptr + 4) = *(s32 *)(ptr + 4) + arg1;\n            }\n            ptr = arg0 + (i * 8);\n            code = *ptr;\n        } while (code != -0x21);\n    }\n}",
+        "score": 0.4285714285714286,
+        "reason": "length_mismatch (target=42, generated=36)",
+        "diffs": [],
+        "timestamp": "2026-06-03T23:19:35.695Z"
+      },
+      {
+        "code": "void func_150049A4(s8 *arg0, s32 arg1, s32 arg2) {\n    s32 temp_v0;\n    s8 *temp_a1;\n    s32 temp_a3;\n    s32 temp_s0;\n\n    temp_s0 = arg2;\n    temp_a3 = arg1;\n    temp_v0 = 0;\n    temp_a1 = arg0;\n    if (*arg0 != -0x21) {\n        arg2 = *arg0;\n        do {\n            temp_v0++;\n            if (arg2 == -0x24) {\n                if ((u8)temp_a1[3] == 0xE) {\n                    *(s32 *)(temp_a1 + 4) = *(s32 *)(temp_a1 + 4) + temp_s0;\n                }\n            } else if (arg2 == 1) {\n                *(s32 *)(temp_a1 + 4) = *(s32 *)(temp_a1 + 4) + temp_a3;\n            } else if (arg2 == 0xDE) {\n                *(s32 *)(temp_a1 + 4) = *(s32 *)(temp_a1 + 4) + temp_a3;\n            }\n            temp_a1 = arg0 + (temp_v0 << 3);\n            arg2 = *temp_a1;\n        } while (arg2 != -0x21);\n    }\n}",
+        "score": 0.4523809523809524,
+        "reason": "length_mismatch (target=42, generated=38)",
+        "diffs": [],
+        "timestamp": "2026-06-03T23:20:08.436Z"
+      }
+    ]
   },
   {
     "function": "func_15013D38",
