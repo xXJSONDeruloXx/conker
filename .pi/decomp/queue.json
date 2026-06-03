@@ -15777,9 +15777,32 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.4285714285714286,
+    "status": "pending",
+    "history": [
+      {
+        "code": "f32 func_150489B0(u8 arg0) {\n    f32 ret;\n\n    if (arg0 >= 65) {\n        if (arg0 >= 129) {\n            if (arg0 >= 193) {\n                ret = D_8009A620[-arg0];\n            } else {\n                ret = -D_8009A020[arg0];\n            }\n        } else {\n            ret = -D_8009A420[-arg0];\n        }\n    } else {\n        ret = D_8009A220[arg0];\n    }\n\n    return ret;\n}",
+        "score": 0.4285714285714286,
+        "reason": "length_mismatch (target=36, generated=42)",
+        "diffs": [],
+        "timestamp": "2026-06-03T21:01:23.257Z"
+      },
+      {
+        "code": "f32 func_150489B0(u8 arg0) {\n    f32 ret;\n\n    if (arg0 >= 65) {\n        if (arg0 >= 129) {\n            if (arg0 >= 193) {\n                ret = *(f32 *)((s32)D_8009A620 - (arg0 * 4));\n            } else {\n                ret = -D_8009A020[arg0];\n            }\n        } else {\n            ret = -*(f32 *)((s32)D_8009A420 - (arg0 * 4));\n        }\n    } else {\n        ret = D_8009A220[arg0];\n    }\n\n    return ret;\n}",
+        "score": 0.4285714285714286,
+        "reason": "length_mismatch (target=36, generated=42)",
+        "diffs": [],
+        "timestamp": "2026-06-03T21:01:44.778Z"
+      },
+      {
+        "code": "f32 func_150489B0(u8 arg0) {\n    f32 ret;\n\n    if (arg0 >= 65) {\n        if (arg0 >= 129) {\n            if (arg0 >= 193) {\n                ret = *(f32 *)((u8 *)D_8009A620 - (arg0 * 4));\n            } else {\n                ret = -D_8009A020[arg0];\n            }\n        } else {\n            ret = -*(f32 *)((u8 *)D_8009A420 - (arg0 * 4));\n        }\n    } else {\n        ret = D_8009A220[arg0];\n    }\n\n    return ret;\n}",
+        "score": 0.4285714285714286,
+        "reason": "length_mismatch (target=36, generated=42)",
+        "diffs": [],
+        "timestamp": "2026-06-03T21:02:01.245Z"
+      }
+    ]
   },
   {
     "function": "func_15007778",
@@ -20136,8 +20159,8 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 15,
-    "lastScore": 0.4861111111111111,
+    "attempts": 17,
+    "lastScore": 0.6,
     "status": "pending",
     "history": [
       {
@@ -20244,6 +20267,35 @@
         "reason": "length_mismatch (target=35, generated=36)",
         "diffs": [],
         "timestamp": "2026-06-03T21:00:35.038Z"
+      },
+      {
+        "code": "void func_15076768(void) {\n    volatile struct17 pos;\n    struct260 tmp;\n\n    switch (D_800D1890) {\n        case 0:\n            func_15197A7C(D_800D154C);\n            break;\n        case 1:\n            pos.unk0 = D_800D154C->x_position;\n            pos.unk4 = -390.0f;\n            pos.unk8 = D_800D154C->z_position;\n            func_1504715C(&tmp);\n            func_1514B364((struct17 *)&pos, &tmp, 0xFF, 0);\n    }\n}",
+        "score": 0.4861111111111111,
+        "reason": "length_mismatch (target=35, generated=36)",
+        "diffs": [],
+        "timestamp": "2026-06-03T21:00:46.520Z"
+      },
+      {
+        "code": "void func_15076768(void) {\n    struct17 pos;\n    struct260 tmp;\n    f32 x;\n    f32 z;\n\n    switch (D_800D1890) {\n        case 0:\n            func_15197A7C(D_800D154C);\n            break;\n        case 1:\n            x = D_800D154C->x_position;\n            z = D_800D154C->z_position;\n            pos.unk4 = -390.0f;\n            pos.unk0 = x;\n            pos.unk8 = z;\n            func_1504715C(&tmp);\n            func_1514B364(&pos, &tmp, 0xFF, 0);\n    }\n}",
+        "score": 0.6,
+        "reason": "structural_diffs=14",
+        "diffs": [
+          "structural: target=addiu sp, sp, -80 got=addiu sp, sp, -88",
+          "structural: target=lui a1, HI(D_800D154C) got=addiu a0, sp, 40",
+          "structural: target=lw a1, LO(D_800D154C)(a1) got=lui v0, HI(D_800D154C)",
+          "structural: target=lui at, 50115 got=lw v0, LO(D_800D154C)(v0)",
+          "structural: target=mtc1 at, f6 got=lui at, 50115",
+          "structural: target=lwc1 f4, 20(a1) got=mtc1 at, f4",
+          "structural: target=swc1 f6, 72(sp) got=lwc1 f0, 20(v0)",
+          "structural: target=swc1 f4, 68(sp) got=lwc1 f2, 28(v0)",
+          "structural: target=lwc1 f8, 28(a1) got=swc1 f4, 80(sp)",
+          "structural: target=swc1 f8, 76(sp) got=swc1 f0, 76(sp)",
+          "structural: target=addiu a0, sp, 32 got=swc1 f2, 84(sp)",
+          "structural: target=addiu a0, sp, 68 got=addiu a0, sp, 76",
+          "structural: target=addiu a1, sp, 32 got=addiu a1, sp, 40",
+          "structural: target=addiu sp, sp, 80 got=addiu sp, sp, 88"
+        ],
+        "timestamp": "2026-06-03T21:00:58.033Z"
       }
     ]
   },
