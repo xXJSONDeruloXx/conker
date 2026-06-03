@@ -922,8 +922,8 @@
     "instructions": 16,
     "difficulty": "low",
     "tags": [],
-    "attempts": 9,
-    "lastScore": 0.34782608695652173,
+    "attempts": 12,
+    "lastScore": 0.46875,
     "status": "pending",
     "history": [
       {
@@ -988,6 +988,27 @@
         "reason": "length_mismatch (target=16, generated=23)",
         "diffs": [],
         "timestamp": "2026-06-03T06:50:12.893Z"
+      },
+      {
+        "code": "void func_150A7B80(u64 *arg0) {\n    u64 temp_zero;\n    s32 temp = 1;\n\n    temp_zero = 0;\n    arg0[0] = temp_zero;\n    arg0[1] = temp_zero;\n    arg0[2] = temp_zero;\n    arg0[3] = temp_zero;\n    arg0[4] = temp_zero;\n    arg0[5] = temp_zero;\n    arg0[6] = temp_zero;\n    arg0[7] = temp_zero;\n    ((s16 *)arg0)[0] = temp;\n    ((s16 *)arg0)[5] = temp;\n    ((s16 *)arg0)[10] = temp;\n    ((s16 *)arg0)[15] = temp;\n}",
+        "score": 0.24242424242424243,
+        "reason": "length_mismatch (target=16, generated=33)",
+        "diffs": [],
+        "timestamp": "2026-06-03T06:51:10.239Z"
+      },
+      {
+        "code": "void func_150A7B80(f64 *arg0) {\n    s32 temp = 1;\n\n    arg0[0] = 0.0;\n    arg0[1] = 0.0;\n    arg0[2] = 0.0;\n    arg0[3] = 0.0;\n    arg0[4] = 0.0;\n    arg0[5] = 0.0;\n    arg0[6] = 0.0;\n    arg0[7] = 0.0;\n    ((s16 *)arg0)[0] = temp;\n    ((s16 *)arg0)[5] = temp;\n    ((s16 *)arg0)[10] = temp;\n    ((s16 *)arg0)[15] = temp;\n}",
+        "score": 0.47058823529411764,
+        "reason": "length_mismatch (target=16, generated=17)",
+        "diffs": [],
+        "timestamp": "2026-06-03T06:51:31.265Z"
+      },
+      {
+        "code": "void func_150A7B80(s64 *arg0) {\n    s32 temp = 1;\n\n    arg0[0] = 0;\n    arg0[1] = 0;\n    arg0[2] = 0;\n    arg0[3] = 0;\n    arg0[4] = 0;\n    arg0[5] = 0;\n    arg0[6] = 0;\n    arg0[7] = 0;\n    ((s16 *)arg0)[0] = temp;\n    ((s16 *)arg0)[5] = temp;\n    ((s16 *)arg0)[10] = temp;\n    ((s16 *)arg0)[15] = temp;\n}",
+        "score": 0.46875,
+        "reason": "length_mismatch (target=16, generated=15)",
+        "diffs": [],
+        "timestamp": "2026-06-03T06:52:57.217Z"
       }
     ]
   },
