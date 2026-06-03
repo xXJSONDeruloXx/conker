@@ -17598,9 +17598,39 @@
     "instructions": 51,
     "difficulty": "medium",
     "tags": [],
-    "attempts": 0,
+    "attempts": 4,
     "lastScore": 0,
-    "status": "pending"
+    "status": "skipped",
+    "history": [
+      {
+        "code": "void func_15003120(s32 arg0, s32 arg1, s32 arg2) {\n    s32 *temp_t2;\n    u8 **temp_t3;\n    s32 *temp_v1;\n    s32 *temp_t0;\n    s32 count;\n    s32 offset;\n\n    temp_t2 = D_800B0E30;\n    temp_t3 = (u8 **)D_800B0E34;\n    offset = arg1;\n    ((s32 *)*temp_t2)[arg0] = arg2;\n    (*temp_t3)[arg0] = 0;\n    if (arg2 != 0) {\n        count = 0;\n        temp_v1 = (s32 *)((s32)*temp_t2 + (arg0 * 4));\n        *temp_v1 = *temp_v1 + offset;\n        temp_t0 = (s32 *)*((s32 *)((s32)*temp_t2 + (arg0 * 4)));\n        if (*temp_t0 != 0) {\n            arg2 = 0;\n            do {\n                temp_t0 = (s32 *)(*((s32 *)((s32)*temp_t2 + (arg0 * 4))) + arg2);\n                temp_t0[0] = temp_t0[0] + offset;\n                count++;\n                temp_t0[1] = temp_t0[1] + offset;\n                arg2 += 0xC;\n                temp_t0 = (s32 *)(*((s32 *)((s32)*temp_t2 + (arg0 * 4))) + arg2);\n            } while (temp_t0[0] != 0);\n        }\n        (*temp_t3)[arg0] = count;\n    }\n}",
+        "score": 0,
+        "reason": "generated 417 instr for 51 target (8.2x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T23:29:15.252Z"
+      },
+      {
+        "code": "void func_15003120(s32 arg0, s32 arg1, s32 arg2) {\n    s32 *table;\n    u8 *counts;\n    s32 *entry;\n    s32 count;\n\n    table = (s32 *)D_800B0E30[0];\n    counts = *(u8 **)D_800B0E34;\n    table[arg0] = arg2;\n    counts[arg0] = 0;\n    if (arg2 != 0) {\n        count = 0;\n        table[arg0] += arg1;\n        entry = (s32 *)table[arg0];\n        if (entry[0] != 0) {\n            do {\n                entry[0] += arg1;\n                count++;\n                entry[1] += arg1;\n                entry = (s32 *)((s32)entry + 0xC);\n            } while (entry[0] != 0);\n        }\n        counts[arg0] = count;\n    }\n}",
+        "score": 0,
+        "reason": "generated 398 instr for 51 target (7.8x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T23:29:35.313Z"
+      },
+      {
+        "code": "void func_15003120(s32 arg0, s32 arg1, s32 arg2) {\n    s32 temp_t2;\n    s32 temp_t3;\n    s32 temp_v0;\n    s32 temp_v1;\n    s32 temp_t0;\n    s32 count;\n\n    temp_t2 = (s32)D_800B0E30;\n    temp_t3 = (s32)D_800B0E34;\n    temp_v0 = arg0 * 4;\n    *(s32 *)(*(s32 *)temp_t2 + temp_v0) = arg2;\n    *(u8 *)(*(s32 *)temp_t3 + arg0) = 0;\n    if (arg2 != 0) {\n        count = 0;\n        temp_v1 = *(s32 *)temp_t2 + temp_v0;\n        *(s32 *)temp_v1 = *(s32 *)temp_v1 + arg1;\n        temp_v1 = 0;\n        temp_t0 = *(s32 *)(*(s32 *)temp_t2 + temp_v0);\n        if (*(s32 *)temp_t0 != 0) {\n            do {\n                *(s32 *)temp_t0 = *(s32 *)temp_t0 + arg1;\n                count++;\n                *(s32 *)(temp_t0 + 4) = *(s32 *)(temp_t0 + 4) + arg1;\n                temp_v1 += 0xC;\n                temp_t0 = *(s32 *)(*(s32 *)temp_t2 + temp_v0) + temp_v1;\n            } while (*(s32 *)temp_t0 != 0);\n        }\n        *(u8 *)(*(s32 *)temp_t3 + arg0) = count;\n    }\n}",
+        "score": 0,
+        "reason": "generated 417 instr for 51 target (8.2x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T23:30:14.636Z"
+      },
+      {
+        "code": "void func_15003120(s32 arg0, s32 arg1, s32 arg2) {\n    D_800B0E30[arg0] = arg2;\n}",
+        "score": 0,
+        "reason": "generated 376 instr for 51 target (7.4x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T23:30:26.195Z"
+      }
+    ]
   },
   {
     "function": "func_150770E4",
@@ -23026,9 +23056,9 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 1,
-    "lastScore": 0.29577464788732394,
-    "status": "pending",
+    "attempts": 2,
+    "lastScore": 1,
+    "status": "matched",
     "history": [
       {
         "code": "u32 func_1505E7CC(s32 arg0, struct127 *arg1) {\n    s32 idx;\n    s32 *ptr;\n    u32 count;\n    u8 *base;\n    u32 i;\n\n    idx = arg1->id;\n    if (idx == 0xFF) {\n        return 0;\n    }\n    ptr = (s32 *)D_800D1588[idx];\n    if (ptr == NULL) {\n        return 0;\n    }\n    count = ptr[-1];\n    if (count == 0) {\n        return 0;\n    }\n    count = count / 0x18;\n    base = (u8 *)ptr[-2];\n    if (base == NULL) {\n        return 0;\n    }\n    for (i = 0; i < count; i++) {\n        if (arg0 == base[0]) {\n            return i;\n        }\n        base += 0x18;\n    }\n    return 0;\n}",

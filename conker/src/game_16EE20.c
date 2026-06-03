@@ -128,7 +128,21 @@ f32 func_151423D8(u8 arg0) {
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_151424F4.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15142600.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15142838.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15142914.s")
+void func_15142914(f32 mtx[4][4], f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8) {
+    func_150A8050(mtx, arg3, arg4, arg5);
+    mtx[3][0] = arg6;
+    mtx[3][1] = arg7;
+    mtx[3][2] = arg8;
+    mtx[0][0] *= arg1;
+    mtx[0][1] *= arg1;
+    mtx[0][2] *= arg1;
+    mtx[1][0] *= arg2;
+    mtx[1][1] *= arg2;
+    mtx[1][2] *= arg2;
+    mtx[2][0] *= arg1;
+    mtx[2][1] *= arg1;
+    mtx[2][2] *= arg1;
+}
 void func_151429E0(u8 arg0, u8 *arg1, u8 *arg2, u8 *arg3) {
     u8 *ptr = &D_8008A160[(arg0 * 12) + ((func_150ADA20() & 3) * 3)];
 
