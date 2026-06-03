@@ -675,5 +675,14 @@
     "example_functions": [
       "func_15042E3C"
     ]
+  },
+  {
+    "id": "byte-mask-negative-immediate",
+    "description": "Use a negative mask expression instead of an unsigned byte literal to make IDO emit a full 16-bit andi mask such as 0xFFFD after an lbu.",
+    "trigger": "Target loads a byte then uses andi with 0xFFFD/0xFFFE before storing the byte back, while C with 0xFD emits andi 0x00FD.",
+    "solution": "Write the mask as & -3 (or equivalent negative integer mask) on the loaded byte: byte = byte & -3;",
+    "example_functions": [
+      "func_151D2F00"
+    ]
   }
 ]

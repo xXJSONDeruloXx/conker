@@ -128,7 +128,20 @@ N_ALVoiceState *__n_mapVoice(N_ALSeqPlayer *seqp, u8 key, u8 vel, u8 channel)
     return vs;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/init_1AAE0/func_1001AFEC.s")
+N_ALVoiceState *func_1001AFEC(N_ALSeqPlayer *seqp, u8 key, u8 channel) {
+    N_ALVoiceState *vs;
+
+    vs = seqp->vAllocHead;
+    if (vs != NULL) {
+        do {
+            if ((vs->key == key) && (vs->channel == channel) && (vs->phase != 3) && (vs->phase != 4)) {
+                return vs;
+            }
+            vs = vs->next;
+        } while (vs != NULL);
+    }
+    return NULL;
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/init_1AAE0/func_1001B07C.s")
 
