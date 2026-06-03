@@ -19207,9 +19207,32 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.4791666666666667,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_160006CC(struct118 *arg0) {\n    u8 buf[4];\n    u8 *ptr;\n    s32 pos;\n    u8 reg;\n\n    *(s32 *)buf = D_16003B48;\n    ptr = D_160037F0;\n    pos = 0x123;\n    func_16001338(0xC0, 0xC0, 0xFF);\n    buf[0] = ptr[0];\n    do {\n        buf[1] = ptr[1];\n        func_160012B0(pos, buf);\n        reg = ptr[2];\n        pos += 3;\n        func_16001044(pos, 0, ((s32 *)arg0)[reg + 1]);\n        pos += 0xD;\n        ptr += 3;\n        buf[0] = ptr[0];\n    } while (buf[0] != 0);\n}",
+        "score": 0.4895833333333333,
+        "reason": "length_mismatch (target=48, generated=47)",
+        "diffs": [],
+        "timestamp": "2026-06-03T13:25:04.345Z"
+      },
+      {
+        "code": "void func_160006CC(struct118 *arg0) {\n    s32 *regs;\n    u8 buf[4];\n    volatile u8 pad[8];\n    u8 *ptr;\n    s32 pos;\n    s32 next;\n\n    regs = (s32 *)arg0;\n    *(s32 *)buf = D_16003B48;\n    ptr = D_160037F0;\n    pos = 0x123;\n    func_16001338(0xC0, 0xC0, 0xFF);\n    buf[0] = D_160037F0[0];\n    do {\n        buf[1] = ptr[1];\n        func_160012B0(pos, buf);\n        pos += 3;\n        func_16001044(pos, 0, regs[ptr[2] + 1]);\n        next = ptr[3];\n        pos += 0xD;\n        ptr += 3;\n        if (next != 0) {\n            buf[0] = next;\n        }\n    } while (next != 0);\n}",
+        "score": 0.4897959183673469,
+        "reason": "length_mismatch (target=48, generated=49)",
+        "diffs": [],
+        "timestamp": "2026-06-03T13:25:53.508Z"
+      },
+      {
+        "code": "void func_160006CC(struct118 *arg0) {\n    u8 buf[4];\n    u8 *bufp;\n    u8 *ptr;\n    s32 pos;\n    s32 *regs;\n\n    bufp = buf;\n    regs = (s32 *)arg0;\n    *(s32 *)bufp = *(s32 *)D_16003B48;\n    ptr = D_160037F0;\n    pos = 0x123;\n    func_16001338(0xC0, 0xC0, 0xFF);\n    bufp[0] = D_160037F0[0];\n    do {\n        bufp[1] = ptr[1];\n        func_160012B0(pos, bufp);\n        pos += 3;\n        func_16001044(pos, 0, regs[ptr[2] + 1]);\n        pos += 0xD;\n        ptr += 3;\n    } while (bufp[0] = ptr[0]);\n}",
+        "score": 0.4791666666666667,
+        "reason": "length_mismatch (target=48, generated=46)",
+        "diffs": [],
+        "timestamp": "2026-06-03T13:26:41.058Z"
+      }
+    ]
   },
   {
     "function": "func_151618BC",
@@ -20716,9 +20739,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 18,
-    "lastScore": 0.7826,
-    "status": "pending",
+    "attempts": 19,
+    "lastScore": 1,
+    "status": "matched",
     "history": [
       {
         "code": "void func_16000F8C(s32 arg0, f32 arg1) {\n    u8 sp28[0x2C];\n    f32 temp_f12;\n    s32 temp_v1;\n    u32 temp_t9;\n\n    if ((arg0 >= (D_160038A0 << 5)) && (arg0 < 0x341)) {\n        temp_f12 = arg1;\n        temp_v1 = *(s32 *)&temp_f12;\n        temp_t9 = (u32)(temp_v1 & 0x7F800000) >> 0x17;\n        if ((temp_t9 == 0) || (temp_t9 >= 0xFF)) {\n            if ((temp_v1 << 1) != 0) {\n                func_160012B0(arg0, D_160047D0);\n                return;\n            }\n        }\n        func_16001B34(sp28, (s32)D_160047D4, D_160047DC, D_160047E0, (f64)arg1);\n        func_160012B0(arg0, sp28);\n    }\n}",
