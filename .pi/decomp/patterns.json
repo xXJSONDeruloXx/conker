@@ -738,5 +738,14 @@
     "example_functions": [
       "func_15002754"
     ]
+  },
+  {
+    "id": "varargs-formal-width",
+    "description": "For varargs wrappers that store narrow-looking fixed args into globals but target does not home/sign-extend those args, declare the fixed formals as s32 and let the store width (`sh`/`sb`) come from the destination type.",
+    "trigger": "Target varargs function stores a0/a1 with `sh` directly and only homes a2/a3; using s16/u16 formals adds stack homes and sign/zero extension before stores.",
+    "solution": "Use `s32` for fixed varargs formals except true u8 parameters that target explicitly masks/homes; keep `va_start(ap, last_fixed)` and a normal `va_arg` copy loop.",
+    "example_functions": [
+      "func_15042D94"
+    ]
   }
 ]

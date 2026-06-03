@@ -19166,8 +19166,8 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 3,
-    "lastScore": 0.4523809523809524,
+    "attempts": 5,
+    "lastScore": 0.44047619047619047,
     "status": "pending",
     "history": [
       {
@@ -19190,6 +19190,20 @@
         "reason": "length_mismatch (target=42, generated=38)",
         "diffs": [],
         "timestamp": "2026-06-03T23:20:08.436Z"
+      },
+      {
+        "code": "void func_150049A4(s8 *arg0, s32 arg1, s32 arg2) {\n    s32 temp_v0;\n    s32 temp_s0;\n    s32 temp_a3;\n\n    temp_s0 = arg2;\n    temp_a3 = arg1;\n    temp_v0 = 0;\n    arg1 = (s32)arg0;\n    if (*arg0 != -0x21) {\n        arg2 = *arg0;\n        do {\n            temp_v0++;\n            if (arg2 == -0x24) {\n                if (*(u8 *)(arg1 + 3) == 0xE) {\n                    *(s32 *)(arg1 + 4) = *(s32 *)(arg1 + 4) + temp_s0;\n                }\n            } else if (arg2 == 1) {\n                *(s32 *)(arg1 + 4) = *(s32 *)(arg1 + 4) + temp_a3;\n            } else if (arg2 == 0xDE) {\n                *(s32 *)(arg1 + 4) = *(s32 *)(arg1 + 4) + temp_a3;\n            }\n            arg1 = (s32)(arg0 + (temp_v0 << 3));\n            arg2 = *(s8 *)arg1;\n        } while (arg2 != -0x21);\n    }\n}",
+        "score": 0.4642857142857143,
+        "reason": "length_mismatch (target=42, generated=39)",
+        "diffs": [],
+        "timestamp": "2026-06-03T23:20:33.400Z"
+      },
+      {
+        "code": "void func_150049A4(s8 *arg0, s32 arg1, s32 arg2) {\n    s32 temp_v0;\n    s8 *temp_a1;\n    s32 temp_a2;\n    s32 temp_s0;\n    s32 temp_a3;\n\n    temp_v0 = 0;\n    temp_a1 = arg0;\n    temp_a3 = arg1;\n    temp_s0 = arg2;\n    if (*arg0 != -0x21) {\n        temp_a2 = *arg0;\n        do {\n            temp_v0++;\n            if (temp_a2 == -0x24) {\n                if ((u8)temp_a1[3] == 0xE) {\n                    *(s32 *)(temp_a1 + 4) = *(s32 *)(temp_a1 + 4) + temp_s0;\n                }\n            } else if (temp_a2 == 1) {\n                *(s32 *)(temp_a1 + 4) = *(s32 *)(temp_a1 + 4) + temp_a3;\n            } else if (temp_a2 == 0xDE) {\n                *(s32 *)(temp_a1 + 4) = *(s32 *)(temp_a1 + 4) + temp_a3;\n            }\n            temp_a1 = arg0 + (temp_v0 << 3);\n            temp_a2 = *temp_a1;\n        } while (temp_a2 != -0x21);\n    }\n}",
+        "score": 0.44047619047619047,
+        "reason": "length_mismatch (target=42, generated=37)",
+        "diffs": [],
+        "timestamp": "2026-06-03T23:21:01.170Z"
       }
     ]
   },
