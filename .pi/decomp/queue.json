@@ -1653,8 +1653,8 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 12,
-    "lastScore": 0.4285714285714286,
+    "attempts": 15,
+    "lastScore": 0.75,
     "status": "pending",
     "history": [
       {
@@ -1756,6 +1756,35 @@
         "reason": "length_mismatch (target=12, generated=14)",
         "diffs": [],
         "timestamp": "2026-06-03T04:57:08.328Z"
+      },
+      {
+        "code": "void func_15169040(arg0, arg1)\ns32 arg0;\nu8 arg1;\n{\n    func_15169070(0, 0x68, arg0, arg1);\n}",
+        "score": 0.75,
+        "reason": "structural_diffs=3",
+        "diffs": [
+          "structural: target=andi a3, a1, 255 got=move a0, zero",
+          "structural: target=move a0, zero got=li a1, 104",
+          "structural: target=li a1, 104 got=lbu a3, 31(sp)"
+        ],
+        "timestamp": "2026-06-03T04:57:36.129Z"
+      },
+      {
+        "code": "void func_15169040(arg0, arg1)\ns32 arg0;\ns32 arg1;\n{\n    func_15169070(0, 0x68, arg0, arg1 & 0xFF);\n}",
+        "score": 0.4285714285714286,
+        "reason": "length_mismatch (target=12, generated=14)",
+        "diffs": [],
+        "timestamp": "2026-06-03T04:57:57.095Z"
+      },
+      {
+        "code": "void func_15169040(s32 arg0, u8 arg1) {\n    func_15169070(0, 0x68, arg0, arg1);\n}",
+        "score": 0.75,
+        "reason": "structural_diffs=3",
+        "diffs": [
+          "structural: target=andi a3, a1, 255 got=move a0, zero",
+          "structural: target=move a0, zero got=li a1, 104",
+          "structural: target=li a1, 104 got=lbu a3, 31(sp)"
+        ],
+        "timestamp": "2026-06-03T04:58:10.761Z"
       }
     ]
   },
