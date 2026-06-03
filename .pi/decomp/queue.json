@@ -7245,7 +7245,7 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 21,
+    "attempts": 24,
     "lastScore": 0.4857142857142857,
     "status": "pending",
     "history": [
@@ -7421,6 +7421,27 @@
         "reason": "length_mismatch (target=35, generated=34)",
         "diffs": [],
         "timestamp": "2026-06-03T00:19:15.290Z"
+      },
+      {
+        "code": "s32 func_1000FF90(arg0, arg1, arg2, arg3)\ns32 arg0;\ns32 arg1;\ns32 arg2;\ns32 arg3;\n{\n    s32 i;\n    struct15 *tmp;\n\n    arg3 = arg1;\n    tmp = D_80041FE0;\n    for (i = 0; i < D_80042760; i++, tmp++) {\n        if (arg0 == tmp->unk14) {\n            if ((arg3 == tmp->unk18) || (arg3 == -1)) {\n                if ((arg2 == tmp->unk1C) || (arg2 == -1)) {\n                    if ((tmp->unk10 & 0x80) == 0) {\n                        return i;\n                    }\n                }\n            }\n        }\n    }\n    return -1;\n}",
+        "score": 0.4857142857142857,
+        "reason": "length_mismatch (target=35, generated=34)",
+        "diffs": [],
+        "timestamp": "2026-06-03T00:20:43.865Z"
+      },
+      {
+        "code": "s32 func_1000FF90(arg0, arg1, arg2, arg3)\ns32 arg0;\ns32 arg1;\ns32 arg2;\ns32 arg3;\n{\n    s32 i;\n\n    arg3 = arg1;\n    arg1 = (s32) D_80041FE0;\n    for (i = 0; i < D_80042760; i++, arg1 += sizeof(struct15)) {\n        if (arg0 == ((struct15 *) arg1)->unk14) {\n            if ((arg3 == ((struct15 *) arg1)->unk18) || (arg3 == -1)) {\n                if ((arg2 == ((struct15 *) arg1)->unk1C) || (arg2 == -1)) {\n                    if ((((struct15 *) arg1)->unk10 & 0x80) == 0) {\n                        return i;\n                    }\n                }\n            }\n        }\n    }\n    return -1;\n}",
+        "score": 0.4857142857142857,
+        "reason": "length_mismatch (target=35, generated=34)",
+        "diffs": [],
+        "timestamp": "2026-06-03T00:21:15.088Z"
+      },
+      {
+        "code": "s32 func_1000FF90(arg0, arg1, arg2, arg3)\ns32 arg0;\ns32 arg1;\ns32 arg2;\ns32 arg3;\n{\n    s32 i;\n    s32 temp_t1;\n    s32 temp_t0;\n\n    arg1 = (arg3 = arg1, (s32) D_80041FE0);\n    for (i = 0; i < D_80042760; i++, arg1 += sizeof(struct15)) {\n        temp_t1 = -1;\n        temp_t0 = -1;\n        if (arg0 == ((struct15 *) arg1)->unk14) {\n            if ((arg3 == ((struct15 *) arg1)->unk18) || (arg3 == temp_t0)) {\n                if ((arg2 == ((struct15 *) arg1)->unk1C) || (arg2 == temp_t1)) {\n                    if ((((struct15 *) arg1)->unk10 & 0x80) == 0) {\n                        return i;\n                    }\n                }\n            }\n        }\n    }\n    return -1;\n}",
+        "score": 0.4857142857142857,
+        "reason": "length_mismatch (target=35, generated=34)",
+        "diffs": [],
+        "timestamp": "2026-06-03T00:22:02.326Z"
       }
     ]
   },
