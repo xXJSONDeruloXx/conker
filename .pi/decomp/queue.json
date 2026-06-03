@@ -1457,8 +1457,8 @@
     "instructions": 20,
     "difficulty": "low",
     "tags": [],
-    "attempts": 18,
-    "lastScore": 0.9,
+    "attempts": 21,
+    "lastScore": 0.4,
     "status": "pending",
     "history": [
       {
@@ -1792,6 +1792,46 @@
           "structural: target=or t8, t7, t6 got=or t8, t7, v1"
         ],
         "timestamp": "2026-06-03T09:48:57.650Z"
+      },
+      {
+        "code": "void func_15079F6C(void) {\n    u16 tmp0;\n    u16 tmp1;\n    u16 tmp2;\n\n    tmp0 = D_800D1890 << 8;\n    tmp2 = D_800D1891;\n    tmp1 = tmp2;\n    D_800D154C->unk224 = tmp0 | tmp1;\n    D_800D154C->unk22B = D_800D1892;\n    D_800D154C->unk226 = D_800D1893;\n}\n",
+        "score": 0.9,
+        "reason": "structural_diffs=2",
+        "diffs": [
+          "structural: target=lbu t6, LO(D_800D1891)(v1) got=lbu v1, LO(D_800D1891)(v1)",
+          "structural: target=or t8, t7, t6 got=or t8, t7, v1"
+        ],
+        "timestamp": "2026-06-03T09:49:28.646Z"
+      },
+      {
+        "code": "void func_15079F6C(void) {\n    u16 tmp0 = D_800D1890 << 8;\n    u16 tmp1 = D_800D1891;\n\n    D_800D154C->unk224 = tmp0 | tmp1;\n    D_800D154C->unk22B = D_800D1892;\n    D_800D154C->unk226 = D_800D1893;\n}\n",
+        "score": 0.9,
+        "reason": "structural_diffs=2",
+        "diffs": [
+          "structural: target=lbu t6, LO(D_800D1891)(v1) got=lbu v1, LO(D_800D1891)(v1)",
+          "structural: target=or t8, t7, t6 got=or t8, t7, v1"
+        ],
+        "timestamp": "2026-06-03T09:49:46.537Z"
+      },
+      {
+        "code": "void func_15079F6C(void) {\n    u16 tmp0;\n    s32 tmp1;\n\n    tmp0 = D_800D1890 << 8;\n    tmp1 = D_800D1891;\n    D_800D154C->unk224 = tmp0 | (u16)tmp1;\n    D_800D154C->unk22B = D_800D1892;\n    D_800D154C->unk226 = D_800D1893;\n}\n",
+        "score": 0.4,
+        "reason": "structural_diffs=12",
+        "diffs": [
+          "structural: target=lbu t6, LO(D_800D1891)(v1) got=lbu t8, LO(D_800D1891)(v1)",
+          "structural: target=lw t9, 0(a0) got=lw t0, 0(a0)",
+          "structural: target=or t8, t7, t6 got=or t9, t7, t8",
+          "structural: target=sh t8, 548(t9) got=sh t9, 548(t0)",
+          "structural: target=lui t0, HI(D_800D1892) got=lui t1, HI(D_800D1892)",
+          "structural: target=lbu t0, LO(D_800D1892)(t0) got=lbu t1, LO(D_800D1892)(t1)",
+          "structural: target=lw t1, 0(a0) got=lw t2, 0(a0)",
+          "structural: target=lui t2, HI(D_800D1893) got=lui t3, HI(D_800D1893)",
+          "structural: target=sb t0, 555(t1) got=sb t1, 555(t2)",
+          "structural: target=lw t3, 0(a0) got=lw t4, 0(a0)",
+          "structural: target=lbu t2, LO(D_800D1893)(t2) got=lbu t3, LO(D_800D1893)(t3)",
+          "structural: target=sb t2, 550(t3) got=sb t3, 550(t4)"
+        ],
+        "timestamp": "2026-06-03T09:50:03.292Z"
       }
     ]
   },
