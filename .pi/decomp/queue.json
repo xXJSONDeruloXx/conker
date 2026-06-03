@@ -6992,8 +6992,8 @@
     "instructions": 20,
     "difficulty": "low",
     "tags": [],
-    "attempts": 27,
-    "lastScore": 0.45,
+    "attempts": 30,
+    "lastScore": 0.9,
     "status": "pending",
     "history": [
       {
@@ -7420,6 +7420,36 @@
           "structural: target=sll t6, v0, 2 got=sll t6, v1, 2"
         ],
         "timestamp": "2026-06-03T11:04:34.962Z"
+      },
+      {
+        "code": "void func_151696DC(arg0)\nstruct102 *arg0;\n{\n    s32 temp_v0 = 0;\n    s32 temp_v1 = D_800DD190;\n    u8 *temp_a2;\n    s32 temp_t6;\n    struct102 **temp_a1;\n\n    if ((temp_a2 = D_800DD198, temp_v1) > 0) {\n        temp_t6 = temp_v0 << 2;\n        do {\n            temp_a1 = (struct102 **)&temp_a2[temp_t6];\n            if (arg0 == *temp_a1) {\n                *temp_a1 = *(struct102 **)((s32)arg0 + 8);\n            }\n            temp_v0 = (s8)(temp_v0 + 1);\n            temp_t6 = temp_v0 << 2;\n        } while (temp_v0 < temp_v1);\n    }\n}",
+        "score": 0.9,
+        "reason": "structural_diffs=2",
+        "diffs": [
+          "structural: target=addiu a2, a2, LO(D_800DD198) got=move v0, zero",
+          "structural: target=move v0, zero got=addiu a2, a2, LO(D_800DD198)"
+        ],
+        "timestamp": "2026-06-03T11:04:56.028Z"
+      },
+      {
+        "code": "void func_151696DC(arg0)\nstruct102 *arg0;\n{\n    s32 temp_v0 = 0;\n    s32 temp_v1 = D_800DD190;\n    u8 *temp_a2 = D_800DD198;\n    s32 temp_t6;\n    struct102 **temp_a1;\n\n    while (temp_v0 < temp_v1) {\n        temp_t6 = temp_v0 << 2;\n        temp_a1 = (struct102 **)&temp_a2[temp_t6];\n        if (arg0 == *temp_a1) {\n            *temp_a1 = *(struct102 **)((s32)arg0 + 8);\n        }\n        temp_v0 = (s8)(temp_v0 + 1);\n    }\n}",
+        "score": 0.9,
+        "reason": "structural_diffs=2",
+        "diffs": [
+          "structural: target=addiu a2, a2, LO(D_800DD198) got=move v0, zero",
+          "structural: target=move v0, zero got=addiu a2, a2, LO(D_800DD198)"
+        ],
+        "timestamp": "2026-06-03T11:06:35.856Z"
+      },
+      {
+        "code": "void func_151696DC(arg0)\nstruct102 *arg0;\n{\n    s32 temp_v0 = 0;\n    s32 temp_v1 = D_800DD190;\n    u8 *temp_a2 = &D_800DD198[1] - 1;\n    s32 temp_t6;\n    struct102 **temp_a1;\n\n    if (temp_v1 > 0) {\n        temp_t6 = temp_v0 << 2;\n        do {\n            temp_a1 = (struct102 **)&temp_a2[temp_t6];\n            if (arg0 == *temp_a1) {\n                *temp_a1 = *(struct102 **)((s32)arg0 + 8);\n            }\n            temp_v0 = (s8)(temp_v0 + 1);\n            temp_t6 = temp_v0 << 2;\n        } while (temp_v0 < temp_v1);\n    }\n}",
+        "score": 0.9,
+        "reason": "structural_diffs=2",
+        "diffs": [
+          "structural: target=addiu a2, a2, LO(D_800DD198) got=move v0, zero",
+          "structural: target=move v0, zero got=addiu a2, a2, LO(D_800DD198)"
+        ],
+        "timestamp": "2026-06-03T11:07:05.913Z"
       }
     ]
   },
