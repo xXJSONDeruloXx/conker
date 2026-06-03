@@ -272,11 +272,10 @@ function buildChunkPrompt(chunkNum: number): string {
 		"",
 		"1. Call `decomp_queue next` to get the next candidate (includes target asm, context, and any prior failed attempts)",
 		"2. Study the target assembly carefully. Check prior attempts if shown — do NOT repeat them.",
-		"3. Use `decomp_preview` to test ideas freely (no history, no attempt count) — iterate until the structure looks right.",
-		"4. When confident (score ≥ 0.8 or structure matches), call `decomp_attempt` to record the real attempt.",
-		"5. If non-match: read the diff, adjust, and use `decomp_preview` again before committing another attempt.",
-		"6. If match: call `decomp_accept` to verify full ROM SHA and commit.",
-		"7. When done with this function (matched or decided to move on), call `decomp_chunk_done` with a summary.",
+		"3. Write C and call `decomp_attempt` to test it. Every attempt is recorded for learning.",
+		"4. If non-match: read the diff, call `decomp_diff` for focused analysis, then retry with a different approach.",
+		"5. If match: call `decomp_accept` to verify full ROM SHA and commit.",
+		"6. When done with this function (matched or decided to move on), call `decomp_chunk_done` with a summary.",
 		"",
 		"## Rules",
 		"- You can work on MULTIPLE functions per chunk. If stuck, call `decomp_queue next` to try a different one — no need to call `decomp_chunk_done`.",
@@ -1366,116 +1365,6 @@ export default function (pi: ExtensionAPI) {
 		},
 	});
 
-	// ═══════════════════════════════════════════════════════════════
-	// TOOL: decomp_preview
-	// ═══════════════════════════════════════════════════════════════
-	pi.registerTool({
-		name: "decomp_preview",
-		label: "Decomp Preview",
-		description:
-			"Lightweight compile-and-diff: test C code against target assembly WITHOUT recording to attempt history. Use this to iterate quickly before committing a real attempt.",
-		promptSnippet: "Test-compile C code and preview the diff — no history, no attempt count, free iteration",
-		promptGuidelines: [
-			"Use decomp_preview to quickly test ideas without consuming an attempt. It compiles the TU, extracts ASM, scores, and shows the diff — but does NOT record to history or increment the attempt counter.",
-			"Once you're confident in the approach (score ≥ 0.9 or structure looks right), use decomp_attempt for the real gate.",
-			"decomp_preview auto-reverts the source file after showing results.",
-		],
-		parameters: Type.Object({
-			function: Type.String({ description: "Function name, e.g. func_15169668" }),
-			file: Type.String({ description: "Source file basename, e.g. game_1944C0.c" }),
-			code: Type.String({ description: "Complete C function body to test" }),
-			externs: Type.Optional(
-				Type.Array(Type.String(), { description: "Additional extern declarations" }),
-			),
-		}),
-
-		async execute(_toolCallId, params, signal, onUpdate, ctx) {
-			const fs = require("node:fs");
-			const path = require("node:path");
-
-			const srcPath = path.join(ctx.cwd, "conker/src", params.file);
-			const pragma = `#pragma GLOBAL_ASM("asm/nonmatchings/${params.file.replace(".c", "")}/${params.function}.s")`;
-
-			let original: string;
-			try {
-				original = fs.readFileSync(srcPath, "utf-8");
-			} catch (e: any) {
-				return { content: [{ type: "text", text: `Cannot read ${srcPath}: ${e.message}` }], details: {} };
-			}
-
-			if (!original.includes(pragma)) {
-				return { content: [{ type: "text", text: `Pragma not found in ${params.file}:\n${pragma}` }], details: {} };
-			}
-
-			// Apply patch temporarily
-			let patched = original;
-			if (params.externs && params.externs.length > 0) {
-				const externsBlock = params.externs.join("\n") + "\n";
-				const includeEnd = patched.lastIndexOf("#include");
-				if (includeEnd >= 0) {
-					const lineEnd = patched.indexOf("\n", includeEnd);
-					patched = patched.slice(0, lineEnd + 1) + "\n" + externsBlock + patched.slice(lineEnd + 1);
-				}
-			}
-			patched = patched.replace(pragma, params.code);
-			fs.writeFileSync(srcPath, patched);
-
-			onUpdate?.({ content: [{ type: "text", text: "Preview compile..." }], details: {} });
-
-			// Compile TU
-			const buildResult = await pi.exec("bash", ["tools/conker-build-tu.sh", params.file], {
-				signal, timeout: 60000,
-			});
-
-			if (buildResult.code !== 0) {
-				fs.writeFileSync(srcPath, original);
-				return {
-					content: [{ type: "text", text: `⚡ Preview: compile failed (reverted)\n${buildResult.stdout}\n${buildResult.stderr}` }],
-					details: { preview: true, error: "compile" },
-				};
-			}
-
-			// Extract ASM
-			const rawAsmResult = await pi.exec("docker", [
-				"run", "--rm", "--platform", "linux/amd64",
-				"-v", `${ctx.cwd}:/conker`, "-w", "/conker",
-				"conker-build-min-amd64",
-				"bash", "-lc",
-				`mips-linux-gnu-objdump -dr conker/build/src/${params.file.replace(".c", ".c.o")} | sed -n '/<${params.function}>/,/^$/p' | sed '\$d'`,
-			], { signal, timeout: 30000 });
-			const rawAsm = rawAsmResult.stdout?.trim() || "(could not extract)";
-
-			// Diff/score
-			const diffResult = await pi.exec("bash", ["tools/conker-diff.sh", params.function, params.file], {
-				signal, timeout: 30000,
-			});
-
-			// Revert immediately
-			fs.writeFileSync(srcPath, original);
-
-			let scoreData: any = { match: false, score: 0, reason: "diff_failed" };
-			try { scoreData = JSON.parse(diffResult.stdout); } catch {}
-
-			const diffSummary = scoreData.diffs
-				? scoreData.diffs.slice(0, 10).map((d: any) => `  L${d.line}: ${d.type} | target: ${d.target} | got: ${d.generated}`).join("\n")
-				: "(no diff detail)";
-
-			if (scoreData.match) {
-				return {
-					content: [{ type: "text", text: `⚡ Preview: MATCH (score ${scoreData.score})!\n\nThis looks good — call decomp_attempt with this same code to record it and proceed to decomp_accept.` }],
-					details: { preview: true, ...scoreData },
-				};
-			}
-
-			return {
-				content: [{
-					type: "text",
-					text: `⚡ Preview: score ${scoreData.score?.toFixed(3) || 0} (${scoreData.reason || "diff"})\n\nDiff:\n${diffSummary}\n\nGenerated ASM:\n\`\`\`\n${rawAsm}\n\`\`\`\n\n(No attempt recorded — iterate freely, then use decomp_attempt when ready)`,
-				}],
-				details: { preview: true, ...scoreData },
-			};
-		},
-	});
 
 	// ═══════════════════════════════════════════════════════════════
 	// TOOL: decomp_accept
