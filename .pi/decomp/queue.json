@@ -20439,7 +20439,7 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
+    "attempts": 6,
     "lastScore": 0.9744,
     "status": "pending",
     "history": [
@@ -20467,6 +20467,38 @@
           "structural: target=addu s0, s1, t8 got=addu s0, t8, s1"
         ],
         "timestamp": "2026-06-03T22:20:15.071Z"
+      },
+      {
+        "code": "func_15002560(arg0, arg1)\ns32 arg0;\ns32 arg1;\n{\n    s32 temp_s1;\n    s32 temp_s0;\n    s32 temp_v0;\n    s32 temp_t8;\n\nloop:\n    if (arg0 == 0) {\n        return;\n    }\n    if (*(s16 *)(arg0 + 4) == 0) {\n        if (arg1 != 0) {\n            temp_v0 = arg1 - arg0;\n        } else {\n            temp_v0 = 0;\n        }\n        *(s16 *)(arg0 + 4) = temp_v0;\n    }\n    temp_v0 = *(s16 *)(arg0 + 0xC);\n    if (temp_v0 == 0) {\n        return;\n    }\n    temp_s1 = arg0 + temp_v0;\n    if (*(s16 *)(temp_s1 + 4) != 0) {\n        do {\n            temp_t8 = *(s16 *)(temp_s1 + 4);\n            temp_s0 = temp_s1;\n            temp_s0 += temp_t8;\n            func_15002560(temp_s1, temp_s0);\n            temp_s1 = temp_s0;\n        } while (*(s16 *)(temp_s0 + 4) != 0);\n    }\n    arg0 = temp_s1;\n    goto loop;\n}",
+        "score": 0.8462,
+        "reason": "structural_diffs=6",
+        "diffs": [
+          "structural: target=lh t8, 4(s1) got=lh v0, 4(s1)",
+          "structural: target=addu s0, s1, t8 got=addu a1, s1, v0",
+          "structural: target=move a1, s0 got=move s0, a1",
+          "structural: target=lh t9, 4(s0) got=lh t8, 4(s0)",
+          "structural: target=bnezl t9, L5 got=bnezl t8, L5",
+          "structural: target=lh t8, 4(s1) got=lh v0, 4(s1)"
+        ],
+        "timestamp": "2026-06-03T22:20:50.534Z"
+      },
+      {
+        "code": "func_15002560(arg0, arg1)\ns32 arg0;\ns32 arg1;\n{\n    s32 temp_s1;\n    s32 temp_s0;\n    s32 temp_v0;\n\nloop:\n    if (arg0 == 0) {\n        return;\n    }\n    if (*(s16 *)(arg0 + 4) == 0) {\n        if (arg1 != 0) {\n            temp_v0 = arg1 - arg0;\n        } else {\n            temp_v0 = 0;\n        }\n        *(s16 *)(arg0 + 4) = temp_v0;\n    }\n    temp_v0 = *(s16 *)(arg0 + 0xC);\n    if (temp_v0 == 0) {\n        return;\n    }\n    temp_s1 = arg0 + temp_v0;\n    if (*(s16 *)(temp_s1 + 4) != 0) {\n        do {\n            temp_s0 = (s32)((u8 *)temp_s1 + *(s16 *)(temp_s1 + 4));\n            func_15002560(temp_s1, temp_s0);\n            temp_s1 = temp_s0;\n        } while (*(s16 *)(temp_s0 + 4) != 0);\n    }\n    arg0 = temp_s1;\n    goto loop;\n}",
+        "score": 0.9744,
+        "reason": "structural_diffs=1",
+        "diffs": [
+          "structural: target=addu s0, s1, t8 got=addu s0, t8, s1"
+        ],
+        "timestamp": "2026-06-03T22:22:19.198Z"
+      },
+      {
+        "code": "func_15002560(arg0, arg1)\ns32 arg0;\ns32 arg1;\n{\n    s32 temp_s1;\n    s32 temp_s0;\n    s32 temp_v0;\n\nloop:\n    if (arg0 == 0) {\n        return;\n    }\n    if (*(s16 *)(arg0 + 4) == 0) {\n        if (arg1 != 0) {\n            temp_v0 = arg1 - arg0;\n        } else {\n            temp_v0 = 0;\n        }\n        *(s16 *)(arg0 + 4) = temp_v0;\n    }\n    temp_v0 = *(s16 *)(arg0 + 0xC);\n    if (temp_v0 == 0) {\n        return;\n    }\n    temp_s1 = arg0 + temp_v0;\n    if (*(s16 *)(temp_s1 + 4) != 0) {\n        do {\n            temp_s0 = temp_s1;\n            temp_s0 = temp_s0 + *(s16 *)(temp_s1 + 4);\n            func_15002560(temp_s1, temp_s0);\n            temp_s1 = temp_s0;\n        } while (*(s16 *)(temp_s0 + 4) != 0);\n    }\n    arg0 = temp_s1;\n    goto loop;\n}",
+        "score": 0.9744,
+        "reason": "structural_diffs=1",
+        "diffs": [
+          "structural: target=addu s0, s1, t8 got=addu s0, t8, s1"
+        ],
+        "timestamp": "2026-06-03T22:22:38.259Z"
       }
     ]
   },
