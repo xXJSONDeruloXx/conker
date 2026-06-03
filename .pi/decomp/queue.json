@@ -39,7 +39,7 @@
     "instructions": 9,
     "difficulty": "trivial",
     "tags": [],
-    "attempts": 2,
+    "attempts": 0,
     "lastScore": 0.375,
     "status": "skipped"
   },
@@ -50,9 +50,42 @@
     "instructions": 11,
     "difficulty": "low",
     "tags": [],
-    "attempts": 5,
-    "lastScore": 0.1818,
-    "status": "skipped"
+    "attempts": 3,
+    "lastScore": 0.4583333333333333,
+    "status": "pending",
+    "history": [
+      {
+        "code": "s32 func_100038E0(void) {\n    s32 temp_v0 = 0xBC000C02;\n\n    D_80038070 = temp_v0;\n    D_80038074 = (u16)0x4040;\n    *(u16 *)temp_v0 = (u16)0x4040;\n    return temp_v0;\n}",
+        "score": 0.1818,
+        "reason": "structural_diffs=9",
+        "diffs": [
+          "structural: target=lui v0, 48128 got=li v1, 16448",
+          "structural: target=ori v0, v0, 3074 got=lui t6, 48128",
+          "structural: target=lui at, HI(D_80038070) got=ori v0, t6, 3074",
+          "structural: target=sw v0, LO(D_80038070)(at) got=lui at, HI(D_80038070)",
+          "structural: target=lui at, HI(D_80038074) got=sw v0, LO(D_80038070)(at)",
+          "structural: target=li t6, 16448 got=lui at, HI(D_80038074)",
+          "structural: target=sh t6, LO(D_80038074)(at) got=sh v1, LO(D_80038074)(at)",
+          "structural: target=li t7, 16448 got=lui t7, 48128",
+          "structural: target=sh t7, 0(v0) got=sh v1, 3074(t7)"
+        ],
+        "timestamp": "2026-06-03T04:46:31.310Z"
+      },
+      {
+        "code": "s32 func_100038E0(void) {\n    D_80038070 = 0xBC000C02;\n    D_80038074 = (u16)0x4040;\n    *(u16 *)D_80038070 = (u16)0x4040;\n    return D_80038070;\n}",
+        "score": 0.4230769230769231,
+        "reason": "length_mismatch (target=11, generated=13)",
+        "diffs": [],
+        "timestamp": "2026-06-03T04:46:53.077Z"
+      },
+      {
+        "code": "s32 func_100038E0(void) {\n    s32 temp_v0 = 0xBC000C02;\n\n    D_80038070 = temp_v0;\n    *(volatile u16 *)&D_80038074 = (u16)0x4040;\n    *(volatile u16 *)temp_v0 = (u16)0x4040;\n    return temp_v0;\n}",
+        "score": 0.4583333333333333,
+        "reason": "length_mismatch (target=11, generated=12)",
+        "diffs": [],
+        "timestamp": "2026-06-03T04:47:11.872Z"
+      }
+    ]
   },
   {
     "function": "func_15144A74",
@@ -61,9 +94,9 @@
     "instructions": 13,
     "difficulty": "low",
     "tags": [],
-    "attempts": 7,
+    "attempts": 0,
     "lastScore": 0.5385,
-    "status": "skipped"
+    "status": "pending"
   },
   {
     "function": "func_15144B34",
@@ -149,9 +182,9 @@
     "instructions": 16,
     "difficulty": "low",
     "tags": [],
-    "attempts": 4,
+    "attempts": 0,
     "lastScore": 0.46875,
-    "status": "skipped"
+    "status": "pending"
   },
   {
     "function": "func_15079A58",
@@ -160,9 +193,9 @@
     "instructions": 16,
     "difficulty": "low",
     "tags": [],
-    "attempts": 4,
+    "attempts": 0,
     "lastScore": 0.46875,
-    "status": "skipped"
+    "status": "pending"
   },
   {
     "function": "func_1507A3E8",
@@ -171,9 +204,9 @@
     "instructions": 16,
     "difficulty": "low",
     "tags": [],
-    "attempts": 4,
+    "attempts": 0,
     "lastScore": 0.125,
-    "status": "skipped"
+    "status": "pending"
   },
   {
     "function": "func_150A7B80",
@@ -182,9 +215,9 @@
     "instructions": 16,
     "difficulty": "low",
     "tags": [],
-    "attempts": 2,
+    "attempts": 0,
     "lastScore": 0.24242424242424243,
-    "status": "skipped"
+    "status": "pending"
   },
   {
     "function": "func_10001420",
@@ -194,8 +227,38 @@
     "difficulty": "trivial",
     "tags": [],
     "attempts": 4,
-    "lastScore": 0.007462686567164201,
-    "status": "skipped"
+    "lastScore": 0,
+    "status": "skipped",
+    "history": [
+      {
+        "code": "void func_10001420(void) {\n    s32 *p = (s32 *)&D_80043B40;\n    s32 *end = p + (0xFE0 / 4);\n    do {\n        p++;\n        p[-1] = 0;\n    } while (p < end);\n}",
+        "score": 0,
+        "reason": "generated 603 instr for 9 target (67.0x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T04:42:04.365Z"
+      },
+      {
+        "code": "void func_10001420(void) {\n    s32 *p = (s32 *)&D_80043B40;\n    s32 *end = (s32 *)((u8 *)&D_80043B40 + 0xFE0);\n    do {\n        p++;\n        p[-1] = 0;\n    } while (p < end);\n}",
+        "score": 0,
+        "reason": "generated 603 instr for 9 target (67.0x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T04:42:31.761Z"
+      },
+      {
+        "code": "void func_10001420(void) {\n    s32 *p = (s32 *)&D_80043B40;\n    s32 *end = p + 1016;\n    do {\n        *p++ = 0;\n    } while (p < end);\n}",
+        "score": 0,
+        "reason": "generated 603 instr for 9 target (67.0x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T04:43:10.129Z"
+      },
+      {
+        "code": "void func_10001420(void) {\n    s32 *p = (s32 *)&D_80043B40;\n    s32 *end = p + 1016;\n    do {\n        p++;\n        p[-1] = 0;\n    } while (p < end);\n}",
+        "score": 0,
+        "reason": "generated 603 instr for 9 target (67.0x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-03T04:43:30.188Z"
+      }
+    ]
   },
   {
     "function": "func_1506196C",
@@ -204,9 +267,9 @@
     "instructions": 15,
     "difficulty": "low",
     "tags": [],
-    "attempts": 7,
+    "attempts": 0,
     "lastScore": 0.9333,
-    "status": "skipped"
+    "status": "pending"
   },
   {
     "function": "func_15142AC0",
@@ -226,9 +289,9 @@
     "instructions": 17,
     "difficulty": "low",
     "tags": [],
-    "attempts": 2,
+    "attempts": 0,
     "lastScore": 0,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "void func_1508F060(void) {\n    s32 idx = 2;\n    u8 *ptr;\n\n    D_800D246D = 0;\n    D_800D247D = 0;\n    ptr = D_800D2460[idx];\n    ptr[0x1D] = 0;\n    ptr[0x2D] = 0;\n    ptr[0x3D] = 0;\n    ptr[0xD] = 0;\n    D_800D24C0 = 0;\n}\n",
@@ -255,7 +318,7 @@
     "tags": [],
     "attempts": 0,
     "lastScore": 0,
-    "status": "skipped"
+    "status": "pending"
   },
   {
     "function": "func_15079F6C",
@@ -264,9 +327,9 @@
     "instructions": 20,
     "difficulty": "low",
     "tags": [],
-    "attempts": 6,
+    "attempts": 0,
     "lastScore": 0.9,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "void func_15079F6C(void) {\n    struct127 **temp_a0 = &D_800D154C;\n    (*temp_a0)->unk224 = (D_800D1890 << 8) | D_800D1891;\n    (*temp_a0)->unk22B = D_800D1892;\n    (*temp_a0)->unk226 = D_800D1893;\n}\n",
@@ -380,9 +443,9 @@
     "instructions": 20,
     "difficulty": "low",
     "tags": [],
-    "attempts": 2,
+    "attempts": 0,
     "lastScore": 0.475,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "void func_150A7CB0(s32 *arg0, s32 arg1, s32 arg2, s32 arg3) {\n    f32 one = 1.0f;\n\n    arg0[0] = arg1;\n    arg0[1] = 0;\n    arg0[2] = 0;\n    arg0[3] = 0;\n    arg0[4] = 0;\n    arg0[5] = arg2;\n    arg0[6] = 0;\n    arg0[7] = 0;\n    arg0[8] = 0;\n    arg0[9] = 0;\n    arg0[10] = arg3;\n    arg0[11] = 0;\n    arg0[12] = 0;\n    arg0[13] = 0;\n    ((f32 *)arg0)[15] = one;\n    arg0[14] = 0;\n}\n",
@@ -407,9 +470,9 @@
     "instructions": 20,
     "difficulty": "low",
     "tags": [],
-    "attempts": 2,
+    "attempts": 0,
     "lastScore": 0.47619047619047616,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "void func_150A7DA0(f32 *arg0, s32 arg1, s32 arg2, s32 arg3) {\n    f32 one = 1.0f;\n\n    ((s32 *)arg0)[1] = 0;\n    arg0[0] = one;\n    ((s32 *)arg0)[2] = 0;\n    ((s32 *)arg0)[3] = 0;\n    ((s32 *)arg0)[4] = 0;\n    arg0[5] = one;\n    ((s32 *)arg0)[6] = 0;\n    ((s32 *)arg0)[7] = 0;\n    ((s32 *)arg0)[8] = 0;\n    ((s32 *)arg0)[9] = 0;\n    arg0[10] = one;\n    ((s32 *)arg0)[11] = 0;\n    ((s32 *)arg0)[12] = arg1;\n    ((s32 *)arg0)[13] = arg2;\n    ((s32 *)arg0)[14] = arg3;\n    arg0[15] = one;\n}\n",
@@ -434,9 +497,9 @@
     "instructions": 20,
     "difficulty": "low",
     "tags": [],
-    "attempts": 2,
+    "attempts": 0,
     "lastScore": 0.47619047619047616,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "void guMtxIdentF(f32 mf[4][4]) {\n    mf[0][0] = 1.0f;\n    mf[0][1] = 0.0f;\n    mf[0][2] = 0.0f;\n    mf[0][3] = 0.0f;\n    mf[1][0] = 0.0f;\n    mf[1][1] = 1.0f;\n    mf[1][2] = 0.0f;\n    mf[1][3] = 0.0f;\n    mf[2][0] = 0.0f;\n    mf[2][1] = 0.0f;\n    mf[2][2] = 1.0f;\n    mf[2][3] = 0.0f;\n    mf[3][0] = 0.0f;\n    mf[3][1] = 0.0f;\n    mf[3][2] = 0.0f;\n    mf[3][3] = 1.0f;\n}\n",
@@ -461,9 +524,9 @@
     "instructions": 21,
     "difficulty": "low",
     "tags": [],
-    "attempts": 2,
+    "attempts": 0,
     "lastScore": 0.2381,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "void func_1507A428(void) {\n    D_800D154C->unk94 = ~(((D_800D1890 << 0x18) | (D_800D1891 << 0x10) | (D_800D1892 << 8) | D_800D1893) | 1);\n}\n",
@@ -522,9 +585,9 @@
     "instructions": 21,
     "difficulty": "low",
     "tags": [],
-    "attempts": 2,
+    "attempts": 0,
     "lastScore": 0.2381,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "void func_1507A4D4(void) {\n    D_800D154C->unk94 |= (D_800D1890 << 0x18) | (D_800D1891 << 0x10) | (D_800D1892 << 8) | D_800D1893;\n}\n",
@@ -586,9 +649,9 @@
     "instructions": 22,
     "difficulty": "low",
     "tags": [],
-    "attempts": 6,
+    "attempts": 0,
     "lastScore": 0.4583333333333333,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "void func_1506EF5C(void) {\n    s32 temp_t1 = D_800D1580;\n    s32 temp_t6;\n\n    D_800D154C->unk282 = -1;\n    D_800D154C->unk276 = 5;\n    temp_t6 = ((temp_t1 >> 16) & 0xFF) << 1;\n    *(((u8 *)D_800D154C) + temp_t6 + 0x284) = temp_t1 >> 8;\n    *(((u8 *)D_800D154C) + temp_t6 + 0x285) = temp_t1;\n}\n",
@@ -723,9 +786,9 @@
     "instructions": 22,
     "difficulty": "low",
     "tags": [],
-    "attempts": 2,
+    "attempts": 0,
     "lastScore": 0.1818,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "void func_1507A47C(void) {\n    D_800D154C->unk94 &= ~((D_800D1890 << 0x18) | (D_800D1891 << 0x10) | (D_800D1892 << 8) | D_800D1893);\n}\n",
@@ -780,9 +843,9 @@
     "instructions": 15,
     "difficulty": "low",
     "tags": [],
-    "attempts": 4,
+    "attempts": 0,
     "lastScore": 0.4666666666666667,
-    "status": "skipped"
+    "status": "pending"
   },
   {
     "function": "func_15168BAC",
@@ -813,9 +876,9 @@
     "instructions": 25,
     "difficulty": "low",
     "tags": [],
-    "attempts": 3,
+    "attempts": 0,
     "lastScore": 0.16,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "void func_1507A100(void) {\n    s16 val = ((s8)D_800D1892 << 8) | D_800D1893;\n    u8 *base = (u8 *)D_800D2104[D_800D154C->unk13F];\n    *(s16 *)(base + D_800D1890 * 8 + D_800D1891 * 2 + 8) = val;\n}",
@@ -908,9 +971,9 @@
     "instructions": 25,
     "difficulty": "low",
     "tags": [],
-    "attempts": 1,
+    "attempts": 0,
     "lastScore": 0.20833333333333331,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "f32 func_150ADA68(void) {\n    u64 x = D_800885B0;\n    x ^= (x >> 33) | (x << 31);\n    x ^= x << 44;\n    x ^= (x >> 20) & 0xFFF;\n    D_800885B0 = x;\n    return (f32)(s32)(u16)x * D_8009F740;\n}",
@@ -1013,9 +1076,9 @@
     "instructions": 23,
     "difficulty": "low",
     "tags": [],
-    "attempts": 8,
+    "attempts": 0,
     "lastScore": 0.41304347826086957,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "void func_151635A8(struct225 *arg0, s32 arg1, u8 arg2) {\n    if (D_8008B370[arg0->unk25] != NULL) {\n        D_8008B370[arg0->unk25](arg2);\n    }\n}",
@@ -1082,9 +1145,9 @@
     "instructions": 21,
     "difficulty": "low",
     "tags": [],
-    "attempts": 6,
+    "attempts": 0,
     "lastScore": 0.9048,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "void func_1516706C(void) {\n    void (**ptr)(void) = D_8008CB64;\n    void (**end)(void) = D_8008CB70;\n    void (*func)(void) = *ptr;\n\n    do {\n        if (func != NULL) {\n            func();\n            ptr++;\n        } else {\n            ptr++;\n        }\n        if (ptr != end) {\n            func = *ptr;\n        }\n    } while (ptr != end);\n}\n",
@@ -1146,9 +1209,9 @@
     "instructions": 20,
     "difficulty": "low",
     "tags": [],
-    "attempts": 5,
+    "attempts": 0,
     "lastScore": 0.8,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "void func_15168A4C(struct12 *arg0, s32 arg1) {\n    s32 temp_v0 = *((u8 *)arg0 + 1);\n    u8 *temp_t9 = D_800DCE50;\n    struct12 **temp_v1 = (struct12 **)&temp_t9[(temp_v0 * 0x1A0) + (arg1 * 4)];\n    struct12 *temp_t0 = *temp_v1;\n\n    *(struct12 **)((s32)arg0 + 8) = temp_t0;\n    if (temp_t0 != NULL) {\n        *(struct12 **)((s32)temp_t0 + 4) = arg0;\n    }\n    *(u8 *)arg0 = arg1;\n    *(struct12 **)((s32)arg0 + 4) = NULL;\n    *temp_v1 = arg0;\n}\n",
@@ -1214,9 +1277,9 @@
     "instructions": 28,
     "difficulty": "low",
     "tags": [],
-    "attempts": 19,
+    "attempts": 0,
     "lastScore": 0.48214285714285715,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "void func_10003BD0(void) {\n    D_800380B4 = (struct54 *)&D_800E9D10;\n    D_800380B4->unk0 = NULL;\n    D_800380B4->unk4 = NULL;\n    D_800380B4->unk8 = D_80038098 - (u32)&D_800E9D10 - 0x14;\n    D_800380B4->unkC = 0;\n    D_800380B4->unk10 = 0;\n    D_800380BC = (s32 *)D_800380B4;\n    D_800380B8 = D_800380B4;\n    D_800380B0 = D_800380B4;\n}",
@@ -1362,9 +1425,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 6,
+    "attempts": 0,
     "lastScore": 0.4285714285714286,
-    "status": "skipped"
+    "status": "pending"
   },
   {
     "function": "func_15167010",
@@ -1373,9 +1436,9 @@
     "instructions": 23,
     "difficulty": "low",
     "tags": [],
-    "attempts": 4,
+    "attempts": 0,
     "lastScore": 0,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "void func_15167010(void) {\n    struct115 *ptr;\n    struct115 *end;\n\n    ptr = D_8008B4A8;\n    end = (struct115 *)((u8 *)D_8008B4A8 + 0x1484);\n    \n    do {\n        if (ptr->unk18 != NULL) {\n            ptr->unk18(NULL);\n        }\n        ptr++;\n    } while (ptr < end);\n}",
@@ -1425,9 +1488,9 @@
     "instructions": 24,
     "difficulty": "low",
     "tags": [],
-    "attempts": 1,
+    "attempts": 0,
     "lastScore": 0,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "void func_1000B294(s32 *arg0) {\n    struct151 **ptr = D_800417B0;\n    struct151 **end = (struct151 **)&D_800417BC;\n    struct151 *entry;\n    struct00 *sub;\n    \n    do {\n        entry = *ptr;\n        if (entry != NULL) {\n            if (arg0 == entry->unk10) {\n                entry->unk10 = (s32 *)entry;\n            }\n            sub = entry->unk60;\n            if (sub != NULL) {\n                if (arg0 == *(s32 **)((u8 *)sub + 0x10)) {\n                    *(s32 *)((u8 *)sub + 0x10) = (s32)sub;\n                }\n            }\n        }\n        ptr++;\n    } while (ptr != end);\n}",
@@ -1445,9 +1508,9 @@
     "instructions": 26,
     "difficulty": "low",
     "tags": [],
-    "attempts": 4,
+    "attempts": 0,
     "lastScore": 0.46153846153846156,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "void func_151F3D78(void) {\n    s32 temp;\n    s32 (*func)(s32, s32, s32);\n\n    func = ((s32 (*)(s32 *)) (*(s32 *)((u8 *)n_syn + 0x24)))(&temp);\n    func(D_800E0D80 + D_800E0DE4, 0x810, 0);\n}",
@@ -1522,9 +1585,9 @@
     "instructions": 23,
     "difficulty": "low",
     "tags": [],
-    "attempts": 11,
+    "attempts": 0,
     "lastScore": 0.4782608695652174,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "void func_150747E4(void) {\n    u8 val = D_800D154C->unk65;\n    \n    if (val != 0) {\n        u8 *entry = (u8 *)D_800CC2D0 + (val - 1) * 812;\n        *(s32 *)(entry + 0x218) = 0;\n        *(u8 *)(entry + 0x232) = (u8)D_800D1580;\n    }\n}",
@@ -1630,9 +1693,9 @@
     "instructions": 24,
     "difficulty": "low",
     "tags": [],
-    "attempts": 6,
+    "attempts": 0,
     "lastScore": 0.4,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "f32 func_15144B68(f32 arg0) {\n    f32 range = D_800A56A4;\n    f32 val = arg0;\n    \n    if (range < val) {\n        do {\n            val -= range;\n        } while (range < val);\n    }\n    if (val < 0.0f) {\n        do {\n            val += range;\n        } while (val < 0.0f);\n    }\n    return val;\n}",
@@ -1713,9 +1776,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 4,
+    "attempts": 0,
     "lastScore": 0.4666666666666667,
-    "status": "skipped"
+    "status": "pending"
   },
   {
     "function": "func_1516962C",
@@ -1737,9 +1800,9 @@
     "instructions": 17,
     "difficulty": "low",
     "tags": [],
-    "attempts": 5,
+    "attempts": 0,
     "lastScore": 0.3695652173913043,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "struct127 *func_1505EEB0(s32 state, s32 *arg1) {\n    struct127 *tmp = D_800CC2D0;\n    s32 i = 0;\n\n    if (state != tmp->interaction_state) {\n        i++;\n        do {\n            if (i >= 25) {\n                tmp++;\n                break;\n            }\n            tmp++;\n        } while (state != tmp->interaction_state && (++i));\n    }\n\n    *arg1 = i;\n    return tmp;\n}\n",
@@ -1858,9 +1921,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 5,
+    "attempts": 0,
     "lastScore": 0.4666666666666667,
-    "status": "skipped"
+    "status": "pending"
   },
   {
     "function": "func_1513FA2C",
@@ -1897,9 +1960,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 5,
+    "attempts": 0,
     "lastScore": 0.47058823529411764,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "void func_151D343C(s32 arg0, s32 arg1) {\n    s32 sp1C[1];\n\n    sp1C[0] = D_800AB168[0];\n    func_15169260((s32)sp1C, 1, arg0, arg1 & 0xFF);\n}\n",
@@ -1947,9 +2010,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 5,
+    "attempts": 0,
     "lastScore": 0.4473684210526316,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "void func_150721A4(void) {\n    s32 temp_v1 = D_800D1580;\n    func_1506160C(D_800D154C, (temp_v1 >> 16) & 0xFF, temp_v1 & 0xFF, (temp_v1 >> 8) & 0xFF, 0);\n}\n",
@@ -2251,9 +2314,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 5,
+    "attempts": 0,
     "lastScore": 0.18367346938775508,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "void func_150104F0(void) {\n    u8 *temp_v1 = D_800D9950;\n    s32 temp_v0 = 0;\n    void *ret;\n\n    temp_v1[1] = temp_v0;\n    temp_v1[0] = temp_v0;\n    temp_v1[2] = 0;\n    ret = func_151149AC(0xF6);\n    *(f32 *)((s32)ret + 0x7C) = 2.0f;\n    D_80088980 = 0;\n}\n",
@@ -2301,9 +2364,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 5,
+    "attempts": 0,
     "lastScore": 0.4444444444444444,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "s32 func_15141928(void *arg0) {\n    void *temp_v0 = *(void **)((s32)arg0 + 0x178);\n    func_1514182C(arg0, (void *)((s32)arg0 + 0x17C), *(s32 *)((s32)arg0 + 0x170), *(s32 *)((s32)arg0 + 0x174), *(f32 *)temp_v0, *(f32 *)((s32)temp_v0 + 8));\n    return 1;\n}\n",
@@ -2386,9 +2449,9 @@
     "instructions": 20,
     "difficulty": "low",
     "tags": [],
-    "attempts": 5,
+    "attempts": 0,
     "lastScore": 0.475,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "s32 func_151464B8(void *arg0) {\n    s32 temp_a1 = D_80082FA0;\n    s32 temp_v0 = 0;\n    s32 temp_v1 = 0;\n\n    while (temp_a1 >= temp_v0) {\n        temp_v1 = (s16)(temp_v1 | (1 << temp_v0));\n        temp_v0++;\n    }\n    return ((*(s16 *)((s32)arg0 + 2) & temp_v1) == 0);\n}\n",
@@ -2521,9 +2584,9 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 4,
+    "attempts": 0,
     "lastScore": 0.4375,
-    "status": "skipped"
+    "status": "pending"
   },
   {
     "function": "func_151696DC",
@@ -2532,9 +2595,9 @@
     "instructions": 20,
     "difficulty": "low",
     "tags": [],
-    "attempts": 6,
+    "attempts": 0,
     "lastScore": 0.47619047619047616,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "void func_151696DC(arg0)\nstruct102 *arg0;\n{\n    s32 temp_v1 = D_800DD190;\n    s32 temp_v0 = 0;\n    s32 temp_t6;\n    struct102 **temp_a1;\n\n    if (temp_v1 > 0) {\n        temp_t6 = temp_v0 << 2;\n        do {\n            temp_a1 = (struct102 **)&D_800DD198[temp_t6];\n            if (arg0 == *temp_a1) {\n                *temp_a1 = *(struct102 **)((s32)arg0 + 8);\n            }\n            temp_v0 = (s8)(temp_v0 + 1);\n            temp_t6 = temp_v0 << 2;\n        } while (temp_v0 < temp_v1);\n    }\n}\n",
@@ -2628,9 +2691,9 @@
     "instructions": 20,
     "difficulty": "low",
     "tags": [],
-    "attempts": 5,
+    "attempts": 0,
     "lastScore": 0.15,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "s32 func_151DA6A8(void *arg0) {\n    s32 temp_v1;\n    f32 *temp_v0;\n    f32 temp_f0;\n\n    if ((*(s32 *)((s32)arg0 + 0x58) & 1) != 0) {\n        temp_v1 = D_800BE9E4;\n        temp_v0 = (f32 *)((s32)arg0 + 0x128);\n        if (temp_v1 != 0) {\n            temp_v1--;\n            temp_f0 = temp_v0[5];\n            do {\n                temp_v0[4] *= temp_f0;\n            } while (temp_v1-- != 0);\n        }\n    }\n    return 1;\n}\n",
@@ -2707,9 +2770,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 5,
+    "attempts": 0,
     "lastScore": 0.4772727272727273,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "void func_151417C4(u8 arg0, u8 arg1) {\n    struct {\n        s32 unk0;\n        s32 unk4;\n        u8 unk8;\n    } sp1C;\n\n    sp1C.unk0 = D_8008A074[0];\n    sp1C.unk4 = D_8008A074[1];\n    sp1C.unk8 = arg0;\n    func_15169260((s32)&sp1C, 2, (s32)&sp1C.unk8, arg1);\n}\n",
@@ -2805,7 +2868,7 @@
     "tags": [
       "handwritten"
     ],
-    "attempts": 5,
+    "attempts": 0,
     "lastScore": 0.19047619047619047,
     "status": "skipped"
   },
@@ -2816,9 +2879,9 @@
     "instructions": 32,
     "difficulty": "medium-low",
     "tags": [],
-    "attempts": 21,
+    "attempts": 0,
     "lastScore": 0.484375,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "void func_15010600(void) {\n    u8 *temp_v1;\n    u8 *temp_a0;\n    u8 *temp_v0;\n\n    D_800D9921 = 0;\n    D_800D9920 = 0;\n    D_800D9928 = 0;\n    D_800D9938 = 0;\n    D_800D9929 = 0;\n    D_800D9939 = 0;\n\n    temp_v1 = D_800D992A;\n    temp_a0 = D_800D993A;\n    temp_v0 = D_800D993A + 0xC;\n\n    do {\n        temp_a0 += 4;\n        temp_v1[1] = 0;\n        temp_a0[-3] = 0;\n        temp_v1[2] = 0;\n        temp_a0[-2] = 0;\n        temp_v1[3] = 0;\n        temp_a0[-1] = 0;\n        temp_v1 += 4;\n        temp_v1[-4] = 0;\n        temp_a0[-4] = 0;\n    } while (temp_a0 != temp_v0);\n}",
@@ -2998,9 +3061,9 @@
     "instructions": 29,
     "difficulty": "low",
     "tags": [],
-    "attempts": 29,
+    "attempts": 0,
     "lastScore": 0.48333333333333334,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "void func_100100E0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {\n    struct15 *var_v0;\n    struct15 *end;\n\n    var_v0 = D_80041FE0;\n    if (D_80042760 > 0) {\n        end = &D_80041FE0[D_80042760];\n        do {\n            if ((arg0 == var_v0->unk14) && (arg1 == var_v0->unk18) && (arg2 == var_v0->unk1C)) {\n                var_v0->unk14 = arg3;\n                var_v0->unk18 = arg4;\n                var_v0->unk1C = arg5;\n            }\n            var_v0++;\n        } while (var_v0 < end);\n    }\n}",
@@ -3214,9 +3277,9 @@
     "instructions": 33,
     "difficulty": "medium-low",
     "tags": [],
-    "attempts": 11,
+    "attempts": 0,
     "lastScore": 1,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "void func_150492CC(f32 arg0, f32 arg1, f32 arg2) {\n    D_800CC220 = arg0;\n    D_800CC224 = arg1;\n    D_800CC228 = arg2;\n    D_800CC22C = arg0 / 2;\n    D_800CC230 = arg1 / 2;\n    D_800CC234 = arg2 / 2;\n\n    if (arg0 == 0.0f) {\n        arg0 = D_80099080;\n    }\n\n    D_800CC238 = arg1 / arg0;\n    D_800CC23C = arg2 / arg0;\n}",
@@ -3353,9 +3416,9 @@
     "instructions": 26,
     "difficulty": "low",
     "tags": [],
-    "attempts": 14,
+    "attempts": 0,
     "lastScore": 0.1538,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "void func_1507488C(void) {\n    s32 temp_v1 = D_800D1580;\n    struct127 *temp_a2 = D_800D154C;\n    u8 temp_a1 = temp_v1 & 1;\n\n    if (((&temp_a2->unk2E4)[(temp_v1 >> 16) & 0xFF] & ((temp_v1 >> 8) & 0xFF)) != 0) {\n        temp_a1 = ((temp_v1 & 1) ^ 1) & 0xFF;\n    }\n    if (temp_a1 != 0) {\n        temp_a2->unk138 += temp_v1 >> 24;\n    }\n}",
@@ -3595,7 +3658,7 @@
     "tags": [],
     "attempts": 0,
     "lastScore": 0,
-    "status": "skipped"
+    "status": "pending"
   },
   {
     "function": "func_1000CBF0",
@@ -3842,9 +3905,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 5,
+    "attempts": 0,
     "lastScore": 0.34210526315789475,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "void func_1513A594(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {\n    func_1513A5E0(arg1, arg3 & 0xFF, arg4);\n    if (*(s32 *)((s32)arg0 + 0x1D4) != 0) {\n    }\n}\n",
@@ -3903,9 +3966,9 @@
     "instructions": 34,
     "difficulty": "medium-low",
     "tags": [],
-    "attempts": 14,
+    "attempts": 0,
     "lastScore": 0.4852941176470588,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "Gfx *func_15142FBC(Gfx *arg0, s32 arg1, s32 arg2, u8 *arg3) {\n    s32 temp_t6;\n    s32 temp_t7;\n    s32 temp_t0;\n    s32 temp_t8;\n\n    temp_t6 = D_800DD218;\n    temp_t0 = arg1 | 0xF;\n    if (arg1 != temp_t6) {\n        temp_t8 = *arg3;\n        goto block_check;\n    }\n    temp_t7 = D_800DD21C;\n    if (arg2 == temp_t7) {\n        return arg0;\n    }\n    temp_t8 = *arg3;\nblock_check:\n    if (temp_t8 == 1) {\n        arg0->words.w0 = 0xE7000000;\n        arg0->words.w1 = 0;\n        arg0++;\n        *arg3 = 0;\n    }\n    arg0->words.w0 = ((u32)(temp_t0 & 0xFFFFFF)) | 0xEF000000;\n    arg0->words.w1 = arg2;\n    arg0++;\n    D_800DD218 = arg1;\n    D_800DD21C = arg2;\n    return arg0;\n}",
@@ -4435,9 +4498,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 17,
+    "attempts": 0,
     "lastScore": 0.7879,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "void func_1505DFDC(struct127 *arg0) {\n    u8 *temp_v0;\n    s32 temp_t7;\n\n    temp_v0 = (u8 *) arg0->unk2D0;\n    arg0->unk84.uh = 0xFFFF;\n    if (temp_v0 != NULL) {\n        temp_t7 = arg0->id;\n        *(s32 *)(temp_v0 + 0x28) = 0;\n        bzero(temp_v0 + 0x40, 0x3A0);\n        *(u8 *)(temp_v0 + 0x41) = D_800C4ED0[temp_t7] + 1;\n        *(s32 *)(temp_v0 + 0x30) = 0;\n        *(s32 *)(temp_v0 + 0x34) = 0;\n        *(u8 *)(temp_v0 + 0x211) = D_800C4ED0[temp_t7] + 1;\n    }\n}",
@@ -4787,9 +4850,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 24,
+    "attempts": 0,
     "lastScore": 0.9231,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "s32 func_1000FE88(struct15 *arg0, s32 arg1, s32 *arg2) {\n    struct15 *temp_v1;\n    u16 temp_a0;\n\n    if (arg1 < *arg2) {\n        temp_v1 = &arg0[arg1];\n        temp_a0 = temp_v1->unk24;\n        if (temp_a0 != 0) {\n            func_100111C8(temp_a0);\n        }\n        temp_v1->unk10 |= 0x80;\n        return 0;\n    }\n    return 1;\n}",
@@ -5097,9 +5160,9 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 46,
+    "attempts": 0,
     "lastScore": 0.3462,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "void func_15168B44(s32 arg0) {\n    s32 temp_v1 = *(s32 *)(arg0 + 0x14);\n    u16 temp_t6 = temp_v1 & 0xFFFF;\n\n    if (temp_t6 != 0) {\n        s32 temp_t9 = temp_v1 & 0xFFFF0000;\n        u16 temp_t7 = (temp_t6 - 1) & 0xFFFF;\n        *(s32 *)(arg0 + 0x14) = temp_t9;\n        *(s32 *)(arg0 + 0x14) = temp_t9 | temp_t7;\n        *(s16 *)(arg0 + 0x38) = 0x1E;\n        return;\n    }\n\n    {\n        u8 temp_a2 = *(u8 *)(arg0 + 0x3F);\n        u16 temp_t2 = (temp_v1 >> 16) & 0xFFFF;\n\n        if (temp_t2 < temp_a2) {\n            *(u8 *)(arg0 + 0x3F) = temp_a2 - temp_t2;\n            *(s16 *)(arg0 + 0x38) = 0x1E;\n            return;\n        }\n        *(s16 *)(arg0 + 0x38) = 0;\n    }\n}",
@@ -5663,9 +5726,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 18,
+    "attempts": 0,
     "lastScore": 0.7727,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "void func_100043B4(s32 *arg0, u32 arg1) {\n    OSIntMask mask = osSetIntMask(1);\n    *(arg0 - 1) = (*(arg0 - 1) & 0xFFFFFF) | (arg1 << 24);\n    osSetIntMask(mask);\n}",
@@ -6015,9 +6078,9 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 49,
+    "attempts": 0,
     "lastScore": 0.484375,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "void func_15168F08(s8 *arg0, s32 arg1) {\n    s32 i = 0;\n    s8 *ptr = arg0;\n\n    if (*ptr != -0x21) {\n        do {\n            i++;\n            if ((*ptr == 1) || ((*ptr == -0x24) && ((u8)ptr[3] == 0xE))) {\n                *(s32 *)(ptr + 4) &= 0xFFFFFF;\n                *(s32 *)(ptr + 4) += arg1;\n            }\n            ptr = arg0 + (i * 8);\n        } while (*ptr != -0x21);\n    }\n}",
@@ -6542,9 +6605,9 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 23,
+    "attempts": 0,
     "lastScore": 0.2308,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "void func_15125628(void) {\n    if (D_800DBFF4[0] != 0) {\n        D_800DBFF4[0]--;\n    }\n    if (D_800DBFF4[1] != 0) {\n        D_800DBFF4[1]--;\n    }\n    if (D_800DBFF4[2] != 0) {\n        D_800DBFF4[2]--;\n    }\n    if (D_800DBFF4[3] != 0) {\n        D_800DBFF4[3]--;\n    }\n}",
@@ -7276,9 +7339,9 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 10,
+    "attempts": 0,
     "lastScore": 0.48214285714285715,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "void func_15004CE0(s8 *arg0, s32 arg1) {\n    s32 i = 0;\n    s8 *ptr = arg0;\n    u32 temp;\n\n    if (*arg0 != -0x21) {\n        do {\n            if (*ptr == -0x24) {\n                if ((u8)ptr[3] == 0xE) {\n                    temp = *(u32 *)(ptr + 4);\n                    if (temp < 0x80000000U) {\n                        *(u32 *)(ptr + 4) = temp + arg1;\n                    }\n                }\n            }\n            i++;\n            ptr = arg0 + (i << 3);\n        } while (*ptr != -0x21);\n    }\n}",
@@ -7407,9 +7470,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 7,
+    "attempts": 0,
     "lastScore": 0.4861111111111111,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "s32 func_1000F4D8(u16 arg0) {\n    s32 mask = arg0 & 0x7FFF;\n    struct120 *p = D_800425E0;\n    struct120 *end = D_800425E0 + 16;\n    do {\n        if (p->unk8 != 0 && (p->unk4 & 0x7FFF) == mask && func_100173C4(&p->unk8) != 0) {\n            return 1;\n        }\n        p++;\n    } while (p != end);\n    return 0;\n}",
@@ -7956,9 +8019,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 1,
-    "lastScore": 0.2941,
-    "status": "pending",
+    "attempts": 2,
+    "lastScore": 1,
+    "status": "matched",
     "history": [
       {
         "code": "s32 func_151420F8(struct127 *arg0) {\n    s32 sp18[6];\n\n    sp18[0] = D_800A5200[0];\n    sp18[1] = D_800A5200[1];\n    sp18[2] = D_800A5200[2];\n    sp18[3] = D_800A5200[3];\n    sp18[4] = D_800A5200[4];\n    sp18[5] = D_800A5200[5];\n    if (func_150A2AEC(((s32)arg0 - (s32)D_800CC2D0) / 0x32C, 6, sp18, arg0) == -1) {\n        return 0;\n    }\n    return 1;\n}",
@@ -7999,9 +8062,9 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 34,
+    "attempts": 0,
     "lastScore": 0.9143,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "s32 func_1000FF90(s32 arg0, s32 arg1, s32 arg2) {\n    s32 i;\n    struct15 *tmp;\n\n    tmp = D_80041FE0;\n    for (i = 0; i < D_80042760; i++, tmp++) {\n        if (arg0 == tmp->unk14) {\n            if ((arg1 == tmp->unk18) || (arg1 == -1)) {\n                if ((arg2 == tmp->unk1C) || (arg2 == -1)) {\n                    if ((tmp->unk10 & 0x80) == 0) {\n                        return i;\n                    }\n                }\n            }\n        }\n    }\n    return -1;\n}",
@@ -8380,9 +8443,9 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 25,
+    "attempts": 0,
     "lastScore": 0.9,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "s32 func_1514672C(struct17 *arg0) {\n    if ((D_800A56C4 < fabsf(arg0->unk0)) || (D_800A56C4 < fabsf(arg0->unk8)) || (D_800A56C4 < arg0->unk4) || (arg0->unk4 < D_800A56C8)) {\n        return 0;\n    }\n    return 1;\n}",
@@ -8756,9 +8819,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
+    "attempts": 0,
     "lastScore": 0.9355,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "void func_15015F40(s16 arg0, s32 arg1) {\n    switch (arg1) {\n    case 0x1A:\n    case 0x24:\n    case 0x2B:\n    case 0x2D:\n    case 0x30:\n    case 0x33:\n    case 0x34:\n    case 0x3F:\n        D_800BE616 = 1;\n        D_800BE9E8 = func_151E5FAC() - 1;\n        break;\n    default:\n        D_800BE616 = 0;\n        D_800BE9E8 = arg0 - 1;\n        break;\n    }\n}",
@@ -9726,7 +9789,7 @@
     ],
     "attempts": 0,
     "lastScore": 0,
-    "status": "skipped"
+    "status": "pending"
   },
   {
     "function": "func_1514462C",
@@ -9760,9 +9823,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 5,
+    "attempts": 0,
     "lastScore": 0.475,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "void func_150717E0(s32 arg0) {\n    struct127 *temp_v0;\n    struct {\n        struct127 *unk0;\n        u8 unk4;\n    } sp20;\n    void *sp18;\n\n    temp_v0 = func_15083E90(0x12);\n    sp18 = &sp20;\n    if (temp_v0 != NULL) {\n        sp20.unk0 = temp_v0;\n        sp20.unk4 = temp_v0->unique_id;\n        func_15131D4C((s32)sp18, 0x43);\n        func_151494E0((s32)sp18, 0x43);\n    }\n}\n",
@@ -9892,7 +9955,7 @@
     ],
     "attempts": 0,
     "lastScore": 0,
-    "status": "skipped"
+    "status": "pending"
   },
   {
     "function": "func_151D2E5C",
@@ -10077,9 +10140,9 @@
       "handwritten",
       "branchy"
     ],
-    "attempts": 3,
+    "attempts": 0,
     "lastScore": 0.45714285714285713,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "s32 func_150AD9A0(s32 arg0, s32 arg1, s32 arg2) {\n    s32 temp_v0;\n\n    temp_v0 = arg0 >> 31;\n    arg0 = (arg0 ^ temp_v0) - temp_v0;\n    temp_v0 = arg1 >> 31;\n    arg1 = (arg1 ^ temp_v0) - temp_v0;\n    temp_v0 = arg2 >> 31;\n    arg2 = (arg2 ^ temp_v0) - temp_v0;\n\n    if (arg0 < arg1) {\n        arg1 ^= arg0;\n        arg0 ^= arg1;\n        arg1 ^= arg0;\n    }\n    if (arg0 < arg2) {\n        temp_v0 = arg2 ^ arg0;\n        arg0 ^= temp_v0;\n        arg2 = temp_v0 ^ arg0;\n    }\n    if (arg1 < arg2) {\n        arg2 ^= arg1;\n        arg1 ^= arg2;\n        arg2 ^= arg1;\n    }\n    temp_v0 = 0xB;\n    return (((arg1 * temp_v0) >> 5) + (arg2 >> 2)) + arg0;\n}",
@@ -11573,9 +11636,9 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 5,
+    "attempts": 0,
     "lastScore": 0.44565217391304346,
-    "status": "skipped",
+    "status": "pending",
     "history": [
       {
         "code": "s32 func_16002D2C(s16 *arg0, u16 *arg1) {\n    s16 exp;\n    s16 result;\n\n    exp = (s16)((*arg1 & 0x7FF0) >> 4);\n    if (exp == 0x7FF) {\n        *arg0 = 0;\n        result = 2;\n        if ((arg1[0] & 0xF) != 0) {\n            return result;\n        }\n        if (arg1[1] != 0) {\n            return result;\n        }\n        if (arg1[2] != 0) {\n            return result;\n        }\n        if (arg1[3] == 0) {\n            result = 1;\n        }\n        return result;\n    }\n    if (exp > 0) {\n        *arg1 = (*arg1 & 0x800F) | 0x3FF0;\n        *arg0 = exp - 0x3FE;\n        return -1;\n    }\n    if (exp < 0) {\n        return 2;\n    }\n    *arg0 = 0;\n    return 0;\n}",
