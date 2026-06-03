@@ -645,8 +645,8 @@
     "instructions": 16,
     "difficulty": "low",
     "tags": [],
-    "attempts": 6,
-    "lastScore": 0.4,
+    "attempts": 9,
+    "lastScore": 0.1875,
     "status": "pending",
     "history": [
       {
@@ -763,6 +763,70 @@
         "reason": "length_mismatch (target=16, generated=20)",
         "diffs": [],
         "timestamp": "2026-06-03T06:38:44.952Z"
+      },
+      {
+        "code": "s32 func_1507A3E8(void) {\n    s32 tmp;\n\n    tmp = D_800D1890 << 0x18;\n    tmp |= D_800D1891 << 0x10;\n    tmp |= D_800D1892 << 8;\n    tmp |= D_800D1893;\n    return tmp;\n}",
+        "score": 0.125,
+        "reason": "structural_diffs=14",
+        "diffs": [
+          "structural: target=lui t6, HI(D_800D1890) got=lui v1, HI(D_800D1890)",
+          "structural: target=lbu t7, LO(D_800D1890)(t6) got=lui t7, HI(D_800D1891)",
+          "structural: target=lui t9, HI(D_800D1891) got=lbu v1, LO(D_800D1890)(v1)",
+          "structural: target=lbu t0, LO(D_800D1891)(t9) got=lbu t7, LO(D_800D1891)(t7)",
+          "structural: target=lui t3, HI(D_800D1892) got=lui t9, HI(D_800D1892)",
+          "structural: target=lbu t4, LO(D_800D1892)(t3) got=lbu t9, LO(D_800D1892)(t9)",
+          "structural: target=sll t8, t7, 24 got=lui t1, HI(D_800D1893)",
+          "structural: target=lui t7, HI(D_800D1893) got=lbu t1, LO(D_800D1893)(t1)",
+          "structural: target=lbu t9, LO(D_800D1893)(t7) got=sll t6, v1, 24",
+          "structural: target=sll t1, t0, 16 got=sll t8, t7, 16",
+          "structural: target=or t2, t8, t1 got=or v1, t6, t8",
+          "structural: target=sll t5, t4, 8 got=sll t0, t9, 8",
+          "structural: target=or t6, t2, t5 got=or v1, v1, t0",
+          "structural: target=or v0, t6, t9 got=or v0, v1, t1"
+        ],
+        "timestamp": "2026-06-03T06:39:27.354Z"
+      },
+      {
+        "code": "u32 func_1507A3E8(void) {\n    return (D_800D1890 << 0x18) | (D_800D1891 << 0x10) | (D_800D1892 << 8) | D_800D1893;\n}",
+        "score": 0.1875,
+        "reason": "structural_diffs=13",
+        "diffs": [
+          "structural: target=lbu t7, LO(D_800D1890)(t6) got=lui t8, HI(D_800D1891)",
+          "structural: target=lui t9, HI(D_800D1891) got=lbu t8, LO(D_800D1891)(t8)",
+          "structural: target=lbu t0, LO(D_800D1891)(t9) got=lbu t6, LO(D_800D1890)(t6)",
+          "structural: target=lui t3, HI(D_800D1892) got=lui t1, HI(D_800D1892)",
+          "structural: target=lbu t4, LO(D_800D1892)(t3) got=lbu t1, LO(D_800D1892)(t1)",
+          "structural: target=sll t8, t7, 24 got=lui t4, HI(D_800D1893)",
+          "structural: target=lui t7, HI(D_800D1893) got=lbu t4, LO(D_800D1893)(t4)",
+          "structural: target=lbu t9, LO(D_800D1893)(t7) got=sll t9, t8, 16",
+          "structural: target=sll t1, t0, 16 got=sll t7, t6, 24",
+          "structural: target=or t2, t8, t1 got=or t0, t7, t9",
+          "structural: target=sll t5, t4, 8 got=sll t2, t1, 8",
+          "structural: target=or t6, t2, t5 got=or t3, t0, t2",
+          "structural: target=or v0, t6, t9 got=or v0, t3, t4"
+        ],
+        "timestamp": "2026-06-03T06:39:50.715Z"
+      },
+      {
+        "code": "s32 func_1507A3E8(void) {\n    return (((volatile u8)D_800D1890) << 0x18) | (((volatile u8)D_800D1891) << 0x10) | (((volatile u8)D_800D1892) << 8) | ((volatile u8)D_800D1893);\n}",
+        "score": 0.1875,
+        "reason": "structural_diffs=13",
+        "diffs": [
+          "structural: target=lbu t7, LO(D_800D1890)(t6) got=lui t8, HI(D_800D1891)",
+          "structural: target=lui t9, HI(D_800D1891) got=lbu t8, LO(D_800D1891)(t8)",
+          "structural: target=lbu t0, LO(D_800D1891)(t9) got=lbu t6, LO(D_800D1890)(t6)",
+          "structural: target=lui t3, HI(D_800D1892) got=lui t1, HI(D_800D1892)",
+          "structural: target=lbu t4, LO(D_800D1892)(t3) got=lbu t1, LO(D_800D1892)(t1)",
+          "structural: target=sll t8, t7, 24 got=lui t4, HI(D_800D1893)",
+          "structural: target=lui t7, HI(D_800D1893) got=lbu t4, LO(D_800D1893)(t4)",
+          "structural: target=lbu t9, LO(D_800D1893)(t7) got=sll t9, t8, 16",
+          "structural: target=sll t1, t0, 16 got=sll t7, t6, 24",
+          "structural: target=or t2, t8, t1 got=or t0, t7, t9",
+          "structural: target=sll t5, t4, 8 got=sll t2, t1, 8",
+          "structural: target=or t6, t2, t5 got=or t3, t0, t2",
+          "structural: target=or v0, t6, t9 got=or v0, t3, t4"
+        ],
+        "timestamp": "2026-06-03T06:40:54.601Z"
       }
     ]
   },
