@@ -5471,8 +5471,8 @@
     "instructions": 23,
     "difficulty": "low",
     "tags": [],
-    "attempts": 12,
-    "lastScore": 0.6087,
+    "attempts": 15,
+    "lastScore": 0.4782608695652174,
     "status": "pending",
     "history": [
       {
@@ -5714,6 +5714,27 @@
           "structural: target=sb t9, 562(a0) got=sb t9, 562(v1)"
         ],
         "timestamp": "2026-06-03T12:21:30.758Z"
+      },
+      {
+        "code": "void func_150747E4(void) {\n    s32 val;\n    s32 idx;\n    u8 *entry;\n\n    val = D_800D154C->unk65;\n    if (val != 0) {\n        idx = val - 1;\n        entry = (u8 *)D_800CC2D0 + (idx * 0x32C);\n        *(u8 *)(entry + 0x232) = (u8)D_800D1580;\n        *(s32 *)(entry + 0x218) = 0;\n    }\n}",
+        "score": 0.4782608695652174,
+        "reason": "length_mismatch (target=23, generated=22)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:21:46.226Z"
+      },
+      {
+        "code": "void func_150747E4(void) {\n    u8 val;\n    s32 idx;\n    u8 *entry;\n\n    val = D_800D154C->unk65;\n    if (val != 0) {\n        idx = val - 1;\n        entry = (u8 *)D_800CC2D0 + (idx * 0x32C);\n        *(u8 *)(entry + 0x232) = (u8)D_800D1580;\n        *(s32 *)(entry + 0x218) = 0;\n    }\n}",
+        "score": 0.4782608695652174,
+        "reason": "length_mismatch (target=23, generated=22)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:21:55.065Z"
+      },
+      {
+        "code": "void func_150747E4(void) {\n    s32 val;\n    struct127 *entry;\n\n    val = D_800D154C->unk65;\n    if (val != 0) {\n        entry = &D_800CC2D0[val];\n        entry--;\n        entry->unk232 = (u8)D_800D1580;\n        entry->unk218 = 0;\n    }\n}",
+        "score": 0.4782608695652174,
+        "reason": "length_mismatch (target=23, generated=22)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:22:04.225Z"
       }
     ]
   },
