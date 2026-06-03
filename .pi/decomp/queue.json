@@ -3216,9 +3216,9 @@
     "instructions": 21,
     "difficulty": "low",
     "tags": [],
-    "attempts": 1,
-    "lastScore": 0.9048,
-    "status": "pending",
+    "attempts": 2,
+    "lastScore": 1,
+    "status": "matched",
     "history": [
       {
         "code": "void func_1516706C(void) {\n    void (**ptr)(void) = D_8008CB64;\n    void (**end)(void) = D_8008CB70;\n    void (*func)(void) = *ptr;\n\n    do {\n        if (func != NULL) {\n            func();\n            ptr++;\n        } else {\n            ptr++;\n        }\n        if (ptr != end) {\n            func = *ptr;\n        }\n    } while (ptr != end);\n}\n",
@@ -7736,8 +7736,8 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0.4772727272727273,
+    "attempts": 3,
+    "lastScore": 0.9524,
     "status": "pending",
     "history": [
       {
@@ -7822,6 +7822,44 @@
         "reason": "length_mismatch (target=21, generated=22)",
         "diffs": [],
         "timestamp": "2026-06-02T18:15:18.520Z"
+      },
+      {
+        "code": "void func_151417C4(s32 arg0, s32 arg1) {\n    typedef struct {\n        s32 unk0;\n        s32 unk4;\n    } tempstruct;\n    tempstruct sp1C;\n    u8 sp24;\n\n    sp1C = *(tempstruct *)D_8008A074;\n    sp24 = arg0;\n    func_15169260((s32 *)&sp1C, 2, (s32)&sp24, (u8)arg1);\n}",
+        "score": 0.4286,
+        "reason": "structural_diffs=12",
+        "diffs": [
+          "structural: target=addiu a0, sp, 28 got=addiu a0, sp, 32",
+          "structural: target=andi a3, a1, 255 got=lui t6, HI(D_8008A074)",
+          "structural: target=lui t6, HI(D_8008A074) got=addiu t6, t6, LO(D_8008A074)",
+          "structural: target=addiu t6, t6, LO(D_8008A074) got=lw at, 0(t6)",
+          "structural: target=lw at, 0(t6) got=li a1, 2",
+          "structural: target=li a1, 2 got=addiu a2, sp, 31",
+          "structural: target=addiu a2, sp, 36 got=sw at, 0(a0)",
+          "structural: target=sw at, 0(a0) got=lw t9, 4(t6)",
+          "structural: target=lw t9, 4(t6) got=sw t9, 4(a0)",
+          "structural: target=sw t9, 4(a0) got=lw t0, 40(sp)",
+          "structural: target=lbu t0, 43(sp) got=lbu a3, 47(sp)",
+          "structural: target=sb t0, 36(sp) got=sb t0, 31(sp)"
+        ],
+        "timestamp": "2026-06-03T11:35:16.925Z"
+      },
+      {
+        "code": "void func_151417C4(s32 arg0, u8 arg1) {\n    typedef struct {\n        s32 unk0;\n        s32 unk4;\n    } tempstruct;\n    struct {\n        s32 unk0;\n        s32 unk4;\n        u8 unk8;\n    } sp1C;\n\n    *(tempstruct *)&sp1C = *(tempstruct *)D_8008A074;\n    sp1C.unk8 = arg0;\n    func_15169260((s32 *)&sp1C, 2, (s32)&sp1C.unk8, arg1);\n}",
+        "score": 0.9524,
+        "reason": "structural_diffs=1",
+        "diffs": [
+          "structural: target=lbu t0, 43(sp) got=lw t0, 40(sp)"
+        ],
+        "timestamp": "2026-06-03T11:35:37.806Z"
+      },
+      {
+        "code": "void func_151417C4(s32 arg0, u8 arg1) {\n    typedef struct {\n        s32 unk0;\n        s32 unk4;\n    } tempstruct;\n    struct {\n        s32 unk0;\n        s32 unk4;\n        u8 unk8;\n    } sp1C;\n\n    *(tempstruct *)&sp1C = *(tempstruct *)D_8008A074;\n    sp1C.unk8 = (u8)arg0;\n    func_15169260((s32 *)&sp1C, 2, (s32)&sp1C.unk8, arg1);\n}",
+        "score": 0.9524,
+        "reason": "structural_diffs=1",
+        "diffs": [
+          "structural: target=lbu t0, 43(sp) got=lw t0, 40(sp)"
+        ],
+        "timestamp": "2026-06-03T11:35:52.636Z"
       }
     ]
   },
