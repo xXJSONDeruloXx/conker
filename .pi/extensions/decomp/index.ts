@@ -750,12 +750,30 @@ export default function (pi: ExtensionAPI) {
 			}
 
 			// action === "next"
+			// Step 0: Verify ROM is in a known-good state before serving candidates
+			const verifyResult = await pi.exec("docker", [
+				"run", "--rm", "--platform", "linux/amd64",
+				"-v", `${ctx.cwd}:/conker`, "-w", "/conker",
+				"conker-build-min-amd64",
+				"bash", "-lc",
+				"rm -f conker/build/conker.us.ok conker/build/conker.us.bin && make -C conker -j$(nproc) 2>&1 | tail -5",
+			], { signal, timeout: 180000 });
+
+			if (!verifyResult.stdout.includes("conker.us.bin: OK")) {
+				return {
+					content: [{
+						type: "text",
+						text: `⛔ ROM BASELINE BROKEN — cannot serve candidates until fixed.\n\nBuild output:\n${verifyResult.stdout}\n\nFix: git checkout -- conker/src/ conker/include/ to restore known-good state, then retry.`,
+					}],
+					details: { error: "rom_broken" },
+				};
+			}
+
 			// Auto-promote segments if queue is running low
 			const pendingCount = state.queue.filter((e) => e.status === "pending").length;
 			if (pendingCount < AUTO_PROMOTE_THRESHOLD) {
 				const promoteResult = await autoPromoteIfNeeded(pi, ctx.cwd);
 				if (promoteResult) {
-					// Notify via the response that we auto-promoted
 					if (ctx.hasUI) ctx.ui.notify(promoteResult, "info");
 				}
 			}
