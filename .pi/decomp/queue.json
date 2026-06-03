@@ -18400,9 +18400,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 2,
-    "lastScore": 0.7714,
-    "status": "pending",
+    "attempts": 3,
+    "lastScore": 1,
+    "status": "matched",
     "history": [
       {
         "code": "s32 func_15014220(struct134 *arg0) {\n    f32 sp34;\n    struct134 *sp38;\n    u8 sp3C;\n    struct260 *temp_v0;\n\n    arg0->unk16 |= 4;\n    sp34 = 0.0f;\n    sp38 = arg0;\n    sp3C = 1;\n    temp_v0 = func_15149130(0x12C, -1, 0x26, -1, 0, 0x24, (struct37 *)0xC, 0xFF, 0);\n    if (temp_v0 != 0) {\n        memcpy((u8 *)temp_v0 + 0x28, &sp34, 0xC);\n    }\n    return 1;\n}",
@@ -19912,9 +19912,32 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.4861111111111111,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_15076768(void) {\n    struct199 tmp;\n    u8 val;\n\n    val = D_800D1890;\n    switch (val) {\n        case 0:\n            func_15197A7C(D_800D154C);\n            break;\n        case 1:\n            tmp.unk24 = D_800D154C->x_position;\n            tmp.unk28 = -390.0f;\n            tmp.unk2C = D_800D154C->z_position;\n            func_1504715C(&tmp);\n            func_1514B364(&tmp.unk24, &tmp, 0xFF, 0);\n            break;\n    }\n}",
+        "score": 0.4861111111111111,
+        "reason": "length_mismatch (target=35, generated=36)",
+        "diffs": [],
+        "timestamp": "2026-06-03T20:46:58.270Z"
+      },
+      {
+        "code": "void func_15076768(void) {\n    struct260 tmp;\n    struct17 pos;\n    u8 val;\n\n    val = D_800D1890;\n    if (val == 0) {\n        func_15197A7C(D_800D154C);\n    } else if (val == 1) {\n        pos.unk0 = D_800D154C->x_position;\n        pos.unk4 = -390.0f;\n        pos.unk8 = D_800D154C->z_position;\n        func_1504715C(&tmp);\n        func_1514B364(&pos, &tmp, 0xFF, 0);\n    }\n}",
+        "score": 0.4714285714285714,
+        "reason": "length_mismatch (target=35, generated=33)",
+        "diffs": [],
+        "timestamp": "2026-06-03T20:47:21.837Z"
+      },
+      {
+        "code": "void func_15076768(void) {\n    struct17 pos;\n    struct260 tmp;\n    u8 val;\n\n    val = D_800D1890;\n    switch (val) {\n        case 0:\n            func_15197A7C(D_800D154C);\n            break;\n        case 1:\n            pos.unk0 = D_800D154C->x_position;\n            pos.unk4 = -390.0f;\n            pos.unk8 = D_800D154C->z_position;\n            func_1504715C(&tmp);\n            func_1514B364(&pos, &tmp, 0xFF, 0);\n            break;\n    }\n}",
+        "score": 0.4861111111111111,
+        "reason": "length_mismatch (target=35, generated=36)",
+        "diffs": [],
+        "timestamp": "2026-06-03T20:47:33.951Z"
+      }
+    ]
   },
   {
     "function": "func_151F2CDC",
