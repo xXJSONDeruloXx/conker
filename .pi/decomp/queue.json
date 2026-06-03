@@ -3221,9 +3221,9 @@
     "instructions": 25,
     "difficulty": "low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0.16,
-    "status": "pending",
+    "attempts": 1,
+    "lastScore": 1,
+    "status": "matched",
     "history": [
       {
         "code": "void func_1507A100(void) {\n    s16 val = ((s8)D_800D1892 << 8) | D_800D1893;\n    u8 *base = (u8 *)D_800D2104[D_800D154C->unk13F];\n    *(s16 *)(base + D_800D1890 * 8 + D_800D1891 * 2 + 8) = val;\n}",
@@ -3316,8 +3316,8 @@
     "instructions": 25,
     "difficulty": "low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0.20833333333333331,
+    "attempts": 3,
+    "lastScore": 0.46,
     "status": "pending",
     "history": [
       {
@@ -3326,6 +3326,27 @@
         "reason": "length_mismatch (target=25, generated=60)",
         "diffs": [],
         "timestamp": "2026-06-02T19:01:08.547Z"
+      },
+      {
+        "code": "f32 func_150ADA68(void) {\n    u64 tmp0;\n    u64 tmp1;\n    u64 tmp2;\n\n    tmp0 = D_800885B0;\n    tmp2 = (tmp0 << 63) >> 31;\n    tmp1 = (tmp0 << 31) >> 32;\n    tmp2 = tmp2 | tmp1;\n    tmp0 = (tmp0 << 44) >> 32;\n    tmp2 = tmp2 ^ tmp0;\n    tmp0 = (tmp2 >> 20) & 0xFFF;\n    tmp0 = tmp0 ^ tmp2;\n    D_800885B0 = tmp0;\n    return (f32)(s32)(u16)tmp0 * D_8009F740;\n}",
+        "score": 0.17123287671232879,
+        "reason": "length_mismatch (target=25, generated=73)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:51:46.069Z"
+      },
+      {
+        "code": "f32 func_150ADA68(void) {\n    register u64 tmp0;\n    register u64 tmp1;\n    register u64 tmp2;\n\n    tmp0 = D_800885B0;\n    tmp2 = (tmp0 << 63) >> 31;\n    tmp1 = (tmp0 << 31) >> 32;\n    tmp2 = tmp2 | tmp1;\n    tmp0 = (tmp0 << 44) >> 32;\n    tmp2 = tmp2 ^ tmp0;\n    tmp0 = (tmp2 >> 20) & 0xFFF;\n    tmp0 = tmp0 ^ tmp2;\n    D_800885B0 = tmp0;\n    return (f32)(s32)(u16)tmp0 * D_8009F740;\n}",
+        "score": 0.17123287671232879,
+        "reason": "length_mismatch (target=25, generated=73)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:52:13.192Z"
+      },
+      {
+        "code": "f32 func_150ADA68(void) {\n    u32 tmp;\n\n    tmp = D_800885B0;\n    tmp = ((tmp >> 1) | (tmp << 31)) ^ (tmp << 12);\n    tmp ^= (tmp >> 20) & 0xFFF;\n    D_800885B0 = tmp;\n    return (f32)(s32)(u16)tmp * D_8009F740;\n}",
+        "score": 0.46,
+        "reason": "length_mismatch (target=25, generated=23)",
+        "diffs": [],
+        "timestamp": "2026-06-03T12:52:45.929Z"
       }
     ]
   },
