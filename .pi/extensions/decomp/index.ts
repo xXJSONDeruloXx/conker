@@ -1744,14 +1744,19 @@ export default function (pi: ExtensionAPI) {
 
 			// Write the base source file for Transmuter
 			// Include standard headers + extract undefined_syms referenced in the code
+			// Filter out symbols already declared in variables.h/functions.h to avoid redeclaration errors
 			const undefSymsPath = path.join(ctx.cwd, "conker/undefined_syms_auto.txt");
 			const undefSyms2 = path.join(ctx.cwd, "conker/undefined_syms.us.txt");
 			let extraExterns = "";
 			try {
 				const allSyms = (fs.readFileSync(undefSymsPath, "utf-8") + "\n" + fs.readFileSync(undefSyms2, "utf-8"))
 					.split("\n").map((l: string) => l.match(/^([A-Za-z_]\w*)/)?.[1]).filter(Boolean);
-				// Only include externs for symbols actually referenced in the code
-				const neededSyms = allSyms.filter((s: string) => baseCode.includes(s));
+				// Get symbols already in headers (to avoid redeclaration)
+				const headersContent = fs.readFileSync(path.join(ctx.cwd, "conker/include/variables.h"), "utf-8")
+					+ fs.readFileSync(path.join(ctx.cwd, "conker/include/functions.h"), "utf-8");
+				const headerSyms = new Set(headersContent.match(/\b[A-Z_][A-Za-z0-9_]+\b/g) || []);
+				// Only include externs for symbols referenced in code AND not already in headers
+				const neededSyms = allSyms.filter((s: string) => baseCode.includes(s) && !headerSyms.has(s));
 				if (neededSyms.length > 0) {
 					extraExterns = neededSyms.map((s: string) => `extern s32 ${s};`).join("\n") + "\n";
 				}
