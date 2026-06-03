@@ -576,5 +576,14 @@
     "example_functions": [
       "func_151DA6A8"
     ]
+  },
+  {
+    "id": "comma-initializer-splits-hi-lo-order",
+    "description": "A comma-separated assignment can preserve declaration/register order for `%hi` loads while scheduling `%lo` addiu in expression order, fixing near-matches where only paired addiu/lui order differs.",
+    "trigger": "Near-match has correct loop/control flow and register allocation, but target wants `lui` order for pointer/end in declaration order while `%lo` `addiu` order differs from separate declarations/assignments.",
+    "solution": "Use uninitialized locals in declaration order, then initialize them with a single comma expression such as `ptr = START, end = END;` before the loop.",
+    "example_functions": [
+      "func_1516706C"
+    ]
   }
 ]
