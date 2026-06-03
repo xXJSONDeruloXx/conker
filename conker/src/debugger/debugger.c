@@ -3,6 +3,8 @@
 #include "functions.h"
 #include "variables.h"
 
+s32 func_16001B34(u8 *arg0, s32 arg1, ...);
+
 
 void func_16000000(void) {
     func_160012B0(278, &D_160046AC);
@@ -259,7 +261,25 @@ s32 func_16000A5C(void) {
 
 // called from func_10007DAC
 #pragma GLOBAL_ASM("asm/nonmatchings/debugger/debugger/func_16000B14.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/debugger/debugger/func_16000F8C.s")
+void func_16000F8C(s32 arg0, f32 arg1) {
+    u8 buf[0x28];
+    s32 temp_v0;
+    u32 temp_t9;
+
+    if ((arg0 >= (D_160038A0 << 5)) && (arg0 < 0x341)) {
+        *(f32 *)&buf[0x24] = arg1;
+        temp_t9 = (u32)(*(s32 *)&buf[0x24] & 0x7F800000) >> 0x17;
+        if ((temp_t9 == 0) || (temp_t9 >= 0xFF)) {
+            temp_v0 = (*(s32 *)&buf[0x24]) * 2;
+            if (temp_v0 != 0) {
+                func_160012B0(arg0, D_160047D0);
+                return;
+            }
+        }
+        func_16001B34(buf - 8, (s32)D_160047D4, D_160047DC, D_160047E0, (f64)arg1);
+        func_160012B0(arg0, buf - 8);
+    }
+}
 // NON-MATCHING: lots to figure out
 // void func_16000F8C(s32 arg0, f32 arg1) {
 //     struct165 tmp;
