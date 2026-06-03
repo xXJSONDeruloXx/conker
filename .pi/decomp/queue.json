@@ -569,9 +569,9 @@
     "instructions": 16,
     "difficulty": "low",
     "tags": [],
-    "attempts": 4,
-    "lastScore": 0.9375,
-    "status": "pending",
+    "attempts": 5,
+    "lastScore": 1,
+    "status": "matched",
     "history": [
       {
         "code": "void func_15079A58(void) {\n    s16 tmp;\n\n    tmp = (D_800D1890 << 8) + D_800D1891;\n    (*(s16 **)&D_800D2110)[D_800D154C->unk13F] = tmp;\n}",
@@ -645,9 +645,76 @@
     "instructions": 16,
     "difficulty": "low",
     "tags": [],
-    "attempts": 0,
+    "attempts": 3,
     "lastScore": 0.125,
-    "status": "pending"
+    "status": "pending",
+    "history": [
+      {
+        "code": "s32 func_1507A3E8(void) {\n    return (D_800D1890 << 0x18) | (D_800D1891 << 0x10) | (D_800D1892 << 8) | D_800D1893;\n}",
+        "score": 0.1875,
+        "reason": "structural_diffs=13",
+        "diffs": [
+          "structural: target=lbu t7, LO(D_800D1890)(t6) got=lui t8, HI(D_800D1891)",
+          "structural: target=lui t9, HI(D_800D1891) got=lbu t8, LO(D_800D1891)(t8)",
+          "structural: target=lbu t0, LO(D_800D1891)(t9) got=lbu t6, LO(D_800D1890)(t6)",
+          "structural: target=lui t3, HI(D_800D1892) got=lui t1, HI(D_800D1892)",
+          "structural: target=lbu t4, LO(D_800D1892)(t3) got=lbu t1, LO(D_800D1892)(t1)",
+          "structural: target=sll t8, t7, 24 got=lui t4, HI(D_800D1893)",
+          "structural: target=lui t7, HI(D_800D1893) got=lbu t4, LO(D_800D1893)(t4)",
+          "structural: target=lbu t9, LO(D_800D1893)(t7) got=sll t9, t8, 16",
+          "structural: target=sll t1, t0, 16 got=sll t7, t6, 24",
+          "structural: target=or t2, t8, t1 got=or t0, t7, t9",
+          "structural: target=sll t5, t4, 8 got=sll t2, t1, 8",
+          "structural: target=or t6, t2, t5 got=or t3, t0, t2",
+          "structural: target=or v0, t6, t9 got=or v0, t3, t4"
+        ],
+        "timestamp": "2026-06-03T06:35:54.724Z"
+      },
+      {
+        "code": "s32 func_1507A3E8(void) {\n    u8 tmp0;\n    u8 tmp1;\n    u8 tmp2;\n    u8 tmp3;\n\n    tmp0 = D_800D1890;\n    tmp1 = D_800D1891;\n    tmp2 = D_800D1892;\n    tmp3 = D_800D1893;\n    return (tmp0 << 0x18) | (tmp1 << 0x10) | (tmp2 << 8) | tmp3;\n}",
+        "score": 0.125,
+        "reason": "structural_diffs=14",
+        "diffs": [
+          "structural: target=lui t6, HI(D_800D1890) got=lui v1, HI(D_800D1890)",
+          "structural: target=lbu t7, LO(D_800D1890)(t6) got=lui a0, HI(D_800D1891)",
+          "structural: target=lui t9, HI(D_800D1891) got=lbu v1, LO(D_800D1890)(v1)",
+          "structural: target=lbu t0, LO(D_800D1891)(t9) got=lbu a0, LO(D_800D1891)(a0)",
+          "structural: target=lui t3, HI(D_800D1892) got=lui a1, HI(D_800D1892)",
+          "structural: target=lbu t4, LO(D_800D1892)(t3) got=lbu a1, LO(D_800D1892)(a1)",
+          "structural: target=sll t8, t7, 24 got=lui a2, HI(D_800D1893)",
+          "structural: target=lui t7, HI(D_800D1893) got=lbu a2, LO(D_800D1893)(a2)",
+          "structural: target=lbu t9, LO(D_800D1893)(t7) got=sll t6, v1, 24",
+          "structural: target=sll t1, t0, 16 got=sll t7, a0, 16",
+          "structural: target=or t2, t8, t1 got=or t8, t6, t7",
+          "structural: target=sll t5, t4, 8 got=sll t9, a1, 8",
+          "structural: target=or t6, t2, t5 got=or t0, t8, t9",
+          "structural: target=or v0, t6, t9 got=or v0, t0, a2"
+        ],
+        "timestamp": "2026-06-03T06:36:22.023Z"
+      },
+      {
+        "code": "s32 func_1507A3E8(void) {\n    s32 tmp0;\n    s32 tmp1;\n    s32 tmp2;\n\n    tmp0 = D_800D1890 << 0x18;\n    tmp1 = D_800D1891 << 0x10;\n    tmp2 = D_800D1892 << 8;\n    return tmp0 | tmp1 | tmp2 | D_800D1893;\n}",
+        "score": 0.125,
+        "reason": "structural_diffs=14",
+        "diffs": [
+          "structural: target=lui t6, HI(D_800D1890) got=lui v1, HI(D_800D1890)",
+          "structural: target=lbu t7, LO(D_800D1890)(t6) got=lui a0, HI(D_800D1891)",
+          "structural: target=lui t9, HI(D_800D1891) got=lbu v1, LO(D_800D1890)(v1)",
+          "structural: target=lbu t0, LO(D_800D1891)(t9) got=lbu a0, LO(D_800D1891)(a0)",
+          "structural: target=lui t3, HI(D_800D1892) got=lui a1, HI(D_800D1892)",
+          "structural: target=lbu t4, LO(D_800D1892)(t3) got=lbu a1, LO(D_800D1892)(a1)",
+          "structural: target=sll t8, t7, 24 got=lui t1, HI(D_800D1893)",
+          "structural: target=lui t7, HI(D_800D1893) got=lbu t1, LO(D_800D1893)(t1)",
+          "structural: target=lbu t9, LO(D_800D1893)(t7) got=sll t6, v1, 24",
+          "structural: target=sll t1, t0, 16 got=sll t7, a0, 16",
+          "structural: target=or t2, t8, t1 got=or t9, t6, t7",
+          "structural: target=sll t5, t4, 8 got=sll t8, a1, 8",
+          "structural: target=or t6, t2, t5 got=or t0, t9, t8",
+          "structural: target=or v0, t6, t9 got=or v0, t0, t1"
+        ],
+        "timestamp": "2026-06-03T06:37:02.852Z"
+      }
+    ]
   },
   {
     "function": "func_150A7B80",
