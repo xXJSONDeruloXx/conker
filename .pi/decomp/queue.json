@@ -19144,9 +19144,18 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 0.4375,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_15042D94(s16 arg0, s16 arg1, u8 arg2, s32 arg3, ...) {\n    va_list ap;\n    s32 args[16];\n    s32 i;\n\n    D_800CBD74 = arg2;\n    D_800CBD70 = arg0;\n    D_800CBD72 = arg1;\n\n    va_start(ap, arg3);\n    for (i = 0; i < 16; i++) {\n        args[i] = va_arg(ap, s32);\n    }\n    func_15042ECC(arg3, args);\n}",
+        "score": 0.4375,
+        "reason": "length_mismatch (target=42, generated=48)",
+        "diffs": [],
+        "timestamp": "2026-06-03T23:17:21.421Z"
+      }
+    ]
   },
   {
     "function": "func_150049A4",
@@ -23155,9 +23164,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 1,
-    "lastScore": 0.7073,
-    "status": "pending",
+    "attempts": 2,
+    "lastScore": 1,
+    "status": "matched",
     "history": [
       {
         "code": "void func_150771F0(void) {\n    s32 phi_a1;\n\n    if (D_800D1893 == 0) {\n        if (D_800D1892 != 0) {\n            phi_a1 = 1;\n        } else {\n            phi_a1 = 2;\n        }\n        func_1506160C(D_800D154C, phi_a1, D_800D1890, D_800D1891, 0);\n    } else {\n        if (D_800D1892 == 0) {\n            func_1502EA60(D_800D154C, D_800D1890);\n        } else {\n            func_1502EA7C(D_800D154C, D_800D1890);\n        }\n    }\n}",
