@@ -9576,7 +9576,7 @@
     "tags": [],
     "attempts": 3,
     "lastScore": 0.3875,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "void func_150A7D00(Mtx *arg0, f32 arg1, f32 arg2, f32 arg3) {\n    s32 temp_a1;\n    s32 temp_a2;\n    s32 temp_a3;\n    s16 *ptr;\n\n    ptr = (s16 *)arg0;\n    temp_a1 = arg1 * 65536.0f;\n    temp_a2 = arg2 * 65536.0f;\n    temp_a3 = arg3 * 65536.0f;\n    ((s64 *)arg0)[0] = 0;\n    ((s64 *)arg0)[1] = 0;\n    ((s64 *)arg0)[2] = 0;\n    ((s64 *)arg0)[3] = 0;\n    ((s64 *)arg0)[4] = 0;\n    ((s64 *)arg0)[5] = 0;\n    ((s64 *)arg0)[6] = 0;\n    ((s64 *)arg0)[7] = 0;\n    ptr[0] = 1;\n    ptr[5] = 1;\n    ptr[10] = 1;\n    ptr[15] = 1;\n    ptr[12] = (u32)temp_a1 >> 16;\n    ptr[13] = (u32)temp_a2 >> 16;\n    ptr[14] = (u32)temp_a3 >> 16;\n    ptr[28] = temp_a1;\n    ptr[29] = temp_a2;\n    ptr[30] = temp_a3;\n}",
@@ -18190,9 +18190,32 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.45,
+    "status": "pending",
+    "history": [
+      {
+        "code": "s32 func_1000FEF0(u16 arg0, struct127 *arg1, s32 arg2) {\n    s32 i;\n    struct15 *tmp;\n\n    if (arg0 != 0) {\n        for (i = 0; i < D_80042760; i++) {\n            tmp = &D_80041FE0[i];\n            if ((arg0 == tmp->unk24) && (arg1 == (struct127 *)tmp->unk18) && (arg2 == tmp->unk1C) && ((tmp->unk10 & 0x80) == 0)) {\n                return i;\n            }\n        }\n    }\n    return -1;\n}",
+        "score": 0.425,
+        "reason": "length_mismatch (target=40, generated=34)",
+        "diffs": [],
+        "timestamp": "2026-06-03T22:31:05.678Z"
+      },
+      {
+        "code": "s32 func_1000FEF0(s32 arg0, struct127 *arg1, s32 arg2) {\n    s32 i;\n    s32 count;\n    struct15 *ptr;\n    u16 temp_a1;\n    struct127 *temp_a3;\n    s32 temp_s0;\n\n    temp_a1 = arg0;\n    temp_a3 = arg1;\n    temp_s0 = arg2;\n    if (temp_a1 == 0) {\n        return -1;\n    }\n    count = D_80042760;\n    i = 0;\n    if (count <= 0) {\n        return -1;\n    }\n    ptr = D_80041FE0;\nloop:\n    if (temp_a1 != ptr->unk24) {\n        goto next;\n    }\n    if (temp_a3 != (struct127 *)ptr->unk18) {\n        goto next;\n    }\n    if (temp_s0 != ptr->unk1C) {\n        goto next;\n    }\n    if ((ptr->unk10 & 0x80) != 0) {\n        goto next;\n    }\n    return i;\nnext:\n    i++;\n    if (i < count) {\n        ptr++;\n        goto loop;\n    }\n    return -1;\n}",
+        "score": 0.45,
+        "reason": "length_mismatch (target=40, generated=36)",
+        "diffs": [],
+        "timestamp": "2026-06-03T22:31:35.921Z"
+      },
+      {
+        "code": "s32 func_1000FEF0(u16 arg0, struct127 *arg1, register s32 arg2) {\n    s32 i;\n    struct15 *tmp;\n\n    if (arg0 == 0) {\n        return -1;\n    }\n    for (i = 0; i < D_80042760; i++) {\n        tmp = &D_80041FE0[i];\n        if ((arg0 == tmp->unk24) && (arg1 == (struct127 *)tmp->unk18) && (arg2 == tmp->unk1C) && ((tmp->unk10 & 0x80) == 0)) {\n            return i;\n        }\n    }\n    return -1;\n}",
+        "score": 0.45,
+        "reason": "length_mismatch (target=40, generated=36)",
+        "diffs": [],
+        "timestamp": "2026-06-03T22:31:47.252Z"
+      }
+    ]
   },
   {
     "function": "func_15142914",
