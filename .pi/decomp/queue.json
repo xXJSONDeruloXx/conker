@@ -4241,7 +4241,7 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 9,
+    "attempts": 12,
     "lastScore": 0.47058823529411764,
     "status": "pending",
     "history": [
@@ -4329,6 +4329,27 @@
         "reason": "length_mismatch (target=16, generated=17)",
         "diffs": [],
         "timestamp": "2026-06-03T07:08:50.870Z"
+      },
+      {
+        "code": "s32 func_150142AC(struct134 *arg0) {\n    s32 idx;\n    s32 offset;\n\n    idx = ((u8 *)arg0)[0x1B];\n    offset = idx * 4;\n    arg0->unk16 |= 4;\n    if (idx < 0) {\n        goto ret;\n    }\n    if (idx < 3) {\n        goto store;\n    }\nret:\n    return 1;\nstore:\n    *(struct134 **)((s32)D_800D9AA0 + offset) = arg0;\n    return 1;\n}",
+        "score": 0.47058823529411764,
+        "reason": "length_mismatch (target=16, generated=17)",
+        "diffs": [],
+        "timestamp": "2026-06-03T07:09:36.677Z"
+      },
+      {
+        "code": "s32 func_150142AC(struct134 *arg0) {\n    s32 idx;\n\n    idx = ((u8 *)arg0)[0x1B];\n    arg0->unk16 |= 4;\n    if (idx < 0) {\n        return 1;\n    }\n    switch (idx) {\n        case 0:\n        case 1:\n        case 2:\n            D_800D9AA0[idx] = arg0;\n            break;\n    }\n    return 1;\n}",
+        "score": 0.42105263157894735,
+        "reason": "length_mismatch (target=16, generated=19)",
+        "diffs": [],
+        "timestamp": "2026-06-03T07:10:23.341Z"
+      },
+      {
+        "code": "s32 func_150142AC(struct134 *arg0) {\n    s32 idx;\n\n    idx = ((u8 *)arg0)[0x1B];\n    arg0->unk16 |= 4;\n    if (idx < 0) {\n        goto ret;\n    }\n    if ((idx < 3) != 0) {\n        goto store;\n    }\nret:\n    return 1;\nstore:\n    D_800D9AA0[idx] = arg0;\n    return 1;\n}",
+        "score": 0.47058823529411764,
+        "reason": "length_mismatch (target=16, generated=17)",
+        "diffs": [],
+        "timestamp": "2026-06-03T07:10:47.604Z"
       }
     ]
   },
