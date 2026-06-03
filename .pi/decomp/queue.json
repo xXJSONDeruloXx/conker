@@ -7151,8 +7151,8 @@
     "instructions": 29,
     "difficulty": "low",
     "tags": [],
-    "attempts": 3,
-    "lastScore": 0.4264705882352941,
+    "attempts": 6,
+    "lastScore": 0.48333333333333334,
     "status": "pending",
     "history": [
       {
@@ -7378,6 +7378,27 @@
         "reason": "length_mismatch (target=29, generated=34)",
         "diffs": [],
         "timestamp": "2026-06-03T10:18:59.154Z"
+      },
+      {
+        "code": "void func_100100E0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {\n    s32 temp_a0;\n    s32 temp_a1;\n    s32 temp_a2;\n    s32 temp_a3;\n    struct15 *var_v0;\n    struct15 *end;\n\n    temp_a0 = arg0;\n    temp_a1 = arg1;\n    temp_a2 = arg2;\n    temp_a3 = arg3;\n    var_v0 = D_80041FE0;\n    if (D_80042760 >= 1) {\n        end = var_v0 + D_80042760;\n        do {\n            if ((temp_a0 == var_v0->unk14) && (temp_a1 == var_v0->unk18) && (temp_a2 == var_v0->unk1C)) {\n                var_v0->unk14 = temp_a3;\n                var_v0->unk18 = arg4;\n                var_v0->unk1C = arg5;\n            }\n            var_v0++;\n        } while (var_v0 < end);\n    }\n}\n",
+        "score": 0.48333333333333334,
+        "reason": "length_mismatch (target=29, generated=30)",
+        "diffs": [],
+        "timestamp": "2026-06-03T10:19:15.600Z"
+      },
+      {
+        "code": "void func_100100E0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {\n    s32 count;\n    struct15 *var_v0;\n    struct15 *end;\n    s32 temp_arg4;\n    s32 temp_arg5;\n    s32 temp_a0;\n    s32 temp_a1;\n    s32 temp_a2;\n    s32 temp_a3;\n\n    temp_a0 = arg0;\n    temp_a1 = arg1;\n    temp_a2 = arg2;\n    temp_a3 = arg3;\n    count = D_80042760;\n    var_v0 = D_80041FE0;\n    if (count > 0) {\n        end = (struct15 *)((((count << 2) - count) << 4) + (s32)var_v0);\n        temp_arg4 = arg4;\n        temp_arg5 = arg5;\n        do {\n            if ((temp_a0 == var_v0->unk14) && (temp_a1 == var_v0->unk18) && (temp_a2 == var_v0->unk1C)) {\n                var_v0->unk14 = temp_a3;\n                var_v0->unk18 = temp_arg4;\n                var_v0->unk1C = temp_arg5;\n            }\n            var_v0++;\n        } while (var_v0 < end);\n    }\n}\n",
+        "score": 0.48333333333333334,
+        "reason": "length_mismatch (target=29, generated=30)",
+        "diffs": [],
+        "timestamp": "2026-06-03T10:19:50.254Z"
+      },
+      {
+        "code": "void func_100100E0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {\n    s32 count;\n    s32 temp_a0;\n    s32 temp_a1;\n    s32 temp_a2;\n    s32 temp_a3;\n    struct15 *var_v0;\n    struct15 *end;\n\n    count = D_80042760;\n    var_v0 = D_80041FE0;\n    temp_a0 = arg0;\n    temp_a1 = arg1;\n    temp_a2 = arg2;\n    temp_a3 = arg3;\n    if (count > 0) {\n        end = (struct15 *)((((count << 2) - count) << 4) + (s32)var_v0);\n        do {\n            if ((temp_a0 == var_v0->unk14) && (temp_a1 == var_v0->unk18) && (temp_a2 == var_v0->unk1C)) {\n                var_v0->unk14 = temp_a3;\n                var_v0->unk18 = arg4;\n                var_v0->unk1C = arg5;\n            }\n            var_v0++;\n        } while (var_v0 < end);\n    }\n}\n",
+        "score": 0.48333333333333334,
+        "reason": "length_mismatch (target=29, generated=30)",
+        "diffs": [],
+        "timestamp": "2026-06-03T10:20:10.262Z"
       }
     ]
   },
