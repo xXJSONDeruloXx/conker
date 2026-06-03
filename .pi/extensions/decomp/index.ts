@@ -625,7 +625,10 @@ export default function (pi: ExtensionAPI) {
 				}
 			}
 
-			if (/conker\/src(?:\/|["'\s]|$)/.test(cmd) && !isAllowedRecovery) {
+			const mentionsProtected = /conker\/src(?:\/|["'\s]|$)/.test(cmd);
+			const directMutation = /(touch|rm|mv|cp|chmod|chown|chgrp|install|truncate|tee|dd\b|sed\s+-i|perl\s+-pi|python3?\b|node\b|ruby\b|lua\b|awk\b)/.test(cmd)
+				|| />|>>/.test(cmd);
+			if (mentionsProtected && directMutation && !isAllowedRecovery) {
 				return {
 					block: true,
 					reason: `Generic ${toolName} commands may not mutate ${PROTECTED_SRC_PREFIX}. Use decomp_attempt for temporary source patching.`,
