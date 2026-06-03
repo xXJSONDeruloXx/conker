@@ -15627,8 +15627,8 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 3,
-    "lastScore": 0.9444,
+    "attempts": 5,
+    "lastScore": 0.4864864864864865,
     "status": "pending",
     "history": [
       {
@@ -15740,6 +15740,31 @@
           "structural: target=addiu s0, s0, LO(D_800425E0) got=addiu s1, s1, LO(D_800426A0)"
         ],
         "timestamp": "2026-06-03T20:53:47.601Z"
+      },
+      {
+        "code": "s32 func_1000F4D8(arg0)\nregister u16 arg0;\n{\n    struct120 *p;\n    struct120 *end;\n\n    arg0 = arg0 & 0x7FFF;\n    p = D_800425E0;\n    end = (struct120 *)&D_800426A0;\n    do {\n        if (p->unk8 != 0 && (p->unk4 & 0x7FFF) == arg0 && func_100173C4(&p->unk8) != 0) {\n            return 1;\n        }\n        p++;\n    } while (p != end);\n    return 0;\n}",
+        "score": 0.7222,
+        "reason": "structural_diffs=10",
+        "diffs": [
+          "structural: target=sw s2, 32(sp) got=sw s1, 28(sp)",
+          "structural: target=andi s2, a0, 65535 got=andi s1, a0, 65535",
+          "structural: target=sw s1, 28(sp) got=sw s2, 32(sp)",
+          "structural: target=move t6, s2 got=move t6, s1",
+          "structural: target=lui s1, HI(D_800426A0) got=lui s2, HI(D_800426A0)",
+          "structural: target=andi s2, t6, 32767 got=andi s1, t6, 32767",
+          "structural: target=addiu s1, s1, LO(D_800426A0) got=addiu s0, s0, LO(D_800425E0)",
+          "structural: target=addiu s0, s0, LO(D_800425E0) got=addiu s2, s2, LO(D_800426A0)",
+          "structural: target=bnel s2, t0, L0 got=bnel s1, t0, L0",
+          "structural: target=bnel s0, s1, L2 got=bnel s0, s2, L2"
+        ],
+        "timestamp": "2026-06-03T20:54:09.311Z"
+      },
+      {
+        "code": "s32 func_1000F4D8(u16 arg0) {\n    struct120 *p;\n    arg0 = arg0 & 0x7FFF;\n    p = D_800425E0;\n    if (p == (struct120 *)&D_800426A0) {}\n    do {\n        if (p->unk8 != 0 && (p->unk4 & 0x7FFF) == arg0 && func_100173C4(&p->unk8) != 0) {\n            return 1;\n        }\n        p++;\n    } while (p != (struct120 *)&D_800426A0);\n    return 0;\n}",
+        "score": 0.4864864864864865,
+        "reason": "length_mismatch (target=36, generated=37)",
+        "diffs": [],
+        "timestamp": "2026-06-03T20:54:19.446Z"
       }
     ]
   },
@@ -20111,7 +20136,7 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 8,
+    "attempts": 9,
     "lastScore": 0.4861111111111111,
     "status": "pending",
     "history": [
@@ -20170,6 +20195,13 @@
         "reason": "length_mismatch (target=35, generated=36)",
         "diffs": [],
         "timestamp": "2026-06-03T20:48:54.119Z"
+      },
+      {
+        "code": "void func_15076768(void) {\n    struct199 tmp;\n    s32 val;\n\n    val = D_800D1890;\n    switch (val) {\n        case 0:\n            func_15197A7C(D_800D154C);\n            break;\n        case 1:\n            tmp.unk24 = D_800D154C->x_position;\n            tmp.unk28 = -390.0f;\n            tmp.unk2C = D_800D154C->z_position;\n            func_1504715C(&tmp);\n            func_1514B364(&tmp.unk24, &tmp, 0xFF, 0);\n    }\n}",
+        "score": 0.4861111111111111,
+        "reason": "length_mismatch (target=35, generated=36)",
+        "diffs": [],
+        "timestamp": "2026-06-03T20:58:28.860Z"
       }
     ]
   },
