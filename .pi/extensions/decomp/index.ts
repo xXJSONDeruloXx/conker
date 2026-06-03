@@ -1341,18 +1341,21 @@ export default function (pi: ExtensionAPI) {
 				"bash", "-lc", "make -C conker progress",
 			], { timeout: 30000 });
 
-			// Commit source + queue state + fresh progress (preserves history of what was tried) and push
-			// Create allow file to bypass pre-commit hook
-			const allowFile = path.join(ctx.cwd, ".pi/decomp/commit-allow");
-			fs.writeFileSync(allowFile, `${params.function} ${new Date().toISOString()}`);
-
+			// Commit source + queue state + fresh progress
+			// The pre-commit hook will run the full ROM build again as a safety check.
+			// Since we already verified above, it will pass — but it's the hard gate.
 			const desc = params.description || `match ${params.function}`;
 			await pi.exec("git", ["add", `conker/src/${params.file}`, ".pi/decomp/queue.json", ".pi/decomp/patterns.json"]);
-			await pi.exec("git", ["commit", "-m", `feat(decomp): ${desc}`]);
+			const commitResult = await pi.exec("git", ["commit", "-m", `feat(decomp): ${desc}`]);
+			if (commitResult.code !== 0) {
+				// Pre-commit hook blocked it — ROM verification failed
+				await pi.exec("git", ["checkout", "--", `conker/src/${params.file}`]);
+				return {
+					content: [{ type: "text", text: `⛔ Pre-commit hook blocked: ROM SHA failed on final verification.\n${commitResult.stdout}\n${commitResult.stderr}` }],
+					details: { accepted: false, reason: "hook_blocked" },
+				};
+			}
 			await gitPushWithRetry(pi);
-
-			// Remove allow file after successful commit
-			try { fs.unlinkSync(allowFile); } catch {}
 
 			// Update queue
 			const entry = state.queue.find((e) => e.function === params.function);
