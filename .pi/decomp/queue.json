@@ -18946,8 +18946,8 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 3,
-    "lastScore": 0.85,
+    "attempts": 6,
+    "lastScore": 0.9,
     "status": "pending",
     "history": [
       {
@@ -18984,6 +18984,42 @@
           "structural: target=swc1 f16, 1648(a0) got=lw t7, 28(sp)"
         ],
         "timestamp": "2026-06-03T22:35:45.413Z"
+      },
+      {
+        "code": "void func_151254F4(struct108 *arg0, s32 arg1) {\n    f32 tmp;\n\n    tmp = D_800A352C;\n    arg0->unk3A0 = arg0->unk380 * tmp;\n    arg0->unk398 = arg0->unk388 * tmp;\n    func_15124AB4(arg0);\n    func_151239CC(arg0, 1);\n    arg0->unk3D4->unk198 = 0;\n    arg0->unk73C = 0;\n    arg0->unk3D0 = &D_800CC2D0[arg1];\n    arg0->unk670 = 0.0f;\n}",
+        "score": 0.9,
+        "reason": "structural_diffs=4",
+        "diffs": [
+          "structural: target=lui at, HI(D_800A352C) got=sw ra, 20(sp)",
+          "structural: target=lwc1 f0, LO(D_800A352C)(at) got=sw a1, 28(sp)",
+          "structural: target=sw ra, 20(sp) got=lui at, HI(D_800A352C)",
+          "structural: target=sw a1, 28(sp) got=lwc1 f0, LO(D_800A352C)(at)"
+        ],
+        "timestamp": "2026-06-03T22:36:20.544Z"
+      },
+      {
+        "code": "void func_151254F4(struct108 *arg0, s32 arg1) {\n    f32 tmp;\n    s32 sp1C;\n\n    tmp = D_800A352C;\n    sp1C = arg1;\n    arg0->unk3A0 = arg0->unk380 * tmp;\n    arg0->unk398 = arg0->unk388 * tmp;\n    func_15124AB4(arg0);\n    func_151239CC(arg0, 1);\n    arg0->unk3D4->unk198 = 0;\n    arg0->unk73C = 0;\n    arg0->unk3D0 = &D_800CC2D0[sp1C];\n    arg0->unk670 = 0.0f;\n}",
+        "score": 0.9,
+        "reason": "structural_diffs=4",
+        "diffs": [
+          "structural: target=lui at, HI(D_800A352C) got=sw ra, 20(sp)",
+          "structural: target=lwc1 f0, LO(D_800A352C)(at) got=sw a1, 28(sp)",
+          "structural: target=sw ra, 20(sp) got=lui at, HI(D_800A352C)",
+          "structural: target=sw a1, 28(sp) got=lwc1 f0, LO(D_800A352C)(at)"
+        ],
+        "timestamp": "2026-06-03T22:36:53.180Z"
+      },
+      {
+        "code": "void func_151254F4(struct108 *arg0, s32 arg1) {\n    f32 tmp = D_800A352C;\n\n    arg0->unk3A0 = arg0->unk380 * tmp;\n    arg0->unk398 = arg0->unk388 * tmp;\n    func_15124AB4(arg0);\n    func_151239CC(arg0, 1);\n    arg0->unk3D4->unk198 = 0;\n    arg0->unk73C = 0;\n    arg0->unk3D0 = &D_800CC2D0[arg1];\n    arg0->unk670 = 0.0f;\n}",
+        "score": 0.9,
+        "reason": "structural_diffs=4",
+        "diffs": [
+          "structural: target=lui at, HI(D_800A352C) got=sw ra, 20(sp)",
+          "structural: target=lwc1 f0, LO(D_800A352C)(at) got=sw a1, 28(sp)",
+          "structural: target=sw ra, 20(sp) got=lui at, HI(D_800A352C)",
+          "structural: target=sw a1, 28(sp) got=lwc1 f0, LO(D_800A352C)(at)"
+        ],
+        "timestamp": "2026-06-03T22:37:09.102Z"
       }
     ]
   },
