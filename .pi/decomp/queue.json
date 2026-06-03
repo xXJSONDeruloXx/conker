@@ -2114,7 +2114,7 @@
     "instructions": 20,
     "difficulty": "low",
     "tags": [],
-    "attempts": 12,
+    "attempts": 15,
     "lastScore": 0.475,
     "status": "pending",
     "history": [
@@ -2215,6 +2215,27 @@
         "reason": "length_mismatch (target=20, generated=19)",
         "diffs": [],
         "timestamp": "2026-06-03T10:04:43.434Z"
+      },
+      {
+        "code": "s32 func_150A7CB0(f32 mtx[4][4], s32 x, s32 y, s32 z) {\n    ((s32 *)mtx)[0] = x;\n    ((s32 *)mtx)[1] = 0;\n    ((s32 *)mtx)[2] = 0;\n    ((s32 *)mtx)[3] = 0;\n    ((s32 *)mtx)[4] = 0;\n    ((s32 *)mtx)[5] = y;\n    ((s32 *)mtx)[6] = 0;\n    ((s32 *)mtx)[7] = 0;\n    ((s32 *)mtx)[8] = 0;\n    ((s32 *)mtx)[9] = 0;\n    ((s32 *)mtx)[10] = z;\n    ((s32 *)mtx)[11] = 0;\n    ((s32 *)mtx)[12] = 0;\n    ((s32 *)mtx)[13] = 0;\n    mtx[3][3] = 1.0f;\n    return ((s32 *)mtx)[14] = 0;\n}\n",
+        "score": 0.47619047619047616,
+        "reason": "length_mismatch (target=20, generated=21)",
+        "diffs": [],
+        "timestamp": "2026-06-03T10:05:37.025Z"
+      },
+      {
+        "code": "void func_150A7CB0(f32 mtx[4][4], s32 x, s32 y, s32 z) {\n    ((s32 *)mtx)[0] = x;\n    ((s32 *)mtx)[1] = 0;\n    ((s32 *)mtx)[2] = 0;\n    ((s32 *)mtx)[3] = 0;\n    ((s32 *)mtx)[4] = 0;\n    ((s32 *)mtx)[5] = y;\n    ((s32 *)mtx)[6] = 0;\n    ((s32 *)mtx)[7] = 0;\n    ((s32 *)mtx)[8] = 0;\n    ((s32 *)mtx)[9] = 0;\n    ((s32 *)mtx)[10] = z;\n    ((s32 *)mtx)[11] = 0;\n    ((s32 *)mtx)[12] = 0;\n    ((s32 *)mtx)[13] = 0;\n    mtx[3][3] = 1.0f;\n    ((s32 *)mtx)[14] = 0;\n    return;\n}\n",
+        "score": 0.475,
+        "reason": "length_mismatch (target=20, generated=19)",
+        "diffs": [],
+        "timestamp": "2026-06-03T10:05:56.297Z"
+      },
+      {
+        "code": "void func_150A7CB0(f32 mtx[4][4], s32 x, s32 y, s32 z) {\n    ((s32 *)mtx)[0] = x;\n    ((s32 *)mtx)[1] = 0;\n    ((s32 *)mtx)[2] = 0;\n    ((s32 *)mtx)[3] = 0;\n    ((s32 *)mtx)[4] = 0;\n    ((s32 *)mtx)[5] = y;\n    ((s32 *)mtx)[6] = 0;\n    ((s32 *)mtx)[7] = 0;\n    ((s32 *)mtx)[8] = 0;\n    ((s32 *)mtx)[9] = 0;\n    ((s32 *)mtx)[10] = z;\n    ((s32 *)mtx)[11] = 0;\n    ((s32 *)mtx)[12] = 0;\n    ((s32 *)mtx)[13] = 0;\n    mtx[3][3] = 1.0f;\n    *(volatile s32 *)&mtx[3][2] = 0;\n    return;\n}\n",
+        "score": 0.475,
+        "reason": "length_mismatch (target=20, generated=19)",
+        "diffs": [],
+        "timestamp": "2026-06-03T10:06:16.049Z"
       }
     ]
   },
