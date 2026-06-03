@@ -18642,8 +18642,8 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 4,
-    "lastScore": 0.4625,
+    "attempts": 6,
+    "lastScore": 0.7297,
     "status": "pending",
     "history": [
       {
@@ -18703,6 +18703,31 @@
         "reason": "length_mismatch (target=37, generated=40)",
         "diffs": [],
         "timestamp": "2026-06-03T21:38:10.945Z"
+      },
+      {
+        "code": "void func_1000FDF4(u16 arg0) {\n    struct15 *temp_s0;\n    s32 temp_v0;\n    s32 temp_s1;\n    u16 temp_s2;\n    u16 temp_a0;\n    s32 temp_t7;\n\n    temp_v0 = D_80042760;\n    temp_s1 = 0;\n    temp_s2 = arg0;\n    if (temp_v0 > 0) {\n        temp_s0 = D_80041FE0;\n        do {\n            temp_a0 = temp_s0->unk24;\n            if (temp_a0 == temp_s2) {\n                if (temp_a0 != 0) {\n                    func_100111C8(temp_a0);\n                    temp_v0 = D_80042760;\n                }\n                temp_t7 = temp_s0->unk10;\n                temp_s0->unk10 = temp_t7 | 0x80;\n            }\n            temp_s1++;\n            temp_s0++;\n        } while (temp_s1 < temp_v0);\n    }\n}",
+        "score": 0.4625,
+        "reason": "length_mismatch (target=37, generated=40)",
+        "diffs": [],
+        "timestamp": "2026-06-03T21:41:35.527Z"
+      },
+      {
+        "code": "void func_1000FDF4(u16 arg0) {\n    s32 i;\n    u16 temp_a0;\n\n    i = 0;\n    if (D_80042760 > 0) {\n        do {\n            temp_a0 = D_80041FE0[i].unk24;\n            if (temp_a0 == arg0) {\n                if (temp_a0 != 0) {\n                    func_100111C8(temp_a0);\n                }\n                D_80041FE0[i].unk10 |= 0x80;\n            }\n            i++;\n        } while (i < D_80042760);\n    }\n}",
+        "score": 0.7297,
+        "reason": "structural_diffs=10",
+        "diffs": [
+          "structural: target=lui v0, HI(D_80042760) got=lui v1, HI(D_80042760)",
+          "structural: target=lw v0, LO(D_80042760)(v0) got=lw v1, LO(D_80042760)(v1)",
+          "structural: target=move s1, zero got=lui s0, HI(D_80041FE0)",
+          "structural: target=move s2, a0 got=move s1, zero",
+          "structural: target=blez v0, L0 got=blez v1, L0",
+          "structural: target=lui s0, HI(D_80041FE0) got=addiu s0, s0, LO(D_80041FE0)",
+          "structural: target=addiu s0, s0, LO(D_80041FE0) got=move s2, a0",
+          "structural: target=lui v0, HI(D_80042760) got=lui v1, HI(D_80042760)",
+          "structural: target=lw v0, LO(D_80042760)(v0) got=lw v1, LO(D_80042760)(v1)",
+          "structural: target=slt at, s1, v0 got=slt at, s1, v1"
+        ],
+        "timestamp": "2026-06-03T21:42:21.216Z"
       }
     ]
   },
@@ -20206,9 +20231,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 2,
-    "lastScore": 0.973,
-    "status": "pending",
+    "attempts": 3,
+    "lastScore": 1,
+    "status": "matched",
     "history": [
       {
         "code": "void func_1506DC10(void) {\n    struct127 *temp_a1;\n    s32 temp_a0;\n    s32 temp_v1;\n\n    temp_a1 = D_800D154C;\n    if (((temp_a1->unk118 - 112.0f) < temp_a1->y_position) || (D_80099D50 == temp_a1->unk118)) {\n        temp_v1 = func_150ADA20() & 3;\n        if (temp_v1 < 2) {\n            temp_a0 = temp_v1 + 0x8F;\n        } else {\n            temp_a0 = temp_v1 + 0x612;\n        }\n        temp_a1 = D_800D154C;\n    } else {\n        temp_a0 = 9;\n    }\n    func_15060A9C(temp_a0, temp_a1);\n}",
