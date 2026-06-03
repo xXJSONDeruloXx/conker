@@ -4241,8 +4241,8 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 21,
-    "lastScore": 0.5,
+    "attempts": 23,
+    "lastScore": 0.75,
     "status": "pending",
     "history": [
       {
@@ -4438,6 +4438,25 @@
           "structural: target=addu at, at, t8 got=addu at, at, t7"
         ],
         "timestamp": "2026-06-03T07:15:10.233Z"
+      },
+      {
+        "code": "s32 func_150142AC(struct134 *arg0) {\n    s32 idx;\n\n    idx = ((u8 *)arg0)[0x1B];\n    arg0->unk16 |= 4;\n    if (idx >= 0) {\n        if (idx < 3) {\n            D_800D9AA0[idx] = arg0;\n        } else {\n            return 1;\n        }\n    }\n    return 1;\n}",
+        "score": 0.47058823529411764,
+        "reason": "length_mismatch (target=16, generated=17)",
+        "diffs": [],
+        "timestamp": "2026-06-03T07:15:39.532Z"
+      },
+      {
+        "code": "s32 func_150142AC(struct134 *arg0) {\n    s32 idx;\n\n    idx = ((u8 *)arg0)[0x1B];\n    arg0->unk16 |= 4;\n    while (idx >= 0) {\n        if (idx >= 3) {\n            return 1;\n        }\n        D_800D9AA0[idx] = arg0;\n        break;\n    }\n    return 1;\n}",
+        "score": 0.75,
+        "reason": "structural_diffs=4",
+        "diffs": [
+          "structural: target=lbu v1, 27(a0) got=lbu v0, 27(a0)",
+          "structural: target=bltz v1, L0 got=bltz v0, L0",
+          "structural: target=slti at, v1, 3 got=slti at, v0, 3",
+          "structural: target=sll t8, v1, 2 got=sll t8, v0, 2"
+        ],
+        "timestamp": "2026-06-03T07:16:14.109Z"
       }
     ]
   },

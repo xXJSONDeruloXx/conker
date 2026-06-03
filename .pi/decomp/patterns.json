@@ -522,5 +522,14 @@
     "example_functions": [
       "func_15079A58"
     ]
+  },
+  {
+    "id": "mask-u8-globals-to-preserve-load-order",
+    "description": "For packed-byte expressions over u8 globals, adding explicit `& 0xFF` masks can be optimized away while still preventing IDO from hoisting/reordering neighboring global loads, matching targets that load each byte before the next symbol.",
+    "trigger": "Target packs multiple u8 globals with shifts/ORs and emits immediate `lui; lbu` pairs in source order, but natural `u8 << shift` expression hoists the next global load before the current lbu.",
+    "solution": "Write each term as `(GLOBAL & 0xFF) << shift` (and the low byte as `GLOBAL & 0xFF`) so IDO preserves the desired load order while eliminating redundant masks for u8 globals.",
+    "example_functions": [
+      "func_1507A3E8"
+    ]
   }
 ]
