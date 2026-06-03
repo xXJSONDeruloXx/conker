@@ -323,6 +323,80 @@ function listProtectedSourcePaths(cwd: string, staged: boolean): string[] {
 	return output ? output.split("\n").map((s) => s.trim()).filter(Boolean) : [];
 }
 
+function listDirtyProtectedSourcePaths(cwd: string): string[] {
+	const output = runGit(cwd, ["status", "--porcelain", "--", PROTECTED_SRC_PREFIX]);
+	if (!output) return [];
+	return output
+		.split("\n")
+		.map((line) => line.slice(3).trim())
+		.filter(Boolean);
+}
+
+function hasDecompCommitAllow(cwd: string): boolean {
+	const fs = require("node:fs");
+	const path = require("node:path");
+	return fs.existsSync(path.join(cwd, DECOMP_COMMIT_ALLOW_FILE));
+}
+
+function resolveRepoPath(cwd: string, rawPath: string): string {
+	const path = require("node:path");
+	return path.resolve(cwd, rawPath);
+}
+
+function isProtectedSourcePath(cwd: string, rawPath?: string): boolean {
+	if (!rawPath) return false;
+	const path = require("node:path");
+	const protectedRoot = path.resolve(cwd, PROTECTED_SRC_PREFIX);
+	const resolved = resolveRepoPath(cwd, rawPath);
+	return resolved === protectedRoot || resolved.startsWith(`${protectedRoot}${path.sep}`);
+}
+
+function lockProtectedSourceTree(cwd: string): void {
+	const fs = require("node:fs");
+	const path = require("node:path");
+	const root = path.join(cwd, PROTECTED_SRC_PREFIX);
+	if (!fs.existsSync(root)) return;
+	const stack = [root];
+	while (stack.length > 0) {
+		const current = stack.pop();
+		if (!current) continue;
+		const stat = fs.statSync(current);
+		if (stat.isDirectory()) {
+			fs.chmodSync(current, 0o555);
+			for (const entry of fs.readdirSync(current)) {
+				stack.push(path.join(current, entry));
+			}
+		} else if (stat.isFile()) {
+			fs.chmodSync(current, 0o444);
+		}
+	}
+}
+
+function unlockProtectedSourceFile(cwd: string, rawPath: string): void {
+	const fs = require("node:fs");
+	if (!isProtectedSourcePath(cwd, rawPath)) return;
+	const resolved = resolveRepoPath(cwd, rawPath);
+	if (fs.existsSync(resolved)) fs.chmodSync(resolved, 0o644);
+}
+
+function relockProtectedSourceFile(cwd: string, rawPath: string): void {
+	const fs = require("node:fs");
+	if (!isProtectedSourcePath(cwd, rawPath)) return;
+	const resolved = resolveRepoPath(cwd, rawPath);
+	if (fs.existsSync(resolved)) fs.chmodSync(resolved, 0o444);
+}
+
+function restoreProtectedSourceFromHead(cwd: string, rawPath: string): void {
+	const fs = require("node:fs");
+	const path = require("node:path");
+	const { execFileSync } = require("node:child_process");
+	const rel = path.relative(cwd, resolveRepoPath(cwd, rawPath));
+	const content = execFileSync("git", ["show", `HEAD:${rel}`], { cwd, encoding: "utf-8" });
+	unlockProtectedSourceFile(cwd, rawPath);
+	fs.writeFileSync(resolveRepoPath(cwd, rawPath), content);
+	relockProtectedSourceFile(cwd, rawPath);
+}
+
 function ensureProtectedSourceCommitHook(cwd: string): void {
 	const fs = require("node:fs");
 	const path = require("node:path");
@@ -496,14 +570,41 @@ export default function (pi: ExtensionAPI) {
 	});
 
 	// Load state on session start
-	// Guard: block direct git staging/commits to protected source files via bash.
+	// Guard: only decomp_attempt/decomp_accept may touch protected C source.
 	pi.on("tool_call", async (event: any, ctx: any) => {
-		if (event.toolName === "bash") {
-			const cmd = event.input?.command || "";
+		const toolName = event.toolName;
+		const allowProtected = hasDecompCommitAllow(ctx.cwd);
+		const dirtyProtected = listDirtyProtectedSourcePaths(ctx.cwd);
+
+		if ((toolName === "write" || toolName === "edit") && isProtectedSourcePath(ctx.cwd, event.input?.path)) {
+			return {
+				block: true,
+				reason: `Direct ${toolName} on ${PROTECTED_SRC_PREFIX} is blocked. Use decomp_attempt for candidate code and decomp_accept for verified commits.`,
+			};
+		}
+
+		if (!allowProtected && dirtyProtected.length > 0 && ["bash", "process", "interactive_shell", "write", "edit"].includes(toolName)) {
+			const cleanupCommand = toolName === "bash"
+				&& /git\s+(checkout|restore|reset|revert|stash)\b/.test(event.input?.command || "");
+			if (!cleanupCommand) {
+				return {
+					block: true,
+					reason: `Protected source tree is dirty (${dirtyProtected.join(", ")}). Revert/stash those ${PROTECTED_SRC_PREFIX} changes before using generic mutation tools.`,
+				};
+			}
+		}
+
+		if (toolName === "bash" || toolName === "process" || toolName === "interactive_shell") {
+			const cmd = toolName === "process"
+				? (event.input?.command || "")
+				: toolName === "interactive_shell"
+					? (event.input?.command || "")
+					: (event.input?.command || "");
 			const isGitAdd = /(^|&&|;)\s*(cd\s+[^;&]+\s*&&\s*)?git\s+add\b/.test(cmd);
 			const isGitCommit = /(^|&&|;)\s*(cd\s+[^;&]+\s*&&\s*)?git\s+commit\b/.test(cmd);
-			const isAllowedRecovery = /(^|&&|;)\s*(cd\s+[^;&]+\s*&&\s*)?git\s+(cherry-pick|revert)\b/.test(cmd);
-			if ((isGitAdd || isGitCommit) && !isAllowedRecovery) {
+			const isGitPlumbingCommit = /(^|&&|;)\s*(cd\s+[^;&]+\s*&&\s*)?git\s+(commit-tree|merge-tree|update-ref|hash-object\b.*-w\b|apply\b|am\b|cherry-pick\b)\b/.test(cmd);
+			const isAllowedRecovery = /(^|&&|;)\s*(cd\s+[^;&]+\s*&&\s*)?git\s+revert\b/.test(cmd);
+			if ((isGitAdd || isGitCommit || isGitPlumbingCommit) && !isAllowedRecovery) {
 				const stagedProtected = listProtectedSourcePaths(ctx.cwd, true);
 				const unstagedProtected = listProtectedSourcePaths(ctx.cwd, false);
 				const commitAll = isGitCommit && /\s(-a|--all)\b/.test(cmd);
@@ -512,17 +613,23 @@ export default function (pi: ExtensionAPI) {
 					|| unstagedProtected.length > 0
 				);
 				const commitWouldTouchProtected = stagedProtected.length > 0 || (commitAll && unstagedProtected.length > 0);
-
-				if (addWouldTouchProtected || commitWouldTouchProtected) {
+				if (addWouldTouchProtected || commitWouldTouchProtected || stagedProtected.length > 0) {
 					const details = stagedProtected.length > 0
 						? `staged: ${stagedProtected.join(", ")}`
 						: `unstaged: ${unstagedProtected.join(", ")}`;
 					if (ctx?.hasUI) ctx.ui.notify("\u26d4 Blocked: protected conker/src changes must go through decomp_accept", "warning");
 					return {
 						block: true,
-						reason: `Direct git staging/commits touching ${PROTECTED_SRC_PREFIX} are blocked. Use decomp_accept for matched functions or revert/stash the source changes first (${details}).`,
+						reason: `Direct git operations touching ${PROTECTED_SRC_PREFIX} are blocked. Only decomp_accept may commit verified C changes (${details}).`,
 					};
 				}
+			}
+
+			if (/conker\/src(?:\/|["'\s]|$)/.test(cmd) && !isAllowedRecovery) {
+				return {
+					block: true,
+					reason: `Generic ${toolName} commands may not mutate ${PROTECTED_SRC_PREFIX}. Use decomp_attempt for temporary source patching.`,
+				};
 			}
 		}
 		return undefined;
@@ -532,6 +639,7 @@ export default function (pi: ExtensionAPI) {
 		latestCtx = ctx;
 		loadState(ctx.cwd);
 		ensureProtectedSourceCommitHook(ctx.cwd);
+		lockProtectedSourceTree(ctx.cwd);
 		ensureTimer();
 		refreshWidget();
 	});
@@ -1166,6 +1274,7 @@ export default function (pi: ExtensionAPI) {
 
 			// Replace pragma with code
 			patched = patched.replace(pragma, params.code);
+			unlockProtectedSourceFile(ctx.cwd, srcPath);
 			fs.writeFileSync(srcPath, patched);
 
 			onUpdate?.({
@@ -1182,6 +1291,7 @@ export default function (pi: ExtensionAPI) {
 			if (buildResult.code !== 0) {
 				// Revert
 				fs.writeFileSync(srcPath, original);
+				relockProtectedSourceFile(ctx.cwd, srcPath);
 				return {
 					content: [
 						{
@@ -1225,6 +1335,7 @@ export default function (pi: ExtensionAPI) {
 				const ratio = scoreData.generated_instructions / scoreData.target_instructions;
 				if (ratio > 3) {
 					fs.writeFileSync(srcPath, original);
+					relockProtectedSourceFile(ctx.cwd, srcPath);
 					const entry = state.queue.find((e: QueueEntry) => e.function === params.function);
 					if (entry) {
 						entry.attempts++;
@@ -1259,6 +1370,7 @@ export default function (pi: ExtensionAPI) {
 
 			if (scoreData.match) {
 				// Leave the patch in place — user should call decomp_accept
+				relockProtectedSourceFile(ctx.cwd, srcPath);
 				return {
 					content: [
 						{
@@ -1293,6 +1405,7 @@ export default function (pi: ExtensionAPI) {
 
 			// Revert source
 			fs.writeFileSync(srcPath, original);
+			relockProtectedSourceFile(ctx.cwd, srcPath);
 			saveQueue(ctx.cwd);
 			latestCtx = ctx;
 			refreshWidget();
@@ -1389,7 +1502,7 @@ export default function (pi: ExtensionAPI) {
 
 			if (!buildResult.stdout.includes("build/conker.us.z64: OK")) {
 				// Revert
-				await pi.exec("git", ["checkout", "--", `conker/src/${params.file}`]);
+				restoreProtectedSourceFromHead(ctx.cwd, `conker/src/${params.file}`);
 				return {
 					content: [
 						{
