@@ -7174,8 +7174,8 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 6,
-    "lastScore": 0.42105263157894735,
+    "attempts": 9,
+    "lastScore": 0.4473684210526316,
     "status": "pending",
     "history": [
       {
@@ -7254,6 +7254,27 @@
         "reason": "length_mismatch (target=19, generated=16)",
         "diffs": [],
         "timestamp": "2026-06-03T09:07:49.172Z"
+      },
+      {
+        "code": "void func_1513A594(struct_arg1513A594 *arg0, s32 arg1, s32 arg2, u8 arg3, s32 arg4) {\n    func_1513A5E0(arg1, arg3, arg4);\n    if (arg0->unk1D4 == 0) {\n        return;\n    }\n}\n",
+        "score": 0.42105263157894735,
+        "reason": "length_mismatch (target=19, generated=16)",
+        "diffs": [],
+        "timestamp": "2026-06-03T09:08:20.855Z"
+      },
+      {
+        "code": "void func_1513A594(void *arg0, s32 arg1, s32 arg2, u8 arg3, s32 arg4) {\n    func_1513A5E0(arg1, arg3, arg4);\n    while (*(s32 *)((s32)arg0 + 0x1D4) != 0) {\n        break;\n    }\n}\n",
+        "score": 0.42105263157894735,
+        "reason": "length_mismatch (target=19, generated=16)",
+        "diffs": [],
+        "timestamp": "2026-06-03T09:09:07.074Z"
+      },
+      {
+        "code": "void *func_1513A594(void *arg0, s32 arg1, s32 arg2, u8 arg3, s32 arg4) {\n    func_1513A5E0(arg1, arg3, arg4);\n    if (*(s32 *)((s32)arg0 + 0x1D4) != 0) {\n    }\n    return arg0;\n}\n",
+        "score": 0.4473684210526316,
+        "reason": "length_mismatch (target=19, generated=17)",
+        "diffs": [],
+        "timestamp": "2026-06-03T09:09:30.495Z"
       }
     ]
   },
