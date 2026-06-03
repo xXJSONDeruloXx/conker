@@ -57,6 +57,11 @@ const LOOP_POLL_MS = 5000; // fallback timer interval for loop advancement
 const LOOP_STATE_FILE = ".pi/decomp/loop-state.json";
 const AUTO_PROMOTE_THRESHOLD = 20; // auto-promote segments when pending drops below this
 const AUTO_PROMOTE_BATCH = 5; // promote this many segments at a time
+const SESSION_ROTATE_THRESHOLD = 8; // auto-rotate away from a function after this many attempts without improvement
+
+// Session-level tracking: functions to skip because we ground on them this session
+const sessionRotatedFunctions = new Set<string>();
+const sessionAttemptCounts = new Map<string, { count: number; bestScore: number }>();
 
 interface LoopState {
 	enabled: boolean;
@@ -267,14 +272,16 @@ function buildChunkPrompt(chunkNum: number): string {
 		"",
 		"1. Call `decomp_queue next` to get the next candidate (includes target asm, context, and any prior failed attempts)",
 		"2. Study the target assembly carefully. Check prior attempts if shown — do NOT repeat them.",
-		"3. Write C and call `decomp_attempt` to test it.",
-		"4. If non-match: read the diff, call `decomp_diff` for focused analysis, then retry with a different approach.",
-		"5. If match: call `decomp_accept` to verify full ROM SHA and commit.",
-		"6. When done with this function (matched or decided to move on), call `decomp_chunk_done` with a summary.",
+		"3. Use `decomp_preview` to test ideas freely (no history, no attempt count) — iterate until the structure looks right.",
+		"4. When confident (score ≥ 0.8 or structure matches), call `decomp_attempt` to record the real attempt.",
+		"5. If non-match: read the diff, adjust, and use `decomp_preview` again before committing another attempt.",
+		"6. If match: call `decomp_accept` to verify full ROM SHA and commit.",
+		"7. When done with this function (matched or decided to move on), call `decomp_chunk_done` with a summary.",
 		"",
 		"## Rules",
-		"- ONE function per chunk. Match it or move on.",
-		"- Always call `decomp_chunk_done` when finished — this triggers context reset for the next chunk.",
+		"- You can work on MULTIPLE functions per chunk. If stuck, call `decomp_queue next` to try a different one — no need to call `decomp_chunk_done`.",
+		"- Call `decomp_chunk_done` when you’ve made good progress or exhausted reasonable options for this chunk.",
+		"- Functions with 8+ failed attempts are auto-rotated: `decomp_queue next` will skip them this session.",
 		"- Use the pattern library (/skill:n64-decomp) for IDO codegen rules.",
 		"- If score ≥ 0.9, you're close — try declaration reordering, type changes, or expression reshaping.",
 		"- If score ≥ 0.8 and plateaued, use decomp_permute to brute-force the last few instructions.",
@@ -830,6 +837,16 @@ export default function (pi: ExtensionAPI) {
 			}
 
 			let candidates = state.queue.filter((e) => e.status === "pending");
+
+			// Auto-rotate: skip functions we ground on this session (unless nearMiss filter explicitly requested)
+			if (!params.filter?.nearMiss && sessionRotatedFunctions.size > 0) {
+				const beforeCount = candidates.length;
+				candidates = candidates.filter((e) => !sessionRotatedFunctions.has(e.function));
+				if (candidates.length < beforeCount) {
+					// Note: rotated functions are not permanently skipped, just for this session
+				}
+			}
+
 			if (params.filter?.region) candidates = candidates.filter((e) => e.region === params.filter!.region);
 			if (params.filter?.maxInstructions)
 				candidates = candidates.filter((e) => e.instructions <= params.filter!.maxInstructions!);
@@ -1219,6 +1236,24 @@ export default function (pi: ExtensionAPI) {
 				entry.lastScore = scoreData.score || 0;
 			}
 
+			// Track session-level attempts for auto-rotate
+			const sessionEntry = sessionAttemptCounts.get(params.function) || { count: 0, bestScore: 0 };
+			sessionEntry.count++;
+			if ((scoreData.score || 0) > sessionEntry.bestScore) {
+				sessionEntry.bestScore = scoreData.score || 0;
+			}
+			sessionAttemptCounts.set(params.function, sessionEntry);
+
+			// Auto-rotate: if we've tried this function many times without improvement, mark it
+			if (sessionEntry.count >= SESSION_ROTATE_THRESHOLD && entry?.history) {
+				const recentScores = entry.history.slice(-SESSION_ROTATE_THRESHOLD).map((h: AttemptRecord) => h.score);
+				const recentBest = Math.max(...recentScores);
+				const overallBest = Math.max(...entry.history.map((h: AttemptRecord) => h.score));
+				if (recentBest <= overallBest) {
+					sessionRotatedFunctions.add(params.function);
+				}
+			}
+
 			if (scoreData.match) {
 				// Leave the patch in place — user should call decomp_accept
 				return {
@@ -1266,17 +1301,32 @@ export default function (pi: ExtensionAPI) {
 				await gitPushWithRetry(pi);
 			}
 
-			// Detect plateau: last 5+ attempts all within ±0.05 of each other
+			// Detect stall: multiple patterns (flat, alternating, no improvement)
 			let plateauWarning = "";
 			if (entry?.history && entry.history.length >= 5) {
 				const tail = entry.history.slice(-5);
 				const scores = tail.map((h: AttemptRecord) => h.score);
 				const min = Math.min(...scores);
 				const max = Math.max(...scores);
-				if (max - min <= 0.05 && max < 0.9) {
-					plateauWarning = `\n\n⚠️ PLATEAU: Last ${tail.length} attempts scored [${scores.map((s: number) => s.toFixed(2)).join(", ")}]`
-						+ `\n   No improvement trend (range: ${min.toFixed(2)}-${max.toFixed(2)}). This approach may be fundamentally misaligned.`
-						+ `\n   Consider: decomp_chunk_done to move on, or try a completely different type/struct assumption.`;
+				const best = Math.max(...entry.history.map((h: AttemptRecord) => h.score));
+				const recentBest = Math.max(...scores);
+
+				// Pattern 1: flat (all within ±0.05)
+				const isFlat = max - min <= 0.05 && max < 0.9;
+				// Pattern 2: alternating (high variance but no improvement, e.g. 0.9, 0.4, 0.9, 0.4)
+				const isAlternating = max - min > 0.3 && recentBest <= best;
+				// Pattern 3: no improvement in last 8 attempts
+				const isStagnant = entry.history.length >= 8 && Math.max(...entry.history.slice(-8).map((h: AttemptRecord) => h.score)) <= best;
+
+				if (isFlat || isAlternating || (isStagnant && entry.history.length >= 8)) {
+					const pattern = isFlat ? "flat" : isAlternating ? "alternating" : "stagnant";
+					plateauWarning = `\n\n⚠️ STUCK (${pattern}): Last ${tail.length} attempts scored [${scores.map((s: number) => s.toFixed(2)).join(", ")}]`
+						+ `\n   Best ever: ${best.toFixed(2)}. You are NOT making progress with this approach.`
+						+ `\n   → Call decomp_queue next to try a different function (this one’s history is saved for later).`
+						+ `\n   → Or try a FUNDAMENTALLY different strategy: different struct type, different control flow, rewrite from scratch.`;
+					if (best >= 0.8) {
+						plateauWarning += `\n   → Score ${best.toFixed(2)} is a permuter candidate: try decomp_permute ${params.function}`;
+					}
 				}
 			}
 
@@ -1293,6 +1343,117 @@ export default function (pi: ExtensionAPI) {
 					},
 				],
 				details: scoreData,
+			};
+		},
+	});
+
+	// ═══════════════════════════════════════════════════════════════
+	// TOOL: decomp_preview
+	// ═══════════════════════════════════════════════════════════════
+	pi.registerTool({
+		name: "decomp_preview",
+		label: "Decomp Preview",
+		description:
+			"Lightweight compile-and-diff: test C code against target assembly WITHOUT recording to attempt history. Use this to iterate quickly before committing a real attempt.",
+		promptSnippet: "Test-compile C code and preview the diff — no history, no attempt count, free iteration",
+		promptGuidelines: [
+			"Use decomp_preview to quickly test ideas without consuming an attempt. It compiles the TU, extracts ASM, scores, and shows the diff — but does NOT record to history or increment the attempt counter.",
+			"Once you're confident in the approach (score ≥ 0.9 or structure looks right), use decomp_attempt for the real gate.",
+			"decomp_preview auto-reverts the source file after showing results.",
+		],
+		parameters: Type.Object({
+			function: Type.String({ description: "Function name, e.g. func_15169668" }),
+			file: Type.String({ description: "Source file basename, e.g. game_1944C0.c" }),
+			code: Type.String({ description: "Complete C function body to test" }),
+			externs: Type.Optional(
+				Type.Array(Type.String(), { description: "Additional extern declarations" }),
+			),
+		}),
+
+		async execute(_toolCallId, params, signal, onUpdate, ctx) {
+			const fs = require("node:fs");
+			const path = require("node:path");
+
+			const srcPath = path.join(ctx.cwd, "conker/src", params.file);
+			const pragma = `#pragma GLOBAL_ASM("asm/nonmatchings/${params.file.replace(".c", "")}/${params.function}.s")`;
+
+			let original: string;
+			try {
+				original = fs.readFileSync(srcPath, "utf-8");
+			} catch (e: any) {
+				return { content: [{ type: "text", text: `Cannot read ${srcPath}: ${e.message}` }], details: {} };
+			}
+
+			if (!original.includes(pragma)) {
+				return { content: [{ type: "text", text: `Pragma not found in ${params.file}:\n${pragma}` }], details: {} };
+			}
+
+			// Apply patch temporarily
+			let patched = original;
+			if (params.externs && params.externs.length > 0) {
+				const externsBlock = params.externs.join("\n") + "\n";
+				const includeEnd = patched.lastIndexOf("#include");
+				if (includeEnd >= 0) {
+					const lineEnd = patched.indexOf("\n", includeEnd);
+					patched = patched.slice(0, lineEnd + 1) + "\n" + externsBlock + patched.slice(lineEnd + 1);
+				}
+			}
+			patched = patched.replace(pragma, params.code);
+			fs.writeFileSync(srcPath, patched);
+
+			onUpdate?.({ content: [{ type: "text", text: "Preview compile..." }], details: {} });
+
+			// Compile TU
+			const buildResult = await pi.exec("bash", ["tools/conker-build-tu.sh", params.file], {
+				signal, timeout: 60000,
+			});
+
+			if (buildResult.code !== 0) {
+				fs.writeFileSync(srcPath, original);
+				return {
+					content: [{ type: "text", text: `⚡ Preview: compile failed (reverted)\n${buildResult.stdout}\n${buildResult.stderr}` }],
+					details: { preview: true, error: "compile" },
+				};
+			}
+
+			// Extract ASM
+			const rawAsmResult = await pi.exec("docker", [
+				"run", "--rm", "--platform", "linux/amd64",
+				"-v", `${ctx.cwd}:/conker`, "-w", "/conker",
+				"conker-build-min-amd64",
+				"bash", "-lc",
+				`mips-linux-gnu-objdump -dr conker/build/src/${params.file.replace(".c", ".c.o")} | sed -n '/<${params.function}>/,/^$/p' | sed '\$d'`,
+			], { signal, timeout: 30000 });
+			const rawAsm = rawAsmResult.stdout?.trim() || "(could not extract)";
+
+			// Diff/score
+			const diffResult = await pi.exec("bash", ["tools/conker-diff.sh", params.function, params.file], {
+				signal, timeout: 30000,
+			});
+
+			// Revert immediately
+			fs.writeFileSync(srcPath, original);
+
+			let scoreData: any = { match: false, score: 0, reason: "diff_failed" };
+			try { scoreData = JSON.parse(diffResult.stdout); } catch {}
+
+			const diffSummary = scoreData.diffs
+				? scoreData.diffs.slice(0, 10).map((d: any) => `  L${d.line}: ${d.type} | target: ${d.target} | got: ${d.generated}`).join("\n")
+				: "(no diff detail)";
+
+			if (scoreData.match) {
+				return {
+					content: [{ type: "text", text: `⚡ Preview: MATCH (score ${scoreData.score})!\n\nThis looks good — call decomp_attempt with this same code to record it and proceed to decomp_accept.` }],
+					details: { preview: true, ...scoreData },
+				};
+			}
+
+			return {
+				content: [{
+					type: "text",
+					text: `⚡ Preview: score ${scoreData.score?.toFixed(3) || 0} (${scoreData.reason || "diff"})\n\nDiff:\n${diffSummary}\n\nGenerated ASM:\n\`\`\`\n${rawAsm}\n\`\`\`\n\n(No attempt recorded — iterate freely, then use decomp_attempt when ready)`,
+				}],
+				details: { preview: true, ...scoreData },
 			};
 		},
 	});
