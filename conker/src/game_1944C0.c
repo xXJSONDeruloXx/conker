@@ -31,7 +31,16 @@ extern u8 D_800D2DAB;
 #pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_151671E8.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_15167310.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_151674F8.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_15167A68.s")
+void *func_15167A68(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
+    void *temp_v0;
+    temp_v0 = (void *)func_10003C6C(arg2, 1, arg3, 0, (u8)arg5);
+    if (temp_v0 != NULL) {
+        *(u8 *)((s32)temp_v0 + 1) = arg1;
+        func_15168A4C(temp_v0, arg0);
+        *(u8 *)((s32)temp_v0 + 0xC) = *((u8 *)&arg4 + 3);
+    }
+    return temp_v0;
+}
 void func_15167AD8(void *arg0, u8 arg1, s32 arg2) {
     void *temp_v0 = func_15167A68(3, arg2, 0x28, 0, arg1, 1);
     if (temp_v0 != NULL) {
