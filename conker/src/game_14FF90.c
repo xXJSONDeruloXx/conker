@@ -513,7 +513,34 @@ void func_15125608(struct108 *arg0) {
 }
 
 // ???
-#pragma GLOBAL_ASM("asm/nonmatchings/game_14FF90/func_15125628.s")
+void func_15125628(void) {
+    u32 temp_v0;
+    s32 temp_t6;
+    s32 temp_t7;
+    s32 temp_t8;
+    s32 temp_t9;
+
+    temp_v0 = D_800DBFF4[0];
+    temp_t6 = temp_v0 - 1;
+    if (temp_v0 != 0) {
+        D_800DBFF4[0] = temp_t6;
+    }
+    temp_v0 = D_800DBFF5;
+    temp_t7 = temp_v0 - 1;
+    if (temp_v0 != 0) {
+        D_800DBFF5 = temp_t7;
+    }
+    temp_v0 = D_800DBFF6;
+    temp_t8 = temp_v0 - 1;
+    if (temp_v0 != 0) {
+        D_800DBFF6 = temp_t8;
+    }
+    temp_v0 = D_800DBFF7;
+    temp_t9 = temp_v0 - 1;
+    if (temp_v0 != 0) {
+        D_800DBFF7 = temp_t9;
+    }
+}
 
 void func_15125690(struct108 *arg0, s32 arg1) {
     u8 *temp_v0 = &D_800DBFF4[arg0->unk23D];
