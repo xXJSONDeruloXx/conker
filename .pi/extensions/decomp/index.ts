@@ -950,6 +950,8 @@ export default function (pi: ExtensionAPI) {
 			);
 
 			const output = [
+				`✅ ROM baseline verified (conker.us.bin: OK)`,
+				"",
 				`## Next candidate: ${next.function}`,
 				`File: ${next.file} | Region: ${next.region} | Instructions: ${next.instructions} | Difficulty: ${next.difficulty}`,
 				`Attempts so far: ${next.attempts} | Last score: ${next.lastScore}`,
