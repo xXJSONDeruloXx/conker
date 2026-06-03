@@ -172,7 +172,21 @@ f32 func_15135670(s32 arg0) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_161520/func_15136698.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_161520/func_151368A8.s")
+s32 func_151368A8(struct102 *arg0) {
+    s16 temp_v0 = arg0->unk1C;
+    f32 *temp_v1 = (f32 *)((s32)arg0 + 0x128);
+    volatile f32 *temp_a1 = &D_800BE9A4;
+    s32 temp;
+    if (temp_v0 < 0x20) {
+        temp = temp_v0 << 3;
+        if (temp < *((u8 *)arg0 + 0x5C)) {
+            *((u8 *)arg0 + 0x5C) = temp;
+        }
+    }
+    *(f32 *)((s32)arg0 + 0x2C) += *temp_v1 * *temp_a1;
+    *(f32 *)((s32)arg0 + 0x30) += *temp_v1 * *temp_a1;
+    return 1;
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_161520/func_15136918.s")
 
