@@ -507,9 +507,9 @@
     "instructions": 16,
     "difficulty": "low",
     "tags": [],
-    "attempts": 7,
-    "lastScore": 0.46875,
-    "status": "pending",
+    "attempts": 8,
+    "lastScore": 1,
+    "status": "matched",
     "history": [
       {
         "code": "void func_151927C0(struct114 *arg0) {\n    s32 tmp0;\n    tmp0 = (s16)((arg0->unk14 & 0xFF) >> 1);\n    arg0->unk38 = 300;\n    arg0->unk3A = 10;\n    arg0->unk14 = tmp0 * 65537;\n    arg0->unk3B = 0;\n}",
@@ -569,9 +569,65 @@
     "instructions": 16,
     "difficulty": "low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0.46875,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.625,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_15079A58(void) {\n    s16 tmp;\n\n    tmp = (D_800D1890 << 8) + D_800D1891;\n    (*(s16 **)&D_800D2110)[D_800D154C->unk13F] = tmp;\n}",
+        "score": 0.375,
+        "reason": "structural_diffs=10",
+        "diffs": [
+          "structural: target=lui t1, HI(D_800D154C) got=lui t2, HI(D_800D154C)",
+          "structural: target=lw t1, LO(D_800D154C)(t1) got=lw t2, LO(D_800D154C)(t2)",
+          "structural: target=lbu t2, 319(t1) got=lbu t3, 319(t2)",
+          "structural: target=lui t0, HI(D_800D2110) got=lui t1, HI(D_800D2110)",
+          "structural: target=lw t0, LO(D_800D2110)(t0) got=lbu t8, LO(D_800D1891)(t8)",
+          "structural: target=lbu t8, LO(D_800D1891)(t8) got=lw t1, LO(D_800D2110)(t1)",
+          "structural: target=sll t3, t2, 1 got=sll t4, t3, 1",
+          "structural: target=addu t4, t0, t3 got=addu t0, t7, t8",
+          "structural: target=addu t9, t7, t8 got=addu t5, t1, t4",
+          "structural: target=sh t9, 0(t4) got=sh t0, 0(t5)"
+        ],
+        "timestamp": "2026-06-03T06:32:44.711Z"
+      },
+      {
+        "code": "void func_15079A58(void) {\n    struct127 *temp_t1;\n    s16 *temp_t0;\n    s32 temp_t7;\n    u8 temp_t2;\n\n    temp_t1 = D_800D154C;\n    temp_t7 = D_800D1890 << 8;\n    temp_t2 = temp_t1->unk13F;\n    temp_t0 = *(s16 **)&D_800D2110;\n    temp_t0[temp_t2] = temp_t7 + D_800D1891;\n}",
+        "score": 0.125,
+        "reason": "structural_diffs=14",
+        "diffs": [
+          "structural: target=lui t1, HI(D_800D154C) got=lui v0, HI(D_800D154C)",
+          "structural: target=lw t1, LO(D_800D154C)(t1) got=lw v0, LO(D_800D154C)(v0)",
+          "structural: target=lui t6, HI(D_800D1890) got=lui v1, HI(D_800D1890)",
+          "structural: target=lbu t6, LO(D_800D1890)(t6) got=lbu v1, LO(D_800D1890)(v1)",
+          "structural: target=lbu t2, 319(t1) got=lbu a0, 319(v0)",
+          "structural: target=lui t8, HI(D_800D1891) got=lui a1, HI(D_800D2110)",
+          "structural: target=lui t0, HI(D_800D2110) got=lui t7, HI(D_800D1891)",
+          "structural: target=lw t0, LO(D_800D2110)(t0) got=lw a1, LO(D_800D2110)(a1)",
+          "structural: target=lbu t8, LO(D_800D1891)(t8) got=lbu t7, LO(D_800D1891)(t7)",
+          "structural: target=sll t7, t6, 8 got=sll t6, v1, 8",
+          "structural: target=sll t3, t2, 1 got=sll t9, a0, 1",
+          "structural: target=addu t4, t0, t3 got=addu t0, a1, t9",
+          "structural: target=addu t9, t7, t8 got=addu t8, t7, t6",
+          "structural: target=sh t9, 0(t4) got=sh t8, 0(t0)"
+        ],
+        "timestamp": "2026-06-03T06:33:20.993Z"
+      },
+      {
+        "code": "void func_15079A58(void) {\n    (*(s16 **)&D_800D2110)[D_800D154C->unk13F] = (D_800D1891 + (D_800D1890 << 8));\n}",
+        "score": 0.625,
+        "reason": "structural_diffs=6",
+        "diffs": [
+          "structural: target=lui t6, HI(D_800D1890) got=lui t7, HI(D_800D1890)",
+          "structural: target=lbu t6, LO(D_800D1890)(t6) got=lbu t7, LO(D_800D1890)(t7)",
+          "structural: target=lui t8, HI(D_800D1891) got=lui t6, HI(D_800D1891)",
+          "structural: target=lbu t8, LO(D_800D1891)(t8) got=lbu t6, LO(D_800D1891)(t6)",
+          "structural: target=sll t7, t6, 8 got=sll t8, t7, 8",
+          "structural: target=addu t9, t7, t8 got=addu t9, t6, t8"
+        ],
+        "timestamp": "2026-06-03T06:33:46.690Z"
+      }
+    ]
   },
   {
     "function": "func_1507A3E8",
