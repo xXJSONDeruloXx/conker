@@ -3478,7 +3478,7 @@
     "instructions": 17,
     "difficulty": "low",
     "tags": [],
-    "attempts": 18,
+    "attempts": 21,
     "lastScore": 0.4722222222222222,
     "status": "pending",
     "history": [
@@ -3642,6 +3642,27 @@
         "reason": "length_mismatch (target=17, generated=18)",
         "diffs": [],
         "timestamp": "2026-06-03T07:28:40.323Z"
+      },
+      {
+        "code": "struct127 *func_1505EEB0(s32 state, s32 *arg1) {\n    struct127 *ptr = D_800CC2D0;\n    s32 i = 0;\n\n    if (state == D_800CC2D0[0].interaction_state) {\n        goto done;\n    }\n    do {\n        i += 1;\n        ptr += 1;\n        if (i >= 25) {\n            break;\n        }\n    } while (state != ptr->interaction_state);\n\ndone:\n    *arg1 = i;\n    return ptr;\n}\n",
+        "score": 0.4722222222222222,
+        "reason": "length_mismatch (target=17, generated=18)",
+        "diffs": [],
+        "timestamp": "2026-06-03T07:28:59.377Z"
+      },
+      {
+        "code": "struct127 *func_1505EEB0(s32 state, s32 *arg1) {\n    struct127 *ptr;\n    s32 i = 0;\n\n    if (state != D_800CC2D0[0].interaction_state) {\n        ptr = D_800CC2D0;\n        do {\n            i += 1;\n            ptr += 1;\n            if (i >= 25) {\n                break;\n            }\n        } while (state != ptr->interaction_state);\n    } else {\n        ptr = D_800CC2D0;\n    }\n\n    *arg1 = i;\n    return ptr;\n}\n",
+        "score": 0.38636363636363635,
+        "reason": "length_mismatch (target=17, generated=22)",
+        "diffs": [],
+        "timestamp": "2026-06-03T07:29:18.208Z"
+      },
+      {
+        "code": "struct127 *func_1505EEB0(s32 state, s32 *arg1) {\n    struct127 *ptr = D_800CC2D0;\n    s32 first;\n    s32 i = 0;\n\n    first = D_800CC2D0[0].interaction_state;\n    if (state == first) {\n        goto done;\n    }\n    do {\n        i += 1;\n        ptr += 1;\n        if (i >= 25) {\n            break;\n        }\n    } while (state != ptr->interaction_state);\n\ndone:\n    *arg1 = i;\n    return ptr;\n}\n",
+        "score": 0.4722222222222222,
+        "reason": "length_mismatch (target=17, generated=18)",
+        "diffs": [],
+        "timestamp": "2026-06-03T07:29:31.395Z"
       }
     ]
   },
