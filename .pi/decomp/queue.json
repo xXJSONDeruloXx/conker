@@ -3213,7 +3213,7 @@
     "instructions": 24,
     "difficulty": "low",
     "tags": [],
-    "attempts": 9,
+    "attempts": 12,
     "lastScore": 0.4444444444444444,
     "status": "pending",
     "history": [
@@ -3286,6 +3286,27 @@
         "reason": "length_mismatch (target=24, generated=27)",
         "diffs": [],
         "timestamp": "2026-06-03T08:22:40.877Z"
+      },
+      {
+        "code": "struct151 *func_1000B294(s32 *arg0) {\n    struct151 *entry;\n    struct151 **ptr;\n    struct151 *child;\n    struct151 **end;\n\n    entry = D_800417B0[0];\n    ptr = D_800417B0;\n    end = (struct151 **)&D_800417BC;\nloop:\n    if (entry != NULL) {\n        if (entry->unk10 == arg0) {\n            entry->unk10 = (s32 *)entry;\n        }\n        child = (struct151 *)(*ptr)->unk60;\n        if (child != NULL) {\n            if (child->unk10 == arg0) {\n                child->unk10 = (s32 *)child;\n            }\n        }\n    }\n    ptr++;\n    if (ptr != end) {\n        entry = *ptr;\n        goto loop;\n    }\n    return entry;\n}\n",
+        "score": 0.4285714285714286,
+        "reason": "length_mismatch (target=24, generated=28)",
+        "diffs": [],
+        "timestamp": "2026-06-03T08:23:08.669Z"
+      },
+      {
+        "code": "void func_1000B294(s32 *arg0) {\n    struct151 *entry;\n    struct151 **ptr;\n    struct151 *child;\n    struct151 **end;\n\n    entry = D_800417B0[0];\n    ptr = D_800417B0;\n    end = (struct151 **)&D_800417BC;\nloop:\n    if (entry != NULL) {\n        if (entry->unk10 == arg0) {\n            entry->unk10 = (s32 *)entry;\n        }\n        child = (struct151 *)entry->unk60;\n        if (child != NULL) {\n            if (child->unk10 == arg0) {\n                child->unk10 = (s32 *)child;\n            }\n        }\n    }\n    ptr++;\n    if (ptr != end) {\n        entry = *ptr;\n        goto loop;\n    }\n}\n",
+        "score": 0.48,
+        "reason": "length_mismatch (target=24, generated=25)",
+        "diffs": [],
+        "timestamp": "2026-06-03T08:23:35.695Z"
+      },
+      {
+        "code": "void func_1000B294(s32 *arg0) {\n    struct151 *entry;\n    struct151 **ptr;\n    struct151 *child;\n    struct151 **end;\n\n    entry = D_800417B0[0];\n    ptr = D_800417B0;\n    end = (struct151 **)&D_800417BC;\nloop:\n    if (entry != NULL) {\n        if (entry->unk10 == arg0) {\n            entry->unk10 = (s32 *)entry;\n            entry = *ptr;\n        }\n        child = (struct151 *)entry->unk60;\n        if (child != NULL) {\n            if (child->unk10 == arg0) {\n                child->unk10 = (s32 *)child;\n            }\n        }\n    }\n    ptr++;\n    if (ptr != end) {\n        entry = *ptr;\n        goto loop;\n    }\n}\n",
+        "score": 0.4444444444444444,
+        "reason": "length_mismatch (target=24, generated=27)",
+        "diffs": [],
+        "timestamp": "2026-06-03T08:24:00.072Z"
       }
     ]
   },
