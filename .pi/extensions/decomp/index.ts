@@ -1335,7 +1335,8 @@ export default function (pi: ExtensionAPI) {
 			if ((scoreData.score || 0) >= 0.8 && !plateauWarning.includes("permuter")) {
 				permuterHint = `\n\n🎯 HIGH SCORE (${scoreData.score?.toFixed(3)}) — this is a strong permuter candidate!`
 					+ `\n   The code is semantically correct but codegen doesn’t match exactly.`
-					+ `\n   → Call \`decomp_permute ${params.function}\` to brute-force the last few instructions.`;
+					+ `\n   → Call \`decomp_permute\` with function="${params.function}" file="${params.file}" to brute-force the last few instructions.`
+					+ `\n   Note: Transmuter compiles in isolation. After it finds a match, verify with decomp_attempt (full TU build).`;
 			}
 
 			// Build response with prior attempt context
@@ -1756,10 +1757,12 @@ export default function (pi: ExtensionAPI) {
 			"Use decomp_permute on functions with score ≥ 0.8 where decomp_attempt has plateaued. Transmuter runs multi-branch mutation search with IDO-tuned rules.",
 			"decomp_permute uses the best attempt from history by default. Provide code= to override with a specific starting point.",
 			"Transmuter typically finds matches in 3-30 seconds for near-misses (score ≥ 0.9). Give it up to 60s.",
+			"IMPORTANT: Transmuter compiles the function in isolation (not the full TU). After it finds a match, you MUST verify with decomp_attempt to confirm the match holds in the full translation unit context. IDO codegen is context-sensitive.",
+			"If the Transmuter match includes externs not in the source file, pass them via decomp_attempt's externs parameter.",
 		],
 		parameters: Type.Object({
 			function: Type.String({ description: "Function name to permute" }),
-			file: Type.String({ description: "Source file basename, e.g. game_1944C0.c" }),
+			file: Type.Optional(Type.String({ description: "Source file basename, e.g. game_1944C0.c (auto-resolved from queue if omitted)" })),
 			code: Type.Optional(Type.String({ description: "Starting C code (default: best attempt from history)" })),
 			timeout: Type.Optional(Type.Number({ description: "Timeout in seconds (default: 60)" })),
 			maxCompiles: Type.Optional(Type.Number({ description: "Max compile attempts (default: 2000)" })),
@@ -1770,6 +1773,20 @@ export default function (pi: ExtensionAPI) {
 			const path = require("node:path");
 			const timeoutMs = (params.timeout || 60) * 1000;
 			const maxCompiles = params.maxCompiles || 2000;
+
+			// Auto-resolve file from queue if not provided
+			let file = params.file;
+			if (!file) {
+				const qEntry = state.queue.find((e) => e.function === params.function);
+				if (qEntry) {
+					file = qEntry.file;
+				} else {
+					return {
+						content: [{ type: "text", text: `Cannot resolve file for ${params.function}. Provide file= parameter.` }],
+						details: { error: "no_file" },
+					};
+				}
+			}
 
 			// Get the best C attempt from history (or use provided code)
 			let baseCode = params.code;
@@ -1790,7 +1807,7 @@ export default function (pi: ExtensionAPI) {
 			}
 
 			// Create target .o by assembling the target .s file natively
-			const targetS = path.join(ctx.cwd, "conker/asm/nonmatchings", params.file.replace(".c", ""), `${params.function}.s`);
+			const targetS = path.join(ctx.cwd, "conker/asm/nonmatchings", file.replace(".c", ""), `${params.function}.s`);
 			if (!fs.existsSync(targetS)) {
 				return {
 					content: [{ type: "text", text: `Target assembly not found: ${targetS}` }],
