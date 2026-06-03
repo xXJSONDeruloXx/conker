@@ -14455,8 +14455,8 @@
     "instructions": 36,
     "difficulty": "medium-low",
     "tags": [],
-    "attempts": 3,
-    "lastScore": 0.5833,
+    "attempts": 6,
+    "lastScore": 0.6389,
     "status": "pending",
     "history": [
       {
@@ -14525,6 +14525,57 @@
           "structural: target=slt at, a3, t9 got=slt at, a3, t3"
         ],
         "timestamp": "2026-06-03T20:50:45.743Z"
+      },
+      {
+        "code": "void func_15143D18(s32 *arg0, s32 *arg1, s32 arg2, s32 arg3) {\n    s32 *ptr0;\n    s32 *ptr1;\n    s32 tmp;\n    s32 newmax;\n\n    ptr1 = arg1;\n    ptr0 = arg0;\n    if (arg3 < arg2) {\n        tmp = arg2 ^ arg3;\n        newmax = arg3 ^ tmp;\n        arg3 = newmax;\n        arg2 = tmp ^ newmax;\n    }\n    tmp = *ptr1;\n    arg1 = (s32 *) *ptr0;\n    if (tmp < (s32) arg1) {\n        arg0 = (s32 *) ((s32) arg1 ^ tmp);\n        *ptr0 = (s32) arg0;\n        tmp = *ptr1 ^ (s32) arg0;\n        *ptr1 = tmp;\n        arg1 = (s32 *) (*ptr0 ^ tmp);\n        *ptr0 = (s32) arg1;\n    }\n    if ((s32) arg1 < arg2) {\n        *ptr0 = arg2;\n    }\n    if (arg3 < *ptr1) {\n        *ptr1 = arg3;\n    }\n}",
+        "score": 0.4305555555555556,
+        "reason": "length_mismatch (target=36, generated=31)",
+        "diffs": [],
+        "timestamp": "2026-06-03T20:51:19.995Z"
+      },
+      {
+        "code": "void func_15143D18(s32 *arg0, s32 *arg1, s32 arg2, s32 arg3) {\n    s32 tmp;\n    s32 newmax;\n\n    if (arg3 < arg2) {\n        tmp = arg2 ^ arg3;\n        newmax = arg3 ^ tmp;\n        arg3 = newmax;\n        arg2 = tmp ^ newmax;\n    }\n    if (*arg1 < *arg0) {\n        *arg0 ^= *arg1;\n        *arg1 ^= *arg0;\n        *arg0 ^= *arg1;\n    }\n    if (*arg0 < arg2) {\n        *arg0 = arg2;\n    }\n    if (arg3 < *arg1) {\n        *arg1 = arg3;\n    }\n}",
+        "score": 0.5833,
+        "reason": "structural_diffs=15",
+        "diffs": [
+          "structural: target=lw v1, 0(s0) got=lw v0, 0(s0)",
+          "structural: target=lw a1, 0(s1) got=lw v1, 0(s1)",
+          "structural: target=slt at, v1, a1 got=slt at, v0, v1",
+          "structural: target=xor v0, a1, v1 got=xor t6, v1, v0",
+          "structural: target=sw v0, 0(s1) got=sw t6, 0(s1)",
+          "structural: target=lw t6, 0(s0) got=lw t7, 0(s0)",
+          "structural: target=xor a0, t6, v0 got=xor t9, t7, t6",
+          "structural: target=sw a0, 0(s0) got=sw t9, 0(s0)",
+          "structural: target=lw t7, 0(s1) got=lw t0, 0(s1)",
+          "structural: target=xor a1, t7, a0 got=xor v1, t0, t9",
+          "structural: target=sw a1, 0(s1) got=sw v1, 0(s1)",
+          "structural: target=slt at, a1, a2 got=slt at, v1, a2",
+          "structural: target=lw t9, 0(s0) got=lw t3, 0(s0)",
+          "structural: target=lw t9, 0(s0) got=lw t3, 0(s0)",
+          "structural: target=slt at, a3, t9 got=slt at, a3, t3"
+        ],
+        "timestamp": "2026-06-03T20:51:50.521Z"
+      },
+      {
+        "code": "void func_15143D18(s32 *arg0, s32 *arg1, s32 arg2, s32 arg3) {\n    s32 tmp;\n    s32 newmax;\n    s32 temp_v0;\n    s32 temp_v1;\n    s32 temp_a1;\n    s32 temp_a0;\n\n    if (arg3 < arg2) {\n        tmp = arg2 ^ arg3;\n        newmax = arg3 ^ tmp;\n        arg3 = newmax;\n        arg2 = tmp ^ newmax;\n    }\n    temp_v1 = *arg1;\n    temp_a1 = *arg0;\n    if (temp_v1 < temp_a1) {\n        temp_v0 = temp_a1 ^ temp_v1;\n        *arg0 = temp_v0;\n        temp_a0 = *arg1 ^ temp_v0;\n        *arg1 = temp_a0;\n        temp_a1 = *arg0 ^ temp_a0;\n        *arg0 = temp_a1;\n    }\n    if (temp_a1 < arg2) {\n        *arg0 = arg2;\n    }\n    if (arg3 < *arg1) {\n        *arg1 = arg3;\n    }\n}",
+        "score": 0.6389,
+        "reason": "structural_diffs=13",
+        "diffs": [
+          "structural: target=lw v1, 0(s0) got=lw v0, 0(s0)",
+          "structural: target=lw a1, 0(s1) got=lw v1, 0(s1)",
+          "structural: target=slt at, v1, a1 got=slt at, v0, v1",
+          "structural: target=xor v0, a1, v1 got=xor a0, v1, v0",
+          "structural: target=sw v0, 0(s1) got=sw a0, 0(s1)",
+          "structural: target=xor a0, t6, v0 got=xor a1, t6, a0",
+          "structural: target=sw a0, 0(s0) got=sw a1, 0(s0)",
+          "structural: target=xor a1, t7, a0 got=xor v1, t7, a1",
+          "structural: target=sw a1, 0(s1) got=sw v1, 0(s1)",
+          "structural: target=slt at, a1, a2 got=slt at, v1, a2",
+          "structural: target=lw t9, 0(s0) got=lw t8, 0(s0)",
+          "structural: target=lw t9, 0(s0) got=lw t8, 0(s0)",
+          "structural: target=slt at, a3, t9 got=slt at, a3, t8"
+        ],
+        "timestamp": "2026-06-03T20:52:09.893Z"
       }
     ]
   },
