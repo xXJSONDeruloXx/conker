@@ -2874,9 +2874,9 @@
     "instructions": 22,
     "difficulty": "low",
     "tags": [],
-    "attempts": 5,
-    "lastScore": 0.9545,
-    "status": "pending",
+    "attempts": 6,
+    "lastScore": 1,
+    "status": "matched",
     "history": [
       {
         "code": "void func_1507A47C(void) {\n    D_800D154C->unk94 &= ~((D_800D1890 << 0x18) | (D_800D1891 << 0x10) | (D_800D1892 << 8) | D_800D1893);\n}\n",
@@ -3421,8 +3421,8 @@
     "instructions": 23,
     "difficulty": "low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0.41304347826086957,
+    "attempts": 3,
+    "lastScore": 0.391304347826087,
     "status": "pending",
     "history": [
       {
@@ -3480,6 +3480,27 @@
         "reason": "length_mismatch (target=23, generated=19)",
         "diffs": [],
         "timestamp": "2026-06-02T18:36:51.714Z"
+      },
+      {
+        "code": "void func_151635A8(struct225 *arg0, s32 arg1, u8 arg2) {\n    s32 (**temp_v0)(s32);\n\n    temp_v0 = D_8008B370;\n    if (temp_v0[arg0->unk25] != NULL) {\n        ((void (*)(struct225 *, s32, u8))temp_v0[arg0->unk25])(arg0, arg1, arg2);\n    }\n}",
+        "score": 0.391304347826087,
+        "reason": "length_mismatch (target=23, generated=18)",
+        "diffs": [],
+        "timestamp": "2026-06-03T11:48:20.897Z"
+      },
+      {
+        "code": "void func_151635A8(struct225 *arg0, s32 arg1, u8 arg2) {\n    s32 temp_v0;\n\n    temp_v0 = (s32)D_8008B370;\n    if (*(s32 *)(temp_v0 + (arg0->unk25 * 4)) != 0) {\n        ((void (*)(struct225 *, s32, u8))(*(s32 *)(temp_v0 + (arg0->unk25 * 4))))(arg0, arg1, arg2);\n    }\n}",
+        "score": 0.391304347826087,
+        "reason": "length_mismatch (target=23, generated=18)",
+        "diffs": [],
+        "timestamp": "2026-06-03T11:48:42.341Z"
+      },
+      {
+        "code": "void func_151635A8(struct225 *arg0, s32 arg1, u8 arg2) {\n    s32 temp_v0;\n\n    temp_v0 = (s32)&D_8008B370;\n    if (*(s32 *)(temp_v0 + (arg0->unk25 * 4)) != 0) {\n        ((void (*)(struct225 *, s32, u8))(*(s32 *)(temp_v0 + (arg0->unk25 * 4))))(arg0, arg1, arg2);\n    }\n}",
+        "score": 0.391304347826087,
+        "reason": "length_mismatch (target=23, generated=18)",
+        "diffs": [],
+        "timestamp": "2026-06-03T11:48:58.143Z"
       }
     ]
   },
