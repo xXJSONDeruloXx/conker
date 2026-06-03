@@ -1367,7 +1367,7 @@
     "instructions": 18,
     "difficulty": "low",
     "tags": [],
-    "attempts": 3,
+    "attempts": 6,
     "lastScore": 0.4722222222222222,
     "status": "pending",
     "history": [
@@ -1391,6 +1391,27 @@
         "reason": "length_mismatch (target=18, generated=17)",
         "diffs": [],
         "timestamp": "2026-06-03T08:08:01.275Z"
+      },
+      {
+        "code": "u8 func_150ADA20(void) {\n    u32 tmp;\n\n    tmp = D_800885B0;\n    tmp = ((tmp >> 1) | (tmp << 31)) ^ (tmp << 12);\n    tmp ^= (tmp >> 20) & 0xFFF;\n    D_800885B0 = tmp;\n}\n",
+        "score": 0.4444444444444444,
+        "reason": "length_mismatch (target=18, generated=16)",
+        "diffs": [],
+        "timestamp": "2026-06-03T08:09:18.544Z"
+      },
+      {
+        "code": "u8 func_150ADA20(void) {\n    u64 tmp0;\n    u64 tmp2;\n\n    tmp0 = D_800885B0;\n    tmp2 = ((tmp0 << 63) >> 31) | ((tmp0 << 31) >> 32);\n    tmp0 = (tmp0 << 44) >> 32;\n    tmp2 ^= tmp0;\n    tmp0 = (tmp2 >> 20) & 0xFFF;\n    tmp0 ^= tmp2;\n    D_800885B0 = tmp0;\n    return tmp0;\n}\n",
+        "score": 0.4285714285714286,
+        "reason": "length_mismatch (target=18, generated=21)",
+        "diffs": [],
+        "timestamp": "2026-06-03T08:10:22.777Z"
+      },
+      {
+        "code": "u8 func_150ADA20(void) {\n    u64 tmp0;\n    u64 tmp2;\n\n    tmp0 = D_800885B0;\n    tmp2 = ((tmp0 << 63) >> 31) | ((tmp0 << 31) >> 32);\n    tmp0 = (tmp0 << 44) >> 32;\n    tmp2 ^= tmp0;\n    tmp0 = (tmp2 >> 20) & 0xFFF;\n    tmp0 ^= tmp2;\n    D_800885B0 = tmp0;\n}\n",
+        "score": 0.4722222222222222,
+        "reason": "length_mismatch (target=18, generated=17)",
+        "diffs": [],
+        "timestamp": "2026-06-03T08:10:47.356Z"
       }
     ]
   },
