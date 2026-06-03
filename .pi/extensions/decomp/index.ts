@@ -1569,8 +1569,14 @@ export default function (pi: ExtensionAPI) {
 			}
 
 			// Need to wrap the target .s with a proper prelude for the assembler
-			const targetAsmContent = fs.readFileSync(targetS, "utf-8");
-			const wrappedAsm = `.set noat\n.set noreorder\n.set gp=64\n\n${targetAsmContent}\n`;
+			// Convert glabel to proper .global + label directives
+			let targetAsmContent = fs.readFileSync(targetS, "utf-8");
+			targetAsmContent = targetAsmContent
+				.replace(/^glabel\s+(\w+)/gm, ".global $1\n$1:")
+				.replace(/^\.L(\w+):/gm, ".L$1:")
+				.replace(/^\s*\/\*.*?\*\/\s*/gm, "")  // strip /* comments */
+				.replace(/^\s*#.*$/gm, "");  // strip # comments
+			const wrappedAsm = `.set noat\n.set noreorder\n.set gp=64\n.section .text\n\n${targetAsmContent}\n`;
 			fs.writeFileSync(path.join(workDir, "target.s"), wrappedAsm);
 
 			// Assemble target.o inside Docker
