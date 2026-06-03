@@ -922,7 +922,7 @@
     "instructions": 16,
     "difficulty": "low",
     "tags": [],
-    "attempts": 12,
+    "attempts": 15,
     "lastScore": 0.46875,
     "status": "pending",
     "history": [
@@ -1009,6 +1009,27 @@
         "reason": "length_mismatch (target=16, generated=15)",
         "diffs": [],
         "timestamp": "2026-06-03T06:52:57.217Z"
+      },
+      {
+        "code": "void func_150A7B80(s64 *arg0) {\n    s64 *ptr64;\n    s16 *ptr16;\n    s32 temp;\n\n    ptr64 = arg0;\n    ptr16 = (s16 *)arg0;\n    temp = 1;\n    ptr64[0] = 0;\n    ptr64[1] = 0;\n    ptr64[2] = 0;\n    ptr64[3] = 0;\n    ptr64[4] = 0;\n    ptr64[5] = 0;\n    ptr64[6] = 0;\n    ptr64[7] = 0;\n    ptr16[0] = temp;\n    ptr16[5] = temp;\n    ptr16[10] = temp;\n    ptr16[15] = temp;\n}",
+        "score": 0.46875,
+        "reason": "length_mismatch (target=16, generated=15)",
+        "diffs": [],
+        "timestamp": "2026-06-03T06:53:34.331Z"
+      },
+      {
+        "code": "void func_150A7B80(s64 *arg0) {\n    register s32 temp;\n\n    temp = 1;\n    arg0[0] = 0;\n    arg0[1] = 0;\n    arg0[2] = 0;\n    arg0[3] = 0;\n    arg0[4] = 0;\n    arg0[5] = 0;\n    arg0[6] = 0;\n    arg0[7] = 0;\n    ((s16 *)arg0)[0] = temp;\n    ((s16 *)arg0)[5] = temp;\n    ((s16 *)arg0)[10] = temp;\n    ((s16 *)arg0)[15] = temp;\n}",
+        "score": 0.46875,
+        "reason": "length_mismatch (target=16, generated=15)",
+        "diffs": [],
+        "timestamp": "2026-06-03T06:54:00.416Z"
+      },
+      {
+        "code": "s32 func_150A7B80(s64 *arg0) {\n    s32 temp = 1;\n\n    arg0[0] = 0;\n    arg0[1] = 0;\n    arg0[2] = 0;\n    arg0[3] = 0;\n    arg0[4] = 0;\n    arg0[5] = 0;\n    arg0[6] = 0;\n    arg0[7] = 0;\n    ((s16 *)arg0)[0] = temp;\n    ((s16 *)arg0)[5] = temp;\n    ((s16 *)arg0)[10] = temp;\n    ((s16 *)arg0)[15] = temp;\n}",
+        "score": 0.46875,
+        "reason": "length_mismatch (target=16, generated=15)",
+        "diffs": [],
+        "timestamp": "2026-06-03T06:54:20.620Z"
       }
     ]
   },
