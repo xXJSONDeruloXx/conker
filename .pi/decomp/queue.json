@@ -1244,7 +1244,7 @@
     "instructions": 15,
     "difficulty": "low",
     "tags": [],
-    "attempts": 21,
+    "attempts": 24,
     "lastScore": 0.4666666666666667,
     "status": "pending",
     "history": [
@@ -1428,6 +1428,27 @@
         "reason": "length_mismatch (target=15, generated=14)",
         "diffs": [],
         "timestamp": "2026-06-03T06:14:30.420Z"
+      },
+      {
+        "code": "void func_1514143C(struct210 *arg0) {\n    register struct224 *temp_v0;\n\n    if (*(volatile s32 *)((s32)arg0 + 0x154) != 0) {\n        temp_v0 = (struct224 *)((s32)arg0 + 0x110);\n        ((struct17 *)temp_v0->unk44)->unk0 = arg0->unk34;\n        ((struct17 *)temp_v0->unk44)->unk4 = arg0->unk38;\n        ((struct17 *)temp_v0->unk44)->unk8 = *(f32 *)((s32)arg0 + 0x3C);\n    }\n}",
+        "score": 0.4666666666666667,
+        "reason": "length_mismatch (target=15, generated=14)",
+        "diffs": [],
+        "timestamp": "2026-06-03T06:14:55.091Z"
+      },
+      {
+        "code": "void func_1514143C(struct210 *arg0) {\n    struct224 *temp_v0;\n\n    if (*(volatile s32 *)((s32)arg0 + 0x154) != 0) {\n        ((struct17 *)(temp_v0 = (struct224 *)((s32)arg0 + 0x110))->unk44)->unk0 = arg0->unk34;\n        ((struct17 *)temp_v0->unk44)->unk4 = arg0->unk38;\n        ((struct17 *)temp_v0->unk44)->unk8 = *(f32 *)((s32)arg0 + 0x3C);\n    }\n}",
+        "score": 0.4666666666666667,
+        "reason": "length_mismatch (target=15, generated=14)",
+        "diffs": [],
+        "timestamp": "2026-06-03T06:15:49.921Z"
+      },
+      {
+        "code": "void func_1514143C(struct210 *arg0) {\n    struct224 *temp_v0;\n\n    if (*(s32 *)((s32)arg0 + 0x154) != 0) {\n        ((struct17 *)(temp_v0 = (struct224 *)((s32)arg0 + 0x110))->unk44)->unk0 = arg0->unk34;\n        ((struct17 *)temp_v0->unk44)->unk4 = arg0->unk38;\n        ((struct17 *)temp_v0->unk44)->unk8 = *(f32 *)((s32)arg0 + 0x3C);\n    }\n}",
+        "score": 0.4666666666666667,
+        "reason": "length_mismatch (target=15, generated=14)",
+        "diffs": [],
+        "timestamp": "2026-06-03T06:16:09.728Z"
       }
     ]
   },
