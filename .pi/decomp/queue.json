@@ -18948,7 +18948,7 @@
     ],
     "attempts": 6,
     "lastScore": 0.9,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "void func_151254F4(struct108 *arg0, s32 arg1) {\n    f32 tmp;\n\n    tmp = D_800A352C;\n    arg0->unk3A0 = arg0->unk380 * tmp;\n    arg0->unk398 = arg0->unk388 * tmp;\n    func_15124AB4(arg0);\n    func_151239CC(arg0, 1);\n    arg0->unk3D4->unk198 = 0;\n    arg0->unk73C = 0;\n    arg0->unk670 = 0.0f;\n    arg0->unk3D0 = &D_800CC2D0[arg1];\n}",
@@ -19109,9 +19109,32 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.4625,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_15008930(s32 arg0) {\n    void (**sp2C)(void);\n    s32 i;\n    void (**ptr)(void);\n    s32 count;\n\n    if (arg0 == 1) {\n        sp2C = D_80082BD0;\n        count = 1;\n    } else {\n        count = 0;\n        if (arg0 == 2) {\n            sp2C = D_80082BD4;\n            count = 1;\n        }\n    }\n    if (count > 0) {\n        i = 0;\n        ptr = sp2C;\n        do {\n            (*ptr)();\n            i++;\n            ptr++;\n        } while (i != count);\n    }\n    D_800DD1B0 = -1;\n}",
+        "score": 0.4625,
+        "reason": "length_mismatch (target=40, generated=37)",
+        "diffs": [],
+        "timestamp": "2026-06-03T22:38:03.476Z"
+      },
+      {
+        "code": "void func_15008930(s32 arg0) {\n    void (**sp2C)(void);\n    s32 i;\n    void (**ptr)(void);\n    s32 count;\n\n    switch (arg0) {\n    case 1:\n        sp2C = D_80082BD0;\n        count = 1;\n        break;\n    case 2:\n        sp2C = D_80082BD4;\n        count = 1;\n        break;\n    default:\n        count = 0;\n        break;\n    }\n    if (count > 0) {\n        i = 0;\n        ptr = sp2C;\n        do {\n            (*ptr)();\n            i++;\n            ptr++;\n        } while (i != count);\n    }\n    D_800DD1B0 = -1;\n}",
+        "score": 0.475,
+        "reason": "length_mismatch (target=40, generated=38)",
+        "diffs": [],
+        "timestamp": "2026-06-03T22:38:36.497Z"
+      },
+      {
+        "code": "void func_15008930(s32 arg0) {\n    void (**sp2C)(void);\n    s32 i;\n    void (**ptr)(void);\n    s32 count;\n\n    if (arg0 == 1) {\n        sp2C = D_80082BD0;\n        count = 1;\n        goto after_select;\n    } else {\n        count = 0;\n        if (arg0 == 2) {\n            sp2C = D_80082BD4;\n            count = 1;\n            goto after_select;\n        }\n    }\nafter_select:\n    if (count > 0) {\n        i = 0;\n        ptr = sp2C;\n        do {\n            (*ptr)();\n            i++;\n            ptr++;\n        } while (i != count);\n    }\n    D_800DD1B0 = -1;\n}",
+        "score": 0.4625,
+        "reason": "length_mismatch (target=40, generated=37)",
+        "diffs": [],
+        "timestamp": "2026-06-03T22:38:59.414Z"
+      }
+    ]
   },
   {
     "function": "func_15105C24",
