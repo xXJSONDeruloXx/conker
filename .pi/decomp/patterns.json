@@ -531,5 +531,14 @@
     "example_functions": [
       "func_1507A3E8"
     ]
+  },
+  {
+    "id": "for-comma-init-register-order",
+    "description": "IDO register allocation in compact for loops follows comma initializer/update expression order; placing pointer initializer before index initializer can assign pointer to v1 and index to a2, matching tight search loops with branch delay init.",
+    "trigger": "Tight array search loop has correct structure but pointer/index registers are swapped, especially around `for (i=0, ptr=...; ...)` generated output.",
+    "solution": "Swap the comma initializer order to `for (ptr = BASE, i = 0; ...; i++, ptr++)` (or vice versa) to steer pointer/index register assignment without changing declarations.",
+    "example_functions": [
+      "func_1505EEB0"
+    ]
   }
 ]
