@@ -19873,7 +19873,7 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
+    "attempts": 6,
     "lastScore": 0.8974,
     "status": "pending",
     "history": [
@@ -19918,6 +19918,47 @@
           "structural: target=negu t0, t9 got=negu t0, a0"
         ],
         "timestamp": "2026-06-03T22:14:40.869Z"
+      },
+      {
+        "code": "void *func_15134DAC(void *arg0, s32 arg1) {\n    void *temp_v0;\n    void *sp24;\n    s32 temp_t8;\n    s32 temp_t9;\n    s32 one;\n    f32 zero;\n\n    temp_v0 = func_15167A68(0x29, 0, arg1 + 0x80, 1, 0xFF, 1);\n    if (temp_v0 == NULL) {\n        return NULL;\n    }\n    sp24 = temp_v0;\n    memcpy((void *)((s32)temp_v0 + 0x18), arg0, 0x3C);\n    temp_t8 = (s32)arg0;\n    temp_t9 = *(s16 *)(temp_t8 + 0x28);\n    one = 1;\n    zero = 0.0f;\n    *(s32 *)((s32)sp24 + 0x10) = one;\n    *(s16 *)((s32)sp24 + 0x54) = -temp_t9;\n    *(s32 *)((s32)sp24 + 0x14) = 0;\n    *(f32 *)((s32)sp24 + 0x70) = zero;\n    *(f32 *)((s32)sp24 + 0x74) = zero;\n    *(f32 *)((s32)sp24 + 0x78) = zero;\n    return sp24;\n}",
+        "score": 0.8974,
+        "reason": "structural_diffs=4",
+        "diffs": [
+          "structural: target=lh t9, 40(t8) got=lh a0, 40(t8)",
+          "structural: target=li t1, 1 got=li t9, 1",
+          "structural: target=sw t1, 16(v0) got=sw t9, 16(v0)",
+          "structural: target=negu t0, t9 got=negu t0, a0"
+        ],
+        "timestamp": "2026-06-03T22:15:08.801Z"
+      },
+      {
+        "code": "void *func_15134DAC(void *arg0, s32 arg1) {\n    void *temp_v0;\n    void *sp24;\n    f32 zero;\n\n    temp_v0 = func_15167A68(0x29, 0, arg1 + 0x80, 1, 0xFF, 1);\n    if (temp_v0 == NULL) {\n        return NULL;\n    }\n    sp24 = temp_v0;\n    memcpy((void *)((s32)temp_v0 + 0x18), arg0, 0x3C);\n    zero = 0.0f;\n    *(s32 *)((s32)sp24 + 0x10) = 1;\n    *(s16 *)((s32)sp24 + 0x54) = -*(s16 *)((s32)arg0 + 0x28);\n    *(s32 *)((s32)sp24 + 0x14) = 0;\n    *(f32 *)((s32)sp24 + 0x70) = zero;\n    *(f32 *)((s32)sp24 + 0x74) = zero;\n    *(f32 *)((s32)sp24 + 0x78) = zero;\n    return sp24;\n}",
+        "score": 0.7692,
+        "reason": "structural_diffs=9",
+        "diffs": [
+          "structural: target=lw t8, 40(sp) got=lw v0, 36(sp)",
+          "structural: target=lw v0, 36(sp) got=li t8, 1",
+          "structural: target=lh t9, 40(t8) got=sw t8, 16(v0)",
+          "structural: target=li t1, 1 got=lw t9, 40(sp)",
+          "structural: target=sw t1, 16(v0) got=lh t0, 40(t9)",
+          "structural: target=negu t0, t9 got=sw zero, 20(v0)",
+          "structural: target=sh t0, 84(v0) got=swc1 f0, 112(v0)",
+          "structural: target=sw zero, 20(v0) got=negu t1, t0",
+          "structural: target=swc1 f0, 112(v0) got=sh t1, 84(v0)"
+        ],
+        "timestamp": "2026-06-03T22:16:45.656Z"
+      },
+      {
+        "code": "void *func_15134DAC(void *arg0, s32 arg1) {\n    void *temp_v0;\n    void *sp24;\n    s32 temp_t9;\n    s32 temp_t0;\n    s32 one;\n    f32 zero;\n\n    temp_v0 = func_15167A68(0x29, 0, arg1 + 0x80, 1, 0xFF, 1);\n    if (temp_v0 == NULL) {\n        return NULL;\n    }\n    sp24 = temp_v0;\n    memcpy((void *)((s32)temp_v0 + 0x18), arg0, 0x3C);\n    temp_t9 = *(s16 *)((s32)arg0 + 0x28);\n    temp_t0 = -temp_t9;\n    one = 1;\n    zero = 0.0f;\n    *(s32 *)((s32)sp24 + 0x10) = one;\n    *(s16 *)((s32)sp24 + 0x54) = temp_t0;\n    *(s32 *)((s32)sp24 + 0x14) = 0;\n    *(f32 *)((s32)sp24 + 0x70) = zero;\n    *(f32 *)((s32)sp24 + 0x74) = zero;\n    *(f32 *)((s32)sp24 + 0x78) = zero;\n    return sp24;\n}",
+        "score": 0.8974,
+        "reason": "structural_diffs=4",
+        "diffs": [
+          "structural: target=lh t9, 40(t8) got=lh a0, 40(t8)",
+          "structural: target=li t1, 1 got=li t9, 1",
+          "structural: target=sw t1, 16(v0) got=sw t9, 16(v0)",
+          "structural: target=negu t0, t9 got=negu t0, a0"
+        ],
+        "timestamp": "2026-06-03T22:17:09.521Z"
       }
     ]
   },
