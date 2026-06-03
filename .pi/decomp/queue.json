@@ -9540,9 +9540,32 @@
     "instructions": 40,
     "difficulty": "medium-low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.47619047619047616,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void guMtxXFMF(f32 arg0[4][4], f32 arg1, f32 arg2, f32 arg3, f32 *arg4, f32 *arg5, f32 *arg6) {\n    *arg4 = (arg0[0][0] * arg1) + (arg0[1][0] * arg2) + (arg0[2][0] * arg3) + arg0[3][0];\n    *arg5 = (arg0[0][1] * arg1) + (arg0[1][1] * arg2) + (arg0[2][1] * arg3) + arg0[3][1];\n    *arg6 = (arg0[0][2] * arg1) + (arg0[1][2] * arg2) + (arg0[2][2] * arg3) + arg0[3][2];\n}",
+        "score": 0.47619047619047616,
+        "reason": "length_mismatch (target=40, generated=42)",
+        "diffs": [],
+        "timestamp": "2026-06-03T22:25:49.490Z"
+      },
+      {
+        "code": "void guMtxXFMF(f32 arg0[4][4], f32 arg1, f32 arg2, f32 arg3, f32 *arg4, f32 *arg5, f32 *arg6) {\n    f32 z;\n    f32 x;\n    f32 y;\n\n    z = arg3;\n    x = arg1;\n    y = arg2;\n    *arg4 = (arg0[0][0] * x) + (arg0[1][0] * y) + (arg0[2][0] * z) + arg0[3][0];\n    *arg5 = (arg0[0][1] * x) + (arg0[1][1] * y) + (arg0[2][1] * z) + arg0[3][1];\n    *arg6 = (arg0[0][2] * x) + (arg0[1][2] * y) + (arg0[2][2] * z) + arg0[3][2];\n}",
+        "score": 0.47619047619047616,
+        "reason": "length_mismatch (target=40, generated=42)",
+        "diffs": [],
+        "timestamp": "2026-06-03T22:26:38.756Z"
+      },
+      {
+        "code": "void guMtxXFMF(f32 arg0[4][4], f32 arg1, f32 arg2, f32 arg3, f32 *arg4, f32 *arg5, f32 *arg6) {\n    f32 x;\n    f32 y;\n    f32 z;\n\n    x = arg1;\n    y = arg2;\n    z = arg3;\n    *arg4 = (arg0[0][0] * x) + (arg0[1][0] * y) + (arg0[2][0] * z) + arg0[3][0];\n    *arg5 = (arg0[0][1] * x) + (arg0[1][1] * y) + (arg0[2][1] * z) + arg0[3][1];\n    *arg6 = (arg0[0][2] * x) + (arg0[1][2] * y) + (arg0[2][2] * z) + arg0[3][2];\n}",
+        "score": 0.47619047619047616,
+        "reason": "length_mismatch (target=40, generated=42)",
+        "diffs": [],
+        "timestamp": "2026-06-03T22:26:53.122Z"
+      }
+    ]
   },
   {
     "function": "func_150A7D00",
@@ -21026,9 +21049,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 1,
-    "lastScore": 0.8205,
-    "status": "pending",
+    "attempts": 2,
+    "lastScore": 1,
+    "status": "matched",
     "history": [
       {
         "code": "struct224 *func_151D2BA4(void *arg0, struct00 *arg1, s32 arg2, u8 arg3, s32 arg4) {\n    struct224 *ret;\n\n    ret = func_15167A68(0x3D, arg4, arg2 + 0x48, 1, arg3, 1);\n    if (ret == NULL) {\n        return NULL;\n    }\n    memcpy(&ret->unk10, arg0, 0x24);\n    ret->unk34 = arg1->unk0;\n    ret->unk38 = arg1->unk4;\n    ret->unk3C = arg1->unk8;\n    func_151D3308(ret);\n    return ret;\n}",
