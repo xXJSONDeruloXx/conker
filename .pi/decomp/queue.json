@@ -592,8 +592,8 @@
     "instructions": 15,
     "difficulty": "low",
     "tags": [],
-    "attempts": 3,
-    "lastScore": 0.6667,
+    "attempts": 6,
+    "lastScore": 0.9333,
     "status": "pending",
     "history": [
       {
@@ -632,6 +632,34 @@
           "structural: target=multu t7, t8 got=multu t6, t8"
         ],
         "timestamp": "2026-06-03T05:59:02.562Z"
+      },
+      {
+        "code": "s32 func_1506196C(u8 *arg0, s32 arg1) {\n    s32 temp_v1 = arg0[7] * arg0[arg1 + 0xB];\n    if (temp_v1 == 0xFE01) {\n        temp_v1 = 0xFF;\n    } else {\n        temp_v1 = temp_v1 >> 8;\n    }\n    return temp_v1;\n}",
+        "score": 0.8667,
+        "reason": "structural_diffs=2",
+        "diffs": [
+          "structural: target=addu t6, a0, a1 got=addu t6, a1, a0",
+          "structural: target=ori at, zero, 65025 got=li at, 65025"
+        ],
+        "timestamp": "2026-06-03T05:59:28.336Z"
+      },
+      {
+        "code": "s32 func_1506196C(u8 *arg0, s32 arg1) {\n    s32 temp_v1 = arg0[7] * (arg0 + arg1)[0xB];\n    if (temp_v1 == 0xFE01) {\n        temp_v1 = 0xFF;\n    } else {\n        temp_v1 = temp_v1 >> 8;\n    }\n    return temp_v1;\n}",
+        "score": 0.9333,
+        "reason": "structural_diffs=1",
+        "diffs": [
+          "structural: target=ori at, zero, 65025 got=li at, 65025"
+        ],
+        "timestamp": "2026-06-03T05:59:51.372Z"
+      },
+      {
+        "code": "s32 func_1506196C(u8 *arg0, s32 arg1) {\n    s32 temp_v1 = arg0[7] * (arg0 + arg1)[0xB];\n    if (temp_v1 == 0xFE01U) {\n        temp_v1 = 0xFF;\n    } else {\n        temp_v1 = temp_v1 >> 8;\n    }\n    return temp_v1;\n}",
+        "score": 0.9333,
+        "reason": "structural_diffs=1",
+        "diffs": [
+          "structural: target=ori at, zero, 65025 got=li at, 65025"
+        ],
+        "timestamp": "2026-06-03T06:01:09.148Z"
       }
     ]
   },
