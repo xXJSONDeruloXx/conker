@@ -1487,7 +1487,7 @@
     "difficulty": "low",
     "tags": [],
     "attempts": 3,
-    "lastScore": 1,
+    "lastScore": 0.98,
     "status": "matched",
     "history": [
       {
@@ -1503,6 +1503,15 @@
         "reason": "length_mismatch (target=28, generated=27)",
         "diffs": [],
         "timestamp": "2026-06-02T21:15:59.138Z"
+      },
+      {
+        "code": "s32 func_151368A8(struct102 *arg0) {\n    s16 temp_v0 = arg0->unk1C;\n    f32 *temp_v1 = (f32 *)((s32)arg0 + 0x128);\n    volatile f32 *temp_a1 = &D_800BE9A4;\n    s32 temp;\n    if (temp_v0 < 0x20) {\n        temp = temp_v0 << 3;\n        if (temp < *((u8 *)arg0 + 0x5C)) {\n            *((u8 *)arg0 + 0x5C) = temp;\n        }\n    }\n    *(f32 *)((s32)arg0 + 0x2C) += *temp_v1 * *temp_a1;\n    *(f32 *)((s32)arg0 + 0x30) += *temp_v1 * *temp_a1;\n    return 1;\n}",
+        "score": 0.98,
+        "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
+        "diffs": [
+          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
+        ],
+        "timestamp": "2026-06-02T19:00:00.000Z"
       }
     ]
   },
@@ -1777,8 +1786,19 @@
     "difficulty": "low",
     "tags": [],
     "attempts": 1,
-    "lastScore": 1,
-    "status": "matched"
+    "lastScore": 0.98,
+    "status": "matched",
+    "history": [
+      {
+        "code": "f32 func_15144BC8(f32 arg0) {\n    f32 range = 360.0f;\n    f32 val = arg0;\n    if (range < val) {\n        do {\n            val -= range;\n        } while (range < val);\n    }\n    if (val < 0.0f) {\n        do {\n            val += range;\n        } while (val < 0.0f);\n    }\n    return val;\n}",
+        "score": 0.98,
+        "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
+        "diffs": [
+          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
+        ],
+        "timestamp": "2026-06-02T19:00:00.000Z"
+      }
+    ]
   },
   {
     "function": "func_15143834",
@@ -1801,7 +1821,7 @@
     "difficulty": "low",
     "tags": [],
     "attempts": 3,
-    "lastScore": 1,
+    "lastScore": 0.98,
     "status": "matched",
     "history": [
       {
@@ -1817,6 +1837,15 @@
         "reason": "length_mismatch (target=24, generated=17)",
         "diffs": [],
         "timestamp": "2026-06-02T18:55:38.409Z"
+      },
+      {
+        "code": "void func_15004A4C(void) {\n    s32 i;\n    for (i = 0; i < D_800DBEF0; i++) {\n        D_800DBEF8[i] = 0;\n        D_800DBEFC[i] = 0;\n    }\n}",
+        "score": 0.98,
+        "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
+        "diffs": [
+          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
+        ],
+        "timestamp": "2026-06-02T19:00:00.000Z"
       }
     ]
   },
@@ -2456,8 +2485,19 @@
     "difficulty": "low",
     "tags": [],
     "attempts": 1,
-    "lastScore": 1,
-    "status": "matched"
+    "lastScore": 0.98,
+    "status": "matched",
+    "history": [
+      {
+        "code": "f32 func_15144528(f32 arg0, f32 arg1, f32 arg2) {\n    f32 temp_f0;\n    if (arg1 < arg0) {\n        temp_f0 = arg1 - arg2;\n        do {\n            arg0 -= temp_f0;\n        } while (arg1 < arg0);\n    }\n    if (arg0 < arg2) {\n        temp_f0 = arg1 - arg2;\n        do {\n            arg0 += temp_f0;\n        } while (arg0 < arg2);\n    }\n    return arg0;\n}",
+        "score": 0.98,
+        "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
+        "diffs": [
+          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
+        ],
+        "timestamp": "2026-06-02T19:00:00.000Z"
+      }
+    ]
   },
   {
     "function": "func_15137E10",
@@ -3532,8 +3572,19 @@
       "has-calls"
     ],
     "attempts": 1,
-    "lastScore": 1,
-    "status": "matched"
+    "lastScore": 0.98,
+    "status": "matched",
+    "history": [
+      {
+        "code": "void func_1505E060(u8 *arg0) {\n    *(u16 *)(arg0 + 0x6) = *(u16 *)(arg0 + 0x4);\n    *(f32 *)(arg0 + 0xC) = *(f32 *)(arg0 + 0x8);\n    *(f32 *)(arg0 + 0x14) = *(f32 *)(arg0 + 0x10);\n    *(f32 *)(arg0 + 0x24) = *(f32 *)(arg0 + 0x20);\n    *(f32 *)(arg0 + 0x1C) = *(f32 *)(arg0 + 0x18);\n    *(s8 *)(arg0 + 0x39) = *(s8 *)(arg0 + 0x38);\n    *(s32 *)(arg0 + 0x2C) = *(s32 *)(arg0 + 0x28);\n    bcopy(arg0 + 0x40, arg0 + 0x210, 0x1D0);\n}",
+        "score": 0.98,
+        "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
+        "diffs": [
+          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
+        ],
+        "timestamp": "2026-06-02T19:00:00.000Z"
+      }
+    ]
   },
   {
     "function": "func_1001DA28",
@@ -3736,7 +3787,7 @@
     "difficulty": "low",
     "tags": [],
     "attempts": 3,
-    "lastScore": 1,
+    "lastScore": 0.98,
     "status": "matched",
     "history": [
       {
@@ -3757,6 +3808,15 @@
         "reason": "length_mismatch (target=30, generated=39)",
         "diffs": [],
         "timestamp": "2026-06-02T22:05:49.422Z"
+      },
+      {
+        "code": "void func_1001BE1C(void *arg0, s32 *arg1, s32 arg2) {\n    if (arg2 == -1) {\n        (*(void (**)(s32 *))((s32)arg0 + 0x30))(arg1);\n    } else {\n        (*(void (**)(s32))((s32)arg0 + 0x30))(arg1[arg2 + 4]);\n    }\n}",
+        "score": 0.98,
+        "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
+        "diffs": [
+          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
+        ],
+        "timestamp": "2026-06-02T19:00:00.000Z"
       }
     ]
   },
@@ -4165,7 +4225,7 @@
       "has-calls"
     ],
     "attempts": 3,
-    "lastScore": 1,
+    "lastScore": 0.98,
     "status": "matched",
     "history": [
       {
@@ -4207,6 +4267,15 @@
           "structural: target=move a0, zero got=lhu a2, 62(sp)"
         ],
         "timestamp": "2026-06-02T21:49:30.525Z"
+      },
+      {
+        "code": "void func_10010E78(s32, s32, u16, s16, u8, s32, s16, s16, s16, s16, s16);\nvoid func_10010F88(s32 arg0, u16 arg1, s16 arg2, u8 arg3, s32 arg4, s16 arg5, s16 arg6, s16 arg7, s16 arg8, s16 arg9) {\n    func_10010E78(0, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);\n}",
+        "score": 0.98,
+        "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
+        "diffs": [
+          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
+        ],
+        "timestamp": "2026-06-02T19:00:00.000Z"
       }
     ]
   },
@@ -4233,7 +4302,7 @@
       "has-calls"
     ],
     "attempts": 2,
-    "lastScore": 1,
+    "lastScore": 0.98,
     "status": "matched",
     "history": [
       {
@@ -4242,6 +4311,15 @@
         "reason": "length_mismatch (target=32, generated=33)",
         "diffs": [],
         "timestamp": "2026-06-02T23:28:38.875Z"
+      },
+      {
+        "code": "extern u8 D_800CC40F[];\nvoid func_1507D158(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {\n    s32 temp_v0 = D_800CC40F[arg0 * sizeof(struct127)];\n    func_1509BFB0(3, temp_v0 | 0x2000, arg1, arg2, arg3, arg4);\n}",
+        "score": 0.98,
+        "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
+        "diffs": [
+          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
+        ],
+        "timestamp": "2026-06-02T19:00:00.000Z"
       }
     ]
   },
@@ -4644,7 +4722,7 @@
       "branchy"
     ],
     "attempts": 4,
-    "lastScore": 1,
+    "lastScore": 0.98,
     "status": "matched",
     "history": [
       {
@@ -4667,6 +4745,15 @@
         "reason": "length_mismatch (target=24, generated=20)",
         "diffs": [],
         "timestamp": "2026-06-02T18:58:22.996Z"
+      },
+      {
+        "code": "s32 func_15143DA8(s32 *arg0, s32 min, s32 max) {\n    s32 tmp;\n    s32 val;\n    s32 newmax;\n    if (max < min) {\n        tmp = min ^ max;\n        newmax = max ^ tmp;\n        max = newmax;\n        min = tmp ^ newmax;\n    }\n    val = *arg0;\n    if (val < min) {\n        *arg0 = min;\n        return 1;\n    } else if (max < val) {\n        *arg0 = max;\n        return 2;\n    }\n    return 0;\n}",
+        "score": 0.98,
+        "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
+        "diffs": [
+          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
+        ],
+        "timestamp": "2026-06-02T19:00:00.000Z"
       }
     ]
   },
@@ -5785,7 +5872,7 @@
       "has-calls"
     ],
     "attempts": 8,
-    "lastScore": 1,
+    "lastScore": 0.98,
     "status": "matched",
     "history": [
       {
@@ -5836,6 +5923,15 @@
         "reason": "length_mismatch (target=27, generated=28)",
         "diffs": [],
         "timestamp": "2026-06-02T20:55:20.951Z"
+      },
+      {
+        "code": "extern u8 D_800A3FD8[];\nvoid func_15143134(void *, s32, s32);\ns32 func_151380B4(u8 *arg0, s32 arg1, s32 arg2) {\n    s32 temp_v0 = *(s32 *)(arg0 + 0x1D4);\n    if (temp_v0 != 0) {\n        goto nonzero;\n    }\n    return 0;\nnonzero:\n    if ((arg0[0x74] & 0xF) == 0xF) {\n        return 0;\n    }\n    func_15143134(&D_800A3FD8[arg1 << 4], arg2, temp_v0 + 0x300);\n    return 1;\n}",
+        "score": 0.98,
+        "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
+        "diffs": [
+          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
+        ],
+        "timestamp": "2026-06-02T19:00:00.000Z"
       }
     ]
   },
@@ -5875,8 +5971,19 @@
       "branchy"
     ],
     "attempts": 1,
-    "lastScore": 1,
-    "status": "matched"
+    "lastScore": 0.98,
+    "status": "matched",
+    "history": [
+      {
+        "code": "void func_16001678(void) {\n    s32 *ptr = (s32 *)D_8002AAE8[D_16003888];\n    s32 width = D_160038A8;\n    s32 count;\n    s32 *end;\n    if (width == 0x124) {\n        count = 0xD7;\n    } else {\n        count = 0x108;\n    }\n    end = ptr + ((width >> 1) * count);\n    if (ptr < end) {\n        do {\n            ptr += 4;\n            ptr[-4] = 0x10001;\n            ptr[-3] = 0x10001;\n            ptr[-2] = 0x10001;\n            ptr[-1] = 0x10001;\n        } while (ptr < end);\n    }\n}",
+        "score": 0.98,
+        "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
+        "diffs": [
+          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
+        ],
+        "timestamp": "2026-06-02T19:00:00.000Z"
+      }
+    ]
   },
   {
     "function": "func_15168F08",
@@ -7001,7 +7108,7 @@
       "branchy"
     ],
     "attempts": 10,
-    "lastScore": 1,
+    "lastScore": 0.98,
     "status": "matched",
     "history": [
       {
@@ -7127,6 +7234,15 @@
           "structural: target=addu at, at, t2 got=addu at, at, t1"
         ],
         "timestamp": "2026-06-02T21:00:53.833Z"
+      },
+      {
+        "code": "f32 func_151423D8(u8 arg0) {\n    s32 temp_v1;\n    s32 temp_v0 = arg0;\n    u16 temp_t0;\n    if (temp_v0 & 0x40) {\n        temp_v1 = 0x40 - (temp_v0 & 0x3F);\n    } else {\n        temp_v1 = temp_v0 & 0x3F;\n    }\n    temp_t0 = temp_v0 & 0xC0;\n    if ((temp_t0 == 0) || (temp_t0 == 0xC0)) {\n        return D_8009A220[temp_v1];\n    }\n    return -D_8009A220[temp_v1];\n}",
+        "score": 0.98,
+        "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
+        "diffs": [
+          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
+        ],
+        "timestamp": "2026-06-02T19:00:00.000Z"
       }
     ]
   },
@@ -7313,7 +7429,7 @@
       "has-calls"
     ],
     "attempts": 18,
-    "lastScore": 1,
+    "lastScore": 0.98,
     "status": "matched",
     "history": [
       {
@@ -7560,6 +7676,15 @@
           "structural: target=addiu sp, sp, 40 got=addiu sp, sp, 48"
         ],
         "timestamp": "2026-06-02T21:31:15.959Z"
+      },
+      {
+        "code": "s32 func_15141564(struct210 *arg0) {\n    struct211 *temp_v1;\n    f32 tmp;\n    s32 pad1;\n    temp_v1 = (struct211 *)((s32)arg0 + 0x170);\n    tmp = sinf(temp_v1->unk8);\n    *(f32 *)((s32)arg0 + 0x158) = temp_v1->unk0 + (temp_v1->unk4 * tmp);\n    temp_v1->unk8 += temp_v1->unkC * D_800BE9A4;\n    temp_v1->unk8 = func_15144B68(temp_v1->unk8);\n    return 1;\n}",
+        "score": 0.98,
+        "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
+        "diffs": [
+          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
+        ],
+        "timestamp": "2026-06-02T19:00:00.000Z"
       }
     ]
   },
@@ -7586,7 +7711,7 @@
       "has-calls"
     ],
     "attempts": 9,
-    "lastScore": 1,
+    "lastScore": 0.98,
     "status": "matched",
     "history": [
       {
@@ -7679,6 +7804,15 @@
           "structural: target=lw v0, 24(sp) got=lw v0, 28(sp)"
         ],
         "timestamp": "2026-06-02T22:44:32.097Z"
+      },
+      {
+        "code": "extern void (*D_80089B70[])(struct102 *);\nvoid func_1513532C(struct102 *arg0) {\n    u16 temp_a0;\n    s32 idx = *(u8 *)((s32)arg0 + 0x50);\n    if (idx < 0) {\n        idx = 0;\n    } else if (idx < 6) {\n    } else {\n        idx = 0;\n    }\n    temp_a0 = *(u16 *)((s32)arg0 + 0x44);\n    if (temp_a0 != 0) {\n        func_100111C8(temp_a0);\n        *(u16 *)((s32)arg0 + 0x44) = 0;\n    }\n    D_80089B70[idx](arg0);\n}",
+        "score": 0.98,
+        "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
+        "diffs": [
+          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
+        ],
+        "timestamp": "2026-06-02T19:00:00.000Z"
       }
     ]
   },
@@ -7692,8 +7826,19 @@
       "has-calls"
     ],
     "attempts": 1,
-    "lastScore": 1,
-    "status": "matched"
+    "lastScore": 0.98,
+    "status": "matched",
+    "history": [
+      {
+        "code": "extern void (*D_80089B88[])(struct102 *);\nvoid func_151353A8(struct102 *arg0) {\n    u16 temp_a0;\n    s32 idx = *(u8 *)((s32)arg0 + 0x50);\n    if (idx < 0) {\n        idx = 0;\n    } else if (idx < 6) {\n    } else {\n        idx = 0;\n    }\n    temp_a0 = *(u16 *)((s32)arg0 + 0x44);\n    if (temp_a0 != 0) {\n        func_100111C8(temp_a0);\n        *(u16 *)((s32)arg0 + 0x44) = 0;\n    }\n    D_80089B88[idx](arg0);\n}",
+        "score": 0.98,
+        "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
+        "diffs": [
+          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
+        ],
+        "timestamp": "2026-06-02T19:00:00.000Z"
+      }
+    ]
   },
   {
     "function": "func_151420F8",
@@ -8597,8 +8742,19 @@
       "branchy"
     ],
     "attempts": 1,
-    "lastScore": 1,
-    "status": "matched"
+    "lastScore": 0.98,
+    "status": "matched",
+    "history": [
+      {
+        "code": "void func_15167AD8(void *arg0, u8 arg1, s32 arg2) {\n    void *temp_v0 = func_15167A68(3, arg2, 0x28, 0, arg1, 1);\n    if (temp_v0 != NULL) {\n        bcopy(arg0, (void *)((s32)temp_v0 + 0x10), 0x18);\n        *(u8 *)((s32)temp_v0 + 0x23) = 0xFF;\n    }\n}",
+        "score": 0.98,
+        "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
+        "diffs": [
+          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
+        ],
+        "timestamp": "2026-06-02T19:00:00.000Z"
+      }
+    ]
   },
   {
     "function": "__n_nextSampleTime",
@@ -8647,7 +8803,7 @@
       "branchy"
     ],
     "attempts": 6,
-    "lastScore": 1,
+    "lastScore": 0.98,
     "status": "matched",
     "history": [
       {
@@ -8705,6 +8861,15 @@
         "reason": "length_mismatch (target=32, generated=33)",
         "diffs": [],
         "timestamp": "2026-06-02T23:34:08.711Z"
+      },
+      {
+        "code": "int func_150027F8(s32 arg0) {\n    s32 var_v0;\n    s32 var_v1;\n    s32 temp_a1;\n    if (arg0 != 0) {\n        goto non_null;\n    }\n    return 0;\nnon_null:\n    var_v0 = 0;\n    var_v1 = 0;\n    temp_a1 = *(s8 *)arg0;\n    if (temp_a1 != -0x21) {\n        do {\n            var_v0++;\n            if ((temp_a1 >> 4) == 1) {\n                var_v1 += 4;\n            } else if (temp_a1 == 6) {\n                var_v1 += 2;\n            } else if (temp_a1 == 5) {\n                var_v1 += 1;\n            }\n            temp_a1 = *(s8 *)(arg0 + (var_v0 << 3));\n        } while (temp_a1 != -0x21);\n    }\n    return var_v1;\n}",
+        "score": 0.98,
+        "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
+        "diffs": [
+          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
+        ],
+        "timestamp": "2026-06-02T19:00:00.000Z"
       }
     ]
   },
@@ -8745,8 +8910,19 @@
       "branchy"
     ],
     "attempts": 1,
-    "lastScore": 1,
-    "status": "matched"
+    "lastScore": 0.98,
+    "status": "matched",
+    "history": [
+      {
+        "code": "void func_15060A9C(s32 arg0, struct127 *arg1) {\n    if (arg1->camera == NULL) {\n        func_10010630(arg0, arg1, 0x5DC0, 0x1F4, 0x9C4);\n    } else {\n        func_15060778(arg0, arg1, 0x5DC0, 0, 0x1F4, 0x9C4, 0);\n    }\n}",
+        "score": 0.98,
+        "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
+        "diffs": [
+          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
+        ],
+        "timestamp": "2026-06-02T19:00:00.000Z"
+      }
+    ]
   },
   {
     "function": "func_15167A68",
@@ -8759,7 +8935,7 @@
       "branchy"
     ],
     "attempts": 3,
-    "lastScore": 1,
+    "lastScore": 0.98,
     "status": "matched",
     "history": [
       {
@@ -8779,6 +8955,15 @@
           "structural: target=lbu t8, 59(sp) got=lw t8, 56(sp)"
         ],
         "timestamp": "2026-06-02T21:33:47.482Z"
+      },
+      {
+        "code": "void *func_15167A68(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {\n    void *temp_v0;\n    temp_v0 = (void *)func_10003C6C(arg2, 1, arg3, 0, (u8)arg5);\n    if (temp_v0 != NULL) {\n        *(u8 *)((s32)temp_v0 + 1) = arg1;\n        func_15168A4C(temp_v0, arg0);\n        *(u8 *)((s32)temp_v0 + 0xC) = *((u8 *)&arg4 + 3);\n    }\n    return temp_v0;\n}",
+        "score": 0.98,
+        "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
+        "diffs": [
+          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
+        ],
+        "timestamp": "2026-06-02T19:00:00.000Z"
       }
     ]
   },
@@ -8793,7 +8978,7 @@
       "branchy"
     ],
     "attempts": 28,
-    "lastScore": 1,
+    "lastScore": 0.98,
     "status": "matched",
     "history": [
       {
@@ -9026,6 +9211,15 @@
           "structural: target=beq a3, a2, L1 got=beq a2, a3, L1"
         ],
         "timestamp": "2026-06-02T22:03:14.089Z"
+      },
+      {
+        "code": "void func_151640C0(struct225 *arg0, void *arg1, u8 arg2) {\n    struct225 **sp18;\n    void **sp1C;\n    s32 temp_v1;\n    s32 temp_v0;\n    s32 temp_a0;\n    s32 temp_a1;\n    u8 temp_a3;\n    u8 temp_a2;\n    sp18 = &arg0;\n    sp1C = &arg1;\n    if (arg2 == 0x29) {\n        temp_v1 = *(s32 *)((s32)*sp1C + 4);\n        temp_v0 = (s32)*sp18;\n        temp_a0 = *(s32 *)temp_v1;\n        temp_a1 = *(s32 *)(temp_v0 + 0x18);\n        temp_v0 += 0x18;\n        temp_a2 = *(u8 *)(temp_v0 + 4);\n        temp_a3 = *(u8 *)(temp_v1 + 4);\n        if ((temp_a1 == temp_a0) || (temp_a2 == temp_a3) || (temp_a3 == *(u8 *)(temp_a1 + 0x3B))) {\n            func_1516972C(*sp18);\n        }\n    }\n}",
+        "score": 0.98,
+        "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
+        "diffs": [
+          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
+        ],
+        "timestamp": "2026-06-02T19:00:00.000Z"
       }
     ]
   },
@@ -9091,7 +9285,7 @@
       "branchy"
     ],
     "attempts": 2,
-    "lastScore": 1,
+    "lastScore": 0.98,
     "status": "matched",
     "history": [
       {
@@ -9102,6 +9296,15 @@
           "structural: target=lw a0, 40(sp) got=lhu a0, 42(sp)"
         ],
         "timestamp": "2026-06-02T21:03:11.298Z"
+      },
+      {
+        "code": "void func_15060A30(s32 arg0, struct127 *arg1) {\n    if (arg1->camera == NULL) {\n        func_10010344(arg0, arg1, 0x6D60, 0x1F4, 0x9C4);\n    } else {\n        func_15060778(arg0, arg1, 0x5DC0, 0, 0x1F4, 0x9C4, 1);\n    }\n}",
+        "score": 0.98,
+        "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
+        "diffs": [
+          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
+        ],
+        "timestamp": "2026-06-02T19:00:00.000Z"
       }
     ]
   },
@@ -9129,8 +9332,19 @@
       "branchy"
     ],
     "attempts": 1,
-    "lastScore": 1,
-    "status": "matched"
+    "lastScore": 0.98,
+    "status": "matched",
+    "history": [
+      {
+        "code": "void *func_15168800(void *arg0, u8 arg1, s32 arg2) {\n    void *temp_v0;\n    temp_v0 = func_15167A68(0xE, arg2, 0xB8, 1, arg1, 1);\n    if (temp_v0 == NULL) {\n        return NULL;\n    }\n    bcopy(arg0, (void *)((s32)temp_v0 + 0x10), 0xA8);\n    return temp_v0;\n}",
+        "score": 0.98,
+        "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
+        "diffs": [
+          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
+        ],
+        "timestamp": "2026-06-02T19:00:00.000Z"
+      }
+    ]
   },
   {
     "function": "func_15042D94",
@@ -9221,8 +9435,19 @@
       "branchy"
     ],
     "attempts": 1,
-    "lastScore": 1,
-    "status": "matched"
+    "lastScore": 0.98,
+    "status": "matched",
+    "history": [
+      {
+        "code": "void *func_15167A68(s32, s32, s32, s32, s32, s32);\nvoid func_15168BE4(void *arg0, u8 arg1, s32 arg2) {\n    void *temp_v0;\n    if (*(s32 *)((s32)arg0 + 0x40) != 0) {\n        temp_v0 = func_15167A68(0x10, arg2, 0xF0, 1, arg1, 1);\n        if (temp_v0 != NULL) {\n            bcopy(arg0, (void *)((s32)temp_v0 + 0x90), 0x60);\n        }\n    }\n}",
+        "score": 0.98,
+        "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
+        "diffs": [
+          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
+        ],
+        "timestamp": "2026-06-02T19:00:00.000Z"
+      }
+    ]
   },
   {
     "function": "func_1513BA78",
@@ -9249,8 +9474,19 @@
       "branchy"
     ],
     "attempts": 1,
-    "lastScore": 1,
-    "status": "matched"
+    "lastScore": 0.98,
+    "status": "matched",
+    "history": [
+      {
+        "code": "extern void func_1512C490(struct108 *arg0);\nvoid func_151284C4(struct108 *arg0) {\n    struct127 *temp_v0;\n    u8 temp_v1;\n    func_1512C490(arg0);\n    temp_v0 = arg0->unk3D0;\n    temp_v1 = arg0->unk23C;\n    arg0->unk2B0 = temp_v0->x_position;\n    arg0->unk2B4 = temp_v0->y_position;\n    arg0->unk2B8 = temp_v0->z_position;\n    if (temp_v1 != 0) {\n        arg0->unk23C = temp_v1 - 1;\n    }\n    if (arg0->unk84 & 8) {\n        if ((s16)arg0->unk5FE <= 0) {\n            arg0->unk5FE = 0x3C;\n            func_15128774(arg0, arg0->unk3D0);\n        }\n    }\n}",
+        "score": 0.98,
+        "reason": "normalizer_false_positive: function-level match but ROM SHA fails",
+        "diffs": [
+          "ROM SHA mismatch \u2014 likely 1-2 instruction/relocation differences not caught by normalizer"
+        ],
+        "timestamp": "2026-06-02T19:00:00.000Z"
+      }
+    ]
   },
   {
     "function": "func_150174C0",
