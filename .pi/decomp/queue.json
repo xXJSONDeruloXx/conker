@@ -3936,7 +3936,7 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 9,
+    "attempts": 12,
     "lastScore": 0.4473684210526316,
     "status": "pending",
     "history": [
@@ -4037,6 +4037,27 @@
         "reason": "length_mismatch (target=17, generated=19)",
         "diffs": [],
         "timestamp": "2026-06-03T07:38:58.480Z"
+      },
+      {
+        "code": "void func_150721A4(void) {\n    s32 temp_v1;\n    u8 temp_a1;\n    u8 temp_a3;\n\n    temp_v1 = D_800D1580;\n    temp_a1 = temp_v1 >> 16;\n    temp_a3 = temp_v1 >> 8;\n    func_1506160C(D_800D154C, temp_a1, temp_v1, temp_a3, 0);\n}\n",
+        "score": 0.4473684210526316,
+        "reason": "length_mismatch (target=17, generated=19)",
+        "diffs": [],
+        "timestamp": "2026-06-03T07:39:38.201Z"
+      },
+      {
+        "code": "void func_150721A4(void) {\n    typedef void (*func_t)(struct127 *, u8, u8, u8, s32);\n    s32 temp_v1;\n\n    temp_v1 = D_800D1580;\n    ((func_t)func_1506160C)(D_800D154C, temp_v1 >> 16, temp_v1, temp_v1 >> 8, 0);\n}\n",
+        "score": 0.40476190476190477,
+        "reason": "length_mismatch (target=17, generated=21)",
+        "diffs": [],
+        "timestamp": "2026-06-03T07:40:17.068Z"
+      },
+      {
+        "code": "void func_150721A4(void) {\n    struct127 *temp_v0;\n    s32 temp_v1;\n    s32 temp_t6;\n    s32 temp_t7;\n\n    temp_v0 = D_800D154C;\n    temp_v1 = D_800D1580;\n    temp_t6 = temp_v1 >> 8;\n    temp_t7 = temp_v1 >> 16;\n    func_1506160C(temp_v0, (u8)temp_t7, (u8)temp_v1, (u8)temp_t6, 0);\n}\n",
+        "score": 0.4473684210526316,
+        "reason": "length_mismatch (target=17, generated=19)",
+        "diffs": [],
+        "timestamp": "2026-06-03T07:40:48.504Z"
       }
     ]
   },
