@@ -7174,7 +7174,7 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 3,
+    "attempts": 6,
     "lastScore": 0.42105263157894735,
     "status": "pending",
     "history": [
@@ -7233,6 +7233,27 @@
         "reason": "length_mismatch (target=19, generated=16)",
         "diffs": [],
         "timestamp": "2026-06-03T09:06:30.651Z"
+      },
+      {
+        "code": "void func_1513A594(void *arg0, s32 arg1, s32 arg2, u8 arg3, s32 arg4) {\n    volatile s32 *temp_v0;\n\n    func_1513A5E0(arg1, arg3, arg4);\n    temp_v0 = (volatile s32 *)((s32)arg0 + 0x1D4);\n    if (*temp_v0 == 0) {\n        goto done;\n    }\ndone:\n    return;\n}\n",
+        "score": 0.42105263157894735,
+        "reason": "length_mismatch (target=19, generated=16)",
+        "diffs": [],
+        "timestamp": "2026-06-03T09:06:55.661Z"
+      },
+      {
+        "code": "void func_1513A594(void *arg0, s32 arg1, s32 arg2, u8 arg3, s32 arg4) {\n    func_1513A5E0(arg1, arg3, arg4);\n    if (*(s32 *)((s32)arg0 + 0x1D4) != 0) {\n        asm(\"\");\n    }\n}\n",
+        "score": 0.41304347826086957,
+        "reason": "length_mismatch (target=19, generated=23)",
+        "diffs": [],
+        "timestamp": "2026-06-03T09:07:19.712Z"
+      },
+      {
+        "code": "void func_1513A594(void *arg0, s32 arg1, s32 arg2, u8 arg3, s32 arg4) {\n    func_1513A5E0(arg1, arg3, arg4);\n    if (*(s32 *)((s32)arg0 + 0x1D4) == 0) {\n        return;\n    } else {\n        return;\n    }\n}\n",
+        "score": 0.42105263157894735,
+        "reason": "length_mismatch (target=19, generated=16)",
+        "diffs": [],
+        "timestamp": "2026-06-03T09:07:49.172Z"
       }
     ]
   },
