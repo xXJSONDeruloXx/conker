@@ -507,9 +507,32 @@
     "instructions": 16,
     "difficulty": "low",
     "tags": [],
-    "attempts": 0,
+    "attempts": 3,
     "lastScore": 0.46875,
-    "status": "pending"
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_151927C0(struct114 *arg0) {\n    s32 tmp0;\n    tmp0 = (s16)((arg0->unk14 & 0xFF) >> 1);\n    arg0->unk38 = 300;\n    arg0->unk3A = 10;\n    arg0->unk14 = tmp0 * 65537;\n    arg0->unk3B = 0;\n}",
+        "score": 0.46875,
+        "reason": "length_mismatch (target=16, generated=15)",
+        "diffs": [],
+        "timestamp": "2026-06-03T06:22:40.785Z"
+      },
+      {
+        "code": "void func_151927C0(struct114 *arg0) {\n    s32 tmp0;\n    s32 tmp1;\n    tmp0 = (s16)((arg0->unk14 & 0xFF) >> 1);\n    tmp1 = tmp0 << 16;\n    arg0->unk38 = 300;\n    arg0->unk3A = 10;\n    arg0->unk14 = tmp1 + tmp0;\n    arg0->unk3B = 0;\n}",
+        "score": 0.46875,
+        "reason": "length_mismatch (target=16, generated=15)",
+        "diffs": [],
+        "timestamp": "2026-06-03T06:23:32.412Z"
+      },
+      {
+        "code": "void func_151927C0(struct114 *arg0) {\n    s32 tmp0;\n    s32 tmp1;\n    tmp0 = (s16)((arg0->unk14 & 0xFF) >> 1);\n    tmp1 = tmp0 << 16;\n    arg0->unk38 = 300;\n    arg0->unk3A = 10;\n    arg0->unk14 = tmp1 + tmp0;\n    arg0->unk3B = 0;\n    return;\n    __asm__(\"nop\");\n}",
+        "score": 0.46875,
+        "reason": "length_mismatch (target=16, generated=15)",
+        "diffs": [],
+        "timestamp": "2026-06-03T06:24:13.807Z"
+      }
+    ]
   },
   {
     "function": "func_15079A58",
@@ -2984,9 +3007,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0.4666666666666667,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1,
+    "status": "matched"
   },
   {
     "function": "func_1513FA2C",
