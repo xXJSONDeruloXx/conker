@@ -2874,8 +2874,8 @@
     "instructions": 22,
     "difficulty": "low",
     "tags": [],
-    "attempts": 3,
-    "lastScore": 0.4772727272727273,
+    "attempts": 5,
+    "lastScore": 0.9545,
     "status": "pending",
     "history": [
       {
@@ -2931,6 +2931,24 @@
         "reason": "length_mismatch (target=22, generated=21)",
         "diffs": [],
         "timestamp": "2026-06-03T11:44:41.563Z"
+      },
+      {
+        "code": "void func_1507A47C(void) {\n    s32 temp;\n\n    temp = ((D_800D1890 & 0xFF) << 0x18) | ((D_800D1891 & 0xFF) << 0x10) | ((D_800D1892 & 0xFF) << 8) | (D_800D1893 & 0xFF);\n    D_800D154C->unk94 &= ~temp;\n}",
+        "score": 0.9545,
+        "reason": "structural_diffs=1",
+        "diffs": [
+          "structural: target=not t8, v0 got=nor t8, v0, zero"
+        ],
+        "timestamp": "2026-06-03T11:45:11.275Z"
+      },
+      {
+        "code": "void func_1507A47C(void) {\n    s32 temp;\n    s32 inv;\n\n    temp = ((D_800D1890 & 0xFF) << 0x18) | ((D_800D1891 & 0xFF) << 0x10) | ((D_800D1892 & 0xFF) << 8) | (D_800D1893 & 0xFF);\n    inv = ~temp;\n    D_800D154C->unk94 &= inv;\n}",
+        "score": 0.9545,
+        "reason": "structural_diffs=1",
+        "diffs": [
+          "structural: target=not t8, v0 got=nor t8, v0, zero"
+        ],
+        "timestamp": "2026-06-03T11:45:46.197Z"
       }
     ]
   },

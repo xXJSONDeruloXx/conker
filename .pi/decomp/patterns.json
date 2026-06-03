@@ -585,5 +585,14 @@
     "example_functions": [
       "func_1516706C"
     ]
+  },
+  {
+    "id": "force-lbu-arg-home-byte-via-address-cast",
+    "description": "When IDO saves an s32 argument to its home stack slot and later loads only the low byte with `lbu`, force the byte reload by taking the argument address and indexing the big-endian low byte.",
+    "trigger": "Near-match differs only by `lw arg_home(sp)` before an `sb`, while target uses `lbu arg_home+3(sp)` from the saved s32 argument.",
+    "solution": "Keep the parameter as `s32`, then assign through `*((u8 *)&arg + 3)` (big-endian low byte) instead of `(u8)arg` or direct assignment.",
+    "example_functions": [
+      "func_151417C4"
+    ]
   }
 ]
