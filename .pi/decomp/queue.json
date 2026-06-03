@@ -3421,8 +3421,8 @@
     "instructions": 23,
     "difficulty": "low",
     "tags": [],
-    "attempts": 3,
-    "lastScore": 0.391304347826087,
+    "attempts": 6,
+    "lastScore": 0.43478260869565216,
     "status": "pending",
     "history": [
       {
@@ -3501,6 +3501,27 @@
         "reason": "length_mismatch (target=23, generated=18)",
         "diffs": [],
         "timestamp": "2026-06-03T11:48:58.143Z"
+      },
+      {
+        "code": "void func_151635A8(struct225 *arg0, s32 arg1, u8 arg2) {\n    if (D_8008B370[arg0->unk25] != NULL) {\n        ((void (*)(struct225 *, s32, u8))D_8008B370[arg0->unk25])(arg0, arg1, arg2);\n    }\n}",
+        "score": 0.391304347826087,
+        "reason": "length_mismatch (target=23, generated=18)",
+        "diffs": [],
+        "timestamp": "2026-06-03T11:49:18.432Z"
+      },
+      {
+        "code": "void func_151635A8(struct225 *arg0, s32 arg1, u8 arg2) {\n    volatile s32 *temp_v0;\n\n    temp_v0 = (volatile s32 *)D_8008B370;\n    if (temp_v0[arg0->unk25] != 0) {\n        ((void (*)(struct225 *, s32, u8))temp_v0[arg0->unk25])(arg0, arg1, arg2);\n    }\n}",
+        "score": 0.43478260869565216,
+        "reason": "length_mismatch (target=23, generated=20)",
+        "diffs": [],
+        "timestamp": "2026-06-03T11:49:34.341Z"
+      },
+      {
+        "code": "void func_151635A8(struct225 *arg0, s32 arg1, u8 arg2) {\n    s32 *temp_v0;\n\n    temp_v0 = (s32 *)D_8008B370;\n    if (*(volatile s32 *)&temp_v0[arg0->unk25] != 0) {\n        ((void (*)(struct225 *, s32, u8))(*(volatile s32 *)&temp_v0[arg0->unk25]))(arg0, arg1, arg2);\n    }\n}",
+        "score": 0.43478260869565216,
+        "reason": "length_mismatch (target=23, generated=20)",
+        "diffs": [],
+        "timestamp": "2026-06-03T11:49:49.482Z"
       }
     ]
   },
