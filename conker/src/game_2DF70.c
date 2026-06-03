@@ -246,7 +246,21 @@ void func_15002724(s32 arg0) {
     D_800DBE38 += func_150027F8(arg0);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_2DF70/func_15002754.s")
+void func_15002754(void) {
+    s32 count;
+    s32 idx;
+
+    D_800DBDD8[D_800DBE50] = D_800B0DC0 = ALIGN4(D_800B0DC0);
+    count = D_800DBE38;
+    idx = D_800DBE50;
+    D_800B0DC0 += count * 12;
+    D_800DBDE8[idx] = D_800B0DC0;
+    D_800B0DC0 += count * 8;
+    D_800DBDF8[idx] = D_800B0DC0;
+    D_800B0DC0 += count * 4;
+    func_1510F800(idx);
+    D_800DBE38 = 0;
+}
 
 
 int func_150027F8(s32 arg0) {

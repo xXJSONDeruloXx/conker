@@ -15851,8 +15851,8 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 9,
-    "lastScore": 0.9268,
+    "attempts": 10,
+    "lastScore": 0.47560975609756095,
     "status": "pending",
     "history": [
       {
@@ -16055,6 +16055,13 @@
           "structural: target=addu t4, t2, t3 got=addu t4, t3, t2"
         ],
         "timestamp": "2026-06-03T22:58:52.522Z"
+      },
+      {
+        "code": "void func_15002754(void) {\n    s32 count;\n    s32 idx;\n    s32 temp;\n\n    D_800DBDD8[D_800DBE50] = temp = D_800B0DC0 = ALIGN4(D_800B0DC0);\n    count = D_800DBE38;\n    idx = D_800DBE50;\n    temp = temp + count * 12;\n    D_800B0DC0 = temp;\n    D_800DBDE8[idx] = temp;\n    temp = temp + count * 8;\n    D_800B0DC0 = temp;\n    D_800DBDF8[idx] = temp;\n    D_800B0DC0 = temp + count * 4;\n    func_1510F800(idx);\n    D_800DBE38 = 0;\n}",
+        "score": 0.47560975609756095,
+        "reason": "length_mismatch (target=41, generated=39)",
+        "diffs": [],
+        "timestamp": "2026-06-03T22:59:25.997Z"
       }
     ]
   },
