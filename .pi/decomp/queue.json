@@ -9059,8 +9059,8 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 4,
-    "lastScore": 1,
+    "attempts": 6,
+    "lastScore": 0.09523809523809523,
     "status": "matched",
     "history": [
       {
@@ -9183,6 +9183,20 @@
           "structural: target=lbu t0, 43(sp) got=lw t0, 40(sp)"
         ],
         "timestamp": "2026-06-03T11:35:52.636Z"
+      },
+      {
+        "code": "void func_151417C4(s32 arg0, u8 arg1) {\n}",
+        "score": 0.09523809523809523,
+        "reason": "length_mismatch (target=21, generated=4)",
+        "diffs": [],
+        "timestamp": "2026-06-03T13:29:21.263Z"
+      },
+      {
+        "code": "void func_151417C4(s32 arg0, u8 arg1) {\n}",
+        "score": 0.09523809523809523,
+        "reason": "length_mismatch (target=21, generated=4)",
+        "diffs": [],
+        "timestamp": "2026-06-03T13:31:06.810Z"
       }
     ]
   },
