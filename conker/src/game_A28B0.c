@@ -648,7 +648,11 @@ void func_15076FA8(void) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_A28B0/func_150770E4.s")
+void func_150770E4(void) {
+    if (*(f32 *)((u8 *)D_800CC30C + (D_800D154C->unk222 * 0x32C)) < D_800D1892) {
+        func_15075400(D_800D1893);
+    }
+}
 // NON-MATCHING: JUSTREG (?)
 // void func_150770E4(void) {
 //     // this can't be right?

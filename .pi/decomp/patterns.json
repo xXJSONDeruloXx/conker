@@ -648,5 +648,14 @@
     "example_functions": [
       "func_151436B4"
     ]
+  },
+  {
+    "id": "local-array-typed-stores",
+    "description": "Use a small integer local array plus typed casts to force compact stack layout with mixed float/pointer/byte stores before memcpy.",
+    "trigger": "Target stores a 12-byte mixed payload on stack (swc1, sw, sb) and memcpy's the stack address; struct local creates too large a frame or individual locals are optimized apart.",
+    "solution": "Declare `s32 tmp[3]`; assign `*(f32 *)&tmp[0]`, `tmp[1]`, and `((u8 *)tmp)[8]`, then `memcpy(dst, tmp, 0xC)`.",
+    "example_functions": [
+      "func_15014220"
+    ]
   }
 ]

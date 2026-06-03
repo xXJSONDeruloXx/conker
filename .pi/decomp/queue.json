@@ -16748,8 +16748,8 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 3,
-    "lastScore": 0.8333,
+    "attempts": 4,
+    "lastScore": 0.5556,
     "status": "pending",
     "history": [
       {
@@ -16797,6 +16797,30 @@
           "structural: target=bgez t9, L0 got=bgez v0, L0"
         ],
         "timestamp": "2026-06-03T21:08:41.114Z"
+      },
+      {
+        "code": "void func_150770E4(void) {\n    struct127 *actor;\n    u32 val;\n\n    actor = D_800D154C;\n    val = D_800D1892;\n    if (D_800CC30C[actor->unk222 * 203] < val) {\n        func_15075400(D_800D1893);\n    }\n}",
+        "score": 0.5556,
+        "reason": "structural_diffs=16",
+        "diffs": [
+          "structural: target=lui t6, HI(D_800D154C) got=lui v0, HI(D_800D154C)",
+          "structural: target=lw t6, LO(D_800D154C)(t6) got=lw v0, LO(D_800D154C)(v0)",
+          "structural: target=lui t9, HI(D_800D1892) got=lui v1, HI(D_800D1892)",
+          "structural: target=lbu t9, LO(D_800D1892)(t9) got=lbu v1, LO(D_800D1892)(v1)",
+          "structural: target=lbu t7, 546(t6) got=lbu t6, 546(v0)",
+          "structural: target=mtc1 t9, f6 got=mtc1 v1, f6",
+          "structural: target=sll t8, t7, 2 got=sll t7, t6, 2",
+          "structural: target=subu t8, t8, t7 got=subu t7, t7, t6",
+          "structural: target=sll t8, t8, 2 got=sll t7, t7, 2",
+          "structural: target=addu t8, t8, t7 got=addu t7, t7, t6",
+          "structural: target=sll t8, t8, 2 got=sll t7, t7, 2",
+          "structural: target=subu t8, t8, t7 got=subu t7, t7, t6",
+          "structural: target=sll t8, t8, 2 got=sll t7, t7, 2",
+          "structural: target=subu t8, t8, t7 got=subu t7, t7, t6",
+          "structural: target=sll t8, t8, 2 got=sll t8, t7, 2",
+          "structural: target=bgez t9, L0 got=bgez v1, L0"
+        ],
+        "timestamp": "2026-06-03T21:08:56.501Z"
       }
     ]
   },
