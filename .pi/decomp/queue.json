@@ -13702,9 +13702,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1,
+    "status": "matched"
   },
   {
     "function": "func_100186DC",
@@ -16659,9 +16659,32 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.4523809523809524,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_15040CC8(u8 *arg0) {\n    s32 i;\n    void (**table)(s32);\n    s32 temp_a0;\n\n    i = 0;\n    while (++i < 0x10) {\n    }\n\n    table = D_800844B0;\n    for (i = -0x14; i < 0xA; i++) {\n        temp_a0 = (s32)(arg0 + (i * 8));\n        table[*(u8 *)temp_a0](temp_a0);\n    }\n\n    temp_a0 = D_800848B0;\n    if (temp_a0 != 0) {\n        func_1500390C(temp_a0);\n    }\n}",
+        "score": 0.48717948717948717,
+        "reason": "length_mismatch (target=38, generated=39)",
+        "diffs": [],
+        "timestamp": "2026-06-03T21:50:06.163Z"
+      },
+      {
+        "code": "void func_15040CC8(u8 *arg0) {\n    s32 i;\n    s32 offset;\n    s32 temp_a0;\n    void (**table)(s32);\n\n    i = 0;\n    i++;\n    while (i < 0x10) {\n        i++;\n    }\n\n    table = D_800844B0;\n    i = -0x14;\n    offset = i << 3;\n    do {\n        temp_a0 = (s32)arg0 + offset;\n        table[*(u8 *)temp_a0](temp_a0);\n        i++;\n        offset = i << 3;\n    } while (i < 0xA);\n\n    temp_a0 = D_800848B0;\n    if (temp_a0 != 0) {\n        func_1500390C(temp_a0);\n    }\n}",
+        "score": 0.4523809523809524,
+        "reason": "length_mismatch (target=38, generated=42)",
+        "diffs": [],
+        "timestamp": "2026-06-03T21:50:37.210Z"
+      },
+      {
+        "code": "void func_15040CC8(u8 *arg0) {\n    s32 i;\n    u8 *base;\n    void (**table)(s32);\n    s32 temp_a0;\n\n    base = arg0;\n    for (i = 0; i < 0x10; i++) {\n    }\n\n    table = D_800844B0;\n    i = -0x14;\n    do {\n        temp_a0 = (s32)(base + (i * 8));\n        table[*(u8 *)temp_a0](temp_a0);\n        i++;\n    } while (i < 0xA);\n\n    temp_a0 = D_800848B0;\n    if (temp_a0 != 0) {\n        func_1500390C(temp_a0);\n    }\n}",
+        "score": 0.4523809523809524,
+        "reason": "length_mismatch (target=38, generated=42)",
+        "diffs": [],
+        "timestamp": "2026-06-03T21:51:03.417Z"
+      }
+    ]
   },
   {
     "function": "func_1513532C",
