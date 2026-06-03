@@ -50,7 +50,7 @@
     "instructions": 11,
     "difficulty": "low",
     "tags": [],
-    "attempts": 9,
+    "attempts": 12,
     "lastScore": 0.1818,
     "status": "pending",
     "history": [
@@ -176,6 +176,57 @@
           "structural: target=sh t7, 0(v0) got=sh v1, 3074(t7)"
         ],
         "timestamp": "2026-06-03T04:49:34.747Z"
+      },
+      {
+        "code": "s32 func_100038E0(void) {\n    s32 temp_v0 = 0xBC000C02;\n\n    D_80038070 = temp_v0;\n    D_80038074 = 0x4040;\n    *(u16 *)temp_v0 = 0xFFFF4040;\n    return temp_v0;\n}",
+        "score": 0.1818,
+        "reason": "structural_diffs=9",
+        "diffs": [
+          "structural: target=lui v0, 48128 got=li v1, 16448",
+          "structural: target=ori v0, v0, 3074 got=lui t6, 48128",
+          "structural: target=lui at, HI(D_80038070) got=ori v0, t6, 3074",
+          "structural: target=sw v0, LO(D_80038070)(at) got=lui at, HI(D_80038070)",
+          "structural: target=lui at, HI(D_80038074) got=sw v0, LO(D_80038070)(at)",
+          "structural: target=li t6, 16448 got=lui at, HI(D_80038074)",
+          "structural: target=sh t6, LO(D_80038074)(at) got=sh v1, LO(D_80038074)(at)",
+          "structural: target=li t7, 16448 got=lui t7, 48128",
+          "structural: target=sh t7, 0(v0) got=sh v1, 3074(t7)"
+        ],
+        "timestamp": "2026-06-03T04:49:56.373Z"
+      },
+      {
+        "code": "s32 func_100038E0(void) {\n    s32 temp_v0;\n    u16 temp_t6;\n    u16 temp_t7;\n\n    temp_v0 = 0xBC000C02;\n    temp_t6 = 0x4040;\n    temp_t7 = 0x4040;\n    D_80038070 = temp_v0;\n    D_80038074 = temp_t6;\n    *(u16 *)temp_v0 = temp_t7;\n    return temp_v0;\n}",
+        "score": 0.1818,
+        "reason": "structural_diffs=9",
+        "diffs": [
+          "structural: target=lui v0, 48128 got=li v1, 16448",
+          "structural: target=ori v0, v0, 3074 got=lui t6, 48128",
+          "structural: target=lui at, HI(D_80038070) got=ori v0, t6, 3074",
+          "structural: target=sw v0, LO(D_80038070)(at) got=lui at, HI(D_80038070)",
+          "structural: target=lui at, HI(D_80038074) got=sw v0, LO(D_80038070)(at)",
+          "structural: target=li t6, 16448 got=lui at, HI(D_80038074)",
+          "structural: target=sh t6, LO(D_80038074)(at) got=sh v1, LO(D_80038074)(at)",
+          "structural: target=li t7, 16448 got=lui t7, 48128",
+          "structural: target=sh t7, 0(v0) got=sh v1, 3074(t7)"
+        ],
+        "timestamp": "2026-06-03T04:50:09.460Z"
+      },
+      {
+        "code": "s32 func_100038E0(void) {\n    register s32 temp_v0;\n    register u16 temp_t6;\n    register u16 temp_t7;\n\n    temp_v0 = 0xBC000C02;\n    D_80038070 = temp_v0;\n    temp_t6 = 0x4040;\n    D_80038074 = temp_t6;\n    temp_t7 = 0x4040;\n    *(u16 *)temp_v0 = temp_t7;\n    return temp_v0;\n}",
+        "score": 0.1818,
+        "reason": "structural_diffs=9",
+        "diffs": [
+          "structural: target=lui v0, 48128 got=li v1, 16448",
+          "structural: target=ori v0, v0, 3074 got=lui t6, 48128",
+          "structural: target=lui at, HI(D_80038070) got=ori v0, t6, 3074",
+          "structural: target=sw v0, LO(D_80038070)(at) got=lui at, HI(D_80038070)",
+          "structural: target=lui at, HI(D_80038074) got=sw v0, LO(D_80038070)(at)",
+          "structural: target=li t6, 16448 got=lui at, HI(D_80038074)",
+          "structural: target=sh t6, LO(D_80038074)(at) got=sh v1, LO(D_80038074)(at)",
+          "structural: target=li t7, 16448 got=lui t7, 48128",
+          "structural: target=sh t7, 0(v0) got=sh v1, 3074(t7)"
+        ],
+        "timestamp": "2026-06-03T04:50:23.873Z"
       }
     ]
   },
