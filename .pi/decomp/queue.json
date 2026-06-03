@@ -4134,8 +4134,8 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 12,
-    "lastScore": 0.7879,
+    "attempts": 15,
+    "lastScore": 0.6667,
     "status": "pending",
     "history": [
       {
@@ -4326,6 +4326,55 @@
           "structural: target=sb t4, 529(v0) got=sb t2, 529(v0)"
         ],
         "timestamp": "2026-06-03T00:45:08.627Z"
+      },
+      {
+        "code": "void func_1505DFDC(struct127 *arg0) {\n    s32 temp_t7;\n    u8 *temp_v0;\n    s32 temp_t1;\n    s32 temp_t3;\n\n    temp_v0 = (u8 *) arg0->unk2D0;\n    *(u16 *)((u8 *)arg0 + 0x84) = 0xFFFF;\n    if (temp_v0 != NULL) {\n        temp_t7 = arg0->id;\n        *(s32 *)(temp_v0 + 0x28) = 0;\n        bzero(temp_v0 + 0x40, 0x3A0);\n        temp_t1 = D_800C4ED0[temp_t7];\n        *(u8 *)(temp_v0 + 0x41) = temp_t1 + 1;\n        temp_t3 = D_800C4ED0[temp_t7];\n        *(s32 *)(temp_v0 + 0x30) = 0;\n        *(s32 *)(temp_v0 + 0x34) = 0;\n        *(u8 *)(temp_v0 + 0x211) = temp_t3 + 1;\n    }\n}",
+        "score": 0.7879,
+        "reason": "structural_diffs=7",
+        "diffs": [
+          "structural: target=ori t6, zero, 65535 got=li t6, 65535",
+          "structural: target=lhu t1, 0(v1) got=lhu a0, 0(v1)",
+          "structural: target=addiu t2, t1, 1 got=addiu t1, a0, 1",
+          "structural: target=sb t2, 65(v0) got=sb t1, 65(v0)",
+          "structural: target=lhu t3, 0(v1) got=lhu a1, 0(v1)",
+          "structural: target=addiu t4, t3, 1 got=addiu t2, a1, 1",
+          "structural: target=sb t4, 529(v0) got=sb t2, 529(v0)"
+        ],
+        "timestamp": "2026-06-03T00:46:25.021Z"
+      },
+      {
+        "code": "void func_1505DFDC(struct127 *arg0) {\n    s32 temp_t7;\n    u8 *temp_v0;\n    u16 *temp_a0;\n    u16 *temp_a1;\n    s32 temp_t1;\n    s32 temp_t3;\n\n    temp_v0 = (u8 *) arg0->unk2D0;\n    arg0->unk84.uh = 0xFFFF;\n    if (temp_v0 != NULL) {\n        temp_t7 = arg0->id;\n        *(s32 *)(temp_v0 + 0x28) = 0;\n        temp_a0 = temp_v0 + 0x40;\n        temp_a1 = (u16 *)(s32)0x3A0;\n        bzero(temp_a0, (s32)temp_a1);\n        temp_t1 = D_800C4ED0[temp_t7];\n        *(u8 *)(temp_v0 + 0x41) = temp_t1 + 1;\n        temp_t3 = D_800C4ED0[temp_t7];\n        *(s32 *)(temp_v0 + 0x30) = 0;\n        *(s32 *)(temp_v0 + 0x34) = 0;\n        *(u8 *)(temp_v0 + 0x211) = temp_t3 + 1;\n    }\n}",
+        "score": 0.7879,
+        "reason": "structural_diffs=7",
+        "diffs": [
+          "structural: target=ori t6, zero, 65535 got=li t6, 65535",
+          "structural: target=lhu t1, 0(v1) got=lhu a0, 0(v1)",
+          "structural: target=addiu t2, t1, 1 got=addiu t1, a0, 1",
+          "structural: target=sb t2, 65(v0) got=sb t1, 65(v0)",
+          "structural: target=lhu t3, 0(v1) got=lhu a1, 0(v1)",
+          "structural: target=addiu t4, t3, 1 got=addiu t2, a1, 1",
+          "structural: target=sb t4, 529(v0) got=sb t2, 529(v0)"
+        ],
+        "timestamp": "2026-06-03T00:48:21.148Z"
+      },
+      {
+        "code": "void func_1505DFDC(struct127 *arg0) {\n    u8 *temp_v0;\n    s32 temp_t7;\n    u8 *temp_v1;\n    s32 temp_t1;\n    s32 temp_t3;\n\n    temp_v0 = (u8 *) arg0->unk2D0;\n    arg0->unk84.uh = 0xFFFF;\n    if (temp_v0 != NULL) {\n        temp_t7 = arg0->id;\n        *(s32 *)(temp_v0 + 0x28) = 0;\n        bzero(temp_v0 + 0x40, 0x3A0);\n        temp_v1 = (u8 *)D_800C4ED0 + temp_t7 * 2;\n        temp_t1 = *(u16 *)temp_v1;\n        *(u8 *)(temp_v0 + 0x41) = temp_t1 + 1;\n        temp_t3 = *(u16 *)temp_v1;\n        *(s32 *)(temp_v0 + 0x30) = 0;\n        *(s32 *)(temp_v0 + 0x34) = 0;\n        *(u8 *)(temp_v0 + 0x211) = temp_t3 + 1;\n    }\n}",
+        "score": 0.6667,
+        "reason": "structural_diffs=11",
+        "diffs": [
+          "structural: target=ori t6, zero, 65535 got=li t6, 65535",
+          "structural: target=sw t7, 28(sp) got=sw t7, 24(sp)",
+          "structural: target=sw v0, 24(sp) got=sw v0, 28(sp)",
+          "structural: target=lw t8, 28(sp) got=lw t8, 24(sp)",
+          "structural: target=lhu t1, 0(v1) got=lhu a0, 0(v1)",
+          "structural: target=lw v0, 24(sp) got=lw v0, 28(sp)",
+          "structural: target=addiu t2, t1, 1 got=addiu t1, a0, 1",
+          "structural: target=sb t2, 65(v0) got=sb t1, 65(v0)",
+          "structural: target=lhu t3, 0(v1) got=lhu a1, 0(v1)",
+          "structural: target=addiu t4, t3, 1 got=addiu t2, a1, 1",
+          "structural: target=sb t4, 529(v0) got=sb t2, 529(v0)"
+        ],
+        "timestamp": "2026-06-03T00:48:56.796Z"
       }
     ]
   },
