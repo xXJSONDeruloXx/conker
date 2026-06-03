@@ -621,5 +621,14 @@
     "example_functions": [
       "func_15125628"
     ]
+  },
+  {
+    "id": "mask-to-shape-lhu-registers",
+    "description": "Masking/recasting lhu-loaded values can shift IDO register allocation while preserving direct byte stores.",
+    "trigger": "Near-match after bzero where lhu/addiu/sb sequence uses a0/a1 or reorders zero stores instead of t1/t2/t3/t4 target registers.",
+    "solution": "Load table entries into s32 temps, then use `(temp & 0xFFFF) + 1` for the first byte store and `(unsigned char)temp + 1` for the second to force IDO's target lhu/addiu/sb scheduling and temp register allocation.",
+    "example_functions": [
+      "func_1505DFDC"
+    ]
   }
 ]
