@@ -1661,7 +1661,16 @@ void func_15074644(void) {
     D_800D154C->unk31C->unk11A = (s8) D_800D1580;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_15074664.s")
+void func_15074664(void) {
+    if (D_800D154C->unk31C != NULL) {
+        if (D_800D1580 == 1) {
+            func_10011FDC(5);
+        } else if ((u8) D_800D154C->unk31C->unk94 == 1) {
+            func_10011FDC(0);
+        }
+        D_800D154C->unk31C->unk94 = D_800D1580;
+    }
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_150746F0.s")
 // ?
 void func_150747E4(void) {

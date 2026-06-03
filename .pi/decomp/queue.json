@@ -17010,9 +17010,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1,
+    "status": "matched"
   },
   {
     "function": "func_15167AD8",
@@ -17833,9 +17833,26 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 0.8,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_15074664(void) {\n    struct126 *temp_v1;\n\n    temp_v1 = D_800D154C->unk31C;\n    if (temp_v1 != NULL) {\n        if (D_800D1580 == 1) {\n            func_10011FDC(5);\n        } else if ((u8) temp_v1->unk94 == 1) {\n            func_10011FDC(0);\n        }\n        D_800D154C->unk31C->unk94 = D_800D1580;\n    }\n}",
+        "score": 0.8,
+        "reason": "structural_diffs=7",
+        "diffs": [
+          "structural: target=beqzl v1, L0 got=beqz v1, L0",
+          "structural: target=lw ra, 20(sp) got=move a0, v1",
+          "structural: target=li a0, 1 got=li a1, 1",
+          "structural: target=bnel a0, v0, L1 got=bnel a1, v0, L1",
+          "structural: target=lbu t8, 148(v1) got=lbu t8, 148(a0)",
+          "structural: target=lbu t8, 148(v1) got=lbu t8, 148(a0)",
+          "structural: target=bnel a0, t8, L3 got=bnel a1, t8, L0"
+        ],
+        "timestamp": "2026-06-03T20:42:53.869Z"
+      }
+    ]
   },
   {
     "function": "func_15142C10",
