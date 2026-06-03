@@ -3879,7 +3879,7 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 3,
+    "attempts": 6,
     "lastScore": 0.47058823529411764,
     "status": "pending",
     "history": [
@@ -3938,6 +3938,27 @@
         "reason": "length_mismatch (target=17, generated=16)",
         "diffs": [],
         "timestamp": "2026-06-03T07:51:00.734Z"
+      },
+      {
+        "code": "void func_151D343C(s32 arg0, u8 arg1) {\n    s32 sp1C[1] = D_800AB168;\n\n    func_15169260(sp1C, 1, arg0, arg1);\n}\n",
+        "score": 0.47058823529411764,
+        "reason": "length_mismatch (target=17, generated=16)",
+        "diffs": [],
+        "timestamp": "2026-06-03T07:51:32.874Z"
+      },
+      {
+        "code": "void func_151D343C(s32 arg0, u8 arg1) {\n    s32 sp1C[1] = D_800AB168;\n\n    func_15169260(sp1C, 1, arg0, arg1);\n}\n",
+        "score": 0.47058823529411764,
+        "reason": "length_mismatch (target=17, generated=16)",
+        "diffs": [],
+        "timestamp": "2026-06-03T07:51:52.503Z"
+      },
+      {
+        "code": "void func_151D343C(s32 arg0, u8 arg1) {\n    s32 sp1C[1] = D_800AB168;\n\n    func_15169260(sp1C, 1, arg0, arg1);\n    return;\n    asm(\"nop\");\n}\n",
+        "score": 0.47058823529411764,
+        "reason": "length_mismatch (target=17, generated=16)",
+        "diffs": [],
+        "timestamp": "2026-06-03T07:53:02.160Z"
       }
     ]
   },
