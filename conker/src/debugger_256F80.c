@@ -3,9 +3,27 @@
 #include "functions.h"
 #include "variables.h"
 
+#include "libultra/io/controller.h"
+
 
 #pragma GLOBAL_ASM("asm/nonmatchings/debugger_256F80/func_16001700.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/debugger_256F80/func_16001830.s")
+void func_16001830(OSContPad *data) {
+    u8 *ptr;
+    __OSContReadFormat readformat;
+    s32 i;
+
+    ptr = (u8 *)&__osContPifRam;
+    for (i = 0; i < __osMaxControllers; i++, ptr += sizeof(__OSContReadFormat), data++) {
+        readformat = *(__OSContReadFormat *)ptr;
+        data->errno = CHNL_ERR(readformat);
+        if (data->errno != 0) {
+            continue;
+        }
+        data->button = readformat.button;
+        data->stick_x = readformat.stick_x;
+        data->stick_y = readformat.stick_y;
+    }
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/debugger_256F80/func_160018BC.s")
 
 // another __osSiDeviceBusy function
