@@ -14455,7 +14455,7 @@
     "instructions": 36,
     "difficulty": "medium-low",
     "tags": [],
-    "attempts": 8,
+    "attempts": 9,
     "lastScore": 0.6389,
     "status": "pending",
     "history": [
@@ -14620,6 +14620,27 @@
           "structural: target=slt at, a3, t9 got=slt at, a3, t8"
         ],
         "timestamp": "2026-06-03T20:52:38.373Z"
+      },
+      {
+        "code": "void func_15143D18(s32 *arg0, s32 *arg1, s32 arg2, s32 arg3) {\n    s32 tmp;\n    s32 newmax;\n    s32 temp_v0;\n    s32 temp_a0;\n\n    if (arg3 < arg2) {\n        tmp = arg2 ^ arg3;\n        newmax = arg3 ^ tmp;\n        arg3 = newmax;\n        arg2 = tmp ^ newmax;\n    }\n    tmp = *arg1;\n    newmax = *arg0;\n    if (tmp < newmax) {\n        temp_v0 = newmax ^ tmp;\n        *arg0 = temp_v0;\n        temp_a0 = *arg1 ^ temp_v0;\n        *arg1 = temp_a0;\n        newmax = *arg0 ^ temp_a0;\n        *arg0 = newmax;\n    }\n    if (newmax < arg2) {\n        *arg0 = arg2;\n    }\n    if (arg3 < *arg1) {\n        *arg1 = arg3;\n    }\n}",
+        "score": 0.6389,
+        "reason": "structural_diffs=13",
+        "diffs": [
+          "structural: target=lw v1, 0(s0) got=lw v0, 0(s0)",
+          "structural: target=lw a1, 0(s1) got=lw a0, 0(s1)",
+          "structural: target=slt at, v1, a1 got=slt at, v0, a0",
+          "structural: target=xor v0, a1, v1 got=xor v1, a0, v0",
+          "structural: target=sw v0, 0(s1) got=sw v1, 0(s1)",
+          "structural: target=xor a0, t6, v0 got=xor a1, t6, v1",
+          "structural: target=sw a0, 0(s0) got=sw a1, 0(s0)",
+          "structural: target=xor a1, t7, a0 got=xor a0, t7, a1",
+          "structural: target=sw a1, 0(s1) got=sw a0, 0(s1)",
+          "structural: target=slt at, a1, a2 got=slt at, a0, a2",
+          "structural: target=lw t9, 0(s0) got=lw t8, 0(s0)",
+          "structural: target=lw t9, 0(s0) got=lw t8, 0(s0)",
+          "structural: target=slt at, a3, t9 got=slt at, a3, t8"
+        ],
+        "timestamp": "2026-06-03T21:20:40.702Z"
       }
     ]
   },
@@ -15627,8 +15648,8 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 9,
-    "lastScore": 0.7222,
+    "attempts": 10,
+    "lastScore": 0.9444,
     "status": "pending",
     "history": [
       {
@@ -15810,6 +15831,16 @@
           "structural: target=bnel s0, s1, L2 got=bnel s0, s2, L2"
         ],
         "timestamp": "2026-06-03T21:17:23.772Z"
+      },
+      {
+        "code": "s32 func_1000F4D8(u16 arg0) {\n    struct120 *p;\n\n    arg0 = arg0 & 0x7FFF;\n    p = (struct120 *)&D_800426A0;\n    p = D_800425E0;\n    do {\n        if (p->unk8 != 0 && (p->unk4 & 0x7FFF) == arg0 && func_100173C4(&p->unk8) != 0) {\n            return 1;\n        }\n        p++;\n    } while (p != (struct120 *)&D_800426A0);\n    return 0;\n}",
+        "score": 0.9444,
+        "reason": "structural_diffs=2",
+        "diffs": [
+          "structural: target=addiu s1, s1, LO(D_800426A0) got=addiu s0, s0, LO(D_800425E0)",
+          "structural: target=addiu s0, s0, LO(D_800425E0) got=addiu s1, s1, LO(D_800426A0)"
+        ],
+        "timestamp": "2026-06-03T21:17:39.546Z"
       }
     ]
   },
