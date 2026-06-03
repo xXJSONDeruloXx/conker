@@ -657,5 +657,14 @@
     "example_functions": [
       "func_15014220"
     ]
+  },
+  {
+    "id": "byte-offset-float-table-cast",
+    "description": "Use a u8* byte-offset cast for float table accesses with manual stride math so IDO keeps the computed byte offset in-place instead of adding an extra array-index shift temp.",
+    "trigger": "Target address math computes a byte stride manually (e.g. 0x32C) then directly adds it to a float table symbol before lwc1.",
+    "solution": "Cast the f32 table to u8* and add the byte stride, then cast back to f32*: *(f32 *)((u8 *)TABLE + index * STRIDE).",
+    "example_functions": [
+      "func_150770E4"
+    ]
   }
 ]
