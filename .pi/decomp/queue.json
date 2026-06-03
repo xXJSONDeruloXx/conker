@@ -18533,9 +18533,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1,
+    "status": "matched"
   },
   {
     "function": "func_15074F48",
@@ -18608,9 +18608,37 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 2,
+    "lastScore": 0.9216,
+    "status": "pending",
+    "history": [
+      {
+        "code": "f32 func_1505DF10(struct127 *arg0, u8 arg1, s16 *arg2, f32 *arg3, f32 *arg4) {\n    struct127 *ptr;\n    f32 temp_f12;\n    f32 temp_f2;\n    f32 temp_f14;\n\n    ptr = &D_800CC2D0[arg1];\n    temp_f2 = arg0->y_position - ptr->y_position;\n    temp_f12 = ptr->x_position - arg0->x_position;\n    temp_f14 = arg0->z_position - ptr->z_position;\n    *arg4 = temp_f2;\n    *arg2 = func_1505A630(temp_f12, temp_f14, 0);\n    temp_f12 = temp_f12 * temp_f12;\n    temp_f2 = temp_f2 * temp_f2;\n    temp_f14 = temp_f14 * temp_f14;\n    *arg3 = temp_f12 + temp_f14;\n    return (temp_f12 + temp_f2) + temp_f14;\n}",
+        "score": 0.8824,
+        "reason": "structural_diffs=6",
+        "diffs": [
+          "structural: target=lwc1 f10, 24(v0) got=lwc1 f6, 24(v0)",
+          "structural: target=lwc1 f8, 24(a0) got=lwc1 f4, 24(a0)",
+          "structural: target=lwc1 f4, 20(v0) got=lwc1 f8, 20(v0)",
+          "structural: target=lwc1 f6, 20(a0) got=lwc1 f10, 20(a0)",
+          "structural: target=sub.s f2, f8, f10 got=sub.s f2, f4, f6",
+          "structural: target=sub.s f12, f4, f6 got=sub.s f12, f8, f10"
+        ],
+        "timestamp": "2026-06-03T23:32:39.738Z"
+      },
+      {
+        "code": "f32 func_1505DF10(struct127 *arg0, u8 arg1, s16 *arg2, f32 *arg3, f32 *arg4) {\n    struct127 *ptr;\n    f32 temp_f2;\n    f32 temp_f12;\n    f32 temp_f14;\n\n    ptr = &D_800CC2D0[arg1];\n    temp_f12 = ptr->x_position - arg0->x_position;\n    temp_f2 = arg0->y_position - ptr->y_position;\n    temp_f14 = arg0->z_position - ptr->z_position;\n    *arg4 = temp_f2;\n    *arg2 = func_1505A630(temp_f12, temp_f14, 0);\n    temp_f12 = temp_f12 * temp_f12;\n    temp_f2 = temp_f2 * temp_f2;\n    temp_f14 = temp_f14 * temp_f14;\n    *arg3 = temp_f12 + temp_f14;\n    return (temp_f12 + temp_f2) + temp_f14;\n}",
+        "score": 0.9216,
+        "reason": "structural_diffs=4",
+        "diffs": [
+          "structural: target=swc1 f12, 32(sp) got=swc1 f12, 28(sp)",
+          "structural: target=swc1 f2, 28(sp) got=swc1 f2, 32(sp)",
+          "structural: target=lwc1 f12, 32(sp) got=lwc1 f12, 28(sp)",
+          "structural: target=lwc1 f2, 28(sp) got=lwc1 f2, 32(sp)"
+        ],
+        "timestamp": "2026-06-03T23:33:08.896Z"
+      }
+    ]
   },
   {
     "function": "func_150027F8",

@@ -966,7 +966,24 @@ f32 func_1505D34C(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 *arg4) {
 #pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_1505D6F0.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_1505DADC.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_1505DDA8.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_1505DF10.s")
+f32 func_1505DF10(struct127 *arg0, u8 arg1, s16 *arg2, f32 *arg3, f32 *arg4) {
+    struct127 *ptr;
+    f32 temp_f12;
+    f32 temp_f2;
+    f32 temp_f14;
+
+    ptr = &D_800CC2D0[arg1];
+    temp_f12 = ptr->x_position - arg0->x_position;
+    temp_f2 = arg0->y_position - ptr->y_position;
+    temp_f14 = arg0->z_position - ptr->z_position;
+    *arg4 = temp_f2;
+    *arg2 = func_1505A630(temp_f12, temp_f14, 0);
+    temp_f12 = temp_f12 * temp_f12;
+    temp_f2 = temp_f2 * temp_f2;
+    temp_f14 = temp_f14 * temp_f14;
+    *arg3 = temp_f12 + temp_f14;
+    return (temp_f12 + temp_f2) + temp_f14;
+}
 void func_1505DFDC(struct127 *arg0) {
     extern u16 D_800C4ED0[];
     s32 temp_t7;

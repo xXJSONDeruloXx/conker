@@ -747,5 +747,14 @@
     "example_functions": [
       "func_15042D94"
     ]
+  },
+  {
+    "id": "mixed-float-wrapper-matrix-scale",
+    "description": "Mixed pointer+float wrapper functions may receive f32 parameters in integer argument registers; IDO emits `mtc1 a1/a2` to preserve scale floats, homes later args, calls a helper, then applies in-place matrix scaling.",
+    "trigger": "Function entry converts a1/a2 with `mtc1`, homes a3/stack args before calling another function, then performs repeated matrix float multiplies.",
+    "solution": "Use a natural signature with pointer first followed by f32 parameters; call the helper with later f32 args, then write stack-passed translation/scaling values in source order.",
+    "example_functions": [
+      "func_15142914"
+    ]
   }
 ]
