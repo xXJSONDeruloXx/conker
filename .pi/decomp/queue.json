@@ -1457,7 +1457,7 @@
     "instructions": 20,
     "difficulty": "low",
     "tags": [],
-    "attempts": 3,
+    "attempts": 6,
     "lastScore": 0.9,
     "status": "pending",
     "history": [
@@ -1590,6 +1590,44 @@
           "structural: target=or t8, t7, t6 got=or t8, t7, v1"
         ],
         "timestamp": "2026-06-03T09:39:04.340Z"
+      },
+      {
+        "code": "void func_15079F6C(void) {\n    u16 tmp0;\n    u16 tmp1;\n\n    tmp0 = D_800D1890 << 8;\n    tmp1 = ((u8 *)&D_800D1890)[1];\n    D_800D154C->unk224 = tmp0 | tmp1;\n    D_800D154C->unk22B = D_800D1892;\n    D_800D154C->unk226 = D_800D1893;\n}\n",
+        "score": 0.5,
+        "reason": "structural_diffs=10",
+        "diffs": [
+          "structural: target=lui a0, HI(D_800D154C) got=lui a0, HI(D_800D1890)",
+          "structural: target=addiu a0, a0, LO(D_800D154C) got=lui a1, HI(D_800D154C)",
+          "structural: target=lui v0, HI(D_800D1890) got=addiu a1, a1, LO(D_800D154C)",
+          "structural: target=lbu v0, LO(D_800D1890)(v0) got=addiu a0, a0, LO(D_800D1890)",
+          "structural: target=lui v1, HI(D_800D1891) got=lbu v0, 0(a0)",
+          "structural: target=lbu t6, LO(D_800D1891)(v1) got=lbu v1, 1(a0)",
+          "structural: target=lw t9, 0(a0) got=lw t9, 0(a1)",
+          "structural: target=or t8, t7, t6 got=or t8, t7, v1",
+          "structural: target=lw t1, 0(a0) got=lw t1, 0(a1)",
+          "structural: target=lw t3, 0(a0) got=lw t3, 0(a1)"
+        ],
+        "timestamp": "2026-06-03T09:39:25.917Z"
+      },
+      {
+        "code": "void func_15079F6C(void) {\n    u16 tmp1;\n    u16 tmp0;\n\n    tmp0 = D_800D1890 << 8;\n    tmp1 = D_800D1891;\n    D_800D154C->unk224 = tmp0 | tmp1;\n    D_800D154C->unk22B = D_800D1892;\n    D_800D154C->unk226 = D_800D1893;\n}\n",
+        "score": 0.9,
+        "reason": "structural_diffs=2",
+        "diffs": [
+          "structural: target=lbu t6, LO(D_800D1891)(v1) got=lbu v1, LO(D_800D1891)(v1)",
+          "structural: target=or t8, t7, t6 got=or t8, t7, v1"
+        ],
+        "timestamp": "2026-06-03T09:40:16.147Z"
+      },
+      {
+        "code": "void func_15079F6C(void) {\n    u16 tmp0;\n    s16 tmp1;\n\n    tmp0 = D_800D1890 << 8;\n    tmp1 = D_800D1891;\n    D_800D154C->unk224 = tmp0 | tmp1;\n    D_800D154C->unk22B = D_800D1892;\n    D_800D154C->unk226 = D_800D1893;\n}\n",
+        "score": 0.9,
+        "reason": "structural_diffs=2",
+        "diffs": [
+          "structural: target=lbu t6, LO(D_800D1891)(v1) got=lbu v1, LO(D_800D1891)(v1)",
+          "structural: target=or t8, t7, t6 got=or t8, t7, v1"
+        ],
+        "timestamp": "2026-06-03T09:40:32.453Z"
       }
     ]
   },
