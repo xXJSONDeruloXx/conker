@@ -7361,9 +7361,18 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 0.4857142857142857,
+    "status": "pending",
+    "history": [
+      {
+        "code": "s32 func_151239CC(struct108 *arg0, s32 arg1) {\n    if (arg0->unk20C[arg1] != 0) {\n        arg0->unk0 = arg0->unk2[arg1];\n        arg0->unk2C  = *(s32*)((u8*)arg0 + arg1 * 4 + 0x30);\n        arg0->unkDC  = *(s32*)((u8*)arg0 + arg1 * 4 + 0xE0);\n        arg0->unk84  = *(s32*)((u8*)arg0 + arg1 * 4 + 0x88);\n        arg0->unk134 = *(s32*)((u8*)arg0 + arg1 * 4 + 0x138);\n        arg0->unk1B4 = arg0->unk1B6[arg1];\n        arg0->unk1E0 = *(s16*)((u8*)arg0 + arg1 * 2 + 0x1E2);\n        func_15124B18(arg0);\n        arg0->unk20C[arg1] = 0;\n        return 1;\n    }\n    return 0;\n}",
+        "score": 0.4857142857142857,
+        "reason": "length_mismatch (target=34, generated=35)",
+        "diffs": [],
+        "timestamp": "2026-06-03T03:48:16.954Z"
+      }
+    ]
   },
   {
     "function": "func_16001830",

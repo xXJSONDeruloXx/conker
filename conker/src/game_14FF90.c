@@ -333,7 +333,21 @@ void func_15123508(struct108 *arg0) {
 //     return 0;
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_14FF90/func_151239CC.s")
+s32 func_151239CC(struct108 *arg0, s32 arg1) {
+    if (arg0->unk20C[arg1] != 0) {
+        arg0->unk0 = arg0->unk2[arg1];
+        arg0->unk2C  = *(s32*)((u8*)arg0 + arg1 * 4 + 0x30);
+        arg0->unkDC  = *(s32*)((u8*)arg0 + arg1 * 4 + 0xE0);
+        arg0->unk84  = *(s32*)((u8*)arg0 + arg1 * 4 + 0x88);
+        arg0->unk134 = *(s32*)((u8*)arg0 + arg1 * 4 + 0x138);
+        arg0->unk1B4 = ((s16*)arg0)[arg1 + 0xDB];
+        arg0->unk1E0 = ((s16*)arg0)[arg1 + 0xF1];
+        func_15124B18(arg0);
+        arg0->unk20C[arg1] = 0;
+        return 1;
+    }
+    return 0;
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/game_14FF90/func_15123A54.s")
 
 void func_15124770(struct108 *arg0, s32 arg1) {
