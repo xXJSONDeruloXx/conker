@@ -23732,9 +23732,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 2,
-    "lastScore": 0.8654,
-    "status": "pending",
+    "attempts": 3,
+    "lastScore": 1,
+    "status": "matched",
     "history": [
       {
         "code": "void func_151644F4(struct242 *arg0, struct17 *arg1, s32 arg2, f32 arg3, f32 arg4) {\n    f32 tmp[16];\n    f32 sp6C;\n    f32 sp70;\n    f32 sp74;\n\n    func_150A8050((f32 (*)[4])tmp, arg3, 0.0f, arg4);\n    tmp[13] = arg1->unk0;\n    tmp[14] = arg1->unk4;\n    tmp[15] = arg1->unk8;\n    func_150A7960((f32 (*)[4])tmp, 0.0f, arg2, 0.0f, &sp6C, &sp70, &sp74);\n    arg0->unk14->unkE = sp6C;\n    arg0->unk14->unk10 = sp70;\n    arg0->unk14->unk12 = sp74;\n}",
@@ -24413,7 +24413,7 @@
     ],
     "attempts": 0,
     "lastScore": 0,
-    "status": "pending"
+    "status": "skipped"
   },
   {
     "function": "func_151D2BA4",
@@ -28399,9 +28399,37 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 2,
+    "lastScore": 0.7885,
+    "status": "pending",
+    "history": [
+      {
+        "code": "s32 func_15015104(struct134 *arg0) {\n    s32 sp44[5];\n    struct260 *temp_v0;\n    s32 temp_v1;\n\n    ((u8 *)arg0)[0x14] = 1;\n    sp44[0] = (s32)arg0;\n    ((u8 *)sp44)[4] = arg0->unk1C;\n    func_1510F800(0);\n    sp44[2] = func_1510FD20(arg0->unk0, arg0->unk4);\n    temp_v1 = arg0->unk20;\n    if (temp_v1 != 0) {\n        ((u8 *)sp44)[0xC] = 3;\n    } else {\n        ((u8 *)sp44)[0xC] = 0;\n    }\n    sp44[4] = 0;\n    temp_v0 = func_15149130(0x12C, -1, -1, -1, 0, 0x2C, (struct37 *)0x14, 0xFF, 0);\n    if (temp_v0 != 0) {\n        memcpy((u8 *)temp_v0 + 0x28, sp44, 0x14);\n    }\n    return 1;\n}",
+        "score": 0.4519230769230769,
+        "reason": "length_mismatch (target=52, generated=47)",
+        "diffs": [],
+        "timestamp": "2026-06-04T04:24:36.632Z"
+      },
+      {
+        "code": "s32 func_15015104(struct134 *arg0) {\n    s32 sp44[5];\n    s32 pad[2];\n    struct260 *temp_v0;\n    s32 temp_v1;\n    s32 temp_t0;\n    s32 temp_v0_2;\n\n    ((u8 *)arg0)[0x14] = 1;\n    sp44[0] = (s32)arg0;\n    ((u8 *)sp44)[4] = arg0->unk1C;\n    func_1510F800(0);\n    sp44[2] = func_1510FD20(arg0->unk0, arg0->unk4);\n    temp_v1 = arg0->unk20;\n    if (temp_v1 != 0) {\n        temp_t0 = 1;\n    } else {\n        temp_t0 = 0;\n    }\n    if (temp_v1 != 0) {\n        temp_v0_2 = 2;\n    } else {\n        temp_v0_2 = 0;\n    }\n    ((u8 *)sp44)[0xC] = temp_v0_2 | temp_t0;\n    sp44[4] = 0;\n    temp_v0 = func_15149130(0x12C, -1, -1, -1, 0, 0x2C, (struct37 *)0x14, 0xFF, 0);\n    if (temp_v0 != 0) {\n        memcpy((u8 *)temp_v0 + 0x28, sp44, 0x14);\n    }\n    return 1;\n}",
+        "score": 0.7885,
+        "reason": "structural_diffs=11",
+        "diffs": [
+          "structural: target=addiu sp, sp, -88 got=addiu sp, sp, -96",
+          "structural: target=sw a2, 68(sp) got=sw a2, 76(sp)",
+          "structural: target=sw a2, 88(sp) got=sw a2, 96(sp)",
+          "structural: target=sb t7, 72(sp) got=sb t7, 80(sp)",
+          "structural: target=lw a2, 88(sp) got=lw a2, 96(sp)",
+          "structural: target=lw a2, 88(sp) got=lw a2, 96(sp)",
+          "structural: target=sw v0, 76(sp) got=sw v0, 84(sp)",
+          "structural: target=sb t8, 80(sp) got=sb t8, 88(sp)",
+          "structural: target=sw zero, 84(sp) got=sw zero, 92(sp)",
+          "structural: target=addiu a1, sp, 68 got=addiu a1, sp, 76",
+          "structural: target=addiu sp, sp, 88 got=addiu sp, sp, 96"
+        ],
+        "timestamp": "2026-06-04T04:25:10.851Z"
+      }
+    ]
   },
   {
     "function": "func_1500B8F4",
