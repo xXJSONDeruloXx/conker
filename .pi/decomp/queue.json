@@ -31141,9 +31141,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
-    "lastScore": 0.6557,
-    "status": "pending",
+    "attempts": 4,
+    "lastScore": 1,
+    "status": "matched",
     "history": [
       {
         "code": "void func_150746F0(void) {\n    struct127 *temp_a0;\n    struct127 **temp_a1;\n    s32 temp_v0;\n    u8 temp_v1;\n\n    temp_a1 = &D_800D154C;\n    temp_a0 = NULL;\n    if (D_800BE616 != 0) {\n        temp_a0 = *temp_a1;\n    } else if ((*temp_a1)->unk13C != 0) {\n        temp_a0 = D_800CC2D0;\n    }\n    if (temp_a0 != NULL) {\n        temp_v0 = D_800D1580;\n        temp_v1 = temp_a0->health;\n        if (temp_v0 < temp_v1) {\n            temp_a0->health = temp_v1 - temp_v0;\n            if (temp_a0->unk31C != NULL) {\n                if (temp_a0->camera != NULL) {\n                    if (((u8 *)temp_a0->unk31C)[0x197] != 0) {\n                        func_1517F488(0xFF, 0, 0, 0xB4, 0x14, ((u8 *)temp_a0->camera)[0x23D]);\n                    }\n                }\n            }\n        } else {\n            temp_a0->health = 0;\n            (*temp_a1)->health = 0;\n            if (temp_a0->interaction_state == 1) {\n                temp_a0->immune = 0xFF;\n                func_1507CD64(temp_a0, 6);\n            }\n        }\n    }\n}",
@@ -32046,9 +32046,53 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.377,
+    "status": "pending",
+    "history": [
+      {
+        "code": "s32 func_1502B5C8(s32 *arg0, s32 arg1, s32 arg2, s32 arg3) {\n    s32 *args;\n    s32 temp_a1;\n    s32 offset;\n    s32 sp40;\n    s32 sp38;\n    s32 ret;\n\n    args = &arg2;\n    if (arg0 == NULL) {\n        arg0 = &sp40;\n    }\n    *arg0 = 1;\n    offset = (s32) D_AB1950;\n    if (arg1 != 0) {\n        do {\n            args = (s32 *)(((s32) args + 3) & -4);\n            temp_a1 = *args++;\n            if (*arg0 != 0) {\n                offset += func_1502AC88(offset, temp_a1, &sp38);\n            }\n            *arg0 = sp38 & 0x0FFFFFFF;\n            arg1--;\n        } while (arg1 != 0);\n    }\n    ret = 0;\n    if (*arg0 != 0) {\n        ret = func_1502B350(offset, sp38, arg0);\n    }\n    return ret;\n}",
+        "score": 0.48360655737704916,
+        "reason": "length_mismatch (target=61, generated=59)",
+        "diffs": [],
+        "timestamp": "2026-06-04T10:10:27.259Z"
+      },
+      {
+        "code": "s32 func_1502B5C8(s32 *arg0, s32 arg1, s32 arg2, s32 arg3) {\n    s32 offset;\n    s32 *args;\n    s32 *dst;\n    s32 temp_a1;\n    s32 sp40;\n    s32 sp38;\n    s32 ret;\n\n    dst = &sp40;\n    if (arg0 != NULL) {\n        dst = arg0;\n    }\n    *dst = 1;\n    offset = (s32) D_AB1950;\n    args = &arg2;\n    for (; *(&arg1) != 0; (*(&arg1))--) {\n        args = (s32 *)(((s32) args + 3) & -4);\n        temp_a1 = *args++;\n        if (*dst != 0) {\n            offset += func_1502AC88(offset, temp_a1, &sp38);\n        }\n        *dst = sp38 & 0x0FFFFFFF;\n    }\n    ret = 0;\n    if (*dst != 0) {\n        ret = func_1502B350(offset, sp38, dst);\n    }\n    return ret;\n}",
+        "score": 0.48360655737704916,
+        "reason": "length_mismatch (target=61, generated=59)",
+        "diffs": [],
+        "timestamp": "2026-06-04T10:11:05.745Z"
+      },
+      {
+        "code": "s32 func_1502B5C8(s32 *arg0, s32 arg1, ...) {\n    va_list args;\n    s32 *dst;\n    s32 temp_a1;\n    s32 offset;\n    s32 sp40;\n    s32 sp38;\n    s32 ret;\n\n    if (arg0 != NULL) {\n        dst = arg0;\n    } else {\n        dst = &sp40;\n    }\n    *dst = 1;\n    offset = (s32) D_AB1950;\n    va_start(args, arg1);\n    for (; arg1 != 0; arg1--) {\n        temp_a1 = va_arg(args, s32);\n        if (*dst != 0) {\n            offset += func_1502AC88(offset, temp_a1, &sp38);\n        }\n        *dst = sp38 & 0x0FFFFFFF;\n    }\n    ret = 0;\n    if (*dst != 0) {\n        ret = func_1502B350(offset, sp38, dst);\n    }\n    return ret;\n}",
+        "score": 0.377,
+        "reason": "structural_diffs=38",
+        "diffs": [
+          "structural: target=addiu s2, sp, 64 got=li t6, 1",
+          "structural: target=move s2, a0 got=b L1",
+          "structural: target=li t6, 1 got=move s2, a0",
+          "structural: target=sw t6, 0(s2) got=addiu s2, sp, 60",
+          "structural: target=lw t7, 84(sp) got=sw t6, 0(s2)",
+          "structural: target=lui s0, HI(D_AB1950) got=lw t7, 84(sp)",
+          "structural: target=addiu s0, s0, LO(D_AB1950) got=lui s0, HI(D_AB1950)",
+          "structural: target=beqz t7, L1 got=addiu s0, s0, LO(D_AB1950)",
+          "structural: target=addiu s1, sp, 88 got=beqz t7, L2",
+          "structural: target=lui s5, 4095 got=addiu s1, sp, 88",
+          "structural: target=ori s5, s5, 65535 got=lui s5, 4095",
+          "structural: target=addiu s4, sp, 56 got=ori s5, s5, 65535",
+          "structural: target=li s3, -4 got=addiu s4, sp, 56",
+          "structural: target=lw t9, 0(s2) got=li s3, -4",
+          "structural: target=addiu t8, s1, 3 got=lw t9, 0(s2)",
+          "structural: target=and s1, t8, s3 got=addiu t8, s1, 3",
+          "structural: target=addiu s1, s1, 4 got=and s1, t8, s3",
+          "structural: target=beqz t9, L2 got=addiu s1, s1, 4",
+          "structural: target=lw a1, -4(s1) got=beqz t9, L3",
+          "structural: target=move a0, s0 got=lw a1, -4(s1)"
+        ],
+        "timestamp": "2026-06-04T10:11:26.334Z"
+      }
+    ]
   },
   {
     "function": "func_1506D584",
