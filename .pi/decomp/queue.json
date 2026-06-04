@@ -25603,9 +25603,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 1,
-    "lastScore": 0.5574,
-    "status": "pending",
+    "attempts": 2,
+    "lastScore": 1,
+    "status": "matched",
     "history": [
       {
         "code": "void func_15145548(struct17 *arg0, struct17 *arg1, struct17 *arg2, struct17 *arg3, f32 *arg4) {\n    f32 sp24;\n\n    if (arg4 == NULL) {\n        arg4 = &sp24;\n    }\n    if (func_1514563C(arg0, arg1, arg2, arg3, arg4) != 0) {\n        if (*arg4 < 0.0f) {\n            arg3->unk0 = arg0->unk0;\n            arg3->unk4 = arg0->unk4;\n            arg3->unk8 = arg0->unk8;\n        } else if (1.0f < *arg4) {\n            arg3->unk0 = arg0->unk0 + arg1->unk0;\n            arg3->unk4 = arg0->unk4 + arg1->unk4;\n            arg3->unk8 = arg0->unk8 + arg1->unk8;\n        }\n    } else {\n        arg3->unk0 = arg0->unk0;\n        arg3->unk4 = arg0->unk4;\n        arg3->unk8 = arg0->unk8;\n    }\n}",
@@ -31083,9 +31083,32 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.48360655737704916,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_1501B22C(s32 arg0) {\n    u8 *temp_s0;\n    f32 temp_f0;\n    f32 temp_f8;\n    f32 temp_f12;\n    f32 temp_f2;\n    f32 temp_f0_2;\n    f32 zero;\n\n    zero = 0.0f;\n    temp_s0 = (u8 *)D_800BE628 + (((arg0 << 2) - arg0) << 7);\n    temp_f0 = *(f32 *)(temp_s0 + 0x74) * 0.5f;\n    temp_f8 = *(f32 *)(temp_s0 + 0x78) * 0.5f;\n    temp_f12 = -temp_f0 * D_80096900;\n    temp_f2 = cosf(temp_f12);\n    temp_f0_2 = sinf(temp_f12);\n    *(f32 *)(temp_s0 + 0x9C) = temp_f0_2;\n    temp_f2 = -temp_f2;\n    *(f32 *)(temp_s0 + 0x90) = temp_f0_2;\n    *(f32 *)(temp_s0 + 0x94) = temp_f2;\n    *(f32 *)(temp_s0 + 0x88) = -temp_f2;\n    *(f32 *)(temp_s0 + 0x98) = zero;\n    *(f32 *)(temp_s0 + 0x8C) = zero;\n    temp_f12 = temp_f8 * D_80096904;\n    temp_f2 = cosf(temp_f12);\n    temp_f0_2 = sinf(temp_f12);\n    temp_f12 = -temp_f0_2;\n    *(f32 *)(temp_s0 + 0xA0) = zero;\n    *(f32 *)(temp_s0 + 0xA8) = temp_f12;\n    *(f32 *)(temp_s0 + 0xB4) = temp_f12;\n    temp_f2 = -temp_f2;\n    *(f32 *)(temp_s0 + 0xAC) = zero;\n    *(f32 *)(temp_s0 + 0xA4) = temp_f2;\n    *(f32 *)(temp_s0 + 0xB0) = -temp_f2;\n}",
+        "score": 0.4918032786885246,
+        "reason": "length_mismatch (target=61, generated=60)",
+        "diffs": [],
+        "timestamp": "2026-06-04T10:02:51.316Z"
+      },
+      {
+        "code": "void func_1501B22C(s32 arg0) {\n    u8 *temp_s0;\n    volatile f32 sp24;\n    volatile f32 sp28;\n    volatile f32 sp34;\n    f32 temp_f2;\n    f32 temp_f0;\n\n    temp_s0 = (u8 *)D_800BE628 + (((arg0 << 2) - arg0) << 7);\n    temp_f0 = *(f32 *)(temp_s0 + 0x74) * 0.5f;\n    sp28 = *(f32 *)(temp_s0 + 0x78) * 0.5f;\n    sp24 = -temp_f0 * D_80096900;\n    sp34 = cosf(sp24);\n    temp_f0 = sinf(sp24);\n    temp_f2 = -sp34;\n    *(f32 *)(temp_s0 + 0x9C) = temp_f0;\n    *(f32 *)(temp_s0 + 0x90) = temp_f0;\n    *(f32 *)(temp_s0 + 0x94) = temp_f2;\n    *(f32 *)(temp_s0 + 0x88) = -temp_f2;\n    *(f32 *)(temp_s0 + 0x98) = 0.0f;\n    *(f32 *)(temp_s0 + 0x8C) = 0.0f;\n    sp24 = sp28 * D_80096904;\n    sp34 = cosf(sp24);\n    temp_f0 = sinf(sp24);\n    temp_f2 = -sp34;\n    sp24 = -temp_f0;\n    *(f32 *)(temp_s0 + 0xA0) = 0.0f;\n    *(f32 *)(temp_s0 + 0xA8) = sp24;\n    *(f32 *)(temp_s0 + 0xB4) = sp24;\n    *(f32 *)(temp_s0 + 0xAC) = 0.0f;\n    *(f32 *)(temp_s0 + 0xA4) = temp_f2;\n    *(f32 *)(temp_s0 + 0xB0) = -temp_f2;\n}",
+        "score": 0.4765625,
+        "reason": "length_mismatch (target=61, generated=64)",
+        "diffs": [],
+        "timestamp": "2026-06-04T10:03:20.074Z"
+      },
+      {
+        "code": "void func_1501B22C(s32 arg0) {\n    u8 *temp_s0;\n    f32 stack[5];\n    f32 temp_f0;\n    f32 temp_f2;\n    f32 temp_f12;\n\n    temp_s0 = (u8 *)D_800BE628 + (((arg0 << 2) - arg0) << 7);\n    temp_f0 = *(f32 *)(temp_s0 + 0x74) * 0.5f;\n    stack[1] = *(f32 *)(temp_s0 + 0x78) * 0.5f;\n    stack[0] = -temp_f0 * D_80096900;\n    stack[4] = cosf(stack[0]);\n    temp_f0 = sinf(stack[0]);\n    temp_f2 = stack[4];\n    *(f32 *)(temp_s0 + 0x9C) = temp_f0;\n    temp_f2 = -temp_f2;\n    *(f32 *)(temp_s0 + 0x90) = temp_f0;\n    *(f32 *)(temp_s0 + 0x94) = temp_f2;\n    *(f32 *)(temp_s0 + 0x88) = -temp_f2;\n    *(f32 *)(temp_s0 + 0x98) = 0.0f;\n    *(f32 *)(temp_s0 + 0x8C) = 0.0f;\n    stack[0] = stack[1] * D_80096904;\n    stack[4] = cosf(stack[0]);\n    temp_f0 = sinf(stack[0]);\n    temp_f12 = -temp_f0;\n    *(f32 *)(temp_s0 + 0xA0) = 0.0f;\n    temp_f2 = stack[4];\n    *(f32 *)(temp_s0 + 0xA8) = temp_f12;\n    *(f32 *)(temp_s0 + 0xB4) = temp_f12;\n    temp_f2 = -temp_f2;\n    *(f32 *)(temp_s0 + 0xAC) = 0.0f;\n    *(f32 *)(temp_s0 + 0xA4) = temp_f2;\n    *(f32 *)(temp_s0 + 0xB0) = -temp_f2;\n}",
+        "score": 0.48360655737704916,
+        "reason": "length_mismatch (target=61, generated=59)",
+        "diffs": [],
+        "timestamp": "2026-06-04T10:03:50.181Z"
+      }
+    ]
   },
   {
     "function": "func_150746F0",
