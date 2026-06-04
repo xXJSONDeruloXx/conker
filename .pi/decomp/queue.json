@@ -17712,9 +17712,9 @@
     "instructions": 49,
     "difficulty": "medium-low",
     "tags": [],
-    "attempts": 6,
-    "lastScore": 0.2449,
-    "status": "pending",
+    "attempts": 8,
+    "lastScore": 0.4897959183673469,
+    "status": "skipped",
     "history": [
       {
         "code": "void func_15142314(void *arg0, s32 arg1, f32 *arg2) {\n    u8 *temp_v0;\n    f32 scale;\n\n    if (D_800C3E90 != 0) {\n        scale = 0.0000152587890625f;\n        temp_v0 = (u8 *)arg0 + (arg1 << 6);\n        arg2[0] = ((f32)*(s16 *)(temp_v0 + 0x38) + (f32)(*(s16 *)(temp_v0 + 0x18) << 16)) * scale;\n        arg2[1] = ((f32)*(s16 *)(temp_v0 + 0x3A) + (f32)(*(s16 *)(temp_v0 + 0x1A) << 16)) * scale;\n        arg2[2] = ((f32)*(s16 *)(temp_v0 + 0x3C) + (f32)(*(s16 *)(temp_v0 + 0x1C) << 16)) * scale;\n    } else {\n        temp_v0 = (u8 *)arg0 + (arg1 << 6);\n        arg2[0] = *(f32 *)(temp_v0 + 0x30);\n        arg2[1] = *(f32 *)(temp_v0 + 0x34);\n        arg2[2] = *(f32 *)(temp_v0 + 0x38);\n    }\n}",
@@ -17862,6 +17862,41 @@
           "structural: target=mtc1 t3, f6 got=mtc1 t1, f4"
         ],
         "timestamp": "2026-06-04T03:03:23.882Z"
+      },
+      {
+        "code": "void func_15142314(void *arg0, s32 arg1, vertex *arg2) {\n    struct113 *temp_v0;\n\n    if (D_800C3E90 != 0) {\n        temp_v0 = (struct113 *)((u8 *)arg0 + (arg1 << 6));\n        arg2->x = ((f32)temp_v0->unk38 + (f32)(temp_v0->unk18 << 16)) * 0.0000152587890625f;\n        arg2->y = ((f32)temp_v0->unk3A + (f32)(temp_v0->unk1A << 16)) * 0.0000152587890625f;\n        arg2->z = ((f32)temp_v0->unk3C + (f32)(temp_v0->unk1C << 16)) * 0.0000152587890625f;\n    } else {\n        temp_v0 = (struct113 *)((u8 *)arg0 + (arg1 << 6));\n        arg2->x = *(f32 *)((s32)temp_v0 + 0x30);\n        arg2->y = *(f32 *)((s32)temp_v0 + 0x34);\n        arg2->z = *(f32 *)((s32)temp_v0 + 0x38);\n    }\n}",
+        "score": 0.3061,
+        "reason": "structural_diffs=34",
+        "diffs": [
+          "structural: target=lui at, 14208 got=addu v0, a0, t7",
+          "structural: target=beqz t6, L0 got=beqzl t6, L0",
+          "structural: target=addu v0, a0, t7 got=lwc1 f4, 48(v0)",
+          "structural: target=mtc1 at, f0 got=sll t7, a1, 6",
+          "structural: target=sll t7, a1, 6 got=addu v0, a0, t7",
+          "structural: target=addu v0, a0, t7 got=lh t9, 24(v0)",
+          "structural: target=lh t9, 24(v0) got=lh t8, 56(v0)",
+          "structural: target=lh t8, 56(v0) got=lui at, 14208",
+          "structural: target=cvt.s.w f10, f8 got=mtc1 at, f0",
+          "structural: target=cvt.s.w f6, f4 got=cvt.s.w f10, f8",
+          "structural: target=add.s f16, f6, f10 got=cvt.s.w f6, f4",
+          "structural: target=mul.s f18, f16, f0 got=add.s f16, f6, f10",
+          "structural: target=swc1 f18, 0(a2) got=mul.s f18, f16, f0",
+          "structural: target=lh t2, 26(v0) got=swc1 f18, 0(a2)",
+          "structural: target=lh t1, 58(v0) got=lh t2, 26(v0)",
+          "structural: target=sll t3, t2, 16 got=lh t1, 58(v0)",
+          "structural: target=mtc1 t3, f6 got=sll t3, t2, 16",
+          "structural: target=mtc1 t1, f4 got=mtc1 t3, f6",
+          "structural: target=cvt.s.w f10, f6 got=mtc1 t1, f4",
+          "structural: target=cvt.s.w f8, f4 got=cvt.s.w f10, f6"
+        ],
+        "timestamp": "2026-06-04T03:03:47.591Z"
+      },
+      {
+        "code": "void func_15142314(void *arg0, s32 arg1, vertex *arg2) {\n    struct113 *temp_v0;\n\n    if (!D_800C3E90) {\n        temp_v0 = (struct113 *)((u8 *)arg0 + (arg1 << 6));\n        arg2->x = *(f32 *)((s32)temp_v0 + 0x30);\n        arg2->y = *(f32 *)((s32)temp_v0 + 0x34);\n        arg2->z = *(f32 *)((s32)temp_v0 + 0x38);\n    } else {\n        temp_v0 = (struct113 *)((u8 *)arg0 + (arg1 << 6));\n        arg2->x = ((f32)temp_v0->unk38 + (f32)(temp_v0->unk18 << 16)) * 0.0000152587890625f;\n        arg2->y = ((f32)temp_v0->unk3A + (f32)(temp_v0->unk1A << 16)) * 0.0000152587890625f;\n        arg2->z = ((f32)temp_v0->unk3C + (f32)(temp_v0->unk1C << 16)) * 0.0000152587890625f;\n    }\n}",
+        "score": 0.4897959183673469,
+        "reason": "length_mismatch (target=49, generated=48)",
+        "diffs": [],
+        "timestamp": "2026-06-04T03:04:10.098Z"
       }
     ]
   },
@@ -21637,9 +21672,35 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.9592,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_15074980(void) {\n    s8 *countp;\n    struct127 *cur;\n    s32 i;\n    f32 dist;\n    s32 value;\n\n    countp = &D_8008FD8C;\n    value = D_800D1580 << 3;\n    i = 0;\n    dist = (f32)value;\n    if (*countp > 0) {\n        cur = D_800CC2D0;\n        do {\n            if (func_1505A72C(D_800D154C, cur) < dist) {\n                if (cur->unk31C != 0) {\n                    *(s8 *)((s32)cur->unk31C + 0x4B) = 0x14;\n                }\n            }\n            i++;\n            cur++;\n        } while (i < *countp);\n    }\n}",
+        "score": 0.4803921568627451,
+        "reason": "length_mismatch (target=49, generated=51)",
+        "diffs": [],
+        "timestamp": "2026-06-04T03:05:13.822Z"
+      },
+      {
+        "code": "void func_15074980(void) {\n    register s8 *countp;\n    register struct127 *cur;\n    register s32 i;\n    f32 dist;\n\n    countp = &D_8008FD8C;\n    dist = (f32)(D_800D1580 << 3);\n    i = 0;\n    if (*countp > 0) {\n        cur = D_800CC2D0;\n        do {\n            if (func_1505A72C(D_800D154C, cur) < dist) {\n                if (cur->unk31C != 0) {\n                    *(s8 *)((s32)cur->unk31C + 0x4B) = 0x14;\n                }\n            }\n            i++;\n            cur++;\n        } while (i < *countp);\n    }\n}",
+        "score": 0.49,
+        "reason": "length_mismatch (target=49, generated=50)",
+        "diffs": [],
+        "timestamp": "2026-06-04T03:05:49.633Z"
+      },
+      {
+        "code": "void func_15074980(void) {\n    register struct127 *cur;\n    register s32 i;\n    f32 dist;\n\n    dist = (f32)(D_800D1580 << 3);\n    i = 0;\n    if (D_8008FD8C > 0) {\n        cur = D_800CC2D0;\n        do {\n            if (func_1505A72C(D_800D154C, cur) < dist) {\n                if (cur->unk31C != 0) {\n                    *(s8 *)((s32)cur->unk31C + 0x4B) = 0x14;\n                }\n            }\n            i++;\n            cur++;\n        } while (i < D_8008FD8C);\n    }\n}",
+        "score": 0.9592,
+        "reason": "structural_diffs=2",
+        "diffs": [
+          "structural: target=addiu s2, s2, LO(D_800D154C) got=addiu s0, s0, LO(D_800CC2D0)",
+          "structural: target=addiu s0, s0, LO(D_800CC2D0) got=addiu s2, s2, LO(D_800D154C)"
+        ],
+        "timestamp": "2026-06-04T03:06:09.430Z"
+      }
+    ]
   },
   {
     "function": "func_1507266C",
