@@ -19383,7 +19383,7 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 3,
+    "attempts": 6,
     "lastScore": 0.48863636363636365,
     "status": "pending",
     "history": [
@@ -19407,6 +19407,27 @@
         "reason": "length_mismatch (target=44, generated=43)",
         "diffs": [],
         "timestamp": "2026-06-04T00:26:23.454Z"
+      },
+      {
+        "code": "s32 func_15013D38(struct47 *arg0) {\n    struct17 sp3C;\n    s32 temp_v0;\n    s32 temp_v1;\n\n    arg0->unk16 |= 4;\n    sp3C.unk0 = arg0->unk0;\n    sp3C.unk4 = arg0->unk2;\n    sp3C.unk8 = arg0->unk4;\n    temp_v0 = arg0->unk18;\n    if (temp_v0 == 0) {\n        temp_v1 = 1;\n    } else {\n        temp_v1 = temp_v0;\n    }\n    func_151BE850(&sp3C, arg0->unk10, temp_v1, arg0->unk1F, 1, 0xFF, 1);\n    return 1;\n}",
+        "score": 0.48863636363636365,
+        "reason": "length_mismatch (target=44, generated=43)",
+        "diffs": [],
+        "timestamp": "2026-06-04T00:26:58.315Z"
+      },
+      {
+        "code": "s32 func_15013D38(struct47 *arg0) {\n    struct17 sp3C;\n    s32 temp_v0;\n    s32 temp_v1;\n\n    arg0->unk16 |= 4;\n    sp3C.unk0 = arg0->unk0;\n    sp3C.unk4 = arg0->unk2;\n    sp3C.unk8 = arg0->unk4;\n    temp_v0 = arg0->unk18;\n    temp_v1 = 1;\n    if (temp_v0 == 0) {\n    } else {\n        temp_v1 = temp_v0;\n    }\n    func_151BE850(&sp3C, arg0->unk10, temp_v1, arg0->unk1F, 1, 0xFF, 1);\n    return 1;\n}",
+        "score": 0.48863636363636365,
+        "reason": "length_mismatch (target=44, generated=43)",
+        "diffs": [],
+        "timestamp": "2026-06-04T00:27:17.213Z"
+      },
+      {
+        "code": "s32 func_15013D38(struct47 *arg0) {\n    struct17 sp3C;\n    s32 temp_v0;\n    s32 temp_v1;\n    s32 temp_t1;\n    s32 temp_t2;\n    s32 temp_t3;\n\n    arg0->unk16 |= 4;\n    sp3C.unk0 = arg0->unk0;\n    sp3C.unk4 = arg0->unk2;\n    sp3C.unk8 = arg0->unk4;\n    temp_t1 = 1;\n    temp_t2 = 0xFF;\n    temp_t3 = 1;\n    temp_v1 = 1;\n    temp_v0 = arg0->unk18;\n    if (temp_v0 != 0) {\n        temp_v1 = temp_v0;\n    }\n    func_151BE850(&sp3C, arg0->unk10, temp_v1, arg0->unk1F, temp_t1, temp_t2, temp_t3);\n    return 1;\n}",
+        "score": 0.48863636363636365,
+        "reason": "length_mismatch (target=44, generated=43)",
+        "diffs": [],
+        "timestamp": "2026-06-04T00:27:39.023Z"
       }
     ]
   },
