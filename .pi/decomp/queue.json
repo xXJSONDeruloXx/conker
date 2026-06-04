@@ -16663,7 +16663,7 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 9,
+    "attempts": 12,
     "lastScore": 0.4285714285714286,
     "status": "pending",
     "history": [
@@ -16729,6 +16729,27 @@
         "reason": "length_mismatch (target=36, generated=42)",
         "diffs": [],
         "timestamp": "2026-06-03T21:06:09.666Z"
+      },
+      {
+        "code": "f32 func_150489B0(u8 arg0) {\n    f32 ret;\n\n    if (arg0 < 0x41) {\n        ret = D_8009A220[arg0];\n    } else if (arg0 < 0x81) {\n        ret = -D_8009A420[-arg0];\n    } else if (arg0 < 0xC1) {\n        ret = -D_8009A020[arg0];\n    } else {\n        ret = D_8009A620[-arg0];\n    }\n\n    return ret;\n}",
+        "score": 0.4285714285714286,
+        "reason": "length_mismatch (target=36, generated=42)",
+        "diffs": [],
+        "timestamp": "2026-06-04T13:17:24.487Z"
+      },
+      {
+        "code": "f32 func_150489B0(u8 arg0) {\n    f32 ret;\n    s32 temp;\n\n    if (arg0 < 0x41) {\n        goto small;\n    }\n    temp = arg0;\n    if (temp < 0x81) {\n        goto medium1;\n    }\n    if (temp < 0xC1) {\n        goto medium2;\n    }\n    ret = *(f32 *)((u8 *)D_8009A620 - (temp * 4));\n    goto done;\nmedium2:\n    ret = -*(f32 *)((u8 *)D_8009A020 + (temp * 4));\n    goto done;\nmedium1:\n    ret = -*(f32 *)((u8 *)D_8009A420 - (temp * 4));\n    goto done;\nsmall:\n    ret = *(f32 *)((u8 *)D_8009A220 + (arg0 * 4));\ndone:\n    return ret;\n}",
+        "score": 0.4285714285714286,
+        "reason": "length_mismatch (target=36, generated=42)",
+        "diffs": [],
+        "timestamp": "2026-06-04T13:18:04.762Z"
+      },
+      {
+        "code": "f32 func_150489B0(u8 arg0) {\n    f32 ret;\n    s32 temp;\n\n    if (arg0 >= 0x41) {\n        temp = arg0;\n        if (temp >= 0x81) {\n            if (temp >= 0xC1) {\n                ret = *(f32 *)((s32)D_8009A620 - (temp * 4));\n            } else {\n                ret = -D_8009A020[temp];\n            }\n        } else {\n            ret = -*(f32 *)((s32)D_8009A420 - (temp * 4));\n        }\n    } else {\n        ret = D_8009A220[arg0];\n    }\n\n    return ret;\n}",
+        "score": 0.4285714285714286,
+        "reason": "length_mismatch (target=36, generated=42)",
+        "diffs": [],
+        "timestamp": "2026-06-04T13:18:28.496Z"
       }
     ]
   },
@@ -28673,7 +28694,7 @@
     ],
     "attempts": 21,
     "lastScore": 0.4714285714285714,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "void func_15076768(void) {\n    struct199 tmp;\n    u8 val;\n\n    val = D_800D1890;\n    switch (val) {\n        case 0:\n            func_15197A7C(D_800D154C);\n            break;\n        case 1:\n            tmp.unk24 = D_800D154C->x_position;\n            tmp.unk28 = -390.0f;\n            tmp.unk2C = D_800D154C->z_position;\n            func_1504715C(&tmp);\n            func_1514B364(&tmp.unk24, &tmp, 0xFF, 0);\n            break;\n    }\n}",
