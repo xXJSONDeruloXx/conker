@@ -1062,5 +1062,14 @@
     "example_functions": [
       "func_1001F978"
     ]
+  },
+  {
+    "id": "in-place-bitfield-or-schedules-around-load",
+    "description": "For small flag updates like `field |= mask`, writing the operation directly can let IDO schedule an unrelated load between the lbu and ori/sb and allocate temporaries to t-registers. Splitting the flag byte into an explicit local may allocate v0 and cause a register cascade mismatch.",
+    "trigger": "Target has `lbu field`, an unrelated `lw` from the same arg, then `ori`/`sb`, while an explicit byte temp produces `v0` register diffs.",
+    "solution": "Use direct `arg->flag |= mask;` and assign other locals in adjacent source order; avoid explicit byte temporaries unless the target actually uses v0.",
+    "example_functions": [
+      "func_15013C38"
+    ]
   }
 ]

@@ -567,7 +567,27 @@ void func_15145548(struct17 *arg0, struct17 *arg1, struct17 *arg2, struct17 *arg
         *arg3 = *arg0;
     }
 }
-#pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_1514563C.s")
+s32 func_1514563C(struct17 *arg0, struct17 *arg1, struct17 *arg2, struct17 *arg3, f32 *arg4) {
+    f32 sp1C[1];
+    f32 denom;
+    f32 dot0;
+    f32 dot1;
+
+    if (arg4 == NULL) {
+        arg4 = &sp1C[-3];
+    }
+    denom = (arg1->unk0 * arg1->unk0) + (arg1->unk4 * arg1->unk4) + (arg1->unk8 * arg1->unk8);
+    if (denom == 0.0f) {
+        return 0;
+    }
+    dot0 = (arg1->unk0 * arg0->unk0) + (arg1->unk4 * arg0->unk4) + (arg1->unk8 * arg0->unk8);
+    dot1 = (arg1->unk0 * arg2->unk0) + (arg1->unk4 * arg2->unk4) + (arg1->unk8 * arg2->unk8);
+    *arg4 = (dot1 - dot0) / denom;
+    arg3->unk0 = arg0->unk0 + (*arg4 * arg1->unk0);
+    arg3->unk4 = arg0->unk4 + (*arg4 * arg1->unk4);
+    arg3->unk8 = arg0->unk8 + (*arg4 * arg1->unk8);
+    return 1;
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15145740.s")
 // NON-MATCHING: 90% there
