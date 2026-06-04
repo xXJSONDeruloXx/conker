@@ -29676,8 +29676,8 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 9,
-    "lastScore": 0.46875,
+    "attempts": 12,
+    "lastScore": 0.4838709677419355,
     "status": "pending",
     "history": [
       {
@@ -29797,6 +29797,27 @@
         "reason": "length_mismatch (target=60, generated=64)",
         "diffs": [],
         "timestamp": "2026-06-04T09:43:35.121Z"
+      },
+      {
+        "code": "s32 func_1502B020(s32 *arg0, s32 arg1, s32 arg2, ...) {\n    s32 *args;\n    s32 temp_a1;\n    s32 offset;\n    s32 sp38;\n\n    sp38 = 1;\n    offset = (s32) D_AB1950;\n    args = &arg2;\n    if (arg1 != 0) {\n        do {\n            args = (s32 *)(((s32) args + 3) & -4);\n            temp_a1 = *args++;\n            if (sp38 != 0) {\n                offset += func_1502AC88(offset, temp_a1, &sp38);\n            }\n            arg1--;\n            sp38 = sp38 & 0x0FFFFFFF;\n        } while (arg1 != 0);\n    }\n    if (arg0 != 0) {\n        *arg0 = sp38 & 0x0FFFFFFF;\n    }\n    if (sp38 == 0) {\n        return 0;\n    }\n    return offset;\n}",
+        "score": 0.48333333333333334,
+        "reason": "length_mismatch (target=60, generated=58)",
+        "diffs": [],
+        "timestamp": "2026-06-04T09:44:08.742Z"
+      },
+      {
+        "code": "s32 func_1502B020(s32 *arg0, s32 arg1, s32 arg2, ...) {\n    va_list va;\n    s32 *args;\n    s32 temp_a1;\n    s32 offset;\n    s32 sp38;\n\n    sp38 = 1;\n    offset = (s32) D_AB1950;\n    va_start(va, arg2);\n    args = &arg2;\n    if (arg1 != 0) {\n        do {\n            args = (s32 *)(((s32) args + 3) & -4);\n            temp_a1 = *args++;\n            if (sp38 != 0) {\n                offset += func_1502AC88(offset, temp_a1, &sp38);\n            }\n            arg1--;\n            sp38 = sp38 & 0x0FFFFFFF;\n        } while (arg1 != 0);\n    }\n    if (arg0 != 0) {\n        *arg0 = sp38 & 0x0FFFFFFF;\n    }\n    if (sp38 == 0) {\n        return 0;\n    }\n    return offset;\n}",
+        "score": 0.48333333333333334,
+        "reason": "length_mismatch (target=60, generated=58)",
+        "diffs": [],
+        "timestamp": "2026-06-04T09:44:26.826Z"
+      },
+      {
+        "code": "s32 func_1502B020(s32 *arg0, s32 arg1, ...) {\n    va_list args;\n    s32 temp_a1;\n    s32 offset;\n    s32 sp38;\n\n    sp38 = 1;\n    offset = (s32) D_AB1950;\n    va_start(args, arg1);\n    if (arg1 != 0) {\n        for (; arg1 != 0; arg1--) {\n            temp_a1 = va_arg(args, s32);\n            if (sp38 != 0) {\n                offset += func_1502AC88(offset, temp_a1, &sp38);\n            }\n            sp38 = sp38 & 0x0FFFFFFF;\n        }\n    }\n    if (arg0 != 0) {\n        *arg0 = sp38 & 0x0FFFFFFF;\n    }\n    if (sp38 == 0) {\n        return 0;\n    }\n    return offset;\n}",
+        "score": 0.4838709677419355,
+        "reason": "length_mismatch (target=60, generated=62)",
+        "diffs": [],
+        "timestamp": "2026-06-04T09:44:42.276Z"
       }
     ]
   },
