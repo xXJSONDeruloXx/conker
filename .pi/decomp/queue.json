@@ -33868,9 +33868,32 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.48484848484848486,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_15001A08(void) {\n    s32 sp24;\n    s32 tmp;\n    s32 sp1C;\n\n    tmp = D_800BE9F0;\n    sp24 = D_80091AF0[tmp];\n\n    __osPiGetAccess();\n\n    while ((IO_READ(PI_STATUS_REG) & 3)) {};\n\n    tmp = D_80000308 | 0xB0000D24 | 0xA0000000;\n    sp1C = *(s32*)tmp;\n\n    __osPiRelAccess();\n\n    if (sp1C != 0x98CCE31A) {\n        sp24 <<= 1;\n    }\n\n    D_800B0DDC = allocate_memory(sp24, 1, 0, 0);\n    D_800B0DE0 = D_800B0DDC;\n    D_800B0DCC = 0;\n    D_800B0DD0 = 0;\n    D_800DBE30 = 0;\n    D_800DBE32 = 0;\n    D_800DBE34 = 0;\n    D_800DBE36 = 0;\n}",
+        "score": 0.48484848484848486,
+        "reason": "length_mismatch (target=66, generated=64)",
+        "diffs": [],
+        "timestamp": "2026-06-04T11:38:11.332Z"
+      },
+      {
+        "code": "void func_15001A08(void) {\n    s32 sp24;\n    s32 tmp;\n    s32 sp1C;\n\n    sp24 = D_80091AF0[D_800BE9F0];\n\n    __osPiGetAccess();\n\n    tmp = IO_READ(PI_STATUS_REG);\n    if (tmp & 3) {\n        do {\n            tmp = IO_READ(PI_STATUS_REG);\n        } while (tmp & 3);\n    }\n\n    tmp = D_80000308 | 0xB0000D24 | 0xA0000000;\n    sp1C = *(s32*)tmp;\n\n    __osPiRelAccess();\n\n    if (sp1C != 0x98CCE31A) {\n        sp24 <<= 1;\n    }\n\n    D_800B0DDC = allocate_memory(sp24, 1, 0, 0);\n    D_800B0DE0 = D_800B0DDC;\n    D_800B0DCC = 0;\n    D_800B0DD0 = 0;\n    D_800DBE30 = 0;\n    D_800DBE32 = 0;\n    D_800DBE34 = 0;\n    D_800DBE36 = 0;\n}",
+        "score": 0.4772727272727273,
+        "reason": "length_mismatch (target=66, generated=63)",
+        "diffs": [],
+        "timestamp": "2026-06-04T11:38:36.524Z"
+      },
+      {
+        "code": "void func_15001A08(void) {\n    s32 sp24;\n    s32 tmp;\n    s32 sp1C;\n\n    sp24 = D_80091AF0[D_800BE9F0];\n\n    __osPiGetAccess(sp24);\n\n    while ((IO_READ(PI_STATUS_REG) & 3)) {};\n\n    tmp = D_80000308 | 0xB0000D24 | 0xA0000000;\n    sp1C = *(s32*)tmp;\n\n    __osPiRelAccess(sp24);\n\n    if (sp1C != 0x98CCE31A) {\n        sp24 <<= 1;\n    }\n\n    D_800B0DDC = allocate_memory(sp24, 1, 0, 0);\n    D_800B0DE0 = D_800B0DDC;\n    D_800B0DCC = 0;\n    D_800B0DD0 = 0;\n    D_800DBE30 = 0;\n    D_800DBE32 = 0;\n    D_800DBE34 = 0;\n    D_800DBE36 = 0;\n}",
+        "score": 0.48484848484848486,
+        "reason": "length_mismatch (target=66, generated=64)",
+        "diffs": [],
+        "timestamp": "2026-06-04T11:39:13.671Z"
+      }
+    ]
   },
   {
     "function": "n_alCSeqNew",
