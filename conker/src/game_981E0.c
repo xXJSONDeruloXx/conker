@@ -1100,7 +1100,21 @@ void func_150701F4(s32 arg0) {
     func_151C9740(D_800D154C, 0xFF, 1);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_15070224.s")
+void func_15070224(s32 arg0) {
+    Header header;
+    Header2 header2;
+
+    header.unk0 = 3;
+    header.unk1 = -1;
+    header.unk2 = (func_150ADA20() % 5U) + 4;
+    header.unk4 = 0;
+
+    header2.unk0 = (s32) D_800D154C->x_position;
+    header2.unk4 = (s32) D_800D154C->y_position;
+    header2.unk8 = (s32) D_800D154C->z_position;
+
+    func_151602C0(&header, &header2, (func_150ADA20() % 3U) + 4, 0xFF, 0xFF, 0xFF, 0xFF, 0, 0, 0xFF, 1);
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_15070300.s")
 
 void func_15070690(s32 arg0) {

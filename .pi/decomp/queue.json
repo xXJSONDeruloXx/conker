@@ -25910,9 +25910,9 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 3,
+    "attempts": 4,
     "lastScore": 0.45454545454545453,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "void func_1513FFF4(s32 arg0, u8 arg1, u8 arg2) {\n    s32 temp_s0;\n    u8 *temp_v0;\n    u16 temp_v1;\n    u16 temp_a0;\n    s32 temp;\n    u8 temp_a3;\n\n    temp_s0 = arg0;\n    if (arg1 != 0xFF) {\n        temp_v0 = &D_80090B60[arg1 * 12];\n        temp_v1 = *(u16 *)(temp_v0 + 6);\n        temp_a0 = *(u16 *)(temp_v0 + 8);\n        temp_a3 = arg2;\n        temp_v1--;\n        temp_a0--;\n        if ((arg2 & 1) != 0) {\n            temp = temp_v1 << 6;\n        } else {\n            temp = 0;\n        }\n        *(s16 *)(temp_s0 + 0x38) = temp;\n        *(s16 *)(temp_s0 + 8) = temp;\n        if ((arg2 & 1) != 0) {\n            temp = 0;\n        } else {\n            temp = temp_v1 << 6;\n        }\n        *(s16 *)(temp_s0 + 0x28) = temp;\n        *(s16 *)(temp_s0 + 0x18) = temp;\n        if ((temp_a3 & 2) != 0) {\n            temp = temp_a0 << 6;\n        } else {\n            temp = 0;\n        }\n        *(s16 *)(temp_s0 + 0x1A) = temp;\n        *(s16 *)(temp_s0 + 0xA) = temp;\n        if ((temp_a3 & 2) != 0) {\n            temp = 0;\n        } else {\n            temp = temp_a0 << 6;\n        }\n        *(s16 *)(temp_s0 + 0x3A) = temp;\n        *(s16 *)(temp_s0 + 0x2A) = temp;\n    }\n}",
@@ -25934,6 +25934,13 @@
         "reason": "length_mismatch (target=55, generated=50)",
         "diffs": [],
         "timestamp": "2026-06-04T06:10:30.366Z"
+      },
+      {
+        "code": "void func_1513FFF4(s32 arg0, u8 arg1, u8 arg2) {\n    s32 temp_v0;\n    s32 temp_v1;\n    s32 temp_a0;\n    s32 temp_s0;\n    s32 temp_a3;\n    s32 temp_t0;\n\n    temp_s0 = arg0;\n    if (arg1 != 0xFF) {\n        temp_v0 = (s32)&D_80090B60[arg1 * 12];\n        temp_v1 = *(u16 *)(temp_v0 + 6);\n        temp_a0 = *(u16 *)(temp_v0 + 8);\n        temp_t0 = arg2 & 1;\n        temp_v1 = (temp_v1 - 1) & 0xFFFF;\n        temp_a0 = (temp_a0 - 1) & 0xFFFF;\n        temp_a3 = arg2;\n        if (temp_t0 != 0) {\n            temp_v0 = temp_v1 << 6;\n        } else {\n            temp_v0 = 0;\n        }\n        *(s16 *)(temp_s0 + 0x38) = temp_v0;\n        *(s16 *)(temp_s0 + 8) = temp_v0;\n        if (temp_t0 != 0) {\n            temp_v0 = 0;\n        } else {\n            temp_v0 = temp_v1 << 6;\n        }\n        *(s16 *)(temp_s0 + 0x28) = temp_v0;\n        *(s16 *)(temp_s0 + 0x18) = temp_v0;\n        temp_v1 = temp_a3 & 2;\n        if (temp_v1 != 0) {\n            temp_v0 = temp_a0 << 6;\n        } else {\n            temp_v0 = 0;\n        }\n        *(s16 *)(temp_s0 + 0x1A) = temp_v0;\n        *(s16 *)(temp_s0 + 0xA) = temp_v0;\n        if (temp_v1 != 0) {\n            temp_v0 = 0;\n        } else {\n            temp_v0 = temp_a0 << 6;\n        }\n        *(s16 *)(temp_s0 + 0x3A) = temp_v0;\n        *(s16 *)(temp_s0 + 0x2A) = temp_v0;\n    }\n}",
+        "score": 0.45454545454545453,
+        "reason": "length_mismatch (target=55, generated=50)",
+        "diffs": [],
+        "timestamp": "2026-06-04T06:11:46.375Z"
       }
     ]
   },
