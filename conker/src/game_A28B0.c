@@ -924,7 +924,17 @@ void func_15077DA0(void) {
     D_800D154C->unk21E = D_800D1890;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_A28B0/func_15077DBC.s")
+void func_15077DBC(void) {
+    u8 temp_v0;
+
+    temp_v0 = D_800D1890;
+    if (temp_v0 != 0xFA) {
+        D_800D154C->unk21E = temp_v0;
+    }
+    D_800D154C->x_position = (f32)*(s16 *)(D_800D2104[D_800D154C->unk13F] + (D_800D154C->unk21E * 8) + 8);
+    D_800D154C->y_position = (f32)*(s16 *)(D_800D2104[D_800D154C->unk13F] + (D_800D154C->unk21E * 8) + 10);
+    D_800D154C->z_position = (f32)*(s16 *)(D_800D2104[D_800D154C->unk13F] + (D_800D154C->unk21E * 8) + 12);
+}
 // ???
 // void func_15077DBC(void) {
 //     if (D_800D1890 != 0xFA) {

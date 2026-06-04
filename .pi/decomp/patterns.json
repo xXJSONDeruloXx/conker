@@ -945,5 +945,14 @@
     "example_functions": [
       "func_1507879C"
     ]
+  },
+  {
+    "id": "call-arg-register-staging-for-mask-and-stack-order",
+    "description": "For calls with a masked first argument and several stack arguments, introduce explicit locals for the masked value and stack constants to force IDO to stage through temp registers and emit the target move/store order.",
+    "trigger": "Generated code computes `andi` directly into `$a0` or uses the wrong temp register for stack constants, while target computes flags into a temp (e.g. `$t7`), moves to `$a0`, and stores constants in a specific order before the call.",
+    "solution": "Use an `s32` prototype for the first argument, assign `masked = (expr) & 0xFF`, and create named locals for stack constants (e.g. `temp_t8 = -1; temp_t9 = 0xFF; temp_t3 = 1`) before the call.",
+    "example_functions": [
+      "func_15014144"
+    ]
   }
 ]
