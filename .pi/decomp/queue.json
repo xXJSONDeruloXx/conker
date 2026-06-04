@@ -26670,7 +26670,7 @@
     ],
     "attempts": 6,
     "lastScore": 0.4827586206896552,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "void func_150626EC(struct127 *arg0, s32 arg1) {\n    struct127 *ptr;\n    struct127 *base;\n    struct127 *end;\n    s32 size;\n    s32 max;\n    s32 idx;\n\n    ptr = D_800CC2D0;\n    base = D_800CC2D0;\n    end = (struct127 *)&D_800D121C;\n    size = sizeof(struct127);\n    max = 0xFF;\n    do {\n        idx = ((s32)arg0 - (s32)base) / size;\n        if (ptr->interaction_state != 0) {\n            if ((idx + 1) == ptr->unk65) {\n                if (ptr->unk127 == max) {\n                    func_15060F28(ptr, arg1);\n                }\n            }\n        }\n        ptr++;\n    } while (ptr != end);\n}",
@@ -27850,9 +27850,32 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.4568965517241379,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_15016588(void) {\n    s32 sp40;\n    s32 sp44;\n    s32 i;\n    s32 byte;\n    s32 mask;\n\n    bzero(D_800BE580, 8);\n    byte = -1;\n    i = 0;\n    mask = sp44;\n    do {\n        if ((i & 7) == 0) {\n            mask = 1;\n            byte++;\n        } else {\n            mask <<= 1;\n        }\n        func_1502B020(&sp40, 3, 0x1A, D_800BEAAB, i);\n        i++;\n        if (sp40 != 0) {\n            D_800BE580[byte] |= mask;\n        }\n    } while (i != 0x43);\n    sp44 = mask;\n}",
+        "score": 0.4568965517241379,
+        "reason": "length_mismatch (target=58, generated=53)",
+        "diffs": [],
+        "timestamp": "2026-06-04T08:08:27.954Z"
+      },
+      {
+        "code": "void func_15016588(void) {\n    s32 local[2];\n    s32 i;\n    s32 byte;\n    s32 mask;\n\n    bzero(D_800BE580, 8);\n    byte = -1;\n    i = 0;\n    mask = local[1];\n    do {\n        if ((i & 7) == 0) {\n            mask = 1;\n            byte++;\n        } else {\n            mask <<= 1;\n        }\n        func_1502B020(local, 3, 0x1A, D_800BEAAB, i);\n        i++;\n        if (local[0] != 0) {\n            D_800BE580[byte] |= mask;\n        }\n    } while (i != 0x43);\n    local[1] = mask;\n}",
+        "score": 0.4568965517241379,
+        "reason": "length_mismatch (target=58, generated=53)",
+        "diffs": [],
+        "timestamp": "2026-06-04T08:08:50.731Z"
+      },
+      {
+        "code": "void func_15016588(void) {\n    u8 local[8];\n    s32 i;\n    s32 byte;\n    s32 mask;\n\n    bzero(D_800BE580, 8);\n    byte = -1;\n    i = 0;\n    mask = *(s32 *)&local[4];\n    do {\n        if ((i & 7) == 0) {\n            mask = 1;\n            byte++;\n        } else {\n            mask <<= 1;\n        }\n        func_1502B020(local, 3, 0x1A, D_800BEAAB, i);\n        i++;\n        if (*(s32 *)local != 0) {\n            D_800BE580[byte] |= mask;\n        }\n    } while (i != 0x43);\n    *(s32 *)&local[4] = mask;\n}",
+        "score": 0.4568965517241379,
+        "reason": "length_mismatch (target=58, generated=53)",
+        "diffs": [],
+        "timestamp": "2026-06-04T08:09:15.325Z"
+      }
+    ]
   },
   {
     "function": "func_1505E7CC",
