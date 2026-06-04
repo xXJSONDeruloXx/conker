@@ -19349,9 +19349,9 @@
     "instructions": 50,
     "difficulty": "medium-low",
     "tags": [],
-    "attempts": 6,
-    "lastScore": 0.58,
-    "status": "pending",
+    "attempts": 8,
+    "lastScore": 0.98,
+    "status": "skipped",
     "history": [
       {
         "code": "void func_160018BC(void) {\n    u8 *ptr;\n    __OSContReadFormat readformat;\n    s32 i;\n    u32 *zeroPtr;\n\n    ptr = (u8 *)&__osContPifRam;\n    zeroPtr = (u32 *)&__osContPifRam;\n    do {\n        *zeroPtr++ = 0;\n    } while (zeroPtr < (u32 *)&__osContLastCmd);\n    __osContPifRam.pifstatus = CONT_CMD_EXE;\n    readformat.dummy = CONT_CMD_NOP;\n    readformat.txsize = CONT_CMD_READ_BUTTON_TX;\n    readformat.rxsize = CONT_CMD_READ_BUTTON_RX;\n    readformat.cmd = CONT_CMD_READ_BUTTON;\n    readformat.button = 0xFFFF;\n    readformat.stick_x = -1;\n    readformat.stick_y = -1;\n    for (i = 0; i < __osMaxControllers; i++, ptr += sizeof(__OSContReadFormat)) {\n        *(__OSContReadFormat *)ptr = readformat;\n    }\n    *ptr = CONT_CMD_END;\n}",
@@ -19440,6 +19440,24 @@
           "structural: target=li t3, -1 got=li t2, -1"
         ],
         "timestamp": "2026-06-04T03:39:43.233Z"
+      },
+      {
+        "code": "void func_160018BC(void) {\n    u8 *ptr;\n    __OSContReadFormat readformat;\n    s32 i;\n\n    ptr = (u8 *)&__osContPifRam;\n    i = 0;\n    do {\n        __osContPifRam.ramarray[i++] = 0;\n    } while ((u32 *)&__osContPifRam.ramarray[i] < (u32 *)&__osContLastCmd);\n    __osContPifRam.pifstatus = CONT_CMD_EXE;\n    readformat.dummy = CONT_CMD_NOP;\n    readformat.txsize = CONT_CMD_READ_BUTTON_TX;\n    readformat.rxsize = CONT_CMD_READ_BUTTON_RX;\n    readformat.cmd = CONT_CMD_READ_BUTTON;\n    readformat.button = 0xFFFF;\n    readformat.stick_x = -1;\n    readformat.stick_y = -1;\n    for (i = 0; i < __osMaxControllers; i++, ptr += sizeof(__OSContReadFormat)) {\n        *(__OSContReadFormat *)ptr = readformat;\n    }\n    *ptr = CONT_CMD_END;\n}",
+        "score": 0.98,
+        "reason": "structural_diffs=1",
+        "diffs": [
+          "structural: target=ori t1, zero, 65535 got=li t1, 65535"
+        ],
+        "timestamp": "2026-06-04T03:40:22.416Z"
+      },
+      {
+        "code": "void func_160018BC(void) {\n    u8 *ptr;\n    __OSContReadFormat readformat;\n    s32 i;\n\n    ptr = (u8 *)&__osContPifRam;\n    i = 0;\n    do {\n        __osContPifRam.ramarray[i++] = 0;\n    } while ((u32 *)&__osContPifRam.ramarray[i] < (u32 *)&__osContLastCmd);\n    __osContPifRam.pifstatus = CONT_CMD_EXE;\n    readformat.dummy = CONT_CMD_NOP;\n    readformat.txsize = CONT_CMD_READ_BUTTON_TX;\n    readformat.rxsize = CONT_CMD_READ_BUTTON_RX;\n    readformat.cmd = CONT_CMD_READ_BUTTON;\n    readformat.button = 0 | 0xFFFF;\n    readformat.stick_x = -1;\n    readformat.stick_y = -1;\n    for (i = 0; i < __osMaxControllers; i++, ptr += sizeof(__OSContReadFormat)) {\n        *(__OSContReadFormat *)ptr = readformat;\n    }\n    *ptr = CONT_CMD_END;\n}",
+        "score": 0.98,
+        "reason": "structural_diffs=1",
+        "diffs": [
+          "structural: target=ori t1, zero, 65535 got=li t1, 65535"
+        ],
+        "timestamp": "2026-06-04T03:41:29.546Z"
       }
     ]
   },
@@ -22632,9 +22650,32 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.49,
+    "status": "pending",
+    "history": [
+      {
+        "code": "s32 func_1514306C(s32 *arg0, s32 arg1, s32 arg2, u8 arg3) {\n    s32 ret;\n    s32 temp;\n\n    switch (arg3) {\n    case 1:\n        ret = D_800915B0;\n        break;\n    case 2:\n        ret = D_80091514;\n        break;\n    case 3:\n        ret = 0;\n        break;\n    case 4:\n        ret = D_80091564[arg1];\n        break;\n    case 5:\n        ret = arg1;\n        break;\n    case 6:\n        temp = *arg0;\n        if ((u32)temp < 0x10000000) {\n            ret = temp;\n        } else {\n            ret = ((s32 *)temp)[arg2];\n        }\n        break;\n    default:\n        ret = D_80090B60[arg1 * 3][arg2];\n        break;\n    }\n    return ret;\n}",
+        "score": 0.49,
+        "reason": "length_mismatch (target=50, generated=49)",
+        "diffs": [],
+        "timestamp": "2026-06-04T03:42:24.307Z"
+      },
+      {
+        "code": "s32 func_1514306C(s32 *arg0, s32 arg1, s32 arg2, u8 arg3) {\n    s32 ret;\n    s32 temp;\n\n    switch (arg3) {\n    case 1:\n        ret = D_800915B0;\n        break;\n    case 2:\n        ret = D_80091514;\n        break;\n    case 3:\n        ret = 0;\n        break;\n    case 4:\n        ret = D_80091564[arg1];\n        break;\n    case 5:\n        ret = arg1;\n        break;\n    case 6:\n        temp = *arg0;\n        arg1 = temp;\n        if ((u32)temp >= 0x10000000) {\n            ret = ((s32 *)temp)[arg2];\n        } else {\n            ret = arg1;\n        }\n        break;\n    default:\n        ret = (*(s32 **)&D_80090B60[((arg1 * 4) - arg1) * 4])[arg2];\n        break;\n    }\n    return ret;\n}",
+        "score": 0.49,
+        "reason": "length_mismatch (target=50, generated=49)",
+        "diffs": [],
+        "timestamp": "2026-06-04T03:43:11.593Z"
+      },
+      {
+        "code": "s32 func_1514306C(s32 *arg0, s32 arg1, s32 arg2, u8 arg3) {\n    s32 ret;\n    s32 temp;\n\n    switch (arg3) {\n    case 1:\n        ret = D_800915B0;\n        break;\n    case 2:\n        ret = D_80091514;\n        break;\n    case 3:\n        ret = 0;\n        break;\n    case 4:\n        ret = D_80091564[arg1];\n        break;\n    case 5:\n        ret = arg1;\n        break;\n    case 6:\n        temp = *arg0;\n        if ((arg1 = temp, (u32)temp < 0x10000000)) {\n            ret = arg1;\n        } else {\n            ret = ((s32 *)temp)[arg2];\n        }\n        break;\n    default:\n        ret = D_80090B60[arg1 * 3][arg2];\n        break;\n    }\n    return ret;\n}",
+        "score": 0.49,
+        "reason": "length_mismatch (target=50, generated=49)",
+        "diffs": [],
+        "timestamp": "2026-06-04T03:44:10.668Z"
+      }
+    ]
   },
   {
     "function": "func_1001001C",
