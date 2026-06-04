@@ -23547,7 +23547,7 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 6,
+    "attempts": 8,
     "lastScore": 0.49074074074074076,
     "status": "pending",
     "history": [
@@ -23613,6 +23613,41 @@
         "reason": "length_mismatch (target=53, generated=54)",
         "diffs": [],
         "timestamp": "2026-06-04T05:25:25.936Z"
+      },
+      {
+        "code": "void func_1507B974(void) {\n    struct127 **temp_v0;\n    struct127 *phi_v1;\n    u8 temp_a0;\n    u8 *temp_t9;\n    s32 *temp_t0;\n    u8 *temp_ptr;\n    u8 *temp_a0_2;\n\n    temp_v0 = &D_800D154C;\n    phi_v1 = *temp_v0;\n    temp_a0 = phi_v1->unk65;\n    temp_t9 = &D_800D1891;\n    temp_t0 = D_800D2104;\n    if (temp_a0 != 0) {\n        phi_v1 = &D_800CC2D0[temp_a0 - 1];\n    }\n    temp_ptr = (u8 *)temp_t0[phi_v1->unk13F] + (phi_v1->unk21E * 8) + (D_800D1893 * 8);\n    if (*temp_t9 == *(u16 *)(temp_ptr + 6)) {\n        D_800D1892 = D_800D1892 ^ 1;\n    }\n    temp_a0_2 = &D_800D1890;\n    if (D_800D1892 != 0) {\n        func_15075400(*temp_a0_2);\n    }\n}",
+        "score": 0.3774,
+        "reason": "structural_diffs=33",
+        "diffs": [
+          "structural: target=lw v1, LO(D_800D154C)(v0) got=lw v0, LO(D_800D154C)(v0)",
+          "structural: target=lui t8, HI(D_800CC2D0) got=lui a1, HI(D_800D2104)",
+          "structural: target=addiu t8, t8, LO(D_800CC2D0) got=lui t8, HI(D_800CC2D0)",
+          "structural: target=lbu a0, 101(v1) got=lbu v1, 101(v0)",
+          "structural: target=lui t9, HI(D_800D1891) got=lw a1, LO(D_800D2104)(a1)",
+          "structural: target=lui t0, HI(D_800D2104) got=addiu t8, t8, LO(D_800CC2D0)",
+          "structural: target=beqz a0, L0 got=beqz v1, L0",
+          "structural: target=sll t6, a0, 2 got=sll t6, v1, 2",
+          "structural: target=subu t6, t6, a0 got=subu t6, t6, v1",
+          "structural: target=addu t6, t6, a0 got=addu t6, t6, v1",
+          "structural: target=subu t6, t6, a0 got=subu t6, t6, v1",
+          "structural: target=subu t6, t6, a0 got=subu t6, t6, v1",
+          "structural: target=addu v1, t7, t8 got=addu v0, t7, t8",
+          "structural: target=lbu t1, 319(v1) got=lbu t9, 319(v0)",
+          "structural: target=lw t0, LO(D_800D2104)(t0) got=lbu t3, 542(v0)",
+          "structural: target=lbu t5, 542(v1) got=lui t6, HI(D_800D1893)",
+          "structural: target=sll t2, t1, 2 got=sll t0, t9, 2",
+          "structural: target=lui t8, HI(D_800D1893) got=addu t1, a1, t0",
+          "structural: target=addu t3, t0, t2 got=lw t2, 0(t1)",
+          "structural: target=lw t4, 0(t3) got=lbu t6, LO(D_800D1893)(t6)"
+        ],
+        "timestamp": "2026-06-04T05:26:04.348Z"
+      },
+      {
+        "code": "void func_1507B974(void) {\n    struct127 **temp_v0;\n    struct127 *phi_v1;\n    u8 temp_a0;\n    u8 *temp_t9;\n    u8 *temp_ptr;\n    u8 *temp_a0_2;\n\n    temp_v0 = &D_800D154C;\n    phi_v1 = *temp_v0;\n    temp_a0 = phi_v1->unk65;\n    temp_t9 = &D_800D1891;\n    if (temp_a0 != 0) {\n        phi_v1 = &D_800CC2D0[temp_a0 - 1];\n    }\n    temp_ptr = (u8 *)D_800D2104[phi_v1->unk13F] + (phi_v1->unk21E * 8) + (D_800D1893 * 8);\n    if (*temp_t9 == *(u16 *)(temp_ptr + 6)) {\n        D_800D1892 = D_800D1892 ^ 1;\n    }\n    temp_a0_2 = &D_800D1890;\n    if (D_800D1892 != 0) {\n        func_15075400(*temp_a0_2);\n    }\n}",
+        "score": 0.49074074074074076,
+        "reason": "length_mismatch (target=53, generated=54)",
+        "diffs": [],
+        "timestamp": "2026-06-04T05:26:22.919Z"
       }
     ]
   },
@@ -24279,8 +24314,8 @@
     "instructions": 53,
     "difficulty": "medium",
     "tags": [],
-    "attempts": 4,
-    "lastScore": 0.3208,
+    "attempts": 6,
+    "lastScore": 0.9623,
     "status": "pending",
     "history": [
       {
@@ -24394,6 +24429,44 @@
           "structural: target=move v0, zero got=b L0"
         ],
         "timestamp": "2026-06-04T04:43:57.892Z"
+      },
+      {
+        "code": "void func_1513DF9C(void *arg0, s32 arg1, u8 arg2) {\n    s32 idx;\n\n    if ((*(s32 *)((s32)arg0 + 0x58) & 0x400000) != 0) {\n        switch (*(u8 *)((s32)arg0 + 0x19)) {\n            case 12:\n                idx = 10;\n                break;\n            case 11:\n                idx = 9;\n                break;\n            case 0:\n            case 2:\n                idx = 0;\n                break;\n            case 1:\n                idx = 1;\n                break;\n            case 5:\n                idx = 2;\n                break;\n            case 6:\n                idx = 3;\n                break;\n            case 3:\n                idx = 4;\n                break;\n            case 7:\n                idx = 5;\n                break;\n            case 8:\n                idx = 6;\n                break;\n            case 9:\n                idx = 7;\n                break;\n            case 4:\n                idx = 8;\n                break;\n            default:\n                idx = 0;\n                break;\n        }\n    } else {\n        idx = 0;\n    }\n    D_80089F64[idx](arg0, arg1, arg2);\n}",
+        "score": 0.3208,
+        "reason": "structural_diffs=36",
+        "diffs": [
+          "structural: target=sll t8, t7, 9 got=move v0, zero",
+          "structural: target=bltzl t8, L0 got=sll t8, t7, 9",
+          "structural: target=lbu t9, 25(a0) got=bgez t8, L0",
+          "structural: target=b L1 got=nop",
+          "structural: target=move v0, zero got=lbu t9, 25(a0)",
+          "structural: target=lbu t9, 25(a0) got=sltiu at, t9, 13",
+          "structural: target=sltiu at, t9, 13 got=beqz at, L1",
+          "structural: target=beqz at, L2 got=sll t9, t9, 2",
+          "structural: target=sll t9, t9, 2 got=lui at, HI(.rodata)",
+          "structural: target=lui at, HI(jtbl_800A5188) got=addu at, at, t9",
+          "structural: target=addu at, at, t9 got=lw t9, LO(.rodata)(at)",
+          "structural: target=lw t9, LO(jtbl_800A5188)(at) got=jr t9",
+          "structural: target=jr t9 got=nop",
+          "structural: target=nop got=b L0",
+          "structural: target=b L1 got=li v0, 10",
+          "structural: target=li v0, 10 got=b L0",
+          "structural: target=b L1 got=li v0, 9",
+          "structural: target=li v0, 9 got=b L0",
+          "structural: target=b L1 got=move v0, zero",
+          "structural: target=move v0, zero got=b L0"
+        ],
+        "timestamp": "2026-06-04T05:29:32.753Z"
+      },
+      {
+        "code": "void func_1513DF9C(void *arg0, s32 arg1, u8 arg2) {\n    s32 idx;\n\n    if ((*(s32 *)((s32)arg0 + 0x58) << 9) >= 0) {\n        idx = 0;\n        goto call;\n    }\n    switch (*(u8 *)((s32)arg0 + 0x19)) {\n        case 12:\n            idx = 10;\n            break;\n        case 11:\n            idx = 9;\n            break;\n        case 0:\n        case 2:\n            idx = 0;\n            break;\n        case 1:\n            idx = 1;\n            break;\n        case 5:\n            idx = 2;\n            break;\n        case 6:\n            idx = 3;\n            break;\n        case 3:\n            idx = 4;\n            break;\n        case 7:\n            idx = 5;\n            break;\n        case 8:\n            idx = 6;\n            break;\n        case 9:\n            idx = 7;\n            break;\n        case 4:\n            idx = 8;\n            break;\n        default:\n            idx = 0;\n            break;\n    }\ncall:\n    D_80089F64[idx](arg0, arg1, arg2);\n}",
+        "score": 0.9623,
+        "reason": "structural_diffs=2",
+        "diffs": [
+          "structural: target=lui at, HI(jtbl_800A5188) got=lui at, HI(.rodata)",
+          "structural: target=lw t9, LO(jtbl_800A5188)(at) got=lw t9, LO(.rodata)(at)"
+        ],
+        "timestamp": "2026-06-04T05:30:09.406Z"
       }
     ]
   },
