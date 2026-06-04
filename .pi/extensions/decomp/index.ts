@@ -784,6 +784,16 @@ export default function (pi: ExtensionAPI) {
 					latestCtx = ctx;
 					refreshWidget();
 				}
+				// Notify coordinator
+				const coordUrl2 = process.env.DECOMP_COORDINATOR_URL;
+				const lane2 = process.env.DECOMP_LANE_ID;
+				if (coordUrl2 && lane2 && funcName) {
+					fetch(`${coordUrl2}/release`, {
+						method: "POST",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify({ laneId: lane2, function: funcName, status: "skipped" }),
+					}).catch(() => {});
+				}
 				return { content: [{ type: "text", text: `Skipped ${funcName}` }], details: {} };
 			}
 
@@ -808,6 +818,53 @@ export default function (pi: ExtensionAPI) {
 			}
 
 			// action === "next"
+
+			// ─── COORDINATOR MODE ─────────────────────────────────────────
+			// If DECOMP_COORDINATOR_URL is set, claim from coordinator instead of local queue
+			const coordinatorUrl = process.env.DECOMP_COORDINATOR_URL;
+			const laneId = process.env.DECOMP_LANE_ID;
+			if (coordinatorUrl && laneId) {
+				try {
+					// Heartbeat
+					fetch(`${coordinatorUrl}/lanes/${laneId}/heartbeat`, { method: "POST" }).catch(() => {});
+
+					// Claim next function from coordinator
+					const claimRes = await fetch(`${coordinatorUrl}/claim`, {
+						method: "POST",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify({ laneId }),
+					});
+
+					if (claimRes.status === 204) {
+						return { content: [{ type: "text", text: "No pending candidates available from coordinator. All functions are claimed or completed." }], details: {} };
+					}
+					if (!claimRes.ok) {
+						const err = await claimRes.text();
+						return { content: [{ type: "text", text: `Coordinator error: ${err}` }], details: {} };
+					}
+
+					const claim = await claimRes.json() as { function: string; file: string; region: string; instructions: number; difficulty: string; history: any[] };
+
+					// Get patterns from coordinator
+					const patternsRes = await fetch(`${coordinatorUrl}/patterns`).catch(() => null);
+					if (patternsRes?.ok) {
+						const { patterns: coordPatterns } = await patternsRes.json() as { patterns: any[] };
+						state.patterns = coordPatterns;
+					}
+
+					// Now fall through to the normal "next" logic but with the claimed function
+					// Override the queue to only contain this function
+					const overrideEntry = state.queue.find((e) => e.function === claim.function);
+					if (overrideEntry) {
+						overrideEntry.status = "pending";
+						overrideEntry.history = claim.history || overrideEntry.history;
+					}
+				} catch (e: any) {
+					// Coordinator unreachable — fall back to local queue
+					// (allows graceful degradation if coordinator dies)
+				}
+			}
+
 			// Step 0: Verify ROM is in a known-good state before serving candidates
 			const verifyResult = await pi.exec("docker", [
 				"run", "--rm", "--platform", "linux/amd64",
@@ -1327,6 +1384,23 @@ export default function (pi: ExtensionAPI) {
 			latestCtx = ctx;
 			refreshWidget();
 
+			// Report attempt to coordinator (for cross-lane learning)
+			const coordUrl3 = process.env.DECOMP_COORDINATOR_URL;
+			if (coordUrl3 && entry?.history?.length) {
+				const lastAttempt = entry.history[entry.history.length - 1];
+				fetch(`${coordUrl3}/attempt`, {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({
+						function: params.function,
+						code: lastAttempt.code,
+						score: lastAttempt.score,
+						reason: lastAttempt.reason,
+						diffs: lastAttempt.diffs,
+					}),
+				}).catch(() => {});
+			}
+
 			// Periodically commit queue history to repo so findings persist
 			if (entry && entry.attempts > 0 && entry.attempts % COMMIT_HISTORY_EVERY === 0) {
 				await pi.exec("git", ["add", ".pi/decomp/queue.json"]);
@@ -1513,6 +1587,17 @@ export default function (pi: ExtensionAPI) {
 			const matched = state.queue.filter((e) => e.status === "matched").length;
 			const total = state.queue.length;
 			const pct = total > 0 ? ((matched / total) * 100).toFixed(1) : "0.0";
+
+			// Notify coordinator of successful match
+			const coordUrl = process.env.DECOMP_COORDINATOR_URL;
+			const lane = process.env.DECOMP_LANE_ID;
+			if (coordUrl && lane) {
+				fetch(`${coordUrl}/release`, {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({ laneId: lane, function: params.function, status: "matched" }),
+				}).catch(() => {});
+			}
 
 			return {
 				content: [
