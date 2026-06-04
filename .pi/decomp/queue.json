@@ -23615,8 +23615,8 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 3,
-    "lastScore": 0.4609375,
+    "attempts": 6,
+    "lastScore": 0.46875,
     "status": "pending",
     "history": [
       {
@@ -23639,6 +23639,27 @@
         "reason": "length_mismatch (target=64, generated=59)",
         "diffs": [],
         "timestamp": "2026-06-04T10:59:56.216Z"
+      },
+      {
+        "code": "void func_1513A5E0(s32 *arg0, u8 arg1, s32 arg2) {\n    f32 temp_f0 = 4.0f;\n    f32 temp_f2 = D_800A4960;\n    s32 sp2C;\n    s32 sp30;\n    s32 sp34[13];\n\n    sp2C = 7;\n    sp30 = 7;\n    sp34[0] = arg0[0];\n    sp34[1] = arg0[1];\n    sp34[2] = arg0[2];\n    ((s16 *)&sp2C)[10] = 0;\n    ((s16 *)&sp2C)[11] = 0xFF;\n    ((s16 *)&sp2C)[12] = -0x32;\n    ((s16 *)&sp2C)[13] = 0x1B;\n    ((f32 *)&sp2C)[7] = temp_f0;\n    ((f32 *)&sp2C)[8] = temp_f0;\n    ((f32 *)&sp2C)[9] = D_800A4964;\n    ((f32 *)&sp2C)[10] = D_800A4968;\n    ((s16 *)&sp2C)[22] = 0x19;\n    ((s16 *)&sp2C)[23] = 0x28;\n    ((f32 *)&sp2C)[12] = temp_f2;\n    ((f32 *)&sp2C)[13] = temp_f2;\n    ((f32 *)&sp2C)[14] = D_800A496C;\n    func_15152190(&sp2C, D_800A4268, D_800A4270, 2, 0.0f, 1, arg1, arg2);\n}",
+        "score": 0.4765625,
+        "reason": "length_mismatch (target=64, generated=61)",
+        "diffs": [],
+        "timestamp": "2026-06-04T11:00:39.811Z"
+      },
+      {
+        "code": "void func_1513A5E0(s32 *arg0, u8 arg1, s32 arg2) {\n    f32 temp_f0 = 4.0f;\n    f32 temp_f2 = D_800A4960;\n    s32 sp2C[13];\n\n    sp2C[0] = 7;\n    sp2C[1] = 7;\n    sp2C[2] = arg0[0];\n    sp2C[3] = arg0[1];\n    sp2C[4] = arg0[2];\n    ((s16 *)sp2C)[10] = 0;\n    ((s16 *)sp2C)[11] = 0xFF;\n    ((s16 *)sp2C)[12] = -0x32;\n    ((s16 *)sp2C)[13] = 0x1B;\n    ((f32 *)sp2C)[7] = temp_f0;\n    ((f32 *)sp2C)[8] = temp_f0;\n    ((f32 *)sp2C)[9] = D_800A4964;\n    ((f32 *)sp2C)[10] = D_800A4968;\n    ((s16 *)sp2C)[22] = 0x19;\n    ((s16 *)sp2C)[23] = 0x28;\n    ((volatile f32 *)sp2C)[12] = temp_f2;\n    ((volatile f32 *)sp2C)[13] = temp_f2;\n    ((volatile f32 *)sp2C)[14] = D_800A496C;\n    func_15152190(sp2C, D_800A4268, D_800A4270, 2, 0.0f, 1, arg1, arg2);\n}",
+        "score": 0.4921875,
+        "reason": "length_mismatch (target=64, generated=63)",
+        "diffs": [],
+        "timestamp": "2026-06-04T11:01:00.484Z"
+      },
+      {
+        "code": "void func_1513A5E0(s32 *arg0, u8 arg1, s32 arg2) {\n    f32 temp_f0 = 4.0f;\n    f32 temp_f2 = D_800A4960;\n    s32 sp2C[14];\n\n    sp2C[0] = 7;\n    sp2C[1] = 7;\n    sp2C[2] = arg0[0];\n    sp2C[3] = arg0[1];\n    sp2C[4] = arg0[2];\n    ((s16 *)sp2C)[10] = 0;\n    ((s16 *)sp2C)[11] = 0xFF;\n    ((s16 *)sp2C)[12] = -0x32;\n    ((s16 *)sp2C)[13] = 0x1B;\n    ((f32 *)sp2C)[7] = temp_f0;\n    ((f32 *)sp2C)[8] = temp_f0;\n    ((f32 *)sp2C)[9] = D_800A4964;\n    ((f32 *)sp2C)[10] = D_800A4968;\n    ((s16 *)sp2C)[22] = 0x19;\n    ((s16 *)sp2C)[23] = 0x28;\n    ((f32 *)sp2C)[12] = temp_f2;\n    ((f32 *)sp2C)[13] = temp_f2;\n    ((f32 *)sp2C)[14] = D_800A496C;\n    func_15152190(sp2C, D_800A4268, D_800A4270, 2, 0.0f, 1, arg1, arg2);\n}",
+        "score": 0.46875,
+        "reason": "length_mismatch (target=64, generated=60)",
+        "diffs": [],
+        "timestamp": "2026-06-04T11:01:22.992Z"
       }
     ]
   },
