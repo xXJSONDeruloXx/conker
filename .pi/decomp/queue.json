@@ -26668,7 +26668,7 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
+    "attempts": 6,
     "lastScore": 0.4827586206896552,
     "status": "pending",
     "history": [
@@ -26692,6 +26692,27 @@
         "reason": "length_mismatch (target=58, generated=56)",
         "diffs": [],
         "timestamp": "2026-06-04T08:06:16.992Z"
+      },
+      {
+        "code": "void func_150626EC(struct127 *arg0, s32 arg1) {\n    struct127 *ptr;\n    struct127 *end;\n    s32 size;\n    s32 max;\n    s32 idx;\n\n    ptr = D_800CC2D0;\n    end = (struct127 *)&D_800D121C;\n    size = sizeof(struct127);\n    max = 0xFF;\n    do {\n        idx = ((s32)arg0 - (s32)D_800CC2D0) / size;\n        if (ptr->interaction_state != 0) {\n            if ((idx + 1) == ptr->unk65) {\n                if (ptr->unk127 == max) {\n                    func_15060F28(ptr, arg1);\n                }\n            }\n        }\n        ptr++;\n    } while (ptr != end);\n}",
+        "score": 0.4827586206896552,
+        "reason": "length_mismatch (target=58, generated=56)",
+        "diffs": [],
+        "timestamp": "2026-06-04T08:06:40.404Z"
+      },
+      {
+        "code": "void func_150626EC(s32 arg0, s32 arg1) {\n    struct127 *ptr;\n    struct127 *base;\n    struct127 *end;\n    s32 size;\n    s32 max;\n    s32 idx;\n\n    ptr = D_800CC2D0;\n    base = D_800CC2D0;\n    end = (struct127 *)&D_800D121C;\n    size = sizeof(struct127);\n    max = 0xFF;\n    do {\n        idx = (arg0 - (s32)base) / size;\n        if (ptr->interaction_state != 0) {\n            if ((idx + 1) == ptr->unk65) {\n                if (ptr->unk127 == max) {\n                    func_15060F28(ptr, arg1);\n                }\n            }\n        }\n        ptr++;\n    } while (ptr != end);\n}",
+        "score": 0.4827586206896552,
+        "reason": "length_mismatch (target=58, generated=56)",
+        "diffs": [],
+        "timestamp": "2026-06-04T08:07:06.041Z"
+      },
+      {
+        "code": "void func_150626EC(struct127 *arg0, s32 arg1) {\n    struct127 *ptr;\n    struct127 *base;\n    struct127 *end;\n    s32 size;\n    s32 max;\n    s32 idx;\n    s32 unused;\n\n    ptr = D_800CC2D0;\n    base = D_800CC2D0;\n    end = (struct127 *)&D_800D121C;\n    unused = 0;\n    size = sizeof(struct127);\n    max = 0xFF;\n    do {\n        idx = ((s32)arg0 - (s32)base) / size;\n        if (ptr->interaction_state != 0) {\n            if ((idx + 1) == ptr->unk65) {\n                if (ptr->unk127 == max) {\n                    func_15060F28(ptr, arg1);\n                }\n            }\n        }\n        ptr++;\n    } while (ptr != end);\n}",
+        "score": 0.4827586206896552,
+        "reason": "length_mismatch (target=58, generated=56)",
+        "diffs": [],
+        "timestamp": "2026-06-04T08:07:29.501Z"
       }
     ]
   },
