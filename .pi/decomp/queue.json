@@ -23615,9 +23615,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 6,
-    "lastScore": 0.46875,
-    "status": "pending",
+    "attempts": 7,
+    "lastScore": 0.4921875,
+    "status": "skipped",
     "history": [
       {
         "code": "void func_1513A5E0(s32 *arg0, u8 arg1, s32 arg2) {\n    s32 sp2C[15];\n    f32 temp_f0 = 4.0f;\n    f32 temp_f2 = D_800A4960;\n\n    sp2C[0] = 7;\n    sp2C[1] = 7;\n    sp2C[2] = arg0[0];\n    sp2C[3] = arg0[1];\n    sp2C[4] = arg0[2];\n    ((s16 *)sp2C)[10] = 0;\n    ((s16 *)sp2C)[11] = 0xFF;\n    ((s16 *)sp2C)[12] = -0x32;\n    ((s16 *)sp2C)[13] = 0x1B;\n    ((f32 *)sp2C)[7] = temp_f0;\n    ((f32 *)sp2C)[8] = temp_f0;\n    ((f32 *)sp2C)[9] = D_800A4964;\n    ((f32 *)sp2C)[10] = D_800A4968;\n    ((s16 *)sp2C)[22] = 0x19;\n    ((s16 *)sp2C)[23] = 0x28;\n    ((f32 *)sp2C)[12] = temp_f2;\n    ((f32 *)sp2C)[13] = temp_f2;\n    ((f32 *)sp2C)[14] = D_800A496C;\n    func_15152190(sp2C, D_800A4268, D_800A4270, 2, 0.0f, 1, arg1, arg2);\n}",
@@ -23660,6 +23660,13 @@
         "reason": "length_mismatch (target=64, generated=60)",
         "diffs": [],
         "timestamp": "2026-06-04T11:01:22.992Z"
+      },
+      {
+        "code": "void func_1513A5E0(s32 *arg0, u8 arg1, s32 arg2) {\n    f32 temp_f0 = 4.0f;\n    f32 temp_f2 = D_800A4960;\n    s32 sp2C[13];\n\n    sp2C[0] = 7;\n    sp2C[1] = 7;\n    sp2C[2] = arg0[0];\n    sp2C[3] = arg0[1];\n    sp2C[4] = arg0[2];\n    ((s16 *)sp2C)[10] = 0;\n    ((s16 *)sp2C)[11] = 0xFF;\n    ((s16 *)sp2C)[12] = -0x32;\n    ((s16 *)sp2C)[13] = 0x1B;\n    *(f32 *)((s32)sp2C + 0x1C) = temp_f0;\n    *(f32 *)((s32)sp2C + 0x20) = temp_f0;\n    *(f32 *)((s32)sp2C + 0x24) = D_800A4964;\n    *(f32 *)((s32)sp2C + 0x28) = D_800A4968;\n    *(s16 *)((s32)sp2C + 0x2C) = 0x19;\n    *(s16 *)((s32)sp2C + 0x2E) = 0x28;\n    *(f32 *)((s32)sp2C + 0x30) = temp_f2;\n    *(f32 *)((s32)sp2C + 0x34) = temp_f2;\n    *(f32 *)((s32)sp2C + 0x38) = D_800A496C;\n    func_15152190(sp2C, D_800A4268, D_800A4270, 2, 0.0f, 1, arg1, arg2);\n}",
+        "score": 0.4921875,
+        "reason": "length_mismatch (target=64, generated=63)",
+        "diffs": [],
+        "timestamp": "2026-06-04T11:01:51.774Z"
       }
     ]
   },
@@ -26902,9 +26909,32 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.47761194029850745,
+    "status": "pending",
+    "history": [
+      {
+        "code": "s32 *func_1001F978(struct55 *arg0, s32 arg1, s32 arg2, s32 *arg3) {\n    s32 *sp24;\n    s16 sp22;\n    s32 *sp1C;\n    s32 *sp18;\n\n    sp24 = arg3;\n    sp22 = arg2 >> 8;\n    sp1C = sp24;\n    sp24 += 2;\n    sp1C[0] = 0x0B000020;\n    sp1C[1] = osVirtualToPhysical((s32)arg0 + 8);\n    sp18 = sp24;\n    sp24 += 2;\n    sp18[0] = ((arg0->unk28 & 0xFF) << 0x10) | 0x0E000000 | (arg0->unk2 & 0xFFFF);\n    sp18[1] = (osVirtualToPhysical(*(s32 *)((s32)arg0 + (arg1 * 4) + 0x2C)) & 0x00FFFFFF) | ((sp22 & 0xFF) << 0x18);\n    arg0->unk28 = 0;\n    return sp24;\n}",
+        "score": 0.48484848484848486,
+        "reason": "length_mismatch (target=64, generated=66)",
+        "diffs": [],
+        "timestamp": "2026-06-04T11:03:16.808Z"
+      },
+      {
+        "code": "s32 *func_1001F978(struct55 *arg0, s32 arg1, s32 arg2, s32 *arg3) {\n    s32 *sp24;\n    s16 sp22;\n    s32 *sp1C;\n    s32 *sp18;\n    s32 *temp_t9;\n    s32 *temp_t4;\n\n    sp24 = arg3;\n    sp22 = arg2 >> 8;\n    temp_t9 = sp24;\n    sp24 = temp_t9 + 2;\n    sp1C = temp_t9;\n    sp1C[0] = 0x0B000020;\n    sp1C[1] = osVirtualToPhysical((s32)arg0 + 8);\n    temp_t4 = sp24;\n    sp24 = temp_t4 + 2;\n    sp18 = temp_t4;\n    sp18[0] = ((arg0->unk28 & 0xFF) << 0x10) | 0x0E000000 | (arg0->unk2 & 0xFFFF);\n    sp18[1] = (osVirtualToPhysical(*(s32 *)((s32)arg0 + (arg1 * 4) + 0x2C)) & 0x00FFFFFF) | ((sp22 & 0xFF) << 0x18);\n    arg0->unk28 = 0;\n    return sp24;\n}",
+        "score": 0.45714285714285713,
+        "reason": "length_mismatch (target=64, generated=70)",
+        "diffs": [],
+        "timestamp": "2026-06-04T11:03:48.380Z"
+      },
+      {
+        "code": "s32 *func_1001F978(struct55 *arg0, s32 arg1, s32 arg2, s32 *arg3) {\n    s32 *sp24;\n    s16 sp22;\n    s32 *sp1C;\n    s32 *sp18;\n    register s32 *temp_t9;\n    register s32 *temp_t4;\n\n    sp24 = arg3;\n    sp22 = arg2 >> 8;\n    temp_t9 = sp24;\n    sp24 = temp_t9 + 2;\n    sp1C = temp_t9;\n    sp1C[0] = 0x0B000020;\n    sp1C[1] = osVirtualToPhysical((s32)arg0 + 8);\n    temp_t4 = sp24;\n    sp24 = temp_t4 + 2;\n    sp18 = temp_t4;\n    sp18[0] = ((arg0->unk28 & 0xFF) << 0x10) | 0x0E000000 | (arg0->unk2 & 0xFFFF);\n    sp18[1] = (osVirtualToPhysical(*(s32 *)((s32)arg0 + (arg1 * 4) + 0x2C)) & 0x00FFFFFF) | ((sp22 & 0xFF) << 0x18);\n    arg0->unk28 = 0;\n    return sp24;\n}",
+        "score": 0.47761194029850745,
+        "reason": "length_mismatch (target=64, generated=67)",
+        "diffs": [],
+        "timestamp": "2026-06-04T11:04:08.995Z"
+      }
+    ]
   },
   {
     "function": "func_151D9450",
