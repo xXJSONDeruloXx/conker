@@ -273,7 +273,26 @@ void func_1000F9D4(u16 arg0, s16 arg1, s16 arg2, s16 arg3) {
 #pragma GLOBAL_ASM("asm/nonmatchings/init_EB00/func_1000FA64.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/init_EB00/func_1000FC18.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/init_EB00/func_1000FD38.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/init_EB00/func_1000FDF4.s")
+void func_1000FDF4(u16 arg0) {
+    s32 temp_s2;
+    s32 i;
+    u16 temp_a0;
+
+    temp_s2 = arg0;
+    i = 0;
+    if (D_80042760 > 0) {
+        do {
+            temp_a0 = D_80041FE0[i].unk24;
+            if (temp_a0 == temp_s2) {
+                if ((unsigned int)temp_a0 != 0) {
+                    func_100111C8(temp_a0);
+                }
+                D_80041FE0[i].unk10 |= 0x80;
+            }
+            i++;
+        } while (i < D_80042760);
+    }
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/init_EB00/func_1000FE88.s")
 // ? func_1000FE88(s32 arg0, s32 arg1, void *arg2) {
 //     void *sp1C;

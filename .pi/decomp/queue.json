@@ -21070,7 +21070,7 @@
       "branchy"
     ],
     "attempts": 8,
-    "lastScore": 0.8378,
+    "lastScore": 1,
     "status": "pending",
     "history": [
       {
@@ -21176,6 +21176,19 @@
           "structural: target=slt at, s1, v0 got=slt at, s1, v1"
         ],
         "timestamp": "2026-06-03T21:43:18.192Z"
+      },
+      {
+        "code": "#include <ultra64.h>\n#include \"functions.h\"\n#include \"variables.h\"\n\n\nvoid func_1000FDF4(u16 arg0) {\n    s32 temp_s2;\n    s32 i;\n    u16 temp_a0;\n\n    temp_s2 = arg0;\n    i = 0;\n    if (D_80042760 > 0) {\n        do {\n            temp_a0 = D_80041FE0[i].unk24;\n            if (temp_a0 == temp_s2) {\n                if ((unsigned int)temp_a0 != 0) {\n                    func_100111C8(temp_a0);\n                }\n                D_80041FE0[i].unk10 |= 0x80;\n            }\n            i++;\n        } while (i < D_80042760);\n    }\n}\n",
+        "score": 1,
+        "reason": "transmuter_match",
+        "diffs": [
+          "transmuter: initial=6→best=6, iters=0, compiled=0, errors=0, forks=0",
+          "fork_rules: cast-expr",
+          "last_fork_rule: cast-expr",
+          "config: timeout=60s, maxCompiles=3000, concurrency=4, profile=ido",
+          "NOTE: 0 compiled = all mutations hit compile errors. Source may have constructs incompatible with isolated compilation."
+        ],
+        "timestamp": "2026-06-04T13:45:05.349Z"
       }
     ]
   },
@@ -22461,6 +22474,16 @@
           "structural: target=addiu s0, s0, LO(D_800419A8) got=addiu s3, s3, LO(D_800417B0)"
         ],
         "timestamp": "2026-06-04T13:31:42.753Z"
+      },
+      {
+        "code": "void func_1000DEC4(void) {\n    struct137 *ptr;\n    s32 neg;\n\n    ptr = D_800419A8;\n    neg = -1;\n    do {\n        if (neg == ptr->unk0) {\n            if (neg != ptr->unk4) {\n                ptr->unk4 = neg;\n            }\n        } else {\n            if (func_1000853C(ptr->unk0) == 0) {\n                D_800417B0[ptr->unk0] = 0;\n                ptr->unk0 = neg;\n                ptr->unk4 = neg;\n            }\n        }\n        ptr++;\n        *(s32 *)((s32)ptr - 4) = 0;\n    } while (ptr != (struct137 *)D_80041E58);\n}",
+        "score": 0.9,
+        "reason": "transmuter_best=3",
+        "diffs": [
+          "transmuter: iters=0, forks=0, bestScore=3",
+          "timeout=60s, maxCompiles=2000"
+        ],
+        "timestamp": "2026-06-04T13:32:23.529Z"
       }
     ]
   },
