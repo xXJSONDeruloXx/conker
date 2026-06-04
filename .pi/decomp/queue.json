@@ -27591,7 +27591,7 @@
     ],
     "attempts": 6,
     "lastScore": 0.4609375,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "int func_1507BB28(s32 arg0, s32 arg1) {\n    s32 *temp_v0;\n    u8 *table;\n    u8 *entry;\n    s32 idx;\n    s32 temp_t0;\n\n    temp_v0 = (s32 *)D_800D1588[D_800D154C->id];\n    if (temp_v0 == NULL) {\n        return (s32)D_8009A120;\n    }\n    table = (u8 *)temp_v0[-4];\n    if (table == NULL) {\n        return (s32)D_8009A120;\n    }\n    idx = 0;\n    entry = table;\n    if (arg1 == entry[4]) {\n        return *(s32 *)table;\n    }\n    temp_t0 = *(s32 *)entry;\nloop:\n    if (temp_t0 == 0) {\n        table = D_80086A88;\n        idx = 0;\n        if (arg1 == table[4]) {\n            return *(s32 *)table;\n        }\n        entry = table;\nfallback_loop:\n        if (*(s32 *)entry == 0) {\ninfinite:\n            goto infinite;\n        }\n        idx++;\n        entry += 8;\n        if (arg1 != entry[4]) {\n            goto fallback_loop;\n        }\n        return *(s32 *)(table + (idx * 8));\n    }\n    idx++;\n    entry += 8;\n    if (arg1 != entry[4]) {\n        temp_t0 = *(s32 *)entry;\n        goto loop;\n    }\n    return *(s32 *)(table + (idx * 8));\n}",
@@ -27832,9 +27832,32 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.4576271186440678,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void *func_151F85C4(s32 arg0, s32 arg1, s32 arg2) {\n    u8 *sp1C;\n\n    sp1C = D_800E1880;\n    if (sp1C == NULL) {\n        return NULL;\n    }\n    *(s32 *)(sp1C + 0xC) = -1;\n    *(s32 *)(sp1C + 0x10) = -1;\n    *(s32 *)(sp1C + 0x14) = -1;\n    *(s32 *)(sp1C + 0) = arg0;\n    *(s32 *)(sp1C + 4) = arg1;\n    *(s32 *)(sp1C + 8) = arg2;\n    *(s32 *)(sp1C + 0x201C) = 0;\n    *(s32 *)(sp1C + 0x2020) = 0;\n    *(s32 *)(sp1C + 0x3BA0) = 0;\n    if (func_151F8088(sp1C, 0) == 0) {\n        return NULL;\n    }\n    *(s32 *)(sp1C + 0x8474) = 0;\n    bzero(sp1C + 0x6A64, 0x900);\n    return sp1C;\n}",
+        "score": 0.3813559322033898,
+        "reason": "length_mismatch (target=59, generated=45)",
+        "diffs": [],
+        "timestamp": "2026-06-04T08:45:38.589Z"
+      },
+      {
+        "code": "void *func_151F85C4(s32 arg0, s32 arg1, s32 arg2) {\n    u8 *volatile sp1C;\n\n    sp1C = D_800E1880;\n    if (sp1C == NULL) {\n        return NULL;\n    }\n    *(s32 *)(sp1C + 0xC) = -1;\n    *(s32 *)(sp1C + 0x10) = -1;\n    *(s32 *)(sp1C + 0x14) = -1;\n    *(s32 *)(sp1C + 0) = arg0;\n    *(s32 *)(sp1C + 4) = arg1;\n    *(s32 *)(sp1C + 8) = arg2;\n    *(s32 *)(sp1C + 0x201C) = 0;\n    *(s32 *)(sp1C + 0x2020) = 0;\n    *(s32 *)(sp1C + 0x3BA0) = 0;\n    if (func_151F8088(sp1C, 0) == 0) {\n        return NULL;\n    }\n    *(s32 *)(sp1C + 0x8474) = 0;\n    bzero(sp1C + 0x6A64, 0x900);\n    return sp1C;\n}",
+        "score": 0.4322033898305085,
+        "reason": "length_mismatch (target=59, generated=51)",
+        "diffs": [],
+        "timestamp": "2026-06-04T08:46:11.343Z"
+      },
+      {
+        "code": "void *func_151F85C4(volatile s32 arg0, volatile s32 arg1, volatile s32 arg2) {\n    u8 *volatile sp1C;\n\n    sp1C = D_800E1880;\n    if (sp1C == NULL) {\n        return NULL;\n    }\n    *(s32 *)(sp1C + 0xC) = -1;\n    *(s32 *)(sp1C + 0x10) = -1;\n    *(s32 *)(sp1C + 0x14) = -1;\n    *(s32 *)(sp1C + 0) = arg0;\n    *(s32 *)(sp1C + 4) = arg1;\n    *(s32 *)(sp1C + 8) = arg2;\n    *(s32 *)(sp1C + 0x201C) = 0;\n    *(s32 *)(sp1C + 0x2020) = 0;\n    *(s32 *)(sp1C + 0x3BA0) = 0;\n    if (func_151F8088(sp1C, 0) == 0) {\n        return NULL;\n    }\n    *(s32 *)(sp1C + 0x8474) = 0;\n    bzero(sp1C + 0x6A64, 0x900);\n    return sp1C;\n}",
+        "score": 0.4576271186440678,
+        "reason": "length_mismatch (target=59, generated=54)",
+        "diffs": [],
+        "timestamp": "2026-06-04T08:46:36.000Z"
+      }
+    ]
   },
   {
     "function": "func_1000FC18",
