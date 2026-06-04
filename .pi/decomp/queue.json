@@ -25770,7 +25770,7 @@
     ],
     "attempts": 6,
     "lastScore": 0.48,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "s32 func_1509DDFC(s32 arg0, s32 arg1, struct215 *arg2) {\n    switch (arg1) {\n    case 0:\n        func_15178BE4(arg0 & 0xFF, &D_800CC2D0[func_15084000(arg2->unk8 & ~0x2000)].x_position, arg2->unkC.s.unk2);\n        return 1;\n    case 1:\n        func_15178C34(arg0 & 0xFF, arg2->unk8, arg2->unkC.i.unk0, arg2->unk10, arg2->unk14);\n        return 1;\n    }\n    return 0;\n}",
@@ -26487,9 +26487,32 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.4807692307692308,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void __n_initFromBank(N_ALSeqPlayer *seqp, ALBank *bank) {\n    ALInstrument *inst;\n    s32 i;\n\n    inst = NULL;\n    i = 1;\n    if (inst == NULL) {\n        do {\n            inst = bank->instArray[i];\n            i++;\n        } while (inst == NULL);\n    }\n    i = 0;\n    if (seqp->maxChannels > 0) {\n        do {\n            __n_resetPerfChanState(seqp, i);\n            i++;\n        } while (i < seqp->maxChannels);\n    }\n    if (bank->percussion != NULL) {\n        __n_resetPerfChanState(seqp, i);\n    }\n}",
+        "score": 0.4807692307692308,
+        "reason": "length_mismatch (target=50, generated=52)",
+        "diffs": [],
+        "timestamp": "2026-06-04T03:55:18.724Z"
+      },
+      {
+        "code": "void __n_initFromBank(N_ALSeqPlayer *seqp, ALBank *bank) {\n    s32 i;\n    ALInstrument *inst;\n\n    inst = NULL;\n    i = 1;\n    if (inst == NULL) {\n        do {\n            inst = bank->instArray[i];\n            i++;\n        } while (inst == NULL);\n    }\n    i = 0;\n    if (seqp->maxChannels > 0) {\n        do {\n            __n_resetPerfChanState(seqp, i);\n            i++;\n        } while (i < seqp->maxChannels);\n    }\n    if (bank->percussion != NULL) {\n        __n_resetPerfChanState(seqp, i);\n    }\n}",
+        "score": 0.4807692307692308,
+        "reason": "length_mismatch (target=50, generated=52)",
+        "diffs": [],
+        "timestamp": "2026-06-04T03:55:48.508Z"
+      },
+      {
+        "code": "void __n_initFromBank(N_ALSeqPlayer *seqp, ALBank *bank) {\n    s32 i;\n    ALInstrument *inst;\n\n    inst = NULL;\n    if (inst == NULL) {\n        i = 1;\n        do {\n            inst = bank->instArray[i];\n            i++;\n        } while (inst == NULL);\n    }\n    if (seqp->maxChannels > (i = 0)) {\n        do {\n            __n_resetPerfChanState(seqp, i);\n            i++;\n        } while (i < seqp->maxChannels);\n    }\n    if (bank->percussion != NULL) {\n        __n_resetPerfChanState(seqp, i);\n    }\n}",
+        "score": 0.4807692307692308,
+        "reason": "length_mismatch (target=50, generated=52)",
+        "diffs": [],
+        "timestamp": "2026-06-04T03:56:05.671Z"
+      }
+    ]
   },
   {
     "function": "func_1505A184",
