@@ -21016,8 +21016,8 @@
     "instructions": 56,
     "difficulty": "medium",
     "tags": [],
-    "attempts": 5,
-    "lastScore": 0.4642857142857143,
+    "attempts": 6,
+    "lastScore": 0.4827586206896552,
     "status": "pending",
     "history": [
       {
@@ -21054,6 +21054,13 @@
         "reason": "length_mismatch (target=56, generated=52)",
         "diffs": [],
         "timestamp": "2026-06-04T06:41:23.912Z"
+      },
+      {
+        "code": "s32 *func_15142C10(s32 *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, u8 *arg5) {\n    s32 *temp_s0;\n    s32 *temp_v1;\n\n    temp_s0 = arg0;\n    if (arg1 != D_800DD1C8) {\n        goto changed;\n    }\n    if (arg2 != D_800DD1CA) {\n        goto changed;\n    }\n    if (arg3 != D_800DD1CC) {\n        goto changed;\n    }\n    if (arg4 == D_800DD1CE) {\n        return temp_s0;\n    }\nchanged:\n    if (*arg5 == 1) {\n        temp_v1 = temp_s0;\n        temp_v1[0] = 0xE7000000;\n        temp_v1[1] = 0;\n        temp_s0 += 2;\n        *arg5 = 0;\n    }\n    temp_v1 = temp_s0;\n    temp_v1[0] = 0xFB000000;\n    temp_v1[1] = (arg1 << 0x18) | ((arg2 & 0xFF) << 0x10) | ((arg3 & 0xFF) << 8) | (arg4 & 0xFF);\n    temp_s0 += 2;\n    D_800DD1C8 = arg1;\n    D_800DD1CA = arg2;\n    D_800DD1CC = arg3;\n    D_800DD1CE = arg4;\n    return temp_s0;\n}",
+        "score": 0.4827586206896552,
+        "reason": "length_mismatch (target=56, generated=58)",
+        "diffs": [],
+        "timestamp": "2026-06-04T07:06:43.844Z"
       }
     ]
   },
@@ -28385,8 +28392,8 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
-    "lastScore": 0.49107142857142855,
+    "attempts": 5,
+    "lastScore": 0.4642857142857143,
     "status": "pending",
     "history": [
       {
@@ -28409,6 +28416,20 @@
         "reason": "length_mismatch (target=56, generated=55)",
         "diffs": [],
         "timestamp": "2026-06-04T06:57:41.891Z"
+      },
+      {
+        "code": "void func_1500A7E8(s32 arg0, s32 arg1) {\n    u8 sp48[5];\n    s32 sp30[6];\n    u8 sp24[0xC];\n    void *temp_v0;\n    void *temp_v0_2;\n    u8 *temp_a0;\n\n    temp_a0 = sp24 + arg1;\n    *(s32 *)sp24 = *(s32 *)D_80082BF4;\n    *(u16 *)(sp24 + 4) = *(u16 *)(D_80082BF4 + 4);\n    temp_v0 = func_151149AC(temp_a0[-0x50]);\n    sp30[2] = (s32)temp_v0;\n    if (temp_v0 != NULL) {\n        *(f32 *)&sp30[0] = -400.0f;\n        *(f32 *)&sp30[1] = 4.0f;\n        *(f32 *)&sp30[3] = (f32)*(s16 *)((u8 *)temp_v0 + 0x10);\n        *(f32 *)&sp30[4] = (f32)*(s16 *)((u8 *)temp_v0 + 0x12);\n        *(f32 *)&sp30[5] = (f32)*(s16 *)((u8 *)temp_v0 + 0x14);\n        sp48[0] = 0;\n        sp48[1] = 0x17;\n        *(s16 *)&sp48[2] = 0x12C;\n        sp48[4] = 0;\n        temp_v0_2 = func_1516037C(sp48, arg0, 0x18, 0xFF, 1);\n        if (temp_v0_2 != NULL) {\n            memcpy((u8 *)temp_v0_2 + 0x18, sp30, 0x18);\n        }\n    }\n}",
+        "score": 0.49107142857142855,
+        "reason": "length_mismatch (target=56, generated=55)",
+        "diffs": [],
+        "timestamp": "2026-06-04T07:05:11.429Z"
+      },
+      {
+        "code": "void func_1500A7E8(s32 arg0, s32 arg1) {\n    u8 sp48[5];\n    s32 sp30[6];\n    s32 sp2C;\n    u16 sp28;\n    s32 sp24;\n    void *temp_v0;\n    void *temp_v0_2;\n    u8 *temp_a0;\n\n    temp_a0 = (u8 *)&sp24 + arg1;\n    sp24 = *(s32 *)D_80082BF4;\n    sp28 = *(u16 *)(D_80082BF4 + 4);\n    temp_v0 = func_151149AC(temp_a0[-0x50]);\n    sp30[2] = (s32)temp_v0;\n    if (temp_v0 != NULL) {\n        *(f32 *)&sp30[0] = -400.0f;\n        *(f32 *)&sp30[1] = 4.0f;\n        *(f32 *)&sp30[3] = (f32)*(s16 *)((u8 *)temp_v0 + 0x10);\n        *(f32 *)&sp30[4] = (f32)*(s16 *)((u8 *)temp_v0 + 0x12);\n        *(f32 *)&sp30[5] = (f32)*(s16 *)((u8 *)temp_v0 + 0x14);\n        sp48[0] = 0;\n        sp48[1] = 0x17;\n        *(s16 *)&sp48[2] = 0x12C;\n        sp48[4] = 0;\n        temp_v0_2 = func_1516037C(sp48, arg0, 0x18, 0xFF, 1);\n        if (temp_v0_2 != NULL) {\n            memcpy((u8 *)temp_v0_2 + 0x18, sp30, 0x18);\n        }\n    }\n}",
+        "score": 0.4642857142857143,
+        "reason": "length_mismatch (target=56, generated=52)",
+        "diffs": [],
+        "timestamp": "2026-06-04T07:05:44.775Z"
       }
     ]
   },
