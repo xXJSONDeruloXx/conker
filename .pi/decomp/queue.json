@@ -18382,9 +18382,9 @@
     "instructions": 46,
     "difficulty": "medium-low",
     "tags": [],
-    "attempts": 3,
+    "attempts": 4,
     "lastScore": 0.5652,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "void func_1504BA38(struct127 *arg0) {\n    s8 temp_a1;\n    s8 temp_v0;\n    s8 *temp_v1;\n\n    if (10.0f < arg0->unk28) {\n        arg0->unkCE = 0;\n        return;\n    }\n    temp_v1 = &D_80099140[(arg0->unk184 & 0x1F) * 3];\n    temp_a1 = temp_v1[2];\n    if ((temp_a1 != 0) && (arg0->unkAA == 0)) {\n        arg0->unkAA = temp_a1;\n    }\n    temp_v0 = temp_v1[1];\n    if (temp_v0 == 0) {\n        arg0->unkCE = temp_v1[0];\n        return;\n    }\n    arg0->unkCE = (s32)((temp_v0 * D_800991D4) * (temp_v1[0] - arg0->xz_velocity));\n}",
@@ -18427,6 +18427,34 @@
           "structural: target=mfc1 t4, f4 got=mfc1 t4, f16"
         ],
         "timestamp": "2026-06-04T01:49:25.241Z"
+      },
+      {
+        "code": "void func_1504BA38(struct127 *arg0) {\n    s8 temp_v0;\n    s8 *temp_v1;\n    s8 temp_a1;\n    f32 temp_f18;\n\n    if (10.0f < arg0->unk28) {\n        arg0->unkCE = 0;\n        return;\n    }\n    temp_v1 = &D_80099140[(arg0->unk184 & 0x1F) * 3];\n    temp_a1 = temp_v1[2];\n    if ((temp_a1 != 0) && (arg0->unkAA == 0)) {\n        arg0->unkAA = temp_a1;\n    }\n    temp_v0 = temp_v1[1];\n    if (temp_v0 == 0) {\n        arg0->unkCE = temp_v1[0];\n        return;\n    }\n    temp_f18 = temp_v0 * D_800991D4;\n    arg0->unkCE = (s32)(temp_f18 * (temp_v1[0] - arg0->xz_velocity));\n}",
+        "score": 0.5652,
+        "reason": "structural_diffs=20",
+        "diffs": [
+          "structural: target=addu v1, t8, t9 got=addu v0, t8, t9",
+          "structural: target=lb a1, 2(v1) got=lb v1, 2(v0)",
+          "structural: target=beqzl a1, L1 got=beqzl v1, L1",
+          "structural: target=lb v0, 1(v1) got=lb v1, 1(v0)",
+          "structural: target=lb v0, 1(v1) got=lb v1, 1(v0)",
+          "structural: target=sb a1, 170(a0) got=sb v1, 170(a0)",
+          "structural: target=lb v0, 1(v1) got=lb v1, 1(v0)",
+          "structural: target=bnezl v0, L2 got=bnezl v1, L2",
+          "structural: target=mtc1 v0, f8 got=mtc1 v1, f8",
+          "structural: target=lb t1, 0(v1) got=lb t1, 0(v0)",
+          "structural: target=mtc1 v0, f8 got=mtc1 v1, f8",
+          "structural: target=lb t2, 0(v1) got=lb t2, 0(v0)",
+          "structural: target=mtc1 t2, f4 got=mtc1 t2, f18",
+          "structural: target=lwc1 f8, 60(a0) got=lwc1 f6, 60(a0)",
+          "structural: target=cvt.s.w f6, f4 got=cvt.s.w f4, f18",
+          "structural: target=mul.s f18, f10, f16 got=mul.s f0, f10, f16",
+          "structural: target=sub.s f10, f6, f8 got=sub.s f8, f4, f6",
+          "structural: target=mul.s f16, f18, f10 got=mul.s f10, f8, f0",
+          "structural: target=trunc.w.s f4, f16 got=trunc.w.s f16, f10",
+          "structural: target=mfc1 t4, f4 got=mfc1 t4, f16"
+        ],
+        "timestamp": "2026-06-04T01:49:56.929Z"
       }
     ]
   },
@@ -22246,9 +22274,32 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.4782608695652174,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_10010E78(s32 arg0, s32 arg1, u16 arg2, s16 arg3, u8 arg4, s32 arg5, s16 arg6, s16 arg7, s16 arg8, s16 arg9, s16 arg10) {\n    s32 sp2C;\n    u16 temp_a2;\n    s32 temp_v0;\n\n    temp_v0 = func_1000F6B8(arg5, arg6, arg7, arg8, &sp2C, arg9, arg10);\n    temp_a2 = (arg2 * temp_v0) >> 15;\n    if (temp_a2 != 0) {\n        temp_v0 = sp2C;\n        func_10010BE8((u16)arg0, arg1, temp_a2, temp_v0 & 0x7F, arg3, (temp_v0 & 0x80) | arg4, D_80041FD9);\n    }\n}",
+        "score": 0.4782608695652174,
+        "reason": "length_mismatch (target=46, generated=44)",
+        "diffs": [],
+        "timestamp": "2026-06-04T01:51:07.872Z"
+      },
+      {
+        "code": "void func_10010E78(s32 arg0, s32 arg1, u16 arg2, s16 arg3, u8 arg4, s32 arg5, s16 arg6, s16 arg7, s16 arg8, s16 arg9, s16 arg10) {\n    u8 sp2C;\n    u16 temp_a2;\n    s32 temp_v0;\n\n    temp_v0 = func_1000F6B8(arg5, arg6, arg7, arg8, &sp2C, arg9, arg10);\n    temp_a2 = (arg2 * temp_v0) >> 15;\n    if (temp_a2 != 0) {\n        temp_v0 = *(s32 *)&sp2C;\n        func_10010BE8((u16)arg0, arg1, temp_a2, temp_v0 & 0x7F, arg3, (temp_v0 & 0x80) | arg4, D_80041FD9);\n    }\n}",
+        "score": 0.4891304347826087,
+        "reason": "length_mismatch (target=46, generated=45)",
+        "diffs": [],
+        "timestamp": "2026-06-04T01:51:37.401Z"
+      },
+      {
+        "code": "void func_10010E78(s32 arg0, s32 arg1, u16 arg2, s16 arg3, u8 arg4, s32 arg5, s16 arg6, s16 arg7, s16 arg8, s16 arg9, s16 arg10) {\n    s32 sp2C[1];\n    u16 temp_a2;\n    s32 temp_v0;\n\n    temp_v0 = func_1000F6B8(arg5, arg6, arg7, arg8, sp2C, arg9, arg10);\n    temp_a2 = (arg2 * temp_v0) >> 15;\n    if (temp_a2 != 0) {\n        temp_v0 = sp2C[0];\n        func_10010BE8((u16)arg0, arg1, temp_a2, temp_v0 & 0x7F, arg3, (temp_v0 & 0x80) | arg4, D_80041FD9);\n    }\n}",
+        "score": 0.4782608695652174,
+        "reason": "length_mismatch (target=46, generated=44)",
+        "diffs": [],
+        "timestamp": "2026-06-04T01:52:03.535Z"
+      }
+    ]
   },
   {
     "function": "func_150AEDF8",
