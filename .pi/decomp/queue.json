@@ -24252,7 +24252,7 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 9,
+    "attempts": 11,
     "lastScore": 0.4528,
     "status": "pending",
     "history": [
@@ -24423,6 +24423,41 @@
           "structural: target=sw t2, 148(a0) got=sw t8, 148(a0)"
         ],
         "timestamp": "2026-06-04T05:46:37.911Z"
+      },
+      {
+        "code": "void func_1507DF10(struct127 *arg0, s32 arg1, s32 arg2, s32 arg3) {\n    s32 temp;\n\n    switch (arg1) {\n        case 9:\n            arg0->unk94 |= 0x20;\n            arg0->unk9C |= 0x78;\n            arg0->unk2E4 = 1;\n            return;\n        case 8:\n            temp = arg0->unk94 | 0x40;\n            ((volatile struct127 *)arg0)->unk94 = temp;\n            arg0->unk94 = temp & ~0x200;\n            arg0->unk9C |= 0xF00;\n            arg0->unk2E4 = 2;\n            return;\n        case 6:\n        case 7:\n            temp = arg0->unk94 | 0xE;\n            ((volatile struct127 *)arg0)->unk94 = temp;\n            arg0->unk94 = temp & ~0x410;\n            arg0->unk9C |= 0xEE0000;\n            arg0->unk2E4 = 4;\n            return;\n        case 4:\n        case 5:\n            temp = arg0->unk94 | 0x80;\n            ((volatile struct127 *)arg0)->unk94 = temp;\n            arg0->unk94 = temp & ~0x500;\n            arg0->unk2E4 = 8;\n            return;\n    }\n}",
+        "score": 0.4818181818181818,
+        "reason": "length_mismatch (target=53, generated=55)",
+        "diffs": [],
+        "timestamp": "2026-06-04T05:46:57.926Z"
+      },
+      {
+        "code": "void func_1507DF10(struct127 *arg0, s32 arg1) {\n    switch (arg1) {\n        case 9:\n            arg0->unk94 |= 0x20;\n            arg0->unk9C |= 0x78;\n            arg0->unk2E4 = 1;\n            return;\n        case 8:\n        {\n            register s32 temp_t2 = arg0->unk94;\n            register s32 temp_t6 = arg0->unk9C;\n            register s32 temp_t3 = temp_t2 | 0x40;\n            register s32 temp_t5 = temp_t3 & ~0x200;\n            register s32 temp_t7 = temp_t6 | 0xF00;\n            ((volatile struct127 *)arg0)->unk94 = temp_t3;\n            arg0->unk94 = temp_t5;\n            arg0->unk9C = temp_t7;\n            arg0->unk2E4 = 2;\n            return;\n        }\n        case 6:\n        case 7:\n        {\n            register s32 temp_t9 = arg0->unk94;\n            register s32 temp_t3 = arg0->unk9C;\n            register s32 temp_t0 = temp_t9 | 0xE;\n            register s32 temp_t2 = temp_t0 & ~0x410;\n            register s32 temp_t4 = temp_t3 | 0xEE0000;\n            ((volatile struct127 *)arg0)->unk94 = temp_t0;\n            arg0->unk94 = temp_t2;\n            arg0->unk9C = temp_t4;\n            arg0->unk2E4 = 4;\n            return;\n        }\n        case 4:\n        case 5:\n        {\n            register s32 temp_t6 = arg0->unk94;\n            register s32 temp_t7 = temp_t6 | 0x80;\n            register s32 temp_t9 = temp_t7 & ~0x500;\n            ((volatile struct127 *)arg0)->unk94 = temp_t7;\n            arg0->unk94 = temp_t9;\n            arg0->unk2E4 = 8;\n            return;\n        }\n    }\n}",
+        "score": 0.4528,
+        "reason": "structural_diffs=29",
+        "diffs": [
+          "structural: target=lui at, HI(jtbl_8009B884) got=lui at, HI(.rodata)",
+          "structural: target=lw t6, LO(jtbl_8009B884)(at) got=lw t6, LO(.rodata)(at)",
+          "structural: target=lw t2, 148(a0) got=lw v0, 148(a0)",
+          "structural: target=lw t6, 156(a0) got=lw v1, 156(a0)",
+          "structural: target=ori t3, t2, 64 got=ori a1, v0, 64",
+          "structural: target=sw t3, 148(a0) got=sw a1, 148(a0)",
+          "structural: target=and t5, t3, at got=and t2, a1, at",
+          "structural: target=li t8, 2 got=li t4, 2",
+          "structural: target=ori t7, t6, 3840 got=ori t3, v1, 3840",
+          "structural: target=sw t5, 148(a0) got=sw t2, 148(a0)",
+          "structural: target=sw t7, 156(a0) got=sw t3, 156(a0)",
+          "structural: target=sw t8, 740(a0) got=sw t4, 740(a0)",
+          "structural: target=lw t9, 148(a0) got=lw v0, 148(a0)",
+          "structural: target=lw t3, 156(a0) got=lw v1, 156(a0)",
+          "structural: target=ori t0, t9, 14 got=ori a1, v0, 14",
+          "structural: target=and t2, t0, at got=and t5, a1, at",
+          "structural: target=sw t0, 148(a0) got=sw a1, 148(a0)",
+          "structural: target=li t5, 4 got=li t7, 4",
+          "structural: target=or t4, t3, at got=or t6, v1, at",
+          "structural: target=sw t2, 148(a0) got=sw t5, 148(a0)"
+        ],
+        "timestamp": "2026-06-04T05:47:50.605Z"
       }
     ]
   },
@@ -24462,9 +24497,32 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.4537037037037037,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_1000A348(void) {\n    struct147 *temp_a3;\n    struct54 *temp_v0;\n    struct54 *temp_v1;\n    struct54 *temp_a0;\n    struct54 *temp_a2;\n\n    temp_a3 = &D_800406A0;\n    temp_v0 = (struct54 *)temp_a3->unk4;\n    if (temp_v0 != NULL) {\n        do {\n            temp_v1 = temp_v0->unk0;\n            if ((temp_v0->unk14 == 0) && (temp_v0->unk16 == 0)) {\n                *(s32 *)temp_v0->unkC = temp_v0->unk8;\n                temp_v0->unkC = NULL;\n                if ((s32)temp_v0 == temp_a3->unk4) {\n                    temp_a3->unk4 = (s32)temp_v1;\n                }\n                temp_a0 = temp_v0->unk0;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk4 = temp_v0->unk4;\n                }\n                temp_a0 = temp_v0->unk4;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk0 = temp_v0->unk0;\n                }\n                temp_a0 = temp_a3->unk10;\n                if (temp_a0 != NULL) {\n                    temp_v0->unk4 = temp_a0;\n                    temp_v0->unk0 = temp_a0->unk0;\n                    temp_a2 = temp_a0->unk0;\n                    if (temp_a2 != NULL) {\n                        temp_a2->unk4 = temp_v0;\n                    }\n                    temp_a0->unk0 = temp_v0;\n                } else {\n                    temp_a3->unk10 = temp_v0;\n                    temp_v0->unk0 = NULL;\n                    temp_v0->unk4 = NULL;\n                }\n            }\n        } while ((temp_v0 = temp_v1) != NULL);\n    }\n}",
+        "score": 0.4814814814814815,
+        "reason": "length_mismatch (target=54, generated=52)",
+        "diffs": [],
+        "timestamp": "2026-06-04T05:50:22.115Z"
+      },
+      {
+        "code": "void func_1000A348(void) {\n    register struct147 *temp_a3;\n    struct54 *temp_v0;\n    struct54 *temp_v1;\n    struct54 *temp_a0;\n    struct54 *temp_a2;\n\n    temp_a3 = &D_800406A0;\n    temp_v0 = (struct54 *)temp_a3->unk4;\n    if (temp_v0 != NULL) {\n        do {\n            temp_v1 = temp_v0->unk0;\n            if ((temp_v0->unk14 == 0) && (temp_v0->unk16 == 0)) {\n                *(s32 *)temp_v0->unkC = temp_v0->unk8;\n                temp_v0->unkC = NULL;\n                if ((s32)temp_v0 == temp_a3->unk4) {\n                    temp_a3->unk4 = (s32)temp_v1;\n                }\n                temp_a0 = temp_v0->unk0;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk4 = temp_v0->unk4;\n                }\n                temp_a0 = temp_v0->unk4;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk0 = temp_v0->unk0;\n                }\n                temp_a0 = temp_a3->unk10;\n                if (temp_a0 != NULL) {\n                    temp_v0->unk4 = temp_a0;\n                    temp_v0->unk0 = temp_a0->unk0;\n                    temp_a2 = temp_a0->unk0;\n                    if (temp_a2 != NULL) {\n                        temp_a2->unk4 = temp_v0;\n                    }\n                    temp_a0->unk0 = temp_v0;\n                } else {\n                    temp_a3->unk10 = temp_v0;\n                    temp_v0->unk0 = NULL;\n                    temp_v0->unk4 = NULL;\n                }\n            }\n        } while ((temp_v0 = temp_v1) != NULL);\n    }\n}",
+        "score": 0.4814814814814815,
+        "reason": "length_mismatch (target=54, generated=52)",
+        "diffs": [],
+        "timestamp": "2026-06-04T05:50:56.744Z"
+      },
+      {
+        "code": "void func_1000A348(void) {\n    struct147 *temp_a3;\n    struct54 *temp_v0;\n    struct54 *temp_v1;\n    struct54 *temp_a0;\n    struct54 *temp_a2;\n\n    temp_a3 = (struct147 *)(s32)&D_800406A0;\n    temp_v0 = (struct54 *)temp_a3->unk4;\n    if (temp_v0 != NULL) {\n        do {\n            temp_v1 = temp_v0->unk0;\n            if ((temp_v0->unk14 == 0) && (temp_v0->unk16 == 0)) {\n                *(s32 *)temp_v0->unkC = temp_v0->unk8;\n                temp_v0->unkC = NULL;\n                if ((s32)temp_v0 == temp_a3->unk4) {\n                    temp_a3->unk4 = (s32)temp_v1;\n                }\n                temp_a0 = temp_v0->unk0;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk4 = temp_v0->unk4;\n                }\n                temp_a0 = temp_v0->unk4;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk0 = temp_v0->unk0;\n                }\n                temp_a0 = temp_a3->unk10;\n                if (temp_a0 != NULL) {\n                    temp_v0->unk4 = temp_a0;\n                    temp_v0->unk0 = temp_a0->unk0;\n                    temp_a2 = temp_a0->unk0;\n                    if (temp_a2 != NULL) {\n                        temp_a2->unk4 = temp_v0;\n                    }\n                    temp_a0->unk0 = temp_v0;\n                } else {\n                    temp_a3->unk10 = temp_v0;\n                    temp_v0->unk0 = NULL;\n                    temp_v0->unk4 = NULL;\n                }\n            }\n        } while ((temp_v0 = temp_v1) != NULL);\n    }\n}",
+        "score": 0.4537037037037037,
+        "reason": "length_mismatch (target=54, generated=49)",
+        "diffs": [],
+        "timestamp": "2026-06-04T05:51:16.940Z"
+      }
+    ]
   },
   {
     "function": "func_15134908",
@@ -24512,7 +24570,7 @@
     "tags": [],
     "attempts": 6,
     "lastScore": 0.9623,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "void func_1513DF9C(void *arg0, s32 arg1, u8 arg2) {\n    s32 idx;\n\n    if ((*(s32 *)((s32)arg0 + 0x58) << 9) < 0) {\n        switch (*(u8 *)((s32)arg0 + 0x19)) {\n            case 12:\n                idx = 10;\n                break;\n            case 11:\n                idx = 9;\n                break;\n            case 0:\n            case 2:\n                idx = 0;\n                break;\n            case 1:\n                idx = 1;\n                break;\n            case 5:\n                idx = 2;\n                break;\n            case 6:\n                idx = 3;\n                break;\n            case 3:\n                idx = 4;\n                break;\n            case 7:\n                idx = 5;\n                break;\n            case 8:\n                idx = 6;\n                break;\n            case 9:\n                idx = 7;\n                break;\n            case 4:\n                idx = 8;\n                break;\n            default:\n                idx = 0;\n                break;\n        }\n    } else {\n        idx = 0;\n    }\n    D_80089F64[idx](arg0, arg1, arg2);\n}",
