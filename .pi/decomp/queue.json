@@ -24612,7 +24612,7 @@
     ],
     "attempts": 8,
     "lastScore": 0.49242424242424243,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "s32 func_150C2700(s32 arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8, s32 arg9, s32 arg10, s32 arg11, s32 arg12, s32 arg13, u8 arg14) {\n    u8 sp20[0x48];\n\n    *(s16 *)&sp20[0x16] = 5;\n    *(s16 *)&sp20[0] = 0x6B;\n    *(s16 *)&sp20[0x14] = 6;\n    *(s16 *)&sp20[2] = 0x46;\n    *(s16 *)&sp20[4] = -0x1F;\n    *(s16 *)&sp20[6] = 0x2E;\n    *(f32 *)&sp20[8] = arg2;\n    *(f32 *)&sp20[0xC] = arg3;\n    *(f32 *)&sp20[0x10] = arg4;\n    *(f32 *)&sp20[0x18] = 30.0f;\n    *(f32 *)&sp20[0x1C] = 35.0f;\n    *(s16 *)&sp20[0x20] = 0x64;\n    *(s16 *)&sp20[0x22] = 0;\n    *(f32 *)&sp20[0x24] = D_800A0274;\n    *(f32 *)&sp20[0x28] = D_800A0278;\n    sp20[0x2C] = 0x9B;\n    sp20[0x2D] = 0x64;\n    *(f32 *)&sp20[0x30] = D_800A027C;\n    *(f32 *)&sp20[0x34] = 0.0f;\n    sp20[0x38] = 1;\n    sp20[0x39] = 6;\n    *(f32 *)&sp20[0x3C] = 0.0f;\n    sp20[0x40] = 1;\n    *(f32 *)&sp20[0x44] = 0.0f;\n    func_15150178(sp20, &sp20[8], 0, arg14, 1);\n    return 1;\n}",
@@ -24732,6 +24732,16 @@
         "reason": "length_mismatch (target=65, generated=66)",
         "diffs": [],
         "timestamp": "2026-06-04T11:22:17.720Z"
+      },
+      {
+        "code": "s32 func_150C2700(s32 arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8, s32 arg9, s32 arg10, s32 arg11, s32 arg12, s32 arg13, u8 arg14) {\n    u8 sp20[0x48];\n\n    *(s16 *)&sp20[0x16] = 5;\n    *(s16 *)&sp20[0] = 0x6B;\n    *(s16 *)&sp20[0x14] = (sp20[0x39] = 6);\n    *(s16 *)&sp20[2] = 0x46;\n    *(s16 *)&sp20[4] = -0x1F;\n    *(s16 *)&sp20[6] = 0x2E;\n    *(f32 *)&sp20[8] = arg2;\n    *(f32 *)&sp20[0xC] = arg3;\n    *(f32 *)&sp20[0x10] = arg4;\n    *(f32 *)&sp20[0x18] = 30.0f;\n    *(f32 *)&sp20[0x1C] = 35.0f;\n    *(s16 *)&sp20[0x20] = 0x64;\n    *(s16 *)&sp20[0x22] = 0;\n    *(f32 *)&sp20[0x24] = D_800A0274;\n    *(f32 *)&sp20[0x28] = D_800A0278;\n    sp20[0x2C] = 0x9B;\n    sp20[0x2D] = 0x64;\n    *(f32 *)&sp20[0x30] = D_800A027C;\n    *(f32 *)&sp20[0x34] = 0.0f;\n    sp20[0x38] = 1;\n    *(f32 *)&sp20[0x3C] = 0.0f;\n    sp20[0x40] = 1;\n    *(f32 *)&sp20[0x44] = 0.0f;\n    func_15150178(sp20, &sp20[8], 0, arg14, 1);\n    return 1;\n}",
+        "score": 0,
+        "reason": "transmuter_best=?",
+        "diffs": [
+          "transmuter: initial=?→best=?, iters=?, compiled=?, errors=?, forks=0",
+          "config: timeout=60s, maxCompiles=3000, concurrency=4, profile=ido"
+        ],
+        "timestamp": "2026-06-04T15:01:04.790Z"
       }
     ]
   },
@@ -26169,7 +26179,7 @@
     ],
     "attempts": 9,
     "lastScore": 0.49074074074074076,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "void func_1000A348(void) {\n    struct147 *temp_a3;\n    struct54 *temp_v0;\n    struct54 *temp_v1;\n    struct54 *temp_a0;\n    struct54 *temp_a2;\n\n    temp_a3 = &D_800406A0;\n    temp_v0 = (struct54 *)temp_a3->unk4;\n    if (temp_v0 != NULL) {\n        do {\n            temp_v1 = temp_v0->unk0;\n            if ((temp_v0->unk14 == 0) && (temp_v0->unk16 == 0)) {\n                *(s32 *)temp_v0->unkC = temp_v0->unk8;\n                temp_v0->unkC = NULL;\n                if ((s32)temp_v0 == temp_a3->unk4) {\n                    temp_a3->unk4 = (s32)temp_v1;\n                }\n                temp_a0 = temp_v0->unk0;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk4 = temp_v0->unk4;\n                }\n                temp_a0 = temp_v0->unk4;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk0 = temp_v0->unk0;\n                }\n                temp_a0 = temp_a3->unk10;\n                if (temp_a0 != NULL) {\n                    temp_v0->unk4 = temp_a0;\n                    temp_v0->unk0 = temp_a0->unk0;\n                    temp_a2 = temp_a0->unk0;\n                    if (temp_a2 != NULL) {\n                        temp_a2->unk4 = temp_v0;\n                    }\n                    temp_a0->unk0 = temp_v0;\n                } else {\n                    temp_a3->unk10 = temp_v0;\n                    temp_v0->unk0 = NULL;\n                    temp_v0->unk4 = NULL;\n                }\n            }\n        } while ((temp_v0 = temp_v1) != NULL);\n    }\n}",
@@ -26233,6 +26243,16 @@
         "reason": "length_mismatch (target=54, generated=53)",
         "diffs": [],
         "timestamp": "2026-06-04T14:27:14.184Z"
+      },
+      {
+        "code": "void func_1000A348(s32 arg0, s32 arg1, s32 arg2) {\n    volatile struct147 *temp_a3;\n    struct54 *temp_v0;\n    struct54 *temp_v1;\n    struct54 *temp_a0;\n    struct54 *temp_a2;\n\n    temp_a3 = (volatile struct147 *)&D_800406A0;\n    temp_v0 = (struct54 *)temp_a3->unk4;\n    while (temp_v0 != NULL) {\n        temp_v1 = temp_v0->unk0;\n        if ((temp_v0->unk14 == 0) && (temp_v0->unk16 == 0)) {\n            *(s32 *)temp_v0->unkC = temp_v0->unk8;\n            temp_v0->unkC = 0;\n            if ((s32)temp_v0 == temp_a3->unk4) {\n                temp_a3->unk4 = (s32)temp_v1;\n            }\n            temp_a0 = temp_v0->unk0;\n            if (temp_a0 != NULL) {\n                temp_a0->unk4 = temp_v0->unk4;\n            }\n            temp_a0 = temp_v0->unk4;\n            if (temp_a0 != NULL) {\n                temp_a0->unk0 = temp_v0->unk0;\n            }\n            temp_a0 = temp_a3->unk10;\n            if (temp_a0 != NULL) {\n                temp_v0->unk4 = temp_a0;\n                temp_v0->unk0 = temp_a0->unk0;\n                temp_a2 = temp_a0->unk0;\n                if (temp_a2 != NULL) {\n                    temp_a2->unk4 = temp_v0;\n                }\n                temp_a0->unk0 = temp_v0;\n            } else {\n                temp_a3->unk10 = temp_v0;\n                temp_v0->unk0 = NULL;\n                temp_v0->unk4 = NULL;\n            }\n        }\n        temp_v0 = temp_v1;\n    }\n}",
+        "score": 0,
+        "reason": "transmuter_best=?",
+        "diffs": [
+          "transmuter: initial=?→best=?, iters=?, compiled=?, errors=?, forks=0",
+          "config: timeout=60s, maxCompiles=2000, concurrency=4, profile=ido"
+        ],
+        "timestamp": "2026-06-04T15:00:25.323Z"
       }
     ]
   },
@@ -30207,9 +30227,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 10,
-    "lastScore": 0.49264705882352944,
-    "status": "pending",
+    "attempts": 11,
+    "lastScore": 0.4852941176470588,
+    "status": "skipped",
     "history": [
       {
         "code": "void func_15077F64(void) {\n    u8 temp_t6;\n    s32 phi_a0;\n    s32 phi_a1;\n    s32 temp_v0;\n\n    temp_t6 = D_800D1890 - 1;\n    temp_v0 = D_800D2104[D_800D154C->unk13F] + (D_800D154C->unk21E * 8);\n    D_800D154C->unk78 = func_1505A630((f32)*(s16 *)(temp_v0 + 8) - D_800D154C->x_position, D_800D154C->z_position - (f32)*(s16 *)(temp_v0 + 0xC), 0);\n    phi_a0 = phi_a1 = ((D_800D154C->unk78 - D_800D154C->unk76) >> 8) & 0xFF;\n    if ((phi_a0 & 0x80) != 0) {\n        phi_a0 = -phi_a0 & 0xFF;\n        phi_a1 = phi_a0;\n    }\n    if (((u8 *)D_80099A3C)[temp_t6 * 0xA] < phi_a0) {\n        D_800D154C->unk250 = D_800D1891;\n        func_15056A00(D_800D154C, phi_a1, temp_t6);\n    }\n}",
@@ -30382,6 +30402,23 @@
         "reason": "length_mismatch (target=68, generated=67)",
         "diffs": [],
         "timestamp": "2026-06-04T12:23:06.304Z"
+      },
+      {
+        "code": "void func_15077F64(void) {\n    u8 pad0;\n    u8 temp_t6;\n    u8 pad[24];\n    s32 phi_a0;\n    s32 phi_a1;\n    s32 temp_v0;\n    f32 temp_f12;\n    f32 temp_f14;\n\n    temp_t6 = D_800D1890 - 1;\n    temp_v0 = D_800D2104[D_800D154C->unk13F] + (D_800D154C->unk21E * 8);\n    temp_f12 = (f32)*(s16 *)(temp_v0 + 8) - D_800D154C->x_position;\n    temp_f14 = D_800D154C->z_position - (f32)*(s16 *)(temp_v0 + 0xC);\n    D_800D154C->unk78 = func_1505A630(temp_f12, temp_f14, 0);\n    phi_a0 = phi_a1 = ((D_800D154C->unk78 - D_800D154C->unk76) >> 8) & 0xFF;\n    if ((phi_a1 & 0x80) != 0) {\n        phi_a1 = -phi_a1;\n        phi_a0 = phi_a1 & 0xFF;\n        phi_a1 = phi_a0;\n    }\n    if (((u8 *)D_80099A3C)[temp_t6 * 0xA] < phi_a0) {\n        D_800D154C->unk250 = D_800D1891;\n        func_15056A00(D_800D154C, phi_a1, temp_t6);\n    }\n}",
+        "score": 0,
+        "reason": "transmuter_best=?",
+        "diffs": [
+          "transmuter: initial=?→best=?, iters=?, compiled=?, errors=?, forks=0",
+          "config: timeout=60s, maxCompiles=3000, concurrency=4, profile=ido"
+        ],
+        "timestamp": "2026-06-04T15:01:22.876Z"
+      },
+      {
+        "code": "void func_15077F64(void) {\n    u8 pad0;\n    u8 temp_t6;\n    volatile u8 pad[12];\n    s32 phi_a0;\n    s32 phi_a1;\n    s32 temp_v0;\n    f32 temp_f12;\n    f32 temp_f14;\n\n    temp_t6 = D_800D1890 - 1;\n    temp_v0 = D_800D2104[D_800D154C->unk13F] + (D_800D154C->unk21E * 8);\n    temp_f12 = (f32)*(s16 *)(temp_v0 + 8) - D_800D154C->x_position;\n    temp_f14 = D_800D154C->z_position - (f32)*(s16 *)(temp_v0 + 0xC);\n    D_800D154C->unk78 = func_1505A630(temp_f12, temp_f14, 0);\n    phi_a0 = phi_a1 = ((D_800D154C->unk78 - D_800D154C->unk76) >> 8) & 0xFF;\n    if ((phi_a1 & 0x80) != 0) {\n        phi_a1 = -phi_a1;\n        phi_a0 = phi_a1 & 0xFF;\n        phi_a1 = phi_a0;\n    }\n    if (((u8 *)D_80099A3C)[temp_t6 * 0xA] < phi_a0) {\n        D_800D154C->unk250 = D_800D1891;\n        func_15056A00(D_800D154C, phi_a1, temp_t6);\n    }\n}",
+        "score": 0.4852941176470588,
+        "reason": "length_mismatch (target=68, generated=66)",
+        "diffs": [],
+        "timestamp": "2026-06-04T15:01:53.353Z"
       }
     ]
   },
@@ -36096,9 +36133,95 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.6667,
+    "status": "pending",
+    "history": [
+      {
+        "code": "s32 func_1502B110(s32 arg0, s32 arg1, s32 arg2, s32 arg3, ...) {\n    va_list args;\n    s32 temp_s1;\n    s32 offset;\n    s32 more;\n    s32 ret;\n\n    more = 1;\n    ret = 0;\n    offset = arg0;\n    if (offset == 0) {\n        offset = (s32)D_AB1950;\n    }\n    va_start(args, arg3);\n    while (arg3 >= 2U) {\n        temp_s1 = va_arg(args, s32);\n        if (more != 0) {\n            offset += func_1502AC88(offset, temp_s1, &more);\n        }\n        arg3--;\n        more &= 0x0FFFFFFF;\n    }\n    temp_s1 = va_arg(args, s32);\n    if (more != 0) {\n        ret = func_1502AF04(offset, arg2, temp_s1, arg1);\n    }\n    return ret;\n}",
+        "score": 0.6667,
+        "reason": "structural_diffs=23",
+        "diffs": [
+          "structural: target=sw s2, 28(sp) got=sw ra, 44(sp)",
+          "structural: target=move s2, a0 got=sw s5, 40(sp)",
+          "structural: target=sw ra, 44(sp) got=sw s4, 36(sp)",
+          "structural: target=sw s5, 40(sp) got=sw s3, 32(sp)",
+          "structural: target=sw s4, 36(sp) got=sw s2, 28(sp)",
+          "structural: target=sw s3, 32(sp) got=sw s1, 24(sp)",
+          "structural: target=sw s1, 24(sp) got=sw s0, 20(sp)",
+          "structural: target=sw s0, 20(sp) got=sw a1, 76(sp)",
+          "structural: target=sw a1, 76(sp) got=sw a2, 80(sp)",
+          "structural: target=sw a2, 80(sp) got=sw a3, 84(sp)",
+          "structural: target=sw a3, 84(sp) got=li t6, 1",
+          "structural: target=li t6, 1 got=sw t6, 56(sp)",
+          "structural: target=sw t6, 60(sp) got=sw zero, 52(sp)",
+          "structural: target=bnez s2, L0 got=bnez a0, L0",
+          "structural: target=sw zero, 56(sp) got=move s2, a0",
+          "structural: target=addiu s3, sp, 60 got=addiu s3, sp, 56",
+          "structural: target=lw t8, 60(sp) got=lw t8, 56(sp)",
+          "structural: target=lw t9, 60(sp) got=lw t9, 56(sp)",
+          "structural: target=sw a3, 84(sp) got=sw t0, 56(sp)",
+          "structural: target=sw t0, 60(sp) got=sw a3, 84(sp)"
+        ],
+        "timestamp": "2026-06-04T15:02:54.652Z"
+      },
+      {
+        "code": "s32 func_1502B110(s32 arg0, s32 arg1, s32 arg2, s32 arg3, ...) {\n    va_list args;\n    s32 offset;\n    s32 temp_s1;\n    s32 ret;\n    s32 more;\n\n    offset = arg0;\n    more = 1;\n    ret = 0;\n    if (offset == 0) {\n        offset = (s32)D_AB1950;\n    }\n    va_start(args, arg3);\n    while (arg3 >= 2U) {\n        temp_s1 = va_arg(args, s32);\n        if (more != 0) {\n            offset += func_1502AC88(offset, temp_s1, &more);\n        }\n        arg3--;\n        more &= 0x0FFFFFFF;\n    }\n    temp_s1 = va_arg(args, s32);\n    if (more != 0) {\n        ret = func_1502AF04(offset, arg2, temp_s1, arg1);\n    }\n    return ret;\n}",
+        "score": 0.7101,
+        "reason": "structural_diffs=20",
+        "diffs": [
+          "structural: target=sw s2, 28(sp) got=sw ra, 44(sp)",
+          "structural: target=move s2, a0 got=sw s5, 40(sp)",
+          "structural: target=sw ra, 44(sp) got=sw s4, 36(sp)",
+          "structural: target=sw s5, 40(sp) got=sw s3, 32(sp)",
+          "structural: target=sw s4, 36(sp) got=sw s2, 28(sp)",
+          "structural: target=sw s3, 32(sp) got=sw s1, 24(sp)",
+          "structural: target=sw s1, 24(sp) got=sw s0, 20(sp)",
+          "structural: target=sw s0, 20(sp) got=sw a1, 76(sp)",
+          "structural: target=sw a1, 76(sp) got=sw a2, 80(sp)",
+          "structural: target=sw a2, 80(sp) got=sw a3, 84(sp)",
+          "structural: target=sw a3, 84(sp) got=li t6, 1",
+          "structural: target=li t6, 1 got=move s2, a0",
+          "structural: target=sw t6, 60(sp) got=sw t6, 52(sp)",
+          "structural: target=bnez s2, L0 got=bnez a0, L0",
+          "structural: target=addiu s3, sp, 60 got=addiu s3, sp, 52",
+          "structural: target=lw t8, 60(sp) got=lw t8, 52(sp)",
+          "structural: target=lw t9, 60(sp) got=lw t9, 52(sp)",
+          "structural: target=sw a3, 84(sp) got=sw t0, 52(sp)",
+          "structural: target=sw t0, 60(sp) got=sw a3, 84(sp)",
+          "structural: target=lw t2, 60(sp) got=lw t2, 52(sp)"
+        ],
+        "timestamp": "2026-06-04T15:03:17.716Z"
+      },
+      {
+        "code": "s32 func_1502B110(s32 arg0, s32 arg1, s32 arg2, s32 arg3, ...) {\n    va_list args;\n    s32 offset;\n    s32 temp_s1;\n    s32 sp38[2];\n\n    offset = arg0;\n    sp38[1] = 1;\n    sp38[0] = 0;\n    if (offset == 0) {\n        offset = (s32)D_AB1950;\n    }\n    va_start(args, arg3);\n    while (arg3 >= 2U) {\n        temp_s1 = va_arg(args, s32);\n        if (sp38[1] != 0) {\n            offset += func_1502AC88(offset, temp_s1, &sp38[1]);\n        }\n        arg3--;\n        sp38[1] = sp38[1] & 0x0FFFFFFF;\n    }\n    temp_s1 = va_arg(args, s32);\n    if (sp38[1] != 0) {\n        sp38[0] = func_1502AF04(offset, arg2, temp_s1, arg1);\n    }\n    return sp38[0];\n}",
+        "score": 0.6667,
+        "reason": "structural_diffs=23",
+        "diffs": [
+          "structural: target=sw s2, 28(sp) got=sw ra, 44(sp)",
+          "structural: target=move s2, a0 got=sw s5, 40(sp)",
+          "structural: target=sw ra, 44(sp) got=sw s4, 36(sp)",
+          "structural: target=sw s5, 40(sp) got=sw s3, 32(sp)",
+          "structural: target=sw s4, 36(sp) got=sw s2, 28(sp)",
+          "structural: target=sw s3, 32(sp) got=sw s1, 24(sp)",
+          "structural: target=sw s1, 24(sp) got=sw s0, 20(sp)",
+          "structural: target=sw s0, 20(sp) got=sw a1, 76(sp)",
+          "structural: target=sw a1, 76(sp) got=sw a2, 80(sp)",
+          "structural: target=sw a2, 80(sp) got=sw a3, 84(sp)",
+          "structural: target=sw a3, 84(sp) got=li t6, 1",
+          "structural: target=li t6, 1 got=move s2, a0",
+          "structural: target=sw t6, 60(sp) got=sw t6, 56(sp)",
+          "structural: target=bnez s2, L0 got=bnez a0, L0",
+          "structural: target=sw zero, 56(sp) got=sw zero, 52(sp)",
+          "structural: target=addiu s3, sp, 60 got=addiu s3, sp, 56",
+          "structural: target=lw t8, 60(sp) got=lw t8, 56(sp)",
+          "structural: target=lw t9, 60(sp) got=lw t9, 56(sp)",
+          "structural: target=sw a3, 84(sp) got=sw t0, 56(sp)",
+          "structural: target=sw t0, 60(sp) got=sw a3, 84(sp)"
+        ],
+        "timestamp": "2026-06-04T15:03:37.783Z"
+      }
+    ]
   },
   {
     "function": "func_151DB97C",
