@@ -21973,9 +21973,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
+    "attempts": 4,
     "lastScore": 0.47959183673469385,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "void func_1000FD38(s32 arg0, s32 arg1, s32 arg2) {\n    struct15 *temp_s0;\n    s32 temp_v0;\n    s32 temp_s1;\n\n    temp_v0 = D_80042760;\n    temp_s0 = D_80041FE0;\n    temp_s1 = 0;\n    if (temp_v0 > 0) {\n        do {\n            if ((arg0 == temp_s0->unk14) && (arg1 == temp_s0->unk18) && (arg2 == temp_s0->unk1C)) {\n                if (temp_s0->unk24 != 0) {\n                    func_100111C8(temp_s0->unk24);\n                    temp_v0 = D_80042760;\n                }\n                temp_s0->unk10 |= 0x80;\n            }\n            temp_s1++;\n            temp_s0++;\n        } while (temp_s1 < temp_v0);\n    }\n}",
@@ -22003,6 +22003,13 @@
         "reason": "length_mismatch (target=47, generated=49)",
         "diffs": [],
         "timestamp": "2026-06-04T02:29:55.240Z"
+      },
+      {
+        "code": "void func_1000FD38(s32 arg0, s32 arg1, s32 arg2) {\n    struct15 *temp_s0;\n    register s32 temp_v0;\n    s32 temp_s1;\n\n    temp_v0 = D_80042760;\n    temp_s0 = D_80041FE0;\n    temp_s1 = 0;\n    if (temp_v0 > 0) {\n        do {\n            if ((arg0 == temp_s0->unk14) && (arg1 == temp_s0->unk18) && (arg2 == temp_s0->unk1C)) {\n                if (temp_s0->unk24 != 0) {\n                    func_100111C8(temp_s0->unk24);\n                    temp_v0 = D_80042760;\n                }\n                temp_s0->unk10 |= 0x80;\n            }\n            temp_s1++;\n            temp_s0++;\n        } while (temp_s1 < temp_v0);\n    }\n}",
+        "score": 0.47959183673469385,
+        "reason": "length_mismatch (target=47, generated=49)",
+        "diffs": [],
+        "timestamp": "2026-06-04T02:32:02.159Z"
       }
     ]
   },

@@ -3,6 +3,8 @@
 #include "functions.h"
 #include "variables.h"
 
+void func_15084D70(s32, u8, s32, void *, void *, void *, void *, void *, void *, s32, void *);
+
 
 void func_1507C8E0(struct127 *arg0, s32 arg1) {
     arg0->unk31C->unk120 = (u8)2;
@@ -117,5 +119,23 @@ void func_1507DE4C(struct127 *arg0) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_A9D90/func_1507DF10.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_A9D90/func_1507DFE4.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_A9D90/func_1507E114.s")
+s32 func_1507E114(s32 arg0) {
+    s32 sp5C;
+    s32 sp54[2];
+    s32 sp48[3];
+    s32 sp44;
+    u8 sp43;
+    u8 sp42;
+    s32 sp3C;
+
+    if (D_800D18A8 == 0) {
+        return 0;
+    }
+    if ((D_800BE9F4 == (u16 *)0x22) || (D_800BE9F4 == (u16 *)0x18)) {
+        return 0;
+    }
+    D_800BE9F4 = (u16 *)(s32)(s8)D_800BE3DF;
+    func_15084D70(0, D_800BE3E0, 1, sp54, sp48, &sp43, &sp42, &sp44, &sp3C, 1, &sp5C);
+    return sp5C + 1;
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/game_A9D90/func_1507E1D0.s")

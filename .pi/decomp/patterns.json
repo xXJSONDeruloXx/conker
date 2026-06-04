@@ -855,5 +855,14 @@
     "example_functions": [
       "func_150718E4"
     ]
+  },
+  {
+    "id": "signed-byte-local-for-minus-one",
+    "description": "Use a signed byte local/array when target materializes -1 before an sb store, rather than 255.",
+    "trigger": "Near-match differs only by `li reg,-1` target versus `li reg,255` generated for a byte field assigned -1 before `sb`.",
+    "solution": "Make the local buffer or field `s8` instead of `u8`, then assign `-1` so IDO preserves the signed immediate.",
+    "example_functions": [
+      "func_150712AC"
+    ]
   }
 ]
