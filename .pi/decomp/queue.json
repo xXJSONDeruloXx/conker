@@ -30935,8 +30935,8 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 3,
-    "lastScore": 0.4927536231884058,
+    "attempts": 6,
+    "lastScore": 0.4859154929577465,
     "status": "pending",
     "history": [
       {
@@ -30959,6 +30959,27 @@
         "reason": "length_mismatch (target=69, generated=68)",
         "diffs": [],
         "timestamp": "2026-06-04T12:57:12.563Z"
+      },
+      {
+        "code": "void func_15062D10(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {\n    s32 temp_a1;\n    s32 *temp_a3;\n    s32 temp_a2;\n    s32 temp_v1;\n    s32 temp_a0;\n    s32 temp_v0;\n\n    if (((&D_800D19A0)[arg0]) != 0) {\n        temp_a1 = *(s32 *)((*(s32 *)((s32)&D_800C4488 + (arg0 * 4))) + (arg4 * 4));\n        temp_a3 = (s32 *)(temp_a1 + (*(&arg1) * 8));\n        temp_a2 = temp_a3[1];\n        temp_v1 = ((temp_a2 >> 12) & 0xFFF) + 2;\n        temp_a0 = (temp_a2 & 0xFFF) + 2;\n        temp_a2 = temp_a3[0];\n        if (arg5 != 0) {\n            temp_v0 = arg2 & 0xFFF;\n        } else {\n            temp_a1 = ((temp_a2 >> 12) & 0xFFF) + arg2;\n            temp_v0 = temp_a1;\n            if (temp_v1 < temp_a1) {\n                temp_v0 = temp_a1 - temp_v1;\n            } else if (temp_a1 < 0) {\n                temp_v0 = temp_a1 + temp_v1;\n            }\n        }\n        temp_v0 &= 0xFFF;\n        if (arg5 != 0) {\n            temp_v1 = arg3 & 0xFFF;\n        } else {\n            temp_a1 = (temp_a2 & 0xFFF) + arg3;\n            temp_v1 = temp_a1;\n            if (temp_a0 < temp_a1) {\n                temp_v1 = temp_a1 - temp_a0;\n            } else if (temp_a1 < 0) {\n                temp_v1 = temp_a1 + temp_a0;\n            }\n        }\n        temp_a3[0] = (temp_a2 & 0xFF000000) | (temp_v1 & 0xFFF) | (temp_v0 << 12);\n    }\n}",
+        "score": 0.4927536231884058,
+        "reason": "length_mismatch (target=69, generated=68)",
+        "diffs": [],
+        "timestamp": "2026-06-04T12:57:57.543Z"
+      },
+      {
+        "code": "void func_15062D10(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {\n    s32 temp_a1;\n    s32 *temp_a3;\n    s32 temp_a2;\n    s32 temp_v1;\n    s32 temp_a0;\n    s32 temp_v0;\n\n    if (((&D_800D19A0)[arg0]) != 0) {\n        temp_a1 = *(s32 *)((*(s32 *)((s32)&D_800C4488 + (arg0 * 4))) + (arg4 * 4));\n        temp_a3 = (s32 *)(temp_a1 + (*(volatile s32 *)&arg1 * 8));\n        temp_a2 = temp_a3[1];\n        temp_v1 = ((temp_a2 >> 12) & 0xFFF) + 2;\n        temp_a0 = (temp_a2 & 0xFFF) + 2;\n        temp_a2 = temp_a3[0];\n        if (arg5 != 0) {\n            temp_v0 = arg2 & 0xFFF;\n        } else {\n            temp_a1 = ((temp_a2 >> 12) & 0xFFF) + arg2;\n            temp_v0 = temp_a1;\n            if (temp_v1 < temp_a1) {\n                temp_v0 = temp_a1 - temp_v1;\n            } else if (temp_a1 < 0) {\n                temp_v0 = temp_a1 + temp_v1;\n            }\n        }\n        temp_v0 &= 0xFFF;\n        if (arg5 != 0) {\n            temp_v1 = arg3 & 0xFFF;\n        } else {\n            temp_a1 = (temp_a2 & 0xFFF) + arg3;\n            temp_v1 = temp_a1;\n            if (temp_a0 < temp_a1) {\n                temp_v1 = temp_a1 - temp_a0;\n            } else if (temp_a1 < 0) {\n                temp_v1 = temp_a1 + temp_a0;\n            }\n        }\n        temp_a3[0] = (temp_a2 & 0xFF000000) | (temp_v1 & 0xFFF) | (temp_v0 << 12);\n    }\n}",
+        "score": 0.4859154929577465,
+        "reason": "length_mismatch (target=69, generated=71)",
+        "diffs": [],
+        "timestamp": "2026-06-04T12:58:26.497Z"
+      },
+      {
+        "code": "void func_15062D10(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {\n    s32 temp_a1;\n    s32 *temp_a3;\n    s32 temp_a2;\n    s32 temp_v1;\n    s32 temp_a0;\n    s32 temp_v0;\n    volatile s32 temp_arg1;\n\n    temp_arg1 = arg1;\n    if (((&D_800D19A0)[arg0]) != 0) {\n        temp_a1 = *(s32 *)((*(s32 *)((s32)&D_800C4488 + (arg0 * 4))) + (arg4 * 4));\n        temp_a3 = (s32 *)(temp_a1 + (temp_arg1 * 8));\n        temp_a2 = temp_a3[1];\n        temp_v1 = ((temp_a2 >> 12) & 0xFFF) + 2;\n        temp_a0 = (temp_a2 & 0xFFF) + 2;\n        temp_a2 = temp_a3[0];\n        if (arg5 != 0) {\n            temp_v0 = arg2 & 0xFFF;\n        } else {\n            temp_a1 = ((temp_a2 >> 12) & 0xFFF) + arg2;\n            temp_v0 = temp_a1;\n            if (temp_v1 < temp_a1) {\n                temp_v0 = temp_a1 - temp_v1;\n            } else if (temp_a1 < 0) {\n                temp_v0 = temp_a1 + temp_v1;\n            }\n        }\n        temp_v0 &= 0xFFF;\n        if (arg5 != 0) {\n            temp_v1 = arg3 & 0xFFF;\n        } else {\n            temp_a1 = (temp_a2 & 0xFFF) + arg3;\n            temp_v1 = temp_a1;\n            if (temp_a0 < temp_a1) {\n                temp_v1 = temp_a1 - temp_a0;\n            } else if (temp_a1 < 0) {\n                temp_v1 = temp_a1 + temp_a0;\n            }\n        }\n        temp_a3[0] = (temp_a2 & 0xFF000000) | (temp_v1 & 0xFFF) | (temp_v0 << 12);\n    }\n}",
+        "score": 0.4859154929577465,
+        "reason": "length_mismatch (target=69, generated=71)",
+        "diffs": [],
+        "timestamp": "2026-06-04T12:58:57.225Z"
       }
     ]
   },
