@@ -27676,8 +27676,8 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
-    "lastScore": 0.6667,
+    "attempts": 6,
+    "lastScore": 0.47058823529411764,
     "status": "pending",
     "history": [
       {
@@ -27743,6 +27743,45 @@
           "structural: target=addiu sp, sp, 96 got=addiu sp, sp, 104"
         ],
         "timestamp": "2026-06-04T02:55:21.167Z"
+      },
+      {
+        "code": "void func_15138BC0(struct102 *arg0, u8 arg1, s32 arg2) {\n    u8 sp28[0x27];\n    u8 sp4F;\n    u8 sp50[8];\n    s32 temp_s1;\n\n    temp_s1 = func_15134070(arg0);\n    if (temp_s1 != 0x63) {\n        sp4F = func_151380B4(arg0, temp_s1, sp50);\n        func_15138120(arg0, temp_s1, 1);\n        if (sp4F != 0) {\n            func_1504715C(sp28, arg0);\n            func_151382E0(sp50, temp_s1, sp28, arg1, arg2);\n            func_15138424(arg0, sp50, temp_s1, sp28, arg1, arg2);\n        }\n    }\n}",
+        "score": 0.8333,
+        "reason": "structural_diffs=8",
+        "diffs": [
+          "structural: target=addiu a2, sp, 80 got=addiu a2, sp, 44",
+          "structural: target=sb v0, 79(sp) got=sb v0, 55(sp)",
+          "structural: target=lbu t6, 79(sp) got=lbu t6, 55(sp)",
+          "structural: target=addiu a0, sp, 40 got=addiu a0, sp, 56",
+          "structural: target=addiu a0, sp, 80 got=addiu a0, sp, 44",
+          "structural: target=addiu a2, sp, 40 got=addiu a2, sp, 56",
+          "structural: target=addiu a1, sp, 80 got=addiu a1, sp, 44",
+          "structural: target=addiu a3, sp, 40 got=addiu a3, sp, 56"
+        ],
+        "timestamp": "2026-06-04T02:55:46.408Z"
+      },
+      {
+        "code": "void func_15138BC0(struct102 *arg0, u8 arg1, s32 arg2) {\n    s32 sp50[2];\n    s32 sp28[10];\n    s32 temp_s1;\n\n    temp_s1 = func_15134070(arg0);\n    if (temp_s1 != 0x63) {\n        ((u8 *)sp28)[0x27] = func_151380B4(arg0, temp_s1, sp50);\n        func_15138120(arg0, temp_s1, 1);\n        if (((u8 *)sp28)[0x27] != 0) {\n            func_1504715C(sp28, arg0);\n            func_151382E0(sp50, temp_s1, sp28, arg1, arg2);\n            func_15138424(arg0, sp50, temp_s1, sp28, arg1, arg2);\n        }\n    }\n}",
+        "score": 0.8333,
+        "reason": "structural_diffs=8",
+        "diffs": [
+          "structural: target=addiu a2, sp, 80 got=addiu a2, sp, 88",
+          "structural: target=sb v0, 79(sp) got=sb v0, 87(sp)",
+          "structural: target=lbu t6, 79(sp) got=lbu t6, 87(sp)",
+          "structural: target=addiu a0, sp, 40 got=addiu a0, sp, 48",
+          "structural: target=addiu a0, sp, 80 got=addiu a0, sp, 88",
+          "structural: target=addiu a2, sp, 40 got=addiu a2, sp, 48",
+          "structural: target=addiu a1, sp, 80 got=addiu a1, sp, 88",
+          "structural: target=addiu a3, sp, 40 got=addiu a3, sp, 48"
+        ],
+        "timestamp": "2026-06-04T02:56:17.649Z"
+      },
+      {
+        "code": "void func_15138BC0(struct102 *arg0, u8 arg1, s32 arg2) {\n    u8 sp50[8];\n    u8 sp4F;\n    u8 sp28[0x27];\n    s32 temp_s1;\n\n    temp_s1 = func_15134070(arg0);\n    if (temp_s1 != 0x63) {\n        *(u8 *)((s32)&sp4F - 8) = func_151380B4(arg0, temp_s1, sp50 - 8);\n        func_15138120(arg0, temp_s1, 1);\n        if (*(u8 *)((s32)&sp4F - 8) != 0) {\n            func_1504715C(sp28 - 8, arg0);\n            func_151382E0(sp50 - 8, temp_s1, sp28 - 8, arg1, arg2);\n            func_15138424(arg0, sp50 - 8, temp_s1, sp28 - 8, arg1, arg2);\n        }\n    }\n}",
+        "score": 0.47058823529411764,
+        "reason": "length_mismatch (target=48, generated=51)",
+        "diffs": [],
+        "timestamp": "2026-06-04T02:56:38.229Z"
       }
     ]
   },
