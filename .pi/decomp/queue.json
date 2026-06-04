@@ -28671,8 +28671,8 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 18,
-    "lastScore": 0.4861111111111111,
+    "attempts": 21,
+    "lastScore": 0.4714285714285714,
     "status": "pending",
     "history": [
       {
@@ -28825,6 +28825,27 @@
         "reason": "length_mismatch (target=35, generated=36)",
         "diffs": [],
         "timestamp": "2026-06-04T13:15:05.027Z"
+      },
+      {
+        "code": "void func_15076768(void) {\n    struct17 pos;\n    struct260 tmp;\n    struct127 *actor;\n\n    switch (D_800D1890) {\n        case 0:\n            func_15197A7C(D_800D154C);\n            return;\n        case 1:\n            actor = D_800D154C;\n            pos.unk0 = actor->x_position;\n            pos.unk4 = -390.0f;\n            pos.unk8 = actor->z_position;\n            func_1504715C(&tmp);\n            func_1514B364(&pos, &tmp, 0xFF, 0);\n            return;\n    }\n}",
+        "score": 0.4861111111111111,
+        "reason": "length_mismatch (target=35, generated=36)",
+        "diffs": [],
+        "timestamp": "2026-06-04T13:15:37.874Z"
+      },
+      {
+        "code": "void func_15076768(void) {\n    struct17 pos;\n    struct260 tmp;\n    struct127 *actor;\n\n    switch (D_800D1890) {\n        case 0:\n            func_15197A7C(D_800D154C);\n            return;\n        case 1:\n            actor = D_800D154C;\n            pos.unk4 = -390.0f;\n            pos.unk0 = actor->x_position;\n            pos.unk8 = actor->z_position;\n            func_1504715C(&tmp);\n            func_1514B364(&pos, &tmp, 0xFF, 0);\n            return;\n    }\n}",
+        "score": 0.4861111111111111,
+        "reason": "length_mismatch (target=35, generated=36)",
+        "diffs": [],
+        "timestamp": "2026-06-04T13:16:04.990Z"
+      },
+      {
+        "code": "void func_15076768(void) {\n    struct17 pos;\n    struct260 tmp;\n    struct127 *actor;\n    u8 val;\n\n    val = D_800D1890;\n    if (val == 0) {\n        func_15197A7C(D_800D154C);\n    } else if (val == 1) {\n        actor = D_800D154C;\n        pos.unk0 = actor->x_position;\n        pos.unk4 = -390.0f;\n        pos.unk8 = actor->z_position;\n        func_1504715C(&tmp);\n        func_1514B364(&pos, &tmp, 0xFF, 0);\n    }\n}",
+        "score": 0.4714285714285714,
+        "reason": "length_mismatch (target=35, generated=33)",
+        "diffs": [],
+        "timestamp": "2026-06-04T13:16:19.778Z"
       }
     ]
   },
