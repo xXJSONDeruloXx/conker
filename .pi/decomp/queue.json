@@ -24610,7 +24610,7 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 8,
+    "attempts": 9,
     "lastScore": 0.49242424242424243,
     "status": "pending",
     "history": [
@@ -24732,6 +24732,23 @@
         "reason": "length_mismatch (target=65, generated=66)",
         "diffs": [],
         "timestamp": "2026-06-04T11:22:17.720Z"
+      },
+      {
+        "code": "s32 func_150C2700(s32 arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8, s32 arg9, s32 arg10, s32 arg11, s32 arg12, s32 arg13, u8 arg14) {\n    u8 sp20[0x48];\n\n    *(s16 *)&sp20[0x16] = 5;\n    *(s16 *)&sp20[0] = 0x6B;\n    *(s16 *)&sp20[0x14] = (sp20[0x39] = 6);\n    *(s16 *)&sp20[2] = 0x46;\n    *(s16 *)&sp20[4] = -0x1F;\n    *(s16 *)&sp20[6] = 0x2E;\n    *(f32 *)&sp20[8] = arg2;\n    *(f32 *)&sp20[0xC] = arg3;\n    *(f32 *)&sp20[0x10] = arg4;\n    *(f32 *)&sp20[0x18] = 30.0f;\n    *(f32 *)&sp20[0x1C] = 35.0f;\n    *(s16 *)&sp20[0x20] = 0x64;\n    *(s16 *)&sp20[0x22] = 0;\n    *(f32 *)&sp20[0x24] = D_800A0274;\n    *(f32 *)&sp20[0x28] = D_800A0278;\n    sp20[0x2C] = 0x9B;\n    sp20[0x2D] = 0x64;\n    *(f32 *)&sp20[0x30] = D_800A027C;\n    *(f32 *)&sp20[0x34] = 0.0f;\n    sp20[0x38] = 1;\n    *(f32 *)&sp20[0x3C] = 0.0f;\n    sp20[0x40] = 1;\n    *(f32 *)&sp20[0x44] = 0.0f;\n    func_15150178(sp20, &sp20[8], 0, arg14, 1);\n    return 1;\n}",
+        "score": 0,
+        "reason": "transmuter_best=?",
+        "diffs": [
+          "transmuter: initial=?→best=?, iters=?, compiled=?, errors=?, forks=0",
+          "config: timeout=60s, maxCompiles=2000, concurrency=4, profile=ido"
+        ],
+        "timestamp": "2026-06-04T15:01:10.190Z"
+      },
+      {
+        "code": "s32 func_150C2700(s32 arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8, s32 arg9, s32 arg10, s32 arg11, s32 arg12, s32 arg13, u8 arg14) {\n    s8 sp20[0x48];\n\n    *(s16 *)&sp20[0x16] = 5;\n    *(s16 *)&sp20[0] = 0x6B;\n    *(s16 *)&sp20[0x14] = 6;\n    *(s16 *)&sp20[2] = 0x46;\n    *(s16 *)&sp20[4] = -0x1F;\n    *(s16 *)&sp20[6] = 0x2E;\n    *(f32 *)&sp20[8] = arg2;\n    *(f32 *)&sp20[0xC] = arg3;\n    *(f32 *)&sp20[0x10] = arg4;\n    *(f32 *)&sp20[0x18] = 30.0f;\n    *(f32 *)&sp20[0x1C] = 35.0f;\n    *(s16 *)&sp20[0x20] = 0x64;\n    *(s16 *)&sp20[0x22] = 0;\n    *(f32 *)&sp20[0x24] = D_800A0274;\n    *(f32 *)&sp20[0x28] = D_800A0278;\n    sp20[0x2C] = 0x9B;\n    sp20[0x2D] = 0x64;\n    *(f32 *)&sp20[0x30] = D_800A027C;\n    *(f32 *)&sp20[0x34] = 0.0f;\n    sp20[0x38] = 1;\n    sp20[0x39] = 6;\n    *(f32 *)&sp20[0x3C] = 0.0f;\n    sp20[0x40] = 1;\n    *(f32 *)&sp20[0x44] = 0.0f;\n    func_15150178(sp20, &sp20[8], 0, arg14, 1);\n    return 1;\n}",
+        "score": 0.49242424242424243,
+        "reason": "length_mismatch (target=65, generated=66)",
+        "diffs": [],
+        "timestamp": "2026-06-04T15:01:37.755Z"
       }
     ]
   },
@@ -26169,7 +26186,7 @@
     ],
     "attempts": 15,
     "lastScore": 0.4814814814814815,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "void func_1000A348(void) {\n    struct147 *temp_a3;\n    struct54 *temp_v0;\n    struct54 *temp_v1;\n    struct54 *temp_a0;\n    struct54 *temp_a2;\n\n    temp_a3 = &D_800406A0;\n    temp_v0 = (struct54 *)temp_a3->unk4;\n    if (temp_v0 != NULL) {\n        do {\n            temp_v1 = temp_v0->unk0;\n            if ((temp_v0->unk14 == 0) && (temp_v0->unk16 == 0)) {\n                *(s32 *)temp_v0->unkC = temp_v0->unk8;\n                temp_v0->unkC = NULL;\n                if ((s32)temp_v0 == temp_a3->unk4) {\n                    temp_a3->unk4 = (s32)temp_v1;\n                }\n                temp_a0 = temp_v0->unk0;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk4 = temp_v0->unk4;\n                }\n                temp_a0 = temp_v0->unk4;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk0 = temp_v0->unk0;\n                }\n                temp_a0 = temp_a3->unk10;\n                if (temp_a0 != NULL) {\n                    temp_v0->unk4 = temp_a0;\n                    temp_v0->unk0 = temp_a0->unk0;\n                    temp_a2 = temp_a0->unk0;\n                    if (temp_a2 != NULL) {\n                        temp_a2->unk4 = temp_v0;\n                    }\n                    temp_a0->unk0 = temp_v0;\n                } else {\n                    temp_a3->unk10 = temp_v0;\n                    temp_v0->unk0 = NULL;\n                    temp_v0->unk4 = NULL;\n                }\n            }\n        } while ((temp_v0 = temp_v1) != NULL);\n    }\n}",
