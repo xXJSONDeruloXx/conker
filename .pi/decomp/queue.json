@@ -33868,9 +33868,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
+    "attempts": 5,
     "lastScore": 0.48484848484848486,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "void func_15001A08(void) {\n    s32 sp24;\n    s32 tmp;\n    s32 sp1C;\n\n    tmp = D_800BE9F0;\n    sp24 = D_80091AF0[tmp];\n\n    __osPiGetAccess();\n\n    while ((IO_READ(PI_STATUS_REG) & 3)) {};\n\n    tmp = D_80000308 | 0xB0000D24 | 0xA0000000;\n    sp1C = *(s32*)tmp;\n\n    __osPiRelAccess();\n\n    if (sp1C != 0x98CCE31A) {\n        sp24 <<= 1;\n    }\n\n    D_800B0DDC = allocate_memory(sp24, 1, 0, 0);\n    D_800B0DE0 = D_800B0DDC;\n    D_800B0DCC = 0;\n    D_800B0DD0 = 0;\n    D_800DBE30 = 0;\n    D_800DBE32 = 0;\n    D_800DBE34 = 0;\n    D_800DBE36 = 0;\n}",
@@ -33892,6 +33892,20 @@
         "reason": "length_mismatch (target=66, generated=64)",
         "diffs": [],
         "timestamp": "2026-06-04T11:39:13.671Z"
+      },
+      {
+        "code": "void func_15001A08(void) {\n    s32 sp24;\n    s32 tmp;\n    s32 sp1C;\n\n    sp24 = D_80091AF0[D_800BE9F0];\n\n    __osPiGetAccess(sp24);\n\n    tmp = IO_READ(PI_STATUS_REG);\n    if (tmp & 3) {\n        do {\n            tmp = IO_READ(PI_STATUS_REG);\n        } while (tmp & 3);\n    }\n\n    tmp = D_80000308 | 0xB0000D24 | 0xA0000000;\n    sp1C = *(s32*)tmp;\n\n    __osPiRelAccess(sp24);\n\n    if (sp1C != 0x98CCE31A) {\n        sp24 <<= 1;\n    }\n\n    D_800B0DDC = allocate_memory(sp24, 1, 0, 0);\n    D_800B0DE0 = D_800B0DDC;\n    D_800B0DCC = 0;\n    D_800B0DD0 = 0;\n    D_800DBE30 = 0;\n    D_800DBE32 = 0;\n    D_800DBE34 = 0;\n    D_800DBE36 = 0;\n}",
+        "score": 0.49242424242424243,
+        "reason": "length_mismatch (target=66, generated=65)",
+        "diffs": [],
+        "timestamp": "2026-06-04T11:39:47.459Z"
+      },
+      {
+        "code": "void func_15001A08(void) {\n    s32 sp24;\n    s32 tmp;\n    s32 sp1C;\n\n    sp24 = D_80091AF0[D_800BE9F0];\n\n    __osPiGetAccess(sp24);\n\n    while ((IO_READ(PI_STATUS_REG) & 3)) {};\n\n    tmp = D_80000308 | 0xB0000D24 | 0xA0000000;\n    sp1C = *(s32*)tmp;\n\n    __osPiRelAccess();\n\n    if (sp1C != 0x98CCE31A) {\n        sp24 <<= 1;\n    }\n\n    D_800B0DDC = allocate_memory(sp24, 1, 0, 0);\n    D_800B0DE0 = D_800B0DDC;\n    D_800B0DCC = 0;\n    D_800B0DD0 = 0;\n    D_800DBE30 = 0;\n    D_800DBE32 = 0;\n    D_800DBE34 = 0;\n    D_800DBE36 = 0;\n}",
+        "score": 0.48484848484848486,
+        "reason": "length_mismatch (target=66, generated=64)",
+        "diffs": [],
+        "timestamp": "2026-06-04T11:40:19.305Z"
       }
     ]
   },
@@ -36598,9 +36612,53 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.49242424242424243,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_1509C120(void) {\n    void *sp34;\n    void *sp38[4];\n    s32 temp_s3;\n    s32 i;\n    void **ptr;\n    void **end;\n\n    temp_s3 = func_150ADA20() & 3;\n    sp34 = D_800D2E4C;\n    if (sp34 != NULL) {\n        if ((func_150ADA20() & 4) == 0) {\n            return;\n        }\n    }\n    i = 0;\n    if (temp_s3 >= 0) {\n        ptr = sp38;\n        end = &sp38[temp_s3 + 1];\n        do {\n            *ptr = allocate_memory(0x1B, 0xFF, 2, 0);\n            ptr++;\n        } while (end != ptr);\n        i = 0;\n    }\n    if (temp_s3 >= 0) {\n        do {\n            if (i != temp_s3) {\n                ((void (*)())func_10004074)(sp38[i]);\n            }\n            i++;\n        } while (i != (temp_s3 + 1));\n    }\n    D_800D2E4C = sp38[temp_s3];\n    if (sp34 != NULL) {\n        bcopy(sp34, D_800D2E4C, 0x1B);\n        ((void (*)())func_10004074)(sp34);\n    }\n}",
+        "score": 0.4714285714285714,
+        "reason": "length_mismatch (target=66, generated=70)",
+        "diffs": [],
+        "timestamp": "2026-06-04T11:43:03.056Z"
+      },
+      {
+        "code": "void func_1509C120(void) {\n    void *sp34;\n    void *sp38[4];\n    s32 temp_s3;\n    s32 i;\n    void **ptr;\n    void **end;\n\n    temp_s3 = func_150ADA20() & 3;\n    sp34 = D_800D2E4C;\n    if (sp34 != NULL) {\n        if ((func_150ADA20() & 4) == 0) {\n            return;\n        }\n    }\n    i = 0;\n    if (temp_s3 >= 0) {\n        ptr = sp38;\n        end = &sp38[temp_s3 + 1];\n        do {\n            *ptr = allocate_memory(0x1B, 0xFF, 2, 0);\n            ptr++;\n        } while (end != ptr);\n        i = 0;\n    }\n    if (temp_s3 >= 0) {\n        void func_10004074();\n        do {\n            if (i != temp_s3) {\n                func_10004074(sp38[i]);\n            }\n            i++;\n        } while (i != (temp_s3 + 1));\n    }\n    D_800D2E4C = sp38[temp_s3];\n    if (sp34 != NULL) {\n        void func_10004074();\n        bcopy(sp34, D_800D2E4C, 0x1B);\n        func_10004074(sp34);\n    }\n}",
+        "score": 0.0152,
+        "reason": "structural_diffs=65",
+        "diffs": [
+          "structural: target=addiu sp, sp, -80 got=addiu sp, sp, -88",
+          "structural: target=sw ra, 36(sp) got=sw ra, 44(sp)",
+          "structural: target=sw s3, 32(sp) got=sw s4, 40(sp)",
+          "structural: target=sw s2, 28(sp) got=sw s3, 36(sp)",
+          "structural: target=sw s1, 24(sp) got=sw s2, 32(sp)",
+          "structural: target=sw s0, 20(sp) got=sw s1, 28(sp)",
+          "structural: target=jal func_150ADA20 got=sw s0, 24(sp)",
+          "structural: target=nop got=jal func_150ADA20",
+          "structural: target=lui t6, HI(D_800D2E4C) got=nop",
+          "structural: target=lw t6, LO(D_800D2E4C)(t6) got=lui t6, HI(D_800D2E4C)",
+          "structural: target=andi s3, v0, 3 got=lw t6, LO(D_800D2E4C)(t6)",
+          "structural: target=beqz t6, L0 got=andi s3, v0, 3",
+          "structural: target=sw t6, 52(sp) got=beqz t6, L0",
+          "structural: target=jal func_150ADA20 got=sw t6, 84(sp)",
+          "structural: target=nop got=jal func_150ADA20",
+          "structural: target=andi t7, v0, 4 got=nop",
+          "structural: target=beqzl t7, L1 got=andi t7, v0, 4",
+          "structural: target=lw ra, 36(sp) got=beqzl t7, L1",
+          "structural: target=bltz s3, L2 got=lw ra, 44(sp)",
+          "structural: target=move s0, zero got=bltz s3, L2"
+        ],
+        "timestamp": "2026-06-04T11:44:00.299Z"
+      },
+      {
+        "code": "void func_1509C120(void) {\n    void *sp38[4];\n    void *sp34;\n    s32 temp_s3;\n    s32 i;\n    s32 count;\n\n    temp_s3 = func_150ADA20() & 3;\n    sp34 = D_800D2E4C;\n    if (sp34 != NULL) {\n        if ((func_150ADA20() & 4) == 0) {\n            return;\n        }\n    }\n    i = 0;\n    if (temp_s3 >= 0) {\n        do {\n            sp38[i] = allocate_memory(0x1B, 0xFF, 2, 0);\n            i++;\n        } while (i != (temp_s3 + 1));\n        i = 0;\n    }\n    count = temp_s3 + 1;\n    if (temp_s3 >= 0) {\n        void func_10004074();\n        do {\n            if (i != temp_s3) {\n                func_10004074(sp38[i]);\n            }\n            i++;\n        } while (count != i);\n    }\n    D_800D2E4C = sp38[temp_s3];\n    if (sp34 != NULL) {\n        void func_10004074();\n        bcopy(sp34, D_800D2E4C, 0x1B);\n        func_10004074(sp34);\n    }\n}",
+        "score": 0.49242424242424243,
+        "reason": "length_mismatch (target=66, generated=65)",
+        "diffs": [],
+        "timestamp": "2026-06-04T11:44:47.774Z"
+      }
+    ]
   },
   {
     "function": "func_151DC034",
