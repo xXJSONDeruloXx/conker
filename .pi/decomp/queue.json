@@ -20350,8 +20350,8 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 11,
-    "lastScore": 0.3269,
+    "attempts": 12,
+    "lastScore": 0.7115,
     "status": "pending",
     "history": [
       {
@@ -20534,6 +20534,29 @@
           "structural: target=lwc1 f8, 8(t2) got=lwc1 f8, 8(v0)"
         ],
         "timestamp": "2026-06-04T04:48:22.015Z"
+      },
+      {
+        "code": "s32 func_151DAA88(void *arg0, s32 arg1, s32 arg2, s32 arg3, f32 arg4, s32 arg5) {\n    void *temp_v1;\n    s32 temp_t0;\n    f32 sp34[3];\n    s32 temp_v0;\n\n    temp_t0 = 0x14;\n    temp_v0 = *(s32 *)((s32)arg0 + 0x94);\n    temp_v1 = *(void **)((s32)arg0 + 0x98);\n    sp34[0] = *(f32 *)((0, temp_v0) + (*(s8 *)((s32)arg0 + 0x2D) * temp_t0));\n    sp34[1] = arg4;\n    sp34[2] = *(f32 *)((0, temp_v0) + ((*(s8 *)((s32)arg0 + 0x2D) * temp_t0) + 8));\n    func_151D9FC0(*(u8 *)((s32)temp_v1 + 0x50), *(f32 *)((s32)temp_v1 + 0x4C) * (*(f32 *)temp_v1 * 11.0f), *(u8 *)((s32)temp_v1 + 0x1B), arg5, (s32)sp34, *(u8 *)((s32)arg0 + 0xC), *(u8 *)((s32)arg0 + 1));\n    *(u8 *)((s32)temp_v1 + 0x20) = 4;\n    return 1;\n}",
+        "score": 0.7115,
+        "reason": "structural_diffs=15",
+        "diffs": [
+          "structural: target=addiu sp, sp, -72 got=addiu sp, sp, -80",
+          "structural: target=sw a1, 76(sp) got=sw a1, 84(sp)",
+          "structural: target=sw a2, 80(sp) got=sw a2, 88(sp)",
+          "structural: target=sw a3, 84(sp) got=sw a3, 92(sp)",
+          "structural: target=lwc1 f6, 88(sp) got=lwc1 f6, 96(sp)",
+          "structural: target=addiu t3, sp, 52 got=addiu t3, sp, 60",
+          "structural: target=lw a3, 92(sp) got=lw a3, 100(sp)",
+          "structural: target=addu t8, v0, t7 got=addu t8, t7, v0",
+          "structural: target=swc1 f6, 56(sp) got=swc1 f6, 64(sp)",
+          "structural: target=swc1 f4, 52(sp) got=swc1 f4, 60(sp)",
+          "structural: target=addu t2, v0, t1 got=addu t2, t1, v0",
+          "structural: target=swc1 f8, 60(sp) got=swc1 f8, 68(sp)",
+          "structural: target=sw v1, 68(sp) got=sw v1, 76(sp)",
+          "structural: target=lw v1, 68(sp) got=lw v1, 76(sp)",
+          "structural: target=addiu sp, sp, 72 got=addiu sp, sp, 80"
+        ],
+        "timestamp": "2026-06-04T05:04:35.309Z"
       }
     ]
   },
@@ -26842,8 +26865,8 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
-    "lastScore": 0.49056603773584906,
+    "attempts": 4,
+    "lastScore": 0.4811320754716981,
     "status": "pending",
     "history": [
       {
@@ -26866,6 +26889,13 @@
         "reason": "length_mismatch (target=53, generated=52)",
         "diffs": [],
         "timestamp": "2026-06-04T05:02:19.315Z"
+      },
+      {
+        "code": "s32 func_1502B8E0(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {\n    s32 sp34[5];\n    s32 *tmp;\n    s32 offset;\n    s32 more;\n\n    offset = (s32)D_AB1950;\n    more = 1;\n    tmp = &arg3;\n    if (arg2 != 0) {\n        do {\n            tmp = (s32 *)ALIGN4(tmp);\n            tmp += 1;\n            if (more != 0) {\n                offset += func_1502AC88(offset, *(tmp - 1), sp34);\n            }\n            arg2--;\n            more = sp34[0] & 0xFFFFFFF;\n        } while (arg2 != 0);\n    }\n    if (more != 0) {\n        more = func_1502B224(offset, arg0, sp34[0], arg1);\n    }\n    return more;\n}",
+        "score": 0.4811320754716981,
+        "reason": "length_mismatch (target=53, generated=51)",
+        "diffs": [],
+        "timestamp": "2026-06-04T05:03:00.722Z"
       }
     ]
   },
