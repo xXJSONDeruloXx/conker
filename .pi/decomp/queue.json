@@ -25935,9 +25935,9 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 6,
-    "lastScore": 0.4846153846153846,
-    "status": "pending",
+    "attempts": 7,
+    "lastScore": 1,
+    "status": "matched",
     "history": [
       {
         "code": "s32 func_1001B310(N_ALVoiceState *arg0, N_ALSeqPlayer *arg1) {\n    s32 sp14;\n    s32 sp10;\n\n    sp14 = arg1->chanState[arg0->channel].fxmix & 0x80;\n    sp10 = (s32)(((arg1->chanState[arg0->channel].fxmix & 0x7F) + (s32)(*(f32 *)((s32)arg1 + 0x7C) * 127.0f)) * *(f32 *)((s32)arg1 + 0x80));\n    return (MAX(0, MIN(0x7F, sp10)) | sp14) & 0xFF;\n}",
@@ -27133,9 +27133,91 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.4127,
+    "status": "pending",
+    "history": [
+      {
+        "code": "f32 func_1514182C(void *arg0, struct17 *arg1, s32 arg2, f32 arg3, f32 arg4, f32 arg5) {\n    f32 mtx[4][4];\n    f32 temp_f0;\n    f32 temp_f2;\n    f32 temp_f12;\n\n    func_150A8050(mtx, arg4, 0, arg5);\n    mtx[3][0] = arg1->unk0;\n    mtx[3][1] = arg1->unk4;\n    mtx[3][2] = arg1->unk8;\n    func_150A7960(mtx, 0, arg2, 0, (f32 *)((s32)arg0 + 0x34), (f32 *)((s32)arg0 + 0x38), (f32 *)((s32)arg0 + 0x3C));\n    temp_f0 = *(f32 *)((s32)arg0 + 0x34);\n    temp_f2 = *(f32 *)((s32)arg0 + 0x38);\n    temp_f12 = *(f32 *)((s32)arg0 + 0x3C);\n    *(f32 *)((s32)arg0 + 0x40) = temp_f0 + ((temp_f0 - arg1->unk0) * arg3 * 500.0f);\n    *(f32 *)((s32)arg0 + 0x44) = temp_f2 + ((temp_f2 - arg1->unk4) * arg3 * 500.0f);\n    *(f32 *)((s32)arg0 + 0x48) = temp_f12 + ((temp_f12 - arg1->unk8) * arg3 * 500.0f);\n    return temp_f0;\n}",
+        "score": 0.5079,
+        "reason": "structural_diffs=31",
+        "diffs": [
+          "structural: target=addiu a0, sp, 52 got=addiu a0, sp, 64",
+          "structural: target=swc1 f4, 100(sp) got=swc1 f4, 112(sp)",
+          "structural: target=swc1 f6, 104(sp) got=swc1 f6, 116(sp)",
+          "structural: target=addiu a0, sp, 52 got=addiu a0, sp, 64",
+          "structural: target=swc1 f8, 108(sp) got=swc1 f8, 120(sp)",
+          "structural: target=lwc1 f0, 52(s0) got=lwc1 f2, 52(s0)",
+          "structural: target=lwc1 f6, 140(sp) got=lwc1 f18, 140(sp)",
+          "structural: target=lwc1 f2, 56(s0) got=lui at, 17402",
+          "structural: target=sub.s f4, f0, f10 got=sub.s f4, f2, f10",
+          "structural: target=lwc1 f8, 4(s1) got=mtc1 at, f16",
+          "structural: target=lwc1 f12, 60(s0) got=lwc1 f12, 56(s0)",
+          "structural: target=lui at, 17402 got=lwc1 f14, 60(s0)",
+          "structural: target=mul.s f14, f4, f6 got=mul.s f6, f4, f18",
+          "structural: target=sub.s f10, f2, f8 got=mov.s f0, f2",
+          "structural: target=lwc1 f4, 8(s1) got=mul.s f8, f6, f16",
+          "structural: target=sub.s f8, f12, f4 got=add.s f10, f8, f2",
+          "structural: target=mul.s f16, f10, f6 got=swc1 f10, 64(s0)",
+          "structural: target=mtc1 at, f10 got=lwc1 f4, 4(s1)",
+          "structural: target=mul.s f18, f8, f6 got=sub.s f6, f12, f4",
+          "structural: target=mtc1 at, f6 got=mul.s f8, f6, f18"
+        ],
+        "timestamp": "2026-06-04T10:36:16.915Z"
+      },
+      {
+        "code": "void func_1514182C(void *arg0, struct17 *arg1, s32 arg2, f32 arg3, f32 arg4, f32 arg5) {\n    f32 mtx[16];\n    f32 temp_f0;\n    f32 temp_f2;\n    f32 temp_f12;\n    f32 temp_f14;\n    f32 temp_f16;\n    f32 temp_f18;\n\n    func_150A8050((f32 (*)[4])mtx, arg4, 0, arg5);\n    mtx[12] = arg1->unk0;\n    mtx[13] = arg1->unk4;\n    mtx[14] = arg1->unk8;\n    func_150A7960((f32 (*)[4])mtx, 0, arg2, 0, (f32 *)((s32)arg0 + 0x34), (f32 *)((s32)arg0 + 0x38), (f32 *)((s32)arg0 + 0x3C));\n    temp_f0 = *(f32 *)((s32)arg0 + 0x34);\n    temp_f2 = *(f32 *)((s32)arg0 + 0x38);\n    temp_f12 = *(f32 *)((s32)arg0 + 0x3C);\n    temp_f14 = (temp_f0 - arg1->unk0) * arg3;\n    temp_f16 = (temp_f2 - arg1->unk4) * arg3;\n    temp_f18 = (temp_f12 - arg1->unk8) * arg3;\n    *(f32 *)((s32)arg0 + 0x40) = temp_f0 + (temp_f14 * 500.0f);\n    *(f32 *)((s32)arg0 + 0x44) = temp_f2 + (temp_f16 * 500.0f);\n    *(f32 *)((s32)arg0 + 0x48) = temp_f12 + (temp_f18 * 500.0f);\n}",
+        "score": 0.746,
+        "reason": "structural_diffs=16",
+        "diffs": [
+          "structural: target=addiu sp, sp, -128 got=addiu sp, sp, -136",
+          "structural: target=sw a2, 136(sp) got=sw a2, 144(sp)",
+          "structural: target=sw a3, 140(sp) got=sw a3, 148(sp)",
+          "structural: target=addiu a0, sp, 52 got=addiu a0, sp, 72",
+          "structural: target=lw a1, 144(sp) got=lw a1, 152(sp)",
+          "structural: target=lw a3, 148(sp) got=lw a3, 156(sp)",
+          "structural: target=swc1 f4, 100(sp) got=swc1 f4, 120(sp)",
+          "structural: target=swc1 f6, 104(sp) got=swc1 f6, 124(sp)",
+          "structural: target=addiu a0, sp, 52 got=addiu a0, sp, 72",
+          "structural: target=lw a2, 136(sp) got=lw a2, 144(sp)",
+          "structural: target=swc1 f8, 108(sp) got=swc1 f8, 128(sp)",
+          "structural: target=lwc1 f6, 140(sp) got=lwc1 f6, 148(sp)",
+          "structural: target=add.s f8, f0, f4 got=add.s f8, f4, f0",
+          "structural: target=add.s f4, f2, f10 got=add.s f4, f10, f2",
+          "structural: target=add.s f10, f12, f6 got=add.s f10, f6, f12",
+          "structural: target=addiu sp, sp, 128 got=addiu sp, sp, 136"
+        ],
+        "timestamp": "2026-06-04T10:37:11.240Z"
+      },
+      {
+        "code": "void func_1514182C(void *arg0, struct17 *arg1, s32 arg2, f32 arg3, f32 arg4, f32 arg5) {\n    f32 mtx[16];\n\n    func_150A8050((f32 (*)[4])mtx, arg4, 0, arg5);\n    mtx[12] = arg1->unk0;\n    mtx[13] = arg1->unk4;\n    mtx[14] = arg1->unk8;\n    func_150A7960((f32 (*)[4])mtx, 0, arg2, 0, (f32 *)((s32)arg0 + 0x34), (f32 *)((s32)arg0 + 0x38), (f32 *)((s32)arg0 + 0x3C));\n    *(f32 *)((s32)arg0 + 0x40) = *(f32 *)((s32)arg0 + 0x34) + ((*(f32 *)((s32)arg0 + 0x34) - arg1->unk0) * arg3 * 500.0f);\n    *(f32 *)((s32)arg0 + 0x44) = *(f32 *)((s32)arg0 + 0x38) + ((*(f32 *)((s32)arg0 + 0x38) - arg1->unk4) * arg3 * 500.0f);\n    *(f32 *)((s32)arg0 + 0x48) = *(f32 *)((s32)arg0 + 0x3C) + ((*(f32 *)((s32)arg0 + 0x3C) - arg1->unk8) * arg3 * 500.0f);\n}",
+        "score": 0.4127,
+        "reason": "structural_diffs=37",
+        "diffs": [
+          "structural: target=addiu sp, sp, -128 got=addiu sp, sp, -112",
+          "structural: target=sw a2, 136(sp) got=sw a2, 120(sp)",
+          "structural: target=sw a3, 140(sp) got=sw a3, 124(sp)",
+          "structural: target=addiu a0, sp, 52 got=addiu a0, sp, 48",
+          "structural: target=lw a1, 144(sp) got=lw a1, 128(sp)",
+          "structural: target=lw a3, 148(sp) got=lw a3, 132(sp)",
+          "structural: target=swc1 f4, 100(sp) got=swc1 f4, 96(sp)",
+          "structural: target=swc1 f6, 104(sp) got=swc1 f6, 100(sp)",
+          "structural: target=addiu a0, sp, 52 got=addiu a0, sp, 48",
+          "structural: target=lw a2, 136(sp) got=lw a2, 120(sp)",
+          "structural: target=swc1 f8, 108(sp) got=swc1 f8, 104(sp)",
+          "structural: target=lwc1 f6, 140(sp) got=lwc1 f16, 124(sp)",
+          "structural: target=lwc1 f2, 56(s0) got=lui at, 17402",
+          "structural: target=sub.s f4, f0, f10 got=sub.s f18, f0, f10",
+          "structural: target=lwc1 f8, 4(s1) got=mtc1 at, f14",
+          "structural: target=lwc1 f12, 60(s0) got=lwc1 f2, 56(s0)",
+          "structural: target=lui at, 17402 got=lwc1 f12, 60(s0)",
+          "structural: target=mul.s f14, f4, f6 got=mul.s f4, f18, f16",
+          "structural: target=sub.s f10, f2, f8 got=nop",
+          "structural: target=lwc1 f4, 8(s1) got=mul.s f6, f4, f14"
+        ],
+        "timestamp": "2026-06-04T10:37:33.380Z"
+      }
+    ]
   },
   {
     "function": "func_15142180",
