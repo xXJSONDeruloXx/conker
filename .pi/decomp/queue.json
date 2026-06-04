@@ -16360,9 +16360,32 @@
     "instructions": 44,
     "difficulty": "medium-low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.48863636363636365,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_15077404(void) {\n    struct127 *temp_v1;\n    s32 temp_v0;\n    s16 temp_t7;\n\n    if (D_800D1893 != 0) {\n        temp_v1 = D_800D154C;\n        temp_t7 = (D_800D1891 << 8) + D_800D1892;\n        temp_v0 = (s16)(((temp_v1->unk246 & 0x1F) << 8) + temp_v1->unk249 + (temp_t7 * D_800BE9E4));\n        if (temp_v0 < 0) {\n            temp_v0 = 0;\n        }\n        temp_v1->unk246 = (temp_v0 >> 8) | 0x80;\n        D_800D154C->unk249 = temp_v0;\n    } else {\n        D_800D154C->unk246 = D_800D1890;\n    }\n}",
+        "score": 0.48863636363636365,
+        "reason": "length_mismatch (target=44, generated=43)",
+        "diffs": [],
+        "timestamp": "2026-06-04T00:21:18.118Z"
+      },
+      {
+        "code": "void func_15077404(void) {\n    struct127 *temp_v1;\n    s32 temp_t3;\n    s32 temp_t7;\n    s32 temp_t5;\n    s32 temp_t8;\n    s32 temp_t9;\n    s32 temp_t4;\n    s32 temp_a0;\n    s32 temp_t0;\n    s32 temp_t2;\n    s32 temp_v0;\n\n    if (D_800D1893 != 0) {\n        temp_v1 = D_800D154C;\n        temp_t3 = D_800D1891;\n        temp_t7 = temp_v1->unk246;\n        temp_t5 = D_800D1892;\n        temp_t8 = temp_t7 & 0x1F;\n        temp_t9 = temp_t8 << 8;\n        temp_t4 = temp_t3 << 8;\n        temp_a0 = temp_t4 + temp_t5;\n        temp_t7 = (s16) temp_a0;\n        temp_t7 = temp_t7 * D_800BE9E4;\n        temp_t0 = temp_v1->unk249;\n        temp_t2 = temp_t9 + temp_t0;\n        temp_v0 = (s16)(temp_t2 + temp_t7);\n        if (temp_v0 < 0) {\n            temp_v0 = 0;\n        }\n        temp_v1->unk246 = (temp_v0 >> 8) | 0x80;\n        D_800D154C->unk249 = temp_v0;\n    } else {\n        D_800D154C->unk246 = D_800D1890;\n    }\n}",
+        "score": 0.48863636363636365,
+        "reason": "length_mismatch (target=44, generated=43)",
+        "diffs": [],
+        "timestamp": "2026-06-04T00:22:01.995Z"
+      },
+      {
+        "code": "void func_15077404(void) {\n    struct127 *temp_v1;\n    s32 temp_v0;\n\n    if (D_800D1893 != 0) {\n        temp_v1 = D_800D154C;\n        temp_v0 = (s16)((((temp_v1->unk246 & 0x1F) << 8) + temp_v1->unk249) + ((s16)((D_800D1891 << 8) + D_800D1892) * D_800BE9E4));\n        if (temp_v0 < 0) {\n            temp_v0 = 0;\n        }\n        temp_v1->unk246 = (temp_v0 >> 8) | 0x80;\n        D_800D154C->unk249 = temp_v0;\n    } else {\n        D_800D154C->unk246 = D_800D1890;\n    }\n}",
+        "score": 0.48863636363636365,
+        "reason": "length_mismatch (target=44, generated=43)",
+        "diffs": [],
+        "timestamp": "2026-06-04T00:22:22.061Z"
+      }
+    ]
   },
   {
     "function": "func_1000F4D8",
@@ -21297,9 +21320,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 13,
-    "lastScore": 0.9767,
-    "status": "pending",
+    "attempts": 14,
+    "lastScore": 1,
+    "status": "matched",
     "history": [
       {
         "code": "void func_151419D0(struct102 *arg0, u8 *arg1, s32 arg2) {\n    u8 *temp_v0;\n    s32 temp_v1;\n    s32 temp_a0;\n\n    arg2 = (u8)arg2;\n    if (arg2 == 0) {\n        temp_v0 = (u8 *)arg0 + 0x28;\n        temp_v1 = *(s32 *)arg1;\n        if ((temp_v1 == *(s32 *)(temp_v0 + 4)) || (temp_v0[8] == arg1[4])) {\n            func_1516972C(arg0);\n        }\n    } else if (arg2 == 0x2D) {\n        temp_v0 = (u8 *)arg0 + 0x28;\n        temp_a0 = *(s32 *)(temp_v0 + 4);\n        temp_v1 = *(s32 *)arg1;\n        if (temp_v1 == temp_a0) {\n            *(s32 *)(temp_v0 + 4) = *(s32 *)(arg1 + 4);\n            temp_v0[8] = arg1[9];\n        } else if (*(s32 *)(arg1 + 4) == temp_a0) {\n            *(s32 *)(temp_v0 + 4) = temp_v1;\n            temp_v0[8] = arg1[8];\n        }\n    }\n}",
