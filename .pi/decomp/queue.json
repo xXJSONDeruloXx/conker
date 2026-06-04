@@ -36133,7 +36133,7 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
+    "attempts": 6,
     "lastScore": 0.971,
     "status": "pending",
     "history": [
@@ -36168,6 +36168,42 @@
           "structural: target=sw t0, 60(sp) got=sw a3, 84(sp)"
         ],
         "timestamp": "2026-06-04T15:00:04.780Z"
+      },
+      {
+        "code": "s32 func_1502B110(s32 offset, s32 arg1, s32 arg2, u32 arg3, ...) {\n    va_list args;\n    s32 temp_s1;\n    s32 more;\n    s32 ret;\n\n    more = 1;\n    ret = 0;\n    if (offset == 0) {\n        offset = (s32) D_AB1950;\n    }\n    va_start(args, arg3);\n    while (arg3 >= 2) {\n        temp_s1 = va_arg(args, s32);\n        if (more != 0) {\n            offset += func_1502AC88(offset, temp_s1, &more);\n        }\n        more &= 0x0FFFFFFF;\n        arg3--;\n    }\n    temp_s1 = va_arg(args, s32);\n    if (more != 0) {\n        ret = func_1502AF04(offset, arg2, temp_s1, arg1);\n    }\n    return ret;\n}",
+        "score": 0,
+        "reason": "transmuter_compile_fail",
+        "diffs": [
+          "compile_error: cfe: Error: /Users/dhimebauch/Developer/personal/conker/.worktrees/lane-3/build/transmuter/func_1502B110_base.c, line 8: Syntax Error\n     va_list args;\n ------------^\ncfe: Error: /Users/dhimebauch/De"
+        ],
+        "timestamp": "2026-06-04T15:00:16.646Z"
+      },
+      {
+        "code": "s32 func_1502B110(s32 offset, s32 arg1, s32 arg2, u32 arg3, ...) {\n    va_list args;\n    s32 temp_s1;\n    s32 more;\n    s32 ret;\n\n    more = 1;\n    ret = 0;\n    if (offset == 0) {\n        offset = (s32) D_AB1950;\n    }\n    va_start(args, arg3);\n    while (arg3 >= 2) {\n        temp_s1 = va_arg(args, s32);\n        if (more != 0) {\n            offset += func_1502AC88(offset, temp_s1, &more);\n        }\n        arg3--;\n        *(&arg3) = arg3;\n        more &= 0x0FFFFFFF;\n    }\n    temp_s1 = va_arg(args, s32);\n    if (more != 0) {\n        ret = func_1502AF04(offset, arg2, temp_s1, arg1);\n    }\n    return ret;\n}",
+        "score": 0.971,
+        "reason": "structural_diffs=2",
+        "diffs": [
+          "structural: target=sw a3, 84(sp) got=sw t0, 60(sp)",
+          "structural: target=sw t0, 60(sp) got=sw a3, 84(sp)"
+        ],
+        "timestamp": "2026-06-04T15:00:47.615Z"
+      },
+      {
+        "code": "s32 func_1502B110(s32 offset, s32 arg1, s32 arg2, u32 arg3, ...) {\n    s32 *args;\n    s32 temp_s1;\n    s32 more;\n    s32 ret;\n\n    more = 1;\n    ret = 0;\n    if (offset == 0) {\n        offset = (s32) D_AB1950;\n    }\n    args = (s32 *)(&arg3 + 1);\n    while (arg3 >= 2) {\n        args = (s32 *)(((s32)args + 3) & -4);\n        temp_s1 = *args++;\n        if (more != 0) {\n            offset += func_1502AC88(offset, temp_s1, &more);\n        }\n        arg3--;\n        more &= 0x0FFFFFFF;\n    }\n    args = (s32 *)(((s32)args + 3) & -4);\n    temp_s1 = *args++;\n    if (more != 0) {\n        ret = func_1502AF04(offset, arg2, temp_s1, arg1);\n    }\n    return ret;\n}",
+        "score": 0.4927536231884058,
+        "reason": "length_mismatch (target=69, generated=68)",
+        "diffs": [],
+        "timestamp": "2026-06-04T15:01:04.439Z"
+      },
+      {
+        "code": "s32 func_1502B110(s32 offset, s32 arg1, s32 arg2, u32 arg3, ...) {\n    va_list args;\n    s32 temp_s1;\n    s32 more;\n    s32 ret;\n\n    more = 1;\n    ret = 0;\n    if (offset == 0) {\n        offset = (s32) D_AB1950;\n    }\n    va_start(args, arg3);\n    if (arg3 >= 2) {\n        do {\n            temp_s1 = va_arg(args, s32);\n            if (more != 0) {\n                offset += func_1502AC88(offset, temp_s1, &more);\n            }\n            arg3--;\n            more &= 0x0FFFFFFF;\n        } while (arg3 >= 2);\n    }\n    temp_s1 = va_arg(args, s32);\n    if (more != 0) {\n        ret = func_1502AF04(offset, arg2, temp_s1, arg1);\n    }\n    return ret;\n}",
+        "score": 0.971,
+        "reason": "structural_diffs=2",
+        "diffs": [
+          "structural: target=sw a3, 84(sp) got=sw t0, 60(sp)",
+          "structural: target=sw t0, 60(sp) got=sw a3, 84(sp)"
+        ],
+        "timestamp": "2026-06-04T15:01:25.919Z"
       }
     ]
   },
