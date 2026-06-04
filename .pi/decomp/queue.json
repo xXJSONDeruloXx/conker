@@ -27512,7 +27512,7 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 3,
+    "attempts": 6,
     "lastScore": 0.4920634920634921,
     "status": "pending",
     "history": [
@@ -27536,6 +27536,46 @@
         "reason": "length_mismatch (target=63, generated=62)",
         "diffs": [],
         "timestamp": "2026-06-04T10:47:51.766Z"
+      },
+      {
+        "code": "s32 func_151606A8(struct225 *arg0) {\n    f32 pad[2];\n    f32 tmp[16];\n    f32 sp3C;\n    f32 sp38;\n    f32 sp34;\n    struct227 *temp_v0;\n\n    temp_v0 = arg0->unk18;\n    func_150A8050((f32 (*)[4])tmp, temp_v0->unk0, temp_v0->unk4, temp_v0->unk8);\n    tmp[12] = (f32) arg0->unk18->unk10;\n    tmp[13] = (f32) *(s16 *)((s32)arg0->unk18 + 0x12);\n    tmp[14] = (f32) *(s16 *)((s32)arg0->unk18 + 0x14);\n    func_150A7960((f32 (*)[4])tmp, D_800A66B4[0], ((s32 *)D_800A66B4)[1], D_800A66B4[2], &sp34, &sp38, &sp3C);\n    arg0->unk14->unkE = sp34;\n    arg0->unk14->unk10 = sp38;\n    arg0->unk14->unk12 = sp3C;\n    return 1;\n}",
+        "score": 0.4920634920634921,
+        "reason": "length_mismatch (target=63, generated=62)",
+        "diffs": [],
+        "timestamp": "2026-06-04T10:48:22.787Z"
+      },
+      {
+        "code": "s32 func_151606A8(struct225 *arg0) {\n    f32 pad[2];\n    f32 tmp[16];\n    f32 sp3C;\n    f32 sp38;\n    f32 sp34;\n    struct227 *temp_v0;\n\n    temp_v0 = arg0->unk18;\n    func_150A8050((f32 (*)[4])tmp, temp_v0->unk0, temp_v0->unk4, temp_v0->unk8);\n    arg0 = (struct225 *)((s32)arg0 + 0x18);\n    tmp[12] = (f32) (*(struct227 **)arg0)->unk10;\n    tmp[13] = (f32) *(s16 *)((s32)*(struct227 **)arg0 + 0x12);\n    tmp[14] = (f32) *(s16 *)((s32)*(struct227 **)arg0 + 0x14);\n    func_150A7960((f32 (*)[4])tmp, D_800A66B4[0], ((s32 *)D_800A66B4)[1], D_800A66B4[2], &sp34, &sp38, &sp3C);\n    ((struct225 *)((s32)arg0 - 0x18))->unk14->unkE = sp34;\n    ((struct225 *)((s32)arg0 - 0x18))->unk14->unk10 = sp38;\n    ((struct225 *)((s32)arg0 - 0x18))->unk14->unk12 = sp3C;\n    return 1;\n}",
+        "score": 0.7143,
+        "reason": "structural_diffs=18",
+        "diffs": [
+          "structural: target=addiu v0, s0, 24 got=lw t6, 24(s0)",
+          "structural: target=lw t6, 0(v0) got=lui v0, HI(D_800A66B4)",
+          "structural: target=lui v1, HI(D_800A66B4) got=addiu v0, v0, LO(D_800A66B4)",
+          "structural: target=addiu v1, v1, LO(D_800A66B4) got=lh t7, 16(t6)",
+          "structural: target=lh t7, 16(t6) got=addiu t2, sp, 52",
+          "structural: target=addiu t2, sp, 52 got=addiu t3, sp, 56",
+          "structural: target=addiu t3, sp, 56 got=mtc1 t7, f4",
+          "structural: target=mtc1 t7, f4 got=addiu t4, sp, 60",
+          "structural: target=addiu t4, sp, 60 got=addiu s0, s0, 24",
+          "structural: target=lw a1, 0(v1) got=cvt.s.w f6, f4",
+          "structural: target=cvt.s.w f6, f4 got=lw a1, 0(v0)",
+          "structural: target=lw a2, 4(v1) got=lw a2, 4(v0)",
+          "structural: target=lw a3, 8(v1) got=lw a3, 8(v0)",
+          "structural: target=lw t8, 0(v0) got=lw t8, 0(s0)",
+          "structural: target=lw t0, 0(v0) got=lw t0, 0(s0)",
+          "structural: target=lw t7, 20(s0) got=lw t7, -4(s0)",
+          "structural: target=lw t0, 20(s0) got=lw t0, -4(s0)",
+          "structural: target=lw t3, 20(s0) got=lw t3, -4(s0)"
+        ],
+        "timestamp": "2026-06-04T10:48:57.800Z"
+      },
+      {
+        "code": "s32 func_151606A8(struct225 *arg0) {\n    f32 pad[2];\n    f32 tmp[16];\n    f32 sp3C;\n    f32 sp38;\n    f32 sp34;\n    struct227 *temp_v0;\n    s32 temp_v0_2;\n\n    temp_v0 = arg0->unk18;\n    func_150A8050((f32 (*)[4])tmp, temp_v0->unk0, temp_v0->unk4, temp_v0->unk8);\n    temp_v0_2 = (s32)arg0 + 0x18;\n    tmp[12] = (f32) (*(struct227 **)temp_v0_2)->unk10;\n    tmp[13] = (f32) *(s16 *)((s32)*(struct227 **)temp_v0_2 + 0x12);\n    tmp[14] = (f32) *(s16 *)((s32)*(struct227 **)temp_v0_2 + 0x14);\n    func_150A7960((f32 (*)[4])tmp, D_800A66B4[0], ((s32 *)D_800A66B4)[1], D_800A66B4[2], &sp34, &sp38, &sp3C);\n    arg0->unk14->unkE = sp34;\n    arg0->unk14->unk10 = sp38;\n    arg0->unk14->unk12 = sp3C;\n    return 1;\n}",
+        "score": 0.4920634920634921,
+        "reason": "length_mismatch (target=63, generated=62)",
+        "diffs": [],
+        "timestamp": "2026-06-04T10:49:24.515Z"
       }
     ]
   },
