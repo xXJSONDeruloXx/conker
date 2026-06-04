@@ -24451,7 +24451,7 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
+    "attempts": 6,
     "lastScore": 0.4897959183673469,
     "status": "pending",
     "history": [
@@ -24475,6 +24475,27 @@
         "reason": "length_mismatch (target=49, generated=48)",
         "diffs": [],
         "timestamp": "2026-06-04T03:12:51.214Z"
+      },
+      {
+        "code": "void func_151D3130(struct102 *arg0) {\n    struct102 *temp_s0;\n    struct102 *temp_s1;\n    register s32 idx;\n\n    if (D_8008FC5C[*(u8 *)((s32)arg0 + 0x1D)] != NULL) {\n        D_8008FC5C[*(u8 *)((s32)arg0 + 0x1D)](arg0);\n    }\n    temp_s0 = *(struct102 **)((s32)arg0 + 0x24);\n    if (temp_s0 != NULL) {\n        idx = *(s8 *)((s32)temp_s0 + 0x2A);\nloop:\n        temp_s1 = *(struct102 **)((s32)temp_s0 + 0x40);\n        if (idx != -1) {\n            D_8008FC48[idx](temp_s0, (void *)((s32)temp_s0 + 0x34));\n        }\n        *(s32 *)((s32)temp_s0 + 0x2C) = 0;\n        func_1516972C(temp_s0);\n        temp_s0 = temp_s1;\n        if (temp_s1 != NULL) {\n            idx = *(s8 *)((s32)temp_s0 + 0x2A);\n            goto loop;\n        }\n    }\n    func_1514EDF0(arg0, *(s32 *)((s32)arg0 + 0x10));\n}",
+        "score": 0.49,
+        "reason": "length_mismatch (target=49, generated=50)",
+        "diffs": [],
+        "timestamp": "2026-06-04T03:13:22.566Z"
+      },
+      {
+        "code": "void func_151D3130(struct102 *arg0) {\n    struct102 *temp_s0;\n    struct102 *temp_s1;\n    register s32 idx;\n\n    if (D_8008FC5C[*(u8 *)((s32)arg0 + 0x1D)] != NULL) {\n        D_8008FC5C[*(u8 *)((s32)arg0 + 0x1D)](arg0);\n    }\n    temp_s0 = *(struct102 **)((s32)arg0 + 0x24);\n    if (temp_s0 != NULL) {\n        idx = *(s8 *)((s32)temp_s0 + 0x2A);\nloop:\n        temp_s1 = *(struct102 **)((s32)temp_s0 + 0x40);\n        if (idx != -1) {\n            D_8008FC48[idx](temp_s0, (void *)((s32)temp_s0 + 0x34));\n        }\n        *(s32 *)((s32)temp_s0 + 0x2C) = 0;\n        func_1516972C(temp_s0);\n        if ((temp_s0 = temp_s1) != NULL) {\n            idx = *(s8 *)((s32)temp_s0 + 0x2A);\n            goto loop;\n        }\n    }\n    func_1514EDF0(arg0, *(s32 *)((s32)arg0 + 0x10));\n}",
+        "score": 0.49,
+        "reason": "length_mismatch (target=49, generated=50)",
+        "diffs": [],
+        "timestamp": "2026-06-04T03:13:44.353Z"
+      },
+      {
+        "code": "void func_151D3130(struct102 *arg0) {\n    struct102 *temp_s0;\n    struct102 *temp_s1;\n    s32 idx;\n\n    if (D_8008FC5C[*(u8 *)((s32)arg0 + 0x1D)] != NULL) {\n        D_8008FC5C[*(u8 *)((s32)arg0 + 0x1D)](arg0);\n    }\n    temp_s0 = *(struct102 **)((s32)arg0 + 0x24);\n    if (temp_s0 != NULL) {\n        while (1) {\n            idx = *(s8 *)((s32)temp_s0 + 0x2A);\n            temp_s1 = *(struct102 **)((s32)temp_s0 + 0x40);\n            if (idx != -1) {\n                D_8008FC48[idx](temp_s0, (void *)((s32)temp_s0 + 0x34));\n            }\n            *(s32 *)((s32)temp_s0 + 0x2C) = 0;\n            func_1516972C(temp_s0);\n            temp_s0 = temp_s1;\n            if (temp_s1 == NULL) {\n                break;\n            }\n        }\n    }\n    func_1514EDF0(arg0, *(s32 *)((s32)arg0 + 0x10));\n}",
+        "score": 0.4897959183673469,
+        "reason": "length_mismatch (target=49, generated=48)",
+        "diffs": [],
+        "timestamp": "2026-06-04T03:14:20.424Z"
       }
     ]
   },
