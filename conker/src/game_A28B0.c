@@ -1008,7 +1008,27 @@ void func_150781A4(void) {
 }
 
 // another function with D_800D2104
-#pragma GLOBAL_ASM("asm/nonmatchings/game_A28B0/func_150781F4.s")
+void func_150781F4(void) {
+    struct127 *temp_v0;
+    s32 temp_v1;
+    f32 temp_f2;
+    f32 temp_f12;
+    f32 temp_f0;
+    s32 temp_a0;
+    s32 temp_a1;
+
+    temp_v0 = D_800D154C;
+    temp_a0 = D_800D1891 + 1;
+    temp_v1 = D_800D2104[temp_v0->unk13F] + (temp_a0 * 8);
+    temp_f2 = (f32)*(s16 *)temp_v1 - temp_v0->x_position;
+    temp_f12 = (f32)*(s16 *)(temp_v1 + 4) - temp_v0->z_position;
+    temp_f0 = sqrtf((temp_f2 * temp_f2) + (temp_f12 * temp_f12));
+    temp_f2 = (f32)(D_800D1893 << 3);
+    temp_a1 = D_800D1892;
+    if (((temp_a1 == 0) && (temp_f0 < temp_f2)) || ((temp_a1 != 0) && (temp_f2 < temp_f0))) {
+        func_15075400(D_800D1890);
+    }
+}
 
 void func_150782CC(void) {
     D_800D154C->unk23E = D_800D1890;

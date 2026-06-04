@@ -25117,8 +25117,8 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 6,
-    "lastScore": 0.8704,
+    "attempts": 7,
+    "lastScore": 0.6481,
     "status": "pending",
     "history": [
       {
@@ -25194,6 +25194,33 @@
           "structural: target=lh t3, 4(v1) got=lh t3, 4(a0)"
         ],
         "timestamp": "2026-06-04T05:58:30.148Z"
+      },
+      {
+        "code": "void func_150781F4(void) {\n    struct127 *temp_v0;\n    s32 temp_v1;\n    f32 temp_f2;\n    f32 temp_f12;\n    f32 temp_f0;\n    s32 temp_a1;\n\n    temp_v0 = D_800D154C;\n    temp_v1 = D_800D2104[temp_v0->unk13F] + ((D_800D1891 + 1) * 8);\n    temp_f2 = (f32)*(s16 *)temp_v1 - temp_v0->x_position;\n    temp_f12 = (f32)*(s16 *)(temp_v1 + 4) - temp_v0->z_position;\n    temp_f0 = sqrtf((temp_f2 * temp_f2) + (temp_f12 * temp_f12));\n    temp_f2 = (f32)(D_800D1893 << 3);\n    temp_a1 = D_800D1892;\n    if (((temp_a1 == 0) && (temp_f0 < temp_f2)) || ((temp_a1 != 0) && (temp_f2 < temp_f0))) {\n        func_15075400(D_800D1890);\n    }\n}",
+        "score": 0.6481,
+        "reason": "structural_diffs=19",
+        "diffs": [
+          "structural: target=lui a0, HI(D_800D1891) got=lui t1, HI(D_800D1891)",
+          "structural: target=lbu a0, LO(D_800D1891)(a0) got=lbu t1, LO(D_800D1891)(t1)",
+          "structural: target=addiu a0, a0, 1 got=sll t2, t1, 3",
+          "structural: target=sll t1, a0, 3 got=lwc1 f8, 20(v0)",
+          "structural: target=addu v1, t0, t1 got=addu v1, t0, t2",
+          "structural: target=lh t2, 0(v1) got=lh t3, 8(v1)",
+          "structural: target=lh t3, 4(v1) got=lh t4, 12(v1)",
+          "structural: target=lwc1 f8, 20(v0) got=lwc1 f18, 28(v0)",
+          "structural: target=mtc1 t2, f4 got=mtc1 t3, f4",
+          "structural: target=mtc1 t3, f10 got=mtc1 t4, f10",
+          "structural: target=lwc1 f18, 28(v0) got=lui t5, HI(D_800D1893)",
+          "structural: target=lui t4, HI(D_800D1893) got=lbu t5, LO(D_800D1893)(t5)",
+          "structural: target=lbu t4, LO(D_800D1893)(t4) got=lui a0, HI(D_800D1892)",
+          "structural: target=lui a1, HI(D_800D1892) got=lbu a0, LO(D_800D1892)(a0)",
+          "structural: target=lbu a1, LO(D_800D1892)(a1) got=sll t7, t5, 3",
+          "structural: target=sll t5, t4, 3 got=addiu v1, v1, 8",
+          "structural: target=mtc1 t5, f8 got=mtc1 t7, f8",
+          "structural: target=bnez a1, L0 got=bnez a0, L0",
+          "structural: target=beqzl a1, L2 got=beqzl a0, L2"
+        ],
+        "timestamp": "2026-06-04T05:58:50.589Z"
       }
     ]
   },

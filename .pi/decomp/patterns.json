@@ -918,5 +918,14 @@
     "example_functions": [
       "func_15071360"
     ]
+  },
+  {
+    "id": "variadic-va-list-stack-slot-order",
+    "description": "For IDO variadic functions, using va_list/va_start/va_arg produces the characteristic argument-save stack walk. Local declaration order can move the callee output stack slot; declaring the output scalar after offset/more placed it at the target offset.",
+    "trigger": "Function manually walks stack varargs via ALIGN4 and near-match has correct va_arg pointer but local output slot is at the wrong stack offset.",
+    "solution": "Use a variadic signature with va_list/va_start/va_arg rather than manual pointer walking, and reorder locals so scratch/offset/more precede the output scalar that is passed by address.",
+    "example_functions": [
+      "func_1502B8E0"
+    ]
   }
 ]
