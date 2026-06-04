@@ -22446,9 +22446,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 1,
-    "lastScore": 0.47115384615384615,
-    "status": "pending",
+    "attempts": 2,
+    "lastScore": 1,
+    "status": "matched",
     "history": [
       {
         "code": "void func_1001001C(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {\n    s32 i;\n    struct15 *ptr;\n\n    i = 0;\n    ptr = D_80041FE0;\n    if (D_80042760 > 0) {\n        do {\n            if ((arg0 == ptr->unk14) && (arg1 == ptr->unk18) && (arg2 == ptr->unk1C)) {\n                ptr->unk2C = alCents2Ratio(arg4);\n                ptr->unkC = arg3;\n            }\n            i++;\n            ptr++;\n        } while (i < D_80042760);\n    }\n}",
@@ -24451,9 +24451,32 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.4897959183673469,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_151D3130(struct102 *arg0) {\n    struct102 *temp_s0;\n    struct102 *temp_s1;\n    s32 idx;\n\n    if (D_8008FC5C[*(u8 *)((s32)arg0 + 0x1D)] != NULL) {\n        D_8008FC5C[*(u8 *)((s32)arg0 + 0x1D)](arg0);\n    }\n    temp_s0 = *(struct102 **)((s32)arg0 + 0x24);\n    if (temp_s0 != NULL) {\n        do {\n            idx = *(s8 *)((s32)temp_s0 + 0x2A);\n            temp_s1 = *(struct102 **)((s32)temp_s0 + 0x40);\n            if (idx != -1) {\n                D_8008FC48[idx](temp_s0, (void *)((s32)temp_s0 + 0x34));\n            }\n            *(s32 *)((s32)temp_s0 + 0x2C) = 0;\n            func_1516972C(temp_s0);\n            temp_s0 = temp_s1;\n        } while (temp_s1 != NULL);\n    }\n    func_1514EDF0(arg0, *(s32 *)((s32)arg0 + 0x10));\n}",
+        "score": 0.4897959183673469,
+        "reason": "length_mismatch (target=49, generated=48)",
+        "diffs": [],
+        "timestamp": "2026-06-04T03:11:40.724Z"
+      },
+      {
+        "code": "void func_151D3130(struct102 *arg0) {\n    struct102 *temp_s0;\n    struct102 *temp_s1;\n    s32 idx;\n\n    if (D_8008FC5C[*(u8 *)((s32)arg0 + 0x1D)] != NULL) {\n        D_8008FC5C[*(u8 *)((s32)arg0 + 0x1D)](arg0);\n    }\n    temp_s0 = *(struct102 **)((s32)arg0 + 0x24);\n    if (temp_s0 != NULL) {\n        idx = *(s8 *)((s32)temp_s0 + 0x2A);\n        do {\n            temp_s1 = *(struct102 **)((s32)temp_s0 + 0x40);\n            if (-1 != idx) {\n                D_8008FC48[idx](temp_s0, (void *)((s32)temp_s0 + 0x34));\n            }\n            *(s32 *)((s32)temp_s0 + 0x2C) = 0;\n            func_1516972C(temp_s0);\n            temp_s0 = temp_s1;\n            if (temp_s1 != NULL) {\n                idx = *(s8 *)((s32)temp_s0 + 0x2A);\n            }\n        } while (temp_s1 != NULL);\n    }\n    func_1514EDF0(arg0, *(s32 *)((s32)arg0 + 0x10));\n}",
+        "score": 0.46226415094339623,
+        "reason": "length_mismatch (target=49, generated=53)",
+        "diffs": [],
+        "timestamp": "2026-06-04T03:12:20.349Z"
+      },
+      {
+        "code": "void func_151D3130(struct102 *arg0) {\n    struct102 *temp_s0;\n    struct102 *temp_s1;\n    s32 idx;\n\n    if (D_8008FC5C[*(u8 *)((s32)arg0 + 0x1D)] != NULL) {\n        D_8008FC5C[*(u8 *)((s32)arg0 + 0x1D)](arg0);\n    }\n    temp_s0 = *(struct102 **)((s32)arg0 + 0x24);\n    if (temp_s0 != NULL) {\n        do {\n            idx = *(s8 *)((s32)temp_s0 + 0x2A);\n            temp_s1 = *(struct102 **)((s32)temp_s0 + 0x40);\n            if (-1 != idx) {\n                D_8008FC48[idx](temp_s0, (void *)((s32)temp_s0 + 0x34));\n            }\n            *(s32 *)((s32)temp_s0 + 0x2C) = 0;\n            func_1516972C(temp_s0);\n        } while ((temp_s0 = temp_s1) != NULL);\n    }\n    func_1514EDF0(arg0, *(s32 *)((s32)arg0 + 0x10));\n}",
+        "score": 0.4897959183673469,
+        "reason": "length_mismatch (target=49, generated=48)",
+        "diffs": [],
+        "timestamp": "2026-06-04T03:12:51.214Z"
+      }
+    ]
   },
   {
     "function": "func_15079790",
