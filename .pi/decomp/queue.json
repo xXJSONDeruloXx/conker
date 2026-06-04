@@ -23870,7 +23870,7 @@
     ],
     "attempts": 0,
     "lastScore": 0,
-    "status": "pending"
+    "status": "skipped"
   },
   {
     "function": "func_15167D84",
@@ -25935,9 +25935,51 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.4846153846153846,
+    "status": "pending",
+    "history": [
+      {
+        "code": "s32 func_1001B310(N_ALVoiceState *arg0, N_ALSeqPlayer *arg1) {\n    s32 sp14;\n    s32 sp10;\n\n    sp14 = arg1->chanState[arg0->channel].fxmix & 0x80;\n    sp10 = (s32)(((arg1->chanState[arg0->channel].fxmix & 0x7F) + (s32)(*(f32 *)((s32)arg1 + 0x7C) * 127.0f)) * *(f32 *)((s32)arg1 + 0x80));\n    return (MAX(0, MIN(0x7F, sp10)) | sp14) & 0xFF;\n}",
+        "score": 0.9841,
+        "reason": "structural_diffs=1",
+        "diffs": [
+          "structural: target=mul.s f6, f18, f4 got=mul.s f6, f4, f18"
+        ],
+        "timestamp": "2026-06-04T10:30:40.096Z"
+      },
+      {
+        "code": "s32 func_1001B310(N_ALVoiceState *arg0, N_ALSeqPlayer *arg1) {\n    s32 sp14;\n    s32 sp10;\n\n    sp14 = arg1->chanState[arg0->channel].fxmix & 0x80;\n    sp10 = (s32)(*(f32 *)((s32)arg1 + 0x80) * ((arg1->chanState[arg0->channel].fxmix & 0x7F) + (s32)(*(f32 *)((s32)arg1 + 0x7C) * 127.0f)));\n    return (MAX(0, MIN(0x7F, sp10)) | sp14) & 0xFF;\n}",
+        "score": 0.746,
+        "reason": "structural_diffs=16",
+        "diffs": [
+          "structural: target=lbu t4, 53(a0) got=lbu t7, 53(a0)",
+          "structural: target=lw t3, 96(a1) got=lw t5, 96(a1)",
+          "structural: target=sll t5, t4, 4 got=sll t6, t7, 4",
+          "structural: target=subu t5, t5, t4 got=subu t6, t6, t7",
+          "structural: target=sll t5, t5, 2 got=sll t6, t6, 2",
+          "structural: target=addu t7, t3, t5 got=addu t8, t5, t6",
+          "structural: target=lbu t6, 10(t7) got=lbu t9, 10(t8)",
+          "structural: target=andi t8, t6, 127 got=andi t1, t9, 127",
+          "structural: target=mfc1 t1, f10 got=mfc1 t4, f10",
+          "structural: target=addu t2, t8, t1 got=addu t2, t4, t1",
+          "structural: target=mfc1 t3, f8 got=mfc1 t7, f8",
+          "structural: target=sw t3, 16(sp) got=sw t7, 16(sp)",
+          "structural: target=lw t7, 16(sp) got=lw t6, 16(sp)",
+          "structural: target=slti at, t7, 128 got=slti at, t6, 128",
+          "structural: target=lw t6, 20(sp) got=lw t8, 20(sp)",
+          "structural: target=or v0, a2, t6 got=or v0, a2, t8"
+        ],
+        "timestamp": "2026-06-04T10:31:03.769Z"
+      },
+      {
+        "code": "s32 func_1001B310(N_ALVoiceState *arg0, N_ALSeqPlayer *arg1) {\n    s32 sp14;\n    s32 sp10;\n    s32 temp_t2;\n\n    sp14 = arg1->chanState[arg0->channel].fxmix & 0x80;\n    temp_t2 = (arg1->chanState[arg0->channel].fxmix & 0x7F) + (s32)(*(f32 *)((s32)arg1 + 0x7C) * 127.0f);\n    sp10 = (s32)((f32)temp_t2 * *(f32 *)((s32)arg1 + 0x80));\n    return (MAX(0, MIN(0x7F, sp10)) | sp14) & 0xFF;\n}",
+        "score": 0.4846153846153846,
+        "reason": "length_mismatch (target=63, generated=65)",
+        "diffs": [],
+        "timestamp": "2026-06-04T10:31:28.920Z"
+      }
+    ]
   },
   {
     "function": "func_10009BE4",
@@ -31676,9 +31718,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
+    "attempts": 4,
     "lastScore": 0.629,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "void func_15003570(void) {\n    s32 phi_s0;\n    s32 phi_s1;\n    u16 *phi_s2;\n    u16 *phi_s3;\n    u8 *temp_s4;\n    u16 *phi_s5;\n    u8 *temp_v0;\n    s32 temp_v1;\n\n    temp_s4 = allocate_memory(0x10, 1, 2, 0);\n    phi_s0 = (s32) D_1A37E0;\n    phi_s2 = (u16 *) D_80091D20;\n    phi_s3 = (u16 *) D_800B87A0;\n    phi_s5 = (u16 *) D_800BC444;\n    do {\n        if (phi_s0 & 1) {\n            phi_s0 -= 1;\n            phi_s1 = 1;\n        } else {\n            phi_s1 = 0;\n        }\n        func_10004514(phi_s0, temp_s4, 0x10, 1);\n        temp_v0 = temp_s4 + phi_s1;\n        temp_v1 = (temp_v0[0] << 0x18) + (temp_v0[3] + (temp_v0[1] << 0x10)) + (temp_v0[2] << 8);\n        *phi_s3++ = temp_v1;\n        phi_s0 += *phi_s2++ + phi_s1;\n    } while (phi_s3 != phi_s5);\n    func_10004074(temp_s4);\n}",
@@ -31763,6 +31805,34 @@
           "structural: target=addiu s2, s2, 2 got=addiu s3, s3, 2"
         ],
         "timestamp": "2026-06-04T10:27:21.916Z"
+      },
+      {
+        "code": "void func_15003570(void) {\n    s32 phi_s0;\n    s32 phi_s1;\n    s32 phi_s2;\n    s32 phi_s3;\n    u8 *temp_s4;\n    s32 phi_s5;\n    u8 *temp_v0;\n    s32 temp_v1;\n    s32 temp_t8;\n    s32 temp_t7;\n    s32 temp_t1;\n    s32 temp_t4;\n    u16 temp_t6;\n    s32 temp_t8_2;\n\n    temp_s4 = allocate_memory(0x10, 1, 2, 0);\n    phi_s0 = (s32) D_1A37E0;\n    phi_s2 = (s32) D_80091D20;\n    phi_s3 = (s32) D_800B87A0;\n    phi_s5 = (s32) D_800BC444;\n    do {\n        if (phi_s0 & 1) {\n            phi_s0 -= 1;\n            phi_s1 = 1;\n        } else {\n            phi_s1 = 0;\n        }\n        func_10004514(phi_s0, temp_s4, 0x10, 1);\n        temp_v0 = (u8 *)(phi_s1 + (s32) temp_s4);\n        temp_t8 = temp_v0[0];\n        temp_t7 = temp_v0[3];\n        temp_t1 = temp_v0[1];\n        temp_t4 = temp_v0[2];\n        temp_t6 = *(u16 *)phi_s2;\n        temp_v1 = (temp_t8 << 0x18) + temp_t7 + (temp_t1 << 0x10) + (temp_t4 << 8);\n        phi_s3 += 2;\n        temp_t8_2 = temp_t6 + phi_s1;\n        phi_s2 += 2;\n        *(u16 *)(phi_s3 - 2) = temp_v1;\n        phi_s0 += temp_t8_2;\n    } while (phi_s3 != phi_s5);\n    func_10004074(temp_s4);\n}",
+        "score": 0.629,
+        "reason": "structural_diffs=23",
+        "diffs": [
+          "structural: target=lui s2, HI(D_80091D20) got=lui s3, HI(D_80091D20)",
+          "structural: target=lui s3, HI(D_800B87A0) got=lui s2, HI(D_800B87A0)",
+          "structural: target=addiu s5, s5, LO(D_800BC444) got=addiu s3, s3, LO(D_80091D20)",
+          "structural: target=addiu s3, s3, LO(D_800B87A0) got=addiu s2, s2, LO(D_800B87A0)",
+          "structural: target=addiu s2, s2, LO(D_80091D20) got=addiu s5, s5, LO(D_800BC444)",
+          "structural: target=addu v0, s1, s4 got=addu v1, s4, s1",
+          "structural: target=lbu t8, 0(v0) got=lbu a0, 0(v1)",
+          "structural: target=lbu t7, 3(v0) got=lbu a1, 3(v1)",
+          "structural: target=lbu t1, 1(v0) got=lbu a2, 1(v1)",
+          "structural: target=lbu t4, 2(v0) got=lbu a3, 2(v1)",
+          "structural: target=lhu t6, 0(s2) got=lhu t0, 0(s3)",
+          "structural: target=sll t9, t8, 24 got=sll t7, a0, 24",
+          "structural: target=addu t0, t7, t9 got=addu t8, t7, a1",
+          "structural: target=sll t2, t1, 16 got=sll t9, a2, 16",
+          "structural: target=addu t3, t0, t2 got=addu t1, t8, t9",
+          "structural: target=sll t5, t4, 8 got=sll t2, a3, 8",
+          "structural: target=addiu s3, s3, 2 got=addiu s2, s2, 2",
+          "structural: target=addu v1, t3, t5 got=addu t3, t1, t2",
+          "structural: target=addu t8, t6, s1 got=addu t4, t0, s1",
+          "structural: target=addiu s2, s2, 2 got=addiu s3, s3, 2"
+        ],
+        "timestamp": "2026-06-04T10:28:13.513Z"
       }
     ]
   },
