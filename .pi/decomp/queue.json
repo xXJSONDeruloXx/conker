@@ -21106,7 +21106,7 @@
     "instructions": 56,
     "difficulty": "medium",
     "tags": [],
-    "attempts": 5,
+    "attempts": 6,
     "lastScore": 0.48214285714285715,
     "status": "pending",
     "history": [
@@ -21144,6 +21144,13 @@
         "reason": "length_mismatch (target=56, generated=54)",
         "diffs": [],
         "timestamp": "2026-06-04T06:48:07.912Z"
+      },
+      {
+        "code": "f32 func_1514462C(s32 arg0) {\n    s32 temp_v0;\n    f32 temp_f0;\n    f32 temp_f2;\n    f32 temp_f16;\n\n    switch (*(u8 *)(arg0 + 0x15) & 3) {\n    case 2:\n        temp_f2 = (f32)((*(s16 *)(arg0 + 8) * *(s16 *)(arg0 + 0xA)) * *(s16 *)(arg0 + 6));\n        break;\n    case 0:\n        temp_v0 = *(s16 *)(arg0 + 6);\n        temp_f0 = (f32)*(s16 *)(arg0 + 8);\n        temp_f16 = (f32)(temp_v0 * temp_v0) * D_800A5698;\n        temp_f2 = temp_f16;\n        temp_f2 *= temp_f0;\n        break;\n    case 1:\n        temp_f0 = (f32)*(s16 *)(arg0 + 6);\n        temp_f2 = ((temp_f0 * D_800A569C) * temp_f0) * temp_f0;\n        break;\n    default:\n        temp_f2 = 1.0f;\n        break;\n    }\n    return temp_f2;\n}",
+        "score": 0.48214285714285715,
+        "reason": "length_mismatch (target=56, generated=54)",
+        "diffs": [],
+        "timestamp": "2026-06-04T07:08:41.987Z"
       }
     ]
   },
