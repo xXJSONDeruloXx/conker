@@ -21157,7 +21157,7 @@
     ],
     "attempts": 12,
     "lastScore": 0.9756,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "void func_151D2E5C(struct16 *arg0, struct223 *arg1, u8 arg2) {\n    s32 temp_v0;\n    s32 temp_v1;\n    u8 temp_a2;\n    u8 temp_a3;\n\n    if (arg2 == 0) {\n        temp_v0 = arg0->unk10;\n        temp_v1 = arg1->unk0;\n        temp_a2 = arg0->unk14;\n        temp_a3 = arg1->unk4.ub;\n        if ((temp_v0 == temp_v1) || (temp_a3 == temp_a2)) {\n            func_1516972C((struct102 *)arg0);\n        }\n    } else if (arg2 == 0x2D) {\n        temp_v0 = arg1->unk0;\n        temp_v1 = arg0->unk10;\n        if (temp_v0 == temp_v1) {\n            arg0->unk10 = arg1->unk4.w;\n            arg0->unk14 = arg1->unk9;\n        } else if (arg1->unk4.w == temp_v1) {\n            arg0->unk10 = temp_v0;\n            arg0->unk14 = arg1->unk8;\n        }\n    }\n}",
@@ -23077,9 +23077,53 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.4891304347826087,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_15104FF8(struct207 *arg0, s32 arg1, u8 arg2) {\n    void *temp_v1;\n    struct205 *temp_v0;\n    void *temp_func;\n\n    temp_v1 = (void *)((s32)arg0 + 0x28);\n    if (arg2 == 0x38) {\n        temp_v0 = *(struct205 **)temp_v1;\n        temp_func = (void *)func_1000EF40;\n        if (temp_v0->unk14 == 1) {\n            *(s16 *)((s32)temp_v1 + 8) = 0x12C;\n            func_1000FD38(temp_func, temp_v0, 0);\n            temp_v0 = *(struct205 **)temp_v1;\n            func_1000FA64(0x236, *(s16 *)((s32)temp_v0 + 0), *(s16 *)((s32)temp_v0 + 2), *(s16 *)((s32)temp_v0 + 4), 0x4000, 0x5DC, 0x3E8, (s32)temp_func, temp_v0, 0, 8, 0);\n        }\n    }\n}",
+        "score": 0.4791666666666667,
+        "reason": "length_mismatch (target=46, generated=48)",
+        "diffs": [],
+        "timestamp": "2026-06-04T02:17:06.715Z"
+      },
+      {
+        "code": "void func_15104FF8(struct207 *arg0, s32 arg1, u8 arg2) {\n    void *temp_v1;\n    void *temp_func;\n\n    temp_v1 = (void *)((s32)arg0 + 0x28);\n    if (arg2 == 0x38) {\n        temp_func = (void *)func_1000EF40;\n        if ((*(struct205 **)temp_v1)->unk14 == 1) {\n            *(s16 *)((s32)temp_v1 + 8) = 0x12C;\n            func_1000FD38(temp_func, *(void **)temp_v1, 0);\n            func_1000FA64(0x236, *(s16 *)(*(s32 *)temp_v1 + 0), *(s16 *)(*(s32 *)temp_v1 + 2), *(s16 *)(*(s32 *)temp_v1 + 4), 0x4000, 0x5DC, 0x3E8, (s32)temp_func, *(void **)temp_v1, 0, 8, 0);\n        }\n    }\n}",
+        "score": 0.4348,
+        "reason": "structural_diffs=26",
+        "diffs": [
+          "structural: target=lw v0, 0(v1) got=lw a1, 0(v1)",
+          "structural: target=lbu t7, 20(v0) got=lbu t7, 20(a1)",
+          "structural: target=move a1, v0 got=move a2, zero",
+          "structural: target=sw a0, 60(sp) got=sw a0, 56(sp)",
+          "structural: target=sw v1, 64(sp) got=jal func_1000FD38",
+          "structural: target=jal func_1000FD38 got=sw v1, 60(sp)",
+          "structural: target=move a2, zero got=lw v1, 60(sp)",
+          "structural: target=lw v1, 64(sp) got=lw t2, 56(sp)",
+          "structural: target=lw t2, 60(sp) got=li t9, 16384",
+          "structural: target=li t9, 16384 got=lw v0, 0(v1)",
+          "structural: target=lw v0, 0(v1) got=li t0, 1500",
+          "structural: target=li t0, 1500 got=li t1, 1000",
+          "structural: target=li t1, 1000 got=lh a1, 0(v0)",
+          "structural: target=lh a1, 0(v0) got=lh a2, 2(v0)",
+          "structural: target=lh a2, 2(v0) got=lh a3, 4(v0)",
+          "structural: target=lh a3, 4(v0) got=sw t1, 24(sp)",
+          "structural: target=li t3, 8 got=sw t0, 20(sp)",
+          "structural: target=sw t3, 40(sp) got=sw t9, 16(sp)",
+          "structural: target=sw zero, 44(sp) got=sw t2, 28(sp)",
+          "structural: target=sw zero, 36(sp) got=lw t3, 0(v1)"
+        ],
+        "timestamp": "2026-06-04T02:17:35.046Z"
+      },
+      {
+        "code": "void func_15104FF8(struct207 *arg0, s32 arg1, u8 arg2) {\n    void *temp_v1;\n    struct205 *temp_v0;\n    struct205 *temp_v0_2;\n    void *temp_func;\n\n    temp_v1 = (void *)((s32)arg0 + 0x28);\n    if (arg2 == 0x38) {\n        temp_v0 = *(struct205 **)temp_v1;\n        temp_func = (void *)func_1000EF40;\n        if (temp_v0->unk14 == 1) {\n            *(s16 *)((s32)temp_v1 + 8) = 0x12C;\n            func_1000FD38(temp_func, temp_v0, 0);\n            temp_v0_2 = *(struct205 **)temp_v1;\n            func_1000FA64(0x236, *(s16 *)((s32)temp_v0_2 + 0), *(s16 *)((s32)temp_v0_2 + 2), *(s16 *)((s32)temp_v0_2 + 4), 0x4000, 0x5DC, 0x3E8, (s32)temp_func, temp_v0_2, 0, 8, 0);\n        }\n    }\n}",
+        "score": 0.4891304347826087,
+        "reason": "length_mismatch (target=46, generated=45)",
+        "diffs": [],
+        "timestamp": "2026-06-04T02:18:00.802Z"
+      }
+    ]
   },
   {
     "function": "func_1001B310",
