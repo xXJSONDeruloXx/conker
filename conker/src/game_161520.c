@@ -258,7 +258,32 @@ s32 func_151368A8(struct102 *arg0) {
     return 1;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_161520/func_15136918.s")
+void func_15136918(f32 arg0, u8 arg1, u8 arg2, s16 arg3, s16 arg4, s32 arg5, f32 *arg6, u8 arg7, s32 arg8) {
+    s32 padHi[3];
+    u8 sp48[0x1C];
+    s32 padLo;
+
+    sp48[6] = 0x55;
+    *(s32 *)&sp48[0] = 0x300;
+    *(s32 *)&sp48[8] = 0;
+    *(s32 *)&sp48[0xC] = 0;
+    sp48[0x10] = arg1;
+    sp48[0x11] = arg2;
+    sp48[0x12] = 0;
+    sp48[0x13] = 0;
+    sp48[0x14] = 0;
+    sp48[0x15] = 0;
+    *(s32 *)&sp48[0x18] = 0x280001;
+    sp48[0x16] = 1;
+    sp48[0x17] = 1;
+    if (arg3 == -1) {
+        *(s16 *)&sp48[4] = 0x12C;
+    } else {
+        *(s32 *)&sp48[0] = 0x301;
+        *(s16 *)&sp48[4] = arg3 + 0x20;
+    }
+    func_1513C73C((s32)sp48, 0xD, 0, arg5, arg6[0], arg6[1], arg6[2], arg0, arg0, arg4, 0, 0, arg7, arg8);
+}
 
 s32 func_15136A1C(struct102 *arg0) {
     s16 temp_v0 = arg0->unk1C;

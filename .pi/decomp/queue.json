@@ -26630,7 +26630,7 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 3,
+    "attempts": 4,
     "lastScore": 0.7385,
     "status": "pending",
     "history": [
@@ -26714,6 +26714,31 @@
           "structural: target=addiu a0, sp, 72 got=addiu a0, sp, 84"
         ],
         "timestamp": "2026-06-04T11:24:58.374Z"
+      },
+      {
+        "code": "void func_15136918(f32 arg0, u8 arg1, u8 arg2, s16 arg3, s16 arg4, s32 arg5, f32 *arg6, u8 arg7, s32 arg8) {\n    s32 pad[4];\n    u8 sp48[0x1C];\n\n    sp48[6] = 0x55;\n    *(s32 *)&sp48[0] = 0x300;\n    *(s32 *)&sp48[8] = 0;\n    *(s32 *)&sp48[0xC] = 0;\n    sp48[0x10] = arg1;\n    sp48[0x11] = arg2;\n    sp48[0x12] = 0;\n    sp48[0x13] = 0;\n    sp48[0x14] = 0;\n    sp48[0x15] = 0;\n    *(s32 *)&sp48[0x18] = 0x280001;\n    sp48[0x16] = 1;\n    sp48[0x17] = 1;\n    if (arg3 == -1) {\n        *(s16 *)&sp48[4] = 0x12C;\n    } else {\n        *(s32 *)&sp48[0] = 0x301;\n        *(s16 *)&sp48[4] = arg3 + 0x20;\n    }\n    func_1513C73C((s32)sp48, 0xD, 0, arg5, arg6[0], arg6[1], arg6[2], arg0, arg0, arg4, 0, 0, arg7, arg8);\n}",
+        "score": 0.7385,
+        "reason": "structural_diffs=17",
+        "diffs": [
+          "structural: target=sb t0, 78(sp) got=sb t0, 74(sp)",
+          "structural: target=sw t1, 72(sp) got=sw t1, 68(sp)",
+          "structural: target=sw zero, 80(sp) got=sw zero, 76(sp)",
+          "structural: target=sw zero, 84(sp) got=sw zero, 80(sp)",
+          "structural: target=sb a1, 88(sp) got=sb a1, 84(sp)",
+          "structural: target=sb a2, 89(sp) got=sb a2, 85(sp)",
+          "structural: target=sb zero, 90(sp) got=sb zero, 86(sp)",
+          "structural: target=sb zero, 91(sp) got=sb zero, 87(sp)",
+          "structural: target=sb zero, 92(sp) got=sb zero, 88(sp)",
+          "structural: target=sb zero, 93(sp) got=sb zero, 89(sp)",
+          "structural: target=sw t2, 96(sp) got=sw t2, 92(sp)",
+          "structural: target=sb t3, 94(sp) got=sb t3, 90(sp)",
+          "structural: target=sb t4, 95(sp) got=sb t4, 91(sp)",
+          "structural: target=sh t5, 76(sp) got=sh t5, 72(sp)",
+          "structural: target=sw t6, 72(sp) got=sw t6, 68(sp)",
+          "structural: target=sh t7, 76(sp) got=sh t7, 72(sp)",
+          "structural: target=addiu a0, sp, 72 got=addiu a0, sp, 68"
+        ],
+        "timestamp": "2026-06-04T11:25:18.232Z"
       }
     ]
   },

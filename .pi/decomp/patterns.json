@@ -1071,5 +1071,14 @@
     "example_functions": [
       "func_15013C38"
     ]
+  },
+  {
+    "id": "negative-index-local-outparam",
+    "description": "When an optional out-parameter defaults to a stack local, IDO may place a scalar local at the top of the frame (`sp+0x1C`) while the target wants the fallback pointer at a lower slot (`sp+0x10`). Declaring a one-element local array and taking a negative index can produce the desired `addiu reg, sp, offset` without extra arithmetic.",
+    "trigger": "Near-match differs only in `addiu temp, sp, <local offset>` for a NULL out-param fallback; direct `&local` gives too-high stack address and cast arithmetic changes temp register allocation.",
+    "solution": "Replace the scalar local with a tiny array and use a negative index for the fallback pointer, e.g. `f32 tmp[1]; if (out == NULL) out = &tmp[-3];`.",
+    "example_functions": [
+      "func_1514563C"
+    ]
   }
 ]
