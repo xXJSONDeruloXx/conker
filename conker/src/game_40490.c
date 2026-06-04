@@ -3,6 +3,8 @@
 #include "functions.h"
 #include "variables.h"
 
+void func_151A9390(s32, u8, struct134 *, s32, f32, f32, s32, s32, s32);
+
 s32 func_151BE850(struct17 *arg0, s32 arg1, u8 arg2, u8 arg3, u8 arg4, u8 arg5, u8 arg6);
 
 
@@ -156,7 +158,51 @@ s32 func_1501407C(s32 arg0) {
 //     }
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_40490/func_15014144.s")
+s32 func_15014144(struct134 *arg0) {
+    s32 temp_v0;
+    s32 temp_t2;
+    s32 temp_t1;
+    s32 temp_v1;
+    s32 temp_t0;
+    s32 temp_v0_2;
+    s32 temp_t7;
+    s32 temp_t8;
+    s32 temp_t9;
+    s32 temp_t3;
+
+    temp_v0 = arg0->unk18;
+    if ((temp_v0 & 8) != 0) {
+        temp_t2 = 8;
+    } else {
+        temp_t2 = 0;
+    }
+    if ((temp_v0 & 4) != 0) {
+        temp_t1 = 4;
+    } else {
+        temp_t1 = 0;
+    }
+    if ((temp_v0 & 2) != 0) {
+        temp_v1 = 0;
+    } else {
+        temp_v1 = 2;
+    }
+    if ((temp_v0 & 1) != 0) {
+        temp_t0 = 1;
+    } else {
+        temp_t0 = 0;
+    }
+    temp_t8 = -1;
+    if ((temp_v0 & 0x10) != 0) {
+        temp_v0_2 = 0x10;
+    } else {
+        temp_v0_2 = 0;
+    }
+    temp_t7 = (temp_v0_2 | temp_t0 | temp_v1 | temp_t1 | temp_t2) & 0xFF;
+    temp_t9 = 0xFF;
+    temp_t3 = 1;
+    func_151A9390(temp_t7, ((u8 *)arg0)[0x1F], arg0, 0, *(f32 *)&D_8009667C, 100.0f, temp_t8, temp_t9, temp_t3);
+    return 1;
+}
 
 s32 func_15014220(struct134 *arg0) {
     s32 sp34[3];
