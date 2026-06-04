@@ -25082,7 +25082,7 @@
     ],
     "attempts": 6,
     "lastScore": 0.4814814814814815,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "void func_10009BE4(struct147 *arg0) {\n    struct54 *arg0_54;\n    struct147 *temp_a1;\n    struct54 *temp_v0;\n    struct54 *temp_v1;\n\n    arg0_54 = (struct54 *)arg0;\n    if (((s32)arg0_54 & 1) != 0) {\n        D_8003C8E0 = 0x0F000004;\n        func_150AD770();\n        return;\n    }\n    temp_a1 = &D_800406A0;\n    *(s32 *)arg0_54->unkC = arg0_54->unk8;\n    if ((s32)arg0_54 == temp_a1->unk4) {\n        D_800406A4 = arg0_54->unk0;\n    }\n    temp_v0 = arg0_54->unk0;\n    if (temp_v0 != NULL) {\n        temp_v0->unk4 = arg0_54->unk4;\n    }\n    temp_v0 = arg0_54->unk4;\n    if (temp_v0 != NULL) {\n        temp_v0->unk0 = arg0_54->unk0;\n    }\n    temp_v1 = temp_a1->unk10;\n    if (temp_v1 != NULL) {\n        arg0_54->unk4 = temp_v1;\n        arg0_54->unk0 = temp_v1->unk0;\n        temp_a1 = (struct147 *)temp_v1->unk0;\n        if (temp_a1 != NULL) {\n            ((struct54 *)temp_a1)->unk4 = arg0_54;\n        }\n        temp_v1->unk0 = arg0_54;\n    } else {\n        D_800406B0 = arg0_54;\n        arg0_54->unk0 = NULL;\n        arg0_54->unk4 = NULL;\n    }\n}",

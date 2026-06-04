@@ -936,5 +936,14 @@
     "example_functions": [
       "func_150781F4"
     ]
+  },
+  {
+    "id": "shared-call-or-condition-for-branch-shape",
+    "description": "For paired conditions that trigger the same call, writing them as a single OR expression can make IDO emit one shared call block with branch-through labels instead of duplicated call sites.",
+    "trigger": "Two if/else branches compare a shared value and both call the same function, but generated C duplicates the call and uses branch-likely skips while target has one call label.",
+    "solution": "Use `if (((mode == 0) && cond0) || ((mode == 1) && cond1)) { call(); }` with a local mode temp; keep per-branch conversions inline if target reloads/converts separately.",
+    "example_functions": [
+      "func_1507879C"
+    ]
   }
 ]
