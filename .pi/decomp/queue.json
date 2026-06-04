@@ -19383,8 +19383,8 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 6,
-    "lastScore": 0.48863636363636365,
+    "attempts": 9,
+    "lastScore": 0.8864,
     "status": "pending",
     "history": [
       {
@@ -19428,6 +19428,39 @@
         "reason": "length_mismatch (target=44, generated=43)",
         "diffs": [],
         "timestamp": "2026-06-04T00:27:39.023Z"
+      },
+      {
+        "code": "s32 func_15013D38(struct47 *arg0) {\n    struct17 sp3C;\n    s32 temp_v1;\n\n    arg0->unk16 |= 4;\n    sp3C.unk0 = arg0->unk0;\n    sp3C.unk4 = arg0->unk2;\n    sp3C.unk8 = arg0->unk4;\n    temp_v1 = arg0->unk18;\n    if (temp_v1 == 0) {\n        temp_v1 = 1;\n    }\n    func_151BE850(&sp3C, arg0->unk10, temp_v1, arg0->unk1F, 1, 0xFF, 1);\n    return 1;\n}",
+        "score": 0.4772727272727273,
+        "reason": "length_mismatch (target=44, generated=42)",
+        "diffs": [],
+        "timestamp": "2026-06-04T00:27:57.150Z"
+      },
+      {
+        "code": "s32 func_15013D38(struct47 *arg0) {\n    struct17 sp3C;\n    s32 temp_v0;\n    s32 temp_v1;\n\n    arg0->unk16 |= 4;\n    sp3C.unk0 = arg0->unk0;\n    sp3C.unk4 = arg0->unk2;\n    sp3C.unk8 = arg0->unk4;\n    temp_v0 = arg0->unk18;\n    temp_v1 = (temp_v0 != 0) ? temp_v0 : 1;\n    func_151BE850(&sp3C, arg0->unk10, temp_v1, arg0->unk1F, 1, 0xFF, 1);\n    return 1;\n}",
+        "score": 0.8864,
+        "reason": "structural_diffs=5",
+        "diffs": [
+          "structural: target=addiu a0, sp, 60 got=li v1, 1",
+          "structural: target=li t1, 1 got=addiu a0, sp, 60",
+          "structural: target=li t2, 255 got=li t1, 1",
+          "structural: target=li t3, 1 got=li t2, 255",
+          "structural: target=li v1, 1 got=li t3, 1"
+        ],
+        "timestamp": "2026-06-04T00:28:10.331Z"
+      },
+      {
+        "code": "s32 func_15013D38(struct47 *arg0) {\n    struct17 sp3C;\n    struct17 *temp_a0;\n    s32 temp_v0;\n    s32 temp_v1;\n\n    temp_a0 = &sp3C;\n    arg0->unk16 |= 4;\n    sp3C.unk0 = arg0->unk0;\n    sp3C.unk4 = arg0->unk2;\n    sp3C.unk8 = arg0->unk4;\n    temp_v0 = arg0->unk18;\n    temp_v1 = (temp_v0 != 0) ? temp_v0 : 1;\n    func_151BE850(temp_a0, arg0->unk10, temp_v1, arg0->unk1F, 1, 0xFF, 1);\n    return 1;\n}",
+        "score": 0.8864,
+        "reason": "structural_diffs=5",
+        "diffs": [
+          "structural: target=addiu a0, sp, 60 got=li v1, 1",
+          "structural: target=li t1, 1 got=addiu a0, sp, 60",
+          "structural: target=li t2, 255 got=li t1, 1",
+          "structural: target=li t3, 1 got=li t2, 255",
+          "structural: target=li v1, 1 got=li t3, 1"
+        ],
+        "timestamp": "2026-06-04T00:28:24.781Z"
       }
     ]
   },
