@@ -19071,9 +19071,58 @@
     "instructions": 50,
     "difficulty": "medium-low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.76,
+    "status": "pending",
+    "history": [
+      {
+        "code": "s32 func_15145128(struct17 *arg0, struct17 *arg1, f32 *arg2, f32 *arg3) {\n    f32 sp0;\n    f32 len;\n    f32 inv;\n    f32 sum;\n\n    if (arg3 == NULL) {\n        arg3 = &sp0;\n    }\n    sum = (arg0->unk0 * arg0->unk0) + (arg0->unk4 * arg0->unk4) + (arg0->unk8 * arg0->unk8);\n    if (sum == 0.0f) {\n        return 0;\n    }\n    len = sqrtf(sum);\n    inv = 1.0f / len;\n    if (arg2 != NULL) {\n        *arg2 = len;\n    }\n    *arg3 = inv;\n    arg1->unk0 = arg0->unk0 * *arg3;\n    arg1->unk4 = arg0->unk4 * *arg3;\n    arg1->unk8 = arg0->unk8 * *arg3;\n    return 1;\n}",
+        "score": 0.39,
+        "reason": "length_mismatch (target=50, generated=39)",
+        "diffs": [],
+        "timestamp": "2026-06-04T03:26:31.173Z"
+      },
+      {
+        "code": "s32 func_15145128(struct17 *arg0, struct17 *arg1, f32 *arg2, f32 *arg3) {\n    f32 sp0[2];\n    f32 x;\n    f32 y;\n    f32 z;\n    f32 sum;\n    f32 len;\n    f32 recip;\n\n    if (arg3 == NULL) {\n        arg3 = sp0;\n    }\n    x = arg0->unk0;\n    y = arg0->unk4;\n    z = arg0->unk8;\n    sum = (x * x) + (y * y) + (z * z);\n    if (sum == 0.0f) {\n        return 0;\n    }\n    if (arg2 != NULL) {\n        len = sqrtf(sum);\n        recip = 1.0f / len;\n        *arg2 = len;\n        *arg3 = recip;\n    } else {\n        len = sqrtf(sum);\n        *arg3 = 1.0f / len;\n    }\n    arg1->unk0 = *arg3 * arg0->unk0;\n    arg1->unk4 = *arg3 * arg0->unk4;\n    arg1->unk8 = *arg3 * arg0->unk8;\n    return 1;\n}",
+        "score": 0.76,
+        "reason": "structural_diffs=12",
+        "diffs": [
+          "structural: target=addiu sp, sp, -8 got=addiu sp, sp, -40",
+          "structural: target=addiu a3, sp, 0 got=addiu a3, sp, 32",
+          "structural: target=lwc1 f12, 4(a0) got=lwc1 f2, 4(a0)",
+          "structural: target=lwc1 f14, 8(a0) got=lwc1 f12, 8(a0)",
+          "structural: target=mul.s f6, f12, f12 got=mul.s f6, f2, f2",
+          "structural: target=mul.s f10, f14, f14 got=mul.s f10, f12, f12",
+          "structural: target=add.s f2, f8, f10 got=add.s f14, f8, f10",
+          "structural: target=c.eq.s f2, f16 got=c.eq.s f16, f14",
+          "structural: target=sqrt.s f0, f2 got=sqrt.s f0, f14",
+          "structural: target=sqrt.s f0, f2 got=sqrt.s f0, f14",
+          "structural: target=sqrt.s f0, f2 got=sqrt.s f0, f14",
+          "structural: target=addiu sp, sp, 8 got=addiu sp, sp, 40"
+        ],
+        "timestamp": "2026-06-04T03:27:28.706Z"
+      },
+      {
+        "code": "s32 func_15145128(struct17 *arg0, struct17 *arg1, f32 *arg2, f32 *arg3) {\n    f32 sp0[2];\n\n    if (arg3 == NULL) {\n        arg3 = sp0;\n    }\n    if (((arg0->unk0 * arg0->unk0) + (arg0->unk4 * arg0->unk4) + (arg0->unk8 * arg0->unk8)) == 0.0f) {\n        return 0;\n    }\n    if (arg2 != NULL) {\n        *arg2 = sqrtf((arg0->unk0 * arg0->unk0) + (arg0->unk4 * arg0->unk4) + (arg0->unk8 * arg0->unk8));\n        *arg3 = 1.0f / *arg2;\n    } else {\n        *arg3 = 1.0f / sqrtf((arg0->unk0 * arg0->unk0) + (arg0->unk4 * arg0->unk4) + (arg0->unk8 * arg0->unk8));\n    }\n    arg1->unk0 = *arg3 * arg0->unk0;\n    arg1->unk4 = *arg3 * arg0->unk4;\n    arg1->unk8 = *arg3 * arg0->unk8;\n    return 1;\n}",
+        "score": 0.76,
+        "reason": "structural_diffs=12",
+        "diffs": [
+          "structural: target=addiu sp, sp, -8 got=addiu sp, sp, -16",
+          "structural: target=addiu a3, sp, 0 got=addiu a3, sp, 8",
+          "structural: target=lwc1 f12, 4(a0) got=lwc1 f2, 4(a0)",
+          "structural: target=lwc1 f14, 8(a0) got=lwc1 f12, 8(a0)",
+          "structural: target=mul.s f6, f12, f12 got=mul.s f6, f2, f2",
+          "structural: target=mul.s f10, f14, f14 got=mul.s f10, f12, f12",
+          "structural: target=add.s f2, f8, f10 got=add.s f14, f8, f10",
+          "structural: target=c.eq.s f2, f16 got=c.eq.s f16, f14",
+          "structural: target=sqrt.s f0, f2 got=sqrt.s f0, f14",
+          "structural: target=sqrt.s f0, f2 got=sqrt.s f0, f14",
+          "structural: target=sqrt.s f0, f2 got=sqrt.s f0, f14",
+          "structural: target=addiu sp, sp, 8 got=addiu sp, sp, 16"
+        ],
+        "timestamp": "2026-06-04T03:28:17.666Z"
+      }
+    ]
   },
   {
     "function": "func_15070C40",
@@ -28303,9 +28352,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
+    "attempts": 5,
     "lastScore": 0.9592,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "s32 func_1000CAE4(s32 arg0, u8 arg1, s32 arg2, s32 arg3) {\n    s32 tmp;\n\n    tmp = arg0 & 2;\n    arg0 &= 1;\n    if (D_800BE9F0 == 0x42) {\n        func_10011FA0((s32 *)4);\n        if (arg0 == 0) {\n            arg0 = 1;\n            func_1000E704(0x58, 1, 0xFFFF);\n        }\n    } else if (arg0 != 0) {\n        func_1000E704(0x58, 0, 0xFFFF);\n        func_1000E40C(0x58, 0x3E80);\n        arg0 = 0;\n    }\n    if (tmp == 0) {\n        func_10008790(arg1, 0x1000, 0, 1);\n        tmp = 2;\n    }\n    return tmp | arg0;\n}",
@@ -28336,6 +28385,26 @@
           "structural: target=ori a2, zero, 65535 got=li a2, 65535"
         ],
         "timestamp": "2026-06-04T03:21:16.956Z"
+      },
+      {
+        "code": "s32 func_1000CAE4(s32 arg0, u8 arg1, s32 arg2, s32 arg3) {\n    s32 tmp;\n\n    tmp = arg0 & 2;\n    arg0 &= 1;\n    if (D_800BE9F0 == 0x42) {\n        func_10011FA0(4);\n        if (arg0 == 0) {\n            arg0 = 1;\n            func_1000E704(0x58, 1, (u16)-1);\n        }\n    } else if (arg0 != 0) {\n        func_1000E704(0x58, 0, (u16)-1);\n        func_1000E40C(0x58, 0x3E80);\n        arg0 = 0;\n    }\n    if (tmp == 0) {\n        func_10008790(arg1, 0x1000, 0, 1);\n        tmp = 2;\n    }\n    return tmp | arg0;\n}",
+        "score": 0.9592,
+        "reason": "structural_diffs=2",
+        "diffs": [
+          "structural: target=ori a2, zero, 65535 got=li a2, 65535",
+          "structural: target=ori a2, zero, 65535 got=li a2, 65535"
+        ],
+        "timestamp": "2026-06-04T03:22:47.527Z"
+      },
+      {
+        "code": "s32 func_1000CAE4(s32 arg0, u8 arg1, s32 arg2, s32 arg3) {\n    s32 tmp;\n\n    tmp = arg0 & 2;\n    arg0 &= 1;\n    if (D_800BE9F0 == 0x42) {\n        func_10011FA0(4);\n        if (arg0 == 0) {\n            arg0 = 1;\n            func_1000E704(0x58, 1, (-1 & 0xFFFF));\n        }\n    } else if (arg0 != 0) {\n        func_1000E704(0x58, 0, (-1 & 0xFFFF));\n        func_1000E40C(0x58, 0x3E80);\n        arg0 = 0;\n    }\n    if (tmp == 0) {\n        func_10008790(arg1, 0x1000, 0, 1);\n        tmp = 2;\n    }\n    return tmp | arg0;\n}",
+        "score": 0.9592,
+        "reason": "structural_diffs=2",
+        "diffs": [
+          "structural: target=ori a2, zero, 65535 got=li a2, 65535",
+          "structural: target=ori a2, zero, 65535 got=li a2, 65535"
+        ],
+        "timestamp": "2026-06-04T03:23:15.629Z"
       }
     ]
   },
