@@ -981,5 +981,14 @@
     "example_functions": [
       "func_1001BD34"
     ]
+  },
+  {
+    "id": "byte-addressed-float-stride-struct",
+    "description": "When indexing a f32 array that aliases struct fields with a struct-sized stride, cast the table to u8* and add a byte offset instead of using f32 index multiplication.",
+    "trigger": "Generated assembly computes stride/index then emits an extra temp register for final array scaling (e.g. sll t1,t0,2; addu at,at,t1) but target keeps the stride byte offset in-place (sll t0,t0,2; addu at,at,t0).",
+    "solution": "Use `*(f32 *)((u8 *)TABLE + (index * STRUCT_SIZE))` so IDO treats the offset as bytes and reuses the same integer temp register.",
+    "example_functions": [
+      "func_15079570"
+    ]
   }
 ]
