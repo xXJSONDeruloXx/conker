@@ -25873,7 +25873,7 @@
     ],
     "attempts": 3,
     "lastScore": 0.2982,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "void func_1500727C(void) {\n    u8 *ptr;\n    s32 sum;\n    s32 i;\n\n    func_151DD3A0(&D_800BE900, 0x44, &D_800BE2F0, 0x70);\n    sum = ((D_800BE2F2 << 2) + 0xCC + (D_800BE2F3 << 3)) & 0xFFFF;\n    ptr = D_800BE2F4;\n    i = 4;\n    do {\n        sum = (sum + (*ptr << (i & 3))) & 0xFFFF;\n        i++;\n        ptr++;\n    } while (i != 0x68);\n    if (sum != D_800BE2F0) {\n        func_15007168();\n    }\n}",
@@ -25984,9 +25984,32 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.49122807017543857,
+    "status": "pending",
+    "history": [
+      {
+        "code": "s32 func_151D9450(void *arg0, void *arg1) {\n    u8 *temp_v1;\n    s32 temp_a0;\n    f32 temp_f0;\n\n    arg1 = arg0;\n    if (((u8 *)arg1)[0xC1] & 1) {\n        return 1;\n    }\n    temp_v1 = (u8 *)arg1 + 0xA8;\n    temp_a0 = temp_v1[4] + (*(s8 *)(temp_v1 + 6) * D_800BE9E4);\n    temp_v1[4] = temp_a0;\n    temp_v1[5] = temp_v1[5] + (*(s8 *)(temp_v1 + 7) * D_800BE9E4);\n    temp_f0 = func_151423D8((temp_a0 - 0x40) & 0xFF);\n    *(f32 *)((u8 *)arg1 + 0x38) = (temp_f0 * *(f32 *)(temp_v1 + 8)) + *(f32 *)temp_v1;\n    temp_f0 = func_151423D8((temp_v1[5] - 0x40) & 0xFF);\n    *(f32 *)((u8 *)arg1 + 0x3C) = (temp_f0 * *(f32 *)(temp_v1 + 0xC)) + *(f32 *)temp_v1;\n    return 1;\n}",
+        "score": 0.4824561403508772,
+        "reason": "length_mismatch (target=57, generated=55)",
+        "diffs": [],
+        "timestamp": "2026-06-04T07:14:46.489Z"
+      },
+      {
+        "code": "s32 func_151D9450(void *arg0, void *arg1) {\n    u8 *temp_v1;\n    s32 temp_a0;\n\n    arg1 = arg0;\n    temp_v1 = (u8 *)arg1 + 0xA8;\n    if (((u8 *)arg1)[0xC1] & 1) {\n        return 1;\n    }\n    temp_a0 = temp_v1[4] + (*(s8 *)(temp_v1 + 6) * D_800BE9E4);\n    temp_v1[4] = temp_a0;\n    temp_a0 = (temp_a0 - 0x40) & 0xFF;\n    temp_v1[5] = temp_v1[5] + (*(s8 *)(temp_v1 + 7) * D_800BE9E4);\n    arg1 = arg0;\n    *(f32 *)((u8 *)arg1 + 0x38) = (func_151423D8(temp_a0) * *(f32 *)(temp_v1 + 8)) + *(f32 *)temp_v1;\n    temp_a0 = (temp_v1[5] - 0x40) & 0xFF;\n    *(f32 *)((u8 *)arg1 + 0x3C) = (func_151423D8(temp_a0) * *(f32 *)(temp_v1 + 0xC)) + *(f32 *)temp_v1;\n    return 1;\n}",
+        "score": 0.4736842105263158,
+        "reason": "length_mismatch (target=57, generated=54)",
+        "diffs": [],
+        "timestamp": "2026-06-04T07:15:26.032Z"
+      },
+      {
+        "code": "s32 func_151D9450(void *arg0, void *arg1) {\n    void *temp_a1;\n    s32 *temp_v0;\n    u8 *temp_v1;\n    s32 temp_a0;\n\n    temp_a1 = arg0;\n    temp_v0 = &D_800BE9E4;\n    temp_v1 = (u8 *)temp_a1 + 0xA8;\n    if (((u8 *)temp_a1)[0xC1] & 1) {\n        return 1;\n    }\n    temp_a0 = temp_v1[4] + (*(s8 *)(temp_v1 + 6) * *temp_v0);\n    temp_v1[4] = temp_a0;\n    temp_a0 = (temp_a0 - 0x40) & 0xFF;\n    temp_v1[5] = temp_v1[5] + (*(s8 *)(temp_v1 + 7) * *temp_v0);\n    *(f32 *)((u8 *)temp_a1 + 0x38) = (func_151423D8(temp_a0) * *(f32 *)(temp_v1 + 8)) + *(f32 *)temp_v1;\n    temp_a0 = (temp_v1[5] - 0x40) & 0xFF;\n    *(f32 *)((u8 *)temp_a1 + 0x3C) = (func_151423D8(temp_a0) * *(f32 *)(temp_v1 + 0xC)) + *(f32 *)temp_v1;\n    return 1;\n}",
+        "score": 0.49122807017543857,
+        "reason": "length_mismatch (target=57, generated=56)",
+        "diffs": [],
+        "timestamp": "2026-06-04T07:15:56.666Z"
+      }
+    ]
   },
   {
     "function": "func_15007558",
