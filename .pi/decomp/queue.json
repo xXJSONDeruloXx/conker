@@ -24024,8 +24024,8 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
-    "lastScore": 0.21705426356589147,
+    "attempts": 6,
+    "lastScore": 0.49107142857142855,
     "status": "pending",
     "history": [
       {
@@ -24048,6 +24048,48 @@
         "reason": "length_mismatch (target=56, generated=129)",
         "diffs": [],
         "timestamp": "2026-06-04T06:49:58.250Z"
+      },
+      {
+        "code": "void func_15007360(void) {\n    u8 *ptr;\n    s32 sum;\n    s32 i;\n    s32 ret;\n\n    sum = ((D_800BE2F2 << 2) + 0xCC + (D_800BE2F3 << 3)) & 0xFFFF;\n    ptr = D_800BE2F4;\n    i = 4;\n    do {\n        sum = (sum + (*ptr << (i & 3))) & 0xFFFF;\n        i++;\n        ptr++;\n    } while (i != 0x68);\n    D_800BE2F0 = sum;\n    if (D_8002AC5C == 0) {\n        ret = func_151DCEF0(&D_800BE900, 0x44, &D_800BE2F0, 0x70);\n    }\n}",
+        "score": 0.49107142857142855,
+        "reason": "length_mismatch (target=56, generated=55)",
+        "diffs": [],
+        "timestamp": "2026-06-04T06:50:31.293Z"
+      },
+      {
+        "code": "void func_15007360(void) {\n    s32 sum;\n    s32 i;\n    u8 *ptr;\n    volatile s32 ret;\n\n    sum = ((D_800BE2F2 << 2) + 0xCC + (D_800BE2F3 << 3)) & 0xFFFF;\n    ptr = D_800BE2F4;\n    i = 4;\n    do {\n        sum = (sum + (*ptr << (i & 3))) & 0xFFFF;\n        i++;\n        ptr++;\n    } while (i != 0x68);\n    D_800BE2F0 = sum;\n    if (D_8002AC5C == 0) {\n        ret = func_151DCEF0(&D_800BE900, 0x44, &D_800BE2F0, 0x70);\n    }\n}",
+        "score": 0.3571,
+        "reason": "structural_diffs=36",
+        "diffs": [
+          "structural: target=addiu sp, sp, -32 got=addiu sp, sp, -40",
+          "structural: target=lui v0, HI(D_800BE2F2) got=lui t6, HI(D_800BE2F2)",
+          "structural: target=lbu v0, LO(D_800BE2F2)(v0) got=lui t8, HI(D_800BE2F3)",
+          "structural: target=lui t8, HI(D_800BE2F3) got=lbu t8, LO(D_800BE2F3)(t8)",
+          "structural: target=lbu t8, LO(D_800BE2F3)(t8) got=lbu t6, LO(D_800BE2F2)(t6)",
+          "structural: target=sll t6, v0, 2 got=lui v0, HI(D_800BE2F4)",
+          "structural: target=addiu t7, t6, 204 got=sll t9, t8, 3",
+          "structural: target=sll t9, t8, 3 got=sll t7, t6, 2",
+          "structural: target=addu v0, t7, t9 got=addu v1, t7, t9",
+          "structural: target=andi t0, v0, 65535 got=addiu v1, v1, 204",
+          "structural: target=lui a0, HI(D_800BE2F4) got=andi t0, v1, 65535",
+          "structural: target=addiu a0, a0, LO(D_800BE2F4) got=move v1, t0",
+          "structural: target=move v0, t0 got=addiu v0, v0, LO(D_800BE2F4)",
+          "structural: target=li v1, 4 got=li a0, 4",
+          "structural: target=lbu t1, 0(a0) got=lbu t1, 0(v0)",
+          "structural: target=lbu t5, 1(a0) got=lbu t5, 1(v0)",
+          "structural: target=andi t2, v1, 3 got=andi t2, a0, 3",
+          "structural: target=addiu t6, v1, 1 got=addiu t6, a0, 1",
+          "structural: target=andi t7, t6, 3 got=andi t8, t6, 3",
+          "structural: target=lbu t0, 2(a0) got=lbu t0, 2(v0)"
+        ],
+        "timestamp": "2026-06-04T06:51:03.144Z"
+      },
+      {
+        "code": "void func_15007360(void) {\n    s32 sum;\n    s32 i;\n    u8 *ptr;\n    s32 ret;\n\n    sum = D_800BE2F2;\n    sum = sum << 2;\n    sum += 0xCC;\n    sum += D_800BE2F3 << 3;\n    sum &= 0xFFFF;\n    ptr = D_800BE2F4;\n    i = 4;\n    do {\n        sum = (sum + (*ptr << (i & 3))) & 0xFFFF;\n        i++;\n        ptr++;\n    } while (i != 0x68);\n    D_800BE2F0 = sum;\n    if (D_8002AC5C == 0) {\n        ret = func_151DCEF0(&D_800BE900, 0x44, &D_800BE2F0, 0x70);\n    }\n}",
+        "score": 0.49107142857142855,
+        "reason": "length_mismatch (target=56, generated=55)",
+        "diffs": [],
+        "timestamp": "2026-06-04T06:51:34.227Z"
       }
     ]
   },
