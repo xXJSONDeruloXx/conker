@@ -20343,8 +20343,8 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 3,
-    "lastScore": 0.6923,
+    "attempts": 6,
+    "lastScore": 0.9615,
     "status": "pending",
     "history": [
       {
@@ -20392,6 +20392,37 @@
           "structural: target=addiu sp, sp, 72 got=addiu sp, sp, 80"
         ],
         "timestamp": "2026-06-04T04:04:05.290Z"
+      },
+      {
+        "code": "s32 func_151DAA88(void *arg0, s32 arg1, s32 arg2, s32 arg3, f32 arg4, s32 arg5) {\n    void *temp_v1;\n    s32 temp_t0;\n    f32 sp34[3];\n    f32 *temp_v0;\n\n    temp_t0 = 0x14;\n    temp_v0 = *(f32 **)((s32)arg0 + 0x94);\n    temp_v1 = *(void **)((s32)arg0 + 0x98);\n    sp34[0] = *(f32 *)((s32)temp_v0 + (*(s8 *)((s32)arg0 + 0x2D) * temp_t0));\n    sp34[1] = arg4;\n    sp34[2] = *(f32 *)((s32)temp_v0 + (*(s8 *)((s32)arg0 + 0x2D) * temp_t0) + 8);\n    func_151D9FC0(*(u8 *)((s32)temp_v1 + 0x50), (*(f32 *)temp_v1 * 11.0f) * *(f32 *)((s32)temp_v1 + 0x4C), *(u8 *)((s32)temp_v1 + 0x1B), arg5, (s32)sp34, *(u8 *)((s32)arg0 + 0xC), *(u8 *)((s32)arg0 + 1));\n    *(u8 *)((s32)temp_v1 + 0x20) = 4;\n    return 1;\n}",
+        "score": 0.9423,
+        "reason": "structural_diffs=3",
+        "diffs": [
+          "structural: target=addu t8, v0, t7 got=addu t8, t7, v0",
+          "structural: target=addu t2, v0, t1 got=addu t2, t1, v0",
+          "structural: target=mul.s f6, f18, f4 got=mul.s f6, f4, f18"
+        ],
+        "timestamp": "2026-06-04T04:04:27.893Z"
+      },
+      {
+        "code": "s32 func_151DAA88(void *arg0, s32 arg1, s32 arg2, s32 arg3, f32 arg4, s32 arg5) {\n    void *temp_v1;\n    s32 temp_t0;\n    f32 sp34[3];\n    f32 *temp_v0;\n\n    temp_t0 = 0x14;\n    temp_v0 = *(f32 **)((s32)arg0 + 0x94);\n    temp_v1 = *(void **)((s32)arg0 + 0x98);\n    sp34[0] = *(f32 *)&((u8 *)temp_v0)[*(s8 *)((s32)arg0 + 0x2D) * temp_t0];\n    sp34[1] = arg4;\n    sp34[2] = *(f32 *)&((u8 *)temp_v0)[(*(s8 *)((s32)arg0 + 0x2D) * temp_t0) + 8];\n    func_151D9FC0(*(u8 *)((s32)temp_v1 + 0x50), *(f32 *)((s32)temp_v1 + 0x4C) * (*(f32 *)temp_v1 * 11.0f), *(u8 *)((s32)temp_v1 + 0x1B), arg5, (s32)sp34, *(u8 *)((s32)arg0 + 0xC), *(u8 *)((s32)arg0 + 1));\n    *(u8 *)((s32)temp_v1 + 0x20) = 4;\n    return 1;\n}",
+        "score": 0.9615,
+        "reason": "structural_diffs=2",
+        "diffs": [
+          "structural: target=addu t8, v0, t7 got=addu t8, t7, v0",
+          "structural: target=addu t2, v0, t1 got=addu t2, t1, v0"
+        ],
+        "timestamp": "2026-06-04T04:04:53.767Z"
+      },
+      {
+        "code": "s32 func_151DAA88(void *arg0, s32 arg1, s32 arg2, s32 arg3, f32 arg4, s32 arg5) {\n    void *temp_v1;\n    s32 temp_t0;\n    f32 sp34[3];\n    u8 *temp_v0;\n\n    temp_t0 = 0x14;\n    temp_v0 = *(u8 **)((s32)arg0 + 0x94);\n    temp_v1 = *(void **)((s32)arg0 + 0x98);\n    sp34[0] = *(f32 *)(temp_v0 + (*(s8 *)((s32)arg0 + 0x2D) * temp_t0));\n    sp34[1] = arg4;\n    sp34[2] = *(f32 *)(temp_v0 + ((*(s8 *)((s32)arg0 + 0x2D) * temp_t0) + 8));\n    func_151D9FC0(*(u8 *)((s32)temp_v1 + 0x50), *(f32 *)((s32)temp_v1 + 0x4C) * (*(f32 *)temp_v1 * 11.0f), *(u8 *)((s32)temp_v1 + 0x1B), arg5, (s32)sp34, *(u8 *)((s32)arg0 + 0xC), *(u8 *)((s32)arg0 + 1));\n    *(u8 *)((s32)temp_v1 + 0x20) = 4;\n    return 1;\n}",
+        "score": 0.9615,
+        "reason": "structural_diffs=2",
+        "diffs": [
+          "structural: target=addu t8, v0, t7 got=addu t8, t7, v0",
+          "structural: target=addu t2, v0, t1 got=addu t2, t1, v0"
+        ],
+        "timestamp": "2026-06-04T04:05:13.145Z"
       }
     ]
   },
