@@ -34725,8 +34725,8 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
-    "lastScore": 0.4478,
+    "attempts": 6,
+    "lastScore": 0.4855072463768116,
     "status": "pending",
     "history": [
       {
@@ -34791,6 +34791,48 @@
           "structural: target=b L4 got=sh t1, 14(a1)"
         ],
         "timestamp": "2026-06-04T12:03:21.704Z"
+      },
+      {
+        "code": "void func_1506B634(u8 arg0) {\n    u32 temp_hi;\n    struct126 *temp_a1;\n\n    temp_hi = (u32)func_150ADA20() % (u32)arg0;\n    arg0 = temp_hi & 0xFF;\n    temp_a1 = D_800D154C->unk31C;\n    if (((u8 *)temp_a1)[0x16] != 0) {\n        if (D_800BE9F0 == 0x29) {\n            if ((temp_hi & 0xFF) == 7) {\n                arg0 = 0;\n            }\n        }\n        *(s16 *)((s32)temp_a1 + 0xE) = ((u8 *)D_80099ABC)[arg0];\n    } else {\n        *(s16 *)((s32)temp_a1 + 0xE) = ((u8 *)D_80099AB4)[temp_hi & 0xFF];\n    }\n    if (*(u16 *)((s32)D_800D154C->unk31C + 0xE) == 0xA7) {\n        D_800D1580 = 0xFF020144;\n        ((u8 *)D_800D154C->unk31C)[0xC] = ((u32)func_150ADA20() % 3U) + 2;\n        func_1506E8D8();\n        D_800D154C->xz_velocity *= D_80099C38;\n    }\n}",
+        "score": 0.47183098591549294,
+        "reason": "length_mismatch (target=67, generated=71)",
+        "diffs": [],
+        "timestamp": "2026-06-04T12:03:45.171Z"
+      },
+      {
+        "code": "void func_1506B634(u8 arg0) {\n    u32 temp_hi;\n    struct126 *temp_a1;\n    u8 temp_a0;\n\n    temp_hi = (u32)func_150ADA20() % (u32)arg0;\n    temp_a0 = temp_hi & 0xFF;\n    temp_a1 = D_800D154C->unk31C;\n    if (temp_a1->unk16 != 0) {\n        if (D_800BE9F0 == 0x29) {\n            if ((temp_hi & 0xFF) == 7) {\n                temp_a0 = 0;\n            }\n        }\n        temp_a1->unkE = ((u8 *)D_80099ABC)[temp_a0];\n    } else {\n        temp_a1->unkE = ((u8 *)D_80099AB4)[temp_hi & 0xFF];\n    }\n    if (D_800D154C->unk31C->unkE == 0xA7) {\n        D_800D1580 = 0xFF020144;\n        D_800D154C->unk31C->unkC = ((u32)func_150ADA20() % 3U) + 2;\n        func_1506E8D8();\n        D_800D154C->xz_velocity *= D_80099C38;\n    }\n}",
+        "score": 0.5373,
+        "reason": "structural_diffs=31",
+        "diffs": [
+          "structural: target=lw t7, 0(a2) got=lw t8, 0(a2)",
+          "structural: target=andi a0, v1, 255 got=andi t7, v1, 255",
+          "structural: target=lw a1, 796(t7) got=lw a1, 796(t8)",
+          "structural: target=break 7 got=break 0x7",
+          "structural: target=lbu t8, 22(a1) got=lbu t9, 22(a1)",
+          "structural: target=lui t9, HI(D_800BE9F0) got=move v1, t7",
+          "structural: target=andi t2, v1, 255 got=andi a0, t7, 255",
+          "structural: target=beqz t8, L1 got=beqz t9, L1",
+          "structural: target=lui t3, HI(D_80099AB4) got=lui t2, HI(D_80099AB4)",
+          "structural: target=lw t9, LO(D_800BE9F0)(t9) got=lui t0, HI(D_800BE9F0)",
+          "structural: target=li at, 41 got=lw t0, LO(D_800BE9F0)(t0)",
+          "structural: target=andi t0, v1, 255 got=li at, 41",
+          "structural: target=bne t9, at, L2 got=lui t1, HI(D_80099ABC)",
+          "structural: target=lui t1, HI(D_80099ABC) got=bne t0, at, L2",
+          "structural: target=bnel t0, at, L3 got=bnel t7, at, L3",
+          "structural: target=addu t3, t3, t2 got=addu t2, t2, v1",
+          "structural: target=lbu t3, LO(D_80099AB4)(t3) got=lbu t2, LO(D_80099AB4)(t2)",
+          "structural: target=sh t3, 14(a1) got=sh t2, 14(a1)",
+          "structural: target=lw t4, 0(a2) got=lw t3, 0(a2)",
+          "structural: target=lui t7, 65282 got=lui t6, 65282"
+        ],
+        "timestamp": "2026-06-04T12:04:32.883Z"
+      },
+      {
+        "code": "void func_1506B634(s32 arg0) {\n    u32 temp_hi;\n    struct126 *temp_a1;\n\n    temp_hi = (u32)func_150ADA20() % (u32)(u8)arg0;\n    arg0 = temp_hi & 0xFF;\n    temp_a1 = D_800D154C->unk31C;\n    if (temp_a1->unk16 != 0) {\n        if (D_800BE9F0 == 0x29) {\n            if ((temp_hi & 0xFF) == 7) {\n                arg0 = 0;\n            }\n        }\n        temp_a1->unkE = ((u8 *)D_80099ABC)[arg0];\n    } else {\n        temp_a1->unkE = ((u8 *)D_80099AB4)[temp_hi & 0xFF];\n    }\n    if (D_800D154C->unk31C->unkE == 0xA7) {\n        D_800D1580 = 0xFF020144;\n        D_800D154C->unk31C->unkC = ((u32)func_150ADA20() % 3U) + 2;\n        func_1506E8D8();\n        D_800D154C->xz_velocity *= D_80099C38;\n    }\n}",
+        "score": 0.4855072463768116,
+        "reason": "length_mismatch (target=67, generated=69)",
+        "diffs": [],
+        "timestamp": "2026-06-04T12:04:55.066Z"
       }
     ]
   },
