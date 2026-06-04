@@ -1126,5 +1126,14 @@
     "example_functions": [
       "func_1000FDF4"
     ]
+  },
+  {
+    "id": "gbi-postincrement-display-list-macro",
+    "description": "Using the appropriate GBI display-list macro with a postincremented Gfx pointer can force IDO to emit the pointer increment between the two command-word stores and return the updated pointer.",
+    "trigger": "Near-match display-list builder manually writes Gfx words but generated C precomputes the return pointer (`addiu v0, ptr, 8`) instead of target `sw w0; addiu ptr, ptr, 8; sw w1; move v0, ptr`.",
+    "solution": "Replace manual `words.w0/w1` stores with the matching GBI macro using `arg0++`, e.g. `gDPSetTileSize(arg0++, tile, uls, ult, lrs, lrt); return arg0;`.",
+    "example_functions": [
+      "func_150C3160"
+    ]
   }
 ]

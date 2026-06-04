@@ -335,7 +335,7 @@ segments:
       - [0x3fc60, asm]
       - [0x40490, c, game_40490]
       - [0x42dc0, asm]
-      - [0x43330, asm]
+      - [0x43330, c, game_43330]
       - [0x433F0, c, game_433F0]
       - [0x43620, c, game_43620]
       - [0x43760, c, game/done/game_43760]

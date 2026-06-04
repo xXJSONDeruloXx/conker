@@ -1,8 +1,8 @@
 {
-  "enabled": false,
-  "chunk": 310,
-  "status": "stopped",
-  "lastChunkSummary": "Matched and accepted func_15125628 as an unrolled four-byte countdown using an explicit shared load temp plus distinct decrement temps to force the branch-delay `addiu`/conditional `sb` shape. Also had to repair the broken baseline first by removing a stray committed `# test` directive; the accepted commit adds the missing D_800DBFF7 symbol and decompiles the function.",
+  "enabled": true,
+  "chunk": 373,
+  "status": "running",
+  "lastChunkSummary": "Matched and accepted game-region func_150C3160 after skipping two plateaued candidates. The key was recognizing the manual Gfx word stores as `gDPSetTileSize(arg0++, 4, temp_v1, temp_a0, 0x1FE, 0x03E)`, which preserves the target postincrement scheduling and return pointer update.",
   "consecutiveNoProgress": 0,
-  "updatedAt": "2026-06-03T20:01:37.350Z"
+  "updatedAt": "2026-06-04T14:02:50.786Z"
 }
