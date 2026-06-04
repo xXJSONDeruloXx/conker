@@ -21297,8 +21297,8 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 6,
-    "lastScore": 0.9767,
+    "attempts": 9,
+    "lastScore": 0.9302,
     "status": "pending",
     "history": [
       {
@@ -21346,6 +21346,34 @@
           "structural: target=bnel t2, a0, L2 got=bnel a0, t2, L2"
         ],
         "timestamp": "2026-06-04T00:15:22.973Z"
+      },
+      {
+        "code": "void func_151419D0(struct102 *arg0, u8 *arg1, u8 arg2) {\n    struct102 *temp_a3;\n    u8 *temp_v0;\n    s32 temp_v1;\n    s32 temp_a0;\n    s32 temp_t2;\n\n    temp_a3 = arg0;\n    temp_v0 = (u8 *)arg0 + 0x28;\n    if (arg2 == 0) {\n        temp_v1 = *(s32 *)arg1;\n        if ((temp_v1 == *(s32 *)(temp_v0 + 4)) || (temp_v0[8] == arg1[4])) {\n            func_1516972C(temp_a3);\n        }\n    } else if (arg2 == 0x2D) {\n        temp_a0 = *(s32 *)(temp_v0 + 4);\n        temp_v1 = *(s32 *)arg1;\n        if (temp_v1 == temp_a0) {\n            *(s32 *)(temp_v0 + 4) = *(s32 *)(arg1 + 4);\n            temp_v0[8] = arg1[9];\n        } else {\n            temp_t2 = *(s32 *)(arg1 + 4);\n            if (temp_t2 == temp_a0) {\n                *(s32 *)(temp_v0 + 4) = temp_v1;\n                temp_v0[8] = arg1[8];\n            }\n        }\n    }\n}",
+        "score": 0.4883720930232558,
+        "reason": "length_mismatch (target=43, generated=42)",
+        "diffs": [],
+        "timestamp": "2026-06-04T00:15:43.972Z"
+      },
+      {
+        "code": "void func_151419D0(struct102 *arg0, u8 *arg1, u8 arg2) {\n    struct102 *temp_a3;\n    u8 *temp_v0;\n    s32 temp_v1;\n\n    temp_a3 = arg0;\n    temp_v0 = (u8 *)arg0 + 0x28;\n    if (arg2 == 0) {\n        temp_v1 = *(s32 *)arg1;\n        if ((temp_v1 == *(s32 *)(temp_v0 + 4)) || (temp_v0[8] == arg1[4])) {\n            func_1516972C(temp_a3);\n        }\n    } else if (arg2 == 0x2D) {\n        temp_v1 = *(s32 *)arg1;\n        if (temp_v1 == *(s32 *)(temp_v0 + 4)) {\n            *(s32 *)(temp_v0 + 4) = *(s32 *)(arg1 + 4);\n            temp_v0[8] = arg1[9];\n        } else if (*(s32 *)(arg1 + 4) == *(s32 *)(temp_v0 + 4)) {\n            *(s32 *)(temp_v0 + 4) = temp_v1;\n            temp_v0[8] = arg1[8];\n        }\n    }\n}",
+        "score": 0.9535,
+        "reason": "structural_diffs=2",
+        "diffs": [
+          "structural: target=lw a0, 4(v0) got=lw v1, 0(a1)",
+          "structural: target=lw v1, 0(a1) got=lw a0, 4(v0)"
+        ],
+        "timestamp": "2026-06-04T00:16:14.109Z"
+      },
+      {
+        "code": "void func_151419D0(struct102 *arg0, u8 *arg1, u8 arg2) {\n    struct102 *temp_a3;\n    u8 *temp_v0;\n    s32 temp_v1;\n    s32 temp_a0;\n\n    temp_a3 = arg0;\n    temp_v0 = (u8 *)arg0 + 0x28;\n    if (arg2 == 0) {\n        temp_v1 = *(s32 *)arg1;\n        if ((temp_v1 == *(s32 *)(temp_v0 + 4)) || (temp_v0[8] == arg1[4])) {\n            func_1516972C(temp_a3);\n        }\n    } else if (arg2 == 0x2D) {\n        temp_a0 = *(s32 *)(temp_v0 + 4);\n        temp_v1 = *(s32 *)arg1;\n        if (temp_v1 == temp_a0) {\n            *(s32 *)(temp_v0 + 4) = *(s32 *)(arg1 + 4);\n            temp_v0[8] = arg1[9];\n        } else if (*(s32 *)(arg1 + 4) == *(s32 *)(temp_v0 + 4)) {\n            *(s32 *)(temp_v0 + 4) = temp_v1;\n            temp_v0[8] = arg1[8];\n        }\n    }\n}",
+        "score": 0.9302,
+        "reason": "structural_diffs=3",
+        "diffs": [
+          "structural: target=lw a0, 4(v0) got=lw a2, 4(v0)",
+          "structural: target=bnel v1, a0, L4 got=bnel v1, a2, L4",
+          "structural: target=bnel t2, a0, L2 got=bnel t2, a2, L2"
+        ],
+        "timestamp": "2026-06-04T00:16:33.477Z"
       }
     ]
   },
