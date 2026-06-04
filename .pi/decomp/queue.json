@@ -27133,8 +27133,8 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 6,
-    "lastScore": 0.746,
+    "attempts": 9,
+    "lastScore": 0.9524,
     "status": "pending",
     "history": [
       {
@@ -27296,6 +27296,40 @@
           "structural: target=addiu sp, sp, 128 got=addiu sp, sp, 152"
         ],
         "timestamp": "2026-06-04T10:38:48.969Z"
+      },
+      {
+        "code": "void func_1514182C(void *arg0, struct17 *arg1, s32 arg2, f32 arg3, f32 arg4, f32 arg5) {\n    f32 mtx[14];\n    f32 temp_f0;\n    f32 temp_f2;\n    f32 temp_f12;\n    f32 temp_f14;\n    f32 temp_f16;\n    f32 temp_f18;\n\n    func_150A8050((f32 (*)[4])mtx, arg4, 0, arg5);\n    mtx[12] = arg1->unk0;\n    mtx[13] = arg1->unk4;\n    mtx[14] = arg1->unk8;\n    func_150A7960((f32 (*)[4])mtx, 0, arg2, 0, (f32 *)((s32)arg0 + 0x34), (f32 *)((s32)arg0 + 0x38), (f32 *)((s32)arg0 + 0x3C));\n    temp_f0 = *(f32 *)((s32)arg0 + 0x34);\n    temp_f2 = *(f32 *)((s32)arg0 + 0x38);\n    temp_f12 = *(f32 *)((s32)arg0 + 0x3C);\n    temp_f14 = (temp_f0 - arg1->unk0) * arg3;\n    temp_f16 = (temp_f2 - arg1->unk4) * arg3;\n    temp_f18 = (temp_f12 - arg1->unk8) * arg3;\n    *(f32 *)((s32)arg0 + 0x40) = temp_f0 + (temp_f14 * 500.0f);\n    *(f32 *)((s32)arg0 + 0x44) = temp_f2 + (temp_f16 * 500.0f);\n    *(f32 *)((s32)arg0 + 0x48) = temp_f12 + (temp_f18 * 500.0f);\n}",
+        "score": 0.873,
+        "reason": "structural_diffs=8",
+        "diffs": [
+          "structural: target=addiu a0, sp, 52 got=addiu a0, sp, 72",
+          "structural: target=swc1 f4, 100(sp) got=swc1 f4, 120(sp)",
+          "structural: target=swc1 f6, 104(sp) got=swc1 f6, 124(sp)",
+          "structural: target=addiu a0, sp, 52 got=addiu a0, sp, 72",
+          "structural: target=swc1 f8, 108(sp) got=swc1 f8, 128(sp)",
+          "structural: target=add.s f8, f0, f4 got=add.s f8, f4, f0",
+          "structural: target=add.s f4, f2, f10 got=add.s f4, f10, f2",
+          "structural: target=add.s f10, f12, f6 got=add.s f10, f6, f12"
+        ],
+        "timestamp": "2026-06-04T10:39:26.922Z"
+      },
+      {
+        "code": "void func_1514182C(void *arg0, struct17 *arg1, s32 arg2, f32 arg3, f32 arg4, f32 arg5) {\n    f32 mtx[14];\n    f32 temp_f0;\n    f32 temp_f2;\n    f32 temp_f12;\n    f32 temp_f14;\n    f32 temp_f16;\n    f32 temp_f18;\n\n    func_150A8050((f32 (*)[4])((s32)mtx - 0x14), arg4, 0, arg5);\n    mtx[7] = arg1->unk0;\n    mtx[8] = arg1->unk4;\n    mtx[9] = arg1->unk8;\n    func_150A7960((f32 (*)[4])((s32)mtx - 0x14), 0, arg2, 0, (f32 *)((s32)arg0 + 0x34), (f32 *)((s32)arg0 + 0x38), (f32 *)((s32)arg0 + 0x3C));\n    temp_f0 = *(f32 *)((s32)arg0 + 0x34);\n    temp_f2 = *(f32 *)((s32)arg0 + 0x38);\n    temp_f12 = *(f32 *)((s32)arg0 + 0x3C);\n    temp_f14 = (temp_f0 - arg1->unk0) * arg3;\n    temp_f16 = (temp_f2 - arg1->unk4) * arg3;\n    temp_f18 = (temp_f12 - arg1->unk8) * arg3;\n    *(f32 *)((s32)arg0 + 0x40) = (temp_f14 * 500.0f) + temp_f0;\n    *(f32 *)((s32)arg0 + 0x44) = (temp_f16 * 500.0f) + temp_f2;\n    *(f32 *)((s32)arg0 + 0x48) = (temp_f18 * 500.0f) + temp_f12;\n}",
+        "score": 0.4846153846153846,
+        "reason": "length_mismatch (target=63, generated=65)",
+        "diffs": [],
+        "timestamp": "2026-06-04T10:39:59.969Z"
+      },
+      {
+        "code": "void func_1514182C(void *arg0, struct17 *arg1, s32 arg2, f32 arg3, f32 arg4, f32 arg5) {\n    f32 mtx[14];\n    f32 temp_f0;\n    f32 temp_f2;\n    f32 temp_f12;\n    f32 temp_f14;\n    f32 temp_f16;\n    f32 temp_f18;\n\n    func_150A8050((f32 (*)[4])&mtx[-5], arg4, 0, arg5);\n    mtx[7] = arg1->unk0;\n    mtx[8] = arg1->unk4;\n    mtx[9] = arg1->unk8;\n    func_150A7960((f32 (*)[4])&mtx[-5], 0, arg2, 0, (f32 *)((s32)arg0 + 0x34), (f32 *)((s32)arg0 + 0x38), (f32 *)((s32)arg0 + 0x3C));\n    temp_f0 = *(f32 *)((s32)arg0 + 0x34);\n    temp_f2 = *(f32 *)((s32)arg0 + 0x38);\n    temp_f12 = *(f32 *)((s32)arg0 + 0x3C);\n    temp_f14 = (temp_f0 - arg1->unk0) * arg3;\n    temp_f16 = (temp_f2 - arg1->unk4) * arg3;\n    temp_f18 = (temp_f12 - arg1->unk8) * arg3;\n    *(f32 *)((s32)arg0 + 0x40) = (temp_f14 * 500.0f) + temp_f0;\n    *(f32 *)((s32)arg0 + 0x44) = (temp_f16 * 500.0f) + temp_f2;\n    *(f32 *)((s32)arg0 + 0x48) = (temp_f18 * 500.0f) + temp_f12;\n}",
+        "score": 0.9524,
+        "reason": "structural_diffs=3",
+        "diffs": [
+          "structural: target=add.s f8, f0, f4 got=add.s f8, f4, f0",
+          "structural: target=add.s f4, f2, f10 got=add.s f4, f10, f2",
+          "structural: target=add.s f10, f12, f6 got=add.s f10, f6, f12"
+        ],
+        "timestamp": "2026-06-04T10:40:26.913Z"
       }
     ]
   },
