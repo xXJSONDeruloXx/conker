@@ -27036,8 +27036,8 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 9,
-    "lastScore": 0.49056603773584906,
+    "attempts": 12,
+    "lastScore": 0.9434,
     "status": "pending",
     "history": [
       {
@@ -27102,6 +27102,54 @@
         "reason": "length_mismatch (target=53, generated=52)",
         "diffs": [],
         "timestamp": "2026-06-04T05:33:41.801Z"
+      },
+      {
+        "code": "s32 func_1502B8E0(s32 arg0, s32 arg1, s32 arg2, ...) {\n    va_list args;\n    s32 sp34;\n    s32 offset;\n    s32 more;\n    s32 temp_a1;\n\n    offset = (s32)D_AB1950;\n    more = 1;\n    va_start(args, arg2);\n    if (arg2 != 0) {\n        do {\n            temp_a1 = va_arg(args, s32);\n            if (more != 0) {\n                offset += func_1502AC88(offset, temp_a1, &sp34);\n            }\n            arg2--;\n            more = sp34 & 0x0FFFFFFF;\n        } while (arg2 != 0);\n    }\n    if (more != 0) {\n        more = func_1502B224(offset, arg0, sp34, arg1);\n    }\n    return more;\n}",
+        "score": 0.9057,
+        "reason": "structural_diffs=5",
+        "diffs": [
+          "structural: target=li v1, 1 got=addiu s0, s0, LO(D_AB1950)",
+          "structural: target=addiu s0, s0, LO(D_AB1950) got=li v1, 1",
+          "structural: target=addiu s3, sp, 52 got=addiu s3, sp, 64",
+          "structural: target=lw t7, 52(sp) got=lw t7, 64(sp)",
+          "structural: target=lw a2, 52(sp) got=lw a2, 64(sp)"
+        ],
+        "timestamp": "2026-06-04T05:34:38.685Z"
+      },
+      {
+        "code": "s32 func_1502B8E0(s32 arg0, s32 arg1, s32 arg2, ...) {\n    va_list args;\n    s32 sp34[4];\n    s32 offset;\n    s32 more;\n    s32 temp_a1;\n\n    more = 1;\n    offset = (s32)D_AB1950;\n    va_start(args, arg2);\n    if (arg2 != 0) {\n        do {\n            temp_a1 = va_arg(args, s32);\n            if (more != 0) {\n                offset += func_1502AC88(offset, temp_a1, sp34);\n            }\n            arg2--;\n            more = sp34[0] & 0x0FFFFFFF;\n        } while (arg2 != 0);\n    }\n    if (more != 0) {\n        more = func_1502B224(offset, arg0, sp34[0], arg1);\n    }\n    return more;\n}",
+        "score": 0.6981,
+        "reason": "structural_diffs=16",
+        "diffs": [
+          "structural: target=addiu sp, sp, -72 got=addiu sp, sp, -88",
+          "structural: target=sw a0, 72(sp) got=sw a0, 88(sp)",
+          "structural: target=sw a1, 76(sp) got=sw a1, 92(sp)",
+          "structural: target=sw a2, 80(sp) got=sw a2, 96(sp)",
+          "structural: target=sw a3, 84(sp) got=sw a3, 100(sp)",
+          "structural: target=addiu s1, sp, 84 got=addiu s1, sp, 100",
+          "structural: target=sw a2, 80(sp) got=sw a2, 96(sp)",
+          "structural: target=sw a2, 80(sp) got=sw a2, 96(sp)",
+          "structural: target=addiu s3, sp, 52 got=addiu s3, sp, 68",
+          "structural: target=lw a2, 80(sp) got=lw a2, 96(sp)",
+          "structural: target=lw t7, 52(sp) got=lw t7, 68(sp)",
+          "structural: target=sw a2, 80(sp) got=sw a2, 96(sp)",
+          "structural: target=lw a1, 72(sp) got=lw a1, 88(sp)",
+          "structural: target=lw a2, 52(sp) got=lw a2, 68(sp)",
+          "structural: target=lw a3, 76(sp) got=lw a3, 92(sp)",
+          "structural: target=addiu sp, sp, 72 got=addiu sp, sp, 88"
+        ],
+        "timestamp": "2026-06-04T05:35:08.394Z"
+      },
+      {
+        "code": "s32 func_1502B8E0(s32 arg0, s32 arg1, s32 arg2, ...) {\n    va_list args;\n    s32 temp_a1;\n    s32 sp34;\n    s32 offset;\n    s32 more;\n\n    more = 1;\n    offset = (s32)D_AB1950;\n    va_start(args, arg2);\n    if (arg2 != 0) {\n        do {\n            temp_a1 = va_arg(args, s32);\n            if (more != 0) {\n                offset += func_1502AC88(offset, temp_a1, &sp34);\n            }\n            arg2--;\n            more = sp34 & 0x0FFFFFFF;\n        } while (arg2 != 0);\n    }\n    if (more != 0) {\n        more = func_1502B224(offset, arg0, sp34, arg1);\n    }\n    return more;\n}",
+        "score": 0.9434,
+        "reason": "structural_diffs=3",
+        "diffs": [
+          "structural: target=addiu s3, sp, 52 got=addiu s3, sp, 60",
+          "structural: target=lw t7, 52(sp) got=lw t7, 60(sp)",
+          "structural: target=lw a2, 52(sp) got=lw a2, 60(sp)"
+        ],
+        "timestamp": "2026-06-04T05:35:26.254Z"
       }
     ]
   },
