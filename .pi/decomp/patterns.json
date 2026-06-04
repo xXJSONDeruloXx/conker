@@ -972,5 +972,14 @@
     "example_functions": [
       "func_151618BC"
     ]
+  },
+  {
+    "id": "goto-success-return-branch-chain",
+    "description": "Use a goto label for the successful return path to preserve IDO's extra branch-to-branch return sequence instead of optimizing directly to the epilogue.",
+    "trigger": "Target has an apparently redundant branch to a label that immediately branches to the epilogue with the real return-value load in the delay slot, while natural `return value;` emits only one branch.",
+    "solution": "Replace the direct successful `return value;` with `goto return_value;` and put `return_value: return value;` after the other return path(s).",
+    "example_functions": [
+      "func_1001BD34"
+    ]
   }
 ]

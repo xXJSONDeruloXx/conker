@@ -1235,7 +1235,15 @@ void func_15079390(void) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_A28B0/func_150793D8.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_A28B0/func_15079570.s")
+void func_15079570(void) {
+    f32 temp_f2;
+
+    temp_f2 = func_1505A6F8(D_800D154C, &D_800CC2D0[D_800D154C->unk222]);
+    D_800D154C->unk44 = D_800D154C->xz_velocity;
+    temp_f2 = 2.0f * (temp_f2 / D_800D154C->unk44);
+    D_800D154C->y_velocity = D_800D154C->gravity * temp_f2 * 0.5f;
+    D_800D154C->y_velocity += ((*(f32 *)((u8 *)D_800CC2E8 + (D_800D154C->unk222 * 0x32C)) - D_800D154C->y_position) / temp_f2) * 2.0f;
+}
 // NON-MATCHING: JUSTREG - t1 not t0
 // void func_15079570(void) {
 //     f32 temp_f2;
