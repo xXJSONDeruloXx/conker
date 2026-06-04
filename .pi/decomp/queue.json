@@ -20091,9 +20091,32 @@
     "instructions": 61,
     "difficulty": "medium",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.3278688524590164,
+    "status": "pending",
+    "history": [
+      {
+        "code": "Gfx *func_1501A39C(void) {\n    Gfx **src;\n    s32 *dst;\n    s32 offset;\n    Gfx *g;\n\n    src = D_800BE9C8;\n    dst = D_800BE9D8;\n    offset = 0;\n    do {\n        g = *src;\n        g->words.w0 = 0xDB060000;\n        g->words.w1 = 0;\n        g++;\n        g->words.w0 = 0xDB060000;\n        g->words.w1 = 0;\n        g++;\n        g->words.w0 = 0xDE000000;\n        g->words.w1 = (s32) D_8002C930;\n        g++;\n        g->words.w0 = 0xFE000000;\n        g->words.w1 = D_800BE9C4;\n        g++;\n        g->words.w0 = 0xDC080008;\n        g->words.w1 = D_800BE628 + offset + 0x40;\n        g++;\n        src++;\n        dst++;\n        offset += 0x10;\n        dst[-1] = (s32) g;\n    } while (dst != &D_800BE9E0);\n    return g;\n}",
+        "score": 0.3112244897959184,
+        "reason": "length_mismatch (target=61, generated=98)",
+        "diffs": [],
+        "timestamp": "2026-06-04T09:54:23.098Z"
+      },
+      {
+        "code": "Gfx *func_1501A39C(void) {\n    Gfx **src;\n    Gfx *g;\n    Gfx *tmp;\n    s32 *dst;\n    s32 *end;\n    s32 *depthPtr;\n    s32 *viewportBasePtr;\n    s32 viewportCmd;\n    s32 offset;\n    s32 cmdFE;\n    s32 cmdDE;\n    s32 cmdDB;\n\n    src = D_800BE9C8;\n    dst = D_800BE9D8;\n    end = &D_800BE9E0;\n    viewportBasePtr = &D_800BE628;\n    viewportCmd = 0xDC080008;\n    depthPtr = &D_800BE9C4;\n    offset = 0;\n    cmdFE = 0xFE000000;\n    cmdDE = 0xDE000000;\n    cmdDB = 0xDB060000;\n    do {\n        g = *src;\n        tmp = g;\n        tmp->words.w0 = cmdDB;\n        tmp->words.w1 = 0;\n        g++;\n        tmp = g;\n        tmp->words.w0 = cmdDB;\n        tmp->words.w1 = 0;\n        g++;\n        tmp = g;\n        tmp->words.w0 = cmdDE;\n        tmp->words.w1 = (s32)D_8002C930;\n        g++;\n        tmp = g;\n        tmp->words.w0 = cmdFE;\n        tmp->words.w1 = *depthPtr;\n        g++;\n        tmp = g;\n        tmp->words.w0 = viewportCmd;\n        tmp->words.w1 = *viewportBasePtr + offset + 0x40;\n        src++;\n        g++;\n        dst++;\n        offset += 0x10;\n        dst[-1] = (s32) g;\n    } while (dst != end);\n    return g;\n}",
+        "score": 0.31443298969072164,
+        "reason": "length_mismatch (target=61, generated=97)",
+        "diffs": [],
+        "timestamp": "2026-06-04T09:55:08.759Z"
+      },
+      {
+        "code": "Gfx *func_1501A39C(void) {\n    Gfx **src;\n    Gfx *g;\n    Gfx *tmp;\n    s32 *dst;\n    s32 *end;\n    s32 *depthPtr;\n    s32 *viewportBasePtr;\n    s32 viewportCmd;\n    s32 offset;\n    s32 cmdFE;\n    s32 cmdDE;\n    s32 cmdDB;\n\n    src = D_800BE9C8;\n    dst = D_800BE9D8;\n    end = &D_800BE9E0;\n    viewportBasePtr = &D_800BE628;\n    viewportCmd = 0xDC080008;\n    depthPtr = &D_800BE9C4;\n    offset = 0;\n    cmdFE = 0xFE000000;\n    cmdDE = 0xDE000000;\n    cmdDB = 0xDB060000;\n    while (1) {\n        g = *src;\n        tmp = g;\n        tmp->words.w0 = cmdDB;\n        tmp->words.w1 = 0;\n        g++;\n        tmp = g;\n        tmp->words.w0 = cmdDB;\n        tmp->words.w1 = 0;\n        g++;\n        tmp = g;\n        tmp->words.w0 = cmdDE;\n        tmp->words.w1 = (s32)D_8002C930;\n        g++;\n        tmp = g;\n        tmp->words.w0 = cmdFE;\n        tmp->words.w1 = *depthPtr;\n        g++;\n        tmp = g;\n        tmp->words.w0 = viewportCmd;\n        tmp->words.w1 = *viewportBasePtr + offset + 0x40;\n        src++;\n        g++;\n        dst++;\n        offset += 0x10;\n        dst[-1] = (s32) g;\n        if (dst == end) {\n            break;\n        }\n    }\n    return g;\n}",
+        "score": 0.3278688524590164,
+        "reason": "length_mismatch (target=61, generated=40)",
+        "diffs": [],
+        "timestamp": "2026-06-04T09:55:36.647Z"
+      }
+    ]
   },
   {
     "function": "func_151F2BE8",
@@ -31258,9 +31281,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 2,
-    "lastScore": 0.48333333333333334,
-    "status": "pending",
+    "attempts": 3,
+    "lastScore": 1,
+    "status": "matched",
     "history": [
       {
         "code": "s32 func_1502B7F0(s32 *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {\n    s32 *args;\n    s32 temp_a1;\n    s32 offset;\n    s32 sp34;\n    s32 sp38;\n\n    sp38 = 1;\n    offset = (s32) D_AB1950;\n    args = &arg2;\n    for (; arg1 != 0; arg1--) {\n        args = (s32 *)(((s32) args + 3) & -4);\n        temp_a1 = *args++;\n        if (sp38 != 0) {\n            offset += func_1502AC88(offset, temp_a1, &sp34);\n        }\n        sp38 = sp34 & 0x0FFFFFFF;\n    }\n    if (sp38 != 0) {\n        *arg0 = func_1502B350(offset, sp34, &sp38);\n    } else {\n        *arg0 = 0;\n    }\n    return sp38;\n}",
@@ -32215,7 +32238,7 @@
     ],
     "attempts": 0,
     "lastScore": 0,
-    "status": "pending"
+    "status": "skipped"
   },
   {
     "function": "func_15135480",
