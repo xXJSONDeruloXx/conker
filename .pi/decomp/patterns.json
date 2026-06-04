@@ -1044,5 +1044,14 @@
     "example_functions": [
       "func_1001B310"
     ]
+  },
+  {
+    "id": "negative-index-stack-bias-and-product-temps",
+    "description": "When IDO reserves stack slots for named float temporaries, a local matrix may sit too high on the stack even though the target passes an address lower than the array base. You can match by declaring a smaller float array and passing a negative index pointer into it, while assigning matrix translation elements at corresponding positive indices. If final FP add operands are reversed, split products into separate named temporaries so the final simple `a + product` emits the desired add operand order.",
+    "trigger": "Function with stack matrix passed to calls: named f32 temporaries are needed for FPR scheduling, but they push the matrix base above target; near-match differs by constant stack offset or only FP add operand order.",
+    "solution": "Use an undersized local array with negative indexing for the matrix pointer (e.g. `func((f32 (*)[4])&mtx[-8], ...)` and stores to `mtx[4..6]`), and introduce product temporaries (`prod = delta * constant; out = base + prod`) to shape add.s operands.",
+    "example_functions": [
+      "func_1514182C"
+    ]
   }
 ]

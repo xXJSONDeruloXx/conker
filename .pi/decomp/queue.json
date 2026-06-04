@@ -26909,8 +26909,8 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 3,
-    "lastScore": 0.47761194029850745,
+    "attempts": 4,
+    "lastScore": 0.47058823529411764,
     "status": "pending",
     "history": [
       {
@@ -26933,6 +26933,13 @@
         "reason": "length_mismatch (target=64, generated=67)",
         "diffs": [],
         "timestamp": "2026-06-04T11:04:08.995Z"
+      },
+      {
+        "code": "s32 *func_1001F978(struct55 *arg0, s32 arg1, s32 arg2, s32 *arg3) {\n    s32 *sp24;\n    s16 sp22;\n    s32 *sp1C;\n    s32 *sp18;\n\n    sp24 = arg3;\n    sp22 = arg2 >> 8;\n    sp24 += 2;\n    sp1C = sp24 - 2;\n    sp1C[0] = 0x0B000020;\n    sp1C[1] = osVirtualToPhysical((s32)arg0 + 8);\n    sp24 += 2;\n    sp18 = sp24 - 2;\n    sp18[0] = ((arg0->unk28 & 0xFF) << 0x10) | 0x0E000000 | (arg0->unk2 & 0xFFFF);\n    sp18[1] = (osVirtualToPhysical(*(s32 *)((s32)arg0 + (arg1 * 4) + 0x2C)) & 0x00FFFFFF) | ((sp22 & 0xFF) << 0x18);\n    arg0->unk28 = 0;\n    return sp24;\n}",
+        "score": 0.47058823529411764,
+        "reason": "length_mismatch (target=64, generated=68)",
+        "diffs": [],
+        "timestamp": "2026-06-04T11:04:29.169Z"
       }
     ]
   },
