@@ -25255,9 +25255,44 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.48333333333333334,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_15074A94(void) {\n    f32 phi_f2;\n    f32 temp_f0;\n\n    temp_f0 = func_1505A72C(D_800CC2D0, D_800D154C);\n\n    if (D_800D154C->unk148 < D_8009A0E8) {\n        D_800D154C->unk148 = D_800D154C->unk154;\n    }\n\n    if (temp_f0 < 200.0f) {\n        phi_f2 = D_8009A0EC;\n    } else {\n        if (D_8009A0F0 < temp_f0) {\n            phi_f2 = D_800D154C->unk148;\n        } else {\n            f32 tmp = D_8009A0F4;\n            phi_f2 = D_800D154C->unk148;\n            phi_f2 = phi_f2 - tmp;\n            phi_f2 = phi_f2 * ((temp_f0 - 200.0f) / D_8009A0F8);\n            phi_f2 = phi_f2 + tmp;\n        }\n    }\n    D_800D154C->unk158 = phi_f2;\n    D_800D154C->unk154 = D_800D154C->unk158;\n    D_800D154C->unk15C = D_8009A0FC;\n}",
+        "score": 0.8103,
+        "reason": "structural_diffs=11",
+        "diffs": [
+          "structural: target=lwc1 f18, LO(D_8009A0F4)(at) got=lwc1 f12, LO(D_8009A0F4)(at)",
+          "structural: target=sub.s f4, f0, f16 got=sub.s f18, f0, f16",
+          "structural: target=lwc1 f6, LO(D_8009A0F8)(at) got=lwc1 f4, LO(D_8009A0F8)(at)",
+          "structural: target=sub.s f12, f14, f18 got=sub.s f2, f14, f12",
+          "structural: target=div.s f8, f4, f6 got=div.s f6, f18, f4",
+          "structural: target=mul.s f10, f8, f12 got=mul.s f2, f6, f2",
+          "structural: target=add.s f2, f10, f18 got=add.s f2, f2, f12",
+          "structural: target=lwc1 f4, 344(v0) got=lwc1 f8, 344(v0)",
+          "structural: target=swc1 f4, 340(v0) got=swc1 f8, 340(v0)",
+          "structural: target=lwc1 f6, LO(D_8009A0FC)(at) got=lwc1 f10, LO(D_8009A0FC)(at)",
+          "structural: target=swc1 f6, 348(t6) got=swc1 f10, 348(t6)"
+        ],
+        "timestamp": "2026-06-04T07:44:23.473Z"
+      },
+      {
+        "code": "void func_15074A94(void) {\n    f32 phi_f2;\n    f32 temp_f0;\n    f32 temp_f18;\n    f32 temp_f4;\n    f32 temp_f6;\n    f32 temp_f12;\n    f32 temp_f8;\n    f32 temp_f10;\n\n    temp_f0 = func_1505A72C(D_800CC2D0, D_800D154C);\n\n    if (D_800D154C->unk148 < D_8009A0E8) {\n        D_800D154C->unk148 = D_800D154C->unk154;\n    }\n\n    if (temp_f0 < 200.0f) {\n        phi_f2 = D_8009A0EC;\n    } else {\n        phi_f2 = D_800D154C->unk148;\n        if (!(D_8009A0F0 < temp_f0)) {\n            temp_f18 = D_8009A0F4;\n            temp_f4 = temp_f0 - 200.0f;\n            temp_f6 = D_8009A0F8;\n            temp_f12 = phi_f2 - temp_f18;\n            temp_f8 = temp_f4 / temp_f6;\n            temp_f10 = temp_f8 * temp_f12;\n            phi_f2 = temp_f10 + temp_f18;\n        }\n    }\n    D_800D154C->unk158 = phi_f2;\n    D_800D154C->unk154 = D_800D154C->unk158;\n    D_800D154C->unk15C = D_8009A0FC;\n}",
+        "score": 0.4827586206896552,
+        "reason": "length_mismatch (target=58, generated=56)",
+        "diffs": [],
+        "timestamp": "2026-06-04T07:44:53.422Z"
+      },
+      {
+        "code": "void func_15074A94(void) {\n    f32 phi_f2;\n    f32 temp_f0;\n    f32 temp_f18;\n    f32 temp_f4;\n    f32 temp_f6;\n    f32 temp_f12;\n    f32 temp_f8;\n    f32 temp_f10;\n\n    temp_f0 = func_1505A72C(D_800CC2D0, D_800D154C);\n\n    if (D_800D154C->unk148 < D_8009A0E8) {\n        D_800D154C->unk148 = D_800D154C->unk154;\n    }\n\n    if (temp_f0 < 200.0f) {\n        phi_f2 = D_8009A0EC;\n    } else {\n        if (D_8009A0F0 < temp_f0) {\n            phi_f2 = D_800D154C->unk148;\n        } else {\n            temp_f18 = D_8009A0F4;\n            temp_f4 = temp_f0 - 200.0f;\n            temp_f6 = D_8009A0F8;\n            temp_f12 = D_800D154C->unk148 - temp_f18;\n            temp_f8 = temp_f4 / temp_f6;\n            temp_f10 = temp_f8 * temp_f12;\n            phi_f2 = temp_f10 + temp_f18;\n        }\n    }\n    D_800D154C->unk158 = phi_f2;\n    D_800D154C->unk154 = D_800D154C->unk158;\n    D_800D154C->unk15C = D_8009A0FC;\n}",
+        "score": 0.48333333333333334,
+        "reason": "length_mismatch (target=58, generated=60)",
+        "diffs": [],
+        "timestamp": "2026-06-04T07:45:23.652Z"
+      }
+    ]
   },
   {
     "function": "func_15145548",
@@ -28639,9 +28674,9 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 9,
+    "attempts": 11,
     "lastScore": 0.8364,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "struct127 *func_1505EEF4(s32 arg0) {\n    struct127 *temp_v1;\n    s32 i;\n\n    if (D_800CC2D0[0].interaction_state != 0) {\n        if (arg0 == D_800CC40F) {\n            return D_800CC2D0;\n        }\n    }\n\n    temp_v1 = D_800CC5FC;\n    for (i = 1; i != 25; i++) {\n        if (temp_v1->interaction_state != 0) {\n            if (arg0 == temp_v1->unk13F) {\n                return temp_v1;\n            }\n        }\n        temp_v1++;\n    }\n    return NULL;\n}",
@@ -28775,6 +28810,40 @@
           "structural: target=addiu v0, v0, LO(D_800CC2D0) got=move v0, a1"
         ],
         "timestamp": "2026-06-04T07:42:18.860Z"
+      },
+      {
+        "code": "struct127 *func_1505EEF4(s32 arg0) {\n    struct127 *temp_v1;\n    s32 i;\n\n    temp_v1 = D_800CC5FC;\n    if (D_800CC2D0[0].interaction_state != 0) {\n        if (arg0 == D_800CC40F) {\n            volatile struct127 *ret = D_800CC2D0;\n            return (struct127 *)ret;\n        }\n    }\n\n    for (i = 1; i != 25; i++) {\n        if (temp_v1->interaction_state != 0) {\n            if (arg0 == temp_v1->unk13F) {\n                return temp_v1;\n            }\n        }\n        temp_v1++;\n    }\n    return NULL;\n}",
+        "score": 0.8364,
+        "reason": "structural_diffs=9",
+        "diffs": [
+          "structural: target=lui t6, HI(D_800CC2D0) got=lui a1, HI(D_800CC2D0)",
+          "structural: target=lw t6, LO(D_800CC2D0)(t6) got=addiu a1, a1, LO(D_800CC2D0)",
+          "structural: target=lui v1, HI(D_800CC5FC) got=lw t6, 0(a1)",
+          "structural: target=addiu v1, v1, LO(D_800CC5FC) got=lui v1, HI(D_800CC5FC)",
+          "structural: target=beqz t6, L0 got=addiu v1, v1, LO(D_800CC5FC)",
+          "structural: target=lui t7, HI(D_800CC40F) got=beqz t6, L0",
+          "structural: target=lbu t7, LO(D_800CC40F)(t7) got=lui t7, HI(D_800CC40F)",
+          "structural: target=lui v0, HI(D_800CC2D0) got=lbu t7, LO(D_800CC40F)(t7)",
+          "structural: target=addiu v0, v0, LO(D_800CC2D0) got=move v0, a1"
+        ],
+        "timestamp": "2026-06-04T07:42:47.209Z"
+      },
+      {
+        "code": "struct127 *func_1505EEF4(s32 arg0) {\n    struct127 *temp_v1;\n    s32 i;\n\n    temp_v1 = D_800CC5FC;\n    if (D_800CC2D0[0].interaction_state != 0) {\n        if (arg0 == D_800CC40F) {\n            return (struct127 *)&D_800CC2D0[0].interaction_state;\n        }\n    }\n\n    for (i = 1; i != 25; i++) {\n        if (temp_v1->interaction_state != 0) {\n            if (arg0 == temp_v1->unk13F) {\n                return temp_v1;\n            }\n        }\n        temp_v1++;\n    }\n    return NULL;\n}",
+        "score": 0.8364,
+        "reason": "structural_diffs=9",
+        "diffs": [
+          "structural: target=lui t6, HI(D_800CC2D0) got=lui a1, HI(D_800CC2D0)",
+          "structural: target=lw t6, LO(D_800CC2D0)(t6) got=addiu a1, a1, LO(D_800CC2D0)",
+          "structural: target=lui v1, HI(D_800CC5FC) got=lw t6, 0(a1)",
+          "structural: target=addiu v1, v1, LO(D_800CC5FC) got=lui v1, HI(D_800CC5FC)",
+          "structural: target=beqz t6, L0 got=addiu v1, v1, LO(D_800CC5FC)",
+          "structural: target=lui t7, HI(D_800CC40F) got=beqz t6, L0",
+          "structural: target=lbu t7, LO(D_800CC40F)(t7) got=lui t7, HI(D_800CC40F)",
+          "structural: target=lui v0, HI(D_800CC2D0) got=lbu t7, LO(D_800CC40F)(t7)",
+          "structural: target=addiu v0, v0, LO(D_800CC2D0) got=move v0, a1"
+        ],
+        "timestamp": "2026-06-04T07:43:07.373Z"
       }
     ]
   },
