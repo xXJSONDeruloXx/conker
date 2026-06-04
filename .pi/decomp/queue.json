@@ -21016,8 +21016,8 @@
     "instructions": 56,
     "difficulty": "medium",
     "tags": [],
-    "attempts": 3,
-    "lastScore": 0.48214285714285715,
+    "attempts": 5,
+    "lastScore": 0.4642857142857143,
     "status": "pending",
     "history": [
       {
@@ -21040,6 +21040,20 @@
         "reason": "length_mismatch (target=56, generated=54)",
         "diffs": [],
         "timestamp": "2026-06-04T06:40:15.550Z"
+      },
+      {
+        "code": "Gfx *func_15142C10(Gfx *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, u8 *arg5) {\n    volatile Gfx *temp_s0;\n\n    temp_s0 = arg0;\n    if (arg1 == D_800DD1C8) {\n        if (arg2 == D_800DD1CA) {\n            if (arg3 == D_800DD1CC) {\n                if (arg4 == D_800DD1CE) {\n                    return (Gfx *)temp_s0;\n                }\n            }\n        }\n    }\n\n    if (*arg5 == 1) {\n        gDPPipeSync(temp_s0++);\n        *arg5 = 0;\n    }\n\n    gDPSetEnvColor(temp_s0++, arg1, arg2, arg3, arg4);\n    D_800DD1C8 = arg1;\n    D_800DD1CA = arg2;\n    D_800DD1CC = arg3;\n    D_800DD1CE = arg4;\n    return (Gfx *)temp_s0;\n}",
+        "score": 0.48214285714285715,
+        "reason": "length_mismatch (target=56, generated=54)",
+        "diffs": [],
+        "timestamp": "2026-06-04T06:40:46.706Z"
+      },
+      {
+        "code": "u64 *func_15142C10(u64 *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, u8 *arg5) {\n    u64 *temp_s0;\n    s32 *temp_v1;\n\n    temp_s0 = arg0;\n    if (arg1 == D_800DD1C8) {\n        if (arg2 == D_800DD1CA) {\n            if (arg3 == D_800DD1CC) {\n                if (arg4 == D_800DD1CE) {\n                    return temp_s0;\n                }\n            }\n        }\n    }\n\n    if (*arg5 == 1) {\n        temp_v1 = (s32 *)temp_s0;\n        temp_v1[0] = 0xE7000000;\n        temp_v1[1] = 0;\n        temp_s0++;\n        *arg5 = 0;\n    }\n\n    temp_v1 = (s32 *)temp_s0;\n    temp_v1[0] = 0xFB000000;\n    temp_v1[1] = (arg1 << 24) | ((arg2 & 0xFF) << 16) | ((arg3 & 0xFF) << 8) | (arg4 & 0xFF);\n    temp_s0++;\n    D_800DD1C8 = arg1;\n    D_800DD1CA = arg2;\n    D_800DD1CC = arg3;\n    D_800DD1CE = arg4;\n    return temp_s0;\n}",
+        "score": 0.4642857142857143,
+        "reason": "length_mismatch (target=56, generated=52)",
+        "diffs": [],
+        "timestamp": "2026-06-04T06:41:23.912Z"
       }
     ]
   },
@@ -21085,9 +21099,32 @@
     "instructions": 56,
     "difficulty": "medium",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.48214285714285715,
+    "status": "pending",
+    "history": [
+      {
+        "code": "f32 func_1514462C(s32 arg0) {\n    s32 temp_v0;\n    f32 temp_f0;\n    f32 temp_f2;\n\n    switch (*(u8 *)(arg0 + 0x15) & 3) {\n    case 2:\n        temp_f2 = (f32)((*(s16 *)(arg0 + 6) * *(s16 *)(arg0 + 8)) * *(s16 *)(arg0 + 0xA));\n        break;\n    case 0:\n        temp_v0 = *(s16 *)(arg0 + 6);\n        temp_f2 = ((f32)(temp_v0 * temp_v0) * D_800A5698) * (f32)*(s16 *)(arg0 + 8);\n        break;\n    case 1:\n        temp_f0 = (f32)*(s16 *)(arg0 + 6);\n        temp_f2 = ((temp_f0 * D_800A569C) * temp_f0) * temp_f0;\n        break;\n    default:\n        temp_f2 = 1.0f;\n        break;\n    }\n    return temp_f2;\n}",
+        "score": 0.48214285714285715,
+        "reason": "length_mismatch (target=56, generated=54)",
+        "diffs": [],
+        "timestamp": "2026-06-04T06:44:28.692Z"
+      },
+      {
+        "code": "f32 func_1514462C(s32 arg0) {\n    s32 temp_v0;\n    f32 temp_f0;\n    f32 temp_f2;\n\n    switch (*(u8 *)(arg0 + 0x15) & 3) {\n    case 2:\n        temp_f2 = (f32)((*(s16 *)(arg0 + 8) * *(s16 *)(arg0 + 0xA)) * *(s16 *)(arg0 + 6));\n        break;\n    case 0:\n        temp_v0 = *(s16 *)(arg0 + 6);\n        temp_f2 = (f32)*(s16 *)(arg0 + 8) * ((f32)(temp_v0 * temp_v0) * D_800A5698);\n        break;\n    case 1:\n        temp_f0 = (f32)*(s16 *)(arg0 + 6);\n        temp_f2 = ((temp_f0 * D_800A569C) * temp_f0) * temp_f0;\n        break;\n    default:\n        temp_f2 = 1.0f;\n        break;\n    }\n    return temp_f2;\n}",
+        "score": 0.48214285714285715,
+        "reason": "length_mismatch (target=56, generated=54)",
+        "diffs": [],
+        "timestamp": "2026-06-04T06:45:13.736Z"
+      },
+      {
+        "code": "f32 func_1514462C(s32 arg0) {\n    s32 temp_v0;\n    f32 temp_f0;\n    f32 temp_f2;\n\n    switch (*(u8 *)(arg0 + 0x15) & 3) {\n    case 2:\n        temp_f2 = (f32)((*(s16 *)(arg0 + 8) * *(s16 *)(arg0 + 0xA)) * *(s16 *)(arg0 + 6));\n        break;\n    case 0:\n        temp_v0 = *(s16 *)(arg0 + 6);\n        temp_f2 = (f32)(temp_v0 * temp_v0) * D_800A5698;\n        temp_f2 = temp_f2 * (f32)*(s16 *)(arg0 + 8);\n        break;\n    case 1:\n        temp_f0 = (f32)*(s16 *)(arg0 + 6);\n        temp_f2 = ((temp_f0 * D_800A569C) * temp_f0) * temp_f0;\n        break;\n    default:\n        temp_f2 = 1.0f;\n        break;\n    }\n    return temp_f2;\n}",
+        "score": 0.48214285714285715,
+        "reason": "length_mismatch (target=56, generated=54)",
+        "diffs": [],
+        "timestamp": "2026-06-04T06:45:44.047Z"
+      }
+    ]
   },
   {
     "function": "func_15073B38",
