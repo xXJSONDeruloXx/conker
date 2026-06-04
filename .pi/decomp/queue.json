@@ -28590,9 +28590,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 1,
-    "lastScore": 0.3881,
-    "status": "pending",
+    "attempts": 2,
+    "lastScore": 1,
+    "status": "matched",
     "history": [
       {
         "code": "void func_151424F4(Mtx *arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8, f32 arg9, f32 arg10, f32 arg11) {\n    f32 mtx[4][4];\n    f32 temp_f0;\n    f32 temp_f2;\n    f32 temp_f12;\n\n    func_150A8050(mtx, arg3, arg4, arg5);\n    temp_f0 = arg6 * arg1;\n    temp_f2 = arg7 * arg1;\n    temp_f12 = arg8 * arg1;\n    mtx[3][0] = arg9;\n    mtx[3][1] = arg10;\n    mtx[3][2] = arg11;\n    mtx[0][0] *= temp_f0;\n    mtx[0][1] *= temp_f2;\n    mtx[0][2] *= temp_f12;\n    mtx[1][0] *= arg6 * arg2;\n    mtx[1][1] *= arg7 * arg2;\n    mtx[1][2] *= arg8 * arg2;\n    mtx[2][0] *= temp_f0;\n    mtx[2][1] *= temp_f2;\n    mtx[2][2] *= temp_f12;\n    guMtxF2L(mtx, arg0);\n}",
@@ -32573,9 +32573,32 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.4925373134328358,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_15123070(struct108 *arg0) {\n    f32 temp_f0;\n    struct17 tmp;\n\n    if ((arg0->unk6C8 != 0) && ((arg0->unk6FC == 10) || (arg0->unk6FC == 14))) {\n        func_15048F90(&arg0->unk618, &arg0->unk2A4, &tmp);\n        arg0->unk390 = arg0->unk37C - func_15048FC8(&tmp);\n    } else {\n        temp_f0 = arg0->unk3D0->unk40 - arg0->unk37C - 180.0f;\n        while (temp_f0 < 0.0f) {\n            temp_f0 += 360.0f;\n        }\n        arg0->unk390 = temp_f0;\n    }\n\n    while (arg0->unk390 < -360.0f) {\n        arg0->unk390 += 360.0f;\n    }\n}",
+        "score": 0.4925373134328358,
+        "reason": "length_mismatch (target=67, generated=66)",
+        "diffs": [],
+        "timestamp": "2026-06-04T11:49:37.385Z"
+      },
+      {
+        "code": "void func_15123070(struct108 *arg0) {\n    f32 temp_f0;\n    struct17 tmp;\n\n    if ((arg0->unk6C8 != 0) && ((arg0->unk6FC == 10) || (arg0->unk6FC == 14))) {\n        func_15048F90(&arg0->unk618, &arg0->unk2A4, &tmp);\n        arg0->unk390 = arg0->unk37C - func_15048FC8(&tmp);\n        goto end;\n    } else {\n        temp_f0 = arg0->unk3D0->unk40 - arg0->unk37C - 180.0f;\n        while (temp_f0 < 0.0f) {\n            temp_f0 += 360.0f;\n        }\n        arg0->unk390 = temp_f0;\n    }\n\nend:\n    while (arg0->unk390 < -360.0f) {\n        arg0->unk390 += 360.0f;\n    }\n}",
+        "score": 0.4925373134328358,
+        "reason": "length_mismatch (target=67, generated=66)",
+        "diffs": [],
+        "timestamp": "2026-06-04T11:49:55.676Z"
+      },
+      {
+        "code": "void func_15123070(struct108 *arg0) {\n    f32 temp_f0;\n    f32 temp_f12;\n    struct17 tmp;\n\n    if ((arg0->unk6C8 != 0) && ((arg0->unk6FC == 10) || (arg0->unk6FC == 14))) {\n        func_15048F90(&arg0->unk618, &arg0->unk2A4, &tmp);\n        arg0->unk390 = arg0->unk37C - func_15048FC8(&tmp);\n    } else {\n        temp_f0 = arg0->unk3D0->unk40 - arg0->unk37C - 180.0f;\n        while (temp_f0 < 0.0f) {\n            temp_f0 += 360.0f;\n        }\n        arg0->unk390 = temp_f0;\n    }\n\n    temp_f12 = -360.0f;\n    while (arg0->unk390 < temp_f12) {\n        arg0->unk390 += 360.0f;\n    }\n}",
+        "score": 0.4925373134328358,
+        "reason": "length_mismatch (target=67, generated=66)",
+        "diffs": [],
+        "timestamp": "2026-06-04T11:50:44.410Z"
+      }
+    ]
   },
   {
     "function": "cosf",
