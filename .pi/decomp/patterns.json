@@ -828,5 +828,14 @@
     "example_functions": [
       "func_15075AAC"
     ]
+  },
+  {
+    "id": "reuse-float-local-for-unsigned-conversion",
+    "description": "Reuse an existing float local for a later unsigned-to-float conversion to force IDO to recycle that local's FPR.",
+    "trigger": "Near-match uses correct unsigned global load/register but converts into a later FPR (e.g. f10) while target reuses an earlier temp FPR (e.g. f2) for the denominator.",
+    "solution": "After using the earlier float temp, assign the unsigned conversion back into the same local (`temp_f2 = (f32)((u32)global);`) and then divide by that local.",
+    "example_functions": [
+      "func_15075884"
+    ]
   }
 ]
