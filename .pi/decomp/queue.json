@@ -33909,9 +33909,27 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 0.8841,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_15167B44(struct127 *arg0) {\n    s32 temp_v0;\n    s32 temp_v1;\n    s32 temp_a1;\n    s16 temp_a2;\n\n    temp_v0 = *(u8 *)((s32)arg0 + 0x24);\n    if (temp_v0 != 0) {\n        D_8008CA20[temp_v0](arg0);\n    }\n\n    temp_v1 = *(s8 *)((s32)arg0 + 0x22);\n    if (temp_v1 > 0) {\n        temp_v0 = *(u8 *)((s32)arg0 + 0x23);\n        if (temp_v1 < temp_v0) {\n            *(u8 *)((s32)arg0 + 0x23) = temp_v0 - temp_v1;\n        } else {\n            *(s16 *)((s32)arg0 + 0x14) = *(u8 *)(*(s32 *)((s32)arg0 + 0x10) + 4) << 8;\n        }\n    } else if (temp_v1 < 0) {\n        temp_a2 = *(s16 *)((s32)arg0 + 0x14);\n        if ((temp_a2 / 256) >= (*(u8 *)(*(s32 *)((s32)arg0 + 0x10) + 4) - 1)) {\n            temp_v0 = *(u8 *)((s32)arg0 + 0x23);\n            temp_a1 = -temp_v1;\n            if (temp_a1 < temp_v0) {\n                *(u8 *)((s32)arg0 + 0x23) = temp_v0 - temp_a1;\n                *(s16 *)((s32)arg0 + 0x14) = temp_a2 - *(s16 *)((s32)arg0 + 0x16);\n            }\n        }\n    }\n\n    *(s16 *)((s32)arg0 + 0x14) += *(s16 *)((s32)arg0 + 0x16);\n    if ((*(s16 *)((s32)arg0 + 0x14) / 256) >= *(u8 *)(*(s32 *)((s32)arg0 + 0x10) + 4)) {\n        func_1516972C(arg0);\n    }\n}",
+        "score": 0.8841,
+        "reason": "structural_diffs=8",
+        "diffs": [
+          "structural: target=lh a2, 20(a0) got=lh a1, 20(a0)",
+          "structural: target=bgez a2, L5 got=bgez a1, L5",
+          "structural: target=sra t2, a2, 8 got=sra t2, a1, 8",
+          "structural: target=addiu at, a2, 255 got=addiu at, a1, 255",
+          "structural: target=negu a1, v1 got=negu a2, v1",
+          "structural: target=slt at, a1, v0 got=slt at, a2, v0",
+          "structural: target=subu t6, v0, a1 got=subu t6, v0, a2",
+          "structural: target=subu t7, a2, t9 got=subu t7, a1, t9"
+        ],
+        "timestamp": "2026-06-04T13:05:34.045Z"
+      }
+    ]
   },
   {
     "function": "func_1000CDA0",
@@ -34523,9 +34541,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 15,
-    "lastScore": 0.9118,
-    "status": "pending",
+    "attempts": 16,
+    "lastScore": 0.9706,
+    "status": "skipped",
     "history": [
       {
         "code": "void func_151D9EB0(void *arg0) {\n    void *temp_v1;\n\n    *(s16 *)((u8 *)arg0 + 0x28) -= D_800BE9E4;\n    if (*(s16 *)((u8 *)arg0 + 0x28) < 0) {\n        f32 temp_f0 = func_150ADA68();\n        temp_v1 = (u8 *)arg0 + 0x28;\n        func_151D9014((u8 *)temp_v1 + 8, &D_800A5480, *(u8 *)((u8 *)temp_v1 + 0x16),\n            (temp_f0 * D_800AB464) + D_800AB468,\n            ((u32)func_150ADA20() % 0x29) + 0x23,\n            *(u8 *)((u8 *)temp_v1 + 0x14),\n            *(f32 *)((u8 *)temp_v1 + 4),\n            0,\n            1.0f,\n            1.0f,\n            *(u8 *)((u8 *)temp_v1 + 0x15),\n            0,\n            1,\n            0,\n            *(u8 *)((u8 *)arg0 + 0xC),\n            *(u8 *)((u8 *)arg0 + 1));\n        *(s16 *)temp_v1 = ((u32)func_150ADA20() % 0x6F) + 0x1E;\n    }\n}",
@@ -34690,6 +34708,16 @@
           "structural: target=addiu sp, sp, 96 got=addiu sp, sp, 112"
         ],
         "timestamp": "2026-06-04T13:03:29.531Z"
+      },
+      {
+        "code": "void func_151D9EB0(void *arg0) {\n    s32 temp[1];\n    void *temp_v1;\n\n    *(s16 *)((u8 *)arg0 + 0x28) -= D_800BE9E4;\n    if (*(s16 *)((u8 *)arg0 + 0x28) < 0) {\n        *(f32 *)&temp[0] = func_150ADA68();\n        temp_v1 = (u8 *)arg0 + 0x28;\n        func_151D9014((u8 *)temp_v1 + 8, &D_800A5480, *(u8 *)((u8 *)temp_v1 + 0x16),\n            (*(f32 *)&temp[0] * D_800AB464) + D_800AB468,\n            ((u32)func_150ADA20() % 0x29) + 0x23,\n            *(u8 *)((u8 *)temp_v1 + 0x14),\n            *(f32 *)((u8 *)temp_v1 + 4),\n            0,\n            1.0f,\n            1.0f,\n            *(u8 *)((u8 *)temp_v1 + 0x15),\n            0,\n            1,\n            0,\n            *(u8 *)((u8 *)arg0 + 0xC),\n            *(u8 *)((u8 *)arg0 + 1));\n        *(s16 *)temp_v1 = ((u32)func_150ADA20() % 0x6F) + 0x1E;\n    }\n}",
+        "score": 0.9706,
+        "reason": "structural_diffs=2",
+        "diffs": [
+          "structural: target=swc1 f0, 84(sp) got=swc1 f0, 92(sp)",
+          "structural: target=lwc1 f4, 84(sp) got=lwc1 f4, 92(sp)"
+        ],
+        "timestamp": "2026-06-04T13:03:49.830Z"
       }
     ]
   },

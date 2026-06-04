@@ -1098,5 +1098,14 @@
     "example_functions": [
       "func_151424F4"
     ]
+  },
+  {
+    "id": "float-arg-zero-uses-addiu",
+    "description": "When a callee consumes a float value from an integer argument register (e.g. mtc1 $a1,$f12), declare the prototype with f32 and pass 0.0f to get IDO's addiu a1,zero,0 instead of move a1,zero for an integer zero.",
+    "trigger": "A near-matching call only differs by `li/addiu a1, zero, 0` in the jal delay slot versus generated `move a1, zero`, and the callee immediately mtc1s that argument register.",
+    "solution": "Add a local extern prototype with f32 for that parameter and pass `0.0f` instead of integer `0`.",
+    "example_functions": [
+      "func_151283B8"
+    ]
   }
 ]
