@@ -21099,7 +21099,7 @@
     "instructions": 56,
     "difficulty": "medium",
     "tags": [],
-    "attempts": 3,
+    "attempts": 5,
     "lastScore": 0.48214285714285715,
     "status": "pending",
     "history": [
@@ -21123,6 +21123,20 @@
         "reason": "length_mismatch (target=56, generated=54)",
         "diffs": [],
         "timestamp": "2026-06-04T06:45:44.047Z"
+      },
+      {
+        "code": "f32 func_1514462C(s32 arg0) {\n    s32 temp_v0;\n    f32 temp_f0;\n    f32 temp_f2;\n\n    switch (*(u8 *)(arg0 + 0x15) & 3) {\n    case 2:\n        temp_f2 = (f32)((*(s16 *)(arg0 + 8) * *(s16 *)(arg0 + 0xA)) * *(s16 *)(arg0 + 6));\n        break;\n    case 0:\n        temp_v0 = *(s16 *)(arg0 + 6);\n        temp_f0 = (f32)*(s16 *)(arg0 + 8);\n        temp_f2 = ((f32)(temp_v0 * temp_v0) * D_800A5698) * temp_f0;\n        break;\n    case 1:\n        temp_f0 = (f32)*(s16 *)(arg0 + 6);\n        temp_f2 = ((temp_f0 * D_800A569C) * temp_f0) * temp_f0;\n        break;\n    default:\n        temp_f2 = 1.0f;\n        break;\n    }\n    return temp_f2;\n}",
+        "score": 0.48214285714285715,
+        "reason": "length_mismatch (target=56, generated=54)",
+        "diffs": [],
+        "timestamp": "2026-06-04T06:46:11.596Z"
+      },
+      {
+        "code": "f32 func_1514462C(s32 arg0) {\n    s32 temp_v0;\n    f32 temp_f0;\n    f32 temp_f2;\n    f32 temp_f16;\n\n    switch (*(u8 *)(arg0 + 0x15) & 3) {\n    case 2:\n        temp_f2 = (f32)((*(s16 *)(arg0 + 8) * *(s16 *)(arg0 + 0xA)) * *(s16 *)(arg0 + 6));\n        break;\n    case 0:\n        temp_v0 = *(s16 *)(arg0 + 6);\n        temp_f16 = (f32)(temp_v0 * temp_v0) * D_800A5698;\n        temp_f2 = temp_f16 * (f32)*(s16 *)(arg0 + 8);\n        break;\n    case 1:\n        temp_f0 = (f32)*(s16 *)(arg0 + 6);\n        temp_f2 = ((temp_f0 * D_800A569C) * temp_f0) * temp_f0;\n        break;\n    default:\n        temp_f2 = 1.0f;\n        break;\n    }\n    return temp_f2;\n}",
+        "score": 0.48214285714285715,
+        "reason": "length_mismatch (target=56, generated=54)",
+        "diffs": [],
+        "timestamp": "2026-06-04T06:48:07.912Z"
       }
     ]
   },
@@ -24010,9 +24024,32 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.21705426356589147,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_15007360(void) {\n    u8 *ptr;\n    u16 sum;\n    s32 i;\n    s32 ret;\n\n    sum = ((D_800BE2F2 << 2) + 0xCC + (D_800BE2F3 << 3)) & 0xFFFF;\n    ptr = D_800BE2F4;\n    i = 4;\n    do {\n        sum = (sum + (ptr[0] << (i & 3)) + (ptr[1] << ((i + 1) & 3)) + (ptr[2] << ((i + 2) & 3)) + (ptr[3] << ((i + 3) & 3))) & 0xFFFF;\n        i += 4;\n        ptr += 4;\n    } while (i != 0x68);\n    D_800BE2F0 = sum;\n    if (D_8002AC5C == 0) {\n        ret = func_151DCEF0(&D_800BE900, 0x44, &D_800BE2F0, 0x70);\n    }\n}",
+        "score": 0.21705426356589147,
+        "reason": "length_mismatch (target=56, generated=129)",
+        "diffs": [],
+        "timestamp": "2026-06-04T06:48:58.752Z"
+      },
+      {
+        "code": "void func_15007360(void) {\n    u8 *ptr;\n    s32 sum;\n    s32 i;\n    s32 ret;\n\n    sum = ((D_800BE2F2 << 2) + 0xCC + (D_800BE2F3 << 3)) & 0xFFFF;\n    ptr = D_800BE2F4;\n    i = 4;\n    do {\n        sum = (sum + (ptr[0] << (i & 3)) + (ptr[1] << ((i + 1) & 3)) + (ptr[2] << ((i + 2) & 3)) + (ptr[3] << ((i + 3) & 3))) & 0xFFFF;\n        i += 4;\n        ptr += 4;\n    } while (i != 0x68);\n    D_800BE2F0 = sum;\n    if (D_8002AC5C == 0) {\n        ret = func_151DCEF0(&D_800BE900, 0x44, &D_800BE2F0, 0x70);\n    }\n}",
+        "score": 0.2153846153846154,
+        "reason": "length_mismatch (target=56, generated=130)",
+        "diffs": [],
+        "timestamp": "2026-06-04T06:49:34.096Z"
+      },
+      {
+        "code": "void func_15007360(void) {\n    volatile u8 *ptr;\n    s32 sum;\n    s32 i;\n    s32 ret;\n\n    sum = ((D_800BE2F2 << 2) + 0xCC + (D_800BE2F3 << 3)) & 0xFFFF;\n    ptr = D_800BE2F4;\n    i = 4;\n    do {\n        sum = (sum + (ptr[0] << (i & 3)) + (ptr[1] << ((i + 1) & 3)) + (ptr[2] << ((i + 2) & 3)) + (ptr[3] << ((i + 3) & 3))) & 0xFFFF;\n        i += 4;\n        ptr += 4;\n    } while (i != 0x68);\n    D_800BE2F0 = sum;\n    if (D_8002AC5C == 0) {\n        ret = func_151DCEF0(&D_800BE900, 0x44, &D_800BE2F0, 0x70);\n    }\n}",
+        "score": 0.21705426356589147,
+        "reason": "length_mismatch (target=56, generated=129)",
+        "diffs": [],
+        "timestamp": "2026-06-04T06:49:58.250Z"
+      }
+    ]
   },
   {
     "function": "func_15168E54",
