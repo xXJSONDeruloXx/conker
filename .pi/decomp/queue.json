@@ -24183,8 +24183,8 @@
     "instructions": 53,
     "difficulty": "medium",
     "tags": [],
-    "attempts": 3,
-    "lastScore": 0.5472,
+    "attempts": 4,
+    "lastScore": 0.3208,
     "status": "pending",
     "history": [
       {
@@ -24270,6 +24270,34 @@
           "structural: target=b L1 got=b L2"
         ],
         "timestamp": "2026-06-04T04:43:33.626Z"
+      },
+      {
+        "code": "void func_1513DF9C(void *arg0, s32 arg1, u8 arg2) {\n    s32 idx;\n\n    if ((*(s32 *)((s32)arg0 + 0x58) << 9) < 0) {\n        switch (*(u8 *)((s32)arg0 + 0x19)) {\n            case 12:\n                idx = 10;\n                break;\n            case 11:\n                idx = 9;\n                break;\n            case 0:\n            case 2:\n                idx = 0;\n                break;\n            case 1:\n                idx = 1;\n                break;\n            case 5:\n                idx = 2;\n                break;\n            case 6:\n                idx = 3;\n                break;\n            case 3:\n                idx = 4;\n                break;\n            case 7:\n                idx = 5;\n                break;\n            case 8:\n                idx = 6;\n                break;\n            case 9:\n                idx = 7;\n                break;\n            case 4:\n                idx = 8;\n                break;\n            default:\n                idx = 0;\n                break;\n        }\n        goto call;\n    }\n    idx = 0;\ncall:\n    D_80089F64[idx](arg0, arg1, arg2);\n}",
+        "score": 0.3208,
+        "reason": "structural_diffs=36",
+        "diffs": [
+          "structural: target=sll t8, t7, 9 got=move v0, zero",
+          "structural: target=bltzl t8, L0 got=sll t8, t7, 9",
+          "structural: target=lbu t9, 25(a0) got=bgez t8, L0",
+          "structural: target=b L1 got=nop",
+          "structural: target=move v0, zero got=lbu t9, 25(a0)",
+          "structural: target=lbu t9, 25(a0) got=sltiu at, t9, 13",
+          "structural: target=sltiu at, t9, 13 got=beqz at, L1",
+          "structural: target=beqz at, L2 got=sll t9, t9, 2",
+          "structural: target=sll t9, t9, 2 got=lui at, HI(.rodata)",
+          "structural: target=lui at, HI(jtbl_800A5188) got=addu at, at, t9",
+          "structural: target=addu at, at, t9 got=lw t9, LO(.rodata)(at)",
+          "structural: target=lw t9, LO(jtbl_800A5188)(at) got=jr t9",
+          "structural: target=jr t9 got=nop",
+          "structural: target=nop got=b L0",
+          "structural: target=b L1 got=li v0, 10",
+          "structural: target=li v0, 10 got=b L0",
+          "structural: target=b L1 got=li v0, 9",
+          "structural: target=li v0, 9 got=b L0",
+          "structural: target=b L1 got=move v0, zero",
+          "structural: target=move v0, zero got=b L0"
+        ],
+        "timestamp": "2026-06-04T04:43:57.892Z"
       }
     ]
   },
@@ -24848,9 +24876,32 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.49056603773584906,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_15163FEC(struct225 *arg0, void *arg1, u8 arg2) {\n    s32 temp_v1;\n    s32 temp_v0;\n    s32 temp_a2;\n    void (*func)(struct225 *, void *, u8);\n\n    if (arg2 == 0) {\n        temp_v0 = (s32)arg0 + 0x18;\n        temp_v1 = *(s32 *)arg1;\n        if ((temp_v1 == *(s32 *)temp_v0) || (*(u8 *)(temp_v0 + 4) == *(u8 *)((s32)arg1 + 4))) {\n            func_1516972C(arg0);\n        }\n    } else if (arg2 == 0x2D) {\n        temp_v0 = (s32)arg0 + 0x18;\n        temp_a2 = *(s32 *)temp_v0;\n        temp_v1 = *(s32 *)arg1;\n        if (temp_v1 == temp_a2) {\n            *(s32 *)temp_v0 = *(s32 *)((s32)arg1 + 4);\n            *(u8 *)(temp_v0 + 4) = *(u8 *)((s32)arg1 + 9);\n        } else if (*(s32 *)((s32)arg1 + 4) == temp_a2) {\n            *(s32 *)temp_v0 = temp_v1;\n            *(u8 *)(temp_v0 + 4) = *(u8 *)((s32)arg1 + 8);\n        }\n    } else {\n        func = D_8008B374[*(u8 *)((s32)arg0 + 0x2D)];\n        if (func != NULL) {\n            func(arg0, arg1, arg2);\n        }\n    }\n}",
+        "score": 0.49056603773584906,
+        "reason": "length_mismatch (target=53, generated=52)",
+        "diffs": [],
+        "timestamp": "2026-06-04T04:44:43.155Z"
+      },
+      {
+        "code": "void func_15163FEC(struct225 *arg0, void *arg1, u8 arg2) {\n    s32 temp_v1;\n    void *temp_v0;\n    s32 temp_a2;\n    void (*func)(struct225 *, void *, u8);\n\n    if (arg2 == 0) {\n        temp_v0 = (void *)((s32)arg0 + 0x18);\n        temp_v1 = *(s32 *)arg1;\n        if ((temp_v1 == *(s32 *)temp_v0) || (*(u8 *)((s32)temp_v0 + 4) == *(u8 *)((s32)arg1 + 4))) {\n            func_1516972C(arg0);\n        }\n    } else if (arg2 == 0x2D) {\n        temp_v0 = (void *)((s32)arg0 + 0x18);\n        temp_a2 = *(s32 *)temp_v0;\n        temp_v1 = *(s32 *)arg1;\n        if (temp_v1 == temp_a2) {\n            *(s32 *)temp_v0 = *(s32 *)((s32)arg1 + 4);\n            *(u8 *)((s32)temp_v0 + 4) = *(u8 *)((s32)arg1 + 9);\n        } else if (*(s32 *)((s32)arg1 + 4) == temp_a2) {\n            *(s32 *)temp_v0 = temp_v1;\n            *(u8 *)((s32)temp_v0 + 4) = *(u8 *)((s32)arg1 + 8);\n        }\n    } else {\n        func = D_8008B374[*(u8 *)((s32)arg0 + 0x2D)];\n        if (func != NULL) {\n            func(arg0, arg1, arg2);\n        }\n    }\n}",
+        "score": 0.49056603773584906,
+        "reason": "length_mismatch (target=53, generated=52)",
+        "diffs": [],
+        "timestamp": "2026-06-04T04:45:11.067Z"
+      },
+      {
+        "code": "void func_15163FEC(struct225 *arg0, void *arg1, u8 arg2) {\n    s32 temp_v1;\n    s32 temp_v0;\n    s32 temp_a2;\n    void (*func)(struct225 *, void *, u8);\n\n    if (arg2 == 0) {\n        temp_v0 = (s32)arg0;\n        temp_v0 += 0x18;\n        temp_v1 = *(s32 *)arg1;\n        if ((temp_v1 == *(s32 *)temp_v0) || (*(u8 *)(temp_v0 + 4) == *(u8 *)((s32)arg1 + 4))) {\n            func_1516972C(arg0);\n        }\n    } else if (arg2 == 0x2D) {\n        temp_v0 = (s32)arg0;\n        temp_v0 += 0x18;\n        temp_a2 = *(s32 *)temp_v0;\n        temp_v1 = *(s32 *)arg1;\n        if (temp_v1 == temp_a2) {\n            *(s32 *)temp_v0 = *(s32 *)((s32)arg1 + 4);\n            *(u8 *)(temp_v0 + 4) = *(u8 *)((s32)arg1 + 9);\n        } else if (*(s32 *)((s32)arg1 + 4) == temp_a2) {\n            *(s32 *)temp_v0 = temp_v1;\n            *(u8 *)(temp_v0 + 4) = *(u8 *)((s32)arg1 + 8);\n        }\n    } else {\n        func = D_8008B374[*(u8 *)((s32)arg0 + 0x2D)];\n        if (func != NULL) {\n            func(arg0, arg1, arg2);\n        }\n    }\n}",
+        "score": 0.49056603773584906,
+        "reason": "length_mismatch (target=53, generated=52)",
+        "diffs": [],
+        "timestamp": "2026-06-04T04:45:31.116Z"
+      }
+    ]
   },
   {
     "function": "func_15164134",
