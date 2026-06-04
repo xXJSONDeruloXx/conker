@@ -20382,8 +20382,8 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 8,
-    "lastScore": 0.47619047619047616,
+    "attempts": 9,
+    "lastScore": 0.4642857142857143,
     "status": "pending",
     "history": [
       {
@@ -20441,6 +20441,13 @@
         "reason": "length_mismatch (target=42, generated=40)",
         "diffs": [],
         "timestamp": "2026-06-04T00:07:25.065Z"
+      },
+      {
+        "code": "void func_150049A4(s8 *arg0, s32 arg1, s32 arg2) {\n    s8 *ptr;\n    s32 i;\n    s32 code;\n    s32 temp_s0;\n    s32 temp_a3;\n\n    temp_s0 = arg2;\n    temp_a3 = arg1;\n    i = 0;\n    ptr = arg0;\n    if (*arg0 != -0x21) {\n        code = *arg0;\n        do {\n            i++;\n            switch (code) {\n            case -0x24:\n                if ((u8)ptr[3] == 0xE) {\n                    *(s32 *)(ptr + 4) += temp_s0;\n                }\n                break;\n            case 1:\n                *(s32 *)(ptr + 4) += temp_a3;\n                break;\n            case 0xDE:\n                *(s32 *)(ptr + 4) += temp_a3;\n                break;\n            }\n            ptr = arg0 + (i << 3);\n            code = *ptr;\n        } while (code != -0x21);\n    }\n}",
+        "score": 0.4642857142857143,
+        "reason": "length_mismatch (target=42, generated=39)",
+        "diffs": [],
+        "timestamp": "2026-06-04T13:51:58.492Z"
       }
     ]
   },
@@ -22372,7 +22379,7 @@
     ],
     "attempts": 18,
     "lastScore": 0.878,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "void func_1000DEC4(void) {\n    struct137 *ptr;\n    s32 val;\n    s32 neg;\n\n    ptr = D_800419A8;\n    neg = -1;\n    do {\n        val = ptr->unk0;\n        if (val == neg) {\n            if (ptr->unk4 != neg) {\n                ptr->unk4 = neg;\n            }\n        } else {\n            if (func_1000853C(val & 0xFF) == 0) {\n                D_800417B0[ptr->unk0] = 0;\n                ptr->unk0 = neg;\n                ptr->unk4 = neg;\n            }\n        }\n        ptr++;\n        *(s32 *)((s32)ptr - 4) = 0;\n    } while (ptr != (struct137 *)D_80041E58);\n}",
