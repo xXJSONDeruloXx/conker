@@ -21633,9 +21633,9 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 6,
-    "lastScore": 0.4791666666666667,
-    "status": "pending",
+    "attempts": 8,
+    "lastScore": 0.2609,
+    "status": "skipped",
     "history": [
       {
         "code": "void func_150778F0(void) {\n    struct127 **temp_a2;\n    struct127 *temp_v1;\n    s32 temp_v0;\n\n    temp_a2 = &D_800D154C;\n    temp_v1 = *temp_a2;\n    temp_v0 = ((u8 *)*(s32 *)D_800D2108)[temp_v1->unk13F] - 1;\n    if (temp_v1->unk21F != 0) {\n        temp_v0 = temp_v1->unk21F;\n    }\n    temp_v1->unk21E += temp_v1->unk221;\n    (*temp_a2)->unk21E += temp_v0;\n    (*temp_a2)->unk21E %= temp_v0;\n    temp_v1 = *temp_a2;\n    if (temp_v1->unk21E < temp_v1->unk220) {\n        temp_v1->unk21E = temp_v1->unk220;\n    }\n}",
@@ -21699,6 +21699,62 @@
         "reason": "length_mismatch (target=46, generated=48)",
         "diffs": [],
         "timestamp": "2026-06-04T02:00:29.345Z"
+      },
+      {
+        "code": "void func_150778F0(void) {\n    struct127 **temp_a2;\n    struct127 *temp_v1;\n    u8 temp_v0;\n\n    temp_a2 = (struct127 **)((s32)&D_800D154C);\n    temp_v1 = *temp_a2;\n    temp_v0 = ((u8 *)*(s32 *)D_800D2108)[temp_v1->unk13F] - 1;\n    if (temp_v1->unk21F != 0) {\n        temp_v0 = temp_v1->unk21F;\n    }\n    temp_v1->unk21E += temp_v1->unk221;\n    temp_v1 = *temp_a2;\n    temp_v1->unk21E += temp_v0;\n    temp_v1 = *temp_a2;\n    temp_v1->unk21E %= temp_v0;\n    temp_v1 = *temp_a2;\n    if (temp_v1->unk21E < temp_v1->unk220) {\n        temp_v1->unk21E = temp_v1->unk220;\n    }\n}",
+        "score": 0.4348,
+        "reason": "structural_diffs=26",
+        "diffs": [
+          "structural: target=lui a2, HI(D_800D154C) got=lui v0, HI(D_800D154C)",
+          "structural: target=addiu a2, a2, LO(D_800D154C) got=addiu v0, v0, LO(D_800D154C)",
+          "structural: target=lw v1, 0(a2) got=lw v1, 0(v0)",
+          "structural: target=lui t7, HI(D_800D2108) got=lui t6, HI(D_800D2108)",
+          "structural: target=lw t7, LO(D_800D2108)(t7) got=lw t6, LO(D_800D2108)(t6)",
+          "structural: target=lbu t6, 319(v1) got=lbu t7, 319(v1)",
+          "structural: target=lbu a0, 543(v1) got=lbu a1, 543(v1)",
+          "structural: target=lbu v0, 0(t8) got=lbu a0, 0(t8)",
+          "structural: target=addiu v0, v0, -1 got=addiu a0, a0, -1",
+          "structural: target=andi t9, v0, 255 got=andi t9, a0, 255",
+          "structural: target=beqz a0, L0 got=beqz a1, L0",
+          "structural: target=move v0, t9 got=move a0, t9",
+          "structural: target=andi v0, a0, 255 got=andi a0, a1, 255",
+          "structural: target=move a0, v0 got=move a1, a0",
+          "structural: target=lw v1, 0(a2) got=lw v1, 0(v0)",
+          "structural: target=addu t4, t3, v0 got=addu t4, t3, a0",
+          "structural: target=lw v1, 0(a2) got=lw v1, 0(v0)",
+          "structural: target=div zero, t5, v0 got=div zero, t5, a0",
+          "structural: target=lw v1, 0(a2) got=lw v1, 0(v0)",
+          "structural: target=bnez a0, L1 got=bnez a1, L1"
+        ],
+        "timestamp": "2026-06-04T02:00:49.921Z"
+      },
+      {
+        "code": "void func_150778F0(void) {\n    u8 temp_v0;\n    struct127 *temp_v1;\n    s32 temp_a0;\n    s32 temp_a1;\n    struct127 **temp_a2;\n    s32 temp_t6;\n    s32 temp_t7;\n\n    temp_a2 = (struct127 **)((s32)&D_800D154C);\n    temp_v1 = *temp_a2;\n    temp_t7 = *(s32 *)D_800D2108;\n    temp_t6 = temp_v1->unk13F;\n    temp_a0 = temp_v1->unk21F;\n    temp_v0 = ((u8 *)temp_t7)[temp_t6] - 1;\n    if (temp_a0 != 0) {\n        temp_v0 = temp_a0;\n    }\n    temp_a0 = temp_v0;\n    temp_v1->unk21E += temp_v1->unk221;\n    temp_v1 = *temp_a2;\n    temp_v1->unk21E += temp_v0;\n    temp_v1 = *temp_a2;\n    temp_v1->unk21E %= temp_v0;\n    temp_v1 = *temp_a2;\n    temp_a1 = temp_v1->unk220;\n    if (temp_v1->unk21E < temp_a1) {\n        temp_v1->unk21E = temp_a1;\n    }\n}",
+        "score": 0.2609,
+        "reason": "structural_diffs=34",
+        "diffs": [
+          "structural: target=lui a2, HI(D_800D154C) got=lui v0, HI(D_800D154C)",
+          "structural: target=addiu a2, a2, LO(D_800D154C) got=addiu v0, v0, LO(D_800D154C)",
+          "structural: target=lw v1, 0(a2) got=lw v1, 0(v0)",
+          "structural: target=lui t7, HI(D_800D2108) got=lui a0, HI(D_800D2108)",
+          "structural: target=lw t7, LO(D_800D2108)(t7) got=lw a0, LO(D_800D2108)(a0)",
+          "structural: target=lbu t6, 319(v1) got=lbu a1, 319(v1)",
+          "structural: target=lbu a0, 543(v1) got=lbu a2, 543(v1)",
+          "structural: target=addu t8, t6, t7 got=addu t6, a0, a1",
+          "structural: target=lbu v0, 0(t8) got=lbu a3, 0(t6)",
+          "structural: target=addiu v0, v0, -1 got=addiu a3, a3, -1",
+          "structural: target=andi t9, v0, 255 got=andi t7, a3, 255",
+          "structural: target=beqz a0, L0 got=beqz a2, L0",
+          "structural: target=move v0, t9 got=move a3, t7",
+          "structural: target=andi v0, a0, 255 got=andi a3, a2, 255",
+          "structural: target=lbu t0, 542(v1) got=lbu t8, 542(v1)",
+          "structural: target=lb t1, 545(v1) got=lb t9, 545(v1)",
+          "structural: target=move a0, v0 got=move a0, a3",
+          "structural: target=addu t2, t0, t1 got=addu t0, t8, t9",
+          "structural: target=sb t2, 542(v1) got=sb t0, 542(v1)",
+          "structural: target=lw v1, 0(a2) got=lw v1, 0(v0)"
+        ],
+        "timestamp": "2026-06-04T02:01:27.445Z"
       }
     ]
   },
@@ -21844,9 +21900,90 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.6087,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_15079228(void) {\n    struct127 *temp_v1;\n    struct178 *temp_v0;\n    u16 temp_a2;\n\n    temp_v1 = D_800D154C;\n    temp_v0 = &((struct178 *)*(s32 *)D_800D3098)[temp_v1->unk251];\n    temp_a2 = func_1505A630(temp_v1->x_position - temp_v0->unk0, temp_v0->unk4 - temp_v1->z_position, 0);\n    if (temp_a2 == 0) {\n        temp_a2 = 1;\n    }\n    func_1505D024(D_800D154C, D_800D1890, temp_a2, -1);\n    D_800D154C->unk218 -= 5;\n    D_800D154C->unk21C = 1;\n}",
+        "score": 0.587,
+        "reason": "structural_diffs=19",
+        "diffs": [
+          "structural: target=lui v1, HI(D_800D154C) got=lui v0, HI(D_800D154C)",
+          "structural: target=lw v1, LO(D_800D154C)(v1) got=lw v0, LO(D_800D154C)(v0)",
+          "structural: target=lbu t7, 593(v1) got=lbu t7, 593(v0)",
+          "structural: target=lwc1 f8, 20(v1) got=lwc1 f4, 20(v0)",
+          "structural: target=lwc1 f10, 28(v1) got=lwc1 f18, 28(v0)",
+          "structural: target=addu v0, t6, t8 got=addu v1, t6, t8",
+          "structural: target=lh t9, 0(v0) got=lh t9, 0(v1)",
+          "structural: target=lh t0, 4(v0) got=lh t0, 4(v1)",
+          "structural: target=mtc1 t9, f4 got=mtc1 t9, f6",
+          "structural: target=mtc1 t0, f6 got=mtc1 t0, f10",
+          "structural: target=cvt.s.w f0, f4 got=cvt.s.w f8, f6",
+          "structural: target=cvt.s.w f2, f6 got=cvt.s.w f16, f10",
+          "structural: target=sub.s f12, f8, f0 got=sub.s f12, f4, f8",
+          "structural: target=sub.s f14, f2, f10 got=sub.s f14, f16, f18",
+          "structural: target=lui v1, HI(D_800D154C) got=lui v0, HI(D_800D154C)",
+          "structural: target=lw v1, LO(D_800D154C)(v1) got=lw v0, LO(D_800D154C)(v0)",
+          "structural: target=lw t1, 536(v1) got=lw t1, 536(v0)",
+          "structural: target=addiu t2, t1, -5 got=addiu t2, t1, -25",
+          "structural: target=sw t2, 536(v1) got=sw t2, 536(v0)"
+        ],
+        "timestamp": "2026-06-04T02:05:41.682Z"
+      },
+      {
+        "code": "void func_15079228(void) {\n    struct178 *temp_v0;\n    struct127 *temp_v1;\n    u16 temp_a2;\n\n    temp_v1 = D_800D154C;\n    temp_v0 = &((struct178 *)*(s32 *)D_800D3098)[temp_v1->unk251];\n    temp_a2 = func_1505A630(temp_v1->x_position - temp_v0->unk0, temp_v0->unk4 - temp_v1->z_position, 0);\n    if (temp_a2 == 0) {\n        temp_a2 = 1;\n    }\n    func_1505D024(D_800D154C, D_800D1890, temp_a2, -1);\n    D_800D154C->unk218 = (struct216 *)((s32)D_800D154C->unk218 - 5);\n    D_800D154C->unk21C = 1;\n}",
+        "score": 0.6087,
+        "reason": "structural_diffs=18",
+        "diffs": [
+          "structural: target=lui v1, HI(D_800D154C) got=lui v0, HI(D_800D154C)",
+          "structural: target=lw v1, LO(D_800D154C)(v1) got=lw v0, LO(D_800D154C)(v0)",
+          "structural: target=lbu t7, 593(v1) got=lbu t7, 593(v0)",
+          "structural: target=lwc1 f8, 20(v1) got=lwc1 f4, 20(v0)",
+          "structural: target=lwc1 f10, 28(v1) got=lwc1 f18, 28(v0)",
+          "structural: target=addu v0, t6, t8 got=addu v1, t6, t8",
+          "structural: target=lh t9, 0(v0) got=lh t9, 0(v1)",
+          "structural: target=lh t0, 4(v0) got=lh t0, 4(v1)",
+          "structural: target=mtc1 t9, f4 got=mtc1 t9, f6",
+          "structural: target=mtc1 t0, f6 got=mtc1 t0, f10",
+          "structural: target=cvt.s.w f0, f4 got=cvt.s.w f8, f6",
+          "structural: target=cvt.s.w f2, f6 got=cvt.s.w f16, f10",
+          "structural: target=sub.s f12, f8, f0 got=sub.s f12, f4, f8",
+          "structural: target=sub.s f14, f2, f10 got=sub.s f14, f16, f18",
+          "structural: target=lui v1, HI(D_800D154C) got=lui v0, HI(D_800D154C)",
+          "structural: target=lw v1, LO(D_800D154C)(v1) got=lw v0, LO(D_800D154C)(v0)",
+          "structural: target=lw t1, 536(v1) got=lw t1, 536(v0)",
+          "structural: target=sw t2, 536(v1) got=sw t2, 536(v0)"
+        ],
+        "timestamp": "2026-06-04T02:06:00.417Z"
+      },
+      {
+        "code": "void func_15079228(void) {\n    register struct127 *temp_v1;\n    register struct178 *temp_v0;\n    u16 temp_a2;\n\n    temp_v1 = D_800D154C;\n    temp_v0 = &((struct178 *)*(s32 *)D_800D3098)[temp_v1->unk251];\n    temp_a2 = func_1505A630(temp_v1->x_position - temp_v0->unk0, temp_v0->unk4 - temp_v1->z_position, 0);\n    if (temp_a2 == 0) {\n        temp_a2 = 1;\n    }\n    func_1505D024(D_800D154C, D_800D1890, temp_a2, -1);\n    D_800D154C->unk218 = (struct216 *)((s32)D_800D154C->unk218 - 5);\n    D_800D154C->unk21C = 1;\n}",
+        "score": 0.6087,
+        "reason": "structural_diffs=18",
+        "diffs": [
+          "structural: target=lui v1, HI(D_800D154C) got=lui v0, HI(D_800D154C)",
+          "structural: target=lw v1, LO(D_800D154C)(v1) got=lw v0, LO(D_800D154C)(v0)",
+          "structural: target=lbu t7, 593(v1) got=lbu t7, 593(v0)",
+          "structural: target=lwc1 f8, 20(v1) got=lwc1 f4, 20(v0)",
+          "structural: target=lwc1 f10, 28(v1) got=lwc1 f18, 28(v0)",
+          "structural: target=addu v0, t6, t8 got=addu v1, t6, t8",
+          "structural: target=lh t9, 0(v0) got=lh t9, 0(v1)",
+          "structural: target=lh t0, 4(v0) got=lh t0, 4(v1)",
+          "structural: target=mtc1 t9, f4 got=mtc1 t9, f6",
+          "structural: target=mtc1 t0, f6 got=mtc1 t0, f10",
+          "structural: target=cvt.s.w f0, f4 got=cvt.s.w f8, f6",
+          "structural: target=cvt.s.w f2, f6 got=cvt.s.w f16, f10",
+          "structural: target=sub.s f12, f8, f0 got=sub.s f12, f4, f8",
+          "structural: target=sub.s f14, f2, f10 got=sub.s f14, f16, f18",
+          "structural: target=lui v1, HI(D_800D154C) got=lui v0, HI(D_800D154C)",
+          "structural: target=lw v1, LO(D_800D154C)(v1) got=lw v0, LO(D_800D154C)(v0)",
+          "structural: target=lw t1, 536(v1) got=lw t1, 536(v0)",
+          "structural: target=sw t2, 536(v1) got=sw t2, 536(v0)"
+        ],
+        "timestamp": "2026-06-04T02:06:24.931Z"
+      }
+    ]
   },
   {
     "function": "func_150C2700",
