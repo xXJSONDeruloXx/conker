@@ -29162,8 +29162,8 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 6,
-    "lastScore": 0.4928571428571429,
+    "attempts": 9,
+    "lastScore": 0.7391,
     "status": "pending",
     "history": [
       {
@@ -29247,6 +29247,60 @@
         "reason": "length_mismatch (target=69, generated=70)",
         "diffs": [],
         "timestamp": "2026-06-04T12:52:43.798Z"
+      },
+      {
+        "code": "void func_15007168(void) {\n    s32 i;\n    s32 offset;\n\n    for (i = 0; i < 0x68; i++) {\n        D_800BE2F0[i] = 0;\n    }\n\n    i = 0;\n    offset = 0;\n    do {\n        D_80082BBC[offset + 1] = 3;\n        D_80082BBC[offset + 3] = 2;\n        D_80082BBC[offset + 4] = 1;\n        D_80082BBC[offset + 2] = 10;\n        switch (i) {\n        case 0:\n            D_80082BBC[offset + 5] = 3;\n            break;\n        case 1:\n        case 2:\n            D_80082BBC[offset + 5] = 5;\n            break;\n        case 7:\n            D_80082BBC[offset + 5] = 20;\n            break;\n        case 5:\n            D_80082BBC[offset + 5] = 20;\n            D_80082BBC[offset + 2] = 0;\n            break;\n        case 8:\n        case 9:\n            D_80082BBC[offset + 5] = 3;\n            break;\n        }\n        D_80082BBC[offset + 9] = 0;\n        i++;\n        offset += 10;\n    } while (i != 10);\n}",
+        "score": 0.8116,
+        "reason": "structural_diffs=13",
+        "diffs": [
+          "structural: target=lui v0, HI(D_800BE358) got=lui v0, HI(D_800BE2F0)",
+          "structural: target=addiu v0, v0, LO(D_800BE358) got=addiu v0, v0, 104",
+          "structural: target=addiu a0, a0, LO(D_80082BBC) got=move v0, zero",
+          "structural: target=move v0, zero got=move v1, zero",
+          "structural: target=move v1, zero got=addiu a0, a0, LO(D_80082BBC)",
+          "structural: target=li t1, 3 got=li t1, 10",
+          "structural: target=lui at, HI(jtbl_80095A00) got=lui at, HI(.rodata)",
+          "structural: target=lw t8, LO(jtbl_80095A00)(at) got=lw t8, LO(.rodata)(at)",
+          "structural: target=sb t1, 5(t4) got=sb a1, 5(t4)",
+          "structural: target=sb t1, 5(t8) got=sb a1, 5(t8)",
+          "structural: target=addiu v1, v1, 10 got=sb zero, 9(t4)",
+          "structural: target=bne v0, t0, L2 got=bne v0, t1, L2",
+          "structural: target=sb zero, 9(t4) got=addiu v1, v1, 10"
+        ],
+        "timestamp": "2026-06-04T12:53:22.462Z"
+      },
+      {
+        "code": "void func_15007168(void) {\n    s32 i;\n    s32 offset;\n\n    for (i = 0; &D_800BE2F0[i] < D_800BE358; i++) {\n        D_800BE2F0[i] = 0;\n    }\n\n    i = 0;\n    offset = 0;\n    do {\n        D_80082BBC[offset + 1] = 3;\n        D_80082BBC[offset + 3] = 2;\n        D_80082BBC[offset + 4] = 1;\n        D_80082BBC[offset + 2] = 10;\n        switch (i) {\n        case 0:\n            D_80082BBC[offset + 5] = 3;\n            break;\n        case 1:\n        case 2:\n            D_80082BBC[offset + 5] = 5;\n            break;\n        case 7:\n            D_80082BBC[offset + 5] = 20;\n            break;\n        case 5:\n            D_80082BBC[offset + 5] = 20;\n            D_80082BBC[offset + 2] = 0;\n            break;\n        case 8:\n        case 9:\n            D_80082BBC[offset + 5] = 3;\n            break;\n        }\n        D_80082BBC[offset + 9] = 0;\n        i++;\n        offset += 10;\n    } while (i != 10);\n}",
+        "score": 0.46621621621621623,
+        "reason": "length_mismatch (target=69, generated=74)",
+        "diffs": [],
+        "timestamp": "2026-06-04T12:53:52.516Z"
+      },
+      {
+        "code": "void func_15007168(void) {\n    u8 *ptr;\n    s32 i;\n    s32 offset;\n\n    ptr = D_800BE2F0;\n    do {\n        ptr++;\n        ptr[-1] = 0;\n    } while (ptr < D_800BE358);\n\n    i = 0;\n    offset = 0;\n    do {\n        D_80082BBC[offset + 1] = 3;\n        D_80082BBC[offset + 3] = 2;\n        D_80082BBC[offset + 4] = 1;\n        D_80082BBC[offset + 2] = 10;\n        switch (i) {\n        case 0:\n            D_80082BBC[offset + 5] = 3;\n            break;\n        case 1:\n        case 2:\n            D_80082BBC[offset + 5] = 5;\n            break;\n        case 7:\n            D_80082BBC[offset + 5] = 20;\n            break;\n        case 5:\n            D_80082BBC[offset + 5] = 20;\n            D_80082BBC[offset + 2] = 0;\n            break;\n        case 8:\n        case 9:\n            D_80082BBC[offset + 5] = 3;\n            break;\n        }\n        D_80082BBC[offset + 9] = 0;\n        i++;\n        offset += 10;\n    } while (i != 10);\n}",
+        "score": 0.7391,
+        "reason": "structural_diffs=18",
+        "diffs": [
+          "structural: target=lui v1, HI(D_800BE2F0) got=lui v0, HI(D_800BE2F0)",
+          "structural: target=lui v0, HI(D_800BE358) got=lui v1, HI(D_800BE358)",
+          "structural: target=addiu v0, v0, LO(D_800BE358) got=addiu v0, v0, LO(D_800BE2F0)",
+          "structural: target=addiu v1, v1, LO(D_800BE2F0) got=addiu v1, v1, LO(D_800BE358)",
+          "structural: target=addiu v1, v1, 1 got=addiu v0, v0, 1",
+          "structural: target=sltu at, v1, v0 got=sltu at, v0, v1",
+          "structural: target=sb zero, -1(v1) got=sb zero, -1(v0)",
+          "structural: target=addiu a0, a0, LO(D_80082BBC) got=move v0, zero",
+          "structural: target=move v0, zero got=move v1, zero",
+          "structural: target=move v1, zero got=addiu a0, a0, LO(D_80082BBC)",
+          "structural: target=li t1, 3 got=li t1, 10",
+          "structural: target=lui at, HI(jtbl_80095A00) got=lui at, HI(.rodata)",
+          "structural: target=lw t8, LO(jtbl_80095A00)(at) got=lw t8, LO(.rodata)(at)",
+          "structural: target=sb t1, 5(t4) got=sb a1, 5(t4)",
+          "structural: target=sb t1, 5(t8) got=sb a1, 5(t8)",
+          "structural: target=addiu v1, v1, 10 got=sb zero, 9(t4)",
+          "structural: target=bne v0, t0, L2 got=bne v0, t1, L2",
+          "structural: target=sb zero, 9(t4) got=addiu v1, v1, 10"
+        ],
+        "timestamp": "2026-06-04T12:54:11.571Z"
       }
     ]
   },
