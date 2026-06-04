@@ -27169,9 +27169,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
-    "lastScore": 0.4561,
-    "status": "pending",
+    "attempts": 5,
+    "lastScore": 0.49137931034482757,
+    "status": "skipped",
     "history": [
       {
         "code": "s32 func_1000C934(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {\n    s32 sp3C;\n    s32 sp38;\n    s32 temp_t7;\n    s32 temp_a1;\n\n    sp3C = 0;\n    sp38 = 0x2EE0;\n    temp_t7 = D_800DBFF0->unk5F0 & 1;\n    if (temp_t7 != 0) {\n        sp38 = 0x7FFF;\n    }\n    if ((D_800BE9F0 == 0x37) && (temp_t7 == 0)) {\n        func_100114D0(0x898, 0x42A, -0x640, sp38, 0xBB8, 0x5DC, 0, &sp3C, 0);\n        sp3C = sp38 - (sp3C & 0xFF00);\n    }\n    temp_a1 = sp3C;\n    if (temp_a1 != arg0) {\n        func_1000E40C(0x54, temp_a1);\n    }\n    return temp_a1 | 0x80000000;\n}",
@@ -27214,6 +27214,20 @@
           "structural: target=sw a3, 56(sp) got=lw v0, 60(sp)"
         ],
         "timestamp": "2026-06-04T07:21:45.791Z"
+      },
+      {
+        "code": "s32 func_1000C934(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {\n    s32 sp3C;\n    s32 sp38;\n    s32 temp_t7;\n\n    sp3C = 0;\n    temp_t7 = D_800DBFF0->unk5F0 & 1;\n    sp38 = (temp_t7 != 0) ? 0x7FFF : 0x2EE0;\n    if ((D_800BE9F0 == 0x37) && (temp_t7 == 0)) {\n        func_100114D0(0x898, 0x42A, -0x640, sp38, 0xBB8, 0x5DC, 0, &sp3C, 0);\n        sp3C = sp38 - (sp3C & 0xFF00);\n    }\n    arg1 = sp3C;\n    if ((u16)(arg1 != arg0) != 0) {\n        func_1000E40C(0x54, arg1);\n    }\n    return arg1 | 0x80000000;\n}",
+        "score": 0.49137931034482757,
+        "reason": "length_mismatch (target=57, generated=58)",
+        "diffs": [],
+        "timestamp": "2026-06-04T07:22:08.467Z"
+      },
+      {
+        "code": "s32 func_1000C934(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {\n    s32 sp3C;\n    s32 sp38;\n    s32 temp_t7;\n\n    sp3C = 0;\n    temp_t7 = D_800DBFF0->unk5F0 & 1;\n    sp38 = (temp_t7 != 0) ? 0x7FFF : 0x2EE0;\n    if ((D_800BE9F0 == 0x37) && (temp_t7 == 0)) {\n        func_100114D0(0x898, 0x42A, -0x640, sp38, 0xBB8, 0x5DC, 0, &sp3C, 0);\n        arg1 = sp3C;\n        arg1 = sp38 - (arg1 & 0xFF00);\n        sp3C = arg1;\n    }\n    arg1 = sp3C;\n    if ((u16)(arg1 != arg0) != 0) {\n        func_1000E40C(0x54, arg1);\n    }\n    return arg1 | 0x80000000;\n}",
+        "score": 0.49137931034482757,
+        "reason": "length_mismatch (target=57, generated=58)",
+        "diffs": [],
+        "timestamp": "2026-06-04T07:22:46.083Z"
       }
     ]
   },
@@ -27299,9 +27313,32 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.49137931034482757,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_15145CD0(s32 arg0, f32 **arg1, f32 **arg2, s32 arg3) {\n    f32 sp48[16];\n\n    func_150A8050((f32 (*)[4])sp48, *(f32 *)(arg0 + 0), *(f32 *)(arg0 + 4), *(f32 *)(arg0 + 8));\n    sp48[12] = (f32)*(s16 *)(arg0 + 0x10);\n    sp48[13] = (f32)*(s16 *)(arg0 + 0x12);\n    sp48[14] = (f32)*(s16 *)(arg0 + 0x14);\n    if (arg3 > 0) {\n        do {\n            f32 *src = *arg1;\n            f32 *dst = *arg2;\n            func_150A7960((f32 (*)[4])sp48, src[0], src[1], src[2], &dst[0], &dst[1], &dst[2]);\n            arg3--;\n            arg1++;\n            arg2++;\n        } while (arg3 > 0);\n    }\n}",
+        "score": 0.49137931034482757,
+        "reason": "length_mismatch (target=57, generated=58)",
+        "diffs": [],
+        "timestamp": "2026-06-04T07:23:44.385Z"
+      },
+      {
+        "code": "void func_15145CD0(s32 arg0, f32 **arg1, f32 **arg2, s32 arg3) {\n    f32 sp48[16];\n    void *temp_s1;\n    f32 **temp_s2;\n\n    temp_s1 = (void *)arg0;\n    func_150A8050((f32 (*)[4])sp48, *(f32 *)((s32)temp_s1 + 0), *(f32 *)((s32)temp_s1 + 4), *(f32 *)((s32)temp_s1 + 8));\n    sp48[12] = (f32)*(s16 *)((s32)temp_s1 + 0x10);\n    sp48[13] = (f32)*(s16 *)((s32)temp_s1 + 0x12);\n    sp48[14] = (f32)*(s16 *)((s32)temp_s1 + 0x14);\n    temp_s1 = arg1;\n    temp_s2 = arg2;\n    if (arg3 > 0) {\n        do {\n            f32 *src = *(f32 **)temp_s1;\n            f32 *dst = *temp_s2;\n            func_150A7960((f32 (*)[4])sp48, src[0], src[1], src[2], &dst[0], &dst[1], &dst[2]);\n            arg3--;\n            temp_s1 = (u8 *)temp_s1 + 4;\n            temp_s2++;\n        } while (arg3 > 0);\n    }\n}",
+        "score": 0.475,
+        "reason": "length_mismatch (target=57, generated=60)",
+        "diffs": [],
+        "timestamp": "2026-06-04T07:24:17.157Z"
+      },
+      {
+        "code": "void func_15145CD0(void *arg0, void *arg1, void *arg2, s32 arg3) {\n    f32 sp48[16];\n\n    func_150A8050((f32 (*)[4])sp48, *(f32 *)((s32)arg0 + 0), *(f32 *)((s32)arg0 + 4), *(f32 *)((s32)arg0 + 8));\n    sp48[12] = (f32)*(s16 *)((s32)arg0 + 0x10);\n    sp48[13] = (f32)*(s16 *)((s32)arg0 + 0x12);\n    sp48[14] = (f32)*(s16 *)((s32)arg0 + 0x14);\n    if (arg3 > 0) {\n        do {\n            void *src = *(void **)arg1;\n            void *dst = *(void **)arg2;\n            func_150A7960((f32 (*)[4])sp48, *(f32 *)((s32)src + 0), *(f32 *)((s32)src + 4), *(f32 *)((s32)src + 8), (f32 *)((s32)dst + 0), (f32 *)((s32)dst + 4), (f32 *)((s32)dst + 8));\n            arg3--;\n            arg1 = (void *)((s32)arg1 + 4);\n            arg2 = (void *)((s32)arg2 + 4);\n        } while (arg3 > 0);\n    }\n}",
+        "score": 0.49137931034482757,
+        "reason": "length_mismatch (target=57, generated=58)",
+        "diffs": [],
+        "timestamp": "2026-06-04T07:29:18.760Z"
+      }
+    ]
   },
   {
     "function": "func_15043BB8",
@@ -32149,9 +32186,28 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 2,
+    "lastScore": 0.9649,
+    "status": "skipped",
+    "history": [
+      {
+        "code": "s32 func_15141CC0(s32 arg0) {\n    s32 temp_v0 = D_800BE9F0;\n\n    if (temp_v0 == 0x2F) {\n        return 6;\n    }\n    if (temp_v0 == 0x42) {\n        return 7;\n    }\n    if (temp_v0 == 0x27) {\n        return 8;\n    }\n    if (temp_v0 == 0x19) {\n        return 5;\n    }\n\n    switch (arg0) {\n        case 10:\n            return 0;\n        case 11:\n            return 1;\n        case 7:\n            return 2;\n        case 15:\n            return 3;\n        case 2:\n        case 8:\n        case 12:\n            if (temp_v0 == 2) {\n                return 7;\n            }\n            return 4;\n        case 5:\n            if (temp_v0 == 0x14) {\n                return 5;\n            }\n            return 9;\n        case 0:\n        default:\n            return 9;\n    }\n}",
+        "score": 0.4824561403508772,
+        "reason": "length_mismatch (target=57, generated=55)",
+        "diffs": [],
+        "timestamp": "2026-06-04T07:25:51.959Z"
+      },
+      {
+        "code": "s32 func_15141CC0(s32 arg0) {\n    s32 temp_v0 = D_800BE9F0;\n\n    if (temp_v0 == 0x2F) {\n        return 6;\n    }\n    if (temp_v0 == 0x42) {\n        return 7;\n    }\n    if (temp_v0 == 0x27) {\n        return 8;\n    }\n    if (temp_v0 == 0x19) {\n        return 5;\n    }\n\n    switch (arg0) {\n        case 10:\n            return 0;\n        case 7:\n            return 2;\n        case 11:\n            return 1;\n        case 15:\n            return 3;\n        case 2:\n        case 8:\n        case 12:\n            if (temp_v0 == 2) {\n                return 7;\n            }\n            return 4;\n        case 5:\n            if (temp_v0 == 0x14) {\n                return 5;\n            }\n            return 9;\n        case 0:\n            return 9;\n    }\n    return 9;\n}",
+        "score": 0.9649,
+        "reason": "structural_diffs=2",
+        "diffs": [
+          "structural: target=lui at, HI(jtbl_800A5430) got=lui at, HI(.rodata)",
+          "structural: target=lw t6, LO(jtbl_800A5430)(at) got=lw t6, LO(.rodata)(at)"
+        ],
+        "timestamp": "2026-06-04T07:26:42.624Z"
+      }
+    ]
   },
   {
     "function": "func_100099BC",
