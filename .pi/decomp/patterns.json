@@ -909,5 +909,14 @@
     "example_functions": [
       "func_1000ECCC"
     ]
+  },
+  {
+    "id": "signed-stack-byte-for-minus-one",
+    "description": "Use an s8 stack byte array when a local byte field is assigned -1 and target materializes `li reg,-1` before `sb`; u8 arrays tend to materialize 255 instead.",
+    "trigger": "Near-match where the only difference is `addiu reg,zero,-1` vs `addiu reg,zero,0xFF` for a byte store.",
+    "solution": "Declare the stack buffer or local byte as `s8` (or otherwise signed) so IDO treats -1 as signed, then pass it as void pointer if needed.",
+    "example_functions": [
+      "func_15071360"
+    ]
   }
 ]

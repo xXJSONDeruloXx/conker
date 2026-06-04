@@ -5,6 +5,9 @@
 
 #include "macros.h"
 
+#include "libc/stdarg.h"
+extern u8 D_AB1950[];
+
 void func_1502AAF0(void) {
 }
 
@@ -52,7 +55,31 @@ void func_1502AAF8(s32 arg0) {
 //     }
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_57FA0/func_1502B8E0.s")
+s32 func_1502B8E0(s32 arg0, s32 arg1, s32 arg2, ...) {
+    va_list args;
+    s32 temp_a1;
+    s32 offset;
+    s32 more;
+    s32 sp34;
+
+    more = 1;
+    offset = (s32)D_AB1950;
+    va_start(args, arg2);
+    if (arg2 != 0) {
+        do {
+            temp_a1 = va_arg(args, s32);
+            if (more != 0) {
+                offset += func_1502AC88(offset, temp_a1, &sp34);
+            }
+            arg2--;
+            more = sp34 & 0x0FFFFFFF;
+        } while (arg2 != 0);
+    }
+    if (more != 0) {
+        more = func_1502B224(offset, arg0, sp34, arg1);
+    }
+    return more;
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_57FA0/func_1502B9B4.s")
 // NON-MATCHING: maybe 50% there?
