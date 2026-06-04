@@ -19071,9 +19071,9 @@
     "instructions": 50,
     "difficulty": "medium-low",
     "tags": [],
-    "attempts": 8,
-    "lastScore": 0.49019607843137253,
-    "status": "pending",
+    "attempts": 9,
+    "lastScore": 1,
+    "status": "matched",
     "history": [
       {
         "code": "s32 func_15145128(struct17 *arg0, struct17 *arg1, f32 *arg2, f32 *arg3) {\n    f32 sp0;\n    f32 len;\n    f32 inv;\n    f32 sum;\n\n    if (arg3 == NULL) {\n        arg3 = &sp0;\n    }\n    sum = (arg0->unk0 * arg0->unk0) + (arg0->unk4 * arg0->unk4) + (arg0->unk8 * arg0->unk8);\n    if (sum == 0.0f) {\n        return 0;\n    }\n    len = sqrtf(sum);\n    inv = 1.0f / len;\n    if (arg2 != NULL) {\n        *arg2 = len;\n    }\n    *arg3 = inv;\n    arg1->unk0 = arg0->unk0 * *arg3;\n    arg1->unk4 = arg0->unk4 * *arg3;\n    arg1->unk8 = arg0->unk8 * *arg3;\n    return 1;\n}",
@@ -19349,9 +19349,53 @@
     "instructions": 50,
     "difficulty": "medium-low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.49,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_160018BC(void) {\n    u8 *ptr;\n    __OSContReadFormat readformat;\n    s32 i;\n    u32 *zeroPtr;\n\n    ptr = (u8 *)&__osContPifRam;\n    zeroPtr = (u32 *)&__osContPifRam;\n    do {\n        *zeroPtr++ = 0;\n    } while (zeroPtr < (u32 *)&__osContLastCmd);\n    __osContPifRam.pifstatus = CONT_CMD_EXE;\n    readformat.dummy = CONT_CMD_NOP;\n    readformat.txsize = CONT_CMD_READ_BUTTON_TX;\n    readformat.rxsize = CONT_CMD_READ_BUTTON_RX;\n    readformat.cmd = CONT_CMD_READ_BUTTON;\n    readformat.button = 0xFFFF;\n    readformat.stick_x = -1;\n    readformat.stick_y = -1;\n    for (i = 0; i < __osMaxControllers; i++, ptr += sizeof(__OSContReadFormat)) {\n        *(__OSContReadFormat *)ptr = readformat;\n    }\n    *ptr = CONT_CMD_END;\n}",
+        "score": 0.49,
+        "reason": "length_mismatch (target=50, generated=49)",
+        "diffs": [],
+        "timestamp": "2026-06-04T03:36:14.599Z"
+      },
+      {
+        "code": "void func_160018BC(void) {\n    u8 *ptr;\n    __OSContReadFormat readformat;\n    s32 i;\n    u32 *zeroPtr;\n\n    ptr = (u8 *)&__osContPifRam;\n    zeroPtr = __osContPifRam.ramarray;\n    do {\n        *zeroPtr++ = 0;\n    } while (zeroPtr < (u32 *)&__osContLastCmd);\n    ((OSPifRam *)ptr)->pifstatus = CONT_CMD_EXE;\n    readformat.dummy = CONT_CMD_NOP;\n    readformat.txsize = CONT_CMD_READ_BUTTON_TX;\n    readformat.rxsize = CONT_CMD_READ_BUTTON_RX;\n    readformat.cmd = CONT_CMD_READ_BUTTON;\n    readformat.button = 0xFFFF;\n    readformat.stick_x = -1;\n    readformat.stick_y = -1;\n    for (i = 0; i < __osMaxControllers; i++, ptr += sizeof(__OSContReadFormat)) {\n        *(__OSContReadFormat *)ptr = readformat;\n    }\n    *ptr = CONT_CMD_END;\n}",
+        "score": 0.54,
+        "reason": "structural_diffs=23",
+        "diffs": [
+          "structural: target=lui a1, HI(__osContPifRam) got=lui a0, HI(__osContPifRam)",
+          "structural: target=addiu a1, a1, LO(__osContPifRam) got=addiu a0, a0, LO(__osContPifRam)",
+          "structural: target=lui a0, HI(__osContPifRam) got=move v0, a0",
+          "structural: target=lui v1, HI(__osContLastCmd) got=move v1, a0",
+          "structural: target=move v0, a1 got=lui a0, HI(__osContLastCmd)",
+          "structural: target=addiu v1, v1, LO(__osContLastCmd) got=addiu a0, a0, LO(__osContLastCmd)",
+          "structural: target=addiu a0, a0, LO(__osContPifRam) got=addiu v1, v1, 4",
+          "structural: target=addiu a0, a0, 4 got=sltu at, v1, a0",
+          "structural: target=sltu at, a0, v1 got=bnez at, L0",
+          "structural: target=bnez at, L0 got=sw zero, -4(v1)",
+          "structural: target=sw zero, -4(a0) got=lui a0, HI(__osMaxControllers)",
+          "structural: target=lui a0, HI(__osMaxControllers) got=li t6, 1",
+          "structural: target=addiu a0, a0, LO(__osMaxControllers) got=lui at, HI(__osContPifRam)",
+          "structural: target=lbu t4, 0(a0) got=addiu a0, a0, LO(__osMaxControllers)",
+          "structural: target=li t6, 1 got=sw t6, 60(at)",
+          "structural: target=li t7, 255 got=lbu t4, 0(a0)",
+          "structural: target=li t8, 1 got=li t7, 255",
+          "structural: target=li t9, 4 got=li t8, 1",
+          "structural: target=li t0, 1 got=li t9, 4",
+          "structural: target=ori t1, zero, 65535 got=li t0, 1"
+        ],
+        "timestamp": "2026-06-04T03:37:05.262Z"
+      },
+      {
+        "code": "void func_160018BC(void) {\n    u32 *zeroPtr;\n    u8 *ptr;\n    __OSContReadFormat readformat;\n    s32 i;\n\n    zeroPtr = (u32 *)&__osContPifRam;\n    ptr = (u8 *)&__osContPifRam;\n    do {\n        *zeroPtr++ = 0;\n    } while (zeroPtr < (u32 *)&__osContLastCmd);\n    __osContPifRam.pifstatus = CONT_CMD_EXE;\n    readformat.dummy = CONT_CMD_NOP;\n    readformat.txsize = CONT_CMD_READ_BUTTON_TX;\n    readformat.rxsize = CONT_CMD_READ_BUTTON_RX;\n    readformat.cmd = CONT_CMD_READ_BUTTON;\n    readformat.button = 0xFFFF;\n    readformat.stick_x = -1;\n    readformat.stick_y = -1;\n    for (i = 0; i < __osMaxControllers; i++, ptr += sizeof(__OSContReadFormat)) {\n        *(__OSContReadFormat *)ptr = readformat;\n    }\n    *ptr = CONT_CMD_END;\n}",
+        "score": 0.49,
+        "reason": "length_mismatch (target=50, generated=49)",
+        "diffs": [],
+        "timestamp": "2026-06-04T03:37:36.340Z"
+      }
+    ]
   },
   {
     "function": "func_1505DF10",
