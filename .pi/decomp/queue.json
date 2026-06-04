@@ -19047,8 +19047,8 @@
     "instructions": 52,
     "difficulty": "medium",
     "tags": [],
-    "attempts": 8,
-    "lastScore": 0.46153846153846156,
+    "attempts": 9,
+    "lastScore": 0.49038461538461536,
     "status": "pending",
     "history": [
       {
@@ -19106,6 +19106,13 @@
         "reason": "length_mismatch (target=52, generated=48)",
         "diffs": [],
         "timestamp": "2026-06-04T04:27:27.834Z"
+      },
+      {
+        "code": "Gfx *func_150C3160(Gfx *arg0, void *arg1) {\n    s32 temp_v0;\n    s32 temp_v1;\n    s32 temp_a0;\n    f32 temp_f0;\n    Gfx *temp_a1;\n\n    temp_v0 = *(s32 *)((s32)arg1 + 0x2E8);\n    temp_f0 = (temp_v0 != 0) ? ((f32)*(s32 *)((s32)arg1 + 0x2E4) / (f32)temp_v0) : 1.0f;\n    temp_f0 = 1.0f - temp_f0;\n    temp_v1 = (s32)((500.0f * temp_f0) + 2.0f);\n    temp_a0 = 2 - *(s32 *)((s32)arg1 + 0x2EC);\n    *(s32 *)((s32)arg1 + 0x2EC) = temp_v1 / 3;\n    temp_a1 = arg0;\n    while (temp_a0 < 0) {\n        temp_a0 += 0x40;\n    }\n    temp_a1->words.w0 = 0xF2000000 | ((temp_v1 & 0xFFF) << 12) | (temp_a0 & 0xFFF);\n    arg0++;\n    temp_a1->words.w1 = 0x041FE03E;\n    return arg0;\n}",
+        "score": 0.49038461538461536,
+        "reason": "length_mismatch (target=52, generated=51)",
+        "diffs": [],
+        "timestamp": "2026-06-04T13:56:58.763Z"
       }
     ]
   },
@@ -20384,7 +20391,7 @@
     ],
     "attempts": 15,
     "lastScore": 0.119,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "void func_150049A4(s8 *arg0, s32 arg1, s32 arg2) {\n    s8 *ptr;\n    s32 i;\n    s32 code;\n\n    ptr = arg0;\n    i = 0;\n    if (*arg0 != -0x21) {\n        code = *arg0;\n        do {\n            i++;\n            if (code == -0x24) {\n                if ((u8)ptr[3] == 0xE) {\n                    *(s32 *)(ptr + 4) = *(s32 *)(ptr + 4) + arg2;\n                }\n            } else if (code == 1) {\n                *(s32 *)(ptr + 4) = *(s32 *)(ptr + 4) + arg1;\n            } else if (code == 0xDE) {\n                *(s32 *)(ptr + 4) = *(s32 *)(ptr + 4) + arg1;\n            }\n            ptr = arg0 + (i * 8);\n            code = *ptr;\n        } while (code != -0x21);\n    }\n}",
@@ -20511,6 +20518,19 @@
           "structural: target=b L4 got=b L3"
         ],
         "timestamp": "2026-06-04T13:55:03.387Z"
+      },
+      {
+        "code": "void func_150049A4(s8 *arg0, s32 arg1, s32 arg2) {\n    s32 temp_v0;\n    s32 temp_s0;\n    s32 temp_a3;\n    s32 temp_t0;\n    s32 temp_t4;\n    s32 temp_t3;\n    s32 temp_t2;\n    s32 temp_t1;\n\n    temp_v0 = 0;\n    temp_s0 = arg2;\n    temp_a3 = arg1;\n    temp_t0 = -0x21;\n    arg1 = (s32)arg0;\n    if (*(volatile s8 *)arg0 != temp_t0) {\n        temp_t4 = 0xE;\n        arg2 = *arg0;\n        temp_t3 = 0xDE;\n        temp_t2 = 1;\n        temp_t1 = -0x24;\n        do {\n            temp_v0++;\n            if (arg2 == temp_t1) {\n                if (*(u8 *)(arg1 + 3) == temp_t4) {\n                    *(s32 *)(arg1 + 4) = *(s32 *)(arg1 + 4) + temp_s0;\n                }\n            } else if (arg2 == temp_t2) {\n                *(s32 *)(arg1 + 4) = *(s32 *)(arg1 + 4) + temp_a3;\n            } else if (arg2 == temp_t3) {\n                *(s32 *)(arg1 + 4) = *(s32 *)(arg1 + 4) + temp_a3;\n            }\n            arg1 = (s32)(arg0 + (temp_v0 << 3));\n            arg2 = *(s8 *)arg1;\n        } while (arg2 != temp_t0);\n    }\n}",
+        "score": -0.6666666666666667,
+        "reason": "transmuter_best=50",
+        "diffs": [
+          "transmuter: initial=50→best=50, iters=0, compiled=0, errors=0, forks=0",
+          "fork_rules: delete-stmt, duplicate-assignment, modify-condition, commutative-swap, reorder-stmts, expand-expr, randomize-type, add-mask, remove-cast, cast-expr, xor-zero, self-assignment, temp-for-expr, sameline",
+          "last_fork_rule: delete-stmt",
+          "config: timeout=60s, maxCompiles=3000, concurrency=4, profile=ido",
+          "NOTE: 0 compiled = all mutations hit compile errors. Source may have constructs incompatible with isolated compilation."
+        ],
+        "timestamp": "2026-06-04T13:56:19.550Z"
       }
     ]
   },
