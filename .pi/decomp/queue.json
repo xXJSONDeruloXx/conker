@@ -24610,8 +24610,8 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 8,
-    "lastScore": 0.49242424242424243,
+    "attempts": 9,
+    "lastScore": 0.4769230769230769,
     "status": "pending",
     "history": [
       {
@@ -24732,6 +24732,13 @@
         "reason": "length_mismatch (target=65, generated=66)",
         "diffs": [],
         "timestamp": "2026-06-04T11:22:17.720Z"
+      },
+      {
+        "code": "s32 func_150C2700(s32 arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4) {\n    u8 sp20[0x48];\n    \n    *(s32 *)&sp20[0] = arg0;\n    *(s32 *)&sp20[4] = arg1;\n    *(f32 *)&sp20[8] = arg2;\n    *(f32 *)&sp20[0xC] = arg3;\n    *(f32 *)&sp20[0x10] = arg4;\n    *(s16 *)&sp20[0x14] = 6;\n    *(s16 *)&sp20[0x16] = 5;\n    *(s16 *)&sp20[0x18] = 0x46;\n    *(s16 *)&sp20[0x1A] = -0x1F;\n    *(s16 *)&sp20[0x1C] = 0x2E;\n    *(s16 *)&sp20[0x20] = 0x64;\n    *(s16 *)&sp20[0x22] = 0;\n    *(f32 *)&sp20[0x24] = D_800A0274;\n    *(f32 *)&sp20[0x28] = D_800A0278;\n    sp20[0x2C] = 0x9B;\n    sp20[0x2D] = 0x64;\n    *(f32 *)&sp20[0x30] = D_800A027C;\n    *(f32 *)&sp20[0x34] = 0.0f;\n    sp20[0x38] = 1;\n    sp20[0x39] = 6;\n    *(f32 *)&sp20[0x3C] = 0.0f;\n    sp20[0x40] = 1;\n    *(f32 *)&sp20[0x44] = 0.0f;\n    func_15150178(sp20, &sp20[8], 0, *(u8 *)&sp20[0x4B], 1);\n    return 1;\n}",
+        "score": 0.4769230769230769,
+        "reason": "length_mismatch (target=65, generated=62)",
+        "diffs": [],
+        "timestamp": "2026-06-04T20:28:55.780Z"
       }
     ]
   },
@@ -26167,8 +26174,8 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 15,
-    "lastScore": 0.4814814814814815,
+    "attempts": 16,
+    "lastScore": 0.4537037037037037,
     "status": "pending",
     "history": [
       {
@@ -26288,6 +26295,13 @@
         "reason": "length_mismatch (target=54, generated=52)",
         "diffs": [],
         "timestamp": "2026-06-04T20:21:19.354Z"
+      },
+      {
+        "code": "void func_1000A348(void) {\n    register volatile struct147 *temp_a3;\n    register struct54 *temp_v0;\n    register struct54 *temp_v1;\n    register struct54 *temp_a0;\n    register struct54 *temp_a2;\n    register u8 temp_t6;\n    register u8 temp_t7;\n    register s32 temp_t8;\n    register s32 temp_t2;\n    register s32 temp_t1;\n    register s32 temp_t9;\n\n    temp_a3 = (volatile struct147 *)&D_800406A0;\n    temp_v0 = (struct54 *)temp_a3->unk4;\n    if (temp_v0 != NULL) {\n        do {\n            temp_v1 = (struct54 *)temp_v0->unk0;\n            temp_t6 = *(volatile u8 *)((u32)temp_v0 + 0x14);\n            temp_t7 = *(volatile u8 *)((u32)temp_v0 + 0x16);\n            if (temp_t6 != 0) {\n                break;\n            }\n            if (temp_t7 != 0) {\n                break;\n            }\n            temp_t8 = *(s32 *)((u32)temp_v0 + 0xC);\n            *(s32 *)temp_t8 = temp_v0->unk8;\n            temp_v0->unkC = NULL;\n            temp_t9 = temp_a3->unk4;\n            if ((s32)temp_v0 == temp_t9) {\n                temp_a3->unk4 = (s32)temp_v1;\n            }\n            temp_a0 = (struct54 *)temp_v0->unk0;\n            if (temp_a0 != NULL) {\n                temp_a0->unk4 = (s32)temp_v0->unkC;\n            }\n            temp_a0 = (struct54 *)temp_v0->unkC;\n            if (temp_a0 != NULL) {\n                temp_a0->unk0 = (s32)temp_v0->unk0;\n            }\n            temp_a0 = (struct54 *)temp_a3->unk10;\n            if (temp_a0 != NULL) {\n                temp_v0->unk4 = (s32)temp_a0;\n                temp_v0->unk0 = (s32)temp_a0->unk0;\n                temp_a2 = (struct54 *)temp_a0->unk0;\n                if (temp_a2 != NULL) {\n                    temp_a2->unk4 = (s32)temp_v0;\n                }\n                temp_a0->unk0 = (s32)temp_v0;\n            } else {\n                temp_a3->unk10 = (s32)temp_v0;\n                temp_v0->unk0 = NULL;\n                temp_v0->unk4 = NULL;\n            }\n            temp_v0 = temp_v1;\n        } while (temp_v0 != NULL);\n    }\n}",
+        "score": 0.4537037037037037,
+        "reason": "length_mismatch (target=54, generated=49)",
+        "diffs": [],
+        "timestamp": "2026-06-04T20:27:28.249Z"
       }
     ]
   },
