@@ -38143,8 +38143,8 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 12,
-    "lastScore": 0.9851,
+    "attempts": 14,
+    "lastScore": 0.4652777777777778,
     "status": "pending",
     "history": [
       {
@@ -38276,6 +38276,22 @@
           "structural: target=li a1, 0 got=lui a1, 1"
         ],
         "timestamp": "2026-06-04T12:12:49.320Z"
+      },
+      {
+        "code": "void func_151283B8(struct108 *arg0) {\n    switch (arg0->unk2C) {\n        case 0x80:\n            func_15122440(arg0);\n            break;\n        case 0x40:\n            func_15129934(arg0);\n            break;\n        case 0x1:\n            func_15122980(arg0);\n            break;\n        case 0x8:\n        {\n            register s32 temp_a1;\n            temp_a1 = 0;\n            func_15121C80(arg0, temp_a1);\n            break;\n        }\n        case 0x2:\n            func_151220D0(arg0);\n            break;\n        case 0x400:\n            func_15122170(arg0);\n            break;\n        case 0x800:\n            func_15122980(arg0);\n            break;\n        case 0x100:\n            func_15120158(arg0);\n            break;\n        case 0x800000:\n            func_1512DEA4(arg0);\n            break;\n        case 0x2000:\n            break;\n    }\n}",
+        "score": 0.9851,
+        "reason": "structural_diffs=1",
+        "diffs": [
+          "structural: target=li a1, 0 got=move a1, zero"
+        ],
+        "timestamp": "2026-06-04T12:13:10.321Z"
+      },
+      {
+        "code": "void func_151283B8(struct108 *arg0) {\n    switch (arg0->unk2C) {\n        case 0x80:\n            func_15122440(arg0);\n            break;\n        case 0x40:\n            func_15129934(arg0);\n            break;\n        case 0x1:\n            func_15122980(arg0);\n            break;\n        case 0x8:\n            asm(\"addiu $5,$0,0\");\n            func_15121C80(arg0);\n            break;\n        case 0x2:\n            func_151220D0(arg0);\n            break;\n        case 0x400:\n            func_15122170(arg0);\n            break;\n        case 0x800:\n            func_15122980(arg0);\n            break;\n        case 0x100:\n            func_15120158(arg0);\n            break;\n        case 0x800000:\n            func_1512DEA4(arg0);\n            break;\n        case 0x2000:\n            break;\n    }\n}",
+        "score": 0.4652777777777778,
+        "reason": "length_mismatch (target=67, generated=72)",
+        "diffs": [],
+        "timestamp": "2026-06-04T12:13:28.157Z"
       }
     ]
   },

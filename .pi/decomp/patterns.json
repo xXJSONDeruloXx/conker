@@ -1089,5 +1089,14 @@
     "example_functions": [
       "func_15136918"
     ]
+  },
+  {
+    "id": "avoid-float-temp-locals-for-stack-frame",
+    "description": "Explicit f32 temporaries can inflate IDO stack frames even when values stay in FPRs; direct arithmetic expressions can keep the local matrix at the target stack offset.",
+    "trigger": "A matrix/local-array function has matching arithmetic codegen but all stack offsets/frame size are shifted by 8 or more after adding scalar temp locals.",
+    "solution": "Remove explicit scalar temp locals and write compound expressions directly so IDO allocates only the intended stack array.",
+    "example_functions": [
+      "func_151424F4"
+    ]
   }
 ]
