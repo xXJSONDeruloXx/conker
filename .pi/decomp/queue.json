@@ -24610,8 +24610,8 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 9,
-    "lastScore": 0.4769230769230769,
+    "attempts": 10,
+    "lastScore": 0.46153846153846156,
     "status": "pending",
     "history": [
       {
@@ -24739,6 +24739,13 @@
         "reason": "length_mismatch (target=65, generated=62)",
         "diffs": [],
         "timestamp": "2026-06-04T20:28:55.780Z"
+      },
+      {
+        "code": "s32 func_150C2700(s32 arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4) {\n    u8 sp20[0x48];\n    s32 temp_t7;\n    s32 temp_t8;\n    s32 temp_t6;\n    s32 temp_t9;\n    s32 temp_t0;\n    s32 temp_t1;\n    s32 temp_t2;\n    s32 temp_t3;\n    s32 temp_t4;\n    s32 temp_t5;\n    f32 temp_f0;\n    \n    // Set up stack frame\n    temp_t7 = 5;\n    temp_t8 = 0x6B; // 107\n    temp_t6 = 6;\n    temp_t9 = 0x46; // 70\n    temp_t0 = -0x1F; // -31\n    temp_t1 = 0x2E; // 46\n    temp_t2 = 0x64; // 100\n    temp_t3 = 0x9B; // 155\n    temp_t4 = 0x64; // 100\n    temp_t5 = 1;\n    \n    // Store values on stack in correct order\n    *(s16 *)&sp20[0x16] = temp_t7; // 5 at 0x16\n    *(s16 *)&sp20[0] = temp_t8; // 107 at 0x0\n    *(s16 *)&sp20[0x14] = temp_t6; // 6 at 0x14\n    *(s16 *)&sp20[2] = temp_t9; // 70 at 0x2\n    *(s16 *)&sp20[4] = temp_t0; // -31 at 0x4\n    *(s16 *)&sp20[6] = temp_t1; // 46 at 0x6\n    \n    // Store float arguments\n    *(f32 *)&sp20[8] = arg2;\n    *(f32 *)&sp20[0xC] = arg3;\n    *(f32 *)&sp20[0x10] = arg4;\n    \n    // Store float constants and globals\n    *(f32 *)&sp20[0x18] = 30.0f;\n    *(f32 *)&sp20[0x1C] = 35.0f;\n    *(s16 *)&sp20[0x20] = temp_t2; // 100 at 0x20\n    *(s16 *)&sp20[0x22] = 0; // 0 at 0x22\n    *(f32 *)&sp20[0x24] = 0.0f; // temp for D_800A0274\n    *(f32 *)&sp20[0x28] = 0.0f; // temp for D_800A0278\n    \n    // Store byte values\n    sp20[0x2C] = temp_t3; // 155 at 0x2C\n    sp20[0x2D] = temp_t4; // 100 at 0x2D\n    *(f32 *)&sp20[0x30] = 0.0f; // temp for D_800A027C\n    *(f32 *)&sp20[0x34] = 0.0f;\n    sp20[0x38] = temp_t5; // 1 at 0x38\n    sp20[0x39] = temp_t6; // 6 at 0x39\n    *(f32 *)&sp20[0x3C] = 0.0f;\n    sp20[0x40] = temp_t5; // 1 at 0x40\n    *(f32 *)&sp20[0x44] = 0.0f;\n    \n    // Call the function\n    func_15150178(sp20, &sp20[8], 0, *(u8 *)&sp20[0x4B], 1);\n    \n    return 1;\n}",
+        "score": 0.46153846153846156,
+        "reason": "length_mismatch (target=65, generated=60)",
+        "diffs": [],
+        "timestamp": "2026-06-04T20:36:10.922Z"
       }
     ]
   },
@@ -26174,8 +26181,8 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 16,
-    "lastScore": 0.4537037037037037,
+    "attempts": 18,
+    "lastScore": 0.4909090909090909,
     "status": "pending",
     "history": [
       {
@@ -26302,6 +26309,46 @@
         "reason": "length_mismatch (target=54, generated=49)",
         "diffs": [],
         "timestamp": "2026-06-04T20:27:28.249Z"
+      },
+      {
+        "code": "void func_1000A348(s32 arg0, s32 arg1, s32 arg2) {\n    volatile struct147 *temp_a3;\n    struct54 *temp_v0;\n    struct54 *temp_v1;\n    struct54 *temp_a0;\n    struct54 *temp_a2;\n\n    temp_a3 = (volatile struct147 *)&D_800406A0;\n    temp_v0 = (struct54 *)temp_a3->unk4;\n    while (temp_v0 != NULL) {\n        temp_v1 = temp_v0->unk0;\n        if ((temp_v0->unk14 == 0) && (temp_v0->unk16 == 0)) {\n            *(s32 *)temp_v0->unkC = temp_v0->unk8;\n            temp_v0->unkC = 0;\n            if ((s32)temp_v0 == temp_a3->unk4) {\n                temp_a3->unk4 = (s32)temp_v1;\n            }\n            temp_a0 = temp_v0->unk0;\n            if (temp_a0 != NULL) {\n                temp_a0->unk4 = temp_v0->unk4;\n            }\n            temp_a0 = temp_v0->unk4;\n            if (temp_a0 != NULL) {\n                temp_a0->unk0 = temp_v0->unk0;\n            }\n            temp_a0 = temp_a3->unk10;\n            if (temp_a0 != NULL) {\n                temp_v0->unk4 = temp_a0;\n                temp_v0->unk0 = temp_a0->unk0;\n                temp_a2 = temp_a0->unk0;\n                if (temp_a2 != NULL) {\n                    temp_a2->unk4 = temp_v0;\n                }\n                temp_a0->unk0 = temp_v0;\n            } else {\n                temp_a3->unk10 = temp_v0;\n                temp_v0->unk0 = NULL;\n                temp_v0->unk4 = NULL;\n            }\n        }\n        temp_v0 = temp_v1;\n    }\n}",
+        "score": -0.1333333333333333,
+        "reason": "transmuter_best=34",
+        "diffs": [
+          "transmuter: initial=34→best=34, iters=0, compiled=0, errors=0, forks=0",
+          "fork_rules: delete-stmt, reorder-stmts",
+          "last_fork_rule: delete-stmt",
+          "config: timeout=60s, maxCompiles=2000, concurrency=4, profile=ido",
+          "NOTE: 0 compiled = all mutations hit compile errors. Source may have constructs incompatible with isolated compilation."
+        ],
+        "timestamp": "2026-06-04T20:30:08.230Z"
+      },
+      {
+        "code": "void func_1000A348(void) {\n    struct147 *a3;\n    struct54 *v0;\n    struct54 *v1;\n    struct54 *a0;\n    struct54 *a2;\n    u8 t6;\n    u8 t7;\n    s32 t8;\n    s32 t9;\n    s32 t0;\n    s32 t1;\n    s32 t2;\n\n    a3 = &D_800406A0;\n    v0 = (struct54 *)a3->unk4;\n    if (v0 != NULL) {\n        do {\n            v1 = (struct54 *)v0->unk0;\n            t6 = *(u8 *)((u32)v0 + 0x14);\n            t7 = *(u8 *)((u32)v0 + 0x16);\n            if (t6 != 0) {\n                break;\n            }\n            if (t7 != 0) {\n                break;\n            }\n            t8 = *(s32 *)((u32)v0 + 0xC);\n            *(s32 *)t8 = v0->unk8;\n            v0->unkC = NULL;\n            t9 = a3->unk4;\n            if ((s32)v0 == t9) {\n                a3->unk4 = (s32)v1;\n            }\n            a0 = (struct54 *)v0->unk0;\n            if (a0 != NULL) {\n                a0->unk4 = (s32)v0->unkC;\n            }\n            a0 = (struct54 *)v0->unkC;\n            if (a0 != NULL) {\n                a0->unk0 = (s32)v0->unk0;\n            }\n            t0 = a3->unk10;\n            if (t0 != NULL) {\n                v0->unk4 = t0;\n                t1 = *(s32 *)t0;\n                if (t1 != 0) {\n                    t2 = (s32)v0;\n                    *(s32 *)t1 = t2;\n                }\n                *(s32 *)t0 = (s32)v0;\n            } else {\n                a3->unk10 = (s32)v0;\n                v0->unk0 = NULL;\n                v0->unk4 = NULL;\n            }\n            v0 = v1;\n        } while (v0 != NULL);\n    }\n}",
+        "score": 0.4537037037037037,
+        "reason": "length_mismatch (target=54, generated=49)",
+        "diffs": [],
+        "timestamp": "2026-06-04T20:34:02.662Z"
+      },
+      {
+        "code": "void func_1000A348(s32 arg0, s32 arg1, s32 arg2) {\n    volatile struct147 *temp_a3;\n    struct54 *temp_v0;\n    struct54 *temp_v1;\n    struct54 *temp_a0;\n    struct54 *temp_a2;\n\n    temp_a3 = (volatile struct147 *)&D_800406A0;\n    temp_v0 = (struct54 *)temp_a3->unk4;\n    while (temp_v0 != NULL) {\n        temp_v1 = temp_v0->unk0;\n        if ((temp_v0->unk14 == 0) && (temp_v0->unk16 == 0)) {\n            *(s32 *)temp_v0->unkC = temp_v0->unk8;\n            temp_v0->unkC = 0;\n            if ((s32)temp_v0 == temp_a3->unk4) {\n                temp_a3->unk4 = (s32)temp_v1;\n            }\n            temp_a0 = temp_v0->unk0;\n            if (temp_a0 != NULL) {\n                temp_a0->unk4 = temp_v0->unk4;\n            }\n            temp_a0 = temp_v0->unk4;\n            if (temp_a0 != NULL) {\n                temp_a0->unk0 = temp_v0->unk0;\n            }\n            temp_a0 = temp_a3->unk10;\n            if (temp_a0 != NULL) {\n                temp_v0->unk4 = temp_a0;\n                temp_v0->unk0 = temp_a0->unk0;\n                temp_a2 = temp_a0->unk0;\n                if (temp_a2 != NULL) {\n                    temp_a2->unk4 = temp_v0;\n                }\n                temp_a0->unk0 = temp_v0;\n            } else {\n                temp_a3->unk10 = temp_v0;\n                temp_v0->unk0 = NULL;\n                temp_v0->unk4 = NULL;\n            }\n        }\n        temp_v0 = temp_v1;\n    }\n}",
+        "score": -0.1333333333333333,
+        "reason": "transmuter_best=34",
+        "diffs": [
+          "transmuter: initial=34→best=34, iters=0, compiled=0, errors=0, forks=0",
+          "fork_rules: expand-expr, delete-stmt",
+          "last_fork_rule: expand-expr",
+          "config: timeout=60s, maxCompiles=2000, concurrency=4, profile=ido",
+          "NOTE: 0 compiled = all mutations hit compile errors. Source may have constructs incompatible with isolated compilation."
+        ],
+        "timestamp": "2026-06-04T20:37:04.769Z"
+      },
+      {
+        "code": "void func_1000A348(void) {\n    struct147 *temp_a3;\n    struct54 *temp_v0;\n    struct54 *temp_v1;\n    struct54 *temp_a0;\n    struct54 *temp_a2;\n\n    // Initialize pointers\n    temp_a3 = &D_800406A0;\n    temp_v0 = (struct54 *)temp_a3->unk4;\n\n    // Check if temp_v0 is NULL\n    if (temp_v0 == NULL) {\n        return;\n    }\n\n    // Check if temp_v0->unk14 == 0 and temp_v0->unk16 == 0\n    do {\n        if (temp_v0->unk14 != 0 || temp_v0->unk16 != 0) {\n            break;\n        }\n\n        // Store temp_v0->unk8 at temp_v0->unkC\n        *(s32 *)temp_v0->unkC = temp_v0->unk8;\n        temp_v0->unkC = NULL;\n\n        // Check if temp_v0 == temp_a3->unk4\n        if ((s32)temp_v0 == temp_a3->unk4) {\n            temp_a3->unk4 = (s32)temp_v1;\n        }\n\n        // Handle temp_v0->unk0\n        temp_a0 = temp_v0->unk0;\n        if (temp_a0 != NULL) {\n            temp_a0->unk4 = temp_v0->unk4;\n        }\n\n        // Handle temp_v0->unk4\n        temp_a0 = temp_v0->unk4;\n        if (temp_a0 != NULL) {\n            temp_a0->unk0 = temp_v0->unk0;\n        }\n\n        // Handle temp_a3->unk10\n        temp_a0 = temp_a3->unk10;\n        if (temp_a0 != NULL) {\n            temp_v0->unk4 = temp_a0;\n            temp_v0->unk0 = temp_a0->unk0;\n            temp_a2 = temp_a0->unk0;\n            if (temp_a2 != NULL) {\n                temp_a2->unk4 = temp_v0;\n            }\n            temp_a0->unk0 = temp_v0;\n        } else {\n            temp_a3->unk10 = temp_v0;\n            temp_v0->unk0 = NULL;\n            temp_v0->unk4 = NULL;\n        }\n\n        // Move to next iteration\n        temp_v1 = temp_v0->unk0;\n    } while (temp_v0 = temp_v1);\n}",
+        "score": 0.4909090909090909,
+        "reason": "length_mismatch (target=54, generated=55)",
+        "diffs": [],
+        "timestamp": "2026-06-04T20:49:45.899Z"
       }
     ]
   },
