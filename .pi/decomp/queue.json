@@ -22238,8 +22238,8 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 6,
-    "lastScore": 0.3774,
+    "attempts": 9,
+    "lastScore": 0.4732142857142857,
     "status": "pending",
     "history": [
       {
@@ -22346,6 +22346,27 @@
           "structural: target=sb zero, 260(a1) got=sb zero, 260(v0)"
         ],
         "timestamp": "2026-06-04T04:32:52.665Z"
+      },
+      {
+        "code": "void func_1507266C(void) {\n    s32 temp_t0;\n    u8 *temp_t1;\n    u32 temp_t2;\n    s32 temp_v1;\n    u8 temp_t4;\n    u8 *temp_a3;\n    u8 *temp_a1;\n\n    if ((D_800BE616 != 0) || (D_800D154C->unk222 != 0)) {\n        temp_t0 = 0x32C;\n        temp_t1 = &D_800C3E78;\n        temp_t2 = D_800D154C->unk222;\n        temp_v1 = D_800D1580;\n        temp_t4 = *temp_t1;\n        temp_a3 = (u8 *)D_800CC2D0;\n        temp_a1 = temp_a3 + (temp_t2 * temp_t0);\n        *(u8 *)(temp_a1 + 0x65) = temp_t4 + 1;\n        *(s32 *)(temp_a1 + 0x5C) = temp_v1 >> 16;\n        *(u8 *)(temp_a1 + 0x101) = 4;\n        *(u8 *)(temp_a1 + 0x104) = 0;\n        *(u8 *)(temp_a1 + 0x125) = 0xFF;\n        *(s32 *)(temp_a1 + 0x218) = 0;\n        *(s16 *)(temp_a1 + 0xE4) = 0;\n        *(s16 *)(temp_a1 + 0xE6) = 0;\n        *(u8 *)(temp_a1 + 0x232) = temp_v1;\n        *(f32 *)(temp_a1 + 0xEC) = 1.0f;\n        *(f32 *)(temp_a1 + 0xF0) = 1.0f;\n        *(f32 *)(temp_a1 + 0xDC) = 1.0f;\n        *(f32 *)(temp_a1 + 0xE0) = 1.0f;\n        func_151B5BA0(temp_a3 + (*temp_t1 * temp_t0));\n    }\n}",
+        "score": 0.4274193548387097,
+        "reason": "length_mismatch (target=53, generated=62)",
+        "diffs": [],
+        "timestamp": "2026-06-04T05:41:57.221Z"
+      },
+      {
+        "code": "void func_1507266C(void) {\n    u8 *temp_t1;\n    struct127 *base;\n    s32 *temp_v0_ptr;\n    s32 temp_v1;\n    struct127 *temp_a1;\n    u32 temp_t2;\n    u8 temp_t4;\n    s32 temp_t0;\n\n    if ((D_800BE616 != 0) || (D_800D154C->unk222 != 0)) {\n        temp_t1 = &D_800C3E78;\n        base = D_800CC2D0;\n        temp_t0 = sizeof(struct127);\n        temp_t2 = D_800D154C->unk222;\n        temp_v0_ptr = &D_800D1580;\n        temp_v1 = *temp_v0_ptr;\n        temp_t4 = *temp_t1;\n        temp_a1 = &base[temp_t2];\n        temp_a1->unk65 = temp_t4 + 1;\n        temp_a1->unk5C = temp_v1 >> 16;\n        temp_a1->unk101 = 4;\n        temp_a1->stunned = 0;\n        temp_a1->immune = 0xFF;\n        temp_a1->unk218 = 0;\n        temp_a1->unkE4 = 0;\n        temp_a1->unkE6 = 0;\n        temp_a1->unk232 = temp_v1;\n        temp_a1->unkEC = 1.0f;\n        temp_a1->unkF0 = 1.0f;\n        temp_a1->unkDC = 1.0f;\n        temp_a1->unkE0 = 1.0f;\n        func_151B5BA0(&base[*temp_t1]);\n    }\n}",
+        "score": 0.4811320754716981,
+        "reason": "length_mismatch (target=53, generated=51)",
+        "diffs": [],
+        "timestamp": "2026-06-04T05:42:18.888Z"
+      },
+      {
+        "code": "void func_1507266C(s32 arg0, s32 arg1, s32 arg2) {\n    struct127 *temp_a1;\n    s32 temp_v1;\n\n    if ((D_800BE616 != 0) || (D_800D154C->unk222 != 0)) {\n        temp_a1 = &D_800CC2D0[D_800D154C->unk222];\n        temp_v1 = D_800D1580;\n        temp_a1->unk65 = D_800C3E78 + 1;\n        temp_a1->unk5C = temp_v1 >> 16;\n        temp_a1->unk101 = 4;\n        temp_a1->stunned = 0;\n        temp_a1->immune = 0xFF;\n        temp_a1->unk218 = 0;\n        temp_a1->unkE4 = 0;\n        temp_a1->unkE6 = 0;\n        temp_a1->unk232 = temp_v1;\n        temp_a1->unkEC = 1.0f;\n        temp_a1->unkF0 = 1.0f;\n        temp_a1->unkDC = 1.0f;\n        temp_a1->unkE0 = 1.0f;\n        func_151B5BA0(&D_800CC2D0[D_800C3E78]);\n    }\n}",
+        "score": 0.4732142857142857,
+        "reason": "length_mismatch (target=53, generated=56)",
+        "diffs": [],
+        "timestamp": "2026-06-04T05:43:07.112Z"
       }
     ]
   },
@@ -25045,7 +25066,7 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 6,
+    "attempts": 8,
     "lastScore": 0.49056603773584906,
     "status": "pending",
     "history": [
@@ -25090,6 +25111,20 @@
         "reason": "length_mismatch (target=53, generated=52)",
         "diffs": [],
         "timestamp": "2026-06-04T05:38:56.262Z"
+      },
+      {
+        "code": "void func_15163FEC(struct225 *arg0, void *arg1, u8 arg2) {\n    s32 temp_v1;\n    u8 *temp_v0;\n    s32 temp_a2;\n    void (*func)(struct225 *, void *, u8);\n\n    temp_v0 = (u8 *)arg0 + 0x18;\n    if (arg2 == 0) {\n        temp_v1 = *(s32 *)arg1;\n        if ((temp_v1 == *(s32 *)temp_v0) || (temp_v0[4] == *(u8 *)((s32)arg1 + 4))) {\n            func_1516972C((struct102 *)arg0);\n        }\n    } else if (arg2 == 0x2D) {\n        temp_a2 = *(s32 *)temp_v0;\n        temp_v1 = *(s32 *)arg1;\n        if (temp_v1 == temp_a2) {\n            *(s32 *)temp_v0 = *(s32 *)((s32)arg1 + 4);\n            temp_v0[4] = *(u8 *)((s32)arg1 + 9);\n        } else if (*(s32 *)((s32)arg1 + 4) == temp_a2) {\n            *(s32 *)temp_v0 = temp_v1;\n            *(volatile u8 *)((s32)temp_v0 + 4) = *(u8 *)((s32)arg1 + 8);\n        }\n    } else {\n        func = D_8008B374[*(u8 *)((s32)arg0 + 0x2D)];\n        if (func != NULL) {\n            func(arg0, arg1, arg2);\n        }\n    }\n}",
+        "score": 0.49056603773584906,
+        "reason": "length_mismatch (target=53, generated=52)",
+        "diffs": [],
+        "timestamp": "2026-06-04T05:39:34.839Z"
+      },
+      {
+        "code": "void func_15163FEC(struct225 *arg0, void *arg1, u8 arg2) {\n    s32 temp_v1;\n    u8 *temp_v0;\n    s32 temp_a2;\n    void (*func)(struct225 *, void *, u8);\n\n    temp_v0 = (u8 *)arg0 + 0x18;\n    if (arg2 == 0) {\n        temp_v1 = *(s32 *)arg1;\n        if ((temp_v1 == *(s32 *)temp_v0) || (temp_v0[4] == *(u8 *)((s32)arg1 + 4))) {\n            func_1516972C((struct102 *)arg0);\n        }\n    } else if (arg2 == 0x2D) {\n        temp_a2 = *(s32 *)temp_v0;\n        temp_v1 = *(s32 *)arg1;\n        if (temp_v1 == temp_a2) {\n            *(s32 *)temp_v0 = *(s32 *)((s32)arg1 + 4);\n            temp_v0[4] = *(u8 *)((s32)arg1 + 9);\n        } else if (temp_a2 == *(s32 *)((s32)arg1 + 4)) {\n            *(s32 *)temp_v0 = temp_v1;\n            temp_v0[4] = *(u8 *)((s32)arg1 + 8);\n        }\n    } else {\n        func = D_8008B374[*(u8 *)((s32)arg0 + 0x2D)];\n        if (func != NULL) {\n            func(arg0, arg1, arg2);\n        }\n    }\n}",
+        "score": 0.49056603773584906,
+        "reason": "length_mismatch (target=53, generated=52)",
+        "diffs": [],
+        "timestamp": "2026-06-04T05:39:55.524Z"
       }
     ]
   },
