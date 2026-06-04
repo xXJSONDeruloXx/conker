@@ -25379,9 +25379,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 9,
-    "lastScore": 0.8983,
-    "status": "pending",
+    "attempts": 10,
+    "lastScore": 0.48360655737704916,
+    "status": "skipped",
     "history": [
       {
         "code": "void func_15063168(struct127 *arg0) {\n    s32 i;\n    s32 count;\n    s32 idx;\n    struct127 *obj;\n    s32 size;\n\n    count = D_8008FD8C;\n    if (count > 0) {\n        i = 0;\n        idx = ((s32)arg0 - (s32)D_800CC2D0) / 0x32C;\n        size = 0x32C;\n        do {\n            if (i != idx) {\n                if ((D_800CC268 & (1 << i)) != 0) {\n                    obj = (struct127 *)((s32)D_800CC2D0 + (i * size));\n                    if (obj->unk31C != NULL) {\n                        if (((u8 *)obj->unk31C)[0x1AC] == 0) {\n                            func_15194FF4(arg0, obj, 1);\n                            count = D_8008FD8C;\n                        }\n                    }\n                }\n            }\n            i++;\n        } while (i < count);\n    }\n}",
@@ -25490,6 +25490,13 @@
           "structural: target=and t1, t9, t0 got=and t1, t8, t0"
         ],
         "timestamp": "2026-06-04T08:25:31.182Z"
+      },
+      {
+        "code": "void func_15063168(struct127 *arg0) {\n    struct127 *temp_s1;\n    s32 temp_s2;\n    volatile s32 *temp_s3;\n    struct127 *temp_s4;\n    s32 temp_s5;\n    s32 i;\n    struct127 *temp_a1;\n    void *temp_v0;\n    struct127 *temp_t6;\n    s32 temp_v1;\n\n    temp_s1 = arg0;\n    temp_t6 = D_800CC2D0;\n    temp_v1 = D_8008FD8C;\n    if (temp_v1 > 0) {\n        i = 0;\n        temp_s2 = ((s32)temp_s1 - (s32)temp_t6) / 0x32C;\n        temp_s3 = &D_800CC268;\n        temp_s4 = D_800CC2D0;\n        temp_s5 = 0x32C;\n        do {\n            if (i != temp_s2) {\n                if ((*temp_s3 & (1 << i)) != 0) {\n                    temp_a1 = (struct127 *)((s32)temp_s4 + (i * temp_s5));\n                    temp_v0 = temp_a1->unk31C;\n                    if (temp_v0 != NULL) {\n                        if (((u8 *)temp_v0)[0x1AC] == 0) {\n                            func_15194FF4(temp_s1, temp_a1, 1);\n                            temp_v1 = D_8008FD8C;\n                        }\n                    }\n                }\n            }\n            i++;\n        } while (i < temp_v1);\n    }\n}",
+        "score": 0.48360655737704916,
+        "reason": "length_mismatch (target=59, generated=61)",
+        "diffs": [],
+        "timestamp": "2026-06-04T08:26:05.521Z"
       }
     ]
   },
@@ -26540,9 +26547,32 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.19536423841059603,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_15007558(void) {\n    s8 *src;\n    s8 *end;\n    u8 *dst;\n    s32 sum;\n    s32 i;\n    s32 ret;\n\n    src = D_800E0BE0;\n    end = &D_800E0BFC;\n    dst = D_800BE358;\n    do {\n        s8 value = *src;\n        src++;\n        dst++;\n        dst[1] = value;\n    } while (src < end);\n\n    dst = D_800BE35A;\n    sum = 0xCC;\n    i = 2;\n    do {\n        sum = (u16)(sum + (dst[0] << (i & 3)) + (dst[1] << ((i + 1) & 3)) + (dst[2] << ((i + 2) & 3)) + (dst[3] << ((i + 3) & 3)));\n        i += 4;\n        dst += 4;\n    } while (i != 0x1E);\n\n    *(u16 *)D_800BE358 = sum;\n    if (D_8002AC5C == 0) {\n        ret = func_151DCEF0(&D_800BE900, 0, D_800BE358, 0x20);\n    }\n}",
+        "score": 0.19798657718120805,
+        "reason": "length_mismatch (target=59, generated=149)",
+        "diffs": [],
+        "timestamp": "2026-06-04T08:27:16.766Z"
+      },
+      {
+        "code": "void func_15007558(void) {\n    s8 *src;\n    s8 *end;\n    u8 *copyDst;\n    volatile u8 *ptr;\n    s32 sum;\n    s32 i;\n    volatile s32 ret;\n\n    src = D_800E0BE0;\n    end = &D_800E0BFC;\n    copyDst = D_800BE358;\n    do {\n        s8 value = *src;\n        src++;\n        copyDst++;\n        copyDst[1] = value;\n    } while (src < end);\n\n    ptr = D_800BE35A;\n    sum = 0xCC;\n    i = 2;\n    do {\n        sum = (u16)(sum + (ptr[0] << (i & 3)) + (ptr[1] << ((i + 1) & 3)) + (ptr[2] << ((i + 2) & 3)) + (ptr[3] << ((i + 3) & 3)));\n        i += 4;\n        ptr += 4;\n    } while (i != 0x1E);\n\n    *(u16 *)D_800BE358 = sum;\n    if (D_8002AC5C == 0) {\n        ret = func_151DCEF0(&D_800BE900, 0, D_800BE358, 0x20);\n    }\n}",
+        "score": 0.19798657718120805,
+        "reason": "length_mismatch (target=59, generated=149)",
+        "diffs": [],
+        "timestamp": "2026-06-04T08:27:40.711Z"
+      },
+      {
+        "code": "void func_15007558(void) {\n    s8 *src;\n    s8 *end;\n    u8 *copyDst;\n    u8 *ptr;\n    s32 sum;\n    s32 i;\n    s32 limit;\n    volatile s32 ret;\n\n    src = D_800E0BE0;\n    end = &D_800E0BFC;\n    copyDst = D_800BE358;\n    do {\n        s8 value = *src;\n        src++;\n        copyDst++;\n        copyDst[1] = value;\n    } while (src < end);\n\n    ptr = D_800BE35A;\n    sum = 0xCC;\n    i = 2;\n    limit = 0x1E;\n    do {\n        sum = (u16)(sum + (ptr[0] << (i & 3)) + (ptr[1] << ((i + 1) & 3)) + (ptr[2] << ((i + 2) & 3)) + (ptr[3] << ((i + 3) & 3)));\n        i += 4;\n        ptr += 4;\n    } while (i != limit);\n\n    *(u16 *)D_800BE358 = sum;\n    if (D_8002AC5C == 0) {\n        ret = func_151DCEF0(&D_800BE900, 0, D_800BE358, 0x20);\n    }\n}",
+        "score": 0.19536423841059603,
+        "reason": "length_mismatch (target=59, generated=151)",
+        "diffs": [],
+        "timestamp": "2026-06-04T08:28:04.770Z"
+      }
+    ]
   },
   {
     "function": "func_15012370",
