@@ -24995,7 +24995,7 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 9,
+    "attempts": 12,
     "lastScore": 0.49074074074074076,
     "status": "pending",
     "history": [
@@ -25103,6 +25103,27 @@
         "reason": "length_mismatch (target=53, generated=54)",
         "diffs": [],
         "timestamp": "2026-06-04T14:10:44.177Z"
+      },
+      {
+        "code": "void func_1507B974(void) {\n    struct127 **temp_v0;\n    struct127 *phi_v1;\n    u8 temp_a0;\n    u8 *temp_t9;\n    s32 **temp_t0;\n    u8 *temp_ptr;\n\n    temp_v0 = &D_800D154C;\n    phi_v1 = *temp_v0;\n    temp_a0 = phi_v1->unk65;\n    temp_t9 = &D_800D1891;\n    temp_t0 = (s32 **)&D_800D2104;\n    if (temp_a0 != 0) {\n        phi_v1 = &D_800CC2D0[temp_a0 - 1];\n    }\n    temp_ptr = (u8 *)(*temp_t0)[phi_v1->unk13F] + (phi_v1->unk21E * 8) + (D_800D1893 * 8);\n    if (*temp_t9 == *(u16 *)(temp_ptr + 6)) {\n        D_800D1892 = D_800D1892 ^ 1;\n    }\n    if (D_800D1892 != 0) {\n        func_15075400(D_800D1890);\n    }\n}",
+        "score": 0.49074074074074076,
+        "reason": "length_mismatch (target=53, generated=54)",
+        "diffs": [],
+        "timestamp": "2026-06-04T14:11:02.400Z"
+      },
+      {
+        "code": "void func_1507B974(void) {\n    struct127 * volatile *temp_v0;\n    struct127 *phi_v1;\n    u8 temp_a0;\n    u8 *temp_t0;\n\n    temp_v0 = &D_800D154C;\n    phi_v1 = *temp_v0;\n    temp_a0 = phi_v1->unk65;\n    if (temp_a0 != 0) {\n        phi_v1 = &D_800CC2D0[temp_a0 - 1];\n    }\n    temp_t0 = (u8 *)D_800D2104[phi_v1->unk13F] + (phi_v1->unk21E * 8) + (D_800D1893 * 8);\n    if (D_800D1891 == *(u16 *)(temp_t0 + 6)) {\n        D_800D1892 = D_800D1892 ^ 1;\n    }\n    if (D_800D1892 != 0) {\n        func_15075400(D_800D1890);\n    }\n}",
+        "score": 0.4818181818181818,
+        "reason": "length_mismatch (target=53, generated=55)",
+        "diffs": [],
+        "timestamp": "2026-06-04T14:11:21.226Z"
+      },
+      {
+        "code": "void func_1507B974(void) {\n    struct127 *phi_v1;\n    u8 temp_a0;\n    u8 *temp_t0;\n    u8 *temp_a0_2;\n\n    phi_v1 = D_800D154C;\n    temp_a0 = phi_v1->unk65;\n    if (temp_a0 != 0) {\n        phi_v1 = &D_800CC2D0[temp_a0 - 1];\n    }\n    temp_t0 = (u8 *)D_800D2104[phi_v1->unk13F] + (phi_v1->unk21E * 8) + (D_800D1893 * 8);\n    if (D_800D1891 == *(u16 *)(temp_t0 + 6)) {\n        D_800D1892 = D_800D1892 ^ 1;\n    }\n    temp_a0_2 = &D_800D1890;\n    if (D_800D1892 != 0) {\n        func_15075400(*temp_a0_2);\n    }\n}",
+        "score": 0.49074074074074076,
+        "reason": "length_mismatch (target=53, generated=54)",
+        "diffs": [],
+        "timestamp": "2026-06-04T14:11:39.497Z"
       }
     ]
   },
