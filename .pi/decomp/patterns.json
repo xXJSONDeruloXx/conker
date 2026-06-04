@@ -774,5 +774,14 @@
     "example_functions": [
       "func_150779D4"
     ]
+  },
+  {
+    "id": "raw-prev-next-list-removal",
+    "description": "Doubly-linked list removals with incomplete struct definitions can match cleanly by using known fields for one link and raw offset casts for the missing prev link.",
+    "trigger": "Target updates global head/tail and node fields at offsets 0x18/0x1C, but the available struct only names one of those links.",
+    "solution": "Use the named `next` field where available and raw `*(s32 *)((s32)ptr + 0x1C)` casts for the missing previous pointer, preserving head/tail branch structure.",
+    "example_functions": [
+      "func_1509B764"
+    ]
   }
 ]

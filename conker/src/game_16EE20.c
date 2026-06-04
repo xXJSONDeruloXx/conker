@@ -30,7 +30,28 @@ void func_151419B0(void *arg0) {
     func_15141970(arg0);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_151419D0.s")
+void func_151419D0(struct102 *arg0, u8 *arg1, u8 arg2) {
+    struct102 *temp_a3;
+    u8 *temp_v0;
+    s32 temp_v1;
+
+    temp_a3 = arg0;
+    temp_v0 = (u8 *)arg0 + 0x28;
+    if (arg2 == 0) {
+        temp_v1 = *(s32 *)arg1;
+        if ((temp_v1 == *(s32 *)(temp_v0 + 4)) || (temp_v0[8] == arg1[4])) {
+            func_1516972C(temp_a3);
+        }
+    } else if (arg2 == 0x2D) {
+        if (*(s32 *)(temp_v0 + 4) == (temp_v1 = *(s32 *)arg1)) {
+            *(s32 *)(temp_v0 + 4) = *(s32 *)(arg1 + 4);
+            temp_v0[8] = arg1[9];
+        } else if (*(s32 *)(arg1 + 4) == *(s32 *)(temp_v0 + 4)) {
+            *(s32 *)(temp_v0 + 4) = temp_v1;
+            temp_v0[8] = arg1[8];
+        }
+    }
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15141A7C.s")
 // requires jump table
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15141C0C.s")
