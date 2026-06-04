@@ -2634,4 +2634,38 @@ export default function (pi: ExtensionAPI) {
 			}
 		},
 	});
+
+	pi.registerCommand("decomp-coord-teardown", {
+		description: "Remove all lane worktrees, branches, and stop coordinator",
+		handler: async (_args, ctx) => {
+			const fs = require("node:fs");
+			const path = require("node:path");
+
+			// Stop coordinator if running
+			if (coordinatorProcess) {
+				coordinatorProcess.kill();
+				coordinatorProcess = null;
+			}
+
+			const worktreeDir = path.join(ctx.cwd, ".worktrees");
+			if (!fs.existsSync(worktreeDir)) {
+				ctx.ui.notify("No worktrees to clean up", "info");
+				return;
+			}
+
+			// Remove each worktree and its branch
+			const lanes = fs.readdirSync(worktreeDir).filter((d: string) => d.startsWith("lane-"));
+			for (const lane of lanes) {
+				const laneDir = path.join(worktreeDir, lane);
+				const branch = `decomp-${lane}`;
+				await pi.exec("git", ["worktree", "remove", laneDir, "--force"]);
+				await pi.exec("git", ["branch", "-D", branch]);
+			}
+
+			// Remove the .worktrees directory
+			fs.rmSync(worktreeDir, { recursive: true, force: true });
+
+			ctx.ui.notify(`Torn down ${lanes.length} lanes + coordinator`, "info");
+		},
+	});
 }
