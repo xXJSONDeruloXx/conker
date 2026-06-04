@@ -20043,9 +20043,9 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 3,
-    "lastScore": 0.45098039215686275,
-    "status": "pending",
+    "attempts": 5,
+    "lastScore": 0.4423076923076923,
+    "status": "skipped",
     "history": [
       {
         "code": "void func_150174C0(s32 arg0) {\n    s32 temp_v1;\n    s32 temp_v0;\n    s32 temp_a1;\n    s32 temp_a2;\n    s32 temp_a3;\n    s32 temp_a4;\n    s32 temp_v1_2;\n    u16 temp_t0;\n    u16 temp_t2;\n\n    temp_v1 = D_80087380;\n    temp_v0 = 0;\n    if (temp_v1 > 0) {\n        temp_a1 = D_800D23C0;\n        temp_a2 = 0;\n        temp_a3 = temp_a1;\n        do {\n            temp_t0 = *(u16 *)(temp_a3 + 2);\n            temp_a4 = 0;\n            if (temp_t0 > 0) {\n                temp_v1_2 = 0;\n                do {\n                    temp_t2 = *(u16 *)(temp_a1 + (temp_v0 * 0x18) + temp_v1_2 + 8);\n                    temp_a4++;\n                    if ((temp_t2 >> 12) == 2) {\n                        *(u16 *)(temp_a1 + (temp_v0 * 0x18) + temp_v1_2 + 8) = temp_t2 + arg0;\n                        temp_a1 = D_800D23C0;\n                        temp_a3 = temp_a1 + temp_a2;\n                        temp_t0 = *(u16 *)(temp_a3 + 2);\n                    }\n                    temp_v1_2 += 2;\n                } while (temp_a4 < temp_t0);\n                temp_v1 = D_80087380;\n            }\n            temp_v0++;\n            temp_a2 += 0x18;\n            temp_a3 += 0x18;\n        } while (temp_v0 < temp_v1);\n    }\n}",
@@ -20067,6 +20067,20 @@
         "reason": "length_mismatch (target=46, generated=51)",
         "diffs": [],
         "timestamp": "2026-06-04T01:55:18.393Z"
+      },
+      {
+        "code": "void func_150174C0(s32 arg0) {\n    s32 i;\n    s32 base;\n    s32 offset;\n    s32 ptr;\n    s32 j;\n    s32 innerOffset;\n    s32 outerCount;\n    u16 count;\n    u16 val;\n\n    i = 0;\n    outerCount = *(s32 *)0x80087380;\n    if (outerCount > 0) {\n        base = *(s32 *)0x800D23C0;\n        offset = 0;\n        ptr = base;\n        do {\n            count = *(u16 *)(ptr + 2);\n            j = 0;\n            if (count > 0) {\n                innerOffset = 0;\n                do {\n                    val = *(u16 *)(base + (i * 0x18) + innerOffset + 8);\n                    j++;\n                    if ((val >> 12) == 2) {\n                        *(u16 *)(base + (i * 0x18) + innerOffset + 8) = val + arg0;\n                        base = *(s32 *)0x800D23C0;\n                        ptr = base + offset;\n                        count = *(u16 *)(ptr + 2);\n                    }\n                    innerOffset += 2;\n                } while (j < count);\n                outerCount = *(s32 *)0x80087380;\n            }\n            i++;\n            offset += 0x18;\n            ptr += 0x18;\n        } while (i < outerCount);\n    }\n}",
+        "score": 0.45098039215686275,
+        "reason": "length_mismatch (target=46, generated=51)",
+        "diffs": [],
+        "timestamp": "2026-06-04T01:55:49.657Z"
+      },
+      {
+        "code": "void func_150174C0(s32 arg0) {\n    s32 i;\n    s32 base;\n    s32 offset;\n    s32 ptr;\n    s32 j;\n    s32 innerOffset;\n    s32 outerCount;\n    u16 count;\n    u16 val;\n\n    i = 0;\n    outerCount = D_80087380;\n    if (outerCount > 0) {\n        base = D_800D23C0;\n        offset = 0;\n        ptr = base;\n        do {\n            count = *(u16 *)(ptr + 2);\n            j = 0;\n            if (count > 0) {\n                innerOffset = 0;\n                do {\n                    val = *(u16 *)(base + (i * 0x18) + innerOffset + 8);\n                    j++;\n                    if ((val >> 12) == 2) {\n                        *(u16 *)(base + (i * 0x18) + innerOffset + 8) = val + arg0;\n                        base = *(s32 *)0x800D23C0;\n                        ptr = base + offset;\n                        count = *(u16 *)(ptr + 2);\n                    }\n                    innerOffset += 2;\n                } while (j < count);\n                outerCount = D_80087380;\n            }\n            i++;\n            offset += 0x18;\n            ptr += 0x18;\n        } while (i < outerCount);\n    }\n}",
+        "score": 0.4423076923076923,
+        "reason": "length_mismatch (target=46, generated=52)",
+        "diffs": [],
+        "timestamp": "2026-06-04T01:56:47.944Z"
       }
     ]
   },
@@ -21619,9 +21633,32 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.4891304347826087,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_150778F0(void) {\n    struct127 **temp_a2;\n    struct127 *temp_v1;\n    s32 temp_v0;\n\n    temp_a2 = &D_800D154C;\n    temp_v1 = *temp_a2;\n    temp_v0 = ((u8 *)*(s32 *)D_800D2108)[temp_v1->unk13F] - 1;\n    if (temp_v1->unk21F != 0) {\n        temp_v0 = temp_v1->unk21F;\n    }\n    temp_v1->unk21E += temp_v1->unk221;\n    (*temp_a2)->unk21E += temp_v0;\n    (*temp_a2)->unk21E %= temp_v0;\n    temp_v1 = *temp_a2;\n    if (temp_v1->unk21E < temp_v1->unk220) {\n        temp_v1->unk21E = temp_v1->unk220;\n    }\n}",
+        "score": 0.4891304347826087,
+        "reason": "length_mismatch (target=46, generated=45)",
+        "diffs": [],
+        "timestamp": "2026-06-04T01:58:10.055Z"
+      },
+      {
+        "code": "void func_150778F0(void) {\n    register struct127 **temp_a2;\n    register struct127 *temp_v1;\n    s32 temp_v0;\n    s32 temp_t6;\n    s32 temp_t7;\n    s32 temp_a0;\n\n    temp_a2 = &D_800D154C;\n    temp_v1 = *temp_a2;\n    temp_t6 = temp_v1->unk13F;\n    temp_t7 = *(s32 *)D_800D2108;\n    temp_a0 = temp_v1->unk21F;\n    temp_v0 = ((u8 *)temp_t7)[temp_t6] - 1;\n    temp_v0 = (u8) temp_v0;\n    if (temp_a0 != 0) {\n        temp_v0 = (u8) temp_a0;\n    }\n    temp_a0 = temp_v0;\n    temp_v1->unk21E += temp_v1->unk221;\n    temp_v1 = *temp_a2;\n    temp_v1->unk21E += temp_v0;\n    temp_v1 = *temp_a2;\n    temp_v1->unk21E %= temp_v0;\n    temp_v1 = *temp_a2;\n    if (temp_v1->unk21E < temp_v1->unk220) {\n        temp_v1->unk21E = temp_v1->unk220;\n    }\n}",
+        "score": 0.48936170212765956,
+        "reason": "length_mismatch (target=46, generated=47)",
+        "diffs": [],
+        "timestamp": "2026-06-04T01:58:45.161Z"
+      },
+      {
+        "code": "void func_150778F0(void) {\n    struct127 **temp_a2;\n    struct127 *temp_v1;\n    s32 temp_v0;\n    s32 temp_t6;\n    s32 temp_t7;\n    s32 temp_a0;\n\n    temp_a2 = (struct127 **)0x800D154C;\n    temp_v1 = *temp_a2;\n    temp_t6 = temp_v1->unk13F;\n    temp_t7 = *(s32 *)0x800D2108;\n    temp_a0 = temp_v1->unk21F;\n    temp_v0 = ((u8 *)temp_t7)[temp_t6] - 1;\n    temp_v0 = (u8) temp_v0;\n    if (temp_a0 != 0) {\n        temp_v0 = (u8) temp_a0;\n    }\n    temp_a0 = temp_v0;\n    temp_v1->unk21E += temp_v1->unk221;\n    temp_v1 = *temp_a2;\n    temp_v1->unk21E += temp_v0;\n    temp_v1 = *temp_a2;\n    temp_v1->unk21E %= temp_v0;\n    temp_v1 = *temp_a2;\n    if (temp_v1->unk21E < temp_v1->unk220) {\n        temp_v1->unk21E = temp_v1->unk220;\n    }\n}",
+        "score": 0.4891304347826087,
+        "reason": "length_mismatch (target=46, generated=45)",
+        "diffs": [],
+        "timestamp": "2026-06-04T01:59:05.988Z"
+      }
+    ]
   },
   {
     "function": "func_1506FD30",
