@@ -23367,9 +23367,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 2,
-    "lastScore": 0.6889,
-    "status": "pending",
+    "attempts": 3,
+    "lastScore": 1,
+    "status": "matched",
     "history": [
       {
         "code": "void func_150718E4(s32 arg0) {\n    s32 sp20;\n    f32 sp24[3];\n    struct127 *temp_v0;\n    s32 temp_a2;\n\n    sp20 = D_80099BB8;\n    temp_v0 = D_800D154C;\n    if ((temp_v0->unk1D4 != 0) || ((temp_v0->unk74 & 0xF) == 0xF)) {\n        temp_a2 = ((u8 *)&sp20)[func_150ADA20() & 3] << 6;\n        temp_v0 = D_800D154C;\n        func_15143134(&D_800A5480, sp24, temp_a2 + (s32)temp_v0->unk1D4);\n        sp24[1] = D_800D154C->unk180 + 20.0f;\n        func_151C329C(sp24, 0xFF, 1);\n    }\n}",
@@ -23723,9 +23723,20 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 0.9778,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_150712AC(s32 arg0) {\n    u8 sp18[8];\n\n    func_150FE860(D_800D154C, 0xFF, 1);\n    if (D_800D154C->camera != 0) {\n        sp18[0] = 1;\n        *(s16 *)&sp18[2] = (func_150ADA20() % 7U) + 0xA;\n        sp18[5] = 1 << ((u8 *)D_800D154C->camera)[0x23D];\n        sp18[4] = (func_150ADA20() % 7U) + 2;\n        sp18[6] = -1;\n        func_151D8868(sp18, 0, 0xFF, 1);\n    }\n}",
+        "score": 0.9778,
+        "reason": "structural_diffs=1",
+        "diffs": [
+          "structural: target=li t8, -1 got=li t8, 255"
+        ],
+        "timestamp": "2026-06-04T01:09:15.471Z"
+      }
+    ]
   },
   {
     "function": "func_1000C934",

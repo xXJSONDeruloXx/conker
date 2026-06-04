@@ -846,5 +846,14 @@
     "example_functions": [
       "func_1001091C"
     ]
+  },
+  {
+    "id": "direct-global-expression-for-temporary-registers",
+    "description": "Removing locals and using direct global expressions can give IDO the target temp-register allocation for load/address math.",
+    "trigger": "Near-match has identical instruction shape and stack offsets but global loads use v1/a-register temporaries instead of target v0/t-register chain.",
+    "solution": "Inline D_800D154C and the computed address expression directly in the call instead of storing to local temps; keep only real stack locals.",
+    "example_functions": [
+      "func_150718E4"
+    ]
   }
 ]
