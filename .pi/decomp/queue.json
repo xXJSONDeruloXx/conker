@@ -19229,9 +19229,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 3,
-    "lastScore": 0.8667,
-    "status": "pending",
+    "attempts": 4,
+    "lastScore": 1,
+    "status": "matched",
     "history": [
       {
         "code": "void func_15075884(void) {\n    struct127 *temp_v0;\n    u8 *temp_v1;\n    f32 temp_f2;\n    f32 temp_f12;\n    f32 temp_f0;\n    f32 temp_f14;\n    u32 temp_t5;\n\n    func_15075548();\n    temp_v0 = D_800D154C;\n    temp_v1 = (u8 *)D_800D2104[temp_v0->unk13F] + (temp_v0->unk21E * 8);\n    temp_f2 = (f32)*(s16 *)(temp_v1 + 8) - temp_v0->x_position;\n    temp_f12 = (f32)*(s16 *)(temp_v1 + 0xC) - temp_v0->z_position;\n    temp_t5 = D_800D1891;\n    temp_f0 = sqrtf((temp_f2 * temp_f2) + (temp_f12 * temp_f12));\n    temp_f14 = temp_f0 / (f32)temp_t5;\n    temp_v0->unk44 = temp_f14 + temp_f14;\n}",
@@ -19355,7 +19355,7 @@
     ],
     "attempts": 0,
     "lastScore": 0,
-    "status": "pending"
+    "status": "skipped"
   },
   {
     "function": "func_15168800",
@@ -21923,9 +21923,32 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.4891304347826087,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_15168E54(s8 *arg0, s32 arg1) {\n    s32 i;\n    s8 *ptr;\n    s32 temp_v0;\n    s32 end;\n    s32 val_dc;\n    s32 val_one;\n    s32 val_e;\n\n    end = -0x21;\n    i = 0;\n    ptr = arg0;\n    val_e = 0xE;\n    if (*arg0 != end) {\n        temp_v0 = *arg0;\n        val_dc = -0x24;\n        val_one = 1;\n        do {\n            if ((temp_v0 == val_one) || ((temp_v0 == val_dc) && (((u8 *)ptr)[3] == val_e))) {\n                func_15168E34((s32 *)(ptr + 4), arg1);\n            }\n            i++;\n            ptr = arg0 + (i * 8);\n            temp_v0 = *ptr;\n        } while (temp_v0 != end);\n    }\n}",
+        "score": 0.4666666666666667,
+        "reason": "length_mismatch (target=45, generated=42)",
+        "diffs": [],
+        "timestamp": "2026-06-04T00:55:44.900Z"
+      },
+      {
+        "code": "void func_15168E54(s8 *arg0, s32 arg1) {\n    s8 *base;\n    s8 *ptr;\n    s32 i;\n    s32 temp_v0;\n    s32 end;\n    s32 val_dc;\n    s32 val_one;\n    s32 val_e;\n\n    base = arg0;\n    end = -0x21;\n    i = 0;\n    ptr = base;\n    val_e = 0xE;\n    if (*base != end) {\n        temp_v0 = *base;\n        val_dc = -0x24;\n        val_one = 1;\n        do {\n            if ((temp_v0 == val_one) || ((temp_v0 == val_dc) && (((u8 *)ptr)[3] == val_e))) {\n                func_15168E34((s32 *)(ptr + 4), arg1);\n            }\n            i++;\n            ptr = base + (i << 3);\n            temp_v0 = *ptr;\n        } while (temp_v0 != end);\n    }\n}",
+        "score": 0.4891304347826087,
+        "reason": "length_mismatch (target=45, generated=46)",
+        "diffs": [],
+        "timestamp": "2026-06-04T00:56:17.160Z"
+      },
+      {
+        "code": "void func_15168E54(s8 *arg0, s32 arg1) {\n    s8 *base;\n    s32 temp_s2;\n    s32 end;\n    s32 i;\n    s8 *ptr;\n    s32 temp_v0;\n    s32 val_dc;\n    s32 val_one;\n    s32 val_e;\n\n    base = arg0;\n    temp_s2 = arg1;\n    end = -0x21;\n    i = 0;\n    ptr = base;\n    val_e = 0xE;\n    if (*base != end) {\n        temp_v0 = *base;\n        val_dc = -0x24;\n        val_one = 1;\n        do {\n            if ((temp_v0 == val_one) || ((temp_v0 == val_dc) && (((u8 *)ptr)[3] == val_e))) {\n                func_15168E34((s32 *)(ptr + 4), temp_s2);\n            }\n            i++;\n            ptr = base + (i << 3);\n            temp_v0 = *ptr;\n        } while (temp_v0 != end);\n    }\n}",
+        "score": 0.4891304347826087,
+        "reason": "length_mismatch (target=45, generated=46)",
+        "diffs": [],
+        "timestamp": "2026-06-04T00:56:48.407Z"
+      }
+    ]
   },
   {
     "function": "func_10010E78",
