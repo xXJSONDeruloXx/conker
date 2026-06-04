@@ -31374,7 +31374,7 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
+    "attempts": 6,
     "lastScore": 0.9355,
     "status": "pending",
     "history": [
@@ -31413,6 +31413,37 @@
           "structural: target=mtc1 at, f14 got=lwc1 f12, LO(D_800A0268)(at)"
         ],
         "timestamp": "2026-06-04T10:21:25.169Z"
+      },
+      {
+        "code": "void func_150C2424(u8 arg0) {\n    func_1514C470(D_800A0268, -490.0f, -328.0f, D_800A0268, -490.0f, 328.0f, (func_150ADA68() * 8.0f) + 8.0f, 1, 0, 0.0f, 0, arg0);\n    func_1514C470(D_800A026C, -560.0f, -580.0f, 8117.0f, -560.0f, -580.0f, (func_150ADA68() * 3.0f) + 4.0f, 3, 0, 0.0f, 0, arg0);\n}",
+        "score": 0.9355,
+        "reason": "structural_diffs=4",
+        "diffs": [
+          "structural: target=lui at, HI(D_800A0268) got=lui at, 50165",
+          "structural: target=lwc1 f12, LO(D_800A0268)(at) got=mtc1 at, f14",
+          "structural: target=lui at, 50165 got=lui at, HI(D_800A0268)",
+          "structural: target=mtc1 at, f14 got=lwc1 f12, LO(D_800A0268)(at)"
+        ],
+        "timestamp": "2026-06-04T10:23:09.673Z"
+      },
+      {
+        "code": "void func_150C2424(u8 arg0) {\n    f32 temp_f0;\n\n    temp_f0 = func_150ADA68();\n    func_1514C470(D_800A0268, -490.0f, -328.0f, D_800A0268, -490.0f, 328.0f, (temp_f0 * 8.0f) + 8.0f, 1, 0, 0.0f, 0, arg0);\n    temp_f0 = func_150ADA68();\n    func_1514C470(D_800A026C, -560.0f, -580.0f, 8117.0f, -560.0f, -580.0f, (temp_f0 * 3.0f) + 4.0f, 3, 0, 0.0f, 0, arg0);\n}",
+        "score": 0.4920634920634921,
+        "reason": "length_mismatch (target=62, generated=63)",
+        "diffs": [],
+        "timestamp": "2026-06-04T10:23:37.472Z"
+      },
+      {
+        "code": "void func_150C2424(u8 arg0) {\n    f32 temp_f0;\n    f32 temp_f12;\n    f32 temp_f14;\n    f32 temp_f8;\n\n    temp_f0 = func_150ADA68();\n    temp_f12 = D_800A0268;\n    temp_f8 = temp_f0 * 8.0f;\n    temp_f14 = -490.0f;\n    temp_f8 += 8.0f;\n    func_1514C470(temp_f12, temp_f14, -328.0f, temp_f12, temp_f14, 328.0f, temp_f8, 1, 0, 0.0f, 0, arg0);\n    temp_f0 = func_150ADA68();\n    func_1514C470(D_800A026C, -560.0f, -580.0f, 8117.0f, -560.0f, -580.0f, (temp_f0 * 3.0f) + 4.0f, 3, 0, 0.0f, 0, arg0);\n}",
+        "score": 0.9355,
+        "reason": "structural_diffs=4",
+        "diffs": [
+          "structural: target=lui at, HI(D_800A0268) got=lui at, 50165",
+          "structural: target=lwc1 f12, LO(D_800A0268)(at) got=mtc1 at, f14",
+          "structural: target=lui at, 50165 got=lui at, HI(D_800A0268)",
+          "structural: target=mtc1 at, f14 got=lwc1 f12, LO(D_800A0268)(at)"
+        ],
+        "timestamp": "2026-06-04T10:24:11.301Z"
       }
     ]
   },
