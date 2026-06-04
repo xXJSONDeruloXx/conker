@@ -28671,8 +28671,8 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 17,
-    "lastScore": 0.6,
+    "attempts": 18,
+    "lastScore": 0.4861111111111111,
     "status": "pending",
     "history": [
       {
@@ -28808,6 +28808,23 @@
           "structural: target=addiu sp, sp, 80 got=addiu sp, sp, 88"
         ],
         "timestamp": "2026-06-03T21:00:58.033Z"
+      },
+      {
+        "code": "void func_15076768(void) {\n    struct17 pos;\n    struct260 tmp;\n    f32 x;\n    f32 z;\n\n    switch (D_800D1890) {\n        case 0:\n            func_15197A7C(D_800D154C);\n            break;\n        case 1:\n            x = D_800D154C->x_position;\n            z = D_800D154C->z_position;\n            pos.unk4 = -390.0f;\n            pos.unk0 = x;\n            pos.unk8 = z;\n            func_1504715C(&tmp);\n            func_1514B364(&pos, &tmp, 0xFF, 0);\n    }\n}",
+        "score": 0.4666666666666667,
+        "reason": "transmuter_best=16",
+        "diffs": [
+          "transmuter: iters=0, forks=0, bestScore=16",
+          "timeout=60s, maxCompiles=2000"
+        ],
+        "timestamp": "2026-06-04T13:14:48.536Z"
+      },
+      {
+        "code": "void func_15076768(void) {\n    struct260 tmp;\n    struct17 pos;\n\n    switch (D_800D1890) {\n        case 0:\n            func_15197A7C(D_800D154C);\n            return;\n        case 1:\n            pos.unk4 = -390.0f;\n            pos.unk0 = D_800D154C->x_position;\n            pos.unk8 = D_800D154C->z_position;\n            func_1504715C(&tmp);\n            func_1514B364(&pos, &tmp, 0xFF, 0);\n            return;\n    }\n}",
+        "score": 0.4861111111111111,
+        "reason": "length_mismatch (target=35, generated=36)",
+        "diffs": [],
+        "timestamp": "2026-06-04T13:15:05.027Z"
       }
     ]
   },
