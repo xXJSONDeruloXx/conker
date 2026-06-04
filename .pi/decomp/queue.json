@@ -27132,8 +27132,8 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 12,
-    "lastScore": 0.49166666666666664,
+    "attempts": 15,
+    "lastScore": 0.47580645161290325,
     "status": "pending",
     "history": [
       {
@@ -27219,6 +27219,27 @@
         "reason": "length_mismatch (target=59, generated=60)",
         "diffs": [],
         "timestamp": "2026-06-04T08:36:42.029Z"
+      },
+      {
+        "code": "void func_1509B810(struct249 *arg0) {\n    s32 mask;\n    struct249 *cur;\n    s32 key;\n    s32 count;\n    s32 i;\n\n    mask = 0xFFFF03FF;\n    cur = (struct249 *)D_800D2F48.unk8;\n    key = arg0->unk0 & mask;\n    count = D_800D2F48.length;\n    if (count == 0) {\n        D_800D2F48.unk4 = arg0;\n        D_800D2F48.unk8 = (s32)arg0;\n        arg0->next = NULL;\n        *(struct249 **)((s32)arg0 + 0x1C) = NULL;\n        D_800D2F48.length++;\n        return;\n    }\n    if (count > 0) {\n        i = 0;\n        do {\n            i++;\n            if ((cur->unk0 & mask) < key) {\n                if ((s32)cur == D_800D2F48.unk8) {\n                    *(struct249 **)((s32)arg0 + 0x1C) = cur;\n                    arg0->next = NULL;\n                    cur->next = arg0;\n                    D_800D2F48.unk8 = (s32)arg0;\n                    D_800D2F48.length++;\n                    return;\n                }\n                *(struct249 **)((s32)arg0 + 0x1C) = cur;\n                arg0->next = cur->next;\n                *(struct249 **)((s32)cur->next + 0x1C) = arg0;\n                cur->next = arg0;\n                D_800D2F48.length++;\n                return;\n            }\n            cur = *(struct249 **)((s32)cur + 0x1C);\n        } while (i < count);\n    }\n    cur = D_800D2F48.unk4;\n    D_800D2F48.unk4 = arg0;\n    *(struct249 **)((s32)arg0 + 0x1C) = NULL;\n    arg0->next = cur;\n    *(struct249 **)((s32)cur + 0x1C) = arg0;\n    D_800D2F48.length++;\n}",
+        "score": 0.25877192982456143,
+        "reason": "length_mismatch (target=59, generated=114)",
+        "diffs": [],
+        "timestamp": "2026-06-04T08:37:26.405Z"
+      },
+      {
+        "code": "void func_1509B810(struct249 *arg0) {\n    s32 mask;\n    struct249 *cur;\n    s32 key;\n    s32 count;\n    s32 i;\n\n    mask = 0xFFFF03FF;\n    cur = (struct249 *)D_800D2F48.unk8;\n    key = arg0->unk0 & mask;\n    count = D_800D2F48.length;\n    if (count == 0) {\n        D_800D2F48.unk4 = arg0;\n        D_800D2F48.unk8 = (s32)arg0;\n        arg0->next = NULL;\n        *(struct249 **)((s32)arg0 + 0x1C) = NULL;\n        D_800D2F48.length++;\n        return;\n    }\n    if (count <= 0) {\n        goto insert_head;\n    }\n    i = 0;\nloop:\n    i++;\n    if ((cur->unk0 & mask) < key) {\n        if ((s32)cur == D_800D2F48.unk8) {\n            *(struct249 **)((s32)arg0 + 0x1C) = cur;\n            arg0->next = NULL;\n            cur->next = arg0;\n            D_800D2F48.unk8 = (s32)arg0;\n            D_800D2F48.length++;\n            return;\n        }\n        *(struct249 **)((s32)arg0 + 0x1C) = cur;\n        arg0->next = cur->next;\n        *(struct249 **)((s32)cur->next + 0x1C) = arg0;\n        cur->next = arg0;\n        D_800D2F48.length++;\n        return;\n    }\n    if (i < D_800D2F48.length) {\n        cur = *(struct249 **)((s32)cur + 0x1C);\n        goto loop;\n    }\ninsert_head:\n    cur = D_800D2F48.unk4;\n    D_800D2F48.unk4 = arg0;\n    *(struct249 **)((s32)arg0 + 0x1C) = NULL;\n    arg0->next = cur;\n    *(struct249 **)((s32)cur + 0x1C) = arg0;\n    D_800D2F48.length++;\n}",
+        "score": 0.47580645161290325,
+        "reason": "length_mismatch (target=59, generated=62)",
+        "diffs": [],
+        "timestamp": "2026-06-04T08:38:14.103Z"
+      },
+      {
+        "code": "void func_1509B810(struct249 *arg0) {\n    s32 mask;\n    struct249 *cur;\n    s32 key;\n    s32 i;\n    s32 count;\n\n    mask = 0xFFFF03FF;\n    cur = (struct249 *)D_800D2F48.unk8;\n    key = arg0->unk0 & mask;\n    count = D_800D2F48.length;\n    if (count == 0) {\n        D_800D2F48.unk4 = arg0;\n        D_800D2F48.unk8 = (s32)arg0;\n        arg0->next = NULL;\n        *(struct249 **)((s32)arg0 + 0x1C) = NULL;\n        D_800D2F48.length++;\n        return;\n    }\n    if (count <= 0) {\n        goto insert_head;\n    }\n    i = 0;\nloop:\n    i++;\n    if ((cur->unk0 & mask) < key) {\n        if ((s32)cur == D_800D2F48.unk8) {\n            *(struct249 **)((s32)arg0 + 0x1C) = cur;\n            arg0->next = NULL;\n            cur->next = arg0;\n            D_800D2F48.unk8 = (s32)arg0;\n            D_800D2F48.length++;\n            return;\n        }\n        *(struct249 **)((s32)arg0 + 0x1C) = cur;\n        arg0->next = cur->next;\n        *(struct249 **)((s32)cur->next + 0x1C) = arg0;\n        cur->next = arg0;\n        D_800D2F48.length++;\n        return;\n    }\n    if (i < D_800D2F48.length) {\n        cur = *(struct249 **)((s32)cur + 0x1C);\n        goto loop;\n    }\ninsert_head:\n    cur = D_800D2F48.unk4;\n    D_800D2F48.unk4 = arg0;\n    *(struct249 **)((s32)arg0 + 0x1C) = NULL;\n    arg0->next = cur;\n    *(struct249 **)((s32)cur + 0x1C) = arg0;\n    D_800D2F48.length++;\n}",
+        "score": 0.47580645161290325,
+        "reason": "length_mismatch (target=59, generated=62)",
+        "diffs": [],
+        "timestamp": "2026-06-04T08:38:43.609Z"
       }
     ]
   },
