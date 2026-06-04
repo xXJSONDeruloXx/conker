@@ -319,28 +319,133 @@ async function gitPushWithRetry(pi: any): Promise<void> {
 
 export default function (pi: ExtensionAPI) {
 	let latestCtx: any = undefined;
+	let progressRefreshPromise: Promise<void> | null = null;
 
-	function readProjectProgress(cwd: string): { cFuncs: number; asmFuncs: number; cBytes: number; asmBytes: number } {
+	type ProgressSection = { cFuncs: number; asmFuncs: number; cBytes: number; asmBytes: number };
+	type ProgressStats = ProgressSection & {
+		sections: Record<string, ProgressSection>;
+		available: boolean;
+	};
+
+	function emptySection(): ProgressSection {
+		return { cFuncs: 0, asmFuncs: 0, cBytes: 0, asmBytes: 0 };
+	}
+
+	function progressPercent(section: ProgressSection): number {
+		const bytes = section.cBytes + section.asmBytes;
+		return bytes > 0 ? (section.cBytes / bytes) * 100 : 0;
+	}
+
+	function formatPct(percent: number, digits = 2): string {
+		return percent.toFixed(digits);
+	}
+
+	function staticBadge(label: string, value: string, color: string): string {
+		return `https://img.shields.io/badge/${encodeURIComponent(label)}-${encodeURIComponent(value)}-${color}`;
+	}
+
+	function updateReadmeProgress(cwd: string, progress = readProjectProgress(cwd)): void {
+		const fs = require("node:fs");
+		const path = require("node:path");
+		if (!progress.available) return;
+		const readmePath = path.join(cwd, "README.md");
+		if (!fs.existsSync(readmePath)) return;
+
+		const totalFuncs = progress.cFuncs + progress.asmFuncs;
+		const totalBytePct = formatPct(progressPercent(progress));
+		const sectionRow = (name: string, color: string, section: ProgressSection) => {
+			const sectionTotal = section.cFuncs + section.asmFuncs;
+			return `| ![${name} Progress](${staticBadge(name, `${formatPct(progressPercent(section))}%`, color)}) | ![${name} Functions](${staticBadge("funcs", `${section.cFuncs}/${sectionTotal}`, "blue")}) |`;
+		};
+
+		const summaryLine = `${
+			`![Conker's Bad Fur Day (US) Progress](${staticBadge("Conker's Bad Fur Day (US)", `${totalBytePct}%`, "critical")})`
+		} ${
+			`![all Functions](${staticBadge("funcs", `${progress.cFuncs}/${totalFuncs}`, "blue")})`
+		} ![Build Status](https://github.com/mkst/conker/workflows/build/badge.svg)`;
+
+		let readme = fs.readFileSync(readmePath, "utf-8");
+		readme = readme.replace(/^!\[Conker's Bad Fur Day \(US\) Progress\].*$/m, summaryLine);
+		readme = readme.replace(/^\| !\[init Progress\].*$/m, sectionRow("init", "yellow", progress.sections.init));
+		readme = readme.replace(/^\| !\[game Progress\].*$/m, sectionRow("game", "critical", progress.sections.game));
+		readme = readme.replace(/^\| !\[debugger Progress\].*$/m, sectionRow("debugger", "orange", progress.sections.debugger));
+		fs.writeFileSync(readmePath, readme);
+	}
+
+	function readProjectProgress(cwd: string): ProgressStats {
 		const fs = require("node:fs");
 		const path = require("node:path");
 		const csvPath = path.join(cwd, "conker/progress.csv");
-		let cFuncs = 0, asmFuncs = 0, cBytes = 0, asmBytes = 0;
+		const totals: ProgressStats = {
+			...emptySection(),
+			sections: {
+				init: emptySection(),
+				game: emptySection(),
+				debugger: emptySection(),
+			},
+			available: false,
+		};
 		try {
-			if (!fs.existsSync(csvPath)) return { cFuncs, asmFuncs, cBytes, asmBytes };
+			if (!fs.existsSync(csvPath)) return totals;
 			const lines = fs.readFileSync(csvPath, "utf-8").split("\n");
 			for (const line of lines) {
 				const parts = line.split(",");
 				if (parts.length < 7) continue;
+				const sectionName = parts[1]?.trim();
 				const func = parts[3];
 				if (!func || func === "function" || func.startsWith(".") || func.startsWith("D_")) continue;
 				const lang = parts[6]?.trim();
 				const length = parseInt(parts[5]);
 				if (isNaN(length)) continue;
-				if (lang === "c") { cFuncs++; cBytes += length; }
-				else if (lang === "asm") { asmFuncs++; asmBytes += length; }
+				const bucket = totals.sections[sectionName] || (totals.sections[sectionName] = emptySection());
+				if (lang === "c") {
+					totals.cFuncs++;
+					totals.cBytes += length;
+					bucket.cFuncs++;
+					bucket.cBytes += length;
+				} else if (lang === "asm") {
+					totals.asmFuncs++;
+					totals.asmBytes += length;
+					bucket.asmFuncs++;
+					bucket.asmBytes += length;
+				}
 			}
+			totals.available = (totals.cFuncs + totals.asmFuncs) > 0;
 		} catch {}
-		return { cFuncs, asmFuncs, cBytes, asmBytes };
+		return totals;
+	}
+
+	async function ensureProgressCsv(ctx: any): Promise<void> {
+		const fs = require("node:fs");
+		const path = require("node:path");
+		if (!ctx?.cwd) return;
+		if (progressRefreshPromise) return progressRefreshPromise;
+		const csvPath = path.join(ctx.cwd, "conker/progress.csv");
+		const mapPath = path.join(ctx.cwd, "conker/build/conker.us.map");
+		const needsRefresh = (() => {
+			try {
+				if (!fs.existsSync(mapPath)) return false;
+				if (!fs.existsSync(csvPath)) return true;
+				return fs.statSync(csvPath).mtimeMs < fs.statSync(mapPath).mtimeMs;
+			} catch {
+				return false;
+			}
+		})();
+		if (!needsRefresh) return;
+		progressRefreshPromise = (async () => {
+			try {
+				await pi.exec("docker", [
+					"run", "--rm", "--platform", "linux/amd64",
+					"-v", `${ctx.cwd}:/conker`, "-w", "/conker",
+					"conker-build-min-amd64",
+					"bash", "-lc", "make -C conker progress",
+				], { timeout: 60000 });
+			} catch {}
+			finally {
+				progressRefreshPromise = null;
+			}
+		})();
+		return progressRefreshPromise;
 	}
 
 	function refreshWidget() {
@@ -353,6 +458,7 @@ export default function (pi: ExtensionAPI) {
 		const totalFuncs = progress.cFuncs + progress.asmFuncs;
 		const totalBytes = progress.cBytes + progress.asmBytes;
 		const bytePct = totalBytes > 0 ? (progress.cBytes / totalBytes) * 100 : 0;
+		const funcPct = totalFuncs > 0 ? (progress.cFuncs / totalFuncs) * 100 : 0;
 
 		const loopLabel = loopState.enabled
 			? `loop ON  chunk ${loopState.chunk}`
@@ -366,30 +472,51 @@ export default function (pi: ExtensionAPI) {
 					const filled = Math.round((percent / 100) * w);
 					return theme.fg("success", "█".repeat(filled)) + theme.fg("dim", "░".repeat(w - filled));
 				};
+				const pct = (section: ProgressSection) => `${formatPct(progressPercent(section))}%`;
 				const title = theme.fg("accent", theme.bold("◆ Conker Decomp"));
 				const dividerWidth = Math.max(0, safeWidth - visibleWidth(title) - 1);
 				const divider = theme.fg("dim", "─".repeat(Math.min(dividerWidth, 65)));
 				const line1 = dividerWidth > 0 ? `${title} ${divider}` : title;
-				const line2 = [
-					theme.fg("muted", "  progress"),
-					theme.fg("success", `${bytePct.toFixed(1)}%`),
-					bar(bytePct, 14),
-					theme.fg("success", `${progress.cFuncs}`),
-					theme.fg("dim", "C /"),
-					theme.fg("warning", `${progress.asmFuncs}`),
-					theme.fg("dim", "ASM /"),
-					theme.fg("muted", `${totalFuncs} total`),
-				].join(" ");
-				const line3 = [
+				const line2 = progress.available
+					? [
+						theme.fg("muted", "  repo"),
+						theme.fg("success", `${formatPct(bytePct)}% bytes`),
+						bar(bytePct, 14),
+						theme.fg("accent", `${formatPct(funcPct)}% funcs`),
+					].join(" ")
+					: [
+						theme.fg("muted", "  repo"),
+						theme.fg("warning", "progress unavailable"),
+					].join(" ");
+				const line3 = progress.available
+					? [
+						theme.fg("muted", "  total"),
+						theme.fg("success", `${progress.cFuncs} C`),
+						theme.fg("dim", "/"),
+						theme.fg("warning", `${progress.asmFuncs} ASM`),
+						theme.fg("dim", "/"),
+						theme.fg("muted", `${totalFuncs} funcs`),
+						theme.fg("dim", "│"),
+						theme.fg("muted", `init ${pct(progress.sections.init)}`),
+						theme.fg("dim", "game"),
+						theme.fg("muted", pct(progress.sections.game)),
+						theme.fg("dim", "dbg"),
+						theme.fg("muted", pct(progress.sections.debugger)),
+					].join(" ")
+					: [
+						theme.fg("muted", "  total"),
+						theme.fg("warning", "run make -C conker progress to populate repo stats"),
+					].join(" ");
+				const line4 = [
 					theme.fg(loopState.enabled ? "success" : "dim", `  ${loopLabel}`),
 					theme.fg("dim", "│"),
-					theme.fg("accent", `+${queueMatched} matched`),
+					theme.fg("accent", `${queueMatched} queue-matched`),
 					theme.fg("dim", "│"),
 					theme.fg("muted", `${pending} pending`),
 					theme.fg("dim", "│"),
 					theme.fg("muted", `${state.patterns.length} patterns`),
 				].join(" ");
-				return [line1, line2, line3].map(fit);
+				return [line1, line2, line3, line4].map(fit);
 			},
 			invalidate() {},
 		}));
@@ -503,11 +630,15 @@ export default function (pi: ExtensionAPI) {
 		loadState(ctx.cwd);
 		ensureTimer();
 		refreshWidget();
+		await ensureProgressCsv(ctx);
+		refreshWidget();
 	});
 
 	// Refresh widget after every agent turn completes
 	pi.on("agent_end", async (_event, ctx) => {
 		latestCtx = ctx;
+		refreshWidget();
+		await ensureProgressCsv(ctx);
 		refreshWidget();
 	});
 
@@ -1474,12 +1605,13 @@ export default function (pi: ExtensionAPI) {
 				"conker-build-min-amd64",
 				"bash", "-lc", "make -C conker progress",
 			], { timeout: 30000 });
+			updateReadmeProgress(ctx.cwd);
 
 			// Commit source + queue state + fresh progress
 			// The pre-commit hook will run the full ROM build again as a safety check.
 			// Since we already verified above, it will pass — but it's the hard gate.
 			const desc = params.description || `match ${params.function}`;
-			await pi.exec("git", ["add", `conker/src/${params.file}`, ".pi/decomp/queue.json", ".pi/decomp/patterns.json"]);
+			await pi.exec("git", ["add", `conker/src/${params.file}`, "README.md", ".pi/decomp/queue.json", ".pi/decomp/patterns.json"]);
 			const commitResult = await pi.exec("git", ["commit", "-m", `feat(decomp): ${desc}`]);
 			if (commitResult.code !== 0) {
 				// Pre-commit hook blocked it — ROM verification failed
