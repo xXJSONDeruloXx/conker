@@ -23615,9 +23615,32 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.4609375,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_1513A5E0(s32 *arg0, u8 arg1, s32 arg2) {\n    s32 sp2C[15];\n    f32 temp_f0 = 4.0f;\n    f32 temp_f2 = D_800A4960;\n\n    sp2C[0] = 7;\n    sp2C[1] = 7;\n    sp2C[2] = arg0[0];\n    sp2C[3] = arg0[1];\n    sp2C[4] = arg0[2];\n    ((s16 *)sp2C)[10] = 0;\n    ((s16 *)sp2C)[11] = 0xFF;\n    ((s16 *)sp2C)[12] = -0x32;\n    ((s16 *)sp2C)[13] = 0x1B;\n    ((f32 *)sp2C)[7] = temp_f0;\n    ((f32 *)sp2C)[8] = temp_f0;\n    ((f32 *)sp2C)[9] = D_800A4964;\n    ((f32 *)sp2C)[10] = D_800A4968;\n    ((s16 *)sp2C)[22] = 0x19;\n    ((s16 *)sp2C)[23] = 0x28;\n    ((f32 *)sp2C)[12] = temp_f2;\n    ((f32 *)sp2C)[13] = temp_f2;\n    ((f32 *)sp2C)[14] = D_800A496C;\n    func_15152190(sp2C, D_800A4268, D_800A4270, 2, 0.0f, 1, arg1, arg2);\n}",
+        "score": 0.4921875,
+        "reason": "length_mismatch (target=64, generated=63)",
+        "diffs": [],
+        "timestamp": "2026-06-04T10:58:42.665Z"
+      },
+      {
+        "code": "void func_1513A5E0(s32 *arg0, u8 arg1, s32 arg2) {\n    f32 temp_f0 = 4.0f;\n    f32 temp_f2 = D_800A4960;\n    s32 sp34[13];\n\n    sp34[-2] = 7;\n    sp34[-1] = 7;\n    sp34[0] = arg0[0];\n    sp34[1] = arg0[1];\n    sp34[2] = arg0[2];\n    ((s16 *)&sp34[-2])[10] = 0;\n    ((s16 *)&sp34[-2])[11] = 0xFF;\n    ((s16 *)&sp34[-2])[12] = -0x32;\n    ((s16 *)&sp34[-2])[13] = 0x1B;\n    ((f32 *)&sp34[-2])[7] = temp_f0;\n    ((f32 *)&sp34[-2])[8] = temp_f0;\n    ((f32 *)&sp34[-2])[9] = D_800A4964;\n    ((f32 *)&sp34[-2])[10] = D_800A4968;\n    ((s16 *)&sp34[-2])[22] = 0x19;\n    ((s16 *)&sp34[-2])[23] = 0x28;\n    ((f32 *)&sp34[-2])[12] = temp_f2;\n    ((f32 *)&sp34[-2])[13] = temp_f2;\n    ((f32 *)&sp34[-2])[14] = D_800A496C;\n    func_15152190(&sp34[-2], D_800A4268, D_800A4270, 2, 0.0f, 1, arg1, arg2);\n}",
+        "score": 0.4921875,
+        "reason": "length_mismatch (target=64, generated=63)",
+        "diffs": [],
+        "timestamp": "2026-06-04T10:59:32.366Z"
+      },
+      {
+        "code": "void func_1513A5E0(s32 *arg0, u8 arg1, s32 arg2) {\n    f32 temp_f0 = 4.0f;\n    f32 temp_f2 = D_800A4960;\n    s32 sp2C[13];\n\n    sp2C[0] = 7;\n    sp2C[1] = 7;\n    sp2C[2] = arg0[0];\n    sp2C[3] = arg0[1];\n    sp2C[4] = arg0[2];\n    ((s16 *)sp2C)[10] = 0;\n    ((s16 *)sp2C)[11] = 0xFF;\n    ((s16 *)sp2C)[12] = -0x32;\n    ((s16 *)sp2C)[13] = 0x1B;\n    ((f32 *)sp2C)[7] = temp_f0;\n    ((f32 *)sp2C)[8] = temp_f0;\n    ((f32 *)sp2C)[9] = D_800A4964;\n    ((f32 *)sp2C)[10] = D_800A4968;\n    ((s16 *)sp2C)[22] = 0x19;\n    ((s16 *)sp2C)[23] = 0x28;\n    ((f32 *)sp2C)[12] = temp_f2;\n    ((f32 *)sp2C)[13] = temp_f2;\n    ((f32 *)sp2C)[14] = D_800A496C;\n    func_15152190(sp2C, D_800A4268, D_800A4270, 2, 0.0f, 1, arg1, arg2);\n}",
+        "score": 0.4609375,
+        "reason": "length_mismatch (target=64, generated=59)",
+        "diffs": [],
+        "timestamp": "2026-06-04T10:59:56.216Z"
+      }
+    ]
   },
   {
     "function": "func_15079228",
@@ -27512,9 +27535,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 6,
+    "attempts": 7,
     "lastScore": 0.4920634920634921,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "s32 func_151606A8(struct225 *arg0) {\n    f32 tmp[16];\n    f32 sp34;\n    f32 sp38;\n    f32 sp3C;\n    struct227 *temp_v0;\n\n    temp_v0 = arg0->unk18;\n    func_150A8050((f32 (*)[4])tmp, temp_v0->unk0, temp_v0->unk4, temp_v0->unk8);\n    tmp[12] = (f32) arg0->unk18->unk10;\n    tmp[13] = (f32) *(s16 *)((s32)arg0->unk18 + 0x12);\n    tmp[14] = (f32) *(s16 *)((s32)arg0->unk18 + 0x14);\n    func_150A7960((f32 (*)[4])tmp, D_800A66B4[0], D_800A66B4[1], D_800A66B4[2], &sp34, &sp38, &sp3C);\n    arg0->unk14->unkE = sp34;\n    arg0->unk14->unk10 = sp38;\n    arg0->unk14->unk12 = sp3C;\n    return 1;\n}",
@@ -27576,6 +27599,13 @@
         "reason": "length_mismatch (target=63, generated=62)",
         "diffs": [],
         "timestamp": "2026-06-04T10:49:24.515Z"
+      },
+      {
+        "code": "s32 func_151606A8(struct225 *arg0) {\n    f32 pad[2];\n    f32 tmp[16];\n    f32 sp3C;\n    f32 sp38;\n    f32 sp34;\n    struct227 *temp_v0;\n    volatile struct227 **temp_v0_2;\n\n    temp_v0 = arg0->unk18;\n    func_150A8050((f32 (*)[4])tmp, temp_v0->unk0, temp_v0->unk4, temp_v0->unk8);\n    temp_v0_2 = (volatile struct227 **)((s32)arg0 + 0x18);\n    tmp[12] = (f32) (*temp_v0_2)->unk10;\n    tmp[13] = (f32) *(s16 *)((s32)*temp_v0_2 + 0x12);\n    tmp[14] = (f32) *(s16 *)((s32)*temp_v0_2 + 0x14);\n    func_150A7960((f32 (*)[4])tmp, D_800A66B4[0], ((s32 *)D_800A66B4)[1], D_800A66B4[2], &sp34, &sp38, &sp3C);\n    arg0->unk14->unkE = sp34;\n    arg0->unk14->unk10 = sp38;\n    arg0->unk14->unk12 = sp3C;\n    return 1;\n}",
+        "score": 0.4920634920634921,
+        "reason": "length_mismatch (target=63, generated=62)",
+        "diffs": [],
+        "timestamp": "2026-06-04T10:50:16.086Z"
       }
     ]
   },
@@ -36422,9 +36452,25 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 0,
+    "attempts": 2,
     "lastScore": 0,
-    "status": "pending"
+    "status": "skipped",
+    "history": [
+      {
+        "code": "s32 func_15134070(struct102 *arg0) {\n    switch (arg0->unk4) {\n    case 0x87:\n    case 0xB0:\n        return 0xE;\n    case 0xB1:\n        return 0xF;\n    case 0xB4:\n        return 0x10;\n    case 0x70:\n    case 0xB2:\n        return 0x11;\n    case 0xAB:\n        return 0x12;\n    case 0x10:\n    case 0x38:\n    case 0x91:\n        return 0xD;\n    case 0x98:\n        return 0xC;\n    case 0x34:\n        return 0xB;\n    case 0x47:\n        return 0xA;\n    case 0x11:\n    case 0x14:\n    case 0x3B:\n        return 1;\n    case 0x5A:\n    case 0x5F:\n    case 0x74:\n    case 0x75:\n    case 0x7A:\n        return 2;\n    case 0x58:\n    case 0x5B:\n    case 0x80:\n        return 3;\n    case 0x16:\n    case 0x88:\n    case 0x90:\n        return 4;\n    case 0x9C:\n        return 5;\n    case 0x9D:\n        return 6;\n    case 0x96:\n        return 7;\n    case 0xA0:\n        return 8;\n    case 0x9F:\n        return 9;\n    case 0x9A:\n        return 0x13;\n    case 0:\n    case 1:\n    case 2:\n    case 3:\n    case 4:\n        return 0;\n    default:\n        return 0x63;\n    }\n}",
+        "score": 0,
+        "reason": "generated 5531 instr for 63 target (87.8x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-04T10:56:10.440Z"
+      },
+      {
+        "code": "s32 func_15134070(struct102 *arg0) {\n    u8 temp_v0 = arg0->unk4;\n\n    if (temp_v0 < 0x17) {\n        switch (temp_v0) {\n        case 0:\n        case 1:\n        case 2:\n        case 3:\n        case 4:\n            return 0;\n        case 0x10:\n            return 0xD;\n        case 0x11:\n        case 0x14:\n            return 1;\n        case 0x16:\n            return 4;\n        default:\n            return 0x63;\n        }\n    }\n    switch (temp_v0) {\n    case 0x87:\n    case 0xB0:\n        return 0xE;\n    case 0xB1:\n        return 0xF;\n    case 0xB4:\n        return 0x10;\n    case 0x70:\n    case 0xB2:\n        return 0x11;\n    case 0xAB:\n        return 0x12;\n    case 0x38:\n    case 0x91:\n        return 0xD;\n    case 0x98:\n        return 0xC;\n    case 0x34:\n        return 0xB;\n    case 0x47:\n        return 0xA;\n    case 0x3B:\n        return 1;\n    case 0x5A:\n    case 0x5F:\n    case 0x74:\n    case 0x75:\n    case 0x7A:\n        return 2;\n    case 0x58:\n    case 0x5B:\n    case 0x80:\n        return 3;\n    case 0x88:\n    case 0x90:\n        return 4;\n    case 0x9C:\n        return 5;\n    case 0x9D:\n        return 6;\n    case 0x96:\n        return 7;\n    case 0xA0:\n        return 8;\n    case 0x9F:\n        return 9;\n    case 0x9A:\n        return 0x13;\n    default:\n        return 0x63;\n    }\n}",
+        "score": 0,
+        "reason": "generated 5540 instr for 63 target (87.9x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-04T10:56:34.266Z"
+      }
+    ]
   },
   {
     "function": "func_15011D60",
