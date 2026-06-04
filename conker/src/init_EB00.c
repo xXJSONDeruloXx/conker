@@ -62,7 +62,34 @@ s32 func_1000EC24(struct251 *arg0, s32 arg1, s32 *arg2, struct11 *arg3, struct04
     return 0;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/init_EB00/func_1000ECCC.s")
+s32 func_1000ECCC(struct251 *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, u16 *arg6) {
+    s16 temp_a1;
+    s32 temp_v1;
+    unsigned long temp_v0;
+    s16 temp_t4;
+
+    temp_v1 = arg0->unk18.w;
+    temp_v0 = *arg6;
+    temp_a1 = temp_v1;
+    if (temp_v0 != 0) {
+        (0, arg0)->unk18.w = ((0, temp_v0) << 0x10) | (temp_v1 & 0xFFFF);
+        (0, arg0)->unk0 = 0;
+        *arg6 = 0;
+        temp_v1 = arg0->unk18.w;
+    }
+    temp_a1 -= D_800BE9E4;
+    if ((0, temp_a1) <= 0) {
+        temp_t4 = temp_v1 >> 0x10;
+        *arg6 = (0, temp_t4);
+        arg0->unk0 = (0, temp_t4);
+        if (func_10010894((0, arg0)->unk1C) == 0) {
+            func_10010344(*arg6, (0, arg0)->unk1C, *(s32 *)((s32)(0, arg0) + 0xC), *(s16 *)((0, (s32)(0, arg0)) + 0xA), *(u16 *)((s32)(0, arg0) + 8));
+        }
+        return 1;
+    }
+    arg0->unk18.w = (temp_v1 & 0xFFFF0000) | temp_a1;
+    return 0;
+}
 // ? func_1000ECCC(void *arg0, ? arg1, ? arg2, ? arg3, void *arg6) {
 //     s16 temp_a1;
 //     s32 temp_t4;
