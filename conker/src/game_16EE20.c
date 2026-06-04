@@ -3,6 +3,8 @@
 #include "functions.h"
 #include "variables.h"
 
+s32 func_1514563C(struct17 *arg0, struct17 *arg1, struct17 *arg2, struct17 *arg3, f32 *arg4);
+
 s32 func_151452C4(s32 arg0, s32 arg1, s32 arg2, f32 arg3, s32 arg4, s32 arg5, f32 *arg6, f32 *arg7);
 
 extern f32 D_800A5694;
@@ -547,7 +549,24 @@ s32 func_151454BC(u8 arg0, f32 arg1, struct17 *arg2) {
     return 1;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15145548.s")
+void func_15145548(struct17 *arg0, struct17 *arg1, struct17 *arg2, struct17 *arg3, f32 *arg4) {
+    f32 sp24;
+
+    if (arg4 == NULL) {
+        arg4 = &sp24;
+    }
+    if (func_1514563C(arg0, arg1, arg2, arg3, arg4) != 0) {
+        if (*arg4 < 0.0f) {
+            *arg3 = *arg0;
+        } else if (1.0f < *arg4) {
+            arg3->unk0 = arg0->unk0 + arg1->unk0;
+            arg3->unk4 = arg0->unk4 + arg1->unk4;
+            arg3->unk8 = arg0->unk8 + arg1->unk8;
+        }
+    } else {
+        *arg3 = *arg0;
+    }
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_1514563C.s")
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15145740.s")

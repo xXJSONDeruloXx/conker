@@ -999,5 +999,14 @@
     "example_functions": [
       "func_1502B020"
     ]
+  },
+  {
+    "id": "fixed-prototype-va-start-varargs",
+    "description": "A function can have a fixed prototype in headers for call compatibility but still manually consume trailing arguments with `va_start` from an early fixed parameter; IDO saves argument registers to stack and emits varargs-style pointer walking.",
+    "trigger": "Target has fixed-arity declaration/callers but prologue spills a0-a3 and loop walks `sp+0x50`/`&arg2` like varargs, while a manual `&arg2` pointer keeps count in an s-register and mismatches.",
+    "solution": "Keep the fixed function signature to satisfy the header, but declare `va_list args;` and use `va_start(args, arg1); va_arg(args, s32)` for the trailing values. Reorder locals so long-lived registers match (e.g. offset before va_list when target wants offset in s0 and args pointer in s1).",
+    "example_functions": [
+      "func_1502B7F0"
+    ]
   }
 ]
