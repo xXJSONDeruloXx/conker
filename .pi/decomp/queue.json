@@ -21672,8 +21672,8 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 3,
-    "lastScore": 0.9592,
+    "attempts": 6,
+    "lastScore": 0.8571,
     "status": "pending",
     "history": [
       {
@@ -21699,6 +21699,43 @@
           "structural: target=addiu s0, s0, LO(D_800CC2D0) got=addiu s2, s2, LO(D_800D154C)"
         ],
         "timestamp": "2026-06-04T03:06:09.430Z"
+      },
+      {
+        "code": "void func_15074980(void) {\n    register struct127 **playerp;\n    register struct127 *cur;\n    register s32 i;\n    f32 dist;\n\n    dist = (f32)(D_800D1580 << 3);\n    i = 0;\n    if (D_8008FD8C > 0) {\n        playerp = &D_800D154C;\n        cur = D_800CC2D0;\n        do {\n            if (func_1505A72C(*playerp, cur) < dist) {\n                if (cur->unk31C != 0) {\n                    *(s8 *)((s32)cur->unk31C + 0x4B) = 0x14;\n                }\n            }\n            i++;\n            cur++;\n        } while (i < D_8008FD8C);\n    }\n}",
+        "score": 0.46938775510204084,
+        "reason": "length_mismatch (target=49, generated=46)",
+        "diffs": [],
+        "timestamp": "2026-06-04T03:06:42.528Z"
+      },
+      {
+        "code": "void func_15074980(void) {\n    register struct127 *cur = D_800CC2D0;\n    register s32 i;\n    f32 dist;\n\n    dist = (f32)(D_800D1580 << 3);\n    i = 0;\n    if (D_8008FD8C > 0) {\n        do {\n            if (func_1505A72C(D_800D154C, cur) < dist) {\n                if (cur->unk31C != 0) {\n                    *(s8 *)((s32)cur->unk31C + 0x4B) = 0x14;\n                }\n            }\n            i++;\n            cur++;\n        } while (i < D_8008FD8C);\n    }\n}",
+        "score": 0.8571,
+        "reason": "structural_diffs=7",
+        "diffs": [
+          "structural: target=move s1, zero got=lui s0, HI(D_800CC2D0)",
+          "structural: target=lui s0, HI(D_800CC2D0) got=addiu s0, s0, LO(D_800CC2D0)",
+          "structural: target=blez t8, L0 got=move s1, zero",
+          "structural: target=cvt.s.w f20, f4 got=blez t8, L0",
+          "structural: target=lui s2, HI(D_800D154C) got=cvt.s.w f20, f4",
+          "structural: target=addiu s2, s2, LO(D_800D154C) got=lui s2, HI(D_800D154C)",
+          "structural: target=addiu s0, s0, LO(D_800CC2D0) got=addiu s2, s2, LO(D_800D154C)"
+        ],
+        "timestamp": "2026-06-04T03:07:27.484Z"
+      },
+      {
+        "code": "void func_15074980(void) {\n    register struct127 *cur;\n    register s32 i;\n    register struct127 *player;\n    f32 dist;\n\n    dist = (f32)(D_800D1580 << 3);\n    i = 0;\n    if (D_8008FD8C > 0) {\n        player = D_800D154C;\n        cur = D_800CC2D0;\n        do {\n            if (func_1505A72C(player, cur) < dist) {\n                if (cur->unk31C != 0) {\n                    *(s8 *)((s32)cur->unk31C + 0x4B) = 0x14;\n                }\n            }\n            i++;\n            cur++;\n        } while (i < D_8008FD8C);\n    }\n}",
+        "score": 0.8571,
+        "reason": "structural_diffs=7",
+        "diffs": [
+          "structural: target=lui s0, HI(D_800CC2D0) got=lui s3, HI(D_800D154C)",
+          "structural: target=lui s2, HI(D_800D154C) got=lui s0, HI(D_800CC2D0)",
+          "structural: target=addiu s2, s2, LO(D_800D154C) got=lw s3, LO(D_800D154C)(s3)",
+          "structural: target=li s3, 20 got=li s2, 20",
+          "structural: target=lw a0, 0(s2) got=move a0, s3",
+          "structural: target=sb s3, 75(v0) got=sb s2, 75(v0)",
+          "structural: target=lw a0, 0(s2) got=move a0, s3"
+        ],
+        "timestamp": "2026-06-04T03:07:48.013Z"
       }
     ]
   },
