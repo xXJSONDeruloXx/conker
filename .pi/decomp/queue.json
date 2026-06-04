@@ -32046,8 +32046,8 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
-    "lastScore": 0.377,
+    "attempts": 6,
+    "lastScore": 0.9836,
     "status": "pending",
     "history": [
       {
@@ -32091,6 +32091,57 @@
           "structural: target=move a0, s0 got=lw a1, -4(s1)"
         ],
         "timestamp": "2026-06-04T10:11:26.334Z"
+      },
+      {
+        "code": "s32 func_1502B5C8(s32 *arg0, s32 arg1, ...) {\n    va_list args;\n    s32 *dst;\n    s32 temp_a1;\n    s32 offset;\n    s32 sp40;\n    s32 pad;\n    s32 sp38;\n    s32 ret;\n\n    dst = &sp40;\n    if (arg0 != NULL) {\n        dst = arg0;\n    }\n    *dst = 1;\n    offset = (s32) D_AB1950;\n    va_start(args, arg1);\n    for (; arg1 != 0; arg1--) {\n        temp_a1 = va_arg(args, s32);\n        if (*dst != 0) {\n            offset += func_1502AC88(offset, temp_a1, &sp38);\n        }\n        *dst = sp38 & 0x0FFFFFFF;\n    }\n    if (*dst != 0) {\n        ret = func_1502B350(offset, sp38, dst);\n    } else {\n        ret = 0;\n    }\n    return ret;\n}",
+        "score": 0.7869,
+        "reason": "structural_diffs=13",
+        "diffs": [
+          "structural: target=addiu sp, sp, -80 got=addiu sp, sp, -88",
+          "structural: target=sw a1, 84(sp) got=sw a1, 92(sp)",
+          "structural: target=sw a2, 88(sp) got=sw a2, 96(sp)",
+          "structural: target=sw a3, 92(sp) got=sw a3, 100(sp)",
+          "structural: target=addiu s2, sp, 64 got=addiu s2, sp, 68",
+          "structural: target=lw t7, 84(sp) got=lw t7, 92(sp)",
+          "structural: target=addiu s1, sp, 88 got=addiu s1, sp, 96",
+          "structural: target=addiu s4, sp, 56 got=addiu s4, sp, 60",
+          "structural: target=lw t0, 56(sp) got=lw t0, 60(sp)",
+          "structural: target=lw t2, 84(sp) got=lw t2, 92(sp)",
+          "structural: target=sw t3, 84(sp) got=sw t3, 92(sp)",
+          "structural: target=lw a1, 56(sp) got=lw a1, 60(sp)",
+          "structural: target=addiu sp, sp, 80 got=addiu sp, sp, 88"
+        ],
+        "timestamp": "2026-06-04T10:12:04.179Z"
+      },
+      {
+        "code": "s32 func_1502B5C8(s32 *arg0, s32 arg1, ...) {\n    va_list args;\n    s32 *dst;\n    s32 temp_a1;\n    s32 offset;\n    s32 stack[3];\n    s32 ret;\n\n    dst = &stack[2];\n    if (arg0 != NULL) {\n        dst = arg0;\n    }\n    *dst = 1;\n    offset = (s32) D_AB1950;\n    va_start(args, arg1);\n    for (; arg1 != 0; arg1--) {\n        temp_a1 = va_arg(args, s32);\n        if (*dst != 0) {\n            offset += func_1502AC88(offset, temp_a1, &stack[0]);\n        }\n        *dst = stack[0] & 0x0FFFFFFF;\n    }\n    if (*dst != 0) {\n        ret = func_1502B350(offset, stack[0], dst);\n    } else {\n        ret = 0;\n    }\n    return ret;\n}",
+        "score": 0.7869,
+        "reason": "structural_diffs=13",
+        "diffs": [
+          "structural: target=addiu sp, sp, -80 got=addiu sp, sp, -88",
+          "structural: target=sw a1, 84(sp) got=sw a1, 92(sp)",
+          "structural: target=sw a2, 88(sp) got=sw a2, 96(sp)",
+          "structural: target=sw a3, 92(sp) got=sw a3, 100(sp)",
+          "structural: target=addiu s2, sp, 64 got=addiu s2, sp, 68",
+          "structural: target=lw t7, 84(sp) got=lw t7, 92(sp)",
+          "structural: target=addiu s1, sp, 88 got=addiu s1, sp, 96",
+          "structural: target=addiu s4, sp, 56 got=addiu s4, sp, 60",
+          "structural: target=lw t0, 56(sp) got=lw t0, 60(sp)",
+          "structural: target=lw t2, 84(sp) got=lw t2, 92(sp)",
+          "structural: target=sw t3, 84(sp) got=sw t3, 92(sp)",
+          "structural: target=lw a1, 56(sp) got=lw a1, 60(sp)",
+          "structural: target=addiu sp, sp, 80 got=addiu sp, sp, 88"
+        ],
+        "timestamp": "2026-06-04T10:12:38.271Z"
+      },
+      {
+        "code": "s32 func_1502B5C8(s32 *arg0, s32 arg1, ...) {\n    va_list args;\n    s32 *dst;\n    s32 temp_a1;\n    s32 offset;\n    s32 sp40;\n    s32 sp38;\n    s32 ret;\n\n    dst = &sp40;\n    if (arg0 != NULL) {\n        dst = arg0;\n    }\n    *dst = 1;\n    offset = (s32) D_AB1950;\n    va_start(args, arg1);\n    for (; arg1 != 0; arg1--) {\n        temp_a1 = va_arg(args, s32);\n        if (*dst != 0) {\n            offset += func_1502AC88(offset, temp_a1, &sp38);\n        }\n        *dst = sp38 & 0x0FFFFFFF;\n    }\n    if (*dst != 0) {\n        ret = func_1502B350(offset, sp38, dst);\n    } else {\n        ret = 0;\n    }\n    return ret;\n}",
+        "score": 0.9836,
+        "reason": "structural_diffs=1",
+        "diffs": [
+          "structural: target=addiu s2, sp, 64 got=addiu s2, sp, 60"
+        ],
+        "timestamp": "2026-06-04T10:12:54.405Z"
       }
     ]
   },
