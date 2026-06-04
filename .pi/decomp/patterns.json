@@ -765,5 +765,14 @@
     "example_functions": [
       "func_1505DF10"
     ]
+  },
+  {
+    "id": "compare-operand-order-and-inline-fp-assignment",
+    "description": "For IDO branch and FPR shaping, write equality/inequality with operands in target order, and use an inline assignment inside a comparison to force the converted float into `$f2` after a call without adding a spill.",
+    "trigger": "Near-match where `beq` operands are reversed or a post-call int-to-float threshold uses `$f6` instead of target `$f2`.",
+    "solution": "Reverse the source comparison operands (e.g. `if (GLOBAL != idx)`) and compare the call result against `(temp_f2 = expr)` with `temp_f2` declared as `f32`.",
+    "example_functions": [
+      "func_150779D4"
+    ]
   }
 ]

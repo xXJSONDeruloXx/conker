@@ -2,6 +2,8 @@
 #include "functions.h"
 #include "variables.h"
 
+void func_10004074(void);
+
 
 struct249 *func_1509B704(s16 arg0);
 void func_1509C120(void);
@@ -57,7 +59,27 @@ struct249 *func_1509B704(s16 arg0) {
 }
 
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_C8950/func_1509B764.s")
+void func_1509B764(struct249 *arg0) {
+    if (D_800D2F48.length == 1) {
+        D_800D2F48.unk4 = NULL;
+        D_800D2F48.unk8 = 0;
+    } else {
+        if (arg0 == D_800D2F48.unk4) {
+            D_800D2F48.unk4 = arg0->next;
+            *(s32 *)((s32)arg0->next + 0x1C) = 0;
+        } else {
+            *(struct249 **)((s32)*(struct249 **)((s32)arg0 + 0x1C) + 0x18) = arg0->next;
+        }
+        if ((s32)arg0 == D_800D2F48.unk8) {
+            D_800D2F48.unk8 = *(s32 *)((s32)arg0 + 0x1C);
+            *(s32 *)(*(s32 *)((s32)arg0 + 0x1C) + 0x18) = 0;
+        } else {
+            *(s32 *)((s32)arg0->next + 0x1C) = *(s32 *)((s32)arg0 + 0x1C);
+        }
+    }
+    func_10004074();
+    D_800D2F48.length--;
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_C8950/func_1509B810.s")
 
