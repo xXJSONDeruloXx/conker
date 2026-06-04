@@ -25045,7 +25045,7 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 5,
+    "attempts": 6,
     "lastScore": 0.49056603773584906,
     "status": "pending",
     "history": [
@@ -25083,6 +25083,13 @@
         "reason": "length_mismatch (target=53, generated=52)",
         "diffs": [],
         "timestamp": "2026-06-04T04:46:20.302Z"
+      },
+      {
+        "code": "void func_15163FEC(struct225 *arg0, void *arg1, u8 arg2) {\n    s32 temp_v1;\n    u8 *temp_v0;\n    s32 temp_a2;\n    void (*func)(struct225 *, void *, u8);\n\n    temp_v0 = (u8 *)arg0 + 0x18;\n    if (arg2 == 0) {\n        temp_v1 = *(s32 *)arg1;\n        if ((temp_v1 == *(s32 *)temp_v0) || (temp_v0[4] == *(u8 *)((s32)arg1 + 4))) {\n            func_1516972C((struct102 *)arg0);\n        }\n    } else if (arg2 == 0x2D) {\n        temp_a2 = *(s32 *)temp_v0;\n        temp_v1 = *(s32 *)arg1;\n        if (temp_v1 == temp_a2) {\n            *(s32 *)temp_v0 = *(s32 *)((s32)arg1 + 4);\n            temp_v0[4] = *(u8 *)((s32)arg1 + 9);\n        } else if (*(s32 *)((s32)arg1 + 4) == temp_a2) {\n            *(s32 *)temp_v0 = temp_v1;\n            temp_v0[4] = *(u8 *)((s32)arg1 + 8);\n        }\n    } else {\n        func = D_8008B374[*(u8 *)((s32)arg0 + 0x2D)];\n        if (func != NULL) {\n            func(arg0, arg1, arg2);\n        }\n    }\n}",
+        "score": 0.49056603773584906,
+        "reason": "length_mismatch (target=53, generated=52)",
+        "diffs": [],
+        "timestamp": "2026-06-04T05:38:56.262Z"
       }
     ]
   },
@@ -27036,9 +27043,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 18,
-    "lastScore": 0.9434,
-    "status": "pending",
+    "attempts": 19,
+    "lastScore": 1,
+    "status": "matched",
     "history": [
       {
         "code": "s32 func_1502B8E0(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {\n    s32 sp34;\n    s32 more;\n    s32 offset;\n    s32 *tmp;\n\n    more = 1;\n    offset = (s32)D_AB1950;\n    tmp = &arg3;\n    if (arg2 != 0) {\n        do {\n            tmp = (s32 *)ALIGN4(tmp);\n            tmp += 1;\n            if (more != 0) {\n                offset += func_1502AC88(offset, *(tmp - 1), &sp34);\n            }\n            arg2--;\n            more = sp34 & 0xFFFFFFF;\n        } while (arg2 != 0);\n    }\n    if (more != 0) {\n        more = func_1502B224(offset, arg0, sp34, arg1);\n    }\n    return more;\n}",
