@@ -882,5 +882,14 @@
     "example_functions": [
       "func_15138BC0"
     ]
+  },
+  {
+    "id": "branch-delay-loop-init-and-float-overlay-field",
+    "description": "For loops guarded by a count, putting the loop index initialization inside the `if (count > 0)` block lets IDO schedule `i = 0` into the guard branch delay slot. When a struct field is declared as integer but target uses `swc1`, store through a `f32 *` cast to the field address.",
+    "trigger": "Target has `blez count, end` with `move index, zero` in the delay slot, and target stores an `alCents2Ratio` result with `swc1` into a field declared as `s32`.",
+    "solution": "Initialize the data pointer before the count guard, initialize the index as the first statement inside the guarded block, and write `*(f32 *)&ptr->field = float_func(...)` instead of assigning to the integer-typed field.",
+    "example_functions": [
+      "func_1001001C"
+    ]
   }
 ]
