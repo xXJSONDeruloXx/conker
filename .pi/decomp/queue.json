@@ -30512,8 +30512,8 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 3,
-    "lastScore": 0.6833,
+    "attempts": 6,
+    "lastScore": 0.4838709677419355,
     "status": "pending",
     "history": [
       {
@@ -30577,6 +30577,27 @@
           "structural: target=slt at, v0, a1 got=slt at, a1, v0"
         ],
         "timestamp": "2026-06-04T09:47:15.808Z"
+      },
+      {
+        "code": "s32 func_15004BF0(s32 arg0, s32 arg1) {\n    s32 idx;\n    s32 ret;\n\n    if (arg0 == 0) {\n        arg0 = D_800DBF00;\n        arg1 = D_800DBEF0;\n        ret = 1;\n        if (arg0 < arg1) {\n            idx = arg0;\n            do {\n                if (ret == ((u8 *)D_800DBEF4)[(idx * 0xA0) + 0x72]) {\n                    ret++;\n                    idx = arg0 - 1;\n                }\n                if (ret >= 0x100) {\n                    ret = 0xFF;\n                    goto end;\n                }\n                idx++;\n            } while (idx < arg1);\n            goto ret_now;\n        }\n    } else {\n        arg0 = 0xFF - D_800DBF00;\n        arg1 = D_800DBEF0;\n        ret = arg0;\n        if (arg1 > 0) {\n            idx = 0;\n            do {\n                if (ret == ((u8 *)D_800DBEF4)[(idx * 0xA0) + 0x72]) {\n                    ret--;\n                    idx = -1;\n                }\n                idx++;\n                if (ret <= 0) {\n                    ret = arg0;\n                    goto end;\n                }\n            } while (idx < arg1);\n        }\n    }\nend:\n    return ret;\nret_now:\n    return ret;\n}",
+        "score": 0.47619047619047616,
+        "reason": "length_mismatch (target=60, generated=63)",
+        "diffs": [],
+        "timestamp": "2026-06-04T09:47:37.739Z"
+      },
+      {
+        "code": "s32 func_15004BF0(s32 arg0) {\n    register s32 temp_a1;\n    register s32 idx;\n    register s32 ret;\n\n    if (arg0 == 0) {\n        arg0 = D_800DBF00;\n        temp_a1 = D_800DBEF0;\n        ret = 1;\n        if (arg0 < temp_a1) {\n            idx = arg0;\n            do {\n                if (ret == ((u8 *)D_800DBEF4)[(idx * 0xA0) + 0x72]) {\n                    ret++;\n                    idx = arg0 - 1;\n                }\n                if (ret >= 0x100) {\n                    ret = 0xFF;\n                    goto end;\n                }\n                idx++;\n            } while (idx < temp_a1);\n            goto ret_now;\n        }\n    } else {\n        arg0 = 0xFF - D_800DBF00;\n        temp_a1 = D_800DBEF0;\n        ret = arg0;\n        if (temp_a1 > 0) {\n            idx = 0;\n            do {\n                if (ret == ((u8 *)D_800DBEF4)[(idx * 0xA0) + 0x72]) {\n                    ret--;\n                    idx = -1;\n                }\n                idx++;\n                if (ret <= 0) {\n                    ret = arg0;\n                    goto end;\n                }\n            } while (idx < temp_a1);\n        }\n    }\nend:\n    return ret;\nret_now:\n    return ret;\n}",
+        "score": 0.4838709677419355,
+        "reason": "length_mismatch (target=60, generated=62)",
+        "diffs": [],
+        "timestamp": "2026-06-04T09:47:54.438Z"
+      },
+      {
+        "code": "s32 func_15004BF0(s32 arg0) {\n    s32 idx;\n    s32 ret;\n    s32 temp_a1;\n\n    if (arg0 == 0) {\n        arg0 = D_800DBF00;\n        temp_a1 = D_800DBEF0;\n        ret = 1;\n        if (arg0 < temp_a1) {\n            idx = arg0;\n            do {\n                if (ret == ((u8 *)D_800DBEF4)[(idx * 0xA0) + 0x72]) {\n                    ret++;\n                    idx = arg0 - 1;\n                }\n                if (ret >= 0x100) {\n                    ret = 0xFF;\n                    goto end;\n                }\n                idx++;\n            } while (idx < temp_a1);\n            goto ret_now;\n        }\n    } else {\n        arg0 = 0xFF - D_800DBF00;\n        temp_a1 = D_800DBEF0;\n        ret = arg0;\n        if (temp_a1 > 0) {\n            idx = 0;\n            do {\n                if (ret == ((u8 *)D_800DBEF4)[(idx * 0xA0) + 0x72]) {\n                    ret--;\n                    idx = -1;\n                }\n                idx++;\n                if (ret <= 0) {\n                    ret = arg0;\n                    goto end;\n                }\n            } while (idx < temp_a1);\n        }\n    }\nend:\n    return ret;\nret_now:\n    return ret;\n}",
+        "score": 0.4838709677419355,
+        "reason": "length_mismatch (target=60, generated=62)",
+        "diffs": [],
+        "timestamp": "2026-06-04T09:48:12.310Z"
       }
     ]
   },
