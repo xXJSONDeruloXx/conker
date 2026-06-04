@@ -2,6 +2,8 @@
 #include "functions.h"
 #include "variables.h"
 
+void func_150A7960(f32 mtx[4][4], f32 arg1, s32 arg2, f32 arg3, f32 *arg4, f32 *arg5, f32 *arg6);
+
 void func_1516441C(struct225 *, void *);
 void func_15145CD0(s32, void *, void *, s32);
 
@@ -1258,7 +1260,21 @@ s32 func_151644A8(struct242 *arg0) {
     return 1;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_18D770/func_151644F4.s")
+void func_151644F4(struct242 *arg0, struct17 *arg1, s32 arg2, f32 arg3, f32 arg4) {
+    f32 sp74;
+    f32 sp70;
+    f32 sp6C;
+    f32 tmp[16];
+
+    func_150A8050((f32 (*)[4])tmp, arg3, 0.0f, arg4);
+    tmp[12] = arg1->unk0;
+    tmp[13] = arg1->unk4;
+    tmp[14] = arg1->unk8;
+    func_150A7960((f32 (*)[4])tmp, 0.0f, arg2, 0.0f, &sp6C, &sp70, &sp74);
+    arg0->unk14->unkE = sp6C;
+    arg0->unk14->unk10 = sp70;
+    arg0->unk14->unk12 = sp74;
+}
 // NON-MATCHING: close...
 // void func_151644F4(struct242 *arg0, struct17 *arg1, s32 arg2, f32 arg3, f32 arg4) {
 //     f32 tmp1;

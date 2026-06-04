@@ -23708,9 +23708,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 1,
-    "lastScore": 0.9808,
-    "status": "pending",
+    "attempts": 2,
+    "lastScore": 1,
+    "status": "matched",
     "history": [
       {
         "code": "void func_15137E60(s32 arg0, s32 arg1, s32 arg2, s32 arg3, f32 arg4, struct102 *arg5) {\n    f32 sp6C[3];\n    f32 sp60[3];\n    f32 sp54[3];\n    f32 sp50;\n    s16 sp4E;\n    u8 sp4D;\n    f32 sp48;\n\n    func_15137F30(arg0, arg1, arg2, arg3, arg4, arg5, sp6C, sp60, sp54, &sp50, &sp4E, &sp4D, &sp48);\n    func_151D9014(sp6C, sp54, 0, sp50, sp4E, sp4D, sp48, 0, 1.0f, 1.0f, 1, 0, 1, 0, arg5->unkC, arg5->unk1);\n}",
@@ -23732,9 +23732,45 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 2,
+    "lastScore": 0.8654,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_151644F4(struct242 *arg0, struct17 *arg1, s32 arg2, f32 arg3, f32 arg4) {\n    f32 tmp[16];\n    f32 sp6C;\n    f32 sp70;\n    f32 sp74;\n\n    func_150A8050((f32 (*)[4])tmp, arg3, 0.0f, arg4);\n    tmp[13] = arg1->unk0;\n    tmp[14] = arg1->unk4;\n    tmp[15] = arg1->unk8;\n    func_150A7960((f32 (*)[4])tmp, 0.0f, arg2, 0.0f, &sp6C, &sp70, &sp74);\n    arg0->unk14->unkE = sp6C;\n    arg0->unk14->unk10 = sp70;\n    arg0->unk14->unk12 = sp74;\n}",
+        "score": 0.7885,
+        "reason": "structural_diffs=11",
+        "diffs": [
+          "structural: target=addiu a0, sp, 44 got=addiu a0, sp, 56",
+          "structural: target=addiu t6, sp, 108 got=addiu t6, sp, 52",
+          "structural: target=addiu t7, sp, 112 got=addiu t7, sp, 48",
+          "structural: target=addiu t8, sp, 116 got=addiu t8, sp, 44",
+          "structural: target=swc1 f4, 92(sp) got=swc1 f4, 108(sp)",
+          "structural: target=swc1 f6, 96(sp) got=swc1 f6, 112(sp)",
+          "structural: target=addiu a0, sp, 44 got=addiu a0, sp, 56",
+          "structural: target=swc1 f8, 100(sp) got=swc1 f8, 116(sp)",
+          "structural: target=lwc1 f10, 108(sp) got=lwc1 f10, 52(sp)",
+          "structural: target=lwc1 f18, 112(sp) got=lwc1 f18, 48(sp)",
+          "structural: target=lwc1 f6, 116(sp) got=lwc1 f6, 44(sp)"
+        ],
+        "timestamp": "2026-06-04T04:21:49.704Z"
+      },
+      {
+        "code": "void func_151644F4(struct242 *arg0, struct17 *arg1, s32 arg2, f32 arg3, f32 arg4) {\n    f32 sp6C;\n    f32 sp70;\n    f32 sp74;\n    f32 tmp[16];\n\n    func_150A8050((f32 (*)[4])tmp, arg3, 0.0f, arg4);\n    tmp[13] = arg1->unk0;\n    tmp[14] = arg1->unk4;\n    tmp[15] = arg1->unk8;\n    func_150A7960((f32 (*)[4])tmp, 0.0f, arg2, 0.0f, &sp6C, &sp70, &sp74);\n    arg0->unk14->unkE = sp6C;\n    arg0->unk14->unk10 = sp70;\n    arg0->unk14->unk12 = sp74;\n}",
+        "score": 0.8654,
+        "reason": "structural_diffs=7",
+        "diffs": [
+          "structural: target=addiu t6, sp, 108 got=addiu t6, sp, 116",
+          "structural: target=addiu t8, sp, 116 got=addiu t8, sp, 108",
+          "structural: target=swc1 f4, 92(sp) got=swc1 f4, 96(sp)",
+          "structural: target=swc1 f6, 96(sp) got=swc1 f6, 100(sp)",
+          "structural: target=swc1 f8, 100(sp) got=swc1 f8, 104(sp)",
+          "structural: target=lwc1 f10, 108(sp) got=lwc1 f10, 116(sp)",
+          "structural: target=lwc1 f6, 116(sp) got=lwc1 f6, 108(sp)"
+        ],
+        "timestamp": "2026-06-04T04:22:13.464Z"
+      }
+    ]
   },
   {
     "function": "func_1001AAE0",
