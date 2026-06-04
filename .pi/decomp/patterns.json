@@ -1035,5 +1035,14 @@
     "example_functions": [
       "func_1502B5C8"
     ]
+  },
+  {
+    "id": "commutative-fp-mul-and-int-sum-order",
+    "description": "For commutative float multiplies fed by an int-to-float conversion, IDO may emit the `mul.s` operands opposite of the written source order, and reversing the outer multiply can disturb integer temp allocation unless the inner commutative add is also reordered.",
+    "trigger": "Near-match with only `mul.s fd, fA, fB` vs `mul.s fd, fB, fA`, or reverse multiply fixes the FP operand order but shifts integer temp registers in the sum feeding `mtc1/cvt.s.w`.",
+    "solution": "Reverse the outer `*` operands to get the desired `mul.s` operand order, then reverse the inner commutative integer `+` operands so the integer temps/mfc1 register order matches (e.g. `floatScale * ((s32)floatExpr + (byte & mask))`).",
+    "example_functions": [
+      "func_1001B310"
+    ]
   }
 ]
