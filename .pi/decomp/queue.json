@@ -34873,8 +34873,8 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 9,
-    "lastScore": 0.4928571428571429,
+    "attempts": 12,
+    "lastScore": 0.9855,
     "status": "pending",
     "history": [
       {
@@ -34985,6 +34985,41 @@
         "reason": "length_mismatch (target=69, generated=70)",
         "diffs": [],
         "timestamp": "2026-06-04T13:27:11.497Z"
+      },
+      {
+        "code": "void *func_1513BAE8(void) {\n    void *temp_v0;\n    u8 sp24[0x50];\n\n    sp24[0x15] = 2;\n    sp24[0x16] = 5;\n    *(s16 *)&sp24[0x18] = 0x12C;\n    *(s32 *)&sp24[0x44] = 9;\n    *(f32 *)&sp24[0] = 0.0f;\n    *(f32 *)&sp24[4] = 0.0f;\n    *(f32 *)&sp24[0xC] = 0.0f;\n    *(f32 *)&sp24[0x10] = 0.0f;\n    *(f32 *)&sp24[8] = 0.0f;\n    sp24[0x14] = 0;\n    *(s32 *)&sp24[0x48] = 0x1AE;\n    *(s32 *)&sp24[0x1C] = 1;\n    *(s32 *)&sp24[0x20] = 0x220205;\n    *(s32 *)&sp24[0x24] = 0x40600;\n    sp24[0x38] = 0;\n    sp24[0x39] = 0;\n    *(s32 *)&sp24[0x28] = 1;\n    *(s32 *)&sp24[0x2C] = 0x36;\n    *(s32 *)&sp24[0x30] = 0x80;\n    *(s32 *)&sp24[0x34] = 0x20;\n    sp24[0x4C] = 3;\n\n    temp_v0 = func_1513B5E0(&sp24[0x14], 1, 0x14, 0xFF, 1);\n    if (temp_v0 != NULL) {\n        if (*(s32 *)((s32)temp_v0 + 0x50) != 0x1180) {\n            func_1516972C(temp_v0);\n        } else {\n            memcpy((void *)((s32)temp_v0 + *(s32 *)((s32)temp_v0 + 0x50) + 0xF8), sp24, 0x14);\n        }\n    }\n    return temp_v0;\n}",
+        "score": 0.9666666666666667,
+        "reason": "transmuter_best=1",
+        "diffs": [
+          "transmuter: iters=0, forks=0, bestScore=1",
+          "timeout=120s, maxCompiles=5000"
+        ],
+        "timestamp": "2026-06-04T13:29:30.185Z"
+      },
+      {
+        "code": "void *func_1513BAE8(void) {\n    void *temp_v0;\n    u8 sp24[0x50];\n\n    sp24[0x15] = 2;\n    sp24[0x16] = 5;\n    *(s16 *)&sp24[0x18] = 0x12C;\n    *(s32 *)&sp24[0x44] = 9;\n    *(f32 *)&sp24[0] = 0.0f;\n    *(f32 *)&sp24[4] = 0.0f;\n    *(f32 *)&sp24[0xC] = 0.0f;\n    *(f32 *)&sp24[0x10] = 0.0f;\n    *(f32 *)&sp24[8] = 0.0f;\n    sp24[0x14] = 0;\n    *(s32 *)&sp24[0x48] = 0x1AE;\n    *(s32 *)&sp24[0x1C] = 1;\n    *(s32 *)&sp24[0x20] = 0x220205;\n    *(s32 *)&sp24[0x24] = 0x40600;\n    sp24[0x38] = 0;\n    sp24[0x39] = 0;\n    *(s32 *)&sp24[0x28] = 1;\n    *(s32 *)&sp24[0x2C] = 0x36;\n    *(s32 *)&sp24[0x30] = 0x80;\n    *(s32 *)&sp24[0x34] = 0x20;\n    sp24[0x4C] = 3;\n\n    temp_v0 = func_1513B5E0(&sp24[0x14], 1, 0x14, 0xFF, 1);\n    if (temp_v0 != NULL) {\n        if (*(s32 *)((s32)temp_v0 + 0x50) != 0x1180) {\n            func_1516972C(temp_v0);\n        } else {\n            memcpy((void *)((s32)temp_v0 + (u32)*(s32 *)((s32)temp_v0 + 0x50) + 0xF8), sp24, 0x14);\n        }\n    }\n    return temp_v0;\n}",
+        "score": 0.9855,
+        "reason": "structural_diffs=1",
+        "diffs": [
+          "structural: target=addu a0, a3, t1 got=addu a0, t1, a3"
+        ],
+        "timestamp": "2026-06-04T13:29:48.679Z"
+      },
+      {
+        "code": "void *func_1513BAE8(void) {\n    void *temp_v0;\n    void *ret;\n    u8 sp24[0x50];\n\n    sp24[0x15] = 2;\n    sp24[0x16] = 5;\n    *(s16 *)&sp24[0x18] = 0x12C;\n    *(s32 *)&sp24[0x44] = 9;\n    *(f32 *)&sp24[0] = 0.0f;\n    *(f32 *)&sp24[4] = 0.0f;\n    *(f32 *)&sp24[0xC] = 0.0f;\n    *(f32 *)&sp24[0x10] = 0.0f;\n    *(f32 *)&sp24[8] = 0.0f;\n    sp24[0x14] = 0;\n    *(s32 *)&sp24[0x48] = 0x1AE;\n    *(s32 *)&sp24[0x1C] = 1;\n    *(s32 *)&sp24[0x20] = 0x220205;\n    *(s32 *)&sp24[0x24] = 0x40600;\n    sp24[0x38] = 0;\n    sp24[0x39] = 0;\n    *(s32 *)&sp24[0x28] = 1;\n    *(s32 *)&sp24[0x2C] = 0x36;\n    *(s32 *)&sp24[0x30] = 0x80;\n    *(s32 *)&sp24[0x34] = 0x20;\n    sp24[0x4C] = 3;\n\n    temp_v0 = func_1513B5E0(&sp24[0x14], 1, 0x14, 0xFF, 1);\n    ret = temp_v0;\n    if (temp_v0 != NULL) {\n        if (*(s32 *)((s32)temp_v0 + 0x50) != 0x1180) {\n            func_1516972C(temp_v0);\n        } else {\n            temp_v0 = (void *)((s32)temp_v0 + *(s32 *)((s32)temp_v0 + 0x50));\n            memcpy((u8 *)temp_v0 + 0xF8, sp24, 0x14);\n        }\n    }\n    return ret;\n}",
+        "score": 0.4927536231884058,
+        "reason": "length_mismatch (target=69, generated=68)",
+        "diffs": [],
+        "timestamp": "2026-06-04T13:30:05.835Z"
+      },
+      {
+        "code": "void *func_1513BAE8(void) {\n    void *temp_v0;\n    u8 sp24[0x50];\n\n    sp24[0x15] = 2;\n    sp24[0x16] = 5;\n    *(s16 *)&sp24[0x18] = 0x12C;\n    *(s32 *)&sp24[0x44] = 9;\n    *(f32 *)&sp24[0] = 0.0f;\n    *(f32 *)&sp24[4] = 0.0f;\n    *(f32 *)&sp24[0xC] = 0.0f;\n    *(f32 *)&sp24[0x10] = 0.0f;\n    *(f32 *)&sp24[8] = 0.0f;\n    sp24[0x14] = 0;\n    *(s32 *)&sp24[0x48] = 0x1AE;\n    *(s32 *)&sp24[0x1C] = 1;\n    *(s32 *)&sp24[0x20] = 0x220205;\n    *(s32 *)&sp24[0x24] = 0x40600;\n    sp24[0x38] = 0;\n    sp24[0x39] = 0;\n    *(s32 *)&sp24[0x28] = 1;\n    *(s32 *)&sp24[0x2C] = 0x36;\n    *(s32 *)&sp24[0x30] = 0x80;\n    *(s32 *)&sp24[0x34] = 0x20;\n    sp24[0x4C] = 3;\n\n    temp_v0 = func_1513B5E0(&sp24[0x14], 1, 0x14, 0xFF, 1);\n    if (temp_v0 != NULL) {\n        if (*(s32 *)((s32)temp_v0 + 0x50) != 0x1180) {\n            func_1516972C(temp_v0);\n        } else {\n            memcpy(&((u8 *)temp_v0)[*(s32 *)((s32)temp_v0 + 0x50) + 0xF8], sp24, 0x14);\n        }\n    }\n    return temp_v0;\n}",
+        "score": 0.9855,
+        "reason": "structural_diffs=1",
+        "diffs": [
+          "structural: target=addu a0, a3, t1 got=addu a0, t1, a3"
+        ],
+        "timestamp": "2026-06-04T13:30:20.621Z"
       }
     ]
   },
