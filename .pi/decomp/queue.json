@@ -25351,7 +25351,7 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
+    "attempts": 6,
     "lastScore": 0.48863636363636365,
     "status": "pending",
     "history": [
@@ -25375,6 +25375,27 @@
         "reason": "length_mismatch (target=44, generated=43)",
         "diffs": [],
         "timestamp": "2026-06-04T00:42:30.816Z"
+      },
+      {
+        "code": "void func_15014094(struct134 *arg0) {\n    s32 sp34[0xD];\n    struct260 *temp_v0;\n    register struct260 *temp_v1;\n\n    arg0->unk16 |= 4;\n    sp34[0] = (s32)arg0;\n    *(f32 *)&sp34[1] = func_15144598(arg0);\n    *(f32 *)&sp34[2] = 0.0f;\n    func_1510F800(0);\n    sp34[3] = func_1510FD20(arg0->unk0, arg0->unk4);\n    ((u8 *)sp34)[0x2C] = 0;\n    temp_v0 = func_15149130(0x12C, -1, 0x21, -1, 0, 0, (struct37 *)0x34, 0xFF, 1);\n    if (temp_v0 != 0) {\n        temp_v1 = temp_v0;\n        memcpy((u8 *)temp_v1 + 0x28, sp34, 0x34);\n    }\n}",
+        "score": 0.48863636363636365,
+        "reason": "length_mismatch (target=44, generated=43)",
+        "diffs": [],
+        "timestamp": "2026-06-04T00:43:00.675Z"
+      },
+      {
+        "code": "void func_15014094(struct134 *arg0) {\n    s32 sp34[0xB];\n    struct260 *temp_v0;\n    struct260 *temp_v1;\n\n    arg0->unk16 |= 4;\n    sp34[0] = (s32)arg0;\n    *(f32 *)&sp34[1] = func_15144598(arg0);\n    *(f32 *)&sp34[2] = 0.0f;\n    func_1510F800(0);\n    sp34[3] = func_1510FD20(arg0->unk0, arg0->unk4);\n    ((u8 *)sp34)[0x2C] = 0;\n    temp_v0 = func_15149130(0x12C, -1, 0x21, -1, 0, 0, (struct37 *)0x34, 0xFF, 1);\n    if (temp_v0 != 0) {\n        temp_v1 = temp_v0;\n        memcpy((u8 *)temp_v1 + 0x28, sp34, 0x34);\n    }\n}",
+        "score": 0.48863636363636365,
+        "reason": "length_mismatch (target=44, generated=43)",
+        "diffs": [],
+        "timestamp": "2026-06-04T00:43:29.055Z"
+      },
+      {
+        "code": "void func_15014094(struct134 *arg0) {\n    u8 sp34[0x34];\n    struct260 *temp_v0;\n    struct260 *temp_v1;\n\n    arg0->unk16 |= 4;\n    *(s32 *)&sp34[0] = (s32)arg0;\n    *(f32 *)&sp34[4] = func_15144598(arg0);\n    *(f32 *)&sp34[8] = 0.0f;\n    func_1510F800(0);\n    *(s32 *)&sp34[0xC] = func_1510FD20(arg0->unk0, arg0->unk4);\n    sp34[0x2C] = 0;\n    temp_v0 = func_15149130(0x12C, -1, 0x21, -1, 0, 0, (struct37 *)0x34, 0xFF, 1);\n    if (temp_v0 != 0) {\n        temp_v1 = temp_v0;\n        memcpy((u8 *)temp_v1 + 0x28, sp34, 0x34);\n    }\n}",
+        "score": 0.48863636363636365,
+        "reason": "length_mismatch (target=44, generated=43)",
+        "diffs": [],
+        "timestamp": "2026-06-04T00:45:39.962Z"
       }
     ]
   },
