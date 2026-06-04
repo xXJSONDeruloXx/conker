@@ -810,5 +810,14 @@
     "example_functions": [
       "func_1501AE94"
     ]
+  },
+  {
+    "id": "u16-field-byte-store-reorder",
+    "description": "When target stores a single byte into a halfword-declared struct field and schedules flag load before the constant, use a raw u8 cast and put the flag OR source before the byte store.",
+    "trigger": "Struct declares a field as u16/s16, but target uses `sb` at that offset and schedules `lbu flags; li const; sb const; ori flags`.",
+    "solution": "Write the flag update before `((u8 *)ptr)[offset] = const`; the raw byte cast forces `sb`, and IDO can reorder the independent byte store between the flag load and flag store.",
+    "example_functions": [
+      "func_15015644"
+    ]
   }
 ]

@@ -192,7 +192,26 @@ void func_15075A50(void) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_A28B0/func_15075AAC.s")
+void func_15075AAC(void) {
+    struct127 *temp_v1;
+    u8 *temp_v0;
+    f32 temp_f2;
+    f32 temp_f12;
+    f32 temp_f14;
+    f32 temp_f0;
+
+    func_15075548();
+    temp_v1 = D_800D154C;
+    temp_v0 = (u8 *)D_800D2104[temp_v1->unk13F] + (D_800D1891 * 8);
+    temp_f2 = (f32)*(s16 *)(temp_v0 + 0) - temp_v1->x_position;
+    temp_f12 = (f32)*(s16 *)(temp_v0 + 4) - temp_v1->z_position;
+    temp_f14 = fabsf(temp_f2);
+    temp_f0 = fabsf(temp_f12);
+    if ((temp_f0 + temp_f14) < 40.0f) {
+        temp_v1->unk21C = 0;
+        D_800D154C->xz_velocity = 0.0f;
+    }
+}
 // what is D_800D2104?
 // void func_15075AAC(void) {
 //     struct169 *temp_v0;
