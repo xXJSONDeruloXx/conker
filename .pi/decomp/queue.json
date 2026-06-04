@@ -18280,9 +18280,32 @@
     "instructions": 60,
     "difficulty": "medium",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.4285714285714286,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_15049350(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8) {\n    f32 sp0;\n    f32 sp4;\n    f32 sp8;\n    f32 spC;\n    f32 sp10;\n    f32 temp_f0;\n    f32 temp_f2;\n    f32 temp_f12;\n    f32 temp_f14;\n    f32 temp_f16;\n    f32 temp_f18;\n\n    sp0 = *(f32 *)&arg0;\n    sp4 = *(f32 *)&arg1;\n    temp_f0 = *(f32 *)&arg0 - *(f32 *)&arg3;\n    temp_f2 = *(f32 *)&arg1 - *(f32 *)&arg4;\n    temp_f12 = *(f32 *)&arg2 - *(f32 *)&arg5;\n    temp_f14 = *(f32 *)&arg0 - *(f32 *)&arg6;\n    temp_f16 = *(f32 *)&arg1 - *(f32 *)&arg7;\n    temp_f18 = *(f32 *)&arg2 - *(f32 *)&arg8;\n    sp10 = (temp_f2 * temp_f18) - (temp_f12 * temp_f16);\n    D_800CC210 = sp10;\n    spC = (-temp_f0 * temp_f18) + (temp_f12 * temp_f14);\n    D_800CC214 = spC;\n    sp8 = (temp_f0 * temp_f16) - (temp_f2 * temp_f14);\n    D_800CC218 = sp8;\n    D_800CC21C = (sp10 * sp0) + (spC * sp4) + (sp8 * *(f32 *)&arg2);\n}",
+        "score": 0.48333333333333334,
+        "reason": "length_mismatch (target=60, generated=58)",
+        "diffs": [],
+        "timestamp": "2026-06-04T09:19:20.069Z"
+      },
+      {
+        "code": "void func_15049350(volatile s32 arg0, volatile s32 arg1, volatile s32 arg2, volatile s32 arg3, volatile s32 arg4, volatile s32 arg5, volatile s32 arg6, volatile s32 arg7, volatile s32 arg8) {\n    f32 sp0;\n    f32 sp4;\n    f32 sp8;\n    f32 spC;\n    f32 sp10;\n    f32 temp_f0;\n    f32 temp_f2;\n    f32 temp_f12;\n    f32 temp_f14;\n    f32 temp_f16;\n    f32 temp_f18;\n\n    sp0 = *(f32 *)&arg0;\n    sp4 = *(f32 *)&arg1;\n    temp_f0 = *(f32 *)&arg0 - *(f32 *)&arg3;\n    temp_f2 = *(f32 *)&arg1 - *(f32 *)&arg4;\n    temp_f12 = *(f32 *)&arg2 - *(f32 *)&arg5;\n    temp_f14 = *(f32 *)&arg0 - *(f32 *)&arg6;\n    temp_f16 = *(f32 *)&arg1 - *(f32 *)&arg7;\n    temp_f18 = *(f32 *)&arg2 - *(f32 *)&arg8;\n    sp10 = (temp_f2 * temp_f18) - (temp_f12 * temp_f16);\n    D_800CC210 = sp10;\n    spC = (-temp_f0 * temp_f18) + (temp_f12 * temp_f14);\n    D_800CC214 = spC;\n    sp8 = (temp_f0 * temp_f16) - (temp_f2 * temp_f14);\n    D_800CC218 = sp8;\n    D_800CC21C = (sp10 * sp0) + (spC * sp4) + (sp8 * *(f32 *)&arg2);\n}",
+        "score": 0.48333333333333334,
+        "reason": "length_mismatch (target=60, generated=58)",
+        "diffs": [],
+        "timestamp": "2026-06-04T09:19:48.764Z"
+      },
+      {
+        "code": "void func_15049350(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8) {\n    f32 sp0;\n    f32 sp4;\n    f32 sp8;\n    f32 spC;\n    f32 sp10;\n    f32 temp_f0;\n    f32 temp_f2;\n    f32 temp_f12;\n    f32 temp_f14;\n    f32 temp_f16;\n    f32 temp_f18;\n\n    sp0 = *(volatile f32 *)&arg0;\n    sp4 = *(volatile f32 *)&arg1;\n    temp_f0 = *(volatile f32 *)&arg0 - *(volatile f32 *)&arg3;\n    temp_f2 = *(volatile f32 *)&arg1 - *(volatile f32 *)&arg4;\n    temp_f12 = *(volatile f32 *)&arg2 - *(volatile f32 *)&arg5;\n    temp_f14 = *(volatile f32 *)&arg0 - *(volatile f32 *)&arg6;\n    temp_f16 = *(volatile f32 *)&arg1 - *(volatile f32 *)&arg7;\n    temp_f18 = *(volatile f32 *)&arg2 - *(volatile f32 *)&arg8;\n    sp10 = (temp_f2 * temp_f18) - (temp_f12 * temp_f16);\n    D_800CC210 = sp10;\n    spC = (-temp_f0 * temp_f18) + (temp_f12 * temp_f14);\n    D_800CC214 = spC;\n    sp8 = (temp_f0 * temp_f16) - (temp_f2 * temp_f14);\n    D_800CC218 = sp8;\n    D_800CC21C = (sp10 * sp0) + (spC * sp4) + (sp8 * *(volatile f32 *)&arg2);\n}",
+        "score": 0.4285714285714286,
+        "reason": "length_mismatch (target=60, generated=70)",
+        "diffs": [],
+        "timestamp": "2026-06-04T09:20:09.579Z"
+      }
+    ]
   },
   {
     "function": "func_1514672C",
@@ -27855,7 +27878,7 @@
     ],
     "attempts": 4,
     "lastScore": 0.4406779661016949,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "void *func_151F85C4(s32 arg0, s32 arg1, s32 arg2) {\n    u8 *sp1C;\n\n    sp1C = D_800E1880;\n    if (sp1C == NULL) {\n        return NULL;\n    }\n    *(s32 *)(sp1C + 0xC) = -1;\n    *(s32 *)(sp1C + 0x10) = -1;\n    *(s32 *)(sp1C + 0x14) = -1;\n    *(s32 *)(sp1C + 0) = arg0;\n    *(s32 *)(sp1C + 4) = arg1;\n    *(s32 *)(sp1C + 8) = arg2;\n    *(s32 *)(sp1C + 0x201C) = 0;\n    *(s32 *)(sp1C + 0x2020) = 0;\n    *(s32 *)(sp1C + 0x3BA0) = 0;\n    if (func_151F8088(sp1C, 0) == 0) {\n        return NULL;\n    }\n    *(s32 *)(sp1C + 0x8474) = 0;\n    bzero(sp1C + 0x6A64, 0x900);\n    return sp1C;\n}",
@@ -32340,9 +32363,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
+    "attempts": 4,
     "lastScore": 0.49166666666666664,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "s16 func_1000DF68(s32 arg0, s32 arg1, s32 arg2) {\n    struct151 *sp1C;\n    s32 temp_v0;\n\n    sp1C = func_1000B1FC(arg0);\n    if (sp1C != NULL) {\n        sp1C->unk4E = arg1;\n        if (arg2 == 1) {\n            sp1C->unk4C = arg1;\n            if (sp1C->unk0 >= 0) {\n                func_1000CC54(sp1C->unk0);\n            }\n        }\n        if (arg2 < 2) {\n            sp1C->unk50 = 0x200;\n        } else {\n            temp_v0 = sp1C->unk4C - arg1;\n            if (temp_v0 < 0) {\n                temp_v0 = -temp_v0;\n            }\n            temp_v0 = temp_v0 / arg2;\n            if (temp_v0 <= 0) {\n                temp_v0 = 2;\n            } else if (temp_v0 >= 0x8000) {\n                temp_v0 = 0x7FFF;\n            }\n            sp1C->unk50 = temp_v0;\n        }\n    }\n}",
@@ -32364,6 +32387,13 @@
         "reason": "length_mismatch (target=59, generated=60)",
         "diffs": [],
         "timestamp": "2026-06-04T09:16:08.856Z"
+      },
+      {
+        "code": "s16 func_1000DF68(s32 arg0, s32 arg1, s32 arg2) {\n    struct151 *sp1C;\n    s32 temp_v0;\n\n    sp1C = func_1000B1FC(arg0);\n    if (sp1C != NULL) {\n        sp1C->unk4E = arg1;\n        if (arg2 == 1) {\n            sp1C->unk4C = arg1;\n            if (sp1C->unk0 >= 0) {\n                func_1000CC54(sp1C->unk0);\n            }\n        }\n        if (arg2 < 2) {\n            goto set_default;\n        }\n        temp_v0 = sp1C->unk4C - arg1;\n        if (temp_v0 < 0) {\n            temp_v0 = -temp_v0;\n        }\n        temp_v0 = temp_v0 / arg2;\n        if (temp_v0 <= 0) {\n            sp1C->unk50 = 2;\n        } else if (temp_v0 < 0x8000) {\n            sp1C->unk50 = temp_v0;\n        } else {\n            sp1C->unk50 = 0x7FFF;\n        }\n        goto done;\nset_default:\n        sp1C->unk50 = 0x200;\n    }\ndone:\n    ;\n}",
+        "score": 0.49166666666666664,
+        "reason": "length_mismatch (target=59, generated=60)",
+        "diffs": [],
+        "timestamp": "2026-06-04T09:16:38.024Z"
       }
     ]
   },
