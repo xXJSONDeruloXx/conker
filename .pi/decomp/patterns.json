@@ -990,5 +990,14 @@
     "example_functions": [
       "func_15079570"
     ]
+  },
+  {
+    "id": "ido-for-loop-branch-delay-store",
+    "description": "A for-loop decrement expression can move the loop counter spill before the backedge and put a trailing state-store in the branch delay slot, unlike a do/while body decrement which may put the counter store in the delay slot.",
+    "trigger": "Near match where loop end has two independent stores before a bnez, but IDO schedules them in the opposite order (`sw counter; bnez; sw state` vs generated `sw state; bnez; sw counter`).",
+    "solution": "Write the loop as `for (; count != 0; count--) { ... state = state & mask; }` rather than `do { ... count--; state = ...; } while (count != 0);` and avoid an extra outer `if`, so IDO emits a single initial beqz and schedules the state store in the backedge delay slot.",
+    "example_functions": [
+      "func_1502B020"
+    ]
   }
 ]

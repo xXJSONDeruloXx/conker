@@ -30514,7 +30514,7 @@
     ],
     "attempts": 6,
     "lastScore": 0.4838709677419355,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "s32 func_15004BF0(s32 arg0) {\n    s32 temp_a0;\n    s32 temp_a1;\n    s32 i;\n    s32 ret;\n\n    if (arg0 == 0) {\n        temp_a0 = D_800DBF00;\n        temp_a1 = D_800DBEF0;\n        ret = 1;\n        if (temp_a0 < temp_a1) {\n            i = temp_a0;\n            do {\n                if (ret == ((u8 *)D_800DBEF4)[(i * 0xA0) + 0x72]) {\n                    ret++;\n                    i = temp_a0 - 1;\n                }\n                if (ret >= 0x100) {\n                    ret = 0xFF;\n                    break;\n                }\n                i++;\n            } while (i < temp_a1);\n        }\n        return ret;\n    } else {\n        temp_a0 = 0xFF - D_800DBF00;\n        temp_a1 = D_800DBEF0;\n        ret = temp_a0;\n        if (temp_a1 > 0) {\n            i = 0;\n            do {\n                if (ret == ((u8 *)D_800DBEF4)[(i * 0xA0) + 0x72]) {\n                    ret--;\n                    i = -1;\n                }\n                i++;\n                if (ret <= 0) {\n                    ret = temp_a0;\n                    break;\n                }\n            } while (i < temp_a1);\n        }\n        return ret;\n    }\n}",
@@ -31258,9 +31258,25 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 2,
+    "lastScore": 0.48333333333333334,
+    "status": "pending",
+    "history": [
+      {
+        "code": "s32 func_1502B7F0(s32 *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {\n    s32 *args;\n    s32 temp_a1;\n    s32 offset;\n    s32 sp34;\n    s32 sp38;\n\n    sp38 = 1;\n    offset = (s32) D_AB1950;\n    args = &arg2;\n    for (; arg1 != 0; arg1--) {\n        args = (s32 *)(((s32) args + 3) & -4);\n        temp_a1 = *args++;\n        if (sp38 != 0) {\n            offset += func_1502AC88(offset, temp_a1, &sp34);\n        }\n        sp38 = sp34 & 0x0FFFFFFF;\n    }\n    if (sp38 != 0) {\n        *arg0 = func_1502B350(offset, sp34, &sp38);\n    } else {\n        *arg0 = 0;\n    }\n    return sp38;\n}",
+        "score": 0.48333333333333334,
+        "reason": "length_mismatch (target=60, generated=58)",
+        "diffs": [],
+        "timestamp": "2026-06-04T09:50:33.161Z"
+      },
+      {
+        "code": "s32 func_1502B7F0(s32 *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {\n    s32 offset;\n    s32 *args;\n    s32 temp_a1;\n    s32 sp38;\n    s32 sp34;\n\n    sp38 = 1;\n    offset = (s32) D_AB1950;\n    args = &arg2;\n    for (; *(&arg1) != 0; (*(&arg1))--) {\n        args = (s32 *)(((s32) args + 3) & -4);\n        temp_a1 = *args++;\n        if (sp38 != 0) {\n            offset += func_1502AC88(offset, temp_a1, &sp34);\n        }\n        sp38 = sp34 & 0x0FFFFFFF;\n    }\n    if (sp38 != 0) {\n        *arg0 = func_1502B350(offset, sp34, &sp38);\n    } else {\n        *arg0 = 0;\n    }\n    return sp38;\n}",
+        "score": 0.48333333333333334,
+        "reason": "length_mismatch (target=60, generated=58)",
+        "diffs": [],
+        "timestamp": "2026-06-04T09:51:16.092Z"
+      }
+    ]
   },
   {
     "function": "func_15003570",

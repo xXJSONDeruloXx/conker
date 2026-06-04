@@ -7,6 +7,8 @@
 
 #include "libc/stdarg.h"
 
+s32 func_1502B350(s32 arg0, s32 arg1, s32 *arg2);
+
 s32 func_1502AC88(s32 arg0, s32 arg1, s32 *arg2);
 extern u8 D_AB1950[];
 
@@ -49,7 +51,30 @@ s32 func_1502B020(s32 *arg0, s32 arg1, ...) {
 #pragma GLOBAL_ASM("asm/nonmatchings/game_57FA0/func_1502B4A8.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_57FA0/func_1502B5C8.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_57FA0/func_1502B6BC.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_57FA0/func_1502B7F0.s")
+s32 func_1502B7F0(s32 *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    s32 offset;
+    va_list args;
+    s32 temp_a1;
+    s32 sp38;
+    s32 sp34;
+
+    sp38 = 1;
+    offset = (s32) D_AB1950;
+    va_start(args, arg1);
+    for (; arg1 != 0; arg1--) {
+        temp_a1 = va_arg(args, s32);
+        if (sp38 != 0) {
+            offset += func_1502AC88(offset, temp_a1, &sp34);
+        }
+        sp38 = sp34 & 0x0FFFFFFF;
+    }
+    if (sp38 != 0) {
+        *arg0 = func_1502B350(offset, sp34, &sp38);
+    } else {
+        *arg0 = 0;
+    }
+    return sp38;
+}
 // void func_1502B7F0(s32 *arg0, s32 arg1, s32 arg2, s32 arg3) {
 //     s32 sp38;
 //     s32 sp34;
