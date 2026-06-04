@@ -27133,9 +27133,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 13,
-    "lastScore": 0.9048,
-    "status": "pending",
+    "attempts": 14,
+    "lastScore": 1,
+    "status": "matched",
     "history": [
       {
         "code": "f32 func_1514182C(void *arg0, struct17 *arg1, s32 arg2, f32 arg3, f32 arg4, f32 arg5) {\n    f32 mtx[4][4];\n    f32 temp_f0;\n    f32 temp_f2;\n    f32 temp_f12;\n\n    func_150A8050(mtx, arg4, 0, arg5);\n    mtx[3][0] = arg1->unk0;\n    mtx[3][1] = arg1->unk4;\n    mtx[3][2] = arg1->unk8;\n    func_150A7960(mtx, 0, arg2, 0, (f32 *)((s32)arg0 + 0x34), (f32 *)((s32)arg0 + 0x38), (f32 *)((s32)arg0 + 0x3C));\n    temp_f0 = *(f32 *)((s32)arg0 + 0x34);\n    temp_f2 = *(f32 *)((s32)arg0 + 0x38);\n    temp_f12 = *(f32 *)((s32)arg0 + 0x3C);\n    *(f32 *)((s32)arg0 + 0x40) = temp_f0 + ((temp_f0 - arg1->unk0) * arg3 * 500.0f);\n    *(f32 *)((s32)arg0 + 0x44) = temp_f2 + ((temp_f2 - arg1->unk4) * arg3 * 500.0f);\n    *(f32 *)((s32)arg0 + 0x48) = temp_f12 + ((temp_f12 - arg1->unk8) * arg3 * 500.0f);\n    return temp_f0;\n}",
@@ -27512,9 +27512,32 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.4920634920634921,
+    "status": "pending",
+    "history": [
+      {
+        "code": "s32 func_151606A8(struct225 *arg0) {\n    f32 tmp[16];\n    f32 sp34;\n    f32 sp38;\n    f32 sp3C;\n    struct227 *temp_v0;\n\n    temp_v0 = arg0->unk18;\n    func_150A8050((f32 (*)[4])tmp, temp_v0->unk0, temp_v0->unk4, temp_v0->unk8);\n    tmp[12] = (f32) arg0->unk18->unk10;\n    tmp[13] = (f32) *(s16 *)((s32)arg0->unk18 + 0x12);\n    tmp[14] = (f32) *(s16 *)((s32)arg0->unk18 + 0x14);\n    func_150A7960((f32 (*)[4])tmp, D_800A66B4[0], D_800A66B4[1], D_800A66B4[2], &sp34, &sp38, &sp3C);\n    arg0->unk14->unkE = sp34;\n    arg0->unk14->unk10 = sp38;\n    arg0->unk14->unk12 = sp3C;\n    return 1;\n}",
+        "score": 0.4921875,
+        "reason": "length_mismatch (target=63, generated=64)",
+        "diffs": [],
+        "timestamp": "2026-06-04T10:46:25.954Z"
+      },
+      {
+        "code": "s32 func_151606A8(struct225 *arg0) {\n    f32 tmp[18];\n    f32 sp3C;\n    f32 sp38;\n    f32 sp34;\n    struct227 *temp_v0;\n    struct227 **temp_v0_2;\n\n    temp_v0 = arg0->unk18;\n    func_150A8050((f32 (*)[4])tmp, temp_v0->unk0, temp_v0->unk4, temp_v0->unk8);\n    temp_v0_2 = &arg0->unk18;\n    tmp[12] = (f32) (*temp_v0_2)->unk10;\n    tmp[13] = (f32) *(s16 *)((s32)*temp_v0_2 + 0x12);\n    tmp[14] = (f32) *(s16 *)((s32)*temp_v0_2 + 0x14);\n    func_150A7960((f32 (*)[4])tmp, D_800A66B4[0], ((s32 *)D_800A66B4)[1], D_800A66B4[2], &sp34, &sp38, &sp3C);\n    arg0->unk14->unkE = sp34;\n    arg0->unk14->unk10 = sp38;\n    arg0->unk14->unk12 = sp3C;\n    return 1;\n}",
+        "score": 0.4920634920634921,
+        "reason": "length_mismatch (target=63, generated=62)",
+        "diffs": [],
+        "timestamp": "2026-06-04T10:47:12.705Z"
+      },
+      {
+        "code": "s32 func_151606A8(struct225 *arg0) {\n    f32 tmp[16];\n    f32 sp3C;\n    f32 sp38;\n    f32 sp34;\n    f32 pad[2];\n    struct227 *temp_v0;\n    void *temp_v0_2;\n\n    temp_v0 = arg0->unk18;\n    func_150A8050((f32 (*)[4])tmp, temp_v0->unk0, temp_v0->unk4, temp_v0->unk8);\n    temp_v0_2 = (void *)((s32)arg0 + 0x18);\n    tmp[12] = (f32) (*(struct227 **)temp_v0_2)->unk10;\n    tmp[13] = (f32) *(s16 *)((s32)*(struct227 **)temp_v0_2 + 0x12);\n    tmp[14] = (f32) *(s16 *)((s32)*(struct227 **)temp_v0_2 + 0x14);\n    func_150A7960((f32 (*)[4])tmp, D_800A66B4[0], ((s32 *)D_800A66B4)[1], D_800A66B4[2], &sp34, &sp38, &sp3C);\n    arg0->unk14->unkE = sp34;\n    arg0->unk14->unk10 = sp38;\n    arg0->unk14->unk12 = sp3C;\n    return 1;\n}",
+        "score": 0.4920634920634921,
+        "reason": "length_mismatch (target=63, generated=62)",
+        "diffs": [],
+        "timestamp": "2026-06-04T10:47:51.766Z"
+      }
+    ]
   },
   {
     "function": "func_1515D088",
