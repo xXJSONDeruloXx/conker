@@ -21672,9 +21672,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 9,
-    "lastScore": 0.9592,
-    "status": "pending",
+    "attempts": 10,
+    "lastScore": 0.6735,
+    "status": "skipped",
     "history": [
       {
         "code": "void func_15074980(void) {\n    s8 *countp;\n    struct127 *cur;\n    s32 i;\n    f32 dist;\n    s32 value;\n\n    countp = &D_8008FD8C;\n    value = D_800D1580 << 3;\n    i = 0;\n    dist = (f32)value;\n    if (*countp > 0) {\n        cur = D_800CC2D0;\n        do {\n            if (func_1505A72C(D_800D154C, cur) < dist) {\n                if (cur->unk31C != 0) {\n                    *(s8 *)((s32)cur->unk31C + 0x4B) = 0x14;\n                }\n            }\n            i++;\n            cur++;\n        } while (i < *countp);\n    }\n}",
@@ -21771,6 +21771,30 @@
           "structural: target=addiu s0, s0, LO(D_800CC2D0) got=addiu s2, s2, LO(D_800D154C)"
         ],
         "timestamp": "2026-06-04T03:08:41.254Z"
+      },
+      {
+        "code": "void func_15074980(void) {\n    register struct127 *cur;\n    register s32 i;\n    f32 dist;\n\n    dist = (f32)(D_800D1580 << 3);\n    i = 0;\n    if (D_8008FD8C > 0) {\n        cur = D_800CC2D0;\nloop:\n        if (func_1505A72C(D_800D154C, cur) < dist) {\n            if (cur->unk31C != 0) {\n                *(s8 *)((s32)cur->unk31C + 0x4B) = 0x14;\n            }\n        }\n        i++;\n        cur++;\n        if (i < D_8008FD8C) {\n            goto loop;\n        }\n    }\n}",
+        "score": 0.6735,
+        "reason": "structural_diffs=16",
+        "diffs": [
+          "structural: target=sw s4, 48(sp) got=sw s2, 40(sp)",
+          "structural: target=lui s4, HI(D_8008FD8C) got=lui s2, HI(D_8008FD8C)",
+          "structural: target=addiu s4, s4, LO(D_8008FD8C) got=addiu s2, s2, LO(D_8008FD8C)",
+          "structural: target=sw s3, 44(sp) got=sw s4, 48(sp)",
+          "structural: target=sw s2, 40(sp) got=sw s3, 44(sp)",
+          "structural: target=lb t8, 0(s4) got=lb t8, 0(s2)",
+          "structural: target=lui s2, HI(D_800D154C) got=lui s3, HI(D_800D154C)",
+          "structural: target=addiu s2, s2, LO(D_800D154C) got=addiu s0, s0, LO(D_800CC2D0)",
+          "structural: target=addiu s0, s0, LO(D_800CC2D0) got=addiu s3, s3, LO(D_800D154C)",
+          "structural: target=li s3, 20 got=li s4, 20",
+          "structural: target=lw a0, 0(s2) got=lw a0, 0(s3)",
+          "structural: target=lb t9, 0(s4) got=lb t9, 0(s2)",
+          "structural: target=lb t9, 0(s4) got=lb t9, 0(s2)",
+          "structural: target=sb s3, 75(v0) got=sb s4, 75(v0)",
+          "structural: target=lb t9, 0(s4) got=lb t9, 0(s2)",
+          "structural: target=lw a0, 0(s2) got=lw a0, 0(s3)"
+        ],
+        "timestamp": "2026-06-04T03:09:10.597Z"
       }
     ]
   },
@@ -22422,9 +22446,18 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 0.47115384615384615,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_1001001C(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {\n    s32 i;\n    struct15 *ptr;\n\n    i = 0;\n    ptr = D_80041FE0;\n    if (D_80042760 > 0) {\n        do {\n            if ((arg0 == ptr->unk14) && (arg1 == ptr->unk18) && (arg2 == ptr->unk1C)) {\n                ptr->unk2C = alCents2Ratio(arg4);\n                ptr->unkC = arg3;\n            }\n            i++;\n            ptr++;\n        } while (i < D_80042760);\n    }\n}",
+        "score": 0.47115384615384615,
+        "reason": "length_mismatch (target=49, generated=52)",
+        "diffs": [],
+        "timestamp": "2026-06-04T03:10:15.804Z"
+      }
+    ]
   },
   {
     "function": "func_1513A5E0",

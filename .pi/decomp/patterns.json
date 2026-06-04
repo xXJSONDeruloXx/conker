@@ -873,5 +873,14 @@
     "example_functions": [
       "func_1506FD30"
     ]
+  },
+  {
+    "id": "stack-anchor-negative-offset-locals",
+    "description": "When IDO places local arrays 8 bytes higher than target but the frame/saved regs match, use a real local array as a stack anchor and pass/use pointer expressions offset by -8; for byte flags, index into an existing local array at the target byte offset to avoid materializing an address temp.",
+    "trigger": "Generated stack frame matches target but all local array addresses are +8 (e.g. sp+0x58 vs target sp+0x50, sp+0x30 vs target sp+0x28).",
+    "solution": "Keep the compiler's natural locals, pass `array - 8` for pointer arguments, and store scalar flags as `otherArray[targetOffset - naturalBase]` rather than `*(u8*)((s32)&flag - 8)` to avoid extra addiu/sw address temporaries.",
+    "example_functions": [
+      "func_15138BC0"
+    ]
   }
 ]
