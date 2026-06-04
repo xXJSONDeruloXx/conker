@@ -26136,9 +26136,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
-    "lastScore": 0.8868,
-    "status": "pending",
+    "attempts": 4,
+    "lastScore": 1,
+    "status": "matched",
     "history": [
       {
         "code": "s32 func_1000ECCC(struct251 *arg0, s32 arg1, s32 *arg2, struct11 *arg3, struct04 *arg4, s32 *arg5, u16 *arg6) {\n    s16 temp_a1;\n    s32 temp_v1;\n    u16 temp_v0;\n    s16 temp_t4;\n\n    temp_v1 = arg0->unk18.w;\n    temp_v0 = *arg6;\n    temp_a1 = temp_v1;\n    if (temp_v0 != 0) {\n        arg0->unk18.w = (temp_v0 << 0x10) | (temp_v1 & 0xFFFF);\n        arg0->unk0 = 0;\n        *arg6 = 0;\n        temp_v1 = arg0->unk18.w;\n    }\n    temp_a1 -= D_800BE9E4;\n    if (temp_a1 <= 0) {\n        temp_t4 = temp_v1 >> 0x10;\n        *arg6 = temp_t4;\n        arg0->unk0 = temp_t4;\n        if (func_10010894((void *)arg0->unk1C) == 0) {\n            func_10010344(*arg6, (void *)arg0->unk1C, *(s32 *)((s32)arg0 + 0xC), *(s16 *)((s32)arg0 + 0xA), *(u16 *)((s32)arg0 + 8));\n        }\n        return 1;\n    }\n    arg0->unk18.w = (temp_v1 & 0xFFFF0000) | temp_a1;\n    return 0;\n}",
@@ -26842,9 +26842,32 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.49056603773584906,
+    "status": "pending",
+    "history": [
+      {
+        "code": "s32 func_1502B8E0(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {\n    s32 sp34;\n    s32 more;\n    s32 offset;\n    s32 *tmp;\n\n    more = 1;\n    offset = (s32)D_AB1950;\n    tmp = &arg3;\n    if (arg2 != 0) {\n        do {\n            tmp = (s32 *)ALIGN4(tmp);\n            tmp += 1;\n            if (more != 0) {\n                offset += func_1502AC88(offset, *(tmp - 1), &sp34);\n            }\n            arg2--;\n            more = sp34 & 0xFFFFFFF;\n        } while (arg2 != 0);\n    }\n    if (more != 0) {\n        more = func_1502B224(offset, arg0, sp34, arg1);\n    }\n    return more;\n}",
+        "score": 0.4811320754716981,
+        "reason": "length_mismatch (target=53, generated=51)",
+        "diffs": [],
+        "timestamp": "2026-06-04T05:00:56.580Z"
+      },
+      {
+        "code": "s32 func_1502B8E0(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {\n    s32 sp34;\n    s32 offset;\n    s32 *tmp;\n    s32 more;\n    s32 *count;\n\n    offset = (s32)D_AB1950;\n    more = 1;\n    tmp = &arg3;\n    count = &arg2;\n    if (*count != 0) {\n        do {\n            tmp = (s32 *)ALIGN4(tmp);\n            tmp += 1;\n            if (more != 0) {\n                offset += func_1502AC88(offset, *(tmp - 1), &sp34);\n            }\n            *count = *count - 1;\n            more = sp34 & 0xFFFFFFF;\n        } while (*count != 0);\n    }\n    if (more != 0) {\n        more = func_1502B224(offset, arg0, sp34, arg1);\n    }\n    return more;\n}",
+        "score": 0.49056603773584906,
+        "reason": "length_mismatch (target=53, generated=52)",
+        "diffs": [],
+        "timestamp": "2026-06-04T05:01:33.603Z"
+      },
+      {
+        "code": "s32 func_1502B8E0(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {\n    s32 sp34[5];\n    s32 *tmp;\n    s32 offset;\n    s32 more;\n    s32 *count;\n\n    offset = (s32)D_AB1950;\n    more = 1;\n    tmp = &arg3;\n    count = &arg2;\n    if (arg2 != 0) {\n        do {\n            tmp = (s32 *)ALIGN4(tmp);\n            tmp += 1;\n            if (more != 0) {\n                offset += func_1502AC88(offset, *(tmp - 1), sp34);\n            }\n            *count = *count - 1;\n            more = sp34[0] & 0xFFFFFFF;\n        } while (*count != 0);\n    }\n    if (more != 0) {\n        more = func_1502B224(offset, arg0, sp34[0], arg1);\n    }\n    return more;\n}",
+        "score": 0.49056603773584906,
+        "reason": "length_mismatch (target=53, generated=52)",
+        "diffs": [],
+        "timestamp": "2026-06-04T05:02:19.315Z"
+      }
+    ]
   },
   {
     "function": "func_1512DD50",
