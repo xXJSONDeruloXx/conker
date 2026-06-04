@@ -784,16 +784,6 @@ export default function (pi: ExtensionAPI) {
 					latestCtx = ctx;
 					refreshWidget();
 				}
-				// Notify coordinator
-				const coordUrl2 = process.env.DECOMP_COORDINATOR_URL;
-				const lane2 = process.env.DECOMP_LANE_ID;
-				if (coordUrl2 && lane2 && funcName) {
-					fetch(`${coordUrl2}/release`, {
-						method: "POST",
-						headers: { "Content-Type": "application/json" },
-						body: JSON.stringify({ laneId: lane2, function: funcName, status: "skipped" }),
-					}).catch(() => {});
-				}
 				return { content: [{ type: "text", text: `Skipped ${funcName}` }], details: {} };
 			}
 
@@ -818,62 +808,6 @@ export default function (pi: ExtensionAPI) {
 			}
 
 			// action === "next"
-
-			// ─── COORDINATOR MODE ─────────────────────────────────────────
-			// Detect coordinator from .decomp-coordinator.json or env var
-			const coordConfigPath = path.join(ctx.cwd, ".decomp-coordinator.json");
-			let coordinatorUrl = process.env.DECOMP_COORDINATOR_URL || "";
-			let laneId = process.env.DECOMP_LANE_ID || "";
-			if (!coordinatorUrl && fs.existsSync(coordConfigPath)) {
-				try {
-					const cfg = JSON.parse(fs.readFileSync(coordConfigPath, "utf-8"));
-					coordinatorUrl = cfg.url || "";
-					laneId = cfg.laneId || "";
-				} catch {}
-			}
-			if (coordinatorUrl && laneId) {
-				try {
-					// Heartbeat
-					fetch(`${coordinatorUrl}/lanes/${laneId}/heartbeat`, { method: "POST" }).catch(() => {});
-
-					// Claim next function from coordinator
-					const claimRes = await fetch(`${coordinatorUrl}/claim`, {
-						method: "POST",
-						headers: { "Content-Type": "application/json" },
-						body: JSON.stringify({ laneId }),
-					});
-
-					if (claimRes.status === 204) {
-						return { content: [{ type: "text", text: "No pending candidates available from coordinator. All functions are claimed or completed." }], details: {} };
-					}
-					if (!claimRes.ok) {
-						const err = await claimRes.text();
-						return { content: [{ type: "text", text: `Coordinator error: ${err}` }], details: {} };
-					}
-
-					const claim = await claimRes.json() as { function: string; file: string; region: string; instructions: number; difficulty: string; history: any[] };
-
-					// Get patterns from coordinator
-					const patternsRes = await fetch(`${coordinatorUrl}/patterns`).catch(() => null);
-					if (patternsRes?.ok) {
-						const { patterns: coordPatterns } = await patternsRes.json() as { patterns: any[] };
-						state.patterns = coordPatterns;
-					}
-
-					// FORCE this claimed function as the next candidate
-					// Update local queue entry to match coordinator state
-					const overrideEntry = state.queue.find((e) => e.function === claim.function);
-					if (overrideEntry) {
-						overrideEntry.status = "pending";
-						overrideEntry.history = claim.history || overrideEntry.history;
-					}
-
-					// Set a flag so the normal queue logic ONLY serves this function
-					(state as any)._coordinatorClaim = claim.function;
-				} catch (e: any) {
-					// Coordinator unreachable — fall back to local queue
-				}
-			}
 
 			// Step 0: Verify ROM is in a known-good state before serving candidates
 			const verifyResult = await pi.exec("docker", [
@@ -904,13 +838,6 @@ export default function (pi: ExtensionAPI) {
 			}
 
 			let candidates = state.queue.filter((e) => e.status === "pending");
-
-			// If coordinator claimed a specific function, ONLY serve that one
-			const coordClaim = (state as any)._coordinatorClaim;
-			if (coordClaim) {
-				candidates = candidates.filter((e) => e.function === coordClaim);
-				delete (state as any)._coordinatorClaim; // consume the claim
-			}
 
 			// Auto-rotate: skip functions we ground on this session (unless nearMiss filter explicitly requested)
 			if (!params.filter?.nearMiss && sessionRotatedFunctions.size > 0) {
@@ -1401,22 +1328,6 @@ export default function (pi: ExtensionAPI) {
 			latestCtx = ctx;
 			refreshWidget();
 
-			// Report attempt to coordinator (for cross-lane learning)
-			const coordUrl3 = process.env.DECOMP_COORDINATOR_URL;
-			if (coordUrl3 && entry?.history?.length) {
-				const lastAttempt = entry.history[entry.history.length - 1];
-				fetch(`${coordUrl3}/attempt`, {
-					method: "POST",
-					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify({
-						function: params.function,
-						code: lastAttempt.code,
-						score: lastAttempt.score,
-						reason: lastAttempt.reason,
-						diffs: lastAttempt.diffs,
-					}),
-				}).catch(() => {});
-			}
 
 			// Periodically commit queue history to repo so findings persist
 			if (entry && entry.attempts > 0 && entry.attempts % COMMIT_HISTORY_EVERY === 0) {
@@ -1605,16 +1516,6 @@ export default function (pi: ExtensionAPI) {
 			const total = state.queue.length;
 			const pct = total > 0 ? ((matched / total) * 100).toFixed(1) : "0.0";
 
-			// Notify coordinator of successful match
-			const coordUrl = process.env.DECOMP_COORDINATOR_URL;
-			const lane = process.env.DECOMP_LANE_ID;
-			if (coordUrl && lane) {
-				fetch(`${coordUrl}/release`, {
-					method: "POST",
-					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify({ laneId: lane, function: params.function, status: "matched" }),
-				}).catch(() => {});
-			}
 
 			return {
 				content: [
@@ -2478,194 +2379,4 @@ export default function (pi: ExtensionAPI) {
 		},
 	});
 
-	// ═══════════════════════════════════════════════════════════════
-	// COMMANDS: Multi-lane coordination
-	// ═══════════════════════════════════════════════════════════════
-	let coordinatorProcess: any = null;
-
-	pi.registerCommand("decomp-coord-start", {
-		description: "Start the multi-lane coordinator server",
-		handler: async (args, ctx) => {
-			const fs = require("node:fs");
-			const path = require("node:path");
-			if (coordinatorProcess) {
-				ctx.ui.notify("Coordinator already running", "warn");
-				return;
-			}
-			const port = (args || "").trim() || "7700";
-			const coordScript = path.join(ctx.cwd, ".pi/coordinator/src/index.ts");
-			if (!fs.existsSync(coordScript)) {
-				ctx.ui.notify("Coordinator not found at .pi/coordinator/", "error");
-				return;
-			}
-			const { spawn } = require("node:child_process");
-			coordinatorProcess = spawn("bun", [coordScript, "--port", port], {
-				cwd: ctx.cwd,
-				stdio: ["ignore", "pipe", "pipe"],
-				detached: false,
-			});
-			coordinatorProcess.on("exit", () => { coordinatorProcess = null; });
-			await new Promise((r) => setTimeout(r, 2000));
-			ctx.ui.notify(`Coordinator started on port ${port}`, "info");
-		},
-	});
-
-	pi.registerCommand("decomp-coord-stop", {
-		description: "Stop the coordinator server",
-		handler: async (_args, ctx) => {
-			if (!coordinatorProcess) {
-				ctx.ui.notify("No coordinator running", "warn");
-				return;
-			}
-			coordinatorProcess.kill();
-			coordinatorProcess = null;
-			ctx.ui.notify("Coordinator stopped", "info");
-		},
-	});
-
-	pi.registerCommand("decomp-coord-setup", {
-		description: "Create N worktrees for multi-lane decomp (e.g. /decomp-coord-setup 4)",
-		handler: async (args, ctx) => {
-			const fs = require("node:fs");
-			const path = require("node:path");
-			const numLanes = parseInt((args || "").trim() || "4");
-			const port = "7700";
-			const worktreeDir = path.join(ctx.cwd, ".worktrees");
-			fs.mkdirSync(worktreeDir, { recursive: true });
-
-			const results: string[] = [];
-			for (let i = 1; i <= numLanes; i++) {
-				const laneId = `lane-${i}`;
-				const laneDir = path.join(worktreeDir, laneId);
-				const laneBranch = `decomp-${laneId}`;
-
-				if (!fs.existsSync(laneDir)) {
-					const wtResult = await pi.exec("git", ["worktree", "add", "-b", laneBranch, laneDir, "HEAD"]);
-					if (wtResult.code !== 0) {
-						await pi.exec("git", ["worktree", "add", laneDir, laneBranch]);
-					}
-				}
-
-				// Symlinks (shared read-only resources)
-				const symlinks: [string, string][] = [
-					[path.join(ctx.cwd, "baserom.us.z64"), path.join(laneDir, "baserom.us.z64")],
-					[path.join(ctx.cwd, "ido"), path.join(laneDir, "ido")],
-					[path.join(ctx.cwd, "tools/ido-native"), path.join(laneDir, "tools/ido-native")],
-					[path.join(ctx.cwd, "tools/transmuter"), path.join(laneDir, "tools/transmuter")],
-					[path.join(ctx.cwd, "assets"), path.join(laneDir, "assets")],
-				];
-				fs.mkdirSync(path.join(laneDir, "tools"), { recursive: true });
-				for (const [src, dest] of symlinks) {
-					if (!fs.existsSync(dest) && fs.existsSync(src)) {
-						fs.symlinkSync(src, dest);
-					}
-				}
-
-				// Copy-on-write clone of build dir (each lane needs its own for compilation)
-				const buildSrc = path.join(ctx.cwd, "conker/build");
-				const buildDest = path.join(laneDir, "conker/build");
-				if (!fs.existsSync(buildDest) && fs.existsSync(buildSrc)) {
-					await pi.exec("cp", ["-cR", buildSrc, buildDest], { timeout: 30000 });
-				}
-
-				// Copy gitignored files needed for build
-				const copyFiles: [string, string][] = [
-					[path.join(ctx.cwd, "conker/conker.ld"), path.join(laneDir, "conker/conker.ld")],
-					[path.join(ctx.cwd, ".baserom.us.ok"), path.join(laneDir, ".baserom.us.ok")],
-					[path.join(ctx.cwd, "conker/undefined_syms_auto.txt"), path.join(laneDir, "conker/undefined_syms_auto.txt")],
-				];
-				for (const [src, dest] of copyFiles) {
-					if (!fs.existsSync(dest) && fs.existsSync(src)) {
-						fs.copyFileSync(src, dest);
-					}
-				}
-
-				// Write .decomp-coordinator.json
-				fs.writeFileSync(path.join(laneDir, ".decomp-coordinator.json"), JSON.stringify({
-					url: `http://127.0.0.1:${port}`,
-					laneId,
-					masterRoot: ctx.cwd,
-				}, null, 2));
-
-				// Register with coordinator if running
-				try {
-					await fetch(`http://127.0.0.1:${port}/lanes/register`, {
-						method: "POST",
-						headers: { "Content-Type": "application/json" },
-						body: JSON.stringify({ laneId }),
-					});
-				} catch {}
-
-				results.push(`✓ ${laneId}: ${laneDir}`);
-			}
-
-			ctx.ui.notify(
-				`Set up ${numLanes} lanes:\n${results.join("\n")}\n\n` +
-				`cd .worktrees/lane-N && pi && /decomp-start`,
-				"info"
-			);
-		},
-	});
-
-	pi.registerCommand("decomp-coord-status", {
-		description: "Show coordinator + lane status (does NOT trigger agent)",
-		handler: async (_args, ctx) => {
-			const port = "7700";
-			try {
-				const res = await fetch(`http://127.0.0.1:${port}/status`);
-				if (!res.ok) throw new Error(`HTTP ${res.status}`);
-				const data = await res.json() as any;
-				const lanes = data.lanes || [];
-				const queue = data.queue || {};
-
-				const laneLines = lanes.map((l: any) =>
-					`  ${l.id}: ${l.status}${l.currentFunction ? ` → ${l.currentFunction} (${l.currentFile})` : ""} [${l.completedCount} done]`
-				).join("\n");
-
-				// Use notify — does NOT trigger an agent turn
-				ctx.ui.notify(
-					`Queue: ${queue.matched} matched | ${queue.pending} pending | ${queue.claimed} claimed | ${queue.skipped} skipped\n` +
-					`Patterns: ${data.patterns?.count || 0} (v${data.patterns?.version || 0})\n` +
-					`Lanes:\n${laneLines || "  (none)"}`,
-					"info"
-				);
-			} catch (e: any) {
-				ctx.ui.notify(`Coordinator not reachable: ${e.message}`, "error");
-			}
-		},
-	});
-
-	pi.registerCommand("decomp-coord-teardown", {
-		description: "Remove all lane worktrees, branches, and stop coordinator",
-		handler: async (_args, ctx) => {
-			const fs = require("node:fs");
-			const path = require("node:path");
-
-			// Stop coordinator if running
-			if (coordinatorProcess) {
-				coordinatorProcess.kill();
-				coordinatorProcess = null;
-			}
-
-			const worktreeDir = path.join(ctx.cwd, ".worktrees");
-			if (!fs.existsSync(worktreeDir)) {
-				ctx.ui.notify("No worktrees to clean up", "info");
-				return;
-			}
-
-			// Remove each worktree and its branch
-			const lanes = fs.readdirSync(worktreeDir).filter((d: string) => d.startsWith("lane-"));
-			for (const lane of lanes) {
-				const laneDir = path.join(worktreeDir, lane);
-				const branch = `decomp-${lane}`;
-				await pi.exec("git", ["worktree", "remove", laneDir, "--force"]);
-				await pi.exec("git", ["branch", "-D", branch]);
-			}
-
-			// Remove the .worktrees directory
-			fs.rmSync(worktreeDir, { recursive: true, force: true });
-
-			ctx.ui.notify(`Torn down ${lanes.length} lanes + coordinator`, "info");
-		},
-	});
 }

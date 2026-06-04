@@ -40,4 +40,3 @@ tools/gfxdis
 tools/ido-native/
 session-*.json
 *-[0-9]*.c
-.worktrees/
