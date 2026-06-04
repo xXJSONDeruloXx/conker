@@ -6,6 +6,8 @@
 #include "macros.h"
 
 #include "libc/stdarg.h"
+
+s32 func_1502AC88(s32 arg0, s32 arg1, s32 *arg2);
 extern u8 D_AB1950[];
 
 void func_1502AAF0(void) {
@@ -17,7 +19,30 @@ void func_1502AAF8(s32 arg0) {
 #pragma GLOBAL_ASM("asm/nonmatchings/game_57FA0/func_1502AB04.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_57FA0/func_1502AC88.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_57FA0/func_1502AF04.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_57FA0/func_1502B020.s")
+s32 func_1502B020(s32 *arg0, s32 arg1, ...) {
+    va_list args;
+    s32 temp_a1;
+    s32 offset;
+    s32 sp38;
+
+    sp38 = 1;
+    offset = (s32) D_AB1950;
+    va_start(args, arg1);
+    for (; arg1 != 0; arg1--) {
+        temp_a1 = va_arg(args, s32);
+        if (sp38 != 0) {
+            offset += func_1502AC88(offset, temp_a1, &sp38);
+        }
+        sp38 = sp38 & 0x0FFFFFFF;
+    }
+    if (arg0 != 0) {
+        *arg0 = sp38 & 0x0FFFFFFF;
+    }
+    if (sp38 == 0) {
+        return 0;
+    }
+    return offset;
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/game_57FA0/func_1502B110.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_57FA0/func_1502B224.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_57FA0/func_1502B350.s")
