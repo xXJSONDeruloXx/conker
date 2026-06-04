@@ -25934,8 +25934,8 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 6,
-    "lastScore": 0.49137931034482757,
+    "attempts": 9,
+    "lastScore": 0.7759,
     "status": "pending",
     "history": [
       {
@@ -25979,6 +25979,69 @@
         "reason": "length_mismatch (target=58, generated=57)",
         "diffs": [],
         "timestamp": "2026-06-04T07:57:44.376Z"
+      },
+      {
+        "code": "void func_15161F4C(struct225 *arg0, u8 *arg1, u8 arg2) {\n    void (*callback)(struct225 *, u8 *, u8);\n    u8 *ptr;\n    u8 idx;\n\n    ptr = (u8 *)arg0 + 0x18;\n    if (arg2 == 0) {\n        if ((*(s32 *)ptr == *(s32 *)arg1) || (ptr[4] == arg1[4])) {\n            func_1516972C(arg0);\n            idx = *((u8 *)arg0 + 0x1D);\n            goto do_callback;\n        }\n    } else if (arg2 == 0x2D) {\n        if (*(s32 *)arg1 == *(s32 *)ptr) {\n            *(s32 *)ptr = *(s32 *)(arg1 + 4);\n            ptr[4] = arg1[9];\n        } else if (*(s32 *)(arg1 + 4) == *(s32 *)ptr) {\n            *(s32 *)ptr = *(s32 *)arg1;\n            ptr[4] = arg1[8];\n        }\n    }\n\n    idx = *((u8 *)arg0 + 0x1D);\ndo_callback:\n    callback = D_8008B358[idx];\n    if (callback != NULL) {\n        callback(arg0, arg1, arg2);\n    }\n}",
+        "score": 0.7759,
+        "reason": "structural_diffs=13",
+        "diffs": [
+          "structural: target=lbu t5, 29(a3) got=lbu v0, 29(a3)",
+          "structural: target=lw a1, 28(sp) got=lw a3, 24(sp)",
+          "structural: target=lbu a2, 35(sp) got=lw a1, 28(sp)",
+          "structural: target=lw a3, 24(sp) got=lbu a2, 35(sp)",
+          "structural: target=lbu t5, 29(a3) got=lbu v0, 29(a3)",
+          "structural: target=lbu t5, 29(a3) got=lbu v0, 29(a3)",
+          "structural: target=lbu t5, 29(a3) got=lbu v0, 29(a3)",
+          "structural: target=lui v0, HI(D_8008B358) got=sll t5, v0, 2",
+          "structural: target=sll t6, t5, 2 got=lui v1, HI(D_8008B358)",
+          "structural: target=addu v0, v0, t6 got=addu v1, v1, t5",
+          "structural: target=lw v0, LO(D_8008B358)(v0) got=lw v1, LO(D_8008B358)(v1)",
+          "structural: target=beqzl v0, L5 got=beqzl v1, L5",
+          "structural: target=jalr v0 got=jalr v1"
+        ],
+        "timestamp": "2026-06-04T07:58:19.948Z"
+      },
+      {
+        "code": "void func_15161F4C(struct225 *arg0, u8 *arg1, u8 arg2) {\n    void (*callback)(struct225 *, u8 *, u8);\n    u8 *ptr;\n    s32 idx;\n\n    ptr = (u8 *)arg0 + 0x18;\n    if (arg2 == 0) {\n        if ((*(s32 *)ptr == *(s32 *)arg1) || (ptr[4] == arg1[4])) {\n            func_1516972C(arg0);\n            idx = *((u8 *)arg0 + 0x1D);\n            goto do_callback;\n        }\n    } else if (arg2 == 0x2D) {\n        if (*(s32 *)arg1 == *(s32 *)ptr) {\n            *(s32 *)ptr = *(s32 *)(arg1 + 4);\n            ptr[4] = arg1[9];\n        } else if (*(s32 *)(arg1 + 4) == *(s32 *)ptr) {\n            *(s32 *)ptr = *(s32 *)arg1;\n            ptr[4] = arg1[8];\n        }\n    }\n\n    idx = *((u8 *)arg0 + 0x1D);\ndo_callback:\n    callback = D_8008B358[idx];\n    if (callback != NULL) {\n        callback(arg0, arg1, arg2);\n    }\n}",
+        "score": 0.7759,
+        "reason": "structural_diffs=13",
+        "diffs": [
+          "structural: target=lbu t5, 29(a3) got=lbu v0, 29(a3)",
+          "structural: target=lw a1, 28(sp) got=lw a3, 24(sp)",
+          "structural: target=lbu a2, 35(sp) got=lw a1, 28(sp)",
+          "structural: target=lw a3, 24(sp) got=lbu a2, 35(sp)",
+          "structural: target=lbu t5, 29(a3) got=lbu v0, 29(a3)",
+          "structural: target=lbu t5, 29(a3) got=lbu v0, 29(a3)",
+          "structural: target=lbu t5, 29(a3) got=lbu v0, 29(a3)",
+          "structural: target=lui v0, HI(D_8008B358) got=sll t5, v0, 2",
+          "structural: target=sll t6, t5, 2 got=lui v1, HI(D_8008B358)",
+          "structural: target=addu v0, v0, t6 got=addu v1, v1, t5",
+          "structural: target=lw v0, LO(D_8008B358)(v0) got=lw v1, LO(D_8008B358)(v1)",
+          "structural: target=beqzl v0, L5 got=beqzl v1, L5",
+          "structural: target=jalr v0 got=jalr v1"
+        ],
+        "timestamp": "2026-06-04T07:59:07.788Z"
+      },
+      {
+        "code": "void func_15161F4C(struct225 *arg0, u8 *arg1, u8 arg2) {\n    void (*callback)(struct225 *, u8 *, u8);\n    void (**table)(struct225 *, u8 *, u8);\n    u8 *ptr;\n    u8 idx;\n\n    ptr = (u8 *)arg0 + 0x18;\n    if (arg2 == 0) {\n        if ((*(s32 *)ptr == *(s32 *)arg1) || (ptr[4] == arg1[4])) {\n            func_1516972C(arg0);\n            idx = *((u8 *)arg0 + 0x1D);\n            goto do_callback;\n        }\n    } else if (arg2 == 0x2D) {\n        if (*(s32 *)arg1 == *(s32 *)ptr) {\n            *(s32 *)ptr = *(s32 *)(arg1 + 4);\n            ptr[4] = arg1[9];\n        } else if (*(s32 *)(arg1 + 4) == *(s32 *)ptr) {\n            *(s32 *)ptr = *(s32 *)arg1;\n            ptr[4] = arg1[8];\n        }\n    }\n\n    idx = *((u8 *)arg0 + 0x1D);\ndo_callback:\n    table = D_8008B358;\n    callback = table[idx];\n    if (callback != NULL) {\n        callback(arg0, arg1, arg2);\n    }\n}",
+        "score": 0.7759,
+        "reason": "structural_diffs=13",
+        "diffs": [
+          "structural: target=lbu t5, 29(a3) got=lbu v0, 29(a3)",
+          "structural: target=lw a1, 28(sp) got=lw a3, 24(sp)",
+          "structural: target=lbu a2, 35(sp) got=lw a1, 28(sp)",
+          "structural: target=lw a3, 24(sp) got=lbu a2, 35(sp)",
+          "structural: target=lbu t5, 29(a3) got=lbu v0, 29(a3)",
+          "structural: target=lbu t5, 29(a3) got=lbu v0, 29(a3)",
+          "structural: target=lbu t5, 29(a3) got=lbu v0, 29(a3)",
+          "structural: target=lui v0, HI(D_8008B358) got=sll t5, v0, 2",
+          "structural: target=sll t6, t5, 2 got=lui v1, HI(D_8008B358)",
+          "structural: target=addu v0, v0, t6 got=addu v1, v1, t5",
+          "structural: target=lw v0, LO(D_8008B358)(v0) got=lw v1, LO(D_8008B358)(v1)",
+          "structural: target=beqzl v0, L5 got=beqzl v1, L5",
+          "structural: target=jalr v0 got=jalr v1"
+        ],
+        "timestamp": "2026-06-04T07:59:38.503Z"
       }
     ]
   },
