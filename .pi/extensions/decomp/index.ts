@@ -281,7 +281,8 @@ function buildChunkPrompt(chunkNum: number): string {
 		"- You can work on MULTIPLE functions per chunk. If stuck, call `decomp_queue next` to try a different one — no need to call `decomp_chunk_done`.",
 		"- Call `decomp_chunk_done` when you’ve made good progress or exhausted reasonable options for this chunk.",
 		"- Functions with 8+ failed attempts are auto-rotated: `decomp_queue next` will skip them this session.",
-		"- Use the pattern library (/skill:n64-decomp) for IDO codegen rules.",
+		"- Relevant patterns from the library (122+) are auto-shown with each candidate. For more, call `decomp_status` with detail=\"patterns\".",
+		"- The /skill:n64-decomp file has core IDO 5.3 codegen rules (declaration order, branch shapes, addressing).",
 		"- If score ≥ 0.9, you're close — try declaration reordering, type changes, or expression reshaping.",
 		"- If plateaued (3+ attempts, no improvement), use decomp_permute regardless of score — Transmuter can fix codegen issues at ANY score level.",
 		"- Every few chunks, try: decomp_queue next with filter={nearMiss: true} to revisit near-misses with the permuter.",
@@ -1022,12 +1023,28 @@ export default function (pi: ExtensionAPI) {
 				}
 			}
 
-			// Find relevant patterns
-			const relevantPatterns = state.patterns.filter(
-				(p) =>
-					next.tags.some((t) => p.trigger.toLowerCase().includes(t.toLowerCase())) ||
-					p.example_functions.some((f) => f === next.function),
-			);
+			// Find relevant patterns by keyword matching against target assembly + function context
+			const asmLower = targetAsm.toLowerCase();
+			const contextLower = (srcContext || "").toLowerCase();
+			const relevantPatterns = state.patterns
+				.map((p) => {
+					let score = 0;
+					// Check if this function is a known example for the pattern
+					if (p.example_functions.some((f: string) => f === next.function)) score += 10;
+					// Extract keywords from trigger and check against target asm
+					const triggerWords = p.trigger.toLowerCase().match(/[a-z_][a-z0-9_]+/g) || [];
+					const asmKeywords = triggerWords.filter((w: string) => w.length > 3 && (asmLower.includes(w) || contextLower.includes(w)));
+					score += asmKeywords.length;
+					// Check solution keywords against assembly patterns
+					const solWords = p.solution.toLowerCase().match(/[a-z_][a-z0-9_]+/g) || [];
+					const solMatches = solWords.filter((w: string) => w.length > 4 && asmLower.includes(w));
+					score += solMatches.length * 0.5;
+					return { pattern: p, score };
+				})
+				.filter((r) => r.score > 0)
+				.sort((a, b) => b.score - a.score)
+				.slice(0, 5)
+				.map((r) => r.pattern);
 
 			const output = [
 				`✅ ROM baseline verified (conker.us.bin: OK)`,
@@ -1050,31 +1067,48 @@ export default function (pi: ExtensionAPI) {
 			];
 
 			if (relevantPatterns.length > 0) {
-				output.push("", "### Relevant Patterns");
+				output.push("", "### Relevant Patterns (auto-matched from library of " + state.patterns.length + ")");
 				for (const p of relevantPatterns) {
 					output.push(`- **${p.id}**: ${p.description}`);
 					output.push(`  Trigger: ${p.trigger}`);
 					output.push(`  Solution: ${p.solution}`);
 				}
+				output.push("", "_For the full pattern library, call `decomp_status` with detail=\"patterns\"._");
+			} else if (state.patterns.length > 0) {
+				output.push("", `_${state.patterns.length} patterns in library (none matched this target). Search with \`decomp_status\` detail=\"patterns\" if stuck._`);
 			}
 
 			// Surface prior attempt history so the LLM doesn't repeat mistakes
 			if (next.history && next.history.length > 0) {
-				output.push("", "### ⚠️ Prior Failed Attempts (DO NOT REPEAT THESE)");
-				for (let i = 0; i < next.history.length; i++) {
-					const h = next.history[i];
-					output.push(`\n**Attempt ${i + 1}** (score: ${h.score.toFixed(3)}, reason: ${h.reason})`);
-					output.push("```c");
-					output.push(h.code);
-					output.push("```");
-					if (h.diffs.length > 0) {
-						output.push("Diffs:");
-						for (const d of h.diffs) {
-							output.push(`  - ${d}`);
+				// Separate regular attempts from permuter runs
+				const regularAttempts = next.history.filter((h: AttemptRecord) => !h.reason?.startsWith("transmuter"));
+				const permuterRuns = next.history.filter((h: AttemptRecord) => h.reason?.startsWith("transmuter"));
+
+				if (regularAttempts.length > 0) {
+					output.push("", "### ⚠️ Prior Failed Attempts (DO NOT REPEAT THESE)");
+					for (let i = 0; i < regularAttempts.length; i++) {
+						const h = regularAttempts[i];
+						output.push(`\n**Attempt ${i + 1}** (score: ${h.score.toFixed(3)}, reason: ${h.reason})`);
+						output.push("```c");
+						output.push(h.code);
+						output.push("```");
+						if (h.diffs.length > 0) {
+							output.push("Diffs:");
+							for (const d of h.diffs) {
+								output.push(`  - ${d}`);
+							}
 						}
 					}
+					output.push("", "**You must try a DIFFERENT approach.** Study the diffs above and change your strategy.");
 				}
-				output.push("", "**You must try a DIFFERENT approach.** Study the diffs above and change your strategy.");
+
+				if (permuterRuns.length > 0) {
+					output.push("", "### 🔧 Prior Transmuter/Permuter Runs");
+					for (const h of permuterRuns) {
+						output.push(`- ${h.reason} | ${h.diffs.join(" | ")}`);
+					}
+					output.push("_Transmuter already tried mutation search on this code. Different structural approach needed before re-running._");
+				}
 			}
 
 			return {
@@ -1779,6 +1813,38 @@ export default function (pi: ExtensionAPI) {
 				details: {},
 			});
 
+			// Pre-flight: verify the base code compiles before running Transmuter
+			const preflightResult = await pi.exec("bash", [
+				path.join(ctx.cwd, "tools/transmuter-compile.sh"),
+				baseCPath, path.join(workDir, "preflight.o"), params.function,
+			], { signal, timeout: 15000 });
+
+			if (preflightResult.code !== 0) {
+				const errMsg = (preflightResult.stderr || preflightResult.stdout || "unknown error").trim();
+				// Log the compile failure
+				const qEntry = state.queue.find((e) => e.function === params.function);
+				if (qEntry) {
+					if (!qEntry.history) qEntry.history = [];
+					qEntry.history.push({
+						code: baseCode,
+						score: 0,
+						reason: "transmuter_compile_fail",
+						diffs: [`compile_error: ${errMsg.slice(0, 200)}`],
+						timestamp: new Date().toISOString(),
+					});
+					saveQueue(ctx.cwd);
+				}
+				return {
+					content: [{
+						type: "text",
+						text: `❌ Transmuter pre-flight compile failed. The base code doesn’t compile in isolation.\n\nError:\n${errMsg}\n\nFix: ensure the code compiles with \`decomp_attempt\` first, then retry permuter. Missing externs or type conflicts are the usual cause.`,
+					}],
+					details: { error: "preflight_compile_fail", message: errMsg },
+				};
+			}
+			// Clean up preflight .o
+			try { fs.unlinkSync(path.join(workDir, "preflight.o")); } catch {}
+
 			// Run Transmuter natively
 			const transmuterCli = path.join(ctx.cwd, "tools/transmuter/packages/cli/dist/index.js");
 			const compilerCmd = `${path.join(ctx.cwd, "tools/transmuter-compile.sh")} {{inputPath}} {{outputPath}} {{functionName}}`;
@@ -1823,8 +1889,36 @@ export default function (pi: ExtensionAPI) {
 				try { fs.unlinkSync(path.join(ctx.cwd, sf)); } catch {}
 			}
 
+			// Parse output for score info
+			const scoreFromOutput = output.match(/Score\s+\d+\s*→\s*(\d+)/);
+			const bestScore = scoreFromOutput ? parseInt(scoreFromOutput[1]) : null;
+			const iterMatch = output.match(/Iteration[s:]?\s*(\d+)/i);
+			const iters = iterMatch ? parseInt(iterMatch[1]) : null;
+			const forkMatch = output.match(/(\d+)\s*forks?/i);
+			const forks = forkMatch ? parseInt(forkMatch[1]) : 0;
+			const ruleMatch = output.match(/Last fork:.*?via\s+(\S+)/);
+			const winningRule = ruleMatch ? ruleMatch[1] : null;
+
+			// Log permuter result to queue.json history
+			const queueEntry = state.queue.find((e) => e.function === params.function);
+			if (queueEntry) {
+				if (!queueEntry.history) queueEntry.history = [];
+				queueEntry.history.push({
+					code: baseCode,
+					score: perfectMatch ? 1.0 : (bestScore !== null ? 1 - (bestScore / 30) : 0), // normalize objdiff score
+					reason: perfectMatch ? "transmuter_match" : `transmuter_best=${bestScore ?? "?"}`,
+					diffs: [
+						`transmuter: iters=${iters ?? "?"}, forks=${forks}, bestScore=${bestScore ?? "?"}`,
+						...(winningRule ? [`winning_rule: ${winningRule}`] : []),
+						`timeout=${params.timeout || 60}s, maxCompiles=${maxCompiles}`,
+					],
+					timestamp: new Date().toISOString(),
+				});
+				if (perfectMatch) queueEntry.lastScore = 1.0;
+				saveQueue(ctx.cwd);
+			}
+
 			if (perfectMatch && winningCode) {
-				// Extract just the function code (strip includes)
 				const funcCode = winningCode
 					.replace(/^#include.*\n/gm, "")
 					.replace(/^extern.*\n/gm, "")
@@ -1839,16 +1933,10 @@ export default function (pi: ExtensionAPI) {
 				};
 			}
 
-			// Parse output for score info
-			const scoreFromOutput = output.match(/Score\s+\d+\s*→\s*(\d+)/);
-			const bestScore = scoreFromOutput ? parseInt(scoreFromOutput[1]) : null;
-			const iterMatch = output.match(/Iteration[s:]?\s*(\d+)/i);
-			const iters = iterMatch ? parseInt(iterMatch[1]) : null;
-
 			return {
 				content: [{
 					type: "text",
-					text: `Transmuter completed. Best score: ${bestScore ?? "unknown"} (iterations: ${iters ?? "?"})\n\n${output.replace(/\[2K.*?\[G/g, "").replace(/\u001b\[[^m]*m/g, "").slice(-800)}\n\nThe code may need a different structural approach. Try: different variable types, control flow restructuring, or declaration reordering before re-running.`,
+					text: `Transmuter completed. Best score: ${bestScore ?? "unknown"} (iterations: ${iters ?? "?"}, forks: ${forks})\n\n${output.replace(/\[2K.*?\[G/g, "").replace(/\u001b\[[^m]*m/g, "").slice(-800)}\n\nThe code may need a different structural approach. Try: different variable types, control flow restructuring, or declaration reordering before re-running.`,
 				}],
 				details: { matched: false, bestScore, iterations: iters },
 			};

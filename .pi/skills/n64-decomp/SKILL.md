@@ -5,6 +5,10 @@ description: IDO 5.3 matching decompilation patterns, codegen rules, diff interp
 
 # N64 Matching Decompilation — IDO 5.3 Patterns
 
+## Dynamic Pattern Library
+
+Beyond this static guide, there are **122+ patterns** discovered during this project stored in `.pi/decomp/patterns.json`. These are auto-served with each candidate by `decomp_queue next` (matched by keywords in the target assembly). To browse the full library: `decomp_status detail="patterns"`. Patterns include specific IDO quirks like `sameline` effects, stack-array padding, negative-index outparams, and bitfield scheduling.
+
 ## Compiler: IDO 5.3
 
 Conker was compiled with SGI IDO 5.3 (`cc -O2 -g3 -mips2 -o32`). Key behaviors:
