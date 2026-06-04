@@ -21965,8 +21965,8 @@
     "instructions": 65,
     "difficulty": "medium",
     "tags": [],
-    "attempts": 3,
-    "lastScore": 0.7385,
+    "attempts": 6,
+    "lastScore": 0.8615,
     "status": "pending",
     "history": [
       {
@@ -22047,6 +22047,48 @@
           "structural: target=addiu sp, sp, 32 got=addiu sp, sp, 48"
         ],
         "timestamp": "2026-06-04T11:11:26.179Z"
+      },
+      {
+        "code": "s32 func_1514563C(struct17 *arg0, struct17 *arg1, struct17 *arg2, struct17 *arg3, f32 *arg4) {\n    f32 sp10;\n    f32 denom;\n    f32 dot0;\n    f32 dot1;\n\n    if (arg4 == NULL) {\n        arg4 = &sp10;\n    }\n    denom = (arg1->unk0 * arg1->unk0) + (arg1->unk4 * arg1->unk4) + (arg1->unk8 * arg1->unk8);\n    if (denom == 0.0f) {\n        return 0;\n    }\n    dot0 = (arg1->unk0 * arg0->unk0) + (arg1->unk4 * arg0->unk4) + (arg1->unk8 * arg0->unk8);\n    dot1 = (arg1->unk0 * arg2->unk0) + (arg1->unk4 * arg2->unk4) + (arg1->unk8 * arg2->unk8);\n    *arg4 = (dot1 - dot0) / denom;\n    arg3->unk0 = arg0->unk0 + (*arg4 * arg1->unk0);\n    arg3->unk4 = arg0->unk4 + (*arg4 * arg1->unk4);\n    arg3->unk8 = arg0->unk8 + (*arg4 * arg1->unk8);\n    return 1;\n}",
+        "score": 0.9846,
+        "reason": "structural_diffs=1",
+        "diffs": [
+          "structural: target=addiu t7, sp, 16 got=addiu t7, sp, 28"
+        ],
+        "timestamp": "2026-06-04T11:11:49.523Z"
+      },
+      {
+        "code": "s32 func_1514563C(struct17 *arg0, struct17 *arg1, struct17 *arg2, struct17 *arg3, f32 *arg4) {\n    f32 sp10;\n    f32 denom;\n    f32 dot0;\n    f32 dot1;\n\n    if (arg4 == NULL) {\n        arg4 = (f32 *)((s32)&sp10 - 0xC);\n    }\n    denom = (arg1->unk0 * arg1->unk0) + (arg1->unk4 * arg1->unk4) + (arg1->unk8 * arg1->unk8);\n    if (denom == 0.0f) {\n        return 0;\n    }\n    dot0 = (arg1->unk0 * arg0->unk0) + (arg1->unk4 * arg0->unk4) + (arg1->unk8 * arg0->unk8);\n    dot1 = (arg1->unk0 * arg2->unk0) + (arg1->unk4 * arg2->unk4) + (arg1->unk8 * arg2->unk8);\n    *arg4 = (dot1 - dot0) / denom;\n    arg3->unk0 = arg0->unk0 + (*arg4 * arg1->unk0);\n    arg3->unk4 = arg0->unk4 + (*arg4 * arg1->unk4);\n    arg3->unk8 = arg0->unk8 + (*arg4 * arg1->unk8);\n    return 1;\n}",
+        "score": 0.8769,
+        "reason": "structural_diffs=8",
+        "diffs": [
+          "structural: target=addiu t7, sp, 16 got=addiu t8, sp, 16",
+          "structural: target=sw t7, 48(sp) got=sw t8, 48(sp)",
+          "structural: target=lw t8, 48(sp) got=lw t9, 48(sp)",
+          "structural: target=swc1 f6, 0(t8) got=swc1 f6, 0(t9)",
+          "structural: target=lw t9, 48(sp) got=lw t0, 48(sp)",
+          "structural: target=lwc1 f4, 0(t9) got=lwc1 f4, 0(t0)",
+          "structural: target=lw t0, 48(sp) got=lw t1, 48(sp)",
+          "structural: target=lwc1 f10, 0(t0) got=lwc1 f10, 0(t1)"
+        ],
+        "timestamp": "2026-06-04T11:12:08.769Z"
+      },
+      {
+        "code": "s32 func_1514563C(struct17 *arg0, struct17 *arg1, struct17 *arg2, struct17 *arg3, f32 *arg4) {\n    f32 sp10;\n    f32 pad[3];\n    f32 denom;\n    f32 dot0;\n    f32 dot1;\n\n    if (arg4 == NULL) {\n        arg4 = &sp10;\n    }\n    denom = (arg1->unk0 * arg1->unk0) + (arg1->unk4 * arg1->unk4) + (arg1->unk8 * arg1->unk8);\n    if (denom == 0.0f) {\n        return 0;\n    }\n    dot0 = (arg1->unk0 * arg0->unk0) + (arg1->unk4 * arg0->unk4) + (arg1->unk8 * arg0->unk8);\n    dot1 = (arg1->unk0 * arg2->unk0) + (arg1->unk4 * arg2->unk4) + (arg1->unk8 * arg2->unk8);\n    *arg4 = (dot1 - dot0) / denom;\n    arg3->unk0 = arg0->unk0 + (*arg4 * arg1->unk0);\n    arg3->unk4 = arg0->unk4 + (*arg4 * arg1->unk4);\n    arg3->unk8 = arg0->unk8 + (*arg4 * arg1->unk8);\n    return 1;\n}",
+        "score": 0.8615,
+        "reason": "structural_diffs=9",
+        "diffs": [
+          "structural: target=addiu sp, sp, -32 got=addiu sp, sp, -48",
+          "structural: target=lw t6, 48(sp) got=lw t6, 64(sp)",
+          "structural: target=addiu t7, sp, 16 got=addiu t7, sp, 44",
+          "structural: target=sw t7, 48(sp) got=sw t7, 64(sp)",
+          "structural: target=lw t8, 48(sp) got=lw t8, 64(sp)",
+          "structural: target=swc1 f6, 0(sp) got=swc1 f6, 4(sp)",
+          "structural: target=lw t9, 48(sp) got=lw t9, 64(sp)",
+          "structural: target=lw t0, 48(sp) got=lw t0, 64(sp)",
+          "structural: target=addiu sp, sp, 32 got=addiu sp, sp, 48"
+        ],
+        "timestamp": "2026-06-04T11:12:29.641Z"
       }
     ]
   },
