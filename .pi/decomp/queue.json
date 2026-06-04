@@ -25094,8 +25094,8 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 8,
-    "lastScore": 0.41000000000000003,
+    "attempts": 9,
+    "lastScore": 0.8537,
     "status": "pending",
     "history": [
       {
@@ -25192,6 +25192,20 @@
         "reason": "length_mismatch (target=41, generated=50)",
         "diffs": [],
         "timestamp": "2026-06-03T23:15:07.475Z"
+      },
+      {
+        "code": "void func_1513B798(struct102 *arg0) {\n    s32 temp_v1;\n    s32 temp_v0;\n    u8 sp1B[1];\n\n    temp_v1 = 0;\n    if ((((u8 *)arg0)[0x10] & 1) != 0) {\n        *(s16 *)((s32)arg0 + 0x14) = *(s16 *)((s32)arg0 + 0x14) - D_800BE9E4;\n        if (*(s16 *)((s32)arg0 + 0x14) < 0) {\n            temp_v1 = 1;\n        }\n    }\n    if (temp_v1 == 0) {\n        temp_v0 = ((s8 *)arg0)[0x11];\n        if (temp_v0 != -1) {\n            sp1B[0] = temp_v1;\n            temp_v0 = D_80089C18[temp_v0](arg0);\n            temp_v1 = sp1B[0];\n            if (temp_v0 == 0) {\n                temp_v1 = 1;\n            }\n        }\n    }\n    if (temp_v1 != 0) {\n        func_1516972C(arg0);\n    }\n}",
+        "score": 0.8537,
+        "reason": "structural_diffs=6",
+        "diffs": [
+          "structural: target=addiu sp, sp, -32 got=addiu sp, sp, -40",
+          "structural: target=sb v1, 27(sp) got=sb v1, 28(sp)",
+          "structural: target=sw a0, 32(sp) got=sw a0, 40(sp)",
+          "structural: target=lbu v1, 27(sp) got=lw a0, 40(sp)",
+          "structural: target=lw a0, 32(sp) got=lbu v1, 28(sp)",
+          "structural: target=addiu sp, sp, 32 got=addiu sp, sp, 40"
+        ],
+        "timestamp": "2026-06-04T09:13:03.723Z"
       }
     ]
   },
@@ -31893,9 +31907,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
+    "attempts": 5,
     "lastScore": 0.4915254237288136,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "s32 func_15043CA4(struct105 *arg0, void *arg1, s32 arg2) {\n    s32 sp30;\n    s32 sp2C;\n    s32 temp_v0;\n    s32 temp_v1;\n\n    sp30 = 0;\n    sp2C = arg0->unk8;\n    if (sp2C == arg0->unkC) {\n        return 0;\n    }\n    temp_v0 = func_15043AC8(arg0->unk0, arg0->unk4, sp2C, &sp30, 4);\n    temp_v1 = sp30;\n    if (arg2 < temp_v1) {\n        arg2--;\n        temp_v0 = func_15043AC8(arg0->unk0, arg0->unk4, temp_v0, arg1, arg2);\n        ((u8 *)arg1)[arg2] = 0;\n        temp_v0 = func_15043B70(arg0->unk0, arg0->unk4, temp_v0, sp30 - arg2);\n    } else if (temp_v1 != 0) {\n        temp_v0 = func_15043AC8(arg0->unk0, arg0->unk4, temp_v0, arg1, sp30);\n    }\n    arg0->unk8 = temp_v0;\n    return sp30;\n}",
@@ -31917,6 +31931,20 @@
         "reason": "length_mismatch (target=59, generated=58)",
         "diffs": [],
         "timestamp": "2026-06-04T09:09:40.020Z"
+      },
+      {
+        "code": "s32 func_15043CA4(struct105 *arg0, void *arg1, s32 arg2) {\n    s32 sp30[1];\n    s32 sp2C;\n    s32 temp_v0;\n    s32 temp_v1;\n\n    sp30[0] = 0;\n    sp2C = arg0->unk8;\n    if (sp2C == arg0->unkC) {\n        return 0;\n    }\n    temp_v0 = func_15043AC8(arg0->unk0, arg0->unk4, sp2C, sp30, 4);\n    temp_v1 = sp30[0];\n    if (arg2 < temp_v1) {\n        arg2--;\n        temp_v0 = func_15043AC8(arg0->unk0, arg0->unk4, temp_v0, arg1, arg2);\n        ((u8 *)arg1)[arg2] = 0;\n        temp_v0 = func_15043B70(arg0->unk0, arg0->unk4, temp_v0, sp30[0] - arg2);\n    } else if (temp_v1 != 0) {\n        temp_v0 = func_15043AC8(arg0->unk0, arg0->unk4, temp_v0, arg1, sp30[0]);\n    }\n    arg0->unk8 = temp_v0;\n    return sp30[0];\n}",
+        "score": 0.4915254237288136,
+        "reason": "length_mismatch (target=59, generated=58)",
+        "diffs": [],
+        "timestamp": "2026-06-04T09:10:08.659Z"
+      },
+      {
+        "code": "s32 func_15043CA4(struct105 *arg0, void *arg1, s32 arg2) {\n    s32 sp28[3];\n    s32 temp_v0;\n    s32 temp_v1;\n\n    sp28[2] = 0;\n    sp28[1] = arg0->unk8;\n    if (sp28[1] == arg0->unkC) {\n        return 0;\n    }\n    temp_v0 = func_15043AC8(arg0->unk0, arg0->unk4, sp28[1], &sp28[2], 4);\n    temp_v1 = sp28[2];\n    if (arg2 < temp_v1) {\n        arg2--;\n        temp_v0 = func_15043AC8(arg0->unk0, arg0->unk4, temp_v0, arg1, arg2);\n        ((u8 *)arg1)[arg2] = 0;\n        temp_v0 = func_15043B70(arg0->unk0, arg0->unk4, temp_v0, sp28[2] - arg2);\n    } else if (temp_v1 != 0) {\n        temp_v0 = func_15043AC8(arg0->unk0, arg0->unk4, temp_v0, arg1, sp28[2]);\n    }\n    arg0->unk8 = temp_v0;\n    return sp28[2];\n}",
+        "score": 0.4915254237288136,
+        "reason": "length_mismatch (target=59, generated=58)",
+        "diffs": [],
+        "timestamp": "2026-06-04T09:10:27.948Z"
       }
     ]
   },
