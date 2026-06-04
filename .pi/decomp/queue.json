@@ -27313,7 +27313,7 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
+    "attempts": 6,
     "lastScore": 0.49137931034482757,
     "status": "pending",
     "history": [
@@ -27337,6 +27337,27 @@
         "reason": "length_mismatch (target=57, generated=58)",
         "diffs": [],
         "timestamp": "2026-06-04T07:29:18.760Z"
+      },
+      {
+        "code": "void func_15145CD0(void *arg0, void *arg1, void *arg2, s32 arg3) {\n    f32 sp48[16];\n    void *temp_s1;\n\n    temp_s1 = arg0;\n    func_150A8050((f32 (*)[4])sp48, *(f32 *)((s32)temp_s1 + 0), *(f32 *)((s32)temp_s1 + 4), *(f32 *)((s32)temp_s1 + 8));\n    sp48[12] = (f32)*(s16 *)((s32)temp_s1 + 0x10);\n    sp48[13] = (f32)*(s16 *)((s32)temp_s1 + 0x12);\n    sp48[14] = (f32)*(s16 *)((s32)temp_s1 + 0x14);\n    temp_s1 = arg1;\n    if (arg3 > 0) {\n        do {\n            void *src = *(void **)temp_s1;\n            void *dst = *(void **)arg2;\n            func_150A7960((f32 (*)[4])sp48, *(f32 *)((s32)src + 0), *(f32 *)((s32)src + 4), *(f32 *)((s32)src + 8), (f32 *)((s32)dst + 0), (f32 *)((s32)dst + 4), (f32 *)((s32)dst + 8));\n            arg3--;\n            temp_s1 = (void *)((s32)temp_s1 + 4);\n            arg2 = (void *)((s32)arg2 + 4);\n        } while (arg3 > 0);\n    }\n}",
+        "score": 0.4830508474576271,
+        "reason": "length_mismatch (target=57, generated=59)",
+        "diffs": [],
+        "timestamp": "2026-06-04T07:30:30.106Z"
+      },
+      {
+        "code": "void func_15145CD0(void *arg0, void *arg1, void *arg2, s32 arg3) {\n    s32 temp_s0;\n    void *temp_s1;\n    void *temp_s2;\n    f32 sp48[16];\n\n    temp_s0 = arg3;\n    temp_s1 = arg0;\n    func_150A8050((f32 (*)[4])sp48, *(f32 *)((s32)temp_s1 + 0), *(f32 *)((s32)temp_s1 + 4), *(f32 *)((s32)temp_s1 + 8));\n    sp48[12] = (f32)*(s16 *)((s32)temp_s1 + 0x10);\n    sp48[13] = (f32)*(s16 *)((s32)temp_s1 + 0x12);\n    sp48[14] = (f32)*(s16 *)((s32)temp_s1 + 0x14);\n    temp_s2 = arg2;\n    temp_s1 = arg1;\n    if (temp_s0 > 0) {\n        do {\n            void *src = *(void **)temp_s1;\n            void *dst = *(void **)temp_s2;\n            func_150A7960((f32 (*)[4])sp48, *(f32 *)((s32)src + 0), *(f32 *)((s32)src + 4), *(f32 *)((s32)src + 8), (f32 *)((s32)dst + 0), (f32 *)((s32)dst + 4), (f32 *)((s32)dst + 8));\n            temp_s0--;\n            temp_s1 = (void *)((s32)temp_s1 + 4);\n            temp_s2 = (void *)((s32)temp_s2 + 4);\n        } while (temp_s0 > 0);\n    }\n}",
+        "score": 0.4672131147540984,
+        "reason": "length_mismatch (target=57, generated=61)",
+        "diffs": [],
+        "timestamp": "2026-06-04T07:31:01.339Z"
+      },
+      {
+        "code": "void func_15145CD0(void *arg0, void *arg1, void *arg2, s32 arg3) {\n    f32 sp48[16];\n\n    func_150A8050((f32 (*)[4])sp48, *(f32 *)((s32)arg0 + 0), *(f32 *)((s32)arg0 + 4), *(f32 *)((s32)arg0 + 8));\n    sp48[12] = (f32)*(s16 *)((s32)arg0 + 0x10);\n    sp48[13] = (f32)*(s16 *)((s32)arg0 + 0x12);\n    sp48[14] = (f32)*(s16 *)((s32)arg0 + 0x14);\n    arg2 = *(void **)&arg2;\n    arg0 = *(void **)&arg1;\n    if (arg3 > 0) {\n        do {\n            void *src = *(void **)arg0;\n            void *dst = *(void **)arg2;\n            func_150A7960((f32 (*)[4])sp48, *(f32 *)((s32)src + 0), *(f32 *)((s32)src + 4), *(f32 *)((s32)src + 8), (f32 *)((s32)dst + 0), (f32 *)((s32)dst + 4), (f32 *)((s32)dst + 8));\n            arg3--;\n            arg0 = (void *)((s32)arg0 + 4);\n            arg2 = (void *)((s32)arg2 + 4);\n        } while (arg3 > 0);\n    }\n}",
+        "score": 0.49137931034482757,
+        "reason": "length_mismatch (target=57, generated=58)",
+        "diffs": [],
+        "timestamp": "2026-06-04T07:31:28.256Z"
       }
     ]
   },
