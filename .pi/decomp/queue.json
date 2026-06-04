@@ -28710,9 +28710,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
-    "lastScore": 0.4918032786885246,
-    "status": "pending",
+    "attempts": 5,
+    "lastScore": 0.47619047619047616,
+    "status": "skipped",
     "history": [
       {
         "code": "void func_15145DB4(struct227 *arg0, struct17 *arg1, struct17 *arg2, s32 arg3) {\n    f32 tmp[4][4];\n\n    func_150A8050(tmp, arg0->unk0, arg0->unk4, arg0->unk8);\n    tmp[3][0] = (f32) arg0->unk10;\n    tmp[3][1] = (f32) *(s16 *)((u8 *) arg0 + 0x12);\n    tmp[3][2] = (f32) *(s16 *)((u8 *) arg0 + 0x14);\n    if (arg3 > 0) {\n        do {\n            func_150A7960(tmp, arg1->unk0, arg1->unk4, arg1->unk8, &arg2->unk0, &arg2->unk4, &arg2->unk8);\n            arg3--;\n            arg1++;\n            arg2++;\n        } while (arg3 > 0);\n    }\n}",
@@ -28734,6 +28734,20 @@
         "reason": "length_mismatch (target=60, generated=61)",
         "diffs": [],
         "timestamp": "2026-06-04T09:36:56.988Z"
+      },
+      {
+        "code": "void func_15145DB4(struct227 *arg0, struct17 *arg1, struct17 *arg2, s32 arg3) {\n    struct227 *temp_s0;\n    struct17 *temp_s1;\n    f32 *temp_s3;\n    f32 *temp_s4;\n    f32 tmp[4][4];\n\n    temp_s0 = arg0;\n    func_150A8050(tmp, temp_s0->unk0, temp_s0->unk4, temp_s0->unk8);\n    tmp[3][0] = (f32) temp_s0->unk10;\n    tmp[3][1] = (f32) *(s16 *)((u8 *) temp_s0 + 0x12);\n    tmp[3][2] = (f32) *(s16 *)((u8 *) temp_s0 + 0x14);\n    if (arg3 > 0) {\n        temp_s0 = (struct227 *) arg1;\n        temp_s1 = arg2;\n        temp_s3 = &temp_s1->unk4;\n        temp_s4 = &temp_s1->unk8;\n        do {\n            func_150A7960(tmp, ((struct17 *) temp_s0)->unk0, ((struct17 *) temp_s0)->unk4, ((struct17 *) temp_s0)->unk8, &temp_s1->unk0, temp_s3, temp_s4);\n            arg3--;\n            temp_s0 = (struct227 *) ((u8 *) temp_s0 + 0xC);\n            temp_s1++;\n            temp_s3 += 3;\n            temp_s4 += 3;\n        } while (arg3 > 0);\n    }\n}",
+        "score": 0.4918032786885246,
+        "reason": "length_mismatch (target=60, generated=61)",
+        "diffs": [],
+        "timestamp": "2026-06-04T09:37:34.015Z"
+      },
+      {
+        "code": "void func_15145DB4(struct227 *arg0, struct17 *arg1, struct17 *arg2, s32 arg3) {\n    struct227 *temp_s0;\n    struct17 *temp_s1;\n    s32 temp_s2;\n    f32 *temp_s3;\n    f32 *temp_s4;\n    f32 tmp[4][4];\n\n    temp_s0 = arg0;\n    temp_s1 = arg2;\n    temp_s2 = arg3;\n    func_150A8050(tmp, temp_s0->unk0, temp_s0->unk4, temp_s0->unk8);\n    tmp[3][0] = (f32) temp_s0->unk10;\n    temp_s3 = &temp_s1->unk4;\n    temp_s4 = &temp_s1->unk8;\n    tmp[3][1] = (f32) *(s16 *)((u8 *) temp_s0 + 0x12);\n    tmp[3][2] = (f32) *(s16 *)((u8 *) temp_s0 + 0x14);\n    if (temp_s2 > 0) {\n        temp_s0 = (struct227 *) arg1;\n        do {\n            func_150A7960(tmp, ((struct17 *) temp_s0)->unk0, ((struct17 *) temp_s0)->unk4, ((struct17 *) temp_s0)->unk8, &temp_s1->unk0, temp_s3, temp_s4);\n            temp_s2--;\n            temp_s0 = (struct227 *) ((u8 *) temp_s0 + 0xC);\n            temp_s1++;\n            temp_s3 += 3;\n            temp_s4 += 3;\n        } while (temp_s2 > 0);\n    }\n}",
+        "score": 0.47619047619047616,
+        "reason": "length_mismatch (target=60, generated=63)",
+        "diffs": [],
+        "timestamp": "2026-06-04T09:38:04.870Z"
       }
     ]
   },
@@ -29662,9 +29676,51 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.9667,
+    "status": "pending",
+    "history": [
+      {
+        "code": "s32 func_1502B020(s32 *arg0, s32 arg1, ...) {\n    s32 sp38;\n    va_list args;\n    s32 temp_a1;\n    s32 offset;\n    s32 more;\n\n    more = 1;\n    offset = (s32) D_AB1950;\n    va_start(args, arg1);\n    sp38 = more;\n    if (arg1 != 0) {\n        do {\n            temp_a1 = va_arg(args, s32);\n            if (sp38 != 0) {\n                offset += func_1502AC88(offset, temp_a1, &sp38);\n            }\n            arg1--;\n            sp38 &= 0x0FFFFFFF;\n        } while (arg1 != 0);\n    }\n    if (arg0 != 0) {\n        *arg0 = sp38 & 0x0FFFFFFF;\n    }\n    if (sp38 == 0) {\n        return 0;\n    }\n    return offset;\n}",
+        "score": 0.8,
+        "reason": "structural_diffs=12",
+        "diffs": [
+          "structural: target=li t6, 1 got=lui s1, HI(D_AB1950)",
+          "structural: target=lui s1, HI(D_AB1950) got=li t6, 1",
+          "structural: target=sw t6, 56(sp) got=addiu s1, s1, LO(D_AB1950)",
+          "structural: target=addiu s1, s1, LO(D_AB1950) got=addiu s0, sp, 80",
+          "structural: target=addiu s0, sp, 80 got=sw t6, 68(sp)",
+          "structural: target=addiu s3, sp, 56 got=addiu s3, sp, 68",
+          "structural: target=lw t8, 56(sp) got=lw t8, 68(sp)",
+          "structural: target=lw t9, 56(sp) got=lw t9, 68(sp)",
+          "structural: target=sw a1, 76(sp) got=sw t0, 68(sp)",
+          "structural: target=sw t0, 56(sp) got=sw a1, 76(sp)",
+          "structural: target=lw t2, 56(sp) got=lw t2, 68(sp)",
+          "structural: target=lw t4, 56(sp) got=lw t4, 68(sp)"
+        ],
+        "timestamp": "2026-06-04T09:40:27.516Z"
+      },
+      {
+        "code": "s32 func_1502B020(s32 *arg0, s32 arg1, ...) {\n    va_list args;\n    s32 temp_a1;\n    s32 offset;\n    s32 sp38;\n\n    sp38 = 1;\n    offset = (s32) D_AB1950;\n    va_start(args, arg1);\n    if (arg1 != 0) {\n        do {\n            temp_a1 = va_arg(args, s32);\n            if (sp38 != 0) {\n                offset += func_1502AC88(offset, temp_a1, &sp38);\n            }\n            arg1--;\n            sp38 &= 0x0FFFFFFF;\n        } while (arg1 != 0);\n    }\n    if (arg0 != 0) {\n        *arg0 = sp38 & 0x0FFFFFFF;\n    }\n    if (sp38 == 0) {\n        return 0;\n    }\n    return offset;\n}",
+        "score": 0.9667,
+        "reason": "structural_diffs=2",
+        "diffs": [
+          "structural: target=sw a1, 76(sp) got=sw t0, 56(sp)",
+          "structural: target=sw t0, 56(sp) got=sw a1, 76(sp)"
+        ],
+        "timestamp": "2026-06-04T09:40:59.435Z"
+      },
+      {
+        "code": "s32 func_1502B020(s32 *arg0, s32 arg1, ...) {\n    va_list args;\n    s32 temp_a1;\n    s32 offset;\n    s32 sp38;\n\n    sp38 = 1;\n    offset = (s32) D_AB1950;\n    va_start(args, arg1);\n    if (arg1 != 0) {\n        do {\n            temp_a1 = va_arg(args, s32);\n            if (sp38 != 0) {\n                offset += func_1502AC88(offset, temp_a1, &sp38);\n            }\n            sp38 &= 0x0FFFFFFF;\n            arg1--;\n        } while (arg1 != 0);\n    }\n    if (arg0 != 0) {\n        *arg0 = sp38 & 0x0FFFFFFF;\n    }\n    if (sp38 == 0) {\n        return 0;\n    }\n    return offset;\n}",
+        "score": 0.9667,
+        "reason": "structural_diffs=2",
+        "diffs": [
+          "structural: target=sw a1, 76(sp) got=sw t0, 56(sp)",
+          "structural: target=sw t0, 56(sp) got=sw a1, 76(sp)"
+        ],
+        "timestamp": "2026-06-04T09:41:16.066Z"
+      }
+    ]
   },
   {
     "function": "func_1505EEF4",
