@@ -1279,7 +1279,20 @@ void func_150796CC(void) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_A28B0/func_15079790.s")
+void func_15079790(void) {
+    s16 temp_t1;
+    s16 temp_t0;
+
+    if (D_800D1892 != 0) {
+        D_800D154C->id = 0xFF;
+    } else {
+        D_800D154C->id = 0x3A;
+        temp_t1 = (func_150ADA20() % 0x1F4U) - 0xFA;
+        temp_t0 = (func_150ADA20() % 0x1F4U) - 0xFA;
+        D_800D154C->x_position = (f32) (((s16 **) D_800D2104)[D_800D154C->unk13F][0] + temp_t1);
+        D_800D154C->z_position = (f32) (((s16 **) D_800D2104)[D_800D154C->unk13F][2] + temp_t0);
+    }
+}
 // seriously, D_800D2104?
 // void func_15079790(void) {
 //     s16 temp_t1;
