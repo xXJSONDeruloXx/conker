@@ -31083,8 +31083,8 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
-    "lastScore": 0.48360655737704916,
+    "attempts": 6,
+    "lastScore": 0.48412698412698413,
     "status": "pending",
     "history": [
       {
@@ -31107,6 +31107,27 @@
         "reason": "length_mismatch (target=61, generated=59)",
         "diffs": [],
         "timestamp": "2026-06-04T10:03:50.181Z"
+      },
+      {
+        "code": "void func_1501B22C(s32 arg0) {\n    u8 *temp_s0;\n    f32 stack[6];\n    f32 temp_f0;\n    f32 temp_f2;\n    f32 temp_f12;\n\n    temp_s0 = (u8 *)D_800BE628 + (((arg0 << 2) - arg0) << 7);\n    temp_f0 = *(f32 *)(temp_s0 + 0x74) * 0.5f;\n    stack[2] = *(f32 *)(temp_s0 + 0x78) * 0.5f;\n    stack[1] = -temp_f0 * D_80096900;\n    stack[5] = cosf(stack[1]);\n    temp_f0 = sinf(stack[1]);\n    temp_f2 = stack[5];\n    *(f32 *)(temp_s0 + 0x9C) = temp_f0;\n    temp_f2 = -temp_f2;\n    *(f32 *)(temp_s0 + 0x90) = temp_f0;\n    *(f32 *)(temp_s0 + 0x94) = temp_f2;\n    *(f32 *)(temp_s0 + 0x88) = -temp_f2;\n    *(f32 *)(temp_s0 + 0x98) = 0.0f;\n    *(f32 *)(temp_s0 + 0x8C) = 0.0f;\n    stack[1] = stack[2] * D_80096904;\n    stack[5] = cosf(stack[1]);\n    temp_f0 = sinf(stack[1]);\n    temp_f12 = -temp_f0;\n    *(f32 *)(temp_s0 + 0xA0) = 0.0f;\n    temp_f2 = stack[5];\n    *(f32 *)(temp_s0 + 0xA8) = temp_f12;\n    *(f32 *)(temp_s0 + 0xB4) = temp_f12;\n    temp_f2 = -temp_f2;\n    *(f32 *)(temp_s0 + 0xAC) = 0.0f;\n    *(f32 *)(temp_s0 + 0xA4) = temp_f2;\n    *(f32 *)(temp_s0 + 0xB0) = -temp_f2;\n}",
+        "score": 0.48360655737704916,
+        "reason": "length_mismatch (target=61, generated=59)",
+        "diffs": [],
+        "timestamp": "2026-06-04T10:04:28.628Z"
+      },
+      {
+        "code": "void func_1501B22C(s32 arg0) {\n    u8 *temp_s0;\n    volatile f32 pad;\n    f32 stack[5];\n    f32 temp_f0;\n    f32 temp_f2;\n    f32 temp_f12;\n\n    temp_s0 = (u8 *)D_800BE628 + (((arg0 << 2) - arg0) << 7);\n    temp_f0 = *(f32 *)(temp_s0 + 0x74) * 0.5f;\n    stack[1] = *(f32 *)(temp_s0 + 0x78) * 0.5f;\n    stack[0] = -temp_f0 * D_80096900;\n    stack[4] = cosf(stack[0]);\n    temp_f0 = sinf(stack[0]);\n    temp_f2 = stack[4];\n    *(f32 *)(temp_s0 + 0x9C) = temp_f0;\n    temp_f2 = -temp_f2;\n    *(f32 *)(temp_s0 + 0x90) = temp_f0;\n    *(f32 *)(temp_s0 + 0x94) = temp_f2;\n    *(f32 *)(temp_s0 + 0x88) = -temp_f2;\n    *(f32 *)(temp_s0 + 0x98) = 0.0f;\n    *(f32 *)(temp_s0 + 0x8C) = 0.0f;\n    stack[0] = stack[1] * D_80096904;\n    stack[4] = cosf(stack[0]);\n    temp_f0 = sinf(stack[0]);\n    temp_f12 = -temp_f0;\n    *(f32 *)(temp_s0 + 0xA0) = 0.0f;\n    temp_f2 = stack[4];\n    *(f32 *)(temp_s0 + 0xA8) = temp_f12;\n    *(f32 *)(temp_s0 + 0xB4) = temp_f12;\n    temp_f2 = -temp_f2;\n    *(f32 *)(temp_s0 + 0xAC) = 0.0f;\n    *(f32 *)(temp_s0 + 0xA4) = temp_f2;\n    *(f32 *)(temp_s0 + 0xB0) = -temp_f2;\n}",
+        "score": 0.48360655737704916,
+        "reason": "length_mismatch (target=61, generated=59)",
+        "diffs": [],
+        "timestamp": "2026-06-04T10:04:49.886Z"
+      },
+      {
+        "code": "void func_1501B22C(s32 arg0) {\n    u8 *temp_s0;\n    volatile f32 pad;\n    f32 stack[5];\n    f32 temp_f0;\n    f32 temp_f2;\n    f32 temp_f12;\n\n    temp_s0 = (u8 *)D_800BE628 + (((arg0 << 2) - arg0) << 7);\n    temp_f0 = *(f32 *)(temp_s0 + 0x74) * 0.5f;\n    stack[1] = *(f32 *)(temp_s0 + 0x78) * 0.5f;\n    stack[0] = -temp_f0 * D_80096900;\n    temp_f2 = cosf(stack[0]);\n    temp_f0 = sinf(stack[0]);\n    stack[4] = temp_f2;\n    temp_f2 = stack[4];\n    *(f32 *)(temp_s0 + 0x9C) = temp_f0;\n    temp_f2 = -temp_f2;\n    *(f32 *)(temp_s0 + 0x90) = temp_f0;\n    *(f32 *)(temp_s0 + 0x94) = temp_f2;\n    *(f32 *)(temp_s0 + 0x88) = -temp_f2;\n    *(f32 *)(temp_s0 + 0x98) = 0.0f;\n    *(f32 *)(temp_s0 + 0x8C) = 0.0f;\n    stack[0] = stack[1] * D_80096904;\n    temp_f2 = cosf(stack[0]);\n    temp_f0 = sinf(stack[0]);\n    stack[4] = temp_f2;\n    temp_f12 = -temp_f0;\n    *(f32 *)(temp_s0 + 0xA0) = 0.0f;\n    temp_f2 = stack[4];\n    *(f32 *)(temp_s0 + 0xA8) = temp_f12;\n    *(f32 *)(temp_s0 + 0xB4) = temp_f12;\n    temp_f2 = -temp_f2;\n    *(f32 *)(temp_s0 + 0xAC) = 0.0f;\n    *(f32 *)(temp_s0 + 0xA4) = temp_f2;\n    *(f32 *)(temp_s0 + 0xB0) = -temp_f2;\n}",
+        "score": 0.48412698412698413,
+        "reason": "length_mismatch (target=61, generated=63)",
+        "diffs": [],
+        "timestamp": "2026-06-04T10:05:14.430Z"
       }
     ]
   },
