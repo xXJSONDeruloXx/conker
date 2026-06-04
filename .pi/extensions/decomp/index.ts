@@ -1883,34 +1883,61 @@ export default function (pi: ExtensionAPI) {
 			// Also check stdout for "Perfect match" indicator
 			const perfectMatch = output.includes("Perfect match") || winningCode.length > 0;
 
-			// Clean up session report
+			// Read session report before cleanup (contains best candidate, rule stats)
+			let sessionReport: any = null;
+			let bestCandidateCode = "";
 			const sessionFiles = fs.readdirSync(ctx.cwd).filter((f: string) => f.startsWith("session-") && f.endsWith(".json"));
+			if (sessionFiles.length > 0) {
+				try {
+					sessionReport = JSON.parse(fs.readFileSync(path.join(ctx.cwd, sessionFiles[0]), "utf-8"));
+					// Extract best candidate source from report
+					if (sessionReport?.candidates) {
+						const sortedCandidates = sessionReport.candidates.sort((a: any, b: any) => a.score - b.score);
+						if (sortedCandidates[0]?.source) {
+							bestCandidateCode = sortedCandidates[0].source;
+						}
+					}
+				} catch {}
+			}
 			for (const sf of sessionFiles) {
 				try { fs.unlinkSync(path.join(ctx.cwd, sf)); } catch {}
 			}
 
 			// Parse output for score info
 			const scoreFromOutput = output.match(/Score\s+\d+\s*→\s*(\d+)/);
+			const initialScoreMatch = output.match(/Score\s+(\d+)\s*→/);
 			const bestScore = scoreFromOutput ? parseInt(scoreFromOutput[1]) : null;
+			const initialScore = initialScoreMatch ? parseInt(initialScoreMatch[1]) : null;
 			const iterMatch = output.match(/Iteration[s:]?\s*(\d+)/i);
 			const iters = iterMatch ? parseInt(iterMatch[1]) : null;
 			const forkMatch = output.match(/(\d+)\s*forks?/i);
 			const forks = forkMatch ? parseInt(forkMatch[1]) : 0;
+			const compiledMatch = output.match(/(\d+)\s*compiled/i);
+			const compiled = compiledMatch ? parseInt(compiledMatch[1]) : null;
+			const errorsMatch = output.match(/(\d+)\s*errors/i);
+			const compileErrors = errorsMatch ? parseInt(errorsMatch[1]) : null;
 			const ruleMatch = output.match(/Last fork:.*?via\s+(\S+)/);
 			const winningRule = ruleMatch ? ruleMatch[1] : null;
+			// Extract all fork rules from output
+			const allForkRules = [...(output.matchAll(/fork:\s*\d+\s*→\s*\d+\s*via\s+(\S+)/g) || [])].map(m => m[1]);
 
-			// Log permuter result to queue.json history
+			// Log permuter result to queue.json history — FULL DETAIL like decomp_attempt
 			const queueEntry = state.queue.find((e) => e.function === params.function);
 			if (queueEntry) {
 				if (!queueEntry.history) queueEntry.history = [];
+				// Save the BEST code Transmuter found (or input if no improvement)
+				const codeToLog = bestCandidateCode || (perfectMatch && winningCode ? winningCode : baseCode);
 				queueEntry.history.push({
-					code: baseCode,
-					score: perfectMatch ? 1.0 : (bestScore !== null ? 1 - (bestScore / 30) : 0), // normalize objdiff score
+					code: codeToLog,
+					score: perfectMatch ? 1.0 : (bestScore !== null ? 1 - (bestScore / 30) : 0),
 					reason: perfectMatch ? "transmuter_match" : `transmuter_best=${bestScore ?? "?"}`,
 					diffs: [
-						`transmuter: iters=${iters ?? "?"}, forks=${forks}, bestScore=${bestScore ?? "?"}`,
-						...(winningRule ? [`winning_rule: ${winningRule}`] : []),
-						`timeout=${params.timeout || 60}s, maxCompiles=${maxCompiles}`,
+						`transmuter: initial=${initialScore ?? "?"}→best=${bestScore ?? "?"}, iters=${iters ?? "?"}, compiled=${compiled ?? "?"}, errors=${compileErrors ?? "?"}, forks=${forks}`,
+						...(allForkRules.length > 0 ? [`fork_rules: ${[...new Set(allForkRules)].join(", ")}`] : []),
+						...(winningRule ? [`last_fork_rule: ${winningRule}`] : []),
+						`config: timeout=${params.timeout || 60}s, maxCompiles=${maxCompiles}, concurrency=4, profile=ido`,
+						...(compiled === 0 ? ["NOTE: 0 compiled = all mutations hit compile errors. Source may have constructs incompatible with isolated compilation."] : []),
+						...(compileErrors && compiled && compileErrors > compiled * 5 ? [`NOTE: high error rate (${compileErrors} errors vs ${compiled} compiled). Many mutations produce invalid code for this function.`] : []),
 					],
 					timestamp: new Date().toISOString(),
 				});
