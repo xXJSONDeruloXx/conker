@@ -26579,9 +26579,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1,
+    "status": "matched"
   },
   {
     "function": "func_151407D0",
@@ -27975,9 +27975,32 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.45454545454545453,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_151416E8(struct210 *arg0, u8 *arg1, u8 arg2) {\n    u8 temp_v0;\n    u8 *temp_v1;\n\n    if (D_8008A02C[*((u8 *)arg0 + 0x168)] != NULL) {\n        D_8008A02C[*((u8 *)arg0 + 0x168)](arg0, arg1, arg2);\n    }\n    temp_v0 = arg2;\n    if ((temp_v0 == 0x22) || (temp_v0 == 0x24) || (temp_v0 == 0x25)) {\n        temp_v1 = (u8 *)arg0 + 0x110;\n        if (*arg1 == temp_v1[0x58]) {\n            if (temp_v0 == 0x22) {\n                func_1516972C((struct102 *)arg0);\n            } else if (temp_v0 == 0x24) {\n                temp_v1[0x59] = -1;\n            } else if (temp_v0 == 0x25) {\n                temp_v1[0x59] = 2;\n            }\n        }\n    }\n}",
+        "score": 0.45454545454545453,
+        "reason": "length_mismatch (target=55, generated=50)",
+        "diffs": [],
+        "timestamp": "2026-06-04T06:15:33.909Z"
+      },
+      {
+        "code": "void func_151416E8(struct210 *arg0, u8 *arg1, s32 arg2) {\n    u8 *temp_v0;\n    u8 temp_arg2;\n    u8 *temp_v1;\n\n    temp_v0 = D_8008A02C;\n    if (*(s32 *)(temp_v0 + (*((u8 *)arg0 + 0x168) * 4)) != 0) {\n        ((void (*)(struct210 *, u8 *, u8))(*(s32 *)(temp_v0 + (*((u8 *)arg0 + 0x168) * 4))))(arg0, arg1, *((u8 *)&arg2 + 3));\n    }\n    temp_arg2 = *((u8 *)&arg2 + 3);\n    if ((temp_arg2 == 0x22) || (temp_arg2 == 0x24) || (temp_arg2 == 0x25)) {\n        temp_v1 = (u8 *)arg0 + 0x110;\n        if (*arg1 == temp_v1[0x58]) {\n            if (temp_arg2 == 0x22) {\n                func_1516972C((struct102 *)arg0);\n            } else if (temp_arg2 == 0x24) {\n                temp_v1[0x59] = -1;\n            } else if (temp_arg2 == 0x25) {\n                temp_v1[0x59] = 2;\n            }\n        }\n    }\n}",
+        "score": 0.4363636363636364,
+        "reason": "length_mismatch (target=55, generated=48)",
+        "diffs": [],
+        "timestamp": "2026-06-04T06:16:09.106Z"
+      },
+      {
+        "code": "void func_151416E8(struct210 *arg0, u8 *arg1, s32 arg2) {\n    volatile s32 *temp_v0;\n    u8 temp_arg2;\n    u8 *temp_v1;\n\n    temp_v0 = &D_8008A02C;\n    if (temp_v0[*((u8 *)arg0 + 0x168)] != 0) {\n        ((void (*)(struct210 *, u8 *, u8))temp_v0[*((u8 *)arg0 + 0x168)])(arg0, arg1, *((u8 *)&arg2 + 3));\n    }\n    temp_arg2 = *((u8 *)&arg2 + 3);\n    if ((temp_arg2 == 0x22) || (temp_arg2 == 0x24) || (temp_arg2 == 0x25)) {\n        temp_v1 = (u8 *)arg0 + 0x110;\n        if (*arg1 == temp_v1[0x58]) {\n            if (temp_arg2 == 0x22) {\n                func_1516972C((struct102 *)arg0);\n            } else if (temp_arg2 == 0x24) {\n                temp_v1[0x59] = -1;\n            } else if (temp_arg2 == 0x25) {\n                temp_v1[0x59] = 2;\n            }\n        }\n    }\n}",
+        "score": 0.45454545454545453,
+        "reason": "length_mismatch (target=55, generated=50)",
+        "diffs": [],
+        "timestamp": "2026-06-04T06:16:44.729Z"
+      }
+    ]
   },
   {
     "function": "func_1502B020",
