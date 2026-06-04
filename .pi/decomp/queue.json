@@ -24497,8 +24497,8 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 3,
-    "lastScore": 0.4537037037037037,
+    "attempts": 6,
+    "lastScore": 0.4722222222222222,
     "status": "pending",
     "history": [
       {
@@ -24521,6 +24521,27 @@
         "reason": "length_mismatch (target=54, generated=49)",
         "diffs": [],
         "timestamp": "2026-06-04T05:51:16.940Z"
+      },
+      {
+        "code": "void func_1000A348(void) {\n    struct54 *temp_v0;\n    struct147 *temp_a3;\n    struct54 *temp_v1;\n    struct54 *temp_a0;\n    struct54 *temp_a2;\n\n    temp_v0 = (struct54 *)D_800406A0.unk4;\n    temp_a3 = (struct147 *)(s32)&D_800406A0;\n    if (temp_v0 != NULL) {\n        do {\n            temp_v1 = temp_v0->unk0;\n            if ((temp_v0->unk14 == 0) && (temp_v0->unk16 == 0)) {\n                *(s32 *)temp_v0->unkC = temp_v0->unk8;\n                temp_v0->unkC = NULL;\n                if ((s32)temp_v0 == temp_a3->unk4) {\n                    temp_a3->unk4 = (s32)temp_v1;\n                }\n                temp_a0 = temp_v0->unk0;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk4 = temp_v0->unk4;\n                }\n                temp_a0 = temp_v0->unk4;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk0 = temp_v0->unk0;\n                }\n                temp_a0 = temp_a3->unk10;\n                if (temp_a0 != NULL) {\n                    temp_v0->unk4 = temp_a0;\n                    temp_v0->unk0 = temp_a0->unk0;\n                    temp_a2 = temp_a0->unk0;\n                    if (temp_a2 != NULL) {\n                        temp_a2->unk4 = temp_v0;\n                    }\n                    temp_a0->unk0 = temp_v0;\n                } else {\n                    temp_a3->unk10 = temp_v0;\n                    temp_v0->unk0 = NULL;\n                    temp_v0->unk4 = NULL;\n                }\n            }\n        } while ((temp_v0 = temp_v1) != NULL);\n    }\n}",
+        "score": 0.4537037037037037,
+        "reason": "length_mismatch (target=54, generated=49)",
+        "diffs": [],
+        "timestamp": "2026-06-04T05:51:46.051Z"
+      },
+      {
+        "code": "void func_1000A348(void) {\n    s32 *temp_a3;\n    struct54 *temp_v0;\n    struct54 *temp_v1;\n    struct54 *temp_a0;\n    struct54 *temp_a2;\n\n    temp_a3 = (s32 *)&D_800406A0;\n    temp_v0 = (struct54 *)temp_a3[1];\n    if (temp_v0 != NULL) {\n        do {\n            temp_v1 = temp_v0->unk0;\n            if ((temp_v0->unk14 == 0) && (temp_v0->unk16 == 0)) {\n                *(s32 *)temp_v0->unkC = temp_v0->unk8;\n                temp_v0->unkC = NULL;\n                if ((s32)temp_v0 == temp_a3[1]) {\n                    temp_a3[1] = (s32)temp_v1;\n                }\n                temp_a0 = temp_v0->unk0;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk4 = temp_v0->unk4;\n                }\n                temp_a0 = temp_v0->unk4;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk0 = temp_v0->unk0;\n                }\n                temp_a0 = (struct54 *)temp_a3[4];\n                if (temp_a0 != NULL) {\n                    temp_v0->unk4 = temp_a0;\n                    temp_v0->unk0 = temp_a0->unk0;\n                    temp_a2 = temp_a0->unk0;\n                    if (temp_a2 != NULL) {\n                        temp_a2->unk4 = temp_v0;\n                    }\n                    temp_a0->unk0 = temp_v0;\n                } else {\n                    temp_a3[4] = (s32)temp_v0;\n                    temp_v0->unk0 = NULL;\n                    temp_v0->unk4 = NULL;\n                }\n            }\n        } while ((temp_v0 = temp_v1) != NULL);\n    }\n}",
+        "score": 0.4814814814814815,
+        "reason": "length_mismatch (target=54, generated=52)",
+        "diffs": [],
+        "timestamp": "2026-06-04T05:52:08.404Z"
+      },
+      {
+        "code": "void func_1000A348(void) {\n    volatile s32 *temp_a3;\n    struct54 *temp_v0;\n    struct54 *temp_v1;\n    struct54 *temp_a0;\n    struct54 *temp_a2;\n\n    temp_a3 = (volatile s32 *)&D_800406A0;\n    temp_v0 = (struct54 *)temp_a3[1];\n    if (temp_v0 != NULL) {\n        do {\n            temp_v1 = temp_v0->unk0;\n            if ((temp_v0->unk14 == 0) && (temp_v0->unk16 == 0)) {\n                *(s32 *)temp_v0->unkC = temp_v0->unk8;\n                temp_v0->unkC = NULL;\n                if ((s32)temp_v0 == temp_a3[1]) {\n                    temp_a3[1] = (s32)temp_v1;\n                }\n                temp_a0 = temp_v0->unk0;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk4 = temp_v0->unk4;\n                }\n                temp_a0 = temp_v0->unk4;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk0 = temp_v0->unk0;\n                }\n                temp_a0 = (struct54 *)temp_a3[4];\n                if (temp_a0 != NULL) {\n                    temp_v0->unk4 = temp_a0;\n                    temp_v0->unk0 = temp_a0->unk0;\n                    temp_a2 = temp_a0->unk0;\n                    if (temp_a2 != NULL) {\n                        temp_a2->unk4 = temp_v0;\n                    }\n                    temp_a0->unk0 = temp_v0;\n                } else {\n                    temp_a3[4] = (s32)temp_v0;\n                    temp_v0->unk0 = NULL;\n                    temp_v0->unk4 = NULL;\n                }\n            }\n        } while ((temp_v0 = temp_v1) != NULL);\n    }\n}",
+        "score": 0.4722222222222222,
+        "reason": "length_mismatch (target=54, generated=51)",
+        "diffs": [],
+        "timestamp": "2026-06-04T05:52:27.588Z"
       }
     ]
   },
