@@ -28335,7 +28335,7 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 3,
+    "attempts": 6,
     "lastScore": 0.3793,
     "status": "pending",
     "history": [
@@ -28380,6 +28380,48 @@
           "structural: target=bnel v0, t8, L1 got=bnel a2, t8, L2"
         ],
         "timestamp": "2026-06-04T08:17:13.416Z"
+      },
+      {
+        "code": "struct127 *func_15072208(struct127 *arg0, s32 arg1) {\n    register s32 target;\n    struct127 *base;\n    s32 id;\n    s32 count;\n    struct127 *ptr;\n    struct127 *end;\n\n    target = arg1;\n    base = D_800CC2D0;\n    id = (((s32)arg0 - (s32)base) / 0x32C) + 1;\n    if (id == D_800CC335) {\n        count = 1;\n        if (target == 0) {\n            return base;\n        }\n    } else {\n        count = 0;\n    }\n    ptr = &D_800CC5FC;\n    end = (struct127 *)&D_800D121C;\nloop:\n    if (id == ptr->unk65) {\n        if (count == target) {\n            return ptr;\n        }\n        count++;\n    }\n    if (id == ptr[1].unk65) {\n        if (count == target) {\n            return &ptr[1];\n        }\n        count++;\n    }\n    if (id == ptr[2].unk65) {\n        if (count == target) {\n            return &ptr[2];\n        }\n        count++;\n    }\n    if (id == ptr[3].unk65) {\n        if (count == target) {\n            return &ptr[3];\n        }\n        count++;\n    }\n    ptr += 4;\n    if (ptr != end) {\n        goto loop;\n    }\n    return NULL;\n}",
+        "score": 0.49137931034482757,
+        "reason": "length_mismatch (target=58, generated=57)",
+        "diffs": [],
+        "timestamp": "2026-06-04T08:17:45.789Z"
+      },
+      {
+        "code": "struct127 *func_15072208(struct127 *arg0, s32 arg1) {\n    register struct127 *base;\n    register s32 target;\n    s32 id;\n    s32 count;\n    struct127 *ptr;\n    struct127 *end;\n\n    target = arg1;\n    base = D_800CC2D0;\n    id = (((s32)arg0 - (s32)base) / 0x32C) + 1;\n    if (id == D_800CC335) {\n        count = 1;\n        if (target == 0) {\n            return base;\n        }\n    } else {\n        count = 0;\n    }\n    ptr = &D_800CC5FC;\n    end = (struct127 *)&D_800D121C;\nloop:\n    if (id == ptr->unk65) {\n        if (count == target) {\n            return ptr;\n        }\n        count++;\n    }\n    if (id == ptr[1].unk65) {\n        if (count == target) {\n            return &ptr[1];\n        }\n        count++;\n    }\n    if (id == ptr[2].unk65) {\n        if (count == target) {\n            return &ptr[2];\n        }\n        count++;\n    }\n    if (id == ptr[3].unk65) {\n        if (count == target) {\n            return &ptr[3];\n        }\n        count++;\n    }\n    ptr += 4;\n    if (ptr != end) {\n        goto loop;\n    }\n    return NULL;\n}",
+        "score": 0.49137931034482757,
+        "reason": "length_mismatch (target=58, generated=57)",
+        "diffs": [],
+        "timestamp": "2026-06-04T08:18:11.231Z"
+      },
+      {
+        "code": "struct127 *func_15072208(struct127 *arg0, s32 arg1) {\n    register s32 target;\n    s32 id;\n    s32 count;\n\n    target = arg1;\n    arg1 = (s32)D_800CC2D0;\n    id = (((s32)arg0 - arg1) / 0x32C) + 1;\n    if (id == D_800CC335) {\n        count = 1;\n        if (target == 0) {\n            return (struct127 *)arg1;\n        }\n    } else {\n        count = 0;\n    }\n    arg1 = (s32)&D_800CC5FC;\n    arg0 = (struct127 *)&D_800D121C;\nloop:\n    if (id == ((struct127 *)arg1)->unk65) {\n        if (count == target) {\n            return (struct127 *)arg1;\n        }\n        count++;\n    }\n    if (id == ((struct127 *)(arg1 + 0x32C))->unk65) {\n        if (count == target) {\n            return (struct127 *)(arg1 + 0x32C);\n        }\n        count++;\n    }\n    if (id == ((struct127 *)(arg1 + 0x658))->unk65) {\n        if (count == target) {\n            return (struct127 *)(arg1 + 0x658);\n        }\n        count++;\n    }\n    if (id == ((struct127 *)(arg1 + 0x984))->unk65) {\n        if (count == target) {\n            return (struct127 *)(arg1 + 0x984);\n        }\n        count++;\n    }\n    arg1 += 0xCB0;\n    if ((struct127 *)arg1 != arg0) {\n        goto loop;\n    }\n    return NULL;\n}",
+        "score": 0.3793,
+        "reason": "structural_diffs=36",
+        "diffs": [
+          "structural: target=move a2, a1 got=lui v1, HI(D_800CC2D0)",
+          "structural: target=lui a1, HI(D_800CC2D0) got=addiu v1, v1, LO(D_800CC2D0)",
+          "structural: target=addiu a1, a1, LO(D_800CC2D0) got=subu a3, a0, v1",
+          "structural: target=subu v0, a0, a1 got=li at, 812",
+          "structural: target=li at, 812 got=div zero, a3, at",
+          "structural: target=div zero, v0, at got=lui t7, HI(D_800CC335)",
+          "structural: target=lui t7, HI(D_800CC335) got=lbu t7, LO(D_800CC335)(t7)",
+          "structural: target=lbu t7, LO(D_800CC335)(t7) got=mflo a3",
+          "structural: target=mflo t6 got=addiu a2, a3, 1",
+          "structural: target=addiu v0, t6, 1 got=bne a2, t7, L0",
+          "structural: target=bne v0, t7, L0 got=move v0, a1",
+          "structural: target=move v1, zero got=bnez a1, L1",
+          "structural: target=bnez a2, L0 got=li a0, 1",
+          "structural: target=li v1, 1 got=jr ra",
+          "structural: target=jr ra got=move v0, v1",
+          "structural: target=move v0, a1 got=move a0, zero",
+          "structural: target=lui a0, HI(D_800D121C) got=lui v1, HI(D_800D121C)",
+          "structural: target=addiu a0, a0, LO(D_800D121C) got=addiu a1, a1, LO(D_800CC5FC)",
+          "structural: target=addiu a1, a1, LO(D_800CC5FC) got=addiu v1, v1, LO(D_800D121C)",
+          "structural: target=bnel v0, t8, L1 got=bnel a2, t8, L2"
+        ],
+        "timestamp": "2026-06-04T08:19:11.129Z"
       }
     ]
   },
