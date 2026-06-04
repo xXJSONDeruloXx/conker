@@ -222,5 +222,21 @@ s32 func_15015300(struct134 *arg0) {
 
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_40490/func_15015354.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_40490/func_15015644.s")
+s32 func_15015644(struct134 *arg0) {
+    s32 sp38[4];
+    struct260 *temp_v0;
+
+    arg0->unk16 |= 4;
+    ((u8 *)arg0)[0x14] = 1;
+    sp38[0] = (s32)arg0;
+    *(f32 *)&sp38[1] = func_15144598(arg0);
+    func_1510F800(0);
+    sp38[2] = func_1510FD20(arg0->unk0, arg0->unk4);
+    ((u8 *)sp38)[0xC] = 0;
+    temp_v0 = func_15149130(0x12C, -1, 0x44, -1, 0, 0x2F, (struct37 *)0x10, 0xFF, 0);
+    if (temp_v0 != 0) {
+        memcpy((u8 *)temp_v0 + 0x28, sp38, 0x10);
+    }
+    return 1;
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/game_40490/func_150156F4.s")

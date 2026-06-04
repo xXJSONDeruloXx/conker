@@ -801,5 +801,14 @@
     "example_functions": [
       "func_15013D38"
     ]
+  },
+  {
+    "id": "constant-multiply-stride-inplace",
+    "description": "Use a constant multiply instead of manually spelling shift/sub/shift when target uses an in-place stride expansion.",
+    "trigger": "Target computes a stride like 0x180 with `sll reg,arg,2; subu reg,reg,arg; sll reg,reg,7`, but manual C shift/sub expressions allocate extra temporaries.",
+    "solution": "Write the address expression as `base + (idx * 0x180)`; IDO expands the constant multiply using the in-place shift/sub/shift sequence and preserves register allocation.",
+    "example_functions": [
+      "func_1501AE94"
+    ]
   }
 ]
