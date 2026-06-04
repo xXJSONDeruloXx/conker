@@ -11341,8 +11341,8 @@
     "instructions": 37,
     "difficulty": "medium-low",
     "tags": [],
-    "attempts": 9,
-    "lastScore": 0.4625,
+    "attempts": 12,
+    "lastScore": 0.4868421052631579,
     "status": "pending",
     "history": [
       {
@@ -11533,6 +11533,48 @@
         "reason": "length_mismatch (target=37, generated=40)",
         "diffs": [],
         "timestamp": "2026-06-04T13:23:00.754Z"
+      },
+      {
+        "code": "s32 func_1515CF9C(void *arg0, volatile struct17 *arg1) {\n    s8 temp_v0;\n    s32 temp_t2;\n    s32 temp_v1;\n    s32 temp_t0;\n    s32 temp_t1;\n\n    temp_v0 = *(s8 *)((s32)arg0 + 0x2C);\n    temp_t2 = -1;\n    if (temp_v0 < (*(u8 *)((s32)arg0 + 0x25) - 1)) {\n        temp_v1 = *(s32 *)((s32)arg0 + 0x94);\n        temp_t0 = *(s8 *)((s32)arg0 + 0x2E) << 4;\n        *(s8 *)((s32)arg0 + 0x2C) = temp_v0 + 1;\n        temp_t1 = temp_v1 + temp_t0;\n        *(s32 *)(temp_t1 + 0) = *(s32 *)((s32)arg0 + 0x10);\n        *(s32 *)(temp_t1 + 4) = *(s32 *)((s32)arg0 + 0x14);\n        *(s32 *)(temp_t1 + 8) = *(s32 *)((s32)arg0 + 0x18);\n        *(f32 *)(temp_v1 + (*(s8 *)((s32)arg0 + 0x2E) << 4) + 0xC) = arg1->unk8;\n        *(s8 *)((s32)arg0 + 0x2E) = *(s8 *)((s32)arg0 + 0x2E) + 1;\n        if (*(u8 *)((s32)arg0 + 0x25) == *(s8 *)((s32)arg0 + 0x2E)) {\n            *(s8 *)((s32)arg0 + 0x2E) = 0;\n        }\n    } else {\n        *(s8 *)((s32)arg1 + 0x39) = temp_t2;\n    }\n    return 1;\n}",
+        "score": 0.0811,
+        "reason": "structural_diffs=34",
+        "diffs": [
+          "structural: target=lbu t6, 37(a0) got=move a3, a1",
+          "structural: target=lb v0, 44(a0) got=lbu t6, 37(a0)",
+          "structural: target=li t2, -1 got=lb v0, 44(a0)",
+          "structural: target=addiu t7, t6, -1 got=li t0, -1",
+          "structural: target=slt at, v0, t7 got=addiu t7, t6, -1",
+          "structural: target=beqz at, L0 got=slt at, v0, t7",
+          "structural: target=addiu t8, v0, 1 got=beqz at, L0",
+          "structural: target=lb t9, 46(a0) got=addiu t9, v0, 1",
+          "structural: target=lw v1, 148(a0) got=lb a1, 46(a0)",
+          "structural: target=lw at, 16(a0) got=lw v1, 148(a0)",
+          "structural: target=sll t0, t9, 4 got=lw t0, 16(a0)",
+          "structural: target=sb t8, 44(a0) got=sll t8, a1, 4",
+          "structural: target=addu t1, v1, t0 got=sb t9, 44(a0)",
+          "structural: target=sw at, 0(t1) got=addu a2, v1, t8",
+          "structural: target=lw t3, 20(a0) got=sw t0, 0(a2)",
+          "structural: target=sw t3, 4(t1) got=lw t1, 20(a0)",
+          "structural: target=lw at, 24(a0) got=sw t1, 4(a2)",
+          "structural: target=sw at, 8(t1) got=lw t2, 24(a0)",
+          "structural: target=lb t4, 46(a0) got=sw t2, 8(a2)",
+          "structural: target=lwc1 f4, 8(a1) got=lb t3, 46(a0)"
+        ],
+        "timestamp": "2026-06-04T13:23:22.882Z"
+      },
+      {
+        "code": "s32 func_1515CF9C(void *arg0, void *arg1) {\n    void *save;\n    s8 temp_v0;\n    s32 temp_t2;\n    s32 temp_v1;\n    s32 temp_t0;\n    s32 temp_t1;\n\n    save = arg1;\n    temp_v0 = *(s8 *)((s32)arg0 + 0x2C);\n    temp_t2 = -1;\n    if (temp_v0 < (*(u8 *)((s32)arg0 + 0x25) - 1)) {\n        temp_v1 = *(s32 *)((s32)arg0 + 0x94);\n        temp_t0 = *(s8 *)((s32)arg0 + 0x2E) << 4;\n        *(s8 *)((s32)arg0 + 0x2C) = temp_v0 + 1;\n        temp_t1 = temp_v1 + temp_t0;\n        *(s32 *)(temp_t1 + 0) = *(s32 *)((s32)arg0 + 0x10);\n        *(s32 *)(temp_t1 + 4) = *(s32 *)((s32)arg0 + 0x14);\n        *(s32 *)(temp_t1 + 8) = *(s32 *)((s32)arg0 + 0x18);\n        *(f32 *)(temp_v1 + (*(s8 *)((s32)arg0 + 0x2E) << 4) + 0xC) = *(f32 *)((s32)save + 8);\n        *(s8 *)((s32)arg0 + 0x2E) = *(s8 *)((s32)arg0 + 0x2E) + 1;\n        if (*(u8 *)((s32)arg0 + 0x25) == *(s8 *)((s32)arg0 + 0x2E)) {\n            *(s8 *)((s32)arg0 + 0x2E) = 0;\n        }\n    } else {\n        *(s8 *)((s32)save + 0x39) = temp_t2;\n    }\n    return 1;\n}",
+        "score": 0.4864864864864865,
+        "reason": "length_mismatch (target=37, generated=36)",
+        "diffs": [],
+        "timestamp": "2026-06-04T13:23:40.652Z"
+      },
+      {
+        "code": "s32 func_1515CF9C(void *arg0, void *arg1, void *arg2, void *arg3) {\n    void *save;\n    s8 temp_v0;\n    s32 temp_t2;\n    s32 temp_v1;\n    s32 temp_t0;\n    s32 temp_t1;\n\n    save = arg1;\n    temp_v0 = *(s8 *)((s32)arg0 + 0x2C);\n    temp_t2 = -1;\n    if (temp_v0 < (*(u8 *)((s32)arg0 + 0x25) - 1)) {\n        temp_v1 = *(s32 *)((s32)arg0 + 0x94);\n        temp_t0 = *(s8 *)((s32)arg0 + 0x2E) << 4;\n        *(s8 *)((s32)arg0 + 0x2C) = temp_v0 + 1;\n        temp_t1 = temp_v1 + temp_t0;\n        *(s32 *)(temp_t1 + 0) = *(s32 *)((s32)arg0 + 0x10);\n        *(s32 *)(temp_t1 + 4) = *(s32 *)((s32)arg0 + 0x14);\n        *(s32 *)(temp_t1 + 8) = *(s32 *)((s32)arg0 + 0x18);\n        *(f32 *)(temp_v1 + (*(s8 *)((s32)arg0 + 0x2E) << 4) + 0xC) = *(f32 *)((s32)save + 8);\n        *(s8 *)((s32)arg0 + 0x2E) = *(s8 *)((s32)arg0 + 0x2E) + 1;\n        if (*(u8 *)((s32)arg0 + 0x25) == *(s8 *)((s32)arg0 + 0x2E)) {\n            *(s8 *)((s32)arg0 + 0x2E) = 0;\n        }\n    } else {\n        *(s8 *)((s32)save + 0x39) = temp_t2;\n    }\n    return 1;\n}",
+        "score": 0.4868421052631579,
+        "reason": "length_mismatch (target=37, generated=38)",
+        "diffs": [],
+        "timestamp": "2026-06-04T13:24:05.245Z"
       }
     ]
   },
