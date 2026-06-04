@@ -25934,8 +25934,8 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
-    "lastScore": 0.46551724137931033,
+    "attempts": 6,
+    "lastScore": 0.49137931034482757,
     "status": "pending",
     "history": [
       {
@@ -25958,6 +25958,27 @@
         "reason": "length_mismatch (target=58, generated=54)",
         "diffs": [],
         "timestamp": "2026-06-04T07:56:19.580Z"
+      },
+      {
+        "code": "void func_15161F4C(struct225 *arg0, u8 *arg1, u8 arg2) {\n    void (*callback)(struct225 *);\n    u8 *ptr;\n    volatile u8 *sp1C;\n    volatile u8 sp23;\n\n    ptr = (u8 *)arg0 + 0x18;\n    if (arg2 == 0) {\n        if ((*(s32 *)ptr == *(s32 *)arg1) || (ptr[4] == arg1[4])) {\n            sp1C = arg1;\n            sp23 = arg2;\n            func_1516972C(arg0);\n            arg1 = (u8 *)sp1C;\n            arg2 = sp23;\n        }\n    } else if (arg2 == 0x2D) {\n        if (*(s32 *)arg1 == *(s32 *)ptr) {\n            *(s32 *)ptr = *(s32 *)(arg1 + 4);\n            ptr[4] = arg1[9];\n        } else if (*(s32 *)(arg1 + 4) == *(s32 *)ptr) {\n            *(s32 *)ptr = *(s32 *)arg1;\n            ptr[4] = arg1[8];\n        }\n    }\n\n    callback = D_8008B358[*((u8 *)arg0 + 0x1D)];\n    if (callback != NULL) {\n        callback(arg0);\n    }\n}",
+        "score": 0.47413793103448276,
+        "reason": "length_mismatch (target=58, generated=55)",
+        "diffs": [],
+        "timestamp": "2026-06-04T07:56:57.239Z"
+      },
+      {
+        "code": "void func_15161F4C(struct225 *arg0, u8 *arg1, u8 arg2) {\n    void (*callback)(struct225 *);\n    u8 *ptr;\n    u8 * volatile sp1C;\n    volatile u8 sp23;\n\n    ptr = (u8 *)arg0 + 0x18;\n    if (arg2 == 0) {\n        if ((*(s32 *)ptr == *(s32 *)arg1) || (ptr[4] == arg1[4])) {\n            sp1C = arg1;\n            sp23 = arg2;\n            func_1516972C(arg0);\n            arg1 = sp1C;\n            arg2 = sp23;\n        }\n    } else if (arg2 == 0x2D) {\n        if (*(s32 *)arg1 == *(s32 *)ptr) {\n            *(s32 *)ptr = *(s32 *)(arg1 + 4);\n            ptr[4] = arg1[9];\n        } else if (*(s32 *)(arg1 + 4) == *(s32 *)ptr) {\n            *(s32 *)ptr = *(s32 *)arg1;\n            ptr[4] = arg1[8];\n        }\n    }\n\n    callback = D_8008B358[*((u8 *)arg0 + 0x1D)];\n    if (callback != NULL) {\n        callback(arg0);\n    }\n}",
+        "score": 0.49137931034482757,
+        "reason": "length_mismatch (target=58, generated=57)",
+        "diffs": [],
+        "timestamp": "2026-06-04T07:57:14.721Z"
+      },
+      {
+        "code": "void func_15161F4C(struct225 *arg0, u8 *arg1, u8 arg2) {\n    void (*callback)(struct225 *, u8 *, u8);\n    u8 *ptr;\n\n    ptr = (u8 *)arg0 + 0x18;\n    if (arg2 == 0) {\n        if ((*(s32 *)ptr == *(s32 *)arg1) || (ptr[4] == arg1[4])) {\n            func_1516972C(arg0);\n        }\n    } else if (arg2 == 0x2D) {\n        if (*(s32 *)arg1 == *(s32 *)ptr) {\n            *(s32 *)ptr = *(s32 *)(arg1 + 4);\n            ptr[4] = arg1[9];\n        } else if (*(s32 *)(arg1 + 4) == *(s32 *)ptr) {\n            *(s32 *)ptr = *(s32 *)arg1;\n            ptr[4] = arg1[8];\n        }\n    }\n\n    callback = D_8008B358[*((u8 *)arg0 + 0x1D)];\n    if (callback != NULL) {\n        callback(arg0, arg1, arg2);\n    }\n}",
+        "score": 0.49137931034482757,
+        "reason": "length_mismatch (target=58, generated=57)",
+        "diffs": [],
+        "timestamp": "2026-06-04T07:57:44.376Z"
       }
     ]
   },
