@@ -24222,7 +24222,7 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
+    "attempts": 6,
     "lastScore": 0.4888888888888889,
     "status": "pending",
     "history": [
@@ -24246,6 +24246,27 @@
         "reason": "length_mismatch (target=45, generated=44)",
         "diffs": [],
         "timestamp": "2026-06-04T01:14:21.502Z"
+      },
+      {
+        "code": "struct248 *func_1509B950(struct248 *arg0) {\n    s32 temp_v0;\n    s32 temp_t1;\n    s32 temp_v1;\n    s32 temp_t0;\n    s32 temp_t6;\n    struct248 *temp_s1;\n\n    temp_v0 = arg0->unk4;\n    temp_t1 = arg0->unk6;\n    temp_v1 = 8 - (((s32)arg0 + temp_v0) & 7);\n    temp_t0 = temp_v0 + temp_v1;\n    temp_v0 = temp_t0 + temp_t1;\n    *(volatile u16 *)&arg0->unk4 = temp_v0;\n    temp_t6 = (temp_v0 - (((s32)arg0 + temp_v0) & 7)) + 8;\n    arg0->unkA = temp_t0;\n    arg0->unk4 = temp_t6;\n    temp_s1 = allocate_memory((u16)temp_t6, 0xFF, 2, 0);\n    if (temp_s1 == NULL) {\n        while (1) {\n        }\n    }\n    bcopy(arg0, temp_s1, arg0->unk4);\n    bzero((void *)((s32)temp_s1 + temp_s1->unkA), temp_s1->unk6);\n    {\n        void func_10004074();\n        func_10004074(arg0);\n    }\n    return temp_s1;\n}",
+        "score": 0.4888888888888889,
+        "reason": "length_mismatch (target=45, generated=44)",
+        "diffs": [],
+        "timestamp": "2026-06-04T01:15:05.355Z"
+      },
+      {
+        "code": "struct248 *func_1509B950(struct248 *arg0) {\n    s32 temp_v0;\n    s32 temp_t1;\n    s32 temp_v1;\n    s32 temp_t0;\n    s32 temp_t6;\n    struct248 *temp_s1;\n\n    temp_v0 = arg0->unk4;\n    temp_t1 = arg0->unk6;\n    temp_v1 = 8;\n    temp_v1 -= ((s32)arg0 + temp_v0) & 7;\n    temp_t0 = temp_v0 + temp_v1;\n    temp_v0 = temp_t0 + temp_t1;\n    *(volatile u16 *)&arg0->unk4 = temp_v0;\n    temp_t6 = (temp_v0 - (((s32)arg0 + temp_v0) & 7)) + 8;\n    arg0->unkA = temp_t0;\n    arg0->unk4 = temp_t6;\n    temp_s1 = allocate_memory((u16)temp_t6, 0xFF, 2, 0);\n    if (temp_s1 == NULL) {\n        while (1) {\n        }\n    }\n    bcopy(arg0, temp_s1, arg0->unk4);\n    bzero((void *)((s32)temp_s1 + temp_s1->unkA), temp_s1->unk6);\n    {\n        void func_10004074();\n        func_10004074(arg0);\n    }\n    return temp_s1;\n}",
+        "score": 0.4888888888888889,
+        "reason": "length_mismatch (target=45, generated=44)",
+        "diffs": [],
+        "timestamp": "2026-06-04T01:15:35.944Z"
+      },
+      {
+        "code": "struct248 *func_1509B950(struct248 *arg0) {\n    s32 temp_v0;\n    s32 temp_t1;\n    s32 temp_v1;\n    s32 temp_t0;\n    s32 temp_t6;\n    struct248 *temp_s1;\n\n    temp_v0 = arg0->unk4;\n    temp_t1 = arg0->unk6;\n    temp_v1 = 8 - ((s32)((u8 *)arg0 + temp_v0) & 7);\n    temp_t0 = temp_v1;\n    temp_t0 += temp_v0;\n    temp_v0 = temp_t0 + temp_t1;\n    *(volatile u16 *)&arg0->unk4 = temp_v0;\n    temp_t6 = (temp_v0 - ((s32)((u8 *)arg0 + temp_v0) & 7)) + 8;\n    arg0->unkA = temp_t0;\n    arg0->unk4 = temp_t6;\n    temp_s1 = allocate_memory((u16)temp_t6, 0xFF, 2, 0);\n    if (temp_s1 == NULL) {\n        while (1) {\n        }\n    }\n    bcopy(arg0, temp_s1, arg0->unk4);\n    bzero((void *)((s32)temp_s1 + temp_s1->unkA), temp_s1->unk6);\n    {\n        void func_10004074();\n        func_10004074(arg0);\n    }\n    return temp_s1;\n}",
+        "score": 0.4888888888888889,
+        "reason": "length_mismatch (target=45, generated=44)",
+        "diffs": [],
+        "timestamp": "2026-06-04T01:17:32.967Z"
       }
     ]
   },
