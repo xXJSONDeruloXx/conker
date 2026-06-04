@@ -27589,8 +27589,8 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 3,
-    "lastScore": 0.44696969696969696,
+    "attempts": 6,
+    "lastScore": 0.4609375,
     "status": "pending",
     "history": [
       {
@@ -27613,6 +27613,27 @@
         "reason": "length_mismatch (target=59, generated=66)",
         "diffs": [],
         "timestamp": "2026-06-04T08:42:23.053Z"
+      },
+      {
+        "code": "int func_1507BB28(s32 arg0, s32 arg1) {\n    s32 *temp_v0;\n    u8 *table;\n    u8 *entry;\n    s32 idx;\n\n    temp_v0 = (s32 *)D_800D1588[D_800D154C->id];\n    if (temp_v0 == NULL) {\n        return (s32)D_8009A120;\n    }\n    table = (u8 *)temp_v0[-4];\n    if (table == NULL) {\n        return (s32)D_8009A120;\n    }\n    idx = 0;\n    entry = table;\n    while (arg1 != entry[4]) {\n        if (*(s32 *)entry == 0) {\n            table = D_80086A88;\n            idx = 0;\n            entry = table;\n            while (arg1 != entry[4]) {\n                if (*(s32 *)entry == 0) {\nloop:\n                    goto loop;\n                }\n                idx++;\n                entry += 8;\n            }\n            return *(s32 *)(table + (idx * 8));\n        }\n        idx++;\n        entry += 8;\n    }\n    return *(s32 *)(table + (idx * 8));\n}",
+        "score": 0.4915254237288136,
+        "reason": "length_mismatch (target=59, generated=58)",
+        "diffs": [],
+        "timestamp": "2026-06-04T08:42:48.348Z"
+      },
+      {
+        "code": "int func_1507BB28(s32 arg0, s32 arg1) {\n    s32 *temp_v0;\n    u8 *table;\n    u8 *entry;\n    u8 *fallback;\n    u8 *entry2;\n    s32 idx;\n\n    temp_v0 = (s32 *)D_800D1588[D_800D154C->id];\n    if (temp_v0 == NULL) {\n        return (s32)D_8009A120;\n    }\n    table = (u8 *)temp_v0[-4];\n    if (table == NULL) {\n        return (s32)D_8009A120;\n    }\n    idx = 0;\n    entry = table;\n    while (arg1 != entry[4]) {\n        fallback = D_80086A88;\n        if (*(s32 *)entry == 0) {\n            idx = 0;\n            if (arg1 == fallback[4]) {\n                goto found_fallback;\n            }\n            entry2 = fallback;\n            entry = entry2;\n            while (arg1 != entry[4]) {\n                if (*(s32 *)entry2 == 0) {\nloop:\n                    goto loop;\n                }\n                idx++;\n                entry += 8;\n                entry2 += 8;\n            }\nfound_fallback:\n            return *(s32 *)(fallback + (idx * 8));\n        }\n        idx++;\n        entry += 8;\n    }\n    return *(s32 *)(table + (idx * 8));\n}",
+        "score": 0.46825396825396826,
+        "reason": "length_mismatch (target=59, generated=63)",
+        "diffs": [],
+        "timestamp": "2026-06-04T08:43:22.469Z"
+      },
+      {
+        "code": "int func_1507BB28(s32 arg0, s32 arg1) {\n    s32 *temp_v0;\n    u8 *table;\n    u8 *entry;\n    u8 *fallback;\n    u8 *entry2;\n    s32 idx;\n\n    temp_v0 = (s32 *)D_800D1588[D_800D154C->id];\n    if (temp_v0 == NULL) {\n        return (s32)D_8009A120;\n    }\n    table = (u8 *)temp_v0[-4];\n    if (table == NULL) {\n        return (s32)D_8009A120;\n    }\n    idx = 0;\n    entry = table;\n    while (arg1 != entry[4]) {\n        fallback = D_80086A88;\n        if (*(s32 *)entry == 0) {\n            idx = 0;\n            if (arg1 == fallback[4]) {\n                goto found_fallback;\n            }\n            entry2 = D_80086A88;\n            entry = entry2;\nfallback_loop:\n            if (*(s32 *)entry2 == 0) {\nloop:\n                goto loop;\n            }\n            idx++;\n            entry += 8;\n            if (arg1 != entry[4]) {\n                entry2 += 8;\n                goto fallback_loop;\n            }\nfound_fallback:\n            return *(s32 *)(fallback + (idx * 8));\n        }\n        idx++;\n        entry += 8;\n    }\n    return *(s32 *)(table + (idx * 8));\n}",
+        "score": 0.4609375,
+        "reason": "length_mismatch (target=59, generated=64)",
+        "diffs": [],
+        "timestamp": "2026-06-04T08:43:58.143Z"
       }
     ]
   },
