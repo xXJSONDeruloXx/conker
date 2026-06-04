@@ -23211,7 +23211,7 @@
     ],
     "attempts": 13,
     "lastScore": 0.3774,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "void func_1507266C(void) {\n    struct127 *temp_a1;\n    s32 temp_v1;\n\n    if ((D_800BE616 != 0) || (D_800D154C->unk222 != 0)) {\n        temp_a1 = &D_800CC2D0[D_800D154C->unk222];\n        temp_v1 = D_800D1580;\n        temp_a1->unk65 = D_800C3E78 + 1;\n        temp_a1->unk5C = temp_v1 >> 16;\n        temp_a1->unk101 = 4;\n        temp_a1->stunned = 0;\n        temp_a1->immune = 0xFF;\n        temp_a1->unk218 = 0;\n        temp_a1->unkE4 = 0;\n        temp_a1->unkE6 = 0;\n        temp_a1->unk232 = temp_v1;\n        temp_a1->unkEC = 1.0f;\n        temp_a1->unkF0 = 1.0f;\n        temp_a1->unkDC = 1.0f;\n        temp_a1->unkE0 = 1.0f;\n        func_151B5BA0(&D_800CC2D0[D_800C3E78]);\n    }\n}",
@@ -23450,6 +23450,19 @@
           "structural: target=sb zero, 260(a1) got=sb zero, 260(v0)"
         ],
         "timestamp": "2026-06-04T05:44:56.981Z"
+      },
+      {
+        "code": "void func_1507266C(void) {\n    u8 *temp_t1;\n    struct127 *base;\n    s32 *temp_v0_ptr;\n    s32 temp_v1;\n    struct127 *temp_a1;\n    u32 temp_t2;\n    u8 temp_t4;\n    s32 temp_t0;\n\n    if ((D_800BE616 != 0) || (D_800D154C->unk222 != 0)) {\n        temp_t1 = &D_800C3E78;\n        base = D_800CC2D0;\n        temp_t0 = sizeof(struct127);\n        temp_t2 = D_800D154C->unk222;\n        temp_v0_ptr = &D_800D1580;\n        temp_v1 = *temp_v0_ptr;\n        temp_t4 = *temp_t1;\n        temp_a1 = &base[temp_t2];\n        temp_a1->unk65 = temp_t4 + 1;\n        temp_a1->unk5C = temp_v1 >> 16;\n        temp_a1->unk101 = 4;\n        temp_a1->stunned = 0;\n        temp_a1->immune = 0xFF;\n        temp_a1->unk218 = 0;\n        temp_a1->unkE4 = 0;\n        temp_a1->unkE6 = 0;\n        temp_a1->unk232 = temp_v1;\n        temp_a1->unkEC = 1.0f;\n        temp_a1->unkF0 = 1.0f;\n        temp_a1->unkDC = 1.0f;\n        temp_a1->unkE0 = 1.0f;\n        func_151B5BA0(&base[*temp_t1]);\n    }\n}",
+        "score": -0.30000000000000004,
+        "reason": "transmuter_best=39",
+        "diffs": [
+          "transmuter: initial=39→best=39, iters=0, compiled=0, errors=0, forks=0",
+          "fork_rules: expand-expr, randomize-type, long-chain-assignment, delete-stmt, insert-block, add-mask, comma-expr, float-literal",
+          "last_fork_rule: expand-expr",
+          "config: timeout=60s, maxCompiles=5000, concurrency=4, profile=ido",
+          "NOTE: 0 compiled = all mutations hit compile errors. Source may have constructs incompatible with isolated compilation."
+        ],
+        "timestamp": "2026-06-04T14:25:06.713Z"
       }
     ]
   },
@@ -25809,7 +25822,7 @@
     ],
     "attempts": 11,
     "lastScore": 0.4528,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "void func_1507DF10(struct127 *arg0, s32 arg1) {\n    s32 temp;\n\n    switch (arg1) {\n        case 9:\n            arg0->unk94 |= 0x20;\n            arg0->unk9C |= 0x78;\n            arg0->unk2E4 = 1;\n            return;\n        case 8:\n            temp = arg0->unk94 | 0x40;\n            arg0->unk94 = temp;\n            arg0->unk94 = temp & ~0x200;\n            arg0->unk9C |= 0xF00;\n            arg0->unk2E4 = 2;\n            return;\n        case 6:\n        case 7:\n            temp = arg0->unk94 | 0xE;\n            arg0->unk94 = temp;\n            arg0->unk94 = temp & ~0x410;\n            arg0->unk9C |= 0xEE0000;\n            arg0->unk2E4 = 4;\n            return;\n        case 4:\n        case 5:\n            temp = arg0->unk94 | 0x80;\n            arg0->unk94 = temp;\n            arg0->unk94 = temp & ~0x500;\n            arg0->unk2E4 = 8;\n            return;\n    }\n}",
@@ -26154,7 +26167,7 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 8,
+    "attempts": 9,
     "lastScore": 0.49074074074074076,
     "status": "pending",
     "history": [
@@ -26213,6 +26226,13 @@
         "reason": "length_mismatch (target=54, generated=53)",
         "diffs": [],
         "timestamp": "2026-06-04T05:53:13.984Z"
+      },
+      {
+        "code": "void func_1000A348(s32 arg0, s32 arg1, s32 arg2) {\n    volatile struct147 *temp_a3;\n    struct54 *temp_v0;\n    struct54 *temp_v1;\n    struct54 *temp_a0;\n    struct54 *temp_a2;\n\n    temp_a3 = (volatile struct147 *)&D_800406A0;\n    temp_v0 = (struct54 *)temp_a3->unk4;\n    while (temp_v0 != NULL) {\n        temp_v1 = temp_v0->unk0;\n        if ((temp_v0->unk14 == 0) && (temp_v0->unk16 == 0)) {\n            *(s32 *)temp_v0->unkC = temp_v0->unk8;\n            temp_v0->unkC = 0;\n            if ((s32)temp_v0 == temp_a3->unk4) {\n                temp_a3->unk4 = (s32)temp_v1;\n            }\n            temp_a0 = temp_v0->unk0;\n            if (temp_a0 != NULL) {\n                temp_a0->unk4 = temp_v0->unk4;\n            }\n            temp_a0 = temp_v0->unk4;\n            if (temp_a0 != NULL) {\n                temp_a0->unk0 = temp_v0->unk0;\n            }\n            temp_a0 = temp_a3->unk10;\n            if (temp_a0 != NULL) {\n                temp_v0->unk4 = temp_a0;\n                temp_v0->unk0 = temp_a0->unk0;\n                temp_a2 = temp_a0->unk0;\n                if (temp_a2 != NULL) {\n                    temp_a2->unk4 = temp_v0;\n                }\n                temp_a0->unk0 = temp_v0;\n            } else {\n                temp_a3->unk10 = temp_v0;\n                temp_v0->unk0 = NULL;\n                temp_v0->unk4 = NULL;\n            }\n        }\n        temp_v0 = temp_v1;\n    }\n}",
+        "score": 0.49074074074074076,
+        "reason": "length_mismatch (target=54, generated=53)",
+        "diffs": [],
+        "timestamp": "2026-06-04T14:27:14.184Z"
       }
     ]
   },
@@ -27969,7 +27989,7 @@
     ],
     "attempts": 9,
     "lastScore": 0.49056603773584906,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "void func_15164134(struct225 *arg0, void *arg1, u8 arg2) {\n    s32 temp_v1;\n    s32 temp_v0;\n    s32 temp_a2;\n    void (*func)(struct225 *, void *, u8);\n\n    if (arg2 == 0) {\n        temp_v0 = (s32)arg0 + 0x18;\n        temp_v1 = *(s32 *)arg1;\n        if ((temp_v1 == *(s32 *)temp_v0) || (*(u8 *)(temp_v0 + 4) == *(u8 *)((s32)arg1 + 4))) {\n            func_1516972C(arg0);\n        }\n    } else if (arg2 == 0x2D) {\n        temp_v0 = (s32)arg0 + 0x18;\n        temp_a2 = *(s32 *)temp_v0;\n        temp_v1 = *(s32 *)arg1;\n        if (temp_v1 == temp_a2) {\n            *(s32 *)temp_v0 = *(s32 *)((s32)arg1 + 4);\n            *(u8 *)(temp_v0 + 4) = *(u8 *)((s32)arg1 + 9);\n        } else if (*(s32 *)((s32)arg1 + 4) == temp_a2) {\n            *(s32 *)temp_v0 = temp_v1;\n            *(u8 *)(temp_v0 + 4) = *(u8 *)((s32)arg1 + 8);\n        }\n    } else {\n        func = (void (*)(struct225 *, void *, u8))D_8008B37C[*(u8 *)((s32)arg0 + 0x3D)];\n        if (func != NULL) {\n            func(arg0, arg1, arg2);\n        }\n    }\n}",
@@ -31045,7 +31065,7 @@
     ],
     "attempts": 14,
     "lastScore": 0.8529,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "int func_1505F188(struct127 *arg0) {\n    s32 *ptr;\n    s32 *end;\n\n    end = (s32 *)((u8 *)arg0 + 0x32C);\n    for (ptr = (s32 *)arg0; ptr < end; ptr++) {\n        *ptr = 0;\n    }\n\n    arg0->unk2FF = 2;\n    *(s16 *)((u8 *)arg0 + 0x38) = -10000;\n    arg0->xz_scale = 1.0f;\n    arg0->y_scale = 1.0f;\n    arg0->unk118 = D_8009962C;\n    arg0->unk180 = D_8009962C;\n    *(u8 *)((u8 *)arg0 + 0x1DC) = 0xFF;\n    arg0->unk127 = 0xFF;\n    arg0->unk84.uh = 0xFFFF;\n    arg0->unk13F = 0xFF;\n    *(void **)((u8 *)arg0 + 0x2C4) = (u8 *)arg0 + 4;\n    *(u8 *)((u8 *)arg0 + 0x2C8) = 1;\n    arg0->unk2C9 = 1;\n    arg0->id = 0xFF;\n    arg0->unk2CB = 0x32;\n    arg0->unk48 = 1.0f;\n    arg0->gravity = D_80099630;\n    arg0->unk6E = (func_150ADA20() % 0x32) + 0x32;\n    func_150615DC(arg0);\n    *(u8 *)((u8 *)arg0 + 0x1DD) = 0xFF;\n    *(u8 *)((u8 *)arg0 + 0x1DE) = 0xFF;\n    *(u8 *)((u8 *)arg0 + 0x1DF) = 0xFF;\n    *(s16 *)((u8 *)arg0 + 0x18C) = 0;\n    *(s16 *)((u8 *)arg0 + 0x18E) = 0;\n    *(s16 *)((u8 *)arg0 + 0x190) = 0;\n    *(s16 *)((u8 *)arg0 + 0x192) = 0;\n    *(s16 *)((u8 *)arg0 + 0x194) = 0;\n    *(s16 *)((u8 *)arg0 + 0x196) = 0xA;\n    *(s16 *)((u8 *)arg0 + 0x198) = 0xA;\n    *(s16 *)((u8 *)arg0 + 0x19A) = 0;\n    *(s16 *)((u8 *)arg0 + 0x19C) = 0;\n}",
