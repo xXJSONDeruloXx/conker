@@ -1017,5 +1017,14 @@
     "example_functions": [
       "func_15145548"
     ]
+  },
+  {
+    "id": "volatile-global-pointer-address-for-a1-register",
+    "description": "When IDO keeps the address of a global pointer in an argument register across branches and reuses it later, a normal `&globalPtr` local may optimize away to direct global loads or choose the wrong register.",
+    "trigger": "Target computes `lui/addiu a1, &GLOBAL_PTR`, loads through `0(a1)` in multiple branches, and later reuses that register, while generated C emits direct `lui/lw GLOBAL_PTR` or allocates the address in another arg register.",
+    "solution": "Declare the local as `struct *volatile *p = &GLOBAL_PTR;` and load via `*p`; avoid extra temporaries that consume `$a1` (e.g. use direct field reads instead of a saved byte temp) so IDO can allocate the global-pointer address/derived pointer to `$a1`.",
+    "example_functions": [
+      "func_150746F0"
+    ]
   }
 ]
