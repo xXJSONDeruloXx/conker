@@ -25768,7 +25768,7 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
+    "attempts": 6,
     "lastScore": 0.48,
     "status": "pending",
     "history": [
@@ -25813,6 +25813,39 @@
         "reason": "length_mismatch (target=50, generated=48)",
         "diffs": [],
         "timestamp": "2026-06-04T03:52:03.552Z"
+      },
+      {
+        "code": "s32 func_1509DDFC(s32 arg0, s32 arg1, struct215 *arg2) {\n    switch (arg1) {\n    case 0:\n        func_15178BE4(arg0 & 0xFF, &D_800CC2D0[func_15084000(arg2->unk8 & ~0x2000)].x_position, arg2->unkC.s.unk2);\n        return 1;\n    case 1:\n        break;\n    default:\n        return 0;\n    }\n    func_15178C34(arg0 & 0xFF, arg2->unk8, arg2->unkC.i.unk0, arg2->unk10, arg2->unk14);\n    return 1;\n}",
+        "score": 0.78,
+        "reason": "structural_diffs=11",
+        "diffs": [
+          "structural: target=move v0, zero got=lw t2, 40(sp)",
+          "structural: target=nop got=move v0, zero",
+          "structural: target=lw t2, 40(sp) got=b L2",
+          "structural: target=lw t4, 20(s0) got=move v0, zero",
+          "structural: target=lw a1, 8(s0) got=lw t4, 20(s0)",
+          "structural: target=lw a2, 12(s0) got=lw a1, 8(s0)",
+          "structural: target=lw a3, 16(s0) got=lw a2, 12(s0)",
+          "structural: target=andi a0, t2, 255 got=lw a3, 16(s0)",
+          "structural: target=jal func_15178C34 got=andi a0, t2, 255",
+          "structural: target=sw t4, 16(sp) got=jal func_15178C34",
+          "structural: target=b L2 got=sw t4, 16(sp)"
+        ],
+        "timestamp": "2026-06-04T03:52:41.057Z"
+      },
+      {
+        "code": "s32 func_1509DDFC(s32 arg0, s32 arg1, struct215 *arg2) {\n    s32 ret;\n\n    if (arg1 == 0) {\n        func_15178BE4(arg0 & 0xFF, &D_800CC2D0[func_15084000(arg2->unk8 & ~0x2000)].x_position, arg2->unkC.s.unk2);\n        return 1;\n    }\n    ret = 0;\n    if (arg1 == 1) {\n        func_15178C34(arg0 & 0xFF, arg2->unk8, arg2->unkC.i.unk0, arg2->unk10, arg2->unk14);\n        return 1;\n    }\n    return ret;\n}",
+        "score": 0.48,
+        "reason": "length_mismatch (target=50, generated=48)",
+        "diffs": [],
+        "timestamp": "2026-06-04T03:53:10.117Z"
+      },
+      {
+        "code": "s32 func_1509DDFC(s32 arg0, s32 arg1, struct215 *arg2) {\n    switch (arg1) {\n    case 0:\n        func_15178BE4(arg0 & 0xFF, &D_800CC2D0[func_15084000(arg2->unk8 & ~0x2000)].x_position, arg2->unkC.s.unk2);\n        return 1;\n    }\n    if (arg1 == 1) {\n        func_15178C34(arg0 & 0xFF, arg2->unk8, arg2->unkC.i.unk0, arg2->unk10, arg2->unk14);\n        return 1;\n    }\n    return 0;\n}",
+        "score": 0.48,
+        "reason": "length_mismatch (target=50, generated=48)",
+        "diffs": [],
+        "timestamp": "2026-06-04T03:53:45.265Z"
       }
     ]
   },
