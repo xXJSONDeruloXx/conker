@@ -2,6 +2,9 @@
 #include "functions.h"
 #include "variables.h"
 
+void func_15137F30(s32 arg0, s32 arg1, s32 arg2, s32 arg3, f32 arg4, void *arg5, f32 *arg6, f32 *arg7, f32 *arg8, f32 *arg9, s16 *arg10, u8 *arg11, f32 *arg12);
+void func_151D9014(void *arg0, f32 *arg1, u8 arg2, f32 arg3, s16 arg4, u8 arg5, f32 arg6, u8 arg7, f32 arg8, f32 arg9, u8 argA, s32 argB, u8 argC, u8 argD, u8 argE, s32 argF);
+
 s32 func_15134070(struct102 *);
 void func_15138120(struct102 *, s32, s32);
 void func_1504715C(void *, struct102 *);
@@ -305,7 +308,18 @@ s32 func_15137E10(struct259 *arg0) {
 }
 
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_161520/func_15137E60.s")
+void func_15137E60(s32 arg0, s32 arg1, s32 arg2, s32 arg3, f32 arg4, struct102 *arg5) {
+    f32 sp6C[3];
+    f32 sp60[3];
+    f32 sp54[3];
+    f32 sp50;
+    s16 sp4E;
+    u8 sp4D;
+    f32 sp48;
+
+    func_15137F30(arg0, arg1, arg2, arg3, arg4, arg5, sp6C, sp60, sp54, &sp50, &sp4E, &sp4D, &sp48);
+    func_151D9014(sp6C, sp54, 0, sp50, sp4E, sp4D, sp48, 0, 1.0f, 1.0f, 1, 0, 1, 0, *(u8 *)((s32)arg5 + 0xC), arg5->unk1);
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_161520/func_15137F30.s")
 

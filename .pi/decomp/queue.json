@@ -22681,7 +22681,7 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 6,
+    "attempts": 8,
     "lastScore": 0.49056603773584906,
     "status": "pending",
     "history": [
@@ -22726,6 +22726,20 @@
         "reason": "length_mismatch (target=52, generated=53)",
         "diffs": [],
         "timestamp": "2026-06-04T04:14:58.990Z"
+      },
+      {
+        "code": "s32 func_1000EE70(void *arg0, s32 arg1, void *arg2, s32 arg3, s32 arg4, void *arg5) {\n    struct15 *temp_a1;\n    struct127 *temp_v1;\n    s32 temp_t8;\n\n    temp_a1 = arg0;\n    temp_v1 = (struct127 *) temp_a1->unk18;\n    if (temp_v1 != NULL) {\n        if (*(s32 *)arg2 != 0) {\n            if ((temp_v1->interaction_state != 0) && (temp_v1->unique_id == (temp_a1->unk1C & 0xFF))) {\n                *(s32 *)arg5 = (((u32) temp_v1->unk184 >> 3) & 0x30) << 1;\n                *(s16 *)((s32)temp_a1 + 2) = temp_v1->x_position;\n                *(s16 *)((s32)temp_a1 + 4) = temp_v1->y_position;\n                *(s16 *)((s32)temp_a1 + 6) = temp_v1->z_position;\n                return 0;\n            }\n            if (func_1000F44C(temp_a1->unk24) == 0) {\n                return 0;\n            }\n        }\n    }\n    return 1;\n}",
+        "score": 0.49056603773584906,
+        "reason": "length_mismatch (target=52, generated=53)",
+        "diffs": [],
+        "timestamp": "2026-06-04T04:15:30.325Z"
+      },
+      {
+        "code": "s32 func_1000EE70(void *arg0, s32 arg1, void *arg2, s32 arg3, s32 arg4, void *arg5) {\n    struct15 *temp_a1;\n    struct127 *temp_v1;\n    s32 temp_t7;\n    s32 temp_t8;\n\n    temp_a1 = arg0;\n    temp_v1 = (struct127 *) temp_a1->unk18;\n    if (temp_v1 != NULL) {\n        if (*(s32 *)arg2 != 0) {\n            temp_t7 = temp_a1->unk1C;\n            if (temp_v1->interaction_state != 0) {\n                temp_t8 = temp_t7 & 0xFF;\n                if (temp_v1->unique_id == temp_t8) {\n                    *(s32 *)arg5 = (((u32) temp_v1->unk184 >> 3) & 0x30) << 1;\n                    *(s16 *)((s32)temp_a1 + 2) = temp_v1->x_position;\n                    *(s16 *)((s32)temp_a1 + 4) = temp_v1->y_position;\n                    *(s16 *)((s32)temp_a1 + 6) = temp_v1->z_position;\n                    return 0;\n                }\n            }\n            if (func_1000F44C(temp_a1->unk24) == 0) {\n                return 0;\n            }\n        }\n    }\n    return 1;\n}",
+        "score": 0.49056603773584906,
+        "reason": "length_mismatch (target=52, generated=53)",
+        "diffs": [],
+        "timestamp": "2026-06-04T04:15:54.416Z"
       }
     ]
   },
@@ -23346,7 +23360,7 @@
     ],
     "attempts": 0,
     "lastScore": 0,
-    "status": "pending"
+    "status": "skipped"
   },
   {
     "function": "func_1507B974",
@@ -23694,9 +23708,20 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 0.9808,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_15137E60(s32 arg0, s32 arg1, s32 arg2, s32 arg3, f32 arg4, struct102 *arg5) {\n    f32 sp6C[3];\n    f32 sp60[3];\n    f32 sp54[3];\n    f32 sp50;\n    s16 sp4E;\n    u8 sp4D;\n    f32 sp48;\n\n    func_15137F30(arg0, arg1, arg2, arg3, arg4, arg5, sp6C, sp60, sp54, &sp50, &sp4E, &sp4D, &sp48);\n    func_151D9014(sp6C, sp54, 0, sp50, sp4E, sp4D, sp48, 0, 1.0f, 1.0f, 1, 0, 1, 0, arg5->unkC, arg5->unk1);\n}",
+        "score": 0.9808,
+        "reason": "structural_diffs=1",
+        "diffs": [
+          "structural: target=lbu t8, 12(v0) got=lh t8, 12(v0)"
+        ],
+        "timestamp": "2026-06-04T04:19:38.388Z"
+      }
+    ]
   },
   {
     "function": "func_151644F4",

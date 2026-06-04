@@ -891,5 +891,14 @@
     "example_functions": [
       "func_1001001C"
     ]
+  },
+  {
+    "id": "stack-local-order-for-address-taken-float",
+    "description": "IDO assigns stack slots for float locals in declaration order even when one is kept in an FPR. If an address-taken scratch float needs to live at `sp+0` in an 8-byte leaf frame, declare the non-address-taken float temporary before the scratch local.",
+    "trigger": "A leaf float/vector helper uses `addiu sp,-8`, falls back to `a3 = sp+0`, and a first attempt with `f32 scratch; f32 temp;` emits `a3 = sp+4`.",
+    "solution": "Declare the computed float temporary first and the address-taken scratch second, e.g. `f32 sum; f32 sp0;`, then assign `arg3 = &sp0;`. This can move the scratch from `sp+4` to `sp+0` without changing the frame size.",
+    "example_functions": [
+      "func_15145128"
+    ]
   }
 ]
