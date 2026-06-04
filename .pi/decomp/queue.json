@@ -21018,7 +21018,7 @@
     "tags": [],
     "attempts": 6,
     "lastScore": 0.4827586206896552,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "s32 *func_15142C10(s32 *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, u8 *arg5) {\n    s32 *temp_s0;\n    s32 *temp_v1;\n\n    temp_s0 = arg0;\n    if (arg1 == D_800DD1C8) {\n        if (arg2 == D_800DD1CA) {\n            if (arg3 == D_800DD1CC) {\n                if (arg4 == D_800DD1CE) {\n                    return temp_s0;\n                }\n            }\n        }\n    }\n\n    if (*arg5 == 1) {\n        temp_s0[0] = 0xE7000000;\n        temp_s0[1] = 0;\n        temp_s0 += 2;\n        *arg5 = 0;\n    }\n\n    temp_v1 = temp_s0;\n    temp_v1[0] = 0xFB000000;\n    temp_v1[1] = (arg1 << 24) | ((arg2 & 0xFF) << 16) | ((arg3 & 0xFF) << 8) | (arg4 & 0xFF);\n    temp_s0 += 2;\n    D_800DD1C8 = arg1;\n    D_800DD1CA = arg2;\n    D_800DD1CC = arg3;\n    D_800DD1CE = arg4;\n    return temp_s0;\n}",
@@ -21108,7 +21108,7 @@
     "tags": [],
     "attempts": 6,
     "lastScore": 0.48214285714285715,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "f32 func_1514462C(s32 arg0) {\n    s32 temp_v0;\n    f32 temp_f0;\n    f32 temp_f2;\n\n    switch (*(u8 *)(arg0 + 0x15) & 3) {\n    case 2:\n        temp_f2 = (f32)((*(s16 *)(arg0 + 6) * *(s16 *)(arg0 + 8)) * *(s16 *)(arg0 + 0xA));\n        break;\n    case 0:\n        temp_v0 = *(s16 *)(arg0 + 6);\n        temp_f2 = ((f32)(temp_v0 * temp_v0) * D_800A5698) * (f32)*(s16 *)(arg0 + 8);\n        break;\n    case 1:\n        temp_f0 = (f32)*(s16 *)(arg0 + 6);\n        temp_f2 = ((temp_f0 * D_800A569C) * temp_f0) * temp_f0;\n        break;\n    default:\n        temp_f2 = 1.0f;\n        break;\n    }\n    return temp_f2;\n}",
@@ -24040,7 +24040,7 @@
     ],
     "attempts": 6,
     "lastScore": 0.49107142857142855,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "void func_15007360(void) {\n    u8 *ptr;\n    u16 sum;\n    s32 i;\n    s32 ret;\n\n    sum = ((D_800BE2F2 << 2) + 0xCC + (D_800BE2F3 << 3)) & 0xFFFF;\n    ptr = D_800BE2F4;\n    i = 4;\n    do {\n        sum = (sum + (ptr[0] << (i & 3)) + (ptr[1] << ((i + 1) & 3)) + (ptr[2] << ((i + 2) & 3)) + (ptr[3] << ((i + 3) & 3))) & 0xFFFF;\n        i += 4;\n        ptr += 4;\n    } while (i != 0x68);\n    D_800BE2F0 = sum;\n    if (D_8002AC5C == 0) {\n        ret = func_151DCEF0(&D_800BE900, 0x44, &D_800BE2F0, 0x70);\n    }\n}",
@@ -25046,7 +25046,7 @@
     ],
     "attempts": 6,
     "lastScore": 0.45535714285714285,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "void func_1507E1D0(struct127 *arg0, f32 *arg1, f32 *arg2, f32 *arg3) {\n    f32 sp28[3];\n    f32 sp1C[3];\n    void *temp_a2;\n\n    if (arg0->unk1D4 != NULL) {\n        sp28[0] = 0.0f;\n        sp28[1] = arg0->y_scale * 30.0f;\n        sp28[2] = 0.0f;\n        temp_a2 = arg0->unk1D4;\n        if (arg0->interaction_state == 1) {\n            temp_a2 = (u8 *)temp_a2 + 0x300;\n        } else if (arg0->interaction_state == 0x1E) {\n            temp_a2 = (u8 *)temp_a2 + 0xC0;\n        }\n        func_15143134(sp28, sp1C, temp_a2);\n        *arg1 = sp1C[0];\n        *arg2 = sp1C[1];\n        *arg3 = sp1C[2];\n    } else {\n        *arg1 = arg0->x_position;\n        *arg2 = arg0->y_position;\n        *arg3 = arg0->z_position;\n    }\n}",
@@ -25871,9 +25871,95 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.2982,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_1500727C(void) {\n    u8 *ptr;\n    s32 sum;\n    s32 i;\n\n    func_151DD3A0(&D_800BE900, 0x44, &D_800BE2F0, 0x70);\n    sum = ((D_800BE2F2 << 2) + 0xCC + (D_800BE2F3 << 3)) & 0xFFFF;\n    ptr = D_800BE2F4;\n    i = 4;\n    do {\n        sum = (sum + (*ptr << (i & 3))) & 0xFFFF;\n        i++;\n        ptr++;\n    } while (i != 0x68);\n    if (sum != D_800BE2F0) {\n        func_15007168();\n    }\n}",
+        "score": 0.4035,
+        "reason": "structural_diffs=34",
+        "diffs": [
+          "structural: target=lui v0, HI(D_800BE2F2) got=lui t6, HI(D_800BE2F2)",
+          "structural: target=lbu v0, LO(D_800BE2F2)(v0) got=lui t8, HI(D_800BE2F3)",
+          "structural: target=lui t8, HI(D_800BE2F3) got=lbu t8, LO(D_800BE2F3)(t8)",
+          "structural: target=lbu t8, LO(D_800BE2F3)(t8) got=lbu t6, LO(D_800BE2F2)(t6)",
+          "structural: target=sll t6, v0, 2 got=lui v0, HI(D_800BE2F4)",
+          "structural: target=addiu t7, t6, 204 got=sll t9, t8, 3",
+          "structural: target=sll t9, t8, 3 got=sll t7, t6, 2",
+          "structural: target=addu v0, t7, t9 got=addu v1, t7, t9",
+          "structural: target=andi t0, v0, 65535 got=addiu v1, v1, 204",
+          "structural: target=lui a0, HI(D_800BE2F4) got=andi t0, v1, 65535",
+          "structural: target=addiu a0, a0, LO(D_800BE2F4) got=move v1, t0",
+          "structural: target=move v0, t0 got=addiu v0, v0, LO(D_800BE2F4)",
+          "structural: target=li v1, 4 got=li a0, 4",
+          "structural: target=lbu t1, 0(a0) got=lbu t1, 0(v0)",
+          "structural: target=lbu t5, 1(a0) got=lbu t5, 1(v0)",
+          "structural: target=andi t2, v1, 3 got=andi t2, a0, 3",
+          "structural: target=addiu t6, v1, 1 got=addiu t6, a0, 1",
+          "structural: target=andi t7, t6, 3 got=andi t8, t6, 3",
+          "structural: target=lbu t0, 2(a0) got=lbu t0, 2(v0)",
+          "structural: target=sllv t8, t5, t7 got=sllv t7, t5, t8"
+        ],
+        "timestamp": "2026-06-04T07:12:36.848Z"
+      },
+      {
+        "code": "void func_1500727C(void) {\n    s32 sum;\n    u8 *ptr;\n    s32 i;\n\n    func_151DD3A0(&D_800BE900, 0x44, &D_800BE2F0, 0x70);\n    sum = ((D_800BE2F2 << 2) + 0xCC + (D_800BE2F3 << 3)) & 0xFFFF;\n    ptr = D_800BE2F4;\n    i = 4;\n    do {\n        sum = (sum + (*ptr << (i & 3))) & 0xFFFF;\n        i++;\n        ptr++;\n    } while (i != 0x68);\n    if (sum != D_800BE2F0) {\n        func_15007168();\n    }\n}",
+        "score": 0.4035,
+        "reason": "structural_diffs=34",
+        "diffs": [
+          "structural: target=lui v0, HI(D_800BE2F2) got=lui t6, HI(D_800BE2F2)",
+          "structural: target=lbu v0, LO(D_800BE2F2)(v0) got=lui t8, HI(D_800BE2F3)",
+          "structural: target=lui t8, HI(D_800BE2F3) got=lbu t8, LO(D_800BE2F3)(t8)",
+          "structural: target=lbu t8, LO(D_800BE2F3)(t8) got=lbu t6, LO(D_800BE2F2)(t6)",
+          "structural: target=sll t6, v0, 2 got=lui v0, HI(D_800BE2F4)",
+          "structural: target=addiu t7, t6, 204 got=sll t9, t8, 3",
+          "structural: target=sll t9, t8, 3 got=sll t7, t6, 2",
+          "structural: target=addu v0, t7, t9 got=addu v1, t7, t9",
+          "structural: target=andi t0, v0, 65535 got=addiu v1, v1, 204",
+          "structural: target=lui a0, HI(D_800BE2F4) got=andi t0, v1, 65535",
+          "structural: target=addiu a0, a0, LO(D_800BE2F4) got=move v1, t0",
+          "structural: target=move v0, t0 got=addiu v0, v0, LO(D_800BE2F4)",
+          "structural: target=li v1, 4 got=li a0, 4",
+          "structural: target=lbu t1, 0(a0) got=lbu t1, 0(v0)",
+          "structural: target=lbu t5, 1(a0) got=lbu t5, 1(v0)",
+          "structural: target=andi t2, v1, 3 got=andi t2, a0, 3",
+          "structural: target=addiu t6, v1, 1 got=addiu t6, a0, 1",
+          "structural: target=andi t7, t6, 3 got=andi t8, t6, 3",
+          "structural: target=lbu t0, 2(a0) got=lbu t0, 2(v0)",
+          "structural: target=sllv t8, t5, t7 got=sllv t7, t5, t8"
+        ],
+        "timestamp": "2026-06-04T07:12:57.738Z"
+      },
+      {
+        "code": "void func_1500727C(void) {\n    s32 sum;\n    u8 *ptr;\n    s32 i;\n\n    func_151DD3A0(&D_800BE900, 0x44, &D_800BE2F0, 0x70);\n    sum = D_800BE2F2;\n    sum = sum << 2;\n    sum += 0xCC;\n    sum += D_800BE2F3 << 3;\n    sum &= 0xFFFF;\n    ptr = D_800BE2F4;\n    i = 4;\n    do {\n        sum = (sum + (*ptr << (i & 3))) & 0xFFFF;\n        i++;\n        ptr++;\n    } while (i != 0x68);\n    if (sum != D_800BE2F0) {\n        func_15007168();\n    }\n}",
+        "score": 0.2982,
+        "reason": "structural_diffs=40",
+        "diffs": [
+          "structural: target=lui v0, HI(D_800BE2F2) got=lui v1, HI(D_800BE2F2)",
+          "structural: target=lbu v0, LO(D_800BE2F2)(v0) got=lbu v1, LO(D_800BE2F2)(v1)",
+          "structural: target=lui t8, HI(D_800BE2F3) got=lui t7, HI(D_800BE2F3)",
+          "structural: target=lbu t8, LO(D_800BE2F3)(t8) got=lbu t7, LO(D_800BE2F3)(t7)",
+          "structural: target=sll t6, v0, 2 got=sll t6, v1, 2",
+          "structural: target=addiu t7, t6, 204 got=addiu v1, t6, 204",
+          "structural: target=sll t9, t8, 3 got=sll t8, t7, 3",
+          "structural: target=addu v0, t7, t9 got=addu v1, v1, t8",
+          "structural: target=andi t0, v0, 65535 got=andi t9, v1, 65535",
+          "structural: target=lui a0, HI(D_800BE2F4) got=lui v0, HI(D_800BE2F4)",
+          "structural: target=addiu a0, a0, LO(D_800BE2F4) got=move v1, t9",
+          "structural: target=move v0, t0 got=addiu v0, v0, LO(D_800BE2F4)",
+          "structural: target=li v1, 4 got=li a0, 4",
+          "structural: target=lbu t1, 0(a0) got=lbu t0, 0(v0)",
+          "structural: target=lbu t5, 1(a0) got=lbu t4, 1(v0)",
+          "structural: target=andi t2, v1, 3 got=andi t1, a0, 3",
+          "structural: target=addiu t6, v1, 1 got=addiu t5, a0, 1",
+          "structural: target=andi t7, t6, 3 got=andi t6, t5, 3",
+          "structural: target=sllv t3, t1, t2 got=sllv t2, t0, t1",
+          "structural: target=lbu t0, 2(a0) got=lbu t9, 2(v0)"
+        ],
+        "timestamp": "2026-06-04T07:13:15.200Z"
+      }
+    ]
   },
   {
     "function": "func_1001F978",
@@ -28408,7 +28494,7 @@
     ],
     "attempts": 5,
     "lastScore": 0.4642857142857143,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "void func_1500A7E8(s32 arg0, s32 arg1) {\n    u8 sp48[5];\n    s32 sp30[6];\n    u8 sp24[6];\n    void *temp_v0;\n    void *temp_v0_2;\n\n    *(s32 *)sp24 = *(s32 *)D_80082BF4;\n    *(u16 *)(sp24 + 4) = *(u16 *)(D_80082BF4 + 4);\n    temp_v0 = func_151149AC(sp24[arg1 - 0x50]);\n    if (temp_v0 != NULL) {\n        sp30[2] = (s32)temp_v0;\n        *(f32 *)&sp30[0] = -400.0f;\n        *(f32 *)&sp30[1] = 4.0f;\n        *(f32 *)&sp30[3] = (f32)*(s16 *)((u8 *)temp_v0 + 0x10);\n        *(f32 *)&sp30[4] = (f32)*(s16 *)((u8 *)temp_v0 + 0x12);\n        *(f32 *)&sp30[5] = (f32)*(s16 *)((u8 *)temp_v0 + 0x14);\n        sp48[0] = 0;\n        sp48[1] = 0x17;\n        *(s16 *)&sp48[2] = 0x12C;\n        sp48[4] = 0;\n        temp_v0_2 = func_1516037C(sp48, arg0, 0x18, 0xFF, 1);\n        if (temp_v0_2 != NULL) {\n            memcpy((u8 *)temp_v0_2 + 0x18, sp30, 0x18);\n        }\n    }\n}",
@@ -28533,7 +28619,7 @@
     ],
     "attempts": 6,
     "lastScore": 0.49107142857142855,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "void func_1508EF80(f32 *arg0, f32 *arg1, f32 arg2, f32 *arg3) {\n    f32 sp3C;\n    f32 sp38;\n    f32 sp28;\n    f32 sp24;\n    f32 temp_f20;\n\n    sp3C = arg0[0] - arg1[0];\n    temp_f20 = arg2 * D_8009DC80;\n    sp38 = arg0[2] - arg1[2];\n    sp24 = cosf(temp_f20);\n    sp28 = (sinf(temp_f20) * sp38) + (sp24 * sp3C) + arg1[0];\n    sp24 = sinf(temp_f20);\n    arg3[0] = sp28;\n    arg3[2] = (cosf(temp_f20) * sp38) + (-sp24 * sp3C) + arg1[2];\n}",
