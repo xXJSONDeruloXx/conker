@@ -16709,8 +16709,8 @@
     "instructions": 46,
     "difficulty": "medium-low",
     "tags": [],
-    "attempts": 3,
-    "lastScore": 0.3898305084745763,
+    "attempts": 6,
+    "lastScore": 0.4035087719298246,
     "status": "pending",
     "history": [
       {
@@ -16733,6 +16733,27 @@
         "reason": "length_mismatch (target=46, generated=59)",
         "diffs": [],
         "timestamp": "2026-06-04T01:38:19.978Z"
+      },
+      {
+        "code": "void func_15007778(void) {\n    u8 phi_v0;\n    u8 *ptr;\n    u8 *temp_v1;\n    s32 temp_a0;\n\n    temp_v1 = (u8 *)&D_800BE3F8;\n    temp_a0 = -1;\n    *(s32 *)(temp_v1 + 8) = temp_a0;\n    *(s32 *)(temp_v1 + 0x18) = temp_a0;\n    *(s32 *)(temp_v1 + 0x28) = temp_a0;\n    temp_v1[0xE] = temp_a0;\n    temp_v1[0x1E] = temp_a0;\n    temp_v1[0x2E] = temp_a0;\n    D_800BE3DC = temp_a0;\n    D_800BE3DE = 0;\n    D_80082BC0 = 1;\n\n    phi_v0 = 0;\n    do {\n        ((u8 *)D_800D2E4C)[phi_v0] = 0;\n        phi_v0++;\n    } while (phi_v0 < 0x1B);\n\n    ptr = D_800D2E60;\n    do {\n        *ptr++ = 0;\n    } while (ptr < &D_800D2E69);\n\n    D_800BE3DB = -1;\n    D_800BE3DA = -1;\n    D_800BE3D9 = -1;\n    D_800BE3D8 = -1;\n}",
+        "score": 0.4891304347826087,
+        "reason": "length_mismatch (target=46, generated=45)",
+        "diffs": [],
+        "timestamp": "2026-06-04T01:39:00.375Z"
+      },
+      {
+        "code": "void func_15007778(void) {\n    s32 phi_v0;\n    s32 limit;\n    u8 *ptr;\n    u8 *temp_v1;\n    s32 temp_a0;\n\n    temp_v1 = (u8 *)&D_800BE3F8;\n    temp_a0 = -1;\n    *(s32 *)(temp_v1 + 8) = temp_a0;\n    *(s32 *)(temp_v1 + 0x18) = temp_a0;\n    *(s32 *)(temp_v1 + 0x28) = temp_a0;\n    *(s8 *)(temp_v1 + 0xE) = temp_a0;\n    *(s8 *)(temp_v1 + 0x1E) = temp_a0;\n    *(s8 *)(temp_v1 + 0x2E) = temp_a0;\n    D_800BE3DC = temp_a0;\n    D_800BE3DE = 0;\n    D_80082BC0 = 1;\n\n    phi_v0 = 0;\n    limit = 0x1B;\n    do {\n        ((u8 *)D_800D2E4C)[phi_v0] = 0;\n        phi_v0++;\n    } while (phi_v0 < limit);\n\n    ptr = D_800D2E60;\n    do {\n        *ptr++ = 0;\n    } while (ptr < &D_800D2E69);\n\n    D_800BE3DB = -1;\n    D_800BE3DA = -1;\n    D_800BE3D9 = -1;\n    D_800BE3D8 = -1;\n}",
+        "score": 0.4782608695652174,
+        "reason": "length_mismatch (target=46, generated=44)",
+        "diffs": [],
+        "timestamp": "2026-06-04T01:39:39.519Z"
+      },
+      {
+        "code": "void func_15007778(void) {\n    u8 *ptr;\n    u8 *temp_v1;\n    s32 temp_a0;\n    s32 phi_v0;\n\n    temp_v1 = (u8 *)&D_800BE3F8;\n    temp_a0 = -1;\n    *(s32 *)(temp_v1 + 8) = temp_a0;\n    *(s32 *)(temp_v1 + 0x18) = temp_a0;\n    *(s32 *)(temp_v1 + 0x28) = temp_a0;\n    *(s8 *)(temp_v1 + 0xE) = temp_a0;\n    *(s8 *)(temp_v1 + 0x1E) = temp_a0;\n    *(s8 *)(temp_v1 + 0x2E) = temp_a0;\n    D_800BE3DC = temp_a0;\n    D_800BE3DE = 0;\n    D_80082BC0 = 1;\n\n    phi_v0 = 0;\n    while (phi_v0 < 0x1B) {\n        ((u8 *)D_800D2E4C)[phi_v0] = 0;\n        phi_v0++;\n    }\n\n    ptr = D_800D2E60;\n    do {\n        *ptr++ = 0;\n    } while (ptr < &D_800D2E69);\n\n    D_800BE3DB = -1;\n    D_800BE3DA = -1;\n    D_800BE3D9 = -1;\n    D_800BE3D8 = -1;\n}",
+        "score": 0.4035087719298246,
+        "reason": "length_mismatch (target=46, generated=57)",
+        "diffs": [],
+        "timestamp": "2026-06-04T01:40:28.609Z"
       }
     ]
   },
