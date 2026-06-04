@@ -3,6 +3,8 @@
 #include "functions.h"
 #include "variables.h"
 
+s32 func_151452C4(s32 arg0, s32 arg1, s32 arg2, f32 arg3, s32 arg4, s32 arg5, f32 *arg6, f32 *arg7);
+
 extern f32 D_800A5694;
 
 struct s6_unk { s32 a, b, c, d, e, f; };
@@ -487,7 +489,28 @@ s32 func_15145128(struct17 *arg0, struct17 *arg1, f32 *arg2, f32 *arg3) {
     arg1->unk8 = *arg3 * arg0->unk8;
     return 1;
 }
-#pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_151451F0.s")
+s32 func_151451F0(s32 arg0, s32 arg1, s32 arg2, f32 arg3, f32 arg4, s32 arg5, s32 arg6, f32 *arg7, f32 *arg8) {
+    f32 temp_f0;
+
+    if (func_151452C4(arg0, arg1, arg2, arg3, arg5, arg6, arg7, arg8) != 0) {
+        temp_f0 = *arg7;
+        if (temp_f0 < 0.0f) {
+            if (*arg8 < 0.0f) {
+                return 0;
+            }
+        }
+        if (0.0f <= temp_f0) {
+            if (*arg8 < 0.0f) {
+                return 1;
+            }
+        }
+        if (temp_f0 < arg4) {
+            return 1;
+        }
+        return 0;
+    }
+    return 0;
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_151452C4.s")
 
 s32 func_151454BC(u8 arg0, f32 arg1, struct17 *arg2) {
