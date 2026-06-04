@@ -21203,8 +21203,8 @@
     "instructions": 60,
     "difficulty": "medium",
     "tags": [],
-    "attempts": 3,
-    "lastScore": 0.6833,
+    "attempts": 6,
+    "lastScore": 0.8333,
     "status": "pending",
     "history": [
       {
@@ -21279,6 +21279,69 @@
           "structural: target=sb t9, 173(t1) got=sb t7, 173(a0)"
         ],
         "timestamp": "2026-06-04T09:22:56.999Z"
+      },
+      {
+        "code": "void func_15073B38(void) {\n    s32 *temp_v0;\n    struct127 **temp_v1;\n    f32 temp_f0;\n    f32 temp_f2;\n\n    temp_v0 = &D_800D1580;\n    temp_v1 = &D_800D154C;\n    temp_f0 = (f32) (*temp_v0 & 0xFFFF);\n    *(f32 *)((u8 *)(*temp_v1)->unk31C + 0xA8) = temp_f0;\n    temp_f2 = (f32) ((*temp_v0 >> 16) & 0xFF);\n    ((u8 *)(*temp_v1)->unk31C)[0xAC] = (u8) temp_f2;\n    {\n        struct127 *temp_t0;\n        s32 temp_t7;\n        struct126 *temp_t1;\n        s32 temp_t9;\n        temp_t0 = *temp_v1;\n        temp_t7 = *temp_v0;\n        temp_t1 = temp_t0->unk31C;\n        temp_t9 = temp_t7 >> 24;\n        ((u8 *)temp_t1)[0xAD] = temp_t9;\n    }\n}",
+        "score": 0.6833,
+        "reason": "structural_diffs=19",
+        "diffs": [
+          "structural: target=lui v0, HI(D_800D1580) got=lui a1, HI(D_800D1580)",
+          "structural: target=lui v1, HI(D_800D154C) got=lui a2, HI(D_800D154C)",
+          "structural: target=addiu v1, v1, LO(D_800D154C) got=addiu a2, a2, LO(D_800D154C)",
+          "structural: target=addiu v0, v0, LO(D_800D1580) got=addiu a1, a1, LO(D_800D1580)",
+          "structural: target=lw t6, 0(v0) got=lw t6, 0(a1)",
+          "structural: target=lw t8, 0(v1) got=lw t8, 0(a2)",
+          "structural: target=lw t0, 0(v0) got=lw t0, 0(a1)",
+          "structural: target=cfc1 t3, $31 got=cfc1 t3, c1_fcsr",
+          "structural: target=ctc1 t4, $31 got=ctc1 t4, c1_fcsr",
+          "structural: target=cfc1 t4, $31 got=cfc1 t4, c1_fcsr",
+          "structural: target=ctc1 t4, $31 got=ctc1 t4, c1_fcsr",
+          "structural: target=cfc1 t4, $31 got=cfc1 t4, c1_fcsr",
+          "structural: target=lw t5, 0(v1) got=lw t5, 0(a2)",
+          "structural: target=ctc1 t3, $31 got=ctc1 t3, c1_fcsr",
+          "structural: target=lw t0, 0(v1) got=lw v0, 0(a2)",
+          "structural: target=lw t7, 0(v0) got=lw v1, 0(a1)",
+          "structural: target=lw t1, 796(t0) got=lw a0, 796(v0)",
+          "structural: target=sra t9, t7, 24 got=sra t7, v1, 24",
+          "structural: target=sb t9, 173(t1) got=sb t7, 173(a0)"
+        ],
+        "timestamp": "2026-06-04T09:23:41.204Z"
+      },
+      {
+        "code": "void func_15073B38(void) {\n    s32 *temp_v0;\n    struct127 **temp_v1;\n    f32 temp_f0;\n    f32 temp_f2;\n\n    temp_v0 = &D_800D1580;\n    temp_v1 = &D_800D154C;\n    temp_f0 = (f32) (*temp_v0 & 0xFFFF);\n    *(f32 *)((u8 *)(*temp_v1)->unk31C + 0xA8) = temp_f0;\n    temp_f2 = (f32) ((*temp_v0 >> 16) & 0xFF);\n    ((u8 *)(*temp_v1)->unk31C)[0xAC] = (u8) temp_f2;\n    ((struct127 *)(*temp_v1)->unk31C)->in_water = *temp_v0 >> 24;\n}",
+        "score": 0.8333,
+        "reason": "structural_diffs=10",
+        "diffs": [
+          "structural: target=cfc1 t3, $31 got=cfc1 t3, c1_fcsr",
+          "structural: target=ctc1 t4, $31 got=ctc1 t4, c1_fcsr",
+          "structural: target=cfc1 t4, $31 got=cfc1 t4, c1_fcsr",
+          "structural: target=ctc1 t4, $31 got=ctc1 t4, c1_fcsr",
+          "structural: target=cfc1 t4, $31 got=cfc1 t4, c1_fcsr",
+          "structural: target=ctc1 t3, $31 got=ctc1 t3, c1_fcsr",
+          "structural: target=lw t0, 0(v1) got=lw t9, 0(v1)",
+          "structural: target=lw t1, 796(t0) got=lw t0, 796(t9)",
+          "structural: target=sra t9, t7, 24 got=sra t8, t7, 24",
+          "structural: target=sb t9, 173(t1) got=sb t8, 173(t0)"
+        ],
+        "timestamp": "2026-06-04T09:24:31.933Z"
+      },
+      {
+        "code": "void func_15073B38(void) {\n    s32 *temp_v0;\n    struct127 **temp_v1;\n    f32 temp_f0;\n    f32 temp_f2;\n\n    temp_v0 = &D_800D1580;\n    temp_v1 = &D_800D154C;\n    temp_f0 = (f32) (*temp_v0 & 0xFFFF);\n    *(f32 *)((u8 *)(*temp_v1)->unk31C + 0xA8) = temp_f0;\n    temp_f2 = (f32) ((*temp_v0 >> 16) & 0xFF);\n    ((u8 *)(*temp_v1)->unk31C)[0xAC] = (u8) temp_f2;\n    ((struct127 *)(*temp_v1)->unk31C)->in_water = D_800D1580 >> 24;\n}",
+        "score": 0.8333,
+        "reason": "structural_diffs=10",
+        "diffs": [
+          "structural: target=cfc1 t3, $31 got=cfc1 t3, c1_fcsr",
+          "structural: target=ctc1 t4, $31 got=ctc1 t4, c1_fcsr",
+          "structural: target=cfc1 t4, $31 got=cfc1 t4, c1_fcsr",
+          "structural: target=ctc1 t4, $31 got=ctc1 t4, c1_fcsr",
+          "structural: target=cfc1 t4, $31 got=cfc1 t4, c1_fcsr",
+          "structural: target=ctc1 t3, $31 got=ctc1 t3, c1_fcsr",
+          "structural: target=lw t0, 0(v1) got=lw t9, 0(v1)",
+          "structural: target=lw t1, 796(t0) got=lw t0, 796(t9)",
+          "structural: target=sra t9, t7, 24 got=sra t8, t7, 24",
+          "structural: target=sb t9, 173(t1) got=sb t8, 173(t0)"
+        ],
+        "timestamp": "2026-06-04T09:24:57.309Z"
       }
     ]
   },
