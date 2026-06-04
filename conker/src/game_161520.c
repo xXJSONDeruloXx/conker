@@ -2,6 +2,12 @@
 #include "functions.h"
 #include "variables.h"
 
+s32 func_15134070(struct102 *);
+void func_15138120(struct102 *, s32, s32);
+void func_1504715C(void *, struct102 *);
+void func_151382E0(void *, s32, void *, u8, s32);
+void func_15138424(struct102 *, void *, s32, void *, u8, s32);
+
 extern f32 D_800A45B0;
 
 extern f32 D_800A461C;
@@ -327,7 +333,22 @@ nonzero:
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_161520/func_151389A8.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_161520/func_15138BC0.s")
+void func_15138BC0(struct102 *arg0, u8 arg1, s32 arg2) {
+    u8 sp50[8];
+    u8 sp28[0x27];
+    s32 temp_s1;
+
+    temp_s1 = func_15134070(arg0);
+    if (temp_s1 != 0x63) {
+        sp28[0x1F] = func_151380B4(arg0, temp_s1, sp50 - 8);
+        func_15138120(arg0, temp_s1, 1);
+        if (sp28[0x1F] != 0) {
+            func_1504715C(sp28 - 8, arg0);
+            func_151382E0(sp50 - 8, temp_s1, sp28 - 8, arg1, arg2);
+            func_15138424(arg0, sp50 - 8, temp_s1, sp28 - 8, arg1, arg2);
+        }
+    }
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_161520/func_15138C80.s")
 
