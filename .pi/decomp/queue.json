@@ -34727,7 +34727,7 @@
     ],
     "attempts": 6,
     "lastScore": 0.4855072463768116,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "void func_1506B634(u8 arg0) {\n    u32 temp_hi;\n    struct126 *temp_a1;\n    u8 temp_a0;\n\n    temp_hi = func_150ADA20() % arg0;\n    temp_a0 = temp_hi & 0xFF;\n    temp_a1 = D_800D154C->unk31C;\n    if (((u8 *)temp_a1)[0x16] != 0) {\n        if (D_800BE9F0 == 0x29) {\n            if ((temp_hi & 0xFF) == 7) {\n                temp_a0 = 0;\n            }\n        }\n        *(s16 *)((s32)temp_a1 + 0xE) = ((u8 *)D_80099ABC)[temp_a0];\n    } else {\n        *(s16 *)((s32)temp_a1 + 0xE) = ((u8 *)D_80099AB4)[temp_hi & 0xFF];\n    }\n    if (*(u16 *)((s32)D_800D154C->unk31C + 0xE) == 0xA7) {\n        D_800D1580 = 0xFF020144;\n        ((u8 *)D_800D154C->unk31C)[0xC] = (func_150ADA20() % 3U) + 2;\n        func_1506E8D8();\n        D_800D154C->xz_velocity *= D_80099C38;\n    }\n}",
@@ -38143,9 +38143,60 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.806,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_151283B8(struct108 *arg0) {\n    switch (arg0->unk2C) {\n        case 0x1:\n            func_15122980(arg0);\n            break;\n        case 0x2:\n            func_151220D0(arg0);\n            break;\n        case 0x8:\n            func_15121C80(arg0, 0);\n            break;\n        case 0x40:\n            func_15129934(arg0);\n            break;\n        case 0x80:\n            func_15122440(arg0);\n            break;\n        case 0x100:\n            func_15120158(arg0);\n            break;\n        case 0x400:\n            func_15122170(arg0);\n            break;\n        case 0x800:\n            func_15122980(arg0);\n            break;\n        case 0x800000:\n            func_1512DEA4(arg0);\n            break;\n        case 0x2000:\n            break;\n    }\n}",
+        "score": 0.4855072463768116,
+        "reason": "length_mismatch (target=67, generated=69)",
+        "diffs": [],
+        "timestamp": "2026-06-04T12:05:57.782Z"
+      },
+      {
+        "code": "void func_151283B8(struct108 *arg0) {\n    s32 temp_v0;\n\n    temp_v0 = arg0->unk2C;\n    if (temp_v0 < 0x81) {\n        goto small;\n    }\n    if (temp_v0 == 0x100) {\n        goto case_100;\n    }\n    if (temp_v0 == 0x400) {\n        goto case_400;\n    }\n    if (temp_v0 == 0x800) {\n        goto case_800;\n    }\n    if (temp_v0 == 0x2000) {\n        goto done;\n    }\n    if (temp_v0 == 0x800000) {\n        goto case_800000;\n    }\n    goto done;\n\nsmall:\n    if (temp_v0 == 1) {\n        goto case_1;\n    }\n    if (temp_v0 == 2) {\n        goto case_2;\n    }\n    if (temp_v0 == 8) {\n        goto case_8;\n    }\n    if (temp_v0 == 0x40) {\n        goto case_40;\n    }\n    if (temp_v0 != 0x80) {\n        goto done;\n    }\ncase_80:\n    func_15122440(arg0);\n    goto done;\ncase_40:\n    func_15129934(arg0);\n    goto done;\ncase_1:\n    func_15122980(arg0);\n    goto done;\ncase_8:\n    func_15121C80(arg0, 0);\n    goto done;\ncase_2:\n    func_151220D0(arg0);\n    goto done;\ncase_400:\n    func_15122170(arg0);\n    goto done;\ncase_800:\n    func_15122980(arg0);\n    goto done;\ncase_100:\n    func_15120158(arg0);\n    goto done;\ncase_800000:\n    func_1512DEA4(arg0);\ndone:\n    ;\n}",
+        "score": 0.806,
+        "reason": "structural_diffs=13",
+        "diffs": [
+          "structural: target=beq v0, at, L5 got=bnel v0, at, L5",
+          "structural: target=nop got=lw ra, 20(sp)",
+          "structural: target=lw ra, 20(sp) got=nop",
+          "structural: target=bnel v0, at, L6 got=bnel v0, at, L5",
+          "structural: target=b L6 got=b L5",
+          "structural: target=b L6 got=b L5",
+          "structural: target=b L6 got=b L5",
+          "structural: target=li a1, 0 got=move a1, zero",
+          "structural: target=b L6 got=b L5",
+          "structural: target=b L6 got=b L5",
+          "structural: target=b L6 got=b L5",
+          "structural: target=b L6 got=b L5",
+          "structural: target=b L6 got=b L5"
+        ],
+        "timestamp": "2026-06-04T12:06:31.393Z"
+      },
+      {
+        "code": "void func_151283B8(struct108 *arg0) {\n    s32 temp_v0;\n\n    temp_v0 = arg0->unk2C;\n    if (temp_v0 < 0x81) {\n        goto small;\n    }\n    if (temp_v0 == 0x100) {\n        goto case_100;\n    }\n    if (temp_v0 == 0x400) {\n        goto case_400;\n    }\n    if (temp_v0 == 0x800) {\n        goto case_800;\n    }\n    if (temp_v0 == 0x2000) {\n        goto done;\n    }\n    if (temp_v0 == 0x800000) {\n        goto case_800000;\n    } else {\n        goto done;\n    }\n\nsmall:\n    if (temp_v0 == 1) {\n        goto case_1;\n    }\n    if (temp_v0 == 2) {\n        goto case_2;\n    }\n    if (temp_v0 == 8) {\n        goto case_8;\n    }\n    if (temp_v0 == 0x40) {\n        goto case_40;\n    }\n    if (temp_v0 != 0x80) {\n        goto done;\n    }\ncase_80:\n    func_15122440(arg0);\n    goto done;\ncase_40:\n    func_15129934(arg0);\n    goto done;\ncase_1:\n    func_15122980(arg0);\n    goto done;\ncase_8:\n    func_15121C80(arg0, 0);\n    goto done;\ncase_2:\n    func_151220D0(arg0);\n    goto done;\ncase_400:\n    func_15122170(arg0);\n    goto done;\ncase_800:\n    func_15122980(arg0);\n    goto done;\ncase_100:\n    func_15120158(arg0);\n    goto done;\ncase_800000:\n    func_1512DEA4(arg0);\ndone:\n    ;\n}",
+        "score": 0.806,
+        "reason": "structural_diffs=13",
+        "diffs": [
+          "structural: target=beq v0, at, L5 got=bnel v0, at, L5",
+          "structural: target=nop got=lw ra, 20(sp)",
+          "structural: target=lw ra, 20(sp) got=nop",
+          "structural: target=bnel v0, at, L6 got=bnel v0, at, L5",
+          "structural: target=b L6 got=b L5",
+          "structural: target=b L6 got=b L5",
+          "structural: target=b L6 got=b L5",
+          "structural: target=li a1, 0 got=move a1, zero",
+          "structural: target=b L6 got=b L5",
+          "structural: target=b L6 got=b L5",
+          "structural: target=b L6 got=b L5",
+          "structural: target=b L6 got=b L5",
+          "structural: target=b L6 got=b L5"
+        ],
+        "timestamp": "2026-06-04T12:07:12.114Z"
+      }
+    ]
   },
   {
     "function": "func_1513D2F0",
