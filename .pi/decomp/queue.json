@@ -27036,7 +27036,7 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 4,
+    "attempts": 6,
     "lastScore": 0.4811320754716981,
     "status": "pending",
     "history": [
@@ -27067,6 +27067,20 @@
         "reason": "length_mismatch (target=53, generated=51)",
         "diffs": [],
         "timestamp": "2026-06-04T05:03:00.722Z"
+      },
+      {
+        "code": "s32 func_1502B8E0(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {\n    s32 sp34;\n    s32 more;\n    u8 *offset;\n    s32 *tmp;\n    u32 mask;\n\n    offset = D_AB1950;\n    more = 1;\n    tmp = &arg3;\n    if (arg2 != 0) {\n        mask = 0x0FFFFFFF;\n        do {\n            tmp = (s32 *)(((s32)tmp + 3) & ~3);\n            tmp += 1;\n            if (more != 0) {\n                offset += func_1502AC88(offset, *(tmp - 1), &sp34);\n            }\n            arg2 -= 1;\n            more = sp34 & mask;\n        } while (arg2 != 0);\n    }\n    if (more != 0) {\n        more = func_1502B224(offset, arg0, sp34, arg1);\n    }\n    return more;\n}",
+        "score": 0.4811320754716981,
+        "reason": "length_mismatch (target=53, generated=51)",
+        "diffs": [],
+        "timestamp": "2026-06-04T05:31:54.219Z"
+      },
+      {
+        "code": "s32 func_1502B8E0(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {\n    s32 offset;\n    s32 *tmp;\n    s32 sp34;\n    s32 more;\n\n    offset = (s32)D_AB1950;\n    more = 1;\n    tmp = &arg3;\n    if (arg2 != 0) {\n        do {\n            tmp = (s32 *)(((s32)tmp + 3) & ~3);\n            tmp++;\n            if (more != 0) {\n                offset += func_1502AC88(offset, *(tmp - 1), &sp34);\n            }\n            arg2--;\n            more = sp34 & 0x0FFFFFFF;\n        } while (arg2 != 0);\n    }\n    if (more != 0) {\n        more = func_1502B224(offset, arg0, sp34, arg1);\n    }\n    return more;\n}",
+        "score": 0.4811320754716981,
+        "reason": "length_mismatch (target=53, generated=51)",
+        "diffs": [],
+        "timestamp": "2026-06-04T05:32:25.956Z"
       }
     ]
   },
