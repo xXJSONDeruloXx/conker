@@ -1008,5 +1008,14 @@
     "example_functions": [
       "func_1502B7F0"
     ]
+  },
+  {
+    "id": "struct-assignment-for-float-vector-copy",
+    "description": "For small structs containing floats, field-by-field float assignment emits lwc1/swc1, but original code may copy the struct with integer lw/sw pairs.",
+    "trigger": "Target copies a 3-float vector using `lw`/`sw` (including `$at`) instead of FPU loads/stores, while generated C with `dst->x = src->x` uses `lwc1`/`swc1`.",
+    "solution": "Use whole-struct assignment (`*dst = *src;`) for the copy paths, and keep arithmetic paths field-wise when they should use FPU operations.",
+    "example_functions": [
+      "func_15145548"
+    ]
   }
 ]

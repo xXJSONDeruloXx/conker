@@ -3,6 +3,9 @@
 #include "functions.h"
 #include "variables.h"
 
+void func_1507CD64(struct127 *arg0, s32 arg1);
+void func_1517F488(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5);
+
 s32 func_151044F4(void);
 void func_150FF084(struct127 *arg0, s32 arg1, s32 arg2);
 void func_150FED30(struct127 *arg0, s32 arg1, s32 arg2);
@@ -1762,7 +1765,44 @@ void func_15074664(void) {
         D_800D154C->unk31C->unk94 = D_800D1580;
     }
 }
-#pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_150746F0.s")
+void func_150746F0(void) {
+    struct127 *volatile *temp_a1;
+    struct127 *temp_a0;
+    s32 temp_v0;
+    struct126 *temp_a1_2;
+    struct108 *temp_v0_2;
+
+    temp_a1 = &D_800D154C;
+    temp_a0 = NULL;
+    if (D_800BE616 != 0) {
+        temp_a1 = &D_800D154C;
+        temp_a0 = *temp_a1;
+    } else if ((*temp_a1)->unk13C != 0) {
+        temp_a0 = D_800CC2D0;
+    }
+    if (temp_a0 != NULL) {
+        temp_v0 = D_800D1580;
+        if (temp_v0 >= temp_a0->health) {
+            temp_a0->health = 0;
+            (*temp_a1)->health = 0;
+            if (temp_a0->interaction_state == 1) {
+                temp_a0->immune = 0xFF;
+                func_1507CD64(temp_a0, 6);
+            }
+        } else {
+            temp_a1_2 = temp_a0->unk31C;
+            temp_a0->health = temp_a0->health - temp_v0;
+            if (temp_a1_2 != NULL) {
+                temp_v0_2 = temp_a0->camera;
+                if (temp_v0_2 != NULL) {
+                    if (((u8 *)temp_a1_2)[0x197] != 0) {
+                        func_1517F488(0xFF, 0, 0, 0xB4, 0x14, ((u8 *)temp_v0_2)[0x23D]);
+                    }
+                }
+            }
+        }
+    }
+}
 // ?
 void func_150747E4(void) {
     s32 val;
