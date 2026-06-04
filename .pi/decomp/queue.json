@@ -25257,7 +25257,7 @@
     ],
     "attempts": 3,
     "lastScore": 0.48333333333333334,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "void func_15074A94(void) {\n    f32 phi_f2;\n    f32 temp_f0;\n\n    temp_f0 = func_1505A72C(D_800CC2D0, D_800D154C);\n\n    if (D_800D154C->unk148 < D_8009A0E8) {\n        D_800D154C->unk148 = D_800D154C->unk154;\n    }\n\n    if (temp_f0 < 200.0f) {\n        phi_f2 = D_8009A0EC;\n    } else {\n        if (D_8009A0F0 < temp_f0) {\n            phi_f2 = D_800D154C->unk148;\n        } else {\n            f32 tmp = D_8009A0F4;\n            phi_f2 = D_800D154C->unk148;\n            phi_f2 = phi_f2 - tmp;\n            phi_f2 = phi_f2 * ((temp_f0 - 200.0f) / D_8009A0F8);\n            phi_f2 = phi_f2 + tmp;\n        }\n    }\n    D_800D154C->unk158 = phi_f2;\n    D_800D154C->unk154 = D_800D154C->unk158;\n    D_800D154C->unk15C = D_8009A0FC;\n}",
@@ -25316,9 +25316,46 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 2,
+    "lastScore": 0.4827586206896552,
+    "status": "pending",
+    "history": [
+      {
+        "code": "s32 func_1001BD34(void *arg0, void *arg1, s32 arg2) {\n    void *sp1C;\n    s32 sp18;\n    s32 phi_v0;\n\n    sp18 = 0;\n    sp1C = (*(void *(**)(void))((s32)arg0 + 0x28))();\n    if (sp1C == 0) {\n        return 0;\n    }\n    if (arg2 == -1) {\n        phi_v0 = ((s32 (*)(void *, s32))sp1C)(arg1, 1);\n    } else {\n        phi_v0 = ((s32 (*)(s32, s32))sp1C)(*(s32 *)arg1 + (arg2 * 4) + 0x10, 0);\n    }\n    sp18 = phi_v0;\n    if ((sp18 != 0) && ((sp18 & 0xFF000003) != 0x80000000)) {\n        return 0;\n    }\n    return sp18;\n}",
+        "score": 0.1897,
+        "reason": "structural_diffs=47",
+        "diffs": [
+          "structural: target=addiu sp, sp, -32 got=addiu sp, sp, -40",
+          "structural: target=sw a0, 32(sp) got=sw a0, 40(sp)",
+          "structural: target=sw a1, 36(sp) got=sw a1, 44(sp)",
+          "structural: target=sw a2, 40(sp) got=sw a2, 48(sp)",
+          "structural: target=sw zero, 24(sp) got=sw zero, 32(sp)",
+          "structural: target=lw t6, 32(sp) got=lw t6, 40(sp)",
+          "structural: target=sw v0, 28(sp) got=sw v0, 36(sp)",
+          "structural: target=lw t7, 28(sp) got=lw t7, 36(sp)",
+          "structural: target=beqz t7, L0 got=bnez t7, L0",
+          "structural: target=lw t8, 40(sp) got=b L1",
+          "structural: target=li at, -1 got=move v0, zero",
+          "structural: target=bne t8, at, L1 got=lw t8, 48(sp)",
+          "structural: target=nop got=li at, -1",
+          "structural: target=lw t9, 28(sp) got=bne t8, at, L2",
+          "structural: target=lw a0, 36(sp) got=nop",
+          "structural: target=li a1, 1 got=lw t9, 36(sp)",
+          "structural: target=jalr t9 got=lw a0, 44(sp)",
+          "structural: target=nop got=li a1, 1",
+          "structural: target=b L2 got=jalr t9",
+          "structural: target=sw v0, 24(sp) got=nop"
+        ],
+        "timestamp": "2026-06-04T07:46:10.885Z"
+      },
+      {
+        "code": "s32 func_1001BD34(void *arg0, void *arg1, s32 arg2) {\n    void *sp1C;\n    s32 sp18;\n\n    sp18 = 0;\n    sp1C = (*(void *(**)(void))((s32)arg0 + 0x28))();\n    if (sp1C != NULL) {\n        if (arg2 == -1) {\n            sp18 = ((s32 (*)(void *, s32))sp1C)(arg1, 1);\n        } else {\n            sp18 = ((s32 (*)(s32, s32))sp1C)(*(s32 *)arg1 + (arg2 * 4) + 0x10, 0);\n        }\n        if ((sp18 != 0) && ((sp18 & 0xFF000003) != 0x80000000)) {\n            return 0;\n        }\n        return sp18;\n    }\n    return 0;\n}",
+        "score": 0.4827586206896552,
+        "reason": "length_mismatch (target=58, generated=56)",
+        "diffs": [],
+        "timestamp": "2026-06-04T07:46:29.660Z"
+      }
+    ]
   },
   {
     "function": "func_15063168",

@@ -963,5 +963,14 @@
     "example_functions": [
       "func_15077DBC"
     ]
+  },
+  {
+    "id": "unsigned-modulo-divu",
+    "description": "Use unsigned modulo constants to force IDO to emit divu instead of div for random table indices.",
+    "trigger": "Target has divu for `%` by a positive constant after a random/u8-returning function, but C emits div with a signed integer literal.",
+    "solution": "Write the divisor as an unsigned literal (e.g. `% 10U`) so IDO generates `divu`.",
+    "example_functions": [
+      "func_151618BC"
+    ]
   }
 ]

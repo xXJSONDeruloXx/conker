@@ -238,7 +238,27 @@ void __n_resetPerfChanState(N_ALSeqPlayer *seqp, s32 chan) {
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/init_1AAE0/func_1001B7D0.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/init_1AAE0/func_1001BD34.s")
+s32 func_1001BD34(void *arg0, void *arg1, s32 arg2) {
+    void *sp1C;
+    s32 sp18;
+
+    sp18 = 0;
+    sp1C = (*(void *(**)(void))((s32)arg0 + 0x28))();
+    if (sp1C != NULL) {
+        if (arg2 == -1) {
+            sp18 = ((s32 (*)(void *, s32))sp1C)(arg1, 1);
+        } else {
+            sp18 = ((s32 (*)(s32, s32))sp1C)(*(s32 *)arg1 + (arg2 * 4) + 0x10, 0);
+        }
+        if ((sp18 != 0) && ((sp18 & 0xFF000003) != 0x80000000)) {
+            return 0;
+        }
+        goto return_sp18;
+    }
+    return 0;
+return_sp18:
+    return sp18;
+}
 // s32 func_1001BD34(void *arg0, void *arg1, s32 arg2) {
 //     void *sp1C;
 //     s32 sp18;
