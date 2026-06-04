@@ -23988,8 +23988,8 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 3,
-    "lastScore": 0.49242424242424243,
+    "attempts": 6,
+    "lastScore": 0.16153846153846152,
     "status": "pending",
     "history": [
       {
@@ -24012,6 +24012,69 @@
         "reason": "length_mismatch (target=65, generated=66)",
         "diffs": [],
         "timestamp": "2026-06-04T11:18:31.850Z"
+      },
+      {
+        "code": "s32 func_150C2700(s32 arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8, s32 arg9, s32 arg10, s32 arg11, s32 arg12, s32 arg13, u8 arg14) {\n    u8 sp20[0x48];\n\n    *(s16 *)&sp20[0x16] = 5;\n    *(s16 *)&sp20[0] = 0x6B;\n    sp20[0x39] = *(s16 *)&sp20[0x14] = 6;\n    *(s16 *)&sp20[2] = 0x46;\n    *(s16 *)&sp20[4] = -0x1F;\n    *(s16 *)&sp20[6] = 0x2E;\n    *(f32 *)&sp20[8] = arg2;\n    *(f32 *)&sp20[0xC] = arg3;\n    *(f32 *)&sp20[0x10] = arg4;\n    *(f32 *)&sp20[0x18] = 30.0f;\n    *(f32 *)&sp20[0x1C] = 35.0f;\n    *(s16 *)&sp20[0x20] = 0x64;\n    *(s16 *)&sp20[0x22] = 0;\n    *(f32 *)&sp20[0x24] = D_800A0274;\n    *(f32 *)&sp20[0x28] = D_800A0278;\n    sp20[0x2C] = 0x9B;\n    sp20[0x2D] = 0x64;\n    *(f32 *)&sp20[0x30] = D_800A027C;\n    *(f32 *)&sp20[0x34] = 0.0f;\n    sp20[0x38] = 1;\n    *(f32 *)&sp20[0x3C] = 0.0f;\n    sp20[0x40] = 1;\n    *(f32 *)&sp20[0x44] = 0.0f;\n    func_15150178(sp20, &sp20[8], 0, arg14, 1);\n    return 1;\n}",
+        "score": 0.5231,
+        "reason": "structural_diffs=31",
+        "diffs": [
+          "structural: target=li t7, 5 got=li t6, 5",
+          "structural: target=li t8, 107 got=lui at, HI(D_800A027C)",
+          "structural: target=lui at, HI(D_800A027C) got=lwc1 f4, 120(sp)",
+          "structural: target=lwc1 f4, 120(sp) got=lwc1 f18, LO(D_800A027C)(at)",
+          "structural: target=lwc1 f18, LO(D_800A027C)(at) got=sh t6, 54(sp)",
+          "structural: target=sh t7, 54(sp) got=li t7, 107",
+          "structural: target=sh t8, 32(sp) got=li v0, 6",
+          "structural: target=li t6, 6 got=li t8, 70",
+          "structural: target=li t9, 70 got=li t9, -31",
+          "structural: target=li t0, -31 got=li t0, 46",
+          "structural: target=li t1, 46 got=li t1, 100",
+          "structural: target=li t2, 100 got=li t2, 155",
+          "structural: target=li t3, 155 got=li t3, 100",
+          "structural: target=li t4, 100 got=li t4, 1",
+          "structural: target=li t7, 1 got=li t6, 1",
+          "structural: target=li t8, 1 got=sh t7, 32(sp)",
+          "structural: target=swc1 f12, 40(sp) got=sb v0, 89(sp)",
+          "structural: target=swc1 f14, 44(sp) got=sh t8, 34(sp)",
+          "structural: target=sh t6, 52(sp) got=sh t9, 36(sp)",
+          "structural: target=sh t9, 34(sp) got=sh t0, 38(sp)"
+        ],
+        "timestamp": "2026-06-04T11:19:00.609Z"
+      },
+      {
+        "code": "s32 func_150C2700(s32 arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8, s32 arg9, s32 arg10, s32 arg11, s32 arg12, s32 arg13, u8 arg14) {\n    u8 sp20[0x48];\n\n    *(s16 *)&sp20[0x16] = 5;\n    *(s16 *)&sp20[0] = 0x6B;\n    *(s16 *)&sp20[0x14] = (sp20[0x39] = 6);\n    *(s16 *)&sp20[2] = 0x46;\n    *(s16 *)&sp20[4] = -0x1F;\n    *(s16 *)&sp20[6] = 0x2E;\n    *(f32 *)&sp20[8] = arg2;\n    *(f32 *)&sp20[0xC] = arg3;\n    *(f32 *)&sp20[0x10] = arg4;\n    *(f32 *)&sp20[0x18] = 30.0f;\n    *(f32 *)&sp20[0x1C] = 35.0f;\n    *(s16 *)&sp20[0x20] = 0x64;\n    *(s16 *)&sp20[0x22] = 0;\n    *(f32 *)&sp20[0x24] = D_800A0274;\n    *(f32 *)&sp20[0x28] = D_800A0278;\n    sp20[0x2C] = 0x9B;\n    sp20[0x2D] = 0x64;\n    *(f32 *)&sp20[0x30] = D_800A027C;\n    *(f32 *)&sp20[0x34] = 0.0f;\n    sp20[0x38] = 1;\n    *(f32 *)&sp20[0x3C] = 0.0f;\n    sp20[0x40] = 1;\n    *(f32 *)&sp20[0x44] = 0.0f;\n    func_15150178(sp20, &sp20[8], 0, arg14, 1);\n    return 1;\n}",
+        "score": 0.5231,
+        "reason": "structural_diffs=31",
+        "diffs": [
+          "structural: target=li t7, 5 got=li t6, 5",
+          "structural: target=li t8, 107 got=lui at, HI(D_800A027C)",
+          "structural: target=lui at, HI(D_800A027C) got=lwc1 f4, 120(sp)",
+          "structural: target=lwc1 f4, 120(sp) got=lwc1 f18, LO(D_800A027C)(at)",
+          "structural: target=lwc1 f18, LO(D_800A027C)(at) got=sh t6, 54(sp)",
+          "structural: target=sh t7, 54(sp) got=li t7, 107",
+          "structural: target=sh t8, 32(sp) got=li v0, 6",
+          "structural: target=li t6, 6 got=li t8, 70",
+          "structural: target=li t9, 70 got=li t9, -31",
+          "structural: target=li t0, -31 got=li t0, 46",
+          "structural: target=li t1, 46 got=li t1, 100",
+          "structural: target=li t2, 100 got=li t2, 155",
+          "structural: target=li t3, 155 got=li t3, 100",
+          "structural: target=li t4, 100 got=li t4, 1",
+          "structural: target=li t7, 1 got=li t6, 1",
+          "structural: target=li t8, 1 got=sh t7, 32(sp)",
+          "structural: target=swc1 f12, 40(sp) got=sh v0, 52(sp)",
+          "structural: target=swc1 f14, 44(sp) got=sh t8, 34(sp)",
+          "structural: target=sh t6, 52(sp) got=sh t9, 36(sp)",
+          "structural: target=sh t9, 34(sp) got=sh t0, 38(sp)"
+        ],
+        "timestamp": "2026-06-04T11:20:54.853Z"
+      },
+      {
+        "code": "s32 func_150C2700(s32 arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8, s32 arg9, s32 arg10, s32 arg11, s32 arg12, s32 arg13, u8 arg14) {\n    s16 sp20;\n    s16 sp22;\n    s16 sp24;\n    s16 sp26;\n    f32 sp28;\n    f32 sp2C;\n    f32 sp30;\n    s16 sp34;\n    s16 sp36;\n    f32 sp38;\n    f32 sp3C;\n    s16 sp40;\n    s16 sp42;\n    f32 sp44;\n    f32 sp48;\n    u8 sp4C;\n    u8 sp4D;\n    f32 sp50;\n    f32 sp54;\n    u8 sp58;\n    u8 sp59;\n    f32 sp5C;\n    u8 sp60;\n    f32 sp64;\n\n    sp36 = 5;\n    sp20 = 0x6B;\n    sp34 = 6;\n    sp22 = 0x46;\n    sp24 = -0x1F;\n    sp26 = 0x2E;\n    sp28 = arg2;\n    sp2C = arg3;\n    sp30 = arg4;\n    sp38 = 30.0f;\n    sp3C = 35.0f;\n    sp40 = 0x64;\n    sp42 = 0;\n    sp44 = D_800A0274;\n    sp48 = D_800A0278;\n    sp4C = 0x9B;\n    sp4D = 0x64;\n    sp50 = D_800A027C;\n    sp54 = 0.0f;\n    sp58 = 1;\n    sp59 = 6;\n    sp5C = 0.0f;\n    sp60 = 1;\n    sp64 = 0.0f;\n    func_15150178(&sp20, &sp28, 0, arg14, 1);\n    return 1;\n}",
+        "score": 0.16153846153846152,
+        "reason": "length_mismatch (target=65, generated=21)",
+        "diffs": [],
+        "timestamp": "2026-06-04T11:21:21.442Z"
       }
     ]
   },
