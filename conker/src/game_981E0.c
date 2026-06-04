@@ -3,6 +3,10 @@
 #include "functions.h"
 #include "variables.h"
 
+s32 func_151044F4(void);
+void func_150FF084(struct127 *arg0, s32 arg1, s32 arg2);
+void func_150FED30(struct127 *arg0, s32 arg1, s32 arg2);
+
 extern f32 D_80099EA0;
 
 void func_150FE860(struct127 *, s32, s32);
@@ -1200,7 +1204,23 @@ void func_150712AC(s32 arg0) {
         func_151D8868(sp18, 0, 0xFF, 1);
     }
 }
-#pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_15071360.s")
+void func_15071360(s32 arg0) {
+    s8 sp18[8];
+
+    if (func_151044F4() != 0) {
+        func_150FF084(D_800D154C, 0xFF, 1);
+    } else {
+        func_150FED30(D_800D154C, 0xFF, 1);
+    }
+    if (D_800D154C->camera != 0) {
+        sp18[0] = 1;
+        *(s16 *)&sp18[2] = (func_150ADA20() % 5U) + 0xF;
+        sp18[5] = 1 << ((u8 *)D_800D154C->camera)[0x23D];
+        sp18[4] = (func_150ADA20() & 3) + 3;
+        sp18[6] = -1;
+        func_151D8868(sp18, 0, 0xFF, 1);
+    }
+}
 
 void func_15071434(s32 arg0) {
     func_150FF840(D_800D154C, 1, 0, 0xFF, 1);

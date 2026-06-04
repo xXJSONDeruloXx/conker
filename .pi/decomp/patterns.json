@@ -900,5 +900,14 @@
     "example_functions": [
       "func_15145128"
     ]
+  },
+  {
+    "id": "comma-operator-register-shaping",
+    "description": "Use no-op comma expressions like (0, var) to perturb IDO register allocation/evaluation without changing semantics, especially when a stack argument is loaded into the wrong available arg register.",
+    "trigger": "Near-match where structure is identical but an argument/stack pointer consistently uses a neighboring arg register (e.g. a3 instead of target a2).",
+    "solution": "Wrap selected variable uses in comma expressions `(0, var)` and use unsigned long/other type tweaks to alter IDO allocation; verify with decomp_attempt because this is context-sensitive.",
+    "example_functions": [
+      "func_1000ECCC"
+    ]
   }
 ]
