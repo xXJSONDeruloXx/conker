@@ -819,5 +819,14 @@
     "example_functions": [
       "func_15015644"
     ]
+  },
+  {
+    "id": "fabs-local-order-fpr-shaping",
+    "description": "Explicit fabs locals can steer which FPR receives each abs.s result.",
+    "trigger": "A near-match differs only in `abs.s` destination FPRs and the add uses the opposite operand register order.",
+    "solution": "Assign the first absolute value to a named local declared before the second (e.g. `temp_f14 = fabsf(x); temp_f0 = fabsf(y);`) and write the comparison expression in the target add operand order.",
+    "example_functions": [
+      "func_15075AAC"
+    ]
   }
 ]
