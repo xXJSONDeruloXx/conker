@@ -19047,7 +19047,7 @@
     "instructions": 52,
     "difficulty": "medium",
     "tags": [],
-    "attempts": 18,
+    "attempts": 19,
     "lastScore": 0.49038461538461536,
     "status": "pending",
     "history": [
@@ -19187,6 +19187,13 @@
         "reason": "length_mismatch (target=52, generated=51)",
         "diffs": [],
         "timestamp": "2026-06-04T14:01:27.643Z"
+      },
+      {
+        "code": "Gfx *func_150C3160(Gfx *arg0, void *arg1) {\n    s32 temp_v0;\n    s32 temp_v1;\n    s32 temp_a0;\n    f32 temp_f0;\n\n    temp_v0 = *(s32 *)((s32)arg1 + 0x2E8);\n    temp_f0 = (temp_v0 != 0) ? ((f32)*(s32 *)((s32)arg1 + 0x2E4) / (f32)temp_v0) : 1.0f;\n    temp_f0 = 1.0f - temp_f0;\n    temp_v1 = (s32)((500.0f * temp_f0) + 2.0f);\n    temp_a0 = 2 - *(s32 *)((s32)arg1 + 0x2EC);\n    *(s32 *)((s32)arg1 + 0x2EC) = temp_v1 / 3;\n    arg1 = arg0;\n    while (temp_a0 < 0) {\n        temp_a0 += 0x40;\n    }\n    ((Gfx *)arg1)->words.w0 = 0xF2000000 | ((temp_v1 & 0xFFF) << 12) | (temp_a0 & 0xFFF);\n    ((Gfx *)arg1)->words.w1 = (++arg0, 0x041FE03E);\n    return arg0;\n}",
+        "score": 0.49038461538461536,
+        "reason": "length_mismatch (target=52, generated=51)",
+        "diffs": [],
+        "timestamp": "2026-06-04T14:01:44.662Z"
       }
     ]
   },

@@ -1111,11 +1111,20 @@
   {
     "id": "commutative-addu-operand-order",
     "description": "IDO's addu operand order follows C expression order. Swapping a+b to b+a in the source swaps the register operands in the generated addu instruction.",
-    "trigger": "Diff shows 'addu rd, X, Y' vs 'addu rd, Y, X' \u2014 same registers, swapped operand positions. Common with pointer+offset expressions.",
+    "trigger": "Diff shows 'addu rd, X, Y' vs 'addu rd, Y, X' — same registers, swapped operand positions. Common with pointer+offset expressions.",
     "solution": "Swap the operand order in the C addition expression. E.g., change `ptr + offset` to `offset + ptr`, or `base + *(s32*)(x + 0x50)` to `*(s32*)(x + 0x50) + base`. For memcpy: reorder the pointer arithmetic argument.",
     "example_functions": [
       "func_1513BAE8",
       "func_1505DFDC"
+    ]
+  },
+  {
+    "id": "nonzero-unsigned-cast-for-v0-global-temp",
+    "description": "Casting a u16 temp to unsigned int in a nonzero check can steer IDO to keep global count loads in $v0 instead of $v1 while preserving branch-likely shape.",
+    "trigger": "Near-match where loop structure and saved registers match but D_80042760 loads use v1 instead of target v0, and inner `if (temp != 0)` follows an lhu-loaded u16 temp.",
+    "solution": "Write the nonzero check as `if ((unsigned int)temp != 0)` instead of `if (temp != 0)`.",
+    "example_functions": [
+      "func_1000FDF4"
     ]
   }
 ]

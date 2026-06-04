@@ -175,7 +175,24 @@ void func_150C2804(s32 arg0, s32 arg1, s32 arg2, s16 arg3, u8 arg4, s32 arg5) {
 //     return 1;
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_EF410/func_150C3160.s")
+Gfx *func_150C3160(Gfx *arg0, void *arg1) {
+    s32 temp_v0;
+    s32 temp_v1;
+    s32 temp_a0;
+    f32 temp_f0;
+
+    temp_v0 = *(s32 *)((s32)arg1 + 0x2E8);
+    temp_f0 = (temp_v0 != 0) ? ((f32)*(s32 *)((s32)arg1 + 0x2E4) / (f32)temp_v0) : 1.0f;
+    temp_f0 = 1.0f - temp_f0;
+    temp_v1 = (s32)((500.0f * temp_f0) + 2.0f);
+    temp_a0 = 2 - *(s32 *)((s32)arg1 + 0x2EC);
+    *(s32 *)((s32)arg1 + 0x2EC) = temp_v1 / 3;
+    while (temp_a0 < 0) {
+        temp_a0 += 0x40;
+    }
+    gDPSetTileSize(arg0++, 4, temp_v1, temp_a0, 0x1FE, 0x03E);
+    return arg0;
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/game_EF410/func_150C3230.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_EF410/func_150C3574.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_EF410/func_150C3994.s")
