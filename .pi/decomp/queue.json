@@ -21307,8 +21307,8 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 3,
-    "lastScore": 0.41964285714285715,
+    "attempts": 6,
+    "lastScore": 0.48936170212765956,
     "status": "pending",
     "history": [
       {
@@ -21343,6 +21343,51 @@
         "reason": "length_mismatch (target=47, generated=56)",
         "diffs": [],
         "timestamp": "2026-06-04T02:25:28.326Z"
+      },
+      {
+        "code": "void func_151D324C(struct224 *arg0, struct223 *arg1, u8 arg2) {\n    u8 temp_t1;\n    void (*temp_v0)(struct224 *, struct223 *, u8);\n\n    if (arg2 == 0) {\n        func_151D33FC(arg0, arg1);\n        temp_t1 = *(u8 *)((s32)arg0 + 0x1D);\n        goto post;\n    }\n    if (arg2 == 0x2D) {\n        s32 temp_v0_2;\n        s32 temp_v1;\n\n        temp_v0_2 = arg1->unk0;\n        temp_v1 = arg0->unk10;\n        if (temp_v0_2 == temp_v1) {\n            arg0->unk10 = arg1->unk4.w;\n            arg0->unk14 = arg1->unk9;\n        } else if (arg1->unk4.w == temp_v1) {\n            arg0->unk10 = temp_v0_2;\n            arg0->unk14 = arg1->unk8;\n        }\n    }\n    temp_t1 = *(u8 *)((s32)arg0 + 0x1D);\npost:\n    temp_v0 = D_8008FC64[temp_t1];\n    if (temp_v0 != NULL) {\n        temp_v0(arg0, arg1, arg2);\n    }\n}",
+        "score": 0.766,
+        "reason": "structural_diffs=11",
+        "diffs": [
+          "structural: target=lbu t1, 29(a0) got=lbu v0, 29(a0)",
+          "structural: target=lbu t1, 29(a0) got=lbu v0, 29(a0)",
+          "structural: target=bnel t9, v1, L1 got=bnel v1, t9, L1",
+          "structural: target=lbu t1, 29(a0) got=lbu v0, 29(a0)",
+          "structural: target=lbu t1, 29(a0) got=lbu v0, 29(a0)",
+          "structural: target=lui v0, HI(D_8008FC64) got=sll t1, v0, 2",
+          "structural: target=sll t2, t1, 2 got=lui v1, HI(D_8008FC64)",
+          "structural: target=addu v0, v0, t2 got=addu v1, v1, t1",
+          "structural: target=lw v0, LO(D_8008FC64)(v0) got=lw v1, LO(D_8008FC64)(v1)",
+          "structural: target=beqzl v0, L4 got=beqzl v1, L4",
+          "structural: target=jalr v0 got=jalr v1"
+        ],
+        "timestamp": "2026-06-04T02:25:48.658Z"
+      },
+      {
+        "code": "void func_151D324C(struct224 *arg0, struct223 *arg1, u8 arg2) {\n    void (*temp_v0)(struct224 *, struct223 *, u8);\n    u8 temp_t1;\n\n    if (arg2 == 0) {\n        func_151D33FC(arg0, arg1);\n        temp_t1 = *(u8 *)((s32)arg0 + 0x1D);\n        goto post;\n    }\n    if (arg2 == 0x2D) {\n        s32 temp_v0_2;\n        s32 temp_v1;\n\n        temp_v0_2 = arg1->unk0;\n        temp_v1 = arg0->unk10;\n        if (temp_v0_2 == temp_v1) {\n            arg0->unk10 = arg1->unk4.w;\n            arg0->unk14 = arg1->unk9;\n        } else if (arg1->unk4.w == temp_v1) {\n            arg0->unk10 = temp_v0_2;\n            arg0->unk14 = arg1->unk8;\n        }\n    }\n    temp_t1 = *(u8 *)((s32)arg0 + 0x1D);\npost:\n    temp_v0 = (void (*)(struct224 *, struct223 *, u8))*(s32 *)(D_8008FC64 + (temp_t1 * 4));\n    if (temp_v0 != NULL) {\n        temp_v0(arg0, arg1, arg2);\n    }\n}",
+        "score": 0.766,
+        "reason": "structural_diffs=11",
+        "diffs": [
+          "structural: target=lbu t1, 29(a0) got=lbu v0, 29(a0)",
+          "structural: target=lbu t1, 29(a0) got=lbu v0, 29(a0)",
+          "structural: target=bnel t9, v1, L1 got=bnel v1, t9, L1",
+          "structural: target=lbu t1, 29(a0) got=lbu v0, 29(a0)",
+          "structural: target=lbu t1, 29(a0) got=lbu v0, 29(a0)",
+          "structural: target=lui v0, HI(D_8008FC64) got=sll t1, v0, 2",
+          "structural: target=sll t2, t1, 2 got=lui v1, HI(D_8008FC64)",
+          "structural: target=addu v0, v0, t2 got=addu v1, v1, t1",
+          "structural: target=lw v0, LO(D_8008FC64)(v0) got=lw v1, LO(D_8008FC64)(v1)",
+          "structural: target=beqzl v0, L4 got=beqzl v1, L4",
+          "structural: target=jalr v0 got=jalr v1"
+        ],
+        "timestamp": "2026-06-04T02:26:21.134Z"
+      },
+      {
+        "code": "void func_151D324C(struct224 *arg0, struct223 *arg1, u8 arg2) {\n    void (*temp_v0)(struct224 *, struct223 *, u8);\n    u8 temp_a2;\n\n    temp_a2 = arg2;\n    if (temp_a2 == 0) {\n        func_151D33FC(arg0, arg1);\n        temp_a2 = arg2;\n    } else if (temp_a2 == 0x2D) {\n        s32 temp_v0_2;\n        s32 temp_v1;\n\n        temp_v0_2 = arg1->unk0;\n        temp_v1 = arg0->unk10;\n        if (temp_v0_2 == temp_v1) {\n            arg0->unk10 = arg1->unk4.w;\n            arg0->unk14 = arg1->unk9;\n        } else if (arg1->unk4.w == temp_v1) {\n            arg0->unk10 = temp_v0_2;\n            arg0->unk14 = arg1->unk8;\n        }\n    }\n\n    temp_v0 = D_8008FC64[*(u8 *)((s32)arg0 + 0x1D)];\n    if (temp_v0 != NULL) {\n        temp_v0(arg0, arg1, temp_a2);\n    }\n}",
+        "score": 0.48936170212765956,
+        "reason": "length_mismatch (target=47, generated=46)",
+        "diffs": [],
+        "timestamp": "2026-06-04T02:27:45.451Z"
       }
     ]
   },
