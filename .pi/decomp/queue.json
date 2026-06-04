@@ -18679,9 +18679,9 @@
     "instructions": 56,
     "difficulty": "medium",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1,
+    "status": "matched"
   },
   {
     "function": "func_15075AAC",
@@ -21016,9 +21016,32 @@
     "instructions": 56,
     "difficulty": "medium",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.48214285714285715,
+    "status": "pending",
+    "history": [
+      {
+        "code": "s32 *func_15142C10(s32 *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, u8 *arg5) {\n    s32 *temp_s0;\n    s32 *temp_v1;\n\n    temp_s0 = arg0;\n    if (arg1 == D_800DD1C8) {\n        if (arg2 == D_800DD1CA) {\n            if (arg3 == D_800DD1CC) {\n                if (arg4 == D_800DD1CE) {\n                    return temp_s0;\n                }\n            }\n        }\n    }\n\n    if (*arg5 == 1) {\n        temp_s0[0] = 0xE7000000;\n        temp_s0[1] = 0;\n        temp_s0 += 2;\n        *arg5 = 0;\n    }\n\n    temp_v1 = temp_s0;\n    temp_v1[0] = 0xFB000000;\n    temp_v1[1] = (arg1 << 24) | ((arg2 & 0xFF) << 16) | ((arg3 & 0xFF) << 8) | (arg4 & 0xFF);\n    temp_s0 += 2;\n    D_800DD1C8 = arg1;\n    D_800DD1CA = arg2;\n    D_800DD1CC = arg3;\n    D_800DD1CE = arg4;\n    return temp_s0;\n}",
+        "score": 0.4642857142857143,
+        "reason": "length_mismatch (target=56, generated=52)",
+        "diffs": [],
+        "timestamp": "2026-06-04T06:37:44.476Z"
+      },
+      {
+        "code": "Gfx *func_15142C10(Gfx *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, u8 *arg5) {\n    Gfx *temp_s0;\n\n    temp_s0 = arg0;\n    if (arg1 == D_800DD1C8) {\n        if (arg2 == D_800DD1CA) {\n            if (arg3 == D_800DD1CC) {\n                if (arg4 == D_800DD1CE) {\n                    return temp_s0;\n                }\n            }\n        }\n    }\n\n    if (*arg5 == 1) {\n        gDPPipeSync(temp_s0++);\n        *arg5 = 0;\n    }\n\n    gDPSetEnvColor(temp_s0++, arg1, arg2, arg3, arg4);\n    D_800DD1C8 = arg1;\n    D_800DD1CA = arg2;\n    D_800DD1CC = arg3;\n    D_800DD1CE = arg4;\n    return temp_s0;\n}",
+        "score": 0.48214285714285715,
+        "reason": "length_mismatch (target=56, generated=54)",
+        "diffs": [],
+        "timestamp": "2026-06-04T06:39:41.643Z"
+      },
+      {
+        "code": "Gfx *func_15142C10(Gfx *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, u8 *arg5) {\n    register Gfx *temp_s0;\n\n    temp_s0 = arg0;\n    if (arg1 == D_800DD1C8) {\n        if (arg2 == D_800DD1CA) {\n            if (arg3 == D_800DD1CC) {\n                if (arg4 == D_800DD1CE) {\n                    return temp_s0;\n                }\n            }\n        }\n    }\n\n    if (*arg5 == 1) {\n        gDPPipeSync(temp_s0++);\n        *arg5 = 0;\n    }\n\n    gDPSetEnvColor(temp_s0++, arg1, arg2, arg3, arg4);\n    D_800DD1C8 = arg1;\n    D_800DD1CA = arg2;\n    D_800DD1CC = arg3;\n    D_800DD1CE = arg4;\n    return temp_s0;\n}",
+        "score": 0.48214285714285715,
+        "reason": "length_mismatch (target=56, generated=54)",
+        "diffs": [],
+        "timestamp": "2026-06-04T06:40:15.550Z"
+      }
+    ]
   },
   {
     "function": "func_15079570",
