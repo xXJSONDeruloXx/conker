@@ -1107,5 +1107,15 @@
     "example_functions": [
       "func_151283B8"
     ]
+  },
+  {
+    "id": "commutative-addu-operand-order",
+    "description": "IDO's addu operand order follows C expression order. Swapping a+b to b+a in the source swaps the register operands in the generated addu instruction.",
+    "trigger": "Diff shows 'addu rd, X, Y' vs 'addu rd, Y, X' \u2014 same registers, swapped operand positions. Common with pointer+offset expressions.",
+    "solution": "Swap the operand order in the C addition expression. E.g., change `ptr + offset` to `offset + ptr`, or `base + *(s32*)(x + 0x50)` to `*(s32*)(x + 0x50) + base`. For memcpy: reorder the pointer arithmetic argument.",
+    "example_functions": [
+      "func_1513BAE8",
+      "func_1505DFDC"
+    ]
   }
 ]

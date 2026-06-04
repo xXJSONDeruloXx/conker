@@ -1809,19 +1809,72 @@ export default function (pi: ExtensionAPI) {
 			fs.writeFileSync(baseCPath, baseC);
 
 			onUpdate?.({
-				content: [{ type: "text", text: `Transmuter running (IDO profile, max ${maxCompiles} compiles, ${params.timeout || 60}s timeout)...` }],
+				content: [{ type: "text", text: `Transmuter: pre-flight compile check...` }],
 				details: {},
 			});
 
-			// Pre-flight: verify the base code compiles before running Transmuter
-			const preflightResult = await pi.exec("bash", [
-				path.join(ctx.cwd, "tools/transmuter-compile.sh"),
-				baseCPath, path.join(workDir, "preflight.o"), params.function,
-			], { signal, timeout: 15000 });
+			// Iterative pre-flight compile-fix loop (up to 3 retries)
+			let preflightPassed = false;
+			for (let attempt = 0; attempt < 4; attempt++) {
+				const pfResult = await pi.exec("bash", [
+					path.join(ctx.cwd, "tools/transmuter-compile.sh"),
+					baseCPath, path.join(workDir, "preflight.o"), params.function,
+				], { signal, timeout: 15000 });
 
-			if (preflightResult.code !== 0) {
-				const errMsg = (preflightResult.stderr || preflightResult.stdout || "unknown error").trim();
-				// Log the compile failure
+				if (pfResult.code === 0) {
+					preflightPassed = true;
+					try { fs.unlinkSync(path.join(workDir, "preflight.o")); } catch {}
+					break;
+				}
+
+				const errMsg = (pfResult.stderr || pfResult.stdout || "").trim();
+
+				// Auto-fix: redeclaration → remove the offending extern
+				const redeclMatch = errMsg.match(/redeclaration of '(\w+)'/);
+				if (redeclMatch) {
+					const sym = redeclMatch[1];
+					let src = fs.readFileSync(baseCPath, "utf-8");
+					src = src.replace(new RegExp(`^extern\\s+\\w+\\s+${sym}\\s*;\\n?`, "m"), "");
+					fs.writeFileSync(baseCPath, src);
+					continue;
+				}
+
+				// Auto-fix: undefined symbol → add extern s32
+				const undefMatch = errMsg.match(/'(\w+)' undefined/);
+				if (undefMatch) {
+					const sym = undefMatch[1];
+					let src = fs.readFileSync(baseCPath, "utf-8");
+					// Insert after the last #include line
+					const lastInclude = src.lastIndexOf("#include");
+					if (lastInclude >= 0) {
+						const lineEnd = src.indexOf("\n", lastInclude);
+						src = src.slice(0, lineEnd + 1) + `extern s32 ${sym};\n` + src.slice(lineEnd + 1);
+					}
+					fs.writeFileSync(baseCPath, src);
+					continue;
+				}
+
+				// Auto-fix: Subscripting non-array → remove the extern (let header handle it)
+				const subscriptMatch = errMsg.match(/Subscripting a non-array/);
+				if (subscriptMatch) {
+					// Find which extern is causing it by checking the error line
+					const lineMatch = errMsg.match(/line (\d+)/);
+					if (lineMatch) {
+						const src = fs.readFileSync(baseCPath, "utf-8");
+						const lines = src.split("\n");
+						const errLine = lines[parseInt(lineMatch[1]) - 1] || "";
+						// Find the array symbol being subscripted
+						const arrMatch = errLine.match(/(\w+)\s*\[/);
+						if (arrMatch) {
+							const arrSym = arrMatch[1];
+							let fixed = src.replace(new RegExp(`^extern\\s+\\w+\\s+${arrSym}\\s*;\\n?`, "m"), "");
+							fs.writeFileSync(baseCPath, fixed);
+							continue;
+						}
+					}
+				}
+
+				// Can't auto-fix — report the error
 				const qEntry = state.queue.find((e) => e.function === params.function);
 				if (qEntry) {
 					if (!qEntry.history) qEntry.history = [];
@@ -1837,13 +1890,54 @@ export default function (pi: ExtensionAPI) {
 				return {
 					content: [{
 						type: "text",
-						text: `❌ Transmuter pre-flight compile failed. The base code doesn’t compile in isolation.\n\nError:\n${errMsg}\n\nFix: ensure the code compiles with \`decomp_attempt\` first, then retry permuter. Missing externs or type conflicts are the usual cause.`,
+						text: `❌ Transmuter pre-flight compile failed (after ${attempt} auto-fix attempts).\n\nError:\n${errMsg}\n\nThe code doesn’t compile in isolation. Common causes:\n- Type mismatch (symbol declared as struct* in header but used as array)\n- Missing macro or typedef only available in full TU\n\nContinue iterating with decomp_attempt (full TU build) instead.`,
 					}],
 					details: { error: "preflight_compile_fail", message: errMsg },
 				};
 			}
-			// Clean up preflight .o
-			try { fs.unlinkSync(path.join(workDir, "preflight.o")); } catch {}
+
+			if (!preflightPassed) {
+				return {
+					content: [{ type: "text", text: `❌ Pre-flight loop exhausted without successful compile.` }],
+					details: { error: "preflight_exhausted" },
+				};
+			}
+
+			// Build focus constraints from prior diff data (if available)
+			let constraintsArgs: string[] = [];
+			const qEntryForConstraints = state.queue.find((e) => e.function === params.function);
+			if (qEntryForConstraints?.history) {
+				// Find the best attempt's diff lines to focus mutations there
+				const bestAttempt = qEntryForConstraints.history
+					.filter((h: AttemptRecord) => !h.reason?.startsWith("transmuter") && h.score > 0.5)
+					.sort((a: AttemptRecord, b: AttemptRecord) => b.score - a.score)[0];
+				if (bestAttempt?.diffs?.length > 0 && bestAttempt.diffs.length <= 5) {
+					// Extract line numbers from diffs like "structural: target=X got=Y" at lines
+					// These are assembly line numbers, not C — but we can use them to estimate focus region
+					// For now, focus on the last third of the function (where most diffs occur)
+					const codeLines = baseCode.split("\n").length;
+					if (codeLines > 5) {
+						const focusStart = Math.max(1, Math.floor(codeLines * 0.6));
+						const constraintsJson = JSON.stringify({
+							focusConstraints: [{
+								type: "focus-region",
+								id: "diff-region",
+								description: `Focus mutations on the bottom of the function where diffs occur`,
+								lines: { start: focusStart, end: codeLines },
+								strength: 0.7,
+							}],
+						});
+						const constraintsPath = path.join(workDir, "constraints.json");
+						fs.writeFileSync(constraintsPath, constraintsJson);
+						constraintsArgs = ["--constraints", constraintsPath];
+					}
+				}
+			}
+
+			onUpdate?.({
+				content: [{ type: "text", text: `Transmuter running (IDO profile, max ${maxCompiles} compiles, ${params.timeout || 60}s timeout${constraintsArgs.length ? ", with focus constraints" : ""})...` }],
+				details: {},
+			});
 
 			// Run Transmuter natively
 			const transmuterCli = path.join(ctx.cwd, "tools/transmuter/packages/cli/dist/index.js");
@@ -1860,6 +1954,7 @@ export default function (pi: ExtensionAPI) {
 				"--timeout", String(timeoutMs),
 				"--no-reduce",
 				"--concurrency", "4",
+				...constraintsArgs,
 			], { signal, timeout: timeoutMs + 15000 });
 
 			const output = result.stdout || "";
@@ -1960,12 +2055,36 @@ export default function (pi: ExtensionAPI) {
 				};
 			}
 
+			// Build actionable diagnostic based on what happened
+			let diagnostic = "";
+			if (compiled === 0 && (iters ?? 0) > 1000) {
+				diagnostic = `\n\n⚠️ DIAGNOSTIC: ${iters?.toLocaleString()} iterations but 0 successful compiles.`
+					+ `\nAll mutations were deduplicated (identical source after transform). The code is too \"rigid\" for random AST mutation.`
+					+ `\n→ Use decomp_attempt with a rewritten expression — Transmuter can’t help here.`
+					+ `\n→ If diff is 'addu a0, X, Y' vs 'addu a0, Y, X': swap operand order in the C expression (a+b → b+a).`
+					+ `\n→ If diff is register-only: reorder variable declarations or add an intermediate temp in decomp_attempt.`;
+			} else if (bestScore === 1) {
+				diagnostic = `\n\n🎯 SO CLOSE (score 1 = one instruction off)!`
+					+ `\nTransmuter couldn’t bridge the last instruction. Likely causes:`
+					+ `\n  1. Context-sensitivity (IDO allocates differently in isolation vs full TU)`
+					+ `\n  2. Commutative operand order (a+b vs b+a produces different addu operand order)`
+					+ `\n→ Call decomp_attempt with the operands swapped in the expression (a+b → b+a)`
+					+ `\n→ Or call decomp_attempt adding a temp: \`s32 temp = offset; ptr = base + temp;\``;
+			} else if (forks > 0 && bestScore !== null && bestScore > 0) {
+				diagnostic = `\n\nTransmuter improved from ${initialScore} to ${bestScore} (${forks} forks).`
+					+ `\nRules that helped: ${[...new Set(allForkRules)].join(", ") || "unknown"}`
+					+ `\nRemaining ${bestScore} instruction differences may be context-sensitive (IDO full-TU vs isolation).`
+					+ `\n→ Continue with decomp_attempt for the remaining differences.`;
+			} else {
+				diagnostic = `\n\nNo improvement found. Try a different structural approach before re-running.`;
+			}
+
 			return {
 				content: [{
 					type: "text",
-					text: `Transmuter completed. Best score: ${bestScore ?? "unknown"} (iterations: ${iters ?? "?"}, forks: ${forks})\n\n${output.replace(/\[2K.*?\[G/g, "").replace(/\u001b\[[^m]*m/g, "").slice(-800)}\n\nThe code may need a different structural approach. Try: different variable types, control flow restructuring, or declaration reordering before re-running.`,
+					text: `Transmuter completed. Best score: ${bestScore ?? "unknown"} (iters: ${iters?.toLocaleString() ?? "?"}, compiled: ${compiled ?? "?"}, forks: ${forks})${diagnostic}`,
 				}],
-				details: { matched: false, bestScore, iterations: iters },
+				details: { matched: false, bestScore, iterations: iters, compiled, forks },
 			};
 		},
 	});
