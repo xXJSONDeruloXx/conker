@@ -1081,7 +1081,19 @@ void func_15078520(void) {
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_A28B0/func_15078544.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_A28B0/func_1507879C.s")
+void func_1507879C(void) {
+    struct197 *temp_v0;
+    f32 temp_f0;
+    s32 temp_v1;
+
+    temp_v0 = (struct197 *)D_800CC5A0[D_800D154C->unk222].interaction_state;
+    temp_f0 = temp_v0->unk8;
+    temp_v1 = D_800D1892;
+    if (((temp_v1 == 0) && (temp_f0 < (f32)((u32)D_800D1891))) ||
+        ((temp_v1 == 1) && ((f32)((u32)D_800D1891) < temp_f0))) {
+        func_15075400(D_800D1890);
+    }
+}
 // NON-MATCHING: D_800CC5A0 ???
 // void func_1507879C(void) {
 //     f32 temp_f0 =  D_800CC5A0[D_800D154C->unk222].unk8;
