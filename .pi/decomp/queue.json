@@ -28496,7 +28496,7 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
+    "attempts": 6,
     "lastScore": 0.49107142857142855,
     "status": "pending",
     "history": [
@@ -28520,6 +28520,27 @@
         "reason": "length_mismatch (target=56, generated=55)",
         "diffs": [],
         "timestamp": "2026-06-04T06:59:47.226Z"
+      },
+      {
+        "code": "void func_1508EF80(f32 *arg0, f32 *arg1, f32 arg2, f32 *arg3) {\n    f32 sp3C;\n    f32 sp38;\n    volatile s32 pad[4];\n    f32 sp28;\n    f32 sp24;\n    f32 temp_f20;\n    f32 temp_f2;\n\n    sp3C = arg0[0] - arg1[0];\n    sp38 = arg0[2] - arg1[2];\n    temp_f20 = arg2 * D_8009DC80;\n    sp24 = cosf(temp_f20);\n    sp28 = (sinf(temp_f20) * sp38) + (sp24 * sp3C);\n    sp28 += arg1[0];\n    sp24 = sinf(temp_f20);\n    temp_f2 = (cosf(temp_f20) * sp38) + (-sp24 * sp3C);\n    temp_f2 += arg1[2];\n    arg3[0] = sp28;\n    arg3[2] = temp_f2;\n}",
+        "score": 0.49107142857142855,
+        "reason": "length_mismatch (target=56, generated=55)",
+        "diffs": [],
+        "timestamp": "2026-06-04T07:00:26.224Z"
+      },
+      {
+        "code": "void func_1508EF80(f32 *arg0, f32 *arg1, f32 arg2, f32 *arg3) {\n    f32 sp3C;\n    f32 sp38;\n    volatile s32 pad[3];\n    f32 sp28;\n    f32 sp24;\n    f32 temp_f20;\n    f32 temp_f2;\n\n    sp3C = arg0[0] - arg1[0];\n    sp38 = arg0[2] - arg1[2];\n    temp_f20 = arg2 * D_8009DC80;\n    sp24 = cosf(temp_f20);\n    sp28 = (sinf(temp_f20) * sp38) + (sp24 * sp3C);\n    sp28 += arg1[0];\n    sp24 = sinf(temp_f20);\n    temp_f2 = (cosf(temp_f20) * sp38) + (-sp24 * sp3C);\n    temp_f2 += arg1[2];\n    arg3[0] = sp28;\n    arg3[2] = temp_f2;\n}",
+        "score": 0.49107142857142855,
+        "reason": "length_mismatch (target=56, generated=55)",
+        "diffs": [],
+        "timestamp": "2026-06-04T07:00:47.883Z"
+      },
+      {
+        "code": "void func_1508EF80(f32 *arg0, f32 *arg1, f32 arg2, f32 *arg3) {\n    f32 sp3C;\n    f32 sp38;\n    volatile s32 pad[3];\n    f32 sp28;\n    f32 sp24;\n    f32 temp_f20;\n    f32 temp_f2;\n\n    sp3C = arg0[0] - arg1[0];\n    sp38 = arg0[2] - arg1[2];\n    temp_f20 = arg2 * D_8009DC80;\n    sp24 = cosf(temp_f20);\n    sp28 = (sinf(temp_f20) * sp38) + (sp24 * sp3C);\n    sp28 += arg1[0];\n    sp24 = sinf(temp_f20);\n    temp_f2 = (cosf(temp_f20) * sp38) + (-sp24 * sp3C);\n    temp_f2 += arg1[2];\n    arg3[0] = sp28;\n    arg3[2] = temp_f2;\n}\n#ifdef __GNUC__\nasm(\".word 0\");\n#endif",
+        "score": 0.49107142857142855,
+        "reason": "length_mismatch (target=56, generated=55)",
+        "diffs": [],
+        "timestamp": "2026-06-04T07:02:04.569Z"
       }
     ]
   },
