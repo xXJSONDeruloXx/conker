@@ -23619,9 +23619,9 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1,
+    "status": "matched"
   },
   {
     "function": "func_10010558",
@@ -25094,9 +25094,32 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.4528301886792453,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_1000F85C(u16 arg0, u16 arg1, s32 arg2) {\n    f32 sp1C;\n    s32 sp18;\n    s16 temp_a1;\n    s32 temp_a0;\n\n    temp_a0 = arg0 & 0xFFFF;\n    temp_a1 = (s16)arg1;\n    if (temp_a0 >= 0x10) {\n        sp18 = temp_a0;\n        if (func_1000F3D0(temp_a0) != 0) {\n            if (temp_a1 == 0x10) {\n                sp1C = alCents2Ratio(arg2);\n                arg2 = *(s32 *)&sp1C;\n            } else if (temp_a1 == 0x11) {\n                temp_a1 = 0x10;\n            }\n            func_10017714(*(s32 *)(D_800425E8 + ((sp18 & 0xF) * 0xC)), temp_a1, arg2);\n        }\n    }\n}",
+        "score": 0.47058823529411764,
+        "reason": "length_mismatch (target=48, generated=51)",
+        "diffs": [],
+        "timestamp": "2026-06-04T02:48:53.881Z"
+      },
+      {
+        "code": "void func_1000F85C(u16 arg0, u16 arg1, s32 arg2) {\n    f32 sp1C;\n    s32 sp18;\n    s32 temp_a1;\n\n    temp_a1 = (s16)arg1;\n    if (arg0 >= 0x10) {\n        sp18 = arg0;\n        if (func_1000F3D0(arg0) != 0) {\n            if (temp_a1 == 0x10) {\n                sp1C = alCents2Ratio(arg2);\n                arg2 = *(s32 *)&sp1C;\n            } else if (temp_a1 == 0x11) {\n                temp_a1 = 0x10;\n            }\n            func_10017714(*(s32 *)(D_800425E8 + ((sp18 & 0xF) * 0xC)), temp_a1, arg2);\n        }\n    }\n}",
+        "score": 0.4528301886792453,
+        "reason": "length_mismatch (target=48, generated=53)",
+        "diffs": [],
+        "timestamp": "2026-06-04T02:49:52.733Z"
+      },
+      {
+        "code": "void func_1000F85C(arg0, arg1, arg2)\nu16 arg0;\ns16 arg1;\ns32 arg2;\n{\n    f32 sp1C;\n    s32 sp18;\n    s16 temp_a1;\n\n    temp_a1 = arg1;\n    if (arg0 >= 0x10) {\n        sp18 = arg0;\n        if (func_1000F3D0(arg0) != 0) {\n            if (temp_a1 == 0x10) {\n                sp1C = alCents2Ratio(arg2);\n                arg2 = *(s32 *)&sp1C;\n            } else if (temp_a1 == 0x11) {\n                temp_a1 = 0x10;\n            }\n            func_10017714(*(s32 *)(D_800425E8 + ((sp18 & 0xF) * 0xC)), temp_a1, arg2);\n        }\n    }\n}",
+        "score": 0.4528301886792453,
+        "reason": "length_mismatch (target=48, generated=53)",
+        "diffs": [],
+        "timestamp": "2026-06-04T02:50:23.330Z"
+      }
+    ]
   },
   {
     "function": "func_1509DDFC",
