@@ -26255,8 +26255,8 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 3,
-    "lastScore": 0.4925373134328358,
+    "attempts": 6,
+    "lastScore": 0.4714285714285714,
     "status": "pending",
     "history": [
       {
@@ -26279,6 +26279,27 @@
         "reason": "length_mismatch (target=66, generated=67)",
         "diffs": [],
         "timestamp": "2026-06-04T11:35:33.975Z"
+      },
+      {
+        "code": "void func_15056A00(struct127 *arg0, u8 arg1, u8 arg2) {\n    s32 temp_v0;\n    u8 *temp_t0;\n    u8 *temp_v1;\n    u16 temp_v1_2;\n    u8 *temp_a1;\n    s32 temp_t7;\n    s32 temp_t9;\n\n    temp_v0 = 0;\n    temp_t0 = (u8 *)D_80099A3C;\n    temp_v1 = temp_t0 + ((arg2 * 5) * 2);\n    temp_t7 = arg2 << 2;\n    if (temp_v1[7] < arg1) {\n        temp_v0 = 5;\n    } else if (temp_v1[2] < arg1) {\n        temp_v0 = 2;\n    }\n    temp_v1_2 = arg0->unk76;\n    temp_t7 = (temp_t7 + arg2) * 2;\n    if (((arg0->unk78 - temp_v1_2) & 0x8000) != 0) {\n        temp_v0 = (temp_v0 + 3) & 0xFF;\n    } else {\n        temp_v0 = (temp_v0 + 4) & 0xFF;\n    }\n    temp_a1 = temp_t0 + temp_t7 + temp_v0;\n    if (*temp_a1 != 0xFF) {\n        *(s32 *)((s32)arg0 + 0x218) = *(s32 *)((s32)arg0 + 0x218) - 5;\n        *(s16 *)((s32)arg0 + 0x21C) = 0x4E20;\n        *(u8 *)((s32)arg0 + 0x223) = 0xD;\n        arg0->unk44 = 0.0f;\n        temp_t9 = *(s32 *)((s32)arg0 + 0xF4) & -0xF;\n        *(s32 *)((s32)arg0 + 0xF4) = temp_t9;\n        *(s32 *)((s32)arg0 + 0xF4) = temp_t9 | 4;\n        arg0->unk78 = temp_v1_2;\n        arg0->unk7A = temp_v1_2;\n        arg0->unk138 = 0;\n        *(s16 *)((s32)arg0 + 0x244) = *temp_a1;\n    }\n}",
+        "score": 0.4647887323943662,
+        "reason": "length_mismatch (target=66, generated=71)",
+        "diffs": [],
+        "timestamp": "2026-06-04T11:36:05.861Z"
+      },
+      {
+        "code": "void func_15056A00(struct127 *arg0, u8 arg1, u8 arg2) {\n    s32 temp_v0;\n    u8 *temp_t0;\n    u8 *temp_v1;\n    u8 *temp_a1;\n    s32 temp_t9;\n\n    temp_v0 = 0;\n    temp_t0 = (u8 *)D_80099A3C;\n    temp_v1 = temp_t0 + ((arg2 * 5) * 2);\n    if (temp_v1[7] < arg1) {\n        temp_v0 = 5;\n    } else if (temp_v1[2] < arg1) {\n        temp_v0 = 2;\n    }\n    if (((arg0->unk78 - arg0->unk76) & 0x8000) != 0) {\n        temp_v0 = (temp_v0 + 3) & 0xFF;\n    } else {\n        temp_v0 = (temp_v0 + 4) & 0xFF;\n    }\n    temp_a1 = temp_t0 + (arg2 * 10) + temp_v0;\n    if (*temp_a1 != 0xFF) {\n        *(s32 *)((s32)arg0 + 0x218) = *(s32 *)((s32)arg0 + 0x218) - 5;\n        *(s16 *)((s32)arg0 + 0x21C) = 0x4E20;\n        *(u8 *)((s32)arg0 + 0x223) = 0xD;\n        arg0->unk44 = 0.0f;\n        temp_t9 = *(s32 *)((s32)arg0 + 0xF4) & -0xF;\n        *(s32 *)((s32)arg0 + 0xF4) = temp_t9;\n        *(s32 *)((s32)arg0 + 0xF4) = temp_t9 | 4;\n        arg0->unk78 = arg0->unk76;\n        arg0->unk7A = arg0->unk76;\n        arg0->unk138 = 0;\n        *(s16 *)((s32)arg0 + 0x244) = *temp_a1;\n    }\n}",
+        "score": 0.4772727272727273,
+        "reason": "length_mismatch (target=66, generated=63)",
+        "diffs": [],
+        "timestamp": "2026-06-04T11:36:29.989Z"
+      },
+      {
+        "code": "void func_15056A00(struct127 *arg0, u8 arg1, u8 arg2) {\n    s32 temp_v0;\n    u8 *temp_t0;\n    u8 *temp_v1;\n    u16 temp_v1_2;\n    u8 *temp_a1;\n    s32 temp_t9;\n\n    temp_v0 = 0;\n    temp_t0 = (u8 *)D_80099A3C;\n    temp_v1 = temp_t0 + ((arg2 * 5) * 2);\n    if (temp_v1[7] < arg1) {\n        temp_v0 = 5;\n    } else if (temp_v1[2] < arg1) {\n        temp_v0 = 2;\n    }\n    temp_v1_2 = arg0->unk76;\n    if (((arg0->unk78 - temp_v1_2) & 0x8000) != 0) {\n        temp_v0 = (temp_v0 + 3) & 0xFF;\n    } else {\n        temp_v0 = (temp_v0 + 4) & 0xFF;\n    }\n    temp_a1 = temp_t0 + (((arg2 << 2) + arg2) << 1) + temp_v0;\n    if (*temp_a1 != 0xFF) {\n        *(s32 *)((s32)arg0 + 0x218) = *(s32 *)((s32)arg0 + 0x218) - 5;\n        *(s16 *)((s32)arg0 + 0x21C) = 0x4E20;\n        *(u8 *)((s32)arg0 + 0x223) = 0xD;\n        arg0->unk44 = 0.0f;\n        temp_t9 = *(s32 *)((s32)arg0 + 0xF4) & -0xF;\n        *(s32 *)((s32)arg0 + 0xF4) = temp_t9;\n        *(s32 *)((s32)arg0 + 0xF4) = temp_t9 | 4;\n        arg0->unk78 = temp_v1_2;\n        arg0->unk7A = temp_v1_2;\n        arg0->unk138 = 0;\n        *(s16 *)((s32)arg0 + 0x244) = *temp_a1;\n    }\n}",
+        "score": 0.4714285714285714,
+        "reason": "length_mismatch (target=66, generated=70)",
+        "diffs": [],
+        "timestamp": "2026-06-04T11:36:55.583Z"
       }
     ]
   },
