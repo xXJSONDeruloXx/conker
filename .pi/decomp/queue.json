@@ -26487,8 +26487,8 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 6,
-    "lastScore": 0.9,
+    "attempts": 9,
+    "lastScore": 0.44642857142857145,
     "status": "pending",
     "history": [
       {
@@ -26542,6 +26542,27 @@
           "structural: target=nop got=sw t7, 28(sp)"
         ],
         "timestamp": "2026-06-04T03:57:37.280Z"
+      },
+      {
+        "code": "void __n_initFromBank(N_ALSeqPlayer *seqp, ALBank *bank) {\n    s32 i;\n    ALInstrument *inst;\n\n    inst = NULL;\n    if ((inst != NULL) | ((i = 1) == 0)) {\n    } else {\n        do {\n            inst = bank->instArray[i];\n        } while (i++, inst == NULL);\n    }\n    if (seqp->maxChannels > (i = 0)) {\n        do {\n            __n_resetPerfChanState(seqp, i);\n        } while (++i < seqp->maxChannels);\n    }\n    if (bank->percussion != NULL) {\n        __n_resetPerfChanState(seqp, i);\n    }\n}",
+        "score": 0.4807692307692308,
+        "reason": "length_mismatch (target=50, generated=52)",
+        "diffs": [],
+        "timestamp": "2026-06-04T03:57:59.796Z"
+      },
+      {
+        "code": "void __n_initFromBank(N_ALSeqPlayer *seqp, ALBank *bank) {\n    s32 i;\n    ALInstrument *inst;\n\n    inst = NULL;\n    if ((inst == NULL) & ((i = 1) != 0)) {\n        do {\n            inst = bank->instArray[i];\n        } while (i++, inst == NULL);\n    }\n    if (seqp->maxChannels > (i = 0)) {\n        do {\n            __n_resetPerfChanState(seqp, i);\n        } while (++i < seqp->maxChannels);\n    }\n    if (bank->percussion != NULL) {\n        __n_resetPerfChanState(seqp, i);\n    }\n}",
+        "score": 0.4807692307692308,
+        "reason": "length_mismatch (target=50, generated=52)",
+        "diffs": [],
+        "timestamp": "2026-06-04T03:58:14.228Z"
+      },
+      {
+        "code": "void __n_initFromBank(N_ALSeqPlayer *seqp, ALBank *bank) {\n    s32 i;\n    ALInstrument *inst;\n\n    inst = NULL;\n    i = (inst != NULL) ? 1 : 1;\n    if (inst == NULL) {\n        do {\n            inst = bank->instArray[i];\n        } while (i++, inst == NULL);\n    }\n    if (seqp->maxChannels > (i = 0)) {\n        do {\n            __n_resetPerfChanState(seqp, i);\n        } while (++i < seqp->maxChannels);\n    }\n    if (bank->percussion != NULL) {\n        __n_resetPerfChanState(seqp, i);\n    }\n}",
+        "score": 0.44642857142857145,
+        "reason": "length_mismatch (target=50, generated=56)",
+        "diffs": [],
+        "timestamp": "2026-06-04T03:58:49.404Z"
       }
     ]
   },
