@@ -27036,8 +27036,8 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 12,
-    "lastScore": 0.9434,
+    "attempts": 15,
+    "lastScore": 0.49074074074074076,
     "status": "pending",
     "history": [
       {
@@ -27150,6 +27150,35 @@
           "structural: target=lw a2, 52(sp) got=lw a2, 60(sp)"
         ],
         "timestamp": "2026-06-04T05:35:26.254Z"
+      },
+      {
+        "code": "s32 func_1502B8E0(s32 arg0, s32 arg1, s32 arg2, ...) {\n    register va_list args;\n    register s32 temp_a1;\n    s32 sp34;\n    s32 offset;\n    s32 more;\n\n    more = 1;\n    offset = (s32)D_AB1950;\n    va_start(args, arg2);\n    if (arg2 != 0) {\n        do {\n            temp_a1 = va_arg(args, s32);\n            if (more != 0) {\n                offset += func_1502AC88(offset, temp_a1, &sp34);\n            }\n            arg2--;\n            more = sp34 & 0x0FFFFFFF;\n        } while (arg2 != 0);\n    }\n    if (more != 0) {\n        more = func_1502B224(offset, arg0, sp34, arg1);\n    }\n    return more;\n}",
+        "score": 0.9434,
+        "reason": "structural_diffs=3",
+        "diffs": [
+          "structural: target=addiu s3, sp, 52 got=addiu s3, sp, 60",
+          "structural: target=lw t7, 52(sp) got=lw t7, 60(sp)",
+          "structural: target=lw a2, 52(sp) got=lw a2, 60(sp)"
+        ],
+        "timestamp": "2026-06-04T05:35:47.822Z"
+      },
+      {
+        "code": "s32 func_1502B8E0(s32 arg0, s32 arg1, s32 arg2, ...) {\n    va_list args;\n    s32 temp_a1;\n    s32 sp34[1];\n    s32 offset;\n    s32 more;\n\n    more = 1;\n    offset = (s32)D_AB1950;\n    va_start(args, arg2);\n    if (arg2 != 0) {\n        do {\n            temp_a1 = va_arg(args, s32);\n            if (more != 0) {\n                offset += func_1502AC88(offset, temp_a1, sp34);\n            }\n            arg2--;\n            more = sp34[0] & 0x0FFFFFFF;\n        } while (arg2 != 0);\n    }\n    if (more != 0) {\n        more = func_1502B224(offset, arg0, sp34[0], arg1);\n    }\n    return more;\n}",
+        "score": 0.9434,
+        "reason": "structural_diffs=3",
+        "diffs": [
+          "structural: target=addiu s3, sp, 52 got=addiu s3, sp, 60",
+          "structural: target=lw t7, 52(sp) got=lw t7, 60(sp)",
+          "structural: target=lw a2, 52(sp) got=lw a2, 60(sp)"
+        ],
+        "timestamp": "2026-06-04T05:36:18.354Z"
+      },
+      {
+        "code": "s32 func_1502B8E0(s32 arg0, s32 arg1, s32 arg2, ...) {\n    va_list args;\n    s32 temp_a1;\n    s32 sp3C;\n    s32 offset;\n    s32 more;\n\n    more = 1;\n    offset = (s32)D_AB1950;\n    va_start(args, arg2);\n    if (arg2 != 0) {\n        do {\n            temp_a1 = va_arg(args, s32);\n            if (more != 0) {\n                offset += func_1502AC88(offset, temp_a1, ((s32 *)&sp3C) - 2);\n            }\n            arg2--;\n            more = *(((s32 *)&sp3C) - 2) & 0x0FFFFFFF;\n        } while (arg2 != 0);\n    }\n    if (more != 0) {\n        more = func_1502B224(offset, arg0, *(((s32 *)&sp3C) - 2), arg1);\n    }\n    return more;\n}",
+        "score": 0.49074074074074076,
+        "reason": "length_mismatch (target=53, generated=54)",
+        "diffs": [],
+        "timestamp": "2026-06-04T05:36:39.181Z"
       }
     ]
   },
