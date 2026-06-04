@@ -163,7 +163,14 @@ s16 __n_vsVol(N_ALVoiceState *vs, N_ALSeqPlayer *seqp)
     return t1;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/init_1AAE0/func_1001B310.s")
+s32 func_1001B310(N_ALVoiceState *arg0, N_ALSeqPlayer *arg1) {
+    s32 sp14;
+    s32 sp10;
+
+    sp14 = arg1->chanState[arg0->channel].fxmix & 0x80;
+    sp10 = (s32)(*(f32 *)((s32)arg1 + 0x80) * ((s32)(*(f32 *)((s32)arg1 + 0x7C) * 127.0f) + (arg1->chanState[arg0->channel].fxmix & 0x7F)));
+    return (MAX(0, MIN(0x7F, sp10)) | sp14) & 0xFF;
+}
 // NON-MATCHING: missing a move
 // s32 func_1001B310(struct25 *arg0, struct26 *arg1) {
 //     s32 sp14;

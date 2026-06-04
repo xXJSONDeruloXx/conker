@@ -1026,5 +1026,14 @@
     "example_functions": [
       "func_150746F0"
     ]
+  },
+  {
+    "id": "one-past-local-for-stack-slot-shaping",
+    "description": "When target uses a scratch stack slot immediately above a scalar local without otherwise allocating a named variable there, adding a real padding local can inflate the frame, while using the local's one-past address shifts the pointer without changing frame size.",
+    "trigger": "Generated code matches except a stack scratch pointer is `addiu reg, sp, N` but target wants `N+4`; declaring an extra local changes the frame/arg-save offsets.",
+    "solution": "Keep the original locals/frame and initialize the pointer as `dst = &local + 1;` (or equivalent byte cast) to emit `addiu reg, sp, N+4` without increasing the stack frame.",
+    "example_functions": [
+      "func_1502B5C8"
+    ]
   }
 ]
