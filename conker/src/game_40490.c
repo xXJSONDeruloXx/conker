@@ -3,6 +3,10 @@
 #include "functions.h"
 #include "variables.h"
 
+extern u8 D_800C35E8;
+extern f32 D_80096650;
+extern void (*D_80082F28[])(struct16 *, f32);
+
 void func_151A9390(s32, u8, struct134 *, s32, f32, f32, s32, s32, s32);
 
 s32 func_151BE850(struct17 *arg0, s32 arg1, u8 arg2, u8 arg3, u8 arg4, u8 arg5, u8 arg6);
@@ -50,7 +54,33 @@ s32 func_1501396C(struct16 *arg0) {
 // another struct
 #pragma GLOBAL_ASM("asm/nonmatchings/game_40490/func_150139AC.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_40490/func_15013C38.s")
+s32 func_15013C38(struct16 *arg0) {
+    s32 temp_v1;
+    void (*func)(struct16 *, f32);
+    s32 temp_v0;
+    f32 temp_f0;
+
+    arg0->unk16 |= 4;
+    temp_v1 = *(s32 *)((s32)arg0 + 0x18);
+    if (((*(u8 *)((s32)D_800D2E4C + 0x11)) & 4) && (D_800BE9F0 == 0x13)) {
+        return 1;
+    }
+    if (D_800C35EA == 1) {
+        temp_v0 = D_800C35E8;
+        if ((temp_v0 == 0xF) || (temp_v0 == 0x10) || (temp_v0 == 0x11)) {
+            return 1;
+        }
+    }
+    if (temp_v1 >= 6) {
+        return 1;
+    }
+    func = D_80082F28[temp_v1];
+    if (func != NULL) {
+        temp_f0 = (f32)arg0->unk1C * D_80096650;
+        func(arg0, temp_f0);
+    }
+    return 1;
+}
 
 s32 func_15013D38(struct47 *arg0) {
     struct17 sp3C;

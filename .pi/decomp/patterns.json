@@ -1053,5 +1053,14 @@
     "example_functions": [
       "func_1514182C"
     ]
+  },
+  {
+    "id": "gfx-postincrement-display-list",
+    "description": "Display-list builders that increment pointers by 8 bytes should use `Gfx *` and post-increment (`pkt = glist++`) rather than raw `s32 *` arithmetic. IDO emits the old pointer save and `+8` update in the target order, avoiding extra reload/subtract instructions.",
+    "trigger": "Target writes two-word display-list commands, increments a pointer by 8, and stack locals show old-command pointer plus current display-list pointer.",
+    "solution": "Type the display-list pointer as `Gfx *`; use `cmd = glist++; cmd->words.w0 = ...; cmd->words.w1 = ...;` for each emitted command.",
+    "example_functions": [
+      "func_1001F978"
+    ]
   }
 ]
