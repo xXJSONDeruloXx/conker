@@ -565,7 +565,34 @@ void func_1513FA70(s32 arg0, s16 arg1) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_169510/func_1513FFF4.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_169510/func_151400D0.s")
+void func_151400D0(s32 arg0, s32 arg1) {
+    arg0 += 0x30;
+    arg1 += 0x1E;
+    *(u16 *)(arg0 - 0x2A) = *(u16 *)(arg1 - 0x16);
+    *(u8 *)(arg0 - 0x24) = *(s16 *)(arg1 - 0x1E);
+    *(u8 *)(arg0 - 0x23) = *(s16 *)(arg1 - 0x1C);
+    *(u8 *)(arg0 - 0x22) = *(s16 *)(arg1 - 0x1A);
+    *(u8 *)(arg0 - 0x21) = *(s16 *)(arg1 - 0x18);
+    *(u16 *)(arg0 - 0x2A) = 0;
+    *(u16 *)(arg0 - 0x1A) = *(u16 *)(arg1 - 0xC);
+    *(u8 *)(arg0 - 0x14) = *(s16 *)(arg1 - 0x14);
+    *(u8 *)(arg0 - 0x13) = *(s16 *)(arg1 - 0x12);
+    *(u8 *)(arg0 - 0x12) = *(s16 *)(arg1 - 0x10);
+    *(u8 *)(arg0 - 0x11) = *(s16 *)(arg1 - 0xE);
+    *(u16 *)(arg0 - 0x1A) = 0;
+    *(u16 *)(arg0 - 0xA) = *(u16 *)(arg1 - 2);
+    *(u8 *)(arg0 - 4) = *(s16 *)(arg1 - 0xA);
+    *(u8 *)(arg0 - 3) = *(s16 *)(arg1 - 8);
+    *(u8 *)(arg0 - 2) = *(s16 *)(arg1 - 6);
+    *(u8 *)(arg0 - 1) = *(s16 *)(arg1 - 4);
+    *(u16 *)(arg0 - 0xA) = 0;
+    *(u16 *)(arg0 + 6) = *(u16 *)(arg1 + 8);
+    *(u8 *)(arg0 + 0xC) = *(s16 *)(arg1 + 0);
+    *(u8 *)(arg0 + 0xD) = *(s16 *)(arg1 + 2);
+    *(u8 *)(arg0 + 0xE) = *(s16 *)(arg1 + 4);
+    *(u8 *)(arg0 + 0xF) = *(s16 *)(arg1 + 6);
+    *(u16 *)(arg0 + 6) = 0;
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_169510/func_15140190.s")
 

@@ -11572,9 +11572,39 @@
     "instructions": 48,
     "difficulty": "medium-low",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 0.1667,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_151400D0(s32 arg0, s32 arg1) {\n    u16 temp_t6;\n\n    temp_t6 = *(u16 *)(arg1 + 8);\n    arg0 += 0x30;\n    arg1 += 0x1E;\n    *(u16 *)(arg0 - 0x2A) = temp_t6;\n    *(u8 *)(arg0 - 0x24) = *(s16 *)(arg1 - 0x1E);\n    *(u8 *)(arg0 - 0x23) = *(s16 *)(arg1 - 0x1C);\n    *(u8 *)(arg0 - 0x22) = *(s16 *)(arg1 - 0x1A);\n    *(u8 *)(arg0 - 0x21) = *(s16 *)(arg1 - 0x18);\n    *(u16 *)(arg0 - 0x2A) = 0;\n\n    *(u16 *)(arg0 - 0x1A) = *(u16 *)(arg1 - 0xC);\n    *(u8 *)(arg0 - 0x14) = *(s16 *)(arg1 - 0x14);\n    *(u8 *)(arg0 - 0x13) = *(s16 *)(arg1 - 0x12);\n    *(u8 *)(arg0 - 0x12) = *(s16 *)(arg1 - 0x10);\n    *(u8 *)(arg0 - 0x11) = *(s16 *)(arg1 - 0xE);\n    *(u16 *)(arg0 - 0x1A) = 0;\n\n    *(u16 *)(arg0 - 0xA) = *(u16 *)(arg1 - 2);\n    *(u8 *)(arg0 - 4) = *(s16 *)(arg1 - 0xA);\n    *(u8 *)(arg0 - 3) = *(s16 *)(arg1 - 8);\n    *(u8 *)(arg0 - 2) = *(s16 *)(arg1 - 6);\n    *(u8 *)(arg0 - 1) = *(s16 *)(arg1 - 4);\n    *(u16 *)(arg0 - 0xA) = 0;\n\n    *(u16 *)(arg0 + 6) = *(u16 *)(arg1 + 8);\n    *(u8 *)(arg0 + 0xC) = *(s16 *)(arg1 + 0);\n    *(u8 *)(arg0 + 0xD) = *(s16 *)(arg1 + 2);\n    *(u8 *)(arg0 + 0xE) = *(s16 *)(arg1 + 4);\n    *(u8 *)(arg0 + 0xF) = *(s16 *)(arg1 + 6);\n    *(u16 *)(arg0 + 6) = 0;\n}",
+        "score": 0.1667,
+        "reason": "structural_diffs=40",
+        "diffs": [
+          "structural: target=lhu t6, 8(a1) got=lhu v0, 8(a1)",
+          "structural: target=sh t6, -42(a0) got=sh v0, -42(a0)",
+          "structural: target=lh t7, -30(a1) got=lh t6, -30(a1)",
+          "structural: target=sb t7, -36(a0) got=sb t6, -36(a0)",
+          "structural: target=lh t8, -28(a1) got=lh t7, -28(a1)",
+          "structural: target=sb t8, -35(a0) got=sb t7, -35(a0)",
+          "structural: target=lh t9, -26(a1) got=lh t8, -26(a1)",
+          "structural: target=sb t9, -34(a0) got=sb t8, -34(a0)",
+          "structural: target=lh t0, -24(a1) got=lh t9, -24(a1)",
+          "structural: target=sb t0, -33(a0) got=sb t9, -33(a0)",
+          "structural: target=lhu t1, -12(a1) got=lhu t0, -12(a1)",
+          "structural: target=sh t1, -26(a0) got=sh t0, -26(a0)",
+          "structural: target=lh t2, -20(a1) got=lh t1, -20(a1)",
+          "structural: target=sb t2, -20(a0) got=sb t1, -20(a0)",
+          "structural: target=lh t3, -18(a1) got=lh t2, -18(a1)",
+          "structural: target=sb t3, -19(a0) got=sb t2, -19(a0)",
+          "structural: target=lh t4, -16(a1) got=lh t3, -16(a1)",
+          "structural: target=sb t4, -18(a0) got=sb t3, -18(a0)",
+          "structural: target=lh t5, -14(a1) got=lh t4, -14(a1)",
+          "structural: target=sb t5, -17(a0) got=sb t4, -17(a0)"
+        ],
+        "timestamp": "2026-06-04T02:38:11.929Z"
+      }
+    ]
   },
   {
     "function": "func_10010F88",
@@ -20136,9 +20166,9 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 3,
-    "lastScore": 0.4787234042553192,
-    "status": "pending",
+    "attempts": 4,
+    "lastScore": 0.4519230769230769,
+    "status": "skipped",
     "history": [
       {
         "code": "void *func_15105C24(s32 arg0) {\n    u8 phi_v0;\n    u8 phi_v1;\n    s32 temp_a1;\n    void *phi_a0;\n\n    phi_v0 = 0;\n    do {\n        temp_a1 = *(&D_800A5770 + phi_v0) * 4;\n        phi_v1 = 0;\n        do {\n            phi_a0 = *(void **)(D_800DCE50 + (phi_v1 * 0x1A0) + temp_a1);\n            if (phi_a0 != NULL) {\n                do {\n                    if ((*(u8 *)((s32)phi_a0 + 0x13) == 0x2E) && (arg0 == *(s32 *)((s32)phi_a0 + 0x28))) {\n                        return phi_a0;\n                    }\n                    phi_a0 = *(void **)((s32)phi_a0 + 8);\n                } while (phi_a0 != NULL);\n            }\n            phi_v1++;\n        } while (phi_v1 < 2);\n        phi_v0++;\n    } while (phi_v0 < 2);\n    return NULL;\n}",
@@ -20160,6 +20190,13 @@
         "reason": "length_mismatch (target=47, generated=45)",
         "diffs": [],
         "timestamp": "2026-06-04T02:35:54.285Z"
+      },
+      {
+        "code": "void *func_15105C24(s32 arg0) {\n    s32 temp_a2;\n    u8 *temp_a3;\n    u8 phi_v0;\n    s32 temp_t0;\n    u8 phi_v1;\n    s32 temp_a1;\n    void *phi_a0;\n\n    temp_a2 = arg0;\n    temp_a3 = D_800DCE50;\n    phi_v0 = 0;\n    temp_t0 = 0x2E;\n    do {\n        temp_a1 = *(&D_800A5770 + phi_v0) << 2;\n        phi_v1 = 0;\n        do {\n            phi_a0 = *(void **)(temp_a3 + ((((phi_v1 * 4) - phi_v1) * 4 + phi_v1) << 5) + temp_a1);\n            if (phi_a0 == NULL) {\n                phi_v1++;\n            } else {\n                do {\n                    if ((*(u8 *)((s32)phi_a0 + 0x13) == temp_t0) && (temp_a2 == *(s32 *)((s32)phi_a0 + 0x28))) {\n                        return phi_a0;\n                    }\n                    phi_a0 = *(void **)((s32)phi_a0 + 8);\n                } while (phi_a0 != NULL);\n                phi_v1++;\n            }\n        } while (phi_v1 < 2);\n        phi_v0++;\n    } while (phi_v0 < 2);\n    return NULL;\n}",
+        "score": 0.4519230769230769,
+        "reason": "length_mismatch (target=47, generated=52)",
+        "diffs": [],
+        "timestamp": "2026-06-04T02:36:47.262Z"
       }
     ]
   },
