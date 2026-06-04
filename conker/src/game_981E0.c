@@ -3,6 +3,10 @@
 #include "functions.h"
 #include "variables.h"
 
+extern s32 D_80099BB8;
+void func_15143134(void *, void *, s32);
+void func_151C329C(void *, s32, s32);
+
 extern f32 D_80099D50;
 void func_15060A9C(s32, struct127 *);
 
@@ -1282,7 +1286,17 @@ void func_15071888(s32 arg0) {
     func_151D5714(D_800D154C, &D_800A1FB0, &D_800A1FBC, D_80088B90, D_80099F30, 0xFF, 1);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_150718E4.s")
+void func_150718E4(s32 arg0) {
+    f32 sp24[3];
+    s32 sp20;
+
+    sp20 = D_80099BB8;
+    if ((D_800D154C->unk1D4 != 0) || ((D_800D154C->unk74 & 0xF) == 0xF)) {
+        func_15143134(&D_800A5480, sp24, (((u8 *)&sp20)[func_150ADA20() & 3] << 6) + (s32)D_800D154C->unk1D4);
+        sp24[1] = D_800D154C->unk180 + 20.0f;
+        func_151C329C(sp24, 0xFF, 1);
+    }
+}
 
 void func_15071998(s32 arg0) {
     func_150FA520(D_800D154C, 0, 0xFF, 1);

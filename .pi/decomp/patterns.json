@@ -837,5 +837,14 @@
     "example_functions": [
       "func_15075884"
     ]
+  },
+  {
+    "id": "early-return-for-arg-stack-reload",
+    "description": "Using early returns instead of a large compound nested condition can make IDO reload a saved argument stack slot for a later call argument.",
+    "trigger": "Near-match differs only by `move a2, tN` versus target `lw a2, argslot(sp)` after an initial null-check loaded the same argument into a temp register.",
+    "solution": "Rewrite `if (arg != 0 && cond) { ... }` as sequential early-return guard clauses (`if (arg == 0) return; if (!cond) return;`). This can shorten the temp's live range so the call argument is reloaded from the stack slot.",
+    "example_functions": [
+      "func_1001091C"
+    ]
   }
 ]
