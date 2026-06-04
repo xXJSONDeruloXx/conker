@@ -28669,9 +28669,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1,
+    "status": "matched"
   },
   {
     "function": "func_15072208",
@@ -30668,9 +30668,32 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.45384615384615384,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_1506C32C(void) {\n    s32 sp24[4];\n    s32 *temp_a2;\n    s32 temp_v1;\n    s32 temp_t6;\n    s32 temp_v0;\n    s32 temp_a1;\n\n    temp_a2 = &D_800D187C;\n    temp_v1 = *temp_a2;\n    if (temp_v1 != 0) {\n        temp_t6 = temp_v1 - 1;\n        *temp_a2 = temp_t6;\n        temp_v0 = D_800D1580;\n        sp24[0] = temp_t6 & 0x7FF;\n        sp24[1] = temp_v0 & 0x7FF;\n        sp24[2] = (temp_v0 >> 11) & 0x7FF;\n        sp24[3] = (temp_v0 >> 22) & 0x7FF;\n        if (sp24[3] != 0) {\n            temp_a1 = 4;\n        } else if (sp24[2] != 0) {\n            temp_a1 = 3;\n        } else if (sp24[1] != 0) {\n            temp_a1 = 2;\n        } else {\n            temp_a1 = 0;\n        }\n        if (temp_a1 != 0) {\n            temp_a1 = func_1000F568(sp24[0]) - sp24[0];\n        }\n        temp_v0 = sp24[temp_a1];\n        if (temp_v0 != 0) {\n            *temp_a2 &= 0xFFFEF800;\n            D_800D1580 = temp_v0 | *temp_a2;\n            func_1506BF5C();\n        }\n    }\n}",
+        "score": 0.4830508474576271,
+        "reason": "length_mismatch (target=59, generated=57)",
+        "diffs": [],
+        "timestamp": "2026-06-04T08:55:38.545Z"
+      },
+      {
+        "code": "void func_1506C32C(void) {\n    s32 sp24;\n    s32 sp28;\n    s32 sp2C;\n    s32 sp30;\n    volatile s32 *temp_a2;\n    s32 temp_v1;\n    s32 temp_t6;\n    s32 temp_v0;\n    s32 temp_a1;\n\n    temp_a2 = &D_800D187C;\n    temp_v1 = *temp_a2;\n    if (temp_v1 != 0) {\n        temp_t6 = temp_v1 - 1;\n        *temp_a2 = temp_t6;\n        temp_v0 = D_800D1580;\n        sp24 = temp_t6 & 0x7FF;\n        sp28 = temp_v0 & 0x7FF;\n        sp2C = (temp_v0 >> 11) & 0x7FF;\n        sp30 = (temp_v0 >> 22) & 0x7FF;\n        if (sp30 != 0) {\n            temp_a1 = 4;\n        } else if (sp2C != 0) {\n            temp_a1 = 3;\n        } else if (sp28 != 0) {\n            temp_a1 = 2;\n        } else {\n            temp_a1 = 0;\n        }\n        if (temp_a1 != 0) {\n            temp_a1 = func_1000F568(sp24) - sp24;\n        }\n        temp_v0 = (&sp24)[temp_a1];\n        if (temp_v0 != 0) {\n            *temp_a2 = *temp_a2 & 0xFFFEF800;\n            D_800D1580 = temp_v0 | *temp_a2;\n            func_1506BF5C();\n        }\n    }\n}",
+        "score": 0.4745762711864407,
+        "reason": "length_mismatch (target=59, generated=56)",
+        "diffs": [],
+        "timestamp": "2026-06-04T08:56:17.021Z"
+      },
+      {
+        "code": "void func_1506C32C(void) {\n    volatile s32 sp24;\n    volatile s32 sp28;\n    volatile s32 sp2C;\n    volatile s32 sp30;\n    volatile s32 *temp_a2;\n    s32 temp_v1;\n    s32 temp_t6;\n    s32 temp_v0;\n    s32 temp_a1;\n\n    temp_a2 = &D_800D187C;\n    temp_v1 = *temp_a2;\n    if (temp_v1 != 0) {\n        temp_t6 = temp_v1 - 1;\n        *temp_a2 = temp_t6;\n        temp_v0 = D_800D1580;\n        sp24 = temp_t6 & 0x7FF;\n        sp28 = temp_v0 & 0x7FF;\n        sp2C = (temp_v0 >> 11) & 0x7FF;\n        sp30 = (temp_v0 >> 22) & 0x7FF;\n        if (sp30 != 0) {\n            temp_a1 = 4;\n        } else if (sp2C != 0) {\n            temp_a1 = 3;\n        } else if (sp28 != 0) {\n            temp_a1 = 2;\n        } else {\n            temp_a1 = 0;\n        }\n        if (temp_a1 != 0) {\n            temp_a1 = func_1000F568(sp24) - sp24;\n        }\n        temp_v0 = (&sp24)[temp_a1];\n        if (temp_v0 != 0) {\n            *temp_a2 = *temp_a2 & 0xFFFEF800;\n            D_800D1580 = temp_v0 | *temp_a2;\n            func_1506BF5C();\n        }\n    }\n}",
+        "score": 0.45384615384615384,
+        "reason": "length_mismatch (target=59, generated=65)",
+        "diffs": [],
+        "timestamp": "2026-06-04T08:56:59.121Z"
+      }
+    ]
   },
   {
     "function": "func_1502B7F0",
