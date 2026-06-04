@@ -33275,8 +33275,8 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
-    "lastScore": 0.0448,
+    "attempts": 6,
+    "lastScore": 0.4925373134328358,
     "status": "pending",
     "history": [
       {
@@ -33320,6 +33320,48 @@
           "structural: target=lw t9, 4(a1) got=lw t8, LO(D_800417B0)(t8)"
         ],
         "timestamp": "2026-06-04T11:54:43.054Z"
+      },
+      {
+        "code": "s32 func_1000CDA0(u8 arg0, s32 *arg1) {\n    if (arg0 == 0) {\n        return 1;\n    }\n    if (arg1 == NULL) {\n        return 1;\n    }\n    if (arg1[0] < 0) {\n        return 1;\n    }\n    if (D_800417B0[arg1[0]] == NULL) {\n        return 1;\n    }\n    if (arg1[1] <= 0) {\n        return 1;\n    }\n    if (func_1000853C(arg1[0]) == 3) {\n        return 1;\n    }\n    if ((D_8002B078[arg1[1]][0] & 0x20) == 0) {\n        D_800418AC[arg1[0]] |= 3;\n    }\n    return ((arg0 & ~D_800418AC[arg1[0]]) & 0xFF) == 0;\n}",
+        "score": 0.2239,
+        "reason": "structural_diffs=52",
+        "diffs": [
+          "structural: target=beqz a1, L2 got=bnezl a1, L2",
+          "structural: target=nop got=lw v0, 0(a1)",
+          "structural: target=lw v0, 0(a1) got=b L1",
+          "structural: target=lui t8, HI(D_800417B0) got=li v0, 1",
+          "structural: target=bltz v0, L3 got=lw v0, 0(a1)",
+          "structural: target=sll t7, v0, 2 got=lui t8, HI(D_800417B0)",
+          "structural: target=addu t8, t8, t7 got=bgez v0, L3",
+          "structural: target=lw t8, LO(D_800417B0)(t8) got=sll t7, v0, 2",
+          "structural: target=beqz t8, L4 got=b L1",
+          "structural: target=nop got=li v0, 1",
+          "structural: target=lw t9, 4(a1) got=addu t8, t8, t7",
+          "structural: target=andi a0, v0, 255 got=lw t8, LO(D_800417B0)(t8)",
+          "structural: target=bgtzl t9, L5 got=bnezl t8, L4",
+          "structural: target=sw v1, 28(sp) got=lw t9, 4(a1)",
+          "structural: target=sw v1, 28(sp) got=lw t9, 4(a1)",
+          "structural: target=jal func_1000853C got=andi a0, v0, 255",
+          "structural: target=sw a1, 36(sp) got=bgtzl t9, L5",
+          "structural: target=li at, 3 got=sw v1, 28(sp)",
+          "structural: target=lw v1, 28(sp) got=b L1",
+          "structural: target=bne v0, at, L6 got=li v0, 1"
+        ],
+        "timestamp": "2026-06-04T11:55:43.985Z"
+      },
+      {
+        "code": "s32 func_1000CDA0(u8 arg0, s32 *arg1) {\n    if (arg0 == 0) {\n        return 1;\n    }\n    if (arg1 != NULL) {\n        if (arg1[0] >= 0) {\n            if (D_800417B0[arg1[0]] != NULL) {\n                if (arg1[1] > 0) {\n                    if (func_1000853C(arg1[0]) != 3) {\n                        if ((D_8002B078[arg1[1]][0] & 0x20) == 0) {\n                            D_800418AC[arg1[0]] |= 3;\n                        }\n                        return ((arg0 & ~D_800418AC[arg1[0]]) & 0xFF) == 0;\n                    }\n                    return 1;\n                }\n                return 1;\n            }\n            return 1;\n        }\n        return 1;\n    }\n    return 1;\n}",
+        "score": 0.4925373134328358,
+        "reason": "length_mismatch (target=67, generated=66)",
+        "diffs": [],
+        "timestamp": "2026-06-04T11:56:20.987Z"
+      },
+      {
+        "code": "s32 func_1000CDA0(u8 arg0, s32 *arg1) {\n    if (arg0 == 0) {\n        return 1;\n    }\n    if (arg1 != NULL) {\n        if (arg1[0] >= 0) {\n            if (D_800417B0[arg1[0]] != NULL) {\n                if (arg1[1] <= 0) {\n                    return 1;\n                }\n                if (func_1000853C(arg1[0]) == 3) {\n                    return 1;\n                }\n                if ((D_8002B078[arg1[1]][0] & 0x20) == 0) {\n                    D_800418AC[arg1[0]] |= 3;\n                }\n                return ((arg0 & ~D_800418AC[arg1[0]]) & 0xFF) == 0;\n            }\n            return 1;\n        }\n        return 1;\n    }\n    return 1;\n}",
+        "score": 0.4925373134328358,
+        "reason": "length_mismatch (target=67, generated=66)",
+        "diffs": [],
+        "timestamp": "2026-06-04T11:56:39.746Z"
       }
     ]
   },
