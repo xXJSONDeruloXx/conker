@@ -20136,7 +20136,7 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 2,
+    "attempts": 3,
     "lastScore": 0.4787234042553192,
     "status": "pending",
     "history": [
@@ -20153,6 +20153,13 @@
         "reason": "length_mismatch (target=47, generated=45)",
         "diffs": [],
         "timestamp": "2026-06-04T02:22:03.343Z"
+      },
+      {
+        "code": "void *func_15105C24(s32 arg0) {\n    s32 temp_a2;\n    u8 *temp_a3;\n    s32 phi_v0;\n    s32 temp_t0;\n    s32 phi_v1;\n    s32 temp_a1;\n    void *phi_a0;\n\n    temp_a2 = arg0;\n    temp_a3 = D_800DCE50;\n    phi_v0 = 0;\n    temp_t0 = 0x2E;\n    do {\n        temp_a1 = *(s32 *)((s32)&D_800A5770 + (phi_v0 * 4));\n        phi_v1 = 0;\n        temp_a1 = temp_a1 << 2;\n        do {\n            phi_a0 = *(void **)(temp_a3 + ((((phi_v1 * 4) - phi_v1) * 4 + phi_v1) << 5) + temp_a1);\n            if (phi_a0 != NULL) {\n                do {\n                    if ((*(u8 *)((s32)phi_a0 + 0x13) == temp_t0) && (temp_a2 == *(s32 *)((s32)phi_a0 + 0x28))) {\n                        return phi_a0;\n                    }\n                    phi_a0 = *(void **)((s32)phi_a0 + 8);\n                } while (phi_a0 != NULL);\n            }\n            phi_v1++;\n            phi_v1 &= 0xFF;\n        } while (phi_v1 < 2);\n        phi_v0++;\n        phi_v0 &= 0xFF;\n    } while (phi_v0 < 2);\n    return NULL;\n}",
+        "score": 0.4787234042553192,
+        "reason": "length_mismatch (target=47, generated=45)",
+        "diffs": [],
+        "timestamp": "2026-06-04T02:35:54.285Z"
       }
     ]
   },
@@ -22543,9 +22550,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1,
+    "status": "matched"
   },
   {
     "function": "func_15002560",
