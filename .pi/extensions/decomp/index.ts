@@ -860,16 +860,18 @@ export default function (pi: ExtensionAPI) {
 						state.patterns = coordPatterns;
 					}
 
-					// Now fall through to the normal "next" logic but with the claimed function
-					// Override the queue to only contain this function
+					// FORCE this claimed function as the next candidate
+					// Update local queue entry to match coordinator state
 					const overrideEntry = state.queue.find((e) => e.function === claim.function);
 					if (overrideEntry) {
 						overrideEntry.status = "pending";
 						overrideEntry.history = claim.history || overrideEntry.history;
 					}
+
+					// Set a flag so the normal queue logic ONLY serves this function
+					(state as any)._coordinatorClaim = claim.function;
 				} catch (e: any) {
 					// Coordinator unreachable — fall back to local queue
-					// (allows graceful degradation if coordinator dies)
 				}
 			}
 
@@ -902,6 +904,13 @@ export default function (pi: ExtensionAPI) {
 			}
 
 			let candidates = state.queue.filter((e) => e.status === "pending");
+
+			// If coordinator claimed a specific function, ONLY serve that one
+			const coordClaim = (state as any)._coordinatorClaim;
+			if (coordClaim) {
+				candidates = candidates.filter((e) => e.function === coordClaim);
+				delete (state as any)._coordinatorClaim; // consume the claim
+			}
 
 			// Auto-rotate: skip functions we ground on this session (unless nearMiss filter explicitly requested)
 			if (!params.filter?.nearMiss && sessionRotatedFunctions.size > 0) {
@@ -2537,17 +2546,37 @@ export default function (pi: ExtensionAPI) {
 					}
 				}
 
-				// Symlinks
+				// Symlinks (shared read-only resources)
 				const symlinks: [string, string][] = [
 					[path.join(ctx.cwd, "baserom.us.z64"), path.join(laneDir, "baserom.us.z64")],
 					[path.join(ctx.cwd, "ido"), path.join(laneDir, "ido")],
 					[path.join(ctx.cwd, "tools/ido-native"), path.join(laneDir, "tools/ido-native")],
 					[path.join(ctx.cwd, "tools/transmuter"), path.join(laneDir, "tools/transmuter")],
+					[path.join(ctx.cwd, "assets"), path.join(laneDir, "assets")],
 				];
 				fs.mkdirSync(path.join(laneDir, "tools"), { recursive: true });
 				for (const [src, dest] of symlinks) {
 					if (!fs.existsSync(dest) && fs.existsSync(src)) {
 						fs.symlinkSync(src, dest);
+					}
+				}
+
+				// Copy-on-write clone of build dir (each lane needs its own for compilation)
+				const buildSrc = path.join(ctx.cwd, "conker/build");
+				const buildDest = path.join(laneDir, "conker/build");
+				if (!fs.existsSync(buildDest) && fs.existsSync(buildSrc)) {
+					await pi.exec("cp", ["-cR", buildSrc, buildDest], { timeout: 30000 });
+				}
+
+				// Copy gitignored files needed for build
+				const copyFiles: [string, string][] = [
+					[path.join(ctx.cwd, "conker/conker.ld"), path.join(laneDir, "conker/conker.ld")],
+					[path.join(ctx.cwd, ".baserom.us.ok"), path.join(laneDir, ".baserom.us.ok")],
+					[path.join(ctx.cwd, "conker/undefined_syms_auto.txt"), path.join(laneDir, "conker/undefined_syms_auto.txt")],
+				];
+				for (const [src, dest] of copyFiles) {
+					if (!fs.existsSync(dest) && fs.existsSync(src)) {
+						fs.copyFileSync(src, dest);
 					}
 				}
 
