@@ -27850,9 +27850,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
-    "lastScore": 0.4568965517241379,
-    "status": "pending",
+    "attempts": 4,
+    "lastScore": 0.47413793103448276,
+    "status": "skipped",
     "history": [
       {
         "code": "void func_15016588(void) {\n    s32 sp40;\n    s32 sp44;\n    s32 i;\n    s32 byte;\n    s32 mask;\n\n    bzero(D_800BE580, 8);\n    byte = -1;\n    i = 0;\n    mask = sp44;\n    do {\n        if ((i & 7) == 0) {\n            mask = 1;\n            byte++;\n        } else {\n            mask <<= 1;\n        }\n        func_1502B020(&sp40, 3, 0x1A, D_800BEAAB, i);\n        i++;\n        if (sp40 != 0) {\n            D_800BE580[byte] |= mask;\n        }\n    } while (i != 0x43);\n    sp44 = mask;\n}",
@@ -27874,6 +27874,13 @@
         "reason": "length_mismatch (target=58, generated=53)",
         "diffs": [],
         "timestamp": "2026-06-04T08:09:15.325Z"
+      },
+      {
+        "code": "void func_15016588(void) {\n    volatile s32 local[2];\n    s32 i;\n    s32 byte;\n    s32 mask;\n\n    bzero(D_800BE580, 8);\n    byte = -1;\n    i = 0;\n    mask = local[1];\n    do {\n        if ((i & 7) == 0) {\n            mask = 1;\n            byte++;\n        } else {\n            mask <<= 1;\n        }\n        func_1502B020((void *)local, 3, 0x1A, D_800BEAAB, i);\n        i++;\n        if (local[0] != 0) {\n            D_800BE580[byte] |= mask;\n        }\n    } while (i != 0x43);\n    local[1] = mask;\n}",
+        "score": 0.47413793103448276,
+        "reason": "length_mismatch (target=58, generated=55)",
+        "diffs": [],
+        "timestamp": "2026-06-04T08:09:31.303Z"
       }
     ]
   },
@@ -30892,9 +30899,32 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.4827586206896552,
+    "status": "pending",
+    "history": [
+      {
+        "code": "u16 func_10011EB8(s32 arg0, s16 *arg1, s32 arg2) {\n    s32 temp_v0;\n    u8 *base;\n    u8 *ptr;\n    u16 temp_a0;\n\n    temp_v0 = func_1510F8CC(arg0);\n    base = (u8 *)D_8002C240;\n    if (arg1 != NULL) {\n        if (D_80082FA0 != 0) {\n            *arg1 = 0x7FFF / (D_80082FA0 + 1);\n        } else {\n            *arg1 = 0x7FFF;\n        }\n    }\n    ptr = base + (temp_v0 * 0x14) + (arg2 * 4);\n    temp_a0 = *(u16 *)ptr;\n    if (*(u16 *)(ptr + 2) >= 2) {\n        temp_a0 = func_1000F568(temp_a0, *(u16 *)(base + (temp_v0 * 0x14) + (arg2 * 4) + 2));\n    }\n    return temp_a0;\n}",
+        "score": 0.4827586206896552,
+        "reason": "length_mismatch (target=58, generated=56)",
+        "diffs": [],
+        "timestamp": "2026-06-04T08:11:08.748Z"
+      },
+      {
+        "code": "u16 func_10011EB8(s32 arg0, s16 *arg1, s32 arg2) {\n    s32 temp_v0;\n    s32 temp_a3;\n    u8 *base;\n    u8 *ptr;\n    u16 temp_a0;\n    s32 offset;\n    s32 offset2;\n\n    temp_v0 = func_1510F8CC(arg0);\n    base = (u8 *)D_8002C240;\n    temp_a3 = temp_v0;\n    if (arg1 != NULL) {\n        if (D_80082FA0 != 0) {\n            *arg1 = 0x7FFF / (D_80082FA0 + 1);\n        } else {\n            *arg1 = 0x7FFF;\n        }\n    }\n    offset = ((temp_v0 << 2) + temp_v0) << 2;\n    ptr = base + offset + (arg2 << 2);\n    temp_a0 = *(u16 *)ptr;\n    if (*(u16 *)(ptr + 2) >= 2) {\n        offset2 = ((temp_a3 << 2) + temp_a3) << 2;\n        temp_a0 = func_1000F568(temp_a0, *(u16 *)(base + offset2 + (arg2 << 2) + 2));\n    }\n    return temp_a0;\n}",
+        "score": 0.49137931034482757,
+        "reason": "length_mismatch (target=58, generated=57)",
+        "diffs": [],
+        "timestamp": "2026-06-04T08:11:30.409Z"
+      },
+      {
+        "code": "u16 func_10011EB8(s32 arg0, s16 *arg1, s32 arg2) {\n    s32 temp_v0;\n    s32 temp_a3;\n    u8 *base;\n    u8 *ptr;\n    s32 temp_a0;\n    s32 offset;\n    s32 arg2offset;\n    s32 offset2;\n\n    temp_v0 = func_1510F8CC(arg0);\n    temp_a3 = temp_v0;\n    base = (u8 *)D_8002C240;\n    if (arg1 != NULL) {\n        if (D_80082FA0 != 0) {\n            *arg1 = 0x7FFF / (D_80082FA0 + 1);\n        } else {\n            *arg1 = 0x7FFF;\n        }\n    }\n    offset = ((temp_v0 << 2) + temp_v0) << 2;\n    arg2offset = arg2 << 2;\n    ptr = base + offset + arg2offset;\n    temp_a0 = *(u16 *)ptr;\n    if (*(u16 *)(ptr + 2) >= 2) {\n        offset2 = ((temp_a3 << 2) + temp_a3) << 2;\n        temp_a0 = func_1000F568(temp_a0, *(u16 *)(base + offset2 + arg2offset + 2));\n    }\n    return temp_a0;\n}",
+        "score": 0.4827586206896552,
+        "reason": "length_mismatch (target=58, generated=56)",
+        "diffs": [],
+        "timestamp": "2026-06-04T08:11:54.344Z"
+      }
+    ]
   },
   {
     "function": "_n_collectPVoices",
