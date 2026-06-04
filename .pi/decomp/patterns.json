@@ -1080,5 +1080,14 @@
     "example_functions": [
       "func_1514563C"
     ]
+  },
+  {
+    "id": "stack-array-padding-sandwich",
+    "description": "When a raw stack struct/array has the right code shape but sits at the wrong stack offset, sandwich it between unused padding locals. IDO lays later declarations at lower addresses and earlier declarations at higher addresses, so padding before/after the array can independently tune the local base and total frame size without emitted code.",
+    "trigger": "A near-match has the exact instructions and frame or call-stack offsets but all accesses to the local byte array are shifted by a small constant (e.g. base sp+0x44 vs target sp+0x48), or adding one pad moves it too far.",
+    "solution": "Declare high-address padding before the array and low-address padding after it, e.g. `s32 padHi[3]; u8 local[0x1C]; s32 padLo;`, until the array spans the target offsets while the frame size remains matched.",
+    "example_functions": [
+      "func_15136918"
+    ]
   }
 ]
