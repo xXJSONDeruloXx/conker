@@ -24997,7 +24997,7 @@
     ],
     "attempts": 12,
     "lastScore": 0.49074074074074076,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "void func_1507B974(void) {\n    struct127 *phi_v1;\n    u8 *temp_t0;\n\n    phi_v1 = D_800D154C;\n    if (phi_v1->unk65 != 0) {\n        phi_v1 = &D_800CC2D0[phi_v1->unk65 - 1];\n    }\n    temp_t0 = (u8 *)D_800D2104[phi_v1->unk13F] + (phi_v1->unk21E * 8) + (D_800D1893 * 8);\n    if (D_800D1891 == *(u16 *)(temp_t0 + 6)) {\n        D_800D1892 ^= 1;\n    }\n    if (D_800D1892 != 0) {\n        func_15075400(D_800D1890);\n    }\n}",
@@ -27825,8 +27825,8 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 8,
-    "lastScore": 0.49056603773584906,
+    "attempts": 9,
+    "lastScore": 0.4716981132075472,
     "status": "pending",
     "history": [
       {
@@ -27884,6 +27884,13 @@
         "reason": "length_mismatch (target=53, generated=52)",
         "diffs": [],
         "timestamp": "2026-06-04T05:39:55.524Z"
+      },
+      {
+        "code": "void func_15163FEC(struct225 *arg0, void *arg1, s32 arg2) {\n    s32 temp_v1;\n    u8 *temp_v0;\n    s32 temp_a2;\n    void (*func)(s32);\n\n    arg2 = (u8)arg2;\n    if (arg2 == 0) {\n        temp_v0 = (u8 *)arg0 + 0x18;\n        temp_v1 = *(s32 *)arg1;\n        if ((temp_v1 == *(s32 *)temp_v0) || (temp_v0[4] == *(u8 *)((s32)arg1 + 4))) {\n            func_1516972C((struct102 *)arg0);\n        }\n    } else if (arg2 == 0x2D) {\n        temp_v0 = (u8 *)arg0 + 0x18;\n        temp_a2 = *(s32 *)temp_v0;\n        temp_v1 = *(s32 *)arg1;\n        if (temp_v1 == temp_a2) {\n            *(s32 *)temp_v0 = *(s32 *)((s32)arg1 + 4);\n            temp_v0[4] = *(u8 *)((s32)arg1 + 9);\n        } else if (*(s32 *)((s32)arg1 + 4) == temp_a2) {\n            *(s32 *)temp_v0 = temp_v1;\n            temp_v0[4] = *(u8 *)((s32)arg1 + 8);\n        }\n    } else {\n        func = D_8008B374[*(u8 *)((s32)arg0 + 0x2D)];\n        if (func != NULL) {\n            func(arg2);\n        }\n    }\n}",
+        "score": 0.4716981132075472,
+        "reason": "length_mismatch (target=53, generated=50)",
+        "diffs": [],
+        "timestamp": "2026-06-04T14:12:59.702Z"
       }
     ]
   },
