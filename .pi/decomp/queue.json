@@ -16360,9 +16360,9 @@
     "instructions": 44,
     "difficulty": "medium-low",
     "tags": [],
-    "attempts": 3,
+    "attempts": 5,
     "lastScore": 0.48863636363636365,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "void func_15077404(void) {\n    struct127 *temp_v1;\n    s32 temp_v0;\n    s16 temp_t7;\n\n    if (D_800D1893 != 0) {\n        temp_v1 = D_800D154C;\n        temp_t7 = (D_800D1891 << 8) + D_800D1892;\n        temp_v0 = (s16)(((temp_v1->unk246 & 0x1F) << 8) + temp_v1->unk249 + (temp_t7 * D_800BE9E4));\n        if (temp_v0 < 0) {\n            temp_v0 = 0;\n        }\n        temp_v1->unk246 = (temp_v0 >> 8) | 0x80;\n        D_800D154C->unk249 = temp_v0;\n    } else {\n        D_800D154C->unk246 = D_800D1890;\n    }\n}",
@@ -16384,6 +16384,20 @@
         "reason": "length_mismatch (target=44, generated=43)",
         "diffs": [],
         "timestamp": "2026-06-04T00:22:22.061Z"
+      },
+      {
+        "code": "void func_15077404(void) {\n    struct127 *temp_v1;\n    s32 temp_v0;\n    s32 temp_t3;\n\n    if (D_800D1893 != 0) {\n        temp_v1 = D_800D154C;\n        temp_t3 = D_800D1891;\n        temp_v0 = (s16)((((temp_v1->unk246 & 0x1F) << 8) + temp_v1->unk249) + ((s16)((temp_t3 << 8) + D_800D1892) * D_800BE9E4));\n        if (temp_v0 < 0) {\n            temp_v0 = 0;\n        }\n        temp_v1->unk246 = (temp_v0 >> 8) | 0x80;\n        D_800D154C->unk249 = temp_v0;\n    } else {\n        D_800D154C->unk246 = D_800D1890;\n    }\n}",
+        "score": 0.48863636363636365,
+        "reason": "length_mismatch (target=44, generated=43)",
+        "diffs": [],
+        "timestamp": "2026-06-04T00:23:10.594Z"
+      },
+      {
+        "code": "void func_15077404(void) {\n    s32 temp_v0;\n    struct127 *temp_v1;\n    s32 temp_t3;\n\n    if (D_800D1893 != 0) {\n        temp_v1 = D_800D154C;\n        temp_t3 = D_800D1891;\n        temp_v0 = (s16)((((temp_v1->unk246 & 0x1F) << 8) + temp_v1->unk249) + ((s16)((temp_t3 << 8) + D_800D1892) * D_800BE9E4));\n        if (temp_v0 < 0) {\n            temp_v0 = 0;\n        }\n        temp_v1->unk246 = (temp_v0 >> 8) | 0x80;\n        D_800D154C->unk249 = temp_v0;\n    } else {\n        D_800D154C->unk246 = D_800D1890;\n    }\n}",
+        "score": 0.48863636363636365,
+        "reason": "length_mismatch (target=44, generated=43)",
+        "diffs": [],
+        "timestamp": "2026-06-04T00:23:31.363Z"
       }
     ]
   },
@@ -19369,9 +19383,32 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.48863636363636365,
+    "status": "pending",
+    "history": [
+      {
+        "code": "s32 func_15013D38(struct47 *arg0) {\n    struct17 sp3C;\n    s32 temp_v1;\n\n    arg0->unk16 |= 4;\n    sp3C.unk0 = arg0->unk0;\n    sp3C.unk4 = arg0->unk2;\n    sp3C.unk8 = arg0->unk4;\n    temp_v1 = 1;\n    if (arg0->unk18 != 0) {\n        temp_v1 = arg0->unk18;\n    }\n    func_151BE850(&sp3C, arg0->unk10, temp_v1, arg0->unk1F, 1, 0xFF, 1);\n    return 1;\n}",
+        "score": 0.48863636363636365,
+        "reason": "length_mismatch (target=44, generated=43)",
+        "diffs": [],
+        "timestamp": "2026-06-04T00:25:21.056Z"
+      },
+      {
+        "code": "s32 func_15013D38(struct47 *arg0) {\n    struct17 sp3C;\n    s32 temp_v0;\n    s32 temp_v1;\n\n    arg0->unk16 |= 4;\n    sp3C.unk0 = arg0->unk0;\n    sp3C.unk4 = arg0->unk2;\n    sp3C.unk8 = arg0->unk4;\n    temp_v0 = arg0->unk18;\n    temp_v1 = 1;\n    if (temp_v0 != 0) {\n        temp_v1 = temp_v0;\n    }\n    func_151BE850(&sp3C, arg0->unk10, temp_v1, arg0->unk1F, 1, 0xFF, 1);\n    return 1;\n}",
+        "score": 0.48863636363636365,
+        "reason": "length_mismatch (target=44, generated=43)",
+        "diffs": [],
+        "timestamp": "2026-06-04T00:25:57.940Z"
+      },
+      {
+        "code": "s32 func_15013D38(struct47 *arg0) {\n    struct17 sp3C;\n    struct17 *temp_a0;\n    s32 temp_v0;\n    s32 temp_v1;\n\n    temp_a0 = &sp3C;\n    arg0->unk16 |= 4;\n    temp_a0->unk0 = arg0->unk0;\n    temp_a0->unk4 = arg0->unk2;\n    temp_a0->unk8 = arg0->unk4;\n    temp_v0 = arg0->unk18;\n    temp_v1 = 1;\n    if (temp_v0 != 0) {\n        temp_v1 = temp_v0;\n    }\n    func_151BE850(temp_a0, arg0->unk10, temp_v1, arg0->unk1F, 1, 0xFF, 1);\n    return 1;\n}",
+        "score": 0.48863636363636365,
+        "reason": "length_mismatch (target=44, generated=43)",
+        "diffs": [],
+        "timestamp": "2026-06-04T00:26:23.454Z"
+      }
+    ]
   },
   {
     "function": "func_151DAA88",
