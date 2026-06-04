@@ -23023,9 +23023,32 @@
     "instructions": 69,
     "difficulty": "medium",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.4927536231884058,
+    "status": "pending",
+    "history": [
+      {
+        "code": "s32 func_151415D4(struct210 *arg0) {\n    struct211 *temp_v0;\n    f32 temp_f2;\n    f32 temp_f0;\n\n    temp_v0 = (struct211 *)((s32)arg0 + 0x170);\n    if (*(f32 *)((s32)arg0 + 0x17C) < *(f32 *)((s32)arg0 + 0x180)) {\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4;\n    } else {\n        temp_f2 = temp_v0->unkC;\n        if (temp_f2 < temp_v0->unk14) {\n            *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4 + (temp_v0->unk8 * ((temp_f2 - temp_v0->unk10) * *(f32 *)((s32)temp_v0 + 0x20)));\n        } else if (temp_f2 < *(f32 *)((s32)temp_v0 + 0x18)) {\n            *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk0;\n        } else {\n            *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4 + (temp_v0->unk8 * (1.0f - ((temp_f2 - *(f32 *)((s32)temp_v0 + 0x18)) * *(f32 *)((s32)temp_v0 + 0x20))));\n        }\n    }\n    temp_v0->unkC += D_800BE9A4;\n    temp_f0 = *(f32 *)((s32)temp_v0 + 0x1C);\n    while (temp_f0 < temp_v0->unkC) {\n        temp_v0->unkC -= temp_f0;\n    }\n    return 1;\n}",
+        "score": 0.4927536231884058,
+        "reason": "length_mismatch (target=69, generated=68)",
+        "diffs": [],
+        "timestamp": "2026-06-04T12:45:04.529Z"
+      },
+      {
+        "code": "s32 func_151415D4(struct210 *arg0) {\n    struct211 *temp_v0;\n    f32 temp_f0;\n    f32 temp_f2;\n\n    temp_v0 = (struct211 *)((s32)arg0 + 0x170);\n    if (*(f32 *)((s32)arg0 + 0x17C) < *(f32 *)((s32)arg0 + 0x180)) {\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4;\n    } else {\n        temp_f2 = temp_v0->unkC;\n        if (temp_f2 < temp_v0->unk14) {\n            *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4 + (temp_v0->unk8 * ((temp_f2 - temp_v0->unk10) * *(f32 *)((s32)temp_v0 + 0x20)));\n        } else if (temp_f2 < *(f32 *)((s32)temp_v0 + 0x18)) {\n            *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk0;\n        } else {\n            *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4 + (temp_v0->unk8 * (1.0f - ((temp_f2 - *(f32 *)((s32)temp_v0 + 0x18)) * *(f32 *)((s32)temp_v0 + 0x20))));\n        }\n    }\n    temp_v0->unkC += D_800BE9A4;\n    temp_f0 = *(f32 *)((s32)temp_v0 + 0x1C);\n    while (temp_f0 < temp_v0->unkC) {\n        temp_v0->unkC -= temp_f0;\n    }\n    return 1;\n}",
+        "score": 0.4927536231884058,
+        "reason": "length_mismatch (target=69, generated=68)",
+        "diffs": [],
+        "timestamp": "2026-06-04T12:45:35.392Z"
+      },
+      {
+        "code": "s32 func_151415D4(struct210 *arg0) {\n    struct211 *temp_v0;\n    f32 temp_f0;\n    f32 temp_f2;\n    f32 temp_f4;\n\n    temp_v0 = (struct211 *)((s32)arg0 + 0x170);\n    if (*(f32 *)((s32)arg0 + 0x17C) < *(f32 *)((s32)arg0 + 0x180)) {\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4;\n    } else {\n        temp_f2 = temp_v0->unkC;\n        if (temp_f2 < temp_v0->unk14) {\n            temp_f0 = (temp_f2 - temp_v0->unk10) * *(f32 *)((s32)temp_v0 + 0x20);\n            *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4 + (temp_v0->unk8 * temp_f0);\n        } else if (temp_f2 < *(f32 *)((s32)temp_v0 + 0x18)) {\n            *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk0;\n        } else {\n            temp_f4 = temp_f2 - *(f32 *)((s32)temp_v0 + 0x18);\n            temp_f0 = 1.0f - (temp_f4 * *(f32 *)((s32)temp_v0 + 0x20));\n            *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4 + (temp_v0->unk8 * temp_f0);\n        }\n    }\n    temp_v0->unkC += D_800BE9A4;\n    temp_f0 = *(f32 *)((s32)temp_v0 + 0x1C);\n    while (temp_f0 < temp_v0->unkC) {\n        temp_v0->unkC -= temp_f0;\n    }\n    return 1;\n}",
+        "score": 0.4927536231884058,
+        "reason": "length_mismatch (target=69, generated=68)",
+        "diffs": [],
+        "timestamp": "2026-06-04T12:46:12.193Z"
+      }
+    ]
   },
   {
     "function": "func_1000F1A8",
@@ -36692,9 +36715,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
-    "lastScore": 0.4927536231884058,
-    "status": "pending",
+    "attempts": 4,
+    "lastScore": 0.4722222222222222,
+    "status": "skipped",
     "history": [
       {
         "code": "void *func_15019BB8(s32 *arg0, s32 arg1) {\n    void *temp_v0;\n    s32 sp28;\n    s32 mask;\n\n    arg0[0] = 0xDC080008;\n    arg0[1] = D_800BE628 + (arg1 * 0x180) + (D_800BE9C0 * 0x10) + 0x40;\n    sp28 = (s16)arg1;\n    temp_v0 = (void *)func_1501A490((s32)(arg0 + 2), sp28, 0, 0, 0, 0);\n    temp_v0 = func_1517F4D8(temp_v0, arg1);\n    temp_v0 = func_1517F3A0(temp_v0, arg1);\n    temp_v0 = func_15180580(temp_v0, arg1);\n    mask = 1 << arg1;\n    if (((D_800D18A0 & mask) != 0) || ((D_800D18A2 & mask) != 0)) {\n        temp_v0 = func_1507DB6C(temp_v0, arg1);\n    }\n    temp_v0 = func_151674F8(temp_v0, 4, (s16)sp28, 0);\n    return func_151674F8(temp_v0, 4, (s16)sp28, 1);\n}",
@@ -36716,6 +36739,13 @@
         "reason": "length_mismatch (target=68, generated=69)",
         "diffs": [],
         "timestamp": "2026-06-04T12:42:56.299Z"
+      },
+      {
+        "code": "void *func_15019BB8(void *arg0, s16 arg1) {\n    void *temp_v0;\n    s32 sp28;\n    s32 mask;\n\n    *(s32 *)arg0 = 0xDC080008;\n    *(s32 *)((s32)arg0 + 4) = D_800BE628 + (arg1 * 0x180) + (D_800BE9C0 * 0x10) + 0x40;\n    sp28 = arg1;\n    temp_v0 = (void *)func_1501A490((s32)arg0 + 8, sp28, 0, 0, 0, 0);\n    temp_v0 = func_1517F4D8(temp_v0, arg1);\n    temp_v0 = func_1517F3A0(temp_v0, arg1);\n    temp_v0 = func_15180580(temp_v0, arg1);\n    mask = 1 << arg1;\n    if (((D_800D18A0 & mask) != 0) || ((D_800D18A2 & mask) != 0)) {\n        temp_v0 = func_1507DB6C(temp_v0, arg1);\n    }\n    temp_v0 = func_151674F8(temp_v0, 4, (s16)sp28, 0);\n    return func_151674F8(temp_v0, 4, (s16)sp28, 1);\n}",
+        "score": 0.4722222222222222,
+        "reason": "length_mismatch (target=68, generated=72)",
+        "diffs": [],
+        "timestamp": "2026-06-04T12:43:35.027Z"
       }
     ]
   },
@@ -38004,7 +38034,7 @@
     ],
     "attempts": 0,
     "lastScore": 0,
-    "status": "pending"
+    "status": "skipped"
   },
   {
     "function": "func_15140190",
