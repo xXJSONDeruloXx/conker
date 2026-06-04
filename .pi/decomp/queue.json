@@ -23997,8 +23997,8 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 9,
-    "lastScore": 0.4814814814814815,
+    "attempts": 12,
+    "lastScore": 0.6538,
     "status": "pending",
     "history": [
       {
@@ -24063,6 +24063,46 @@
         "reason": "length_mismatch (target=52, generated=54)",
         "diffs": [],
         "timestamp": "2026-06-04T14:04:11.119Z"
+      },
+      {
+        "code": "s32 func_1000EE70(void *arg0, s32 arg1, void *arg2, s32 arg3, s32 arg4, void *arg5) {\n    void *temp_v1;\n    s32 temp_t9;\n    s32 temp_t7;\n\n    arg1 = (s32)arg0;\n    temp_v1 = *(void **)(arg1 + 0x18);\n    if (temp_v1 != NULL) {\n        if (*(s32 *)arg2 != 0) {\n            temp_t9 = *(s32 *)temp_v1;\n            temp_t7 = *(s32 *)(arg1 + 0x1C);\n            if ((temp_t9 != 0) && (*(u8 *)((s32)temp_v1 + 0x3B) == (temp_t7 & 0xFF))) {\n                *(s32 *)arg5 = (((u32)*(s32 *)((s32)temp_v1 + 0x184) >> 3) & 0x30) << 1;\n                *(s16 *)(arg1 + 2) = *(f32 *)((s32)temp_v1 + 0x14);\n                *(s16 *)(arg1 + 4) = *(f32 *)((s32)temp_v1 + 0x18);\n                *(s16 *)(arg1 + 6) = *(f32 *)((s32)temp_v1 + 0x1C);\n                return 0;\n            }\n            if (func_1000F44C(*(u16 *)(arg1 + 0x24)) == 0) {\n                return 0;\n            }\n        }\n    }\n    return 1;\n}",
+        "score": 0.49056603773584906,
+        "reason": "length_mismatch (target=52, generated=53)",
+        "diffs": [],
+        "timestamp": "2026-06-04T14:04:41.317Z"
+      },
+      {
+        "code": "s32 func_1000EE70(void *arg0, s32 arg1, void *arg2, s32 arg3, s32 arg4, void *arg5) {\n    void *temp_v1;\n    s32 temp_t9;\n    s32 temp_t7;\n    s32 temp_t8;\n\n    arg1 = (s32)arg0;\n    temp_v1 = *(void **)(arg1 + 0x18);\n    if (temp_v1 != NULL) {\n        if (*(s32 *)arg2 != 0) {\n            temp_t9 = *(s32 *)temp_v1;\n            temp_t7 = *(s32 *)(arg1 + 0x1C);\n            temp_t8 = temp_t7 & 0xFF;\n            if (temp_t9 != 0) {\n                if (*(u8 *)((s32)temp_v1 + 0x3B) == temp_t8) {\n                    *(s32 *)arg5 = (((u32)*(s32 *)((s32)temp_v1 + 0x184) >> 3) & 0x30) << 1;\n                    *(s16 *)(arg1 + 2) = *(f32 *)((s32)temp_v1 + 0x14);\n                    *(s16 *)(arg1 + 4) = *(f32 *)((s32)temp_v1 + 0x18);\n                    *(s16 *)(arg1 + 6) = *(f32 *)((s32)temp_v1 + 0x1C);\n                    return 0;\n                }\n            }\n            if (func_1000F44C(*(u16 *)(arg1 + 0x24)) == 0) {\n                return 0;\n            }\n        }\n    }\n    return 1;\n}",
+        "score": 0.49056603773584906,
+        "reason": "length_mismatch (target=52, generated=53)",
+        "diffs": [],
+        "timestamp": "2026-06-04T14:05:05.794Z"
+      },
+      {
+        "code": "s32 func_1000EE70(void *arg0, s32 arg1, void *arg2, s32 arg3, s32 arg4, void *arg5) {\n    struct15 *temp_a1;\n    struct127 *temp_v1;\n    u8 temp_t8;\n\n    temp_a1 = arg0;\n    temp_v1 = (struct127 *)temp_a1->unk18;\n    if (temp_v1 != NULL) {\n        if (*(s32 *)arg2 != 0) {\n            temp_t8 = temp_a1->unk1C;\n            if (temp_v1->interaction_state != 0) {\n                if (temp_v1->unique_id == temp_t8) {\n                    *(s32 *)arg5 = (((u32)temp_v1->unk184 >> 3) & 0x30) << 1;\n                    *(s16 *)((s32)temp_a1 + 2) = temp_v1->x_position;\n                    *(s16 *)((s32)temp_a1 + 4) = temp_v1->y_position;\n                    *(s16 *)((s32)temp_a1 + 6) = temp_v1->z_position;\n                    return 0;\n                }\n            }\n            if (func_1000F44C(temp_a1->unk24) == 0) {\n                return 0;\n            }\n        }\n    }\n    return 1;\n}",
+        "score": 0.6538,
+        "reason": "structural_diffs=18",
+        "diffs": [
+          "structural: target=lw t9, 0(v1) got=lw t7, 0(v1)",
+          "structural: target=lw t7, 28(a1) got=lbu v0, 31(a1)",
+          "structural: target=beqz t9, L1 got=beqz t7, L1",
+          "structural: target=andi t8, t7, 255 got=nop",
+          "structural: target=lbu t0, 59(v1) got=lbu t8, 59(v1)",
+          "structural: target=bne t0, t8, L1 got=bne v0, t8, L1",
+          "structural: target=lw t1, 388(v1) got=lw t9, 388(v1)",
+          "structural: target=lw t5, 44(sp) got=lw t3, 44(sp)",
+          "structural: target=srl t2, t1, 3 got=srl t0, t9, 3",
+          "structural: target=andi t3, t2, 48 got=andi t1, t0, 48",
+          "structural: target=sll t4, t3, 1 got=sll t2, t1, 1",
+          "structural: target=sw t4, 0(t5) got=sw t2, 0(t3)",
+          "structural: target=mfc1 t7, f6 got=mfc1 t5, f6",
+          "structural: target=sh t7, 2(a1) got=sh t5, 2(a1)",
+          "structural: target=mfc1 t9, f10 got=mfc1 t7, f10",
+          "structural: target=sh t9, 4(a1) got=sh t7, 4(a1)",
+          "structural: target=mfc1 t1, f18 got=mfc1 t9, f18",
+          "structural: target=sh t1, 6(a1) got=sh t9, 6(a1)"
+        ],
+        "timestamp": "2026-06-04T14:06:08.071Z"
       }
     ]
   },
