@@ -30034,7 +30034,7 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 9,
+    "attempts": 12,
     "lastScore": 0.4909090909090909,
     "status": "pending",
     "history": [
@@ -30115,6 +30115,27 @@
         "reason": "length_mismatch (target=55, generated=54)",
         "diffs": [],
         "timestamp": "2026-06-04T06:33:42.495Z"
+      },
+      {
+        "code": "void func_15135480(struct102 *arg0, u8 *arg1, u8 arg2) {\n    s32 temp_v0;\n    s32 temp_v1;\n    u8 temp_a3;\n\n    temp_a3 = arg2;\n    arg2 = temp_a3;\n    if (temp_a3 == 0x2D) {\n        temp_v1 = *(s32 *)arg1;\n        temp_v0 = *(s32 *)((u8 *)arg0 + 0x1C);\n        if (temp_v1 == temp_v0) {\n            *(s32 *)((u8 *)arg0 + 0x1C) = *(s32 *)(arg1 + 4);\n            ((u8 *)arg0)[0x18] = arg1[9];\n        } else {\n            s32 temp_t9 = *(s32 *)(arg1 + 4);\n            if (temp_t9 == temp_v0) {\n                *(s32 *)((u8 *)arg0 + 0x1C) = temp_v1;\n                ((u8 *)arg0)[0x18] = arg1[8];\n            }\n        }\n    }\n\n    temp_v0 = ((u8 *)arg0)[0x50];\n    switch (temp_v0) {\n    case 1:\n        func_151355B8(arg0, arg1, arg2);\n        return;\n    case 2:\n        func_1513555C(arg0, arg1, arg2);\n        return;\n    default:\n        if (temp_a3 == 0) {\n            s32 temp_t1;\n            temp_v0 = *(s32 *)((u8 *)arg0 + 0x1C);\n            temp_t1 = *(s32 *)arg1;\n            if ((temp_t1 == temp_v0) || (arg1[4] == ((u8 *)arg0)[0x18])) {\n                func_1516972C(arg0);\n            }\n        }\n        break;\n    }\n}",
+        "score": 0.4909090909090909,
+        "reason": "length_mismatch (target=55, generated=54)",
+        "diffs": [],
+        "timestamp": "2026-06-04T06:34:31.016Z"
+      },
+      {
+        "code": "void func_15135480(struct102 *arg0, u8 *arg1, u8 arg2) {\n    s32 temp_v0;\n    s32 temp_v1;\n    u8 temp_a3;\n\n    temp_a3 = arg2;\n    if (temp_a3 == 0x2D) {\n        temp_v1 = *(s32 *)arg1;\n        temp_v0 = *(s32 *)((u8 *)arg0 + 0x1C);\n        if (temp_v1 == temp_v0) {\n            *(s32 *)((u8 *)arg0 + 0x1C) = *(s32 *)(arg1 + 4);\n            ((u8 *)arg0)[0x18] = arg1[9];\n        } else {\n            if (*(s32 *)(arg1 + 4) != temp_v0) {\n            } else {\n                *(s32 *)((u8 *)arg0 + 0x1C) = temp_v1;\n                ((u8 *)arg0)[0x18] = arg1[8];\n            }\n        }\n    }\n\n    temp_v0 = ((u8 *)arg0)[0x50];\n    switch (temp_v0) {\n    case 1:\n        func_151355B8(arg0, arg1, arg2);\n        return;\n    case 2:\n        func_1513555C(arg0, arg1, arg2);\n        return;\n    default:\n        if (temp_a3 == 0) {\n            temp_v0 = *(s32 *)((u8 *)arg0 + 0x1C);\n            if (*(s32 *)arg1 != temp_v0) {\n                if (arg1[4] == ((u8 *)arg0)[0x18]) {\n                    func_1516972C(arg0);\n                }\n            } else {\n                func_1516972C(arg0);\n            }\n        }\n        break;\n    }\n}",
+        "score": 0.4661016949152542,
+        "reason": "length_mismatch (target=55, generated=59)",
+        "diffs": [],
+        "timestamp": "2026-06-04T06:35:05.220Z"
+      },
+      {
+        "code": "void func_15135480(struct102 *arg0, u8 *arg1, u8 arg2) {\n    s32 temp_v0;\n    s32 temp_v1;\n    u8 temp_a3;\n\n    temp_a3 = arg2;\n    if (temp_a3 == 0x2D) {\n        temp_v1 = *(s32 *)arg1;\n        temp_v0 = *(s32 *)((u8 *)arg0 + 0x1C);\n        if (temp_v1 == temp_v0) {\n            *(s32 *)((u8 *)arg0 + 0x1C) = *(s32 *)(arg1 + 4);\n            ((u8 *)arg0)[0x18] = arg1[9];\n        } else if (*(s32 *)(arg1 + 4) == *(s32 *)((u8 *)arg0 + 0x1C)) {\n            *(s32 *)((u8 *)arg0 + 0x1C) = temp_v1;\n            ((u8 *)arg0)[0x18] = arg1[8];\n        }\n    }\n\n    temp_v0 = ((u8 *)arg0)[0x50];\n    switch (temp_v0) {\n    case 1:\n        func_151355B8(arg0, arg1, arg2);\n        return;\n    case 2:\n        func_1513555C(arg0, arg1, arg2);\n        return;\n    default:\n        if (temp_a3 == 0) {\n            if ((*(s32 *)arg1 == *(s32 *)((u8 *)arg0 + 0x1C)) || (arg1[4] == ((u8 *)arg0)[0x18])) {\n                func_1516972C(arg0);\n            }\n        }\n        break;\n    }\n}",
+        "score": 0.4909090909090909,
+        "reason": "length_mismatch (target=55, generated=54)",
+        "diffs": [],
+        "timestamp": "2026-06-04T06:35:40.448Z"
       }
     ]
   },
