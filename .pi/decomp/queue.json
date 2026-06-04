@@ -21982,9 +21982,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 2,
-    "lastScore": 0.4895833333333333,
-    "status": "pending",
+    "attempts": 3,
+    "lastScore": 1,
+    "status": "matched",
     "history": [
       {
         "code": "void func_1506FD30(s32 arg0) {\n    func_150E2EA4(D_800D154C, D_800D154C->unique_id, 1, -1, 0.0f, 0.0f, D_80099EA0, 0.0f, 0.0f, 207.0f, 3, 3, 5, 20.0f, (func_150ADA68() * 10.0f) + 40.0f, 1, 72.0f);\n}",
@@ -22954,9 +22954,32 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 0,
+    "attempts": 3,
     "lastScore": 0,
-    "status": "pending"
+    "status": "skipped",
+    "history": [
+      {
+        "code": "void func_1001AAE0(void *arg0, void *arg1) {\n    void *sp4;\n    void *sp0;\n\n    sp4 = NULL;\n    sp0 = *(void **)((s32)arg0 + 0x64);\n    if (sp0 != NULL) {\n        do {\n            if ((void *)((s32)sp0 + 4) == arg1) {\n                if (sp4 != NULL) {\n                    *(void **)sp4 = *(void **)sp0;\n                } else {\n                    *(void **)((s32)arg0 + 0x64) = *(void **)sp0;\n                }\n                if (*(void **)((s32)arg0 + 0x68) == sp0) {\n                    *(void **)((s32)arg0 + 0x68) = sp4;\n                }\n                *(void **)sp0 = *(void **)((s32)arg0 + 0x6C);\n                *(void **)((s32)arg0 + 0x6C) = sp0;\n                *(u8 *)((s32)arg0 + 0x8D) -= 1;\n                break;\n            }\n            sp4 = sp0;\n            sp0 = *(void **)sp0;\n        } while (sp0 != NULL);\n    }\n}",
+        "score": 0,
+        "reason": "generated 447 instr for 48 target (9.3x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-04T02:45:22.538Z"
+      },
+      {
+        "code": "void func_1001AAE0(void *arg0, s32 arg1) {\n    void *sp4;\n    void *sp0;\n    void *temp_t6;\n\n    sp4 = NULL;\n    sp0 = *(void **)((s32)arg0 + 0x64);\n    if (sp0 != NULL) {\nloop_1:\n        if (((s32)sp0 + 4) == arg1) {\n            if (sp4 != NULL) {\n                *(void **)sp4 = *(void **)sp0;\n            } else {\n                *(void **)((s32)arg0 + 0x64) = *(void **)sp0;\n            }\n            if (*(void **)((s32)arg0 + 0x68) == sp0) {\n                *(void **)((s32)arg0 + 0x68) = sp4;\n            }\n            *(void **)sp0 = *(void **)((s32)arg0 + 0x6C);\n            *(void **)((s32)arg0 + 0x6C) = sp0;\n            *(u8 *)((s32)arg0 + 0x8D) = (u8)(*(u8 *)((s32)arg0 + 0x8D) - 1);\n            return;\n        }\n        sp4 = sp0;\n        temp_t6 = *(void **)sp0;\n        sp0 = temp_t6;\n        if (temp_t6 != NULL) {\n            goto loop_1;\n        }\n    }\n}",
+        "score": 0,
+        "reason": "generated 451 instr for 48 target (9.4x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-04T02:46:06.679Z"
+      },
+      {
+        "code": "void func_1001AAE0(void *arg0, s32 arg1) {\n}",
+        "score": 0,
+        "reason": "generated 403 instr for 48 target (8.4x oversized)",
+        "diffs": [],
+        "timestamp": "2026-06-04T02:46:22.626Z"
+      }
+    ]
   },
   {
     "function": "func_15142838",

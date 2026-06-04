@@ -864,5 +864,14 @@
     "example_functions": [
       "func_150712AC"
     ]
+  },
+  {
+    "id": "double-zero-to-force-second-fpr-zero",
+    "description": "Using 0.0 (double literal) for some float call arguments can force IDO to emit a separate mtc1 zero into a second FPR (e.g. f12), while 0.0f literals share the first zero FPR.",
+    "trigger": "A call with repeated zero float stack arguments matches except generated reuses one FPR for all swc1 zero stores, but target has mtc1 $zero into two different FPRs and stores from both.",
+    "solution": "Keep some zero float arguments as 0.0f and write the others as 0.0 (double literal) so the compiler materializes distinct zero FPRs without extra arithmetic or stack locals.",
+    "example_functions": [
+      "func_1506FD30"
+    ]
   }
 ]
