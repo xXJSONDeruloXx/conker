@@ -25379,8 +25379,8 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
-    "lastScore": 0.4830508474576271,
+    "attempts": 6,
+    "lastScore": 0.4661016949152542,
     "status": "pending",
     "history": [
       {
@@ -25424,6 +25424,27 @@
         "reason": "length_mismatch (target=59, generated=57)",
         "diffs": [],
         "timestamp": "2026-06-04T08:22:54.443Z"
+      },
+      {
+        "code": "void func_15063168(struct127 *arg0) {\n    struct127 *temp_s1;\n    s32 temp_s2;\n    s32 *temp_s3;\n    struct127 *temp_s4;\n    s32 temp_s5;\n    s32 i;\n    s32 count;\n    struct127 *temp_a1;\n    void *temp_v0;\n\n    temp_s1 = arg0;\n    temp_s3 = &D_800CC268;\n    count = D_8008FD8C;\n    i = 0;\n    if (count > 0) {\n        temp_s2 = ((s32)temp_s1 - (s32)D_800CC2D0) / 0x32C;\n        temp_s4 = D_800CC2D0;\n        temp_s5 = 0x32C;\n        do {\n            if (i != temp_s2) {\n                if (((1 << i) & *temp_s3) != 0) {\n                    temp_a1 = (struct127 *)((s32)temp_s4 + (i * temp_s5));\n                    temp_v0 = temp_a1->unk31C;\n                    if (temp_v0 != NULL) {\n                        if (((u8 *)temp_v0)[0x1AC] == 0) {\n                            func_15194FF4(temp_s1, temp_a1, 1);\n                            count = D_8008FD8C;\n                        }\n                    }\n                }\n            }\n            i++;\n        } while (i < count);\n    }\n}",
+        "score": 0.4830508474576271,
+        "reason": "length_mismatch (target=59, generated=57)",
+        "diffs": [],
+        "timestamp": "2026-06-04T08:23:27.679Z"
+      },
+      {
+        "code": "void func_15063168(struct127 *arg0) {\n    struct127 *temp_s1;\n    s32 temp_s2;\n    s32 *temp_s3;\n    struct127 *temp_s4;\n    s32 temp_s5;\n    s32 i;\n    s32 count;\n    struct127 *temp_a1;\n    void *temp_v0;\n\n    temp_s1 = arg0;\n    count = D_8008FD8C;\n    i = 0;\n    if (count > 0) {\n        temp_s2 = ((s32)temp_s1 - (s32)D_800CC2D0) / 0x32C;\n        temp_s3 = &D_800CC268;\n        temp_s4 = D_800CC2D0;\n        temp_s5 = 0x32C;\n        do {\n            if (i != temp_s2) {\n                if (((1 << i) & *temp_s3) != 0) {\n                    temp_a1 = (struct127 *)((s32)temp_s4 + (i * temp_s5));\n                    temp_v0 = temp_a1->unk31C;\n                    if (temp_v0 != NULL) {\n                        if (((u8 *)temp_v0)[0x1AC] == 0) {\n                            func_15194FF4(temp_s1, temp_a1, 1);\n                        }\n                    }\n                }\n            }\n            i++;\n        } while (i < count);\n    }\n}",
+        "score": 0.4576271186440678,
+        "reason": "length_mismatch (target=59, generated=54)",
+        "diffs": [],
+        "timestamp": "2026-06-04T08:23:47.333Z"
+      },
+      {
+        "code": "void func_15063168(struct127 *arg0) {\n    struct127 *temp_s1;\n    s32 temp_s2;\n    s32 *temp_s3;\n    struct127 *temp_s4;\n    s32 temp_s5;\n    s32 i;\n    struct127 *temp_a1;\n    void *temp_v0;\n\n    temp_s1 = arg0;\n    i = 0;\n    if (D_8008FD8C > 0) {\n        temp_s2 = ((s32)temp_s1 - (s32)D_800CC2D0) / 0x32C;\n        temp_s3 = &D_800CC268;\n        temp_s4 = D_800CC2D0;\n        temp_s5 = 0x32C;\n        do {\n            if (i != temp_s2) {\n                if (((1 << i) & *temp_s3) != 0) {\n                    temp_a1 = (struct127 *)((s32)temp_s4 + (i * temp_s5));\n                    temp_v0 = temp_a1->unk31C;\n                    if (temp_v0 != NULL) {\n                        if (((u8 *)temp_v0)[0x1AC] == 0) {\n                            func_15194FF4(temp_s1, temp_a1, 1);\n                        }\n                    }\n                }\n            }\n            i++;\n        } while (i < D_8008FD8C);\n    }\n}",
+        "score": 0.4661016949152542,
+        "reason": "length_mismatch (target=59, generated=55)",
+        "diffs": [],
+        "timestamp": "2026-06-04T08:24:09.384Z"
       }
     ]
   },
