@@ -25118,8 +25118,8 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
-    "lastScore": 0.4891304347826087,
+    "attempts": 6,
+    "lastScore": 0.8667,
     "status": "pending",
     "history": [
       {
@@ -25156,6 +25156,52 @@
         "reason": "length_mismatch (target=45, generated=46)",
         "diffs": [],
         "timestamp": "2026-06-04T01:21:16.318Z"
+      },
+      {
+        "code": "void func_15071A64(s32 arg0) {\n    struct127 *temp_a1;\n    struct199 tmp;\n\n    if ((func_150ADA20() & 1) == 0) {\n        temp_a1 = D_800D154C;\n        if (temp_a1->unk1D4 != 0) {\n            if ((temp_a1->unk74 & 0xF) != 0xF) {\n                if (D_800CC2D0[0].stunned != 0) {\n                    if (D_800CC2D0[0].health > 0) {\n                        func_1504715C(&tmp);\n                        func_15143134(&D_80099BBC, &tmp.unk24, (s32)D_800D154C->unk1D4 + 0x3C0);\n                        func_151DC484(&tmp.unk24, &tmp, 0, 0xFF, 1);\n                    }\n                }\n            }\n        }\n    }\n}",
+        "score": 0.7778,
+        "reason": "structural_diffs=10",
+        "diffs": [
+          "structural: target=lui a1, HI(D_800D154C) got=lui v0, HI(D_800D154C)",
+          "structural: target=lw a1, LO(D_800D154C)(a1) got=lw v0, LO(D_800D154C)(v0)",
+          "structural: target=lw t7, 468(a1) got=lw t7, 468(v0)",
+          "structural: target=lbu t8, 116(a1) got=lbu t8, 116(v0)",
+          "structural: target=li at, 15 got=lui v0, HI(D_800CC2D0)",
+          "structural: target=lui v0, HI(D_800CC2D0) got=li at, 15",
+          "structural: target=addiu a0, sp, 40 got=addiu a0, sp, 36",
+          "structural: target=addiu a1, sp, 76 got=addiu a1, sp, 72",
+          "structural: target=addiu a0, sp, 76 got=addiu a0, sp, 72",
+          "structural: target=addiu a1, sp, 40 got=addiu a1, sp, 36"
+        ],
+        "timestamp": "2026-06-04T01:21:51.313Z"
+      },
+      {
+        "code": "void func_15071A64(s32 arg0) {\n    struct199 tmp;\n\n    if (((func_150ADA20() & 1) == 0) && (D_800D154C->unk1D4 != 0) && ((D_800D154C->unk74 & 0xF) != 0xF) && (D_800CC2D0[0].stunned != 0) && (D_800CC2D0[0].health > 0)) {\n        func_1504715C(&tmp);\n        func_15143134(&D_80099BBC, &tmp.unk24, (s32)D_800D154C->unk1D4 + 0x3C0);\n        func_151DC484(&tmp.unk24, &tmp, 0, 0xFF, 1);\n    }\n}",
+        "score": 0.8667,
+        "reason": "structural_diffs=6",
+        "diffs": [
+          "structural: target=lui a1, HI(D_800D154C) got=lui v0, HI(D_800D154C)",
+          "structural: target=lw a1, LO(D_800D154C)(a1) got=lw v0, LO(D_800D154C)(v0)",
+          "structural: target=lw t7, 468(a1) got=lw t7, 468(v0)",
+          "structural: target=lbu t8, 116(a1) got=lbu t8, 116(v0)",
+          "structural: target=li at, 15 got=lui v0, HI(D_800CC2D0)",
+          "structural: target=lui v0, HI(D_800CC2D0) got=li at, 15"
+        ],
+        "timestamp": "2026-06-04T01:22:16.003Z"
+      },
+      {
+        "code": "void func_15071A64(s32 arg0) {\n    struct199 tmp;\n    s32 temp_v0;\n\n    temp_v0 = func_150ADA20();\n    if ((temp_v0 & 1) == 0) {\n        if (D_800D154C->unk1D4 != 0) {\n            if ((D_800D154C->unk74 & 0xF) != 0xF) {\n                if (D_800CC2D0[0].stunned != 0) {\n                    if (D_800CC2D0[0].health > 0) {\n                        func_1504715C(&tmp);\n                        func_15143134(&D_80099BBC, &tmp.unk24, (s32)D_800D154C->unk1D4 + 0x3C0);\n                        func_151DC484(&tmp.unk24, &tmp, 0, 0xFF, 1);\n                    }\n                }\n            }\n        }\n    }\n}",
+        "score": 0.8667,
+        "reason": "structural_diffs=6",
+        "diffs": [
+          "structural: target=lui a1, HI(D_800D154C) got=lui v0, HI(D_800D154C)",
+          "structural: target=lw a1, LO(D_800D154C)(a1) got=lw v0, LO(D_800D154C)(v0)",
+          "structural: target=lw t7, 468(a1) got=lw t7, 468(v0)",
+          "structural: target=lbu t8, 116(a1) got=lbu t8, 116(v0)",
+          "structural: target=li at, 15 got=lui v0, HI(D_800CC2D0)",
+          "structural: target=lui v0, HI(D_800CC2D0) got=li at, 15"
+        ],
+        "timestamp": "2026-06-04T01:23:21.766Z"
       }
     ]
   },
