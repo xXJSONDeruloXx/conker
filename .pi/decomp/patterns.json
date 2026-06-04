@@ -954,5 +954,14 @@
     "example_functions": [
       "func_15014144"
     ]
+  },
+  {
+    "id": "global-pointer-table-byte-offset-direct-expression",
+    "description": "For repeated global pointer-table lookups where target reloads globals for each assignment and computes byte offsets with shifts, use direct expressions with integer address arithmetic instead of caching locals.",
+    "trigger": "Target repeatedly reloads a global object pointer and table base, indexes table with `field << 2`, then indexes row with `field << 3` plus small byte offsets for each coordinate.",
+    "solution": "Write each assignment as a full direct expression like `(f32)*(s16 *)(TABLE[obj->idx] + (obj->field * 8) + offset)` and avoid locals so IDO preserves repeated global reloads and shift/add sequence.",
+    "example_functions": [
+      "func_15077DBC"
+    ]
   }
 ]

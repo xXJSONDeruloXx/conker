@@ -2,6 +2,8 @@
 #include "functions.h"
 #include "variables.h"
 
+void func_151618BC(u16, s16, u8, s32, f32 *, s16, s16);
+
 void func_150A7960(f32 mtx[4][4], f32 arg1, s32 arg2, f32 arg3, f32 *arg4, f32 *arg5, f32 *arg6);
 
 void func_1516441C(struct225 *, void *);
@@ -463,7 +465,11 @@ void func_15161860(struct225 *arg0) {
     D_8008B2B0[arg0->unk12](arg0);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_18D770/func_151618BC.s")
+void func_151618BC(u16 arg0, s16 arg1, u8 arg2, s32 arg3, f32 *arg4, s16 arg5, s16 arg6) {
+    s32 tmp[10] = D_800A66E4;
+
+    func_10010F88(tmp[func_150ADA20() % 10U], arg0, arg1, arg2, arg3, (s32)arg4[0], (s32)arg4[1], (s32)arg4[2], arg5, arg6);
+}
 // void func_151618BC(u16 arg0, s16 arg1, u8 arg2, s32 arg3, void *arg4, s16 arg5, s16 arg6) {
 //     ? sp38;
 //     ? *temp_t6;
