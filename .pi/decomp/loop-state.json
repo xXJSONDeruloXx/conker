@@ -1,8 +1,8 @@
 {
   "enabled": true,
-  "chunk": 373,
+  "chunk": 375,
   "status": "running",
-  "lastChunkSummary": "Matched and accepted game-region func_150C3160 after skipping two plateaued candidates. The key was recognizing the manual Gfx word stores as `gDPSetTileSize(arg0++, 4, temp_v1, temp_a0, 0x1FE, 0x03E)`, which preserves the target postincrement scheduling and return pointer update.",
-  "consecutiveNoProgress": 0,
-  "updatedAt": "2026-06-04T14:02:50.786Z"
+  "lastChunkSummary": "No match this chunk. Investigated several auto-rotated medium candidates: func_1000EE70, func_1507B974, func_15163FEC/func_15164134, and near-miss func_1505F188; most plateaued on IDO scheduling/register/FPR allocation issues, and Transmuter found no improvement for func_1000EE70/func_1505F188. Skipped the plateaued candidates so the next chunk can continue with fresh functions.",
+  "consecutiveNoProgress": 2,
+  "updatedAt": "2026-06-04T14:22:04.163Z"
 }

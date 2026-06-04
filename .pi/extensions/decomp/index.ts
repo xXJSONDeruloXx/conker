@@ -820,9 +820,17 @@ export default function (pi: ExtensionAPI) {
 			// action === "next"
 
 			// ─── COORDINATOR MODE ─────────────────────────────────────────
-			// If DECOMP_COORDINATOR_URL is set, claim from coordinator instead of local queue
-			const coordinatorUrl = process.env.DECOMP_COORDINATOR_URL;
-			const laneId = process.env.DECOMP_LANE_ID;
+			// Detect coordinator from .decomp-coordinator.json or env var
+			const coordConfigPath = path.join(ctx.cwd, ".decomp-coordinator.json");
+			let coordinatorUrl = process.env.DECOMP_COORDINATOR_URL || "";
+			let laneId = process.env.DECOMP_LANE_ID || "";
+			if (!coordinatorUrl && fs.existsSync(coordConfigPath)) {
+				try {
+					const cfg = JSON.parse(fs.readFileSync(coordConfigPath, "utf-8"));
+					coordinatorUrl = cfg.url || "";
+					laneId = cfg.laneId || "";
+				} catch {}
+			}
 			if (coordinatorUrl && laneId) {
 				try {
 					// Heartbeat
@@ -2458,6 +2466,165 @@ export default function (pi: ExtensionAPI) {
 			saveLoopState(ctx.cwd);
 			refreshWidget();
 			ctx.ui.notify("Decomp loop state reset", "info");
+		},
+	});
+
+	// ═══════════════════════════════════════════════════════════════
+	// COMMAND: /decomp-coordinator
+	// Multi-lane coordination: start/stop server, setup worktrees, status
+	// ═══════════════════════════════════════════════════════════════
+	let coordinatorProcess: any = null;
+
+	pi.registerCommand("decomp-coordinator", {
+		description: "Multi-lane coordinator: start | stop | setup <N> | status",
+		handler: async (args, ctx) => {
+			const fs = require("node:fs");
+			const path = require("node:path");
+			const subcommand = (args || "").trim().split(/\s+/)[0];
+			const arg2 = (args || "").trim().split(/\s+/)[1];
+
+			if (subcommand === "start") {
+				if (coordinatorProcess) {
+					ctx.ui.notify("Coordinator already running", "warn");
+					return;
+				}
+				const port = arg2 || "7700";
+				const coordScript = path.join(ctx.cwd, ".pi/coordinator/src/index.ts");
+				if (!fs.existsSync(coordScript)) {
+					ctx.ui.notify("Coordinator not found at .pi/coordinator/", "error");
+					return;
+				}
+
+				// Start coordinator as a child process
+				const { spawn } = require("node:child_process");
+				coordinatorProcess = spawn("bun", [coordScript, "--port", port], {
+					cwd: ctx.cwd,
+					stdio: ["ignore", "pipe", "pipe"],
+					detached: false,
+				});
+				coordinatorProcess.on("exit", () => { coordinatorProcess = null; });
+
+				// Wait for it to be ready
+				await new Promise((r) => setTimeout(r, 2000));
+				ctx.ui.notify(`Coordinator started on port ${port}`, "info");
+
+			} else if (subcommand === "stop") {
+				if (!coordinatorProcess) {
+					ctx.ui.notify("No coordinator running", "warn");
+					return;
+				}
+				coordinatorProcess.kill();
+				coordinatorProcess = null;
+				ctx.ui.notify("Coordinator stopped", "info");
+
+			} else if (subcommand === "setup") {
+				const numLanes = parseInt(arg2 || "4");
+				const port = "7700";
+				const worktreeDir = path.join(ctx.cwd, ".worktrees");
+				fs.mkdirSync(worktreeDir, { recursive: true });
+
+				const results: string[] = [];
+				for (let i = 1; i <= numLanes; i++) {
+					const laneId = `lane-${i}`;
+					const laneDir = path.join(worktreeDir, laneId);
+					const laneBranch = `decomp-${laneId}`;
+
+					if (!fs.existsSync(laneDir)) {
+						// Create worktree
+						const wtResult = await pi.exec("git", ["worktree", "add", "-b", laneBranch, laneDir, "HEAD"]);
+						if (wtResult.code !== 0) {
+							// Branch might already exist
+							await pi.exec("git", ["worktree", "add", laneDir, laneBranch]);
+						}
+					}
+
+					// Symlink baserom
+					const baseromDest = path.join(laneDir, "baserom.us.z64");
+					if (!fs.existsSync(baseromDest)) {
+						fs.symlinkSync(path.join(ctx.cwd, "baserom.us.z64"), baseromDest);
+					}
+
+					// Symlink ido
+					const idoDest = path.join(laneDir, "ido");
+					if (!fs.existsSync(idoDest)) {
+						fs.symlinkSync(path.join(ctx.cwd, "ido"), idoDest);
+					}
+
+					// Symlink tools/ido-native
+					const idoNativeDest = path.join(laneDir, "tools/ido-native");
+					fs.mkdirSync(path.join(laneDir, "tools"), { recursive: true });
+					if (!fs.existsSync(idoNativeDest)) {
+						fs.symlinkSync(path.join(ctx.cwd, "tools/ido-native"), idoNativeDest);
+					}
+
+					// Symlink tools/transmuter
+					const transmuterDest = path.join(laneDir, "tools/transmuter");
+					if (!fs.existsSync(transmuterDest)) {
+						fs.symlinkSync(path.join(ctx.cwd, "tools/transmuter"), transmuterDest);
+					}
+
+					// Write .decomp-coordinator.json (lanes auto-detect this)
+					const coordConfig = {
+						url: `http://127.0.0.1:${port}`,
+						laneId,
+						masterRoot: ctx.cwd,
+					};
+					fs.writeFileSync(path.join(laneDir, ".decomp-coordinator.json"), JSON.stringify(coordConfig, null, 2));
+
+					// Register lane with coordinator (if running)
+					try {
+						await fetch(`http://127.0.0.1:${port}/lanes/register`, {
+							method: "POST",
+							headers: { "Content-Type": "application/json" },
+							body: JSON.stringify({ laneId }),
+						});
+					} catch {}
+
+					results.push(`✓ ${laneId}: ${laneDir}`);
+				}
+
+				ctx.ui.notify(`Set up ${numLanes} lanes. Open Pi in each worktree to start.`, "info");
+				pi.sendUserMessage(
+					`Multi-lane setup complete:\n\n${results.join("\n")}\n\n` +
+					`To use:\n` +
+					`1. Each lane auto-detects the coordinator via .decomp-coordinator.json\n` +
+					`2. Open a new terminal, cd into a worktree, run \`pi\`, then \`/decomp-start\`\n` +
+					`3. Monitor: \`curl http://127.0.0.1:${port}/status\`\n` +
+					`4. Lanes won’t overlap (file-level locks enforced by coordinator)`
+				);
+
+			} else if (subcommand === "status") {
+				const port = "7700";
+				try {
+					const res = await fetch(`http://127.0.0.1:${port}/status`);
+					if (!res.ok) throw new Error(`HTTP ${res.status}`);
+					const data = await res.json() as any;
+					const lanes = data.lanes || [];
+					const queue = data.queue || {};
+
+					const laneLines = lanes.map((l: any) =>
+						`  ${l.id}: ${l.status}${l.currentFunction ? ` → ${l.currentFunction} (${l.currentFile})` : ""} [${l.completedCount} done]`
+					).join("\n");
+
+					pi.sendUserMessage(
+						`## Coordinator Status\n\n` +
+						`Queue: ${queue.matched} matched | ${queue.pending} pending | ${queue.claimed} claimed | ${queue.skipped} skipped\n` +
+						`Patterns: ${data.patterns?.count || 0} (v${data.patterns?.version || 0})\n\n` +
+						`Lanes:\n${laneLines || "  (none registered)"}`
+					);
+				} catch (e: any) {
+					ctx.ui.notify(`Coordinator not reachable: ${e.message}`, "error");
+				}
+
+			} else {
+				pi.sendUserMessage(
+					`/decomp-coordinator usage:\n` +
+					`  start [port]  — Start coordinator server (default: 7700)\n` +
+					`  stop          — Stop coordinator server\n` +
+					`  setup <N>     — Create N worktrees with coordinator config\n` +
+					`  status        — Show coordinator + lane status`
+				);
+			}
 		},
 	});
 }
