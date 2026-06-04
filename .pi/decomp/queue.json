@@ -27036,8 +27036,8 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 15,
-    "lastScore": 0.49074074074074076,
+    "attempts": 18,
+    "lastScore": 0.9434,
     "status": "pending",
     "history": [
       {
@@ -27179,6 +27179,48 @@
         "reason": "length_mismatch (target=53, generated=54)",
         "diffs": [],
         "timestamp": "2026-06-04T05:36:39.181Z"
+      },
+      {
+        "code": "s32 func_1502B8E0(s32 arg0, s32 arg1, s32 arg2, ...) {\n    va_list args;\n    s32 sp34;\n    s32 offset;\n    s32 more;\n\n    more = 1;\n    offset = (s32)D_AB1950;\n    va_start(args, arg2);\n    if (arg2 != 0) {\n        do {\n            if (more != 0) {\n                offset += func_1502AC88(offset, va_arg(args, s32), &sp34);\n            } else {\n                (void) va_arg(args, s32);\n            }\n            arg2--;\n            more = sp34 & 0x0FFFFFFF;\n        } while (arg2 != 0);\n    }\n    if (more != 0) {\n        more = func_1502B224(offset, arg0, sp34, arg1);\n    }\n    return more;\n}",
+        "score": 0.4568965517241379,
+        "reason": "length_mismatch (target=53, generated=58)",
+        "diffs": [],
+        "timestamp": "2026-06-04T05:36:57.283Z"
+      },
+      {
+        "code": "s32 func_1502B8E0(s32 arg0, s32 arg1, s32 arg2, ...) {\n    va_list args;\n    s32 temp_a1;\n    s32 temp_a2;\n    s32 sp34;\n    s32 offset;\n    s32 more;\n\n    more = 1;\n    offset = (s32)D_AB1950;\n    va_start(args, arg2);\n    if (arg2 != 0) {\n        do {\n            temp_a1 = va_arg(args, s32);\n            temp_a2 = temp_a1;\n            if (more != 0) {\n                offset += func_1502AC88(offset, temp_a2, &sp34);\n            }\n            arg2--;\n            more = sp34 & 0x0FFFFFFF;\n        } while (arg2 != 0);\n    }\n    if (more != 0) {\n        more = func_1502B224(offset, arg0, sp34, arg1);\n    }\n    return more;\n}",
+        "score": 0.6981,
+        "reason": "structural_diffs=16",
+        "diffs": [
+          "structural: target=addiu sp, sp, -72 got=addiu sp, sp, -80",
+          "structural: target=sw a0, 72(sp) got=sw a0, 80(sp)",
+          "structural: target=sw a1, 76(sp) got=sw a1, 84(sp)",
+          "structural: target=sw a2, 80(sp) got=sw a2, 88(sp)",
+          "structural: target=sw a3, 84(sp) got=sw a3, 92(sp)",
+          "structural: target=addiu s1, sp, 84 got=addiu s1, sp, 92",
+          "structural: target=sw a2, 80(sp) got=sw a2, 88(sp)",
+          "structural: target=sw a2, 80(sp) got=sw a2, 88(sp)",
+          "structural: target=addiu s3, sp, 52 got=addiu s3, sp, 64",
+          "structural: target=lw a2, 80(sp) got=lw a2, 88(sp)",
+          "structural: target=lw t7, 52(sp) got=lw t7, 64(sp)",
+          "structural: target=sw a2, 80(sp) got=sw a2, 88(sp)",
+          "structural: target=lw a1, 72(sp) got=lw a1, 80(sp)",
+          "structural: target=lw a2, 52(sp) got=lw a2, 64(sp)",
+          "structural: target=lw a3, 76(sp) got=lw a3, 84(sp)",
+          "structural: target=addiu sp, sp, 72 got=addiu sp, sp, 80"
+        ],
+        "timestamp": "2026-06-04T05:37:17.377Z"
+      },
+      {
+        "code": "s32 func_1502B8E0(s32 arg0, s32 arg1, s32 arg2, ...) {\n    s32 sp34;\n    va_list args;\n    s32 temp_a1;\n    s32 offset;\n    s32 more;\n\n    more = 1;\n    offset = (s32)D_AB1950;\n    va_start(args, arg2);\n    if (arg2 != 0) {\n        do {\n            temp_a1 = va_arg(args, s32);\n            if (more != 0) {\n                offset += func_1502AC88(offset, temp_a1, &sp34);\n            }\n            arg2--;\n            more = sp34 & 0x0FFFFFFF;\n        } while (arg2 != 0);\n    }\n    if (more != 0) {\n        more = func_1502B224(offset, arg0, sp34, arg1);\n    }\n    return more;\n}",
+        "score": 0.9434,
+        "reason": "structural_diffs=3",
+        "diffs": [
+          "structural: target=addiu s3, sp, 52 got=addiu s3, sp, 68",
+          "structural: target=lw t7, 52(sp) got=lw t7, 68(sp)",
+          "structural: target=lw a2, 52(sp) got=lw a2, 68(sp)"
+        ],
+        "timestamp": "2026-06-04T05:37:31.318Z"
       }
     ]
   },
