@@ -16663,8 +16663,8 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 12,
-    "lastScore": 0.4285714285714286,
+    "attempts": 15,
+    "lastScore": 0,
     "status": "pending",
     "history": [
       {
@@ -16750,6 +16750,27 @@
         "reason": "length_mismatch (target=36, generated=42)",
         "diffs": [],
         "timestamp": "2026-06-04T13:18:28.496Z"
+      },
+      {
+        "code": "f32 func_150489B0(u8 arg0) {\n    f32 ret;\n    s32 temp;\n\n    if (arg0 >= 0x41) {\n        temp = arg0;\n        if (temp >= 0x81) {\n            if (temp >= 0xC1) {\n                ret = D_8009A620[-temp];\n            } else {\n                ret = -D_8009A020[temp];\n            }\n        } else {\n            ret = -D_8009A420[-temp];\n        }\n    } else {\n        ret = D_8009A220[arg0];\n    }\n\n    return ret;\n}",
+        "score": 0.4285714285714286,
+        "reason": "length_mismatch (target=36, generated=42)",
+        "diffs": [],
+        "timestamp": "2026-06-04T13:18:46.222Z"
+      },
+      {
+        "code": "f32 func_150489B0(u8 arg0) {\n    f32 ret;\n    s32 temp;\n    s32 offset;\n\n    if (arg0 >= 0x41) {\n        temp = arg0;\n        offset = temp << 2;\n        if (temp >= 0x81) {\n            if (temp >= 0xC1) {\n                ret = *(f32 *)((s32)&D_8009A620 + -offset);\n            } else {\n                ret = *(f32 *)((s32)&D_8009A020 + offset);\n                ret = -ret;\n            }\n        } else {\n            ret = *(f32 *)((s32)&D_8009A420 + -offset);\n            ret = -ret;\n        }\n    } else {\n        ret = D_8009A220[arg0];\n    }\n\n    return ret;\n}",
+        "score": 0.4285714285714286,
+        "reason": "length_mismatch (target=36, generated=42)",
+        "diffs": [],
+        "timestamp": "2026-06-04T13:19:25.629Z"
+      },
+      {
+        "code": "static f32 func_150489B0(u8 arg0) {\n    f32 ret;\n    s32 temp;\n    s32 offset;\n\n    if (arg0 >= 0x41) {\n        temp = arg0;\n        offset = temp << 2;\n        if (temp >= 0x81) {\n            if (temp >= 0xC1) {\n                ret = *(f32 *)((s32)&D_8009A620 + -offset);\n            } else {\n                ret = *(f32 *)((s32)&D_8009A020 + offset);\n                ret = -ret;\n            }\n        } else {\n            ret = *(f32 *)((s32)&D_8009A420 + -offset);\n            ret = -ret;\n        }\n    } else {\n        ret = D_8009A220[arg0];\n    }\n\n    return ret;\n}",
+        "score": 0,
+        "reason": "empty",
+        "diffs": [],
+        "timestamp": "2026-06-04T13:21:52.941Z"
       }
     ]
   },
