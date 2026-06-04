@@ -24688,9 +24688,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 3,
+    "attempts": 4,
     "lastScore": 0.7241,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "void func_150767F4(void) {\n    struct127 *tmp = &D_800CC2D0[D_800D154C->unk222];\n    s32 tmp0 = func_1505A630(tmp->x_position - D_800D154C->x_position, D_800D154C->z_position - tmp->z_position, 0) >> 8;\n\n    if (((tmp0 - (D_800CC34A[D_800D154C->unk222 * 0x196] >> 8)) + D_800D1891 & 0xFF) < (D_800D1891 * 2)) {\n        func_15075400(D_800D1890);\n    }\n}",
@@ -24767,6 +24767,30 @@
           "structural: target=slt at, t8, t9 got=slt at, t8, t0"
         ],
         "timestamp": "2026-06-04T07:40:27.253Z"
+      },
+      {
+        "code": "void func_150767F4(void) {\n    struct127 *tmp;\n    s32 tmp0;\n    s32 ret;\n\n    tmp = &D_800CC2D0[D_800D154C->unk222];\n    ret = func_1505A630(tmp->x_position - D_800D154C->x_position, D_800D154C->z_position - tmp->z_position, 0);\n    tmp0 = ret >> 8;\n    if (((tmp0 - (D_800CC34A[D_800D154C->unk222 * 0x196] >> 8)) + D_800D1891 & 0xFF) < (D_800D1891 * 2)) {\n        func_15075400(D_800D1890);\n    }\n}",
+        "score": 0.7241,
+        "reason": "structural_diffs=16",
+        "diffs": [
+          "structural: target=lui t1, HI(D_800D154C) got=lui t0, HI(D_800D154C)",
+          "structural: target=lw t1, LO(D_800D154C)(t1) got=lw t0, LO(D_800D154C)(t0)",
+          "structural: target=lbu t2, 546(t1) got=lbu t1, 546(t0)",
+          "structural: target=sra t0, v0, 8 got=sra t9, v0, 8",
+          "structural: target=sll t3, t2, 2 got=sll t2, t1, 2",
+          "structural: target=subu t3, t3, t2 got=subu t2, t2, t1",
+          "structural: target=sll t3, t3, 2 got=sll t2, t2, 2",
+          "structural: target=addu t3, t3, t2 got=addu t2, t2, t1",
+          "structural: target=sll t3, t3, 2 got=sll t2, t2, 2",
+          "structural: target=subu t3, t3, t2 got=subu t2, t2, t1",
+          "structural: target=sll t3, t3, 2 got=sll t2, t2, 2",
+          "structural: target=subu t3, t3, t2 got=subu t2, t2, t1",
+          "structural: target=sll t3, t3, 2 got=sll t3, t2, 2",
+          "structural: target=sll t9, v1, 1 got=sll t0, v1, 1",
+          "structural: target=subu t6, t0, t5 got=subu t6, t9, t5",
+          "structural: target=slt at, t8, t9 got=slt at, t8, t0"
+        ],
+        "timestamp": "2026-06-04T07:40:47.413Z"
       }
     ]
   },
@@ -28615,8 +28639,8 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 8,
-    "lastScore": 0.9636,
+    "attempts": 9,
+    "lastScore": 0.8364,
     "status": "pending",
     "history": [
       {
@@ -28734,6 +28758,23 @@
           "structural: target=addiu v0, v0, LO(D_800CC2D0) got=ori v0, v0, 49872"
         ],
         "timestamp": "2026-06-04T06:23:11.606Z"
+      },
+      {
+        "code": "struct127 *func_1505EEF4(s32 arg0) {\n    struct127 *temp_v1;\n    s32 i;\n\n    temp_v1 = D_800CC5FC;\n    if (D_800CC2D0[0].interaction_state != 0) {\n        if (arg0 == D_800CC40F) {\n            return (struct127 *)&D_800CC2D0;\n        }\n    }\n\n    for (i = 1; i != 25; i++) {\n        if (temp_v1->interaction_state != 0) {\n            if (arg0 == temp_v1->unk13F) {\n                return temp_v1;\n            }\n        }\n        temp_v1++;\n    }\n    return NULL;\n}",
+        "score": 0.8364,
+        "reason": "structural_diffs=9",
+        "diffs": [
+          "structural: target=lui t6, HI(D_800CC2D0) got=lui a1, HI(D_800CC2D0)",
+          "structural: target=lw t6, LO(D_800CC2D0)(t6) got=addiu a1, a1, LO(D_800CC2D0)",
+          "structural: target=lui v1, HI(D_800CC5FC) got=lw t6, 0(a1)",
+          "structural: target=addiu v1, v1, LO(D_800CC5FC) got=lui v1, HI(D_800CC5FC)",
+          "structural: target=beqz t6, L0 got=addiu v1, v1, LO(D_800CC5FC)",
+          "structural: target=lui t7, HI(D_800CC40F) got=beqz t6, L0",
+          "structural: target=lbu t7, LO(D_800CC40F)(t7) got=lui t7, HI(D_800CC40F)",
+          "structural: target=lui v0, HI(D_800CC2D0) got=lbu t7, LO(D_800CC40F)(t7)",
+          "structural: target=addiu v0, v0, LO(D_800CC2D0) got=move v0, a1"
+        ],
+        "timestamp": "2026-06-04T07:42:18.860Z"
       }
     ]
   },
