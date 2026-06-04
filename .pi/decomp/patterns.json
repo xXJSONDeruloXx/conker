@@ -927,5 +927,14 @@
     "example_functions": [
       "func_1502B8E0"
     ]
+  },
+  {
+    "id": "combine-global-u8-increment-expression",
+    "description": "For IDO register shaping, assigning a u8 global plus a constant in one expression can keep the incremented value in the target argument temp register and avoid swapping with the computed pointer.",
+    "trigger": "Near-match where `temp = global; temp += 1; ptr = base + temp * stride` gives the global temp and pointer in swapped registers.",
+    "solution": "Use `temp = global + 1;` as a single expression before the pointer arithmetic; keep the computed pointer as an integer/pointer temp used for subsequent loads.",
+    "example_functions": [
+      "func_150781F4"
+    ]
   }
 ]

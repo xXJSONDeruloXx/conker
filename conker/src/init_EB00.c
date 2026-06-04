@@ -340,7 +340,13 @@ void func_1001001C(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
 #pragma GLOBAL_ASM("asm/nonmatchings/init_EB00/func_100100E0.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/init_EB00/func_10010154.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/init_EB00/func_10010344.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/init_EB00/func_10010558.s")
+void func_10010558(u16 arg0, struct127 *arg1, s32 arg2, s16 arg3, u16 arg4, s32 arg5) {
+    if (arg5 <= 0) {
+        func_10010344(arg0, arg1, arg2, arg3, arg4);
+    } else {
+        func_1000FA64(arg0, (s16)arg1->x_position, (s16)arg1->y_position, (s16)arg1->z_position, arg2, arg4, arg3, (s32)func_1000ECCC, (void *)arg5, (s32)arg1, 0, 0);
+    }
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/init_EB00/func_10010630.s")
 // void func_10010630(u16 arg0, struct127 *arg1, s32 arg2, s16 arg3, u16 arg4) {
