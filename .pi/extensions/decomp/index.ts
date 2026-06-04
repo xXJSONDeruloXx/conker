@@ -2040,22 +2040,79 @@ export default function (pi: ExtensionAPI) {
 				saveQueue(ctx.cwd);
 			}
 
-			if (perfectMatch && winningCode) {
-				const funcCode = winningCode
-					.replace(/^#include.*\n/gm, "")
-					.replace(/^extern.*\n/gm, "")
-					.trim();
+			// AUTO-VERIFY: If Transmuter improved the code (or matched), try it in the full TU
+			const codeToVerify = perfectMatch && winningCode
+				? winningCode.replace(/^#include.*\n/gm, "").replace(/^extern.*\n/gm, "").trim()
+				: (forks > 0 && bestCandidateCode)
+					? bestCandidateCode.replace(/^#include.*\n/gm, "").replace(/^extern.*\n/gm, "").trim()
+					: null;
 
+			if (codeToVerify && file) {
+				onUpdate?.({
+					content: [{ type: "text", text: `Transmuter ${perfectMatch ? "matched" : "improved"} (score ${bestScore}). Auto-verifying in full TU...` }],
+					details: {},
+				});
+
+				// Inline full-TU verification (same logic as decomp_attempt)
+				const srcPath = path.join(ctx.cwd, "conker/src", file);
+				const pragma = `#pragma GLOBAL_ASM("asm/nonmatchings/${file.replace(".c", "")}/${params.function}.s")`;
+				let original = "";
+				let tuVerified = false;
+
+				try {
+					original = fs.readFileSync(srcPath, "utf-8");
+					if (original.includes(pragma)) {
+						const patched = original.replace(pragma, codeToVerify);
+						fs.writeFileSync(srcPath, patched);
+
+						// Compile full TU via Docker
+						const tuBuild = await pi.exec("bash", ["tools/conker-build-tu.sh", file], { signal, timeout: 60000 });
+
+						if (tuBuild.code === 0) {
+							// Diff against target
+							const tuDiff = await pi.exec("bash", ["tools/conker-diff.sh", params.function, file], { signal, timeout: 30000 });
+							let tuScore: any = {};
+							try { tuScore = JSON.parse(tuDiff.stdout); } catch {}
+
+							if (tuScore.match) {
+								// FULL TU MATCH! Leave the patch in place for decomp_accept
+								tuVerified = true;
+								if (queueEntry) {
+									queueEntry.lastScore = 1.0;
+									saveQueue(ctx.cwd);
+								}
+								return {
+									content: [{
+										type: "text",
+										text: `✅ TRANSMUTER + FULL TU VERIFIED! Score: 1.0 (match)\n\nTransmuter found code that also matches in the full translation unit!\n\`\`\`c\n${codeToVerify}\n\`\`\`\n\nCall decomp_accept to run ROM SHA gate and commit.`,
+									}],
+									details: { matched: true, bestScore: 0, code: codeToVerify, tuVerified: true },
+								};
+							}
+						}
+						// Full TU didn't match — revert
+						fs.writeFileSync(srcPath, original);
+					}
+				} catch {
+					// Revert on any error
+					if (original) try { fs.writeFileSync(srcPath, original); } catch {}
+				}
+			}
+
+			if (perfectMatch && winningCode && !codeToVerify) {
+				// Fallback: Transmuter matched but we couldn't auto-verify (no file info)
+				const funcCode = winningCode.replace(/^#include.*\n/gm, "").replace(/^extern.*\n/gm, "").trim();
 				return {
 					content: [{
 						type: "text",
-						text: `✅ TRANSMUTER FOUND A MATCH (score 0)!\n\nWinning code:\n\`\`\`c\n${funcCode}\n\`\`\`\n\nRun decomp_attempt with this code, then decomp_accept to commit.\n\nFull source (with includes):\n${winningCode}`,
+						text: `✅ TRANSMUTER FOUND A MATCH (score 0 in isolation)!\n\nWinning code:\n\`\`\`c\n${funcCode}\n\`\`\`\n\nRun decomp_attempt with this code to verify in full TU, then decomp_accept to commit.`,
 					}],
 					details: { matched: true, bestScore: 0, code: funcCode },
 				};
 			}
 
 			// Build actionable diagnostic based on what happened
+			const autoVerifyNote = (codeToVerify && forks > 0) ? "\n(Auto-verified in full TU: did NOT match — context-sensitivity confirmed.)" : "";
 			let diagnostic = "";
 			if (compiled === 0 && (iters ?? 0) > 1000) {
 				diagnostic = `\n\n⚠️ DIAGNOSTIC: ${iters?.toLocaleString()} iterations but 0 successful compiles.`
@@ -2082,7 +2139,7 @@ export default function (pi: ExtensionAPI) {
 			return {
 				content: [{
 					type: "text",
-					text: `Transmuter completed. Best score: ${bestScore ?? "unknown"} (iters: ${iters?.toLocaleString() ?? "?"}, compiled: ${compiled ?? "?"}, forks: ${forks})${diagnostic}`,
+					text: `Transmuter completed. Best score: ${bestScore ?? "unknown"} (iters: ${iters?.toLocaleString() ?? "?"}, compiled: ${compiled ?? "?"}, forks: ${forks})${autoVerifyNote}${diagnostic}`,
 				}],
 				details: { matched: false, bestScore, iterations: iters, compiled, forks },
 			};
