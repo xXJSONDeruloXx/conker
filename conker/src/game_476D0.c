@@ -112,7 +112,22 @@ void func_150A7A00(f32 arg0, f32 arg1, s32 arg2, f32 arg3, f32 arg4, f32 arg5, f
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_476D0/func_1501A8C0.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_476D0/func_1501AE94.s")
+s32 func_1501AE94(s32 arg0) {
+    u8 *temp_v0;
+    f32 temp_f0;
+    f32 temp_f2;
+
+    temp_f0 = (f32)D_800BE620 - 2.0f;
+    temp_f2 = (f32)D_800BE624;
+    temp_v0 = (u8 *)D_800BE628 + (arg0 * 0x180);
+    if ((*(f32 *)(temp_v0 + 0x2C) < 2.0f) || (temp_f0 < *(f32 *)(temp_v0 + 0x30))) {
+        return 0;
+    }
+    if ((*(f32 *)(temp_v0 + 0x24) < 0.0f) || (temp_f2 < *(f32 *)(temp_v0 + 0x28))) {
+        return 0;
+    }
+    return 1;
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_476D0/func_1501AF44.s")
 

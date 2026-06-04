@@ -792,5 +792,14 @@
     "example_functions": [
       "func_151419D0"
     ]
+  },
+  {
+    "id": "inline-ternary-call-arg-default",
+    "description": "Inline a defaulting ternary directly in a call argument to preserve IDO's branch shape and scheduling.",
+    "trigger": "A local default value before a call compiles to branch-likely or schedules the default constant too early, but target has `beqz`/`b` with the selected value moved in the branch delay before call setup.",
+    "solution": "Avoid a named selected-value local; pass `(tmp != 0) ? tmp : default` directly as the call argument so IDO emits the explicit beqz/b selection and schedules call argument address/constants correctly.",
+    "example_functions": [
+      "func_15013D38"
+    ]
   }
 ]
