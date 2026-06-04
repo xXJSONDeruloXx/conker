@@ -31222,9 +31222,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
+    "attempts": 5,
     "lastScore": 0.4830508474576271,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "s32 func_15141478(struct210 *arg0) {\n    struct211 *temp_v1;\n    f32 temp_f0;\n    f32 *temp_a0;\n\n    *(f32 *)((s32)arg0 + 0x180) -= D_800BE9A4;\n    if (*(f32 *)((s32)arg0 + 0x180) < 0.0f) {\n        temp_v1 = (struct211 *)((s32)arg0 + 0x170);\n        temp_v1->unk10 = func_150ADA68() * temp_v1->unk14;\n        if (func_150ADA20() & 3) {\n            temp_f0 = func_150ADA68();\n            temp_v1->unkC = (temp_f0 * (temp_v1->unk0 - temp_v1->unk4)) + temp_v1->unk4;\n        } else {\n            temp_f0 = func_150ADA68();\n            temp_v1->unkC = (temp_f0 * (temp_v1->unk8 - temp_v1->unk0)) + temp_v1->unk0;\n        }\n    }\n    temp_a0 = (f32 *)((s32)arg0 + 0x110);\n    temp_v1 = (struct211 *)((s32)arg0 + 0x170);\n    temp_a0[18] += (temp_v1->unkC - temp_a0[18]) * *(f32 *)((s32)temp_v1 + 0x18);\n    return 1;\n}",
@@ -31246,6 +31246,20 @@
         "reason": "length_mismatch (target=59, generated=57)",
         "diffs": [],
         "timestamp": "2026-06-04T09:02:48.072Z"
+      },
+      {
+        "code": "s32 func_15141478(struct210 *arg0) {\n    struct211 *temp_v1;\n    f32 temp_f0;\n    s32 temp_a0;\n\n    *(f32 *)((s32)arg0 + 0x180) -= D_800BE9A4;\n    if (*(f32 *)((s32)arg0 + 0x180) < 0.0f) {\n        temp_v1 = (struct211 *)((s32)arg0 + 0x170);\n        temp_v1->unk10 = func_150ADA68() * temp_v1->unk14;\n        if (func_150ADA20() & 3) {\n            temp_f0 = func_150ADA68();\n            temp_v1->unkC = (temp_f0 * (temp_v1->unk0 - temp_v1->unk4)) + temp_v1->unk4;\n        } else {\n            temp_f0 = func_150ADA68();\n            temp_v1->unkC = (temp_f0 * (temp_v1->unk8 - temp_v1->unk0)) + temp_v1->unk0;\n        }\n    }\n    temp_a0 = (s32)arg0 + 0x110;\n    temp_v1 = (struct211 *)((s32)arg0 + 0x170);\n    *(f32 *)(temp_a0 + 0x48) = *(f32 *)(temp_a0 + 0x48) + ((temp_v1->unkC - *(f32 *)(temp_a0 + 0x48)) * *(f32 *)((s32)temp_v1 + 0x18));\n    return 1;\n}",
+        "score": 0.4830508474576271,
+        "reason": "length_mismatch (target=59, generated=57)",
+        "diffs": [],
+        "timestamp": "2026-06-04T09:03:34.504Z"
+      },
+      {
+        "code": "s32 func_15141478(struct210 *arg0) {\n    struct211 *temp_v1;\n    f32 temp_f0;\n    struct211 *temp_a0;\n\n    *(f32 *)((s32)arg0 + 0x180) -= D_800BE9A4;\n    if (*(f32 *)((s32)arg0 + 0x180) < 0.0f) {\n        temp_v1 = (struct211 *)((s32)arg0 + 0x170);\n        temp_v1->unk10 = func_150ADA68() * temp_v1->unk14;\n        if (func_150ADA20() & 3) {\n            temp_f0 = func_150ADA68();\n            temp_v1->unkC = (temp_f0 * (temp_v1->unk0 - temp_v1->unk4)) + temp_v1->unk4;\n        } else {\n            temp_f0 = func_150ADA68();\n            temp_v1->unkC = (temp_f0 * (temp_v1->unk8 - temp_v1->unk0)) + temp_v1->unk0;\n        }\n    }\n    temp_a0 = (struct211 *)((s32)arg0 + 0x110);\n    temp_v1 = (struct211 *)((s32)arg0 + 0x170);\n    temp_a0[3].unk0 += (temp_v1->unkC - temp_a0[3].unk0) * temp_v1[1].unk0;\n    return 1;\n}",
+        "score": 0.4830508474576271,
+        "reason": "length_mismatch (target=59, generated=57)",
+        "diffs": [],
+        "timestamp": "2026-06-04T09:04:17.947Z"
       }
     ]
   },
@@ -31544,9 +31558,32 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.4745762711864407,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_1500707C(s32 arg0) {\n    s32 i;\n    u8 *temp_s4;\n    s8 *temp_s2;\n    OSMesgQueue *temp_s5;\n    s32 temp_s6;\n    s32 temp_s3;\n    s32 temp_s1;\n    s32 temp_v0;\n\n    temp_s4 = D_800BE358;\n    i = 0;\n    do {\n        temp_s4[i++] = 0xFF;\n    } while (i < 8);\n    osWritebackDCacheAll();\n    temp_s2 = &D_800BE3D8;\n    i = 0;\n    if (D_8002AC5C == 0) {\n        temp_s5 = &D_800BE900;\n        temp_s6 = 4;\n        do {\n            temp_v0 = (i << 4) + 4;\n            if (arg0 == *temp_s2) {\n                temp_s3 = temp_v0 + 1;\n                temp_s1 = func_151DD4E0(temp_s5, temp_v0 & 0xFF, temp_s4);\n                func_151DD4E0(temp_s5, temp_s3 & 0xFF, temp_s4);\n            }\n            i++;\n            temp_s2++;\n        } while (i != temp_s6);\n    }\n}",
+        "score": 0.4915254237288136,
+        "reason": "length_mismatch (target=59, generated=58)",
+        "diffs": [],
+        "timestamp": "2026-06-04T09:05:34.439Z"
+      },
+      {
+        "code": "void func_1500707C(s32 arg0) {\n    s32 i;\n    u8 *temp_s4;\n    s8 *temp_s2;\n    OSMesgQueue *temp_s5;\n    s32 temp_s6;\n    s32 temp_s3;\n    register s32 temp_s1;\n    s32 temp_v0;\n\n    temp_s4 = D_800BE358;\n    i = 0;\n    do {\n        temp_s4[i++] = 0xFF;\n    } while (i < 8);\n    osWritebackDCacheAll();\n    temp_s2 = &D_800BE3D8;\n    i = 0;\n    if (D_8002AC5C == 0) {\n        temp_s5 = &D_800BE900;\n        temp_s6 = 4;\n        do {\n            temp_v0 = (i << 4) + 4;\n            if (arg0 == *temp_s2) {\n                temp_s3 = temp_v0 + 1;\n                temp_s1 = func_151DD4E0(temp_s5, temp_v0 & 0xFF, temp_s4);\n                func_151DD4E0(temp_s5, temp_s3 & 0xFF, temp_s4);\n            }\n            i++;\n            temp_s2++;\n        } while (i != temp_s6);\n    }\n}",
+        "score": 0.4915254237288136,
+        "reason": "length_mismatch (target=59, generated=58)",
+        "diffs": [],
+        "timestamp": "2026-06-04T09:06:25.216Z"
+      },
+      {
+        "code": "void func_1500707C(s32 arg0) {\n    s32 i;\n    u8 *temp_s4;\n    s8 *temp_s2;\n    OSMesgQueue *temp_s5;\n    s32 temp_s6;\n    s32 temp_s3;\n    s32 temp_s1;\n\n    temp_s4 = D_800BE358;\n    i = 0;\n    do {\n        temp_s4[i++] = 0xFF;\n    } while (i < 8);\n    osWritebackDCacheAll();\n    temp_s2 = &D_800BE3D8;\n    i = 0;\n    if (D_8002AC5C == 0) {\n        temp_s5 = &D_800BE900;\n        temp_s6 = 4;\n        do {\n            if (arg0 == *temp_s2) {\n                temp_s3 = ((i << 4) + 4) + 1;\n                temp_s1 = func_151DD4E0(temp_s5, ((i << 4) + 4) & 0xFF, temp_s4);\n                func_151DD4E0(temp_s5, temp_s3 & 0xFF, temp_s4);\n            }\n            i++;\n            temp_s2++;\n        } while (i != temp_s6);\n    }\n}",
+        "score": 0.4745762711864407,
+        "reason": "length_mismatch (target=59, generated=56)",
+        "diffs": [],
+        "timestamp": "2026-06-04T09:06:58.340Z"
+      }
+    ]
   },
   {
     "function": "func_15001A08",
