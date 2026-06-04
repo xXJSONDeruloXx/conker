@@ -783,5 +783,14 @@
     "example_functions": [
       "func_1509B764"
     ]
+  },
+  {
+    "id": "assignment-in-condition-load-order",
+    "description": "Use assignment inside a comparison to force IDO load order while preserving branch operand order.",
+    "trigger": "Near-match where one compare block needs a field loaded before an input load, but a named local flips a later branch operand order or a plain expression loads in the wrong order.",
+    "solution": "Move the input load into the comparison with `(field == (tmp = input))`; this schedules the field load first while keeping the assigned temp available for later stores and preserving later expression compare operand order.",
+    "example_functions": [
+      "func_151419D0"
+    ]
   }
 ]

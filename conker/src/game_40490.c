@@ -3,6 +3,8 @@
 #include "functions.h"
 #include "variables.h"
 
+s32 func_151BE850(struct17 *arg0, s32 arg1, u8 arg2, u8 arg3, u8 arg4, u8 arg5, u8 arg6);
+
 
 void func_15012FE0(void) {
     D_800BE570 = 0;
@@ -48,7 +50,18 @@ s32 func_1501396C(struct16 *arg0) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_40490/func_15013C38.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_40490/func_15013D38.s")
+s32 func_15013D38(struct47 *arg0) {
+    struct17 sp3C;
+    s32 temp_v0;
+
+    arg0->unk16 |= 4;
+    sp3C.unk0 = arg0->unk0;
+    sp3C.unk4 = arg0->unk2;
+    sp3C.unk8 = arg0->unk4;
+    temp_v0 = arg0->unk18;
+    func_151BE850(&sp3C, arg0->unk10, (temp_v0 != 0) ? temp_v0 : 1, arg0->unk1F, 1, 0xFF, 1);
+    return 1;
+}
 // #NON-MATCHING: looks close but think its wrong
 // s32 func_151BE850(struct17 *arg0, s32 arg1, u8 arg2, u8 arg3, u8 arg4, u8 arg5, u8 arg6);
 // s32 func_15013D38(struct47 *arg0) {
