@@ -19189,9 +19189,9 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1,
+    "status": "matched"
   },
   {
     "function": "func_150C2FCC",
@@ -19202,9 +19202,53 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.4791666666666667,
+    "status": "pending",
+    "history": [
+      {
+        "code": "s32 func_150C2FCC(void *arg0) {\n    f32 temp_f0;\n    f32 temp_f2;\n    f32 temp_f12;\n    f32 temp_f14;\n    f32 temp_f18;\n\n    temp_f0 = *(f32 *)((s32)arg0 + 0x2C);\n    temp_f2 = *(f32 *)((s32)arg0 + 0x150);\n    temp_f12 = *(f32 *)((s32)arg0 + 0x30);\n    temp_f14 = *(f32 *)((s32)arg0 + 0x50);\n    temp_f18 = *(f32 *)((s32)arg0 + 0x4C);\n    *(f32 *)((s32)arg0 + 0x2C) = temp_f0 - (temp_f0 * temp_f2);\n    *(f32 *)((s32)arg0 + 0x30) = temp_f12 - (temp_f12 * temp_f2);\n    *(f32 *)((s32)arg0 + 0x38) += (temp_f14 * D_800BE9A4) + (((0.5f * temp_f18) * D_800BE9A4) * D_800BE9A4);\n    *(f32 *)((s32)arg0 + 0x50) = temp_f14 + (temp_f18 * D_800BE9A4);\n    if (*(f32 *)((s32)arg0 + 0x2C) < 10.0f) {\n        return 0;\n    }\n    if (*(f32 *)((s32)arg0 + 0x30) < 10.0f) {\n        return 0;\n    }\n    return 1;\n}",
+        "score": 0.4792,
+        "reason": "structural_diffs=25",
+        "diffs": [
+          "structural: target=lwc1 f18, 76(a0) got=lwc1 f16, 76(a0)",
+          "structural: target=lwc1 f16, 0(v0) got=lwc1 f18, 0(v0)",
+          "structural: target=mul.s f4, f14, f16 got=mtc1 at, f0",
+          "structural: target=nop got=mul.s f4, f14, f18",
+          "structural: target=mul.s f8, f6, f18 got=nop",
+          "structural: target=nop got=mul.s f8, f6, f16",
+          "structural: target=mul.s f10, f8, f16 got=nop",
+          "structural: target=nop got=mul.s f10, f8, f18",
+          "structural: target=mul.s f6, f10, f16 got=nop",
+          "structural: target=lwc1 f10, 56(a0) got=mul.s f6, f10, f18",
+          "structural: target=add.s f8, f4, f6 got=lwc1 f10, 56(a0)",
+          "structural: target=add.s f4, f10, f8 got=add.s f8, f4, f6",
+          "structural: target=swc1 f4, 56(a0) got=add.s f4, f10, f8",
+          "structural: target=lwc1 f6, 0(v0) got=swc1 f4, 56(a0)",
+          "structural: target=lwc1 f4, 44(a0) got=lwc1 f6, 0(v0)",
+          "structural: target=mul.s f10, f18, f6 got=lwc1 f4, 44(a0)",
+          "structural: target=mtc1 at, f6 got=mul.s f10, f16, f6",
+          "structural: target=lui at, 16672 got=c.lt.s f4, f0",
+          "structural: target=c.lt.s f4, f6 got=add.s f8, f10, f14",
+          "structural: target=add.s f8, f14, f10 got=bc1f L0"
+        ],
+        "timestamp": "2026-06-04T02:40:36.559Z"
+      },
+      {
+        "code": "s32 func_150C2FCC(void *arg0) {\n    f32 temp_f0;\n    f32 temp_f2;\n    f32 temp_f12;\n    f32 temp_f14;\n    f32 temp_f16;\n    f32 temp_f18;\n\n    temp_f0 = *(f32 *)((s32)arg0 + 0x2C);\n    temp_f2 = *(f32 *)((s32)arg0 + 0x150);\n    temp_f12 = *(f32 *)((s32)arg0 + 0x30);\n    temp_f14 = *(f32 *)((s32)arg0 + 0x50);\n    temp_f18 = *(f32 *)((s32)arg0 + 0x4C);\n    *(f32 *)((s32)arg0 + 0x2C) = temp_f0 - (temp_f0 * temp_f2);\n    *(f32 *)((s32)arg0 + 0x30) = temp_f12 - (temp_f12 * temp_f2);\n    temp_f16 = D_800BE9A4;\n    *(f32 *)((s32)arg0 + 0x38) += (temp_f14 * temp_f16) + (((0.5f * temp_f18) * temp_f16) * temp_f16);\n    *(f32 *)((s32)arg0 + 0x50) = temp_f14 + (temp_f18 * D_800BE9A4);\n    if (*(f32 *)((s32)arg0 + 0x2C) >= 10.0f) {\n        if (*(f32 *)((s32)arg0 + 0x30) >= 10.0f) {\n            return 1;\n        }\n    }\n    return 0;\n}",
+        "score": 0.4791666666666667,
+        "reason": "length_mismatch (target=48, generated=46)",
+        "diffs": [],
+        "timestamp": "2026-06-04T02:41:11.559Z"
+      },
+      {
+        "code": "s32 func_150C2FCC(void *arg0) {\n    f32 temp_f0;\n    f32 temp_f2;\n    f32 temp_f12;\n    f32 temp_f14;\n    f32 temp_f16;\n    f32 temp_f18;\n\n    temp_f0 = *(f32 *)((s32)arg0 + 0x2C);\n    temp_f2 = *(f32 *)((s32)arg0 + 0x150);\n    temp_f12 = *(f32 *)((s32)arg0 + 0x30);\n    temp_f14 = *(f32 *)((s32)arg0 + 0x50);\n    temp_f16 = D_800BE9A4;\n    temp_f18 = *(f32 *)((s32)arg0 + 0x4C);\n    *(f32 *)((s32)arg0 + 0x2C) = temp_f0 - (temp_f0 * temp_f2);\n    *(f32 *)((s32)arg0 + 0x30) = temp_f12 - (temp_f12 * temp_f2);\n    *(f32 *)((s32)arg0 + 0x38) += (temp_f14 * temp_f16) + (((0.5f * temp_f18) * temp_f16) * temp_f16);\n    *(f32 *)((s32)arg0 + 0x50) = temp_f14 + (temp_f18 * D_800BE9A4);\n    if (*(f32 *)((s32)arg0 + 0x2C) < 10.0f) {\n        return 0;\n    }\n    if (*(f32 *)((s32)arg0 + 0x30) < 10.0f) {\n        return 0;\n    }\n    return 1;\n}",
+        "score": 0.4791666666666667,
+        "reason": "length_mismatch (target=48, generated=46)",
+        "diffs": [],
+        "timestamp": "2026-06-04T02:41:34.562Z"
+      }
+    ]
   },
   {
     "function": "func_15060A9C",
