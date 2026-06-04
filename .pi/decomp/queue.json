@@ -20382,8 +20382,8 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 12,
-    "lastScore": 0.4523809523809524,
+    "attempts": 15,
+    "lastScore": 0.119,
     "status": "pending",
     "history": [
       {
@@ -20469,6 +20469,48 @@
         "reason": "length_mismatch (target=42, generated=38)",
         "diffs": [],
         "timestamp": "2026-06-04T13:53:38.047Z"
+      },
+      {
+        "code": "void func_150049A4(s8 *arg0, s32 arg1, s32 arg2) {\n    s32 temp_v0;\n    s32 temp_s0;\n    s32 temp_a3;\n    s32 temp_t0;\n    s32 temp_t4;\n    s32 temp_t3;\n    s32 temp_t2;\n    s32 temp_t1;\n\n    temp_v0 = 0;\n    temp_s0 = arg2;\n    temp_a3 = arg1;\n    temp_t0 = -0x21;\n    arg1 = (s32)arg0;\n    if (*arg0 != temp_t0) {\n        temp_t4 = 0xE;\n        arg2 = *arg0;\n        temp_t3 = 0xDE;\n        temp_t2 = 1;\n        temp_t1 = -0x24;\n        do {\n            temp_v0++;\n            if (arg2 == temp_t1) {\n                if (*(u8 *)(arg1 + 3) == temp_t4) {\n                    *(s32 *)(arg1 + 4) = *(s32 *)(arg1 + 4) + temp_s0;\n                }\n            } else if (arg2 == temp_t2) {\n                *(s32 *)(arg1 + 4) = *(s32 *)(arg1 + 4) + temp_a3;\n            } else if (arg2 == temp_t3) {\n                *(s32 *)(arg1 + 4) = *(s32 *)(arg1 + 4) + temp_a3;\n            }\n            arg1 = (s32)(arg0 + (temp_v0 << 3));\n            arg2 = *(s8 *)arg1;\n        } while (arg2 != temp_t0);\n    }\n}",
+        "score": 0.47619047619047616,
+        "reason": "length_mismatch (target=42, generated=40)",
+        "diffs": [],
+        "timestamp": "2026-06-04T13:54:18.226Z"
+      },
+      {
+        "code": "void func_150049A4(s8 *arg0, s32 arg1, s32 arg2) {\n    s32 temp_v0;\n    s32 temp_s0;\n    s32 temp_a3;\n    s32 temp_t0;\n    s32 temp_t4;\n    s32 temp_t3;\n    s32 temp_t2;\n    s32 temp_t1;\n\n    temp_v0 = 0;\n    temp_s0 = arg2;\n    temp_a3 = arg1;\n    temp_t0 = -0x21;\n    arg1 = (s32)arg0;\n    if (*(volatile s8 *)arg0 != temp_t0) {\n        temp_t4 = 0xE;\n        arg2 = *arg0;\n        temp_t3 = 0xDE;\n        temp_t2 = 1;\n        temp_t1 = -0x24;\n        do {\n            temp_v0++;\n            if (arg2 == temp_t1) {\n                if (*(u8 *)(arg1 + 3) == temp_t4) {\n                    *(s32 *)(arg1 + 4) = *(s32 *)(arg1 + 4) + temp_s0;\n                }\n            } else if (arg2 == temp_t2) {\n                *(s32 *)(arg1 + 4) = *(s32 *)(arg1 + 4) + temp_a3;\n            } else if (arg2 == temp_t3) {\n                *(s32 *)(arg1 + 4) = *(s32 *)(arg1 + 4) + temp_a3;\n            }\n            arg1 = (s32)(arg0 + (temp_v0 << 3));\n            arg2 = *(s8 *)arg1;\n        } while (arg2 != temp_t0);\n    }\n}",
+        "score": 0.47619047619047616,
+        "reason": "length_mismatch (target=42, generated=40)",
+        "diffs": [],
+        "timestamp": "2026-06-04T13:54:40.077Z"
+      },
+      {
+        "code": "void func_150049A4(s8 *arg0, s32 arg1, s32 arg2) {\n    s32 temp_v0;\n    volatile register s32 temp_s0;\n    s32 temp_a3;\n    s32 temp_t0;\n    s32 temp_t4;\n    s32 temp_t3;\n    s32 temp_t2;\n    s32 temp_t1;\n\n    temp_v0 = 0;\n    temp_s0 = arg2;\n    temp_a3 = arg1;\n    temp_t0 = -0x21;\n    arg1 = (s32)arg0;\n    if (*(volatile s8 *)arg0 != temp_t0) {\n        temp_t4 = 0xE;\n        arg2 = *arg0;\n        temp_t3 = 0xDE;\n        temp_t2 = 1;\n        temp_t1 = -0x24;\n        do {\n            temp_v0++;\n            if (arg2 == temp_t1) {\n                if (*(u8 *)(arg1 + 3) == temp_t4) {\n                    *(s32 *)(arg1 + 4) = *(s32 *)(arg1 + 4) + temp_s0;\n                }\n            } else if (arg2 == temp_t2) {\n                *(s32 *)(arg1 + 4) = *(s32 *)(arg1 + 4) + temp_a3;\n            } else if (arg2 == temp_t3) {\n                *(s32 *)(arg1 + 4) = *(s32 *)(arg1 + 4) + temp_a3;\n            }\n            arg1 = (s32)(arg0 + (temp_v0 << 3));\n            arg2 = *(s8 *)arg1;\n        } while (arg2 != temp_t0);\n    }\n}",
+        "score": 0.119,
+        "reason": "structural_diffs=37",
+        "diffs": [
+          "structural: target=sw s0, 4(sp) got=sw a2, 0(sp)",
+          "structural: target=move s0, a2 got=lb t6, 0(a0)",
+          "structural: target=move a3, a1 got=move v1, a1",
+          "structural: target=li t0, -33 got=li at, -33",
+          "structural: target=lb t6, 0(a0) got=move v0, zero",
+          "structural: target=move v0, zero got=li a3, -33",
+          "structural: target=move a1, a0 got=beq t6, at, L0",
+          "structural: target=beq t0, t6, L0 got=move a1, a0",
+          "structural: target=li t4, 14 got=lb a2, 0(a0)",
+          "structural: target=lb a2, 0(a0) got=li t4, 222",
+          "structural: target=li t3, 222 got=li t3, 1",
+          "structural: target=li t2, 1 got=li t2, 14",
+          "structural: target=beq a2, t1, L1 got=bne a2, t1, L1",
+          "structural: target=beql a2, t2, L2 got=lbu t7, 3(a1)",
+          "structural: target=lw t9, 4(a1) got=bnel t2, t7, L2",
+          "structural: target=bnel a2, t3, L3 got=sll t5, v0, 3",
+          "structural: target=sll t9, v0, 3 got=lw t8, 4(a1)",
+          "structural: target=lw t7, 4(a1) got=lw t9, 0(sp)",
+          "structural: target=addu t8, t7, a3 got=addu t5, t8, t9",
+          "structural: target=b L4 got=b L3"
+        ],
+        "timestamp": "2026-06-04T13:55:03.387Z"
       }
     ]
   },
