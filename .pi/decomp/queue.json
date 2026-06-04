@@ -21633,8 +21633,8 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 3,
-    "lastScore": 0.4891304347826087,
+    "attempts": 6,
+    "lastScore": 0.4791666666666667,
     "status": "pending",
     "history": [
       {
@@ -21657,6 +21657,48 @@
         "reason": "length_mismatch (target=46, generated=45)",
         "diffs": [],
         "timestamp": "2026-06-04T01:59:05.988Z"
+      },
+      {
+        "code": "void func_150778F0(s32 unused0, s32 unused1) {\n    struct127 **temp_a2;\n    struct127 *temp_v1;\n    s32 temp_v0;\n    s32 temp_t6;\n    s32 temp_t7;\n    s32 temp_a0;\n\n    temp_a2 = (struct127 **)0x800D154C;\n    temp_v1 = *temp_a2;\n    temp_t6 = temp_v1->unk13F;\n    temp_t7 = *(s32 *)0x800D2108;\n    temp_a0 = temp_v1->unk21F;\n    temp_v0 = ((u8 *)temp_t7)[temp_t6] - 1;\n    temp_v0 = (u8) temp_v0;\n    if (temp_a0 != 0) {\n        temp_v0 = (u8) temp_a0;\n    }\n    temp_a0 = temp_v0;\n    temp_v1->unk21E += temp_v1->unk221;\n    temp_v1 = *temp_a2;\n    temp_v1->unk21E += temp_v0;\n    temp_v1 = *temp_a2;\n    temp_v1->unk21E %= temp_v0;\n    temp_v1 = *temp_a2;\n    if (temp_v1->unk21E < temp_v1->unk220) {\n        temp_v1->unk21E = temp_v1->unk220;\n    }\n}",
+        "score": 0.48936170212765956,
+        "reason": "length_mismatch (target=46, generated=47)",
+        "diffs": [],
+        "timestamp": "2026-06-04T01:59:50.788Z"
+      },
+      {
+        "code": "void func_150778F0(void) {\n    struct127 **temp_a2;\n    struct127 *temp_v1;\n    u8 temp_v0;\n\n    temp_a2 = (struct127 **)0x800D154C;\n    temp_v1 = *temp_a2;\n    temp_v0 = ((u8 *)*(s32 *)0x800D2108)[temp_v1->unk13F] - 1;\n    if (temp_v1->unk21F != 0) {\n        temp_v0 = temp_v1->unk21F;\n    }\n    temp_v1->unk21E += temp_v1->unk221;\n    temp_v1 = *temp_a2;\n    temp_v1->unk21E += temp_v0;\n    temp_v1 = *temp_a2;\n    temp_v1->unk21E %= temp_v0;\n    temp_v1 = *temp_a2;\n    if (temp_v1->unk21E < temp_v1->unk220) {\n        temp_v1->unk21E = temp_v1->unk220;\n    }\n}",
+        "score": 0.2391,
+        "reason": "structural_diffs=35",
+        "diffs": [
+          "structural: target=lui a2, HI(D_800D154C) got=lui a2, 32781",
+          "structural: target=addiu a2, a2, LO(D_800D154C) got=ori a2, a2, 5452",
+          "structural: target=lw v1, 0(a2) got=lw v0, 0(a2)",
+          "structural: target=lui t7, HI(D_800D2108) got=lui t6, 32781",
+          "structural: target=lw t7, LO(D_800D2108)(t7) got=lw t7, 8456(t6)",
+          "structural: target=lbu t6, 319(v1) got=lbu t8, 319(v0)",
+          "structural: target=lbu a0, 543(v1) got=lbu a0, 543(v0)",
+          "structural: target=addu t8, t6, t7 got=addu t9, t7, t8",
+          "structural: target=lbu v0, 0(t8) got=lbu v1, 0(t9)",
+          "structural: target=addiu v0, v0, -1 got=addiu v1, v1, -1",
+          "structural: target=andi t9, v0, 255 got=andi t0, v1, 255",
+          "structural: target=move v0, t9 got=move v1, t0",
+          "structural: target=andi v0, a0, 255 got=andi v1, a0, 255",
+          "structural: target=lbu t0, 542(v1) got=lbu t1, 542(v0)",
+          "structural: target=lb t1, 545(v1) got=lb t2, 545(v0)",
+          "structural: target=move a0, v0 got=move a0, v1",
+          "structural: target=addu t2, t0, t1 got=addu t3, t1, t2",
+          "structural: target=sb t2, 542(v1) got=sb t3, 542(v0)",
+          "structural: target=lw v1, 0(a2) got=lw v0, 0(a2)",
+          "structural: target=lbu t3, 542(v1) got=lbu t4, 542(v0)"
+        ],
+        "timestamp": "2026-06-04T02:00:14.382Z"
+      },
+      {
+        "code": "void func_150778F0(void) {\n    struct127 **temp_a2;\n    struct127 *temp_v1;\n    u8 temp_v0;\n\n    temp_a2 = &D_800D154C;\n    temp_v1 = *temp_a2;\n    temp_v0 = ((u8 *)*(s32 *)D_800D2108)[temp_v1->unk13F] - 1;\n    if (temp_v1->unk21F != 0) {\n        temp_v0 = temp_v1->unk21F;\n    }\n    temp_v1->unk21E += temp_v1->unk221;\n    temp_v1 = *temp_a2;\n    temp_v1->unk21E += temp_v0;\n    temp_v1 = *temp_a2;\n    temp_v1->unk21E %= temp_v0;\n    temp_v1 = *temp_a2;\n    if (temp_v1->unk21E < temp_v1->unk220) {\n        temp_v1->unk21E = temp_v1->unk220;\n    }\n}",
+        "score": 0.4791666666666667,
+        "reason": "length_mismatch (target=46, generated=48)",
+        "diffs": [],
+        "timestamp": "2026-06-04T02:00:29.345Z"
       }
     ]
   },
