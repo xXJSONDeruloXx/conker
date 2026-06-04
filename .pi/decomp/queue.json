@@ -20382,8 +20382,8 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 9,
-    "lastScore": 0.4642857142857143,
+    "attempts": 12,
+    "lastScore": 0.4523809523809524,
     "status": "pending",
     "history": [
       {
@@ -20448,6 +20448,27 @@
         "reason": "length_mismatch (target=42, generated=39)",
         "diffs": [],
         "timestamp": "2026-06-04T13:51:58.492Z"
+      },
+      {
+        "code": "void func_150049A4(s8 *arg0, s32 arg1, s32 arg2) {\n    s32 temp_v0;\n    s8 *temp_a1;\n    s32 temp_a3;\n    register s32 temp_s0;\n\n    temp_s0 = arg2;\n    temp_a3 = arg1;\n    temp_v0 = 0;\n    temp_a1 = arg0;\n    if (*arg0 != -0x21) {\n        arg2 = *arg0;\n        do {\n            temp_v0++;\n            switch (arg2) {\n            case -0x24:\n                if ((u8)temp_a1[3] == 0xE) {\n                    *(s32 *)(temp_a1 + 4) += temp_s0;\n                }\n                break;\n            case 1:\n                *(s32 *)(temp_a1 + 4) += temp_a3;\n                break;\n            case 0xDE:\n                *(s32 *)(temp_a1 + 4) += temp_a3;\n                break;\n            }\n            temp_a1 = arg0 + (temp_v0 << 3);\n            arg2 = *temp_a1;\n        } while (arg2 != -0x21);\n    }\n}",
+        "score": 0.47619047619047616,
+        "reason": "length_mismatch (target=42, generated=40)",
+        "diffs": [],
+        "timestamp": "2026-06-04T13:52:54.402Z"
+      },
+      {
+        "code": "void func_150049A4(s8 *arg0, s32 arg1, s32 arg2) {\n    s32 temp_v0;\n    s32 temp_s0;\n    s32 temp_a3;\n    s32 temp_t0;\n    s32 temp_t4;\n    s32 temp_t3;\n    s32 temp_t2;\n    s32 temp_t1;\n\n    temp_s0 = arg2;\n    temp_a3 = arg1;\n    temp_t0 = -0x21;\n    temp_v0 = 0;\n    arg1 = (s32)arg0;\n    if (*arg0 != temp_t0) {\n        temp_t4 = 0xE;\n        arg2 = *arg0;\n        temp_t3 = 0xDE;\n        temp_t2 = 1;\n        temp_t1 = -0x24;\n        do {\n            temp_v0++;\n            if (arg2 == temp_t1) {\n                if (*(u8 *)(arg1 + 3) == temp_t4) {\n                    *(s32 *)(arg1 + 4) = *(s32 *)(arg1 + 4) + temp_s0;\n                }\n            } else if (arg2 == temp_t2) {\n                *(s32 *)(arg1 + 4) = *(s32 *)(arg1 + 4) + temp_a3;\n            } else if (arg2 == temp_t3) {\n                *(s32 *)(arg1 + 4) = *(s32 *)(arg1 + 4) + temp_a3;\n            }\n            arg1 = (s32)(arg0 + (temp_v0 << 3));\n            arg2 = *(s8 *)arg1;\n        } while (arg2 != temp_t0);\n    }\n}",
+        "score": 0.47619047619047616,
+        "reason": "length_mismatch (target=42, generated=40)",
+        "diffs": [],
+        "timestamp": "2026-06-04T13:53:25.013Z"
+      },
+      {
+        "code": "void func_150049A4(s8 *arg0, s32 arg1, s32 arg2) {\n    s32 temp_t0;\n    s32 temp_t4;\n    s32 temp_t3;\n    s32 temp_t2;\n    s32 temp_t1;\n    s32 temp_v0;\n    s32 temp_a2;\n    s32 temp_s0;\n    s8 *temp_a1;\n    s32 temp_a3;\n\n    temp_s0 = arg2;\n    temp_a3 = arg1;\n    temp_t0 = -0x21;\n    temp_v0 = 0;\n    temp_a1 = arg0;\n    if (*arg0 != temp_t0) {\n        temp_t4 = 0xE;\n        temp_a2 = *arg0;\n        temp_t3 = 0xDE;\n        temp_t2 = 1;\n        temp_t1 = -0x24;\n        do {\n            temp_v0++;\n            if (temp_a2 == temp_t1) {\n                if ((u8)temp_a1[3] == temp_t4) {\n                    *(s32 *)(temp_a1 + 4) = *(s32 *)(temp_a1 + 4) + temp_s0;\n                }\n            } else if (temp_a2 == temp_t2) {\n                *(s32 *)(temp_a1 + 4) = *(s32 *)(temp_a1 + 4) + temp_a3;\n            } else if (temp_a2 == temp_t3) {\n                *(s32 *)(temp_a1 + 4) = *(s32 *)(temp_a1 + 4) + temp_a3;\n            }\n            temp_a1 = arg0 + (temp_v0 << 3);\n            temp_a2 = *temp_a1;\n        } while (temp_a2 != temp_t0);\n    }\n}",
+        "score": 0.4523809523809524,
+        "reason": "length_mismatch (target=42, generated=38)",
+        "diffs": [],
+        "timestamp": "2026-06-04T13:53:38.047Z"
       }
     ]
   },
