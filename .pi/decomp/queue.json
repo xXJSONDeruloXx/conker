@@ -29544,8 +29544,8 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 3,
-    "lastScore": 0.7419,
+    "attempts": 6,
+    "lastScore": 0.9516,
     "status": "pending",
     "history": [
       {
@@ -29593,6 +29593,52 @@
           "structural: target=subu a1, a1, t7 got=subu a1, a1, t5"
         ],
         "timestamp": "2026-06-04T10:15:20.929Z"
+      },
+      {
+        "code": "void func_1507A528(void) {\n    s32 temp_v0;\n    s32 phi_a0;\n    s32 temp_a1;\n\n    temp_v0 = D_800D1890;\n    if (temp_v0 == 0) {\n        D_800D154C->unk221 = D_800D1891;\n    } else if (temp_v0 == 1) {\n        D_800D154C->unk221 = -D_800D154C->unk221;\n    } else if (temp_v0 == 2) {\n        if (D_800D1892 != 0) {\n            phi_a0 = D_800D1892;\n        } else {\n            phi_a0 = D_800D154C->unk13F[(u8 *)(*(s32 *)D_800D2108)] - 1;\n        }\n        D_800D154C->unk221 = -D_800D154C->unk221;\n        temp_a1 = D_800D154C->unk21E + D_800D154C->unk221;\n        if (D_800D154C->unk221 > 0) {\n            temp_a1 += D_800D1893;\n        } else {\n            temp_a1 -= D_800D1893;\n        }\n        if (temp_a1 >= phi_a0) {\n            temp_a1 -= phi_a0;\n        } else if (temp_a1 < 0) {\n            temp_a1 += phi_a0;\n        }\n        D_800D154C->unk21E = temp_a1;\n    }\n}",
+        "score": 0.9516,
+        "reason": "structural_diffs=3",
+        "diffs": [
+          "structural: target=lui t1, HI(D_800D2108) got=lui t0, HI(D_800D2108)",
+          "structural: target=lw t1, LO(D_800D2108)(t1) got=lw t0, LO(D_800D2108)(t0)",
+          "structural: target=lbu t0, 319(v0) got=lbu t1, 319(v0)"
+        ],
+        "timestamp": "2026-06-04T10:15:45.101Z"
+      },
+      {
+        "code": "void func_1507A528(void) {\n    s32 temp_v0;\n    s32 phi_a0;\n    s32 temp_a1;\n    s32 temp_t0;\n\n    temp_v0 = D_800D1890;\n    if (temp_v0 == 0) {\n        D_800D154C->unk221 = D_800D1891;\n    } else if (temp_v0 == 1) {\n        D_800D154C->unk221 = -D_800D154C->unk221;\n    } else if (temp_v0 == 2) {\n        if (D_800D1892 != 0) {\n            phi_a0 = D_800D1892;\n        } else {\n            temp_t0 = D_800D154C->unk13F;\n            phi_a0 = *(u8 *)(*(s32 *)D_800D2108 + temp_t0) - 1;\n        }\n        D_800D154C->unk221 = -D_800D154C->unk221;\n        temp_a1 = D_800D154C->unk21E + D_800D154C->unk221;\n        if (D_800D154C->unk221 > 0) {\n            temp_a1 += D_800D1893;\n        } else {\n            temp_a1 -= D_800D1893;\n        }\n        if (temp_a1 >= phi_a0) {\n            temp_a1 -= phi_a0;\n        } else if (temp_a1 < 0) {\n            temp_a1 += phi_a0;\n        }\n        D_800D154C->unk21E = temp_a1;\n    }\n}",
+        "score": 0.7419,
+        "reason": "structural_diffs=16",
+        "diffs": [
+          "structural: target=lui t7, HI(D_800D1893) got=lui t6, HI(D_800D1893)",
+          "structural: target=lui t1, HI(D_800D2108) got=lui t0, HI(D_800D2108)",
+          "structural: target=lw t1, LO(D_800D2108)(t1) got=lw t0, LO(D_800D2108)(t0)",
+          "structural: target=lbu t0, 319(v0) got=lbu v1, 319(v0)",
+          "structural: target=addu t2, t0, t1 got=addu t1, t0, v1",
+          "structural: target=lbu a0, 0(t2) got=lbu a0, 0(t1)",
+          "structural: target=lb t3, 545(v0) got=lb t2, 545(v0)",
+          "structural: target=lui t6, HI(D_800D1893) got=lui t5, HI(D_800D1893)",
+          "structural: target=negu t4, t3 got=negu t3, t2",
+          "structural: target=sb t4, 545(v0) got=sb t3, 545(v0)",
+          "structural: target=lbu t5, 542(v0) got=lbu t4, 542(v0)",
+          "structural: target=addu a1, t5, v1 got=addu a1, t4, v1",
+          "structural: target=lbu t6, LO(D_800D1893)(t6) got=lbu t5, LO(D_800D1893)(t5)",
+          "structural: target=addu a1, a1, t6 got=addu a1, a1, t5",
+          "structural: target=lbu t7, LO(D_800D1893)(t7) got=lbu t6, LO(D_800D1893)(t6)",
+          "structural: target=subu a1, a1, t7 got=subu a1, a1, t6"
+        ],
+        "timestamp": "2026-06-04T10:16:31.702Z"
+      },
+      {
+        "code": "void func_1507A528(void) {\n    s32 temp_v0;\n    s32 phi_a0;\n    s32 temp_a1;\n\n    temp_v0 = D_800D1890;\n    if (temp_v0 == 0) {\n        D_800D154C->unk221 = D_800D1891;\n    } else if (temp_v0 == 1) {\n        D_800D154C->unk221 = -D_800D154C->unk221;\n    } else if (temp_v0 == 2) {\n        if (D_800D1892 != 0) {\n            phi_a0 = D_800D1892;\n        } else {\n            phi_a0 = (*(u8 **)D_800D2108)[D_800D154C->unk13F] - 1;\n        }\n        D_800D154C->unk221 = -D_800D154C->unk221;\n        temp_a1 = D_800D154C->unk21E + D_800D154C->unk221;\n        if (D_800D154C->unk221 > 0) {\n            temp_a1 += D_800D1893;\n        } else {\n            temp_a1 -= D_800D1893;\n        }\n        if (temp_a1 >= phi_a0) {\n            temp_a1 -= phi_a0;\n        } else if (temp_a1 < 0) {\n            temp_a1 += phi_a0;\n        }\n        D_800D154C->unk21E = temp_a1;\n    }\n}",
+        "score": 0.9516,
+        "reason": "structural_diffs=3",
+        "diffs": [
+          "structural: target=lui t1, HI(D_800D2108) got=lui t0, HI(D_800D2108)",
+          "structural: target=lw t1, LO(D_800D2108)(t1) got=lw t0, LO(D_800D2108)(t0)",
+          "structural: target=lbu t0, 319(v0) got=lbu t1, 319(v0)"
+        ],
+        "timestamp": "2026-06-04T10:17:00.440Z"
       }
     ]
   },
