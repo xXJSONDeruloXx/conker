@@ -22650,7 +22650,7 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 4,
+    "attempts": 6,
     "lastScore": 0.49,
     "status": "pending",
     "history": [
@@ -22681,6 +22681,20 @@
         "reason": "length_mismatch (target=50, generated=49)",
         "diffs": [],
         "timestamp": "2026-06-04T03:44:53.758Z"
+      },
+      {
+        "code": "s32 func_1514306C(s32 *arg0, s32 arg1, s32 arg2, u8 arg3) {\n    s32 ret;\n    s32 temp;\n\n    switch (arg3) {\n    case 1:\n        ret = D_800915B0;\n        break;\n    case 2:\n        ret = D_80091514;\n        break;\n    case 3:\n        ret = 0;\n        break;\n    case 4:\n        ret = D_80091564[arg1];\n        break;\n    case 5:\n        ret = arg1;\n        break;\n    case 6:\n        temp = *arg0;\n        if ((u32)temp < 0x10000000) {\n            arg1 = temp;\n            ret = arg1;\n        } else {\n            ret = ((s32 *)temp)[arg2];\n        }\n        break;\n    default:\n        ret = D_80090B60[arg1 * 3][arg2];\n        break;\n    }\n    return ret;\n}",
+        "score": 0.49,
+        "reason": "length_mismatch (target=50, generated=49)",
+        "diffs": [],
+        "timestamp": "2026-06-04T04:00:12.801Z"
+      },
+      {
+        "code": "s32 func_1514306C(s32 *arg0, s32 arg1, s32 arg2, u8 arg3) {\n    s32 ret;\n    s32 temp;\n\n    switch (arg3) {\n    case 1:\n        ret = D_800915B0;\n        break;\n    case 2:\n        ret = D_80091514;\n        break;\n    case 3:\n        ret = 0;\n        break;\n    case 4:\n        ret = D_80091564[arg1];\n        break;\n    case 5:\n        ret = arg1;\n        break;\n    case 6:\n        temp = *arg0;\n        if ((arg1 = temp, (u32)arg1) >= 0x10000000) {\n            ret = ((s32 *)arg1)[arg2];\n        } else {\n            ret = arg1;\n        }\n        break;\n    default:\n        ret = D_80090B60[arg1 * 3][arg2];\n        break;\n    }\n    return ret;\n}",
+        "score": 0.49,
+        "reason": "length_mismatch (target=50, generated=49)",
+        "diffs": [],
+        "timestamp": "2026-06-04T04:00:30.969Z"
       }
     ]
   },
@@ -26487,9 +26501,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 9,
-    "lastScore": 0.44642857142857145,
-    "status": "pending",
+    "attempts": 10,
+    "lastScore": 0.4716981132075472,
+    "status": "skipped",
     "history": [
       {
         "code": "void __n_initFromBank(N_ALSeqPlayer *seqp, ALBank *bank) {\n    ALInstrument *inst;\n    s32 i;\n\n    inst = NULL;\n    i = 1;\n    if (inst == NULL) {\n        do {\n            inst = bank->instArray[i];\n            i++;\n        } while (inst == NULL);\n    }\n    i = 0;\n    if (seqp->maxChannels > 0) {\n        do {\n            __n_resetPerfChanState(seqp, i);\n            i++;\n        } while (i < seqp->maxChannels);\n    }\n    if (bank->percussion != NULL) {\n        __n_resetPerfChanState(seqp, i);\n    }\n}",
@@ -26563,6 +26577,13 @@
         "reason": "length_mismatch (target=50, generated=56)",
         "diffs": [],
         "timestamp": "2026-06-04T03:58:49.404Z"
+      },
+      {
+        "code": "void __n_initFromBank(N_ALSeqPlayer *seqp, ALBank *bank) {\n    s32 i;\n    ALInstrument *inst;\n\n    inst = NULL;\n    if (inst != NULL) {\n        i = 1;\n    } else {\n        i = 1;\n        do {\n            inst = bank->instArray[i];\n        } while (i++, inst == NULL);\n    }\n    if (seqp->maxChannels > (i = 0)) {\n        do {\n            __n_resetPerfChanState(seqp, i);\n        } while (++i < seqp->maxChannels);\n    }\n    if (bank->percussion != NULL) {\n        __n_resetPerfChanState(seqp, i);\n    }\n}",
+        "score": 0.4716981132075472,
+        "reason": "length_mismatch (target=50, generated=53)",
+        "diffs": [],
+        "timestamp": "2026-06-04T03:59:08.861Z"
       }
     ]
   },
