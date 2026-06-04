@@ -16709,9 +16709,9 @@
     "instructions": 46,
     "difficulty": "medium-low",
     "tags": [],
-    "attempts": 6,
+    "attempts": 8,
     "lastScore": 0.4035087719298246,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "void func_15007778(void) {\n    s32 phi_v0;\n    u8 *ptr;\n\n    *(s32 *)((s32)&D_800BE3F8 + 8) = -1;\n    *(s32 *)((s32)&D_800BE3F8 + 0x18) = -1;\n    *(s32 *)((s32)&D_800BE3F8 + 0x28) = -1;\n    *(s8 *)((s32)&D_800BE3F8 + 0xE) = -1;\n    *(s8 *)((s32)&D_800BE3F8 + 0x1E) = -1;\n    *(s8 *)((s32)&D_800BE3F8 + 0x2E) = -1;\n    D_800BE3DC = -1;\n    D_800BE3DE = 0;\n    D_80082BC0 = 1;\n\n    phi_v0 = 0;\n    do {\n        ((u8 *)D_800D2E4C)[phi_v0++] = 0;\n    } while (phi_v0 < 0x1B);\n\n    ptr = D_800D2E60;\n    while (ptr < &D_800D2E69) {\n        *ptr++ = 0;\n    }\n\n    D_800BE3DB = -1;\n    D_800BE3DA = -1;\n    D_800BE3D9 = -1;\n    D_800BE3D8 = -1;\n}",
@@ -16754,6 +16754,20 @@
         "reason": "length_mismatch (target=46, generated=57)",
         "diffs": [],
         "timestamp": "2026-06-04T01:40:28.609Z"
+      },
+      {
+        "code": "void func_15007778(void) {\n    s8 phi_v0;\n    u8 *ptr;\n    u8 *temp_v1;\n    s32 temp_a0;\n\n    temp_v1 = (u8 *)&D_800BE3F8;\n    temp_a0 = -1;\n    *(s32 *)(temp_v1 + 8) = temp_a0;\n    *(s32 *)(temp_v1 + 0x18) = temp_a0;\n    *(s32 *)(temp_v1 + 0x28) = temp_a0;\n    *(s8 *)(temp_v1 + 0xE) = temp_a0;\n    *(s8 *)(temp_v1 + 0x1E) = temp_a0;\n    *(s8 *)(temp_v1 + 0x2E) = temp_a0;\n    D_800BE3DC = temp_a0;\n    D_800BE3DE = 0;\n    D_80082BC0 = 1;\n\n    phi_v0 = 0;\n    do {\n        ((u8 *)D_800D2E4C)[phi_v0] = 0;\n        phi_v0++;\n    } while (phi_v0 < 0x1B);\n\n    ptr = D_800D2E60;\n    do {\n        *ptr++ = 0;\n    } while (ptr < &D_800D2E69);\n\n    D_800BE3DB = -1;\n    D_800BE3DA = -1;\n    D_800BE3D9 = -1;\n    D_800BE3D8 = -1;\n}",
+        "score": 0.4891304347826087,
+        "reason": "length_mismatch (target=46, generated=45)",
+        "diffs": [],
+        "timestamp": "2026-06-04T01:41:02.183Z"
+      },
+      {
+        "code": "void func_15007778(void) {\n    u8 *ptr;\n    u8 *temp_v1;\n    s32 temp_a0;\n    s32 phi_v0;\n    u8 *temp_t7;\n\n    temp_v1 = (u8 *)&D_800BE3F8;\n    temp_a0 = -1;\n    *(s32 *)(temp_v1 + 8) = temp_a0;\n    *(s32 *)(temp_v1 + 0x18) = temp_a0;\n    *(s32 *)(temp_v1 + 0x28) = temp_a0;\n    *(s8 *)(temp_v1 + 0xE) = temp_a0;\n    *(s8 *)(temp_v1 + 0x1E) = temp_a0;\n    *(s8 *)(temp_v1 + 0x2E) = temp_a0;\n    D_800BE3DC = temp_a0;\n    D_800BE3DE = 0;\n    D_80082BC0 = 1;\n\n    phi_v0 = 0;\n    do {\n        temp_t7 = (u8 *)D_800D2E4C;\n        temp_t7[phi_v0] = 0;\n        phi_v0++;\n    } while (phi_v0 < 0x1B);\n\n    ptr = D_800D2E60;\n    do {\n        *ptr++ = 0;\n    } while (ptr < &D_800D2E69);\n\n    D_800BE3DB = -1;\n    D_800BE3DA = -1;\n    D_800BE3D9 = -1;\n    D_800BE3D8 = -1;\n}",
+        "score": 0.4035087719298246,
+        "reason": "length_mismatch (target=46, generated=57)",
+        "diffs": [],
+        "timestamp": "2026-06-04T01:41:32.395Z"
       }
     ]
   },
@@ -17941,9 +17955,53 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.48936170212765956,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_15076D3C(void) {\n    struct127 **temp_v0;\n    s32 temp_v1;\n    s32 temp_a3;\n\n    temp_v0 = &D_800D154C;\n    temp_v1 = (s16)(D_800D1890 | (D_800D1891 << 8));\n    temp_a3 = (s16)(D_800D1892 | (D_800D1893 << 8));\n    (*temp_v0)->xz_scale = temp_v1 * D_8009A144;\n    (*temp_v0)->y_scale = temp_a3 * D_8009A144;\n    (*temp_v0)->unk154 = (*temp_v0)->xz_scale;\n    (*temp_v0)->unk158 = (*temp_v0)->y_scale;\n    func_15062BDC(*temp_v0, (*temp_v0)->xz_scale, (*temp_v0)->y_scale);\n}",
+        "score": 0.4791666666666667,
+        "reason": "length_mismatch (target=46, generated=48)",
+        "diffs": [],
+        "timestamp": "2026-06-04T01:42:59.371Z"
+      },
+      {
+        "code": "void func_15076D3C(void) {\n    struct127 **temp_v0;\n    f32 temp_f0;\n    s32 temp_v1;\n    s32 temp_a3;\n\n    temp_v0 = &D_800D154C;\n    temp_f0 = D_8009A144;\n    temp_v1 = (s16)(D_800D1890 | (D_800D1891 << 8));\n    temp_a3 = (s16)(D_800D1892 | (D_800D1893 << 8));\n    (*temp_v0)->xz_scale = temp_v1 * temp_f0;\n    (*temp_v0)->y_scale = temp_a3 * temp_f0;\n    (*temp_v0)->unk154 = (*temp_v0)->xz_scale;\n    (*temp_v0)->unk158 = (*temp_v0)->y_scale;\n    func_15062BDC(*temp_v0, (*temp_v0)->xz_scale, (*temp_v0)->y_scale);\n}",
+        "score": 0.4565,
+        "reason": "structural_diffs=25",
+        "diffs": [
+          "structural: target=lui at, HI(D_8009A144) got=addiu v0, v0, LO(D_800D154C)",
+          "structural: target=lwc1 f0, LO(D_8009A144)(at) got=sw ra, 20(sp)",
+          "structural: target=addiu v0, v0, LO(D_800D154C) got=lui t7, HI(D_800D1891)",
+          "structural: target=sw ra, 20(sp) got=lbu t7, LO(D_800D1891)(t7)",
+          "structural: target=lui t7, HI(D_800D1891) got=lui t6, HI(D_800D1890)",
+          "structural: target=lbu t7, LO(D_800D1891)(t7) got=lbu t6, LO(D_800D1890)(t6)",
+          "structural: target=lui t6, HI(D_800D1890) got=lui t2, HI(D_800D1893)",
+          "structural: target=lbu t6, LO(D_800D1890)(t6) got=sll t8, t7, 8",
+          "structural: target=lui t2, HI(D_800D1893) got=lbu t2, LO(D_800D1893)(t2)",
+          "structural: target=sll t8, t7, 8 got=lui t1, HI(D_800D1892)",
+          "structural: target=lbu t2, LO(D_800D1893)(t2) got=or v1, t6, t8",
+          "structural: target=lui t1, HI(D_800D1892) got=lbu t1, LO(D_800D1892)(t1)",
+          "structural: target=or v1, t6, t8 got=sll t9, v1, 16",
+          "structural: target=lbu t1, LO(D_800D1892)(t1) got=sra v1, t9, 16",
+          "structural: target=sll t9, v1, 16 got=mtc1 v1, f4",
+          "structural: target=sra v1, t9, 16 got=sll t3, t2, 8",
+          "structural: target=mtc1 v1, f4 got=or a3, t1, t3",
+          "structural: target=sll t3, t2, 8 got=sll t4, a3, 16",
+          "structural: target=or a3, t1, t3 got=cvt.s.w f6, f4",
+          "structural: target=sll t4, a3, 16 got=sra a3, t4, 16"
+        ],
+        "timestamp": "2026-06-04T01:43:29.215Z"
+      },
+      {
+        "code": "void func_15076D3C(void) {\n    struct127 **temp_v0;\n    f32 temp_f0;\n    s32 temp_v1;\n    s32 temp_a3;\n\n    temp_v0 = &D_800D154C;\n    temp_f0 = *(volatile f32 *)&D_8009A144;\n    temp_v1 = (s16)(D_800D1890 | (D_800D1891 << 8));\n    temp_a3 = (s16)(D_800D1892 | (D_800D1893 << 8));\n    (*temp_v0)->xz_scale = temp_v1 * temp_f0;\n    (*temp_v0)->y_scale = temp_a3 * temp_f0;\n    (*temp_v0)->unk154 = (*temp_v0)->xz_scale;\n    (*temp_v0)->unk158 = (*temp_v0)->y_scale;\n    func_15062BDC(*temp_v0, (*temp_v0)->xz_scale, (*temp_v0)->y_scale);\n}",
+        "score": 0.48936170212765956,
+        "reason": "length_mismatch (target=46, generated=47)",
+        "diffs": [],
+        "timestamp": "2026-06-04T01:44:01.030Z"
+      }
+    ]
   },
   {
     "function": "func_15049350",
