@@ -28247,9 +28247,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
+    "attempts": 5,
     "lastScore": 0.48333333333333334,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "s32 func_151638E0(struct225 *arg0) {\n    f32 sp20[3];\n    f32 sp1C;\n    u8 *temp_v1;\n\n    func_15187FC0(arg0->unk18, sp20);\n    temp_v1 = (u8 *) &arg0->unk18;\n    func_15188010(*(struct227 **) temp_v1, &sp1C);\n    arg0->unk14->unk2F = (u8) (*(f32 *)(temp_v1 + 4) + (*(f32 *)(temp_v1 + 8) * sp1C));\n    return 1;\n}",
@@ -28271,6 +28271,20 @@
         "reason": "length_mismatch (target=60, generated=58)",
         "diffs": [],
         "timestamp": "2026-06-04T09:32:34.229Z"
+      },
+      {
+        "code": "s32 func_151638E0(struct225 *arg0) {\n    f32 sp20[3];\n    f32 sp1C;\n    struct227 ** volatile temp_v1;\n\n    func_15187FC0(arg0->unk18, sp20);\n    temp_v1 = &arg0->unk18;\n    func_15188010(*temp_v1, &sp1C);\n    arg0->unk14->unk2F = (u8) (*(f32 *)((s32) temp_v1 + 4) + (*(f32 *)((s32) temp_v1 + 8) * sp1C));\n    return 1;\n}",
+        "score": 0.4838709677419355,
+        "reason": "length_mismatch (target=60, generated=62)",
+        "diffs": [],
+        "timestamp": "2026-06-04T09:33:03.473Z"
+      },
+      {
+        "code": "s32 func_151638E0(struct225 *arg0) {\n    f32 sp20[3];\n    f32 sp1C;\n    struct227 *temp_v1;\n\n    func_15187FC0(arg0->unk18, sp20);\n    temp_v1 = (struct227 *) &arg0->unk18;\n    func_15188010(*(struct227 **) temp_v1, &sp1C);\n    arg0->unk14->unk2F = (u8) (temp_v1->unk4 + (temp_v1->unk8 * sp1C));\n    return 1;\n}",
+        "score": 0.48333333333333334,
+        "reason": "length_mismatch (target=60, generated=58)",
+        "diffs": [],
+        "timestamp": "2026-06-04T09:33:38.120Z"
       }
     ]
   },
@@ -28696,9 +28710,32 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.4918032786885246,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_15145DB4(struct227 *arg0, struct17 *arg1, struct17 *arg2, s32 arg3) {\n    f32 tmp[4][4];\n\n    func_150A8050(tmp, arg0->unk0, arg0->unk4, arg0->unk8);\n    tmp[3][0] = (f32) arg0->unk10;\n    tmp[3][1] = (f32) *(s16 *)((u8 *) arg0 + 0x12);\n    tmp[3][2] = (f32) *(s16 *)((u8 *) arg0 + 0x14);\n    if (arg3 > 0) {\n        do {\n            func_150A7960(tmp, arg1->unk0, arg1->unk4, arg1->unk8, &arg2->unk0, &arg2->unk4, &arg2->unk8);\n            arg3--;\n            arg1++;\n            arg2++;\n        } while (arg3 > 0);\n    }\n}",
+        "score": 0.4583333333333333,
+        "reason": "length_mismatch (target=60, generated=55)",
+        "diffs": [],
+        "timestamp": "2026-06-04T09:35:42.085Z"
+      },
+      {
+        "code": "void func_15145DB4(struct227 *arg0, struct17 *arg1, struct17 *arg2, s32 arg3) {\n    struct227 *temp_s0;\n    struct17 *temp_s1;\n    s32 temp_s2;\n    f32 *temp_s3;\n    f32 *temp_s4;\n    f32 tmp[4][4];\n\n    temp_s0 = arg0;\n    temp_s2 = arg3;\n    func_150A8050(tmp, temp_s0->unk0, temp_s0->unk4, temp_s0->unk8);\n    tmp[3][0] = (f32) temp_s0->unk10;\n    tmp[3][1] = (f32) *(s16 *)((u8 *) temp_s0 + 0x12);\n    tmp[3][2] = (f32) *(s16 *)((u8 *) temp_s0 + 0x14);\n    if (temp_s2 > 0) {\n        temp_s0 = (struct227 *) arg1;\n        temp_s1 = arg2;\n        temp_s3 = &temp_s1->unk4;\n        temp_s4 = &temp_s1->unk8;\n        do {\n            func_150A7960(tmp, ((struct17 *) temp_s0)->unk0, ((struct17 *) temp_s0)->unk4, ((struct17 *) temp_s0)->unk8, &temp_s1->unk0, temp_s3, temp_s4);\n            temp_s2--;\n            temp_s0 = (struct227 *) ((u8 *) temp_s0 + 0xC);\n            temp_s1++;\n            temp_s3 += 3;\n            temp_s4 += 3;\n        } while (temp_s2 > 0);\n    }\n}",
+        "score": 0.4838709677419355,
+        "reason": "length_mismatch (target=60, generated=62)",
+        "diffs": [],
+        "timestamp": "2026-06-04T09:36:17.142Z"
+      },
+      {
+        "code": "void func_15145DB4(struct227 *arg0, struct17 *arg1, struct17 *arg2, s32 arg3) {\n    struct227 *temp_s0;\n    struct17 *temp_s1;\n    f32 *temp_s3;\n    f32 *temp_s4;\n    f32 tmp[21];\n    f32 (*mtx)[4];\n\n    temp_s0 = arg0;\n    mtx = (f32 (*)[4]) &tmp[5];\n    func_150A8050(mtx, temp_s0->unk0, temp_s0->unk4, temp_s0->unk8);\n    ((f32 *) mtx)[12] = (f32) temp_s0->unk10;\n    ((f32 *) mtx)[13] = (f32) *(s16 *)((u8 *) temp_s0 + 0x12);\n    ((f32 *) mtx)[14] = (f32) *(s16 *)((u8 *) temp_s0 + 0x14);\n    if (arg3 > 0) {\n        temp_s0 = (struct227 *) arg1;\n        temp_s1 = arg2;\n        temp_s3 = &temp_s1->unk4;\n        temp_s4 = &temp_s1->unk8;\n        do {\n            func_150A7960(mtx, ((struct17 *) temp_s0)->unk0, ((struct17 *) temp_s0)->unk4, ((struct17 *) temp_s0)->unk8, &temp_s1->unk0, temp_s3, temp_s4);\n            arg3--;\n            temp_s0 = (struct227 *) ((u8 *) temp_s0 + 0xC);\n            temp_s1++;\n            temp_s3 += 3;\n            temp_s4 += 3;\n        } while (arg3 > 0);\n    }\n}",
+        "score": 0.4918032786885246,
+        "reason": "length_mismatch (target=60, generated=61)",
+        "diffs": [],
+        "timestamp": "2026-06-04T09:36:56.988Z"
+      }
+    ]
   },
   {
     "function": "func_1505F188",
