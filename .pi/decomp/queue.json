@@ -36612,7 +36612,7 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
+    "attempts": 6,
     "lastScore": 0.49242424242424243,
     "status": "pending",
     "history": [
@@ -36657,6 +36657,27 @@
         "reason": "length_mismatch (target=66, generated=65)",
         "diffs": [],
         "timestamp": "2026-06-04T11:44:47.774Z"
+      },
+      {
+        "code": "void func_1509C120(void) {\n    void *sp34;\n    void *sp38[4];\n    s32 temp_s3;\n    s32 i;\n    s32 count;\n\n    temp_s3 = func_150ADA20() & 3;\n    sp34 = D_800D2E4C;\n    if (sp34 != NULL) {\n        if ((func_150ADA20() & 4) == 0) {\n            return;\n        }\n    }\n    i = 0;\n    if (temp_s3 >= 0) {\n        do {\n            sp38[i] = allocate_memory(0x1B, 0xFF, 2, 0);\n            i++;\n        } while (i != (temp_s3 + 1));\n        i = 0;\n    }\n    count = temp_s3 + 1;\n    if (temp_s3 >= 0) {\n        void func_10004074();\n        do {\n            if (i != temp_s3) {\n                func_10004074(sp38[i]);\n            }\n            i++;\n        } while (count != i);\n    }\n    D_800D2E4C = sp38[temp_s3];\n    if (sp34 != NULL) {\n        void func_10004074();\n        bcopy(sp34, D_800D2E4C, 0x1B);\n        func_10004074(sp34);\n    }\n}",
+        "score": 0.49242424242424243,
+        "reason": "length_mismatch (target=66, generated=65)",
+        "diffs": [],
+        "timestamp": "2026-06-04T11:45:09.774Z"
+      },
+      {
+        "code": "void func_1509C120(void) {\n    s32 pad[2];\n    void *sp38[4];\n    void *sp34;\n    void **base;\n    s32 temp_s3;\n    s32 i;\n    s32 count;\n\n    temp_s3 = func_150ADA20() & 3;\n    sp34 = D_800D2E4C;\n    if (sp34 != NULL) {\n        if ((func_150ADA20() & 4) == 0) {\n            return;\n        }\n    }\n    i = 0;\n    if (temp_s3 >= 0) {\n        do {\n            sp38[i] = allocate_memory(0x1B, 0xFF, 2, 0);\n            i++;\n        } while (i != (temp_s3 + 1));\n        i = 0;\n    }\n    count = temp_s3 + 1;\n    if (temp_s3 >= 0) {\n        void func_10004074();\n        base = sp38;\n        do {\n            if (i != temp_s3) {\n                func_10004074(base[i]);\n            }\n            i++;\n        } while (count != i);\n    }\n    base = sp38;\n    D_800D2E4C = base[temp_s3];\n    if (sp34 != NULL) {\n        void func_10004074();\n        bcopy(sp34, D_800D2E4C, 0x1B);\n        func_10004074(sp34);\n    }\n}",
+        "score": 0.49242424242424243,
+        "reason": "length_mismatch (target=66, generated=65)",
+        "diffs": [],
+        "timestamp": "2026-06-04T11:45:39.701Z"
+      },
+      {
+        "code": "void func_1509C120(void) {\n    void *sp38[6];\n    void *sp34;\n    s32 temp_s3;\n    s32 i;\n    s32 count;\n\n    temp_s3 = func_150ADA20() & 3;\n    sp34 = D_800D2E4C;\n    if (sp34 != NULL) {\n        if ((func_150ADA20() & 4) == 0) {\n            return;\n        }\n    }\n    i = 0;\n    if (temp_s3 >= 0) {\n        do {\n            sp38[i] = allocate_memory(0x1B, 0xFF, 2, 0);\n            i++;\n        } while (i != (temp_s3 + 1));\n        i = 0;\n    }\n    count = temp_s3 + 1;\n    if (temp_s3 >= 0) {\n        void func_10004074();\n        do {\n            if (i != temp_s3) {\n                func_10004074(sp38[i]);\n            }\n            i++;\n        } while (count != i);\n    }\n    D_800D2E4C = sp38[temp_s3];\n    if (sp34 != NULL) {\n        void func_10004074();\n        bcopy(sp34, D_800D2E4C, 0x1B);\n        func_10004074(sp34);\n    }\n}",
+        "score": 0.49242424242424243,
+        "reason": "length_mismatch (target=66, generated=65)",
+        "diffs": [],
+        "timestamp": "2026-06-04T11:46:01.568Z"
       }
     ]
   },
