@@ -35332,8 +35332,8 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 6,
-    "lastScore": 0.45774647887323944,
+    "attempts": 9,
+    "lastScore": 0.44366197183098594,
     "status": "pending",
     "history": [
       {
@@ -35390,6 +35390,27 @@
         "reason": "length_mismatch (target=71, generated=65)",
         "diffs": [],
         "timestamp": "2026-06-05T01:48:20.704Z"
+      },
+      {
+        "code": "u8 *func_160014F0(u8 *arg0, s32 arg1) {\n    u16 color;\n    u16 *dst;\n    u8 *glyph;\n    s32 *width;\n    s32 row;\n    s32 col;\n    u8 bits;\n    s32 temp_a1;\n    s32 temp_a2;\n\n    temp_a1 = arg1 & 0xFF;\n    temp_a2 = temp_a1;\n    if (temp_a1 < 0x20) {\n        temp_a2 = 0x20;\n    }\n    color = D_1600388C;\n    dst = (u16 *)arg0;\n    glyph = &D_16003CE0[(temp_a2 - 0x20) << 3];\n    width = &D_160038A8;\n    row = 0;\n    do {\n        col = 0;\n        bits = *glyph;\n        do {\n            if (bits & 0x80) {\n                *dst = color;\n            } else {\n                *dst = 1;\n            }\n            dst++;\n            bits <<= 1;\n            if (bits & 0x80) {\n                *dst = color;\n            } else {\n                *dst = 1;\n            }\n            dst++;\n            bits <<= 1;\n            if (bits & 0x80) {\n                *dst = color;\n            } else {\n                *dst = 1;\n            }\n            dst++;\n            bits <<= 1;\n            if (bits & 0x80) {\n                *dst = color;\n            } else {\n                *dst = 1;\n            }\n            dst++;\n            bits <<= 1;\n            col += 4;\n        } while (col != 8);\n        dst += *width - 8;\n        glyph++;\n        row++;\n    } while (row != 8);\n    return arg0 + 0x10;\n}",
+        "score": 0.45774647887323944,
+        "reason": "length_mismatch (target=71, generated=65)",
+        "diffs": [],
+        "timestamp": "2026-06-05T01:48:59.763Z"
+      },
+      {
+        "code": "u8 *func_160014F0(u8 *arg0, s32 arg1) {\n    u16 *dst;\n    u16 color;\n    u8 *glyph;\n    s32 *width;\n    s32 row;\n    s32 col;\n    u8 bits;\n    s32 temp_a1;\n    s32 temp_a2;\n\n    temp_a1 = arg1 & 0xFF;\n    temp_a2 = temp_a1;\n    if (temp_a1 < 0x20) {\n        temp_a2 = 0x20;\n    }\n    dst = (u16 *)arg0;\n    color = D_1600388C;\n    glyph = &D_16003CE0[(temp_a2 - 0x20) << 3];\n    width = &D_160038A8;\n    row = 0;\n    do {\n        col = 0;\n        bits = *glyph;\n        do {\n            if (bits & 0x80) {\n                *dst = color;\n            } else {\n                *dst = 1;\n            }\n            dst++;\n            bits <<= 1;\n            if (bits & 0x80) {\n                *dst = color;\n            } else {\n                *dst = 1;\n            }\n            dst++;\n            bits <<= 1;\n            if (bits & 0x80) {\n                *dst = color;\n            } else {\n                *dst = 1;\n            }\n            dst++;\n            bits <<= 1;\n            if (bits & 0x80) {\n                *dst = color;\n            } else {\n                *dst = 1;\n            }\n            dst++;\n            bits <<= 1;\n            col += 4;\n        } while (col != 8);\n        dst += *width - 8;\n        glyph++;\n        row++;\n    } while (row != 8);\n    return arg0 + 0x10;\n}",
+        "score": 0.4507042253521127,
+        "reason": "length_mismatch (target=71, generated=64)",
+        "diffs": [],
+        "timestamp": "2026-06-05T01:49:40.294Z"
+      },
+      {
+        "code": "u8 *func_160014F0(u8 *arg0, s32 arg1) {\n    u8 *start;\n    u16 color;\n    u8 *glyph;\n    s32 *width;\n    s32 row;\n    s32 col;\n    u8 bits;\n    s32 temp_a1;\n    s32 temp_a2;\n\n    start = arg0;\n    temp_a1 = arg1 & 0xFF;\n    temp_a2 = temp_a1;\n    if (temp_a1 < 0x20) {\n        temp_a2 = 0x20;\n    }\n    color = D_1600388C;\n    glyph = &D_16003CE0[(temp_a2 - 0x20) << 3];\n    width = &D_160038A8;\n    row = 0;\n    do {\n        col = 0;\n        bits = *glyph;\n        do {\n            if (bits & 0x80) {\n                *(u16 *)arg0 = color;\n            } else {\n                *(u16 *)arg0 = 1;\n            }\n            arg0 += 2;\n            bits <<= 1;\n            if (bits & 0x80) {\n                *(u16 *)arg0 = color;\n            } else {\n                *(u16 *)arg0 = 1;\n            }\n            arg0 += 2;\n            bits <<= 1;\n            if (bits & 0x80) {\n                *(u16 *)arg0 = color;\n            } else {\n                *(u16 *)arg0 = 1;\n            }\n            arg0 += 2;\n            bits <<= 1;\n            if (bits & 0x80) {\n                *(u16 *)arg0 = color;\n            } else {\n                *(u16 *)arg0 = 1;\n            }\n            arg0 += 2;\n            bits <<= 1;\n            col += 4;\n        } while (col != 8);\n        arg0 += *width - 8;\n        glyph++;\n        row++;\n    } while (row != 8);\n    return start + 0x10;\n}",
+        "score": 0.44366197183098594,
+        "reason": "length_mismatch (target=71, generated=63)",
+        "diffs": [],
+        "timestamp": "2026-06-05T01:50:23.279Z"
       }
     ]
   },
