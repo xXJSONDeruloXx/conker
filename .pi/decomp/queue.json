@@ -41394,7 +41394,7 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 4,
+    "attempts": 6,
     "lastScore": 0.3486238532110092,
     "status": "pending",
     "history": [
@@ -41438,6 +41438,20 @@
         "reason": "length_mismatch (target=76, generated=109)",
         "diffs": [],
         "timestamp": "2026-06-05T02:25:01.684Z"
+      },
+      {
+        "code": "s32 func_16001700(void) {\n    register u32 count;\n    register u32 limit;\n\n    if (__osContLastCmd != 1) {\n        func_160018BC();\n        func_160019A8(1, &__osContPifRam);\n        osGetCount();\n        count = 0;\n        limit = osGetCount() + 0x30D40;\n        do {\n            func_160016F4(count);\n            count = osGetCount();\n        } while (count < limit);\n        func_160016F4(count);\n    }\n\n    {\n        register u32 *ptr;\n        register u32 *end;\n\n        ptr = (u32 *)&__osContPifRam;\n        end = (u32 *)&__osContLastCmd;\n        do {\n            ptr++;\n            ptr[-1] = 0xFF;\n        } while (ptr < end);\n    }\n\n    D_80042A4C = 0;\n    {\n        s32 ret;\n\n        ret = func_160019A8(0, &__osContPifRam);\n        __osContLastCmd = 1;\n        osGetCount();\n        count = 0;\n        limit = osGetCount() + 0xC3500;\n        do {\n            func_160016F4(count);\n            count = osGetCount();\n        } while (count < limit);\n        func_160016F4(count);\n        return ret;\n    }\n}",
+        "score": 0.3486238532110092,
+        "reason": "length_mismatch (target=76, generated=109)",
+        "diffs": [],
+        "timestamp": "2026-06-05T02:55:41.017Z"
+      },
+      {
+        "code": "s32 func_16001700(void) {\n    register u32 count;\n    register u32 limit;\n    s32 ret;\n\n    if (__osContLastCmd != 1) {\n        func_160018BC();\n        func_160019A8(1, &__osContPifRam);\n        count = osGetCount();\n        count = 0;\n        limit = osGetCount() + 0x30D40;\n        do {\n            func_160016F4(count);\n            count = osGetCount();\n        } while (count < limit);\n        func_160016F4(count);\n    }\n\n    {\n        register u32 *ptr;\n        register u32 *end;\n\n        ptr = (u32 *)&__osContPifRam;\n        end = (u32 *)&__osContLastCmd;\n        do {\n            ptr++;\n            ptr[-1] = 0xFF;\n        } while (ptr < end);\n    }\n\n    D_80042A4C = 0;\n    ret = func_160019A8(0, &__osContPifRam);\n    __osContLastCmd = 1;\n    count = osGetCount();\n    count = 0;\n    limit = osGetCount() + 0xC3500;\n    do {\n        func_160016F4(count);\n        count = osGetCount();\n    } while (count < limit);\n    func_160016F4(count);\n    return ret;\n}",
+        "score": 0.3486238532110092,
+        "reason": "length_mismatch (target=76, generated=109)",
+        "diffs": [],
+        "timestamp": "2026-06-05T02:57:35.099Z"
       }
     ]
   },
