@@ -34055,8 +34055,8 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 4,
-    "lastScore": 0.3873239436619718,
+    "attempts": 6,
+    "lastScore": 0.33098591549295775,
     "status": "pending",
     "history": [
       {
@@ -34097,6 +34097,20 @@
         "reason": "length_mismatch (target=71, generated=55)",
         "diffs": [],
         "timestamp": "2026-06-05T00:32:30.960Z"
+      },
+      {
+        "code": "struct225 *func_15160A58(struct29 *arg0, u8 arg1, Header2 *arg2, u8 arg3, s16 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8, s8 argB, s32 argC, u8 argD, u8 argE, s32 argF, s32 argG, s32 argH) {\n    s8 sp60;\n    s16 sp5E;\n    s8 sp5D;\n    u8 sp5C;\n    u8 sp59;\n    s8 sp58;\n    Header2 sp4C;\n    u8 sp49;\n    u8 sp48;\n    struct29 *sp44;\n    s32 sp40;\n    s32 sp3C;\n    s32 sp38;\n    struct225 *temp_v0;\n\n    if (arg0 == NULL) {\n        return NULL;\n    }\n    sp5C = arg3;\n    sp5D = 5;\n    sp60 = 0x10;\n    sp5E = arg4;\n    sp44 = arg0;\n    sp49 = arg1;\n    sp48 = arg0->unk3B;\n    sp4C.unk0 = arg2->unk0;\n    sp4C.unk4 = arg2->unk4;\n    sp4C.unk8 = arg2->unk8;\n    sp38 = 0;\n    sp3C = 0;\n    sp40 = 0;\n    sp58 = argB;\n    sp59 = argD;\n    temp_v0 = func_151602C0(&sp5C, &sp38, arg5, arg6, arg7, arg8, 0xFF, 0, argC + 0x18, argE, argF);\n    if (temp_v0 != NULL) {\n        memcpy(&temp_v0->unk18, &sp44, 0x18);\n    }\n    return temp_v0;\n}",
+        "score": 0.33098591549295775,
+        "reason": "length_mismatch (target=71, generated=47)",
+        "diffs": [],
+        "timestamp": "2026-06-05T01:36:09.294Z"
+      },
+      {
+        "code": "struct225 *func_15160A58(struct29 *arg0, u8 arg1, Header2 *arg2, u8 arg3, s16 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8, s8 argB, s32 argC, u8 argD, u8 argE, s32 argF, ...) {\n    s8 sp60;\n    s16 sp5E;\n    s8 sp5D;\n    u8 sp5C;\n    u8 sp59;\n    s8 sp58;\n    Header2 sp4C;\n    u8 sp49;\n    u8 sp48;\n    struct29 *sp44;\n    s32 sp40;\n    s32 sp3C;\n    s32 sp38;\n    struct225 *temp_v0;\n\n    if (arg0 == NULL) {\n        return NULL;\n    }\n    sp5C = arg3;\n    sp5D = 5;\n    sp60 = 0x10;\n    sp5E = arg4;\n    sp44 = arg0;\n    sp49 = arg1;\n    sp48 = arg0->unk3B;\n    sp4C.unk0 = arg2->unk0;\n    sp4C.unk4 = arg2->unk4;\n    sp4C.unk8 = arg2->unk8;\n    sp38 = 0;\n    sp3C = 0;\n    sp40 = 0;\n    sp58 = argB;\n    sp59 = argD;\n    temp_v0 = func_151602C0(&sp5C, &sp38, arg5, arg6, arg7, arg8, 0xFF, 0, argC + 0x18, argE, argF);\n    if (temp_v0 != NULL) {\n        memcpy(&temp_v0->unk18, &sp44, 0x18);\n    }\n    return temp_v0;\n}",
+        "score": 0.33098591549295775,
+        "reason": "length_mismatch (target=71, generated=47)",
+        "diffs": [],
+        "timestamp": "2026-06-05T01:37:36.903Z"
       }
     ]
   },
@@ -34247,7 +34261,7 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
+    "attempts": 4,
     "lastScore": 0.29338842975206614,
     "status": "pending",
     "history": [
@@ -34271,6 +34285,26 @@
         "reason": "length_mismatch (target=71, generated=121)",
         "diffs": [],
         "timestamp": "2026-06-05T01:19:47.746Z"
+      },
+      {
+        "code": "s32 func_1502AF04(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {\n    s32 temp;\n    s32 *base;\n    s32 i;\n    s32 rem;\n\n    temp = arg0 + (arg2 << 3);\n    base = (s32 *)((arg1 + 8) & -16);\n    func_10004514(temp & -16, base, (((temp & 0xE) + (arg3 << 3)) + 0xF) & -16, 1);\n    base = (s32 *)((s32)base + (temp & 0xF));\n    if (arg3 != 0) {\n        rem = arg3 & 3;\n        i = 0;\n        if (rem != 0) {\n            do {\n                base[i * 2] += arg0;\n                i++;\n            } while (i != rem);\n            if (i == arg3) {\n                return (s32)base;\n            }\n        }\n        for (; i != arg3; i += 4) {\n            base[(i + 0) * 2] += arg0;\n            base[(i + 1) * 2] += arg0;\n            base[(i + 2) * 2] += arg0;\n            base[(i + 3) * 2] += arg0;\n        }\n    }\n    return (s32)base;\n}",
+        "score": -2.8,
+        "reason": "transmuter_best=114",
+        "diffs": [
+          "transmuter: initial=114→best=114, iters=0, compiled=0, errors=0, forks=0",
+          "fork_rules: refer-to-var, expand-expr, delete-stmt, cast-expr, xor-zero, reorder-stmts, duplicate-assignment, insert-block, randomize-type, add-mask, temp-for-expr, comma-expr, pad-var-decl, modify-condition, remove-cast",
+          "last_fork_rule: refer-to-var",
+          "config: timeout=90s, maxCompiles=3000, concurrency=4, profile=ido",
+          "NOTE: 0 compiled = all mutations hit compile errors. Source may have constructs incompatible with isolated compilation."
+        ],
+        "timestamp": "2026-06-05T01:20:59.211Z"
+      },
+      {
+        "code": "s32 func_1502AF04(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {\n    s32 temp;\n    s32 *base;\n    s32 i;\n    s32 rem;\n\n    temp = arg0 + (arg2 << 3);\n    base = (s32 *)((arg1 + 8) & -16);\n    func_10004514(temp & -16, base, (((temp & 0xE) + (arg3 << 3)) + 0xF) & -16, 1);\n    base = (s32 *)((s32)base + (temp & 0xF));\n    if (arg3 != 0) {\n        rem = arg3 & 3;\n        i = 0;\n        if (rem != 0) {\n            do {\n                base[i * 2] += arg0;\n                i++;\n            } while (i != rem);\n            if (i == arg3) {\n                return (s32)base;\n            }\n        }\n        if (i != arg3) {\n            do {\n                base[i * 2] += arg0;\n                base[(i + 1) * 2] += arg0;\n                base[(i + 2) * 2] += arg0;\n                base[(i + 3) * 2] += arg0;\n                i += 4;\n            } while (i != arg3);\n        }\n    }\n    return (s32)base;\n}",
+        "score": 0.29338842975206614,
+        "reason": "length_mismatch (target=71, generated=121)",
+        "diffs": [],
+        "timestamp": "2026-06-05T01:21:56.299Z"
       }
     ]
   },
