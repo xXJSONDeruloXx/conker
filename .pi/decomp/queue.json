@@ -34055,8 +34055,8 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 6,
-    "lastScore": 0.33098591549295775,
+    "attempts": 7,
+    "lastScore": 0.38028169014084506,
     "status": "pending",
     "history": [
       {
@@ -34111,6 +34111,13 @@
         "reason": "length_mismatch (target=71, generated=47)",
         "diffs": [],
         "timestamp": "2026-06-05T01:37:36.903Z"
+      },
+      {
+        "code": "struct225 *func_15160A58(struct29 *arg0, u8 arg1, Header2 *arg2, u8 arg3, s16 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8, s8 argB, s32 argC, u8 argD, u8 argE, s32 argF, ...) {\n    s32 sp64;\n    s8 sp60;\n    s16 sp5E;\n    s8 sp5D;\n    u8 sp5C;\n    u8 sp59;\n    s8 sp58;\n    s32 sp4C[3];\n    u8 sp49;\n    u8 sp48;\n    void *sp44;\n    s32 sp40;\n    s32 sp3C;\n    s32 sp38;\n\n    if (arg0 == NULL) {\n        return NULL;\n    }\n    sp5C = arg3;\n    sp5D = 5;\n    sp60 = 0x10;\n    sp5E = arg4;\n    sp44 = arg0;\n    sp49 = arg1;\n    sp48 = arg0->unk3B;\n    sp4C[0] = arg2->unk0;\n    sp4C[1] = arg2->unk4;\n    sp4C[2] = arg2->unk8;\n    sp38 = 0;\n    sp3C = 0;\n    sp40 = 0;\n    sp58 = argB;\n    sp59 = argD;\n    sp64 = (s32)func_151602C0(&sp5C, &sp38, arg5, arg6, arg7, arg8, 0xFF, 0, argC + 0x18, argE, argF);\n    if (sp64 != 0) {\n        memcpy((void *)(sp64 + 0x18), &sp44, 0x18);\n    }\n    return (struct225 *)sp64;\n}",
+        "score": 0.38028169014084506,
+        "reason": "length_mismatch (target=71, generated=54)",
+        "diffs": [],
+        "timestamp": "2026-06-05T01:38:25.881Z"
       }
     ]
   },
@@ -34263,7 +34270,7 @@
     ],
     "attempts": 4,
     "lastScore": 0.29338842975206614,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "u8 *func_1502AF04(s32 arg0, u8 *arg1, s32 arg2, s32 arg3) {\n    u8 *ret;\n    s32 offset;\n    s32 size;\n    s32 i;\n    s32 remainder;\n    s32 *wordPtr;\n\n    offset = arg0 + (arg2 << 3);\n    ret = (u8 *)(((s32)arg1 + 8) & -16);\n    size = (((offset & 0xE) + (arg3 << 3)) + 0xF) & -16;\n    func_10004514(offset & -16, ret, size, 1);\n    ret += offset & 0xF;\n    if (arg3 != 0) {\n        remainder = arg3 & 3;\n        wordPtr = (s32 *)ret;\n        if (remainder != 0) {\n            for (i = 0; i < remainder; i++) {\n                wordPtr[i * 2] += arg0;\n            }\n            if (remainder == arg3) {\n                return ret;\n            }\n            wordPtr += remainder * 2;\n            arg3 -= remainder;\n        }\n        for (; arg3 != 0; arg3 -= 4) {\n            wordPtr[0] += arg0;\n            wordPtr[2] += arg0;\n            wordPtr[4] += arg0;\n            wordPtr[6] += arg0;\n            wordPtr += 8;\n        }\n    }\n    return ret;\n}",
@@ -35325,8 +35332,8 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 4,
-    "lastScore": 0.4507042253521127,
+    "attempts": 6,
+    "lastScore": 0.45774647887323944,
     "status": "pending",
     "history": [
       {
@@ -35369,6 +35376,20 @@
         "reason": "length_mismatch (target=71, generated=64)",
         "diffs": [],
         "timestamp": "2026-06-05T00:49:40.833Z"
+      },
+      {
+        "code": "s32 func_160014F0(s32 arg0, s32 arg1) {\n    u16 *dst;\n    u8 *glyph;\n    u16 color;\n    s32 *width;\n    s32 row;\n    s32 col;\n    u8 bits;\n\n    arg1 &= 0xFF;\n    if (arg1 < 0x20) {\n        arg1 = 0x20;\n    }\n    color = D_1600388C;\n    dst = (u16 *)arg0;\n    glyph = &D_16003CE0[(arg1 - 0x20) << 3];\n    width = &D_160038A8;\n    row = 0;\n    do {\n        col = 0;\n        bits = *glyph;\n        do {\n            if (bits & 0x80) {\n                *dst = color;\n            } else {\n                *dst = 1;\n            }\n            dst++;\n            bits <<= 1;\n            if (bits & 0x80) {\n                *dst = color;\n            } else {\n                *dst = 1;\n            }\n            dst++;\n            bits <<= 1;\n            if (bits & 0x80) {\n                *dst = color;\n            } else {\n                *dst = 1;\n            }\n            dst++;\n            bits <<= 1;\n            if (bits & 0x80) {\n                *dst = color;\n            } else {\n                *dst = 1;\n            }\n            dst++;\n            bits <<= 1;\n            col += 4;\n        } while (col != 8);\n        dst += *width - 8;\n        glyph++;\n        row++;\n    } while (row != 8);\n    return arg0 + 0x10;\n}",
+        "score": 0.45774647887323944,
+        "reason": "length_mismatch (target=71, generated=65)",
+        "diffs": [],
+        "timestamp": "2026-06-05T01:47:14.921Z"
+      },
+      {
+        "code": "s32 func_160014F0(s32 arg0, s32 arg1) {\n    u16 color;\n    u16 *dst;\n    u8 *glyph;\n    s32 *width;\n    s32 row;\n    s32 col;\n    u8 bits;\n    s32 temp_a1;\n    s32 temp_a2;\n\n    temp_a1 = arg1 & 0xFF;\n    temp_a2 = temp_a1;\n    if (temp_a1 < 0x20) {\n        temp_a2 = 0x20;\n    }\n    color = D_1600388C;\n    dst = (u16 *)arg0;\n    glyph = &D_16003CE0[(temp_a2 - 0x20) << 3];\n    width = &D_160038A8;\n    row = 0;\n    do {\n        col = 0;\n        bits = *glyph;\n        do {\n            if (bits & 0x80) {\n                *dst = color;\n            } else {\n                *dst = 1;\n            }\n            dst++;\n            bits <<= 1;\n            if (bits & 0x80) {\n                *dst = color;\n            } else {\n                *dst = 1;\n            }\n            dst++;\n            bits <<= 1;\n            if (bits & 0x80) {\n                *dst = color;\n            } else {\n                *dst = 1;\n            }\n            dst++;\n            bits <<= 1;\n            if (bits & 0x80) {\n                *dst = color;\n            } else {\n                *dst = 1;\n            }\n            dst++;\n            bits <<= 1;\n            col += 4;\n        } while (col != 8);\n        dst += *width - 8;\n        glyph++;\n        row++;\n    } while (row != 8);\n    return arg0 + 0x10;\n}",
+        "score": 0.45774647887323944,
+        "reason": "length_mismatch (target=71, generated=65)",
+        "diffs": [],
+        "timestamp": "2026-06-05T01:48:20.704Z"
       }
     ]
   },
