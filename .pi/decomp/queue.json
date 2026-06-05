@@ -35277,7 +35277,7 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 3,
+    "attempts": 4,
     "lastScore": 0.4507042253521127,
     "status": "pending",
     "history": [
@@ -35301,6 +35301,26 @@
         "reason": "length_mismatch (target=71, generated=64)",
         "diffs": [],
         "timestamp": "2026-06-05T00:47:30.612Z"
+      },
+      {
+        "code": "extern u8 D_16003CE0[];\ns32 func_160014F0(s32 arg0, s32 arg1) {\n    s32 temp_a1;\n    s32 temp_a2;\n    u16 *dst;\n    u16 color;\n    u8 *glyph;\n    s32 *width;\n    s32 row;\n    u16 bits;\n\n    temp_a1 = arg1 & 0xFF;\n    temp_a2 = temp_a1;\n    dst = (u16 *)arg0;\n    color = D_1600388C;\n    if (temp_a1 < 0x20) {\n        temp_a2 = 0x20;\n    }\n    glyph = &D_16003CE0[(temp_a2 - 0x20) << 3];\n    width = &D_160038A8;\n    row = 0;\n    do {\n        temp_a1 = 0;\n        bits = *glyph;\n        do {\n            if (bits & 0x80) {\n                *dst = color;\n            } else {\n                *dst = 1;\n            }\n            dst++;\n            bits <<= 1;\n            if (bits & 0x80) {\n                *dst = color;\n            } else {\n                *dst = 1;\n            }\n            dst++;\n            bits <<= 1;\n            if (bits & 0x80) {\n                *dst = color;\n            } else {\n                *dst = 1;\n            }\n            dst++;\n            bits <<= 1;\n            if (bits & 0x80) {\n                *dst = color;\n            } else {\n                *dst = 1;\n            }\n            dst++;\n            bits <<= 1;\n            temp_a1 += 4;\n        } while (temp_a1 != 8);\n        dst += *width - 8;\n        glyph++;\n        row++;\n    } while (row != 8);\n\n    return arg0 + 0x10;\n}",
+        "score": -1.2666666666666666,
+        "reason": "transmuter_best=68",
+        "diffs": [
+          "transmuter: initial=68→best=68, iters=0, compiled=0, errors=0, forks=0",
+          "fork_rules: refer-to-var, randomize-type, cast-expr, reorder-stmts, expand-expr, mult-zero, delete-stmt, add-mask, duplicate-assignment, sameline, modify-condition, temp-for-expr",
+          "last_fork_rule: refer-to-var",
+          "config: timeout=60s, maxCompiles=2000, concurrency=4, profile=ido",
+          "NOTE: 0 compiled = all mutations hit compile errors. Source may have constructs incompatible with isolated compilation."
+        ],
+        "timestamp": "2026-06-05T00:48:54.848Z"
+      },
+      {
+        "code": "s32 func_160014F0(s32 arg0, s32 arg1) {\n    s32 temp_a2;\n    u16 *dst;\n    u16 color;\n    u8 *glyph;\n    s32 *width;\n    s32 row;\n    u16 bits;\n\n    temp_a2 = arg1 & 0xFF;\n    dst = (u16 *)arg0;\n    color = D_1600388C;\n    if (temp_a2 < 0x20) {\n        temp_a2 = 0x20;\n    }\n    glyph = &D_16003CE0[(temp_a2 - 0x20) << 3];\n    width = &D_160038A8;\n    row = 0;\n    do {\n        arg1 = 0;\n        bits = *glyph;\n        do {\n            if (bits & 0x80) {\n                *dst = color;\n            } else {\n                *dst = 1;\n            }\n            dst++;\n            bits <<= 1;\n            if (bits & 0x80) {\n                *dst = color;\n            } else {\n                *dst = 1;\n            }\n            dst++;\n            bits <<= 1;\n            if (bits & 0x80) {\n                *dst = color;\n            } else {\n                *dst = 1;\n            }\n            dst++;\n            bits <<= 1;\n            if (bits & 0x80) {\n                *dst = color;\n            } else {\n                *dst = 1;\n            }\n            dst++;\n            bits <<= 1;\n            arg1 += 4;\n        } while (arg1 != 8);\n        dst += *width - 8;\n        glyph++;\n        row++;\n    } while (row != 8);\n\n    return arg0 + 0x10;\n}",
+        "score": 0.4507042253521127,
+        "reason": "length_mismatch (target=71, generated=64)",
+        "diffs": [],
+        "timestamp": "2026-06-05T00:49:40.833Z"
       }
     ]
   },
@@ -37154,9 +37174,45 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.4859154929577465,
+    "status": "pending",
+    "history": [
+      {
+        "code": "s32 func_1502B9B4(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {\n    s32 stack2[2];\n    s32 stack1[2];\n    s32 stack0[5];\n    s32 more;\n    s32 offset;\n    s32 *tmp;\n    s32 i;\n    s32 *buf;\n\n    more = 1;\n    offset = (s32)D_AB1950;\n    tmp = &arg1;\n    for (i = arg0; i != 0; i--) {\n        tmp = (s32 *)(((s32)tmp + 3) & -4);\n        if (more != 0) {\n            offset += func_1502AC88(offset, *(s32 *)((s32)tmp - 4), stack0);\n        }\n        tmp++;\n        more = stack0[0] & 0x0FFFFFFF;\n    }\n    if (more != 0) {\n        more = (stack0[0] & 0x0FFFFFFF) + 1;\n        more &= -2;\n        if ((stack0[0] & 0x70000000) == 0x10000000) {\n            buf = stack1;\n            if (((s32)buf & 8) != 0) {\n                buf = stack2;\n            }\n            func_10004514(offset, buf, 0x10, 1);\n            more = *buf;\n        }\n    }\n    return more;\n}",
+        "score": 0.47887323943661975,
+        "reason": "length_mismatch (target=71, generated=68)",
+        "diffs": [],
+        "timestamp": "2026-06-05T00:53:52.170Z"
+      },
+      {
+        "code": "s32 func_1502B9B4(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {\n    s32 stack2[2];\n    s32 stack1[2];\n    s32 stack0[5];\n    s32 more;\n    s32 offset;\n    s32 *tmp;\n    s32 i;\n    s32 *buf;\n\n    more = 1;\n    offset = (s32)D_AB1950;\n    tmp = &arg1;\n    for (i = arg0; i != 0; i--) {\n        tmp = (s32 *)(((s32)tmp + 3) & -4);\n        if (more != 0) {\n            offset += func_1502AC88(offset, *(s32 *)((s32)tmp - 4), stack0);\n        }\n        tmp++;\n        more = stack0[0] & 0x0FFFFFFF;\n    }\n    if (more != 0) {\n        more = (stack0[0] & 0x0FFFFFFF) + 1;\n        more &= -2;\n        if ((stack0[0] & 0x70000000) == 0x10000000) {\n            buf = stack1;\n            if (((s32)buf & 8) != 0) {\n                buf = stack2;\n            }\n            func_10004514(offset, buf, 0x10, 1);\n            more = *buf;\n        }\n    }\n    return more;\n}",
+        "score": -0.6000000000000001,
+        "reason": "transmuter_best=48",
+        "diffs": [
+          "transmuter: initial=48→best=48, iters=0, compiled=0, errors=0, forks=0",
+          "fork_rules: refer-to-var, pad-var-decl, expand-expr, reorder-decls, cast-expr, duplicate-assignment, xor-zero, comma-expr, randomize-type, reorder-stmts, mult-zero, delete-stmt, add-mask, temp-for-expr, insert-block",
+          "last_fork_rule: refer-to-var",
+          "config: timeout=60s, maxCompiles=3000, concurrency=4, profile=ido",
+          "NOTE: 0 compiled = all mutations hit compile errors. Source may have constructs incompatible with isolated compilation."
+        ],
+        "timestamp": "2026-06-05T00:54:56.488Z"
+      },
+      {
+        "code": "s32 func_1502B9B4(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {\n    s32 stack2[2];\n    s32 stack1[2];\n    s32 stack0[5];\n    s32 more;\n    s32 offset;\n    s32 *tmp;\n\n    more = 1;\n    offset = (s32)D_AB1950;\n    tmp = &arg1;\n    if (arg0 != 0) {\n        do {\n            tmp = (s32 *)(((s32)tmp + 3) & -4);\n            if (more != 0) {\n                offset += func_1502AC88(offset, *(s32 *)((s32)tmp - 4), stack0);\n            }\n            arg0--;\n            more = stack0[0] & 0x0FFFFFFF;\n            tmp++;\n        } while (arg0 != 0);\n    }\n    if (more != 0) {\n        more = (stack0[0] & 0x0FFFFFFF) + 1;\n        more &= -2;\n        if ((stack0[0] & 0x70000000) == 0x10000000) {\n            s32 *buf = stack1;\n            if (((s32)buf & 8) != 0) {\n                buf = stack2;\n            }\n            func_10004514(offset, buf, 0x10, 1);\n            more = *buf;\n        }\n    }\n    return more;\n}",
+        "score": 0.4859154929577465,
+        "reason": "length_mismatch (target=71, generated=69)",
+        "diffs": [],
+        "timestamp": "2026-06-05T00:55:23.963Z"
+      },
+      {
+        "code": "s32 func_1502B9B4(s32 arg0, ...) {\n    va_list args;\n    s32 stack2[2];\n    s32 stack1[2];\n    s32 stack0[5];\n    s32 more;\n    s32 offset;\n    s32 temp_a1;\n    s32 *buf;\n\n    more = 1;\n    offset = (s32)D_AB1950;\n    va_start(args, arg0);\n    while (arg0 != 0) {\n        temp_a1 = va_arg(args, s32);\n        if (more != 0) {\n            offset += func_1502AC88(offset, temp_a1, stack0);\n        }\n        arg0--;\n        more = stack0[0] & 0x0FFFFFFF;\n    }\n    if (more != 0) {\n        more = (stack0[0] & 0x0FFFFFFF) + 1;\n        more &= -2;\n        if ((stack0[0] & 0x70000000) == 0x10000000) {\n            buf = stack1;\n            if (((s32)buf & 8) != 0) {\n                buf = stack2;\n            }\n            func_10004514(offset, buf, 0x10, 1);\n            more = *buf;\n        }\n    }\n    return more;\n}",
+        "score": 0.4859154929577465,
+        "reason": "length_mismatch (target=71, generated=69)",
+        "diffs": [],
+        "timestamp": "2026-06-05T00:56:48.215Z"
+      }
+    ]
   },
   {
     "function": "func_10021E4C",
