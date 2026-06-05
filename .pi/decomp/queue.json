@@ -33568,9 +33568,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
+    "attempts": 4,
     "lastScore": 0.47887323943661975,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "struct225 *func_151623F4(s32 arg0, u8 arg1, u8 arg2, u8 arg3, s8 arg4, s16 arg5, u8 arg6, s32 arg7) {\n    struct225 *ret;\n    Header header;\n    s32 src[8];\n\n    if (arg1 >= 3) {\n        return 0;\n    }\n\n    memcpy(src, D_800A670C[arg1], 0xC);\n    memcpy(&src[3], D_800A6730[arg1], 0xC);\n    src[6] = 0;\n    *(f32 *)&src[7] = D_800A6754[arg1];\n\n    header.unk0 = arg3;\n    header.unk1 = arg4;\n    header.unk2 = arg5;\n    header.unk4 = arg2;\n\n    ret = func_1516037C(&header, arg0, sizeof(src), arg6, arg7);\n    if (ret != 0) {\n        memcpy(&ret->unk18, src, sizeof(src));\n    }\n    return ret;\n}\n",
@@ -33592,6 +33592,24 @@
         "reason": "length_mismatch (target=71, generated=68)",
         "diffs": [],
         "timestamp": "2026-06-05T00:16:52.721Z"
+      },
+      {
+        "code": "struct225 *func_151623F4(s32 arg0, u8 arg1, u8 arg2, u8 arg3, s8 arg4, s16 arg5, u8 arg6, s32 arg7) {\n    struct225 *ret;\n    Header header;\n    u8 src[0x20];\n\n    if (arg1 >= 3) {\n        return 0;\n    }\n\n    *(s32 *)&src[0x0] = D_800A670C[arg1][0];\n    *(s32 *)&src[0x4] = D_800A670C[arg1][1];\n    *(s32 *)&src[0x8] = D_800A670C[arg1][2];\n    *(s32 *)&src[0xC] = D_800A6730[arg1][0];\n    *(s32 *)&src[0x10] = D_800A6730[arg1][1];\n    *(s32 *)&src[0x14] = D_800A6730[arg1][2];\n    *(f32 *)&src[0x18] = 0.0f;\n    *(f32 *)&src[0x1C] = D_800A6754[arg1];\n\n    header.unk0 = arg3;\n    header.unk1 = arg4;\n    header.unk2 = arg5;\n    header.unk4 = arg2;\n\n    ret = func_1516037C(&header, arg0, 0x20, arg6, arg7);\n    if (ret != 0) {\n        memcpy(&ret->unk18, src, 0x20);\n    }\n    return ret;\n}\n",
+        "score": -1.3333333333333335,
+        "reason": "transmuter_best=70",
+        "diffs": [
+          "transmuter: initial=70→best=70, iters=0, compiled=0, errors=0, forks=0",
+          "config: timeout=60s, maxCompiles=2000, concurrency=4, profile=ido",
+          "NOTE: 0 compiled = all mutations hit compile errors. Source may have constructs incompatible with isolated compilation."
+        ],
+        "timestamp": "2026-06-05T00:18:00.321Z"
+      },
+      {
+        "code": "struct225 *func_151623F4(s32 arg0, u8 arg1, u8 arg2, u8 arg3, s8 arg4, s16 arg5, u8 arg6, s32 arg7) {\n    struct225 *ret;\n    Header header;\n    f32 src[8];\n\n    if (arg1 >= 3) {\n        return 0;\n    }\n\n    *(s32 *)&src[0] = D_800A670C[arg1][0];\n    *(s32 *)&src[1] = D_800A670C[arg1][1];\n    *(s32 *)&src[2] = D_800A670C[arg1][2];\n    *(s32 *)&src[3] = D_800A6730[arg1][0];\n    *(s32 *)&src[4] = D_800A6730[arg1][1];\n    *(s32 *)&src[5] = D_800A6730[arg1][2];\n    src[6] = 0.0f;\n    src[7] = D_800A6754[arg1];\n\n    header.unk0 = arg3;\n    header.unk1 = arg4;\n    header.unk2 = arg5;\n    header.unk4 = arg2;\n\n    ret = func_1516037C(&header, arg0, 0x20, arg6, arg7);\n    if (ret != 0) {\n        memcpy(&ret->unk18, src, 0x20);\n    }\n    return ret;\n}\n",
+        "score": 0.47887323943661975,
+        "reason": "length_mismatch (target=71, generated=68)",
+        "diffs": [],
+        "timestamp": "2026-06-05T00:18:24.784Z"
       }
     ]
   },
@@ -33605,9 +33623,18 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 0.47183098591549294,
+    "status": "pending",
+    "history": [
+      {
+        "code": "ALMicroTime n_alEvtqNextEvent(ALEventQueue *evtq, N_ALEvent *evt) {\n    N_ALEventListItem *item;\n    ALMicroTime ret;\n    N_ALEventListItem *head;\n\n    item = (N_ALEventListItem *)evtq->allocList.next;\n    if (item != 0) {\n        head = item;\n        if (head->node.next != 0) {\n            head->node.next->prev = head->node.prev;\n        }\n        if (head->node.prev != 0) {\n            head->node.prev->next = head->node.next;\n        }\n        bcopy((u8 *)item + 0xC, evt, 0x10);\n        item->node.next = evtq->freeList.next;\n        item->node.prev = &evtq->freeList;\n        if (evtq->freeList.next != 0) {\n            evtq->freeList.next->prev = &item->node;\n        }\n        evtq->freeList.next = &item->node;\n        ret = item->delta;\n    } else {\n        evt->type = -1;\n        ret = 0;\n    }\n    return ret;\n}\n",
+        "score": 0.47183098591549294,
+        "reason": "length_mismatch (target=71, generated=67)",
+        "diffs": [],
+        "timestamp": "2026-06-05T00:20:44.324Z"
+      }
+    ]
   },
   {
     "function": "func_151F7F60",
