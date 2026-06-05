@@ -33623,9 +33623,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 1,
-    "lastScore": 0.47183098591549294,
-    "status": "pending",
+    "attempts": 2,
+    "lastScore": 1,
+    "status": "matched",
     "history": [
       {
         "code": "ALMicroTime n_alEvtqNextEvent(ALEventQueue *evtq, N_ALEvent *evt) {\n    N_ALEventListItem *item;\n    ALMicroTime ret;\n    N_ALEventListItem *head;\n\n    item = (N_ALEventListItem *)evtq->allocList.next;\n    if (item != 0) {\n        head = item;\n        if (head->node.next != 0) {\n            head->node.next->prev = head->node.prev;\n        }\n        if (head->node.prev != 0) {\n            head->node.prev->next = head->node.next;\n        }\n        bcopy((u8 *)item + 0xC, evt, 0x10);\n        item->node.next = evtq->freeList.next;\n        item->node.prev = &evtq->freeList;\n        if (evtq->freeList.next != 0) {\n            evtq->freeList.next->prev = &item->node;\n        }\n        evtq->freeList.next = &item->node;\n        ret = item->delta;\n    } else {\n        evt->type = -1;\n        ret = 0;\n    }\n    return ret;\n}\n",
@@ -34055,9 +34055,32 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.38028169014084506,
+    "status": "pending",
+    "history": [
+      {
+        "code": "struct225 *func_15160A58(struct29 *arg0, u8 arg1, s32 *arg2, u8 arg3, s16 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8, u8 arg9, u8 argA, s8 argB, s32 argC, u8 argD, u8 argE, s32 argF) {\n    struct225 *sp64;\n    Header sp5C;\n    u8 sp59;\n    s8 sp58;\n    Header2 sp4C;\n    u8 sp49;\n    u8 sp48;\n    struct29 *sp44;\n    Header2 sp38;\n\n    if (arg0 == NULL) {\n        return NULL;\n    }\n    sp5C.unk0 = arg3;\n    sp5C.unk1 = 5;\n    sp5C.unk2 = arg4;\n    sp5C.unk4 = 0x10;\n    sp44 = arg0;\n    sp49 = arg1;\n    sp48 = arg0->unk3B;\n    sp4C.unk0 = arg2[0];\n    sp4C.unk4 = arg2[1];\n    sp4C.unk8 = arg2[2];\n    sp38.unk0 = 0;\n    sp38.unk4 = 0;\n    sp38.unk8 = 0;\n    sp58 = argB;\n    sp59 = argD;\n    sp64 = func_151602C0(&sp5C, &sp38, arg5, arg6, arg7, arg8, 0xFF, 0, argC + 0x18, argE, argF);\n    if (sp64 != NULL) {\n        memcpy(&sp64->unk18, &sp44, 0x18);\n    }\n    return sp64;\n}",
+        "score": 0.3873239436619718,
+        "reason": "length_mismatch (target=71, generated=55)",
+        "diffs": [],
+        "timestamp": "2026-06-05T00:28:03.613Z"
+      },
+      {
+        "code": "struct225 *func_15160A58(struct29 *arg0, s32 arg1, s32 *arg2, s32 arg3, s16 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8, s32 arg9, s32 argA, s8 argB, s32 argC, s32 argD, s32 argE, s32 argF) {\n    s32 sp64;\n    s8 sp60;\n    s16 sp5E;\n    s8 sp5D;\n    u8 sp5C;\n    u8 sp59;\n    s8 sp58;\n    s32 sp4C[3];\n    u8 sp49;\n    u8 sp48;\n    struct29 *sp44;\n    s32 sp40;\n    s32 sp3C;\n    s32 sp38;\n\n    if (arg0 == NULL) {\n        return NULL;\n    }\n    sp5C = arg3;\n    sp5D = 5;\n    sp60 = 0x10;\n    sp5E = arg4;\n    sp44 = arg0;\n    sp49 = arg1;\n    sp48 = ((struct29 *)arg0)->unk3B;\n    sp4C[0] = arg2[0];\n    sp4C[1] = arg2[1];\n    sp4C[2] = arg2[2];\n    sp38 = 0;\n    sp3C = 0;\n    sp40 = 0;\n    sp58 = argB;\n    sp59 = argD;\n    sp64 = (s32)func_151602C0(&sp5C, &sp38, arg5, arg6, arg7, arg8, 0xFF, 0, argC + 0x18, argE, argF);\n    if (sp64 != 0) {\n        memcpy((void *)(sp64 + 0x18), &sp44, 0x18);\n    }\n    return (struct225 *)sp64;\n}",
+        "score": 0.38028169014084506,
+        "reason": "length_mismatch (target=71, generated=54)",
+        "diffs": [],
+        "timestamp": "2026-06-05T00:30:12.844Z"
+      },
+      {
+        "code": "struct225 *func_15160A58(void *arg0, u8 arg1, void *arg2, u8 arg3, s16 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8, u8 arg9, s16 argA, s8 argB, s32 argC, u8 argD, u8 argE, s32 argF) {\n    s32 sp64;\n    s8 sp60;\n    s16 sp5E;\n    s8 sp5D;\n    u8 sp5C;\n    u8 sp59;\n    s8 sp58;\n    s32 sp4C[3];\n    u8 sp49;\n    u8 sp48;\n    void *sp44;\n    s32 sp40;\n    s32 sp3C;\n    s32 sp38;\n    struct225 *temp_v0;\n    s32 phi_v1;\n\n    if (arg0 == NULL) {\n        return NULL;\n    }\n    sp5C = arg3;\n    sp5D = 5;\n    sp60 = 0x10;\n    sp5E = arg4;\n    sp44 = arg0;\n    sp49 = arg1;\n    sp48 = ((struct29 *)arg0)->unk3B;\n    sp4C[0] = ((s32 *)arg2)[0];\n    sp4C[1] = ((s32 *)arg2)[1];\n    sp4C[2] = ((s32 *)arg2)[2];\n    sp38 = 0;\n    sp3C = 0;\n    sp40 = 0;\n    sp58 = argB;\n    sp59 = argD;\n    temp_v0 = func_151602C0(&sp5C, &sp38, arg5, arg6, arg7, arg8, 0xFF, 0, argC + 0x18, argE, argF);\n    if (temp_v0 != NULL) {\n        memcpy(&temp_v0->unk18, &sp44, 0x18);\n    }\n    return temp_v0;\n}",
+        "score": 0.38028169014084506,
+        "reason": "length_mismatch (target=71, generated=54)",
+        "diffs": [],
+        "timestamp": "2026-06-05T00:30:46.215Z"
+      }
+    ]
   },
   {
     "function": "func_1501B22C",
