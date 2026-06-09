@@ -2971,7 +2971,7 @@
     "difficulty": "low",
     "tags": [],
     "attempts": 27,
-    "lastScore": 0.6667,
+    "lastScore": 0.4666666666666667,
     "status": "skipped",
     "history": [
       {
@@ -3191,17 +3191,11 @@
         "timestamp": "2026-06-03T06:17:03.029Z"
       },
       {
-        "code": "void func_1514143C(s32 arg0) {\n    s32 temp_v0 = arg0 + 0x110;\n\n    if (*(volatile s32 *)(arg0 + 0x154) != 0) {\n        *(f32 *)(*(s32 *)(temp_v0 + 0x44) + 0) = *(f32 *)(arg0 + 0x34);\n        *(f32 *)(*(s32 *)(temp_v0 + 0x44) + 4) = *(f32 *)(arg0 + 0x38);\n        *(f32 *)(*(s32 *)(temp_v0 + 0x44) + 8) = *(f32 *)(arg0 + 0x3C);\n    }\n}",
-        "score": 0.6667,
-        "reason": "structural_diffs=5",
-        "diffs": [
-          "structural: target=beqz t6, L0 got=addiu v0, a0, 272",
-          "structural: target=nop got=beqz t6, L0",
-          "structural: target=addiu v0, a0, 272 got=nop",
-          "structural: target=lw t7, 68(v0) got=lwc1 f4, 52(a0)",
-          "structural: target=lwc1 f4, 52(a0) got=lw t7, 68(v0)"
-        ],
-        "timestamp": "2026-06-09T23:54:01.258Z"
+        "code": "void func_1514143C(s32 arg0) {\n    struct210 *temp_v0;\n    s32 temp_t7;\n    s32 temp_t8;\n    s32 temp_t9;\n\n    if (*(volatile s32 *)(arg0 + 0x154) != 0) {\n        temp_v0 = (struct210 *)(arg0 + 0x110);\n        temp_t7 = *(s32 *)((s32)temp_v0 + 0x44);\n        *(f32 *)(temp_t7 + 0) = *(f32 *)(arg0 + 0x34);\n        temp_t8 = *(s32 *)((s32)temp_v0 + 0x44);\n        *(f32 *)(temp_t8 + 4) = *(f32 *)(arg0 + 0x38);\n        temp_t9 = *(s32 *)((s32)temp_v0 + 0x44);\n        *(f32 *)(temp_t9 + 8) = *(f32 *)(arg0 + 0x3C);\n    }\n}",
+        "score": 0.4666666666666667,
+        "reason": "length_mismatch (target=15, generated=14)",
+        "diffs": [],
+        "timestamp": "2026-06-09T23:54:32.775Z"
       }
     ]
   },
