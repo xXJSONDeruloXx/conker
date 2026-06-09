@@ -50,7 +50,7 @@
     "instructions": 11,
     "difficulty": "low",
     "tags": [],
-    "attempts": 18,
+    "attempts": 17,
     "lastScore": 0.1818,
     "status": "skipped",
     "history": [
@@ -312,23 +312,6 @@
           "structural: target=sh t7, 0(v0) got=sh v1, 3074(t7)"
         ],
         "timestamp": "2026-06-03T04:53:00.261Z"
-      },
-      {
-        "code": "s32 func_100038E0(void) {\n    D_80038070 = 0xBC000C02;\n    D_80038074 = (u16)0x4040;\n    D_BC000C02 = (u16)0x4040;\n    return 0xBC000C02;\n}",
-        "score": 0.1818,
-        "reason": "structural_diffs=9",
-        "diffs": [
-          "structural: target=lui v0, 48128 got=li v1, 16448",
-          "structural: target=ori v0, v0, 3074 got=lui t6, 48128",
-          "structural: target=lui at, HI(D_80038070) got=ori v0, t6, 3074",
-          "structural: target=sw v0, LO(D_80038070)(at) got=lui at, HI(D_80038070)",
-          "structural: target=lui at, HI(D_80038074) got=sw v0, LO(D_80038070)(at)",
-          "structural: target=li t6, 16448 got=lui at, HI(D_80038074)",
-          "structural: target=sh t6, LO(D_80038074)(at) got=sh v1, LO(D_80038074)(at)",
-          "structural: target=li t7, 16448 got=lui at, HI(D_BC000C02)",
-          "structural: target=sh t7, 0(v0) got=sh v1, LO(D_BC000C02)(at)"
-        ],
-        "timestamp": "2026-06-09T23:51:58.549Z"
       }
     ]
   },
@@ -2987,8 +2970,8 @@
     "instructions": 15,
     "difficulty": "low",
     "tags": [],
-    "attempts": 26,
-    "lastScore": 0.4666666666666667,
+    "attempts": 27,
+    "lastScore": 0.43333333333333335,
     "status": "skipped",
     "history": [
       {
@@ -3206,6 +3189,13 @@
         "reason": "length_mismatch (target=15, generated=14)",
         "diffs": [],
         "timestamp": "2026-06-03T06:17:03.029Z"
+      },
+      {
+        "code": "void func_1514143C(s32 arg0) {\n    s32 temp_v0;\n\n    if (*(s32 *)(arg0 + 0x154) != 0) {\n        temp_v0 = arg0 + 0x110;\n        *(f32 *)(*(s32 *)(temp_v0 + 0x44) + 0) = *(f32 *)(arg0 + 0x34);\n        *(f32 *)(*(s32 *)(temp_v0 + 0x44) + 4) = *(f32 *)(arg0 + 0x38);\n        *(f32 *)(*(s32 *)(temp_v0 + 0x44) + 8) = *(f32 *)(arg0 + 0x3C);\n    }\n}",
+        "score": 0.43333333333333335,
+        "reason": "length_mismatch (target=15, generated=13)",
+        "diffs": [],
+        "timestamp": "2026-06-09T23:53:19.638Z"
       }
     ]
   },
