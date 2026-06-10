@@ -432,7 +432,7 @@ function appendToolingRefinementNote(cwd: string, note: {
 	cause?: string;
 	toolingObservations?: string;
 	improvementOpportunities?: string;
-}): void {
+}): boolean {
 	const fs = require("node:fs");
 	const path = require("node:path");
 	try {
@@ -455,6 +455,19 @@ function appendToolingRefinementNote(cwd: string, note: {
 			"",
 		].join("\n");
 		fs.appendFileSync(notesPath, lines);
+		return true;
+	} catch {
+		return false;
+	}
+}
+
+async function commitToolingRefinementNote(pi: any, cwd: string, chunk: number): Promise<void> {
+	try {
+		const diffResult = await pi.exec("git", ["diff", "--quiet", "--", ".pi/decomp/tooling-refinement.md"]);
+		if (diffResult.code === 0) return;
+		await pi.exec("git", ["add", ".pi/decomp/tooling-refinement.md"]);
+		const commitResult = await pi.exec("git", ["commit", "-m", `chore(decomp): record tooling refinement notes for chunk ${chunk}`]);
+		if (commitResult.code === 0) await gitPushWithRetry(pi);
 	} catch {}
 }
 
@@ -3177,14 +3190,16 @@ export default function (pi: ExtensionAPI) {
 		}),
 
 		async execute(_toolCallId, params, _signal, _onUpdate, ctx) {
-			appendToolingRefinementNote(ctx.cwd, {
-				chunk: loopState.chunk,
+			const noteChunk = loopState.chunk;
+			const noteAppended = appendToolingRefinementNote(ctx.cwd, {
+				chunk: noteChunk,
 				matched: params.matched,
 				summary: params.summary,
 				cause: params.cause,
 				toolingObservations: params.toolingObservations,
 				improvementOpportunities: params.improvementOpportunities,
 			});
+			if (noteAppended) await commitToolingRefinementNote(pi, ctx.cwd, noteChunk);
 			loopState.lastChunkSummary = params.summary;
 
 			if (params.matched) {
