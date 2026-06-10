@@ -13,7 +13,7 @@
  */
 
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
-import { truncateToWidth, visibleWidth } from "@earendil-works/pi-tui";
+import { truncateToWidth } from "@earendil-works/pi-tui";
 import { Type } from "typebox";
 import { StringEnum } from "@earendil-works/pi-ai";
 
@@ -547,6 +547,7 @@ async function runDockerVerify(
 export default function (pi: ExtensionAPI) {
 	let latestCtx: any = undefined;
 	let progressRefreshPromise: Promise<void> | null = null;
+	let lastVerifyStatus: { ok: boolean; at: string } | null = null;
 
 	type ProgressSection = { cFuncs: number; asmFuncs: number; cBytes: number; asmBytes: number };
 	type ProgressStats = ProgressSection & {
@@ -691,6 +692,12 @@ export default function (pi: ExtensionAPI) {
 			else staleDone++;
 		}
 		const queueMatched = state.queue.filter((e) => e.status === "matched").length + staleDone;
+		const skipped = state.queue.filter((e) => e.status === "skipped").length;
+		const attempted = state.queue.filter((e) => e.attempts > 0).length;
+		const pendingByDifficulty = state.queue.reduce((acc: Record<string, number>, e) => {
+			if (e.status === "pending" && candidateStillHasPragma(ctx.cwd, e)) acc[e.difficulty] = (acc[e.difficulty] || 0) + 1;
+			return acc;
+		}, {});
 		const progress = readProjectProgress(ctx.cwd);
 		const totalFuncs = progress.cFuncs + progress.asmFuncs;
 		const totalBytes = progress.cBytes + progress.asmBytes;
@@ -710,11 +717,7 @@ export default function (pi: ExtensionAPI) {
 					return theme.fg("success", "█".repeat(filled)) + theme.fg("dim", "░".repeat(w - filled));
 				};
 				const pct = (section: ProgressSection) => `${formatPct(progressPercent(section))}%`;
-				const title = theme.fg("accent", theme.bold("◆ Conker Decomp"));
-				const dividerWidth = Math.max(0, safeWidth - visibleWidth(title) - 1);
-				const divider = theme.fg("dim", "─".repeat(Math.min(dividerWidth, 65)));
-				const line1 = dividerWidth > 0 ? `${title} ${divider}` : title;
-				const line2 = progress.available
+				const line1 = progress.available
 					? [
 						theme.fg("muted", "  repo"),
 						theme.fg("success", `${formatPct(bytePct)}% bytes`),
@@ -725,7 +728,7 @@ export default function (pi: ExtensionAPI) {
 						theme.fg("muted", "  repo"),
 						theme.fg("warning", "progress unavailable"),
 					].join(" ");
-				const line3 = progress.available
+				const line2 = progress.available
 					? [
 						theme.fg("muted", "  total"),
 						theme.fg("success", `${progress.cFuncs} C`),
@@ -744,14 +747,30 @@ export default function (pi: ExtensionAPI) {
 						theme.fg("muted", "  total"),
 						theme.fg("warning", "run make -C conker progress to populate repo stats"),
 					].join(" ");
-				const line4 = [
+				const line3 = [
 					theme.fg(loopState.enabled ? "success" : "dim", `  ${loopLabel}`),
 					theme.fg("dim", "│"),
-					theme.fg("accent", `${queueMatched} queue-matched`),
+					theme.fg("accent", `${queueMatched} matched`),
 					theme.fg("dim", "│"),
 					theme.fg("muted", `${pending} pending`),
 					theme.fg("dim", "│"),
+					theme.fg("warning", `${skipped} skipped`),
+					theme.fg("dim", "│"),
 					theme.fg("muted", `${state.patterns.length} patterns`),
+				].join(" ");
+				const difficultyParts = Object.entries(pendingByDifficulty)
+					.sort(([a], [b]) => a.localeCompare(b))
+					.map(([difficulty, count]) => `${count} ${difficulty}`);
+				const verifyText = lastVerifyStatus
+					? `verify ${lastVerifyStatus.ok ? "OK" : "FAIL"} ${new Date(lastVerifyStatus.at).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}`
+					: "verify unknown";
+				const line4 = [
+					theme.fg("muted", "  pending"),
+					theme.fg("muted", difficultyParts.join(" / ") || "none"),
+					theme.fg("dim", "│"),
+					theme.fg("muted", `${attempted} attempted`),
+					theme.fg("dim", "│"),
+					theme.fg(lastVerifyStatus?.ok ? "success" : "warning", verifyText),
 				].join(" ");
 				return [line1, line2, line3, line4].map(fit);
 			},
@@ -925,6 +944,7 @@ export default function (pi: ExtensionAPI) {
 			const statusLine = matched
 				? `✓ Conker ROM verify matched (${elapsedSeconds}s)`
 				: `✗ Conker ROM verify failed (${elapsedSeconds}s)`;
+			lastVerifyStatus = { ok: matched, at: new Date().toISOString() };
 			latestCtx = ctx;
 			if (matched) await ensureProgressCsv(ctx);
 			refreshWidget();
