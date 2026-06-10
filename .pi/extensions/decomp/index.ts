@@ -819,11 +819,37 @@ export default function (pi: ExtensionAPI) {
 			const path = require("node:path");
 			loadState(ctx.cwd);
 
-			// Read-only queue actions must be truly read-only. Older versions snapshotted and restored
-			// queue.json/loop-state.json, which could clobber newer attempt history written by another
-			// tool call or accepted commit. Keep this as a no-op compatibility hook at return sites.
-			const restoreReadOnlyState = () => {};
+			const queueStatePath = path.join(ctx.cwd, ".pi/decomp/queue.json");
+			const patternsStatePath = path.join(ctx.cwd, ".pi/decomp/patterns.json");
+			const loopStatePath = path.join(ctx.cwd, LOOP_STATE_FILE);
+			const shouldPreserveReadOnlyState = ["stats", "list", "next"].includes(params.action);
+			const readOnlyHead = shouldPreserveReadOnlyState
+				? (await pi.exec("git", ["rev-parse", "HEAD"], { timeout: 5000 })).stdout.trim()
+				: "";
+			const readOnlySnapshot = shouldPreserveReadOnlyState
+				? {
+					queue: fs.existsSync(queueStatePath) ? fs.readFileSync(queueStatePath, "utf-8") : undefined,
+					patterns: fs.existsSync(patternsStatePath) ? fs.readFileSync(patternsStatePath, "utf-8") : undefined,
+					loop: fs.existsSync(loopStatePath) ? fs.readFileSync(loopStatePath, "utf-8") : undefined,
+				}
+				: undefined;
 			let intentionallyMutatedState = false;
+			const restoreReadOnlyState = async () => {
+				if (!readOnlySnapshot || intentionallyMutatedState) return;
+				try {
+					const currentHead = (await pi.exec("git", ["rev-parse", "HEAD"], { timeout: 5000 })).stdout.trim();
+					if (currentHead !== readOnlyHead) return;
+					if (readOnlySnapshot.queue !== undefined && fs.existsSync(queueStatePath) && fs.readFileSync(queueStatePath, "utf-8") !== readOnlySnapshot.queue) {
+						fs.writeFileSync(queueStatePath, readOnlySnapshot.queue);
+					}
+					if (readOnlySnapshot.patterns !== undefined && fs.existsSync(patternsStatePath) && fs.readFileSync(patternsStatePath, "utf-8") !== readOnlySnapshot.patterns) {
+						fs.writeFileSync(patternsStatePath, readOnlySnapshot.patterns);
+					}
+					if (readOnlySnapshot.loop !== undefined && fs.existsSync(loopStatePath) && fs.readFileSync(loopStatePath, "utf-8") !== readOnlySnapshot.loop) {
+						fs.writeFileSync(loopStatePath, readOnlySnapshot.loop);
+					}
+				} catch {}
+			};
 
 			if (params.action === "promote") {
 				// Promote pure .s segments to C files via splat yaml edit + re-extract
@@ -1045,7 +1071,7 @@ export default function (pi: ExtensionAPI) {
 				const pending = state.queue.filter((e) => e.status === "pending" && candidateStillHasPragma(ctx.cwd, e)).length;
 				const matched = state.queue.filter((e) => e.status === "matched").length + staleDone;
 				const skipped = state.queue.filter((e) => e.status === "skipped").length;
-				restoreReadOnlyState();
+				await restoreReadOnlyState();
 				return {
 					content: [
 						{
@@ -1078,6 +1104,7 @@ export default function (pi: ExtensionAPI) {
 
 			if (params.action === "list") {
 				let filtered = state.queue.filter((e) => e.status === "pending" && candidateStillHasPragma(ctx.cwd, e));
+				if (!params.filter?.nearMiss) filtered = filtered.filter((e) => (e.attempts || 0) < SESSION_ROTATE_THRESHOLD);
 				if (params.filter?.region) filtered = filtered.filter((e) => e.region === params.filter!.region);
 				if (params.filter?.maxInstructions)
 					filtered = filtered.filter((e) => e.instructions <= params.filter!.maxInstructions!);
@@ -1085,7 +1112,7 @@ export default function (pi: ExtensionAPI) {
 					filtered = filtered.filter((e) => e.difficulty === params.filter!.difficulty);
 
 				const summary = filtered.slice(0, 20).map((e) => `${e.function} (${e.file}, ${e.instructions} instr, ${e.difficulty})`);
-				restoreReadOnlyState();
+				await restoreReadOnlyState();
 				return {
 					content: [
 						{
@@ -1109,7 +1136,7 @@ export default function (pi: ExtensionAPI) {
 			], { signal, timeout: 180000 });
 
 			if (!verifyResult.stdout.includes("conker.us.bin: OK")) {
-				restoreReadOnlyState();
+				await restoreReadOnlyState();
 				return {
 					content: [{
 						type: "text",
@@ -1193,7 +1220,7 @@ export default function (pi: ExtensionAPI) {
 			}
 
 			if (candidates.length === 0) {
-				restoreReadOnlyState();
+				await restoreReadOnlyState();
 				return { content: [{ type: "text", text: "No pending candidates matching filter." }], details: {} };
 			}
 
@@ -1489,7 +1516,7 @@ export default function (pi: ExtensionAPI) {
 				}
 			}
 
-			restoreReadOnlyState();
+			await restoreReadOnlyState();
 			return {
 				content: [{ type: "text", text: output.join("\n") }],
 				details: { function: next.function, file: next.file, hasHistory: (next.history?.length ?? 0) > 0 },
