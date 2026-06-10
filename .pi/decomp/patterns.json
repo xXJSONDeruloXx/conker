@@ -1137,12 +1137,12 @@
     ]
   },
   {
-    "id": "stack-word-zero-store-order-follows-assignment-order",
-    "description": "For stack payload construction, IDO generally preserves the relative order of independent word zero stores, even when byte stores and conversions are scheduled between them.",
-    "trigger": "Near-match where all instructions match except two `sw zero, offset(sp)` stores to different fields in a local payload are swapped (e.g. target stores `sp+0x78` before `sp+0x70`).",
-    "solution": "Reorder the C assignments for those payload fields to match target order, while leaving intervening byte/floating assignments in place. For local arrays, assign the later-offset word first if target does so: `sp[16]=0; byte stores; sp[14]=0;`.",
+    "id": "stack-byte-padding-for-call-surviving-u8-at-sp1e",
+    "description": "For call-surviving u8 temps in small call functions, padding locals can force IDO to spill the u8 at the target byte offset (e.g. `sp+0x1E`) and inflate the frame to the target size.",
+    "trigger": "Near-match where generated code is structurally correct but frame is too small and a call-surviving u8 temp spills to `sp+0x1F` or another adjacent byte instead of target `sp+0x1E`.",
+    "solution": "Add/reorder dummy u8 padding locals before the call-surviving u8 temp until the spill lands at the target byte offset and the frame size matches; then preserve exact expression/register shaping for downstream table-index code.",
     "example_functions": [
-      "func_150151D4"
+      "func_15077F64"
     ]
   }
 ]
