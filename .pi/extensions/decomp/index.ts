@@ -738,6 +738,28 @@ export default function (pi: ExtensionAPI) {
 			const path = require("node:path");
 			loadState(ctx.cwd);
 
+			const queueStatePath = path.join(ctx.cwd, ".pi/decomp/queue.json");
+			const loopStatePath = path.join(ctx.cwd, LOOP_STATE_FILE);
+			const shouldPreserveReadOnlyState = ["stats", "list", "next"].includes(params.action);
+			const readOnlySnapshot = shouldPreserveReadOnlyState
+				? {
+					queue: fs.existsSync(queueStatePath) ? fs.readFileSync(queueStatePath, "utf-8") : undefined,
+					loop: fs.existsSync(loopStatePath) ? fs.readFileSync(loopStatePath, "utf-8") : undefined,
+				}
+				: undefined;
+			let intentionallyMutatedState = false;
+			const restoreReadOnlyState = () => {
+				if (!readOnlySnapshot || intentionallyMutatedState) return;
+				try {
+					if (readOnlySnapshot.queue !== undefined && fs.existsSync(queueStatePath) && fs.readFileSync(queueStatePath, "utf-8") !== readOnlySnapshot.queue) {
+						fs.writeFileSync(queueStatePath, readOnlySnapshot.queue);
+					}
+					if (readOnlySnapshot.loop !== undefined && fs.existsSync(loopStatePath) && fs.readFileSync(loopStatePath, "utf-8") !== readOnlySnapshot.loop) {
+						fs.writeFileSync(loopStatePath, readOnlySnapshot.loop);
+					}
+				} catch {}
+			};
+
 			if (params.action === "promote") {
 				// Promote pure .s segments to C files via splat yaml edit + re-extract
 				const yamlPath = path.join(ctx.cwd, "conker/conker.us.yaml");
@@ -957,6 +979,7 @@ export default function (pi: ExtensionAPI) {
 				const pending = state.queue.filter((e) => e.status === "pending").length;
 				const matched = state.queue.filter((e) => e.status === "matched").length;
 				const skipped = state.queue.filter((e) => e.status === "skipped").length;
+				restoreReadOnlyState();
 				return {
 					content: [
 						{
@@ -996,6 +1019,7 @@ export default function (pi: ExtensionAPI) {
 					filtered = filtered.filter((e) => e.difficulty === params.filter!.difficulty);
 
 				const summary = filtered.slice(0, 20).map((e) => `${e.function} (${e.file}, ${e.instructions} instr, ${e.difficulty})`);
+				restoreReadOnlyState();
 				return {
 					content: [
 						{
@@ -1019,6 +1043,7 @@ export default function (pi: ExtensionAPI) {
 			], { signal, timeout: 180000 });
 
 			if (!verifyResult.stdout.includes("conker.us.bin: OK")) {
+				restoreReadOnlyState();
 				return {
 					content: [{
 						type: "text",
@@ -1034,6 +1059,7 @@ export default function (pi: ExtensionAPI) {
 				const promoteResult = await autoPromoteIfNeeded(pi, ctx.cwd);
 				if (promoteResult) {
 					if (ctx.hasUI) ctx.ui.notify(promoteResult, "info");
+					intentionallyMutatedState = true;
 				}
 			}
 
@@ -1099,6 +1125,7 @@ export default function (pi: ExtensionAPI) {
 			}
 
 			if (candidates.length === 0) {
+				restoreReadOnlyState();
 				return { content: [{ type: "text", text: "No pending candidates matching filter." }], details: {} };
 			}
 
@@ -1369,6 +1396,7 @@ export default function (pi: ExtensionAPI) {
 				}
 			}
 
+			restoreReadOnlyState();
 			return {
 				content: [{ type: "text", text: output.join("\n") }],
 				details: { function: next.function, file: next.file, hasHistory: (next.history?.length ?? 0) > 0 },
