@@ -23473,7 +23473,7 @@
     "instructions": 69,
     "difficulty": "medium",
     "tags": [],
-    "attempts": 5,
+    "attempts": 6,
     "lastScore": 0.4927536231884058,
     "status": "pending",
     "history": [
@@ -23511,6 +23511,13 @@
         "reason": "length_mismatch (target=69, generated=68)",
         "diffs": [],
         "timestamp": "2026-06-04T12:47:40.471Z"
+      },
+      {
+        "code": "s32 func_151415D4(struct210 *arg0) {\n    f32 *temp_v0;\n    f32 temp_f0;\n    f32 temp_f2;\n    f32 temp_f4;\n    f32 temp_f12;\n\n    temp_v0 = (f32 *)((s32)arg0 + 0x170);\n    if (*(f32 *)((s32)arg0 + 0x17C) < *(f32 *)((s32)arg0 + 0x180)) {\n        temp_v0 = (f32 *)((s32)arg0 + 0x170);\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0[1];\n    } else {\n        temp_f2 = temp_v0[3];\n        if (temp_f2 < temp_v0[5]) {\n            temp_f0 = (temp_f2 - temp_v0[4]) * temp_v0[8];\n            *(f32 *)((s32)arg0 + 0x158) = temp_v0[1] + (temp_v0[2] * temp_f0);\n        } else {\n            temp_f12 = temp_v0[6];\n            if (temp_f2 < temp_f12) {\n                *(f32 *)((s32)arg0 + 0x158) = temp_v0[0];\n            } else {\n                temp_f4 = temp_f2 - temp_f12;\n                temp_f0 = 1.0f - (temp_f4 * temp_v0[8]);\n                *(f32 *)((s32)arg0 + 0x158) = temp_v0[1] + (temp_v0[2] * temp_f0);\n            }\n        }\n    }\n    temp_v0[3] += D_800BE9A4;\n    temp_f0 = temp_v0[7];\n    temp_f2 = temp_v0[3];\n    while (temp_f0 < temp_f2) {\n        temp_f2 = temp_f2 - temp_f0;\n        temp_v0[3] = temp_f2;\n    }\n    return 1;\n}",
+        "score": 0.4782608695652174,
+        "reason": "length_mismatch (target=69, generated=66)",
+        "diffs": [],
+        "timestamp": "2026-06-10T17:34:14.184Z"
       }
     ]
   },
@@ -36096,12 +36103,12 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
+    "attempts": 1,
     "lastScore": 0.6667,
     "status": "pending",
     "history": [
       {
-        "code": "s32 func_1502B110(s32 arg0, s32 arg1, s32 arg2, s32 arg3, ...) {\n    s32 offset;\n    va_list args;\n    s32 temp_a1;\n    s32 locals[2];\n\n    offset = arg0;\n    locals[1] = 1;\n    locals[0] = 0;\n    if (offset == 0) {\n        offset = (s32) D_AB1950;\n    }\n    va_start(args, arg3);\n    while ((u32) arg3 >= 2U) {\n        temp_a1 = va_arg(args, s32);\n        if (locals[1] != 0) {\n            offset += func_1502AC88(offset, temp_a1, &locals[1]);\n        }\n        arg3--;\n        locals[1] = locals[1] & 0x0FFFFFFF;\n    }\n    temp_a1 = va_arg(args, s32);\n    if (locals[1] != 0) {\n        locals[0] = func_1502AF04(offset, arg2, temp_a1, arg1);\n    }\n    return locals[0];\n}",
+        "code": "s32 func_1502B110(s32 arg0, s32 arg1, s32 arg2, s32 arg3, ...) {\n    va_list args;\n    s32 temp_a1;\n    s32 offset;\n    struct { s32 ret; s32 state; } local;\n\n    local.state = 1;\n    offset = arg0;\n    local.ret = 0;\n    if (offset == 0) {\n        offset = (s32) D_AB1950;\n    }\n    va_start(args, arg3);\n    while ((u32) arg3 >= 2U) {\n        temp_a1 = va_arg(args, s32);\n        if (local.state != 0) {\n            offset += func_1502AC88(offset, temp_a1, &local.state);\n        }\n        arg3--;\n        local.state = local.state & 0x0FFFFFFF;\n    }\n    temp_a1 = va_arg(args, s32);\n    if (local.state != 0) {\n        local.ret = func_1502AF04(offset, arg2, temp_a1, arg1);\n    }\n    return local.ret;\n}",
         "score": 0.6667,
         "reason": "structural_diffs=23",
         "diffs": [
@@ -36116,8 +36123,8 @@
           "structural: target=sw a1, 76(sp) got=sw a2, 80(sp)",
           "structural: target=sw a2, 80(sp) got=sw a3, 84(sp)",
           "structural: target=sw a3, 84(sp) got=li t6, 1",
-          "structural: target=li t6, 1 got=move s2, a0",
-          "structural: target=sw t6, 60(sp) got=sw t6, 56(sp)",
+          "structural: target=li t6, 1 got=sw t6, 56(sp)",
+          "structural: target=sw t6, 60(sp) got=move s2, a0",
           "structural: target=bnez s2, L0 got=bnez a0, L0",
           "structural: target=sw zero, 56(sp) got=sw zero, 52(sp)",
           "structural: target=addiu s3, sp, 60 got=addiu s3, sp, 56",
@@ -36126,42 +36133,7 @@
           "structural: target=sw a3, 84(sp) got=sw t0, 56(sp)",
           "structural: target=sw t0, 60(sp) got=sw a3, 84(sp)"
         ],
-        "timestamp": "2026-06-10T17:27:00.445Z"
-      },
-      {
-        "code": "s32 func_1502B110(s32 arg0, s32 arg1, s32 arg2, s32 arg3, ...) {\n    va_list args;\n    s32 temp_a1;\n    s32 offset;\n    s32 locals[3];\n\n    locals[2] = 1;\n    offset = arg0;\n    locals[1] = 0;\n    if (offset == 0) {\n        offset = (s32) D_AB1950;\n    }\n    va_start(args, arg3);\n    while ((u32) arg3 >= 2U) {\n        temp_a1 = va_arg(args, s32);\n        if (locals[2] != 0) {\n            offset += func_1502AC88(offset, temp_a1, &locals[2]);\n        }\n        arg3--;\n        locals[2] = locals[2] & 0x0FFFFFFF;\n    }\n    temp_a1 = va_arg(args, s32);\n    if (locals[2] != 0) {\n        locals[1] = func_1502AF04(offset, arg2, temp_a1, arg1);\n    }\n    return locals[1];\n}",
-        "score": 0.5507,
-        "reason": "structural_diffs=31",
-        "diffs": [
-          "structural: target=addiu sp, sp, -72 got=addiu sp, sp, -80",
-          "structural: target=sw s2, 28(sp) got=sw ra, 44(sp)",
-          "structural: target=move s2, a0 got=sw s5, 40(sp)",
-          "structural: target=sw ra, 44(sp) got=sw s4, 36(sp)",
-          "structural: target=sw s5, 40(sp) got=sw s3, 32(sp)",
-          "structural: target=sw s4, 36(sp) got=sw s2, 28(sp)",
-          "structural: target=sw s3, 32(sp) got=sw s1, 24(sp)",
-          "structural: target=sw s1, 24(sp) got=sw s0, 20(sp)",
-          "structural: target=sw s0, 20(sp) got=sw a1, 84(sp)",
-          "structural: target=sw a1, 76(sp) got=sw a2, 88(sp)",
-          "structural: target=sw a2, 80(sp) got=sw a3, 92(sp)",
-          "structural: target=sw a3, 84(sp) got=li t6, 1",
-          "structural: target=li t6, 1 got=sw t6, 64(sp)",
-          "structural: target=sw t6, 60(sp) got=move s2, a0",
-          "structural: target=bnez s2, L0 got=bnez a0, L0",
-          "structural: target=sw zero, 56(sp) got=sw zero, 60(sp)",
-          "structural: target=addiu s0, sp, 88 got=addiu s0, sp, 96",
-          "structural: target=sw a3, 84(sp) got=sw a3, 92(sp)",
-          "structural: target=sw a3, 84(sp) got=sw a3, 92(sp)",
-          "structural: target=addiu s3, sp, 60 got=addiu s3, sp, 64"
-        ],
-        "timestamp": "2026-06-10T17:27:12.735Z"
-      },
-      {
-        "code": "s32 func_1502B110(s32 arg0, s32 arg1, s32 arg2, s32 arg3, ...) {\n    va_list args;\n    s32 temp_a1;\n    s32 offset;\n    s32 locals[2];\n\n    locals[2] = 1;\n    offset = arg0;\n    locals[1] = 0;\n    if (offset == 0) {\n        offset = (s32) D_AB1950;\n    }\n    va_start(args, arg3);\n    while ((u32) arg3 >= 2U) {\n        temp_a1 = va_arg(args, s32);\n        if (locals[2] != 0) {\n            offset += func_1502AC88(offset, temp_a1, &locals[2]);\n        }\n        arg3--;\n        locals[2] = locals[2] & 0x0FFFFFFF;\n    }\n    temp_a1 = va_arg(args, s32);\n    if (locals[2] != 0) {\n        locals[1] = func_1502AF04(offset, arg2, temp_a1, arg1);\n    }\n    return locals[1];\n}",
-        "score": 0.4928571428571429,
-        "reason": "length_mismatch (target=69, generated=70)",
-        "diffs": [],
-        "timestamp": "2026-06-10T17:27:24.540Z"
+        "timestamp": "2026-06-10T17:33:31.608Z"
       }
     ]
   },
