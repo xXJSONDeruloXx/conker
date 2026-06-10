@@ -23513,11 +23513,11 @@
         "timestamp": "2026-06-04T12:47:40.471Z"
       },
       {
-        "code": "s32 func_151415D4(struct210 *arg0) {\n    struct211 *temp_v0;\n    f32 temp_f0;\n    f32 temp_f2;\n    f32 temp_f4;\n\n    temp_v0 = (struct211 *)((s32)arg0 + 0x170);\n    if (*(f32 *)((s32)arg0 + 0x17C) < *(f32 *)((s32)arg0 + 0x180)) {\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4;\n    } else {\n        temp_f2 = temp_v0->unkC;\n        if (temp_f2 < temp_v0->unk14) {\n            temp_f0 = (temp_f2 - temp_v0->unk10) * *(f32 *)((s32)temp_v0 + 0x20);\n            *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4 + (temp_v0->unk8 * temp_f0);\n        } else if (temp_f2 < *(f32 *)((s32)temp_v0 + 0x18)) {\n            *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk0;\n        } else {\n            temp_f4 = temp_f2 - *(f32 *)((s32)temp_v0 + 0x18);\n            temp_f0 = 1.0f - (temp_f4 * *(f32 *)((s32)temp_v0 + 0x20));\n            *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4 + (temp_v0->unk8 * temp_f0);\n        }\n    }\n    temp_v0->unkC += D_800BE9A4;\n    temp_f0 = *(f32 *)((s32)temp_v0 + 0x1C);\n    while (temp_f0 < temp_v0->unkC) {\n        temp_v0->unkC -= temp_f0;\n    }\n    return 1;\n}",
+        "code": "s32 func_151415D4(struct210 *arg0) {\n    struct211 *temp_v0;\n    f32 temp_f2;\n    f32 temp_f0;\n    f32 temp_f4;\n\n    temp_v0 = (struct211 *)((s32)arg0 + 0x170);\n    if (*(f32 *)((s32)arg0 + 0x17C) < *(f32 *)((s32)arg0 + 0x180)) {\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4;\n    } else {\n        temp_f2 = temp_v0->unkC;\n        if (temp_f2 < temp_v0->unk14) {\n            temp_f0 = (temp_f2 - temp_v0->unk10) * *(f32 *)((s32)temp_v0 + 0x20);\n            *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4 + (temp_v0->unk8 * temp_f0);\n        } else if (temp_f2 < *(f32 *)((s32)temp_v0 + 0x18)) {\n            *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk0;\n        } else {\n            temp_f4 = temp_f2 - *(f32 *)((s32)temp_v0 + 0x18);\n            temp_f0 = 1.0f - (temp_f4 * *(f32 *)((s32)temp_v0 + 0x20));\n            *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4 + (temp_v0->unk8 * temp_f0);\n        }\n    }\n    temp_v0->unkC += D_800BE9A4;\n    temp_f0 = *(f32 *)((s32)temp_v0 + 0x1C);\n    while (temp_f0 < temp_v0->unkC) {\n        temp_v0->unkC -= temp_f0;\n    }\n    return 1;\n}",
         "score": 0.4927536231884058,
         "reason": "length_mismatch (target=69, generated=68)",
         "diffs": [],
-        "timestamp": "2026-06-10T20:27:39.422Z",
+        "timestamp": "2026-06-10T20:27:59.666Z",
         "contextPatch": []
       }
     ]
