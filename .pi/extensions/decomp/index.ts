@@ -311,6 +311,16 @@ function buildChunkPrompt(chunkNum: number): string {
 	].join("\n");
 }
 
+function appendStateWriteAudit(cwd: string, kind: string, details: Record<string, unknown>): void {
+	const fs = require("node:fs");
+	const path = require("node:path");
+	try {
+		const logPath = path.join(cwd, ".pi/decomp/state-write-audit.jsonl");
+		const stack = new Error().stack?.split("\n").slice(2, 8).join("\n");
+		fs.appendFileSync(logPath, JSON.stringify({ timestamp: new Date().toISOString(), kind, ...details, stack }) + "\n");
+	} catch {}
+}
+
 function saveQueue(cwd: string, options: { preserveDiskHistory?: boolean } = {}): void {
 	const fs = require("node:fs");
 	const path = require("node:path");
@@ -321,26 +331,34 @@ function saveQueue(cwd: string, options: { preserveDiskHistory?: boolean } = {})
 	if (preserveDiskHistory && fs.existsSync(queuePath)) {
 		try {
 			const diskQueue: QueueEntry[] = JSON.parse(fs.readFileSync(queuePath, "utf-8"));
-			const diskByFunction = new Map<string, QueueEntry>(diskQueue.map((e) => [e.function, e]));
-			queueToWrite = state.queue.map((entry) => {
-				const diskEntry = diskByFunction.get(entry.function);
-				if (!diskEntry) return entry;
+			const memoryByFunction = new Map<string, QueueEntry>(state.queue.map((e) => [e.function, e]));
+			let preserved = 0;
+			queueToWrite = diskQueue.map((diskEntry) => {
+				const memEntry = memoryByFunction.get(diskEntry.function);
+				if (!memEntry) return diskEntry;
 
 				const diskHistoryLength = diskEntry.history?.length ?? 0;
-				const memoryHistoryLength = entry.history?.length ?? 0;
-				const diskLooksNewer = diskHistoryLength > memoryHistoryLength || diskEntry.attempts > entry.attempts;
-				if (!diskLooksNewer) return entry;
-
+				const memoryHistoryLength = memEntry.history?.length ?? 0;
+				const memoryLooksNewer = memoryHistoryLength > diskHistoryLength || memEntry.attempts > diskEntry.attempts || memEntry.lastScore > diskEntry.lastScore;
+				const diskLooksNewer = diskHistoryLength > memoryHistoryLength || diskEntry.attempts > memEntry.attempts || diskEntry.lastScore > memEntry.lastScore;
+				if (diskLooksNewer && !memoryLooksNewer) {
+					preserved++;
+					return diskEntry;
+				}
 				return {
-					...entry,
-					attempts: Math.max(entry.attempts, diskEntry.attempts),
-					lastScore: Math.max(entry.lastScore || 0, diskEntry.lastScore || 0),
-					history: diskEntry.history ?? entry.history,
+					...memEntry,
+					attempts: Math.max(memEntry.attempts || 0, diskEntry.attempts || 0),
+					lastScore: Math.max(memEntry.lastScore || 0, diskEntry.lastScore || 0),
+					history: memoryHistoryLength >= diskHistoryLength ? memEntry.history : diskEntry.history,
 				};
 			});
+			for (const [fn, memEntry] of memoryByFunction) {
+				if (!diskQueue.some((e) => e.function === fn)) queueToWrite.push(memEntry);
+			}
+			if (preserved > 0) appendStateWriteAudit(cwd, "queue-preserved-disk-newer", { preserved });
 			state.queue = queueToWrite;
-		} catch {
-			// If disk state is unreadable, fall through and write the current in-memory queue.
+		} catch (e: any) {
+			appendStateWriteAudit(cwd, "queue-merge-failed", { error: String(e?.message || e) });
 		}
 	}
 
@@ -348,6 +366,7 @@ function saveQueue(cwd: string, options: { preserveDiskHistory?: boolean } = {})
 	try {
 		if (fs.existsSync(queuePath) && fs.readFileSync(queuePath, "utf-8") === content) return;
 	} catch {}
+	appendStateWriteAudit(cwd, "queue-write", { entries: queueToWrite.length });
 	fs.writeFileSync(queuePath, content);
 }
 
@@ -355,7 +374,25 @@ function savePatterns(cwd: string): void {
 	const fs = require("node:fs");
 	const path = require("node:path");
 	const patternsPath = path.join(cwd, ".pi/decomp/patterns.json");
-	fs.writeFileSync(patternsPath, JSON.stringify(state.patterns, null, 2));
+	let patternsToWrite = state.patterns;
+	if (fs.existsSync(patternsPath)) {
+		try {
+			const diskPatterns: Pattern[] = JSON.parse(fs.readFileSync(patternsPath, "utf-8"));
+			const byId = new Map<string, Pattern>();
+			for (const p of diskPatterns) byId.set(p.id, p);
+			for (const p of state.patterns) byId.set(p.id, p);
+			patternsToWrite = Array.from(byId.values());
+			state.patterns = patternsToWrite;
+		} catch (e: any) {
+			appendStateWriteAudit(cwd, "patterns-merge-failed", { error: String(e?.message || e) });
+		}
+	}
+	const content = JSON.stringify(patternsToWrite, null, 2);
+	try {
+		if (fs.existsSync(patternsPath) && fs.readFileSync(patternsPath, "utf-8") === content) return;
+	} catch {}
+	appendStateWriteAudit(cwd, "patterns-write", { entries: patternsToWrite.length });
+	fs.writeFileSync(patternsPath, content);
 }
 
 function appendSessionAttempt(cwd: string, record: any): void {

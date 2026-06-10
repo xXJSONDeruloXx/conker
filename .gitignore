@@ -43,3 +43,4 @@ session-*.json
 
 .pi/decomp/session-attempts.jsonl
 .pi/decomp/transmuter-debug/
+.pi/decomp/state-write-audit.jsonl
