@@ -197,7 +197,42 @@ s32 func_1502B8E0(s32 arg0, s32 arg1, s32 arg2, ...) {
     return more;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_57FA0/func_1502B9B4.s")
+s32 func_1502B9B4(s32 arg0, ...) {
+    va_list args;
+    s32 temp_a1;
+    s32 offset;
+    s32 more;
+    s32 sp54;
+    s32 sp38[7];
+    s32 *ptr;
+
+    more = 1;
+    offset = (s32) D_AB1950;
+    va_start(args, arg0);
+    if (arg0 != 0) {
+        do {
+            temp_a1 = va_arg(args, s32);
+            if (more != 0) {
+                offset += func_1502AC88(offset, temp_a1, &sp54);
+            }
+            arg0--;
+            more = sp54 & 0x0FFFFFFF;
+        } while (arg0 != 0);
+    }
+    if (more != 0) {
+        more = sp54 & 0x0FFFFFFF;
+        more = (more + 1) & -2;
+        if ((sp54 & 0x70000000) == 0x10000000) {
+            ptr = sp38;
+            if (((s32) ptr & 8) != 0) {
+                ptr = (s32 *)((s32) ptr + 8);
+            }
+            func_10004514(offset, ptr, 0x10, 1);
+            more = *ptr;
+        }
+    }
+    return more;
+}
 // NON-MATCHING: maybe 50% there?
 // s32 func_1502B9B4(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 //

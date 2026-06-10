@@ -36653,7 +36653,7 @@
     ],
     "attempts": 0,
     "lastScore": 0,
-    "status": "pending"
+    "status": "matched"
   },
   {
     "function": "func_10021E4C",
@@ -36750,53 +36750,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
-    "lastScore": 0.4857142857142857,
-    "status": "pending",
-    "history": [
-      {
-        "code": "void func_15075938(void) {\n    struct127 *temp_v1;\n    s32 changed;\n    s32 delta;\n    s32 count;\n    s32 target;\n    s32 mode;\n\n    temp_v1 = D_800D154C;\n    changed = 0;\n    target = D_800D1891;\n    delta = temp_v1->unk21E - temp_v1->unk221;\n    if (delta < 0) {\n        count = (*(u8 **)&D_800D2108)[temp_v1->unk13F];\n        delta = (delta + count) - 1;\n    } else {\n        count = (*(u8 **)&D_800D2108)[temp_v1->unk13F];\n        if (delta >= (count - 1)) {\n            delta = (delta - count) + 1;\n        }\n    }\n\n    if (target == 0xFF) {\n        target = count - 2;\n    }\n\n    mode = D_800D1892;\n    if (mode == 0) {\n        if (target == delta) {\n            changed = 1;\n        }\n    } else if (mode == 1) {\n        if (target != delta) {\n            changed = 1;\n        }\n    } else if (mode == 2) {\n        if (target < delta) {\n            changed = 1;\n        }\n    } else if (delta < target) {\n        changed = 1;\n    }\n\n    if (changed != 0) {\n        func_15075400(D_800D1890);\n    }\n}",
-        "score": 0.4857142857142857,
-        "reason": "length_mismatch (target=70, generated=68)",
-        "diffs": [],
-        "timestamp": "2026-06-10T14:37:28.238Z"
-      },
-      {
-        "code": "void func_15075938(void) {\n    u8 temp_v0;\n    u8 changed;\n    s32 temp_a0;\n    s32 phi_v1;\n    struct127 *temp_v1;\n\n    changed = 0;\n    temp_v1 = D_800D154C;\n    temp_a0 = temp_v1->unk21E - temp_v1->unk221;\n    if (temp_a0 < 0) {\n        temp_v0 = (*(u8 **)&D_800D2108)[temp_v1->unk13F];\n        temp_a0 = (temp_a0 + temp_v0) - 1;\n    } else {\n        temp_v0 = (*(u8 **)&D_800D2108)[temp_v1->unk13F];\n        if ((temp_v0 - 1) <= temp_a0) {\n            temp_a0 = (temp_a0 - temp_v0) + 1;\n        }\n    }\n\n    if (D_800D1891 == 0xFF) {\n        phi_v1 = temp_v0 - 2;\n    } else {\n        phi_v1 = D_800D1891;\n    }\n\n    if (D_800D1892 == 0) {\n        if (phi_v1 == temp_a0) {\n            changed = 1;\n        }\n    } else if (D_800D1892 == 1) {\n        if (phi_v1 != temp_a0) {\n            changed = 1;\n        }\n    } else if (D_800D1892 == 2) {\n        if (phi_v1 < temp_a0) {\n            changed = 1;\n        }\n    } else {\n        if (phi_v1 > temp_a0) {\n            changed = 1;\n        }\n    }\n\n    if (changed) {\n        func_15075400(D_800D1890);\n    }\n}",
-        "score": 0.6857,
-        "reason": "structural_diffs=22",
-        "diffs": [
-          "structural: target=lui t2, HI(D_800D2108) got=lui t1, HI(D_800D2108)",
-          "structural: target=lui a1, HI(D_800D1891) got=subu a0, t6, t7",
-          "structural: target=subu a0, t6, t7 got=bgez a0, L0",
-          "structural: target=bgezl a0, L0 got=nop",
-          "structural: target=lbu t1, 319(v1) got=lw t8, LO(D_800D2108)(t8)",
-          "structural: target=lw t8, LO(D_800D2108)(t8) got=lbu t9, 319(v1)",
-          "structural: target=lbu t9, 319(v1) got=addu t0, t8, t9",
-          "structural: target=addu t0, t8, t9 got=lbu v0, 0(t0)",
-          "structural: target=lbu v0, 0(t0) got=addu a0, v0, a0",
-          "structural: target=addu a0, a0, v0 got=b L1",
-          "structural: target=b L1 got=addiu a0, a0, -1",
-          "structural: target=addiu a0, a0, -1 got=lw t1, LO(D_800D2108)(t1)",
-          "structural: target=lbu t1, 319(v1) got=lbu t2, 319(v1)",
-          "structural: target=lw t2, LO(D_800D2108)(t2) got=addu t3, t1, t2",
-          "structural: target=addu t3, t1, t2 got=lbu a1, 0(t3)",
-          "structural: target=lbu v0, 0(t3) got=addiu t4, a1, -1",
-          "structural: target=addiu t4, v0, -1 got=slt at, a0, t4",
-          "structural: target=slt at, a0, t4 got=bnez at, L1",
-          "structural: target=bnez at, L1 got=move v0, a1",
-          "structural: target=nop got=subu a0, a0, a1"
-        ],
-        "timestamp": "2026-06-10T14:37:56.942Z"
-      },
-      {
-        "code": "void func_15075938(void) {\n    u8 temp_v0;\n    u8 changed;\n    s32 temp_a0;\n    s32 phi_v1;\n    struct127 *temp_v1;\n    u8 *table;\n\n    changed = 0;\n    temp_v1 = D_800D154C;\n    table = *(u8 **)&D_800D2108;\n    temp_a0 = temp_v1->unk21E - temp_v1->unk221;\n    if (temp_a0 < 0) {\n        temp_v0 = table[temp_v1->unk13F];\n        temp_a0 = (temp_a0 + temp_v0) - 1;\n    } else {\n        temp_v0 = table[temp_v1->unk13F];\n        if ((temp_v0 - 1) <= temp_a0) {\n            temp_a0 = (temp_a0 - temp_v0) + 1;\n        }\n    }\n\n    if (D_800D1891 == 0xFF) {\n        phi_v1 = temp_v0 - 2;\n    } else {\n        phi_v1 = D_800D1891;\n    }\n\n    if (D_800D1892 == 0) {\n        if (phi_v1 == temp_a0) {\n            changed = 1;\n        }\n    } else if (D_800D1892 == 1) {\n        if (phi_v1 != temp_a0) {\n            changed = 1;\n        }\n    } else if (D_800D1892 == 2) {\n        if (phi_v1 < temp_a0) {\n            changed = 1;\n        }\n    } else {\n        if (phi_v1 > temp_a0) {\n            changed = 1;\n        }\n    }\n\n    if (changed) {\n        func_15075400(D_800D1890);\n    }\n}",
-        "score": 0.4857142857142857,
-        "reason": "length_mismatch (target=70, generated=68)",
-        "diffs": [],
-        "timestamp": "2026-06-10T14:38:11.472Z"
-      }
-    ]
+    "attempts": 0,
+    "lastScore": 0,
+    "status": "pending"
   },
   {
     "function": "func_1502B4A8",
