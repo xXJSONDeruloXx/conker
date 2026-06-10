@@ -36788,46 +36788,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
-    "lastScore": 0.9863,
-    "status": "pending",
-    "history": [
-      {
-        "code": "void func_151347CC(struct102 *arg0, u8 *arg1, u8 arg2) {\n    u8 temp_v0;\n    s32 temp_v0_2;\n    s32 temp_v1;\n\n    temp_v0 = arg2;\n    if ((temp_v0 == 0) || (temp_v0 == 3)) {\n        if ((*(s32 *)((s32)arg0 + 0x1C) == *(s32 *)arg1) || (*(u8 *)((s32)arg0 + 0x18) == arg1[4])) {\n            func_1516972C(arg0);\n        }\n    } else if (temp_v0 == 0x11) {\n        if (*(u8 *)((s32)arg0 + 0x3D) == 5) {\n            if ((*(s32 *)((s32)arg0 + 0x1C) == *(s32 *)arg1) || (*(u8 *)((s32)arg0 + 0x18) == arg1[4])) {\n                func_1516972C(arg0);\n            }\n        }\n    } else if (temp_v0 == 0x16) {\n        if ((s32)arg1 == *(s32 *)((s32)arg0 + 0x1C)) {\n            func_1516972C(arg0);\n        }\n    } else if (temp_v0 == 0x2D) {\n        temp_v0_2 = *(s32 *)arg1;\n        temp_v1 = *(s32 *)((s32)arg0 + 0x1C);\n        if (temp_v0_2 == temp_v1) {\n            *(s32 *)((s32)arg0 + 0x1C) = *(s32 *)(arg1 + 4);\n            *(u8 *)((s32)arg0 + 0x18) = arg1[9];\n        } else {\n            if (*(s32 *)(arg1 + 4) != temp_v1) {\n                goto end;\n            }\n            *(s32 *)((s32)arg0 + 0x1C) = temp_v0_2;\n            *(u8 *)((s32)arg0 + 0x18) = arg1[8];\n        }\n    }\nend:\n    ;\n}",
-        "score": 0.9863,
-        "reason": "structural_diffs=1",
-        "diffs": [
-          "structural: target=bnel t9, v1, L3 got=bnel v1, t9, L3"
-        ],
-        "timestamp": "2026-06-10T17:36:10.107Z"
-      },
-      {
-        "code": "void func_151347CC(struct102 *arg0, u8 *arg1, u8 arg2) {\n    u8 temp_v0;\n\n    temp_v0 = arg2;\n    if ((temp_v0 == 0) || (temp_v0 == 3)) {\n        if ((*(s32 *)((s32)arg0 + 0x1C) == *(s32 *)arg1) || (*(u8 *)((s32)arg0 + 0x18) == arg1[4])) {\n            func_1516972C(arg0);\n        }\n    } else if (temp_v0 == 0x11) {\n        if (*(u8 *)((s32)arg0 + 0x3D) == 5) {\n            if ((*(s32 *)((s32)arg0 + 0x1C) == *(s32 *)arg1) || (*(u8 *)((s32)arg0 + 0x18) == arg1[4])) {\n                func_1516972C(arg0);\n            }\n        }\n    } else if (temp_v0 == 0x16) {\n        if ((s32)arg1 == *(s32 *)((s32)arg0 + 0x1C)) {\n            func_1516972C(arg0);\n        }\n    } else if (temp_v0 == 0x2D) {\n        s32 temp_v0_2 = *(s32 *)arg1;\n        s32 temp_v1 = *(s32 *)((s32)arg0 + 0x1C);\n        if (temp_v0_2 == temp_v1) {\n            *(s32 *)((s32)arg0 + 0x1C) = *(s32 *)(arg1 + 4);\n            *(u8 *)((s32)arg0 + 0x18) = arg1[9];\n        } else if (temp_v1 == *(s32 *)(arg1 + 4)) {\n            *(s32 *)((s32)arg0 + 0x1C) = temp_v0_2;\n            *(u8 *)((s32)arg0 + 0x18) = arg1[8];\n        }\n    }\n}",
-        "score": 0.9863,
-        "reason": "structural_diffs=1",
-        "diffs": [
-          "structural: target=bnel t9, v1, L3 got=bnel v1, t9, L3"
-        ],
-        "timestamp": "2026-06-10T17:36:27.408Z"
-      },
-      {
-        "code": "void func_151347CC(struct102 *arg0, u8 *arg1, u8 arg2) {\n    u8 temp_v0;\n\n    temp_v0 = arg2;\n    if ((temp_v0 == 0) || (temp_v0 == 3)) {\n        if ((*(s32 *)((s32)arg0 + 0x1C) == *(s32 *)arg1) || (*(u8 *)((s32)arg0 + 0x18) == arg1[4])) {\n            func_1516972C(arg0);\n        }\n    } else if (temp_v0 == 0x11) {\n        if (*(u8 *)((s32)arg0 + 0x3D) == 5) {\n            if ((*(s32 *)((s32)arg0 + 0x1C) == *(s32 *)arg1) || (*(u8 *)((s32)arg0 + 0x18) == arg1[4])) {\n                func_1516972C(arg0);\n            }\n        }\n    } else if (temp_v0 == 0x16) {\n        if ((s32)arg1 == *(s32 *)((s32)arg0 + 0x1C)) {\n            func_1516972C(arg0);\n        }\n    } else if (temp_v0 == 0x2D) {\n        s32 temp_v0_2;\n        s32 temp_v1;\n        s32 temp_t9;\n        temp_v0_2 = *(s32 *)arg1;\n        temp_v1 = *(s32 *)((s32)arg0 + 0x1C);\n        if (temp_v0_2 == temp_v1) {\n            *(s32 *)((s32)arg0 + 0x1C) = *(s32 *)(arg1 + 4);\n            *(u8 *)((s32)arg0 + 0x18) = arg1[9];\n        } else {\n            temp_t9 = *(s32 *)(arg1 + 4);\n            if (temp_t9 == temp_v1) {\n                *(s32 *)((s32)arg0 + 0x1C) = temp_v0_2;\n                *(u8 *)((s32)arg0 + 0x18) = arg1[8];\n            }\n        }\n    }\n}",
-        "score": 0.8767,
-        "reason": "structural_diffs=9",
-        "diffs": [
-          "structural: target=lw v0, 0(a1) got=lw v1, 0(a1)",
-          "structural: target=lw v1, 28(a0) got=lw a2, 28(a0)",
-          "structural: target=bnel v0, v1, L7 got=bnel v1, a2, L7",
-          "structural: target=lw t9, 4(a1) got=lw v0, 4(a1)",
-          "structural: target=lw t9, 4(a1) got=lw v0, 4(a1)",
-          "structural: target=bnel t9, v1, L3 got=bnel v0, a2, L3",
-          "structural: target=sw v0, 28(a0) got=sw v1, 28(a0)",
-          "structural: target=lbu t0, 8(a1) got=lbu t9, 8(a1)",
-          "structural: target=sb t0, 24(a0) got=sb t9, 24(a0)"
-        ],
-        "timestamp": "2026-06-10T17:36:45.194Z"
-      }
-    ]
+    "attempts": 0,
+    "lastScore": 0,
+    "status": "pending"
   },
   {
     "function": "func_15013DE8",
