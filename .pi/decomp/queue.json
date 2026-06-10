@@ -29719,35 +29719,9 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 3,
-    "lastScore": 0.4868421052631579,
-    "status": "pending",
-    "history": [
-      {
-        "code": "void func_151671E8(void) {\n    u8 *table;\n    s32 *stack;\n    volatile s8 *depth;\n    s32 i;\n    s32 limit;\n    s32 *cb;\n    s32 j;\n    s32 obj;\n    s32 *sptr;\n\n    table = (u8 *)&D_800DCE50;\n    stack = (s32 *)&D_800DD198;\n    depth = &D_800DD190;\n    i = 0;\n    limit = 0x65;\n    do {\n        cb = (s32 *)&D_8008B4A8;\n        j = 0;\n        do {\n            if (cb[1] != 0) {\n                obj = *(s32 *)(table + ((((((i << 2) - i) << 2) + i) << 5)) + (j << 2));\n                *depth = *depth + 1;\n                if (obj != 0) {\n                    sptr = &stack[*depth];\n                    do {\n                        *sptr = *(s32 *)(obj + 8);\n                        ((void (*)(s32))cb[1])(obj);\n                        sptr = &stack[*depth];\n                        obj = *sptr;\n                    } while (obj != 0);\n                }\n                *depth = *depth - 1;\n            }\n            j++;\n            cb = (s32 *)((s32)cb + 0x34);\n        } while (j != limit);\n        i++;\n    } while (i != 2);\n}",
-        "score": 0.4868421052631579,
-        "reason": "length_mismatch (target=74, generated=76)",
-        "diffs": [],
-        "timestamp": "2026-06-10T23:10:38.214Z",
-        "contextPatch": []
-      },
-      {
-        "code": "void func_151671E8(void) {\n    u8 *table;\n    s32 *stack;\n    volatile s8 *depth;\n    s32 i;\n    s32 *cb;\n    s32 j;\n    s32 obj;\n    s32 *sptr;\n\n    table = (u8 *)&D_800DCE50;\n    stack = (s32 *)&D_800DD198;\n    depth = &D_800DD190;\n    i = 0;\n    do {\n        cb = (s32 *)&D_8008B4A8;\n        j = 0;\n        do {\n            if (cb[1] != 0) {\n                obj = *(s32 *)(table + ((((((i << 2) - i) << 2) + i) << 5)) + (j << 2));\n                *depth = *depth + 1;\n                if (obj != 0) {\n                    sptr = &stack[*depth];\n                    do {\n                        *sptr = *(s32 *)(obj + 8);\n                        ((void (*)(s32))cb[1])(obj);\n                        sptr = &stack[*depth];\n                        obj = *sptr;\n                    } while (obj != 0);\n                }\n                *depth = *depth - 1;\n            }\n            j++;\n            cb = (s32 *)((s32)cb + 0x34);\n        } while (j != 0x65);\n        i++;\n    } while (i != 2);\n}",
-        "score": 0.4868421052631579,
-        "reason": "length_mismatch (target=74, generated=76)",
-        "diffs": [],
-        "timestamp": "2026-06-10T23:10:58.509Z",
-        "contextPatch": []
-      },
-      {
-        "code": "void func_151671E8(void) {\n    u8 *table;\n    s32 *stack;\n    s8 *depth;\n    s32 i;\n    s32 *cb;\n    s32 j;\n    s32 obj;\n    s32 *sptr;\n\n    table = (u8 *)&D_800DCE50;\n    stack = (s32 *)&D_800DD198;\n    depth = &D_800DD190;\n    i = 0;\n    do {\n        cb = (s32 *)&D_8008B4A8;\n        j = 0;\n        do {\n            if (cb[1] != 0) {\n                obj = *(s32 *)(table + ((((((i << 2) - i) << 2) + i) << 5)) + (j << 2));\n                *depth = *depth + 1;\n                if (obj != 0) {\n                    sptr = &stack[*depth];\n                    do {\n                        *sptr = *(s32 *)(obj + 8);\n                        ((void (*)(s32))cb[1])(obj);\n                        sptr = &stack[*depth];\n                        obj = *sptr;\n                    } while (obj != 0);\n                }\n                *depth = *depth - 1;\n            }\n            j++;\n            cb = (s32 *)((s32)cb + 0x34);\n        } while (j != 0x65);\n        i++;\n    } while (i != 2);\n}",
-        "score": 0.46835443037974683,
-        "reason": "length_mismatch (target=74, generated=79)",
-        "diffs": [],
-        "timestamp": "2026-06-10T23:11:19.187Z",
-        "contextPatch": []
-      }
-    ]
+    "attempts": 0,
+    "lastScore": 0,
+    "status": "pending"
   },
   {
     "function": "func_15143794",
@@ -36257,9 +36231,35 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.49411764705882355,
+    "status": "pending",
+    "history": [
+      {
+        "code": "s32 func_1000B060(f32 arg0, f32 arg1, s32 arg2) {\n    s16 phi_a1[2];\n    f32 sp18;\n    s16 temp_t8;\n    f64 temp_f6;\n    s8 temp_t9;\n    s16 phi_v1_2;\n\n    phi_a1[0] = 0x80;\n    sp18 = sqrtf((arg0 * arg0) + (arg1 * arg1));\n    if (D_8002C214 < sp18) {\n        sp18 = arg0 / sp18;\n    }\n    temp_f6 = func_150487E0(sp18) * D_8002C218;\n    phi_v1_2 = temp_f6;\n    if (0.0f < arg1) {\n        temp_t8 = temp_f6;\n        if (temp_t8 < 0) {\n            phi_v1_2 = (s16)(-0x80 - temp_t8);\n        } else {\n            phi_v1_2 = (s16)(0x80 - temp_t8);\n        }\n    }\n    temp_t9 = phi_v1_2 + arg2;\n    phi_v1_2 = temp_t9;\n    if ((temp_t9 >= 0x60) || (temp_t9 < -0x60)) {\n        phi_v1_2 = 0;\n    } else if (phi_v1_2 >= 0x20) {\n        phi_v1_2 = (s16)(0x5F - phi_v1_2);\n    } else if (phi_v1_2 < -0x20) {\n        phi_v1_2 = (s16)(-0x5F - phi_v1_2);\n    } else {\n        phi_v1_2 = (s16)(phi_v1_2 * 2);\n        phi_a1[0] = 0;\n    }\n    return (phi_v1_2 + 0x40) | phi_a1[0];\n}",
+        "score": 0.49411764705882355,
+        "reason": "length_mismatch (target=84, generated=85)",
+        "diffs": [],
+        "timestamp": "2026-06-10T23:17:36.521Z",
+        "contextPatch": []
+      },
+      {
+        "code": "s32 func_1000B060(f32 arg0, f32 arg1, s32 arg2) {\n    s16 phi_a1[2];\n    f32 sp18;\n    s16 temp_t8;\n    f64 temp_f6;\n    s8 temp_t9;\n    s16 phi_v1_2;\n\n    sp18 = sqrtf((arg0 * arg0) + (arg1 * arg1));\n    if (D_8002C214 < sp18) {\n        sp18 = arg0 / sp18;\n    }\n    phi_a1[0] = 0x80;\n    temp_f6 = func_150487E0(sp18) * D_8002C218;\n    phi_v1_2 = temp_f6;\n    if (0.0f < arg1) {\n        temp_t8 = temp_f6;\n        if (temp_t8 < 0) {\n            phi_v1_2 = (s16)(-0x80 - temp_t8);\n        } else {\n            phi_v1_2 = (s16)(0x80 - temp_t8);\n        }\n    }\n    temp_t9 = phi_v1_2 + arg2;\n    phi_v1_2 = temp_t9;\n    if ((temp_t9 >= 0x60) || (temp_t9 < -0x60)) {\n        phi_v1_2 = 0;\n    } else if (phi_v1_2 >= 0x20) {\n        phi_v1_2 = (s16)(0x5F - phi_v1_2);\n    } else if (phi_v1_2 < -0x20) {\n        phi_v1_2 = (s16)(-0x5F - phi_v1_2);\n    } else {\n        phi_v1_2 = (s16)(phi_v1_2 * 2);\n        phi_a1[0] = 0;\n    }\n    return (phi_v1_2 + 0x40) | phi_a1[0];\n}",
+        "score": 0.49411764705882355,
+        "reason": "length_mismatch (target=84, generated=85)",
+        "diffs": [],
+        "timestamp": "2026-06-10T23:17:58.340Z",
+        "contextPatch": []
+      },
+      {
+        "code": "s32 func_1000B060(f32 arg0, f32 arg1, s32 arg2) {\n    s32 phi_a1;\n    f32 sp18;\n    s16 temp_t8;\n    f64 temp_f6;\n    s8 temp_t9;\n    s16 phi_v1_2;\n\n    *(s16 *)&phi_a1 = 0x80;\n    sp18 = sqrtf((arg0 * arg0) + (arg1 * arg1));\n    if (D_8002C214 < sp18) {\n        sp18 = arg0 / sp18;\n    }\n    temp_f6 = func_150487E0(sp18) * D_8002C218;\n    phi_v1_2 = temp_f6;\n    if (0.0f < arg1) {\n        temp_t8 = temp_f6;\n        if (temp_t8 < 0) {\n            phi_v1_2 = (s16)(-0x80 - temp_t8);\n        } else {\n            phi_v1_2 = (s16)(0x80 - temp_t8);\n        }\n    }\n    temp_t9 = phi_v1_2 + arg2;\n    phi_v1_2 = temp_t9;\n    if ((temp_t9 >= 0x60) || (temp_t9 < -0x60)) {\n        phi_v1_2 = 0;\n    } else if (phi_v1_2 >= 0x20) {\n        phi_v1_2 = (s16)(0x5F - phi_v1_2);\n    } else if (phi_v1_2 < -0x20) {\n        phi_v1_2 = (s16)(-0x5F - phi_v1_2);\n    } else {\n        phi_v1_2 = (s16)(phi_v1_2 * 2);\n        *(s16 *)&phi_a1 = 0;\n    }\n    return (phi_v1_2 + 0x40) | *(s16 *)&phi_a1;\n}",
+        "score": 0.49411764705882355,
+        "reason": "length_mismatch (target=84, generated=85)",
+        "diffs": [],
+        "timestamp": "2026-06-10T23:18:23.452Z",
+        "contextPatch": []
+      }
+    ]
   },
   {
     "function": "func_150C2558",
