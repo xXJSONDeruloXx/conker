@@ -1074,12 +1074,12 @@
     ]
   },
   {
-    "id": "eof-padding-nops-ignore",
-    "description": "Some terminal nonmatching asm includes trailing nop padding that C extraction omits; the functional C can match after excluding padding from the target comparison, and full ROM SHA gate determines whether linker/segment padding preserves the final bytes.",
-    "trigger": "Raw generated ASM is instruction-for-instruction identical through jr/delay slot, with target-only trailing nop padding at the end of a TU/segment.",
-    "solution": "Verify exact functional body with decomp_attempt; if only target trailing padding differs, rely on full ROM SHA acceptance and record tooling need to ignore or separately model terminal alignment padding.",
+    "id": "hybrid-current-pointer-indexed-store-scheduling",
+    "description": "When looping over a global struct array, using a current pointer for field comparisons but indexed global access for the call argument and final store can preserve pointer-walk addressing while forcing IDO to reload the global loop count before the store after a call.",
+    "trigger": "Near-match loop over `ptr = &GLOBAL[i]` where comparisons and branch-likely chain match, but after an optional call IDO schedules `lw ptr->field` before reloading global count; target reloads the global count first then loads/stores the field.",
+    "solution": "Keep `ptr = &GLOBAL[i]` for the comparison chain, but write the call argument and mutation as `GLOBAL[i].field` instead of `ptr->field`, e.g. `temp = GLOBAL[i].unk24; ... GLOBAL[i].unk10 |= 0x80;`.",
     "example_functions": [
-      "func_1502B9B4"
+      "func_1000FC18"
     ]
   }
 ]
