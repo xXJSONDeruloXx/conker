@@ -6,6 +6,7 @@
  * - decomp_attempt: patch, compile TU, diff, score
  * - decomp_diff: re-examine last diff with focused analysis
  * - decomp_accept: full ROM SHA gate + commit
+ * - decomp_verify: Dockerized full ROM sanity check
  * - decomp_status: progress stats
  *
  * Plus a persistent widget showing decomp progress.
@@ -275,13 +276,13 @@ function buildChunkPrompt(chunkNum: number): string {
 		"",
 		"## Available Context, Tools, and Assets",
 		"",
-		"- Primary queue/tools: `decomp_queue`, `decomp_attempt`, `decomp_diff`, `decomp_permute`, `decomp_accept`, `decomp_status`, `decomp_chunk_done`.",
+		"- Primary queue/tools: `decomp_queue`, `decomp_attempt`, `decomp_diff`, `decomp_permute`, `decomp_accept`, `decomp_verify`, `decomp_status`, `decomp_chunk_done`.",
 		"- Source/ASM assets: `conker/src/<file>.c`, `conker/asm/nonmatchings/<file>/<func>.s`, `conker/include/{functions,variables,structs}.h`, `conker/undefined_syms_auto.txt`.",
 		"- Persistent memory: `.pi/decomp/queue.json` stores prior attempts; `.pi/decomp/patterns.json` stores learned IDO patterns; `.pi/decomp/tooling-refinement.md` stores per-chunk tooling observations and improvement opportunities.",
 		"- Static guidance: read `/skill:n64-decomp` for IDO 5.3 register, branch, stack, and float-codegen rules.",
 		"- Candidate routing/reference tools: `tools/decomp_similarity.py --function <func> --top 5`, `tools/decomp_similarity.py --rank-pending --json`, `tools/decomp_skeleton.py --function <func>`, and `decomp_queue next` with `filter={similarToMatched:true}` or `filter={familyMode:true}`.",
 		"- Low-level aids: `tools/analyze_decomp_candidates.py`, `tools/mips_to_c/m2c.py`, `tools/transmuter-compile.sh`, and Transmuter via `decomp_permute`.",
-		"- Build/verification assets: Docker image `conker-build-min-amd64`, `make -C conker verify`, and full ROM SHA gate inside `decomp_accept`.",
+		"- Build/verification assets: Docker image `conker-build-min-amd64`, `decomp_verify` for Dockerized sanity checks, and full ROM SHA gate inside `decomp_accept`.",
 		"",
 		"## Instructions",
 		"",
@@ -482,6 +483,45 @@ async function gitPushWithRetry(pi: any): Promise<void> {
 		await pi.exec("git", ["pull", "--rebase"], { timeout: 30000 });
 		await pi.exec("git", ["push"], { timeout: 30000 });
 	}
+}
+
+async function runDockerVerify(
+	pi: any,
+	cwd: string,
+	signal: any,
+	options: { clean?: boolean; rebuild?: boolean; timeoutSeconds?: number } = {},
+): Promise<any> {
+	const cleanCmd = options.clean ? "make -C conker clean;" : "";
+	const rebuildCmd = options.rebuild ? "rm -f conker/build/conker.us.ok conker/build/conker.us.bin;" : "";
+	const verifyCmd = [
+		"set -e",
+		cleanCmd,
+		rebuildCmd,
+		// `make clean` removes generated build subdirectories. The raw make target
+		// does not always recreate every nested output dir before redirection/linking,
+		// so prime them via the project's `dirs` target before the SHA gate.
+		"make -C conker dirs >/dev/null",
+		"make -C conker verify",
+	].filter(Boolean).join(" ");
+
+	return pi.exec(
+		"docker",
+		[
+			"run",
+			"--rm",
+			"--platform",
+			"linux/amd64",
+			"-v",
+			`${cwd}:/conker`,
+			"-w",
+			"/conker",
+			"conker-build-min-amd64",
+			"bash",
+			"-lc",
+			verifyCmd,
+		],
+		{ signal, timeout: (options.timeoutSeconds || 600) * 1000 },
+	);
 }
 
 export default function (pi: ExtensionAPI) {
@@ -819,6 +859,56 @@ export default function (pi: ExtensionAPI) {
 			clearInterval(loopTimer);
 			loopTimer = undefined;
 		}
+	});
+
+	// ═══════════════════════════════════════════════════════════════
+	// TOOL: decomp_verify
+	// ═══════════════════════════════════════════════════════════════
+	pi.registerTool({
+		name: "decomp_verify",
+		label: "Decomp Verify",
+		description:
+			"Run the Dockerized Conker full ROM sanity check (`make -C conker verify`) and report whether the built ROM matches the expected SHA.",
+		promptSnippet: "Verify the Conker ROM build in Docker",
+		promptGuidelines: [
+			"Use decomp_verify when the user asks whether the current Conker build is matching.",
+			"Do not run `make -C conker verify` directly on macOS; this repo's IDO compiler is a linux/amd64 binary and must run through Docker.",
+			"Use rebuild=true when you want to force relinking instead of trusting an existing `.ok` target.",
+		],
+		parameters: Type.Object({
+			clean: Type.Optional(Type.Boolean({ description: "Run `make -C conker clean` before verification. Defaults to false." })),
+			rebuild: Type.Optional(Type.Boolean({ description: "Remove conker/build/conker.us.ok and .bin before verification. Defaults to false." })),
+			timeoutSeconds: Type.Optional(Type.Number({ description: "Timeout in seconds. Defaults to 600." })),
+		}),
+
+		async execute(_toolCallId, params, signal, _onUpdate, ctx) {
+			const startedAt = Date.now();
+			const result = await runDockerVerify(pi, ctx.cwd, signal, {
+				clean: params.clean,
+				rebuild: params.rebuild,
+				timeoutSeconds: params.timeoutSeconds,
+			});
+			const elapsedSeconds = ((Date.now() - startedAt) / 1000).toFixed(1);
+			const output = `${result.stdout || ""}\n${result.stderr || ""}`.trim();
+			const matched = result.code === 0 && /build\/conker\.us\.bin:\s+OK/.test(output);
+			const statusLine = matched
+				? `✓ Conker ROM verify matched (${elapsedSeconds}s)`
+				: `✗ Conker ROM verify failed (${elapsedSeconds}s)`;
+
+			return {
+				content: [{
+					type: "text",
+					text: `${statusLine}\n\n${output || "(no output)"}`,
+				}],
+				details: {
+					matched,
+					code: result.code,
+					elapsedSeconds: Number(elapsedSeconds),
+					clean: !!params.clean,
+					rebuild: !!params.rebuild,
+				},
+			};
+		},
 	});
 
 	// ═══════════════════════════════════════════════════════════════
@@ -1880,34 +1970,20 @@ export default function (pi: ExtensionAPI) {
 			const path = require("node:path");
 			loadState(ctx.cwd);
 
-			// Full ROM build
-			const buildResult = await pi.exec(
-				"docker",
-				[
-					"run",
-					"--rm",
-					"--platform",
-					"linux/amd64",
-					"-v",
-					`${ctx.cwd}:/conker`,
-					"-w",
-					"/conker",
-					"conker-build-min-amd64",
-					"bash",
-					"-lc",
-					"rm -f conker/build/conker.us.ok conker/build/conker.us.bin && make -C conker -j$(nproc) 2>&1 | tail -20",
-				],
-				{ signal, timeout: 120000 },
-			);
+			// Full ROM build / SHA gate. Keep this path shared with decomp_verify so
+			// manual sanity checks and accept-time verification use the same Dockerized
+			// linux/amd64 environment and build-directory priming.
+			const buildResult = await runDockerVerify(pi, ctx.cwd, signal, { rebuild: true, timeoutSeconds: 120 });
+			const buildOutput = `${buildResult.stdout || ""}\n${buildResult.stderr || ""}`;
 
-			if (!buildResult.stdout.includes("build/conker.us.bin: OK")) {
+			if (!(buildResult.code === 0 && buildOutput.includes("build/conker.us.bin: OK"))) {
 				// Revert
 				await pi.exec("git", ["checkout", "--", `conker/src/${params.file}`]);
 				return {
 					content: [
 						{
 							type: "text",
-							text: `✗ Full ROM SHA failed (reverted).\n${buildResult.stdout}`,
+							text: `✗ Full ROM SHA failed (reverted).\n${buildOutput}`,
 						},
 					],
 					details: { accepted: false },
