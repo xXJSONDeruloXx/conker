@@ -98,3 +98,32 @@ Append-only notes from decomp chunks. Use this to audit which tooling changes we
 - Likely cause / blocker: Matched via contextPatch type change + byte-addressed pointer arithmetic.
 - Tooling observations: contextPatch worked perfectly for the type redeclaration (u8[] -> u8*) in variables.h and auto-reverted on every non-match, committing cleanly only via decomp_accept's SHA gate. decomp_attempt's full raw ASM + structural diff made the 0.9571 (0-instr-off) register-swap diagnosable. decomp_permute could NOT fix the operand-evaluation-order register swap (plateaued at 15 across 10k compiles, depth 2) — this was an LLM-level expression-shape fix, not a mutation. Similarity ranker (tools/decomp_similarity.py --rank-pending) returned several already-matched functions (func_1502B6BC, func_1502B8E0, func_1502B9B4) as 'pending' top candidates — stale data wasted ~4 tool calls verifying they were already decompiled.
 - Improvement opportunities: 1) decomp_similarity.py --rank-pending should cross-check against actual GLOBAL_ASM pragmas present in source (or the queue's matched set) to avoid surfacing already-decompiled functions as pending. 2) For 0-instruction-off near-misses that are pure operand-evaluation-order register swaps, the permuter has no rule that reorders subexpression evaluation (base vs index of array access) — adding an 'array-index-to-ptr-arith' rewrite rule would let it brute-force these. 3) Functions like func_15007440 with statically-bounded byte-copy loops get unrolled by IDO's memcpy optimizer (148 vs 70 instr) — a queue hint flagging 'likely-loop-unroll' would save attempts.
+
+## Chunk 391 follow-up: implemented 3 harness improvements
+
+Acted on the improvement opportunities from chunk 391:
+
+1. **Pointer-global detector (decomp_queue next context).** When a referenced
+   global is declared as an array in variables.h but the target asm loads it via
+   `lw %lo(sym)` (i.e. it stores a pointer), the candidate context now emits a
+   "Pointer-Global Hints (contextPatch candidates)" section telling the model to
+   redeclare it as `T *sym;` and index via the pointer / byte-addressed arithmetic.
+   This is exactly the D_800D2108 insight that won func_15075938, now surfaced
+   automatically instead of inferred from raw asm.
+
+2. **Operand-eval-order detector (decomp_diff).** When the structural diff is a
+   pure register-name swap between two adjacent loads where the target loads a
+   pointer/base global (`lw %lo`) before the index byte (`lbu`), decomp_diff now
+   suggests rewriting as `*(T *)((s32)PTR + (s32)obj->field)` to force base-first
+   evaluation — and explicitly notes the permuter cannot do this (it plateaued at
+   15 across 10k+ compiles on func_15075938).
+
+3. **Similarity staleness fix (tools/decomp_similarity.py).** --rank-pending now
+   cross-checks each pending entry against the live GLOBAL_ASM pragma in source
+   (has_live_pragma), dropping entries that were decompiled outside this tool.
+   Verified: func_1502B6BC / func_1502B8E0 / func_1502B9B4 (already matched) no
+   longer surface; genuinely-pending func_1502B110 still ranks #1.
+
+Still open: queue hint for likely-loop-unroll (memcpy-shaped bounded byte loops
+like func_15007440 get unrolled to 148 vs 70 instr); permuter rule for
+array-index→ptr-arith rewrites.

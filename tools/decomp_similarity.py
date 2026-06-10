@@ -37,6 +37,34 @@ def load_queue(root: Path) -> list[dict[str, Any]]:
     return json.loads(queue_path.read_text())
 
 
+@lru_cache(maxsize=None)
+def _src_text(src_path: str) -> str:
+    try:
+        return Path(src_path).read_text()
+    except OSError:
+        return ""
+
+
+def has_live_pragma(root: Path, entry: dict[str, Any]) -> bool:
+    """True if the function still has a GLOBAL_ASM pragma in its source file.
+
+    The queue's `status` field can go stale: a function decompiled outside this
+    tool stays marked "pending" even though its pragma is gone. Cross-checking
+    the actual source prevents surfacing already-matched functions as pending.
+    """
+    func = entry.get("function")
+    file = entry.get("file")
+    if not func or not file:
+        return True  # can't verify; don't filter out
+    src_path = root / "conker/src" / file
+    text = _src_text(str(src_path))
+    if not text:
+        return True  # source missing/unreadable; don't filter out
+    stem = file[:-2] if file.endswith(".c") else file
+    pragma = f'#pragma GLOBAL_ASM("asm/nonmatchings/{stem}/{func}.s")'
+    return pragma in text
+
+
 def asm_path_for(root: Path, entry: dict[str, Any]) -> Path | None:
     file_stem = Path(entry.get("file", "")).stem
     func = entry.get("function")
@@ -256,7 +284,12 @@ def main() -> int:
     root = Path(args.repo).resolve()
     queue = load_queue(root)
     matched = [e for e in queue if e.get("status") == "matched"]
-    pending = [e for e in queue if e.get("status") == "pending"]
+    # Cross-check source: drop entries whose GLOBAL_ASM pragma is already gone
+    # (decompiled outside this tool) so stale "pending" status can't resurface them.
+    pending = [
+        e for e in queue
+        if e.get("status") == "pending" and has_live_pragma(root, e)
+    ]
 
     if args.function:
         target = next((e for e in queue if e.get("function") == args.function), None)

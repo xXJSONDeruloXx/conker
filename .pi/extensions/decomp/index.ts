@@ -1476,11 +1476,25 @@ export default function (pi: ExtensionAPI) {
 				try { undefContent = fs.readFileSync(undefPath, "utf-8"); } catch {}
 
 				const symbolDecls: string[] = [];
+				const pointerGlobalHints: string[] = [];
 				for (const sym of symbolRefs) {
 					// Check variables.h
 					const varMatch = varsContent.match(new RegExp(`^.*\\b${sym}\\b.*$`, "m"));
 					if (varMatch) {
 						symbolDecls.push(varMatch[0].trim());
+						// Pointer-global detector: a symbol declared as an array (`T sym[]`/`T sym[N]`)
+						// but loaded with `lw ... %lo(sym)` in the target asm is actually a pointer
+						// global (the asm dereferences the stored address). Indexing it as a C
+						// array emits the wrong addressing. Suggest a contextPatch to `T *sym;`.
+						const declaredAsArray = /\b\w[\w ]*\b\s*\*?\s*\b/.test(varMatch[0]) && /\[\s*\d*\s*\]/.test(varMatch[0]);
+						const loadedAsPointer = new RegExp(`lw\\s+\\$?\\w+,\\s*%lo\\(${sym}\\)`).test(targetAsm);
+						if (declaredAsArray && loadedAsPointer) {
+							pointerGlobalHints.push(
+								`- ${sym} is declared as an array but the target loads it with \`lw %lo(${sym})\` — it is a POINTER global. ` +
+								`Use a contextPatch in variables.h to redeclare it as a pointer (e.g. \`T *${sym};\`) and index it via the pointer ` +
+								`(or byte-addressed arithmetic \`*(T *)((s32)${sym} + offset)\`).`
+							);
+						}
 					} else {
 						// Check undefined_syms_auto.txt
 						const undefMatch = undefContent.match(new RegExp(`^.*\\b${sym}\\b.*$`, "m"));
@@ -1491,6 +1505,9 @@ export default function (pi: ExtensionAPI) {
 				}
 				if (symbolDecls.length > 0) {
 					enrichment.push("### Symbol Declarations", "```c", ...symbolDecls, "```", "");
+				}
+				if (pointerGlobalHints.length > 0) {
+					enrichment.push("### Pointer-Global Hints (contextPatch candidates)", ...pointerGlobalHints, "");
 				}
 			}
 
@@ -2309,6 +2326,28 @@ export default function (pi: ExtensionAPI) {
 				}
 				if (structDiffs.some((d: any) => d.target?.includes("sll") || d.target?.includes("addu"))) {
 					suggestions.push("- Address math mismatch: check extern declaration (u8[] vs pointer[])");
+				}
+				// Operand-evaluation-order detector: a pure register-name swap between two adjacent
+				// loads where the target loads a pointer/base global (`lw %lo(sym)`) BEFORE the index
+				// byte (`lbu off(reg)`) but the generated code does the reverse. C array indexing
+				// (PTR[obj->field]) emits index-then-base; byte-addressed pointer arithmetic forces
+				// base-first evaluation and fixes the swap.
+				{
+					const hasLwLoad = structDiffs.some((d: any) => d.target?.includes("lw ") && /%lo\(/.test(d.target || ""));
+					const hasLbuLoad = structDiffs.some((d: any) => d.target?.includes("lbu "));
+					const onlyRegSwaps = structDiffs.length > 0 && structDiffs.every((d: any) => {
+						// strip register names ($t8, t9, etc.) and compare the instruction skeleton
+						const norm = (s: string) => (s || "").replace(/\$?\b[tsav]\d\b/g, "REG").replace(/\s+/g, " ").trim();
+						return norm(d.target) === norm(d.generated)
+							|| structDiffs.some((o: any) => norm(o.generated) === norm(d.target));
+					});
+					if (hasLwLoad && hasLbuLoad && onlyRegSwaps) {
+						suggestions.push(
+							"- Operand-eval-order swap: target loads the pointer/base global (lw %lo) before the index byte (lbu), " +
+							"but C array indexing emits index-then-base. Rewrite as byte-addressed pointer arithmetic " +
+							"`*(T *)((s32)PTR + (s32)obj->field)` to force base-first evaluation (the permuter cannot do this)."
+						);
+					}
 				}
 
 				if (suggestions.length > 0) {
