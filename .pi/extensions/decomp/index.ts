@@ -509,8 +509,8 @@ async function runDockerVerify(
 ): Promise<any> {
 	const root = findConkerBuildRoot(cwd);
 	const containerMakeDir = root.makeDir === "." ? "/src" : `/src/${root.makeDir}`;
-	const cleanCmd = options.clean ? `make -C ${containerMakeDir} clean;` : "";
-	const rebuildCmd = options.rebuild ? `rm -f ${containerMakeDir}/build/conker.us.ok ${containerMakeDir}/build/conker.us.bin;` : "";
+	const cleanCmd = options.clean ? `make -C ${containerMakeDir} clean` : "";
+	const rebuildCmd = options.rebuild ? `rm -f ${containerMakeDir}/build/conker.us.ok ${containerMakeDir}/build/conker.us.bin` : "";
 	const verifyCmd = [
 		"set -e",
 		cleanCmd,
