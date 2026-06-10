@@ -79,6 +79,15 @@
     "trigger": "Target body only stores $f12/$f14 and $a2/$a3 to stack then jr ra.",
     "solution": "Use an empty function with signature f32, f32, s32, s32 so IDO emits argument homing stores.",
     "example_functions": [
+      "func_151348F0"
+    ]
+  },
+  {
+    "id": "empty-float-arg-homing",
+    "description": "Empty IDO functions with float arguments can still home f12/f14 and integer args to stack before returning.",
+    "trigger": "Target body only stores $f12/$f14 and $a2/$a3 to stack then jr ra.",
+    "solution": "Use an empty function with signature f32, f32, s32, s32 so IDO emits argument homing stores.",
+    "example_functions": [
       "func_15134CD4"
     ]
   },
@@ -89,6 +98,15 @@
     "solution": "Use a typed struct with f32 field at offset 0x74, assign 1.0f, then return 1.",
     "example_functions": [
       "func_15135658"
+    ]
+  },
+  {
+    "id": "void-wrapper-single-call",
+    "description": "Simple void wrappers compile to a small stack frame, jal, and return.",
+    "trigger": "Target only saves ra, calls one function with original a0, restores ra, returns.",
+    "solution": "Use a void function taking the same argument type and directly call the target helper.",
+    "example_functions": [
+      "func_151352EC"
     ]
   },
   {
@@ -139,10 +157,10 @@
   {
     "id": "float-polynomial-with-global-scale",
     "description": "Simple float polynomial expressions can match directly when preserving operation grouping and global scale last.",
-    "trigger": "Target computes `(1.0f - x) * (x - 2.0f) * x * global_float`.",
-    "solution": "Write `(((1.0f - arg0) * (arg0 - 2.0f)) * arg0) * GLOBAL` with the global declared as `extern f32`.",
+    "trigger": "Target computes `(x + 1.0f) * (x - 1.0f) * x * global_float`.",
+    "solution": "Write `((arg0 + 1.0f) * (arg0 - 1.0f) * arg0) * GLOBAL` with the global declared as `extern f32`.",
     "example_functions": [
-      "func_15142A80"
+      "func_15142B44"
     ]
   },
   {
@@ -187,6 +205,15 @@
     "trigger": "Target shifts a halfword, clamps to 0xFF, stores low byte, then `andi` followed by `bgez` to return 1 with a return-0 alternative.",
     "solution": "Load pointer before shifted value for v0/v1 allocation, assign `masked = value & 0xFF`, store byte, then write `if (masked < 0) return 0; return 1;`.",
     "example_functions": [
+      "func_150AED9C"
+    ]
+  },
+  {
+    "id": "impossible-signed-byte-mask-branch",
+    "description": "IDO may preserve an apparently impossible signed branch after masking with 0xFF when written as a negative check on the masked local.",
+    "trigger": "Target shifts a halfword, clamps to 0xFF, stores low byte, then `andi` followed by `bgez` to return 1 with a return-0 alternative.",
+    "solution": "Load pointer before shifted value for v0/v1 allocation, assign `masked = value & 0xFF`, store byte, then write `if (masked < 0) return 0; return 1;`.",
+    "example_functions": [
       "func_150C251C"
     ]
   },
@@ -200,12 +227,21 @@
     ]
   },
   {
+    "id": "float-polynomial-with-global-scale",
+    "description": "Simple float polynomial expressions can match directly when preserving operation grouping and global scale last.",
+    "trigger": "Target computes `(1.0f - x) * (x - 2.0f) * x * global_float`.",
+    "solution": "Write `(((1.0f - arg0) * (arg0 - 2.0f)) * arg0) * GLOBAL` with the global declared as `extern f32`.",
+    "example_functions": [
+      "func_15142A80"
+    ]
+  },
+  {
     "id": "float-polynomial-with-literal-scale",
     "description": "Simple float polynomial expressions with literal scale match when preserving grouping and literal multiplication last.",
-    "trigger": "Target computes `(x + 1.0f) * (x - 1.0f) * (x - 2.0f) * 0.5f`.",
-    "solution": "Write `(((arg0 + 1.0f) * (arg0 - 1.0f)) * (arg0 - 2.0f)) * 0.5f`.",
+    "trigger": "Target computes `(2.0f - x) * (x + 1.0f) * x * 0.5f`.",
+    "solution": "Write `(((2.0f - arg0) * (arg0 + 1.0f)) * arg0) * 0.5f`.",
     "example_functions": [
-      "func_15142AC0"
+      "func_15142B04"
     ]
   },
   {
@@ -233,6 +269,24 @@
     "solution": "Use signature `(s16, s16, f32)` and directly call the helper with the same arguments, adding a matching extern prototype if needed.",
     "example_functions": [
       "func_15143834"
+    ]
+  },
+  {
+    "id": "float-polynomial-with-literal-scale",
+    "description": "Simple float polynomial expressions with literal scale match when preserving grouping and literal multiplication last.",
+    "trigger": "Target computes `(x + 1.0f) * (x - 1.0f) * (x - 2.0f) * 0.5f`.",
+    "solution": "Write `(((arg0 + 1.0f) * (arg0 - 1.0f)) * (arg0 - 2.0f)) * 0.5f`.",
+    "example_functions": [
+      "func_15142AC0"
+    ]
+  },
+  {
+    "id": "stack-float-pair-wrapper",
+    "description": "Wrappers that pass a stack pair of `1.0f` values can match directly with a local `f32[2]` and sign-extended s16 argument.",
+    "trigger": "Target sign-extends an argument into a3, stores `1.0f` twice on stack, sets a1=0, passes stack pointer as a2, and calls helper.",
+    "solution": "Use signature with `s16` second argument, local `f32 pair[2] = {1.0f, 1.0f}` via assignments, and call helper `(arg0, 0, pair, arg1)`.",
+    "example_functions": [
+      "func_1513FA2C"
     ]
   },
   {
@@ -480,11 +534,11 @@
   },
   {
     "id": "for-comma-init-register-order",
-    "description": "Compact for-loop comma initializers can steer IDO register allocation and entry scheduling for loop index/count/base setup.",
-    "trigger": "A near-match has correct loop body but either count/index registers are swapped or entry `addiu base` and `move index,zero` are ordered differently.",
-    "solution": "Use a `for (index = 0, limit = GLOBAL_COUNT, base = GLOBAL_BASE; index < limit; index = (s8)(index + 1))` header and compute the byte offset inside the loop to preserve index in v0, count in v1, base in a2, and base-address addiu before the branch delay zero init.",
+    "description": "IDO register allocation in compact for loops follows comma initializer/update expression order; placing pointer initializer before index initializer can assign pointer to v1 and index to a2, matching tight search loops with branch delay init.",
+    "trigger": "Tight array search loop has correct structure but pointer/index registers are swapped, especially around `for (i=0, ptr=...; ...)` generated output.",
+    "solution": "Swap the comma initializer order to `for (ptr = BASE, i = 0; ...; i++, ptr++)` (or vice versa) to steer pointer/index register assignment without changing declarations.",
     "example_functions": [
-      "func_151696DC"
+      "func_1505EEB0"
     ]
   },
   {
@@ -503,6 +557,15 @@
     "solution": "Search for constants/field patterns across src; copy the known matching C shape, preserving return type, struct field accesses, local declaration placement, and OR-condition form.",
     "example_functions": [
       "func_16002D2C"
+    ]
+  },
+  {
+    "id": "for-comma-init-register-order",
+    "description": "Compact for-loop comma initializers can steer IDO register allocation and entry scheduling for loop index/count/base setup.",
+    "trigger": "A near-match has correct loop body but either count/index registers are swapped or entry `addiu base` and `move index,zero` are ordered differently.",
+    "solution": "Use a `for (index = 0, limit = GLOBAL_COUNT, base = GLOBAL_BASE; index < limit; index = (s8)(index + 1))` header and compute the byte offset inside the loop to preserve index in v0, count in v1, base in a2, and base-address addiu before the branch delay zero init.",
+    "example_functions": [
+      "func_151696DC"
     ]
   },
   {
@@ -1071,15 +1134,6 @@
     "solution": "Replace manual `words.w0/w1` stores with the matching GBI macro using `arg0++`, e.g. `gDPSetTileSize(arg0++, tile, uls, ult, lrs, lrt); return arg0;`.",
     "example_functions": [
       "func_150C3160"
-    ]
-  },
-  {
-    "id": "multiply-by-255-for-temp-div-register",
-    "description": "Writing a scale as `arg *= 0xFF; arg /= const;` can keep the pre-divide product in a temporary register and only assign the quotient back to the saved argument register, matching IDO's `sll temp,arg,8; subu temp,temp,arg; div temp,const; mflo arg` shape.",
-    "trigger": "Near-match where `((arg << 8) - arg) / const` emits `subu savedArg,temp,savedArg; div savedArg,const` but target emits `subu temp,temp,savedArg; div temp,const; mflo savedArg`.",
-    "solution": "Use compound multiply/divide statements: `arg *= 0xFF; arg /= 100;` rather than a single shift/subtract expression.",
-    "example_functions": [
-      "func_1000E46C"
     ]
   }
 ]

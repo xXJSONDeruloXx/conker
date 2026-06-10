@@ -3,6 +3,8 @@
 #include "functions.h"
 #include "variables.h"
 
+void func_1505D408(struct127 *arg0, struct127 *arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, s32 arg7);
+
 
 void func_15058F24(struct127 *arg0, f32, f32);
 u8   func_150599C8(struct127 *arg0, u8 arg1, u16 arg2);
@@ -962,7 +964,27 @@ f32 func_1505D34C(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 *arg4) {
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_1505D408.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_1505D5D0.s")
+void func_1505D5D0(struct127 *arg0, struct127 *arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, s32 arg7, f32 arg8, f32 arg9, f32 arg10, f32 arg11, f32 arg12) {
+    f32 temp_f0;
+    f32 temp_f2;
+    f32 temp_f12;
+    f32 temp_f14;
+    f32 temp_f16;
+    f32 temp_f18;
+
+    temp_f0 = func_1505D34C(arg1->unk40, arg11, arg12, arg1->xz_scale, &arg12);
+    arg8 *= arg1->xz_scale;
+    arg9 *= arg1->y_scale;
+    temp_f16 = arg2 - (arg1->x_position + temp_f0);
+    temp_f18 = arg4 - (arg1->z_position + arg12);
+    temp_f12 = arg3 - (arg1->y_position + (arg10 * arg1->y_scale));
+    temp_f12 *= (arg5 + (arg8 / arg9)) * 0.5f;
+    temp_f2 = (temp_f16 * temp_f16) + (temp_f12 * temp_f12) + (temp_f18 * temp_f18);
+    temp_f0 = arg6 + arg8;
+    if (temp_f2 < (temp_f0 * temp_f0)) {
+        func_1505D408(arg0, arg1, temp_f16, temp_f12, temp_f18, temp_f2, temp_f0, arg7);
+    }
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_1505D6F0.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_1505DADC.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_1505DDA8.s")
