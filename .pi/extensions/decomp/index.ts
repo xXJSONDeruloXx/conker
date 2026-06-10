@@ -277,7 +277,7 @@ function buildChunkPrompt(chunkNum: number): string {
 		"",
 		"- Primary queue/tools: `decomp_queue`, `decomp_attempt`, `decomp_diff`, `decomp_permute`, `decomp_accept`, `decomp_status`, `decomp_chunk_done`.",
 		"- Source/ASM assets: `conker/src/<file>.c`, `conker/asm/nonmatchings/<file>/<func>.s`, `conker/include/{functions,variables,structs}.h`, `conker/undefined_syms_auto.txt`.",
-		"- Persistent memory: `.pi/decomp/queue.json` stores prior attempts; `.pi/decomp/patterns.json` stores learned IDO patterns.",
+		"- Persistent memory: `.pi/decomp/queue.json` stores prior attempts; `.pi/decomp/patterns.json` stores learned IDO patterns; `.pi/decomp/tooling-refinement.md` stores per-chunk tooling observations and improvement opportunities.",
 		"- Static guidance: read `/skill:n64-decomp` for IDO 5.3 register, branch, stack, and float-codegen rules.",
 		"- Candidate routing/reference tools: `tools/decomp_similarity.py --function <func> --top 5`, `tools/decomp_similarity.py --rank-pending --json`, `tools/decomp_skeleton.py --function <func>`, and `decomp_queue next` with `filter={similarToMatched:true}` or `filter={familyMode:true}`.",
 		"- Low-level aids: `tools/analyze_decomp_candidates.py`, `tools/mips_to_c/m2c.py`, `tools/transmuter-compile.sh`, and Transmuter via `decomp_permute`.",
@@ -291,11 +291,11 @@ function buildChunkPrompt(chunkNum: number): string {
 		"4. If non-match: read the raw generated ASM/diff, call `decomp_diff` for focused analysis when useful, then retry with a different approach.",
 		"5. If plateaued after 3+ attempts, call `decomp_permute`; if similarity refs are weak, try `decomp_queue next` with a different filter.",
 		"6. If match: call `decomp_accept` to verify full ROM SHA and commit.",
-		"7. When done with this function (matched or decided to move on), call `decomp_chunk_done` with a summary.",
+		"7. When done with this function (matched or decided to move on), call `decomp_chunk_done` with a summary plus tooling observations/improvement opportunities for the in-tree refinement log.",
 		"",
 		"## Rules",
 		"- You can work on MULTIPLE functions per chunk. If stuck, call `decomp_queue next` to try a different one — no need to call `decomp_chunk_done`.",
-		"- Call `decomp_chunk_done` when you’ve made good progress or exhausted reasonable options for this chunk.",
+		"- Call `decomp_chunk_done` when you’ve made good progress or exhausted reasonable options for this chunk; include likely cause/blocker and concrete tooling improvement opportunities so the next tooling-refinement session has usage data.",
 		"- Functions with 8+ failed attempts are auto-rotated: `decomp_queue next` will skip them this session.",
 		"- Relevant patterns from the library (122+) are auto-shown with each candidate. For more, call `decomp_status` with detail=\"patterns\".",
 		"- The /skill:n64-decomp file has core IDO 5.3 codegen rules (declaration order, branch shapes, addressing).",
@@ -364,6 +364,51 @@ function appendSessionAttempt(cwd: string, record: any): void {
 	try {
 		const logPath = path.join(cwd, ".pi/decomp/session-attempts.jsonl");
 		fs.appendFileSync(logPath, JSON.stringify({ ...record, timestamp: new Date().toISOString() }) + "\n");
+	} catch {}
+}
+
+function candidateStillHasPragma(cwd: string, entry: QueueEntry): boolean {
+	const fs = require("node:fs");
+	const path = require("node:path");
+	try {
+		const srcPath = path.join(cwd, "conker/src", entry.file);
+		const pragma = `#pragma GLOBAL_ASM("asm/nonmatchings/${entry.file.replace(".c", "")}/${entry.function}.s")`;
+		return fs.existsSync(srcPath) && fs.readFileSync(srcPath, "utf-8").includes(pragma);
+	} catch {
+		return true;
+	}
+}
+
+function appendToolingRefinementNote(cwd: string, note: {
+	chunk: number;
+	matched?: boolean;
+	summary: string;
+	cause?: string;
+	toolingObservations?: string;
+	improvementOpportunities?: string;
+}): void {
+	const fs = require("node:fs");
+	const path = require("node:path");
+	try {
+		const notesPath = path.join(cwd, ".pi/decomp/tooling-refinement.md");
+		if (!fs.existsSync(notesPath)) {
+			fs.writeFileSync(notesPath, [
+				"# Decomp Tooling Refinement Log",
+				"",
+				"Append-only notes from decomp chunks. Use this to audit which tooling changes were suggested by real chunk usage rather than fresh-context intuition.",
+				"",
+			].join("\n"));
+		}
+		const lines = [
+			`## Chunk ${note.chunk} — ${new Date().toISOString()}`,
+			`- Matched: ${note.matched ? "yes" : "no"}`,
+			`- Summary: ${note.summary}`,
+			`- Likely cause / blocker: ${note.cause || "not provided"}`,
+			`- Tooling observations: ${note.toolingObservations || "not provided"}`,
+			`- Improvement opportunities: ${note.improvementOpportunities || "not provided"}`,
+			"",
+		].join("\n");
+		fs.appendFileSync(notesPath, lines);
 	} catch {}
 }
 
@@ -1012,8 +1057,9 @@ export default function (pi: ExtensionAPI) {
 			}
 
 			if (params.action === "stats") {
-				const pending = state.queue.filter((e) => e.status === "pending").length;
-				const matched = state.queue.filter((e) => e.status === "matched").length;
+				const staleDone = state.queue.filter((e) => e.status === "pending" && !candidateStillHasPragma(ctx.cwd, e)).length;
+				const pending = state.queue.filter((e) => e.status === "pending" && candidateStillHasPragma(ctx.cwd, e)).length;
+				const matched = state.queue.filter((e) => e.status === "matched").length + staleDone;
 				const skipped = state.queue.filter((e) => e.status === "skipped").length;
 				restoreReadOnlyState();
 				return {
@@ -1047,7 +1093,7 @@ export default function (pi: ExtensionAPI) {
 			}
 
 			if (params.action === "list") {
-				let filtered = state.queue.filter((e) => e.status === "pending");
+				let filtered = state.queue.filter((e) => e.status === "pending" && candidateStillHasPragma(ctx.cwd, e));
 				if (params.filter?.region) filtered = filtered.filter((e) => e.region === params.filter!.region);
 				if (params.filter?.maxInstructions)
 					filtered = filtered.filter((e) => e.instructions <= params.filter!.maxInstructions!);
@@ -1090,7 +1136,7 @@ export default function (pi: ExtensionAPI) {
 			}
 
 			// Auto-promote segments if queue is running low
-			const pendingCount = state.queue.filter((e) => e.status === "pending").length;
+			const pendingCount = state.queue.filter((e) => e.status === "pending" && candidateStillHasPragma(ctx.cwd, e)).length;
 			if (pendingCount < AUTO_PROMOTE_THRESHOLD) {
 				const promoteResult = await autoPromoteIfNeeded(pi, ctx.cwd);
 				if (promoteResult) {
@@ -1099,7 +1145,7 @@ export default function (pi: ExtensionAPI) {
 				}
 			}
 
-			let candidates = state.queue.filter((e) => e.status === "pending");
+			let candidates = state.queue.filter((e) => e.status === "pending" && candidateStillHasPragma(ctx.cwd, e));
 
 			// Auto-rotate: skip functions we ground on this session (unless nearMiss filter explicitly requested)
 			if (!params.filter?.nearMiss && sessionRotatedFunctions.size > 0) {
@@ -2366,6 +2412,26 @@ export default function (pi: ExtensionAPI) {
 				.sort((a: any, b: any) => a.score - b.score || b.mtime - a.mtime);
 			const collectSessionFiles = () => collectFiles((name: string) => /^session-\d+\.json$/.test(name))
 				.sort((a: string, b: string) => statMtime(b) - statMtime(a));
+			const readLatestSessionReport = () => {
+				for (const reportPath of collectSessionFiles()) {
+					try {
+						const report = JSON.parse(fs.readFileSync(reportPath, "utf-8"));
+						if (!report?.config?.functionName || report.config.functionName === params.function) return report;
+					} catch {}
+				}
+				return null;
+			};
+			const quickTransmuterStats = (out: string, report: any) => {
+				const summary = report?.summary || {};
+				const compiledMatch = out.match(/(\d+)\s*compiled/i);
+				const forkMatch = out.match(/(\d+)\s*forks?/i);
+				const iterMatch = out.match(/Iteration[s:]?\s*(\d+)/i);
+				return {
+					compiled: compiledMatch ? parseInt(compiledMatch[1]) : (typeof summary.totalCompiled === "number" ? summary.totalCompiled : null),
+					forks: forkMatch ? parseInt(forkMatch[1]) : (typeof summary.forkCount === "number" ? summary.forkCount : null),
+					iters: iterMatch ? parseInt(iterMatch[1]) : (typeof summary.totalIterations === "number" ? summary.totalIterations : null),
+				};
+			};
 			const cleanupFreshGeneratedFiles = () => {
 				for (const filePath of [...collectCandidateFiles().map((f: any) => f.path), ...collectSessionFiles()]) {
 					try { fs.unlinkSync(filePath); } catch {}
@@ -2394,6 +2460,7 @@ export default function (pi: ExtensionAPI) {
 			let isolateUsed = useIsolate;
 			let result = await pi.exec("bun", buildTransmuterArgs(isolateUsed), { signal, timeout: timeoutMs + 15000 });
 			let output = [result.stdout, result.stderr].filter(Boolean).join("\n");
+			let retryNote = "";
 
 			// --isolate is valuable for larger/preprocessed sources, but tree-sitter can reject some old-C edge cases.
 			// Fall back to the previous behavior automatically so a parse failure doesn't waste the run.
@@ -2404,8 +2471,26 @@ export default function (pi: ExtensionAPI) {
 				});
 				cleanupFreshGeneratedFiles();
 				isolateUsed = false;
+				retryNote = "isolate parse failure; retried without --isolate";
 				result = await pi.exec("bun", buildTransmuterArgs(false), { signal, timeout: timeoutMs + 15000 });
 				output = [result.stdout, result.stderr].filter(Boolean).join("\n");
+			}
+
+			// A successful isolated run with zero compiled mutations/forks is usually an isolation/reduction dead-end,
+			// not useful search. Retry once without isolation so the mutation engine can see the original C shape.
+			if (result.code === 0 && isolateUsed) {
+				const firstStats = quickTransmuterStats(output, readLatestSessionReport());
+				if (firstStats.compiled === 0 && (firstStats.forks === 0 || firstStats.forks === null)) {
+					onUpdate?.({
+						content: [{ type: "text", text: "Transmuter --isolate produced 0 compiled mutations; retrying without --isolate..." }],
+						details: {},
+					});
+					cleanupFreshGeneratedFiles();
+					isolateUsed = false;
+					retryNote = "isolate produced 0 compiled mutations; retried without --isolate";
+					result = await pi.exec("bun", buildTransmuterArgs(false), { signal, timeout: timeoutMs + 15000 });
+					output = [result.stdout, result.stderr].filter(Boolean).join("\n");
+				}
 			}
 
 			const candidateFiles = collectCandidateFiles();
@@ -2415,17 +2500,7 @@ export default function (pi: ExtensionAPI) {
 
 			// Read session report before cleanup (contains best candidate, rule stats). Transmuter main writes
 			// reports to cwd; add-isolate-flag writes next to the source file. Support both layouts.
-			let sessionReport: any = null;
-			const sessionFiles = collectSessionFiles();
-			for (const reportPath of sessionFiles) {
-				try {
-					const report = JSON.parse(fs.readFileSync(reportPath, "utf-8"));
-					if (!report?.config?.functionName || report.config.functionName === params.function) {
-						sessionReport = report;
-						break;
-					}
-				} catch {}
-			}
+			let sessionReport: any = readLatestSessionReport();
 			const reportCandidates = sessionReport?.candidates || sessionReport?.graph?.candidates || [];
 			if (Array.isArray(reportCandidates) && reportCandidates.length > 0) {
 				const sortedCandidates = [...reportCandidates].sort((a: any, b: any) => a.score - b.score);
@@ -2498,7 +2573,8 @@ export default function (pi: ExtensionAPI) {
 						...(allForkRules.length > 0 ? [`fork_rules: ${[...new Set(allForkRules)].join(", ")}`] : []),
 						...(winningRule ? [`last_fork_rule: ${winningRule}`] : []),
 						`config: timeout=${params.timeout || 60}s, maxCompiles=${maxCompiles}, concurrency=${concurrency}, profile=ido, isolate=${isolateUsed}, reduce=${useReduce}, depth=${depth}`,
-						...(compiled === 0 ? ["NOTE: 0 compiled = all mutations hit compile errors. Source may have constructs incompatible with isolated compilation."] : []),
+						...(retryNote ? [`retry: ${retryNote}`] : []),
+						...(compiled === 0 ? ["NOTE: 0 compiled = no mutations reached a successful compile; possible dedupe, invalid mutation output, or isolation removed mutatable structure."] : []),
 						...(compileErrors && compiled && compileErrors > compiled * 5 ? [`NOTE: high error rate (${compileErrors} errors vs ${compiled} compiled). Many mutations produce invalid code for this function.`] : []),
 					],
 					timestamp: new Date().toISOString(),
@@ -2581,10 +2657,10 @@ export default function (pi: ExtensionAPI) {
 			// Build actionable diagnostic based on what happened
 			const autoVerifyNote = (codeToVerify && forks > 0) ? "\n(Auto-verified in full TU: did NOT match — context-sensitivity confirmed.)" : "";
 			let diagnostic = "";
-			if (compiled === 0 && (iters ?? 0) > 1000) {
-				diagnostic = `\n\n⚠️ DIAGNOSTIC: ${iters?.toLocaleString()} iterations but 0 successful compiles.`
-					+ `\nAll mutations were deduplicated (identical source after transform). The code is too \"rigid\" for random AST mutation.`
-					+ `\n→ Use decomp_attempt with a rewritten expression — Transmuter can’t help here.`
+			if (compiled === 0) {
+				diagnostic = `\n\n⚠️ DIAGNOSTIC: 0 successful compiled mutations.`
+					+ `\nThis usually means mutations were deduplicated, produced invalid old-C for this source, or isolation removed too much mutatable structure.`
+					+ (retryNote ? `\nA no-isolate retry was already attempted; use a different structural C seed before re-running.` : `\nTry again with isolate=false or provide a less-rigid rewritten C seed.`)
 					+ `\n→ If diff is 'addu a0, X, Y' vs 'addu a0, Y, X': swap operand order in the C expression (a+b → b+a).`
 					+ `\n→ If diff is register-only: reorder variable declarations or add an intermediate temp in decomp_attempt.`;
 			} else if (bestScore === 1) {
@@ -2606,7 +2682,7 @@ export default function (pi: ExtensionAPI) {
 			return {
 				content: [{
 					type: "text",
-					text: `Transmuter completed. Best score: ${bestScore ?? "unknown"} (iters: ${iters?.toLocaleString() ?? "?"}, compiled: ${compiled ?? "?"}, forks: ${forks})${autoVerifyNote}${diagnostic}`,
+					text: `Transmuter completed. Best score: ${bestScore ?? "unknown"} (iters: ${iters?.toLocaleString() ?? "?"}, compiled: ${compiled ?? "?"}, forks: ${forks})${retryNote ? `\nRetry: ${retryNote}` : ""}${autoVerifyNote}${diagnostic}`,
 				}],
 				details: { matched: false, bestScore, iterations: iters, compiled, forks },
 			};
@@ -2665,12 +2741,13 @@ export default function (pi: ExtensionAPI) {
 			}
 
 			// summary
-			const pending = state.queue.filter((e) => e.status === "pending").length;
-			const matched = state.queue.filter((e) => e.status === "matched").length;
+			const staleDone = state.queue.filter((e) => e.status === "pending" && !candidateStillHasPragma(ctx.cwd, e)).length;
+			const pending = state.queue.filter((e) => e.status === "pending" && candidateStillHasPragma(ctx.cwd, e)).length;
+			const matched = state.queue.filter((e) => e.status === "matched").length + staleDone;
 			const skipped = state.queue.filter((e) => e.status === "skipped").length;
 			const attempted = state.queue.filter((e) => e.attempts > 0).length;
 
-			const byDifficulty = state.queue.reduce(
+			const byDifficulty = state.queue.filter((e) => e.status !== "pending" || candidateStillHasPragma(ctx.cwd, e)).reduce(
 				(acc, e) => {
 					if (e.status === "pending") {
 						acc[e.difficulty] = (acc[e.difficulty] || 0) + 1;
@@ -2723,9 +2800,20 @@ export default function (pi: ExtensionAPI) {
 			summary: Type.String({ description: "1-3 sentence summary: what was tried, outcome, any patterns discovered" }),
 			matched: Type.Optional(Type.Boolean({ description: "Whether a function was successfully matched this chunk" })),
 			patternDiscovered: Type.Optional(Type.String({ description: "New IDO pattern discovered (will be added to library)" })),
+			cause: Type.Optional(Type.String({ description: "Likely cause/blocker when the chunk did not match, or why it succeeded" })),
+			toolingObservations: Type.Optional(Type.String({ description: "What the tools did well/poorly in this chunk, with concrete evidence" })),
+			improvementOpportunities: Type.Optional(Type.String({ description: "Concrete decomp tooling improvements suggested by this chunk" })),
 		}),
 
 		async execute(_toolCallId, params, _signal, _onUpdate, ctx) {
+			appendToolingRefinementNote(ctx.cwd, {
+				chunk: loopState.chunk,
+				matched: params.matched,
+				summary: params.summary,
+				cause: params.cause,
+				toolingObservations: params.toolingObservations,
+				improvementOpportunities: params.improvementOpportunities,
+			});
 			loopState.lastChunkSummary = params.summary;
 
 			if (params.matched) {
