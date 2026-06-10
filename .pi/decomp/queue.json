@@ -33310,9 +33310,35 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.4859154929577465,
+    "status": "pending",
+    "history": [
+      {
+        "code": "struct225 *func_151623F4(s32 arg0, u8 arg1, u8 arg2, u8 arg3, s8 arg4, s16 arg5, u8 arg6, s32 arg7) {\n    struct225 *ret;\n    u8 buf[40];\n\n    if (arg1 >= 3) {\n        return NULL;\n    }\n\n    ((s32 *)&buf[8])[0] = D_800A670C[arg1][0];\n    ((s32 *)&buf[8])[1] = D_800A670C[arg1][1];\n    ((s32 *)&buf[8])[2] = D_800A670C[arg1][2];\n    ((s32 *)&buf[8])[3] = D_800A6730[arg1][0];\n    ((s32 *)&buf[8])[4] = D_800A6730[arg1][1];\n    ((s32 *)&buf[8])[5] = D_800A6730[arg1][2];\n    ((f32 *)&buf[8])[6] = 0.0f;\n    ((f32 *)&buf[8])[7] = D_800A6754[arg1];\n\n    buf[0] = arg3;\n    buf[1] = arg4;\n    *(s16 *)&buf[2] = arg5;\n    buf[4] = arg2;\n\n    ret = func_1516037C((Header *)buf, arg0, 0x20, arg6, arg7);\n    if (ret != NULL) {\n        memcpy(&ret->unk18, &buf[8], 0x20);\n    }\n    return ret;\n}",
+        "score": 0.47887323943661975,
+        "reason": "length_mismatch (target=71, generated=68)",
+        "diffs": [],
+        "timestamp": "2026-06-10T21:17:43.622Z",
+        "contextPatch": []
+      },
+      {
+        "code": "struct225 *func_151623F4(s32 arg0, u8 arg1, u8 arg2, u8 arg3, s8 arg4, s16 arg5, u8 arg6, s32 arg7) {\n    u8 buf[40];\n    struct225 *ret;\n\n    if (arg1 >= 3) {\n        return NULL;\n    }\n\n    ((s32 *)&buf[8])[0] = D_800A670C[arg1][0];\n    ((s32 *)&buf[8])[1] = D_800A670C[arg1][1];\n    ((s32 *)&buf[8])[2] = D_800A670C[arg1][2];\n    ((s32 *)&buf[8])[3] = D_800A6730[arg1][0];\n    ((s32 *)&buf[8])[4] = D_800A6730[arg1][1];\n    ((s32 *)&buf[8])[5] = D_800A6730[arg1][2];\n    ((f32 *)&buf[8])[6] = 0.0f;\n    ((f32 *)&buf[8])[7] = D_800A6754[arg1];\n\n    buf[0] = arg3;\n    buf[1] = arg4;\n    *(s16 *)&buf[2] = arg5;\n    buf[4] = arg2;\n\n    ret = func_1516037C((Header *)buf, arg0, 0x20, arg6, arg7);\n    if (ret == NULL) {\n        return NULL;\n    }\n    memcpy(&ret->unk18, &buf[8], 0x20);\n    return ret;\n}",
+        "score": 0.4859154929577465,
+        "reason": "length_mismatch (target=71, generated=69)",
+        "diffs": [],
+        "timestamp": "2026-06-10T21:17:59.260Z",
+        "contextPatch": []
+      },
+      {
+        "code": "struct225 *func_151623F4(s32 arg0, u8 arg1, u8 arg2, u8 arg3, s8 arg4, s16 arg5, u8 arg6, s32 arg7) {\n    Header header;\n    f32 tmp[8];\n    struct225 *ret;\n\n    if (arg1 >= 3) {\n        return NULL;\n    }\n\n    ((s32 *)tmp)[0] = D_800A670C[arg1][0];\n    ((s32 *)tmp)[1] = D_800A670C[arg1][1];\n    ((s32 *)tmp)[2] = D_800A670C[arg1][2];\n    ((s32 *)tmp)[3] = D_800A6730[arg1][0];\n    ((s32 *)tmp)[4] = D_800A6730[arg1][1];\n    ((s32 *)tmp)[5] = D_800A6730[arg1][2];\n    tmp[6] = 0.0f;\n    tmp[7] = D_800A6754[arg1];\n\n    header.unk0 = arg3;\n    header.unk1 = arg4;\n    header.unk2 = arg5;\n    header.unk4 = arg2;\n\n    ret = func_1516037C(&header, arg0, sizeof(tmp), arg6, arg7);\n    if (ret == NULL) {\n        return NULL;\n    }\n    memcpy(&ret->unk18, tmp, sizeof(tmp));\n    return ret;\n}",
+        "score": 0.4859154929577465,
+        "reason": "length_mismatch (target=71, generated=69)",
+        "diffs": [],
+        "timestamp": "2026-06-10T21:18:19.618Z",
+        "contextPatch": []
+      }
+    ]
   },
   {
     "function": "n_alEvtqNextEvent",
@@ -36611,7 +36637,7 @@
     ],
     "attempts": 0,
     "lastScore": 0,
-    "status": "matched"
+    "status": "pending"
   },
   {
     "function": "func_150151D4",
