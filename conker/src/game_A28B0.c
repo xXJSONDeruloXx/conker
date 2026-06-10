@@ -150,7 +150,54 @@ void func_15075884(void) {
 //     D_800D154C->unk44 = 2.0f * (temp_f0 / D_800D1891);
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_A28B0/func_15075938.s")
+void func_15075938(void) {
+    struct127 *v1;
+    s32 temp_a0;
+    s32 v0;
+    s32 phi_v1;
+    s32 changed;
+    s32 mode;
+    s32 idx;
+
+    changed = 0;
+    v1 = D_800D154C;
+    temp_a0 = v1->unk21E - v1->unk221;
+    if (temp_a0 < 0) {
+        v0 = *(u8 *)((s32)D_800D2108 + (s32)v1->unk13F);
+        temp_a0 = (temp_a0 + v0) - 1;
+    } else {
+        v0 = D_800D2108[v1->unk13F];
+        if ((v0 - 1) <= temp_a0) {
+            temp_a0 = (temp_a0 - v0) + 1;
+        }
+    }
+    if (D_800D1891 == 0xFF) {
+        phi_v1 = v0 - 2;
+    } else {
+        phi_v1 = D_800D1891;
+    }
+    mode = D_800D1892;
+    if (mode == 0) {
+        if (phi_v1 == temp_a0) {
+            changed = 1;
+        }
+    } else if (mode == 1) {
+        if (phi_v1 != temp_a0) {
+            changed = 1;
+        }
+    } else if (mode == 2) {
+        if (phi_v1 < temp_a0) {
+            changed = 1;
+        }
+    } else {
+        if (temp_a0 < phi_v1) {
+            changed = 1;
+        }
+    }
+    if (changed) {
+        func_15075400(D_800D1890);
+    }
+}
 // NON-MATCHING: 2nd half ok, 1st is a mystery
 // void func_15075938(void) {
 //     u8 tmp;
