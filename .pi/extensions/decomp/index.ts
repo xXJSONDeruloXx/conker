@@ -409,7 +409,8 @@ function candidateStillHasPragma(cwd: string, entry: QueueEntry): boolean {
 	const fs = require("node:fs");
 	const path = require("node:path");
 	try {
-		const srcPath = path.join(cwd, "conker/src", entry.file);
+		const root = findConkerBuildRoot(cwd);
+		const srcPath = path.join(root.mount, root.makeDir, "src", entry.file);
 		const pragma = `#pragma GLOBAL_ASM("asm/nonmatchings/${entry.file.replace(".c", "")}/${entry.function}.s")`;
 		return fs.existsSync(srcPath) && fs.readFileSync(srcPath, "utf-8").includes(pragma);
 	} catch {
@@ -601,7 +602,8 @@ export default function (pi: ExtensionAPI) {
 	function readProjectProgress(cwd: string): ProgressStats {
 		const fs = require("node:fs");
 		const path = require("node:path");
-		const csvPath = path.join(cwd, "conker/progress.csv");
+		const root = findConkerBuildRoot(cwd);
+		const csvPath = path.join(root.mount, root.makeDir, "progress.csv");
 		const totals: ProgressStats = {
 			...emptySection(),
 			sections: {
@@ -646,8 +648,9 @@ export default function (pi: ExtensionAPI) {
 		const path = require("node:path");
 		if (!ctx?.cwd) return;
 		if (progressRefreshPromise) return progressRefreshPromise;
-		const csvPath = path.join(ctx.cwd, "conker/progress.csv");
-		const mapPath = path.join(ctx.cwd, "conker/build/conker.us.map");
+		const root = findConkerBuildRoot(ctx.cwd);
+		const csvPath = path.join(root.mount, root.makeDir, "progress.csv");
+		const mapPath = path.join(root.mount, root.makeDir, "build/conker.us.map");
 		const needsRefresh = (() => {
 			try {
 				if (!fs.existsSync(mapPath)) return false;
@@ -660,11 +663,12 @@ export default function (pi: ExtensionAPI) {
 		if (!needsRefresh) return;
 		progressRefreshPromise = (async () => {
 			try {
+				const containerMakeDir = root.makeDir === "." ? "/src" : `/src/${root.makeDir}`;
 				await pi.exec("docker", [
 					"run", "--rm", "--platform", "linux/amd64",
-					"-v", `${ctx.cwd}:/conker`, "-w", "/conker",
+					"-v", `${root.mount}:/src`, "-w", "/src",
 					"conker-build-min-amd64",
-					"bash", "-lc", "make -C conker progress",
+					"bash", "-lc", `make -C ${containerMakeDir} progress`,
 				], { timeout: 60000 });
 			} catch {}
 			finally {
@@ -677,9 +681,16 @@ export default function (pi: ExtensionAPI) {
 	function refreshWidget() {
 		const ctx = latestCtx;
 		if (!ctx?.hasUI) return;
+		loadState(ctx.cwd);
 
-		const pending = state.queue.filter((e) => e.status === "pending").length;
-		const queueMatched = state.queue.filter((e) => e.status === "matched").length;
+		let staleDone = 0;
+		let pending = 0;
+		for (const e of state.queue) {
+			if (e.status !== "pending") continue;
+			if (candidateStillHasPragma(ctx.cwd, e)) pending++;
+			else staleDone++;
+		}
+		const queueMatched = state.queue.filter((e) => e.status === "matched").length + staleDone;
 		const progress = readProjectProgress(ctx.cwd);
 		const totalFuncs = progress.cFuncs + progress.asmFuncs;
 		const totalBytes = progress.cBytes + progress.asmBytes;
@@ -914,6 +925,9 @@ export default function (pi: ExtensionAPI) {
 			const statusLine = matched
 				? `✓ Conker ROM verify matched (${elapsedSeconds}s)`
 				: `✗ Conker ROM verify failed (${elapsedSeconds}s)`;
+			latestCtx = ctx;
+			if (matched) await ensureProgressCsv(ctx);
+			refreshWidget();
 
 			return {
 				content: [{
