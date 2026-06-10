@@ -24610,7 +24610,7 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 9,
+    "attempts": 8,
     "lastScore": 0.49242424242424243,
     "status": "pending",
     "history": [
@@ -24732,13 +24732,6 @@
         "reason": "length_mismatch (target=65, generated=66)",
         "diffs": [],
         "timestamp": "2026-06-04T11:22:17.720Z"
-      },
-      {
-        "code": "s32 func_150C2700(s32 arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8, s32 arg9, s32 arg10, s32 arg11, s32 arg12, s32 arg13, u8 arg14) {\n    u8 sp20[0x48];\n\n    arg5 = 6;\n    *(s16 *)&sp20[0x16] = 5;\n    *(s16 *)&sp20[0] = 0x6B;\n    *(s16 *)&sp20[0x14] = arg5;\n    *(s16 *)&sp20[2] = 0x46;\n    *(s16 *)&sp20[4] = -0x1F;\n    *(s16 *)&sp20[6] = 0x2E;\n    *(f32 *)&sp20[8] = arg2;\n    *(f32 *)&sp20[0xC] = arg3;\n    *(f32 *)&sp20[0x10] = arg4;\n    *(f32 *)&sp20[0x18] = 30.0f;\n    *(f32 *)&sp20[0x1C] = 35.0f;\n    *(s16 *)&sp20[0x20] = 0x64;\n    *(s16 *)&sp20[0x22] = 0;\n    *(f32 *)&sp20[0x24] = D_800A0274;\n    *(f32 *)&sp20[0x28] = D_800A0278;\n    sp20[0x2C] = 0x9B;\n    sp20[0x2D] = 0x64;\n    *(f32 *)&sp20[0x30] = D_800A027C;\n    *(f32 *)&sp20[0x34] = 0.0f;\n    sp20[0x38] = 1;\n    sp20[0x39] = arg5;\n    *(f32 *)&sp20[0x3C] = 0.0f;\n    sp20[0x40] = 1;\n    *(f32 *)&sp20[0x44] = 0.0f;\n    func_15150178(sp20, &sp20[8], 0, arg14, 1);\n    return 1;\n}",
-        "score": 0.49242424242424243,
-        "reason": "length_mismatch (target=65, generated=66)",
-        "diffs": [],
-        "timestamp": "2026-06-10T00:53:34.763Z"
       }
     ]
   },
@@ -37474,9 +37467,45 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.48125,
+    "status": "pending",
+    "history": [
+      {
+        "code": "s32 func_1502B6BC(s32 *arg0, s32 arg1, s32 *arg2, s32 arg3, ...) {\n    va_list args;\n    s32 *dst;\n    s32 temp_a1;\n    s32 offset;\n    s32 sp40;\n    s32 sp38;\n    s32 ret;\n\n    dst = &sp40 + 1;\n    if (arg0 != NULL) {\n        dst = arg0;\n    }\n    *dst = 1;\n    offset = (s32) D_AB1950;\n    va_start(args, arg3);\n    for (; arg3 != 0; arg3--) {\n        temp_a1 = va_arg(args, s32);\n        if (*dst != 0) {\n            offset += func_1502AC88(offset, temp_a1, &sp38);\n        }\n        *dst = sp38 & 0x0FFFFFFF;\n    }\n    if (*dst != 0) {\n        ret = func_1502B350(offset, sp38, dst);\n        if (*dst != 0) {\n            if (ret != 0) {\n                arg1 = func_1502B4A8(ret, arg1);\n            } else {\n                arg1 = 0;\n            }\n            if (arg2 != 0) {\n                *arg2 = arg1;\n            }\n            return ret;\n        }\n    }\n    return 0;\n}",
+        "score": 0.8442,
+        "reason": "structural_diffs=12",
+        "diffs": [
+          "structural: target=addiu s2, sp, 68 got=addiu s2, sp, 64",
+          "structural: target=move s0, zero got=move v0, zero",
+          "structural: target=beqzl t5, L5 got=beqzl t5, L4",
+          "structural: target=sw zero, 84(sp) got=move v0, zero",
+          "structural: target=beqz v0, L6 got=beqz v0, L5",
+          "structural: target=b L5 got=b L6",
+          "structural: target=beqzl t6, L7 got=beqz t6, L7",
+          "structural: target=move v0, s0 got=nop",
+          "structural: target=b L4 got=sw t7, 0(t6)",
+          "structural: target=sw t7, 0(t6) got=b L4",
+          "structural: target=move s0, zero got=move v0, s0",
+          "structural: target=move v0, s0 got=move v0, zero"
+        ],
+        "timestamp": "2026-06-10T12:43:38.276Z"
+      },
+      {
+        "code": "s32 func_1502B6BC(s32 *arg0, s32 arg1, s32 *arg2, s32 arg3, ...) {\n    va_list args;\n    s32 *dst;\n    s32 temp_a1;\n    s32 offset;\n    s32 sp40;\n    s32 sp38;\n    s32 ret;\n\n    dst = &sp40 + 2;\n    if (arg0 != NULL) {\n        dst = arg0;\n    }\n    *dst = 1;\n    offset = (s32) D_AB1950;\n    va_start(args, arg3);\n    for (; arg3 != 0; arg3--) {\n        temp_a1 = va_arg(args, s32);\n        if (*dst != 0) {\n            offset += func_1502AC88(offset, temp_a1, &sp38);\n        }\n        *dst = sp38 & 0x0FFFFFFF;\n    }\n    if (*dst != 0) {\n        ret = func_1502B350(offset, sp38, dst);\n        if (*dst != 0) {\n            if (ret != 0) {\n                arg1 = func_1502B4A8(ret, arg1);\n            } else {\n                arg1 = 0;\n            }\n        } else {\n            arg1 = 0;\n        }\n        if (arg2 == 0) {\n            return ret;\n        }\n        *arg2 = arg1;\n        return ret;\n    }\n    return 0;\n}",
+        "score": 0.48125,
+        "reason": "length_mismatch (target=77, generated=80)",
+        "diffs": [],
+        "timestamp": "2026-06-10T12:43:57.404Z"
+      },
+      {
+        "code": "s32 func_1502B6BC(s32 *arg0, s32 arg1, s32 *arg2, s32 arg3, ...) {\n    va_list args;\n    s32 *dst;\n    s32 temp_a1;\n    s32 offset;\n    s32 sp40;\n    s32 sp38;\n    s32 ret;\n\n    dst = &sp40 + 2;\n    if (arg0 != NULL) {\n        dst = arg0;\n    }\n    *dst = 1;\n    offset = (s32) D_AB1950;\n    va_start(args, arg3);\n    for (; arg3 != 0; arg3--) {\n        temp_a1 = va_arg(args, s32);\n        if (*dst != 0) {\n            offset += func_1502AC88(offset, temp_a1, &sp38);\n        }\n        *dst = sp38 & 0x0FFFFFFF;\n    }\n    ret = 0;\n    if (*dst != 0) {\n        ret = func_1502B350(offset, sp38, dst);\n        if (*dst == 0) {\n            arg1 = 0;\n        } else if (ret != 0) {\n            arg1 = func_1502B4A8(ret, arg1);\n        } else {\n            arg1 = 0;\n        }\n        if (arg2 == 0) {\n            return ret;\n        }\n        *arg2 = arg1;\n    }\n    return ret;\n}",
+        "score": 0.48125,
+        "reason": "length_mismatch (target=77, generated=80)",
+        "diffs": [],
+        "timestamp": "2026-06-10T12:44:16.244Z"
+      }
+    ]
   },
   {
     "function": "func_15062FC0",
