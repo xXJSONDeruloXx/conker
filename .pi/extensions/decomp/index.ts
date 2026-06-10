@@ -819,27 +819,11 @@ export default function (pi: ExtensionAPI) {
 			const path = require("node:path");
 			loadState(ctx.cwd);
 
-			const queueStatePath = path.join(ctx.cwd, ".pi/decomp/queue.json");
-			const loopStatePath = path.join(ctx.cwd, LOOP_STATE_FILE);
-			const shouldPreserveReadOnlyState = ["stats", "list", "next"].includes(params.action);
-			const readOnlySnapshot = shouldPreserveReadOnlyState
-				? {
-					queue: fs.existsSync(queueStatePath) ? fs.readFileSync(queueStatePath, "utf-8") : undefined,
-					loop: fs.existsSync(loopStatePath) ? fs.readFileSync(loopStatePath, "utf-8") : undefined,
-				}
-				: undefined;
+			// Read-only queue actions must be truly read-only. Older versions snapshotted and restored
+			// queue.json/loop-state.json, which could clobber newer attempt history written by another
+			// tool call or accepted commit. Keep this as a no-op compatibility hook at return sites.
+			const restoreReadOnlyState = () => {};
 			let intentionallyMutatedState = false;
-			const restoreReadOnlyState = () => {
-				if (!readOnlySnapshot || intentionallyMutatedState) return;
-				try {
-					if (readOnlySnapshot.queue !== undefined && fs.existsSync(queueStatePath) && fs.readFileSync(queueStatePath, "utf-8") !== readOnlySnapshot.queue) {
-						fs.writeFileSync(queueStatePath, readOnlySnapshot.queue);
-					}
-					if (readOnlySnapshot.loop !== undefined && fs.existsSync(loopStatePath) && fs.readFileSync(loopStatePath, "utf-8") !== readOnlySnapshot.loop) {
-						fs.writeFileSync(loopStatePath, readOnlySnapshot.loop);
-					}
-				} catch {}
-			};
 
 			if (params.action === "promote") {
 				// Promote pure .s segments to C files via splat yaml edit + re-extract
@@ -1147,13 +1131,12 @@ export default function (pi: ExtensionAPI) {
 
 			let candidates = state.queue.filter((e) => e.status === "pending" && candidateStillHasPragma(ctx.cwd, e));
 
-			// Auto-rotate: skip functions we ground on this session (unless nearMiss filter explicitly requested)
-			if (!params.filter?.nearMiss && sessionRotatedFunctions.size > 0) {
-				const beforeCount = candidates.length;
+			// Auto-rotate: skip functions we ground on this session and stale high-attempt functions
+			// unless nearMiss is explicitly requested. This enforces the loop prompt's "8+ attempts"
+			// rule in code instead of relying on the agent to manually skip stale histories.
+			if (!params.filter?.nearMiss) {
 				candidates = candidates.filter((e) => !sessionRotatedFunctions.has(e.function));
-				if (candidates.length < beforeCount) {
-					// Note: rotated functions are not permanently skipped, just for this session
-				}
+				candidates = candidates.filter((e) => (e.attempts || 0) < SESSION_ROTATE_THRESHOLD);
 			}
 
 			if (params.filter?.region) candidates = candidates.filter((e) => e.region === params.filter!.region);
@@ -1977,8 +1960,49 @@ export default function (pi: ExtensionAPI) {
 				};
 			}
 
+			const normalizeAsmLines = (text: string) => text.split("\n")
+				.map((line: string) => line
+					.replace(/^\s*\/\*.*?\*\/\s*/, "")
+					.replace(/^\s*[0-9a-f]+:\s+[0-9a-f]+\s*/i, "")
+					.replace(/^\s*[0-9a-f]+\s+<[^>]+>:\s*$/i, "")
+					.replace(/\s*#.*$/, "")
+					.trim())
+				.filter((line: string) => line && !line.startsWith("Disassembly") && !line.startsWith("glabel") && !line.endsWith(":"));
+			let targetLines: string[] = [];
+			let generatedLines: string[] = [];
+			try {
+				const fs = require("node:fs");
+				const path = require("node:path");
+				const targetPath = path.join(ctx.cwd, "conker/asm/nonmatchings", params.file.replace(".c", ""), `${params.function}.s`);
+				if (fs.existsSync(targetPath)) targetLines = normalizeAsmLines(fs.readFileSync(targetPath, "utf-8"));
+				const objResult = await pi.exec("docker", [
+					"run", "--rm", "--platform", "linux/amd64",
+					"-v", `${ctx.cwd}:/conker`, "-w", "/conker",
+					"conker-build-min-amd64",
+					"bash", "-lc",
+					`mips-linux-gnu-objdump -dr conker/build/src/${params.file.replace(".c", ".c.o")} | sed -n '/<${params.function}>/,/^$/p' | sed '$d'`,
+				], { signal, timeout: 30000 });
+				generatedLines = normalizeAsmLines(objResult.stdout || "");
+			} catch {}
+
 			// Build focused analysis
 			const analysis: string[] = [`## Diff Analysis: ${params.function}`, `Score: ${scoreData.score}`];
+
+			if (targetLines.length || generatedLines.length) {
+				const firstDiffLine = scoreData.diffs?.[0]?.line ?? 1;
+				const start = Math.max(0, Number(firstDiffLine) - 6);
+				const end = Math.min(Math.max(targetLines.length, generatedLines.length), start + 18);
+				analysis.push("", `### Aligned instruction window (target=${targetLines.length}, generated=${generatedLines.length})`);
+				analysis.push("```text");
+				for (let idx = start; idx < end; idx++) {
+					const t = targetLines[idx] || "";
+					const g = generatedLines[idx] || "";
+					const mark = t === g ? " " : "!";
+					analysis.push(`${mark} L${String(idx + 1).padStart(3)}  T: ${t}`);
+					analysis.push(`${mark}       G: ${g}`);
+				}
+				analysis.push("```");
+			}
 
 			if (scoreData.diffs && scoreData.diffs.length > 0) {
 				const focus = params.focus || "all";
@@ -2456,9 +2480,75 @@ export default function (pi: ExtensionAPI) {
 				args.push(...constraintsArgs);
 				return args;
 			};
+			const preserveTransmuterDebug = (stats: any, out: string, err: string, args: string[], report: any) => {
+				try {
+					const stamp = new Date().toISOString().replace(/[:.]/g, "-");
+					const dbgDir = path.join(ctx.cwd, ".pi/decomp/transmuter-debug", params.function, stamp);
+					fs.mkdirSync(dbgDir, { recursive: true });
+					fs.writeFileSync(path.join(dbgDir, "README.md"), [
+						`# Transmuter debug: ${params.function}`,
+						"",
+						`- file: ${file}`,
+						`- stats: ${JSON.stringify(stats)}`,
+						`- retry: ${retryNote || "none"}`,
+						"",
+						"## Re-run",
+						"```sh",
+						`bun ${args.map((a) => JSON.stringify(a)).join(" ")}`,
+						"```",
+						"",
+					].join("\n"));
+					fs.writeFileSync(path.join(dbgDir, "command.json"), JSON.stringify({ command: "bun", args, cwd: ctx.cwd }, null, 2));
+					fs.writeFileSync(path.join(dbgDir, "stdout.txt"), out || "");
+					fs.writeFileSync(path.join(dbgDir, "stderr.txt"), err || "");
+					fs.writeFileSync(path.join(dbgDir, "base.c"), fs.readFileSync(baseCPath, "utf-8"));
+					fs.writeFileSync(path.join(dbgDir, "target.s"), fs.readFileSync(targetSPath, "utf-8"));
+					if (report) fs.writeFileSync(path.join(dbgDir, "session.json"), JSON.stringify(report, null, 2));
+					for (const cand of collectCandidateFiles().slice(0, 5)) {
+						try { fs.copyFileSync(cand.path, path.join(dbgDir, path.basename(cand.path))); } catch {}
+					}
+					return path.relative(ctx.cwd, dbgDir);
+				} catch {
+					return null;
+				}
+			};
+			const runTransmuterSmoke = async () => {
+				try {
+					const smokeDir = path.join(workDir, "smoke");
+					fs.mkdirSync(smokeDir, { recursive: true });
+					const smokeFn = "transmuter_smoke_func";
+					const smokeC = path.join(smokeDir, "smoke.c");
+					const smokeS = path.join(smokeDir, "smoke_target.s");
+					const smokeO = path.join(smokeDir, "smoke_target.o");
+					fs.writeFileSync(smokeC, `#include <ultra64.h>\ns32 ${smokeFn}(s32 x) { return x + 1; }\n`);
+					fs.writeFileSync(smokeS, `.set noat\n.set noreorder\n.set gp=64\n.section .text\n.global ${smokeFn}\n${smokeFn}:\n addiu $v0, $a0, 2\n jr $ra\n nop\n`);
+					const asm = await pi.exec("mips-linux-gnu-as", ["-EB", "-march=vr4300", "-mabi=32", "-o", smokeO, smokeS], { signal, timeout: 10000 });
+					if (asm.code !== 0) return { healthy: false, reason: "smoke target assemble failed", output: `${asm.stdout}\n${asm.stderr}` };
+					const smokeCompiler = `${path.join(ctx.cwd, "tools/transmuter-compile.sh")} {{inputPath}} {{outputPath}} {{functionName}}`;
+					const smokeArgs = [
+						transmuterCli, "match", smokeC,
+						"--target", smokeO,
+						"--function", smokeFn,
+						"--compiler", smokeCompiler,
+						"--cwd", ctx.cwd,
+						"--profile", "ido",
+						"--max-compiles", "20",
+						"--timeout", "5000",
+						"--concurrency", "1",
+						"--no-reduce",
+					];
+					const smoke = await pi.exec("bun", smokeArgs, { signal, timeout: 15000 });
+					const smokeOut = [smoke.stdout, smoke.stderr].filter(Boolean).join("\n");
+					const stats = quickTransmuterStats(smokeOut, null);
+					return { healthy: (stats.compiled ?? 0) > 0, stats, output: smokeOut.slice(0, 2000), args: smokeArgs };
+				} catch (e: any) {
+					return { healthy: false, reason: String(e?.message || e) };
+				}
+			};
 
 			let isolateUsed = useIsolate;
-			let result = await pi.exec("bun", buildTransmuterArgs(isolateUsed), { signal, timeout: timeoutMs + 15000 });
+			let transmuterArgs = buildTransmuterArgs(isolateUsed);
+			let result = await pi.exec("bun", transmuterArgs, { signal, timeout: timeoutMs + 15000 });
 			let output = [result.stdout, result.stderr].filter(Boolean).join("\n");
 			let retryNote = "";
 
@@ -2472,7 +2562,8 @@ export default function (pi: ExtensionAPI) {
 				cleanupFreshGeneratedFiles();
 				isolateUsed = false;
 				retryNote = "isolate parse failure; retried without --isolate";
-				result = await pi.exec("bun", buildTransmuterArgs(false), { signal, timeout: timeoutMs + 15000 });
+				transmuterArgs = buildTransmuterArgs(false);
+				result = await pi.exec("bun", transmuterArgs, { signal, timeout: timeoutMs + 15000 });
 				output = [result.stdout, result.stderr].filter(Boolean).join("\n");
 			}
 
@@ -2488,7 +2579,8 @@ export default function (pi: ExtensionAPI) {
 					cleanupFreshGeneratedFiles();
 					isolateUsed = false;
 					retryNote = "isolate produced 0 compiled mutations; retried without --isolate";
-					result = await pi.exec("bun", buildTransmuterArgs(false), { signal, timeout: timeoutMs + 15000 });
+					transmuterArgs = buildTransmuterArgs(false);
+					result = await pi.exec("bun", transmuterArgs, { signal, timeout: timeoutMs + 15000 });
 					output = [result.stdout, result.stderr].filter(Boolean).join("\n");
 				}
 			}
@@ -2517,8 +2609,6 @@ export default function (pi: ExtensionAPI) {
 			if (!winningCode && perfectMatch && bestCandidateCode) {
 				winningCode = bestCandidateCode;
 			}
-
-			cleanupFreshGeneratedFiles();
 
 			// Parse output/report for score info. Prefer stdout for compatibility with older Transmuter,
 			// then fall back to the JSON report schema used by current main.
@@ -2557,6 +2647,12 @@ export default function (pi: ExtensionAPI) {
 			const allForkRules = stdoutForkRules.length > 0 ? stdoutForkRules : reportForkRules;
 			const ruleMatch = output.match(/Last fork:.*?via\s+(\S+)/);
 			const winningRule = ruleMatch ? ruleMatch[1] : (allForkRules[0] ?? null);
+			let smokeResult: any = null;
+			let debugPath: string | null = null;
+			if (compiled === 0) {
+				smokeResult = await runTransmuterSmoke();
+				debugPath = preserveTransmuterDebug({ bestScore, initialScore, iters, compiled, compileErrors, forks, smoke: smokeResult }, result.stdout || "", result.stderr || "", transmuterArgs, sessionReport);
+			}
 
 			// Log permuter result to queue.json history — FULL DETAIL like decomp_attempt
 			const queueEntry = state.queue.find((e) => e.function === params.function);
@@ -2575,6 +2671,8 @@ export default function (pi: ExtensionAPI) {
 						`config: timeout=${params.timeout || 60}s, maxCompiles=${maxCompiles}, concurrency=${concurrency}, profile=ido, isolate=${isolateUsed}, reduce=${useReduce}, depth=${depth}`,
 						...(retryNote ? [`retry: ${retryNote}`] : []),
 						...(compiled === 0 ? ["NOTE: 0 compiled = no mutations reached a successful compile; possible dedupe, invalid mutation output, or isolation removed mutatable structure."] : []),
+						...(debugPath ? [`debug_artifacts: ${debugPath}`] : []),
+						...(smokeResult ? [`smoke_test: ${smokeResult.healthy ? "healthy" : "UNHEALTHY"} ${JSON.stringify(smokeResult.stats || smokeResult.reason || {})}`] : []),
 						...(compileErrors && compiled && compileErrors > compiled * 5 ? [`NOTE: high error rate (${compileErrors} errors vs ${compiled} compiled). Many mutations produce invalid code for this function.`] : []),
 					],
 					timestamp: new Date().toISOString(),
@@ -2624,6 +2722,7 @@ export default function (pi: ExtensionAPI) {
 									queueEntry.lastScore = 1.0;
 									saveQueue(ctx.cwd);
 								}
+								cleanupFreshGeneratedFiles();
 								return {
 									content: [{
 										type: "text",
@@ -2645,6 +2744,7 @@ export default function (pi: ExtensionAPI) {
 			if (perfectMatch && winningCode && !codeToVerify) {
 				// Fallback: Transmuter matched but we couldn't auto-verify (no file info)
 				const funcCode = winningCode.replace(/^#include.*\n/gm, "").replace(/^extern.*\n/gm, "").trim();
+				cleanupFreshGeneratedFiles();
 				return {
 					content: [{
 						type: "text",
@@ -2661,6 +2761,9 @@ export default function (pi: ExtensionAPI) {
 				diagnostic = `\n\n⚠️ DIAGNOSTIC: 0 successful compiled mutations.`
 					+ `\nThis usually means mutations were deduplicated, produced invalid old-C for this source, or isolation removed too much mutatable structure.`
 					+ (retryNote ? `\nA no-isolate retry was already attempted; use a different structural C seed before re-running.` : `\nTry again with isolate=false or provide a less-rigid rewritten C seed.`)
+					+ (debugPath ? `\nDebug artifacts preserved at: ${debugPath}` : "")
+					+ (smokeResult ? `\nTransmuter smoke test: ${smokeResult.healthy ? "healthy" : "UNHEALTHY"}${smokeResult.stats ? ` (${JSON.stringify(smokeResult.stats)})` : ""}` : "")
+					+ `\nRaw Transmuter output (first 1200 chars):\n${output.slice(0, 1200) || "(empty)"}`
 					+ `\n→ If diff is 'addu a0, X, Y' vs 'addu a0, Y, X': swap operand order in the C expression (a+b → b+a).`
 					+ `\n→ If diff is register-only: reorder variable declarations or add an intermediate temp in decomp_attempt.`;
 			} else if (bestScore === 1) {
@@ -2679,12 +2782,13 @@ export default function (pi: ExtensionAPI) {
 				diagnostic = `\n\nNo improvement found. Try a different structural approach before re-running.`;
 			}
 
+			cleanupFreshGeneratedFiles();
 			return {
 				content: [{
 					type: "text",
 					text: `Transmuter completed. Best score: ${bestScore ?? "unknown"} (iters: ${iters?.toLocaleString() ?? "?"}, compiled: ${compiled ?? "?"}, forks: ${forks})${retryNote ? `\nRetry: ${retryNote}` : ""}${autoVerifyNote}${diagnostic}`,
 				}],
-				details: { matched: false, bestScore, iterations: iters, compiled, forks },
+				details: { matched: false, bestScore, iterations: iters, compiled, forks, debugPath, smokeResult },
 			};
 		},
 	});

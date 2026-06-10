@@ -42,3 +42,4 @@ session-*.json
 *-[0-9]*.c
 
 .pi/decomp/session-attempts.jsonl
+.pi/decomp/transmuter-debug/
