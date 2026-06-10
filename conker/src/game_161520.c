@@ -2,6 +2,8 @@
 #include "functions.h"
 #include "variables.h"
 
+void func_15143134(void *, s32, s32);
+
 void func_15137F30(s32 arg0, s32 arg1, s32 arg2, s32 arg3, f32 arg4, void *arg5, f32 *arg6, f32 *arg7, f32 *arg8, f32 *arg9, s16 *arg10, u8 *arg11, f32 *arg12);
 void func_151D9014(void *arg0, f32 *arg1, u8 arg2, f32 arg3, s16 arg4, u8 arg5, f32 arg6, u8 arg7, f32 arg8, f32 arg9, u8 argA, s32 argB, u8 argC, u8 argD, u8 argE, s32 argF);
 
@@ -34,7 +36,40 @@ s32 func_1513416C(struct102 *arg0) {
     return 1;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_161520/func_1513418C.s")
+void *func_1513418C(void *arg0, s32 arg1, u8 arg2, s32 arg3) {
+    void *ret;
+    u8 temp_a0;
+    void *temp_v0;
+    s32 temp_v1;
+    s32 temp_a2;
+
+    ret = (void *)func_15167A68(0x28, arg3, arg1 + 0x58, 1, arg2, 1);
+    if (ret == NULL) {
+        return NULL;
+    }
+    memcpy((void *)((s32)ret + 0x10), arg0, 0x30);
+    temp_a0 = *(u8 *)((s32)ret + 0x3A);
+    if ((temp_a0 & 2) != 0) {
+        temp_v0 = *(void **)((s32)ret + 0x1C);
+        if ((*(s32 *)temp_v0 == 0) || (*(u8 *)((s32)ret + 0x18) != *(u8 *)((s32)temp_v0 + 0x3B))) {
+            func_1516972C(ret);
+            return NULL;
+        }
+        temp_v1 = *(s32 *)((s32)temp_v0 + 0x1D4);
+        if ((temp_v1 != 0) && ((*(u8 *)((s32)temp_v0 + 0x74) & 0xF) != 0xF)) {
+            temp_a2 = temp_v1;
+            temp_a2 += *(u8 *)((s32)ret + 0x20) << 6;
+            func_15143134((void *)((s32)ret + 0x24), (s32)ret + 0x40, temp_a2);
+        } else {
+            *(u8 *)((s32)ret + 0x3A) = temp_a0 | 8;
+        }
+    } else {
+        *(u8 *)((s32)ret + 0x3A) = temp_a0 | 0x18;
+    }
+    *(f32 *)((s32)ret + 0x4C) = 1.0f / (*(f32 *)((s32)ret + 0x30) + *(f32 *)((s32)ret + 0x30));
+    *(f32 *)((s32)ret + 0x50) = 0.0f;
+    return ret;
+}
 // void *func_1513418C(s32 arg0, s32 arg1 /* size/offset */, u8 arg2, s32 arg3) {
 //     void *sp24;
 //     s32 temp_v1;

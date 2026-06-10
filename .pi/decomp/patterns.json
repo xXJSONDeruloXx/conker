@@ -1137,12 +1137,12 @@
     ]
   },
   {
-    "id": "byte-addressed-global-float-stride",
-    "description": "Use byte-addressed pointer arithmetic for global float/table strides when array indexing introduces a separate final shift temp and shifts downstream registers.",
-    "trigger": "Near-match where target builds a stride offset in one temp (e.g. final `sll t3,t3,2`) for a global float load, but C array indexing emits the final element-size multiply into a new temp and shifts later registers.",
-    "solution": "Replace `GLOBAL[index]` with `*(type *)((s32)GLOBAL + byte_offset)` using the exact byte stride, e.g. `*(f32 *)((s32)D_800CC2E8 + (idx * 812))`.",
+    "id": "force-base-first-addu-through-accumulator-local",
+    "description": "When IDO emits commutative `addu` operands in the wrong order for a call argument, force the desired base-first order by initializing an argument temp from the base, then applying `+= offset` before the call.",
+    "trigger": "One-instruction near-match where target has `addu a2, baseReg, offsetReg` (e.g. `addu a2, v1, t5`) but generated code emits `addu a2, offsetReg, baseReg` from a single `base + offset` expression, even when C operand order is swapped or pointer arithmetic is used.",
+    "solution": "Introduce a local for the call argument: `temp_a2 = base; temp_a2 += offset; func(..., temp_a2);`. This preserves the base register as the first `addu` operand while keeping the same instruction count.",
     "example_functions": [
-      "func_1507839C"
+      "func_1513418C"
     ]
   }
 ]

@@ -37769,7 +37769,7 @@
     ],
     "attempts": 0,
     "lastScore": 0,
-    "status": "pending"
+    "status": "matched"
   },
   {
     "function": "func_15141CC0",
@@ -38164,28 +38164,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 1,
-    "lastScore": 0.9072,
-    "status": "matched",
-    "history": [
-      {
-        "code": "void func_1507839C(void) {\n    struct127 *tmp;\n    f32 phi_f0;\n    f32 phi_f2;\n\n    if (D_800D1892 == 0) {\n        tmp = &D_800CC2D0[D_800D154C->unk222];\n        phi_f0 = func_1505A6F8(D_800D154C, tmp);\n    } else if (D_800D1892 == 1) {\n        tmp = &D_800CC2D0[D_800D154C->unk222];\n        phi_f0 = func_1505A72C(D_800D154C, tmp);\n    } else {\n        phi_f0 = fabsf(D_800D154C->y_position - D_800CC2E8[D_800D154C->unk222 * 203]);\n    }\n\n    phi_f2 = D_800D1893 * 8;\n    if (D_800D1893 == 0xFF) {\n        phi_f2 = D_800D154C->unk23D * 8;\n    }\n    if (((D_800D1891 == 0) && (phi_f0 < phi_f2)) ||\n        ((D_800D1891 == 1) && (phi_f2 < phi_f0))) {\n        func_15075400(D_800D1890);\n    }\n}",
-        "score": 0.9072,
-        "reason": "structural_diffs=9",
-        "diffs": [
-          "structural: target=sll t3, t3, 2 got=sll t4, t3, 2",
-          "structural: target=addu at, at, t3 got=addu at, at, t4",
-          "structural: target=lui t5, HI(D_800D154C) got=lui t6, HI(D_800D154C)",
-          "structural: target=sll t4, v0, 3 got=sll t5, v0, 3",
-          "structural: target=mtc1 t4, f8 got=mtc1 t5, f8",
-          "structural: target=lw t5, LO(D_800D154C)(t5) got=lw t6, LO(D_800D154C)(t6)",
-          "structural: target=lbu t6, 573(t5) got=lbu t7, 573(t6)",
-          "structural: target=sll t7, t6, 3 got=sll t8, t7, 3",
-          "structural: target=mtc1 t7, f10 got=mtc1 t8, f10"
-        ],
-        "timestamp": "2026-06-10T13:44:00.180Z"
-      }
-    ]
+    "attempts": 0,
+    "lastScore": 0,
+    "status": "pending"
   },
   {
     "function": "func_10021C40",
