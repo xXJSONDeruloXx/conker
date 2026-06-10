@@ -1074,12 +1074,12 @@
     ]
   },
   {
-    "id": "struct-copy-preserves-word-copy-schedule",
-    "description": "When a wrapper copies three word fields from an input pointer into a stack payload, assigning individual f32-like fields can emit conversions or repeated base reloads, while assigning a small struct object into a raw payload slice emits the target lw/sw word-copy sequence with a destination pointer temp.",
-    "trigger": "Target uses `lw at, 0(src); addiu dst, sp, off; sw at, 0(dst); lw temp, 4(src); sw temp, 4(dst); lw at, 8(src); sw at, 8(dst)` while field-by-field C reloads src or converts f32 fields.",
-    "solution": "Use `*(struct17 *)&payload[offset] = *arg;` or an equivalent small struct assignment into the payload, then order neighboring byte stores/header stores exactly as target scheduling requires.",
+    "id": "multiply-by-255-for-temp-div-register",
+    "description": "Writing a scale as `arg *= 0xFF; arg /= const;` can keep the pre-divide product in a temporary register and only assign the quotient back to the saved argument register, matching IDO's `sll temp,arg,8; subu temp,temp,arg; div temp,const; mflo arg` shape.",
+    "trigger": "Near-match where `((arg << 8) - arg) / const` emits `subu savedArg,temp,savedArg; div savedArg,const` but target emits `subu temp,temp,savedArg; div temp,const; mflo savedArg`.",
+    "solution": "Use compound multiply/divide statements: `arg *= 0xFF; arg /= 100;` rather than a single shift/subtract expression.",
     "example_functions": [
-      "func_15160A58"
+      "func_1000E46C"
     ]
   }
 ]
