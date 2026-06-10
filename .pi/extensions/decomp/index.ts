@@ -279,7 +279,7 @@ function buildChunkPrompt(chunkNum: number): string {
 		"- Source/ASM assets: `conker/src/<file>.c`, `conker/asm/nonmatchings/<file>/<func>.s`, `conker/include/{functions,variables,structs}.h`, `conker/undefined_syms_auto.txt`.",
 		"- Persistent memory: `.pi/decomp/queue.json` stores prior attempts; `.pi/decomp/patterns.json` stores learned IDO patterns.",
 		"- Static guidance: read `/skill:n64-decomp` for IDO 5.3 register, branch, stack, and float-codegen rules.",
-		"- Candidate routing/reference tools: `tools/decomp_similarity.py --function <func> --top 5`, `tools/decomp_similarity.py --rank-pending --json`, and `decomp_queue next` with `filter={similarToMatched:true}`.",
+		"- Candidate routing/reference tools: `tools/decomp_similarity.py --function <func> --top 5`, `tools/decomp_similarity.py --rank-pending --json`, `tools/decomp_skeleton.py --function <func>`, and `decomp_queue next` with `filter={similarToMatched:true}` or `filter={familyMode:true}`.",
 		"- Low-level aids: `tools/analyze_decomp_candidates.py`, `tools/mips_to_c/m2c.py`, `tools/transmuter-compile.sh`, and Transmuter via `decomp_permute`.",
 		"- Build/verification assets: Docker image `conker-build-min-amd64`, `make -C conker verify`, and full ROM SHA gate inside `decomp_accept`.",
 		"",
@@ -356,6 +356,41 @@ function savePatterns(cwd: string): void {
 	const path = require("node:path");
 	const patternsPath = path.join(cwd, ".pi/decomp/patterns.json");
 	fs.writeFileSync(patternsPath, JSON.stringify(state.patterns, null, 2));
+}
+
+function appendSessionAttempt(cwd: string, record: any): void {
+	const fs = require("node:fs");
+	const path = require("node:path");
+	try {
+		const logPath = path.join(cwd, ".pi/decomp/session-attempts.jsonl");
+		fs.appendFileSync(logPath, JSON.stringify({ ...record, timestamp: new Date().toISOString() }) + "\n");
+	} catch {}
+}
+
+function diagnoseNonMatch(scoreData: any, rawGeneratedAsm: string): string {
+	const hints: string[] = [];
+	const diffs = scoreData.diffs || [];
+	const diffText = JSON.stringify(diffs).toLowerCase();
+	const asm = rawGeneratedAsm.toLowerCase();
+	if (scoreData.reason?.includes("length_mismatch")) {
+		hints.push("Length mismatch: first check extra/missing branches, duplicated stores, early-return shape, and whether a common return variable would merge epilogues.");
+	}
+	if (/beqzl|bnezl|beql|bnel/.test(diffText) || /beqzl|bnezl|beql|bnel/.test(asm)) {
+		hints.push("Branch-likely involved: try flipping condition polarity, using `if (x) ... else ...`, or merging zero paths to fill the delay slot.");
+	}
+	if (/sw\s+zero/.test(asm) && (asm.match(/sw\s+zero/g) || []).length >= 2) {
+		hints.push("Repeated zero stores detected: combine adjacent zero cases into one compound condition or ternary-style assignment.");
+	}
+	if (/move\s+v0,zero|move\s+v0,s0|move\s+s0,zero/.test(asm)) {
+		hints.push("Return temp mismatch likely: try preserving return in an `s` local (`ret`) vs direct `return 0`, or use one shared return epilogue.");
+	}
+	if (/nop/.test(asm) && /beqz|bnez/.test(asm)) {
+		hints.push("Empty branch delay slot: target may need a branch-likely form or a statement moved into the condition's delay slot.");
+	}
+	if (!hints.length && (scoreData.score || 0) >= 0.8) {
+		hints.push("High-score near miss: use similar matched references for declaration order and run `decomp_permute` if isolation supports this target.");
+	}
+	return hints.length ? `\n\n### Automated Diagnosis\n${hints.map((h) => `- ${h}`).join("\n")}` : "";
 }
 
 async function gitPushWithRetry(pi: any): Promise<void> {
@@ -728,6 +763,7 @@ export default function (pi: ExtensionAPI) {
 					),
 					nearMiss: Type.Optional(Type.Boolean({ description: "Only return functions with prior attempts scoring >= 0.8 (best permuter candidates)" })),
 					similarToMatched: Type.Optional(Type.Boolean({ description: "Prioritize pending functions that have a high-similarity matched function reference" })),
+					familyMode: Type.Optional(Type.Boolean({ description: "Prioritize same-file pending siblings with matched references" })),
 				}),
 			),
 			function: Type.Optional(Type.String({ description: "Function name for skip action" })),
@@ -1092,15 +1128,17 @@ export default function (pi: ExtensionAPI) {
 					const bestB = Math.max(...(b.history || []).map((h: AttemptRecord) => h.score));
 					return bestB - bestA;
 				});
-			} else if (params.filter?.similarToMatched) {
+			} else if (params.filter?.similarToMatched || params.filter?.familyMode) {
 				// Snowboard-style candidate routing: prioritize targets with solved assembly-shape references.
 				try {
-					const simResult = await pi.exec("python3", [
+					const simArgs = [
 						"tools/decomp_similarity.py",
 						"--rank-pending",
 						"--limit", "1000",
 						"--json",
-					], { timeout: 30000 });
+					];
+					if (params.filter?.familyMode) simArgs.push("--same-file");
+					const simResult = await pi.exec("python3", simArgs, { timeout: 30000 });
 					const payload = simResult.stdout ? JSON.parse(simResult.stdout) : {};
 					const ranked = Array.isArray(payload.ranked) ? payload.ranked : [];
 					const rankByFunction = new Map(ranked.map((r: any, idx: number) => [r.function, { ...r, idx }]));
@@ -1112,7 +1150,8 @@ export default function (pi: ExtensionAPI) {
 					});
 					if (candidates.length > 0) {
 						const top: any = rankByFunction.get(candidates[0].function);
-						similarityRankingNote = `Similarity-routed: best matched reference is ${top.match_function} (${top.score.toFixed?.(1) ?? top.score}%).`;
+						const reasonText = Array.isArray(top.reasons) && top.reasons.length ? ` [${top.reasons.join(", ")}]` : "";
+						similarityRankingNote = `${params.filter?.familyMode ? "Family-routed" : "Similarity-routed"}: best matched reference is ${top.match_function} (${top.score.toFixed?.(1) ?? top.score}%)${reasonText}.`;
 					}
 				} catch {
 					// Fall back to default queue ordering if the helper is unavailable.
@@ -1307,6 +1346,31 @@ export default function (pi: ExtensionAPI) {
 				// Similarity enrichment is best-effort; queue context should still load if it fails.
 			}
 
+			// 6. Include a mechanical skeleton seed from the closest same-file matched sibling.
+			try {
+				const skeletonResult = await pi.exec("python3", [
+					"tools/decomp_skeleton.py",
+					"--function", next.function,
+					"--top", "1",
+					"--json",
+				], { timeout: 15000 });
+				const payload = skeletonResult.stdout ? JSON.parse(skeletonResult.stdout) : {};
+				const skeletons = Array.isArray(payload.skeletons) ? payload.skeletons : [];
+				if (skeletons.length > 0) {
+					const skel = skeletons[0];
+					enrichment.push(
+						"### Skeleton Seed (mechanically adapted from closest matched sibling)",
+						`Source: ${skel.source_function} (${skel.source_file}, ${Number(skel.score).toFixed(1)}%). Adjust signature/arguments before attempting.`,
+						"```c",
+						skel.code,
+						"```",
+						"",
+					);
+				}
+			} catch {
+				// Skeleton enrichment is best-effort.
+			}
+
 			// Find relevant patterns by keyword matching against target assembly + function context
 			const asmLower = targetAsm.toLowerCase();
 			const contextLower = (srcContext || "").toLowerCase();
@@ -1481,6 +1545,7 @@ export default function (pi: ExtensionAPI) {
 			if (buildResult.code !== 0) {
 				// Revert
 				fs.writeFileSync(srcPath, original);
+				appendSessionAttempt(ctx.cwd, { function: params.function, file: params.file, score: 0, reason: "compile_error", code: params.code, stderr: buildResult.stderr?.slice(0, 1000) });
 				return {
 					content: [
 						{
@@ -1588,6 +1653,8 @@ export default function (pi: ExtensionAPI) {
 			}
 
 			// Non-match: save attempt to history
+			appendSessionAttempt(ctx.cwd, { function: params.function, file: params.file, score: scoreData.score || 0, reason: scoreData.reason || "unknown", code: params.code, diffs: scoreData.diffs || [] });
+			const diagnosis = diagnoseNonMatch(scoreData, rawGeneratedAsm);
 			const diffSummary = scoreData.diffs
 				? scoreData.diffs
 						.slice(0, 10)
@@ -1679,7 +1746,7 @@ export default function (pi: ExtensionAPI) {
 				content: [
 					{
 						type: "text",
-						text: `✗ Non-match (reverted). Score: ${scoreData.score}\nReason: ${scoreData.reason}\n\nDiff:\n${diffSummary}\n\nGenerated ASM:\n\`\`\`\n${rawGeneratedAsm}\n\`\`\`${permuterHint}${plateauWarning}${priorHint}`,
+						text: `✗ Non-match (reverted). Score: ${scoreData.score}\nReason: ${scoreData.reason}\n\nDiff:\n${diffSummary}\n\nGenerated ASM:\n\`\`\`\n${rawGeneratedAsm}\n\`\`\`${diagnosis}${permuterHint}${plateauWarning}${priorHint}`,
 					},
 				],
 				details: scoreData,
@@ -1763,6 +1830,36 @@ export default function (pi: ExtensionAPI) {
 			], { timeout: 30000 });
 			updateReadmeProgress(ctx.cwd);
 
+			// Update queue before committing so accepted commits include matched state.
+			const entry = state.queue.find((e) => e.function === params.function);
+			if (entry) {
+				entry.status = "matched";
+				saveQueue(ctx.cwd);
+			}
+
+			// Add explicit or auto-captured pattern before committing.
+			const latestAttempt = entry?.history?.slice().reverse().find((h: AttemptRecord) => h.code);
+			if (params.pattern) {
+				const newPattern: Pattern = {
+					...params.pattern,
+					example_functions: [params.function],
+				};
+				state.patterns.push(newPattern);
+				savePatterns(ctx.cwd);
+			} else if (latestAttempt) {
+				const autoPattern: Pattern = {
+					id: `auto-${params.function}`,
+					description: `Accepted match for ${params.function}: preserve this function-family shape when similar assembly recurs.`,
+					trigger: `High-similarity sibling or near-miss around ${params.file}; prior reason: ${latestAttempt.reason}`,
+					solution: `Use the accepted C from ${params.function} as a family reference; compare local declaration order, branch polarity, and shared zero/output paths against the target assembly.`,
+					example_functions: [params.function],
+				};
+				if (!state.patterns.some((p) => p.id === autoPattern.id)) {
+					state.patterns.push(autoPattern);
+					savePatterns(ctx.cwd);
+				}
+			}
+
 			// Commit source + queue state + fresh progress
 			// The pre-commit hook will run the full ROM build again as a safety check.
 			// Since we already verified above, it will pass — but it's the hard gate.
@@ -1778,23 +1875,6 @@ export default function (pi: ExtensionAPI) {
 				};
 			}
 			await gitPushWithRetry(pi);
-
-			// Update queue
-			const entry = state.queue.find((e) => e.function === params.function);
-			if (entry) {
-				entry.status = "matched";
-				saveQueue(ctx.cwd);
-			}
-
-			// Add pattern if provided
-			if (params.pattern) {
-				const newPattern: Pattern = {
-					...params.pattern,
-					example_functions: [params.function],
-				};
-				state.patterns.push(newPattern);
-				savePatterns(ctx.cwd);
-			}
 
 			// Refresh widget
 			latestCtx = ctx;
@@ -2104,6 +2184,8 @@ export default function (pi: ExtensionAPI) {
 				'#include <ultra64.h>',
 				'#include "functions.h"',
 				'#include "variables.h"',
+				'#include "macros.h"',
+				'#include "libc/stdarg.h"',
 				'',
 				extraExterns,
 				baseCode,

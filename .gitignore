@@ -40,3 +40,5 @@ tools/gfxdis
 tools/ido-native/
 session-*.json
 *-[0-9]*.c
+
+.pi/decomp/session-attempts.jsonl
