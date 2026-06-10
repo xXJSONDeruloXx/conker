@@ -1,8 +1,0 @@
-{
-  "enabled": true,
-  "chunk": 382,
-  "status": "running",
-  "lastChunkSummary": "Matched and accepted `func_1000FC18` in `init_EB00.c`, a multi-field sound table matcher/flag updater. Also brought `func_151347CC` to a one-instruction near-match (only `bnel` operand order in the `0x2D` replacement case differs) and explored `func_151415D4` briefly but skipped due persistent float FPR/register scheduling plateau.",
-  "consecutiveNoProgress": 0,
-  "updatedAt": "2026-06-10T15:58:37.618Z"
-}
