@@ -478,7 +478,29 @@ s32 func_1000E770(s32 *arg0, s32 *arg1) {
     return D_80041F04;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000E7A0.s")
+void func_1000E7A0(u32 arg0, s32 arg1) {
+    if ((arg0 & 1) == 1) {
+        D_80041F04 |= 1;
+    } else if (arg0 & 2) {
+        D_80041F08 += arg1;
+        D_80041F0C += 1;
+    } else if (arg0 & 4) {
+        D_80041F08 = arg1 + 1;
+        D_80041F04 |= 4;
+    } else if (arg0 & 8) {
+        D_80041F0C = arg1 >> 8;
+        arg1 &= 0xFF;
+        if ((arg1 == 0) || (arg1 == 4) || (arg1 == 5)) {
+            D_80041F08 = 2;
+        } else if (arg1 == 10) {
+            D_80041F08 = 1;
+        } else {
+            D_80041F08 = 3;
+        }
+    } else if (arg0 & 0x10) {
+        D_80041F04 |= 0x10;
+    }
+}
 // NON-MATCHING: mostly just wrong registers
 // void func_1000E7A0(u32 arg0, s32 arg1) {
 //     if ((arg0 & 1) == 1) {
