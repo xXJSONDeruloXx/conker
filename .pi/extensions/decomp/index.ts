@@ -939,8 +939,15 @@ export default function (pi: ExtensionAPI) {
 			});
 			const elapsedSeconds = ((Date.now() - startedAt) / 1000).toFixed(1);
 			const output = `${result.stdout || ""}\n${result.stderr || ""}`.trim();
-			const matched = result.code === 0 && /build\/conker\.us\.bin:\s+OK/.test(output);
 			const root = findConkerBuildRoot(ctx.cwd);
+			const fs = require("node:fs");
+			const path = require("node:path");
+			const okPath = path.join(root.mount, root.makeDir, "build/conker.us.ok");
+			const matched = result.code === 0 && (
+				/build\/conker\.us\.bin:\s+OK/.test(output)
+				|| /Nothing to be done for ['`]verify['`]/.test(output)
+				|| fs.existsSync(okPath)
+			);
 			const statusLine = matched
 				? `✓ Conker ROM verify matched (${elapsedSeconds}s)`
 				: `✗ Conker ROM verify failed (${elapsedSeconds}s)`;
