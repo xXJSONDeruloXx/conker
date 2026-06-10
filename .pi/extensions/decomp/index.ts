@@ -17,12 +17,19 @@ import { truncateToWidth } from "@earendil-works/pi-tui";
 import { Type } from "typebox";
 import { StringEnum } from "@earendil-works/pi-ai";
 
+interface ContextPatch {
+	path: string;
+	oldText: string;
+	newText: string;
+}
+
 interface AttemptRecord {
 	code: string;
 	score: number;
 	reason: string;
 	diffs: string[];
 	timestamp: string;
+	contextPatch?: ContextPatch[];
 }
 
 interface QueueEntry {
@@ -1721,10 +1728,11 @@ export default function (pi: ExtensionAPI) {
 		name: "decomp_attempt",
 		label: "Decomp Attempt",
 		description:
-			"Apply a C replacement for a GLOBAL_ASM pragma, compile the translation unit, extract generated assembly, diff against target, and score. Auto-reverts if non-matching.",
+			"Apply a C replacement for a GLOBAL_ASM pragma plus optional temporary context patches, compile the translation unit, extract generated assembly, diff against target, and score. Auto-reverts if non-matching.",
 		promptSnippet: "Try a C implementation for a GLOBAL_ASM function — compiles, diffs, scores, auto-reverts on mismatch",
 		promptGuidelines: [
 			"Use decomp_attempt to test a C function body against the original assembly. It compiles only the owning TU (~3s), not the full ROM.",
+			"Use contextPatch for temporary prototype/global/struct declaration fixes that affect IDO codegen; patches are reverted on non-match and must pass full ROM SHA in decomp_accept before commit.",
 			"decomp_attempt always auto-reverts on non-match. The full raw generated ASM is included in every non-match response — no need to inspect separately.",
 		],
 		parameters: Type.Object({
@@ -1733,6 +1741,13 @@ export default function (pi: ExtensionAPI) {
 			code: Type.String({ description: "Complete C function body to replace the pragma" }),
 			externs: Type.Optional(
 				Type.Array(Type.String(), { description: "Additional extern declarations to add at top of file" }),
+			),
+			contextPatch: Type.Optional(
+				Type.Array(Type.Object({
+					path: Type.String({ description: "Repo-relative path to patch, e.g. conker/src/game_A9D90.c or conker/include/functions.h" }),
+					oldText: Type.String({ description: "Exact unique text to replace temporarily" }),
+					newText: Type.String({ description: "Temporary replacement text" }),
+				}), { description: "Temporary exact-text patches for surrounding C context/prototypes. Reverted on non-match; committed only through decomp_accept after full ROM SHA." }),
 			),
 		}),
 
@@ -1744,10 +1759,26 @@ export default function (pi: ExtensionAPI) {
 			const srcPath = path.join(ctx.cwd, "conker/src", params.file);
 			const pragma = `#pragma GLOBAL_ASM("asm/nonmatchings/${params.file.replace(".c", "")}/${params.function}.s")`;
 
-			// Read original source
+			// Read original source and any context-patched files. All attempted edits are
+			// sandboxed: on compile/diff mismatch we restore every touched file byte-for-byte.
+			const originals = new Map<string, string>();
+			const contents = new Map<string, string>();
+			const readTracked = (filePath: string): string => {
+				if (contents.has(filePath)) return contents.get(filePath)!;
+				const text = fs.readFileSync(filePath, "utf-8");
+				originals.set(filePath, text);
+				contents.set(filePath, text);
+				return text;
+			};
+			const revertAll = () => {
+				for (const [filePath, text] of originals.entries()) {
+					fs.writeFileSync(filePath, text);
+				}
+			};
+
 			let original: string;
 			try {
-				original = fs.readFileSync(srcPath, "utf-8");
+				original = readTracked(srcPath);
 			} catch (e: any) {
 				return { content: [{ type: "text", text: `Cannot read ${srcPath}: ${e.message}` }], details: {} };
 			}
@@ -1759,8 +1790,30 @@ export default function (pi: ExtensionAPI) {
 				};
 			}
 
-			// Apply patch
-			let patched = original;
+			// Apply surrounding context patches first. These are intended for prototype,
+			// extern, or struct declaration experiments that influence IDO codegen.
+			try {
+				for (const patch of (params.contextPatch || []) as ContextPatch[]) {
+					const rel = patch.path.replace(/^\/+/, "");
+					const patchPath = path.resolve(ctx.cwd, rel);
+					const allowedRoot = path.resolve(ctx.cwd, "conker");
+					if (!patchPath.startsWith(allowedRoot + path.sep)) {
+						throw new Error(`contextPatch path must be inside conker/: ${patch.path}`);
+					}
+					let text = readTracked(patchPath);
+					const matches = text.split(patch.oldText).length - 1;
+					if (matches !== 1) {
+						throw new Error(`contextPatch oldText must match exactly once in ${patch.path}; found ${matches}`);
+					}
+					contents.set(patchPath, text.replace(patch.oldText, patch.newText));
+				}
+			} catch (e: any) {
+				revertAll();
+				return { content: [{ type: "text", text: `Context patch failed (reverted): ${e.message}` }], details: { match: false, reason: "context_patch_failed" } };
+			}
+
+			// Apply function patch
+			let patched = contents.get(srcPath)!;
 
 			// Add externs if needed
 			if (params.externs && params.externs.length > 0) {
@@ -1775,7 +1828,10 @@ export default function (pi: ExtensionAPI) {
 
 			// Replace pragma with code
 			patched = patched.replace(pragma, params.code);
-			fs.writeFileSync(srcPath, patched);
+			contents.set(srcPath, patched);
+			for (const [filePath, text] of contents.entries()) {
+				if (originals.get(filePath) !== text) fs.writeFileSync(filePath, text);
+			}
 
 			onUpdate?.({
 				content: [{ type: "text", text: "Compiling translation unit..." }],
@@ -1789,9 +1845,9 @@ export default function (pi: ExtensionAPI) {
 			});
 
 			if (buildResult.code !== 0) {
-				// Revert
-				fs.writeFileSync(srcPath, original);
-				appendSessionAttempt(ctx.cwd, { function: params.function, file: params.file, score: 0, reason: "compile_error", code: params.code, stderr: buildResult.stderr?.slice(0, 1000) });
+				// Revert all attempted source/context edits
+				revertAll();
+				appendSessionAttempt(ctx.cwd, { function: params.function, file: params.file, score: 0, reason: "compile_error", code: params.code, contextPatch: params.contextPatch || [], stderr: buildResult.stderr?.slice(0, 1000) });
 				return {
 					content: [
 						{
@@ -1834,7 +1890,7 @@ export default function (pi: ExtensionAPI) {
 			if (scoreData.generated_instructions && scoreData.target_instructions) {
 				const ratio = scoreData.generated_instructions / scoreData.target_instructions;
 				if (ratio > 3) {
-					fs.writeFileSync(srcPath, original);
+					revertAll();
 					const entry = state.queue.find((e: QueueEntry) => e.function === params.function);
 					if (entry) {
 						entry.attempts++;
@@ -1846,6 +1902,7 @@ export default function (pi: ExtensionAPI) {
 							reason: `generated ${scoreData.generated_instructions} instr for ${scoreData.target_instructions} target (${ratio.toFixed(1)}x oversized)`,
 							diffs: [],
 							timestamp: new Date().toISOString(),
+							contextPatch: params.contextPatch || [],
 						});
 
 					}
@@ -1899,7 +1956,7 @@ export default function (pi: ExtensionAPI) {
 			}
 
 			// Non-match: save attempt to history
-			appendSessionAttempt(ctx.cwd, { function: params.function, file: params.file, score: scoreData.score || 0, reason: scoreData.reason || "unknown", code: params.code, diffs: scoreData.diffs || [] });
+			appendSessionAttempt(ctx.cwd, { function: params.function, file: params.file, score: scoreData.score || 0, reason: scoreData.reason || "unknown", code: params.code, contextPatch: params.contextPatch || [], diffs: scoreData.diffs || [] });
 			const diagnosis = diagnoseNonMatch(scoreData, rawGeneratedAsm);
 			const diffSummary = scoreData.diffs
 				? scoreData.diffs
@@ -1916,13 +1973,14 @@ export default function (pi: ExtensionAPI) {
 					reason: scoreData.reason || "unknown",
 					diffs: (scoreData.diffs || []).map((d: any) => `${d.type}: target=${d.target} got=${d.generated}`),
 					timestamp: new Date().toISOString(),
+					contextPatch: params.contextPatch || [],
 				});
 				// Keep only last N attempts
 
 			}
 
-			// Revert source
-			fs.writeFileSync(srcPath, original);
+			// Revert all attempted source/context edits
+			revertAll();
 			saveQueue(ctx.cwd);
 			latestCtx = ctx;
 			refreshWidget();
@@ -2040,8 +2098,8 @@ export default function (pi: ExtensionAPI) {
 			const buildOutput = `${buildResult.stdout || ""}\n${buildResult.stderr || ""}`;
 
 			if (!(buildResult.code === 0 && buildOutput.includes("build/conker.us.bin: OK"))) {
-				// Revert
-				await pi.exec("git", ["checkout", "--", `conker/src/${params.file}`]);
+				// Revert the function body and any contextPatch edits left from the matching attempt.
+				await pi.exec("git", ["checkout", "--", "conker/src", "conker/include"]);
 				return {
 					content: [
 						{
@@ -2096,11 +2154,11 @@ export default function (pi: ExtensionAPI) {
 			// The pre-commit hook will run the full ROM build again as a safety check.
 			// Since we already verified above, it will pass — but it's the hard gate.
 			const desc = params.description || `match ${params.function}`;
-			await pi.exec("git", ["add", `conker/src/${params.file}`, "README.md", ".pi/decomp/queue.json", ".pi/decomp/patterns.json"]);
+			await pi.exec("git", ["add", "conker/src", "conker/include", "README.md", ".pi/decomp/queue.json", ".pi/decomp/patterns.json"]);
 			const commitResult = await pi.exec("git", ["commit", "-m", `feat(decomp): ${desc}`]);
 			if (commitResult.code !== 0) {
-				// Pre-commit hook blocked it — ROM verification failed
-				await pi.exec("git", ["checkout", "--", `conker/src/${params.file}`]);
+				// Pre-commit hook blocked it — ROM verification failed. Revert source and context patches.
+				await pi.exec("git", ["checkout", "--", "conker/src", "conker/include"]);
 				return {
 					content: [{ type: "text", text: `⛔ Pre-commit hook blocked: ROM SHA failed on final verification.\n${commitResult.stdout}\n${commitResult.stderr}` }],
 					details: { accepted: false, reason: "hook_blocked" },
