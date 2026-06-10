@@ -1059,7 +1059,30 @@ void func_15078358(void) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_A28B0/func_1507839C.s")
+void func_1507839C(void) {
+    struct127 *tmp;
+    f32 phi_f0;
+    f32 phi_f2;
+
+    if (D_800D1892 == 0) {
+        tmp = &D_800CC2D0[D_800D154C->unk222];
+        phi_f0 = func_1505A6F8(D_800D154C, tmp);
+    } else if (D_800D1892 == 1) {
+        tmp = &D_800CC2D0[D_800D154C->unk222];
+        phi_f0 = func_1505A72C(D_800D154C, tmp);
+    } else {
+        phi_f0 = fabsf(D_800D154C->y_position - *(f32 *)((s32)D_800CC2E8 + (D_800D154C->unk222 * 812)));
+    }
+
+    phi_f2 = D_800D1893 * 8;
+    if (D_800D1893 == 0xFF) {
+        phi_f2 = D_800D154C->unk23D * 8;
+    }
+    if (((D_800D1891 == 0) && (phi_f0 < phi_f2)) ||
+        ((D_800D1891 == 1) && (phi_f2 < phi_f0))) {
+        func_15075400(D_800D1890);
+    }
+}
 // NON-MATCHING: JUSTREG
 // void func_1507839C(void) {
 //     struct127 *tmp;

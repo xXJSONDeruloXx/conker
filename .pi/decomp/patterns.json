@@ -1135,5 +1135,14 @@
     "example_functions": [
       "func_150C3160"
     ]
+  },
+  {
+    "id": "byte-addressed-global-float-stride",
+    "description": "Use byte-addressed pointer arithmetic for global float/table strides when array indexing introduces a separate final shift temp and shifts downstream registers.",
+    "trigger": "Near-match where target builds a stride offset in one temp (e.g. final `sll t3,t3,2`) for a global float load, but C array indexing emits the final element-size multiply into a new temp and shifts later registers.",
+    "solution": "Replace `GLOBAL[index]` with `*(type *)((s32)GLOBAL + byte_offset)` using the exact byte stride, e.g. `*(f32 *)((s32)D_800CC2E8 + (idx * 812))`.",
+    "example_functions": [
+      "func_1507839C"
+    ]
   }
 ]
