@@ -2509,15 +2509,31 @@ export default function (pi: ExtensionAPI) {
 				}
 				return null;
 			};
+			const lastNumberMatch = (out: string, re: RegExp) => {
+				const matches = [...out.matchAll(re)];
+				return matches.length ? parseInt(matches[matches.length - 1]?.[1] || "0") : null;
+			};
+			const parseTransmuterSummaryLine = (out: string) => {
+				const lineMatch = out.match(/\[TRANSMUTER_SUMMARY\]([^\n]+)/);
+				const fields: Record<string, number | string> = {};
+				if (!lineMatch) return fields;
+				for (const m of (lineMatch[1] || "").matchAll(/(\w+)=([^\s]+)/g)) {
+					const key = m[1];
+					const value = m[2];
+					if (!key || value === undefined) continue;
+					const parsed = Number(value);
+					fields[key] = Number.isFinite(parsed) ? parsed : value;
+				}
+				return fields;
+			};
 			const quickTransmuterStats = (out: string, report: any) => {
 				const summary = report?.summary || {};
-				const compiledMatch = out.match(/(\d+)\s*compiled/i);
-				const forkMatch = out.match(/(\d+)\s*forks?/i);
-				const iterMatch = out.match(/Iteration[s:]?\s*(\d+)/i);
+				const line = parseTransmuterSummaryLine(out);
 				return {
-					compiled: compiledMatch ? parseInt(compiledMatch[1]) : (typeof summary.totalCompiled === "number" ? summary.totalCompiled : null),
-					forks: forkMatch ? parseInt(forkMatch[1]) : (typeof summary.forkCount === "number" ? summary.forkCount : null),
-					iters: iterMatch ? parseInt(iterMatch[1]) : (typeof summary.totalIterations === "number" ? summary.totalIterations : null),
+					compiled: typeof summary.totalCompiled === "number" ? summary.totalCompiled : (typeof line.compiled === "number" ? line.compiled : lastNumberMatch(out, /(\d+)\s*compiled/gi)),
+					forks: typeof summary.forkCount === "number" ? summary.forkCount : (lastNumberMatch(out, /(\d+)\s*forks?/gi) ?? null),
+					iters: typeof summary.totalIterations === "number" ? summary.totalIterations : (typeof line.iterations === "number" ? line.iterations : lastNumberMatch(out, /Iteration[s:]?\s*(\d+)/gi)),
+					errors: typeof summary.totalErrors === "number" ? summary.totalErrors : (typeof line.compile_errors === "number" ? line.compile_errors : lastNumberMatch(out, /(\d+)\s*errors/gi)),
 				};
 			};
 			const cleanupFreshGeneratedFiles = () => {
@@ -2677,30 +2693,20 @@ export default function (pi: ExtensionAPI) {
 			// Parse output/report for score info. Prefer stdout for compatibility with older Transmuter,
 			// then fall back to the JSON report schema used by current main.
 			const reportSummary = sessionReport?.summary || {};
-			const scoreFromOutput = output.match(/Score\s+\d+\s*→\s*(\d+)/);
+			const scoreFromOutput = lastNumberMatch(output, /Score\s+\d+\s*→\s*(\d+)/g);
 			const initialScoreMatch = output.match(/Score\s+(\d+)\s*→/);
-			const bestScore = scoreFromOutput
-				? parseInt(scoreFromOutput[1])
-				: (typeof reportSummary.bestScore === "number" ? reportSummary.bestScore : (candidateFiles[0]?.score ?? null));
-			const initialScore = initialScoreMatch
-				? parseInt(initialScoreMatch[1])
-				: (typeof reportSummary.baseScore === "number" ? reportSummary.baseScore : null);
-			const iterMatch = output.match(/Iteration[s:]?\s*(\d+)/i);
-			const iters = iterMatch
-				? parseInt(iterMatch[1])
-				: (typeof reportSummary.totalIterations === "number" ? reportSummary.totalIterations : null);
-			const forkMatch = output.match(/(\d+)\s*forks?/i);
-			const forks = forkMatch
-				? parseInt(forkMatch[1])
-				: (typeof reportSummary.forkCount === "number" ? reportSummary.forkCount : 0);
-			const compiledMatch = output.match(/(\d+)\s*compiled/i);
-			const compiled = compiledMatch
-				? parseInt(compiledMatch[1])
-				: (typeof reportSummary.totalCompiled === "number" ? reportSummary.totalCompiled : null);
-			const errorsMatch = output.match(/(\d+)\s*errors/i);
-			const compileErrors = errorsMatch
-				? parseInt(errorsMatch[1])
-				: (typeof reportSummary.totalErrors === "number" ? reportSummary.totalErrors : null);
+			const summaryLine = parseTransmuterSummaryLine(output);
+			const bestScore = typeof reportSummary.bestScore === "number"
+				? reportSummary.bestScore
+				: (typeof summaryLine.best === "number" ? summaryLine.best : (scoreFromOutput ?? candidateFiles[0]?.score ?? null));
+			const initialScore = typeof reportSummary.baseScore === "number"
+				? reportSummary.baseScore
+				: (initialScoreMatch ? parseInt(initialScoreMatch[1]) : null);
+			const finalStats = quickTransmuterStats(output, sessionReport);
+			const iters = finalStats.iters;
+			const forks = finalStats.forks ?? 0;
+			const compiled = finalStats.compiled;
+			const compileErrors = finalStats.errors;
 			const stdoutForkRules = [...(output.matchAll(/fork:\s*\d+\s*→\s*\d+\s*via\s+(\S+)/g) || [])].map(m => m[1]);
 			const reportForkRules = Array.isArray(sessionReport?.ruleStats)
 				? sessionReport.ruleStats
