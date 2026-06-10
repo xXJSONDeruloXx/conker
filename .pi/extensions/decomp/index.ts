@@ -485,12 +485,26 @@ async function gitPushWithRetry(pi: any): Promise<void> {
 	}
 }
 
+function findConkerRepoRoot(cwd: string): string {
+	const fs = require("node:fs");
+	const path = require("node:path");
+	let dir = cwd;
+	for (let i = 0; i < 6; i++) {
+		if (fs.existsSync(path.join(dir, "conker/Makefile"))) return dir;
+		const parent = path.dirname(dir);
+		if (parent === dir) break;
+		dir = parent;
+	}
+	return cwd;
+}
+
 async function runDockerVerify(
 	pi: any,
 	cwd: string,
 	signal: any,
 	options: { clean?: boolean; rebuild?: boolean; timeoutSeconds?: number } = {},
 ): Promise<any> {
+	const root = findConkerRepoRoot(cwd);
 	const cleanCmd = options.clean ? "make -C conker clean;" : "";
 	const rebuildCmd = options.rebuild ? "rm -f conker/build/conker.us.ok conker/build/conker.us.bin;" : "";
 	const verifyCmd = [
@@ -512,7 +526,7 @@ async function runDockerVerify(
 			"--platform",
 			"linux/amd64",
 			"-v",
-			`${cwd}:/conker`,
+			`${root}:/conker`,
 			"-w",
 			"/conker",
 			"conker-build-min-amd64",
