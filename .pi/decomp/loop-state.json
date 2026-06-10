@@ -1,8 +1,8 @@
 {
-  "enabled": true,
-  "chunk": 377,
-  "status": "running",
+  "enabled": false,
+  "chunk": 378,
+  "status": "stopped",
   "lastChunkSummary": "No match this chunk. Investigated several auto-rotated medium candidates: func_1000EE70, func_1507B974, func_15163FEC/func_15164134, and near-miss func_1505F188; most plateaued on IDO scheduling/register/FPR allocation issues, and Transmuter found no improvement for func_1000EE70/func_1505F188. Skipped the plateaued candidates so the next chunk can continue with fresh functions.",
-  "consecutiveNoProgress": 0,
-  "updatedAt": "2026-06-04T19:57:25.918Z"
+  "consecutiveNoProgress": 1,
+  "updatedAt": "2026-06-10T11:15:00.000Z"
 }
