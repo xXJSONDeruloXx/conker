@@ -30207,8 +30207,8 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 12,
-    "lastScore": 0.8529,
+    "attempts": 10,
+    "lastScore": 0.49264705882352944,
     "status": "pending",
     "history": [
       {
@@ -30382,54 +30382,6 @@
         "reason": "length_mismatch (target=68, generated=67)",
         "diffs": [],
         "timestamp": "2026-06-04T12:23:06.304Z"
-      },
-      {
-        "code": "void func_15077F64(void) {\n    volatile u64 framepad;\n    u8 pad0;\n    u8 temp_t6;\n    s32 phi_a0;\n    s32 phi_a1;\n    s32 temp_v0;\n    f32 temp_f12;\n    f32 temp_f14;\n\n    temp_t6 = D_800D1890 - 1;\n    temp_v0 = D_800D2104[D_800D154C->unk13F] + (D_800D154C->unk21E * 8);\n    temp_f12 = (f32)*(s16 *)(temp_v0 + 8) - D_800D154C->x_position;\n    temp_f14 = D_800D154C->z_position - (f32)*(s16 *)(temp_v0 + 0xC);\n    D_800D154C->unk78 = func_1505A630(temp_f12, temp_f14, 0);\n    phi_a0 = phi_a1 = ((D_800D154C->unk78 - D_800D154C->unk76) >> 8) & 0xFF;\n    if ((phi_a1 & 0x80) != 0) {\n        phi_a1 = -phi_a1;\n        phi_a0 = phi_a1 & 0xFF;\n        phi_a1 = phi_a0;\n    }\n    if (((u8 *)D_80099A3C)[temp_t6 * 0xA] < phi_a0) {\n        D_800D154C->unk250 = D_800D1891;\n        func_15056A00(D_800D154C, phi_a1, temp_t6);\n    }\n}",
-        "score": 0.8529,
-        "reason": "structural_diffs=10",
-        "diffs": [
-          "structural: target=lui t6, HI(D_80099A3C) got=lui t5, HI(D_80099A3C)",
-          "structural: target=sll t5, a3, 2 got=sll t4, a3, 2",
-          "structural: target=addu t5, t5, a3 got=addu t4, t4, a3",
-          "structural: target=sll t5, t5, 1 got=sll t4, t4, 1",
-          "structural: target=addu t6, t6, t5 got=addu t5, t5, t4",
-          "structural: target=lbu t6, LO(D_80099A3C)(t6) got=lbu t5, LO(D_80099A3C)(t5)",
-          "structural: target=lui t8, HI(D_800D1891) got=lui t6, HI(D_800D1891)",
-          "structural: target=slt at, t6, a0 got=slt at, t5, a0",
-          "structural: target=lbu t8, LO(D_800D1891)(t8) got=lbu t6, LO(D_800D1891)(t6)",
-          "structural: target=sb t8, 592(v1) got=sb t6, 592(v1)"
-        ],
-        "timestamp": "2026-06-10T18:23:02.601Z",
-        "contextPatch": []
-      },
-      {
-        "code": "void func_15077F64(void) {\n    volatile u64 framepad;\n    u8 pad0;\n    u8 temp_t6;\n    s32 phi_a0;\n    s32 phi_a1;\n    s32 temp_v0;\n    s32 temp_t5;\n    f32 temp_f12;\n    f32 temp_f14;\n\n    temp_t6 = D_800D1890 - 1;\n    temp_v0 = D_800D2104[D_800D154C->unk13F] + (D_800D154C->unk21E * 8);\n    temp_f12 = (f32)*(s16 *)(temp_v0 + 8) - D_800D154C->x_position;\n    temp_f14 = D_800D154C->z_position - (f32)*(s16 *)(temp_v0 + 0xC);\n    D_800D154C->unk78 = func_1505A630(temp_f12, temp_f14, 0);\n    temp_t5 = (temp_t6 * 4) + temp_t6;\n    temp_t5 *= 2;\n    phi_a0 = phi_a1 = ((D_800D154C->unk78 - D_800D154C->unk76) >> 8) & 0xFF;\n    if ((phi_a1 & 0x80) != 0) {\n        phi_a1 = -phi_a1;\n        phi_a0 = phi_a1 & 0xFF;\n        phi_a1 = phi_a0;\n    }\n    if (((u8 *)D_80099A3C)[temp_t5] < phi_a0) {\n        D_800D154C->unk250 = D_800D1891;\n        func_15056A00(D_800D154C, phi_a1, temp_t6);\n    }\n}",
-        "score": 0.6471,
-        "reason": "structural_diffs=24",
-        "diffs": [
-          "structural: target=lui t6, HI(D_80099A3C) got=sh v0, 120(t8)",
-          "structural: target=sh v0, 120(t8) got=lw v1, 0(t0)",
-          "structural: target=lw v1, 0(t0) got=sll t4, a3, 2",
-          "structural: target=sll t5, a3, 2 got=addu t5, t4, a3",
-          "structural: target=addu t5, t5, a3 got=lhu t7, 120(v1)",
-          "structural: target=lhu t7, 120(v1) got=lhu t9, 118(v1)",
-          "structural: target=lhu t9, 118(v1) got=sll t6, t5, 1",
-          "structural: target=sll t5, t5, 1 got=lui t8, HI(D_80099A3C)",
-          "structural: target=addu t6, t6, t5 got=subu a1, t7, t9",
-          "structural: target=subu a1, t7, t9 got=sra t1, a1, 8",
-          "structural: target=sra t1, a1, 8 got=andi t3, t1, 255",
-          "structural: target=andi t3, t1, 255 got=andi t2, t3, 128",
-          "structural: target=andi t2, t3, 128 got=move a1, t3",
-          "structural: target=move a1, t3 got=beqz t2, L0",
-          "structural: target=beqz t2, L0 got=move a0, t3",
-          "structural: target=move a0, t3 got=negu a1, t3",
-          "structural: target=negu a1, t3 got=andi a0, a1, 255",
-          "structural: target=andi a0, a1, 255 got=move a1, a0",
-          "structural: target=move a1, a0 got=addu t8, t8, t6",
-          "structural: target=lbu t6, LO(D_80099A3C)(t6) got=lbu t8, LO(D_80099A3C)(t8)"
-        ],
-        "timestamp": "2026-06-10T18:23:19.073Z",
-        "contextPatch": []
       }
     ]
   },
