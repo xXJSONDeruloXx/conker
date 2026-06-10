@@ -199,7 +199,38 @@ void func_15160954(f32 *arg0, f32 *arg1, f32 *arg2, f32 *arg3, struct225 *arg4) 
     }
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_18D770/func_15160A58.s")
+struct225 *func_15160A58(struct127 *arg0, u8 arg1, struct17 *arg2, u8 arg3, s16 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8, s32 arg9, s32 argA, s8 argB, s32 argC, u8 argD, u8 argE, s32 argF) {
+    struct225 *ret;
+    Header header;
+    u8 payload[0x18];
+    s32 header2[3];
+
+    if (arg0 == NULL) {
+        return NULL;
+    }
+
+    header.unk0 = arg3;
+    header.unk1 = 5;
+    header.unk2 = arg4;
+    header.unk4 = 0x10;
+
+    *(struct127 **)&payload[0] = arg0;
+    payload[4] = arg0->unique_id;
+    payload[5] = arg1;
+    *(struct17 *)&payload[8] = *arg2;
+    *(s8 *)&payload[0x14] = argB;
+    payload[0x15] = argD;
+
+    header2[0] = 0;
+    header2[1] = 0;
+    header2[2] = 0;
+
+    ret = func_151602C0(&header, (Header2 *)header2, arg5, arg6, arg7, arg8, 0xFF, 0, argC + 0x18, argE, argF);
+    if (ret != NULL) {
+        memcpy(&ret->unk18, payload, 0x18);
+    }
+    return ret;
+}
 // struct225 *func_15160A58(void *arg0, u8 arg1, void *arg2, u8 arg3, s16 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8, s8 argB, s32 argC, u8 argD, u8 argE, s32 argF) {
 //     s32 sp64;
 //

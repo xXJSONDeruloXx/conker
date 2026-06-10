@@ -1,11 +1,11 @@
 # Conker's Bad Fur Day Decompilation
 
-![Conker's Bad Fur Day (US) Progress](https://img.shields.io/badge/Conker's%20Bad%20Fur%20Day%20(US)-7.69%25-critical) ![all Functions](https://img.shields.io/badge/funcs-1544%2F5893-blue) ![Build Status](https://github.com/mkst/conker/workflows/build/badge.svg)
+![Conker's Bad Fur Day (US) Progress](https://img.shields.io/badge/Conker's%20Bad%20Fur%20Day%20(US)-7.71%25-critical) ![all Functions](https://img.shields.io/badge/funcs-1545%2F5893-blue) ![Build Status](https://github.com/mkst/conker/workflows/build/badge.svg)
 
 | Progress                                                                                                                                           | Functions                                                |
 |----------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------|
 | ![init Progress](https://img.shields.io/badge/init-24.88%25-yellow) | ![init Functions](https://img.shields.io/badge/funcs-248%2F538-blue) |
-| ![game Progress](https://img.shields.io/badge/game-6.29%25-critical) | ![game Functions](https://img.shields.io/badge/funcs-1270%2F5313-blue) |
+| ![game Progress](https://img.shields.io/badge/game-6.30%25-critical) | ![game Functions](https://img.shields.io/badge/funcs-1271%2F5313-blue) |
 | ![debugger Progress](https://img.shields.io/badge/debugger-21.59%25-orange) | ![debugger Functions](https://img.shields.io/badge/funcs-26%2F42-blue) |
 
 A WIP decompilation of Conker's Bad Fur Day.
