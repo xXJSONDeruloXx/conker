@@ -508,8 +508,9 @@ async function runDockerVerify(
 	options: { clean?: boolean; rebuild?: boolean; timeoutSeconds?: number } = {},
 ): Promise<any> {
 	const root = findConkerBuildRoot(cwd);
-	const cleanCmd = options.clean ? `make -C ${root.makeDir} clean;` : "";
-	const rebuildCmd = options.rebuild ? `rm -f ${root.makeDir}/build/conker.us.ok ${root.makeDir}/build/conker.us.bin;` : "";
+	const containerMakeDir = root.makeDir === "." ? "/src" : `/src/${root.makeDir}`;
+	const cleanCmd = options.clean ? `make -C ${containerMakeDir} clean;` : "";
+	const rebuildCmd = options.rebuild ? `rm -f ${containerMakeDir}/build/conker.us.ok ${containerMakeDir}/build/conker.us.bin;` : "";
 	const verifyCmd = [
 		"set -e",
 		cleanCmd,
@@ -517,9 +518,10 @@ async function runDockerVerify(
 		// `make clean` removes generated build subdirectories. The raw make target
 		// does not always recreate every nested output dir before redirection/linking,
 		// so prime them via the project's `dirs` target before the SHA gate.
-		`make -C ${root.makeDir} dirs >/dev/null`,
-		`make -C ${root.makeDir} verify`,
-	].filter(Boolean).join(" ");
+		`test -f ${containerMakeDir}/Makefile`,
+		`make -C ${containerMakeDir} dirs >/dev/null`,
+		`make -C ${containerMakeDir} verify`,
+	].filter(Boolean).join("; ");
 
 	return pi.exec(
 		"docker",
@@ -529,9 +531,9 @@ async function runDockerVerify(
 			"--platform",
 			"linux/amd64",
 			"-v",
-			`${root.mount}:/workspace`,
+			`${root.mount}:/src`,
 			"-w",
-			"/workspace",
+			"/src",
 			"conker-build-min-amd64",
 			"bash",
 			"-lc",
