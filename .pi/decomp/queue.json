@@ -1458,7 +1458,7 @@
     "difficulty": "low",
     "tags": [],
     "attempts": 39,
-    "lastScore": 0.9,
+    "lastScore": 0.35,
     "status": "skipped",
     "history": [
       {
@@ -2106,14 +2106,25 @@
         "timestamp": "2026-06-03T09:56:31.096Z"
       },
       {
-        "code": "void func_15079F6C(void) {\n    u8 *ptr;\n    u16 tmp0;\n    s32 tmp1;\n\n    tmp0 = D_800D1890 << 8;\n    ptr = &D_800D1891;\n    tmp1 = *ptr;\n    D_800D154C->unk224 = tmp0 | tmp1;\n    ptr = &D_800D1892;\n    D_800D154C->unk22B = *ptr;\n    ptr = &D_800D1893;\n    D_800D154C->unk226 = *ptr;\n}",
-        "score": 0.9,
-        "reason": "structural_diffs=2",
+        "code": "void func_15079F6C(void) {\n    u8 temp_v0;\n    u8 *temp_v1;\n    u8 temp_t6;\n    u16 temp_t8;\n\n    temp_v0 = D_800D1890;\n    temp_v1 = &D_800D1891;\n    temp_t6 = *temp_v1;\n    temp_t8 = (temp_v0 << 8) | temp_t6;\n    D_800D154C->unk224 = temp_t8;\n    temp_v1 = &D_800D1892;\n    D_800D154C->unk22B = *temp_v1;\n    temp_v1 = &D_800D1893;\n    D_800D154C->unk226 = *temp_v1;\n}",
+        "score": 0.35,
+        "reason": "structural_diffs=13",
         "diffs": [
           "structural: target=lbu t6, LO(D_800D1891)(v1) got=lbu v1, LO(D_800D1891)(v1)",
-          "structural: target=or t8, t7, t6 got=or t8, t7, v1"
+          "structural: target=lw t9, 0(a0) got=lw t8, 0(a0)",
+          "structural: target=sll t7, v0, 8 got=sll t6, v0, 8",
+          "structural: target=or t8, t7, t6 got=or t7, t6, v1",
+          "structural: target=sh t8, 548(t9) got=sh t7, 548(t8)",
+          "structural: target=lui t0, HI(D_800D1892) got=lui t9, HI(D_800D1892)",
+          "structural: target=lbu t0, LO(D_800D1892)(t0) got=lbu t9, LO(D_800D1892)(t9)",
+          "structural: target=lw t1, 0(a0) got=lw t0, 0(a0)",
+          "structural: target=lui t2, HI(D_800D1893) got=lui t1, HI(D_800D1893)",
+          "structural: target=sb t0, 555(t1) got=sb t9, 555(t0)",
+          "structural: target=lw t3, 0(a0) got=lw t2, 0(a0)",
+          "structural: target=lbu t2, LO(D_800D1893)(t2) got=lbu t1, LO(D_800D1893)(t1)",
+          "structural: target=sb t2, 550(t3) got=sb t1, 550(t2)"
         ],
-        "timestamp": "2026-06-10T00:03:01.099Z"
+        "timestamp": "2026-06-10T00:15:19.994Z"
       }
     ]
   },
