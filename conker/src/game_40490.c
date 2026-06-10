@@ -3,6 +3,9 @@
 #include "functions.h"
 #include "variables.h"
 
+extern f32 D_800966B4;
+void func_1510F800(s32);
+
 extern u8 D_800C35E8;
 extern f32 D_80096650;
 extern void (*D_80082F28[])(struct16 *, f32);
@@ -309,7 +312,33 @@ s32 func_15015104(struct134 *arg0) {
     }
     return 1;
 }
-#pragma GLOBAL_ASM("asm/nonmatchings/game_40490/func_150151D4.s")
+s32 func_150151D4(struct134 *arg0) {
+    s32 sp38[18];
+    struct260 *temp_v0;
+
+    arg0->unk16 |= 4;
+    ((u8 *)arg0)[0x14] = 1;
+    sp38[0] = (s32)arg0;
+    ((f32 *)sp38)[1] = 0.0f;
+    ((s16 *)sp38)[4] = -1;
+    ((f32 *)sp38)[3] = (f32)*(s16 *)((u8 *)arg0 + 0);
+    ((f32 *)sp38)[4] = (f32)*(s16 *)((u8 *)arg0 + 2);
+    ((f32 *)sp38)[5] = (f32)*(s16 *)((u8 *)arg0 + 4);
+    ((f32 *)sp38)[6] = (f32)*(s16 *)((u8 *)arg0 + 6);
+    ((f32 *)sp38)[7] = (f32)*(s16 *)((u8 *)arg0 + 8);
+    ((f32 *)sp38)[8] = D_800966B4;
+    sp38[16] = 0;
+    ((u8 *)sp38)[0x3D] = 0;
+    ((u8 *)sp38)[0x3C] = 0;
+    sp38[14] = 0;
+    func_1510F800(0);
+    sp38[17] = func_1510FD20(arg0->unk0, arg0->unk4);
+    temp_v0 = func_15149130(0x12C, -1, 0x3C, -1, 0, 0x2D, (struct37 *)0x48, 0xFF, 0);
+    if (temp_v0 != NULL) {
+        memcpy((u8 *)temp_v0 + 0x28, sp38, 0x48);
+    }
+    return 1;
+}
 
 s32 func_15015300(struct134 *arg0) {
     void (*func)(void);

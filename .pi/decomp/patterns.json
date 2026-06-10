@@ -1137,12 +1137,12 @@
     ]
   },
   {
-    "id": "force-base-first-addu-through-accumulator-local",
-    "description": "When IDO emits commutative `addu` operands in the wrong order for a call argument, force the desired base-first order by initializing an argument temp from the base, then applying `+= offset` before the call.",
-    "trigger": "One-instruction near-match where target has `addu a2, baseReg, offsetReg` (e.g. `addu a2, v1, t5`) but generated code emits `addu a2, offsetReg, baseReg` from a single `base + offset` expression, even when C operand order is swapped or pointer arithmetic is used.",
-    "solution": "Introduce a local for the call argument: `temp_a2 = base; temp_a2 += offset; func(..., temp_a2);`. This preserves the base register as the first `addu` operand while keeping the same instruction count.",
+    "id": "stack-word-zero-store-order-follows-assignment-order",
+    "description": "For stack payload construction, IDO generally preserves the relative order of independent word zero stores, even when byte stores and conversions are scheduled between them.",
+    "trigger": "Near-match where all instructions match except two `sw zero, offset(sp)` stores to different fields in a local payload are swapped (e.g. target stores `sp+0x78` before `sp+0x70`).",
+    "solution": "Reorder the C assignments for those payload fields to match target order, while leaving intervening byte/floating assignments in place. For local arrays, assign the later-offset word first if target does so: `sp[16]=0; byte stores; sp[14]=0;`.",
     "example_functions": [
-      "func_1513418C"
+      "func_150151D4"
     ]
   }
 ]
