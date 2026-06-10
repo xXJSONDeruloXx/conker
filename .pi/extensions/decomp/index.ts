@@ -485,17 +485,20 @@ async function gitPushWithRetry(pi: any): Promise<void> {
 	}
 }
 
-function findConkerRepoRoot(cwd: string): string {
+function findConkerBuildRoot(cwd: string): { mount: string; makeDir: string } {
 	const fs = require("node:fs");
 	const path = require("node:path");
 	let dir = cwd;
-	for (let i = 0; i < 6; i++) {
-		if (fs.existsSync(path.join(dir, "conker/Makefile"))) return dir;
+	for (let i = 0; i < 8; i++) {
+		// Preferred: repository root containing the nested `conker/` build dir.
+		if (fs.existsSync(path.join(dir, "conker/Makefile"))) return { mount: dir, makeDir: "conker" };
+		// Fallback: already inside the nested `conker/` build dir.
+		if (fs.existsSync(path.join(dir, "Makefile")) && fs.existsSync(path.join(dir, "conker.ld"))) return { mount: dir, makeDir: "." };
 		const parent = path.dirname(dir);
 		if (parent === dir) break;
 		dir = parent;
 	}
-	return cwd;
+	return { mount: cwd, makeDir: "conker" };
 }
 
 async function runDockerVerify(
@@ -504,9 +507,9 @@ async function runDockerVerify(
 	signal: any,
 	options: { clean?: boolean; rebuild?: boolean; timeoutSeconds?: number } = {},
 ): Promise<any> {
-	const root = findConkerRepoRoot(cwd);
-	const cleanCmd = options.clean ? "make -C conker clean;" : "";
-	const rebuildCmd = options.rebuild ? "rm -f conker/build/conker.us.ok conker/build/conker.us.bin;" : "";
+	const root = findConkerBuildRoot(cwd);
+	const cleanCmd = options.clean ? `make -C ${root.makeDir} clean;` : "";
+	const rebuildCmd = options.rebuild ? `rm -f ${root.makeDir}/build/conker.us.ok ${root.makeDir}/build/conker.us.bin;` : "";
 	const verifyCmd = [
 		"set -e",
 		cleanCmd,
@@ -514,8 +517,8 @@ async function runDockerVerify(
 		// `make clean` removes generated build subdirectories. The raw make target
 		// does not always recreate every nested output dir before redirection/linking,
 		// so prime them via the project's `dirs` target before the SHA gate.
-		"make -C conker dirs >/dev/null",
-		"make -C conker verify",
+		`make -C ${root.makeDir} dirs >/dev/null`,
+		`make -C ${root.makeDir} verify`,
 	].filter(Boolean).join(" ");
 
 	return pi.exec(
@@ -526,9 +529,9 @@ async function runDockerVerify(
 			"--platform",
 			"linux/amd64",
 			"-v",
-			`${root}:/conker`,
+			`${root.mount}:/workspace`,
 			"-w",
-			"/conker",
+			"/workspace",
 			"conker-build-min-amd64",
 			"bash",
 			"-lc",
@@ -905,6 +908,7 @@ export default function (pi: ExtensionAPI) {
 			const elapsedSeconds = ((Date.now() - startedAt) / 1000).toFixed(1);
 			const output = `${result.stdout || ""}\n${result.stderr || ""}`.trim();
 			const matched = result.code === 0 && /build\/conker\.us\.bin:\s+OK/.test(output);
+			const root = findConkerBuildRoot(ctx.cwd);
 			const statusLine = matched
 				? `✓ Conker ROM verify matched (${elapsedSeconds}s)`
 				: `✗ Conker ROM verify failed (${elapsedSeconds}s)`;
@@ -912,12 +916,14 @@ export default function (pi: ExtensionAPI) {
 			return {
 				content: [{
 					type: "text",
-					text: `${statusLine}\n\n${output || "(no output)"}`,
+					text: `${statusLine}\nmount=${root.mount}\nmakeDir=${root.makeDir}\n\n${output || "(no output)"}`,
 				}],
 				details: {
 					matched,
 					code: result.code,
 					elapsedSeconds: Number(elapsedSeconds),
+					mount: root.mount,
+					makeDir: root.makeDir,
 					clean: !!params.clean,
 					rebuild: !!params.rebuild,
 				},
