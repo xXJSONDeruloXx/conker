@@ -29719,9 +29719,35 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.4868421052631579,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_151671E8(void) {\n    u8 *table;\n    s32 *stack;\n    volatile s8 *depth;\n    s32 i;\n    s32 limit;\n    s32 *cb;\n    s32 j;\n    s32 obj;\n    s32 *sptr;\n\n    table = (u8 *)&D_800DCE50;\n    stack = (s32 *)&D_800DD198;\n    depth = &D_800DD190;\n    i = 0;\n    limit = 0x65;\n    do {\n        cb = (s32 *)&D_8008B4A8;\n        j = 0;\n        do {\n            if (cb[1] != 0) {\n                obj = *(s32 *)(table + ((((((i << 2) - i) << 2) + i) << 5)) + (j << 2));\n                *depth = *depth + 1;\n                if (obj != 0) {\n                    sptr = &stack[*depth];\n                    do {\n                        *sptr = *(s32 *)(obj + 8);\n                        ((void (*)(s32))cb[1])(obj);\n                        sptr = &stack[*depth];\n                        obj = *sptr;\n                    } while (obj != 0);\n                }\n                *depth = *depth - 1;\n            }\n            j++;\n            cb = (s32 *)((s32)cb + 0x34);\n        } while (j != limit);\n        i++;\n    } while (i != 2);\n}",
+        "score": 0.4868421052631579,
+        "reason": "length_mismatch (target=74, generated=76)",
+        "diffs": [],
+        "timestamp": "2026-06-10T23:10:38.214Z",
+        "contextPatch": []
+      },
+      {
+        "code": "void func_151671E8(void) {\n    u8 *table;\n    s32 *stack;\n    volatile s8 *depth;\n    s32 i;\n    s32 *cb;\n    s32 j;\n    s32 obj;\n    s32 *sptr;\n\n    table = (u8 *)&D_800DCE50;\n    stack = (s32 *)&D_800DD198;\n    depth = &D_800DD190;\n    i = 0;\n    do {\n        cb = (s32 *)&D_8008B4A8;\n        j = 0;\n        do {\n            if (cb[1] != 0) {\n                obj = *(s32 *)(table + ((((((i << 2) - i) << 2) + i) << 5)) + (j << 2));\n                *depth = *depth + 1;\n                if (obj != 0) {\n                    sptr = &stack[*depth];\n                    do {\n                        *sptr = *(s32 *)(obj + 8);\n                        ((void (*)(s32))cb[1])(obj);\n                        sptr = &stack[*depth];\n                        obj = *sptr;\n                    } while (obj != 0);\n                }\n                *depth = *depth - 1;\n            }\n            j++;\n            cb = (s32 *)((s32)cb + 0x34);\n        } while (j != 0x65);\n        i++;\n    } while (i != 2);\n}",
+        "score": 0.4868421052631579,
+        "reason": "length_mismatch (target=74, generated=76)",
+        "diffs": [],
+        "timestamp": "2026-06-10T23:10:58.509Z",
+        "contextPatch": []
+      },
+      {
+        "code": "void func_151671E8(void) {\n    u8 *table;\n    s32 *stack;\n    s8 *depth;\n    s32 i;\n    s32 *cb;\n    s32 j;\n    s32 obj;\n    s32 *sptr;\n\n    table = (u8 *)&D_800DCE50;\n    stack = (s32 *)&D_800DD198;\n    depth = &D_800DD190;\n    i = 0;\n    do {\n        cb = (s32 *)&D_8008B4A8;\n        j = 0;\n        do {\n            if (cb[1] != 0) {\n                obj = *(s32 *)(table + ((((((i << 2) - i) << 2) + i) << 5)) + (j << 2));\n                *depth = *depth + 1;\n                if (obj != 0) {\n                    sptr = &stack[*depth];\n                    do {\n                        *sptr = *(s32 *)(obj + 8);\n                        ((void (*)(s32))cb[1])(obj);\n                        sptr = &stack[*depth];\n                        obj = *sptr;\n                    } while (obj != 0);\n                }\n                *depth = *depth - 1;\n            }\n            j++;\n            cb = (s32 *)((s32)cb + 0x34);\n        } while (j != 0x65);\n        i++;\n    } while (i != 2);\n}",
+        "score": 0.46835443037974683,
+        "reason": "length_mismatch (target=74, generated=79)",
+        "diffs": [],
+        "timestamp": "2026-06-10T23:11:19.187Z",
+        "contextPatch": []
+      }
+    ]
   },
   {
     "function": "func_15143794",
@@ -37577,7 +37603,7 @@
     ],
     "attempts": 0,
     "lastScore": 0,
-    "status": "matched"
+    "status": "pending"
   },
   {
     "function": "func_1506E2CC",
