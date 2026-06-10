@@ -286,6 +286,7 @@ function buildChunkPrompt(chunkNum: number): string {
 		"- If score ≥ 0.9, you're close — try declaration reordering, type changes, or expression reshaping.",
 		"- If plateaued (3+ attempts, no improvement), use decomp_permute regardless of score — Transmuter can fix codegen issues at ANY score level.",
 		"- Every few chunks, try: decomp_queue next with filter={nearMiss: true} to revisit near-misses with the permuter.",
+		"- When low-instruction choices stall, try: decomp_queue next with filter={similarToMatched: true} to target functions with solved shape references.",
 		"- If score < 0.3 after 3 attempts, skip this candidate and try the next one.",
 		"- Read `decomp_diff` output before every retry.",
 		"- Never provide code that includes multiple functions, struct definitions, or header content.",
@@ -672,6 +673,7 @@ export default function (pi: ExtensionAPI) {
 						StringEnum(["trivial", "low", "medium-low", "medium", "hard"] as const),
 					),
 					nearMiss: Type.Optional(Type.Boolean({ description: "Only return functions with prior attempts scoring >= 0.8 (best permuter candidates)" })),
+					similarToMatched: Type.Optional(Type.Boolean({ description: "Prioritize pending functions that have a high-similarity matched function reference" })),
 				}),
 			),
 			function: Type.Optional(Type.String({ description: "Function name for skip action" })),
@@ -680,6 +682,7 @@ export default function (pi: ExtensionAPI) {
 		async execute(_toolCallId, params, signal, _onUpdate, ctx) {
 			const fs = require("node:fs");
 			const path = require("node:path");
+			loadState(ctx.cwd);
 
 			if (params.action === "promote") {
 				// Promote pure .s segments to C files via splat yaml edit + re-extract
@@ -859,21 +862,29 @@ export default function (pi: ExtensionAPI) {
 				if (result.code === 0 && result.stdout) {
 					try {
 						const candidates = JSON.parse(result.stdout);
-						state.queue = candidates.map((c: any) => ({
-							function: c.function,
-							file: c.file,
-							region: c.region,
-							instructions: c.instructions,
-							difficulty: c.difficulty || "medium",
-							tags: c.tags || [],
-							attempts: 0,
-							lastScore: 0,
-							status: "pending",
-						}));
+						const priorByFunction = new Map<string, QueueEntry>(state.queue.map((e) => [e.function, e] as [string, QueueEntry]));
+						const refreshed = candidates.map((c: any) => {
+							const prior: QueueEntry | undefined = priorByFunction.get(c.function);
+							return {
+								function: c.function,
+								file: c.file,
+								region: c.region,
+								instructions: c.instructions,
+								difficulty: c.difficulty || "medium",
+								tags: c.tags || [],
+								attempts: prior?.attempts ?? 0,
+								lastScore: prior?.lastScore ?? 0,
+								status: prior?.status ?? "pending",
+								...(prior?.history ? { history: prior.history } : {}),
+							};
+						});
+						const refreshedNames = new Set(refreshed.map((e: QueueEntry) => e.function));
+						const preservedMatched = state.queue.filter((e) => e.status === "matched" && !refreshedNames.has(e.function));
+						state.queue = [...refreshed, ...preservedMatched];
 						saveQueue(ctx.cwd);
 						return {
-							content: [{ type: "text", text: `Queue refreshed: ${state.queue.length} candidates` }],
-							details: { count: state.queue.length },
+							content: [{ type: "text", text: `Queue refreshed: ${state.queue.length} candidates (${preservedMatched.length} matched entries preserved)` }],
+							details: { count: state.queue.length, preservedMatched: preservedMatched.length },
 						};
 					} catch {
 						return {
@@ -911,11 +922,15 @@ export default function (pi: ExtensionAPI) {
 				const entry = state.queue.find((e) => e.function === funcName);
 				if (entry) {
 					entry.status = "skipped";
+					sessionRotatedFunctions.add(funcName);
 					saveQueue(ctx.cwd);
 					latestCtx = ctx;
 					refreshWidget();
+					return { content: [{ type: "text", text: `Skipped ${funcName}` }], details: { skipped: funcName } };
 				}
-				return { content: [{ type: "text", text: `Skipped ${funcName}` }], details: {} };
+				// Also rotate missing entries for this session. This makes manual skip useful even when queue state is stale.
+				sessionRotatedFunctions.add(funcName);
+				return { content: [{ type: "text", text: `Skipped ${funcName} for this session (not found in queue)` }], details: { skipped: funcName, sessionOnly: true } };
 			}
 
 			if (params.action === "list") {
@@ -984,6 +999,7 @@ export default function (pi: ExtensionAPI) {
 				candidates = candidates.filter((e) => e.instructions <= params.filter!.maxInstructions!);
 			if (params.filter?.difficulty)
 				candidates = candidates.filter((e) => e.difficulty === params.filter!.difficulty);
+			let similarityRankingNote = "";
 			if (params.filter?.nearMiss) {
 				candidates = candidates.filter((e) => {
 					if (!e.history || e.history.length === 0) return false;
@@ -996,6 +1012,33 @@ export default function (pi: ExtensionAPI) {
 					const bestB = Math.max(...(b.history || []).map((h: AttemptRecord) => h.score));
 					return bestB - bestA;
 				});
+			} else if (params.filter?.similarToMatched) {
+				// Snowboard-style candidate routing: prioritize targets with solved assembly-shape references.
+				try {
+					const simResult = await pi.exec("python3", [
+						"tools/decomp_similarity.py",
+						"--rank-pending",
+						"--limit", "1000",
+						"--json",
+					], { timeout: 30000 });
+					const payload = simResult.stdout ? JSON.parse(simResult.stdout) : {};
+					const ranked = Array.isArray(payload.ranked) ? payload.ranked : [];
+					const rankByFunction = new Map(ranked.map((r: any, idx: number) => [r.function, { ...r, idx }]));
+					candidates = candidates.filter((e) => rankByFunction.has(e.function));
+					candidates.sort((a, b) => {
+						const ra: any = rankByFunction.get(a.function);
+						const rb: any = rankByFunction.get(b.function);
+						return (rb?.score ?? 0) - (ra?.score ?? 0) || a.instructions - b.instructions || a.attempts - b.attempts;
+					});
+					if (candidates.length > 0) {
+						const top: any = rankByFunction.get(candidates[0].function);
+						similarityRankingNote = `Similarity-routed: best matched reference is ${top.match_function} (${top.score.toFixed?.(1) ?? top.score}%).`;
+					}
+				} catch {
+					// Fall back to default queue ordering if the helper is unavailable.
+					candidates.sort((a, b) => a.instructions - b.instructions || a.attempts - b.attempts);
+					similarityRankingNote = "Similarity routing unavailable; fell back to default ordering.";
+				}
 			} else {
 				// Default sort: fewer instructions first, fewer attempts first
 				candidates.sort((a, b) => a.instructions - b.instructions || a.attempts - b.attempts);
@@ -1155,6 +1198,34 @@ export default function (pi: ExtensionAPI) {
 				}
 			}
 
+			// 5. Include Snowboard-style similar matched references from assembly shape.
+			try {
+				const similarResult = await pi.exec("python3", [
+					"tools/decomp_similarity.py",
+					"--function", next.function,
+					"--top", "3",
+					"--json",
+				], { timeout: 15000 });
+				const payload = similarResult.stdout ? JSON.parse(similarResult.stdout) : {};
+				const similarRows = Array.isArray(payload.similar) ? payload.similar : [];
+				if (similarRows.length > 0) {
+					enrichment.push("### Similar Matched Functions (assembly-shape references)");
+					const alreadyShown = new Set(sameFileMatched.map((m) => m.function));
+					for (const row of similarRows) {
+						const matchedEntry = state.queue.find((e) => e.function === row.function && e.status === "matched");
+						const descriptor = `**${row.function}** (${row.file}, similarity ${Number(row.score).toFixed(1)}%, ${row.instructions} instr):`;
+						if (!matchedEntry?.history?.length || alreadyShown.has(row.function)) {
+							enrichment.push(`- ${descriptor}`);
+							continue;
+						}
+						const bestAttempt = matchedEntry.history.reduce((a: AttemptRecord, b: AttemptRecord) => a.score > b.score ? a : b);
+						enrichment.push(descriptor, "```c", bestAttempt.code, "```", "");
+					}
+				}
+			} catch {
+				// Similarity enrichment is best-effort; queue context should still load if it fails.
+			}
+
 			// Find relevant patterns by keyword matching against target assembly + function context
 			const asmLower = targetAsm.toLowerCase();
 			const contextLower = (srcContext || "").toLowerCase();
@@ -1184,6 +1255,7 @@ export default function (pi: ExtensionAPI) {
 				`## Next candidate: ${next.function}`,
 				`File: ${next.file} | Region: ${next.region} | Instructions: ${next.instructions} | Difficulty: ${next.difficulty}`,
 				`Attempts so far: ${next.attempts} | Last score: ${next.lastScore}`,
+				...(similarityRankingNote ? [similarityRankingNote] : []),
 				"",
 				"### Target Assembly",
 				"```mips",
@@ -1275,6 +1347,7 @@ export default function (pi: ExtensionAPI) {
 		async execute(_toolCallId, params, signal, onUpdate, ctx) {
 			const fs = require("node:fs");
 			const path = require("node:path");
+			loadState(ctx.cwd);
 
 			const srcPath = path.join(ctx.cwd, "conker/src", params.file);
 			const pragma = `#pragma GLOBAL_ASM("asm/nonmatchings/${params.file.replace(".c", "")}/${params.function}.s")`;
@@ -1563,6 +1636,7 @@ export default function (pi: ExtensionAPI) {
 		async execute(_toolCallId, params, signal, _onUpdate, ctx) {
 			const fs = require("node:fs");
 			const path = require("node:path");
+			loadState(ctx.cwd);
 
 			// Full ROM build
 			const buildResult = await pi.exec(
@@ -1835,13 +1909,26 @@ export default function (pi: ExtensionAPI) {
 			code: Type.Optional(Type.String({ description: "Starting C code (default: best attempt from history)" })),
 			timeout: Type.Optional(Type.Number({ description: "Timeout in seconds (default: 60)" })),
 			maxCompiles: Type.Optional(Type.Number({ description: "Max compile attempts (default: 2000)" })),
+			concurrency: Type.Optional(Type.Number({ description: "Transmuter worker count (default: auto, capped at 8)" })),
+			depth: Type.Optional(Type.Number({ description: "Mutations per iteration (default: 1)" })),
+			seed: Type.Optional(Type.Number({ description: "Optional RNG seed for reproducible searches" })),
+			isolate: Type.Optional(Type.Boolean({ description: "Pass Transmuter --isolate before matching (default: true; auto-retries without it if parsing fails)" })),
+			reduce: Type.Optional(Type.Boolean({ description: "Allow Transmuter's reducer before matching (default: false; default keeps --no-reduce for small generated sources)" })),
 		}),
 
 		async execute(_toolCallId, params, signal, onUpdate, ctx) {
 			const fs = require("node:fs");
+			const os = require("node:os");
 			const path = require("node:path");
+			loadState(ctx.cwd);
 			const timeoutMs = (params.timeout || 60) * 1000;
 			const maxCompiles = params.maxCompiles || 2000;
+			const cpuCount = Math.max(1, os.cpus?.().length ?? 4);
+			const defaultConcurrency = Math.min(8, Math.max(1, cpuCount - 1));
+			const concurrency = Math.max(1, Math.min(Math.floor(params.concurrency || defaultConcurrency), 32));
+			const depth = Math.max(1, Math.floor(params.depth || 1));
+			const useIsolate = params.isolate !== false;
+			const useReduce = params.reduce === true;
 
 			// Auto-resolve file from queue if not provided
 			let file = params.file;
@@ -2069,87 +2156,168 @@ export default function (pi: ExtensionAPI) {
 				}
 			}
 
+			const transmuterMode = [
+				"IDO profile",
+				`max ${maxCompiles} compiles`,
+				`${params.timeout || 60}s timeout`,
+				`${concurrency} workers`,
+				useIsolate ? "--isolate" : "no-isolate",
+				useReduce ? "reducer on" : "no-reduce",
+				...(depth > 1 ? [`depth ${depth}`] : []),
+				...(constraintsArgs.length ? ["focus constraints"] : []),
+			].join(", ");
 			onUpdate?.({
-				content: [{ type: "text", text: `Transmuter running (IDO profile, max ${maxCompiles} compiles, ${params.timeout || 60}s timeout${constraintsArgs.length ? ", with focus constraints" : ""})...` }],
+				content: [{ type: "text", text: `Transmuter running (${transmuterMode})...` }],
 				details: {},
 			});
 
 			// Run Transmuter natively
 			const transmuterCli = path.join(ctx.cwd, "tools/transmuter/packages/cli/dist/index.js");
 			const compilerCmd = `${path.join(ctx.cwd, "tools/transmuter-compile.sh")} {{inputPath}} {{outputPath}} {{functionName}}`;
-
-			const result = await pi.exec("bun", [
-				transmuterCli, "match", baseCPath,
-				"--target", targetOPath,
-				"--function", params.function,
-				"--compiler", compilerCmd,
-				"--cwd", ctx.cwd,
-				"--profile", "ido",
-				"--max-compiles", String(maxCompiles),
-				"--timeout", String(timeoutMs),
-				"--no-reduce",
-				"--concurrency", "4",
-				...constraintsArgs,
-			], { signal, timeout: timeoutMs + 15000 });
-
-			const output = result.stdout || "";
-
-			// Check for the output file: <function>-0.c means perfect match
-			const matchFile = path.join(workDir, `${params.function}-0.c`);
-			// Transmuter writes next to the SOURCE file, not workdir:
-			const matchFileAlt = baseCPath.replace("_base.c", "-0.c");
-			// Also check in cwd (Transmuter output location depends on version)
-			const matchFileCwd = path.join(ctx.cwd, `${params.function}-0.c`);
-
-			let winningCode = "";
-			for (const mf of [matchFileCwd, matchFileAlt, matchFile]) {
-				if (fs.existsSync(mf)) {
-					winningCode = fs.readFileSync(mf, "utf-8");
-					fs.unlinkSync(mf); // cleanup
-					break;
+			const outputDirs = [...new Set([ctx.cwd, workDir, path.dirname(baseCPath)])];
+			const runStartedAt = Date.now();
+			const freshCutoff = runStartedAt - 2000;
+			const escapeRegex = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+			const statMtime = (p: string) => {
+				try { return fs.statSync(p).mtimeMs; } catch { return 0; }
+			};
+			const isFresh = (p: string) => statMtime(p) >= freshCutoff;
+			const collectFiles = (predicate: (name: string) => boolean) => outputDirs.flatMap((dir: string) => {
+				try {
+					return fs.readdirSync(dir)
+						.filter((name: string) => predicate(name))
+						.map((name: string) => path.join(dir, name))
+						.filter(isFresh);
+				} catch {
+					return [];
 				}
+			});
+			const candidatePattern = new RegExp(`^${escapeRegex(params.function)}-(\\d+)\\.c$`);
+			const collectCandidateFiles = () => collectFiles((name: string) => candidatePattern.test(name))
+				.map((filePath: string) => ({
+					path: filePath,
+					score: parseInt(path.basename(filePath).match(candidatePattern)?.[1] ?? "999999"),
+					mtime: statMtime(filePath),
+				}))
+				.sort((a: any, b: any) => a.score - b.score || b.mtime - a.mtime);
+			const collectSessionFiles = () => collectFiles((name: string) => /^session-\d+\.json$/.test(name))
+				.sort((a: string, b: string) => statMtime(b) - statMtime(a));
+			const cleanupFreshGeneratedFiles = () => {
+				for (const filePath of [...collectCandidateFiles().map((f: any) => f.path), ...collectSessionFiles()]) {
+					try { fs.unlinkSync(filePath); } catch {}
+				}
+			};
+			const buildTransmuterArgs = (withIsolate: boolean) => {
+				const args = [
+					transmuterCli, "match", baseCPath,
+					"--target", targetOPath,
+					"--function", params.function,
+					"--compiler", compilerCmd,
+					"--cwd", ctx.cwd,
+					"--profile", "ido",
+					"--max-compiles", String(maxCompiles),
+					"--timeout", String(timeoutMs),
+					"--concurrency", String(concurrency),
+				];
+				if (!useReduce) args.push("--no-reduce");
+				if (depth > 1) args.push("--depth", String(depth));
+				if (params.seed !== undefined) args.push("--seed", String(params.seed));
+				if (withIsolate) args.push("--isolate");
+				args.push(...constraintsArgs);
+				return args;
+			};
+
+			let isolateUsed = useIsolate;
+			let result = await pi.exec("bun", buildTransmuterArgs(isolateUsed), { signal, timeout: timeoutMs + 15000 });
+			let output = [result.stdout, result.stderr].filter(Boolean).join("\n");
+
+			// --isolate is valuable for larger/preprocessed sources, but tree-sitter can reject some old-C edge cases.
+			// Fall back to the previous behavior automatically so a parse failure doesn't waste the run.
+			if (result.code !== 0 && isolateUsed && /isolate|parser|parse|target function/i.test(output)) {
+				onUpdate?.({
+					content: [{ type: "text", text: "Transmuter --isolate failed to parse this source; retrying without --isolate..." }],
+					details: {},
+				});
+				cleanupFreshGeneratedFiles();
+				isolateUsed = false;
+				result = await pi.exec("bun", buildTransmuterArgs(false), { signal, timeout: timeoutMs + 15000 });
+				output = [result.stdout, result.stderr].filter(Boolean).join("\n");
 			}
 
-			// Also check stdout for "Perfect match" indicator
-			const perfectMatch = output.includes("Perfect match") || winningCode.length > 0;
+			const candidateFiles = collectCandidateFiles();
+			const perfectCandidate = candidateFiles.find((f: any) => f.score === 0);
+			let winningCode = perfectCandidate ? fs.readFileSync(perfectCandidate.path, "utf-8") : "";
+			let bestCandidateCode = candidateFiles[0] ? fs.readFileSync(candidateFiles[0].path, "utf-8") : "";
 
-			// Read session report before cleanup (contains best candidate, rule stats)
+			// Read session report before cleanup (contains best candidate, rule stats). Transmuter main writes
+			// reports to cwd; add-isolate-flag writes next to the source file. Support both layouts.
 			let sessionReport: any = null;
-			let bestCandidateCode = "";
-			const sessionFiles = fs.readdirSync(ctx.cwd).filter((f: string) => f.startsWith("session-") && f.endsWith(".json"));
-			if (sessionFiles.length > 0) {
+			const sessionFiles = collectSessionFiles();
+			for (const reportPath of sessionFiles) {
 				try {
-					sessionReport = JSON.parse(fs.readFileSync(path.join(ctx.cwd, sessionFiles[0]), "utf-8"));
-					// Extract best candidate source from report
-					if (sessionReport?.candidates) {
-						const sortedCandidates = sessionReport.candidates.sort((a: any, b: any) => a.score - b.score);
-						if (sortedCandidates[0]?.source) {
-							bestCandidateCode = sortedCandidates[0].source;
-						}
+					const report = JSON.parse(fs.readFileSync(reportPath, "utf-8"));
+					if (!report?.config?.functionName || report.config.functionName === params.function) {
+						sessionReport = report;
+						break;
 					}
 				} catch {}
 			}
-			for (const sf of sessionFiles) {
-				try { fs.unlinkSync(path.join(ctx.cwd, sf)); } catch {}
+			const reportCandidates = sessionReport?.candidates || sessionReport?.graph?.candidates || [];
+			if (Array.isArray(reportCandidates) && reportCandidates.length > 0) {
+				const sortedCandidates = [...reportCandidates].sort((a: any, b: any) => a.score - b.score);
+				if (sortedCandidates[0]?.source) {
+					bestCandidateCode = sortedCandidates[0].source;
+				}
+				if (!winningCode && sortedCandidates[0]?.score === 0 && sortedCandidates[0]?.source) {
+					winningCode = sortedCandidates[0].source;
+				}
 			}
 
-			// Parse output for score info
+			// Also check stdout/report for "Perfect match" indicator
+			const perfectMatch = output.includes("Perfect match") || sessionReport?.summary?.perfectMatch === true || winningCode.length > 0;
+			if (!winningCode && perfectMatch && bestCandidateCode) {
+				winningCode = bestCandidateCode;
+			}
+
+			cleanupFreshGeneratedFiles();
+
+			// Parse output/report for score info. Prefer stdout for compatibility with older Transmuter,
+			// then fall back to the JSON report schema used by current main.
+			const reportSummary = sessionReport?.summary || {};
 			const scoreFromOutput = output.match(/Score\s+\d+\s*→\s*(\d+)/);
 			const initialScoreMatch = output.match(/Score\s+(\d+)\s*→/);
-			const bestScore = scoreFromOutput ? parseInt(scoreFromOutput[1]) : null;
-			const initialScore = initialScoreMatch ? parseInt(initialScoreMatch[1]) : null;
+			const bestScore = scoreFromOutput
+				? parseInt(scoreFromOutput[1])
+				: (typeof reportSummary.bestScore === "number" ? reportSummary.bestScore : (candidateFiles[0]?.score ?? null));
+			const initialScore = initialScoreMatch
+				? parseInt(initialScoreMatch[1])
+				: (typeof reportSummary.baseScore === "number" ? reportSummary.baseScore : null);
 			const iterMatch = output.match(/Iteration[s:]?\s*(\d+)/i);
-			const iters = iterMatch ? parseInt(iterMatch[1]) : null;
+			const iters = iterMatch
+				? parseInt(iterMatch[1])
+				: (typeof reportSummary.totalIterations === "number" ? reportSummary.totalIterations : null);
 			const forkMatch = output.match(/(\d+)\s*forks?/i);
-			const forks = forkMatch ? parseInt(forkMatch[1]) : 0;
+			const forks = forkMatch
+				? parseInt(forkMatch[1])
+				: (typeof reportSummary.forkCount === "number" ? reportSummary.forkCount : 0);
 			const compiledMatch = output.match(/(\d+)\s*compiled/i);
-			const compiled = compiledMatch ? parseInt(compiledMatch[1]) : null;
+			const compiled = compiledMatch
+				? parseInt(compiledMatch[1])
+				: (typeof reportSummary.totalCompiled === "number" ? reportSummary.totalCompiled : null);
 			const errorsMatch = output.match(/(\d+)\s*errors/i);
-			const compileErrors = errorsMatch ? parseInt(errorsMatch[1]) : null;
+			const compileErrors = errorsMatch
+				? parseInt(errorsMatch[1])
+				: (typeof reportSummary.totalErrors === "number" ? reportSummary.totalErrors : null);
+			const stdoutForkRules = [...(output.matchAll(/fork:\s*\d+\s*→\s*\d+\s*via\s+(\S+)/g) || [])].map(m => m[1]);
+			const reportForkRules = Array.isArray(sessionReport?.ruleStats)
+				? sessionReport.ruleStats
+					.filter((r: any) => (r.forked || 0) > 0)
+					.sort((a: any, b: any) => (b.totalDelta || 0) - (a.totalDelta || 0))
+					.map((r: any) => r.ruleId)
+				: [];
+			const allForkRules = stdoutForkRules.length > 0 ? stdoutForkRules : reportForkRules;
 			const ruleMatch = output.match(/Last fork:.*?via\s+(\S+)/);
-			const winningRule = ruleMatch ? ruleMatch[1] : null;
-			// Extract all fork rules from output
-			const allForkRules = [...(output.matchAll(/fork:\s*\d+\s*→\s*\d+\s*via\s+(\S+)/g) || [])].map(m => m[1]);
+			const winningRule = ruleMatch ? ruleMatch[1] : (allForkRules[0] ?? null);
 
 			// Log permuter result to queue.json history — FULL DETAIL like decomp_attempt
 			const queueEntry = state.queue.find((e) => e.function === params.function);
@@ -2165,7 +2333,7 @@ export default function (pi: ExtensionAPI) {
 						`transmuter: initial=${initialScore ?? "?"}→best=${bestScore ?? "?"}, iters=${iters ?? "?"}, compiled=${compiled ?? "?"}, errors=${compileErrors ?? "?"}, forks=${forks}`,
 						...(allForkRules.length > 0 ? [`fork_rules: ${[...new Set(allForkRules)].join(", ")}`] : []),
 						...(winningRule ? [`last_fork_rule: ${winningRule}`] : []),
-						`config: timeout=${params.timeout || 60}s, maxCompiles=${maxCompiles}, concurrency=4, profile=ido`,
+						`config: timeout=${params.timeout || 60}s, maxCompiles=${maxCompiles}, concurrency=${concurrency}, profile=ido, isolate=${isolateUsed}, reduce=${useReduce}, depth=${depth}`,
 						...(compiled === 0 ? ["NOTE: 0 compiled = all mutations hit compile errors. Source may have constructs incompatible with isolated compilation."] : []),
 						...(compileErrors && compiled && compileErrors > compiled * 5 ? [`NOTE: high error rate (${compileErrors} errors vs ${compiled} compiled). Many mutations produce invalid code for this function.`] : []),
 					],
@@ -2294,6 +2462,7 @@ export default function (pi: ExtensionAPI) {
 		}),
 
 		async execute(_toolCallId, params, _signal, _onUpdate, ctx) {
+			loadState(ctx.cwd);
 			const detail = params.detail || "summary";
 
 			if (detail === "patterns") {

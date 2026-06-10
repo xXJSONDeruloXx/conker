@@ -104,6 +104,47 @@ def difficulty(row: dict[str, Any]) -> float:
     )
 
 
+def difficulty_label(row: dict[str, Any]) -> str:
+    score = row["difficulty"]
+    if row["instructions"] <= 5 and row["branches"] == 0 and row["calls"] == 0:
+        return "trivial"
+    if score <= 18:
+        return "low"
+    if score <= 35:
+        return "medium-low"
+    if score <= 80:
+        return "medium"
+    return "hard"
+
+
+def queue_tags(row: dict[str, Any]) -> list[str]:
+    tags: list[str] = []
+    if row["calls"]:
+        tags.append("calls")
+    if row["branches"]:
+        tags.append("branches")
+    if row["stack"]:
+        tags.append("stack")
+    if row["handwritten"]:
+        tags.append("handwritten")
+    return tags
+
+
+def queue_row(row: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "function": row["function"],
+        "file": Path(row["source"]).name,
+        "region": row["section"],
+        "instructions": row["instructions"],
+        "difficulty": difficulty_label(row),
+        "tags": queue_tags(row),
+        "source": row["source"],
+        "asm": row["asm"],
+        "line": row["line"],
+        "difficultyScore": row["difficulty"],
+    }
+
+
 def collect(repo_root: Path) -> list[dict[str, Any]]:
     conker_root = repo_root / "conker"
     rows: list[dict[str, Any]] = []
@@ -128,12 +169,22 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--repo", default=".", help="repository root (default: cwd)")
     parser.add_argument("--top", type=int, default=50, help="number of rows to print")
-    parser.add_argument("--json", dest="json_path", help="optional path to write full JSON ranking")
+    parser.add_argument(
+        "--json",
+        nargs="?",
+        const="-",
+        dest="json_path",
+        help="write queue-compatible JSON to PATH, or stdout when PATH is omitted",
+    )
     args = parser.parse_args()
 
     rows = collect(Path(args.repo).resolve())
     if args.json_path:
-        Path(args.json_path).write_text(json.dumps(rows, indent=2))
+        queue_rows = [queue_row(r) for r in rows[: args.top]]
+        if args.json_path == "-":
+            print(json.dumps(queue_rows, indent=2))
+            return 0
+        Path(args.json_path).write_text(json.dumps(queue_rows, indent=2))
 
     print(f"active GLOBAL_ASM candidates: {len(rows)}")
     for section in ("init", "debugger", "game"):

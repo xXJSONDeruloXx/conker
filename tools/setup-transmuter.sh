@@ -7,6 +7,25 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 IDO_DIR="$SCRIPT_DIR/ido-native"
 IDO_VERSION="v1.2"
+BUN_MIN_VERSION="1.3.12"
+
+version_ge() {
+  local current="$1" required="$2"
+  local current_major current_minor current_patch required_major required_minor required_patch
+  IFS=. read -r current_major current_minor current_patch <<< "$current"
+  IFS=. read -r required_major required_minor required_patch <<< "$required"
+  current_patch="${current_patch%%[^0-9]*}"
+  required_patch="${required_patch%%[^0-9]*}"
+  current_major="${current_major:-0}"; current_minor="${current_minor:-0}"; current_patch="${current_patch:-0}"
+  required_major="${required_major:-0}"; required_minor="${required_minor:-0}"; required_patch="${required_patch:-0}"
+  if (( current_major != required_major )); then
+    if (( current_major > required_major )); then return 0; else return 1; fi
+  fi
+  if (( current_minor != required_minor )); then
+    if (( current_minor > required_minor )); then return 0; else return 1; fi
+  fi
+  if (( current_patch >= required_patch )); then return 0; else return 1; fi
+}
 
 echo "=== Conker Transmuter Setup ==="
 echo ""
@@ -17,6 +36,11 @@ echo "[1/5] Checking system dependencies..."
 if ! command -v bun &>/dev/null; then
   echo "  Installing bun..."
   curl -fsSL https://bun.sh/install | bash
+  export PATH="$HOME/.bun/bin:$PATH"
+fi
+if ! version_ge "$(bun --version)" "$BUN_MIN_VERSION"; then
+  echo "  Upgrading bun to satisfy Transmuter engine >=${BUN_MIN_VERSION}..."
+  bun upgrade
   export PATH="$HOME/.bun/bin:$PATH"
 fi
 echo "  ✓ bun $(bun --version)"
@@ -53,12 +77,12 @@ fi
 # Verify
 "$IDO_DIR/cc" --version 2>&1 | head -1
 
-# 3. Initialize Transmuter submodule
+# 3. Initialize Transmuter submodule and nested compiler submodules
 echo ""
-echo "[3/5] Initializing Transmuter submodule..."
+echo "[3/5] Initializing Transmuter submodule and nested compiler submodules..."
 
 cd "$PROJECT_ROOT"
-git submodule update --init tools/transmuter
+git submodule update --init --recursive tools/transmuter
 
 # 4. Install Transmuter dependencies
 echo ""

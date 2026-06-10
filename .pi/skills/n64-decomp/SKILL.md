@@ -9,6 +9,13 @@ description: IDO 5.3 matching decompilation patterns, codegen rules, diff interp
 
 Beyond this static guide, there are **122+ patterns** discovered during this project stored in `.pi/decomp/patterns.json`. These are auto-served with each candidate by `decomp_queue next` (matched by keywords in the target assembly). To browse the full library: `decomp_status detail="patterns"`. Patterns include specific IDO quirks like `sameline` effects, stack-array padding, negative-index outparams, and bitfield scheduling.
 
+## Agentic Loop Additions
+
+- `decomp_queue next` now also surfaces **Similar Matched Functions** based on assembly-shape similarity when matches exist. Treat these as solved references for signatures, control-flow style, declaration ordering, and IDO idioms.
+- If low-instruction ordering stalls, try `decomp_queue next` with `filter={similarToMatched: true}`. This prioritizes pending functions that have high-similarity matched examples instead of only shortest-first.
+- If a function is grinding progress, use `decomp_queue skip` or rely on session auto-rotation. Skips now also rotate the function out for the current session so stale queue state cannot immediately re-serve it.
+- `tools/decomp_similarity.py` can be run directly for investigation, e.g. `python3 tools/decomp_similarity.py --function func_15079F6C --top 5`.
+
 ## Compiler: IDO 5.3
 
 Conker was compiled with SGI IDO 5.3 (`cc -O2 -g3 -mips2 -o32`). Key behaviors:
