@@ -122,7 +122,12 @@ function saveLoopState(cwd: string): void {
 	const fs = require("node:fs");
 	const path = require("node:path");
 	loopState.updatedAt = new Date().toISOString();
-	fs.writeFileSync(path.join(cwd, LOOP_STATE_FILE), JSON.stringify(loopState, null, 2));
+	const loopPath = path.join(cwd, LOOP_STATE_FILE);
+	const content = JSON.stringify(loopState, null, 2);
+	try {
+		if (fs.existsSync(loopPath) && fs.readFileSync(loopPath, "utf-8") === content) return;
+	} catch {}
+	fs.writeFileSync(loopPath, content);
 }
 
 async function autoPromoteIfNeeded(pi: any, cwd: string): Promise<string | null> {
@@ -268,14 +273,25 @@ function buildChunkPrompt(chunkNum: number): string {
 		`Progress: ${matched}/${state.queue.length} matched (${pending} pending, ${patterns} patterns)`,
 		strategyNudge,
 		"",
+		"## Available Context, Tools, and Assets",
+		"",
+		"- Primary queue/tools: `decomp_queue`, `decomp_attempt`, `decomp_diff`, `decomp_permute`, `decomp_accept`, `decomp_status`, `decomp_chunk_done`.",
+		"- Source/ASM assets: `conker/src/<file>.c`, `conker/asm/nonmatchings/<file>/<func>.s`, `conker/include/{functions,variables,structs}.h`, `conker/undefined_syms_auto.txt`.",
+		"- Persistent memory: `.pi/decomp/queue.json` stores prior attempts; `.pi/decomp/patterns.json` stores learned IDO patterns.",
+		"- Static guidance: read `/skill:n64-decomp` for IDO 5.3 register, branch, stack, and float-codegen rules.",
+		"- Candidate routing/reference tools: `tools/decomp_similarity.py --function <func> --top 5`, `tools/decomp_similarity.py --rank-pending --json`, and `decomp_queue next` with `filter={similarToMatched:true}`.",
+		"- Low-level aids: `tools/analyze_decomp_candidates.py`, `tools/mips_to_c/m2c.py`, `tools/transmuter-compile.sh`, and Transmuter via `decomp_permute`.",
+		"- Build/verification assets: Docker image `conker-build-min-amd64`, `make -C conker verify`, and full ROM SHA gate inside `decomp_accept`.",
+		"",
 		"## Instructions",
 		"",
-		"1. Call `decomp_queue next` to get the next candidate (includes target asm, context, and any prior failed attempts)",
-		"2. Study the target assembly carefully. Check prior attempts if shown — do NOT repeat them.",
+		"1. Call `decomp_queue next` to get the next candidate (includes target asm, source context, symbol/callee/struct context, similar matched refs, and prior failed attempts).",
+		"2. Study the target assembly and any similar matched C references carefully. Check prior attempts if shown — do NOT repeat them.",
 		"3. Write C and call `decomp_attempt` to test it. Every attempt is recorded for learning.",
-		"4. If non-match: read the diff, call `decomp_diff` for focused analysis, then retry with a different approach.",
-		"5. If match: call `decomp_accept` to verify full ROM SHA and commit.",
-		"6. When done with this function (matched or decided to move on), call `decomp_chunk_done` with a summary.",
+		"4. If non-match: read the raw generated ASM/diff, call `decomp_diff` for focused analysis when useful, then retry with a different approach.",
+		"5. If plateaued after 3+ attempts, call `decomp_permute`; if similarity refs are weak, try `decomp_queue next` with a different filter.",
+		"6. If match: call `decomp_accept` to verify full ROM SHA and commit.",
+		"7. When done with this function (matched or decided to move on), call `decomp_chunk_done` with a summary.",
 		"",
 		"## Rules",
 		"- You can work on MULTIPLE functions per chunk. If stuck, call `decomp_queue next` to try a different one — no need to call `decomp_chunk_done`.",
@@ -295,11 +311,44 @@ function buildChunkPrompt(chunkNum: number): string {
 	].join("\n");
 }
 
-function saveQueue(cwd: string): void {
+function saveQueue(cwd: string, options: { preserveDiskHistory?: boolean } = {}): void {
 	const fs = require("node:fs");
 	const path = require("node:path");
 	const queuePath = path.join(cwd, ".pi/decomp/queue.json");
-	fs.writeFileSync(queuePath, JSON.stringify(state.queue, null, 2));
+	const preserveDiskHistory = options.preserveDiskHistory !== false;
+
+	let queueToWrite = state.queue;
+	if (preserveDiskHistory && fs.existsSync(queuePath)) {
+		try {
+			const diskQueue: QueueEntry[] = JSON.parse(fs.readFileSync(queuePath, "utf-8"));
+			const diskByFunction = new Map<string, QueueEntry>(diskQueue.map((e) => [e.function, e]));
+			queueToWrite = state.queue.map((entry) => {
+				const diskEntry = diskByFunction.get(entry.function);
+				if (!diskEntry) return entry;
+
+				const diskHistoryLength = diskEntry.history?.length ?? 0;
+				const memoryHistoryLength = entry.history?.length ?? 0;
+				const diskLooksNewer = diskHistoryLength > memoryHistoryLength || diskEntry.attempts > entry.attempts;
+				if (!diskLooksNewer) return entry;
+
+				return {
+					...entry,
+					attempts: Math.max(entry.attempts, diskEntry.attempts),
+					lastScore: Math.max(entry.lastScore || 0, diskEntry.lastScore || 0),
+					history: diskEntry.history ?? entry.history,
+				};
+			});
+			state.queue = queueToWrite;
+		} catch {
+			// If disk state is unreadable, fall through and write the current in-memory queue.
+		}
+	}
+
+	const content = JSON.stringify(queueToWrite, null, 2);
+	try {
+		if (fs.existsSync(queuePath) && fs.readFileSync(queuePath, "utf-8") === content) return;
+	} catch {}
+	fs.writeFileSync(queuePath, content);
 }
 
 function savePatterns(cwd: string): void {
@@ -629,6 +678,11 @@ export default function (pi: ExtensionAPI) {
 	pi.on("session_start", async (_event, ctx) => {
 		latestCtx = ctx;
 		loadState(ctx.cwd);
+		// Do not auto-resume a stale persisted loop after /reload. Explicit /decomp-loop-start should be required.
+		if (loopState.enabled && loopState.status === "running") {
+			loopState.enabled = false;
+			loopState.status = "stopped";
+		}
 		ensureTimer();
 		refreshWidget();
 		await ensureProgressCsv(ctx);
