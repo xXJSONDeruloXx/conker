@@ -3,7 +3,10 @@
 #include "functions.h"
 #include "variables.h"
 
-void func_15084D70(s32, u8, s32, void *, void *, void *, void *, void *, void *, s32, void *);
+void func_15022190(s16, s16, s16, f32);
+void func_1501D348(s32, s32, s32, s32, s32);
+
+void func_15084D70(s32, s32, s32, void *, void *, void *, void *, void *, void *, s32, void *);
 
 
 void func_1507C8E0(struct127 *arg0, s32 arg1) {
@@ -118,7 +121,37 @@ void func_1507DE4C(struct127 *arg0) {
 
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_A9D90/func_1507DF10.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_A9D90/func_1507DFE4.s")
+void func_1507DFE4(s32 arg0, s32 arg1) {
+    s32 sp64;
+    s16 sp5C[3];
+    s32 sp50[3];
+    u8 sp4F;
+    u8 sp4E;
+    s32 sp48;
+    s32 sp44;
+    f32 temp_f0;
+    s32 sp38;
+    s32 sp3C;
+
+    if (D_800C35EA != 1) {
+        func_15084D70(0, arg0, 1, sp5C, sp50, &sp4F, &sp4E, &sp44, &sp48, 1, &sp3C);
+        temp_f0 = ((sp4E - 0x40) * 1.40625f) + 180.0f;
+        if (sp3C == 0) {
+            sp38 = 1;
+        } else if (sp3C == 1) {
+            sp38 = 3;
+        } else {
+            return;
+        }
+        func_15022190(sp5C[0], sp5C[1], sp5C[2], temp_f0);
+        sp64 = D_800BE9F0;
+        D_800BE9F0 = 0x25;
+        D_800C3671 = 1;
+        func_1501D348(0x25, sp38, 0, 0, 0);
+        D_800C3670 = 1;
+        D_800BE9F0 = sp64;
+    }
+}
 s32 func_1507E114(s32 arg0) {
     s32 sp5C;
     s32 sp54[2];
