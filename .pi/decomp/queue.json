@@ -36231,35 +36231,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
-    "lastScore": 0.49411764705882355,
-    "status": "pending",
-    "history": [
-      {
-        "code": "s32 func_1000B060(f32 arg0, f32 arg1, s32 arg2) {\n    s16 phi_a1[2];\n    f32 sp18;\n    s16 temp_t8;\n    f64 temp_f6;\n    s8 temp_t9;\n    s16 phi_v1_2;\n\n    phi_a1[0] = 0x80;\n    sp18 = sqrtf((arg0 * arg0) + (arg1 * arg1));\n    if (D_8002C214 < sp18) {\n        sp18 = arg0 / sp18;\n    }\n    temp_f6 = func_150487E0(sp18) * D_8002C218;\n    phi_v1_2 = temp_f6;\n    if (0.0f < arg1) {\n        temp_t8 = temp_f6;\n        if (temp_t8 < 0) {\n            phi_v1_2 = (s16)(-0x80 - temp_t8);\n        } else {\n            phi_v1_2 = (s16)(0x80 - temp_t8);\n        }\n    }\n    temp_t9 = phi_v1_2 + arg2;\n    phi_v1_2 = temp_t9;\n    if ((temp_t9 >= 0x60) || (temp_t9 < -0x60)) {\n        phi_v1_2 = 0;\n    } else if (phi_v1_2 >= 0x20) {\n        phi_v1_2 = (s16)(0x5F - phi_v1_2);\n    } else if (phi_v1_2 < -0x20) {\n        phi_v1_2 = (s16)(-0x5F - phi_v1_2);\n    } else {\n        phi_v1_2 = (s16)(phi_v1_2 * 2);\n        phi_a1[0] = 0;\n    }\n    return (phi_v1_2 + 0x40) | phi_a1[0];\n}",
-        "score": 0.49411764705882355,
-        "reason": "length_mismatch (target=84, generated=85)",
-        "diffs": [],
-        "timestamp": "2026-06-10T23:17:36.521Z",
-        "contextPatch": []
-      },
-      {
-        "code": "s32 func_1000B060(f32 arg0, f32 arg1, s32 arg2) {\n    s16 phi_a1[2];\n    f32 sp18;\n    s16 temp_t8;\n    f64 temp_f6;\n    s8 temp_t9;\n    s16 phi_v1_2;\n\n    sp18 = sqrtf((arg0 * arg0) + (arg1 * arg1));\n    if (D_8002C214 < sp18) {\n        sp18 = arg0 / sp18;\n    }\n    phi_a1[0] = 0x80;\n    temp_f6 = func_150487E0(sp18) * D_8002C218;\n    phi_v1_2 = temp_f6;\n    if (0.0f < arg1) {\n        temp_t8 = temp_f6;\n        if (temp_t8 < 0) {\n            phi_v1_2 = (s16)(-0x80 - temp_t8);\n        } else {\n            phi_v1_2 = (s16)(0x80 - temp_t8);\n        }\n    }\n    temp_t9 = phi_v1_2 + arg2;\n    phi_v1_2 = temp_t9;\n    if ((temp_t9 >= 0x60) || (temp_t9 < -0x60)) {\n        phi_v1_2 = 0;\n    } else if (phi_v1_2 >= 0x20) {\n        phi_v1_2 = (s16)(0x5F - phi_v1_2);\n    } else if (phi_v1_2 < -0x20) {\n        phi_v1_2 = (s16)(-0x5F - phi_v1_2);\n    } else {\n        phi_v1_2 = (s16)(phi_v1_2 * 2);\n        phi_a1[0] = 0;\n    }\n    return (phi_v1_2 + 0x40) | phi_a1[0];\n}",
-        "score": 0.49411764705882355,
-        "reason": "length_mismatch (target=84, generated=85)",
-        "diffs": [],
-        "timestamp": "2026-06-10T23:17:58.340Z",
-        "contextPatch": []
-      },
-      {
-        "code": "s32 func_1000B060(f32 arg0, f32 arg1, s32 arg2) {\n    s32 phi_a1;\n    f32 sp18;\n    s16 temp_t8;\n    f64 temp_f6;\n    s8 temp_t9;\n    s16 phi_v1_2;\n\n    *(s16 *)&phi_a1 = 0x80;\n    sp18 = sqrtf((arg0 * arg0) + (arg1 * arg1));\n    if (D_8002C214 < sp18) {\n        sp18 = arg0 / sp18;\n    }\n    temp_f6 = func_150487E0(sp18) * D_8002C218;\n    phi_v1_2 = temp_f6;\n    if (0.0f < arg1) {\n        temp_t8 = temp_f6;\n        if (temp_t8 < 0) {\n            phi_v1_2 = (s16)(-0x80 - temp_t8);\n        } else {\n            phi_v1_2 = (s16)(0x80 - temp_t8);\n        }\n    }\n    temp_t9 = phi_v1_2 + arg2;\n    phi_v1_2 = temp_t9;\n    if ((temp_t9 >= 0x60) || (temp_t9 < -0x60)) {\n        phi_v1_2 = 0;\n    } else if (phi_v1_2 >= 0x20) {\n        phi_v1_2 = (s16)(0x5F - phi_v1_2);\n    } else if (phi_v1_2 < -0x20) {\n        phi_v1_2 = (s16)(-0x5F - phi_v1_2);\n    } else {\n        phi_v1_2 = (s16)(phi_v1_2 * 2);\n        *(s16 *)&phi_a1 = 0;\n    }\n    return (phi_v1_2 + 0x40) | *(s16 *)&phi_a1;\n}",
-        "score": 0.49411764705882355,
-        "reason": "length_mismatch (target=84, generated=85)",
-        "diffs": [],
-        "timestamp": "2026-06-10T23:18:23.452Z",
-        "contextPatch": []
-      }
-    ]
+    "attempts": 0,
+    "lastScore": 0,
+    "status": "pending"
   },
   {
     "function": "func_150C2558",
