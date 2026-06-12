@@ -36785,7 +36785,7 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
+    "attempts": 6,
     "lastScore": 0.4857142857142857,
     "status": "pending",
     "history": [
@@ -36811,6 +36811,42 @@
         "reason": "length_mismatch (target=70, generated=68)",
         "diffs": [],
         "timestamp": "2026-06-12T14:37:38.619Z",
+        "contextPatch": []
+      },
+      {
+        "code": "extern u8 D_800BE35A;\nextern u8 D_800E0BE0;\nextern u8 D_8008FE30;\n\nvoid func_15007440(void) {\n    u16 hash;\n    volatile s32 i;\n    u8 *src;\n    s8 saved;\n\n    func_151DD3A0(&D_800BE900, 0, D_800BE358, 0x20);\n\n    hash = 0xCC;\n    i = 2;\n    src = &D_800BE35A;\n    while (i < 0x1E) {\n        hash += *src << (i & 3);\n        hash &= 0xFFFF;\n        i++;\n        src++;\n    }\n\n    saved = *(s8 *)(D_800E0BE0 + 0x10);\n    if (hash != *(u16 *)D_800BE358) {\n        memset(D_800E0BE0, -1, 0x1C);\n    } else {\n        memcpy(D_800E0BE0, &D_800BE35A + 2, 0x1C);\n    }\n\n    func_151DD9E4();\n    *(s8 *)(D_800E0BE0 + 0x10) = saved;\n    func_151E7EF8();\n    D_8008FE30 = 1;\n}",
+        "score": 0.4285714285714286,
+        "reason": "length_mismatch (target=70, generated=60)",
+        "diffs": [],
+        "timestamp": "2026-06-12T14:38:42.789Z",
+        "contextPatch": []
+      },
+      {
+        "code": "void func_15007440(void) {\n    u16 hash;\n    s32 i;\n    u8 *src;\n    s8 saved;\n    s8 fill_val[4];\n\n    func_151DD3A0((OSMesgQueue *)&D_800BE900, 0, D_800BE358, 0x20);\n\n    hash = 0xCC;\n    i = 2;\n    src = (u8 *)&D_800BE35A;\n    do {\n        hash += *src << (i & 3);\n        hash &= 0xFFFF;\n        i++;\n        src++;\n    } while (i < 0x1E);\n\n    saved = *(s8 *)((s32)&D_800E0BE0 + 0x10);\n    if (hash != *(u16 *)D_800BE358) {\n        fill_val[0] = -1;\n        fill_val[1] = -1;\n        fill_val[2] = -1;\n        fill_val[3] = -1;\n        for (i = 0; i < 0x1C; i += 4) {\n            *(s32 *)((s32)&D_800E0BE0 + i) = *(s32 *)fill_val;\n        }\n    } else {\n        for (i = 0; i < 0x1C; i += 4) {\n            *(s32 *)((s32)&D_800E0BE0 + i) = *(s32 *)((s32)&D_800BE35A + 2 + i);\n        }\n    }\n\n    func_151DD9E4();\n    *(s8 *)((s32)&D_800E0BE0 + 0x10) = saved;\n    func_151E7EF8();\n    D_8008FE30 = 1;\n}",
+        "score": 0.368421052631579,
+        "reason": "length_mismatch (target=70, generated=95)",
+        "diffs": [],
+        "timestamp": "2026-06-12T15:11:51.260Z",
+        "contextPatch": []
+      },
+      {
+        "code": "void func_15007440(void) {\n    unsigned int hash;\n    s32 i;\n    u8 *src;\n    s8 saved;\n\n    func_151DD3A0(&D_800BE900, 0, D_800BE358, 0x20);\n\n    hash = 0xCC;\n    i = 2;\n    src = &D_800BE35A;\n    while (2 < 0x1E) {\n        hash += *src << (i & 3);\n        hash &= 0xFFFF;\n        i++;\n        src++;\n    }\n\n    saved = *(s8 *)(D_800E0BE0 + 0x10);\n    if (hash != *(u16 *)D_800BE358) {\n        memset((D_800E0BE0 & 0xFF), -1, 0x1C);\n    } else {\n        memcpy(D_800E0BE0, &D_800BE35A + 2, 0x1C);\n    }\n\n    *(s8 *)(D_800E0BE0 + 0x10) = saved;\n    func_151DD9E4();\n    D_8008FE30 = 1;\n}",
+        "score": -0.7,
+        "reason": "transmuter_best=51",
+        "diffs": [
+          "transmuter: initial=77→best=51, iters=2163, compiled=1325, errors=675, forks=213",
+          "fork_rules: modify-condition, delete-stmt, duplicate-assignment, remove-cast, expand-expr, insert-block, randomize-type, refer-to-var, add-mask, cast-expr, temp-for-expr, reorder-stmts",
+          "last_fork_rule: modify-condition",
+          "config: timeout=60s, maxCompiles=2000, concurrency=7, profile=ido, isolate=true, reduce=false, depth=1"
+        ],
+        "timestamp": "2026-06-12T15:12:24.931Z"
+      },
+      {
+        "code": "void func_15007440(void) {\n    u16 hash;\n    s32 i;\n    u8 *src;\n    s8 saved;\n\n    func_151DD3A0((OSMesgQueue *)&D_800BE900, 0, D_800BE358, 0x20);\n\n    hash = 0xCC;\n    i = 2;\n    src = (u8 *)&D_800BE35A;\n    do {\n        hash += *src << (i & 3);\n        hash &= 0xFFFF;\n        i++;\n        src++;\n    } while (i < 0x1E);\n\n    saved = *(s8 *)((s32)&D_800E0BE0 + 0x10);\n    if (hash != *(u16 *)D_800BE358) {\n        u8 *dst = (u8 *)&D_800E0BE0;\n        u8 *end = (u8 *)&D_800E0BFC;\n        do {\n            *dst++ = -1;\n        } while (dst < end);\n    } else {\n        u8 *dst = (u8 *)&D_800E0BE0;\n        u8 *src2 = (u8 *)&D_800BE35A + 2;\n        do {\n            *dst++ = *src2++;\n        } while (dst < (u8 *)&D_800E0BFC);\n    }\n\n    func_151DD9E4();\n    *(s8 *)((s32)&D_800E0BE0 + 0x10) = saved;\n    func_151E7EF8();\n    D_8008FE30 = 1;\n}",
+        "score": 0.4320987654320988,
+        "reason": "length_mismatch (target=70, generated=81)",
+        "diffs": [],
+        "timestamp": "2026-06-12T15:13:42.941Z",
         "contextPatch": []
       }
     ]
