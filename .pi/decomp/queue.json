@@ -36943,6 +36943,18 @@
         "diffs": [],
         "timestamp": "2026-06-12T22:31:24.743Z",
         "contextPatch": []
+      },
+      {
+        "code": "#include <ultra64.h>\n#include \"functions.h\"\n#include \"variables.h\"\n#include \"macros.h\"\n#include \"libc/stdarg.h\"\n\n\nvoid func_1504ADD0(void) {\n    struct127 *tmp;\n    s32 i;\n    u8 *ptr;\n    u8 sp48;\n\n    if (D_800C35EA != 1) {\n        i = 0;\n        ptr = &sp48;\n        while (i < 25) {\n            tmp = &D_800CC2D0[i];\n            if (tmp->interaction_state != 0) {\n                D_800C3E78 = (i & 0x3);\n                D_800D154C = tmp;\n                if (i < D_8008FD8C) {\n                    if (i < 4) {\n                        D_800CC284 = D_800BE728[i];\n                    } else {\n                        bzero(D_800CC284, 6);\n                    }\n                } else {\n                    (char)D_800CC284 = (s32)ptr;\n                }\n                if (!!tmp->id == 0x77) {\n                    func_150ED578(tmp);\n                }\n            }\n            i++;\n        }\n    }\n}",
+        "score": 0.19999999999999996,
+        "reason": "transmuter_best=24",
+        "diffs": [
+          "transmuter: initial=28→best=24, iters=3169, compiled=2087, errors=913, forks=20",
+          "fork_rules: add-mask, cast-expr, modify-condition, delete-stmt",
+          "last_fork_rule: add-mask",
+          "config: timeout=120s, maxCompiles=3000, concurrency=7, profile=ido, isolate=true, reduce=false, depth=1"
+        ],
+        "timestamp": "2026-06-12T22:32:36.952Z"
       }
     ]
   },
@@ -37357,9 +37369,35 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.4451219512195122,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_151347CC(struct102 *arg0, void *arg1, u8 arg2) {\n    u32 v0;\n    u32 v1;\n    u32 t7;\n    u32 t8;\n    u8 t9;\n    u8 t0;\n    u8 t1;\n    u8 t4;\n    u8 t5;\n    u8 t6;\n    u8 t8_byte;\n\n    v0 = arg2;\n    if (arg2 == 0) {\n        v0 = arg2;\n        t7 = *(u32 *)((u8 *)arg0 + 0x1C);\n        t8 = *(u32 *)arg1;\n        if (t7 == t8) {\n            t9 = *(u8 *)((u8 *)arg0 + 0x18);\n            t0 = *(u8 *)((u8 *)arg1 + 4);\n            if (t9 == t0) {\n                func_1516972C(arg0);\n                return;\n            }\n        }\n        return;\n    }\n\n    if (arg2 == 3) {\n        if (v0 != 0x11) {\n            v1 = *(u32 *)((u8 *)arg0 + 0x1C);\n            t8 = *(u32 *)arg1;\n            if (v1 == t8) {\n                t4 = *(u8 *)((u8 *)arg0 + 0x18);\n                t5 = *(u8 *)((u8 *)arg1 + 4);\n                if (t4 == t5) {\n                    func_1516972C(arg0);\n                    return;\n                }\n            }\n            return;\n        }\n\n        t1 = *(u8 *)((u8 *)arg0 + 0x3D);\n        if (t1 == 5) {\n            t7 = *(u32 *)((u8 *)arg0 + 0x1C);\n            t8 = *(u32 *)arg1;\n            if (t7 == t8) {\n                t4 = *(u8 *)((u8 *)arg0 + 0x18);\n                t5 = *(u8 *)((u8 *)arg1 + 4);\n                if (t4 == t5) {\n                    func_1516972C(arg0);\n                    return;\n                }\n            }\n            return;\n        }\n        return;\n    }\n\n    if (v0 != 0x16) {\n        if (v0 != 0x2D) {\n            return;\n        }\n\n        if (arg1 == (void *)((u8 *)arg0 + 0x1C)) {\n            func_1516972C(arg0);\n            return;\n        }\n        return;\n    }\n\n    v0 = *(u32 *)arg1;\n    v1 = *(u32 *)((u8 *)arg0 + 0x1C);\n    if (v0 != v1) {\n        t9 = *(u8 *)((u8 *)arg1 + 4);\n        t7 = *(u8 *)((u8 *)arg1 + 4);\n        *(u32 *)((u8 *)arg0 + 0x1C) = t7;\n        t8_byte = *(u8 *)((u8 *)arg1 + 9);\n        *(u8 *)((u8 *)arg0 + 0x18) = t8_byte;\n        return;\n    }\n\n    t9 = *(u8 *)((u8 *)arg1 + 4);\n    if (t9 != v1) {\n        return;\n    }\n\n    *(u32 *)((u8 *)arg0 + 0x1C) = v0;\n    t0 = *(u8 *)((u8 *)arg1 + 8);\n    *(u8 *)((u8 *)arg0 + 0x18) = t0;\n}",
+        "score": 0.4451219512195122,
+        "reason": "length_mismatch (target=73, generated=82)",
+        "diffs": [],
+        "timestamp": "2026-06-12T22:40:06.903Z",
+        "contextPatch": []
+      },
+      {
+        "code": "void func_151347CC(struct102 *arg0, void *arg1, u8 arg2) {\n    u32 t7;\n    u32 t8;\n    u8 t9;\n    u8 t0;\n    u8 t1;\n    u8 t4;\n    u8 t5;\n    u32 v0;\n    u32 v1;\n\n    v0 = arg2;\n    if (arg2 != 0) {\n        if (arg2 == 3) {\n            if (v0 != 0x11) {\n                v1 = *(u8 *)((u8 *)arg0 + 0x3D);\n                if (v1 != 5) {\n                    return;\n                }\n            }\n        } else if (arg2 != 0x16) {\n            if (arg2 != 0x2D) {\n                return;\n            }\n        }\n    }\n\n    t7 = *(u32 *)((u8 *)arg0 + 0x1C);\n    t8 = *(u32 *)arg1;\n    if (t7 != t8) {\n        t9 = *(u8 *)((u8 *)arg0 + 0x18);\n        t0 = *(u8 *)((u8 *)arg1 + 4);\n        if (t9 != t0) {\n            return;\n        }\n    }\n\n    func_1516972C(arg0);\n}",
+        "score": 0.2534246575342466,
+        "reason": "length_mismatch (target=73, generated=37)",
+        "diffs": [],
+        "timestamp": "2026-06-12T22:40:27.039Z",
+        "contextPatch": []
+      },
+      {
+        "code": "void func_151347CC(struct102 *arg0, void *arg1, u8 arg2) {\n    switch (arg2) {\n        case 0:\n        case 3:\n            if (*(s32 *)((u8 *)arg0 + 0x1C) == *(s32 *)arg1 || *(u8 *)((u8 *)arg0 + 0x18) == *(u8 *)((u8 *)arg1 + 4)) {\n                func_1516972C(arg0);\n            }\n            break;\n        case 0x16:\n            if (*(u8 *)((u8 *)arg0 + 0x3D) == 5 && *(s32 *)((u8 *)arg0 + 0x1C) == *(s32 *)arg1) {\n                func_1516972C(arg0);\n            }\n            break;\n        case 0x2D:\n            if (arg1 == (void *)*(s32 *)((u8 *)arg0 + 0x1C)) {\n                func_1516972C(arg0);\n            } else {\n                if (*(s32 *)arg1 != *(s32 *)((u8 *)arg0 + 0x1C)) {\n                    if (*(s32 *)((u8 *)arg1 + 4) != *(s32 *)((u8 *)arg0 + 0x1C)) {\n                        break;\n                    }\n                    *(s32 *)((u8 *)arg0 + 0x1C) = *(s32 *)arg1;\n                    *(u8 *)((u8 *)arg0 + 0x18) = *(u8 *)((u8 *)arg1 + 8);\n                } else {\n                    *(s32 *)((u8 *)arg0 + 0x1C) = *(s32 *)((u8 *)arg1 + 4);\n                    *(u8 *)((u8 *)arg0 + 0x18) = *(u8 *)((u8 *)arg1 + 9);\n                }\n            }\n            break;\n    }\n}",
+        "score": 0.4383561643835616,
+        "reason": "length_mismatch (target=73, generated=64)",
+        "diffs": [],
+        "timestamp": "2026-06-12T22:50:33.881Z",
+        "contextPatch": []
+      }
+    ]
   },
   {
     "function": "func_15013DE8",
@@ -41322,6 +41360,18 @@
         "diffs": [],
         "timestamp": "2026-06-12T22:27:35.327Z",
         "contextPatch": []
+      },
+      {
+        "code": "#include <ultra64.h>\n#include \"functions.h\"\n#include \"variables.h\"\n#include \"macros.h\"\n#include \"libc/stdarg.h\"\n\nvoid func_16001700(void) {\n    u32 sp24;\n    s32 sp20;\n    u32 *temp_v0;\n    u32 temp_v1;\n\n    if (__osContLastCmd != 1) {\n        func_160018BC();\n        func_160019A8(1, &__osContPifRam);\n        sp20 = osGetCount();\n        sp20 += 0x30D40;\n        do {\n            sp24 = osGetCount();\n            func_160016F4(0);\n        } while (sp24 < sp20);\n        func_160016F4(0);\n    }\n    temp_v0 = (u32 *)&__osContPifRam;\n    temp_v1 = 0xFF;\n    do {\n        temp_v0++;\n    } while (temp_v0 < (u32 *)&__osContLastCmd);\n    temp_v0[-1] = (temp_v1 | 0);\n    func_160019A8(0, &__osContPifRam);\n    __osContLastCmd = 1;\n    sp20 = osGetCount();\n    sp20 += 0xC3500;\n    do {\n        func_160016F4(0);\n        sp24 = osGetCount();\n    } while (sp24 < sp20);\n    func_160016F4(0);\n}",
+        "score": -0.33333333333333326,
+        "reason": "transmuter_best=40",
+        "diffs": [
+          "transmuter: initial=48→best=40, iters=2103, compiled=1435, errors=565, forks=27",
+          "fork_rules: reorder-stmts, mult-zero, delete-stmt, xor-zero, add-mask, insert-block, refer-to-var",
+          "last_fork_rule: reorder-stmts",
+          "config: timeout=60s, maxCompiles=2000, concurrency=7, profile=ido, isolate=true, reduce=false, depth=1"
+        ],
+        "timestamp": "2026-06-12T22:46:47.133Z"
       }
     ]
   },
