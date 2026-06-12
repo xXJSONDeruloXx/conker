@@ -33115,9 +33115,19 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 0.018518518518518545,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_15072F10(s32 arg0) {\n    struct127 *obj = D_800D154C;\n}",
+        "score": 0.018518518518518545,
+        "reason": "length_mismatch (target=81, generated=3)",
+        "diffs": [],
+        "timestamp": "2026-06-12T21:32:08.847Z",
+        "contextPatch": []
+      }
+    ]
   },
   {
     "function": "func_10017604",
@@ -33508,9 +33518,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
+    "attempts": 4,
     "lastScore": 0.4295774647887324,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "struct225 *func_151623F4(void *arg0, void *arg1, void *arg2, u8 arg3) {\n    Header header;\n    s32 sp30[3];\n    s32 sp3C[3];\n    s32 *temp_table;\n    u8 sp57 = arg3;\n    u8 sp5F;\n    s8 sp63;\n    s16 sp66;\n    u8 sp5B;\n    s32 sp6C;\n    u8 sp6B;\n    f32 f4;\n    f32 f6;\n    struct225 *result;\n\n    if (sp57 >= 3) {\n        return NULL;\n    }\n\n    temp_table = D_800A670C[sp57];\n    sp30[0] = temp_table[0];\n    sp30[1] = temp_table[1];\n    sp30[2] = temp_table[2];\n\n    temp_table = D_800A6730[sp57];\n    sp3C[0] = temp_table[0];\n    sp3C[1] = temp_table[1];\n    sp3C[2] = temp_table[2];\n\n    f4 = 0.0f;\n    f6 = D_800A6754[sp57];\n\n    sp5F = *(u8 *)((s32)arg0 + 0x5F);\n    sp63 = *(s8 *)((s32)arg0 + 0x63);\n    sp66 = *(s16 *)((s32)arg0 + 0x66);\n    sp5B = *(u8 *)((s32)arg0 + 0x5B);\n    sp6C = *(s32 *)((s32)arg0 + 0x6C);\n    sp6B = *(u8 *)((s32)arg0 + 0x6B);\n\n    header.unk0 = sp5F;\n    header.unk1 = sp63;\n    header.unk2 = sp66;\n    header.unk4 = sp5B;\n\n    result = func_1516037C(&header, (struct226 *)sp3C, 0x20, sp63, sp6C);\n\n    if (result != NULL) {\n        memcpy(result, sp30, 0x20);\n    }\n\n    return result;\n}",
@@ -33534,6 +33544,14 @@
         "reason": "length_mismatch (target=71, generated=61)",
         "diffs": [],
         "timestamp": "2026-06-12T20:25:53.485Z",
+        "contextPatch": []
+      },
+      {
+        "code": "struct225 *func_151623F4(void *arg0, void *arg1, void *arg2, u8 arg3) {\n    struct225 *result;\n    Header header;\n    u8 sp57;\n    s32 sp30[3];\n    s32 sp3C[3];\n    f32 f4;\n    f32 f6;\n    u8 sp5F;\n    s8 sp63;\n    s16 sp66;\n    u8 sp5B;\n    s32 sp6C;\n    u8 sp6B;\n\n    sp57 = arg3;\n    if (sp57 >= 3) {\n        return NULL;\n    }\n\n    sp30[0] = D_800A670C[sp57][0];\n    sp30[1] = D_800A670C[sp57][1];\n    sp30[2] = D_800A670C[sp57][2];\n\n    sp3C[0] = D_800A6730[sp57][0];\n    sp3C[1] = D_800A6730[sp57][1];\n    sp3C[2] = D_800A6730[sp57][2];\n\n    f4 = 0.0f;\n    f6 = D_800A6754[sp57];\n\n    sp5F = *(u8 *)((s32)arg0 + 0x57);\n    sp63 = *(s8 *)((s32)arg0 + 0x63);\n    sp66 = *(s16 *)((s32)arg0 + 0x66);\n    sp5B = *(u8 *)((s32)arg0 + 0x5B);\n    sp6C = *(s32 *)((s32)arg0 + 0x6C);\n    sp6B = *(u8 *)((s32)arg0 + 0x6B);\n\n    header.unk0 = sp5F;\n    header.unk1 = sp63;\n    header.unk2 = sp66;\n    header.unk4 = sp5B;\n\n    result = func_1516037C(&header, (struct226 *)sp3C, 0x20, sp6B, sp6C);\n\n    if (result != NULL) {\n        memcpy(result, sp30, 0x20);\n    }\n\n    return result;\n}",
+        "score": 0.4295774647887324,
+        "reason": "length_mismatch (target=71, generated=61)",
+        "diffs": [],
+        "timestamp": "2026-06-12T21:08:05.726Z",
         "contextPatch": []
       }
     ]
@@ -34124,7 +34142,7 @@
     ],
     "attempts": 3,
     "lastScore": 0.4014084507042254,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "u32 func_1502AF04(u32 arg0, u32 arg1, u32 arg2, u32 arg3) {\n    u32 sp34;\n    u32 sp28;\n    u32 sp24;\n    u32 sp20;\n    u32 sp1C;\n    u32 sp18;\n    u32 sp14;\n    u32 sp10;\n    u32 spC;\n    u32 sp8;\n    u32 sp4;\n\n    sp34 = arg0;\n    sp28 = arg3;\n    sp24 = arg1;\n    sp20 = arg2;\n\n    func_10004514((arg0 + (arg2 * 8)) & ~0xF, (arg1 + 8) & ~0xF, ((arg2 * 8 + (arg1 & 0xF) + 0xF) & ~0xF), 1);\n\n    if (arg3 == 0) {\n        return 0;\n    }\n\n    sp18 = arg3 & 3;\n    if (sp18 != 0) {\n        sp14 = (arg1 + 8) & ~0xF;\n        sp10 = 0;\n        do {\n            spC = *(u32 *)(sp14 + sp10);\n            *(u32 *)(sp14 + sp10) = spC + arg0;\n            sp10 += 8;\n        } while (sp10 < (sp18 << 3));\n    }\n\n    sp14 = (arg1 + 8) & ~0xF;\n    sp10 = (arg3 & ~3) << 3;\n    sp8 = arg3 << 3;\n    sp4 = 0;\n    while (sp4 != sp10) {\n        spC = *(u32 *)(sp14 + sp4 + 0);\n        sp1C = *(u32 *)(sp14 + sp4 + 8);\n        sp18 = *(u32 *)(sp14 + sp4 + 0x10);\n        sp14 = *(u32 *)(sp14 + sp4 + 0x18);\n        *(u32 *)(sp14 + sp4 + 0) = spC + arg0;\n        *(u32 *)(sp14 + sp4 + 8) = sp1C + arg0;\n        *(u32 *)(sp14 + sp4 + 0x10) = sp18 + arg0;\n        *(u32 *)(sp14 + sp4 + 0x18) = sp14 + arg0;\n        sp4 += 0x20;\n    }\n\n    return (arg1 + 8) & ~0xF;\n}",
@@ -34173,6 +34191,18 @@
         "diffs": [],
         "timestamp": "2026-06-12T21:06:47.152Z",
         "contextPatch": []
+      },
+      {
+        "code": "s32 func_1502AF04(s32 arg0, s32 arg1, s32 arg2, ...) {\n    s32 offset = (s32)D_AB1950;\n    s32 more = 1;\n    va_list args;\n    va_list *_ptr174 = &args;\n    va_start(args, arg2);\n    va_end((*_ptr174));\n    return more;\n}",
+        "score": -1.3333333333333335,
+        "reason": "transmuter_best=70",
+        "diffs": [
+          "transmuter: initial=89→best=70, iters=2088, compiled=1615, errors=385, forks=148",
+          "fork_rules: reorder-decls, delete-stmt, refer-to-var, randomize-type, reorder-stmts, modify-condition, duplicate-assignment, cast-expr, temp-for-expr, self-assignment, add-mask",
+          "last_fork_rule: reorder-decls",
+          "config: timeout=60s, maxCompiles=2000, concurrency=7, profile=ido, isolate=true, reduce=false, depth=1"
+        ],
+        "timestamp": "2026-06-12T21:16:56.914Z"
       }
     ]
   },
@@ -38347,8 +38377,8 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
-    "lastScore": 0.4798387096774194,
+    "attempts": 4,
+    "lastScore": 0.49583333333333335,
     "status": "pending",
     "history": [
       {
@@ -38400,6 +38430,27 @@
           "smoke_test: healthy {\"compiled\":18,\"forks\":0,\"iters\":35,\"errors\":2}"
         ],
         "timestamp": "2026-06-12T20:01:56.897Z"
+      },
+      {
+        "code": "s32 *func_1001F79C(struct55 *arg0, s32 arg1, u32 arg2, s32 arg3, s32 *arg4) {\n    s32 *sp34;\n    s32 sp30;\n    s32 sp2C;\n    u32 sp28;\n    u32 sp24;\n    s32 *sp20;\n    s32 *sp1C;\n    s32 *sp18;\n    s32 head;\n    u32 base;\n\n    sp34 = arg4;\n    head = *(s32 *)arg0;\n    base = *(u32 *)((s32)arg0 + (arg1 << 2) + 0x20);\n    sp24 = base + (head << 1);\n    if (arg2 < base) {\n        arg2 += head << 1;\n    }\n    sp28 = arg2 + 0x170;\n    if (sp24 < sp28) {\n        sp30 = (s32)((sp28 - sp24) >> 1);\n        sp2C = (s32)((sp24 - arg2) >> 1);\n        sp20 = sp34;\n        sp34 += 2;\n        sp20[0] = ((((sp30 << 1) & 0xFFF) << 12) | 0x6000000) | ((arg3 + (sp2C << 1)) & 0xFFF);\n        sp20[1] = osVirtualToPhysical((s32)arg2);\n        sp1C = sp34;\n        sp34 += 2;\n        sp1C[0] = ((((sp2C << 1) & 0xFFF) << 12) | 0x6000000) | ((arg3 + (sp30 << 1)) & 0xFFF);\n        sp1C[1] = osVirtualToPhysical((s32)base);\n    } else {\n        sp18 = sp34;\n        sp34 += 2;\n        sp18[0] = 0x6170000 | (arg3 & 0xFFF);\n        sp18[1] = osVirtualToPhysical((s32)arg2);\n    }\n    return sp34;\n}",
+        "score": 0.49583333333333335,
+        "reason": "length_mismatch (target=119, generated=120)",
+        "diffs": [],
+        "timestamp": "2026-06-12T21:25:40.214Z",
+        "contextPatch": []
+      },
+      {
+        "code": "#include <ultra64.h>\n#include \"functions.h\"\n#include \"variables.h\"\n#include \"macros.h\"\n#include \"libc/stdarg.h\"\n\n\ns32 *func_1001F79C(struct55 *arg0, s32 arg1, u32 arg2, s32 arg3, s32 *arg4) {\n    s32 *sp34;\n    s32 sp30;\n    s32 sp2C;\n    u32 sp28;\n    u32 sp24;\n    s32 *sp20;\n    s32 *sp1C;\n    s32 *sp18;\n    s32 head;\n    u32 base;\n\n    sp34 = arg4;\n    head = *(s32 *)arg0;\n    base = *(u32 *)((s32)arg0 + (arg1 << 2) + 0x20);\n    sp24 = base + (head << 1);\n    if (arg2 < base) {\n        arg2 += head << 1;\n    }\n    sp28 = arg2 + 0x170;\n    if (sp24 < sp28) {\n        sp30 = (s32)((sp28 - sp24) >> 1);\n        sp2C = (s32)((sp24 - arg2) >> 1);\n        sp20 = sp34;\n        sp34 += 2;\n        sp20[0] = ((((sp30 << 1) & 0xFFF) << 12) | 0x6000000) | ((arg3 + (sp2C << 1)) & 0xFFF);\n        sp20[1] = osVirtualToPhysical((s32)arg2);\n        sp1C = sp34;\n        sp34 += 2;\n        sp1C[0] = ((((sp2C << 1) & 0xFFF) << 12) | 0x6000000) | ((arg3 + (sp30 << 1)) & 0xFFF);\n        sp1C[1] = osVirtualToPhysical((s32)base);\n    } else {\n        sp18 = sp34;\n        sp34 += 2;\n        sp18[0] = 0x6170000 | (arg3 & 0xFFF);\n        sp18[1] = osVirtualToPhysical((s32)arg2);\n    }\n    return sp34;\n}",
+        "score": -3.033333333333333,
+        "reason": "transmuter_best=121",
+        "diffs": [
+          "transmuter: initial=121→best=121, iters=5998023, compiled=0, errors=0, forks=0",
+          "config: timeout=120s, maxCompiles=3000, concurrency=7, profile=ido, isolate=true, reduce=false, depth=1",
+          "NOTE: 0 compiled = no mutations reached a successful compile; possible dedupe, invalid mutation output, or isolation removed mutatable structure.",
+          "debug_artifacts: .pi/decomp/transmuter-debug/func_1001F79C/2026-06-12T21-27-58-890Z",
+          "smoke_test: healthy {\"compiled\":18,\"forks\":0,\"iters\":32,\"errors\":2}"
+        ],
+        "timestamp": "2026-06-12T21:27:58.944Z"
       }
     ]
   },
@@ -38541,7 +38592,7 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 4,
+    "attempts": 6,
     "lastScore": 0.4930555555555556,
     "status": "pending",
     "history": [
@@ -38588,6 +38639,22 @@
           "config: timeout=60s, maxCompiles=2000, concurrency=7, profile=ido, isolate=true, reduce=false, depth=1"
         ],
         "timestamp": "2026-06-12T20:42:10.592Z"
+      },
+      {
+        "code": "s32 func_1000E46C(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {\n    struct151 *temp_v0;\n    s32 temp_s1;\n    s32 i;\n\n    temp_v0 = func_1000B1FC(arg0);\n    temp_s1 = (arg1 * 255) / 100;\n    if (temp_s1 >= 256) {\n        temp_s1 = 255;\n    } else if (temp_s1 < 0) {\n        temp_s1 = 0;\n    }\n\n    if (temp_v0 == NULL) {\n        return 0;\n    }\n\n    if (temp_v0->unk0 < 0) {\n        if (arg3 >= 0) {\n            func_10008790(((u8 *)temp_v0)[3], arg2, temp_s1, arg3);\n        } else {\n            func_1000886C(((u8 *)temp_v0)[3], arg2, temp_s1);\n        }\n        return 1;\n    }\n\n    if (temp_s1 == 0) {\n        temp_v0->unk38 |= arg2;\n    } else if (temp_s1 > 0) {\n        temp_v0->unk38 &= ~arg2;\n    }\n\n    for (i = 0; arg2 != 0; i++, arg2 >>= 1) {\n        if (arg2 & 1) {\n            ((u8 *)temp_v0)[i + 0x3C] = temp_s1;\n        }\n    }\n\n    return 1;\n}",
+        "score": 0.4930555555555556,
+        "reason": "length_mismatch (target=71, generated=72)",
+        "diffs": [],
+        "timestamp": "2026-06-12T21:40:03.784Z",
+        "contextPatch": []
+      },
+      {
+        "code": "s32 func_1000E46C(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {\n    struct151 *temp_v0;\n    s32 temp_s1;\n    s32 i;\n    s32 phi_v1;\n\n    temp_v0 = func_1000B1FC(arg0);\n    temp_s1 = (arg1 * 255) / 100;\n    if (temp_s1 >= 256) {\n        temp_s1 = 255;\n    } else if (temp_s1 < 0) {\n        temp_s1 = 0;\n    }\n\n    if (temp_v0 == NULL) {\n        return 0;\n    }\n\n    if (temp_v0->unk0 < 0) {\n        phi_v1 = temp_v0;\n        if (arg3 >= 0) {\n            func_1000886C(*(u8 *)(phi_v1 + 3), arg2, temp_s1);\n            phi_v1 = temp_v0;\n        } else {\n            func_10008790(*(u8 *)(phi_v1 + 3), arg2, temp_s1, arg3);\n            phi_v1 = temp_v0;\n        }\n        return 1;\n    }\n\n    if (temp_s1 == 0) {\n        temp_v0->unk38 |= arg2;\n    } else if (temp_s1 > 0) {\n        temp_v0->unk38 &= ~arg2;\n    }\n\n    for (i = 0; arg2 != 0; i++, arg2 >>= 1) {\n        if (arg2 & 1) {\n            *(u8 *)((s32)temp_v0 + i + 0x3C) = temp_s1;\n        }\n    }\n\n    return 1;\n}",
+        "score": 0.4930555555555556,
+        "reason": "length_mismatch (target=71, generated=72)",
+        "diffs": [],
+        "timestamp": "2026-06-12T21:40:26.213Z",
+        "contextPatch": []
       }
     ]
   },
