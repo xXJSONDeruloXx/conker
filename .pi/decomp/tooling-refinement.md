@@ -389,3 +389,9 @@ Bottom line: the current candidate is not matchable with our present strategies 
 2. Develop more robust struct reconstruction from assembly references
 3. Improve pointer arithmetic handling in C translations for complex addressing modes
 4. Create more targeted decompilation filters for medium-difficulty functions with pointer-heavy code
+## Chunk 544 — 2026-06-12T23:55:30.803Z
+- Matched: no
+- Summary: Unable to decompile func_151F7F60. The target assembly requires complex struct member access at offsets 0x201C and 0x3F88, heavy pointer arithmetic and calls to bcopy/bzero. The lack of definition for the struct containing these members (and the function pointer at offset 0x04) prevented a correct C translation. Current attempts resulted in compiler errors due to re-declaration of bcopy and syntax errors in pointer math. No further progress can be made without a detailed struct layout or helper functions. Suggest obtaining struct definitions or skipping to next useful candidate.
+- Likely cause / blocker: not provided
+- Tooling observations: not provided
+- Improvement opportunities: not provided
