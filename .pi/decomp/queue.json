@@ -23519,6 +23519,18 @@
         "diffs": [],
         "timestamp": "2026-06-12T12:54:51.649Z",
         "contextPatch": []
+      },
+      {
+        "code": "#include <ultra64.h>\n#include \"functions.h\"\n#include \"variables.h\"\n#include \"macros.h\"\n#include \"libc/stdarg.h\"\n\n\ns32 func_151415D4(struct210 *arg0) {\n    struct211 *temp_v0;\n    f32 temp_f0;\n    f32 temp_f4;\n\n    temp_v0 = (struct211 *)((s32)arg0 + 0x170);\n    if (*(f32 *)((s32)arg0 + 0x17C) < *(f32 *)((s32)arg0 + 0x180)) {\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4;\n    } else if (temp_v0->unkC < temp_v0->unk14) {\n        int _t684 = (s32)temp_v0 + 0x20;\n        int _t163 = temp_v0->unkC - temp_v0->unk10;\n        temp_f0 = (_t163) * *(f32 *)(_t684);\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4 + (*(f32 *)(_t684) * temp_v0->unk8 * (temp_v0->unkC - temp_v0->unk10));\n    } else if (temp_v0->unkC < *(f32 *)((s32)temp_v0 + 0x18)) {\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk0;\n    } else {\n        temp_f4 = temp_v0->unkC - *(f32 *)((s32)temp_v0 + 0x18);\n        temp_f0 = 1.0f - (temp_v0->unkC - *(f32 *)((s32)temp_v0 + 0x18) * *(f32 *)((s32)temp_v0 + 0x20));\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4 + (temp_v0->unk8 * temp_f0);\n    }\n    temp_v0->unkC += D_800BE9A4;\n    temp_f0 = *(f32 *)((s32)temp_v0 + 0x1C);\n    while (temp_f0 < temp_v0->unkC) {\n        temp_v0->unkC -= temp_f0;\n    }\n    return 1;\n}",
+        "score": 0.30000000000000004,
+        "reason": "transmuter_best=21",
+        "diffs": [
+          "transmuter: initial=32→best=21, iters=3149, compiled=1180, errors=1820, forks=18",
+          "fork_rules: expand-expr, temp-for-expr, refer-to-var, reorder-stmts, randomize-type, commutative-swap, delete-stmt, struct-ref-swap",
+          "last_fork_rule: expand-expr",
+          "config: timeout=120s, maxCompiles=3000, concurrency=7, profile=ido, isolate=true, reduce=false, depth=1"
+        ],
+        "timestamp": "2026-06-12T13:29:36.683Z"
       }
     ]
   },
@@ -30215,7 +30227,7 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 12,
+    "attempts": 15,
     "lastScore": 0.49264705882352944,
     "status": "pending",
     "history": [
@@ -30428,6 +30440,51 @@
           "config: timeout=120s, maxCompiles=3000, concurrency=7, profile=ido, isolate=true, reduce=false, depth=1"
         ],
         "timestamp": "2026-06-12T12:30:11.229Z"
+      },
+      {
+        "code": "void func_15077F64(void) {\n    s32 sp10;\n    s32 sp14;\n    s32 sp18;\n    u8 sp1C;\n    u8 sp1D;\n    u8 sp1E;\n    u8 sp1F;\n    u8 sp20;\n    u8 sp21;\n    u8 sp22;\n    u8 sp23;\n    s32 sp24;\n    s32 sp28;\n    s32 sp2C;\n    \n    s32 temp_v0;\n    f32 temp_f12;\n    f32 temp_f14;\n    s32 phi_a0;\n    s32 phi_a1;\n\n    sp1E = D_800D1890 - 1;\n    temp_v0 = D_800D2104[D_800D154C->unk13F] + (D_800D154C->unk21E * 8);\n    temp_f12 = (f32)*(s16 *)(temp_v0 + 8) - D_800D154C->x_position;\n    temp_f14 = D_800D154C->z_position - (f32)*(s16 *)(temp_v0 + 0xC);\n    D_800D154C->unk78 = func_1505A630(temp_f12, temp_f14, 0);\n    phi_a0 = phi_a1 = ((D_800D154C->unk78 - D_800D154C->unk76) >> 8) & 0xFF;\n    if ((phi_a1 & 0x80) != 0) {\n        phi_a1 = -phi_a1;\n        phi_a0 = phi_a1 & 0xFF;\n        phi_a1 = phi_a0;\n    }\n    if (((u8 *)D_80099A3C)[sp1E * 0xA] < phi_a0) {\n        D_800D154C->unk250 = D_800D1891;\n        func_15056A00(D_800D154C, phi_a1, sp1E);\n    }\n}",
+        "score": 0.4852941176470588,
+        "reason": "length_mismatch (target=68, generated=66)",
+        "diffs": [],
+        "timestamp": "2026-06-12T12:57:22.100Z",
+        "contextPatch": []
+      },
+      {
+        "code": "void func_15077F64(void) {\n    s32 sp10;\n    s32 sp14;\n    s32 sp18;\n    s32 sp1C;\n    s32 sp20;\n    s32 sp24;\n    s32 sp28;\n    \n    s32 temp_v0;\n    f32 temp_f12;\n    f32 temp_f14;\n    s32 phi_a0;\n    s32 phi_a1;\n\n    sp1C = D_800D1890 - 1;\n    temp_v0 = D_800D2104[D_800D154C->unk13F] + (D_800D154C->unk21E * 8);\n    temp_f12 = (f32)*(s16 *)(temp_v0 + 8) - D_800D154C->x_position;\n    temp_f14 = D_800D154C->z_position - (f32)*(s16 *)(temp_v0 + 0xC);\n    D_800D154C->unk78 = func_1505A630(temp_f12, temp_f14, 0);\n    phi_a0 = phi_a1 = ((D_800D154C->unk78 - D_800D154C->unk76) >> 8) & 0xFF;\n    if ((phi_a1 & 0x80) != 0) {\n        phi_a1 = -phi_a1;\n        phi_a0 = phi_a1 & 0xFF;\n        phi_a1 = phi_a0;\n    }\n    if (((u8 *)D_80099A3C)[sp1C * 0xA] < phi_a0) {\n        D_800D154C->unk250 = D_800D1891;\n        func_15056A00(D_800D154C, phi_a1, sp1C);\n    }\n}",
+        "score": 0.49264705882352944,
+        "reason": "length_mismatch (target=68, generated=67)",
+        "diffs": [],
+        "timestamp": "2026-06-12T12:59:27.236Z",
+        "contextPatch": []
+      },
+      {
+        "code": "void func_15077F64(void) {\n    s32 sp10;\n    s32 sp14;\n    s32 sp18;\n    s8  sp1C;\n    s8  sp1D;\n    s8  sp1E;\n    s8  pad1F;\n    s32 sp20;\n    s32 sp24;\n    \n    s32 temp_v0;\n    f32 temp_f12;\n    f32 temp_f14;\n    s32 phi_a0;\n    s32 phi_a1;\n    s8 temp_t6;\n\n    temp_t6 = (s8)(D_800D1890 - 1);\n    sp1E = temp_t6;\n    temp_v0 = D_800D2104[D_800D154C->unk13F] + (D_800D154C->unk21E * 8);\n    temp_f12 = (f32)*(s16 *)(temp_v0 + 8) - D_800D154C->x_position;\n    temp_f14 = D_800D154C->z_position - (f32)*(s16 *)(temp_v0 + 0xC);\n    D_800D154C->unk78 = func_1505A630(temp_f12, temp_f14, 0);\n    phi_a0 = phi_a1 = ((D_800D154C->unk78 - D_800D154C->unk76) >> 8) & 0xFF;\n    if ((phi_a1 & 0x80) != 0) {\n        phi_a1 = -phi_a1;\n        phi_a0 = phi_a1 & 0xFF;\n        phi_a1 = phi_a0;\n    }\n    if (((u8 *)D_80099A3C)[(u8)sp1E * 0xA] < phi_a0) {\n        D_800D154C->unk250 = D_800D1891;\n        func_15056A00(D_800D154C, phi_a1, (u8)sp1E);\n    }\n}",
+        "score": 0.3971,
+        "reason": "structural_diffs=41",
+        "diffs": [
+          "structural: target=addiu sp, sp, -40 got=addiu sp, sp, -72",
+          "structural: target=lui t7, HI(D_800D2104) got=lui t8, HI(D_800D2104)",
+          "structural: target=lw t7, LO(D_800D2104)(t7) got=lw t8, LO(D_800D2104)(t8)",
+          "structural: target=lbu t8, 319(v1) got=lbu t9, 319(v1)",
+          "structural: target=lbu t3, 542(v1) got=lbu t4, 542(v1)",
+          "structural: target=sll t9, t8, 2 got=sll t1, t9, 2",
+          "structural: target=addu t1, t7, t9 got=addu t2, t8, t1",
+          "structural: target=lw t2, 0(t1) got=lw t3, 0(t2)",
+          "structural: target=sll t4, t3, 3 got=sll t5, t4, 3",
+          "structural: target=addu v0, t2, t4 got=addu v0, t3, t5",
+          "structural: target=lh t5, 8(v0) got=lh t6, 8(v0)",
+          "structural: target=lh t6, 12(v0) got=lh t7, 12(v0)",
+          "structural: target=mtc1 t5, f4 got=mtc1 t6, f4",
+          "structural: target=mtc1 t6, f16 got=mtc1 t7, f16",
+          "structural: target=sb a3, 30(sp) got=sb a3, 27(sp)",
+          "structural: target=lw t8, 0(t0) got=lw t9, 0(t0)",
+          "structural: target=lbu a3, 30(sp) got=lb a3, 27(sp)",
+          "structural: target=sh v0, 120(t8) got=sh v0, 120(t9)",
+          "structural: target=sll t5, a3, 2 got=andi a2, a3, 255",
+          "structural: target=addu t5, t5, a3 got=sll t5, a2, 2"
+        ],
+        "timestamp": "2026-06-12T13:46:48.717Z",
+        "contextPatch": []
       }
     ]
   },
@@ -36782,8 +36839,8 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 4,
-    "lastScore": 0.4320987654320988,
+    "attempts": 5,
+    "lastScore": 0.4605263157894737,
     "status": "pending",
     "history": [
       {
@@ -36828,6 +36885,14 @@
         "reason": "length_mismatch (target=70, generated=81)",
         "diffs": [],
         "timestamp": "2026-06-12T12:53:05.331Z",
+        "contextPatch": []
+      },
+      {
+        "code": "void func_1000E2F4(s32 arg0) {\n    s32 i;\n    struct151 *temp_v0;\n    struct151 **ptr;\n    s32 temp_v1;\n\n    ptr = D_800417B0;\n    i = 0;\n    do {\n        temp_v0 = ptr[i];\n        if (temp_v0 != NULL) {\n            temp_v1 = temp_v0->unk4;\n            if (temp_v1 > 0) {\n                if (temp_v0->unk15 == 0) {\n                    if (arg0 != 0) {\n                        func_10008EE0(i & 0xFF, 0);\n                        if ((D_8002B074[D_800417B0[i]->unk4].unk4 & 0x10) == 0) {\n                            func_10008F58(i & 0xFF);\n                        }\n                    } else {\n                        if ((D_8002B074[temp_v1].unk4 & 0x10) != 0) {\n                            temp_v0->unk30 = -1;\n                        } else {\n                            func_100084D8(i & 0xFF);\n                            D_800417B0[i]->unk30 = -1;\n                        }\n                        func_1000CC54(i);\n                    }\n                }\n            }\n        }\n        i++;\n    } while (i != 3);\n    D_80041F00 = arg0;\n}",
+        "score": 0.4605263157894737,
+        "reason": "length_mismatch (target=70, generated=76)",
+        "diffs": [],
+        "timestamp": "2026-06-12T13:39:28.719Z",
         "contextPatch": []
       }
     ]
@@ -37988,9 +38053,27 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 2,
+    "lastScore": 0.4722222222222222,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void *func_1001F79C(struct55 *arg0, s32 arg1, u32 arg2, s32 arg3, void *arg4) {\n    s32 *sp34;\n    s32 sp30;\n    s32 sp2C;\n    u32 sp28;\n    u32 sp24;\n    s32 *sp20;\n    s32 *sp1C;\n    s32 *sp18;\n\n    sp34 = arg4;\n    sp24 = *(s32 *)((s32)arg0 + (arg1 * 4) + 0x20) + (arg0->unk0 * 2);\n    if (arg2 < *(s32 *)((s32)arg0 + (arg1 * 4) + 0x20)) {\n        arg2 = arg2 + (arg0->unk0 * 2);\n    }\n    sp28 = arg2 + 0x170;\n    if (sp24 < sp28) {\n        sp30 = (sp28 - sp24) >> 1;\n        sp2C = (sp24 - arg2) >> 1;\n        sp20 = sp34;\n        sp34 += 2;\n        sp20[0] = ((((sp30 << 1) & 0xFFF) << 12) | 0x6000000) | ((arg3 + (sp2C * 2)) & 0xFFF);\n        sp20[1] = osVirtualToPhysical(arg2);\n        sp1C = sp34;\n        sp34 += 2;\n        sp1C[0] = ((((sp2C << 1) & 0xFFF) << 12) | 0x6000000) | ((arg3 + (sp30 * 2)) & 0xFFF);\n        sp1C[1] = osVirtualToPhysical(*(s32 *)((s32)arg0 + (arg1 * 4) + 0x20));\n    } else {\n        sp18 = sp34;\n        sp34 += 2;\n        sp18[0] = (((arg3 & 0xFFF) << 12) | 0x4000000) | (arg3 & 0xFFF);\n        sp18[1] = osVirtualToPhysical(arg2);\n    }\n    return sp34;\n}",
+        "score": 0.4722222222222222,
+        "reason": "length_mismatch (target=119, generated=126)",
+        "diffs": [],
+        "timestamp": "2026-06-12T13:20:45.736Z",
+        "contextPatch": []
+      },
+      {
+        "code": "void *func_1001F79C(struct55 *arg0, s32 arg1, u32 arg2, s32 arg3, void *arg4) {\n    s32 *sp34;\n    s32 sp30;\n    s32 sp2C;\n    u32 sp28;\n    u32 sp24;\n    s32 *sp20;\n    s32 *sp1C;\n    s32 *sp18;\n\n    sp34 = arg4;\n    sp24 = *(s32 *)((s32)arg0 + (arg1 * 4) + 0x20) + (arg0->unk0 * 2);\n    if (arg2 < *(u32 *)((s32)arg0 + (arg1 * 4) + 0x20)) {\n        arg2 = arg2 + (arg0->unk0 * 2);\n    }\n    sp28 = arg2 + 0x170;\n    if ((s32)sp24 < (s32)sp28) {\n        sp30 = (sp28 - sp24) >> 1;\n        sp2C = (sp24 - arg2) >> 1;\n        sp20 = sp34;\n        sp34 += 2;\n        sp20[0] = ((((sp30 * 2) & 0xFFF) << 12) | 0x6000000) | ((arg3 + (sp2C * 2)) & 0xFFF);\n        sp20[1] = osVirtualToPhysical(arg2);\n        sp1C = sp34;\n        sp34 += 2;\n        sp1C[0] = ((((sp2C * 2) & 0xFFF) << 12) | 0x6000000) | ((arg3 + (sp30 * 2)) & 0xFFF);\n        sp1C[1] = osVirtualToPhysical(*(s32 *)((s32)arg0 + (arg1 * 4) + 0x20));\n    } else {\n        sp18 = sp34;\n        sp34 += 2;\n        sp18[0] = (((arg3 & 0xFFF) << 12) | 0x4000000) | (arg3 & 0xFFF);\n        sp18[1] = osVirtualToPhysical(arg2);\n    }\n    return sp34;\n}",
+        "score": 0.4722222222222222,
+        "reason": "length_mismatch (target=119, generated=126)",
+        "diffs": [],
+        "timestamp": "2026-06-12T13:22:06.456Z",
+        "contextPatch": []
+      }
+    ]
   },
   {
     "function": "n_alCSeqNextEvent",
@@ -40552,7 +40635,7 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 1,
+    "attempts": 2,
     "lastScore": 0.37623762376237624,
     "status": "pending",
     "history": [
@@ -40562,6 +40645,14 @@
         "reason": "length_mismatch (target=76, generated=101)",
         "diffs": [],
         "timestamp": "2026-06-12T12:35:03.087Z",
+        "contextPatch": []
+      },
+      {
+        "code": "void func_16001700(void) {\n    u32 sp20;\n    u32 sp24;\n    u32 *temp_v0;\n    u32 *end_ptr;\n    u32 temp_v1;\n\n    if (__osContLastCmd != 1) {\n        func_160018BC();\n        func_160019A8(1, &__osContPifRam);\n        sp20 = osGetCount() + 0x30D40;\n        while (osGetCount() < sp20) {\n            func_160016F4(0);\n        }\n        func_160016F4(0);\n    }\n    temp_v0 = (u32 *)&__osContPifRam;\n    end_ptr = (u32 *)((u8 *)&__osContLastCmd);\n    temp_v1 = 0xFF;\n    while (temp_v0 < end_ptr) {\n        temp_v0++;\n        temp_v0[-1] = temp_v1;\n    }\n    *(u32 *)0x80042A4C = 0;\n    func_160019A8(0, &__osContPifRam);\n    __osContLastCmd = 1;\n    sp20 = osGetCount() + 0xC3500;\n    while (osGetCount() < sp20) {\n        func_160016F4(0);\n    }\n    func_160016F4(0);\n}",
+        "score": 0.33043478260869563,
+        "reason": "length_mismatch (target=76, generated=115)",
+        "diffs": [],
+        "timestamp": "2026-06-12T13:11:01.602Z",
         "contextPatch": []
       }
     ]
