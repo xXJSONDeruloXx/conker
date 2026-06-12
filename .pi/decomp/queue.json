@@ -36621,7 +36621,7 @@
     ],
     "attempts": 0,
     "lastScore": 0,
-    "status": "pending"
+    "status": "skipped"
   },
   {
     "function": "func_15004AAC",
@@ -39269,9 +39269,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
+    "attempts": 4,
     "lastScore": 0.463855421686747,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "s32 func_1000C7E8(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {\n    f32 temp_f12;\n    f32 temp_f14;\n    f32 temp_f16;\n    f32 temp_f18;\n    f32 temp_f4;\n    f32 temp_f6;\n    f32 temp_f8;\n    f32 temp_f0;\n    f32 temp_f2;\n    f32 temp_f10;\n    s32 temp_a2;\n    s32 temp_v0;\n    s32 temp_v1;\n\n    temp_a2 = arg2;\n    temp_v0 = D_800BE9F0;\n    if (temp_v0 == 0x31) {\n        if (arg0 == 0x2) {\n            return 0;\n        }\n        temp_v0 = func_1000B1B0(9);\n        if (temp_v0 != 0) {\n            func_1000E704(0x3E, 0, 0xFFFF);\n        }\n        func_1000E40C(0x3E, 0x7FFF);\n        func_1000D96C(0x3D, 0x3E, 4);\n        return 2;\n    }\n\n    temp_v1 = D_8002B070 + 1;\n    D_8002B070 = temp_v1;\n    if (temp_a2 == 0) {\n        temp_a2 = temp_v1;\n    }\n\n    temp_f14 = (f32)temp_a2 - D_8002C238;\n    temp_f16 = (f32)arg3;\n    temp_f6 = temp_f14 * temp_f14;\n    temp_f8 = temp_f16 * temp_f16;\n    temp_f0 = temp_f6 + temp_f8;\n    temp_f0 = sqrtf(temp_f0);\n    temp_f4 = temp_f0 * 100.0f;\n    temp_f12 = D_8002C238 - temp_f4;\n\n    if (temp_f12 < 0.0f) {\n        temp_f2 = temp_f12;\n    } else if (D_8002C238 < temp_f12) {\n        temp_f2 = D_8002C238;\n    } else {\n        temp_f2 = temp_f12;\n    }\n\n    temp_v0 = (s32)temp_f2;\n    func_1000E40C(0x3E, temp_v0);\n    return temp_a2;\n}",
@@ -39295,6 +39295,26 @@
         "reason": "length_mismatch (target=83, generated=76)",
         "diffs": [],
         "timestamp": "2026-06-12T22:18:27.966Z",
+        "contextPatch": []
+      },
+      {
+        "code": "#include <ultra64.h>\n#include \"functions.h\"\n#include \"variables.h\"\n#include \"macros.h\"\n#include \"libc/stdarg.h\"\n\n\ns32 func_1000C7E8(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {\n    f32 temp_f12;\n    f32 temp_f14;\n    f32 temp_f16;\n    f32 temp_f18;\n    f32 temp_f4;\n    f32 temp_f6;\n    f32 temp_f8;\n    f32 temp_f0;\n    f32 temp_f2;\n    s32 temp_a2;\n    f32 temp_f10;\n    s32 temp_v0;\n    s32 temp_v1;\n\n    temp_a2 = arg2;\n    temp_v0 = D_800BE9F0;\n    if (temp_v0 == 0x31) {\n        if (arg0 == 2) {\n            return 0;\n        }\n        if (func_1000B1B0(9) != 0) {\n            func_1000E704(0x3E, 0, 0xFFFF);\n        }\n        func_1000E40C(0x3E, 0x7FFF);\n        func_1000D96C(0x3D, 0x3E, 4);\n        return 2;\n    }\n\n    temp_v1 = D_8002B070 + 1;\n    D_8002B070 = temp_v1;\n\n    temp_f14 = (f32)temp_a2 - D_8002C238;\n    temp_f16 = (f32)arg3;\n    temp_f6 = temp_f14 * temp_f14;\n    temp_f8 = temp_f16 * temp_f16;\n    temp_f0 = temp_f6 + temp_f8;\n    temp_f0 = sqrtf(temp_f0);\n    temp_f4 = temp_f0 * 100.0f;\n    temp_f12 = D_8002C238 - temp_f4;\n\n    if (D_8002C238 - temp_f4 < 0.0f) {\n        temp_f2 = temp_f12;\n    } else if (D_8002C238 < temp_f12) {\n        temp_f2 = D_8002C238;\n    } else {\n        temp_f2 = temp_f12;\n    }\n\n    temp_v0 = (s32)temp_f2;\n    func_1000E40C(0x3E, temp_v0);\n    return temp_a2;\n}",
+        "score": -0.6666666666666667,
+        "reason": "transmuter_best=50",
+        "diffs": [
+          "transmuter: initial=65→best=50, iters=3008, compiled=1918, errors=1082, forks=161",
+          "fork_rules: reorder-decls, refer-to-var, expand-expr, modify-condition, delete-stmt, pad-var-decl, add-mask, temp-for-expr, insert-block, reorder-stmts",
+          "last_fork_rule: reorder-decls",
+          "config: timeout=120s, maxCompiles=3000, concurrency=7, profile=ido, isolate=true, reduce=false, depth=1"
+        ],
+        "timestamp": "2026-06-12T22:19:07.176Z"
+      },
+      {
+        "code": "s32 func_1000C7E8(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {\n    s32 v0;\n    s32 v1;\n    f32 dx;\n    f32 dz;\n    f32 dist;\n    f32 scaled;\n    f32 t;\n    f32 clamped;\n\n    v0 = D_800BE9F0;\n    if (v0 == 0x31) {\n        if (arg0 == 2) {\n            return 0;\n        }\n        if (func_1000B1B0(9) != 0) {\n            func_1000E704(0x3E, 0, 0xFFFF);\n        }\n        func_1000E40C(0x3E, 0x7FFF);\n        func_1000D96C(0x3D, 0x3E, 4);\n        return 2;\n    }\n\n    v1 = D_8002B070 + 1;\n    D_8002B070 = v1;\n    if (arg2 == 0) {\n        arg2 = v1;\n    }\n\n    dx = (f32)arg2 - D_8002C238;\n    dz = (f32)arg3;\n    dist = sqrtf(dx*dx + dz*dz);\n    scaled = dist * 100.0f;\n    t = D_8002C238 - scaled;\n    if (t < 0.0f) {\n        clamped = t;\n    } else if (D_8002C238 < t) {\n        clamped = D_8002C238;\n    } else {\n        clamped = t;\n    }\n    func_1000E40C(0x3E, (s32)clamped);\n    return arg2;\n}",
+        "score": 0.45783132530120485,
+        "reason": "length_mismatch (target=83, generated=76)",
+        "diffs": [],
+        "timestamp": "2026-06-12T22:20:50.745Z",
         "contextPatch": []
       }
     ]
@@ -41217,7 +41237,7 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 2,
+    "attempts": 3,
     "lastScore": 0.37623762376237624,
     "status": "pending",
     "history": [
@@ -41248,6 +41268,14 @@
           "config: timeout=120s, maxCompiles=2000, concurrency=7, profile=ido, isolate=true, reduce=false, depth=1"
         ],
         "timestamp": "2026-06-12T16:03:50.000Z"
+      },
+      {
+        "code": "void func_16001700(void) {\n    s32 sp20;\n    s32 sp24;\n    u32 *temp_v0;\n    u32 temp_v1;\n\n    if (__osContLastCmd != 1) {\n        func_160018BC();\n        func_160019A8(1, &__osContPifRam);\n        sp20 = osGetCount();\n        sp20 += 0x30D40;\n        do {\n            func_160016F4(0);\n            sp24 = osGetCount();\n        } while (sp24 < sp20);\n        func_160016F4(0);\n    }\n    temp_v0 = (u32 *)&__osContPifRam;\n    temp_v1 = 0xFF;\n    while (temp_v0 < (u32 *)&__osContLastCmd) {\n        temp_v0++;\n        temp_v0[-1] = temp_v1;\n    }\n    *(u32 *)0x80042A4C = 0;\n    func_160019A8(0, &__osContPifRam);\n    __osContLastCmd = 1;\n    sp20 = osGetCount();\n    sp20 += 0xC3500;\n    do {\n        func_160016F4(0);\n        sp24 = osGetCount();\n    } while (sp24 < sp20);\n    func_160016F4(0);\n}",
+        "score": 0.3653846153846154,
+        "reason": "length_mismatch (target=76, generated=104)",
+        "diffs": [],
+        "timestamp": "2026-06-12T22:24:19.551Z",
+        "contextPatch": []
       }
     ]
   },
