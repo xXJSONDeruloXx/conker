@@ -36916,8 +36916,8 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 5,
-    "lastScore": 0.4605263157894737,
+    "attempts": 6,
+    "lastScore": 0.47297297297297297,
     "status": "pending",
     "history": [
       {
@@ -36970,6 +36970,14 @@
         "reason": "length_mismatch (target=70, generated=76)",
         "diffs": [],
         "timestamp": "2026-06-12T13:39:28.719Z",
+        "contextPatch": []
+      },
+      {
+        "code": "void func_1000E2F4(s32 arg0) {\n    struct151 **entry_ptr;\n    s32 index;\n    struct151 *entry;\n    u8 status_byte;\n    s32 temp_v1;\n    s32 tmp_val;\n    f32 unused;\n\n    entry_ptr = (struct151 **)D_800417B0;\n    index = 0;\n    while (index != 3) {\n        entry = entry_ptr[index];\n        if (entry != NULL) {\n            status_byte = *(u8 *)((s32)entry + 0x15);\n            if (status_byte == 0) {\n                if (arg0 != 0) {\n                    func_10008EE0(index & 0xFF, 0);\n                    temp_v1 = *(s32 *)((s32)entry + 4);\n                    if ((D_8002B074[temp_v1].unk4 & 0x10) == 0) {\n                        func_10008F58(index & 0xFF);\n                    }\n                } else {\n                    tmp_val = *(s32 *)((s32)entry + 0x4);\n                    if ((D_8002B074[tmp_val].unk4 & 0x10) != 0) {\n                        entry->unk30 = -1;\n                    } else {\n                        func_100084D8(index & 0xFF);\n                        entry->unk30 = -1;\n                    }\n                    func_1000CC54(index);\n                }\n            }\n        }\n        index++;\n    }\n    D_80041F00 = arg0;\n}",
+        "score": 0.47297297297297297,
+        "reason": "length_mismatch (target=70, generated=74)",
+        "diffs": [],
+        "timestamp": "2026-06-12T14:24:58.513Z",
         "contextPatch": []
       }
     ]
@@ -38157,6 +38165,19 @@
         "diffs": [],
         "timestamp": "2026-06-12T14:22:07.733Z",
         "contextPatch": []
+      },
+      {
+        "code": "#include <ultra64.h>\n#include \"functions.h\"\n#include \"variables.h\"\n#include \"macros.h\"\n#include \"libc/stdarg.h\"\n\n\nvoid *func_1001F79C(struct55 *arg0, s32 arg1, u32 arg2, s32 arg3, void *arg4) {\n    s32 *sp34;\n    s32 sp30;\n    s32 sp2C;\n    u32 sp28;\n    u32 sp24;\n    s32 *sp20;\n    s32 *sp1C;\n    s32 *sp18;\n\n    sp34 = arg4;\n    sp24 = *(s32 *)((s32)arg0 + (arg1 * 4) + 0x20) + (*(s32 *)arg0 << 1);\n    if (arg2 < *(u32 *)((s32)arg0 + (arg1 * 4) + 0x20)) {\n        arg2 = arg2 + (*(s32 *)arg0 << 1);\n    }\n    sp28 = arg2 + 0x170;\n    if (sp24 < sp28) {\n        sp30 = (sp28 - sp24) >> 1;\n        sp2C = (sp24 - arg2) >> 1;\n        sp20 = sp34;\n        sp34 = sp20 + 2;\n        sp20[0] = ((sp2C * 2 & 0xFFF) << 12) | 0x6000000 | (arg3 + sp30 * 2 & 0xFFF);\n        sp20[1] = osVirtualToPhysical(arg2);\n        sp1C = sp34;\n        sp34 = sp1C + 2;\n        sp1C[0] = ((sp30 * 2 & 0xFFF) << 12) | 0x6000000 | (arg3 + sp2C * 2 & 0xFFF);\n        sp1C[1] = osVirtualToPhysical(*(s32 *)((s32)arg0 + (arg1 * 4) + 0x20));\n    } else {\n        sp18 = sp34;\n        sp34 = sp18 + 2;\n        sp18[0] = 0x6170000 | (arg3 & 0xFFF);\n        sp18[1] = osVirtualToPhysical(arg2);\n    }\n    return sp34;\n}",
+        "score": -3.2,
+        "reason": "transmuter_best=126",
+        "diffs": [
+          "transmuter: initial=126→best=126, iters=5689301, compiled=0, errors=0, forks=0",
+          "config: timeout=120s, maxCompiles=3000, concurrency=7, profile=ido, isolate=true, reduce=false, depth=1",
+          "NOTE: 0 compiled = no mutations reached a successful compile; possible dedupe, invalid mutation output, or isolation removed mutatable structure.",
+          "debug_artifacts: .pi/decomp/transmuter-debug/func_1001F79C/2026-06-12T14-24-25-313Z",
+          "smoke_test: healthy {\"compiled\":16,\"forks\":0,\"iters\":39,\"errors\":4}"
+        ],
+        "timestamp": "2026-06-12T14:24:25.363Z"
       }
     ]
   },
