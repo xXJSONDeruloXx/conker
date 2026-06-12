@@ -337,3 +337,9 @@ array-index→ptr-arith rewrites.
 - Likely cause / blocker: not provided
 - Tooling observations: not provided
 - Improvement opportunities: not provided
+## Chunk 514 — 2026-06-12T21:29:22.855Z
+- Matched: no
+- Summary: Skipped func_1502AF04 after 3+ failed attempts and Transmuter plateau at 70. Root cause: stack frame mismatch (target -0x40 vs generated -0x28) and control flow structure differences prevent IDO register scheduling match. Tooling opportunity: stack-depth control patterns for loop-heavy functions; better similarity weighting to avoid repeated failing candidates.
+- Likely cause / blocker: not provided
+- Tooling observations: not provided
+- Improvement opportunities: not provided
