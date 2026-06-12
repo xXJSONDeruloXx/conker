@@ -380,3 +380,12 @@ Bottom line: the current candidate is not matchable with our present strategies 
 - Likely cause / blocker: Unable to reconcile branch‑likely and return patterns; consistent length mismatches (target=73, generated ~70–82).
 - Tooling observations: not provided
 - Improvement opportunities: 1) Re‑write the function as a flat if‑chain with explicit 'volatile' loads to match the repeated field access. 2) Split the logic into helper functions to reduce register pressure. 3) Explore using a manual IL translation to emulate the target's conditional jump style (e.g., use a 'ldc' pattern). 4) Enable morphological patterns such as `volatile-field-condition-reload` and `combine-global-u8-increment-expression` in the IDO rules. 5) Try a higher depth Transmuter run or Conquer‑by‑patterns search on a per‑branch basis.
+## Chunk 540 — 2026-06-12T23:49:22.655Z
+- Matched: no
+- Summary: Exhausted reasonable options for func_151F7F60 (74 instructions, medium difficulty). Multiple attempts with syntax errors and compilation failures prevented progress. Key blockers: 1) Global variable redeclarations in C code causing syntax errors 2) Complex pointer arithmetic in assembly requiring precise C translation 3) Need for proper struct definitions from included headers. No viable C implementation found after 3+ attempts. Next step: Switch to different function family/region as per strategy adjustment.
+- Likely cause / blocker: Multiple syntax errors in C code due to global variable redeclarations and missing struct definitions. Compilation failures prevented testing of C implementation. Function requires precise pointer arithmetic and struct field access that cannot be resolved without full type definitions.
+- Tooling observations: IDO patterns show strong register allocation and stack management requirements. Assembly uses complex pointer arithmetic with multiple indirections. Pattern matching suggests potential for improvement in stack frame organization and register reuse.
+- Improvement opportunities: 1. Implement better global variable management in decompilation to avoid redeclaration conflicts
+2. Develop more robust struct reconstruction from assembly references
+3. Improve pointer arithmetic handling in C translations for complex addressing modes
+4. Create more targeted decompilation filters for medium-difficulty functions with pointer-heavy code
