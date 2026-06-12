@@ -367,3 +367,16 @@ array-index→ptr-arith rewrites.
 - Likely cause / blocker: Persistent structural mismatches and inability to align control flow despite multiple signature adjustments and permuter improvements. The function's complex conditional branching and OS-specific register interactions may require fundamentally different decompilation strategy or auto-rotation to next candidate.
 - Tooling observations: Tools reliably detect mismatches and provide transmuter improvements, but structural differences (e.g., multi-phase conditionals, OS-specific side effects) remain unresolved.
 - Improvement opportunities: Enable auto-rotation to skip this function and try different region/difficulty filters in next chunk. Consider analyzing full TU context for this function or switching to a different function family.
+## Chunk 530 — 2026-06-12T23:05:01.607Z
+- Matched: no
+- Summary: Repeated attempts for func_151347CC have consistently produced a length mismatch error. The target uses a tightly‑packed switch extended branch‑likely sequence and performs several loads of the same field with a 'volatile' pattern that our current C templates miss. All recent attempts (including a full Transmuter search) returned code that either over‑sized or under‑sized the generated prologue/epilogue. The core difficulty appears to be matching the conditional load+jump pattern for the case label 0x11/0x16 and correctly aligning the extra '0x18' field access when the branch is taken.  The length mismatch persists for 7 attempts.
+
+We attempted: a direct copy of the logic; a simplified condition set; sequential if/else with explicit branches; use of 'or' in condition; grouping the 0x11/0x16 branches; calling the helper immediately; and a minimal switch. Each time the generated assembler differed by 3 ‑ 10 instructions.
+
+Given the repeated failure, the function is likely auto‑rotated out of the current chunk or should be replaced by an alternate strategy.  It may require a more radical rewrite, e.g., using a helper that performs the repeated load in a volatile fashion or converting the control flow into a flat if‑chain followed by a tail‑call style.  Switching to a higher‑level decompilation (greedy) or decomp_queue filt=mask may yield an easier target.
+
+Bottom line: the current candidate is not matchable with our present strategies and should be skipped or deferred to a novel approach such as a hand‑crafted decompiler or re‑enabling a lower‑difficulty region.
+
+- Likely cause / blocker: Unable to reconcile branch‑likely and return patterns; consistent length mismatches (target=73, generated ~70–82).
+- Tooling observations: not provided
+- Improvement opportunities: 1) Re‑write the function as a flat if‑chain with explicit 'volatile' loads to match the repeated field access. 2) Split the logic into helper functions to reduce register pressure. 3) Explore using a manual IL translation to emulate the target's conditional jump style (e.g., use a 'ldc' pattern). 4) Enable morphological patterns such as `volatile-field-condition-reload` and `combine-global-u8-increment-expression` in the IDO rules. 5) Try a higher depth Transmuter run or Conquer‑by‑patterns search on a per‑branch basis.
