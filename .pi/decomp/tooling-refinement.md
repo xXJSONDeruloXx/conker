@@ -331,3 +331,9 @@ array-index→ptr-arith rewrites.
 - Likely cause / blocker: not provided
 - Tooling observations: not provided
 - Improvement opportunities: not provided
+## Chunk 509 — 2026-06-12T21:09:28.813Z
+- Matched: no
+- Summary: Exhausted reasonable attempts for func_1502AF04 without achieving a matching decompilation. The function exhibits tight loop control flow and precise pointer arithmetic tied to global indices; mismatches stem from stack layout and register reuse nuances hard to capture in isolated C attempts. Likely cause/blocker: tight coupling to game-specific globals (D_800A670C, D_800A6730) and macro-like index calculations. Concrete tooling improvement opportunities: better similarity reference generation for index-based loops; enhanced handling of scaled pointer arithmetic in IDO 5.3 reconstruction.
+- Likely cause / blocker: not provided
+- Tooling observations: not provided
+- Improvement opportunities: not provided
