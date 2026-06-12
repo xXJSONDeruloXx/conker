@@ -30306,7 +30306,7 @@
     ],
     "attempts": 16,
     "lastScore": 0.49264705882352944,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "void func_15077F64(void) {\n    u8 temp_t6;\n    s32 phi_a0;\n    s32 phi_a1;\n    s32 temp_v0;\n\n    temp_t6 = D_800D1890 - 1;\n    temp_v0 = D_800D2104[D_800D154C->unk13F] + (D_800D154C->unk21E * 8);\n    D_800D154C->unk78 = func_1505A630((f32)*(s16 *)(temp_v0 + 8) - D_800D154C->x_position, D_800D154C->z_position - (f32)*(s16 *)(temp_v0 + 0xC), 0);\n    phi_a0 = phi_a1 = ((D_800D154C->unk78 - D_800D154C->unk76) >> 8) & 0xFF;\n    if ((phi_a0 & 0x80) != 0) {\n        phi_a0 = -phi_a0 & 0xFF;\n        phi_a1 = phi_a0;\n    }\n    if (((u8 *)D_80099A3C)[temp_t6 * 0xA] < phi_a0) {\n        D_800D154C->unk250 = D_800D1891;\n        func_15056A00(D_800D154C, phi_a1, temp_t6);\n    }\n}",
@@ -36916,9 +36916,35 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.4931506849315068,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_1504ADD0(void) {\n    struct127 *tmp;\n    s32 i;\n    u8 *ptr;\n    u8 sp48;\n\n    if (D_800C35EA != 1) {\n        i = 0;\n        ptr = &sp48;\n        while (i < 25) {\n            tmp = &D_800CC2D0[i];\n            if (tmp->interaction_state != 0) {\n                D_800C3E78 = i;\n                D_800D154C = tmp;\n                if (i < D_8008FD8C) {\n                    if (i < 4) {\n                        D_800CC284 = D_800BE728[i];\n                    } else {\n                        bzero(D_800CC284, 6);\n                    }\n                } else {\n                    D_800CC284 = (s32)ptr;\n                }\n                if (tmp->id == 0x77) {\n                    func_150ED578(tmp);\n                }\n            }\n            i++;\n        }\n    }\n}",
+        "score": 0.4931506849315068,
+        "reason": "length_mismatch (target=73, generated=72)",
+        "diffs": [],
+        "timestamp": "2026-06-12T22:29:11.068Z",
+        "contextPatch": []
+      },
+      {
+        "code": "void func_1504ADD0(void) {\n    struct127 *tmp;\n    s32 i;\n    u8 *ptr;\n    u8 sp48_buf[8]; // Buffer for sp+0x48 area\n\n    if (D_800C35EA != 1) {\n        i = 0;\n        while (i < 25) {\n            tmp = &D_800CC2D0[i];\n            if (tmp->interaction_state != 0) {\n                D_800C3E78 = i;\n                D_800D154C = tmp;\n                if (i < D_8008FD8C) {\n                    if (i < 4) {\n                        D_800CC284 = D_800BE728[i];\n                    } else {\n                        bzero((void *)&D_800CC284, 6);\n                    }\n                } else {\n                    // sp48 is at sp+0x48, so we pass address of our buffer\n                    D_800CC284 = (s32)&sp48_buf;\n                }\n                if (tmp->id == 0x77) {\n                    func_150ED578(tmp);\n                }\n            }\n            i++;\n        }\n    }\n}",
+        "score": 0.4863013698630137,
+        "reason": "length_mismatch (target=73, generated=71)",
+        "diffs": [],
+        "timestamp": "2026-06-12T22:30:11.043Z",
+        "contextPatch": []
+      },
+      {
+        "code": "void func_1504ADD0(void) {\n    struct127 *tmp;\n    s32 i;\n    u8 *ptr;\n\n    if (D_800C35EA != 1) {\n        i = 0;\n        while (i < 25) {\n            tmp = &D_800CC2D0[i];\n            if (tmp->interaction_state != 0) {\n                D_800C3E78 = i;\n                D_800D154C = tmp;\n                if (i < D_8008FD8C) {\n                    if (i < 4) {\n                        D_800CC284 = D_800BE728[i];\n                    } else {\n                        bzero((void *)&D_800CC284, 6);\n                    }\n                } else {\n                    // This computes sp+0x48 and stores it to D_800CC284\n                    // The stack layout shows we need to reference a local at sp+0x48\n                    // Based on the assembly, this should work via automatic stack addressing\n                    extern u8 sp48_placeholder;\n                    D_800CC284 = (s32)&sp48_placeholder;\n                }\n                // THIS SECTION ALWAYS EXECUTES REGARDLESS OF THE ABOVE IF/ELSE\n                {\n                    s32 temp_s0 = 0; // This tracks iterations\n                    s32 temp_t9 = D_800BE728; // Base pointer\n                    s32 temp_t0 = temp_s0 << 2;\n                    s32 temp_t1 = temp_t9 + temp_t0;\n                    s32 temp_t2 = *(s32 *)temp_t1;\n                    D_800CC284 = temp_t2; // Overwrite D_800CC284\n                    bzero((void *)0, 6); // This looks wrong but matches assembly\n                }\n                if (tmp->id == 0x77) {\n                    func_150ED578(tmp);\n                }\n            }\n            i++;\n        }\n    }\n}",
+        "score": 0.46794871794871795,
+        "reason": "length_mismatch (target=73, generated=78)",
+        "diffs": [],
+        "timestamp": "2026-06-12T22:31:24.743Z",
+        "contextPatch": []
+      }
+    ]
   },
   {
     "function": "func_15015FBC",
@@ -41237,7 +41263,7 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
+    "attempts": 4,
     "lastScore": 0.37623762376237624,
     "status": "pending",
     "history": [
@@ -41275,6 +41301,26 @@
         "reason": "length_mismatch (target=76, generated=104)",
         "diffs": [],
         "timestamp": "2026-06-12T22:24:19.551Z",
+        "contextPatch": []
+      },
+      {
+        "code": "void func_16001700(void) {\n    u32 sp24;\n    s32 sp20;\n    u32 *temp_v0;\n    u32 temp_v1;\n\n    do {\n        if (__osContLastCmd != 1) {\n        func_160018BC();\n        func_160019A8(1, &__osContPifRam);\n        sp20 = osGetCount();\n        do {\n            sp20 += 0x30D40;\n        } while(0);\n        do {\n            func_160016F4(0);\n            sp24 = osGetCount();\n        } while (sp24 < sp20);\n        func_160016F4(0);\n    }\n    } while(0);\n    temp_v0 = (u32 *)&__osContPifRam;\n    temp_v1 = 0xFF;\n    do {\n        temp_v0++;\n    } while (temp_v0 < (u32 *)&__osContLastCmd);\n    temp_v0[-1] = (temp_v1 & 0xFFFFFFFF);\n    *(u32 *)0x80042A4C = 0;\n    func_160019A8(0, &__osContPifRam);\n    __osContLastCmd = 1;\n    sp20 = osGetCount();\n    sp20 += 0xC3500;\n    do {\n        func_160016F4(0);\n        sp24 = osGetCount();\n    } while (sp24 < (sp20 & 0xFFFF));\n    func_160016F4(0);\n}",
+        "score": -0.2333333333333334,
+        "reason": "transmuter_best=37",
+        "diffs": [
+          "transmuter: initial=48→best=37, iters=3175, compiled=2043, errors=957, forks=33",
+          "fork_rules: reorder-stmts, xor-zero, delete-stmt, add-mask, insert-block, mult-zero",
+          "last_fork_rule: reorder-stmts",
+          "config: timeout=120s, maxCompiles=3000, concurrency=7, profile=ido, isolate=true, reduce=false, depth=1"
+        ],
+        "timestamp": "2026-06-12T22:25:08.262Z"
+      },
+      {
+        "code": "#include <ultra64.h>\n#include \"functions.h\"\n#include \"variables.h\"\n#include \"macros.h\"\n#include \"libc/stdarg.h\"\n\nvoid func_16001700(void) {\n    u32 sp24;\n    s32 sp20;\n    u32 *temp_v0;\n    u32 temp_v1;\n\n    if (__osContLastCmd != 1) {\n        func_160018BC();\n        func_160019A8(1, &__osContPifRam);\n        sp20 = osGetCount();\n        sp20 += 0x30D40;\n        do {\n            func_160016F4(0);\n            sp24 = osGetCount();\n        } while (sp24 < sp20);\n        func_160016F4(0);\n    }\n    temp_v0 = (u32 *)&__osContPifRam;\n    temp_v1 = 0xFF;\n    do {\n        temp_v0++;\n    } while (temp_v0 < (u32 *)&__osContLastCmd);\n    temp_v0[-1] = temp_v1;\n    *(u32 *)0x80042A4C = 0;\n    func_160019A8(0, &__osContPifRam);\n    __osContLastCmd = 1;\n    sp20 = osGetCount();\n    sp20 += 0xC3500;\n    do {\n        func_160016F4(0);\n        sp24 = osGetCount();\n    } while (sp24 < sp20);\n    func_160016F4(0);\n}",
+        "score": 0.37623762376237624,
+        "reason": "length_mismatch (target=76, generated=101)",
+        "diffs": [],
+        "timestamp": "2026-06-12T22:27:35.327Z",
         "contextPatch": []
       }
     ]
