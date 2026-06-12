@@ -343,3 +343,9 @@ array-index→ptr-arith rewrites.
 - Likely cause / blocker: not provided
 - Tooling observations: not provided
 - Improvement opportunities: not provided
+## Chunk 517 — 2026-06-12T21:44:40.963Z
+- Matched: no
+- Summary: Tried three functions this chunk: func_1502AF04 (game_57FA0.c, 71 instr), func_1000E46C (init_B1B0.c, 71 instr), and func_151623F4 (game_18D770.c, 71 instr). All plateaued around 0.4-0.5 score with length mismatches (target 71 vs generated 59-72). Root cause: stack frame allocation differences, branch-likely pattern mismatches, and register allocation (s0/s1 usage) not matching target. Tooling opportunity: better similarity filtering to avoid revisiting same plateaued functions; need pattern for branch-likely epilogue merging; better control flow templates for loop+conditional structures.
+- Likely cause / blocker: Stack frame allocation differences, branch-likely pattern mismatches, and register allocation (s0/s1 usage) not matching target.
+- Tooling observations: Similarity filter keeps returning same plateaued functions; branch-likely pattern not in library; decomp_permuter fails to compile mutations due to isolation.
+- Improvement opportunities: Add branch-likely pattern to library; improve near-miss filtering to exclude functions with >5 attempts; add stack-depth control pattern for IDO.
