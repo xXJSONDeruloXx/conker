@@ -349,3 +349,9 @@ array-index→ptr-arith rewrites.
 - Likely cause / blocker: Stack frame allocation differences, branch-likely pattern mismatches, and register allocation (s0/s1 usage) not matching target.
 - Tooling observations: Similarity filter keeps returning same plateaued functions; branch-likely pattern not in library; decomp_permuter fails to compile mutations due to isolation.
 - Improvement opportunities: Add branch-likely pattern to library; improve near-miss filtering to exclude functions with >5 attempts; add stack-depth control pattern for IDO.
+## Chunk 525 — 2026-06-12T22:35:25.061Z
+- Matched: no
+- Summary: Attempted several functions in this chunk: func_1000B060 (compile error), func_151406AC (skipped), func_16001700 (multiple attempts, length mismatch), func_15077F64 (skipped), func_1504ADD0 (multiple attempts, length mismatch, transmuter tried), func_151347CC (current candidate, not yet attempted). No matches achieved. Need to adjust strategy: try different region/difficulty filters, use similarity to matched functions, or focus on trivial/low difficulty functions to break the streak.
+- Likely cause / blocker: Persistent length mismatches and compilation errors; inability to converge on correct C code despite multiple attempts and transmuter use. Likely need to reconsider function selection or decompilation approach.
+- Tooling observations: Tools reliably detect length mismatches and provide transmuter for near-misses, but when structural differences are large (e.g., wrong control flow), transmuter gets stuck in local minima. Need better guidance for selecting functions with higher match probability.
+- Improvement opportunities: Integrate static analysis to predict function complexity (e.g., cyclomatic complexity) and prioritize simpler functions. Enhance candidate queue ranking with similarity to recently matched functions. Provide more detailed diff analysis for structural mismatches (e.g., control flow graph differences).
