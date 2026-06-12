@@ -36916,8 +36916,8 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 6,
-    "lastScore": 0.4931506849315068,
+    "attempts": 8,
+    "lastScore": 0.49324324324324326,
     "status": "pending",
     "history": [
       {
@@ -36990,6 +36990,22 @@
         "reason": "length_mismatch (target=73, generated=82)",
         "diffs": [],
         "timestamp": "2026-06-12T22:59:27.010Z",
+        "contextPatch": []
+      },
+      {
+        "code": "void func_1504ADD0(void) {\n    struct127 *tmp;\n    s32 i;\n    u8 sp48[8];\n\n    if (D_800C35EA != 1) {\n        i = 0;\n        tmp = D_800CC2D0;\n        while (i != 25) {\n            if (tmp->interaction_state != 0) {\n                D_800C3E78 = i;\n                D_800D154C = tmp;\n                if (i < D_8008FD8C) {\n                    if (i < 4) {\n                        D_800CC284 = D_800BE728[i];\n                    } else {\n                        bzero(&D_800CC284, 6);\n                    }\n                } else {\n                    D_800CC284 = (s32)&sp48;\n                }\n                if (tmp->id == 0x77) {\n                    func_150ED578(tmp);\n                }\n                i++;\n            } else {\n                i++;\n            }\n            tmp = (struct127 *)((u8 *)tmp + 0x32C);\n        }\n    }\n}",
+        "score": 0.49324324324324326,
+        "reason": "length_mismatch (target=73, generated=74)",
+        "diffs": [],
+        "timestamp": "2026-06-12T22:59:41.400Z",
+        "contextPatch": []
+      },
+      {
+        "code": "void func_1504ADD0(void) {\n    struct127 *tmp;\n    s32 i;\n    u8 sp48[16];\n    s32 pad;\n\n    if (D_800C35EA != 1) {\n        for (i = 0, tmp = D_800CC2D0; i != 25; tmp = (struct127 *)((u8 *)tmp + 0x32C)) {\n            if (tmp->interaction_state != 0) {\n                D_800C3E78 = i;\n                D_800D154C = tmp;\n                if (i < D_8008FD8C) {\n                    if (i < 4) {\n                        D_800CC284 = D_800BE728[i];\n                    } else {\n                        bzero(&D_800CC284, 6);\n                    }\n                } else {\n                    D_800CC284 = (s32)&sp48;\n                }\n                if (tmp->id == 0x77) {\n                    func_150ED578(tmp);\n                }\n                i++;\n            } else {\n                i++;\n            }\n        }\n    }\n}",
+        "score": 0.49324324324324326,
+        "reason": "length_mismatch (target=73, generated=74)",
+        "diffs": [],
+        "timestamp": "2026-06-12T23:02:31.976Z",
         "contextPatch": []
       }
     ]
@@ -37405,8 +37421,8 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 4,
-    "lastScore": 0.4451219512195122,
+    "attempts": 6,
+    "lastScore": 0.4589041095890411,
     "status": "pending",
     "history": [
       {
@@ -37451,6 +37467,22 @@
         "reason": "length_mismatch (target=73, generated=64)",
         "diffs": [],
         "timestamp": "2026-06-12T22:52:20.683Z",
+        "contextPatch": []
+      },
+      {
+        "code": "void func_151347CC(struct102 *arg0, void *arg1, u8 arg2) {\n    if (arg2 == 0 || arg2 == 3) {\n        if (*(s32 *)((u8 *)arg0 + 0x1C) == *(s32 *)arg1 || *(u8 *)((u8 *)arg0 + 0x18) == *(u8 *)((u8 *)arg1 + 4)) {\n            func_1516972C(arg0);\n        }\n    } else if (arg2 == 0x11) {\n        if (*(u8 *)((u8 *)arg0 + 0x3D) == 5 && *(s32 *)((u8 *)arg0 + 0x1C) == *(s32 *)arg1) {\n            func_1516972C(arg0);\n        }\n    } else if (arg2 == 0x16) {\n        if (*(u8 *)((u8 *)arg0 + 0x3D) == 5 && *(s32 *)((u8 *)arg0 + 0x1C) == *(s32 *)arg1) {\n            func_1516972C(arg0);\n        }\n    } else if (arg2 == 0x2D) {\n        if (arg1 == (void *)*(s32 *)((u8 *)arg0 + 0x1C)) {\n            func_1516972C(arg0);\n        } else {\n            s32 temp_v0 = *(s32 *)arg1;\n            s32 temp_v1 = *(s32 *)((u8 *)arg0 + 0x1C);\n            if (temp_v0 != temp_v1) {\n                s32 temp_t9 = *(s32 *)((u8 *)arg1 + 4);\n                if (temp_t9 != temp_v1) {\n                    return;\n                }\n                *(s32 *)((u8 *)arg0 + 0x1C) = temp_v0;\n                *(u8 *)((u8 *)arg0 + 0x18) = *(u8 *)((u8 *)arg1 + 8);\n            } else {\n                *(s32 *)((u8 *)arg0 + 0x1C) = *(s32 *)((u8 *)arg1 + 4);\n                *(u8 *)((u8 *)arg0 + 0x18) = *(u8 *)((u8 *)arg1 + 9);\n            }\n        }\n    }\n}",
+        "score": 0.4451219512195122,
+        "reason": "length_mismatch (target=73, generated=82)",
+        "diffs": [],
+        "timestamp": "2026-06-12T23:03:04.323Z",
+        "contextPatch": []
+      },
+      {
+        "code": "void func_151347CC(struct102 *arg0, void *arg1, u8 arg2) {\n    s32 temp_v1;\n    u8 temp_t1;\n\n    if (arg2 == 0 || arg2 == 3) {\n        if (*(s32 *)((u8 *)arg0 + 0x1C) == *(s32 *)arg1 || *(u8 *)((u8 *)arg0 + 0x18) == *(u8 *)((u8 *)arg1 + 4)) {\n            func_1516972C(arg0);\n        }\n    } else if (arg2 == 0x11 || arg2 == 0x16) {\n        temp_t1 = *(u8 *)((u8 *)arg0 + 0x3D);\n        if (temp_t1 == 5 && *(s32 *)((u8 *)arg0 + 0x1C) == *(s32 *)arg1) {\n            func_1516972C(arg0);\n        }\n    } else if (arg2 == 0x2D) {\n        temp_v1 = *(s32 *)((u8 *)arg0 + 0x1C);\n        if (arg1 == (void *)temp_v1) {\n            func_1516972C(arg0);\n        } else {\n            if (*(s32 *)arg1 != temp_v1) {\n                if (*(s32 *)((u8 *)arg1 + 4) != temp_v1) {\n                    return;\n                }\n                *(s32 *)((u8 *)arg0 + 0x1C) = *(s32 *)arg1;\n                *(u8 *)((u8 *)arg0 + 0x18) = *(u8 *)((u8 *)arg1 + 8);\n            } else {\n                *(s32 *)((u8 *)arg0 + 0x1C) = *(s32 *)((u8 *)arg1 + 4);\n                *(u8 *)((u8 *)arg0 + 0x18) = *(u8 *)((u8 *)arg1 + 9);\n            }\n        }\n    }\n}",
+        "score": 0.4589041095890411,
+        "reason": "length_mismatch (target=73, generated=67)",
+        "diffs": [],
+        "timestamp": "2026-06-12T23:04:16.080Z",
         "contextPatch": []
       }
     ]
