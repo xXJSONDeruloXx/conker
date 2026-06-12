@@ -30207,7 +30207,7 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 11,
+    "attempts": 12,
     "lastScore": 0.49264705882352944,
     "status": "pending",
     "history": [
@@ -30402,6 +30402,14 @@
           "config: timeout=120s, maxCompiles=3000, concurrency=7, profile=ido, isolate=true, reduce=false, depth=1"
         ],
         "timestamp": "2026-06-12T11:59:15.766Z"
+      },
+      {
+        "code": "void func_15077F64(void) {\n    u8 sp1E[2];\n    u8 sp1C[2];\n    u8 sp1A[2];\n    u8 sp18[4];\n    s32 phi_a0;\n    s32 phi_a1;\n    s32 temp_v0;\n    f32 temp_f12;\n    f32 temp_f14;\n    u8 temp_t6;\n\n    temp_t6 = D_800D1890 - 1;\n    sp1E[0] = temp_t6;\n    temp_v0 = D_800D2104[D_800D154C->unk13F] + (D_800D154C->unk21E * 8);\n    temp_f12 = (f32)*(s16 *)(temp_v0 + 8) - D_800D154C->x_position;\n    temp_f14 = D_800D154C->z_position - (f32)*(s16 *)(temp_v0 + 0xC);\n    D_800D154C->unk78 = func_1505A630(temp_f12, temp_f14, 0);\n    phi_a0 = phi_a1 = ((D_800D154C->unk78 - D_800D154C->unk76) >> 8) & 0xFF;\n    if ((phi_a1 & 0x80) != 0) {\n        phi_a1 = -phi_a1;\n        phi_a0 = phi_a1 & 0xFF;\n        phi_a1 = phi_a0;\n    }\n    if (((u8 *)D_80099A3C)[sp1E[0] * 0xA] < phi_a0) {\n        D_800D154C->unk250 = D_800D1891;\n        func_15056A00(D_800D154C, phi_a1, sp1E[0]);\n    }\n}",
+        "score": 0.49264705882352944,
+        "reason": "length_mismatch (target=68, generated=67)",
+        "diffs": [],
+        "timestamp": "2026-06-12T12:29:25.830Z",
+        "contextPatch": []
       }
     ]
   },
