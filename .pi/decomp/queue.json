@@ -23473,7 +23473,7 @@
     "instructions": 69,
     "difficulty": "medium",
     "tags": [],
-    "attempts": 6,
+    "attempts": 9,
     "lastScore": 0.4927536231884058,
     "status": "pending",
     "history": [
@@ -23531,6 +23531,30 @@
           "config: timeout=120s, maxCompiles=3000, concurrency=7, profile=ido, isolate=true, reduce=false, depth=1"
         ],
         "timestamp": "2026-06-12T13:29:36.683Z"
+      },
+      {
+        "code": "s32 func_151415D4(struct210 *arg0) {\n    struct211 *temp_v0;\n    f32 temp_f0;\n    f32 temp_f2;\n    f32 temp_f4;\n    f32 temp_f6;\n    f32 temp_f8;\n    f32 temp_f10;\n    f32 temp_f12;\n    f32 temp_f14;\n    f32 temp_f16;\n    f32 temp_f18;\n\n    temp_v0 = (struct211 *)((s32)arg0 + 0x170);\n    \n    if (*(f32 *)((s32)arg0 + 0x17C) < *(f32 *)((s32)arg0 + 0x180)) {\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4;\n    } else {\n        temp_f2 = temp_v0->unkC;\n        temp_f10 = temp_v0->unk14;\n        if (temp_f2 < temp_f10) {\n            temp_f16 = temp_v0->unk10;\n            temp_f4 = *(f32 *)((s32)temp_v0 + 0x20);\n            temp_f8 = temp_v0->unk8;\n            temp_f6 = temp_v0->unk4;\n            temp_f18 = temp_f2 - temp_f16;\n            temp_f0 = temp_f18 * temp_f4;\n            temp_f14 = temp_f8 * temp_f0;\n            *(f32 *)((s32)arg0 + 0x158) = temp_f6 + temp_f14;\n        } else {\n            temp_f12 = *(f32 *)((s32)temp_v0 + 0x18);\n            if (temp_f2 < temp_f12) {\n                *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk0;\n            } else {\n                temp_f4 = temp_f2 - temp_f12;\n                temp_f8 = *(f32 *)((s32)temp_v0 + 0x20);\n                temp_f10 = temp_v0->unk8;\n                temp_f6 = temp_v0->unk4;\n                temp_f0 = 1.0f - (temp_f4 * temp_f8);\n                temp_f16 = temp_f10 * temp_f0;\n                *(f32 *)((s32)arg0 + 0x158) = temp_f6 + temp_f16;\n            }\n        }\n    }\n    \n    temp_v0->unkC = temp_v0->unkC + D_800BE9A4;\n    temp_f0 = *(f32 *)((s32)temp_v0 + 0x1C);\n    do {\n        if (!(temp_f0 < temp_v0->unkC)) break;\n        temp_v0->unkC = temp_v0->unkC - temp_f0;\n    } while (1);\n    \n    return 1;\n}",
+        "score": 0.463768115942029,
+        "reason": "length_mismatch (target=69, generated=64)",
+        "diffs": [],
+        "timestamp": "2026-06-12T13:55:35.043Z",
+        "contextPatch": []
+      },
+      {
+        "code": "s32 func_151415D4(struct210 *arg0) {\n    struct211 *temp_v0;\n    f32 temp_f0;\n    f32 temp_f2;\n    f32 temp_f4;\n    f32 temp_f6;\n    f32 temp_f8;\n    f32 temp_f10;\n    f32 temp_f12;\n    f32 temp_f14;\n    f32 temp_f16;\n    f32 temp_f18;\n\n    temp_v0 = (struct211 *)((s32)arg0 + 0x170);\n    \n    if (*(f32 *)((s32)arg0 + 0x17C) < *(f32 *)((s32)arg0 + 0x180)) {\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4;\n    } else {\n        temp_f2 = temp_v0->unkC;\n        if (temp_f2 < temp_v0->unk14) {\n            temp_f16 = temp_v0->unk10;\n            temp_f4 = *(f32 *)((s32)temp_v0 + 0x20);\n            temp_f8 = temp_v0->unk8;\n            temp_f6 = temp_v0->unk4;\n            temp_f18 = temp_f2 - temp_f16;\n            temp_f0 = temp_f18 * temp_f4;\n            temp_f14 = temp_f8 * temp_f0;\n            *(f32 *)((s32)arg0 + 0x158) = temp_f6 + temp_f14;\n        } else {\n            temp_f12 = *(f32 *)((s32)temp_v0 + 0x18);\n            if (temp_f2 < temp_f12) {\n                *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk0;\n            } else {\n                temp_f4 = temp_f2 - temp_f12;\n                temp_f8 = *(f32 *)((s32)temp_v0 + 0x20);\n                temp_f10 = temp_v0->unk8;\n                temp_f6 = temp_v0->unk4;\n                temp_f0 = 1.0f - (temp_f4 * temp_f8);\n                temp_f16 = temp_f10 * temp_f0;\n                *(f32 *)((s32)arg0 + 0x158) = temp_f6 + temp_f16;\n            }\n        }\n    }\n    \n    temp_v0->unkC += D_800BE9A4;\n    temp_f0 = *(f32 *)((s32)temp_v0 + 0x1C);\n    temp_f2 = temp_v0->unkC;\n    \nloop:\n    if (temp_f0 < temp_f2) {\n        temp_f2 = temp_f2 - temp_f0;\n        temp_v0->unkC = temp_f2;\n        temp_f2 = temp_v0->unkC;\n        goto loop;\n    }\n    \n    return 1;\n}",
+        "score": 0.4782608695652174,
+        "reason": "length_mismatch (target=69, generated=66)",
+        "diffs": [],
+        "timestamp": "2026-06-12T13:56:52.438Z",
+        "contextPatch": []
+      },
+      {
+        "code": "s32 func_151415D4(struct210 *arg0) {\n    struct211 *temp_v0;\n    f32 temp_f0;\n    f32 temp_f2;\n    f32 temp_f4;\n    f32 temp_f6;\n    f32 temp_f8;\n    f32 temp_f10;\n    f32 temp_f12;\n    f32 temp_f14;\n    f32 temp_f16;\n    f32 temp_f18;\n    s32 result;\n\n    temp_v0 = (struct211 *)((s32)arg0 + 0x170);\n    \n    if (*(f32 *)((s32)arg0 + 0x17C) < *(f32 *)((s32)arg0 + 0x180)) {\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4;\n    } else {\n        temp_f2 = temp_v0->unkC;\n        if (temp_f2 < temp_v0->unk14) {\n            temp_f16 = temp_v0->unk10;\n            temp_f4 = *(f32 *)((s32)temp_v0 + 0x20);\n            temp_f8 = temp_v0->unk8;\n            temp_f6 = temp_v0->unk4;\n            temp_f18 = temp_f2 - temp_f16;\n            temp_f0 = temp_f18 * temp_f4;\n            temp_f14 = temp_f8 * temp_f0;\n            *(f32 *)((s32)arg0 + 0x158) = temp_f6 + temp_f14;\n        } else {\n            temp_f12 = *(f32 *)((s32)temp_v0 + 0x18);\n            if (temp_f2 < temp_f12) {\n                *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk0;\n            } else {\n                temp_f4 = temp_f2 - temp_f12;\n                temp_f8 = *(f32 *)((s32)temp_v0 + 0x20);\n                temp_f10 = temp_v0->unk8;\n                temp_f6 = temp_v0->unk4;\n                temp_f0 = 1.0f - (temp_f4 * temp_f8);\n                temp_f16 = temp_f10 * temp_f0;\n                *(f32 *)((s32)arg0 + 0x158) = temp_f6 + temp_f16;\n            }\n        }\n    }\n    \n    temp_v0->unkC += D_800BE9A4;\n    temp_f0 = *(f32 *)((s32)temp_v0 + 0x1C);\n    temp_f2 = temp_v0->unkC;\n    result = 1;\n    \n    if (temp_f0 < temp_f2) {\n        temp_f16 = temp_f2 - temp_f0;\n        do {\n            temp_v0->unkC = temp_f16;\n            temp_f2 = temp_v0->unkC;\n            if (!(temp_f0 < temp_f2)) break;\n            temp_f16 = temp_f2 - temp_f0;\n        } while (1);\n    }\n    \n    return result;\n}",
+        "score": 0.4927536231884058,
+        "reason": "length_mismatch (target=69, generated=68)",
+        "diffs": [],
+        "timestamp": "2026-06-12T14:00:15.105Z",
+        "contextPatch": []
       }
     ]
   },
