@@ -361,3 +361,9 @@ array-index→ptr-arith rewrites.
 - Likely cause / blocker: Persistent length mismatches and inability to align control flow despite multiple signature adjustments and permuter attempts. The function's complex interaction with OS-specific globals and multi-phase loops may require deeper analysis of the surrounding context or a different function family.
 - Tooling observations: Tools reliably detect mismatches and provide transmuter improvements, but structural differences (e.g., multi-phase loops, OS-specific side effects) remain unresolved.
 - Improvement opportunities: Investigate the full TU context for this function, examine how OS-specific globals are used, and consider enabling more detailed debugging or alternative decompilation strategies.
+## Chunk 529 — 2026-06-12T22:53:01.090Z
+- Matched: no
+- Summary: Exhausted reasonable options for func_151347CC (game_161520.c) after 4 attempts, permute, and multiple filter variations. Persistent length mismatches (target 73 vs generated 64) and structural differences in control flow suggest deeper context-sensitivity or fundamental mismatch in algorithmic approach. No viable candidates remain in current queue filters.
+- Likely cause / blocker: Persistent structural mismatches and inability to align control flow despite multiple signature adjustments and permuter improvements. The function's complex conditional branching and OS-specific register interactions may require fundamentally different decompilation strategy or auto-rotation to next candidate.
+- Tooling observations: Tools reliably detect mismatches and provide transmuter improvements, but structural differences (e.g., multi-phase conditionals, OS-specific side effects) remain unresolved.
+- Improvement opportunities: Enable auto-rotation to skip this function and try different region/difficulty filters in next chunk. Consider analyzing full TU context for this function or switching to a different function family.
