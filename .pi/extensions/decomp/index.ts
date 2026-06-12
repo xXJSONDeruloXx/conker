@@ -800,9 +800,18 @@ export default function (pi: ExtensionAPI) {
 
 	let loopTimer: any = undefined;
 
+	async function sendChunkPrompt(chunkNum: number): Promise<boolean> {
+		try {
+			await pi.sendUserMessage(buildChunkPrompt(chunkNum), { deliverAs: "followUp" });
+			return true;
+		} catch {
+			return false;
+		}
+	}
+
 	function ensureTimer() {
 		if (loopTimer) return;
-		loopTimer = setInterval(() => {
+		loopTimer = setInterval(async () => {
 			const ctx = latestCtx;
 			if (!ctx) return;
 			if (!loopState.enabled) return;
@@ -817,20 +826,13 @@ export default function (pi: ExtensionAPI) {
 			saveLoopState(ctx.cwd);
 			refreshWidget();
 
-			try {
-				pi.sendUserMessage(buildChunkPrompt(loopState.chunk));
+			if (await sendChunkPrompt(loopState.chunk)) {
 				loopState.status = "running";
 				saveLoopState(ctx.cwd);
-			} catch {
-				try {
-					pi.sendUserMessage(buildChunkPrompt(loopState.chunk), { deliverAs: "followUp" });
-					loopState.status = "running";
-					saveLoopState(ctx.cwd);
-				} catch {
-					loopState.status = "idle";
-					loopState.chunk--;
-					saveLoopState(ctx.cwd);
-				}
+			} else {
+				loopState.status = "idle";
+				loopState.chunk--;
+				saveLoopState(ctx.cwd);
 			}
 		}, LOOP_POLL_MS);
 	}
@@ -3264,21 +3266,18 @@ export default function (pi: ExtensionAPI) {
 			saveLoopState(ctx.cwd);
 			refreshWidget();
 
-			const doAdvance = () => {
+			const doAdvance = async () => {
 				loopState.chunk = nextChunk;
-				loopState.status = "running";
+				loopState.status = "advancing";
 				saveLoopState(ctx.cwd);
 				refreshWidget();
-				try {
-					pi.sendUserMessage(buildChunkPrompt(nextChunk));
-				} catch {
-					try {
-						pi.sendUserMessage(buildChunkPrompt(nextChunk), { deliverAs: "followUp" });
-					} catch {
-						loopState.status = "idle";
-						saveLoopState(ctx.cwd);
-					}
+				if (await sendChunkPrompt(nextChunk)) {
+					loopState.status = "running";
+				} else {
+					loopState.status = "idle";
 				}
+				saveLoopState(ctx.cwd);
+				refreshWidget();
 			};
 
 			ctx.compact({
@@ -3311,7 +3310,12 @@ export default function (pi: ExtensionAPI) {
 			ensureTimer();
 			refreshWidget();
 			ctx.ui.notify(`Decomp loop started at chunk ${loopState.chunk}`, "info");
-			pi.sendUserMessage(buildChunkPrompt(loopState.chunk));
+			if (!(await sendChunkPrompt(loopState.chunk))) {
+				loopState.status = "idle";
+				saveLoopState(ctx.cwd);
+				refreshWidget();
+				ctx.ui.notify("Failed to queue initial decomp chunk prompt", "error");
+			}
 		},
 	});
 

@@ -30207,7 +30207,7 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 10,
+    "attempts": 11,
     "lastScore": 0.49264705882352944,
     "status": "pending",
     "history": [
@@ -30382,6 +30382,26 @@
         "reason": "length_mismatch (target=68, generated=67)",
         "diffs": [],
         "timestamp": "2026-06-04T12:23:06.304Z"
+      },
+      {
+        "code": "void func_15077F64(void) {\n    u8 phi_a3;\n    s32 temp_v0;\n    s16 temp_t5;\n    s16 temp_t6;\n    f32 temp_f6;\n    f32 temp_f18;\n    s32 phi_a0;\n    s32 phi_a1;\n\n    phi_a3 = D_800D1890 - 1;\n    temp_v0 = D_800D2104[D_800D154C->unk13F] + (D_800D154C->unk21E * 8);\n    temp_t5 = *(s16 *)(temp_v0 + 8);\n    temp_t6 = *(s16 *)(temp_v0 + 0xC);\n    temp_f6 = (f32)temp_t5;\n    temp_f18 = (f32)temp_t6;\n    D_800D154C->unk78 = func_1505A630(temp_f6 - D_800D154C->x_position, D_800D154C->z_position - temp_f18, 0);\n    phi_a1 = ((D_800D154C->unk78 - D_800D154C->unk76) >> 8) & 0xFF;\n    phi_a0 = phi_a1;\n    if ((phi_a1 & 0x80) != 0) {\n        phi_a1 = -phi_a1;\n        phi_a0 = phi_a1 & 0xFF;\n        phi_a1 = phi_a0;\n    }\n    if (D_80099A3C[phi_a3 * 5] < phi_a0) {\n        D_800D154C->unk250 = D_800D1891;\n        func_15056A00(D_800D154C, phi_a1, phi_a3);\n    }\n}",
+        "score": 0.4852941176470588,
+        "reason": "length_mismatch (target=68, generated=66)",
+        "diffs": [],
+        "timestamp": "2026-06-12T11:58:25.635Z",
+        "contextPatch": []
+      },
+      {
+        "code": "#include <ultra64.h>\n#include \"functions.h\"\n#include \"variables.h\"\n#include \"macros.h\"\n#include \"libc/stdarg.h\"\n\n\nvoid func_15077F64(void) {\n    u8 pad0;\n    u8 temp_t6;\n    u8 pad[24];\n    s32 phi_a0;\n    s32 phi_a1;\n    s32 temp_v0;\n    f32 temp_f12;\n    f32 temp_f14;\n\n    temp_t6 = D_800D1890 - 1;\n    temp_v0 = D_800D2104[D_800D154C->unk13F] + (D_800D154C->unk21E * 8);\n    temp_f12 = (f32)*(s16 *)(temp_v0 + 8) - D_800D154C->x_position;\n    temp_f14 = D_800D154C->z_position - (f32)*(s16 *)(temp_v0 + 0xC);\n    D_800D154C->unk78 = func_1505A630(temp_f12, temp_f14, 0);\n    phi_a0 = phi_a1 = ((D_800D154C->unk78 - D_800D154C->unk76) >> 8) & 0xFF;\n    if (!!(phi_a1 & 0x80) != 0) {\n        phi_a1 = -phi_a1;\n        phi_a0 = phi_a1 & 0xFF;\n        phi_a1 = phi_a0;\n    }\n    if (((u8 *)D_80099A3C)[temp_t6 * 0xA] < phi_a0) {\n        D_800D154C->unk250 = D_800D1891;\n        func_15056A00(D_800D154C, phi_a1, (u32)temp_t6);\n    }\n}",
+        "score": 0.8333333333333334,
+        "reason": "transmuter_best=5",
+        "diffs": [
+          "transmuter: initial=55→best=5, iters=3400, compiled=1609, errors=1391, forks=69",
+          "fork_rules: randomize-type, remove-cast, cast-expr, reorder-stmts, expand-expr, add-mask, refer-to-var, insert-block, delete-stmt, pad-var-decl, modify-condition",
+          "last_fork_rule: randomize-type",
+          "config: timeout=120s, maxCompiles=3000, concurrency=7, profile=ido, isolate=true, reduce=false, depth=1"
+        ],
+        "timestamp": "2026-06-12T11:59:15.766Z"
       }
     ]
   },
