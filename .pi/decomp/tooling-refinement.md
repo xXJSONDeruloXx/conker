@@ -395,3 +395,9 @@ Bottom line: the current candidate is not matchable with our present strategies 
 - Likely cause / blocker: not provided
 - Tooling observations: not provided
 - Improvement opportunities: not provided
+## Chunk 548 — 2026-06-13T00:11:16.696Z
+- Matched: no
+- Summary: Exhaustive decompilation attempts on func_151F7F60 failed to produce a matching C implementation; permuter search reached score 68 but did not pass full ROM SHA-1 verification. The function likely requires precise struct layout knowledge and indirect function pointer handling that is currently unavailable.
+- Likely cause / blocker: Complex pointer arithmetic and indirect function call through object fields prevents accurate C reconstruction; current attempts fail to match due to missing struct context and unknown function prototype.
+- Tooling observations: decomp_attempt repeatedly produced length mismatches; diff highlighted extra branches and missing stores; permuter achieved best 68 score but full ROM verification still failed; IDO context sensitivity confirmed.
+- Improvement opportunities: Need correct struct layout for offsets 0x201C and 0x3F88; clarify prototype for indirect function stored at offset 0x04; provide accurate extern declarations for bcopy/bzero if used; handle indirect function pointer call with proper type.
