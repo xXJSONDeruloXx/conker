@@ -27643,9 +27643,19 @@
     "instructions": 74,
     "difficulty": "medium",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 0.37755102040816324,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_150727F0(void) {\n    struct127 *current;\n    struct127 *end;\n    s32 temp_t7;\n    u8 temp_t8;\n    s32 temp_t0;\n\n    if (D_800CC2D0 != NULL) {\n        temp_t7 = D_800C3E78 + 1;\n        if (temp_t7 == (s32)D_800CC335) {\n            D_800CC4E8 = 0;\n            D_800CC502 = (u8)D_800D1580;\n        }\n    }\n\n    current = D_800CC5FC;\n    end = (struct127 *)D_800D121C;\n    while (current != end) {\n        if (current->interaction_state != 0) {\n            temp_t8 = D_800C3E78 + 1;\n            if (temp_t8 == current->unk65) {\n                current->unk2E4 = 0;\n                current->unk232 = (u8)D_800D1580;\n            }\n        }\n        current = (struct127 *)((s32)current + 0xCB0);\n    }\n}",
+        "score": 0.37755102040816324,
+        "reason": "length_mismatch (target=74, generated=98)",
+        "diffs": [],
+        "timestamp": "2026-06-12T23:16:02.884Z",
+        "contextPatch": []
+      }
+    ]
   },
   {
     "function": "func_151DBAA8",
@@ -29803,9 +29813,19 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 0.08108108108108109,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_151670C0(void) {\n    s32 *ptr = (s32 *)&D_8008B4A8;\n    s32 j;\n    for (j = 0; j < 2; j++) {\n        s32 i;\n        for (i = 0; i < 0x65; i++) {\n            // empty\n        }\n        ptr += 0x34 / sizeof(s32);\n    }\n}",
+        "score": 0.08108108108108109,
+        "reason": "length_mismatch (target=74, generated=12)",
+        "diffs": [],
+        "timestamp": "2026-06-12T23:19:06.811Z",
+        "contextPatch": []
+      }
+    ]
   },
   {
     "function": "func_151671E8",
@@ -29816,9 +29836,28 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 0.47297297297297297,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_151671E8(void) {\n    int playerIdx;\n    int slot;\n    struct115 *player;\n    void (*func)(void*);\n    void *obj;\n    signed char index;\n    void *next;\n    void **table;\n    void **dd198;\n\n    table = (void**)D_800DCE50;\n    dd198 = (void**)D_800DD198;\n\n    for (playerIdx = 0; playerIdx < 2; playerIdx++) {\n        player = &D_8008B4A8[playerIdx];\n        func = *(void**)((u8*)player + 4);\n        for (slot = 0; slot < 101; slot++) {\n            obj = table[playerIdx * 104 + slot];\n            if (obj == NULL) continue;\n            index = ++D_800DD190;\n            func(obj);\n            next = *(void**)((u8*)obj + 8);\n            dd198[index] = next;\n            while (next != NULL) {\n                obj = next;\n                func(obj);\n                next = *(void**)((u8*)obj + 8);\n                dd198[index] = next;\n            }\n        }\n    }\n}",
+        "score": 0.47297297297297297,
+        "reason": "length_mismatch (target=74, generated=70)",
+        "diffs": [],
+        "timestamp": "2026-06-12T23:38:56.887Z",
+        "contextPatch": []
+      },
+      {
+        "code": "// auto generated placeholder\nint temp = 0;\n(void)temp;",
+        "score": 0,
+        "reason": "transmuter_compile_fail",
+        "diffs": [
+          "compile_error: cfe: Error: /Users/danhimebauch/Developer/conker/build/transmuter/func_151671E8_base.c, line 10: Syntax Error\n (void)temp;\n -^\ncfe: Error: /Users/danhimebauch/Developer/conker/build/transmuter/func_15"
+        ],
+        "timestamp": "2026-06-12T23:39:52.354Z"
+      }
+    ]
   },
   {
     "function": "func_15143794",
@@ -33624,9 +33663,39 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 2,
+    "lastScore": 0.3445945945945946,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_151F7F60(void *arg0) {\n    s32 sp20, sp24, sp18;\n    void *temp_v0, *temp_v1;\n    s32 temp_t4, temp_t9;\n\n    temp_t4 = *(s32*)((s32)sp20 + 0x201C);\n    temp_t9 = *(s32*)((s32)sp20 + 0x3F88);\n    sp20 = arg0;\n    if (temp_t4 + temp_t9 < 0x1FFC) {\n        sp24 = 0x1000;\n        temp_v0 = (char *)arg0 + 0x1C;\n        temp_v1 = (char *)arg0 + 0x101C;\n        bcopy(temp_v0, temp_v1, sp24);\n        *(s32*)((s32)sp20 + 0x201C) = temp_t4 - sp24;\n        *(s32*)((s32)sp20 + 0x2020) -= sp24 << 3;\n    }\n    temp_v0 = *(void**)sp20;\n    temp_v1 = *(void**)(sp20 + 4);\n    sp18 = ((s32 (*)(void*, void*, s32))temp_v1)(temp_v0, (char *)sp20 + temp_t4 + 0x1C, temp_t9);\n    *(s32*)((s32)sp20 + 0x18) += temp_t9;\n    temp_t4 += temp_t9;\n    *(s32*)((s32)sp20 + 0x201C) = temp_t4;\n    sp24 = *(s32*)sp20;\n    if (sp18 < temp_t9) {\n        bzero((char *)sp20 + sp18 + 0x1C, temp_t9 - sp18);\n    }\n}",
+        "score": 0.3445945945945946,
+        "reason": "length_mismatch (target=74, generated=51)",
+        "diffs": [],
+        "timestamp": "2026-06-13T00:08:56.050Z",
+        "contextPatch": []
+      },
+      {
+        "code": "void func_151F7F60(void *arg0) {\n    s32 sp20, sp24;\n    s32 field_201C, field_3F88;\n    void *func_ptr;\n    void *field_0;\n\n    field_201C = *(s32*)((char *)arg0 + 0x201C);\n    field_3F88 = *(s32*)((char *)arg0 + 0x3F88);\n    if (field_201C + field_3F88 < 0x1FFC) {\n        bcopy(arg0, (char *)arg0 + 0x101C, 0x1000);\n        *(s32*)((char *)arg0 + 0x201C) = field_201C - 0x1000;\n        *(s32*)((char *)arg0 + 0x2020) -= 0x8000;\n    }\n    func_ptr = *(void**)((char *)arg0 + 0x04);\n    field_0 = *(void**)arg0;\n    sp20 = ((s32 (*)(void *, void *, s32))func_ptr)(field_0, (char *)arg0 + field_201C + 0x1C, field_3F88);\n    if (sp20 < field_3F88) {\n        bzero((char *)arg0 + sp20 + 0x1C, field_3F88 - sp20);\n    }\n    *(s32*)((char *)arg0 + 0x18) += field_3F88;\n    field_201C += field_3F88;\n    *(s32*)((char *)arg0 + 0x201C) = field_201C;\n}",
+        "score": 0.30405405405405406,
+        "reason": "length_mismatch (target=74, generated=45)",
+        "diffs": [],
+        "timestamp": "2026-06-13T00:09:52.250Z",
+        "contextPatch": []
+      },
+      {
+        "code": "#include <ultra64.h>\n#include \"functions.h\"\n#include \"variables.h\"\n#include \"macros.h\"\n#include \"libc/stdarg.h\"\n\n\nvoid func_151F7F60(void *arg0) {\n    s32 sp20, sp24, sp18;\n    void *temp_v0, *temp_v1;\n    s32 temp_t4, temp_t9;\n\n    temp_t4 = *(s32*)((s32)sp20 + 0x201C);\n    temp_t9 = *(s32*)((s32)sp20 + 0x3F88);\n    sp20 = arg0;\n    temp_v0 = *(void**)sp20;\n    temp_v1 = *(void**)(sp20 + 4);\n    sp18 = ((s32 (*)(void*, void*, s32))temp_v1)(temp_v0, (char *)sp20 + temp_t4 + 0x1C, temp_t9);\n    temp_t4 += temp_t9;\n    sp24 = *(s32*)sp20;\n    if (sp18 < temp_t9) {\n        bzero((char *)sp20 + sp18 + 0x1C, temp_t9 - sp18);\n    }\n}",
+        "score": -1.2666666666666666,
+        "reason": "transmuter_best=68",
+        "diffs": [
+          "transmuter: initial=82→best=68, iters=2029, compiled=1610, errors=390, forks=147",
+          "fork_rules: delete-stmt, add-mask, modify-condition, cast-expr, reorder-stmts, refer-to-var, insert-block, randomize-type, mult-zero, xor-zero",
+          "last_fork_rule: delete-stmt",
+          "config: timeout=60s, maxCompiles=2000, concurrency=7, profile=ido, isolate=true, reduce=false, depth=1"
+        ],
+        "timestamp": "2026-06-13T00:10:26.449Z"
+      }
+    ]
   },
   {
     "function": "func_15017640",
@@ -37423,7 +37492,7 @@
     ],
     "attempts": 6,
     "lastScore": 0.4589041095890411,
-    "status": "pending",
+    "status": "skipped",
     "history": [
       {
         "code": "void func_151347CC(struct102 *arg0, void *arg1, u8 arg2) {\n    u32 v0;\n    u32 v1;\n    u32 t7;\n    u32 t8;\n    u8 t9;\n    u8 t0;\n    u8 t1;\n    u8 t4;\n    u8 t5;\n    u8 t6;\n    u8 t8_byte;\n\n    v0 = arg2;\n    if (arg2 == 0) {\n        v0 = arg2;\n        t7 = *(u32 *)((u8 *)arg0 + 0x1C);\n        t8 = *(u32 *)arg1;\n        if (t7 == t8) {\n            t9 = *(u8 *)((u8 *)arg0 + 0x18);\n            t0 = *(u8 *)((u8 *)arg1 + 4);\n            if (t9 == t0) {\n                func_1516972C(arg0);\n                return;\n            }\n        }\n        return;\n    }\n\n    if (arg2 == 3) {\n        if (v0 != 0x11) {\n            v1 = *(u32 *)((u8 *)arg0 + 0x1C);\n            t8 = *(u32 *)arg1;\n            if (v1 == t8) {\n                t4 = *(u8 *)((u8 *)arg0 + 0x18);\n                t5 = *(u8 *)((u8 *)arg1 + 4);\n                if (t4 == t5) {\n                    func_1516972C(arg0);\n                    return;\n                }\n            }\n            return;\n        }\n\n        t1 = *(u8 *)((u8 *)arg0 + 0x3D);\n        if (t1 == 5) {\n            t7 = *(u32 *)((u8 *)arg0 + 0x1C);\n            t8 = *(u32 *)arg1;\n            if (t7 == t8) {\n                t4 = *(u8 *)((u8 *)arg0 + 0x18);\n                t5 = *(u8 *)((u8 *)arg1 + 4);\n                if (t4 == t5) {\n                    func_1516972C(arg0);\n                    return;\n                }\n            }\n            return;\n        }\n        return;\n    }\n\n    if (v0 != 0x16) {\n        if (v0 != 0x2D) {\n            return;\n        }\n\n        if (arg1 == (void *)((u8 *)arg0 + 0x1C)) {\n            func_1516972C(arg0);\n            return;\n        }\n        return;\n    }\n\n    v0 = *(u32 *)arg1;\n    v1 = *(u32 *)((u8 *)arg0 + 0x1C);\n    if (v0 != v1) {\n        t9 = *(u8 *)((u8 *)arg1 + 4);\n        t7 = *(u8 *)((u8 *)arg1 + 4);\n        *(u32 *)((u8 *)arg0 + 0x1C) = t7;\n        t8_byte = *(u8 *)((u8 *)arg1 + 9);\n        *(u8 *)((u8 *)arg0 + 0x18) = t8_byte;\n        return;\n    }\n\n    t9 = *(u8 *)((u8 *)arg1 + 4);\n    if (t9 != v1) {\n        return;\n    }\n\n    *(u32 *)((u8 *)arg0 + 0x1C) = v0;\n    t0 = *(u8 *)((u8 *)arg1 + 8);\n    *(u8 *)((u8 *)arg0 + 0x18) = t0;\n}",
@@ -41389,7 +41458,7 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 4,
+    "attempts": 6,
     "lastScore": 0.37623762376237624,
     "status": "pending",
     "history": [
@@ -41460,6 +41529,22 @@
           "config: timeout=60s, maxCompiles=2000, concurrency=7, profile=ido, isolate=true, reduce=false, depth=1"
         ],
         "timestamp": "2026-06-12T22:46:47.133Z"
+      },
+      {
+        "code": "void func_16001700(void) {\n    u32 start, end, new_start, new_end;\n    u32 *temp_v0, *end_ptr;\n\n    if (__osContLastCmd != 1) {\n        func_160018BC();\n        func_160019A8(1, &__osContPifRam);\n        start = osGetCount() + 0x30D40;\n        end = start + 0xC3500;\n        for (; start < end; start++) {\n            func_160016F4(0);\n        }\n    }\n    temp_v0 = (u32 *)&__osContPifRam;\n    end_ptr = (u32 *)((u8 *)&__osContLastCmd);\n    while (temp_v0 < end_ptr) {\n        temp_v0[-1] = 0xFF;\n        temp_v0++;\n    }\n    *(u32 *)0x80042A4C = 0;\n    func_160019A8(0, &__osContPifRam);\n    __osContLastCmd = 1;\n    new_start = osGetCount() + 0xC3500;\n    new_end = new_start + 0x30D40;\n    for (; new_start < new_end; new_start++) {\n        func_160016F4(0);\n    }\n    func_160016F4(0);\n}",
+        "score": 0.33043478260869563,
+        "reason": "length_mismatch (target=76, generated=115)",
+        "diffs": [],
+        "timestamp": "2026-06-13T00:00:07.625Z",
+        "contextPatch": []
+      },
+      {
+        "code": "s32 func_16001700(void) {\n    u32 *temp_v0;\n    u32 *end_ptr;\n    u32 temp_v1;\n    s32 sp20;\n    s32 sp24;\n    s32 ret;\n\n    if (__osContLastCmd != 1) {\n        func_160018BC();\n        func_160019A8(1, &__osContPifRam);\n        sp20 = 0;\n        osGetCount();\n        sp24 = osGetCount() + 0x30D40;\n        if (osGetCount() < sp24) {\n            do {\n                func_160016F4(0);\n                sp20 = osGetCount();\n            } while (sp20 < sp24);\n            func_160016F4(sp20);\n        }\n    }\n    temp_v0 = (u32 *)&__osContPifRam;\n    end_ptr = (u32 *)&__osContLastCmd;\n    temp_v1 = 0xFF;\n    while (temp_v0 < end_ptr) {\n        temp_v0++;\n        temp_v0[-1] = temp_v1;\n    }\n    *(u32 *)0x80042A4C = 0;\n    ret = func_160019A8(0, &__osContPifRam);\n    __osContLastCmd = 1;\n    sp20 = 0;\n    osGetCount();\n    sp24 = osGetCount() + 0xC3500;\n    if (osGetCount() < sp24) {\n        do {\n            func_160016F4(0);\n            sp20 = osGetCount();\n        } while (sp20 < sp24);\n        func_160016F4(sp20);\n    }\n    return ret;\n}",
+        "score": 0.31666666666666665,
+        "reason": "length_mismatch (target=76, generated=120)",
+        "diffs": [],
+        "timestamp": "2026-06-13T00:22:24.051Z",
+        "contextPatch": []
       }
     ]
   },
