@@ -36171,7 +36171,7 @@
     ],
     "attempts": 0,
     "lastScore": 0,
-    "status": "pending"
+    "status": "skipped"
   },
   {
     "function": "func_1500707C",
@@ -36648,9 +36648,27 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 2,
+    "lastScore": 0.4285714285714286,
+    "status": "pending",
+    "history": [
+      {
+        "code": "#include <math.h>\n\nextern f32 D_8002C214;\nextern f64 D_8002C218;\n\nf32 func_1000B060(f32 arg0, f32 arg1, s32 arg2) {\n    f32 sum_sq = arg0 * arg0 + arg1 * arg1;\n    f32 sqrt_val = sqrtf(sum_sq);\n    f32 threshold = D_8002C214;\n    if (sqrt_val < threshold) {\n        f32 temp = D_8002C218;\n        f32 result = sqrt_val * temp;\n        f32 temp2 = D_8002C214;\n        result = sqrt_val * temp2;\n        return result;\n    } else {\n        f32 temp = D_8002C214;\n        f32 result = sqrt_val * temp;\n        return result;\n    }\n}",
+        "score": 0.10714285714285715,
+        "reason": "length_mismatch (target=84, generated=18)",
+        "diffs": [],
+        "timestamp": "2026-06-13T00:28:18.421Z",
+        "contextPatch": []
+      },
+      {
+        "code": "#include <math.h>\n\nextern f32 D_8002C214;\nextern f64 D_8002C218;\n\nu16 func_1000B060(f32 arg0, f32 arg1, s32 arg2) {\n    f32 sp18;\n    s16 phi_a1;\n    f64 temp_f6;\n    s8 temp_t9;\n    s16 phi_v1;\n\n    sp18 = sqrtf(arg0 * arg0 + arg1 * arg1);\n    if (D_8002C214 < sp18) {\n        sp18 = arg0 / sp18;\n    }\n    phi_a1 = 0x80;\n    func_150487E0(sp18);\n    temp_f6 = (f64)sp18 * D_8002C218;\n    phi_v1 = (s16)temp_f6;\n    if (0.0f < arg1) {\n        if (phi_v1 < 0) {\n            phi_v1 = (s16)(-0x80 - phi_v1);\n        } else {\n            phi_v1 = (s16)(0x80 - phi_v1);\n        }\n    }\n    temp_t9 = (s8)(arg2 + phi_v1);\n    if (temp_t9 < 0x60) {\n        phi_v1 = temp_t9;\n        if (temp_t9 < -0x60) {\n            phi_v1 = 0;\n        } else {\n            if (phi_v1 >= 0x20) {\n                phi_v1 = (s16)(0x5F - phi_v1);\n            }\n        }\n    } else {\n        phi_v1 = 0;\n    }\n    if (phi_v1 >= 0x20) {\n        if (phi_v1 < -0x20) {\n            phi_v1 = (s16)(-0x5F - phi_v1);\n        } else {\n            phi_v1 *= 2;\n            phi_a1 = 0;\n        }\n    } else {\n        phi_v1 = (s16)(0x5F - phi_v1);\n    }\n    return (u16)(phi_v1 + 0x40) | phi_a1;\n}",
+        "score": 0.4285714285714286,
+        "reason": "length_mismatch (target=84, generated=98)",
+        "diffs": [],
+        "timestamp": "2026-06-13T00:29:14.461Z",
+        "contextPatch": []
+      }
+    ]
   },
   {
     "function": "func_150C2558",
@@ -38503,9 +38521,19 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 0.35714285714285715,
+    "status": "pending",
+    "history": [
+      {
+        "code": "s32 func_1000F568(s32 arg0, s32 arg1) {\n    s32 temp_v0;\n    s32 temp_a3;\n    u8 temp_t2;\n    s32 temp_t6;\n    s32 temp_t0;\n    s32 temp_a2;\n    u32 mask;\n    u8 *ptr;\n    u32 temp_a1;\n    s32 phi_v1, phi_v0;\n    s32 temp_t3;\n\n    temp_v0 = func_150ADA20();\n    if (temp_v0 == 0 || arg1 == 0) {\n        return 1;\n    }\n    temp_a3 = temp_v0 % arg1;\n    if (arg0 >= 0x6E2) {\n        return arg0;\n    }\n    if (arg1 == 1) {\n        return 1;\n    }\n    ptr = (u8 *)&D_80041F5C[arg0];\n    temp_t2 = *ptr;\n    if (arg1 < 8) {\n        temp_a2 = 1 << arg1;\n        temp_a2--;\n        if ((temp_t2 & 0x80) != 0) {\n            temp_t0 = temp_v0 & temp_a2;\n        } else {\n            temp_a2 = (1 << arg1) - 1;\n            temp_t0 = D_80041F5C[arg0];\n        }\n    }\n    if ((temp_t0 & temp_a2) != 0) {\n        // Complex branch\n    }\n    phi_v1 = temp_a3 + 1;\n    // Loop back\n    return arg0 + phi_v1;\n}",
+        "score": 0.35714285714285715,
+        "reason": "length_mismatch (target=84, generated=60)",
+        "diffs": [],
+        "timestamp": "2026-06-13T00:31:58.060Z",
+        "contextPatch": []
+      }
+    ]
   },
   {
     "function": "func_1516295C",
@@ -38734,6 +38762,32 @@
           "smoke_test: healthy {\"compiled\":18,\"forks\":0,\"iters\":32,\"errors\":2}"
         ],
         "timestamp": "2026-06-12T21:27:58.944Z"
+      },
+      {
+        "code": "#include <ultra64.h>\n#include \"functions.h\"\n#include \"variables.h\"\n#include \"macros.h\"\n#include \"libc/stdarg.h\"\n\n\ns32 *func_1001F79C(struct55 *arg0, s32 arg1, u32 arg2, s32 arg3, s32 *arg4) {\n    s32 *sp34;\n    s32 sp30;\n    s32 sp2C;\n    u32 sp28;\n    u32 sp24;\n    s32 *sp20;\n    s32 *sp1C;\n    s32 *sp18;\n    s32 head;\n    u32 base;\n\n    sp34 = arg4;\n    head = *(s32 *)arg0;\n    base = *(u32 *)((s32)arg0 + (arg1 << 2) + 0x20);\n    sp24 = base + (head << 1);\n    if (arg2 < base) {\n        arg2 += head << 1;\n    }\n    sp28 = arg2 + 0x170;\n    if (sp24 < sp28) {\n        sp30 = (s32)((sp28 - sp24) >> 1);\n        sp2C = (s32)((sp24 - arg2) >> 1);\n        sp20 = sp34;\n        sp34 += 2;\n        sp20[0] = ((((sp30 << 1) & 0xFFF) << 12) | 0x6000000) | ((arg3 + (sp2C << 1)) & 0xFFF);\n        sp20[1] = osVirtualToPhysical((s32)arg2);\n        sp1C = sp34;\n        sp34 += 2;\n        sp1C[0] = ((((sp2C << 1) & 0xFFF) << 12) | 0x6000000) | ((arg3 + (sp30 << 1)) & 0xFFF);\n        sp1C[1] = osVirtualToPhysical((s32)base);\n    } else {\n        sp18 = sp34;\n        sp34 += 2;\n        sp18[0] = 0x6170000 | (arg3 & 0xFFF);\n        sp18[1] = osVirtualToPhysical((s32)arg2);\n    }\n    return sp34;\n}",
+        "score": -3.033333333333333,
+        "reason": "transmuter_best=121",
+        "diffs": [
+          "transmuter: initial=121→best=121, iters=2887582, compiled=0, errors=0, forks=0",
+          "config: timeout=60s, maxCompiles=2000, concurrency=7, profile=ido, isolate=true, reduce=false, depth=1",
+          "NOTE: 0 compiled = no mutations reached a successful compile; possible dedupe, invalid mutation output, or isolation removed mutatable structure.",
+          "debug_artifacts: .pi/decomp/transmuter-debug/func_1001F79C/2026-06-13T00-35-12-182Z",
+          "smoke_test: healthy {\"compiled\":18,\"forks\":0,\"iters\":40,\"errors\":2}"
+        ],
+        "timestamp": "2026-06-13T00:35:12.211Z"
+      },
+      {
+        "code": "#include <ultra64.h>\n#include \"functions.h\"\n#include \"variables.h\"\n#include \"macros.h\"\n#include \"libc/stdarg.h\"\n\n\ns32 *func_1001F79C(struct55 *arg0, s32 arg1, u32 arg2, s32 arg3, s32 *arg4) {\n    s32 *sp34;\n    s32 sp30;\n    s32 sp2C;\n    u32 sp28;\n    u32 sp24;\n    s32 *sp20;\n    s32 *sp1C;\n    s32 *sp18;\n    s32 head;\n    u32 base;\n\n    sp34 = arg4;\n    head = *(s32 *)arg0;\n    base = *(u32 *)((s32)arg0 + (arg1 << 2) + 0x20);\n    sp24 = base + (head << 1);\n    if (arg2 < base) {\n        arg2 += head << 1;\n    }\n    sp28 = arg2 + 0x170;\n    if (sp24 < sp28) {\n        sp30 = (s32)((sp28 - sp24) >> 1);\n        sp2C = (s32)((sp24 - arg2) >> 1);\n        sp20 = sp34;\n        sp34 += 2;\n        sp20[0] = ((((sp30 << 1) & 0xFFF) << 12) | 0x6000000) | ((arg3 + (sp2C << 1)) & 0xFFF);\n        sp20[1] = osVirtualToPhysical((s32)arg2);\n        sp1C = sp34;\n        sp34 += 2;\n        sp1C[0] = ((((sp2C << 1) & 0xFFF) << 12) | 0x6000000) | ((arg3 + (sp30 << 1)) & 0xFFF);\n        sp1C[1] = osVirtualToPhysical((s32)base);\n    } else {\n        sp18 = sp34;\n        sp34 += 2;\n        sp18[0] = 0x6170000 | (arg3 & 0xFFF);\n        sp18[1] = osVirtualToPhysical((s32)arg2);\n    }\n    return sp34;\n}",
+        "score": -3.033333333333333,
+        "reason": "transmuter_best=121",
+        "diffs": [
+          "transmuter: initial=121→best=121, iters=2842369, compiled=0, errors=0, forks=0",
+          "config: timeout=60s, maxCompiles=2000, concurrency=7, profile=ido, isolate=false, reduce=false, depth=1",
+          "NOTE: 0 compiled = no mutations reached a successful compile; possible dedupe, invalid mutation output, or isolation removed mutatable structure.",
+          "debug_artifacts: .pi/decomp/transmuter-debug/func_1001F79C/2026-06-13T00-36-36-118Z",
+          "smoke_test: healthy {\"compiled\":18,\"forks\":0,\"iters\":39,\"errors\":2}"
+        ],
+        "timestamp": "2026-06-13T00:36:36.147Z"
       }
     ]
   },
