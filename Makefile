@@ -106,6 +106,11 @@ $(EXTRACT_DIR)/00000000.bin:
 	@mkdir -p $(EXTRACT_DIR)
 	$(PYTHON) tools/extract_compressed.py config/compressed.$(VERSION).yaml $(BIN_DIR)/compressed.bin $(EXTRACT_DIR)
 
+# Refresh the repository-local progress/routine dashboard from queue, source,
+# progress.csv, Git, and the current ROM artifact.
+progress-dashboard:
+	$(PYTHON) tools/render_progress_visualization.py
+
 # settings
-.PHONY: all clean default
+.PHONY: all clean default progress-dashboard
 SHELL = /bin/bash -e -o pipefail

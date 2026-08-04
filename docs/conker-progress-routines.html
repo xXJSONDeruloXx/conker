@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Live Conker decompilation progress and portable agent routine">
+  <title>Conker progress and routines</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --background: light-dark(rgb(255 255 255), rgb(24 24 24));
+      --foreground: light-dark(rgb(32 32 32), rgb(235 235 235));
+      --card: light-dark(rgb(248 248 248), rgb(37 37 37));
+      --card-foreground: var(--foreground);
+      --muted: light-dark(rgb(235 235 235), rgb(58 58 58));
+      --muted-foreground: light-dark(rgb(90 90 90), rgb(180 180 180));
+      --border: light-dark(rgb(210 210 210), rgb(76 76 76));
+      --input: var(--card);
+      --primary: light-dark(rgb(45 105 175), rgb(115 175 245));
+      --primary-foreground: light-dark(rgb(255 255 255), rgb(20 30 40));
+      --secondary: light-dark(rgb(222 232 244), rgb(52 72 96));
+      --secondary-foreground: var(--foreground);
+      --accent: light-dark(rgb(232 240 249), rgb(42 56 72));
+      --accent-foreground: var(--foreground);
+      --viz-series-1: light-dark(rgb(45 125 95), rgb(95 190 145));
+      --viz-series-2: light-dark(rgb(115 140 175), rgb(135 160 195));
+      --viz-series-3: light-dark(rgb(205 145 55), rgb(235 175 75));
+      --viz-series-4: light-dark(rgb(175 85 85), rgb(225 125 125));
+      --font-size-base: 16px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--foreground);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: var(--font-size-base);
+      line-height: 1.45;
+    }
+
+    main {
+      width: min(calc(100% - 2rem), 60rem);
+      margin: 0 auto;
+      padding: 1rem 0 2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .viz-controls,
+    .viz-row {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .viz-controls { align-items: end; }
+    .measure-field { min-width: 11rem; }
+    .form-label { display: block; margin-bottom: 0.25rem; }
+
+    .form-select,
+    .btn {
+      border: 1px solid var(--border);
+      border-radius: 0.45rem;
+      font: inherit;
+    }
+
+    .form-select {
+      width: 100%;
+      padding: 0.45rem 0.6rem;
+      background: var(--input);
+      color: var(--foreground);
+    }
+
+    .btn {
+      padding: 0.42rem 0.7rem;
+      background: transparent;
+      color: var(--foreground);
+      cursor: pointer;
+    }
+
+    .btn:hover { background: var(--accent); }
+    .btn:focus-visible,
+    .form-select:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+    .btn-primary { background: var(--primary); color: var(--primary-foreground); border-color: var(--primary); }
+    .btn-ghost { color: var(--muted-foreground); }
+
+    .card {
+      border: 1px solid var(--border);
+      border-radius: 0.65rem;
+      background: var(--card);
+      color: var(--card-foreground);
+      padding: 0.8rem;
+    }
+
+    .viz-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.75rem;
+    }
+
+    .viz-stat { display: grid; gap: 0.15rem; min-width: 0; }
+    .viz-stat-value { font-size: 1.35rem; font-weight: 500; }
+    .viz-badge {
+      display: inline-flex;
+      width: fit-content;
+      padding: 0.15rem 0.45rem;
+      border-radius: 999px;
+      background: var(--accent);
+      color: var(--accent-foreground);
+      white-space: nowrap;
+    }
+
+    .text-muted { color: var(--muted-foreground); }
+    .text-small { font-size: 0.875rem; }
+
+    section { display: grid; gap: 0.75rem; min-width: 0; }
+    .coverage-list,
+    .queue-legend { display: grid; gap: 0.7rem; }
+    .coverage-row { display: grid; gap: 0.3rem; min-width: 0; }
+    .coverage-label,
+    .coverage-legend,
+    .queue-line { display: flex; justify-content: space-between; gap: 0.75rem; min-width: 0; }
+    .coverage-label span:last-child,
+    .coverage-legend span:last-child,
+    .queue-line span:last-child { text-align: end; }
+
+    .progress-track {
+      display: flex;
+      min-height: 0.8rem;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--muted);
+    }
+
+    .progress-segment { min-width: 0; transition: width 240ms ease; }
+    .segment-c,
+    .segment-matched { background: var(--viz-series-1); }
+    .segment-asm,
+    .segment-skipped { background: var(--viz-series-2); }
+    .segment-pending { background: var(--viz-series-3); }
+    .segment-stale { background: var(--viz-series-4); }
+
+    .legend-key { display: inline-flex; align-items: center; gap: 0.35rem; }
+    .swatch { width: 0.65rem; height: 0.65rem; border-radius: 50%; flex: 0 0 auto; }
+    .swatch-matched { background: var(--viz-series-1); }
+    .swatch-skipped { background: var(--viz-series-2); }
+    .swatch-pending { background: var(--viz-series-3); }
+    .swatch-stale { background: var(--viz-series-4); }
+
+    .routine-flow { display: flex; align-items: center; flex-wrap: wrap; gap: 0.4rem; }
+    .flow-arrow { color: var(--muted-foreground); user-select: none; }
+    .routine-detail { display: grid; gap: 0.45rem; padding-top: 0.2rem; }
+    .routine-command { overflow-wrap: anywhere; }
+
+    .source-note {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      color: var(--muted-foreground);
+    }
+
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+
+    @media (max-width: 600px) {
+      .viz-grid { grid-template-columns: 1fr; }
+      .coverage-label,
+      .coverage-legend,
+      .queue-line { align-items: flex-start; flex-direction: column; gap: 0.15rem; }
+      .coverage-label span:last-child,
+      .coverage-legend span:last-child,
+      .queue-line span:last-child { text-align: start; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .progress-segment { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <main id="conker-progress-routines">
+    <div class="viz-controls">
+      <div class="measure-field">
+        <label class="form-label" for="conker-progress-measure">Coverage measure</label>
+        <select class="form-select" id="conker-progress-measure">
+          <option value="functions">Functions</option>
+          <option value="bytes">Bytes</option>
+        </select>
+      </div>
+      <span class="viz-badge" id="conker-branch"></span>
+      <span class="text-muted text-small" id="conker-build-context"></span>
+    </div>
+
+    <div class="viz-grid">
+      <div class="card viz-stat">
+        <span class="text-muted">Total C coverage</span>
+        <span class="viz-stat-value" id="conker-total-coverage"></span>
+        <span class="text-muted text-small" id="conker-total-context"></span>
+      </div>
+      <div class="card viz-stat">
+        <span class="text-muted">Live queue</span>
+        <span class="viz-stat-value" id="conker-live-queue"></span>
+        <span class="text-muted text-small" id="conker-queue-context"></span>
+      </div>
+      <div class="card viz-stat">
+        <span class="text-muted">ROM artifact</span>
+        <span class="viz-stat-value" id="conker-rom-status"></span>
+        <span class="text-muted text-small" id="conker-rom-context"></span>
+      </div>
+    </div>
+
+    <section aria-labelledby="conker-coverage-label">
+      <div class="viz-row">
+        <span id="conker-coverage-label">Coverage by section</span>
+        <span class="text-muted text-small" id="conker-coverage-mode"></span>
+      </div>
+      <div class="coverage-list" id="conker-coverage-list"></div>
+    </section>
+
+    <section aria-labelledby="conker-queue-label">
+      <div class="viz-row">
+        <span id="conker-queue-label">Candidate queue</span>
+        <span class="text-muted text-small" id="conker-queue-summary"></span>
+      </div>
+      <div class="progress-track" id="conker-queue-track" role="img" aria-label="Queue status"></div>
+      <div class="queue-legend" id="conker-queue-legend"></div>
+    </section>
+
+    <section aria-labelledby="conker-routine-label">
+      <div class="viz-row">
+        <span id="conker-routine-label">Portable agent routine</span>
+        <span class="text-muted text-small">Pi is an adapter; compile and ROM matching decide</span>
+      </div>
+      <div class="routine-flow" role="list" aria-label="Decompilation workflow">
+        <button type="button" class="btn btn-primary" data-step="status" aria-pressed="true">status</button>
+        <span class="flow-arrow" aria-hidden="true">→</span>
+        <button type="button" class="btn btn-ghost" data-step="next" aria-pressed="false">next</button>
+        <span class="flow-arrow" aria-hidden="true">→</span>
+        <button type="button" class="btn btn-ghost" data-step="lift" aria-pressed="false">lift</button>
+        <span class="flow-arrow" aria-hidden="true">→</span>
+        <button type="button" class="btn btn-ghost" data-step="attempt" aria-pressed="false">attempt</button>
+        <span class="flow-arrow" aria-hidden="true">→</span>
+        <button type="button" class="btn btn-ghost" data-step="diff" aria-pressed="false">diff</button>
+        <span class="flow-arrow" aria-hidden="true">→</span>
+        <button type="button" class="btn btn-ghost" data-step="verify" aria-pressed="false">verify</button>
+        <span class="flow-arrow" aria-hidden="true">→</span>
+        <button type="button" class="btn btn-ghost" data-step="accept" aria-pressed="false">accept</button>
+      </div>
+      <div class="routine-detail" role="status" aria-live="polite">
+        <div class="viz-row">
+          <span class="viz-badge" id="conker-step-name">status</span>
+          <span class="text-muted" id="conker-step-copy">Read queue state, live pragmas, patterns, and build-derived coverage.</span>
+        </div>
+        <code class="routine-command" id="conker-step-command">python3 tools/decomp_harness.py status --json</code>
+      </div>
+    </section>
+
+    <div class="source-note">
+      <span id="conker-generated-at"></span>
+      <code>python3 tools/render_progress_visualization.py</code>
+    </div>
+  </main>
+
+  <!-- BEGIN GENERATED CONKER PROGRESS DATA -->
+  <script id="conker-progress-data" type="application/json">
+{
+  "branch": "master",
+  "commit": "6ff311b",
+  "generated_at": "2026-08-04T17:00:43+00:00",
+  "progress": {
+    "available": true,
+    "sections": {
+      "debugger": {
+        "asm_bytes": 11028,
+        "asm_functions": 16,
+        "byte_percent": 21.59,
+        "c_bytes": 3036,
+        "c_functions": 26,
+        "function_percent": 61.9
+      },
+      "game": {
+        "asm_bytes": 1795680,
+        "asm_functions": 4041,
+        "byte_percent": 6.32,
+        "c_bytes": 121136,
+        "c_functions": 1272,
+        "function_percent": 23.94
+      },
+      "init": {
+        "asm_bytes": 108844,
+        "asm_functions": 289,
+        "byte_percent": 25.08,
+        "c_bytes": 36432,
+        "c_functions": 249,
+        "function_percent": 46.28
+      }
+    },
+    "total": {
+      "asm_bytes": 1915552,
+      "asm_functions": 4346,
+      "byte_percent": 7.74,
+      "c_bytes": 160604,
+      "c_functions": 1547,
+      "function_percent": 26.25
+    }
+  },
+  "queue": {
+    "attempted": 386,
+    "entries": 934,
+    "live_pending": 526,
+    "patterns": 126,
+    "pending_source_missing": 0,
+    "pending_without_live_pragma": 13,
+    "statuses": {
+      "matched": 181,
+      "pending": 539,
+      "skipped": 214
+    }
+  },
+  "rom": {
+    "artifact": "build/conker.us.z64",
+    "available": true,
+    "docker_ok": null,
+    "expected_sha1": "4cbadd3c4e0729dec46af64ad018050eada4f47a",
+    "sha1": "4cbadd3c4e0729dec46af64ad018050eada4f47a",
+    "sha_match": true,
+    "size": 67108864
+  }
+}
+  </script>
+  <!-- END GENERATED CONKER PROGRESS DATA -->
+
+  <script>
+    (() => {
+      const data = JSON.parse(document.getElementById('conker-progress-data').textContent);
+      const root = document.getElementById('conker-progress-routines');
+      const number = new Intl.NumberFormat('en-US');
+      const measure = root.querySelector('#conker-progress-measure');
+      const coverageMode = root.querySelector('#conker-coverage-mode');
+      const totalCoverage = root.querySelector('#conker-total-coverage');
+      const totalContext = root.querySelector('#conker-total-context');
+      const sections = data.progress.sections;
+      const coverageRows = [];
+
+      root.querySelector('#conker-branch').textContent = `${data.branch} · ${data.commit}`;
+      root.querySelector('#conker-build-context').textContent = `generated ${data.generated_at}`;
+
+      function percent(c, asm) {
+        const total = c + asm;
+        return total ? (c / total) * 100 : 0;
+      }
+
+      function formatValues(values, key) {
+        if (key === 'functions') {
+          return [`${number.format(values.c_functions)} C · ${number.format(values.asm_functions)} ASM functions`, `${number.format(values.c_bytes)} C bytes · ${number.format(values.asm_bytes)} ASM bytes`];
+        }
+        return [`${number.format(values.c_bytes)} C bytes · ${number.format(values.asm_bytes)} ASM bytes`, `${number.format(values.c_functions)} C · ${number.format(values.asm_functions)} ASM functions`];
+      }
+
+      function buildCoverageRows() {
+        ['init', 'game', 'debugger', 'total'].forEach((sectionName) => {
+          const row = document.createElement('div');
+          row.className = 'coverage-row';
+          row.dataset.section = sectionName;
+          row.innerHTML = '<div class="coverage-label"><span></span><span class="coverage-value"></span></div><div class="progress-track" role="img"><span class="progress-segment segment-c"></span><span class="progress-segment segment-asm"></span></div><div class="coverage-legend text-small"><span class="coverage-primary"></span><span class="coverage-secondary"></span></div>';
+          row.querySelector('.coverage-label span').textContent = sectionName;
+          row.querySelector('.progress-track').setAttribute('aria-label', `${sectionName} coverage`);
+          root.querySelector('#conker-coverage-list').appendChild(row);
+          coverageRows.push(row);
+        });
+      }
+
+      function updateCoverage() {
+        const key = measure.value;
+        coverageMode.textContent = key === 'functions' ? 'C / ASM functions' : 'C / ASM bytes';
+        coverageRows.forEach((row) => {
+          const values = sections[row.dataset.section];
+          const c = key === 'functions' ? values.c_functions : values.c_bytes;
+          const asm = key === 'functions' ? values.asm_functions : values.asm_bytes;
+          const cPercent = percent(c, asm);
+          row.querySelector('.segment-c').style.width = `${cPercent}%`;
+          row.querySelector('.segment-asm').style.width = `${100 - cPercent}%`;
+          row.querySelector('.coverage-value').textContent = `${cPercent.toFixed(2)}% C`;
+          const labels = formatValues(values, key);
+          row.querySelector('.coverage-primary').textContent = labels[0];
+          row.querySelector('.coverage-secondary').textContent = labels[1];
+        });
+        const total = sections.total;
+        const c = key === 'functions' ? total.c_functions : total.c_bytes;
+        const asm = key === 'functions' ? total.asm_functions : total.asm_bytes;
+        totalCoverage.textContent = `${percent(c, asm).toFixed(2)}%`;
+        totalContext.textContent = key === 'functions' ? `${number.format(total.c_functions)} C / ${number.format(total.asm_functions)} ASM functions` : `${number.format(total.c_bytes)} C / ${number.format(total.asm_bytes)} ASM bytes`;
+      }
+
+      function buildQueue() {
+        const statuses = data.queue.statuses;
+        const matched = statuses.matched || 0;
+        const skipped = statuses.skipped || 0;
+        const pending = statuses.pending || 0;
+        const entries = data.queue.entries || matched + skipped + pending;
+        const queueTrack = root.querySelector('#conker-queue-track');
+        const segments = [
+          ['matched', matched, 'segment-matched'],
+          ['skipped', skipped, 'segment-skipped'],
+          ['pending', pending, 'segment-pending']
+        ];
+        segments.forEach(([name, value, className]) => {
+          const segment = document.createElement('span');
+          segment.className = `progress-segment ${className}`;
+          segment.style.width = `${entries ? (value / entries) * 100 : 0}%`;
+          queueTrack.appendChild(segment);
+        });
+        queueTrack.setAttribute('aria-label', `Queue status: ${matched} matched, ${skipped} skipped, ${pending} pending`);
+        root.querySelector('#conker-queue-summary').textContent = `${number.format(entries)} entries · ${number.format(data.queue.attempted)} attempted · ${number.format(data.queue.patterns)} patterns`;
+        const legend = root.querySelector('#conker-queue-legend');
+        [['matched', matched, 'swatch-matched'], ['skipped', skipped, 'swatch-skipped'], ['pending', pending, 'swatch-pending']].forEach(([name, value, swatch]) => {
+          const line = document.createElement('div');
+          line.className = 'queue-line text-small';
+          const valuePercent = entries ? (value / entries) * 100 : 0;
+          line.innerHTML = `<span class="legend-key"><span class="swatch ${swatch}"></span>${name[0].toUpperCase() + name.slice(1)} · ${number.format(value)}</span><span>${valuePercent.toFixed(2)}%</span>`;
+          legend.appendChild(line);
+        });
+        const live = data.queue.live_pending;
+        const stale = data.queue.pending_without_live_pragma;
+        root.querySelector('#conker-live-queue').textContent = number.format(live);
+        root.querySelector('#conker-queue-context').textContent = `${number.format(pending)} pending · ${number.format(stale)} stale pragma records`;
+      }
+
+      function buildRom() {
+        const rom = data.rom;
+        const status = rom.docker_ok === false ? 'DOCKER FAIL' : rom.sha_match ? (rom.docker_ok === true ? 'DOCKER PASS' : 'SHA MATCH') : (rom.available ? 'MISMATCH' : 'NO ARTIFACT');
+        root.querySelector('#conker-rom-status').textContent = status;
+        const context = rom.docker_ok === false && rom.docker_error ? `Docker gate failed · ${rom.docker_error}` : rom.available ? `${number.format(rom.size)} bytes · ${rom.sha1.slice(0, 12)}…` : 'build/conker.us.z64 unavailable';
+        root.querySelector('#conker-rom-context').textContent = context;
+      }
+
+      const steps = {
+        status: ['Read queue state, live pragmas, patterns, and build-derived coverage.', 'python3 tools/decomp_harness.py status --json'],
+        next: ['Route a live candidate; --near-miss explains and prioritizes prior scores ≥ 0.8.', 'python3 tools/decomp_harness.py next --json --near-miss'],
+        lift: ['Ask optional asmlift for a C hypothesis; its IDO 7.1 target is advisory only.', 'python3 tools/decomp_harness.py lift --function FUNC --json'],
+        attempt: ['Compile one TU, compare it, record history, and roll back non-matches automatically.', 'python3 tools/decomp_harness.py attempt --function FUNC --code-file candidate.c --json'],
+        diff: ['Compare normalized assembly plus encoded instruction words with relocation-aware masking.', 'python3 tools/decomp_harness.py diff --function FUNC --file FILE.c --json'],
+        verify: ['Run the Docker/IDO 5.3 build and full ROM SHA-1 gate.', 'python3 tools/decomp_harness.py verify --json'],
+        accept: ['Only after the ROM gate passes, remove the queue item from active work.', 'python3 tools/decomp_harness.py accept --function FUNC --file FILE.c --json']
+      };
+
+      function selectStep(button) {
+        root.querySelectorAll('[data-step]').forEach((item) => {
+          const selected = item === button;
+          item.setAttribute('aria-pressed', String(selected));
+          item.classList.toggle('btn-primary', selected);
+          item.classList.toggle('btn-ghost', !selected);
+        });
+        const detail = steps[button.dataset.step];
+        root.querySelector('#conker-step-name').textContent = button.dataset.step;
+        root.querySelector('#conker-step-copy').textContent = detail[0];
+        root.querySelector('#conker-step-command').textContent = detail[1];
+      }
+
+      measure.addEventListener('change', updateCoverage);
+      root.querySelectorAll('[data-step]').forEach((button) => button.addEventListener('click', () => selectStep(button)));
+      buildCoverageRows();
+      buildQueue();
+      buildRom();
+      updateCoverage();
+      root.querySelector('#conker-generated-at').textContent = `Generated from repository state at ${data.generated_at}`;
+    })();
+  </script>
+</body>
+</html>

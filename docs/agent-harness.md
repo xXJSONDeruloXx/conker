@@ -43,6 +43,7 @@ for a terminal or prompt transcript.
 # Queue and progress
 python3 tools/decomp_harness.py status --json
 python3 tools/decomp_harness.py progress --json
+python3 tools/render_progress_visualization.py
 python3 tools/decomp_harness.py next --json --similar --with-asmlift
 python3 tools/decomp_harness.py next --json --near-miss
 
@@ -100,6 +101,19 @@ but also compares the encoded instruction words from the target splat comments
 with the generated object. Only fields covered by an object `R_MIPS_HI16`,
 `R_MIPS_LO16`, or `R_MIPS_26` relocation are masked. A raw-word mismatch cannot
 be accepted as a match.
+
+The repository-local [progress and routine dashboard](conker-progress-routines.html)
+is generated from the same live inputs:
+
+```sh
+python3 tools/render_progress_visualization.py
+# or
+make progress-dashboard
+```
+
+It reads `.pi/decomp/queue.json`, live source pragmas, `conker/progress.csv`,
+Git state, and the current `build/conker.us.z64` SHA-1. Add `--verify` when the
+Docker ROM gate should also run during refresh.
 
 ## Agent integration pattern
 
