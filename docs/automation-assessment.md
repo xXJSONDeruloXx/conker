@@ -1,6 +1,6 @@
 # Conker automation assessment
 
-Assessment date: 2026-06-02
+Assessment date: 2026-08-04
 
 This fork was assessed against the N64 decomp/recomp automation research in `n64-decomp-recomp-research`, especially the Snowboard Kids / Nigel / BattleShip findings.
 
@@ -80,13 +80,20 @@ This fork now includes `tools/strip_splat_metadata.py` and wires it into `make -
 
 ## Current progress shape
 
-`make -C conker progress` after a passing build produced:
+The live progress snapshot from `conker/progress.csv` is rendered by:
+
+```sh
+python3 tools/decomp_harness.py progress
+```
+
+The current snapshot after a passing build is:
 
 | Section | C functions | ASM functions | Function % C | C bytes | ASM bytes | Byte % C |
 |---|---:|---:|---:|---:|---:|---:|
-| init | 307 | 315 | 49.36% | 51,008 | 113,040 | 31.09% |
-| game | 1,429 | 5,842 | 19.65% | 123,292 | 1,949,588 | 5.95% |
-| debugger | 160 | 22 | 87.91% | 8,000 | 11,800 | 40.40% |
+| init | 249 | 289 | 46.28% | 36,432 | 108,844 | 25.08% |
+| game | 1,272 | 4,041 | 23.94% | 121,136 | 1,795,680 | 6.32% |
+| debugger | 26 | 16 | 61.90% | 3,036 | 11,028 | 21.59% |
+| **total** | **1,547** | **4,346** | **26.25%** | **160,604** | **1,915,552** | **7.74%** |
 
 Important interpretation:
 

@@ -45,6 +45,27 @@ def _src_text(src_path: str) -> str:
         return ""
 
 
+@lru_cache(maxsize=8)
+def _source_matches(src_root: str, basename: str) -> tuple[str, ...]:
+    root = Path(src_root)
+    if not root.is_dir():
+        return ()
+    return tuple(
+        str(path)
+        for path in sorted(root.rglob(basename))
+        if path.is_file() and path.suffix == ".c"
+    )
+
+
+def source_path(root: Path, file_name: str) -> Path | None:
+    src_root = root / "conker/src"
+    direct = src_root / str(file_name)
+    if direct.is_file():
+        return direct
+    matches = _source_matches(str(src_root), Path(str(file_name)).name)
+    return Path(matches[0]) if len(matches) == 1 else None
+
+
 def has_live_pragma(root: Path, entry: dict[str, Any]) -> bool:
     """True if the function still has a GLOBAL_ASM pragma in its source file.
 
@@ -56,11 +77,16 @@ def has_live_pragma(root: Path, entry: dict[str, Any]) -> bool:
     file = entry.get("file")
     if not func or not file:
         return True  # can't verify; don't filter out
-    src_path = root / "conker/src" / file
+    src_path = source_path(root, str(file))
+    if src_path is None:
+        return False
     text = _src_text(str(src_path))
     if not text:
-        return True  # source missing/unreadable; don't filter out
-    stem = file[:-2] if file.endswith(".c") else file
+        return False
+    try:
+        stem = src_path.relative_to(root / "conker/src").with_suffix("").as_posix()
+    except ValueError:
+        stem = Path(str(file)).with_suffix("").as_posix()
     pragma = f'#pragma GLOBAL_ASM("asm/nonmatchings/{stem}/{func}.s")'
     return pragma in text
 

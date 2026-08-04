@@ -36,6 +36,15 @@ print(entry['file'] if entry else 'unknown')
     
     # Assemble target .o
     TARGET_S="$PROJECT_ROOT/conker/asm/nonmatchings/${FILE_KEY%.c}/$FUNC.s"
+    if [ ! -f "$TARGET_S" ]; then
+        target_matches=()
+        while IFS= read -r match; do
+            target_matches+=("$match")
+        done < <(find "$PROJECT_ROOT/conker/asm/nonmatchings" -type f -name "$FUNC.s" -print)
+        if [ "${#target_matches[@]}" -eq 1 ]; then
+            TARGET_S="${target_matches[0]}"
+        fi
+    fi
     TARGET_O="$BATCH_DIR/${FUNC}_target.o"
     
     if [ ! -f "$TARGET_S" ]; then

@@ -70,6 +70,45 @@ class HarnessTests(unittest.TestCase):
         self.assertEqual(harness.referenced_symbols("%hi(D_TEST)"), ["D_TEST"])
         self.assertEqual(harness.referenced_callees("jal func_2"), ["func_2"])
 
+    def test_legacy_basename_resolves_nested_source_and_near_miss(self) -> None:
+        nested = {
+            "function": "func_nested",
+            "file": "init_nested.c",
+            "region": "init",
+            "instructions": 4,
+            "difficulty": "trivial",
+            "attempts": 1,
+            "lastScore": 0.86,
+            "status": "pending",
+            "history": [{"score": 0.86, "reason": "near miss"}],
+        }
+        source_path = self.root / "conker/src/libultra/audio/init_nested.c"
+        source_path.parent.mkdir(parents=True)
+        source_path.write_text(
+            '#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/init_nested/func_nested.s")\n'
+        )
+        target_path = self.root / "conker/asm/nonmatchings/libultra/audio/init_nested/func_nested.s"
+        target_path.parent.mkdir(parents=True)
+        target_path.write_text("glabel func_nested\n")
+        queue = harness.load_queue(self.root)
+        queue.append(nested)
+        harness.save_queue(self.root, queue)
+
+        self.assertEqual(harness.source_path(self.root, nested), source_path)
+        self.assertEqual(harness.source_relative_path(self.root, nested), "libultra/audio/init_nested.c")
+        self.assertEqual(harness.target_path(self.root, nested), target_path)
+        self.assertTrue(harness.has_live_pragma(self.root, nested))
+        args = argparse.Namespace(
+            near_miss=True,
+            include_attempted=False,
+            region="init",
+            difficulty=None,
+            max_instructions=None,
+        )
+        self.assertEqual(harness.filtered_candidates(self.root, args), [nested])
+        context = harness.source_context(self.root, nested)
+        self.assertIn("GLOBAL_ASM", context)
+
     def test_candidate_payload_is_agent_context(self) -> None:
         args = argparse.Namespace(
             include_history_code=False,
@@ -139,7 +178,65 @@ class HarnessTests(unittest.TestCase):
             capture_output=True,
             check=True,
         )
-        self.assertTrue(json.loads(result.stdout)["match"])
+        payload = json.loads(result.stdout)
+        self.assertTrue(payload["match"])
+        self.assertTrue(payload["raw_match"])
+        self.assertTrue(payload["raw_available"])
+        self.assertEqual(payload["raw_diffs"], [])
+
+    def test_raw_opcode_mismatch_rejects_same_shape(self) -> None:
+        target = self.root / "target.s"
+        target.write_text(
+            "glabel func_1\n"
+            "    /* 0 0 01004027 */  not $t0, $t0\n"
+        )
+        generated = "00000000 <func_1>:\n"
+        generated += "   0:\t01084027\tnor\tt0,t1,zero\n"
+        normalizer = Path(__file__).with_name("conker-normalize-asm.py")
+        result = subprocess.run(
+            [sys.executable, str(normalizer), str(target)],
+            input=generated,
+            text=True,
+            capture_output=True,
+            check=True,
+        )
+        payload = json.loads(result.stdout)
+        self.assertFalse(payload["match"])
+        self.assertFalse(payload["raw_match"])
+        self.assertEqual(payload["raw_diffs"][0]["target"], "01004027")
+
+    def test_raw_opcode_comparison_masks_object_relocations(self) -> None:
+        target = self.root / "target.s"
+        target.write_text(
+            "glabel func_1\n"
+            "    /* 0 0 3c088004 */  lui $t0, %hi(D_TEST)\n"
+        )
+        generated = "00000000 <func_1>:\n"
+        generated += "   0:\t3c080000\tlui\tt0,0\n"
+        generated += "\t0:\tR_MIPS_HI16\tD_TEST\n"
+        normalizer = Path(__file__).with_name("conker-normalize-asm.py")
+        result = subprocess.run(
+            [sys.executable, str(normalizer), str(target)],
+            input=generated,
+            text=True,
+            capture_output=True,
+            check=True,
+        )
+        payload = json.loads(result.stdout)
+        self.assertTrue(payload["match"])
+        self.assertTrue(payload["raw_match"])
+        self.assertEqual(payload["raw_diffs"], [])
+
+    def test_progress_stats_include_live_percentages(self) -> None:
+        (self.root / "conker/progress.csv").write_text(
+            "version,section,filename,function,offset,length,language\n"
+            "us,game,game.c,func_c,0,4,c\n"
+            "us,game,game.s,func_a,4,12,asm\n"
+        )
+        progress = harness.progress_stats(self.root)
+        self.assertEqual(progress["total"]["c_functions"], 1)
+        self.assertEqual(progress["total"]["function_percent"], 50.0)
+        self.assertEqual(progress["total"]["byte_percent"], 25.0)
 
     def test_verify_targets_mounted_repository_root(self) -> None:
         real_run_process = harness.run_process

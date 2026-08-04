@@ -12,6 +12,7 @@ Normalization:
   - Normalizes branch labels to sequential numbers
   - Normalizes register names to canonical form
   - Strips comments and trailing whitespace
+  - Compares encoded instruction words, masking only object relocation fields
 """
 
 import re
@@ -132,7 +133,7 @@ def normalize_objdump_line(line: str) -> str | None:
         return None
 
     # Skip function labels like "00001234 <func_name>:"
-    if re.match(r'^[0-9a-f]+\s+<', line):
+    if re.match(r'^[0-9A-Fa-f]+\s+<', line):
         return None
 
     # Skip relocation lines like "    1234: R_MIPS_..."
@@ -140,7 +141,7 @@ def normalize_objdump_line(line: str) -> str | None:
         return None
 
     # Format: "    addr: hexbytes  instruction"
-    m = re.match(r'\s*[0-9a-f]+:\s+[0-9a-f]+\s+(.*)', line)
+    m = re.match(r'\s*[0-9A-Fa-f]+:\s+[0-9A-Fa-f]+\s+(.*)', line)
     if m:
         instr = m.group(1).strip()
         if not instr:
@@ -152,12 +153,21 @@ def normalize_objdump_line(line: str) -> str | None:
     return None
 
 
+RELOCATION_RE = re.compile(r"\s*([0-9A-Fa-f]+):\s+R_MIPS_(HI16|LO16|26)\s+(\S+)")
+
+
+def relocation_map(raw_text: str) -> dict[str, tuple[str, str]]:
+    """Return instruction address -> (relocation kind, symbol)."""
+    return {
+        match.group(1).lower(): (match.group(2), match.group(3))
+        for match in RELOCATION_RE.finditer(raw_text)
+    }
+
+
 def apply_relocations(lines: list[str], raw_text: str) -> list[str]:
     """Post-process objdump output to replace 0-value immediates with relocation symbols."""
     # Find relocation lines and map them to preceding instruction addresses
-    reloc_map: dict[str, str] = {}  # addr -> symbol
-    for m in re.finditer(r'\s*([0-9a-f]+):\s+R_MIPS_(?:HI16|LO16|26)\s+(\S+)', raw_text):
-        reloc_map[m.group(1)] = m.group(2)
+    reloc_map = relocation_map(raw_text)
 
     if not reloc_map:
         return lines
@@ -166,9 +176,9 @@ def apply_relocations(lines: list[str], raw_text: str) -> list[str]:
     result = []
     instr_addrs: list[str] = []
     for raw_line in raw_text.splitlines():
-        m = re.match(r'\s*([0-9a-f]+):\s+[0-9a-f]+\s+', raw_line)
+        m = re.match(r'\s*([0-9A-Fa-f]+):\s+[0-9A-Fa-f]+\s+', raw_line)
         if m and 'R_MIPS' not in raw_line:
-            instr_addrs.append(m.group(1))
+            instr_addrs.append(m.group(1).lower())
 
     # Now match instructions to their relocations
     idx = 0
@@ -176,7 +186,7 @@ def apply_relocations(lines: list[str], raw_text: str) -> list[str]:
         if idx < len(instr_addrs):
             addr = instr_addrs[idx]
             if addr in reloc_map:
-                sym = reloc_map[addr]
+                sym = reloc_map[addr][1]
                 # Replace the 0 immediate with symbol reference
                 # lui reg, 0 → lui reg, HI(SYM)
                 line = re.sub(r'lui (\w+), 0$', f'lui \\1, HI({sym})', line)
@@ -263,6 +273,99 @@ def parse_objdump(text: str) -> list[str]:
     return lines
 
 
+TARGET_WORD_RE = re.compile(r"/\*.*?\s([0-9A-Fa-f]{8})\s*\*/")
+OBJDUMP_WORD_RE = re.compile(r"^\s*([0-9A-Fa-f]+):\s+([0-9A-Fa-f]{8})\s+")
+
+
+def parse_target_words(filepath: str) -> list[int]:
+    """Read the encoded instruction words preserved in splat comments."""
+    words: list[int] = []
+    with open(filepath) as target:
+        for raw in target:
+            if normalize_target_line(raw) is None:
+                continue
+            match = TARGET_WORD_RE.search(raw)
+            if match:
+                words.append(int(match.group(1), 16))
+    return words
+
+
+def parse_objdump_words(text: str) -> list[tuple[str, int]]:
+    """Read (address, instruction word) pairs from objdump output."""
+    words: list[tuple[str, int]] = []
+    for raw in text.splitlines():
+        if "R_MIPS_" in raw:
+            continue
+        match = OBJDUMP_WORD_RE.match(raw)
+        if match:
+            words.append((match.group(1).lower(), int(match.group(2), 16)))
+    return words
+
+
+def relocation_mask(kind: str | None) -> int:
+    """Mask relocatable operand bits while retaining the encoded opcode/registers."""
+    if kind in {"HI16", "LO16"}:
+        return 0xFFFF0000
+    if kind == "26":
+        return 0xFC000000
+    return 0xFFFFFFFF
+
+
+def compare_raw_opcodes(target_file: str, generated_text: str) -> dict:
+    """Compare encoded words, masking only fields filled by object relocations.
+
+    Target splat comments contain the final ROM words, while ``objdump -dr`` on
+    a translation-unit object leaves HI16/LO16/26 relocation fields unresolved.
+    The relocation mask keeps those fields comparable without throwing away the
+    opcode, register, and instruction-order bits that textual normalization can
+    accidentally overlook.
+    """
+    target_words = parse_target_words(target_file)
+    generated_words = parse_objdump_words(generated_text)
+    result: dict[str, object] = {
+        "available": bool(target_words and generated_words),
+        "target_words": len(target_words),
+        "generated_words": len(generated_words),
+        "match": False,
+        "score": 0.0,
+        "diffs": [],
+    }
+    if not target_words or not generated_words:
+        result["reason"] = "raw_instruction_words_unavailable"
+        return result
+
+    relocations = relocation_map(generated_text)
+    matched = 0
+    diffs: list[dict[str, object]] = []
+    for index, (target_word, generated) in enumerate(zip(target_words, generated_words)):
+        address, generated_word = generated
+        kind = relocations.get(address, (None, ""))[0]
+        mask = relocation_mask(kind)
+        if (target_word & mask) == (generated_word & mask):
+            matched += 1
+            continue
+        diffs.append({
+            "line": index,
+            "address": address,
+            "target": f"{target_word:08x}",
+            "generated": f"{generated_word:08x}",
+            "relocation": f"R_MIPS_{kind}" if kind else None,
+        })
+
+    length_match = len(target_words) == len(generated_words)
+    if not length_match:
+        diffs.append({
+            "type": "length",
+            "target": len(target_words),
+            "generated": len(generated_words),
+        })
+    result["match"] = length_match and not diffs
+    result["score"] = round(matched / max(len(target_words), len(generated_words)), 4)
+    result["diffs"] = diffs[:20]
+    result["reason"] = "match" if result["match"] else "raw_opcode_mismatch"
+    return result
+
+
 def compute_score(target: list[str], generated: list[str]) -> dict:
     """Compute match score between normalized target and generated assembly."""
     if not target or not generated:
@@ -341,6 +444,32 @@ def main():
     gen_lines = normalize_branch_labels(gen_lines)
 
     result = compute_score(target_lines, gen_lines)
+    normalized_match = bool(result.get("match"))
+    raw = compare_raw_opcodes(target_file, gen_text)
+    result["normalized_match"] = normalized_match
+    result["raw_match"] = raw["match"] if raw["available"] else None
+    result["raw_available"] = raw["available"]
+    result["raw_target_words"] = raw["target_words"]
+    result["raw_generated_words"] = raw["generated_words"]
+    result["raw_score"] = raw["score"]
+    result["raw_diffs"] = raw["diffs"]
+    if raw["available"]:
+        if raw["match"]:
+            # The encoded instruction stream is the final authority. This also
+            # accepts harmless assembler aliases such as target `not` vs
+            # objdump `nor`, provided the words are identical.
+            result["match"] = True
+            result["score"] = 1.0
+            result["reason"] = "match"
+            result["diffs"] = []
+        else:
+            result["match"] = False
+            result["score"] = min(float(result.get("score", 0.0)), float(raw["score"]))
+            result["reason"] = (
+                "raw_opcode_mismatch"
+                if normalized_match
+                else f"{result.get('reason', 'nonmatch')}, raw_opcode_mismatch"
+            )
     result["target_instructions"] = len(target_lines)
     result["generated_instructions"] = len(gen_lines)
 

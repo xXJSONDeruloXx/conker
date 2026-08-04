@@ -10,8 +10,28 @@ set -euo pipefail
 FUNC="${1:?Usage: conker-diff.sh <func_name> <source_file.c>}"
 SRC="${2:?Usage: conker-diff.sh <func_name> <source_file.c>}"
 
+# Resolve legacy basename-only inputs to the unique nested source path.
+if [ ! -f "conker/src/$SRC" ]; then
+  matches=()
+  while IFS= read -r match; do
+    matches+=("$match")
+  done < <(find conker/src -type f -name "$(basename "$SRC")" -print)
+  if [ "${#matches[@]}" -eq 1 ]; then
+    SRC="${matches[0]#conker/src/}"
+  fi
+fi
+
 OBJ="conker/build/src/${SRC%.c}.c.o"
 TARGET="conker/asm/nonmatchings/${SRC%.c}/${FUNC}.s"
+if [ ! -f "$TARGET" ]; then
+  target_matches=()
+  while IFS= read -r match; do
+    target_matches+=("$match")
+  done < <(find conker/asm/nonmatchings -type f -name "${FUNC}.s" -print)
+  if [ "${#target_matches[@]}" -eq 1 ]; then
+    TARGET="${target_matches[0]}"
+  fi
+fi
 
 if [ ! -f "$TARGET" ]; then
   echo '{"error": "target assembly not found: '"$TARGET"'"}' 

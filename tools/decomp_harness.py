@@ -6,6 +6,7 @@ not require a particular agent runtime.  This command is the small, stable
 boundary other harnesses can invoke:
 
     python3 tools/decomp_harness.py status --json
+    python3 tools/decomp_harness.py progress --json
     python3 tools/decomp_harness.py next --json --with-asmlift
     python3 tools/decomp_harness.py lift --function func_10001420
     python3 tools/decomp_harness.py attempt --function FUNC --code-file candidate.c --json
@@ -30,6 +31,7 @@ import shlex
 import shutil
 import subprocess
 import sys
+from functools import lru_cache
 from pathlib import Path
 from typing import Any, Iterable
 
@@ -109,30 +111,86 @@ def file_stem(entry: dict[str, Any]) -> str:
     return Path(file_name).stem
 
 
-def pragma_for(entry: dict[str, Any]) -> str:
-    return PRAGMA_TEMPLATE.format(stem=file_stem(entry), function=entry["function"])
+@lru_cache(maxsize=8)
+def _source_matches(src_root: str, basename: str) -> tuple[str, ...]:
+    """Return source files matching a queue basename.
+
+    The queue predates the current source tree layout and stores basenames such
+    as ``init_19B50.c`` even when the source lives under ``src/libultra/audio``.
+    Keep the lookup cached because status/next inspect hundreds of queue entries
+    in one invocation.
+    """
+    root = Path(src_root)
+    if not root.is_dir():
+        return ()
+    return tuple(
+        str(path)
+        for path in sorted(root.rglob(basename))
+        if path.is_file() and path.suffix == ".c"
+    )
+
+
+def resolved_source_path(root: Path, entry: dict[str, Any]) -> Path | None:
+    """Resolve a queue source, including legacy basename-only entries."""
+    src_root = root / "conker/src"
+    file_name = str(entry.get("file", ""))
+    direct = src_root / file_name
+    if direct.is_file():
+        return direct
+    matches = _source_matches(str(src_root), Path(file_name).name)
+    if len(matches) == 1:
+        return Path(matches[0])
+    return None
+
+
+def pragma_for(entry: dict[str, Any], root: Path | None = None) -> str:
+    """Build the GLOBAL_ASM pragma using the actual source/ASM stem."""
+    if root is not None:
+        source = resolved_source_path(root, entry)
+        if source is not None:
+            try:
+                stem = source.relative_to(root / "conker/src").with_suffix("").as_posix()
+            except ValueError:
+                stem = file_stem(entry)
+        else:
+            stem = Path(str(entry.get("file", ""))).with_suffix("").as_posix()
+    else:
+        stem = Path(str(entry.get("file", ""))).with_suffix("").as_posix()
+    return PRAGMA_TEMPLATE.format(stem=stem, function=entry["function"])
 
 
 def source_path(root: Path, entry: dict[str, Any]) -> Path:
-    return root / "conker/src" / str(entry.get("file", ""))
+    """Return the resolved source, or the expected direct path if unresolved."""
+    return resolved_source_path(root, entry) or root / "conker/src" / str(entry.get("file", ""))
+
+
+def source_relative_path(root: Path, entry: dict[str, Any]) -> str:
+    """Return the source path as expected by the translation-unit make target."""
+    source = source_path(root, entry)
+    try:
+        return source.relative_to(root / "conker/src").as_posix()
+    except ValueError:
+        return Path(str(entry.get("file", ""))).as_posix()
 
 
 def target_path(root: Path, entry: dict[str, Any]) -> Path | None:
-    expected = root / "conker/asm/nonmatchings" / file_stem(entry) / f"{entry['function']}.s"
-    if expected.is_file():
-        return expected
+    source_stem = Path(source_relative_path(root, entry)).with_suffix("").as_posix()
+    for stem in (source_stem, file_stem(entry)):
+        expected = root / "conker/asm/nonmatchings" / stem / f"{entry['function']}.s"
+        if expected.is_file():
+            return expected
     matches = list((root / "conker/asm/nonmatchings").glob(f"**/{entry['function']}.s"))
     return matches[0] if matches else None
 
 
 def has_live_pragma(root: Path, entry: dict[str, Any]) -> bool:
     path = source_path(root, entry)
+    if not path.is_file():
+        return False
     try:
-        return pragma_for(entry) in path.read_text(errors="ignore")
+        return pragma_for(entry, root) in path.read_text(errors="ignore")
     except OSError:
-        # A missing source should remain visible to the agent instead of being
-        # silently discarded from the queue.
-        return True
+        return False
 
 
 def entry_for(
@@ -181,7 +239,7 @@ def source_context(root: Path, entry: dict[str, Any], radius: int = 18) -> str:
         lines = path.read_text(errors="replace").splitlines()
     except OSError:
         return "(source file not found)"
-    needle = pragma_for(entry)
+    needle = pragma_for(entry, root)
     try:
         index = next(index for index, line in enumerate(lines) if needle in line)
     except StopIteration:
@@ -374,6 +432,15 @@ def progress_stats(root: Path) -> dict[str, Any]:
             bucket["asm_bytes"] += length
             total["asm_functions"] += 1
             total["asm_bytes"] += length
+    def add_percentages(bucket: dict[str, int]) -> None:
+        function_total = bucket["c_functions"] + bucket["asm_functions"]
+        byte_total = bucket["c_bytes"] + bucket["asm_bytes"]
+        bucket["function_percent"] = round(100 * bucket["c_functions"] / function_total, 2) if function_total else 0.0
+        bucket["byte_percent"] = round(100 * bucket["c_bytes"] / byte_total, 2) if byte_total else 0.0
+
+    for bucket in sections.values():
+        add_percentages(bucket)
+    add_percentages(total)
     result["available"] = bool(total["c_functions"] + total["asm_functions"])
     result["total"] = total
     result["sections"] = sections
@@ -386,17 +453,54 @@ def queue_status(root: Path) -> dict[str, Any]:
     for entry in queue:
         status = str(entry.get("status", "unknown"))
         statuses[status] = statuses.get(status, 0) + 1
-    live_pending = sum(
-        1 for entry in queue if entry.get("status") == "pending" and has_live_pragma(root, entry)
-    )
+    pending_entries = [entry for entry in queue if entry.get("status") == "pending"]
+    live_pending = sum(1 for entry in pending_entries if has_live_pragma(root, entry))
+    unresolved_sources = sum(1 for entry in pending_entries if not source_path(root, entry).is_file())
+    stale_pragmas = len(pending_entries) - live_pending - unresolved_sources
     attempted = sum(1 for entry in queue if int(entry.get("attempts", 0) or 0) > 0)
     return {
         "entries": len(queue),
         "statuses": statuses,
         "live_pending": live_pending,
+        "pending_source_missing": unresolved_sources,
+        "pending_without_live_pragma": stale_pragmas,
         "attempted": attempted,
         "patterns": len(load_patterns(root)),
         "progress": progress_stats(root),
+    }
+
+
+def best_history_score(entry: dict[str, Any]) -> float:
+    history = entry.get("history") or []
+    if not isinstance(history, list):
+        return 0.0
+    return max(
+        (float(item.get("score", 0) or 0) for item in history if isinstance(item, dict)),
+        default=0.0,
+    )
+
+
+def candidate_diagnostics(root: Path, args: argparse.Namespace) -> dict[str, int]:
+    """Explain why a filtered next/near-miss request has no result."""
+    queue = load_queue(root)
+    pending = [entry for entry in queue if entry.get("status") == "pending"]
+    live = [entry for entry in pending if has_live_pragma(root, entry)]
+
+    def in_scope(entry: dict[str, Any]) -> bool:
+        if args.region and entry.get("region") != args.region:
+            return False
+        if args.difficulty and entry.get("difficulty") != args.difficulty:
+            return False
+        if args.max_instructions is not None and int(entry.get("instructions", 0) or 0) > args.max_instructions:
+            return False
+        return True
+
+    scoped = [entry for entry in live if in_scope(entry)]
+    return {
+        "pending": len(pending),
+        "live_pending": len(live),
+        "scoped_live_pending": len(scoped),
+        "near_miss_eligible": sum(1 for entry in scoped if best_history_score(entry) >= 0.8),
     }
 
 
@@ -414,15 +518,14 @@ def filtered_candidates(root: Path, args: argparse.Namespace) -> list[dict[str, 
             continue
         if args.max_instructions is not None and int(entry.get("instructions", 0) or 0) > args.max_instructions:
             continue
-        history = entry.get("history") or []
-        best = max((float(item.get("score", 0) or 0) for item in history if isinstance(item, dict)), default=0)
+        best = best_history_score(entry)
         if args.near_miss and best < 0.8:
             continue
         candidates.append(entry)
     if args.near_miss:
         candidates.sort(
             key=lambda entry: (
-                -max((float(item.get("score", 0) or 0) for item in entry.get("history", []) if isinstance(item, dict)), default=0),
+                -best_history_score(entry),
                 int(entry.get("instructions", 0) or 0),
             )
         )
@@ -642,13 +745,49 @@ def cmd_status(root: Path, args: argparse.Namespace) -> int:
     else:
         queue = payload["queue"]
         print(f"Conker decomp queue: {queue['entries']} entries; {queue['live_pending']} live pending; {queue['attempted']} attempted")
+        if queue["pending_source_missing"] or queue["pending_without_live_pragma"]:
+            print(
+                "Pending diagnostics: "
+                f"{queue['pending_source_missing']} source-missing; "
+                f"{queue['pending_without_live_pragma']} without a live GLOBAL_ASM pragma"
+            )
         print("Statuses: " + ", ".join(f"{key}={value}" for key, value in sorted(queue["statuses"].items())))
         print(f"Patterns: {queue['patterns']}")
         if queue["progress"].get("available"):
             total = queue["progress"]["total"]
-            print(f"Progress: {total['c_functions']} C / {total['asm_functions']} ASM functions; {total['c_bytes']} / {total['c_bytes'] + total['asm_bytes']} bytes")
+            print(
+                f"Progress: {total['c_functions']} C / {total['asm_functions']} ASM functions "
+                f"({total['function_percent']:.2f}% C); "
+                f"{total['c_bytes']} / {total['c_bytes'] + total['asm_bytes']} bytes "
+                f"({total['byte_percent']:.2f}% C)"
+            )
         else:
             print("Progress CSV: unavailable (run make -C conker progress when the build artifacts exist)")
+    return 0
+
+
+def cmd_progress(root: Path, args: argparse.Namespace) -> int:
+    progress = progress_stats(root)
+    if args.json:
+        print(json.dumps({"repo": str(root), "progress": progress}, indent=2))
+        return 0 if progress.get("available") else 1
+    if not progress.get("available"):
+        print("Progress CSV: unavailable (run make -C conker progress when the build artifacts exist)")
+        return 1
+    print("| Section | C functions | ASM functions | Function % C | C bytes | ASM bytes | Byte % C |")
+    print("|---|---:|---:|---:|---:|---:|---:|")
+    for section, bucket in progress["sections"].items():
+        print(
+            f"| {section} | {bucket['c_functions']} | {bucket['asm_functions']} | "
+            f"{bucket['function_percent']:.2f}% | {bucket['c_bytes']} | {bucket['asm_bytes']} | "
+            f"{bucket['byte_percent']:.2f}% |"
+        )
+    total = progress["total"]
+    print(
+        f"| **total** | **{total['c_functions']}** | **{total['asm_functions']}** | "
+        f"**{total['function_percent']:.2f}%** | **{total['c_bytes']}** | "
+        f"**{total['asm_bytes']}** | **{total['byte_percent']:.2f}%** |"
+    )
     return 0
 
 
@@ -677,7 +816,15 @@ def cmd_next(root: Path, args: argparse.Namespace) -> int:
             return 1
     candidates = filtered_candidates(root, args)
     if not candidates:
-        payload = {"candidate": None, "message": "no pending candidate matches the requested filters"}
+        diagnostics = candidate_diagnostics(root, args)
+        if args.near_miss:
+            message = (
+                "no pending near-miss candidate matches the requested filters "
+                f"({diagnostics['near_miss_eligible']} scoped candidates have a prior score >= 0.8)"
+            )
+        else:
+            message = "no pending candidate matches the requested filters"
+        payload = {"candidate": None, "message": message, "filters": diagnostics}
         if args.json:
             print(json.dumps(payload, indent=2))
         else:
@@ -748,8 +895,8 @@ def cmd_lift(root: Path, args: argparse.Namespace) -> int:
 
 def cmd_diff(root: Path, args: argparse.Namespace) -> int:
     entry = entry_for(root, args.function, args.file)
-    file_name = Path(str(entry["file"])).name
-    result = run_process([str(root / "tools/conker-diff.sh"), args.function, file_name], root, 180)
+    source_file = source_relative_path(root, entry)
+    result = run_process([str(root / "tools/conker-diff.sh"), args.function, source_file], root, 180)
     try:
         payload = parse_diff_output(result.stdout)
     except HarnessError:
@@ -765,16 +912,17 @@ def cmd_attempt(root: Path, args: argparse.Namespace) -> int:
     queue = load_queue(root)
     entry = entry_for(root, args.function, args.file, queue)
     file_name = Path(str(entry["file"])).name
-    src = source_path(root, {**entry, "file": file_name})
+    src = source_path(root, entry)
     if not src.is_file():
         raise HarnessError(f"source file not found: {src}")
+    source_file = source_relative_path(root, entry)
     code = code_from_args(root, args).strip()
     if not code:
         raise HarnessError("candidate code is empty")
     if "#pragma GLOBAL_ASM" in code:
         raise HarnessError("candidate code must replace one function, not contain another GLOBAL_ASM pragma")
     original_source = read_text(src, "source")
-    pragma = pragma_for({**entry, "file": file_name})
+    pragma = pragma_for(entry, root)
     if original_source.count(pragma) != 1:
         raise HarnessError(f"expected exactly one target pragma in {src}, found {original_source.count(pragma)}")
     context_patches = load_context_patches(root, args.context_patch_file)
@@ -784,7 +932,7 @@ def cmd_attempt(root: Path, args: argparse.Namespace) -> int:
         originals.update(apply_context_patches(root, context_patches))
         patched_source = read_text(src, "source after context patches")
         src.write_text(patched_source.replace(pragma, code, 1))
-        compile_result = run_process([str(root / "tools/conker-build-tu.sh"), file_name], root, args.timeout)
+        compile_result = run_process([str(root / "tools/conker-build-tu.sh"), source_file], root, args.timeout)
         if compile_result.returncode != 0:
             payload = {
                 "match": False,
@@ -796,7 +944,7 @@ def cmd_attempt(root: Path, args: argparse.Namespace) -> int:
             }
             record_attempt(root, args.function, file_name, code, 0.0, "compile_error", [], context_patches)
             return emit_attempt(payload, args, 1)
-        diff_result = run_process([str(root / "tools/conker-diff.sh"), args.function, file_name], root, args.timeout)
+        diff_result = run_process([str(root / "tools/conker-diff.sh"), args.function, source_file], root, args.timeout)
         diff = parse_diff_output(diff_result.stdout)
         score = float(diff.get("score", 0) or 0)
         match = bool(diff.get("match")) and diff_result.returncode == 0
@@ -893,6 +1041,9 @@ def build_parser() -> argparse.ArgumentParser:
     status = commands.add_parser("status", help="summarize queue and build progress")
     add_json_flag(status)
 
+    progress = commands.add_parser("progress", help="render live C/ASM progress from conker/progress.csv")
+    add_json_flag(progress)
+
     next_parser = commands.add_parser("next", help="select a pending candidate and return its context")
     next_parser.add_argument("--region", choices=["init", "game", "debugger"])
     next_parser.add_argument("--difficulty", choices=["trivial", "low", "medium-low", "medium", "hard"])
@@ -956,6 +1107,8 @@ def main(argv: list[str] | None = None) -> int:
         root = find_repo_root(start)
         if args.command == "status":
             return cmd_status(root, args)
+        if args.command == "progress":
+            return cmd_progress(root, args)
         if args.command == "next":
             return cmd_next(root, args)
         if args.command == "lift":

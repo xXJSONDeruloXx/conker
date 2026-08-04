@@ -42,6 +42,7 @@ for a terminal or prompt transcript.
 ```sh
 # Queue and progress
 python3 tools/decomp_harness.py status --json
+python3 tools/decomp_harness.py progress --json
 python3 tools/decomp_harness.py next --json --similar --with-asmlift
 python3 tools/decomp_harness.py next --json --near-miss
 
@@ -86,6 +87,19 @@ can be tested transactionally with a JSON file containing either an array or:
 The portable interface does not auto-commit or auto-push. `accept --commit` is
 an explicit opt-in; this is safer for harnesses whose branch/approval policy is
 managed outside the decomp loop.
+
+Queue file names are historically stored as basenames. The harness resolves
+them against nested paths under `conker/src` and derives the nested
+`asm/nonmatchings` pragma, so `next`, `attempt`, and `accept` work for libultra
+and other subtrees as well. If a queue entry has gone stale, `status` reports
+source-missing and missing-live-pragma counts; an empty `next --near-miss`
+response includes the scoped candidate counts that explain the routing result.
+
+`conker-diff.sh` keeps normalized assembly scoring for useful near-miss signals,
+but also compares the encoded instruction words from the target splat comments
+with the generated object. Only fields covered by an object `R_MIPS_HI16`,
+`R_MIPS_LO16`, or `R_MIPS_26` relocation are masked. A raw-word mismatch cannot
+be accepted as a match.
 
 ## Agent integration pattern
 
