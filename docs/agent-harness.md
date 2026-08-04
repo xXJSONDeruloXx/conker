@@ -89,6 +89,37 @@ The portable interface does not auto-commit or auto-push. `accept --commit` is
 an explicit opt-in; this is safer for harnesses whose branch/approval policy is
 managed outside the decomp loop.
 
+## Commit and ROM-gate workflow
+
+Keep one exact byte-matching function per commit. Include only the declarations,
+context, queue metadata, or linker/build support needed by that function. This
+keeps each match independently reviewable and gives the repository's full ROM
+gate a separate checkpoint. Bonus matches follow the same rule but remain
+outside the counted goal.
+
+After accepting a match, review and commit it as a narrow change:
+
+```sh
+git add FUNCTION.c required-support-file
+git diff --cached --name-only
+git diff --cached --check
+git commit -m "Match FUNC"
+python3 tools/decomp_harness.py verify --json
+git push origin BRANCH
+```
+
+The repository hook is a `pre-commit` hook. When staged files under
+`conker/src/` or `conker/include/` are present, it runs the Dockerized build
+and requires `conker.us.bin: OK`; do not use `git commit --no-verify`. A push
+does not run that pre-commit hook, so one commit per function is the part that
+provides independent verification. Push commits one at a time when the remote
+should show the same progression.
+
+If a linker, Makefile, compiler, or other build-support change is involved,
+also run a clean/default build rather than relying only on an incremental
+harness diff. Generated linker scripts and build outputs are disposable; keep
+durable linker behavior in tracked inputs.
+
 Queue file names are historically stored as basenames. The harness resolves
 them against nested paths under `conker/src` and derives the nested
 `asm/nonmatchings` pragma, so `next`, `attempt`, and `accept` work for libultra

@@ -64,6 +64,11 @@ TARGET = $(BUILD_DIR)/$(BASENAME).$(VERSION)
 
 LD_SCRIPT = $(BASENAME).ld
 
+ifeq ($(VERSION),us)
+CSPLAYER_LD_FLAGS := -T n_csplayer.lds
+CSPLAYER_LD_DEP   := n_csplayer.lds
+endif
+
 CC     := ../ido/ido5.3_recomp/cc
 
 CROSS   = mips-linux-gnu-
@@ -108,7 +113,7 @@ CFLAGS += -D_LANGUAGE_C -D_FINALROM -DF3DEX_GBI_2 -D_MIPS_SZLONG=32
 CFLAGS += -woff 649,838
 CFLAGS += $(INCLUDE_CFLAGS)
 
-LDFLAGS = -T $(BUILD_DIR)/$(LD_SCRIPT) -Map $(TARGET).map -T undefined_syms.$(VERSION).txt -T undefined_funcs.$(VERSION).txt -T undefined_syms_auto.txt -T undefined_funcs_auto.txt --no-check-sections
+LDFLAGS = $(CSPLAYER_LD_FLAGS) -T $(BUILD_DIR)/$(LD_SCRIPT) -Map $(TARGET).map -T undefined_syms.$(VERSION).txt -T undefined_funcs.$(VERSION).txt -T undefined_syms_auto.txt -T undefined_funcs_auto.txt --no-check-sections
 
 ### Overrides
 
@@ -193,19 +198,10 @@ replace: $(VERIFY) $(TARGET).header.bin $(TARGET).boot.bin $(TARGET).init.bin $(
 
 ### Recipes
 
-$(BUILD_DIR)/$(LD_SCRIPT): $(LD_SCRIPT) Makefile
+$(BUILD_DIR)/$(LD_SCRIPT): $(LD_SCRIPT)
 	$(CPP) -P -DBUILD_DIR=$(BUILD_DIR) -o $@ $<
-	sed -i '1i\.L100140BC_init_data = __n_CSPHandleNextSeqEvent + 0x74;' $@
-	sed -i '1i\.L100140D8_init_data = __n_CSPHandleNextSeqEvent + 0x90;' $@
-	sed -i '1i\.L100140F4_init_data = __n_CSPHandleNextSeqEvent + 0xAC;' $@
-	sed -i '1i\.L1001412C_init_data = __n_CSPHandleNextSeqEvent + 0xE4;' $@
-	sed -i '1i\.L1001413C = __n_CSPHandleNextSeqEvent + 0xF4;' $@
-	sed -i '/init_data_ROM_END = __romPos;/i\    .n_csplayer_rodata 0x8002C4CC (NOLOAD) : SUBALIGN(4)' $@
-	sed -i '/init_data_ROM_END = __romPos;/i\    {' $@
-	sed -i '/init_data_ROM_END = __romPos;/i\        build/src/libultra/audio/n_csplayer.c.o(.rodata);' $@
-	sed -i '/init_data_ROM_END = __romPos;/i\    }' $@
 
-$(TARGET).elf: $(O_FILES) $(BUILD_DIR)/$(LD_SCRIPT) $(GLOBAL_ASM_O_FILES)
+$(TARGET).elf: $(O_FILES) $(BUILD_DIR)/$(LD_SCRIPT) $(GLOBAL_ASM_O_FILES) $(CSPLAYER_LD_DEP)
 	$(LD) $(LDFLAGS) -o $@
 
 ifndef PERMUTER
