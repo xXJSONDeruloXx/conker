@@ -334,6 +334,7 @@ extern struct105 D_800427A0;
 extern s32  D_800427B0;
 extern s16  D_800427F4;
 extern struct120 D_800425E0[];
+extern struct120 D_800426A0[];
 extern struct124 *D_80042800;
 extern s32  D_80042804;
 extern u16  D_800428B8[];
@@ -427,6 +428,7 @@ extern void (*D_80089AAC[10])(void);
 extern void (*D_80089AD4[10])(void);
 extern void (*D_80089C44[])(void);
 extern void (*D_80089C54[])(void);
+extern s32 (*D_80089C18[])(struct102 *);
 extern void (*D_80089EE8[])(void);
 extern void (*D_80089EF0[])(void);
 extern void (*D_80089EF8[])(void);
@@ -567,6 +569,7 @@ extern f32 D_80098D90[];
 extern f32 D_80098DB0; // 0.008726646192371845
 extern f32 D_80098DB4; // 0.008726646192371845
 
+extern f32 D_80099080;
 extern f32 D_800990B0; // 0.6931471824645996f
 extern f32 D_800990B4; // 0.6931471824645996f
 extern s8  D_80099140[];
@@ -689,6 +692,7 @@ extern f32 D_800A5168;
 extern f32 D_800A5178;
 extern f32 D_800A45B4;
 extern f32 D_800A5644;
+extern f32 D_800A56A4;
 extern f32 D_800A56A8;
 extern f32 D_800A56AC;
 extern f32 D_800A56B4;

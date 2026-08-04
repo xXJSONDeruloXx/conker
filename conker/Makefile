@@ -193,8 +193,17 @@ replace: $(VERIFY) $(TARGET).header.bin $(TARGET).boot.bin $(TARGET).init.bin $(
 
 ### Recipes
 
-$(BUILD_DIR)/$(LD_SCRIPT): $(LD_SCRIPT)
+$(BUILD_DIR)/$(LD_SCRIPT): $(LD_SCRIPT) Makefile
 	$(CPP) -P -DBUILD_DIR=$(BUILD_DIR) -o $@ $<
+	sed -i '1i\.L100140BC_init_data = __n_CSPHandleNextSeqEvent + 0x74;' $@
+	sed -i '1i\.L100140D8_init_data = __n_CSPHandleNextSeqEvent + 0x90;' $@
+	sed -i '1i\.L100140F4_init_data = __n_CSPHandleNextSeqEvent + 0xAC;' $@
+	sed -i '1i\.L1001412C_init_data = __n_CSPHandleNextSeqEvent + 0xE4;' $@
+	sed -i '1i\.L1001413C = __n_CSPHandleNextSeqEvent + 0xF4;' $@
+	sed -i '/init_data_ROM_END = __romPos;/i\    .n_csplayer_rodata 0x8002C4CC (NOLOAD) : SUBALIGN(4)' $@
+	sed -i '/init_data_ROM_END = __romPos;/i\    {' $@
+	sed -i '/init_data_ROM_END = __romPos;/i\        build/src/libultra/audio/n_csplayer.c.o(.rodata);' $@
+	sed -i '/init_data_ROM_END = __romPos;/i\    }' $@
 
 $(TARGET).elf: $(O_FILES) $(BUILD_DIR)/$(LD_SCRIPT) $(GLOBAL_ASM_O_FILES)
 	$(LD) $(LDFLAGS) -o $@

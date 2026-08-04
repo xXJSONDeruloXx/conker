@@ -24,7 +24,29 @@ void func_16001830(OSContPad *data) {
         data->stick_y = readformat.stick_y;
     }
 }
-#pragma GLOBAL_ASM("asm/nonmatchings/debugger_256F80/func_160018BC.s")
+void func_160018BC(void) {
+    u8 *ptr;
+    __OSContReadFormat readformat;
+    s32 i;
+
+    ptr = (u8 *)&__osContPifRam;
+    i = 0;
+    do {
+        __osContPifRam.ramarray[i++] = 0;
+    } while ((u32 *)&__osContPifRam.ramarray[i] < (u32 *)&__osContLastCmd);
+    __osContPifRam.pifstatus = CONT_CMD_EXE;
+    readformat.dummy = CONT_CMD_NOP;
+    readformat.txsize = CONT_CMD_READ_BUTTON_TX;
+    readformat.rxsize = CONT_CMD_READ_BUTTON_RX;
+    readformat.cmd = CONT_CMD_READ_BUTTON;
+    readformat.button = 0xFFFF;
+    readformat.stick_x = -1;
+    readformat.stick_y = -1;
+    for (i = 0; i < __osMaxControllers; i++, ptr += sizeof(__OSContReadFormat)) {
+        *(__OSContReadFormat *)ptr = readformat;
+    }
+    *ptr = CONT_CMD_END;
+}
 
 // another __osSiDeviceBusy function
 s32 func_16001984()

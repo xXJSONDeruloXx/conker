@@ -9,9 +9,9 @@
 
 
        ALMicroTime      __n_CSPVoiceHandler(void *node);
-static void              __n_CSPHandleNextSeqEvent(N_ALCSPlayer *seqp);
-static void             __n_CSPHandleMIDIMsg(N_ALCSPlayer *seqp, N_ALEvent *event);
-static void             __n_CSPHandleMetaMsg(N_ALCSPlayer *seqp, N_ALEvent *event);
+       void              __n_CSPHandleNextSeqEvent(N_ALCSPlayer *seqp);
+void                    __n_CSPHandleMIDIMsg(N_ALCSPlayer *seqp, N_ALEvent *event);
+void                    __n_CSPHandleMetaMsg(N_ALCSPlayer *seqp, N_ALEvent *event);
        void             __n_CSPRepostEvent(ALEventQueue *evtq, N_ALEventListItem *item);
        void              __n_setUsptFromTempo(N_ALCSPlayer *seqp, f32 tempo);
 
@@ -101,7 +101,37 @@ void n_alCSPNew(N_ALCSPlayer *seqp, ALSeqpConfig *c)
 
 extern void (*jtbl_8002C4CC[])(void);
 // jump table
-#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/n_csplayer/__n_CSPHandleNextSeqEvent.s")
+void __n_CSPHandleNextSeqEvent(N_ALCSPlayer *seqp) {
+    N_ALEvent event;
+
+    if ((seqp->target == NULL) || (seqp->state == 3)) {
+        return;
+    }
+    n_alCSeqNextEvent(seqp->target, &event, 1);
+    switch (event.type) {
+        case AL_SEQ_MIDI_EVT:
+            __n_CSPHandleMIDIMsg(seqp, &event);
+            __n_CSPPostNextSeqEvent(seqp);
+            break;
+        case AL_TEMPO_EVT:
+            __n_CSPHandleMetaMsg(seqp, &event);
+            __n_CSPPostNextSeqEvent(seqp);
+            break;
+        case AL_SEQ_END_EVT:
+            seqp->state = AL_STOPPING;
+            event.type = AL_SEQP_STOPPING_EVT;
+            n_alEvtqPostEvent(&seqp->evtq, &event, 0x7FFFFFFF, 0);
+            break;
+        case AL_TRACK_END:
+        case AL_CSP_LOOPSTART:
+        case AL_CSP_LOOPEND:
+        case AL_CSP_NOTEOFF_EVT:
+            __n_CSPPostNextSeqEvent(seqp);
+            break;
+        default:
+            break;
+    }
+}
 // jump table
 #pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/n_csplayer/__n_CSPHandleMIDIMsg.s")
 
@@ -175,7 +205,37 @@ void __n_CSPHandleMetaMsg(N_ALCSPlayer *seqp, N_ALEvent *event)
   }
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/n_csplayer/__n_CSPRepostEvent.s")
+#define alLinkMacro(ln, to)       \
+{                                \
+    ALLink *_ln = (ALLink *)(ln); \
+    ALLink *_to = (ALLink *)(to); \
+    _ln->next = _to->next;        \
+    _ln->prev = _to;              \
+    if (_to->next) {              \
+        _to->next->prev = _ln;    \
+    }                             \
+    _to->next = _ln;              \
+}
+
+void __n_CSPRepostEvent(ALEventQueue *evtq, N_ALEventListItem *item) {
+    ALLink *node;
+    N_ALEventListItem *nextItem;
+
+    for (node = &evtq->allocList; node != 0; node = node->next) {
+        if (!node->next) {
+            alLinkMacro((ALLink *)item, node);
+            break;
+        } else {
+            nextItem = (N_ALEventListItem *)node->next;
+            if (item->delta < nextItem->delta) {
+                nextItem->delta -= item->delta;
+                alLinkMacro((ALLink *)item, node);
+                break;
+            }
+            item->delta -= nextItem->delta;
+        }
+    }
+}
 
 void __n_setUsptFromTempo (N_ALCSPlayer *seqp, f32 tempo)
 {

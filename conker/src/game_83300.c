@@ -668,7 +668,48 @@ void func_1505959C(struct127 *arg0, s32 arg1) {
 #pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_150597FC.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_150599C8.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_15059B54.s")
+u8 func_15059B54(struct127 *arg0, u16 arg1) {
+    s16 temp_t8;
+    s16 temp_t8_2;
+    s16 temp_t2;
+    s16 temp_t8_3;
+    s32 temp_lo;
+    s16 phi_a2;
+
+    temp_t8 = arg0->unk78 - arg0->unk76;
+    phi_a2 = temp_t8;
+    if (phi_a2 < 0) {
+        phi_a2 = phi_a2 ^ 0xFFFF;
+    }
+    if (arg0->unk1EA != 0) {
+        temp_lo = (s32)(arg0->unk1EA * D_800CC264) / 0x64;
+        temp_t8_2 = arg0->unk1EC + temp_lo;
+        temp_t2 = arg0->unk1EC - temp_lo;
+        if (temp_t8_2 < temp_t8) {
+            temp_t8 = temp_t8_2;
+        }
+        if (temp_t8 < temp_t2) {
+            temp_t8 = temp_t2;
+        }
+    }
+    temp_t8_3 = temp_t8;
+    if (temp_t8 < 0) {
+        temp_t8 ^= 0xFFFF;
+    }
+    if (temp_t8 < arg1) {
+        arg1 = temp_t8;
+    }
+    if ((arg0->unkF4 & 1) == 0) {
+        if (temp_t8_3 < 0) {
+            arg0->unk76 -= arg1;
+            arg0->unk1EC = -arg1;
+        } else {
+            arg0->unk76 += arg1;
+            arg0->unk1EC = arg1;
+        }
+    }
+    return phi_a2 >> 8;
+}
 // NON-MATCHING: 90% there, missing an s16 cast
 // u8 func_15059B54(struct127 *arg0, u16 arg1) {
 //     s16 temp_t8;
