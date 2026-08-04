@@ -131,6 +131,15 @@ See the [README](conker/README.md) for more information.
 
 # Tools
 
+## Agent harness
+
+The decompilation workflow is available to any agent runtime through the
+dependency-free [`tools/decomp_harness.py`](tools/decomp_harness.py) CLI. It
+provides queue/context, optional asmlift drafts, transactional compile/diff
+attempts, and the full ROM SHA-1 gate. The Pi extension under `.pi/` remains an
+interactive frontend, not a project requirement. See
+[`docs/agent-harness.md`](docs/agent-harness.md).
+
 ## Custom tools
 
  - `rarezip/rareunzip`; python script to compress/decompress the compression format used in the ROM.

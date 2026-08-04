@@ -1,6 +1,12 @@
 # Conker Matching Decomp Harness — Architecture Plan
 
-This document proposes a Pi-native harness for automated matching decompilation of Conker's Bad Fur Day, built as a **Pi package** (`pi-n64-decomp`) containing an extension, a skill, and CLI tooling. The design is informed by the LLM decomp probe findings and the Pi extension/SDK documentation.
+This document describes the automated matching-decompilation harness for
+Conker's Bad Fur Day. The runtime-neutral contract lives in
+`tools/decomp_harness.py`; the Pi package (`pi-n64-decomp`) is an adapter that
+adds interactive UI, prompts, and the existing permuter loop. The design is
+informed by the LLM decomp probe findings and the Pi extension/SDK
+documentation. See [`agent-harness.md`](agent-harness.md) for the portable
+command contract.
 
 ## Goals
 
