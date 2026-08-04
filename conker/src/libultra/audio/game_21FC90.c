@@ -121,6 +121,26 @@ void func_151F3C34(s32 arg0) {
     D_800E0DFC = arg0;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/game_21FC90/func_151F3C4C.s")
+s32 func_151F3C4C(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    s32 sp1C;
+    s32 sp18;
+
+    if (arg3 != -1) {
+        D_800E0DE4 = arg3;
+    }
+    if ((D_800E0DE4 + arg2) > D_800E0DE0) {
+        arg2 = D_800E0DE0 - D_800E0DE4;
+    }
+    sp18 = (*(s32 (**)(s32 *))((s32)n_syn + 0x24))(&sp1C);
+    sp1C = ((s32 (*)(s32, s32, s32))sp18)(D_800E0D80 + D_800E0DE4, arg2, 0);
+    if (sp1C == 0) {
+        return 0;
+    }
+    sp1C += 0x80000000;
+    osInvalDCache((void *)sp1C, arg2);
+    bcopy((void *)sp1C, (void *)arg1, arg2);
+    D_800E0DE4 += arg2;
+    return arg2;
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/game_21FC90/func_151F3D78.s")
