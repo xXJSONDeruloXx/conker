@@ -24725,8 +24725,8 @@
     "instructions": 69,
     "difficulty": "medium",
     "tags": [],
-    "attempts": 42,
-    "lastScore": 0.3478,
+    "attempts": 53,
+    "lastScore": 0.1739,
     "status": "pending",
     "history": [
       {
@@ -25405,6 +25405,204 @@
         "reason": "length_mismatch (target=69, generated=68), raw_opcode_mismatch",
         "diffs": [],
         "timestamp": "2026-08-04T21:44:43.726350+00:00"
+      },
+      {
+        "code": "s32 func_151415D4(void *arg0) {\n    struct {\n        f32 unk0;\n        f32 unk4;\n        f32 unk8;\n        f32 unkC;\n        f32 unk10;\n        f32 unk14;\n        f32 unk18;\n        f32 unk1C;\n        f32 unk20;\n    } *temp_v0;\n    f32 temp_f0;\n\n    temp_v0 = (void *)((s32)arg0 + 0x170);\n    if (*(f32 *)((s32)arg0 + 0x17C) < *(f32 *)((s32)arg0 + 0x180)) {\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4;\n    } else if (temp_v0->unkC < temp_v0->unk14) {\n        temp_f0 = (temp_v0->unkC - temp_v0->unk10) * temp_v0->unk20;\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4 + (temp_v0->unk8 * temp_f0);\n    } else if (temp_v0->unkC < temp_v0->unk18) {\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk0;\n    } else {\n        temp_f0 = (temp_v0->unkC - temp_v0->unk18) * temp_v0->unk20;\n        temp_f0 = 1.0f - temp_f0;\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4 + (temp_v0->unk8 * temp_f0);\n    }\n    temp_v0->unkC += D_800BE9A4;\n    while (temp_v0->unkC > temp_v0->unk1C) {\n        temp_v0->unkC -= temp_v0->unk1C;\n    }\n    return 1;\n}",
+        "score": 0.3478,
+        "reason": "length_mismatch (target=69, generated=68), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:08:27.983053+00:00"
+      },
+      {
+        "code": "s32 func_151415D4(void *arg0) {\n    struct {\n        f32 unk0;\n        f32 unk4;\n        f32 unk8;\n        f32 unkC;\n        f32 unk10;\n        f32 unk14;\n        f32 unk18;\n        f32 unk1C;\n        f32 unk20;\n    } *temp_v0;\n    f32 temp_f0;\n\n    temp_v0 = (void *)((s32)arg0 + 0x170);\n    if (*(f32 *)((s32)arg0 + 0x17C) < *(f32 *)((s32)arg0 + 0x180)) {\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4;\n    } else if (temp_v0->unkC < temp_v0->unk14) {\n        temp_f0 = (temp_v0->unkC - temp_v0->unk10) * temp_v0->unk20;\n        *(volatile f32 *)((s32)arg0 + 0x158) = temp_v0->unk4 + (temp_v0->unk8 * temp_f0);\n    } else if (temp_v0->unkC < temp_v0->unk18) {\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk0;\n    } else {\n        temp_f0 = (temp_v0->unkC - temp_v0->unk18) * temp_v0->unk20;\n        temp_f0 = 1.0f - temp_f0;\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4 + (temp_v0->unk8 * temp_f0);\n    }\n    temp_v0->unkC += D_800BE9A4;\n    while (temp_v0->unkC > temp_v0->unk1C) {\n        temp_v0->unkC -= temp_v0->unk1C;\n    }\n    return 1;\n}",
+        "score": 0.3478,
+        "reason": "length_mismatch (target=69, generated=68), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:09:26.332762+00:00"
+      },
+      {
+        "code": "s32 func_151415D4(struct210 *arg0) {\n    struct {\n        f32 unk0;\n        f32 unk4;\n        f32 unk8;\n        f32 unkC;\n        f32 unk10;\n        f32 unk14;\n        f32 unk18;\n        f32 unk1C;\n        f32 unk20;\n    } *temp_v0;\n    f32 temp_f0;\n    f32 temp_f2;\n    f32 temp_f4;\n    f32 temp_f6;\n    f32 temp_f8;\n    f32 temp_f10;\n    f32 temp_f12;\n    f32 temp_f16;\n    f32 temp_f18;\n\n    temp_v0 = (void *)((s32)arg0 + 0x170);\n    if (*(f32 *)((s32)arg0 + 0x17C) < *(f32 *)((s32)arg0 + 0x180)) {\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4;\n    } else {\n        temp_f2 = temp_v0->unkC;\n        if (temp_f2 < temp_v0->unk14) {\n            temp_f16 = temp_v0->unk10;\n            temp_f4 = temp_v0->unk20;\n            temp_f8 = temp_v0->unk8;\n            temp_f6 = temp_v0->unk4;\n            temp_f18 = temp_f2 - temp_f16;\n            temp_f0 = temp_f18 * temp_f4;\n            temp_f10 = temp_f8 * temp_f0;\n            temp_f16 = temp_f6 + temp_f10;\n            *(f32 *)((s32)arg0 + 0x158) = temp_f16;\n        } else {\n            temp_f12 = temp_v0->unk18;\n            if (temp_f2 < temp_f12) {\n                temp_f18 = temp_v0->unk0;\n                *(f32 *)((s32)arg0 + 0x158) = temp_f18;\n            } else {\n                temp_f4 = temp_f2 - temp_f12;\n                temp_f8 = temp_v0->unk20;\n                temp_f10 = 1.0f;\n                temp_f6 = temp_f4 * temp_f8;\n                temp_f18 = temp_v0->unk8;\n                temp_f16 = temp_v0->unk4;\n                temp_f0 = temp_f10 - temp_f6;\n                temp_f4 = temp_f18 * temp_f0;\n                temp_f8 = temp_f16 + temp_f4;\n                *(f32 *)((s32)arg0 + 0x158) = temp_f8;\n            }\n        }\n    }\n    temp_v0->unkC += D_800BE9A4;\n    temp_f0 = temp_v0->unk1C;\n    temp_f2 = temp_v0->unkC;\n    if (temp_f0 < temp_f2) {\n        do {\n            temp_f16 = temp_f2 - temp_f0;\n            temp_v0->unkC = temp_f16;\n            temp_f2 = temp_v0->unkC;\n        } while (temp_f0 < temp_f2);\n    }\n    return 1;\n}",
+        "score": 0.1739,
+        "reason": "length_mismatch (target=69, generated=67), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:11:59.154315+00:00"
+      },
+      {
+        "code": "s32 func_151415D4(void *arg0) {\n    struct {\n        f32 unk0;\n        f32 unk4;\n        f32 unk8;\n        f32 unkC;\n        f32 unk10;\n        f32 unk14;\n        f32 unk18;\n        f32 unk1C;\n        f32 unk20;\n    } *temp_v0;\n    f32 temp_f0;\n\n    temp_v0 = (void *)((s32)arg0 + 0x170);\n    if (*(f32 *)((s32)arg0 + 0x17C) < *(f32 *)((s32)arg0 + 0x180)) {\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4;\n    } else if (temp_v0->unkC < temp_v0->unk14) {\n        temp_f0 = (temp_v0->unkC - temp_v0->unk10) * temp_v0->unk20;\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4 + (temp_v0->unk8 * temp_f0);\n    } else if (temp_v0->unkC < temp_v0->unk18) {\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk0;\n    } else {\n        f32 temp_f4;\n        f32 temp_f6;\n        f32 temp_f8;\n        f32 temp_f10;\n        f32 temp_f16;\n        f32 temp_f18;\n\n        temp_f4 = temp_v0->unkC - temp_v0->unk18;\n        temp_f8 = temp_v0->unk20;\n        temp_f10 = 1.0f;\n        temp_f6 = temp_f4 * temp_f8;\n        temp_f18 = temp_v0->unk8;\n        temp_f16 = temp_v0->unk4;\n        temp_f0 = temp_f10 - temp_f6;\n        temp_f4 = temp_f18 * temp_f0;\n        temp_f8 = temp_f16 + temp_f4;\n        *(f32 *)((s32)arg0 + 0x158) = temp_f8;\n    }\n    temp_v0->unkC += D_800BE9A4;\n    temp_f0 = temp_v0->unk1C;\n    while (temp_v0->unkC > temp_f0) {\n        temp_v0->unkC -= temp_f0;\n    }\n    return 1;\n}",
+        "score": 0.1739,
+        "reason": "length_mismatch (target=69, generated=68), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:12:37.947593+00:00"
+      },
+      {
+        "code": "s32 func_151415D4(void *arg0) {\n    struct {\n        f32 unk0;\n        f32 unk4;\n        f32 unk8;\n        f32 unkC;\n        f32 unk10;\n        f32 unk14;\n        f32 unk18;\n        f32 unk1C;\n        f32 unk20;\n    } *temp_v0;\n    f32 temp_f0;\n\n    temp_v0 = (void *)((s32)arg0 + 0x170);\n    if (*(f32 *)((s32)arg0 + 0x17C) < *(f32 *)((s32)arg0 + 0x180)) {\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4;\n    } else if (temp_v0->unkC < temp_v0->unk14) {\n        temp_f0 = (temp_v0->unkC - temp_v0->unk10) * temp_v0->unk20;\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4 + (temp_v0->unk8 * temp_f0);\n    } else if (temp_v0->unkC < temp_v0->unk18) {\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk0;\n    } else {\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4 + (temp_v0->unk8 * (1.0f - ((temp_v0->unkC - temp_v0->unk18) * temp_v0->unk20)));\n    }\n    temp_v0->unkC += D_800BE9A4;\n    temp_f0 = temp_v0->unk1C;\n    while (temp_v0->unkC > temp_f0) {\n        temp_v0->unkC -= temp_f0;\n    }\n    return 1;\n}",
+        "score": 0.3333,
+        "reason": "length_mismatch (target=69, generated=68), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:13:02.086014+00:00"
+      },
+      {
+        "code": "s32 func_151415D4(void *arg0) {\n    struct {\n        f32 unk0;\n        f32 unk4;\n        f32 unk8;\n        f32 unkC;\n        f32 unk10;\n        f32 unk14;\n        f32 unk18;\n        f32 unk1C;\n        f32 unk20;\n    } *temp_v0;\n    f32 temp_f0;\n\n    temp_v0 = (void *)((s32)arg0 + 0x170);\n    if (*(f32 *)((s32)arg0 + 0x17C) < *(f32 *)((s32)arg0 + 0x180)) {\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4;\n    } else if (temp_v0->unkC < temp_v0->unk14) {\n        temp_f0 = (temp_v0->unkC - temp_v0->unk10) * temp_v0->unk20;\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4 + (temp_v0->unk8 * temp_f0);\n    } else if (temp_v0->unkC < temp_v0->unk18) {\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk0;\n    } else {\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4 + (temp_v0->unk8 * (1.0f - ((temp_v0->unkC - temp_v0->unk18) * temp_v0->unk20)));\n    }\n    temp_v0->unkC += D_800BE9A4;\n    temp_f0 = temp_v0->unk1C;\n    while (temp_v0->unkC > temp_f0) {\n        temp_v0->unkC -= temp_f0;\n    }\n    return 1;\n}\n\nvoid pad_test(void) {\n}\n#pragma align_symbol (pad_test, 16)",
+        "score": 0.3333,
+        "reason": "length_mismatch (target=69, generated=68), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:13:40.302909+00:00"
+      },
+      {
+        "code": "extern f32 D_800BE9A4;\n\ns32 func_151415D4(void *arg0) {\n    struct {\n        f32 unk0;\n        f32 unk4;\n        f32 unk8;\n        f32 unkC;\n        f32 unk10;\n        f32 unk14;\n        f32 unk18;\n        f32 unk1C;\n        f32 unk20;\n    } *temp_v0;\n    f32 temp_f2;\n\n    temp_v0 = (void *)((s32)arg0 + 0x170);\n    if (*(f32 *)((s32)arg0 + 0x17C) < *(f32 *)((s32)arg0 + 0x180)) {\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4;\n        goto update;\n    }\n    if ((temp_f2 = temp_v0->unkC) < temp_v0->unk14) {\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4 + ((temp_v0->unkC - temp_v0->unk10) * temp_v0->unk20 * temp_v0->unk8);\n        goto update;\n    }\n    if (temp_f2 < temp_v0->unk18) {\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk0;\n    } else {\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4 + (temp_v0->unk8 * (1.0f - ((temp_f2 - temp_v0->unk18) * temp_v0->unk20)));\n    }\nupdate:\n    temp_v0->unkC += D_800BE9A4;\n    while (temp_v0->unkC > temp_v0->unk1C) {\n        temp_v0->unkC -= temp_v0->unk1C;\n    }\n    return 1;\n}",
+        "score": 0.5072,
+        "reason": "structural_diffs=34, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 13,
+            "type": "structural",
+            "target": "c.lt.s f2, f10",
+            "generated": "mov.s f0, f2"
+          },
+          {
+            "line": 14,
+            "type": "structural",
+            "target": "nop",
+            "generated": "c.lt.s f2, f10"
+          },
+          {
+            "line": 15,
+            "type": "structural",
+            "target": "bc1fl L2",
+            "generated": "nop"
+          },
+          {
+            "line": 16,
+            "type": "structural",
+            "target": "lwc1 f12, 24(v0)",
+            "generated": "bc1fl L2"
+          },
+          {
+            "line": 17,
+            "type": "structural",
+            "target": "lwc1 f16, 16(v0)",
+            "generated": "lwc1 f2, 24(v0)"
+          },
+          {
+            "line": 18,
+            "type": "structural",
+            "target": "lwc1 f4, 32(v0)",
+            "generated": "lwc1 f16, 16(v0)"
+          },
+          {
+            "line": 19,
+            "type": "structural",
+            "target": "lwc1 f8, 8(v0)",
+            "generated": "lwc1 f4, 32(v0)"
+          },
+          {
+            "line": 20,
+            "type": "structural",
+            "target": "sub.s f18, f2, f16",
+            "generated": "lwc1 f8, 8(v0)"
+          },
+          {
+            "line": 21,
+            "type": "structural",
+            "target": "lwc1 f6, 4(v0)",
+            "generated": "sub.s f18, f2, f16"
+          },
+          {
+            "line": 22,
+            "type": "structural",
+            "target": "mul.s f0, f18, f4",
+            "generated": "lwc1 f16, 4(v0)"
+          },
+          {
+            "line": 23,
+            "type": "structural",
+            "target": "nop",
+            "generated": "mul.s f6, f18, f4"
+          },
+          {
+            "line": 24,
+            "type": "structural",
+            "target": "mul.s f10, f8, f0",
+            "generated": "nop"
+          },
+          {
+            "line": 25,
+            "type": "structural",
+            "target": "add.s f16, f6, f10",
+            "generated": "mul.s f10, f6, f8"
+          },
+          {
+            "line": 26,
+            "type": "structural",
+            "target": "swc1 f16, 344(a0)",
+            "generated": "add.s f18, f16, f10"
+          },
+          {
+            "line": 28,
+            "type": "structural",
+            "target": "nop",
+            "generated": "swc1 f18, 344(a0)"
+          },
+          {
+            "line": 29,
+            "type": "structural",
+            "target": "lwc1 f12, 24(v0)",
+            "generated": "lwc1 f2, 24(v0)"
+          },
+          {
+            "line": 30,
+            "type": "structural",
+            "target": "c.lt.s f2, f12",
+            "generated": "c.lt.s f0, f2"
+          },
+          {
+            "line": 33,
+            "type": "structural",
+            "target": "sub.s f4, f2, f12",
+            "generated": "sub.s f6, f0, f2"
+          },
+          {
+            "line": 34,
+            "type": "structural",
+            "target": "lwc1 f18, 0(v0)",
+            "generated": "lwc1 f4, 0(v0)"
+          },
+          {
+            "line": 36,
+            "type": "structural",
+            "target": "swc1 f18, 344(a0)",
+            "generated": "swc1 f4, 344(a0)"
+          }
+        ],
+        "timestamp": "2026-08-04T22:14:19.007597+00:00"
+      },
+      {
+        "code": "extern f32 D_800BE9A4;\n\ns32 func_151415D4(void *arg0) {\n    struct {\n        f32 unk0;\n        f32 unk4;\n        f32 unk8;\n        f32 unkC;\n        f32 unk10;\n        f32 unk14;\n        f32 unk18;\n        f32 unk1C;\n        f32 unk20;\n    } *temp_v0;\n    temp_v0 = (void *)((s32)arg0 + 0x170);\n    if (*(f32 *)((s32)arg0 + 0x17C) < *(f32 *)((s32)arg0 + 0x180)) {\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4;\n        goto update;\n    }\n    if (temp_v0->unkC < temp_v0->unk14) {\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4 + ((temp_v0->unkC - temp_v0->unk10) * temp_v0->unk20 * temp_v0->unk8);\n        goto update;\n    }\n    if (temp_v0->unkC < temp_v0->unk18) {\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk0;\n    } else {\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4 + (temp_v0->unk8 * (1.0f - ((temp_f2 - temp_v0->unk18) * temp_v0->unk20)));\n    }\nupdate:\n    temp_v0->unkC += D_800BE9A4;\n    while (temp_v0->unkC > temp_v0->unk1C) {\n        temp_v0->unkC -= temp_v0->unk1C;\n    }\n    return 1;\n}",
+        "score": 0.0,
+        "reason": "compile_error",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:14:48.760225+00:00"
+      },
+      {
+        "code": "extern f32 D_800BE9A4;\n\ns32 func_151415D4(void *arg0) {\n    struct {\n        f32 unk0;\n        f32 unk4;\n        f32 unk8;\n        f32 unkC;\n        f32 unk10;\n        f32 unk14;\n        f32 unk18;\n        f32 unk1C;\n        f32 unk20;\n    } *temp_v0;\n    temp_v0 = (void *)((s32)arg0 + 0x170);\n    if (*(f32 *)((s32)arg0 + 0x17C) < *(f32 *)((s32)arg0 + 0x180)) {\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4;\n        goto update;\n    }\n    if (temp_v0->unkC < temp_v0->unk14) {\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4 + ((temp_v0->unkC - temp_v0->unk10) * temp_v0->unk20 * temp_v0->unk8);\n        goto update;\n    }\n    if (temp_v0->unkC < temp_v0->unk18) {\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk0;\n    } else {\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4 + (temp_v0->unk8 * (1.0f - ((temp_v0->unkC - temp_v0->unk18) * temp_v0->unk20)));\n    }\nupdate:\n    temp_v0->unkC += D_800BE9A4;\n    while (temp_v0->unkC > temp_v0->unk1C) {\n        temp_v0->unkC -= temp_v0->unk1C;\n    }\n    return 1;\n}",
+        "score": 0.2174,
+        "reason": "length_mismatch (target=69, generated=68), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:14:58.172694+00:00"
+      },
+      {
+        "code": "s32 func_151415D4(void *arg0) {\n    struct {\n        f32 unk0;\n        f32 unk4;\n        f32 unk8;\n        f32 unkC;\n        f32 unk10;\n        f32 unk14;\n        f32 unk18;\n        f32 unk1C;\n        f32 unk20;\n    } *temp_v0;\n    f32 temp_f0;\n\n    temp_v0 = (void *)((s32)arg0 + 0x170);\n    if (*(f32 *)((s32)arg0 + 0x17C) < *(f32 *)((s32)arg0 + 0x180)) {\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4;\n    } else if (temp_v0->unkC < temp_v0->unk14) {\n        temp_f0 = (temp_v0->unkC - temp_v0->unk10) * temp_v0->unk20;\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4 + (temp_v0->unk8 * temp_f0);\n    } else if (temp_v0->unkC < temp_v0->unk18) {\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk0;\n    } else {\n        f32 temp_f4;\n        temp_f4 = (temp_v0->unkC - temp_v0->unk18) * temp_v0->unk20;\n        temp_f0 = 1.0f - temp_f4;\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4 + (temp_v0->unk8 * temp_f0);\n    }\n    temp_v0->unkC += D_800BE9A4;\n    temp_f0 = temp_v0->unk1C;\n    while (temp_v0->unkC > temp_f0) {\n        temp_v0->unkC -= temp_f0;\n    }\n    return 1;\n}",
+        "score": 0.3478,
+        "reason": "length_mismatch (target=69, generated=68), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:15:41.351370+00:00"
+      },
+      {
+        "code": "s32 func_151415D4(void *arg0) {\n    struct {\n        f32 unk0;\n        f32 unk4;\n        f32 unk8;\n        f32 unkC;\n        f32 unk10;\n        f32 unk14;\n        f32 unk18;\n        f32 unk1C;\n        f32 unk20;\n    } *temp_v0;\n    f32 temp_f0;\n    f32 temp_f4;\n    f32 temp_f6;\n    f32 temp_f8;\n    f32 temp_f10;\n    f32 temp_f16;\n    f32 temp_f18;\n\n    temp_v0 = (void *)((s32)arg0 + 0x170);\n    if (*(f32 *)((s32)arg0 + 0x17C) < *(f32 *)((s32)arg0 + 0x180)) {\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4;\n    } else if (temp_v0->unkC < temp_v0->unk14) {\n        temp_f0 = (temp_v0->unkC - temp_v0->unk10) * temp_v0->unk20;\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk4 + (temp_v0->unk8 * temp_f0);\n    } else if (temp_v0->unkC < temp_v0->unk18) {\n        *(f32 *)((s32)arg0 + 0x158) = temp_v0->unk0;\n    } else {\n        temp_f4 = temp_v0->unkC - temp_v0->unk18;\n        temp_f8 = temp_v0->unk20;\n        temp_f10 = 1.0f;\n        temp_f6 = temp_f4 * temp_f8;\n        temp_f18 = temp_v0->unk8;\n        temp_f16 = temp_v0->unk4;\n        temp_f0 = temp_f10 - temp_f6;\n        temp_f4 = temp_f18 * temp_f0;\n        temp_f8 = temp_f16 + temp_f4;\n        *(f32 *)((s32)arg0 + 0x158) = temp_f8;\n    }\n    temp_v0->unkC += D_800BE9A4;\n    temp_f0 = temp_v0->unk1C;\n    while (temp_v0->unkC > temp_f0) {\n        temp_v0->unkC -= temp_f0;\n    }\n    return 1;\n}",
+        "score": 0.1739,
+        "reason": "length_mismatch (target=69, generated=68), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:16:17.313319+00:00"
       }
     ]
   },
@@ -26504,8 +26702,8 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 20,
-    "lastScore": 0.303,
+    "attempts": 26,
+    "lastScore": 0.1818,
     "status": "pending",
     "history": [
       {
@@ -26831,6 +27029,169 @@
         "reason": "length_mismatch (target=65, generated=66), raw_opcode_mismatch",
         "diffs": [],
         "timestamp": "2026-08-04T18:52:43.075576+00:00"
+      },
+      {
+        "code": "extern f32 D_800A0274;\nextern f32 D_800A0278;\nextern f32 D_800A027C;\n\ns32 func_150C2700(s32 arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4,\n                  s32 arg5, s32 arg6, s32 arg7, s32 arg8, s32 arg9,\n                  s32 arg10, s32 arg11, s32 arg12, s32 arg13, u8 arg14) {\n    u8 sp20[0x48];\n\n    *(s16 *)&sp20[0x16] = 5;\n    *(s16 *)&sp20[0] = 0x6B;\n    *(s16 *)&sp20[0x14] = 6;\n    *(s16 *)&sp20[2] = 0x46;\n    *(s16 *)&sp20[4] = -0x1F;\n    *(s16 *)&sp20[6] = 0x2E;\n    *(f32 *)&sp20[8] = arg2;\n    *(f32 *)&sp20[0xC] = arg3;\n    *(f32 *)&sp20[0x10] = arg4;\n    *(f32 *)&sp20[0x18] = 30.0f;\n    *(f32 *)&sp20[0x1C] = 35.0f;\n    *(s16 *)&sp20[0x20] = 0x64;\n    *(s16 *)&sp20[0x22] = 0;\n    *(f32 *)&sp20[0x24] = D_800A0274;\n    *(f32 *)&sp20[0x28] = D_800A0278;\n    sp20[0x2C] = 0x9B;\n    sp20[0x2D] = 0x64;\n    *(f32 *)&sp20[0x30] = D_800A027C;\n    *(f32 *)&sp20[0x34] = 0.0f;\n    sp20[0x38] = 1;\n    sp20[0x39] = 6;\n    *(f32 *)&sp20[0x3C] = 0.0f;\n    sp20[0x40] = 1;\n    *(f32 *)&sp20[0x44] = 0.0f;\n    func_15150178(sp20, &sp20[8], 0, arg14, 1);\n    return 1;\n}",
+        "score": 0.2273,
+        "reason": "length_mismatch (target=65, generated=66), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:36:55.371051+00:00"
+      },
+      {
+        "code": "extern f32 D_800A0274;\nextern f32 D_800A0278;\nextern f32 D_800A027C;\n\ns32 func_150C2700(s32 arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4,\n                  s32 arg5, s32 arg6, s32 arg7, s32 arg8, s32 arg9,\n                  s32 arg10, s32 arg11, s32 arg12, s32 arg13, u8 arg14) {\n    u8 sp20[0x48];\n\n    *(f32 *)&sp20[0x18] = 30.0f;\n    *(f32 *)&sp20[0x1C] = 35.0f;\n    *(f32 *)&sp20[0x24] = D_800A0274;\n    *(f32 *)&sp20[0x28] = D_800A0278;\n    *(s16 *)&sp20[0x16] = 5;\n    *(s16 *)&sp20[0] = 0x6B;\n    *(f32 *)&sp20[0x30] = D_800A027C;\n    *(f32 *)&sp20[0x10] = arg4;\n    *(f32 *)&sp20[8] = arg2;\n    *(f32 *)&sp20[0xC] = arg3;\n    *(s16 *)&sp20[0x14] = 6;\n    *(s16 *)&sp20[2] = 0x46;\n    *(s16 *)&sp20[4] = -0x1F;\n    *(s16 *)&sp20[6] = 0x2E;\n    *(s16 *)&sp20[0x20] = 0x64;\n    *(s16 *)&sp20[0x22] = 0;\n    sp20[0x2C] = 0x9B;\n    sp20[0x2D] = 0x64;\n    *(f32 *)&sp20[0x30] = D_800A027C;\n    *(f32 *)&sp20[0x34] = 0.0f;\n    sp20[0x38] = 1;\n    sp20[0x39] = 6;\n    *(f32 *)&sp20[0x3C] = 0.0f;\n    sp20[0x40] = 1;\n    *(f32 *)&sp20[0x44] = 0.0f;\n    func_15150178(sp20, &sp20[8], 0, arg14, 1);\n    return 1;\n}",
+        "score": 0.1667,
+        "reason": "length_mismatch (target=65, generated=66), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:37:42.075046+00:00"
+      },
+      {
+        "code": "extern f32 D_800A0274;\nextern f32 D_800A0278;\nextern f32 D_800A027C;\n\ns32 func_150C2700(s32 arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4,\n                  s32 arg5, s32 arg6, s32 arg7, s32 arg8, s32 arg9,\n                  s32 arg10, s32 arg11, s32 arg12, s32 arg13, u8 arg14) {\n    u8 sp20[0x48];\n\n    *(s16 *)&sp20[0x16] = 5;\n    *(s16 *)&sp20[0] = 0x6B;\n    *(f32 *)&sp20[8] = arg2;\n    *(f32 *)&sp20[0xC] = arg3;\n    *(s16 *)&sp20[0x14] = 6;\n    *(f32 *)&sp20[0x10] = arg4;\n    *(s16 *)&sp20[2] = 0x46;\n    *(s16 *)&sp20[4] = -0x1F;\n    *(s16 *)&sp20[6] = 0x2E;\n    *(f32 *)&sp20[0x18] = 30.0f;\n    *(f32 *)&sp20[0x1C] = 35.0f;\n    *(s16 *)&sp20[0x20] = 0x64;\n    *(s16 *)&sp20[0x22] = 0;\n    *(f32 *)&sp20[0x24] = D_800A0274;\n    *(f32 *)&sp20[0x28] = D_800A0278;\n    sp20[0x2C] = 0x9B;\n    sp20[0x2D] = 0x64;\n    *(f32 *)&sp20[0x30] = D_800A027C;\n    *(f32 *)&sp20[0x30] = D_800A027C;\n    *(f32 *)&sp20[0x34] = 0.0f;\n    sp20[0x38] = 1;\n    sp20[0x39] = 6;\n    *(f32 *)&sp20[0x3C] = 0.0f;\n    sp20[0x40] = 1;\n    *(f32 *)&sp20[0x44] = 0.0f;\n    func_15150178(sp20, &sp20[8], 0, arg14, 1);\n    return 1;\n}",
+        "score": 0.2273,
+        "reason": "length_mismatch (target=65, generated=66), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:38:12.657399+00:00"
+      },
+      {
+        "code": "extern f32 D_800A0274;\nextern f32 D_800A0278;\nextern f32 D_800A027C;\n\ns32 func_150C2700(s32 arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4,\n                  s32 arg5, s32 arg6, s32 arg7, s32 arg8, s32 arg9,\n                  s32 arg10, s32 arg11, s32 arg12, s32 arg13, u8 arg14) {\n    u8 sp20[0x48];\n    s32 temp6;\n\n    *(s16 *)&sp20[0x16] = 5;\n    *(s16 *)&sp20[0] = 0x6B;\n    *(f32 *)&sp20[8] = arg2;\n    *(f32 *)&sp20[0xC] = arg3;\n    temp6 = 6;\n    *(s16 *)&sp20[0x14] = temp6;\n    *(f32 *)&sp20[0x10] = arg4;\n    *(s16 *)&sp20[2] = 0x46;\n    *(s16 *)&sp20[4] = -0x1F;\n    *(s16 *)&sp20[6] = 0x2E;\n    *(f32 *)&sp20[0x18] = 30.0f;\n    *(f32 *)&sp20[0x1C] = 35.0f;\n    *(s16 *)&sp20[0x20] = 0x64;\n    *(s16 *)&sp20[0x22] = 0;\n    *(f32 *)&sp20[0x24] = D_800A0274;\n    *(f32 *)&sp20[0x28] = D_800A0278;\n    sp20[0x2C] = 0x9B;\n    sp20[0x2D] = 0x64;\n    *(f32 *)&sp20[0x30] = D_800A027C;\n    *(f32 *)&sp20[0x34] = 0.0f;\n    sp20[0x38] = 1;\n    sp20[0x39] = temp6;\n    *(f32 *)&sp20[0x3C] = 0.0f;\n    sp20[0x40] = 1;\n    *(f32 *)&sp20[0x44] = 0.0f;\n    func_15150178(sp20, &sp20[8], 0, arg14, 1);\n    return 1;\n}",
+        "score": 0.1818,
+        "reason": "length_mismatch (target=65, generated=66), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:39:31.755672+00:00"
+      },
+      {
+        "code": "extern f32 D_800A0274;\nextern f32 D_800A0278;\nextern f32 D_800A027C;\n\ns32 func_150C2700(s32 arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4,\n                  s32 arg5, s32 arg6, s32 arg7, s32 arg8, s32 arg9,\n                  s32 arg10, s32 arg11, s32 arg12, s32 arg13, u8 arg14) {\n    u8 sp20[0x48];\n\n    *(s16 *)&sp20[0x16] = 5;\n    *(s16 *)&sp20[0] = 0x6B;\n    *(f32 *)&sp20[8] = arg2;\n    *(f32 *)&sp20[0xC] = arg3;\n    sp20[0x39] = *(s16 *)&sp20[0x14] = 6;\n    *(f32 *)&sp20[0x10] = arg4;\n    *(s16 *)&sp20[2] = 0x46;\n    *(s16 *)&sp20[4] = -0x1F;\n    *(s16 *)&sp20[6] = 0x2E;\n    *(f32 *)&sp20[0x18] = 30.0f;\n    *(f32 *)&sp20[0x1C] = 35.0f;\n    *(s16 *)&sp20[0x20] = 0x64;\n    *(s16 *)&sp20[0x22] = 0;\n    *(f32 *)&sp20[0x24] = D_800A0274;\n    *(f32 *)&sp20[0x28] = D_800A0278;\n    sp20[0x2C] = 0x9B;\n    sp20[0x2D] = 0x64;\n    *(f32 *)&sp20[0x30] = D_800A027C;\n    *(f32 *)&sp20[0x34] = 0.0f;\n    sp20[0x38] = 1;\n    *(f32 *)&sp20[0x3C] = 0.0f;\n    sp20[0x40] = 1;\n    *(f32 *)&sp20[0x44] = 0.0f;\n    func_15150178(sp20, &sp20[8], 0, arg14, 1);\n    return 1;\n}",
+        "score": 0.5538,
+        "reason": "structural_diffs=29, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 15,
+            "type": "structural",
+            "target": "li t7, 5",
+            "generated": "li t6, 5"
+          },
+          {
+            "line": 16,
+            "type": "structural",
+            "target": "li t8, 107",
+            "generated": "lui at, HI(D_800A027C)"
+          },
+          {
+            "line": 17,
+            "type": "structural",
+            "target": "lui at, HI(D_800A027C)",
+            "generated": "lwc1 f4, 120(sp)"
+          },
+          {
+            "line": 18,
+            "type": "structural",
+            "target": "lwc1 f4, 120(sp)",
+            "generated": "lwc1 f18, LO(D_800A027C)(at)"
+          },
+          {
+            "line": 19,
+            "type": "structural",
+            "target": "lwc1 f18, LO(D_800A027C)(at)",
+            "generated": "sh t6, 54(sp)"
+          },
+          {
+            "line": 20,
+            "type": "structural",
+            "target": "sh t7, 54(sp)",
+            "generated": "li t7, 107"
+          },
+          {
+            "line": 21,
+            "type": "structural",
+            "target": "sh t8, 32(sp)",
+            "generated": "li v0, 6"
+          },
+          {
+            "line": 22,
+            "type": "structural",
+            "target": "li t6, 6",
+            "generated": "li t8, 70"
+          },
+          {
+            "line": 23,
+            "type": "structural",
+            "target": "li t9, 70",
+            "generated": "li t9, -31"
+          },
+          {
+            "line": 24,
+            "type": "structural",
+            "target": "li t0, -31",
+            "generated": "li t0, 46"
+          },
+          {
+            "line": 25,
+            "type": "structural",
+            "target": "li t1, 46",
+            "generated": "li t1, 100"
+          },
+          {
+            "line": 26,
+            "type": "structural",
+            "target": "li t2, 100",
+            "generated": "li t2, 155"
+          },
+          {
+            "line": 27,
+            "type": "structural",
+            "target": "li t3, 155",
+            "generated": "li t3, 100"
+          },
+          {
+            "line": 28,
+            "type": "structural",
+            "target": "li t4, 100",
+            "generated": "li t4, 1"
+          },
+          {
+            "line": 30,
+            "type": "structural",
+            "target": "li t7, 1",
+            "generated": "li t6, 1"
+          },
+          {
+            "line": 31,
+            "type": "structural",
+            "target": "li t8, 1",
+            "generated": "sh t7, 32(sp)"
+          },
+          {
+            "line": 34,
+            "type": "structural",
+            "target": "sh t6, 52(sp)",
+            "generated": "sb v0, 89(sp)"
+          },
+          {
+            "line": 35,
+            "type": "structural",
+            "target": "sh t9, 34(sp)",
+            "generated": "sh t8, 34(sp)"
+          },
+          {
+            "line": 36,
+            "type": "structural",
+            "target": "sh t0, 36(sp)",
+            "generated": "sh t9, 36(sp)"
+          },
+          {
+            "line": 37,
+            "type": "structural",
+            "target": "sh t1, 38(sp)",
+            "generated": "sh t0, 38(sp)"
+          }
+        ],
+        "timestamp": "2026-08-04T22:39:49.030924+00:00"
+      },
+      {
+        "code": "extern f32 D_800A0274;\nextern f32 D_800A0278;\nextern f32 D_800A027C;\n\ns32 func_150C2700(s32 arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4,\n                  s32 arg5, s32 arg6, s32 arg7, s32 arg8, s32 arg9,\n                  s32 arg10, s32 arg11, s32 arg12, s32 arg13, u8 arg14) {\n    u8 sp20[0x48];\n    register s32 temp6;\n\n    *(s16 *)&sp20[0x16] = 5;\n    *(s16 *)&sp20[0] = 0x6B;\n    *(f32 *)&sp20[8] = arg2;\n    *(f32 *)&sp20[0xC] = arg3;\n    temp6 = 6;\n    *(s16 *)&sp20[0x14] = temp6;\n    *(f32 *)&sp20[0x10] = arg4;\n    *(s16 *)&sp20[2] = 0x46;\n    *(s16 *)&sp20[4] = -0x1F;\n    *(s16 *)&sp20[6] = 0x2E;\n    *(f32 *)&sp20[0x18] = 30.0f;\n    *(f32 *)&sp20[0x1C] = 35.0f;\n    *(s16 *)&sp20[0x20] = 0x64;\n    *(s16 *)&sp20[0x22] = 0;\n    *(f32 *)&sp20[0x24] = D_800A0274;\n    *(f32 *)&sp20[0x28] = D_800A0278;\n    sp20[0x2C] = 0x9B;\n    sp20[0x2D] = 0x64;\n    *(f32 *)&sp20[0x30] = D_800A027C;\n    sp20[0x39] = temp6;\n    *(f32 *)&sp20[0x34] = 0.0f;\n    sp20[0x38] = 1;\n    *(f32 *)&sp20[0x3C] = 0.0f;\n    sp20[0x40] = 1;\n    *(f32 *)&sp20[0x44] = 0.0f;\n    func_15150178(sp20, &sp20[8], 0, arg14, 1);\n    return 1;\n}",
+        "score": 0.1818,
+        "reason": "length_mismatch (target=65, generated=66), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:40:17.846267+00:00"
       }
     ]
   },
@@ -28301,8 +28662,8 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 15,
-    "lastScore": 0.0556,
+    "attempts": 43,
+    "lastScore": 0.4722222222222222,
     "status": "pending",
     "history": [
       {
@@ -28409,6 +28770,202 @@
         "reason": "length_mismatch (target=54, generated=53), raw_opcode_mismatch",
         "diffs": [],
         "timestamp": "2026-08-04T18:21:39.627118+00:00"
+      },
+      {
+        "code": "void func_1000A348(s32 arg0, s32 arg1, s32 arg2) {\n    volatile struct147 *temp_a3;\n    struct54 *temp_v0;\n    struct54 *temp_v1;\n    struct54 *temp_a0;\n    struct54 *temp_a2;\n\n    temp_a3 = (volatile struct147 *)&D_800406A0;\n    temp_v0 = (struct54 *)temp_a3->unk4;\n    while (temp_v0 != NULL) {\n        temp_v1 = temp_v0->unk0;\n        if ((temp_v0->unk14 == 0) && (temp_v0->unk16 == 0)) {\n            *(s32 *)temp_v0->unkC = temp_v0->unk8;\n            temp_v0->unkC = 0;\n            if ((s32)temp_v0 == temp_a3->unk4) {\n                temp_a3->unk4 = (s32)temp_v1;\n            }\n            temp_a0 = temp_v0->unk0;\n            if (temp_a0 != NULL) {\n                temp_a0->unk4 = temp_v0->unk4;\n            }\n            temp_a0 = temp_v0->unk4;\n            if (temp_a0 != NULL) {\n                temp_a0->unk0 = temp_v0->unk0;\n            }\n            temp_a0 = temp_a3->unk10;\n            if (temp_a0 != NULL) {\n                temp_v0->unk4 = temp_a0;\n                temp_v0->unk0 = temp_a0->unk0;\n                temp_a2 = temp_a0->unk0;\n                if (temp_a2 != NULL) {\n                    temp_a2->unk4 = temp_v0;\n                }\n                temp_a0->unk0 = temp_v0;\n            } else {\n                temp_a3->unk10 = temp_v0;\n                temp_v0->unk0 = NULL;\n                temp_v0->unk4 = NULL;\n            }\n        }\n        temp_v0 = temp_v1;\n    }\n}",
+        "score": 0.0556,
+        "reason": "length_mismatch (target=54, generated=53), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T21:48:00.169959+00:00"
+      },
+      {
+        "code": "void func_1000A348(s32 arg0, s32 arg1, s32 arg2) {\n    volatile struct147 *temp_a3;\n    struct54 *temp_v0;\n    struct54 *temp_v1;\n    struct54 *temp_a0;\n    struct54 *temp_a2;\n\n    temp_a3 = (volatile struct147 *)&D_800406A0;\n    temp_v0 = (struct54 *)temp_a3->unk4;\n    if (temp_v0 != NULL) {\n        do {\n            temp_v1 = temp_v0->unk0;\n            if ((temp_v0->unk14 == 0) && (temp_v0->unk16 == 0)) {\n                *(s32 *)temp_v0->unkC = temp_v0->unk8;\n                temp_v0->unkC = NULL;\n                if ((s32)temp_v0 == temp_a3->unk4) {\n                    temp_a3->unk4 = (s32)temp_v1;\n                }\n                temp_a0 = temp_v0->unk0;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk4 = temp_v0->unk4;\n                }\n                temp_a0 = temp_v0->unk4;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk0 = temp_v0->unk0;\n                }\n                temp_a0 = temp_a3->unk10;\n                if (temp_a0 != NULL) {\n                    temp_v0->unk4 = temp_a0;\n                    temp_v0->unk0 = temp_a0->unk0;\n                    temp_a2 = temp_a0->unk0;\n                    if (temp_a2 != NULL) {\n                        temp_a2->unk4 = temp_v0;\n                    }\n                    temp_a0->unk0 = temp_v0;\n                } else {\n                    temp_a3->unk10 = temp_v0;\n                    temp_v0->unk0 = NULL;\n                    temp_v0->unk4 = NULL;\n                }\n            }\n        } while ((temp_v0 = temp_v1) != NULL);\n    }\n}",
+        "score": 0.0556,
+        "reason": "length_mismatch (target=54, generated=53), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T21:48:32.794869+00:00"
+      },
+      {
+        "code": "void func_1000A348(void) {\n    struct147 *temp_a3;\n    struct54 *temp_v0;\n    struct54 *temp_v1;\n    struct54 *temp_a0;\n    struct54 *temp_a2;\n\n    temp_a3 = &D_800406A0;\n    temp_v0 = (struct54 *)temp_a3->unk4;\n    if (temp_v0 != NULL) {\n        do {\n            temp_v1 = temp_v0->unk0;\n            if ((temp_v0->unk14 == 0) && (temp_v0->unk16 == 0)) {\n                *(s32 *)temp_v0->unkC = temp_v0->unk8;\n                temp_v0->unkC = NULL;\n                if ((s32)temp_v0 == temp_a3->unk4) {\n                    temp_a3->unk4 = (s32)temp_v1;\n                }\n                temp_a0 = temp_v0->unk0;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk4 = temp_v0->unk4;\n                }\n                temp_a0 = temp_v0->unk4;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk0 = temp_v0->unk0;\n                }\n                temp_a0 = temp_a3->unk10;\n                if (temp_a0 != NULL) {\n                    temp_v0->unk4 = temp_a0;\n                    temp_v0->unk0 = temp_a0->unk0;\n                    temp_a2 = temp_a0->unk0;\n                    if (temp_a2 != NULL) {\n                        temp_a2->unk4 = temp_v0;\n                    }\n                    temp_a0->unk0 = temp_v0;\n                } else {\n                    temp_a3->unk10 = temp_v0;\n                    temp_v0->unk0 = NULL;\n                    temp_v0->unk4 = NULL;\n                }\n            }\n        } while ((temp_v0 = temp_v1) != NULL);\n    }\n}",
+        "score": 0.037,
+        "reason": "length_mismatch (target=54, generated=53), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T21:48:56.677593+00:00"
+      },
+      {
+        "code": "void func_1000A348(void) {\n    volatile struct147 *temp_a3;\n    struct54 *temp_v0;\n    struct54 *temp_v1;\n    struct54 *temp_a0;\n    struct54 *temp_a2;\n\n    temp_a3 = (volatile struct147 *)&D_800406A0;\n    temp_v0 = (struct54 *)temp_a3->unk4;\n    if (temp_v0 != NULL) {\n        do {\n            temp_v1 = temp_v0->unk0;\n            if ((temp_v0->unk14 == 0) && (temp_v0->unk16 == 0)) {\n                *(s32 *)temp_v0->unkC = temp_v0->unk8;\n                temp_v0->unkC = NULL;\n                if ((s32)temp_v0 == temp_a3->unk4) {\n                    temp_a3->unk4 = (s32)temp_v1;\n                }\n                temp_a0 = temp_v0->unk0;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk4 = temp_v0->unk4;\n                }\n                temp_a0 = temp_v0->unk4;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk0 = temp_v0->unk0;\n                }\n                temp_a0 = temp_a3->unk10;\n                if (temp_a0 != NULL) {\n                    temp_v0->unk4 = temp_a0;\n                    temp_v0->unk0 = temp_a0->unk0;\n                    temp_a2 = temp_a0->unk0;\n                    if (temp_a2 != NULL) {\n                        temp_a2->unk4 = temp_v0;\n                    }\n                    temp_a0->unk0 = temp_v0;\n                } else {\n                    temp_a3->unk10 = temp_v0;\n                    temp_v0->unk0 = NULL;\n                    temp_v0->unk4 = NULL;\n                }\n            }\n        } while ((temp_v0 = temp_v1) != NULL);\n    }\n}",
+        "score": 0.3333,
+        "reason": "length_mismatch (target=54, generated=53), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T21:49:12.504376+00:00"
+      },
+      {
+        "code": "void func_1000A348(void) {\n    struct54 *temp_v0;\n    volatile struct147 *temp_a3;\n    struct54 *temp_v1;\n    struct54 *temp_a0;\n    struct54 *temp_a2;\n\n    temp_a3 = (volatile struct147 *)&D_800406A0;\n    temp_v0 = (struct54 *)temp_a3->unk4;\n    if (temp_v0 != NULL) {\n        do {\n            temp_v1 = temp_v0->unk0;\n            if ((temp_v0->unk14 == 0) && (temp_v0->unk16 == 0)) {\n                *(s32 *)temp_v0->unkC = temp_v0->unk8;\n                temp_v0->unkC = NULL;\n                if ((s32)temp_v0 == temp_a3->unk4) {\n                    temp_a3->unk4 = (s32)temp_v1;\n                }\n                temp_a0 = temp_v0->unk0;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk4 = temp_v0->unk4;\n                }\n                temp_a0 = temp_v0->unk4;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk0 = temp_v0->unk0;\n                }\n                temp_a0 = temp_a3->unk10;\n                if (temp_a0 != NULL) {\n                    temp_v0->unk4 = temp_a0;\n                    temp_v0->unk0 = temp_a0->unk0;\n                    temp_a2 = temp_a0->unk0;\n                    if (temp_a2 != NULL) {\n                        temp_a2->unk4 = temp_v0;\n                    }\n                    temp_a0->unk0 = temp_v0;\n                } else {\n                    temp_a3->unk10 = temp_v0;\n                    temp_v0->unk0 = NULL;\n                    temp_v0->unk4 = NULL;\n                }\n            }\n        } while ((temp_v0 = temp_v1) != NULL);\n    }\n}",
+        "score": 0.3333,
+        "reason": "length_mismatch (target=54, generated=53), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T21:49:34.847302+00:00"
+      },
+      {
+        "code": "void func_1000A348(void) {\n    struct147 *temp_a3;\n    struct54 *temp_v0;\n    struct54 *temp_v1;\n    struct54 *temp_a0;\n    struct54 *temp_a1;\n    struct54 *temp_a2;\n\n    temp_a3 = &D_800406A0;\n    temp_v0 = (struct54 *)temp_a3->unk4;\n    if (temp_v0 != NULL) {\n        do {\n            temp_v1 = temp_v0->unk0;\n            if ((temp_v0->unk14 == 0) && (temp_v0->unk16 == 0)) {\n                temp_a0 = (struct54 *)temp_v0->unkC;\n                temp_a0->unk0 = temp_v0->unk8;\n                temp_v0->unkC = NULL;\n                if ((s32)temp_v0 == temp_a3->unk4) {\n                    temp_a3->unk4 = (s32)temp_v1;\n                }\n                temp_a0 = temp_v0->unk0;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk4 = temp_v0->unk4;\n                }\n                temp_a0 = temp_v0->unk4;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk0 = temp_v0->unk0;\n                }\n                temp_a0 = temp_a3->unk10;\n                if (temp_a0 != NULL) {\n                    temp_v0->unk4 = temp_a0;\n                    temp_v0->unk0 = temp_a0->unk0;\n                    temp_a1 = temp_a0;\n                    temp_a2 = temp_a0->unk0;\n                    if (temp_a2 != NULL) {\n                        temp_a2->unk4 = temp_v0;\n                    }\n                    temp_a1->unk0 = temp_v0;\n                } else {\n                    temp_a3->unk10 = temp_v0;\n                    temp_v0->unk0 = NULL;\n                    temp_v0->unk4 = NULL;\n                }\n            }\n        } while ((temp_v0 = temp_v1) != NULL);\n    }\n}",
+        "score": 0.037,
+        "reason": "length_mismatch (target=54, generated=53), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T21:53:45.192658+00:00"
+      },
+      {
+        "code": "void func_1000A348(void) {\n    volatile struct147 *temp_a3;\n    struct54 *temp_v0;\n    struct54 *temp_v1;\n    struct54 *temp_a0;\n    struct54 *temp_a1;\n    struct54 *temp_a2;\n\n    temp_a3 = &D_800406A0;\n    temp_v0 = (struct54 *)temp_a3->unk4;\n    if (temp_v0 != NULL) {\n        do {\n            temp_v1 = temp_v0->unk0;\n            if ((temp_v0->unk14 == 0) && (temp_v0->unk16 == 0)) {\n                temp_a0 = (struct54 *)temp_v0->unkC;\n                temp_a0->unk0 = temp_v0->unk8;\n                temp_v0->unkC = NULL;\n                if ((s32)temp_v0 == temp_a3->unk4) {\n                    temp_a3->unk4 = (s32)temp_v1;\n                }\n                temp_a0 = temp_v0->unk0;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk4 = temp_v0->unk4;\n                }\n                temp_a0 = temp_v0->unk4;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk0 = temp_v0->unk0;\n                }\n                temp_a0 = temp_a3->unk10;\n                if (temp_a0 != NULL) {\n                    temp_v0->unk4 = temp_a0;\n                    temp_v0->unk0 = temp_a0->unk0;\n                    temp_a1 = temp_a0;\n                    temp_a2 = temp_a0->unk0;\n                    if (temp_a2 != NULL) {\n                        temp_a2->unk4 = temp_v0;\n                    }\n                    temp_a1->unk0 = temp_v0;\n                } else {\n                    temp_a3->unk10 = temp_v0;\n                    temp_v0->unk0 = NULL;\n                    temp_v0->unk4 = NULL;\n                }\n            }\n        } while ((temp_v0 = temp_v1) != NULL);\n    }\n}",
+        "score": 0.3704,
+        "reason": "length_mismatch (target=54, generated=53), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T21:54:06.218617+00:00"
+      },
+      {
+        "code": "void func_1000A348(s32 arg0) {\n    volatile struct147 *temp_a3;\n    struct54 *temp_v0;\n    struct54 *temp_v1;\n    struct54 *temp_a0;\n    struct54 *temp_a1;\n    struct54 *temp_a2;\n\n    temp_a3 = &D_800406A0;\n    temp_v0 = (struct54 *)temp_a3->unk4;\n    if (temp_v0 != NULL) {\n        do {\n            temp_v1 = temp_v0->unk0;\n            if ((temp_v0->unk14 == 0) && (temp_v0->unk16 == 0)) {\n                temp_a0 = (struct54 *)temp_v0->unkC;\n                temp_a0->unk0 = temp_v0->unk8;\n                temp_v0->unkC = NULL;\n                if ((s32)temp_v0 == temp_a3->unk4) {\n                    temp_a3->unk4 = (s32)temp_v1;\n                }\n                temp_a0 = temp_v0->unk0;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk4 = temp_v0->unk4;\n                }\n                temp_a0 = temp_v0->unk4;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk0 = temp_v0->unk0;\n                }\n                temp_a0 = temp_a3->unk10;\n                if (temp_a0 != NULL) {\n                    temp_v0->unk4 = temp_a0;\n                    temp_v0->unk0 = temp_a0->unk0;\n                    temp_a1 = temp_a0;\n                    temp_a2 = temp_a0->unk0;\n                    if (temp_a2 != NULL) {\n                        temp_a2->unk4 = temp_v0;\n                    }\n                    temp_a1->unk0 = temp_v0;\n                } else {\n                    temp_a3->unk10 = temp_v0;\n                    temp_v0->unk0 = NULL;\n                    temp_v0->unk4 = NULL;\n                }\n            }\n        } while ((temp_v0 = temp_v1) != NULL);\n    }\n}",
+        "score": 0.0741,
+        "reason": "length_mismatch (target=54, generated=53), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T21:54:51.907167+00:00"
+      },
+      {
+        "code": "void func_1000A348(void) {\n    volatile struct147 *temp_a3;\n    struct54 *temp_v0;\n    struct54 *temp_v1;\n    struct54 *temp_a0;\n    volatile struct54 *temp_a1;\n    struct54 *temp_a2;\n\n    temp_a3 = &D_800406A0;\n    temp_v0 = (struct54 *)temp_a3->unk4;\n    if (temp_v0 != NULL) {\n        do {\n            temp_v1 = temp_v0->unk0;\n            if ((temp_v0->unk14 == 0) && (temp_v0->unk16 == 0)) {\n                temp_a0 = (struct54 *)temp_v0->unkC;\n                temp_a0->unk0 = temp_v0->unk8;\n                temp_v0->unkC = NULL;\n                if ((s32)temp_v0 == temp_a3->unk4) {\n                    temp_a3->unk4 = (s32)temp_v1;\n                }\n                temp_a0 = temp_v0->unk0;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk4 = temp_v0->unk4;\n                }\n                temp_a0 = temp_v0->unk4;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk0 = temp_v0->unk0;\n                }\n                temp_a0 = temp_a3->unk10;\n                if (temp_a0 != NULL) {\n                    temp_v0->unk4 = temp_a0;\n                    temp_v0->unk0 = temp_a0->unk0;\n                    temp_a1 = temp_a0;\n                    temp_a2 = temp_a0->unk0;\n                    if (temp_a2 != NULL) {\n                        temp_a2->unk4 = temp_v0;\n                    }\n                    temp_a1->unk0 = temp_v0;\n                } else {\n                    temp_a3->unk10 = temp_v0;\n                    temp_v0->unk0 = NULL;\n                    temp_v0->unk4 = NULL;\n                }\n            }\n        } while ((temp_v0 = temp_v1) != NULL);\n    }\n}",
+        "score": 0.3704,
+        "reason": "length_mismatch (target=54, generated=53), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T21:55:29.541074+00:00"
+      },
+      {
+        "code": "void func_1000A348(void) {\n    struct54 *temp_v0;\n    struct54 *temp_v1;\n    struct54 *temp_a0;\n    struct54 *temp_a1;\n    struct54 *temp_a2;\n\n    temp_v0 = (struct54 *)D_800406A0.unk4;\n    if (temp_v0 != NULL) {\n        do {\n            temp_v1 = temp_v0->unk0;\n            if ((temp_v0->unk14 == 0) && (temp_v0->unk16 == 0)) {\n                temp_a0 = (struct54 *)temp_v0->unkC;\n                temp_a0->unk0 = temp_v0->unk8;\n                temp_v0->unkC = NULL;\n                if ((s32)temp_v0 == D_800406A0.unk4) {\n                    D_800406A0.unk4 = (s32)temp_v1;\n                }\n                temp_a0 = temp_v0->unk0;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk4 = temp_v0->unk4;\n                }\n                temp_a0 = temp_v0->unk4;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk0 = temp_v0->unk0;\n                }\n                temp_a0 = D_800406A0.unk10;\n                if (temp_a0 != NULL) {\n                    temp_v0->unk4 = temp_a0;\n                    temp_v0->unk0 = temp_a0->unk0;\n                    temp_a1 = temp_a0;\n                    temp_a2 = temp_a0->unk0;\n                    if (temp_a2 != NULL) {\n                        temp_a2->unk4 = temp_v0;\n                    }\n                    temp_a1->unk0 = temp_v0;\n                } else {\n                    D_800406A0.unk10 = temp_v0;\n                    temp_v0->unk0 = NULL;\n                    temp_v0->unk4 = NULL;\n                }\n            }\n        } while ((temp_v0 = temp_v1) != NULL);\n    }\n}",
+        "score": 0.3889,
+        "reason": "length_mismatch (target=54, generated=49), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T21:56:10.948443+00:00"
+      },
+      {
+        "code": "void func_1000A348(void) {\n    struct54 *temp_v0;\n    struct54 *temp_v1;\n    struct54 *temp_a0;\n    void *temp_a1;\n    struct54 *temp_a2;\n\n    temp_v0 = (struct54 *)D_800406A0.unk4;\n    if (temp_v0 != NULL) {\n        do {\n            temp_v1 = temp_v0->unk0;\n            if ((temp_v0->unk14 == 0) && (temp_v0->unk16 == 0)) {\n                temp_a0 = (struct54 *)temp_v0->unkC;\n                temp_a0->unk0 = temp_v0->unk8;\n                temp_v0->unkC = NULL;\n                if ((s32)temp_v0 == D_800406A0.unk4) {\n                    D_800406A0.unk4 = (s32)temp_v1;\n                }\n                temp_a0 = temp_v0->unk0;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk4 = temp_v0->unk4;\n                }\n                temp_a0 = temp_v0->unk4;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk0 = temp_v0->unk0;\n                }\n                temp_a0 = D_800406A0.unk10;\n                if (temp_a0 != NULL) {\n                    temp_v0->unk4 = temp_a0;\n                    temp_v0->unk0 = temp_a0->unk0;\n                    temp_a1 = temp_a0;\n                    temp_a2 = temp_a0->unk0;\n                    if (temp_a2 != NULL) {\n                        temp_a2->unk4 = temp_v0;\n                    }\n                    ((struct54 *)temp_a1)->unk0 = temp_v0;\n                } else {\n                    D_800406A0.unk10 = temp_v0;\n                    temp_v0->unk0 = NULL;\n                    temp_v0->unk4 = NULL;\n                }\n            }\n        } while ((temp_v0 = temp_v1) != NULL);\n    }\n}",
+        "score": 0.3889,
+        "reason": "length_mismatch (target=54, generated=49), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T21:56:49.929639+00:00"
+      },
+      {
+        "code": "void func_1000A348(void) {\n    struct54 *temp_v0;\n    struct54 *temp_v1;\n    struct54 *temp_a0;\n    void *temp_a1;\n    struct54 *temp_a2;\n\n    temp_v0 = (struct54 *)D_800406A0.unk4;\n    if (temp_v0 != NULL) {\n        do {\n            temp_v1 = temp_v0->unk0;\n            if ((temp_v0->unk14 == 0) && (temp_v0->unk16 == 0)) {\n                temp_a0 = (struct54 *)temp_v0->unkC;\n                temp_a0->unk0 = temp_v0->unk8;\n                temp_v0->unkC = NULL;\n                if ((s32)temp_v0 == D_800406A0.unk4) {\n                    D_800406A0.unk4 = (s32)temp_v1;\n                }\n                temp_a0 = temp_v0->unk0;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk4 = temp_v0->unk4;\n                }\n                temp_a0 = temp_v0->unk4;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk0 = temp_v0->unk0;\n                }\n                temp_a0 = D_800406A0.unk10;\n                if (temp_a0 != NULL) {\n                    temp_v0->unk4 = temp_a0;\n                    temp_v0->unk0 = temp_a0->unk0;\n                    temp_a1 = temp_a0;\n                    temp_a2 = temp_a0->unk0;\n                    if (temp_a2 != NULL) {\n                        temp_a2->unk4 = temp_v0;\n                    }\n                    temp_a0 = NULL;\n                    ((struct54 *)temp_a1)->unk0 = temp_v0;\n                } else {\n                    D_800406A0.unk10 = temp_v0;\n                    temp_v0->unk0 = NULL;\n                    temp_v0->unk4 = NULL;\n                }\n            }\n        } while ((temp_v0 = temp_v1) != NULL);\n    }\n}",
+        "score": 0.4537037037037037,
+        "reason": "length_mismatch (target=54, generated=49), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T21:57:04.408094+00:00"
+      },
+      {
+        "code": "void func_1000A348(void) {\n    struct54 *temp_v0;\n    struct54 *temp_v1;\n    struct54 *temp_a0;\n    void *temp_a1;\n    struct54 *temp_a2;\n\n    temp_v0 = (struct54 *)D_800406A0.unk4;\n    if (temp_v0 != NULL) {\n        do {\n            temp_v1 = temp_v0->unk0;\n            if ((temp_v0->unk14 == 0) && (temp_v0->unk16 == 0)) {\n                temp_a0 = (struct54 *)temp_v0->unkC;\n                temp_a0->unk0 = temp_v0->unk8;\n                temp_v0->unkC = NULL;\n                if ((s32)temp_v0 == D_800406A0.unk4) {\n                    D_800406A0.unk4 = (s32)temp_v1;\n                }\n                temp_a0 = temp_v0->unk0;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk4 = temp_v0->unk4;\n                }\n                temp_a0 = temp_v0->unk4;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk0 = temp_v0->unk0;\n                }\n                temp_a0 = D_800406A0.unk10;\n                if (temp_a0 != NULL) {\n                    temp_v0->unk0 = temp_a0->unk0;\n                    temp_v0->unk4 = temp_a0;\n                    temp_a1 = temp_a0;\n                    temp_a2 = temp_a0->unk0;\n                    temp_a0 = NULL;\n                    if (temp_a2 == NULL) {\n                        ((struct54 *)temp_a1)->unk0 = temp_v0;\n                    } else {\n                        temp_a2->unk4 = temp_v0;\n                        ((struct54 *)temp_a1)->unk0 = temp_v0;\n                    }\n                } else {\n                    D_800406A0.unk10 = temp_v0;\n                    temp_v0->unk0 = NULL;\n                    temp_v0->unk4 = NULL;\n                }\n            }\n        } while ((temp_v0 = temp_v1) != NULL);\n    }\n}",
+        "score": 0.49074074074074076,
+        "reason": "length_mismatch (target=54, generated=53), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T21:58:23.142367+00:00"
+      },
+      {
+        "code": "void func_1000A348(void) {\n    struct54 *temp_v0;\n    struct54 *temp_v1;\n    struct54 *temp_a0;\n    void *temp_a1;\n    struct54 *temp_a2;\n\n    temp_v0 = (struct54 *)D_800406A0.unk4;\n    if (temp_v0 != NULL) {\n        do {\n            temp_v1 = temp_v0->unk0;\n            if ((temp_v0->unk14 == 0) && (temp_v0->unk16 == 0)) {\n                temp_a0 = (struct54 *)temp_v0->unkC;\n                temp_a0->unk0 = temp_v0->unk8;\n                temp_v0->unkC = NULL;\n                if ((s32)temp_v0 == D_800406A0.unk4) {\n                    D_800406A0.unk4 = (s32)temp_v1;\n                }\n                temp_a0 = temp_v0->unk0;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk4 = temp_v0->unk4;\n                }\n                temp_a0 = temp_v0->unk4;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk0 = temp_v0->unk0;\n                }\n                temp_a0 = D_800406A0.unk10;\n                if (temp_a0 != NULL) {\n                    temp_v0->unk0 = temp_a0->unk0;\n                    temp_v0->unk4 = temp_a0;\n                    temp_a1 = temp_a0;\n                    temp_a2 = temp_a0->unk0;\n                    temp_a0 = NULL;\n                    if (temp_a2 != NULL) {\n                        temp_a2->unk4 = temp_v0;\n                        ((struct54 *)temp_a1)->unk0 = temp_v0;\n                    } else {\n                        ((struct54 *)temp_a1)->unk0 = temp_v0;\n                    }\n                } else {\n                    D_800406A0.unk10 = temp_v0;\n                    temp_v0->unk0 = NULL;\n                    temp_v0->unk4 = NULL;\n                }\n            }\n        } while ((temp_v0 = temp_v1) != NULL);\n    }\n}",
+        "score": 0.49074074074074076,
+        "reason": "length_mismatch (target=54, generated=53), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T21:58:57.654287+00:00"
+      },
+      {
+        "code": "void func_1000A348(void) {\n    struct54 *temp_v0;\n    struct54 *temp_v1;\n    struct54 *temp_a0;\n    void *temp_a1;\n    struct54 *temp_a2;\n\n    temp_v0 = (struct54 *)D_800406A0.unk4;\n    if (temp_v0 != NULL) {\n        do {\n            temp_v1 = temp_v0->unk0;\n            if ((temp_v0->unk14 == 0) && (temp_v0->unk16 == 0)) {\n                temp_a0 = (struct54 *)temp_v0->unkC;\n                temp_a0->unk0 = temp_v0->unk8;\n                temp_v0->unkC = NULL;\n                if ((s32)temp_v0 == D_800406A0.unk4) {\n                    D_800406A0.unk4 = (s32)temp_v1;\n                }\n                temp_a0 = temp_v0->unk0;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk4 = temp_v0->unk4;\n                }\n                temp_a0 = temp_v0->unk4;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk0 = temp_v0->unk0;\n                }\n                temp_a0 = D_800406A0.unk10;\n                if (temp_a0 != NULL) {\n                    temp_v0->unk0 = temp_a0->unk0;\n                    temp_v0->unk4 = temp_a0;\n                    temp_a1 = temp_a0;\n                    temp_a2 = temp_a0->unk0;\n                    temp_a0 = NULL;\n                    if (temp_a2 != NULL) {\n                        temp_a2->unk4 = temp_v0;\n                    }\n                    ((struct54 *)temp_a1)->unk0 = temp_v0;\n                } else {\n                    D_800406A0.unk10 = temp_v0;\n                    temp_v0->unk0 = NULL;\n                    temp_v0->unk4 = NULL;\n                }\n            }\n        } while ((temp_v0 = temp_v1) != NULL);\n    }\n}",
+        "score": 0.4537037037037037,
+        "reason": "length_mismatch (target=54, generated=49), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T21:59:24.807823+00:00"
+      },
+      {
+        "code": "void func_1000A348(void) {\n    struct54 *temp_v0;\n    struct54 *temp_v1;\n    struct54 *temp_a0;\n    void *temp_a1;\n    struct54 *temp_a2;\n\n    temp_v0 = (struct54 *)D_800406A0.unk4;\n    if (temp_v0 != NULL) {\n        do {\n            temp_v1 = temp_v0->unk0;\n            if ((temp_v0->unk14 == 0) && (temp_v0->unk16 == 0)) {\n                temp_a0 = (struct54 *)temp_v0->unkC;\n                temp_a0->unk0 = temp_v0->unk8;\n                temp_v0->unkC = NULL;\n                if ((s32)temp_v0 == D_800406A0.unk4) {\n                    D_800406A0.unk4 = (s32)temp_v1;\n                }\n                temp_a0 = temp_v0->unk0;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk4 = temp_v0->unk4;\n                }\n                temp_a0 = temp_v0->unk4;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk0 = temp_v0->unk0;\n                }\n                temp_a0 = D_800406A0.unk10;\n                if (temp_a0 != NULL) {\n                    temp_v0->unk0 = temp_a0->unk0;\n                    temp_v0->unk4 = temp_a0;\n                    temp_a1 = temp_a0;\n                    temp_a2 = temp_a0->unk0;\n                    temp_a0 = NULL;\n                    if (temp_a2 == NULL) {\n                        ((struct54 *)temp_a1)->unk0 = temp_v0;\n                        goto inserted;\n                    }\n                    temp_a2->unk4 = temp_v0;\n                    ((struct54 *)temp_a1)->unk0 = temp_v0;\n                inserted:\n                    ;\n                } else {\n                    D_800406A0.unk10 = temp_v0;\n                    temp_v0->unk0 = NULL;\n                    temp_v0->unk4 = NULL;\n                }\n            }\n        } while ((temp_v0 = temp_v1) != NULL);\n    }\n}",
+        "score": 0.49074074074074076,
+        "reason": "length_mismatch (target=54, generated=53), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:00:21.094177+00:00"
+      },
+      {
+        "code": "void func_1000A348(void) {\n    struct54 *temp_v0;\n    struct54 *temp_v1;\n    struct54 *temp_a0;\n    void *temp_a1;\n    struct54 *temp_a2;\n\n    temp_v0 = (struct54 *)D_800406A0.unk4;\n    if (temp_v0 != NULL) {\n        do {\n            temp_v1 = temp_v0->unk0;\n            if ((temp_v0->unk14 == 0) && (temp_v0->unk16 == 0)) {\n                temp_a0 = (struct54 *)temp_v0->unkC;\n                temp_a0->unk0 = temp_v0->unk8;\n                temp_v0->unkC = NULL;\n                if ((s32)temp_v0 == D_800406A0.unk4) {\n                    D_800406A0.unk4 = (s32)temp_v1;\n                }\n                temp_a0 = temp_v0->unk0;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk4 = temp_v0->unk4;\n                }\n                temp_a0 = temp_v0->unk4;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk0 = temp_v0->unk0;\n                }\n                temp_a0 = D_800406A0.unk10;\n                if (temp_a0 != NULL) {\n                    temp_v0->unk0 = temp_a0->unk0;\n                    temp_v0->unk4 = temp_a0;\n                    temp_a1 = temp_a0;\n                    temp_a2 = temp_a0->unk0;\n                    temp_a0 = NULL;\n                    if (temp_a2 != NULL) {\n                        temp_a2->unk4 = temp_v0;\n                        ((struct54 *)temp_a1)->unk0 = temp_v0;\n                        goto inserted;\n                    }\n                    ((struct54 *)temp_a1)->unk0 = temp_v0;\n                inserted:\n                    ;\n                } else {\n                    D_800406A0.unk10 = temp_v0;\n                    temp_v0->unk0 = NULL;\n                    temp_v0->unk4 = NULL;\n                }\n            }\n        } while ((temp_v0 = temp_v1) != NULL);\n    }\n}",
+        "score": 0.49074074074074076,
+        "reason": "length_mismatch (target=54, generated=53), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:00:36.177180+00:00"
+      },
+      {
+        "code": "void func_1000A348(void) {\n    struct54 *temp_v0;\n    struct54 *temp_v1;\n    struct54 *temp_a0;\n    void *temp_a1;\n    struct54 *temp_a2;\n\n    temp_v0 = (struct54 *)D_800406A0.unk4;\n    if (temp_v0 != NULL) {\n        do {\n            temp_v1 = temp_v0->unk0;\n            if ((temp_v0->unk14 == 0) && (temp_v0->unk16 == 0)) {\n                temp_a0 = (struct54 *)temp_v0->unkC;\n                temp_a0->unk0 = temp_v0->unk8;\n                temp_v0->unkC = NULL;\n                if ((s32)temp_v0 == D_800406A0.unk4) {\n                    D_800406A0.unk4 = (s32)temp_v1;\n                }\n                temp_a0 = temp_v0->unk0;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk4 = temp_v0->unk4;\n                }\n                temp_a0 = temp_v0->unk4;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk0 = temp_v0->unk0;\n                }\n                temp_a0 = D_800406A0.unk10;\n                if (temp_a0 != NULL) {\n                    temp_v0->unk0 = temp_a0->unk0;\n                    temp_v0->unk4 = temp_a0;\n                    temp_a1 = temp_a0;\n                    temp_a2 = temp_a0->unk0;\n                    temp_a0 = NULL;\n                    if (temp_a2 != NULL) {\n                        temp_a2->unk4 = temp_v0;\n                    } else {\n                        ((struct54 *)temp_a1)->unk0 = temp_v0;\n                    }\n                    ((struct54 *)temp_a1)->unk0 = temp_v0;\n                inserted:\n                    ;\n                } else {\n                    D_800406A0.unk10 = temp_v0;\n                    temp_v0->unk0 = NULL;\n                    temp_v0->unk4 = NULL;\n                }\n            }\n        } while ((temp_v0 = temp_v1) != NULL);\n    }\n}",
+        "score": 0.49074074074074076,
+        "reason": "length_mismatch (target=54, generated=53), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:00:54.949130+00:00"
+      },
+      {
+        "code": "void func_1000A348(void) {\n    struct54 *temp_v0;\n    struct54 *temp_v1;\n    struct54 *temp_a0;\n    volatile struct54 *temp_a1;\n    struct54 *temp_a2;\n\n    temp_v0 = (struct54 *)D_800406A0.unk4;\n    if (temp_v0 != NULL) {\n        do {\n            temp_v1 = temp_v0->unk0;\n            if ((temp_v0->unk14 == 0) && (temp_v0->unk16 == 0)) {\n                temp_a0 = (struct54 *)temp_v0->unkC;\n                temp_a0->unk0 = temp_v0->unk8;\n                temp_v0->unkC = NULL;\n                if ((s32)temp_v0 == D_800406A0.unk4) {\n                    D_800406A0.unk4 = (s32)temp_v1;\n                }\n                temp_a0 = temp_v0->unk0;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk4 = temp_v0->unk4;\n                }\n                temp_a0 = temp_v0->unk4;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk0 = temp_v0->unk0;\n                }\n                temp_a0 = D_800406A0.unk10;\n                if (temp_a0 != NULL) {\n                    temp_v0->unk0 = temp_a0->unk0;\n                    temp_v0->unk4 = temp_a0;\n                    temp_a1 = temp_a0;\n                    temp_a2 = temp_a0->unk0;\n                    temp_a0 = NULL;\n                    if (temp_a2 != NULL) {\n                        temp_a2->unk4 = temp_v0;\n                    } else {\n                        temp_a1->unk0 = temp_v0;\n                    }\n                    temp_a1->unk0 = temp_v0;\n                inserted:\n                    ;\n                } else {\n                    D_800406A0.unk10 = temp_v0;\n                    temp_v0->unk0 = NULL;\n                    temp_v0->unk4 = NULL;\n                }\n            }\n        } while ((temp_v0 = temp_v1) != NULL);\n    }\n}",
+        "score": 0.49074074074074076,
+        "reason": "length_mismatch (target=54, generated=53), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:01:22.639676+00:00"
+      },
+      {
+        "code": "void func_1000A348(void) {\n    struct54 *temp_v0;\n    struct54 *temp_v1;\n    struct54 *temp_a0;\n    volatile struct54 *temp_a1;\n    struct54 *temp_a2;\n\n    temp_v0 = (struct54 *)D_800406A0.unk4;\n    if (temp_v0 != NULL) {\n        do {\n            temp_v1 = temp_v0->unk0;\n            if ((temp_v0->unk14 == 0) && (temp_v0->unk16 == 0)) {\n                temp_a0 = (struct54 *)temp_v0->unkC;\n                temp_a0->unk0 = temp_v0->unk8;\n                temp_v0->unkC = NULL;\n                if ((s32)temp_v0 == D_800406A0.unk4) {\n                    D_800406A0.unk4 = (s32)temp_v1;\n                }\n                temp_a0 = temp_v0->unk0;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk4 = temp_v0->unk4;\n                }\n                temp_a0 = temp_v0->unk4;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk0 = temp_v0->unk0;\n                }\n                temp_a0 = D_800406A0.unk10;\n                if (temp_a0 != NULL) {\n                    temp_v0->unk0 = temp_a0->unk0;\n                    temp_v0->unk4 = temp_a0;\n                    temp_a1 = temp_a0;\n                    temp_a2 = temp_a0->unk0;\n                    temp_a0 = NULL;\n                    if (temp_a2 != NULL) {\n                        temp_a2->unk4 = temp_v0;\n                    }\n                    temp_a1->unk0 = temp_v0;\n                inserted:\n                    ;\n                } else {\n                    D_800406A0.unk10 = temp_v0;\n                    temp_v0->unk0 = NULL;\n                    temp_v0->unk4 = NULL;\n                }\n            }\n        } while ((temp_v0 = temp_v1) != NULL);\n    }\n}",
+        "score": 0.49074074074074076,
+        "reason": "length_mismatch (target=54, generated=53), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:01:37.211584+00:00"
+      },
+      {
+        "code": "void func_1000A348(void) {\n    struct54 *temp_v0;\n    struct54 *temp_v1;\n    struct54 *temp_a0;\n    volatile struct54 *temp_a1;\n    struct54 *temp_a2;\n\n    temp_v0 = (struct54 *)D_800406A0.unk4;\n    if (temp_v0 != NULL) {\n        do {\n            temp_v1 = temp_v0->unk0;\n            if ((temp_v0->unk14 == 0) && (temp_v0->unk16 == 0)) {\n                temp_a0 = (struct54 *)temp_v0->unkC;\n                temp_a0->unk0 = temp_v0->unk8;\n                temp_v0->unkC = NULL;\n                if ((s32)temp_v0 == D_800406A0.unk4) {\n                    D_800406A0.unk4 = (s32)temp_v1;\n                }\n                temp_a0 = temp_v0->unk0;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk4 = temp_v0->unk4;\n                }\n                temp_a0 = temp_v0->unk4;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk0 = temp_v0->unk0;\n                }\n                temp_a0 = D_800406A0.unk10;\n                if (temp_a0 != NULL) {\n                    temp_v0->unk0 = temp_a0->unk0;\n                    temp_v0->unk4 = temp_a0;\n                    temp_a1 = temp_a0;\n                    temp_a2 = temp_a0->unk0;\n                    temp_a0 = NULL;\n                    if (temp_a2 != NULL) {\n                        temp_a2->unk4 = temp_v0;\n                    }\n                    temp_a1->unk0 = temp_v0;\n                inserted:\n                    ;\n                } else {\n                    D_800406A0.unk10 = temp_v0;\n                    temp_v0->unk0 = NULL;\n                    temp_v0->unk4 = NULL;\n                }\n            }\n        } while ((temp_v0 = temp_v1) != NULL);\n    }\n    __asm__(\"nop\\n nop\\n nop\");\n}",
+        "score": 0.0,
+        "reason": "length_mismatch (target=54, generated=57), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:02:34.119046+00:00"
+      },
+      {
+        "code": "void func_1000A348(void) {\n    struct54 *temp_v0;\n    struct54 *temp_v1;\n    struct54 *temp_a0;\n    volatile struct54 *temp_a1;\n    struct54 *temp_a2;\n\n    temp_v0 = (struct54 *)D_800406A0.unk4;\n    if (temp_v0 != NULL) {\n        do {\n            temp_v1 = temp_v0->unk0;\n            if ((temp_v0->unk14 == 0) && (temp_v0->unk16 == 0)) {\n                temp_a0 = (struct54 *)temp_v0->unkC;\n                temp_a0->unk0 = temp_v0->unk8;\n                temp_v0->unkC = NULL;\n                if ((s32)temp_v0 == D_800406A0.unk4) {\n                    D_800406A0.unk4 = (s32)temp_v1;\n                }\n                temp_a0 = temp_v0->unk0;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk4 = temp_v0->unk4;\n                }\n                temp_a0 = temp_v0->unk4;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk0 = temp_v0->unk0;\n                }\n                temp_a0 = D_800406A0.unk10;\n                if (temp_a0 != NULL) {\n                    temp_v0->unk0 = temp_a0->unk0;\n                    temp_v0->unk4 = temp_a0;\n                    temp_a1 = temp_a0;\n                    temp_a2 = temp_a0->unk0;\n                    temp_a0 = NULL;\n                    if (temp_a2 != NULL) {\n                        temp_a2->unk4 = temp_v0;\n                    }\n                    temp_a1->unk0 = temp_v0;\n                inserted:\n                    ;\n                } else {\n                    D_800406A0.unk10 = temp_v0;\n                    temp_v0->unk0 = NULL;\n                    temp_v0->unk4 = NULL;\n                }\n            }\n        } while ((temp_v0 = temp_v1) != NULL);\n    }\n}\n\nstatic void func_1000A348_pad(void) {\n}",
+        "score": 0.4722222222222222,
+        "reason": "length_mismatch (target=54, generated=51), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:03:21.906665+00:00"
+      },
+      {
+        "code": "void func_1000A348(void) {\n    struct54 *temp_v0;\n    struct54 *temp_v1;\n    struct54 *temp_a0;\n    volatile struct54 *temp_a1;\n    struct54 *temp_a2;\n\n    temp_v0 = (struct54 *)D_800406A0.unk4;\n    if (temp_v0 != NULL) {\n        do {\n            temp_v1 = temp_v0->unk0;\n            if ((temp_v0->unk14 == 0) && (temp_v0->unk16 == 0)) {\n                temp_a0 = (struct54 *)temp_v0->unkC;\n                temp_a0->unk0 = temp_v0->unk8;\n                temp_v0->unkC = NULL;\n                if ((s32)temp_v0 == D_800406A0.unk4) {\n                    D_800406A0.unk4 = (s32)temp_v1;\n                }\n                temp_a0 = temp_v0->unk0;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk4 = temp_v0->unk4;\n                }\n                temp_a0 = temp_v0->unk4;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk0 = temp_v0->unk0;\n                }\n                temp_a0 = D_800406A0.unk10;\n                if (temp_a0 != NULL) {\n                    temp_v0->unk0 = temp_a0->unk0;\n                    temp_v0->unk4 = temp_a0;\n                    temp_a1 = temp_a0;\n                    temp_a2 = temp_a0->unk0;\n                    temp_a0 = NULL;\n                    if (temp_a2 != NULL) {\n                        temp_a2->unk4 = temp_v0;\n                    }\n                    temp_a1->unk0 = temp_v0;\n                inserted:\n                    ;\n                } else {\n                    D_800406A0.unk10 = temp_v0;\n                    temp_v0->unk0 = NULL;\n                    temp_v0->unk4 = NULL;\n                }\n            }\n        } while ((temp_v0 = temp_v1) != NULL);\n    }\n}\n\nvoid func_1000A348_pad(void) {\n}",
+        "score": 0.4722222222222222,
+        "reason": "length_mismatch (target=54, generated=51), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:03:29.382538+00:00"
+      },
+      {
+        "code": "void func_1000A348(void) {\n    struct54 *temp_v0;\n    struct54 *temp_v1;\n    struct54 *temp_a0;\n    volatile struct54 *temp_a1;\n    struct54 *temp_a2;\n\n    temp_v0 = (struct54 *)D_800406A0.unk4;\n    if (temp_v0 != NULL) {\n        do {\n            temp_v1 = temp_v0->unk0;\n            if ((temp_v0->unk14 == 0) && (temp_v0->unk16 == 0)) {\n                temp_a0 = (struct54 *)temp_v0->unkC;\n                temp_a0->unk0 = temp_v0->unk8;\n                temp_v0->unkC = NULL;\n                if ((s32)temp_v0 == D_800406A0.unk4) {\n                    D_800406A0.unk4 = (s32)temp_v1;\n                }\n                temp_a0 = temp_v0->unk0;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk4 = temp_v0->unk4;\n                }\n                temp_a0 = temp_v0->unk4;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk0 = temp_v0->unk0;\n                }\n                temp_a0 = D_800406A0.unk10;\n                if (temp_a0 != NULL) {\n                    temp_v0->unk0 = temp_a0->unk0;\n                    temp_v0->unk4 = temp_a0;\n                    temp_a1 = temp_a0;\n                    temp_a2 = temp_a0->unk0;\n                    temp_a0 = NULL;\n                    if (temp_a2 != NULL) {\n                        temp_a2->unk4 = temp_v0;\n                    }\n                    temp_a1->unk0 = temp_v0;\n                inserted:\n                    ;\n                } else {\n                    D_800406A0.unk10 = temp_v0;\n                    temp_v0->unk0 = NULL;\n                    temp_v0->unk4 = NULL;\n                }\n            }\n        } while ((temp_v0 = temp_v1) != NULL);\n    }\n}\n\nvoid func_1000A348_pad(void) __attribute__((aligned(16)));\n\nvoid func_1000A348_pad(void) {\n}",
+        "score": 0.0,
+        "reason": "compile_error",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:03:42.877030+00:00"
+      },
+      {
+        "code": "void func_1000A348(void) {\n    struct54 *temp_v0;\n    struct54 *temp_v1;\n    struct54 *temp_a0;\n    volatile struct54 *temp_a1;\n    struct54 *temp_a2;\n\n    temp_v0 = (struct54 *)D_800406A0.unk4;\n    if (temp_v0 != NULL) {\n        do {\n            temp_v1 = temp_v0->unk0;\n            if ((temp_v0->unk14 == 0) && (temp_v0->unk16 == 0)) {\n                temp_a0 = (struct54 *)temp_v0->unkC;\n                temp_a0->unk0 = temp_v0->unk8;\n                temp_v0->unkC = NULL;\n                if ((s32)temp_v0 == D_800406A0.unk4) {\n                    D_800406A0.unk4 = (s32)temp_v1;\n                }\n                temp_a0 = temp_v0->unk0;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk4 = temp_v0->unk4;\n                }\n                temp_a0 = temp_v0->unk4;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk0 = temp_v0->unk0;\n                }\n                temp_a0 = D_800406A0.unk10;\n                if (temp_a0 != NULL) {\n                    temp_v0->unk0 = temp_a0->unk0;\n                    temp_v0->unk4 = temp_a0;\n                    temp_a1 = temp_a0;\n                    temp_a2 = temp_a0->unk0;\n                    temp_a0 = NULL;\n                    if (temp_a2 != NULL) {\n                        temp_a2->unk4 = temp_v0;\n                    }\n                    temp_a1->unk0 = temp_v0;\n                inserted:\n                    ;\n                } else {\n                    D_800406A0.unk10 = temp_v0;\n                    temp_v0->unk0 = NULL;\n                    temp_v0->unk4 = NULL;\n                }\n            }\n        } while ((temp_v0 = temp_v1) != NULL);\n    }\n}",
+        "score": 0.49074074074074076,
+        "reason": "length_mismatch (target=54, generated=53), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:04:23.048995+00:00"
+      },
+      {
+        "code": "void func_1000A348(void) {\n    struct54 *temp_v0;\n    struct54 *temp_v1;\n    struct54 *temp_a0;\n    volatile struct54 *temp_a1;\n    struct54 *temp_a2;\n\n    temp_v0 = (struct54 *)D_800406A0.unk4;\n    if (temp_v0 != NULL) {\n        do {\n            temp_v1 = temp_v0->unk0;\n            if ((temp_v0->unk14 == 0) && (temp_v0->unk16 == 0)) {\n                temp_a0 = (struct54 *)temp_v0->unkC;\n                temp_a0->unk0 = temp_v0->unk8;\n                temp_v0->unkC = NULL;\n                if ((s32)temp_v0 == D_800406A0.unk4) {\n                    D_800406A0.unk4 = (s32)temp_v1;\n                }\n                temp_a0 = temp_v0->unk0;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk4 = temp_v0->unk4;\n                }\n                temp_a0 = temp_v0->unk4;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk0 = temp_v0->unk0;\n                }\n                temp_a0 = D_800406A0.unk10;\n                if (temp_a0 != NULL) {\n                    temp_v0->unk0 = temp_a0->unk0;\n                    temp_v0->unk4 = temp_a0;\n                    temp_a1 = temp_a0;\n                    temp_a2 = temp_a0->unk0;\n                    temp_a0 = NULL;\n                    if (temp_a2 != NULL) {\n                        temp_a2->unk4 = temp_v0;\n                    }\n                    temp_a1->unk0 = temp_v0;\n                inserted:\n                    ;\n                } else {\n                    D_800406A0.unk10 = temp_v0;\n                    temp_v0->unk0 = NULL;\n                    temp_v0->unk4 = NULL;\n                }\n            }\n        } while ((temp_v0 = temp_v1) != NULL);\n    }\n}\n\n#pragma align 16\nvoid func_1000A348_pad(void) {\n}",
+        "score": 0.4722222222222222,
+        "reason": "length_mismatch (target=54, generated=51), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:05:05.360062+00:00"
+      },
+      {
+        "code": "void func_1000A348(void) {\n    struct54 *temp_v0;\n    struct54 *temp_v1;\n    struct54 *temp_a0;\n    volatile struct54 *temp_a1;\n    struct54 *temp_a2;\n\n    temp_v0 = (struct54 *)D_800406A0.unk4;\n    if (temp_v0 != NULL) {\n        do {\n            temp_v1 = temp_v0->unk0;\n            if ((temp_v0->unk14 == 0) && (temp_v0->unk16 == 0)) {\n                temp_a0 = (struct54 *)temp_v0->unkC;\n                temp_a0->unk0 = temp_v0->unk8;\n                temp_v0->unkC = NULL;\n                if ((s32)temp_v0 == D_800406A0.unk4) {\n                    D_800406A0.unk4 = (s32)temp_v1;\n                }\n                temp_a0 = temp_v0->unk0;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk4 = temp_v0->unk4;\n                }\n                temp_a0 = temp_v0->unk4;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk0 = temp_v0->unk0;\n                }\n                temp_a0 = D_800406A0.unk10;\n                if (temp_a0 != NULL) {\n                    temp_v0->unk0 = temp_a0->unk0;\n                    temp_v0->unk4 = temp_a0;\n                    temp_a1 = temp_a0;\n                    temp_a2 = temp_a0->unk0;\n                    temp_a0 = NULL;\n                    if (temp_a2 != NULL) {\n                        temp_a2->unk4 = temp_v0;\n                    }\n                    temp_a1->unk0 = temp_v0;\n                inserted:\n                    ;\n                } else {\n                    D_800406A0.unk10 = temp_v0;\n                    temp_v0->unk0 = NULL;\n                    temp_v0->unk4 = NULL;\n                }\n            }\n        } while ((temp_v0 = temp_v1) != NULL);\n    }\n}\n\n#pragma align_symbol(func_1000A348_pad, 16)\nvoid func_1000A348_pad(void) {\n}",
+        "score": 0.4722222222222222,
+        "reason": "length_mismatch (target=54, generated=51), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:06:31.050930+00:00"
+      },
+      {
+        "code": "void func_1000A348(void) {\n    struct54 *temp_v0;\n    struct54 *temp_v1;\n    struct54 *temp_a0;\n    volatile struct54 *temp_a1;\n    struct54 *temp_a2;\n\n    temp_v0 = (struct54 *)D_800406A0.unk4;\n    if (temp_v0 != NULL) {\n        do {\n            temp_v1 = temp_v0->unk0;\n            if ((temp_v0->unk14 == 0) && (temp_v0->unk16 == 0)) {\n                temp_a0 = (struct54 *)temp_v0->unkC;\n                temp_a0->unk0 = temp_v0->unk8;\n                temp_v0->unkC = NULL;\n                if ((s32)temp_v0 == D_800406A0.unk4) {\n                    D_800406A0.unk4 = (s32)temp_v1;\n                }\n                temp_a0 = temp_v0->unk0;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk4 = temp_v0->unk4;\n                }\n                temp_a0 = temp_v0->unk4;\n                if (temp_a0 != NULL) {\n                    temp_a0->unk0 = temp_v0->unk0;\n                }\n                temp_a0 = D_800406A0.unk10;\n                if (temp_a0 != NULL) {\n                    temp_v0->unk0 = temp_a0->unk0;\n                    temp_v0->unk4 = temp_a0;\n                    temp_a1 = temp_a0;\n                    temp_a2 = temp_a0->unk0;\n                    temp_a0 = NULL;\n                    if (temp_a2 != NULL) {\n                        temp_a2->unk4 = temp_v0;\n                    }\n                    temp_a1->unk0 = temp_v0;\n                inserted:\n                    ;\n                } else {\n                    D_800406A0.unk10 = temp_v0;\n                    temp_v0->unk0 = NULL;\n                    temp_v0->unk4 = NULL;\n                }\n            }\n        } while ((temp_v0 = temp_v1) != NULL);\n    }\n}",
+        "score": 0.4722222222222222,
+        "reason": "length_mismatch (target=54, generated=51), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:07:09.910298+00:00"
       }
     ]
   },
@@ -29796,9 +30353,449 @@
     "instructions": 77,
     "difficulty": "medium",
     "tags": [],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 28,
+    "lastScore": 0.1299,
+    "status": "pending",
+    "history": [
+      {
+        "code": "extern s16 D_800DD204;\nextern s16 D_800DD206;\nextern s16 D_800DD1C0;\nextern s16 D_800DD1C2;\nextern s16 D_800DD1C4;\nextern s16 D_800DD1C6;\n\ns32 func_15142CF0(u32 *arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4, s16 arg5, s16 arg6, u8 *arg7) {\n    u32 *temp_s0;\n\n    temp_s0 = arg0;\n    if ((arg1 == D_800DD204) && (arg2 == D_800DD206) && (arg3 == D_800DD1C0) &&\n        (arg4 == D_800DD1C2) && (arg5 == D_800DD1C4) && (arg6 == D_800DD1C6)) {\n        return (s32)temp_s0;\n    }\n    if (*arg7 == 1) {\n        temp_s0[0] = 0xE7000000;\n        temp_s0[1] = 0;\n        temp_s0 += 2;\n        *arg7 = 0;\n    }\n    temp_s0[0] = 0xFA000000 | ((arg1 & 0xFF) << 8) | (arg2 & 0xFF);\n    temp_s0[1] = (arg3 << 24) | ((arg4 & 0xFF) << 16) | ((arg5 & 0xFF) << 8) | (arg6 & 0xFF);\n    temp_s0 += 2;\n    D_800DD204 = arg1;\n    D_800DD206 = arg2;\n    D_800DD1C0 = arg3;\n    D_800DD1C2 = arg4;\n    D_800DD1C4 = arg5;\n    D_800DD1C6 = arg6;\n    return (s32)temp_s0;\n}",
+        "score": 0.0244,
+        "reason": "length_mismatch (target=77, generated=82), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:19:50.502841+00:00"
+      },
+      {
+        "code": "extern s16 D_800DD204;\nextern s16 D_800DD206;\nextern s16 D_800DD1C0;\nextern s16 D_800DD1C2;\nextern s16 D_800DD1C4;\nextern s16 D_800DD1C6;\n\ns32 func_15142CF0(u32 *arg0, s32 arg1, s32 arg2, s32 arg3, s16 arg4, s16 arg5, s16 arg6, u8 *arg7) {\n    u32 *temp_s0;\n\n    temp_s0 = arg0;\n    if ((arg1 == D_800DD204) && (arg2 == D_800DD206) && (arg3 == D_800DD1C0) &&\n        (arg4 == D_800DD1C2) && (arg5 == D_800DD1C4) && (arg6 == D_800DD1C6)) {\n        return (s32)temp_s0;\n    }\n    if (*arg7 == 1) {\n        temp_s0[0] = 0xE7000000;\n        temp_s0[1] = 0;\n        temp_s0 += 2;\n        *arg7 = 0;\n    }\n    temp_s0[0] = 0xFA000000 | ((arg1 & 0xFF) << 8) | (arg2 & 0xFF);\n    temp_s0[1] = (arg3 << 24) | ((arg4 & 0xFF) << 16) | ((arg5 & 0xFF) << 8) | (arg6 & 0xFF);\n    temp_s0 += 2;\n    D_800DD204 = arg1;\n    D_800DD206 = arg2;\n    D_800DD1C0 = arg3;\n    D_800DD1C2 = arg4;\n    D_800DD1C4 = arg5;\n    D_800DD1C6 = arg6;\n    return (s32)temp_s0;\n}",
+        "score": 0.0,
+        "reason": "length_mismatch (target=77, generated=73), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:20:25.801331+00:00"
+      },
+      {
+        "code": "extern s16 D_800DD204;\nextern s16 D_800DD206;\nextern s16 D_800DD1C0;\nextern s16 D_800DD1C2;\nextern s16 D_800DD1C4;\nextern s16 D_800DD1C6;\n\nu32 *func_15142CF0(u32 *arg0, s32 arg1, s32 arg2, s32 arg3, s16 arg4, s16 arg5, s16 arg6, u8 *arg7) {\n    u32 *temp_s0;\n\n    temp_s0 = arg0;\n    if ((arg1 == D_800DD204) && (arg2 == D_800DD206) && (arg3 == D_800DD1C0) &&\n        (arg4 == D_800DD1C2) && (arg5 == D_800DD1C4) && (arg6 == D_800DD1C6)) {\n        return temp_s0;\n    }\n    if (*arg7 == 1) {\n        temp_s0[0] = 0xE7000000;\n        temp_s0[1] = 0;\n        temp_s0 += 2;\n        *arg7 = 0;\n    }\n    temp_s0[0] = 0xFA000000 | ((arg1 & 0xFF) << 8) | (arg2 & 0xFF);\n    temp_s0[1] = (arg3 << 24) | ((arg4 & 0xFF) << 16) | ((arg5 & 0xFF) << 8) | (arg6 & 0xFF);\n    temp_s0 += 2;\n    D_800DD204 = arg1;\n    D_800DD206 = arg2;\n    D_800DD1C0 = arg3;\n    D_800DD1C2 = arg4;\n    D_800DD1C4 = arg5;\n    D_800DD1C6 = arg6;\n    return temp_s0;\n}",
+        "score": 0.0,
+        "reason": "length_mismatch (target=77, generated=73), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:21:05.984574+00:00"
+      },
+      {
+        "code": "extern s16 D_800DD204;\nextern s16 D_800DD206;\nextern s16 D_800DD1C0;\nextern s16 D_800DD1C2;\nextern s16 D_800DD1C4;\nextern s16 D_800DD1C6;\n\nu32 *func_15142CF0(u32 *arg0, s32 arg1, s32 arg2, s32 arg3, s16 arg4, s16 arg5, s16 arg6, u8 *arg7) {\n    volatile u32 *temp_s0;\n\n    temp_s0 = arg0;\n    if ((arg1 == D_800DD204) && (arg2 == D_800DD206) && (arg3 == D_800DD1C0) &&\n        (arg4 == D_800DD1C2) && (arg5 == D_800DD1C4) && (arg6 == D_800DD1C6)) {\n        return temp_s0;\n    }\n    if (*arg7 == 1) {\n        temp_s0[0] = 0xE7000000;\n        temp_s0[1] = 0;\n        temp_s0 += 2;\n        *arg7 = 0;\n    }\n    temp_s0[0] = 0xFA000000 | ((arg1 & 0xFF) << 8) | (arg2 & 0xFF);\n    temp_s0[1] = (arg3 << 24) | ((arg4 & 0xFF) << 16) | ((arg5 & 0xFF) << 8) | (arg6 & 0xFF);\n    temp_s0 += 2;\n    D_800DD204 = arg1;\n    D_800DD206 = arg2;\n    D_800DD1C0 = arg3;\n    D_800DD1C2 = arg4;\n    D_800DD1C4 = arg5;\n    D_800DD1C6 = arg6;\n    return temp_s0;\n}",
+        "score": 0.0,
+        "reason": "length_mismatch (target=77, generated=73), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:21:14.661720+00:00"
+      },
+      {
+        "code": "extern s16 D_800DD204;\nextern s16 D_800DD206;\nextern s16 D_800DD1C0;\nextern s16 D_800DD1C2;\nextern s16 D_800DD1C4;\nextern s16 D_800DD1C6;\n\nu32 *func_15142CF0(u32 *arg0, s32 arg1, s32 arg2, s32 arg3, s16 arg4, s16 arg5, s16 arg6, u8 *arg7) {\n    register volatile u32 *temp_s0;\n\n    temp_s0 = arg0;\n    if ((arg1 == D_800DD204) && (arg2 == D_800DD206) && (arg3 == D_800DD1C0) &&\n        (arg4 == D_800DD1C2) && (arg5 == D_800DD1C4) && (arg6 == D_800DD1C6)) {\n        return temp_s0;\n    }\n    if (*arg7 == 1) {\n        temp_s0[0] = 0xE7000000;\n        temp_s0[1] = 0;\n        temp_s0 += 2;\n        *arg7 = 0;\n    }\n    temp_s0[0] = 0xFA000000 | ((arg1 & 0xFF) << 8) | (arg2 & 0xFF);\n    temp_s0[1] = (arg3 << 24) | ((arg4 & 0xFF) << 16) | ((arg5 & 0xFF) << 8) | (arg6 & 0xFF);\n    temp_s0 += 2;\n    D_800DD204 = arg1;\n    D_800DD206 = arg2;\n    D_800DD1C0 = arg3;\n    D_800DD1C2 = arg4;\n    D_800DD1C4 = arg5;\n    D_800DD1C6 = arg6;\n    return temp_s0;\n}",
+        "score": 0.0,
+        "reason": "length_mismatch (target=77, generated=73), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:21:41.742975+00:00"
+      },
+      {
+        "code": "extern s16 D_800DD204;\nextern s16 D_800DD206;\nextern s16 D_800DD1C0;\nextern s16 D_800DD1C2;\nextern s16 D_800DD1C4;\nextern s16 D_800DD1C6;\n\ns32 func_15142CF0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s16 arg4, s16 arg5, s16 arg6, u8 *arg7) {\n    s32 temp_s0;\n\n    temp_s0 = arg0;\n    if ((arg1 == D_800DD204) && (arg2 == D_800DD206) && (arg3 == D_800DD1C0) &&\n        (arg4 == D_800DD1C2) && (arg5 == D_800DD1C4) && (arg6 == D_800DD1C6)) {\n        return temp_s0;\n    }\n    if (*arg7 == 1) {\n        *(u32 *)temp_s0 = 0xE7000000;\n        *(u32 *)(temp_s0 + 4) = 0;\n        temp_s0 += 8;\n        *arg7 = 0;\n    }\n    *(u32 *)temp_s0 = 0xFA000000 | ((arg1 & 0xFF) << 8) | (arg2 & 0xFF);\n    *(u32 *)(temp_s0 + 4) = (arg3 << 24) | ((arg4 & 0xFF) << 16) | ((arg5 & 0xFF) << 8) | (arg6 & 0xFF);\n    temp_s0 += 8;\n    D_800DD204 = arg1;\n    D_800DD206 = arg2;\n    D_800DD1C0 = arg3;\n    D_800DD1C2 = arg4;\n    D_800DD1C4 = arg5;\n    D_800DD1C6 = arg6;\n    return temp_s0;\n}",
+        "score": 0.0,
+        "reason": "length_mismatch (target=77, generated=73), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:22:06.085842+00:00"
+      },
+      {
+        "code": "extern s16 D_800DD204;\nextern s16 D_800DD206;\nextern s16 D_800DD1C0;\nextern s16 D_800DD1C2;\nextern s16 D_800DD1C4;\nextern s16 D_800DD1C6;\n\ns32 func_15142CF0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s16 arg4, s16 arg5, s16 arg6, u8 *arg7) {\n    s32 temp_s0;\n\n    temp_s0 = arg0;\n    arg0 = arg6;\n    if ((arg1 == D_800DD204) && (arg2 == D_800DD206) && (arg3 == D_800DD1C0) &&\n        (arg4 == D_800DD1C2) && (arg5 == D_800DD1C4) && (arg6 == D_800DD1C6)) {\n        return temp_s0;\n    }\n    if (*arg7 == 1) {\n        *(u32 *)temp_s0 = 0xE7000000;\n        *(u32 *)(temp_s0 + 4) = 0;\n        temp_s0 += 8;\n        *arg7 = 0;\n    }\n    *(u32 *)temp_s0 = 0xFA000000 | ((arg1 & 0xFF) << 8) | (arg2 & 0xFF);\n    *(u32 *)(temp_s0 + 4) = (arg3 << 24) | ((arg4 & 0xFF) << 16) | ((arg5 & 0xFF) << 8) | (arg0 & 0xFF);\n    temp_s0 += 8;\n    D_800DD204 = arg1;\n    D_800DD206 = arg2;\n    D_800DD1C0 = arg3;\n    D_800DD1C2 = arg4;\n    D_800DD1C4 = arg5;\n    D_800DD1C6 = arg0;\n    return temp_s0;\n}",
+        "score": 0.0,
+        "reason": "length_mismatch (target=77, generated=73), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:23:05.261006+00:00"
+      },
+      {
+        "code": "extern s16 D_800DD204;\nextern s16 D_800DD206;\nextern s16 D_800DD1C0;\nextern s16 D_800DD1C2;\nextern s16 D_800DD1C4;\nextern s16 D_800DD1C6;\n\ns32 func_15142CF0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s16 arg4, s16 arg5, s16 arg6, u8 *arg7) {\n    volatile s32 temp_s0;\n\n    temp_s0 = arg0;\n    arg0 = arg6;\n    if ((arg1 == D_800DD204) && (arg2 == D_800DD206) && (arg3 == D_800DD1C0) &&\n        (arg4 == D_800DD1C2) && (arg5 == D_800DD1C4) && (arg6 == D_800DD1C6)) {\n        return temp_s0;\n    }\n    if (*arg7 == 1) {\n        *(u32 *)temp_s0 = 0xE7000000;\n        *(u32 *)(temp_s0 + 4) = 0;\n        temp_s0 += 8;\n        *arg7 = 0;\n    }\n    *(u32 *)temp_s0 = 0xFA000000 | ((arg1 & 0xFF) << 8) | (arg2 & 0xFF);\n    *(u32 *)(temp_s0 + 4) = (arg3 << 24) | ((arg4 & 0xFF) << 16) | ((arg5 & 0xFF) << 8) | (arg0 & 0xFF);\n    temp_s0 += 8;\n    D_800DD204 = arg1;\n    D_800DD206 = arg2;\n    D_800DD1C0 = arg3;\n    D_800DD1C2 = arg4;\n    D_800DD1C4 = arg5;\n    D_800DD1C6 = arg0;\n    return temp_s0;\n}",
+        "score": 0.0241,
+        "reason": "length_mismatch (target=77, generated=83), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:23:22.824053+00:00"
+      },
+      {
+        "code": "extern s16 D_800DD204;\nextern s16 D_800DD206;\nextern s16 D_800DD1C0;\nextern s16 D_800DD1C2;\nextern s16 D_800DD1C4;\nextern s16 D_800DD1C6;\n\ns32 func_15142CF0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s16 arg4, s16 arg5, s16 arg6, u8 *arg7) {\n    s32 temp_s0;\n    s16 temp_v0;\n    s16 temp_v1;\n    s16 temp_a0;\n\n    temp_s0 = arg0;\n    temp_v0 = arg4;\n    temp_v1 = arg5;\n    temp_a0 = arg6;\n    arg0 = temp_a0;\n    if ((arg1 == D_800DD204) && (arg2 == D_800DD206) && (arg3 == D_800DD1C0) &&\n        (temp_v0 == D_800DD1C2) && (temp_v1 == D_800DD1C4) && (temp_a0 == D_800DD1C6)) {\n        return temp_s0;\n    }\n    if (*arg7 == 1) {\n        *(u32 *)temp_s0 = 0xE7000000;\n        *(u32 *)(temp_s0 + 4) = 0;\n        temp_s0 += 8;\n        *arg7 = 0;\n    }\n    *(u32 *)temp_s0 = 0xFA000000 | ((arg1 & 0xFF) << 8) | (arg2 & 0xFF);\n    *(u32 *)(temp_s0 + 4) = (arg3 << 24) | ((temp_v0 & 0xFF) << 16) | ((temp_v1 & 0xFF) << 8) | (arg0 & 0xFF);\n    temp_s0 += 8;\n    D_800DD204 = arg1;\n    D_800DD206 = arg2;\n    D_800DD1C0 = arg3;\n    D_800DD1C2 = temp_v0;\n    D_800DD1C4 = temp_v1;\n    D_800DD1C6 = arg0;\n    return temp_s0;\n}",
+        "score": 0.0617,
+        "reason": "length_mismatch (target=77, generated=81), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:23:59.153063+00:00"
+      },
+      {
+        "code": "extern s16 D_800DD204;\nextern s16 D_800DD206;\nextern s16 D_800DD1C0;\nextern s16 D_800DD1C2;\nextern s16 D_800DD1C4;\nextern s16 D_800DD1C6;\n\ns32 func_15142CF0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s16 arg4, s16 arg5, s16 arg6, u8 *arg7) {\n    s32 temp_s0;\n    s16 temp_v0;\n    s16 temp_v1;\n    s16 temp_a0;\n\n    temp_s0 = arg0;\n    arg0 = arg6;\n    if ((arg1 == D_800DD204) && (arg2 == D_800DD206) && (arg3 == D_800DD1C0) &&\n        ((temp_v0 = arg4) == D_800DD1C2) && ((temp_v1 = arg5) == D_800DD1C4) &&\n        ((temp_a0 = arg6) == D_800DD1C6)) {\n        return temp_s0;\n    }\n    if (*arg7 == 1) {\n        *(u32 *)temp_s0 = 0xE7000000;\n        *(u32 *)(temp_s0 + 4) = 0;\n        temp_s0 += 8;\n        *arg7 = 0;\n    }\n    *(u32 *)temp_s0 = 0xFA000000 | ((arg1 & 0xFF) << 8) | (arg2 & 0xFF);\n    *(u32 *)(temp_s0 + 4) = (arg3 << 24) | ((arg4 & 0xFF) << 16) | ((arg5 & 0xFF) << 8) | (arg0 & 0xFF);\n    temp_s0 += 8;\n    D_800DD204 = arg1;\n    D_800DD206 = arg2;\n    D_800DD1C0 = arg3;\n    D_800DD1C2 = arg4;\n    D_800DD1C4 = arg5;\n    D_800DD1C6 = arg0;\n    return temp_s0;\n}",
+        "score": 0.0,
+        "reason": "length_mismatch (target=77, generated=73), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:24:29.191289+00:00"
+      },
+      {
+        "code": "extern s16 D_800DD204;\nextern s16 D_800DD206;\nextern s16 D_800DD1C0;\nextern s16 D_800DD1C2;\nextern s16 D_800DD1C4;\nextern s16 D_800DD1C6;\n\ns32 func_15142CF0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s16 arg4, s16 arg5, s16 arg6, u8 *arg7) {\n    s32 temp_s0;\n    s32 temp_v0;\n    s32 temp_v1;\n    s32 temp_a0;\n\n    temp_s0 = arg0;\n    arg0 = arg6;\n    if ((arg1 == D_800DD204) && (arg2 == D_800DD206) && (arg3 == D_800DD1C0) &&\n        ((temp_v0 = arg4) == D_800DD1C2) && ((temp_v1 = arg5) == D_800DD1C4) &&\n        ((temp_a0 = arg6) == D_800DD1C6)) {\n        return temp_s0;\n    }\n    if (*arg7 == 1) {\n        *(u32 *)temp_s0 = 0xE7000000;\n        *(u32 *)(temp_s0 + 4) = 0;\n        temp_s0 += 8;\n        *arg7 = 0;\n    }\n    *(u32 *)temp_s0 = 0xFA000000 | ((arg1 & 0xFF) << 8) | (arg2 & 0xFF);\n    *(u32 *)(temp_s0 + 4) = (arg3 << 24) | ((arg4 & 0xFF) << 16) | ((arg5 & 0xFF) << 8) | (arg0 & 0xFF);\n    temp_s0 += 8;\n    D_800DD204 = arg1;\n    D_800DD206 = arg2;\n    D_800DD1C0 = arg3;\n    D_800DD1C2 = arg4;\n    D_800DD1C4 = arg5;\n    D_800DD1C6 = arg0;\n    return temp_s0;\n}",
+        "score": 0.0,
+        "reason": "length_mismatch (target=77, generated=73), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:24:42.158862+00:00"
+      },
+      {
+        "code": "extern s16 D_800DD204;\nextern s16 D_800DD206;\nextern s16 D_800DD1C0;\nextern s16 D_800DD1C2;\nextern s16 D_800DD1C4;\nextern s16 D_800DD1C6;\n\nvoid *func_15142CF0(void *arg0, s32 arg1, s32 arg2, s32 arg3, s16 arg4, s16 arg5, s16 arg6, u8 *arg7) {\n    void *temp_s0;\n    s32 temp_v0;\n    s32 temp_v1;\n    s32 temp_a0;\n\n    temp_s0 = arg0;\n    arg0 = (void *)arg6;\n    if ((arg1 == D_800DD204) && (arg2 == D_800DD206) && (arg3 == D_800DD1C0) &&\n        ((temp_v0 = arg4) == D_800DD1C2) && ((temp_v1 = arg5) == D_800DD1C4) &&\n        ((temp_a0 = arg6) == D_800DD1C6)) {\n        return temp_s0;\n    }\n    if (*arg7 == 1) {\n        *(u32 *)temp_s0 = 0xE7000000;\n        *(u32 *)((s32)temp_s0 + 4) = 0;\n        temp_s0 = (void *)((s32)temp_s0 + 8);\n        *arg7 = 0;\n    }\n    *(u32 *)temp_s0 = 0xFA000000 | ((arg1 & 0xFF) << 8) | (arg2 & 0xFF);\n    *(u32 *)((s32)temp_s0 + 4) = (arg3 << 24) | ((arg4 & 0xFF) << 16) | ((arg5 & 0xFF) << 8) | ((s32)arg0 & 0xFF);\n    temp_s0 = (void *)((s32)temp_s0 + 8);\n    D_800DD204 = arg1;\n    D_800DD206 = arg2;\n    D_800DD1C0 = arg3;\n    D_800DD1C2 = arg4;\n    D_800DD1C4 = arg5;\n    D_800DD1C6 = arg0;\n    return temp_s0;\n}",
+        "score": 0.0,
+        "reason": "length_mismatch (target=77, generated=73), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:25:02.486020+00:00"
+      },
+      {
+        "code": "extern s16 D_800DD204;\nextern s16 D_800DD206;\nextern s16 D_800DD1C0;\nextern s16 D_800DD1C2;\nextern s16 D_800DD1C4;\nextern s16 D_800DD1C6;\n\ns32 func_15142CF0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s16 arg4, s16 arg5, s16 arg6, u8 *arg7) {\n    s32 temp_s0;\n    s32 temp_t1;\n    s32 temp_t0;\n\n    temp_s0 = arg0;\n    arg0 = arg6;\n    if ((arg1 == D_800DD204) && (arg2 == D_800DD206) && (arg3 == D_800DD1C0) &&\n        (arg4 == D_800DD1C2) && (arg5 == D_800DD1C4) && (arg0 == D_800DD1C6)) {\n        return temp_s0;\n    }\n    if (*arg7 == 1) {\n        temp_t1 = temp_s0;\n        *(u32 *)temp_t1 = 0xE7000000;\n        *(u32 *)(temp_t1 + 4) = 0;\n        temp_s0 += 8;\n        *arg7 = 0;\n    }\n    temp_t0 = temp_s0;\n    *(u32 *)temp_t0 = 0xFA000000 | ((arg1 & 0xFF) << 8) | (arg2 & 0xFF);\n    *(u32 *)(temp_t0 + 4) = (arg3 << 24) | ((arg4 & 0xFF) << 16) | ((arg5 & 0xFF) << 8) | (arg0 & 0xFF);\n    temp_s0 += 8;\n    D_800DD204 = arg1;\n    D_800DD206 = arg2;\n    D_800DD1C0 = arg3;\n    D_800DD1C2 = arg4;\n    D_800DD1C4 = arg5;\n    D_800DD1C6 = arg0;\n    return temp_s0;\n}",
+        "score": 0.0,
+        "reason": "length_mismatch (target=77, generated=73), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:25:33.095889+00:00"
+      },
+      {
+        "code": "extern s16 D_800DD204;\nextern s16 D_800DD206;\nextern s16 D_800DD1C0;\nextern s16 D_800DD1C2;\nextern s16 D_800DD1C4;\nextern s16 D_800DD1C6;\n\ns32 func_15142CF0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s16 arg4, s16 arg5, s16 arg6, u8 *arg7) {\n    s32 temp_s0;\n    s32 temp_v1;\n\n    temp_s0 = arg0;\n    arg0 = arg6;\n    temp_v1 = arg5;\n    if ((arg1 == D_800DD204) && (arg2 == D_800DD206) && (arg3 == D_800DD1C0) &&\n        (arg4 == D_800DD1C2) && (temp_v1 == D_800DD1C4) && (arg0 == D_800DD1C6)) {\n        return temp_s0;\n    }\n    if (*arg7 == 1) {\n        *(u32 *)temp_s0 = 0xE7000000;\n        *(u32 *)(temp_s0 + 4) = 0;\n        temp_s0 += 8;\n        *arg7 = 0;\n    }\n    *(u32 *)temp_s0 = 0xFA000000 | ((arg1 & 0xFF) << 8) | (arg2 & 0xFF);\n    *(u32 *)(temp_s0 + 4) = (arg3 << 24) | ((arg4 & 0xFF) << 16) | ((temp_v1 & 0xFF) << 8) | (arg0 & 0xFF);\n    temp_s0 += 8;\n    D_800DD204 = arg1;\n    D_800DD206 = arg2;\n    D_800DD1C0 = arg3;\n    D_800DD1C2 = arg4;\n    D_800DD1C4 = temp_v1;\n    D_800DD1C6 = arg0;\n    return temp_s0;\n}",
+        "score": 0.039,
+        "reason": "structural_diffs=74, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 0,
+            "type": "structural",
+            "target": "addiu sp, sp, -8",
+            "generated": "lui t1, HI(D_800DD204)"
+          },
+          {
+            "line": 1,
+            "type": "structural",
+            "target": "sw s0, 4(sp)",
+            "generated": "addiu t1, t1, LO(D_800DD204)"
+          },
+          {
+            "line": 2,
+            "type": "structural",
+            "target": "lui t2, HI(D_800DD204)",
+            "generated": "sw a1, 4(sp)"
+          },
+          {
+            "line": 3,
+            "type": "structural",
+            "target": "addiu t2, t2, LO(D_800DD204)",
+            "generated": "lw t6, 4(sp)"
+          },
+          {
+            "line": 4,
+            "type": "structural",
+            "target": "move s0, a0",
+            "generated": "lh t7, 0(t1)"
+          },
+          {
+            "line": 5,
+            "type": "structural",
+            "target": "lh t6, 0(t2)",
+            "generated": "move v1, a0"
+          },
+          {
+            "line": 6,
+            "type": "structural",
+            "target": "lui t7, HI(D_800DD206)",
+            "generated": "lui t8, HI(D_800DD206)"
+          },
+          {
+            "line": 7,
+            "type": "structural",
+            "target": "lw t0, 36(sp)",
+            "generated": "bne t6, t7, L0"
+          },
+          {
+            "line": 8,
+            "type": "structural",
+            "target": "bne a1, t6, L0",
+            "generated": "lw v0, 28(sp)"
+          },
+          {
+            "line": 9,
+            "type": "structural",
+            "target": "li at, 1",
+            "generated": "lh t8, LO(D_800DD206)(t8)"
+          },
+          {
+            "line": 10,
+            "type": "structural",
+            "target": "lh t7, LO(D_800DD206)(t7)",
+            "generated": "lui t9, HI(D_800DD1C0)"
+          },
+          {
+            "line": 11,
+            "type": "structural",
+            "target": "lui t8, HI(D_800DD1C0)",
+            "generated": "bnel a2, t8, L1"
+          },
+          {
+            "line": 12,
+            "type": "structural",
+            "target": "bnel a2, t7, L1",
+            "generated": "lbu t5, 0(v0)"
+          },
+          {
+            "line": 13,
+            "type": "structural",
+            "target": "lbu t5, 0(t0)",
+            "generated": "lh t9, LO(D_800DD1C0)(t9)"
+          },
+          {
+            "line": 14,
+            "type": "structural",
+            "target": "lh t8, LO(D_800DD1C0)(t8)",
+            "generated": "lh t0, 18(sp)"
+          },
+          {
+            "line": 15,
+            "type": "structural",
+            "target": "lw v0, 24(sp)",
+            "generated": "lui t2, HI(D_800DD1C2)"
+          },
+          {
+            "line": 16,
+            "type": "structural",
+            "target": "lui t9, HI(D_800DD1C2)",
+            "generated": "bnel a3, t9, L1"
+          },
+          {
+            "line": 17,
+            "type": "structural",
+            "target": "bnel a3, t8, L1",
+            "generated": "lbu t5, 0(v0)"
+          },
+          {
+            "line": 18,
+            "type": "structural",
+            "target": "lbu t5, 0(t0)",
+            "generated": "lh t2, LO(D_800DD1C2)(t2)"
+          },
+          {
+            "line": 19,
+            "type": "structural",
+            "target": "lh t9, LO(D_800DD1C2)(t9)",
+            "generated": "lh a1, 22(sp)"
+          }
+        ],
+        "timestamp": "2026-08-04T22:25:57.286735+00:00"
+      },
+      {
+        "code": "extern s16 D_800DD204;\nextern s16 D_800DD206;\nextern s16 D_800DD1C0;\nextern s16 D_800DD1C2;\nextern s16 D_800DD1C4;\nextern s16 D_800DD1C6;\n\ns32 func_15142CF0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s16 arg4, s16 arg5, s16 arg6, u8 *arg7) {\n    s32 temp_s0;\n    register s32 temp_v1;\n\n    temp_s0 = arg0;\n    arg0 = arg6;\n    temp_v1 = arg5;\n    if ((arg1 == D_800DD204) && (arg2 == D_800DD206) && (arg3 == D_800DD1C0) &&\n        (arg4 == D_800DD1C2) && (temp_v1 == D_800DD1C4) && (arg0 == D_800DD1C6)) {\n        return temp_s0;\n    }\n    if (*arg7 == 1) {\n        *(u32 *)temp_s0 = 0xE7000000;\n        *(u32 *)(temp_s0 + 4) = 0;\n        temp_s0 += 8;\n        *arg7 = 0;\n    }\n    *(u32 *)temp_s0 = 0xFA000000 | ((arg1 & 0xFF) << 8) | (arg2 & 0xFF);\n    *(u32 *)(temp_s0 + 4) = (arg3 << 24) | ((arg4 & 0xFF) << 16) | ((temp_v1 & 0xFF) << 8) | (arg0 & 0xFF);\n    temp_s0 += 8;\n    D_800DD204 = arg1;\n    D_800DD206 = arg2;\n    D_800DD1C0 = arg3;\n    D_800DD1C2 = arg4;\n    D_800DD1C4 = temp_v1;\n    D_800DD1C6 = arg0;\n    return temp_s0;\n}",
+        "score": 0.039,
+        "reason": "structural_diffs=74, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 0,
+            "type": "structural",
+            "target": "addiu sp, sp, -8",
+            "generated": "lui t1, HI(D_800DD204)"
+          },
+          {
+            "line": 1,
+            "type": "structural",
+            "target": "sw s0, 4(sp)",
+            "generated": "addiu t1, t1, LO(D_800DD204)"
+          },
+          {
+            "line": 2,
+            "type": "structural",
+            "target": "lui t2, HI(D_800DD204)",
+            "generated": "sw a1, 4(sp)"
+          },
+          {
+            "line": 3,
+            "type": "structural",
+            "target": "addiu t2, t2, LO(D_800DD204)",
+            "generated": "lw t6, 4(sp)"
+          },
+          {
+            "line": 4,
+            "type": "structural",
+            "target": "move s0, a0",
+            "generated": "lh t7, 0(t1)"
+          },
+          {
+            "line": 5,
+            "type": "structural",
+            "target": "lh t6, 0(t2)",
+            "generated": "move v1, a0"
+          },
+          {
+            "line": 6,
+            "type": "structural",
+            "target": "lui t7, HI(D_800DD206)",
+            "generated": "lui t8, HI(D_800DD206)"
+          },
+          {
+            "line": 7,
+            "type": "structural",
+            "target": "lw t0, 36(sp)",
+            "generated": "bne t6, t7, L0"
+          },
+          {
+            "line": 8,
+            "type": "structural",
+            "target": "bne a1, t6, L0",
+            "generated": "lw v0, 28(sp)"
+          },
+          {
+            "line": 9,
+            "type": "structural",
+            "target": "li at, 1",
+            "generated": "lh t8, LO(D_800DD206)(t8)"
+          },
+          {
+            "line": 10,
+            "type": "structural",
+            "target": "lh t7, LO(D_800DD206)(t7)",
+            "generated": "lui t9, HI(D_800DD1C0)"
+          },
+          {
+            "line": 11,
+            "type": "structural",
+            "target": "lui t8, HI(D_800DD1C0)",
+            "generated": "bnel a2, t8, L1"
+          },
+          {
+            "line": 12,
+            "type": "structural",
+            "target": "bnel a2, t7, L1",
+            "generated": "lbu t5, 0(v0)"
+          },
+          {
+            "line": 13,
+            "type": "structural",
+            "target": "lbu t5, 0(t0)",
+            "generated": "lh t9, LO(D_800DD1C0)(t9)"
+          },
+          {
+            "line": 14,
+            "type": "structural",
+            "target": "lh t8, LO(D_800DD1C0)(t8)",
+            "generated": "lh t0, 18(sp)"
+          },
+          {
+            "line": 15,
+            "type": "structural",
+            "target": "lw v0, 24(sp)",
+            "generated": "lui t2, HI(D_800DD1C2)"
+          },
+          {
+            "line": 16,
+            "type": "structural",
+            "target": "lui t9, HI(D_800DD1C2)",
+            "generated": "bnel a3, t9, L1"
+          },
+          {
+            "line": 17,
+            "type": "structural",
+            "target": "bnel a3, t8, L1",
+            "generated": "lbu t5, 0(v0)"
+          },
+          {
+            "line": 18,
+            "type": "structural",
+            "target": "lbu t5, 0(t0)",
+            "generated": "lh t2, LO(D_800DD1C2)(t2)"
+          },
+          {
+            "line": 19,
+            "type": "structural",
+            "target": "lh t9, LO(D_800DD1C2)(t9)",
+            "generated": "lh a1, 22(sp)"
+          }
+        ],
+        "timestamp": "2026-08-04T22:26:05.426075+00:00"
+      },
+      {
+        "code": "extern s16 D_800DD204;\nextern s16 D_800DD206;\nextern s16 D_800DD1C0;\nextern s16 D_800DD1C2;\nextern s16 D_800DD1C4;\nextern s16 D_800DD1C6;\n\ns32 func_15142CF0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, u8 *arg7) {\n    s32 temp_s0;\n\n    temp_s0 = arg0;\n    if ((arg1 == D_800DD204) && (arg2 == D_800DD206) && (arg3 == D_800DD1C0) &&\n        (arg4 == D_800DD1C2) && (arg5 == D_800DD1C4) && (arg6 == D_800DD1C6)) {\n        return temp_s0;\n    }\n    if (*arg7 == 1) {\n        *(u32 *)temp_s0 = 0xE7000000;\n        *(u32 *)(temp_s0 + 4) = 0;\n        temp_s0 += 8;\n        *arg7 = 0;\n    }\n    *(u32 *)temp_s0 = 0xFA000000 | ((arg1 & 0xFF) << 8) | (arg2 & 0xFF);\n    *(u32 *)(temp_s0 + 4) = (arg3 << 24) | ((arg4 & 0xFF) << 16) | ((arg5 & 0xFF) << 8) | (arg6 & 0xFF);\n    temp_s0 += 8;\n    D_800DD204 = arg1;\n    D_800DD206 = arg2;\n    D_800DD1C0 = arg3;\n    D_800DD1C2 = arg4;\n    D_800DD1C4 = arg5;\n    D_800DD1C6 = arg6;\n    return temp_s0;\n}",
+        "score": 0.0,
+        "reason": "length_mismatch (target=77, generated=73), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:26:56.391458+00:00"
+      },
+      {
+        "code": "extern s16 D_800DD204;\nextern s16 D_800DD206;\nextern s16 D_800DD1C0;\nextern s16 D_800DD1C2;\nextern s16 D_800DD1C4;\nextern s16 D_800DD1C6;\n\ns32 func_15142CF0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, u8 *arg7) {\n    s32 temp_s0;\n    s32 temp_v0;\n    s32 temp_v1;\n    s32 temp_a0;\n\n    temp_s0 = arg0;\n    if ((arg1 == D_800DD204) && (arg2 == D_800DD206) && (arg3 == D_800DD1C0) &&\n        ((temp_v0 = arg4) == D_800DD1C2) && ((temp_v1 = arg5) == D_800DD1C4) &&\n        ((temp_a0 = arg6) == D_800DD1C6)) {\n        return temp_s0;\n    }\n    if (*arg7 == 1) {\n        *(u32 *)temp_s0 = 0xE7000000;\n        *(u32 *)(temp_s0 + 4) = 0;\n        temp_s0 += 8;\n        *arg7 = 0;\n    }\n    *(u32 *)temp_s0 = 0xFA000000 | ((arg1 & 0xFF) << 8) | (arg2 & 0xFF);\n    *(u32 *)(temp_s0 + 4) = (arg3 << 24) | ((temp_v0 & 0xFF) << 16) | ((temp_v1 & 0xFF) << 8) | (temp_a0 & 0xFF);\n    temp_s0 += 8;\n    D_800DD204 = arg1;\n    D_800DD206 = arg2;\n    D_800DD1C0 = arg3;\n    D_800DD1C2 = temp_v0;\n    D_800DD1C4 = temp_v1;\n    D_800DD1C6 = temp_a0;\n    return temp_s0;\n}",
+        "score": 0.025,
+        "reason": "length_mismatch (target=77, generated=80), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:27:14.279685+00:00"
+      },
+      {
+        "code": "extern s16 D_800DD204;\nextern s16 D_800DD206;\nextern s16 D_800DD1C0;\nextern s16 D_800DD1C2;\nextern s16 D_800DD1C4;\nextern s16 D_800DD1C6;\n\ns32 func_15142CF0(Gfx *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, u8 *arg7) {\n    Gfx *temp_s0;\n\n    temp_s0 = arg0;\n    if ((arg1 == D_800DD204) && (arg2 == D_800DD206) && (arg3 == D_800DD1C0) &&\n        (arg4 == D_800DD1C2) && (arg5 == D_800DD1C4) && (arg6 == D_800DD1C6)) {\n        return (s32)temp_s0;\n    }\n    if (*arg7 == 1) {\n        temp_s0->words.w0 = 0xE7000000;\n        temp_s0->words.w1 = 0;\n        temp_s0++;\n        *arg7 = 0;\n    }\n    temp_s0->words.w0 = 0xFA000000 | ((arg1 & 0xFF) << 8) | (arg2 & 0xFF);\n    temp_s0->words.w1 = (arg3 << 24) | ((arg4 & 0xFF) << 16) | ((arg5 & 0xFF) << 8) | (arg6 & 0xFF);\n    temp_s0++;\n    D_800DD204 = arg1;\n    D_800DD206 = arg2;\n    D_800DD1C0 = arg3;\n    D_800DD1C2 = arg4;\n    D_800DD1C4 = arg5;\n    D_800DD1C6 = arg6;\n    return (s32)temp_s0;\n}",
+        "score": 0.0,
+        "reason": "length_mismatch (target=77, generated=73), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:29:00.051682+00:00"
+      },
+      {
+        "code": "extern s16 D_800DD204;\nextern s16 D_800DD206;\nextern s16 D_800DD1C0;\nextern s16 D_800DD1C2;\nextern s16 D_800DD1C4;\nextern s16 D_800DD1C6;\n\ns32 func_15142CF0(Gfx *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, u8 *arg7) {\n    register Gfx *temp_s0 __asm__(\"s0\");\n\n    temp_s0 = arg0;\n    if ((arg1 == D_800DD204) && (arg2 == D_800DD206) && (arg3 == D_800DD1C0) &&\n        (arg4 == D_800DD1C2) && (arg5 == D_800DD1C4) && (arg6 == D_800DD1C6)) {\n        return (s32)temp_s0;\n    }\n    if (*arg7 == 1) {\n        temp_s0->words.w0 = 0xE7000000;\n        temp_s0->words.w1 = 0;\n        temp_s0++;\n        *arg7 = 0;\n    }\n    temp_s0->words.w0 = 0xFA000000 | ((arg1 & 0xFF) << 8) | (arg2 & 0xFF);\n    temp_s0->words.w1 = (arg3 << 24) | ((arg4 & 0xFF) << 16) | ((arg5 & 0xFF) << 8) | (arg6 & 0xFF);\n    temp_s0++;\n    D_800DD204 = arg1;\n    D_800DD206 = arg2;\n    D_800DD1C0 = arg3;\n    D_800DD1C2 = arg4;\n    D_800DD1C4 = arg5;\n    D_800DD1C6 = arg6;\n    return (s32)temp_s0;\n}",
+        "score": 0.0,
+        "reason": "compile_error",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:29:31.969214+00:00"
+      },
+      {
+        "code": "extern s16 D_800DD204;\nextern s16 D_800DD206;\nextern s16 D_800DD1C0;\nextern s16 D_800DD1C2;\nextern s16 D_800DD1C4;\nextern s16 D_800DD1C6;\n\ns32 func_15142CF0(Gfx *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, u8 *arg7) {\n    if ((arg1 == D_800DD204) && (arg2 == D_800DD206) && (arg3 == D_800DD1C0) &&\n        (arg4 == D_800DD1C2) && (arg5 == D_800DD1C4) && (arg6 == D_800DD1C6)) {\n        return (s32)arg0;\n    }\n    if (*arg7 == 1) {\n        arg0->words.w0 = 0xE7000000;\n        arg0->words.w1 = 0;\n        arg0++;\n        *arg7 = 0;\n    }\n    arg0->words.w0 = 0xFA000000 | ((arg1 & 0xFF) << 8) | (arg2 & 0xFF);\n    arg0->words.w1 = (arg3 << 24) | ((arg4 & 0xFF) << 16) | ((arg5 & 0xFF) << 8) | (arg6 & 0xFF);\n    arg0++;\n    D_800DD204 = arg1;\n    D_800DD206 = arg2;\n    D_800DD1C0 = arg3;\n    D_800DD1C2 = arg4;\n    D_800DD1C4 = arg5;\n    D_800DD1C6 = arg6;\n    return (s32)arg0;\n}",
+        "score": 0.1299,
+        "reason": "length_mismatch (target=77, generated=76), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:30:04.639117+00:00"
+      },
+      {
+        "code": "extern s16 D_800DD204;\nextern s16 D_800DD206;\nextern s16 D_800DD1C0;\nextern s16 D_800DD1C2;\nextern s16 D_800DD1C4;\nextern s16 D_800DD1C6;\n\ns32 func_15142CF0(Gfx *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, u8 *arg7) {\n    if (arg1 != D_800DD204) {\n        goto not_same;\n    }\n    if (arg2 != D_800DD206) {\n        goto not_same;\n    }\n    if (arg3 != D_800DD1C0) {\n        goto not_same;\n    }\n    if (arg4 != D_800DD1C2) {\n        goto not_same;\n    }\n    if (arg5 != D_800DD1C4) {\n        goto not_same;\n    }\n    if (arg6 == D_800DD1C6) {\n        return (s32)arg0;\n    }\nnot_same:\n    if (*arg7 == 1) {\n        arg0->words.w0 = 0xE7000000;\n        arg0->words.w1 = 0;\n        arg0++;\n        *arg7 = 0;\n    }\n    arg0->words.w0 = 0xFA000000 | ((arg1 & 0xFF) << 8) | (arg2 & 0xFF);\n    arg0->words.w1 = (arg3 << 24) | ((arg4 & 0xFF) << 16) | ((arg5 & 0xFF) << 8) | (arg6 & 0xFF);\n    arg0++;\n    D_800DD204 = arg1;\n    D_800DD206 = arg2;\n    D_800DD1C0 = arg3;\n    D_800DD1C2 = arg4;\n    D_800DD1C4 = arg5;\n    D_800DD1C6 = arg6;\n    return (s32)arg0;\n}",
+        "score": 0.0345,
+        "reason": "length_mismatch (target=77, generated=87), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:30:42.798003+00:00"
+      },
+      {
+        "code": "extern s16 D_800DD204;\nextern s16 D_800DD206;\nextern s16 D_800DD1C0;\nextern s16 D_800DD1C2;\nextern s16 D_800DD1C4;\nextern s16 D_800DD1C6;\n\ns32 func_15142CF0(Gfx *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, u8 *arg7) {\n    if ((arg1 == D_800DD204) && (arg2 == D_800DD206) && (arg3 == D_800DD1C0) &&\n        (arg4 == D_800DD1C2) && (arg5 == D_800DD1C4)) {\n        if (arg6 == D_800DD1C6) {\n            return (s32)arg0;\n        }\n    }\n    if (*arg7 == 1) {\n        arg0->words.w0 = 0xE7000000;\n        arg0->words.w1 = 0;\n        arg0++;\n        *arg7 = 0;\n    }\n    arg0->words.w0 = 0xFA000000 | ((arg1 & 0xFF) << 8) | (arg2 & 0xFF);\n    arg0->words.w1 = (arg3 << 24) | ((arg4 & 0xFF) << 16) | ((arg5 & 0xFF) << 8) | (arg6 & 0xFF);\n    arg0++;\n    D_800DD204 = arg1;\n    D_800DD206 = arg2;\n    D_800DD1C0 = arg3;\n    D_800DD1C2 = arg4;\n    D_800DD1C4 = arg5;\n    D_800DD1C6 = arg6;\n    return (s32)arg0;\n}",
+        "score": 0.1299,
+        "reason": "length_mismatch (target=77, generated=76), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:30:58.765911+00:00"
+      },
+      {
+        "code": "extern s16 D_800DD204;\nextern s16 D_800DD206;\nextern s16 D_800DD1C0;\nextern s16 D_800DD1C2;\nextern s16 D_800DD1C4;\nextern s16 D_800DD1C6;\n\ns32 func_15142CF0(Gfx *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, u8 *arg7) {\n    u8 *temp_t0;\n\n    temp_t0 = arg7;\n    if ((arg1 == D_800DD204) && (arg2 == D_800DD206) && (arg3 == D_800DD1C0) &&\n        (arg4 == D_800DD1C2) && (arg5 == D_800DD1C4)) {\n        if (arg6 == D_800DD1C6) {\n            return (s32)arg0;\n        }\n    }\n    if (*temp_t0 == 1) {\n        arg0->words.w0 = 0xE7000000;\n        arg0->words.w1 = 0;\n        arg0++;\n        *temp_t0 = 0;\n    }\n    arg0->words.w0 = 0xFA000000 | ((arg1 & 0xFF) << 8) | (arg2 & 0xFF);\n    arg0->words.w1 = (arg3 << 24) | ((arg4 & 0xFF) << 16) | ((arg5 & 0xFF) << 8) | (arg6 & 0xFF);\n    arg0++;\n    D_800DD204 = arg1;\n    D_800DD206 = arg2;\n    D_800DD1C0 = arg3;\n    D_800DD1C2 = arg4;\n    D_800DD1C4 = arg5;\n    D_800DD1C6 = arg6;\n    return (s32)arg0;\n}",
+        "score": 0.1299,
+        "reason": "length_mismatch (target=77, generated=76), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:31:28.932609+00:00"
+      },
+      {
+        "code": "extern s16 D_800DD204;\nextern s16 D_800DD206;\nextern s16 D_800DD1C0;\nextern s16 D_800DD1C2;\nextern s16 D_800DD1C4;\nextern s16 D_800DD1C6;\n\ns32 func_15142CF0(Gfx *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7) {\n    if ((arg1 == D_800DD204) && (arg2 == D_800DD206) && (arg3 == D_800DD1C0) &&\n        (arg4 == D_800DD1C2) && (arg5 == D_800DD1C4)) {\n        if (arg6 == D_800DD1C6) {\n            return (s32)arg0;\n        }\n    }\n    if (*(u8 *)arg7 == 1) {\n        arg0->words.w0 = 0xE7000000;\n        arg0->words.w1 = 0;\n        arg0++;\n        *(u8 *)arg7 = 0;\n    }\n    arg0->words.w0 = 0xFA000000 | ((arg1 & 0xFF) << 8) | (arg2 & 0xFF);\n    arg0->words.w1 = (arg3 << 24) | ((arg4 & 0xFF) << 16) | ((arg5 & 0xFF) << 8) | (arg6 & 0xFF);\n    arg0++;\n    D_800DD204 = arg1;\n    D_800DD206 = arg2;\n    D_800DD1C0 = arg3;\n    D_800DD1C2 = arg4;\n    D_800DD1C4 = arg5;\n    D_800DD1C6 = arg6;\n    return (s32)arg0;\n}",
+        "score": 0.1299,
+        "reason": "length_mismatch (target=77, generated=76), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:31:41.128035+00:00"
+      },
+      {
+        "code": "extern s16 D_800DD204;\nextern s16 D_800DD206;\nextern s16 D_800DD1C0;\nextern s16 D_800DD1C2;\nextern s16 D_800DD1C4;\nextern s16 D_800DD1C6;\n\ns32 func_15142CF0(Gfx *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, volatile u8 *arg7) {\n    if ((arg1 == D_800DD204) && (arg2 == D_800DD206) && (arg3 == D_800DD1C0) &&\n        (arg4 == D_800DD1C2) && (arg5 == D_800DD1C4)) {\n        if (arg6 == D_800DD1C6) {\n            return (s32)arg0;\n        }\n    }\n    if (*(u8 *)arg7 == 1) {\n        arg0->words.w0 = 0xE7000000;\n        arg0->words.w1 = 0;\n        arg0++;\n        *(u8 *)arg7 = 0;\n    }\n    arg0->words.w0 = 0xFA000000 | ((arg1 & 0xFF) << 8) | (arg2 & 0xFF);\n    arg0->words.w1 = (arg3 << 24) | ((arg4 & 0xFF) << 16) | ((arg5 & 0xFF) << 8) | (arg6 & 0xFF);\n    arg0++;\n    D_800DD204 = arg1;\n    D_800DD206 = arg2;\n    D_800DD1C0 = arg3;\n    D_800DD1C2 = arg4;\n    D_800DD1C4 = arg5;\n    D_800DD1C6 = arg6;\n    return (s32)arg0;\n}",
+        "score": 0.1299,
+        "reason": "length_mismatch (target=77, generated=76), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:31:51.291576+00:00"
+      },
+      {
+        "code": "extern s16 D_800DD204;\nextern s16 D_800DD206;\nextern s16 D_800DD1C0;\nextern s16 D_800DD1C2;\nextern s16 D_800DD1C4;\nextern s16 D_800DD1C6;\n\ns32 func_15142CF0(Gfx *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, u8 *arg7) {\n    u8 *temp_t0;\n    s32 temp_v0;\n    s32 temp_v1;\n    s32 temp_a0;\n\n    temp_t0 = arg7;\n    temp_v0 = arg4;\n    temp_v1 = arg5;\n    temp_a0 = arg6;\n    if ((arg1 == D_800DD204) && (arg2 == D_800DD206) && (arg3 == D_800DD1C0) &&\n        (temp_v0 == D_800DD1C2) && (temp_v1 == D_800DD1C4) && (temp_a0 == D_800DD1C6)) {\n        return (s32)arg0;\n    }\n    if (*temp_t0 == 1) {\n        arg0->words.w0 = 0xE7000000;\n        arg0->words.w1 = 0;\n        arg0++;\n        *temp_t0 = 0;\n    }\n    arg0->words.w0 = 0xFA000000 | ((arg1 & 0xFF) << 8) | (arg2 & 0xFF);\n    arg0->words.w1 = (arg3 << 24) | ((temp_v0 & 0xFF) << 16) | ((temp_v1 & 0xFF) << 8) | (temp_a0 & 0xFF);\n    arg0++;\n    D_800DD204 = arg1;\n    D_800DD206 = arg2;\n    D_800DD1C0 = arg3;\n    D_800DD1C2 = temp_v0;\n    D_800DD1C4 = temp_v1;\n    D_800DD1C6 = temp_a0;\n    return (s32)arg0;\n}",
+        "score": 0.075,
+        "reason": "length_mismatch (target=77, generated=80), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:32:40.747073+00:00"
+      },
+      {
+        "code": "extern s16 D_800DD204;\nextern s16 D_800DD206;\nextern s16 D_800DD1C0;\nextern s16 D_800DD1C2;\nextern s16 D_800DD1C4;\nextern s16 D_800DD1C6;\n\ns32 func_15142CF0(Gwords *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, u8 *arg7) {\n    if ((arg1 == D_800DD204) && (arg2 == D_800DD206) && (arg3 == D_800DD1C0) &&\n        (arg4 == D_800DD1C2) && (arg5 == D_800DD1C4) && (arg6 == D_800DD1C6)) {\n        return (s32)arg0;\n    }\n    if (*arg7 == 1) {\n        arg0->w0 = 0xE7000000;\n        arg0->w1 = 0;\n        arg0++;\n        *arg7 = 0;\n    }\n    arg0->w0 = 0xFA000000 | ((arg1 & 0xFF) << 8) | (arg2 & 0xFF);\n    arg0->w1 = (arg3 << 24) | ((arg4 & 0xFF) << 16) | ((arg5 & 0xFF) << 8) | (arg6 & 0xFF);\n    arg0++;\n    D_800DD204 = arg1;\n    D_800DD206 = arg2;\n    D_800DD1C0 = arg3;\n    D_800DD1C2 = arg4;\n    D_800DD1C4 = arg5;\n    D_800DD1C6 = arg6;\n    return (s32)arg0;\n}",
+        "score": 0.1299,
+        "reason": "length_mismatch (target=77, generated=76), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:33:05.162748+00:00"
+      },
+      {
+        "code": "extern s16 D_800DD204;\nextern s16 D_800DD206;\nextern s16 D_800DD1C0;\nextern s16 D_800DD1C2;\nextern s16 D_800DD1C4;\nextern s16 D_800DD1C6;\n\ns32 func_15142CF0(Gwords *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, u8 *arg7) {\n    if ((arg1 == D_800DD204) && (arg2 == D_800DD206) && (arg3 == D_800DD1C0) &&\n        (arg4 == D_800DD1C2) && (arg5 == D_800DD1C4) && (arg6 == D_800DD1C6)) {\n        return (s32)arg0;\n    }\n    if (*arg7 == 1) {\n        arg0->w0 = 0xE7000000;\n        arg0->w1 = 0;\n        arg0++;\n        *arg7 = 0;\n    }\n    arg0->w0 = 0xFA000000 | ((arg1 & 0xFF) << 8) | (arg2 & 0xFF);\n    arg0->w1 = (arg3 << 24) | ((arg4 & 0xFF) << 16) | ((arg5 & 0xFF) << 8) | (arg6 & 0xFF);\n    arg0++;\n    D_800DD204 = arg1;\n    D_800DD206 = arg2;\n    D_800DD1C0 = arg3;\n    D_800DD1C2 = arg4;\n    D_800DD1C4 = arg5;\n    D_800DD1C6 = arg6;\n    return (s32)arg0;\n}",
+        "score": 0.1299,
+        "reason": "length_mismatch (target=77, generated=76), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:35:51.819387+00:00"
+      }
+    ]
   },
   {
     "function": "func_150488C8",
@@ -37933,9 +38930,32 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "struct225 *func_15160A58(struct127 *arg0, u8 arg1, struct17 *arg2, u8 arg3,\n                         s16 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8,\n                         s32 arg9, s32 argA, s8 argB, s32 argC, u8 argD,\n                         u8 argE, s32 argF) {\n    s32 sp64;\n    s8 sp60;\n    s16 sp5E;\n    s8 sp5D;\n    u8 sp5C;\n    u8 sp59;\n    s8 sp58;\n    struct17 sp4C;\n    u8 sp49;\n    u8 sp48;\n    struct127 *sp44;\n    s32 sp40;\n    s32 sp3C;\n    s32 sp38;\n\n    if (arg0 == NULL) {\n        return NULL;\n    }\n    sp5C = arg3;\n    sp5D = 5;\n    sp60 = 0x10;\n    sp5E = arg4;\n    sp44 = arg0;\n    sp49 = arg1;\n    sp48 = arg0->unk3B;\n    sp4C.unk0 = arg2->unk0;\n    sp4C.unk4 = arg2->unk4;\n    sp4C.unk8 = arg2->unk8;\n    sp38 = 0;\n    sp3C = 0;\n    sp40 = 0;\n    sp58 = argB;\n    sp59 = argD;\n    sp64 = (s32)func_151602C0((Header *)&sp5C, (Header2 *)&sp38,\n                               arg5, arg6, arg7, arg8, 0xFF, 0,\n                               argC + 0x18, argE, argF);\n    if (sp64 != 0) {\n        memcpy((void *)(sp64 + 0x18), &sp44, 0x18);\n    }\n    return (struct225 *)sp64;\n}",
+        "score": 0.0,
+        "reason": "compile_error",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:42:19.749998+00:00"
+      },
+      {
+        "code": "struct225 *func_15160A58(struct127 *arg0, u8 arg1, struct17 *arg2, u8 arg3,\n                         s16 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8,\n                         s32 arg9, s32 argA, s8 argB, s32 argC, u8 argD,\n                         u8 argE, s32 argF) {\n    s32 sp64;\n    s8 sp60;\n    s16 sp5E;\n    s8 sp5D;\n    u8 sp5C;\n    u8 sp59;\n    s8 sp58;\n    struct17 sp4C;\n    u8 sp49;\n    u8 sp48;\n    struct127 *sp44;\n    s32 sp40;\n    s32 sp3C;\n    s32 sp38;\n\n    if (arg0 == NULL) {\n        return NULL;\n    }\n    sp5C = arg3;\n    sp5D = 5;\n    sp60 = 0x10;\n    sp5E = arg4;\n    sp44 = arg0;\n    sp49 = arg1;\n    sp48 = arg0->unique_id;\n    sp4C.unk0 = arg2->unk0;\n    sp4C.unk4 = arg2->unk4;\n    sp4C.unk8 = arg2->unk8;\n    sp38 = 0;\n    sp3C = 0;\n    sp40 = 0;\n    sp58 = argB;\n    sp59 = argD;\n    sp64 = (s32)func_151602C0((Header *)&sp5C, (Header2 *)&sp38,\n                               arg5, arg6, arg7, arg8, 0xFF, 0,\n                               argC + 0x18, argE, argF);\n    if (sp64 != 0) {\n        memcpy((void *)(sp64 + 0x18), &sp44, 0x18);\n    }\n    return (struct225 *)sp64;\n}",
+        "score": 0.1408,
+        "reason": "length_mismatch (target=71, generated=47), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:42:31.193904+00:00"
+      },
+      {
+        "code": "struct225 *func_15160A58(struct127 *arg0, u8 arg1, struct17 *arg2, u8 arg3,\n                         s16 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8,\n                         s32 arg9, s32 argA, s8 argB, s32 argC, u8 argD,\n                         u8 argE, s32 argF) {\n    struct225 *ret;\n    Header header;\n    u8 payload[0x18];\n    Header2 header2;\n\n    if (arg0 == NULL) {\n        return NULL;\n    }\n    header.unk0 = arg3;\n    header.unk1 = 5;\n    header.unk2 = arg4;\n    header.unk4 = 0x10;\n    *(struct127 **)&payload[0] = arg0;\n    payload[4] = arg0->unique_id;\n    payload[5] = arg1;\n    *(struct17 *)&payload[8] = *arg2;\n    *(s8 *)&payload[0x14] = argB;\n    payload[0x15] = argD;\n    header2.unk0 = 0;\n    header2.unk4 = 0;\n    header2.unk8 = 0;\n    ret = func_151602C0(&header, &header2, arg5, arg6, arg7, arg8,\n                        0xFF, 0, argC + 0x18, argE, argF);\n    if (ret != NULL) {\n        memcpy(&ret->unk18, payload, 0x18);\n    }\n    return ret;\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-04T22:42:56.018532+00:00"
+      }
+    ]
   },
   {
     "function": "func_1501B22C",
