@@ -224,7 +224,52 @@ s32 func_1000BC28(s32 arg0, u8 arg1, s32 arg2, s32 arg3) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000BCBC.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000BF60.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000C350.s")
+extern u8 D_800C35E8;
+extern void func_15178EFC(s32);
+s32 func_1000C350(s32 arg0, u8 arg1, s32 arg2, s32 arg3) {
+    s32 new_var;
+
+    if ((arg0 & 0x80) == 0) {
+        arg0 |= 0x80;
+        if (D_800C35EA != 1) {
+            func_1000886C(arg1, 0x1E, 1);
+            func_1000886C(arg1, 1, 1);
+            func_1000E40C(0x23, 0x61A8);
+        } else {
+            if (D_800C35E8 == 3) {
+                func_1000E40C(0x23, 0xFA);
+                func_15178EFC(2);
+            } else if (D_800C35E8 == 6) {
+                func_1000886C(arg1, 0x1E, 1);
+                func_1000886C(arg1, 1, 0x40);
+                func_15178EFC(2);
+            } else {
+                func_1000E40C(0x23, 0x61A8);
+            }
+        }
+        return arg0;
+    }
+    new_var = arg0 & 0x7F;
+    if (D_800BE9F0 != 0x1D) {
+        func_10008F24(arg1);
+        return arg0;
+    }
+    if (new_var != D_80041F08) {
+        switch (D_80041F08) {
+        case 1:
+            func_10008790(arg1, 0x1E, 0, 0);
+            func_10008790(arg1, 1, 0x40, 0);
+            break;
+        case 2:
+            func_10008790(arg1, 0x18, 0xFF, 0);
+            func_10008790(arg1, 6, 0, 0);
+            func_10008790(arg1, 1, 1, 0);
+            break;
+        }
+        arg0 = D_80041F08 | 0x80;
+    }
+    return arg0;
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000C530.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000C7E8.s")
 

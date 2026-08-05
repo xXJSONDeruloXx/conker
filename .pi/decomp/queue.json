@@ -50723,7 +50723,7 @@
     ],
     "attempts": 2,
     "lastScore": 1.0,
-    "status": "pending",
+    "status": "matched",
     "history": [
       {
         "code": "s32 func_1000C350(s32 arg0, u8 arg1, s32 arg2, s32 arg3) {\n    s32 new_var;\n\n    if ((arg0 & 0x80) == 0) {\n        arg0 |= 0x80;\n        if (D_800C35EA != 1) {\n            func_1000886C(arg1, 0x1E, 1);\n            func_1000886C(arg1, 1, 1);\n            func_1000E40C(0x23, 0x61A8);\n        } else {\n            if (D_800C35E8 == 3) {\n                func_1000E40C(0x23, 0xFA);\n                func_15178EFC(2);\n            } else if (D_800C35E8 == 6) {\n                func_1000886C(arg1, 0x1E, 1);\n                func_1000886C(arg1, 1, 0x40);\n                func_15178EFC(2);\n            } else {\n                func_1000E40C(0x23, 0x61A8);\n            }\n        }\n        return arg0;\n    }\n    new_var = arg0 & 0x7F;\n    if (D_800BE9F0 != 0x1D) {\n        func_10008F24(arg1);\n        return arg0;\n    }\n    if (new_var != D_80041F08) {\n        switch (D_80041F08) {\n        case 1:\n            func_10008790(arg1, 0x1E, 0, 0);\n            func_10008790(arg1, 1, 0x40, 0);\n            break;\n        case 2:\n            func_10008790(arg1, 0x18, 0xFF, 0);\n            func_10008790(arg1, 6, 0, 0);\n            func_10008790(arg1, 1, 1, 0);\n            break;\n        }\n        arg0 = D_80041F08 | 0x80;\n    }\n    return arg0;\n}",
