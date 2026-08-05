@@ -50148,7 +50148,7 @@
     ],
     "attempts": 2,
     "lastScore": 1.0,
-    "status": "pending",
+    "status": "matched",
     "history": [
       {
         "code": "Cmd *func_10022040(Voice *arg0, s16 *arg1, s32 arg2, Cmd *arg3) {\n    Cmd *sp2C;\n    f32 sp28;\n    Cmd *sp24;\n    Cmd *sp20;\n    Cmd *sp1C;\n\n    sp2C = arg3;\n    sp2C = func_10022460(arg0, arg1, arg3);\n\n    if ((arg0->unk99 != 0) && (arg0->unk99 < 64)) {\n        if (arg0->unk99 >= 6) {\n            sp28 = D_8002C830 / sqrtf((f32) arg0->unk99 + 1.0f);\n        } else {\n            sp28 = 65536.0f / ((f32) arg0->unk99 + 1.0f);\n        }\n        if (sp28 < D_8002C834) {\n            sp28 = D_8002C838;\n        }\n        sp24 = sp2C++;\n        sp24->w0 = arg1[0] & 0xFFFF;\n        sp24->w1 = (((u32) sp28 & 0xFFFF) << 16) | ((arg0->unk99 + 1) & 0xFFFF);\n    }\n    if (arg0->unkA2 > 0) {\n        if (arg0->unkC8 != 0) {\n            func_1001CF38(&arg0->unkA0, 22050.0f);\n        }\n        sp20 = sp2C++;\n        sp20->w0 = 0xB000020;\n        sp20->w1 = osVirtualToPhysical(&arg0->unkA8);\n        if (arg0->unkC8 == 2) {\n            arg0->unkC8 = 0;\n        }\n        sp1C = sp2C++;\n        sp1C->w0 = (arg1[0] & 0xFFFF) | (((arg0->unkC8 & 0xFF) << 16) | 0xE000000);\n        sp1C->w1 = osVirtualToPhysical(arg0->unkCC) & 0xFFFFFF & 0xFFFFFF;\n        arg0->unkC8 = 0;\n    }\n    return sp2C;\n}",
