@@ -202,7 +202,53 @@ s32 func_151DA6A8(void *arg0) {
     return 1;
 }
 #pragma GLOBAL_ASM("asm/nonmatchings/game_2062D0/func_151DA6F8.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_2062D0/func_151DA938.s")
+extern f32 D_800AB49C;
+extern void func_151DAB58(u8, f32, u8, void *, s32, u8, s32);
+typedef struct { f32 unk00; u8 pad04[4]; u8 unk08; } SubUnk98A938;
+typedef struct {
+    f32 unk00;
+    u8 pad04[0x17];
+    u8 unk1B;
+    u8 pad1C[4];
+    u8 unk20;
+    u8 pad21[0x27];
+    f32 unk48;
+    u8 pad4C[4];
+    u8 unk50;
+    u8 pad51[3];
+} StructA938Unk98;
+typedef struct { f32 unk00; u8 pad04[4]; f32 unk08; u8 pad0C[8]; } StructAA88Elem;
+typedef struct {
+    u8 pad00[1];
+    u8 unk01;
+    u8 pad02[10];
+    u8 unk0C;
+    u8 pad0D[0x20];
+    s8 unk2D;
+    u8 pad2E[0x66];
+    StructAA88Elem *unk94;
+    void *unk98;
+} StructAA88;
+s32 func_151DA938(StructAA88 *arg0, s32 arg1, s32 arg2, s32 arg3, f32 arg4, s32 arg5) {
+    StructAA88Elem *e;
+    StructA938Unk98 *p98;
+    f32 vec[3];
+    SubUnk98A938 *q;
+
+    e = arg0->unk94;
+    p98 = (StructA938Unk98 *) arg0->unk98;
+    vec[0] = e[arg0->unk2D].unk00;
+    vec[1] = arg4 + 2.0f;
+    vec[2] = e[arg0->unk2D].unk08;
+    q = (SubUnk98A938 *) &p98->unk48;
+    if (func_150ADA20() & 1) {
+        func_151D9B8C(q->unk08, (p98->unk00 * 3.0f) * q->unk00, p98->unk1B, arg5, (struct17 *) vec, 0x64, 0, 1, 0, arg0->unk0C, arg0->unk01);
+    } else {
+        func_151DAB58(q->unk08, (p98->unk00 * D_800AB49C) * q->unk00, p98->unk1B, vec, 1, arg0->unk0C, arg0->unk01);
+    }
+    p98->unk20 = 4;
+    return 1;
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/game_2062D0/func_151DAA88.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_2062D0/func_151DAB58.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_2062D0/func_151DADA0.s")

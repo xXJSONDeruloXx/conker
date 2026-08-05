@@ -43571,7 +43571,7 @@
     ],
     "attempts": 4,
     "lastScore": 1.0,
-    "status": "pending",
+    "status": "matched",
     "history": [
       {
         "code": "s32 func_151DA938(StructAA88 *arg0, s32 arg1, s32 arg2, s32 arg3, f32 arg4, s32 arg5) {\n    StructAA88Elem *e;\n    StructA938Unk98 *p98;\n    f32 vec[3];\n    SubUnk98A938 *q;\n\n    e = arg0->unk94;\n    p98 = (StructA938Unk98 *) arg0->unk98;\n    vec[0] = e[arg0->unk2D].unk00;\n    vec[1] = arg4 + 2.0f;\n    vec[2] = e[arg0->unk2D].unk08;\n    q = (SubUnk98A938 *) &p98->unk48;\n    if (func_150ADA20() & 1) {\n        func_151D9B8C(q->unk08, (p98->unk00 * 3.0f) * q->unk00, p98->unk1B, arg5, (struct17 *) vec, 0x64, 0, 1, 0, arg0->unk0C, arg0->unk01);\n    } else {\n        func_151DAB58(q->unk08, (p98->unk00 * D_800AB49C) * q->unk00, p98->unk1B, vec, 1, arg0->unk0C, arg0->unk01);\n    }\n    p98->unk20 = 4;\n    return 1;\n}",
