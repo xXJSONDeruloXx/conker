@@ -431,7 +431,79 @@ nonzero:
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_161520/func_15138120.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_161520/func_151382E0.s")
+typedef struct {
+    s32 a;
+    s32 b;
+    s32 c;
+} Vec3w382E0;
+
+typedef struct {
+    s16 unk0;
+    s16 unk2;
+    s16 unk4;
+    s16 unk6;
+    Vec3w382E0 unk8;
+    f32 unk14;
+    f32 unk18;
+    f32 unk1C;
+    f32 unk20;
+    f32 unk24;
+    f32 unk28;
+    s16 unk2C;
+    s16 unk2E;
+    s16 unk30;
+    s16 unk32;
+    s16 unk34;
+    s16 unk36;
+    s16 unk38;
+    s16 unk3A;
+    u8  unk3C;
+    u8  pad3D[3];
+    f32 unk40;
+    s16 unk44;
+    s16 unk46;
+    s32 unk48;
+} Local151382E0;
+
+extern f32 D_800A4830, D_800A4834, D_800A4838, D_800A483C, D_800A4840;
+extern u8 D_800A3FE6[];
+extern void func_15153F18(Local151382E0 *, Vec3w382E0 *, void *, u8, s32);
+
+void func_151382E0(void *arg0, s32 arg1, void *arg2, u8 arg3, s32 arg4) {
+    Local151382E0 sp24;
+
+    if (D_800A3FE6[arg1 * 16] != 2) {
+        sp24.unk8 = *(Vec3w382E0 *) arg0;
+        sp24.unk2C = 0x12;
+        sp24.unk2E = 7;
+        sp24.unk2 = 0xFF;
+        sp24.unk0 = 0;
+        sp24.unk4 = -63;
+        sp24.unk6 = 78;
+        sp24.unk30 = 3;
+        sp24.unk32 = 3;
+        sp24.unk14 = D_800A4830;
+        sp24.unk18 = D_800A4834;
+        sp24.unk1C = D_800A4838;
+        sp24.unk20 = D_800A483C;
+        sp24.unk24 = 4.0f;
+        sp24.unk28 = 9.0f;
+        sp24.unk34 = 0x14;
+        sp24.unk36 = 0x1E;
+        sp24.unk38 = 0x9B;
+        sp24.unk3A = 0x64;
+        sp24.unk44 = 0x10;
+        sp24.unk46 = 0xF;
+        sp24.unk48 = 0;
+        sp24.unk40 = D_800A4840;
+        if (D_800A3FE6[arg1 * 16] == 1) {
+            sp24.unk3C = 1;
+        } else {
+            sp24.unk3C = 0;
+        }
+        func_15153F18(&sp24, &sp24.unk8, arg2, arg3, arg4);
+    }
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_161520/func_15138424.s")
 
