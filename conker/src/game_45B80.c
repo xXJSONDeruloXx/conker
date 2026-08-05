@@ -109,7 +109,24 @@ void func_15019414(void) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_45B80/func_15019464.s")
+void *func_15019464(Gfx *arg0, s16 arg1) {
+    func_1510B958(arg1);
+    gSPViewport(arg0++, (s32)((u8 *)D_800BE628 + arg1 * 0x180) + D_800BE9C0 * 0x10 + 64);
+    arg0 = (Gfx *)func_1501A490((s32)arg0, arg1, 0, 0, 0, 0);
+    if (D_800BEAC0 != 0) {
+        return arg0;
+    }
+    if (D_80084480 != 0) {
+        return arg0;
+    }
+    arg0 = (Gfx *)func_1510FEA0((s32)arg0, D_800BE9F0);
+    if ((func_1517EFAC(arg1) != 0) || ((D_800D18A0 & (1 << arg1)) != 0)) {
+        return arg0;
+    }
+    arg0 = (Gfx *)func_1515D6D0((s32)arg0, arg1);
+    arg0 = (Gfx *)func_1510B9D0((s32)arg0, arg1);
+    return arg0;
+}
 // NON-MATCHING: 70% of the way there... maybe.
 // s32 func_15019464(Gfx *arg0, s16 arg1) {
 //     s32 temp_s0;

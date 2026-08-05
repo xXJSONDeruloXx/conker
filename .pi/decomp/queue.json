@@ -47391,7 +47391,7 @@
     ],
     "attempts": 1,
     "lastScore": 1.0,
-    "status": "pending",
+    "status": "matched",
     "history": [
       {
         "code": "void *func_15019464(Gfx *arg0, s16 arg1) {\n    func_1510B958(arg1);\n    gSPViewport(arg0++, (s32)((u8 *)D_800BE628 + arg1 * 0x180) + D_800BE9C0 * 0x10 + 64);\n    arg0 = (Gfx *)func_1501A490((s32)arg0, arg1, 0, 0, 0, 0);\n    if (D_800BEAC0 != 0) {\n        return arg0;\n    }\n    if (D_80084480 != 0) {\n        return arg0;\n    }\n    arg0 = (Gfx *)func_1510FEA0((s32)arg0, D_800BE9F0);\n    if ((func_1517EFAC(arg1) != 0) || ((D_800D18A0 & (1 << arg1)) != 0)) {\n        return arg0;\n    }\n    arg0 = (Gfx *)func_1515D6D0((s32)arg0, arg1);\n    arg0 = (Gfx *)func_1510B9D0((s32)arg0, arg1);\n    return arg0;\n}",
