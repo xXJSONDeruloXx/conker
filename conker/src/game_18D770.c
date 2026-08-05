@@ -280,7 +280,63 @@ struct225 *func_15160A58(struct127 *arg0, u8 arg1, struct17 *arg2, u8 arg3,
 #pragma GLOBAL_ASM("asm/nonmatchings/game_18D770/func_15160B74.s")
 
 // another struct definition
-#pragma GLOBAL_ASM("asm/nonmatchings/game_18D770/func_15160CDC.s")
+typedef struct {
+    s32 unk0;
+    s32 unk4;
+    s32 unk8;
+} coords3;
+
+typedef struct {
+    struct127 *unk0;
+    u8  unk4;
+    u8  unk5;
+    u8  pad6[0x2];
+    coords3 unk8;
+    coords3 unk14;
+    f32 unk20;
+    u8  unk24;
+    u8  unk25;
+    u8  pad26[0x2];
+} struct15160CDC_payload;
+struct225 *func_15160CDC(struct127 *arg0, u8 arg1, coords3 *arg2, coords3 *arg3, f32 arg4, u8 arg5, s16 arg6, s32 arg7, s32 arg8, s32 arg9, s32 arg10, u8 arg11, u8 arg12, u8 arg13, u8 arg14, s32 arg15) {
+    struct225 *temp_v0;
+    Header header;
+    struct15160CDC_payload src;
+    Header2 header2;
+    s32 sp_v1;
+    s32 sp_v0;
+
+    if (arg0 == NULL) {
+        return NULL;
+    }
+
+    header.unk0 = arg5;
+    header.unk1 = 6;
+    header.unk2 = arg6;
+    header.unk4 = 0x11;
+    src.unk0 = arg0;
+    src.unk4 = arg0->unique_id;
+    src.unk5 = arg1;
+    src.unk8 = *arg2;
+    src.unk14 = *arg3;
+
+    src.unk20 = arg4;
+    sp_v1 = (arg11 != 0) ? 1 : 0;
+    sp_v0 = (arg13 != 0) ? 2 : 0;
+    src.unk24 = sp_v0 | sp_v1;
+
+    header2.unk0 = 0;
+    header2.unk4 = 0;
+    header2.unk8 = 0;
+
+    src.unk25 = arg12;
+
+    temp_v0 = func_151602C0(&header, &header2, arg7, arg8, arg9, arg10, 0xFF, 0, sizeof(src), arg14, arg15);
+    if (temp_v0 != NULL) {
+        memcpy(&temp_v0->unk18, &src, sizeof(src));
+    }
+    return temp_v0;
+}
 
 // similar to func_15160B74
 #pragma GLOBAL_ASM("asm/nonmatchings/game_18D770/func_15160E30.s")
