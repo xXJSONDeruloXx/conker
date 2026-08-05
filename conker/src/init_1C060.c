@@ -94,7 +94,85 @@ ALMicroTime n_alEvtqNextEvent(ALEventQueue *arg0, N_ALEvent *arg1) {
 //     return sp28;
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/init_1C060/n_alEvtqPostEvent.s")
+void n_alEvtqPostEvent(ALEventQueue *evtq, N_ALEvent *event, ALMicroTime delta, s32 flags)
+{
+    N_ALEventListItem *item;
+    N_ALEventListItem *thisItem;
+    ALLink *nextItem;
+    s32 atEnd;
+    OSIntMask savedMask;
+    ALLink *unlinkEl;
+    ALLink *elA;
+    ALLink *afterA;
+    ALLink *elB;
+    ALLink *afterB;
+
+    atEnd = 0;
+    if (flags & 2) {
+        savedMask = osSetIntMask(1);
+    }
+    item = (N_ALEventListItem *)evtq->freeList.next;
+    if (item == 0) {
+        if (flags & 2) {
+            osSetIntMask(savedMask);
+        }
+        return;
+    }
+    if (item->node.next == 0 && (flags & 1) == 0) {
+        if (flags & 2) {
+            osSetIntMask(savedMask);
+        }
+        return;
+    }
+    unlinkEl = (ALLink *)item;
+    if (unlinkEl->next) {
+        unlinkEl->next->prev = unlinkEl->prev;
+    }
+    if (unlinkEl->prev) {
+        unlinkEl->prev->next = unlinkEl->next;
+    }
+    bcopy(event, &item->evt, 0x10);
+    if (delta == 0x7FFFFFFF) {
+        atEnd = -1;
+    }
+    for (nextItem = &evtq->allocList; nextItem; nextItem = nextItem->next) {
+        if (nextItem->next == 0) {
+            if (atEnd) {
+                item->delta = 0;
+            } else {
+                item->delta = delta;
+            }
+            elA = (ALLink *)item;
+            afterA = nextItem;
+            elA->next = afterA->next;
+            elA->prev = afterA;
+            if (afterA->next) {
+                afterA->next->prev = elA;
+            }
+            afterA->next = elA;
+            break;
+        } else {
+            thisItem = (N_ALEventListItem *)nextItem->next;
+            if (delta < thisItem->delta) {
+                item->delta = delta;
+                thisItem->delta = thisItem->delta - delta;
+                elB = (ALLink *)item;
+                afterB = nextItem;
+                elB->next = afterB->next;
+                elB->prev = afterB;
+                if (afterB->next) {
+                    afterB->next->prev = elB;
+                }
+                afterB->next = elB;
+                break;
+            }
+            delta = delta - thisItem->delta;
+        }
+    }
+    if (flags & 2) {
+        osSetIntMask(savedMask);
+    }
+}
 // void n_alEvtqPostEvent(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
 //     void *sp3C;
 //     void *sp38;
