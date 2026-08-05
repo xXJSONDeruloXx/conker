@@ -4,7 +4,22 @@
 
 void func_15143134(void *, s32, s32);
 
-void func_15137F30(s32 arg0, s32 arg1, s32 arg2, s32 arg3, f32 arg4, void *arg5, f32 *arg6, f32 *arg7, f32 *arg8, f32 *arg9, s16 *arg10, u8 *arg11, f32 *arg12);
+typedef struct {
+    f32 x;
+    f32 y;
+    f32 z;
+} Vec3f37F30;
+
+typedef struct {
+    u8  unk0;
+    u8  unk1;
+    u8  pad2[0xA];
+    u8  unkC;
+    u8  padD[0x67];
+    f32 unk74;
+} Struct37F30;
+
+void func_15137F30(Vec3f37F30 *arg0, Vec3f37F30 *arg1, Vec3f37F30 *arg2, Vec3f37F30 *arg3, f32 arg4, Struct37F30 *arg5, Vec3f37F30 *arg6, Vec3f37F30 *arg7, Vec3f37F30 *arg8, f32 *arg9, s16 *arg10, u8 *arg11, f32 *arg12);
 void func_151D9014(void *arg0, f32 *arg1, u8 arg2, f32 arg3, s16 arg4, u8 arg5, f32 arg6, u8 arg7, f32 arg8, f32 arg9, u8 argA, s32 argB, u8 argC, u8 argD, u8 argE, s32 argF);
 
 s32 func_15134070(struct102 *);
@@ -24,6 +39,7 @@ void func_151BC5A4(struct102 *, s32, u8);
 void func_15145EA4(s32 *, s32 *, s32, s32);
 
 extern f32 D_800A4828;
+extern f32 D_800A482C;
 
 // requires jump table
 #pragma GLOBAL_ASM("asm/nonmatchings/game_161520/func_15134070.s")
@@ -381,7 +397,21 @@ void func_15137E60(s32 arg0, s32 arg1, s32 arg2, s32 arg3, f32 arg4, struct102 *
     func_151D9014(sp6C, sp54, 0, sp50, sp4E, sp4D, sp48, 0, 1.0f, 1.0f, 1, 0, 1, 0, *(u8 *)((s32)arg5 + 0xC), arg5->unk1);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_161520/func_15137F30.s")
+void func_15137F30(Vec3f37F30 *arg0, Vec3f37F30 *arg1, Vec3f37F30 *arg2, Vec3f37F30 *arg3, f32 arg4, Struct37F30 *arg5, Vec3f37F30 *arg6, Vec3f37F30 *arg7, Vec3f37F30 *arg8, f32 *arg9, s16 *argA, u8 *argB, f32 *argC) {
+    arg6->x = arg0->x + arg2->x * arg4;
+    arg6->y = arg0->y + arg2->y * arg4;
+    arg6->z = arg0->z + arg2->z * arg4;
+    arg7->x = arg1->x + arg3->x * arg4;
+    arg7->y = arg1->y + arg3->y * arg4;
+    arg7->z = arg1->z + arg3->z * arg4;
+    arg8->x = (arg7->x - arg6->x) * arg5->unk74;
+    arg8->y = (arg7->y - arg6->y) * arg5->unk74;
+    arg8->z = (arg7->z - arg6->z) * arg5->unk74;
+    *arg9 = (func_150ADA68() * 217.0f + -456.0f) * D_800A482C;
+    *argA = (u32) func_150ADA20() % 0x1F + 0x1E;
+    *argB = (u32) func_150ADA20() % 0x9C + 0x64;
+    *argC = func_150ADA68() * 35.0f + 40.0f;
+}
 
 extern u8 D_800A3FD8[];
 void func_15143134(void *, s32, s32);

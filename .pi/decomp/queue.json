@@ -45243,7 +45243,7 @@
     ],
     "attempts": 3,
     "lastScore": 1.0,
-    "status": "pending",
+    "status": "matched",
     "history": [
       {
         "code": "void func_15137F30(Vec3f37F30 *arg0, Vec3f37F30 *arg1, Vec3f37F30 *arg2, Vec3f37F30 *arg3, f32 arg4, Struct37F30 *arg5, Vec3f37F30 *arg6, Vec3f37F30 *arg7, Vec3f37F30 *arg8, f32 *arg9, s16 *argA, u8 *argB, f32 *argC) {\n    arg6->x = arg0->x + arg2->x * arg4;\n    arg6->y = arg0->y + arg2->y * arg4;\n    arg6->z = arg0->z + arg2->z * arg4;\n    arg7->x = arg1->x + arg3->x * arg4;\n    arg7->y = arg1->y + arg3->y * arg4;\n    arg7->z = arg1->z + arg3->z * arg4;\n    arg8->x = (arg7->x - arg6->x) * arg5->unk74;\n    arg8->y = (arg7->y - arg6->y) * arg5->unk74;\n    arg8->z = (arg7->z - arg6->z) * arg5->unk74;\n    *arg9 = (func_150ADA68() * 217.0f + -456.0f) * D_800A482C;\n    *argA = (u32) func_150ADA20() % 0x1F + 0x1E;\n    *argB = (u32) func_150ADA20() % 0x9C + 0x64;\n    *argC = func_150ADA68() * 35.0f + 40.0f;\n}",
