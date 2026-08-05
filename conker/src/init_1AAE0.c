@@ -35,7 +35,64 @@ void __n_resetPerfChanState(N_ALSeqPlayer *seqp, s32 chan);
 //     }
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/init_1AAE0/__n_seqpReleaseVoice.s")
+typedef struct RelNode { struct RelNode *unk0; struct RelNode *unk4; s32 unk8; s16 unkC; u8 padE[0x2]; void *unk10; } RelNode;
+typedef struct { u8 pad0[0x1C]; s32 unk1C; u8 pad20[0x28]; RelNode *unk48; u8 pad4C[0x4]; RelNode *unk50; } RelSeqp;
+void __n_seqpReleaseVoice(RelSeqp *arg0, N_ALVoice *arg1, s32 arg2) {
+    N_ALEvent sp38;
+    N_ALVoiceState *sp34;
+    RelNode *sp30;
+    RelNode *sp2C;
+    RelNode *sp28;
+    RelNode *sp24;
+    RelNode *sp20;
+    RelNode *sp1C;
+    RelNode **sp18;
+
+    sp34 = arg1->unk10;
+    if (sp34->envPhase == 0) {
+        sp30 = arg0->unk50;
+        if (sp30 != 0) {
+            do {
+                sp2C = sp30->unk0;
+                sp28 = sp30;
+                sp24 = sp2C;
+                if (sp28->unkC == 6) {
+                    if (sp28->unk10 == arg1) {
+                        if (sp24 != 0) {
+                            sp24->unk8 += sp28->unk8;
+                        }
+                        sp20 = sp30;
+                        if (sp20->unk0 != 0) {
+                            sp20->unk0->unk4 = sp20->unk4;
+                        }
+                        if (sp20->unk4 != 0) {
+                            sp20->unk4->unk0 = sp20->unk0;
+                        }
+                        sp1C = sp30;
+                        sp18 = &arg0->unk48;
+                        sp1C->unk0 = *sp18;
+                        sp1C->unk4 = (RelNode *)sp18;
+                        if (*sp18 != 0) {
+                            (*sp18)->unk4 = sp1C;
+                        }
+                        *sp18 = sp1C;
+                    }
+                }
+                sp30 = sp2C;
+            } while (sp30 != 0);
+        }
+    }
+    sp34->velocity = 0;
+    sp34->envPhase = 3;
+    sp34->envGain = 0;
+    sp34->envEndTime = arg0->unk1C + arg2;
+    n_alSynSetPriority(arg1, 0);
+    n_alSynSetVol(arg1, 0, arg2);
+    sp38.type = 5;
+    sp38.msg.note.voice = arg1;
+    arg2 = arg2 + 0x7D00;
+    n_alEvtqPostEvent((ALEventQueue *)&arg0->unk48, &sp38, arg2, 0);
+}
 // void __n_seqpReleaseVoice(void *arg0, void *arg1, s32 arg2) {
 //     void *sp3C;
 //     s16 sp38;
