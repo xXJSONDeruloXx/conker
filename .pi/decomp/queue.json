@@ -44564,7 +44564,7 @@
     ],
     "attempts": 14,
     "lastScore": 1.0,
-    "status": "pending",
+    "status": "matched",
     "history": [
       {
         "code": "void func_1000E2F4(s32 arg0) {\n    s32 i;\n    struct151 **ptr;\n    struct151 *temp_v0;\n    s32 temp_v1;\n    s32 temp_t8;\n    s32 temp_t5;\n\n    ptr = D_800417B0;\n    for (i = 0; i != 3; i++, ptr++) {\n        temp_v0 = *ptr;\n        if (temp_v0 == NULL) {\n            continue;\n        }\n        temp_v1 = temp_v0->unk4;\n        if (temp_v1 <= 0) {\n            continue;\n        }\n        if (temp_v0->unk15 != 0) {\n            continue;\n        }\n        if (arg0 != 0) {\n            func_10008EE0(i & 0xFF, 0);\n            temp_t8 = D_800417B0[i]->unk4;\n            if ((D_8002B074[temp_t8].unk4 & 0x10) != 0) {\n                continue;\n            }\n            func_10008F58(i & 0xFF);\n        } else {\n            temp_t5 = D_8002B074[temp_v1].unk4;\n            if ((temp_t5 & 0x10) != 0) {\n                temp_v0->unk30 = -1;\n            } else {\n                func_100084D8(i & 0xFF);\n                D_800417B0[i]->unk30 = -1;\n            }\n            func_1000CC54(i);\n        }\n    }\n    D_80041F00 = arg0;\n}",
