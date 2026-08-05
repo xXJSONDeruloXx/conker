@@ -151,7 +151,59 @@ void __n_seqpReleaseVoice(RelSeqp *arg0, N_ALVoice *arg1, s32 arg2) {
 //     n_alEvtqPostEvent(arg0 + 0x48, &sp38, arg2, 0);
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/init_1AAE0/func_1001ADA4.s")
+typedef struct EvtNode { struct EvtNode *unk0; struct EvtNode *unk4; s32 unk8; s16 unkC; u8 padE[0x2]; void *unk10; } EvtNode;
+typedef struct { u8 pad0[0x48]; EvtNode *unk48; u8 pad4C[0x4]; EvtNode *unk50; } EvtSeqp;
+s32 func_1001ADA4(EvtSeqp *seqp, void *arg1, s32 arg2) {
+    EvtNode *sp1C;
+    EvtNode *sp18;
+    EvtNode *sp14;
+    s32 sp10;
+    u8 spF;
+    EvtNode *sp8;
+    EvtNode *sp4;
+    EvtNode **sp0;
+
+    sp10 = 0;
+    spF = 1;
+    sp1C = seqp->unk50;
+    if (sp1C != 0) {
+        do {
+            sp18 = sp1C->unk0;
+            sp14 = sp1C;
+            sp10 += sp14->unk8;
+            if (sp14->unkC == 5) {
+                if (sp14->unk10 == arg1) {
+                    if (arg2 < sp10) {
+                        if (sp18 != 0) {
+                            sp18->unk8 += sp14->unk8;
+                        }
+                        sp8 = sp1C;
+                        if (sp8->unk0 != 0) {
+                            sp8->unk0->unk4 = sp8->unk4;
+                        }
+                        if (sp8->unk4 != 0) {
+                            sp8->unk4->unk0 = sp8->unk0;
+                        }
+                        sp4 = sp1C;
+                        sp0 = &seqp->unk48;
+                        sp4->unk0 = *sp0;
+                        sp4->unk4 = (EvtNode *)sp0;
+                        if (*sp0 != 0) {
+                            (*sp0)->unk4 = sp4;
+                        }
+                        *sp0 = sp4;
+                        goto done;
+                    }
+                    spF = 0;
+                done:
+                    break;
+                }
+            }
+            sp1C = sp18;
+        } while (sp1C != 0);
+    }
+    return spF;
+}
 
 N_ALVoiceState *__n_mapVoice(N_ALSeqPlayer *seqp, u8 key, u8 vel, u8 channel)
 {
