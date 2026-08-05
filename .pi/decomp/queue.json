@@ -45942,7 +45942,7 @@
     ],
     "attempts": 1,
     "lastScore": 1.0,
-    "status": "pending",
+    "status": "matched",
     "history": [
       {
         "code": "ALSound *func_1001B07C(N_ALSeqPlayer *seqp, u8 key, u8 vel, u8 chan) {\n    ALInstrument *inst;\n    s32 lo;\n    s32 hi;\n    s32 mid;\n    ALKeyMap *keyMap;\n\n    inst = seqp->chanState[chan].instrument;\n    lo = 1;\n    if (inst == NULL) {\n        return NULL;\n    }\n    hi = inst->soundCount;\n    while (hi >= lo) {\n        mid = (lo + hi) / 2;\n        keyMap = inst->soundArray[mid - 1]->keyMap;\n        if (key >= keyMap->keyMin && key <= keyMap->keyMax &&\n            vel >= keyMap->velocityMin && vel <= keyMap->velocityMax) {\n            return inst->soundArray[mid - 1];\n        } else {\n            if (key < keyMap->keyMin ||\n                (vel < keyMap->velocityMin && key <= keyMap->keyMax)) {\n                hi = mid - 1;\n            } else {\n                lo = mid + 1;\n            }\n        }\n    }\n    return NULL;\n}",

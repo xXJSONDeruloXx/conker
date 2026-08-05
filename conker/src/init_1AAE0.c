@@ -252,7 +252,36 @@ N_ALVoiceState *func_1001AFEC(N_ALSeqPlayer *seqp, u8 key, u8 channel) {
     return NULL;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/init_1AAE0/func_1001B07C.s")
+ALSound *func_1001B07C(N_ALSeqPlayer *seqp, u8 key, u8 vel, u8 chan) {
+    ALInstrument *inst;
+    s32 lo;
+    s32 hi;
+    s32 mid;
+    ALKeyMap *keyMap;
+
+    inst = seqp->chanState[chan].instrument;
+    lo = 1;
+    if (inst == NULL) {
+        return NULL;
+    }
+    hi = inst->soundCount;
+    while (hi >= lo) {
+        mid = (lo + hi) / 2;
+        keyMap = inst->soundArray[mid - 1]->keyMap;
+        if (key >= keyMap->keyMin && key <= keyMap->keyMax &&
+            vel >= keyMap->velocityMin && vel <= keyMap->velocityMax) {
+            return inst->soundArray[mid - 1];
+        } else {
+            if (key < keyMap->keyMin ||
+                (vel < keyMap->velocityMin && key <= keyMap->keyMax)) {
+                hi = mid - 1;
+            } else {
+                lo = mid + 1;
+            }
+        }
+    }
+    return NULL;
+}
 
 s16 __n_vsVol(N_ALVoiceState *vs, N_ALSeqPlayer *seqp)
 {
