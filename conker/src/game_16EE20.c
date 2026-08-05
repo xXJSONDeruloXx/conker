@@ -73,7 +73,40 @@ void func_15141DA4(void *arg0, s32 arg1, s32 arg2) {
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15141E38.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15141F78.s")
+void func_15141F78(u8 arg0, struct241 *arg1, f32 arg2, u8 arg3, struct17 *arg4, u8 arg5) {
+    struct157 tmp;
+    f32 temp_f2;
+    s32 phi_v0;
+
+    tmp.unk6 = arg0;
+    tmp.unk7 = 0;
+    tmp.unk0 = 0x6F701;
+    tmp.unk4 = (func_150ADA20() % 61U) + 100;
+    tmp.unk8 = 0;
+    tmp.unkC = 0;
+    tmp.unk10 = (func_150ADA20() & 0x7F) + 128;
+    // unk11-unk15/unk20 are likely u8 (colour components); struct157 declares
+    // them s8, so store through a u8 cast to keep the 0xFF immediate unsigned
+    *(u8 *) &tmp.unk11 = 0xFF;
+    *(u8 *) &tmp.unk12 = 0xFF;
+    *(u8 *) &tmp.unk13 = 0xFF;
+    *(u8 *) &tmp.unk14 = 0xFF;
+    *(u8 *) &tmp.unk15 = 0xFF;
+    tmp.unk18 = 0x3B0002;
+    tmp.unk16 = 0;
+    tmp.unk17 = 7;
+    *(u8 *) &tmp.unk20 = 0xFF;
+    tmp.unk1C = arg1->unk18;
+    tmp.unk22 = 0x28;
+    tmp.unk24 = 6;
+    temp_f2 = ((func_150ADA68() * 5.0f) + 10.0f) * arg2;
+    if (arg5 == 2) {
+        phi_v0 = 1;
+    } else {
+        phi_v0 = 0;
+    }
+    func_1513C650(&tmp, 0, 0, &arg1->unk4, arg4->unk0, arg1->unk0, arg4->unk8, temp_f2, temp_f2, arg3, phi_v0, 3, 1, 0, 0xFF, 1);
+}
 // NON-MATCHING: need to determine arguments
 // void func_1513C650(s32, s32, s32, u16, s32, s32, s32, f32, f32, s32, s32, s32, s32, s32, u8, s32);
 // s32 func_1513C650(s32 arg0, u8 arg1, u8 arg2, s32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8, u8 arg9, u8 argA, s32 argB, s32 argC, s32 argD, u8 argE, s32 argF);

@@ -45772,7 +45772,7 @@
     ],
     "attempts": 1,
     "lastScore": 1.0,
-    "status": "pending",
+    "status": "matched",
     "history": [
       {
         "code": "void func_15141F78(u8 arg0, struct241 *arg1, f32 arg2, u8 arg3, struct17 *arg4, u8 arg5) {\n    struct157 tmp;\n    f32 temp_f2;\n    s32 phi_v0;\n\n    tmp.unk6 = arg0;\n    tmp.unk7 = 0;\n    tmp.unk0 = 0x6F701;\n    tmp.unk4 = (func_150ADA20() % 61U) + 100;\n    tmp.unk8 = 0;\n    tmp.unkC = 0;\n    tmp.unk10 = (func_150ADA20() & 0x7F) + 128;\n    // unk11-unk15/unk20 are likely u8 (colour components); struct157 declares\n    // them s8, so store through a u8 cast to keep the 0xFF immediate unsigned\n    *(u8 *) &tmp.unk11 = 0xFF;\n    *(u8 *) &tmp.unk12 = 0xFF;\n    *(u8 *) &tmp.unk13 = 0xFF;\n    *(u8 *) &tmp.unk14 = 0xFF;\n    *(u8 *) &tmp.unk15 = 0xFF;\n    tmp.unk18 = 0x3B0002;\n    tmp.unk16 = 0;\n    tmp.unk17 = 7;\n    *(u8 *) &tmp.unk20 = 0xFF;\n    tmp.unk1C = arg1->unk18;\n    tmp.unk22 = 0x28;\n    tmp.unk24 = 6;\n    temp_f2 = ((func_150ADA68() * 5.0f) + 10.0f) * arg2;\n    if (arg5 == 2) {\n        phi_v0 = 1;\n    } else {\n        phi_v0 = 0;\n    }\n    func_1513C650(&tmp, 0, 0, &arg1->unk4, arg4->unk0, arg1->unk0, arg4->unk8, temp_f2, temp_f2, arg3, phi_v0, 3, 1, 0, 0xFF, 1);\n}",
