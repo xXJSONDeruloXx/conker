@@ -270,7 +270,28 @@ f32 func_15142B44(f32 arg0) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15142B7C.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15142C10.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15142CF0.s")
+extern s16 D_800DD204;
+extern s16 D_800DD206;
+extern s16 D_800DD1C0;
+extern s16 D_800DD1C2;
+extern s16 D_800DD1C4;
+extern s16 D_800DD1C6;
+Gfx *func_15142CF0(Gfx *gdl, s32 m, s32 l, s32 r, s32 g, s32 b, s32 a, u8 *arg7) {
+    if ((m != D_800DD204) || (l != D_800DD206) || (r != D_800DD1C0) || (g != D_800DD1C2) || (b != D_800DD1C4) || (a != D_800DD1C6)) {
+        if (*arg7 == 1) {
+            gDPPipeSync(gdl++);
+            *arg7 = 0;
+        }
+        gDPSetPrimColor(gdl++, m, l, r, g, b, a);
+        D_800DD204 = m;
+        D_800DD206 = l;
+        D_800DD1C0 = r;
+        D_800DD1C2 = g;
+        D_800DD1C4 = b;
+        D_800DD1C6 = a;
+    }
+    return gdl;
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15142E24.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15142FBC.s")
 s16 func_15143044(u8 arg0, s32 arg1) {
