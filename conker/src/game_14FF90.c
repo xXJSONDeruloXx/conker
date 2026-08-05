@@ -772,7 +772,48 @@ void func_151284C4(struct108 *arg0) {
         }
     }
 }
-#pragma GLOBAL_ASM("asm/nonmatchings/game_14FF90/func_15128540.s")
+s32 func_15128540(struct108 *arg0) {
+    s32 temp;
+
+    if (func_151253CC(arg0) != 0) {
+        return 1;
+    }
+    if (func_15128030(arg0) != 0) {
+        return 0;
+    }
+    temp = arg0->unk2C;
+    if (temp & 0x80000) {
+        func_1512A360(arg0);
+        *(struct17 *) &arg0->unk2BC = *(struct17 *) &arg0->unk2A4;
+        func_151256BC(arg0);
+        func_151236D0(arg0);
+        func_151284C4(arg0);
+        return 1;
+    }
+    if (temp & 0x100000) {
+        func_1512E4B0(arg0);
+        func_151236D0(arg0);
+        func_151284C4(arg0);
+        return 1;
+    }
+    if (temp & 0x200000) {
+        func_151219D0(arg0);
+        func_151236D0(arg0);
+        func_151284C4(arg0);
+        return 1;
+    }
+    if (temp & 0x400000) {
+        func_1512D380(arg0);
+        func_151236D0(arg0);
+        func_151284C4(arg0);
+        return 1;
+    }
+    if (func_15126378(arg0) != 0) {
+        func_151284C4(arg0);
+        return 1;
+    }
+    return 0;
+}
 
 void func_15128680(struct108 *arg0) {
 }
