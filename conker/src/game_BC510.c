@@ -50,7 +50,29 @@ void func_1508F9C4(void) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_BC510/func_150911F4.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_BC510/func_15091534.s")
+extern u8 D_D16;
+extern u32 func_1510D0EC(s32, s32, s32, s32);
+Gfx *func_15091534(Gfx *arg0, s32 arg1, u8 *arg2) {
+    u32 temp_v0;
+
+    *arg2 = 0;
+    temp_v0 = func_1510D0EC(arg1 + (s32) &D_D16, 0, 3, 0);
+    if (temp_v0 != 0x80000000) {
+        { Gfx *g = arg0++; g->words.w0 = 0xFD500000; g->words.w1 = temp_v0; }
+        { Gfx *g = arg0++; g->words.w0 = 0xF5500000; g->words.w1 = 0x07098260; }
+        { Gfx *g = arg0++; g->words.w0 = 0xE6000000; g->words.w1 = 0; }
+        { Gfx *g = arg0++; g->words.w0 = 0xF3000000; g->words.w1 = 0x073FF000; }
+        { Gfx *g = arg0++; g->words.w0 = 0xE7000000; g->words.w1 = 0; }
+        { Gfx *g = arg0++; g->words.w0 = 0xF5400800; g->words.w1 = 0x00098260; }
+        { Gfx *g = arg0++; g->words.w0 = 0xF2000000; g->words.w1 = 0x000FC0FC; }
+        { Gfx *g = arg0++; g->words.w0 = 0xFD100000; g->words.w1 = temp_v0 + 0x800; }
+        { Gfx *g = arg0++; g->words.w0 = 0xE6000000; g->words.w1 = 0; }
+        { Gfx *g = arg0++; g->words.w0 = 0xF0000000; g->words.w1 = 0x0603C000; }
+        { Gfx *g = arg0++; g->words.w0 = 0xEF00AC3F; g->words.w1 = 0x00504244; }
+        *arg2 = 1;
+    }
+    return arg0;
+}
 // NON-MATCHING: needs some love
 // Gfx* func_15091534(Gfx* arg0, struct257 *arg1, u8 *arg2) {
 //     u32 temp_v0;
