@@ -120,4 +120,48 @@
 // }
 
 
-#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/n_synallocvoice/_allocatePVoice.s")
+s32 _allocatePVoice(N_PVoice **pvoice, s16 priority) {
+    N_PVoice *pv;
+    N_PVoice *v;
+    s32 stolen = 0;
+
+    if ((pv = (N_PVoice *)n_syn->pLameList.next) != 0) {
+        ALLink *element;
+        ALLink *ln;
+        ALLink *to;
+        *pvoice = pv;
+        element = (ALLink *)pv;
+        if (element->next) element->next->prev = element->prev;
+        if (element->prev) element->prev->next = element->next;
+        ln = (ALLink *)pv;
+        to = &n_syn->pAllocList;
+        ln->next = to->next;
+        ln->prev = to;
+        if (to->next) to->next->prev = ln;
+        to->next = ln;
+    } else if ((pv = (N_PVoice *)n_syn->pFreeList.next) != 0) {
+        ALLink *element;
+        ALLink *ln;
+        ALLink *to;
+        *pvoice = pv;
+        element = (ALLink *)pv;
+        if (element->next) element->next->prev = element->prev;
+        if (element->prev) element->prev->next = element->next;
+        ln = (ALLink *)pv;
+        to = &n_syn->pAllocList;
+        ln->next = to->next;
+        ln->prev = to;
+        if (to->next) to->next->prev = ln;
+        to->next = ln;
+    } else {
+        for (pv = (N_PVoice *)n_syn->pAllocList.next; pv != 0; pv = (N_PVoice *)pv->node.next) {
+            v = pv;
+            if (priority >= (*(N_ALVoice **)((u8 *)v + 0x10))->priority && *(s32 *)((u8 *)v + 0x90) == 0) {
+                *pvoice = v;
+                priority = (*(N_ALVoice **)((u8 *)v + 0x10))->priority;
+                stolen = 1;
+            }
+        }
+    }
+    return stolen;
+}

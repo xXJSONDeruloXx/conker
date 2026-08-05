@@ -89,7 +89,36 @@ void func_10019F98(N_ALCSPlayer *seqp, s32 arg1, s32 chan, s32 arg3) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/init_19B50/func_1001A030.s")
+void func_1001A030(N_ALCSPlayer *seqp, s32 arg1, s32 chan, s32 arg3) {
+    N_ALSoundState *state;
+
+    seqp->chanState[chan].sustain = arg3;
+
+    for (state = seqp->vAllocHead; state != NULL; state = state->voice.node.next) {
+        if (state->chan == chan && *((u8 *)state + 0x39) != 3) {
+            if ((u32)arg3 >= 0x40) {
+                if (*((u8 *)state + 0x39) == 0) {
+                    *((u8 *)state + 0x39) = 2;
+                }
+            } else if (*((u8 *)state + 0x39) == 2) {
+                *((u8 *)state + 0x39) = 0;
+            } else if (*((u8 *)state + 0x39) == 4) {
+                *((u8 *)state + 0x39) = 3;
+                if (*((u8 *)&seqp->chanState[chan] + 0x28) != 0) {
+                    __n_seqpReleaseVoice(seqp, &state->voice.node.prev,
+                        (*(s32 *)((u8 *)&seqp->chanState[chan] + 0x24) < 0x3E80)
+                            ? 0x3E80
+                            : *(s32 *)((u8 *)&seqp->chanState[chan] + 0x24));
+                } else {
+                    __n_seqpReleaseVoice(seqp, &state->voice.node.prev,
+                        ((*(ALSound **)((u8 *)state + 0x24))->envelope->releaseTime < 0x3E80)
+                            ? 0x3E80
+                            : (*(ALSound **)((u8 *)state + 0x24))->envelope->releaseTime);
+                }
+            }
+        }
+    }
+}
 
 void func_1001A224(N_ALCSPlayer *seqp, s32 arg1, s32 chan, s32 arg3) {
     N_ALSoundState *state;
@@ -128,7 +157,16 @@ void func_1001A3FC(struct24 *arg0, s32 arg1, s32 arg2, s32 arg3) {
     func_1001263C(arg0->unk36 * 100 + arg3, 0x7FFF, 0x40);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/init_19B50/func_1001A45C.s")
+void func_1001A45C(N_ALCSPlayer *seqp, u8 chan) {
+    N_ALSoundState *state;
+    s16 tmp;
+    for (state = seqp->vAllocHead; state != NULL; state = state->voice.node.next) {
+        if ((state->chan == chan) && (state->unk38 != 3)) {
+            tmp = __n_vsVol(state, seqp);
+            n_alSynSetVol(&state->voice.node.prev, tmp, __n_vsDelta(state, seqp->curTime));
+        }
+    }
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/init_19B50/func_1001A508.s")
 
 void func_1001A704(N_ALCSPlayer *seqp, s32 arg1, s32 chan, s32 arg3) {

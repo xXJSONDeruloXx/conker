@@ -287,7 +287,24 @@ void func_10017594(N_ALUnknownStruct1 *arg0) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/init_15550/func_10017604.s")
+void func_10017604(u8 arg0) {
+    s32 mask;
+    N_ALEvent event;
+    N_ALUnknownStruct1 *ptr;
+
+    mask = osSetIntMask(1);
+    ptr = D_8002BA20;
+    while (ptr) {
+        event.type = 1024;
+        event.msg.unknown1.unk0 = ptr;
+        if ((ptr->unk53 & arg0) == arg0) {
+            event.msg.unknown1.unk0->unk53 &= -0x11;
+            n_alEvtqPostEvent(&D_8002BA2C->evtq, &event, 0, 2);
+        }
+        ptr = ptr->node.next;
+    }
+    osSetIntMask(mask);
+}
 // NON-MATCHING: stack isnt quite right
 // void func_10017604(u8 arg0) {
 //     s32 mask;

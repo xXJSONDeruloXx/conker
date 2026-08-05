@@ -3,7 +3,21 @@
 #pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/n_csq/n_alCSeqNew.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/n_csq/n_alCSeqNextEvent.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/n_csq/__n_alCSeqGetTrackEvent.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/n_csq/func_100186DC.s")
+void func_100186DC(ALCSeq *seq, ALCSeqMarker *marker) {
+    s32 i;
+
+    seq->validTracks = marker->validTracks;
+    seq->lastTicks = marker->lastTicks;
+    seq->lastDeltaTicks = marker->lastDeltaTicks;
+
+    for (i = 0; i < 16; i++) {
+        seq->curLoc[i] = marker->curLoc[i];
+        seq->curBUPtr[i] = marker->curBUPtr[i];
+        seq->curBULen[i] = marker->curBULen[i];
+        seq->lastStatus[i] = marker->lastStatus[i];
+        seq->evtDeltaTicks[i] = marker->evtDeltaTicks[i];
+    }
+}
 // void func_100186DC(void *arg0, void *arg1) {
 //     s32 sp4;
 //     s32 temp_t0;
@@ -31,7 +45,44 @@
 //     }
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/n_csq/func_10018790.s")
+void func_10018790(ALCSeq *seq, ALCSeqMarker *markers, u32 count, u32 base) {
+    N_ALEvent event;
+    ALCSeq tmp;
+    s32 j;
+    s32 i;
+    ALCSeqMarker lclMarker;
+
+    n_alCSeqNew(&tmp, (u8 *)seq->base);
+
+    for (i = 0; i < count; i++) {
+        markers[i].lastTicks = 0;
+    }
+
+    do {
+        lclMarker.validTracks = tmp.validTracks;
+        lclMarker.lastTicks = tmp.lastTicks;
+        lclMarker.lastDeltaTicks = tmp.lastDeltaTicks;
+        for (j = 0; j < 16; j++) {
+            lclMarker.curLoc[j] = tmp.curLoc[j];
+            lclMarker.curBUPtr[j] = tmp.curBUPtr[j];
+            lclMarker.curBULen[j] = tmp.curBULen[j];
+            lclMarker.lastStatus[j] = tmp.lastStatus[j];
+            lclMarker.evtDeltaTicks[j] = tmp.evtDeltaTicks[j];
+        }
+        n_alCSeqNextEvent(&tmp, &event, 0);
+        if (event.type == AL_CSP_LOOPEND) {
+            if ((s32)event.msg.midi.duration >> 8 >= base &&
+                (s32)event.msg.midi.duration >> 8 < base + count) {
+                if (markers[((s32)event.msg.midi.duration >> 8) - base].lastTicks == 0) {
+                    markers[((s32)event.msg.midi.duration >> 8) - base] = lclMarker;
+                    if (--i <= 0) {
+                        return;
+                    }
+                }
+            }
+        }
+    } while (event.type != AL_SEQ_END_EVT);
+}
 
 u8 __getTrackByte(ALCSeq *seq, s32 track) {
     u8 theByte;

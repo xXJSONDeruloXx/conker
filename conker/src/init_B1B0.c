@@ -421,7 +421,24 @@ s32 func_1000CD40(s32 arg0, s32 arg1, s32 arg2) {
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000D2F8.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000D758.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000D96C.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000DE1C.s")
+void func_1000DE1C(s32 arg0, s32 arg1) {
+    s32 count;
+    s32 i;
+    s32 sp34[3];
+
+    arg0 &= 0xFFF;
+    if (arg0 == 0) {
+        func_1000DEC4();
+        count = func_1000B548(sp34);
+        for (i = 0; i < count; i++) {
+            if (sp34[i] > 0) {
+                func_1000D96C(0, sp34[i], arg1);
+            }
+        }
+    } else {
+        func_1000D96C(0, arg0, arg1);
+    }
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000DEC4.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000DF68.s")
 

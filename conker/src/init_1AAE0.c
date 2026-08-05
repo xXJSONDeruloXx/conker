@@ -2,7 +2,31 @@
 
 void __n_resetPerfChanState(N_ALSeqPlayer *seqp, s32 chan);
 
-#pragma GLOBAL_ASM("asm/nonmatchings/init_1AAE0/func_1001AAE0.s")
+void func_1001AAE0(N_ALSeqPlayer *seqp, N_ALVoice *voice) {
+    N_ALVoiceState *last;
+    N_ALVoiceState *vs;
+
+    last = NULL;
+    vs = seqp->vAllocHead;
+
+    if (vs) do {
+        if (&vs->voice == voice) {
+            if (last) {
+                last->next = vs->next;
+            } else {
+                seqp->vAllocHead = vs->next;
+            }
+            if (seqp->vAllocTail == vs) {
+                seqp->vAllocTail = last;
+            }
+            vs->next = seqp->vFreeList;
+            seqp->vFreeList = vs;
+            seqp->usedVoices--;
+            return;
+        }
+        last = vs;
+    } while ((vs = vs->next) != NULL);
+}
 // void func_1001AAE0(void *arg0, s32 arg1) {
 //     void *sp4;
 //     void *sp0;
@@ -350,7 +374,24 @@ ALPan __n_vsPan(N_ALVoiceState *vs, N_ALSeqPlayer *seqp)
 }
 
 // not vanilla
-#pragma GLOBAL_ASM("asm/nonmatchings/init_1AAE0/__n_initFromBank.s")
+void __n_initFromBank(N_ALSeqPlayer *seqp, ALBank *b)
+{
+    s32 i;
+    ALInstrument *inst;
+
+    inst = NULL;
+    for (i = 1; inst == NULL; i++) {
+        inst = b->instArray[i];
+    }
+
+    for (i = 0; i < seqp->maxChannels; i++) {
+        __n_resetPerfChanState(seqp, i);
+    }
+
+    if (b->percussion) {
+        __n_resetPerfChanState(seqp, i);
+    }
+}
 
 void __n_initChanState(N_ALSeqPlayer *seqp)
 {

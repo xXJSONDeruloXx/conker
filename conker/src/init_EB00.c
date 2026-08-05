@@ -303,7 +303,25 @@ void func_1000FC18(u16 arg0, s16 arg1, s16 arg2, s16 arg3, u16 arg4) {
         } while (i < D_80042760);
     }
 }
-#pragma GLOBAL_ASM("asm/nonmatchings/init_EB00/func_1000FD38.s")
+void func_1000FD38(s32 arg0, s32 arg1, s32 arg2) {
+    struct15 *p;
+    s32 *new_var;
+    s32 count;
+    s32 i;
+
+    count = D_80042760;
+    p = D_80041FE0;
+    for (i = 0; i < count; i++, p++) {
+        if ((arg0 == p->unk14) && (arg1 == p->unk18) && (arg2 == p->unk1C)) {
+            new_var = &D_80042760;
+            if (p->unk24 != 0) {
+                func_100111C8(p->unk24);
+                count = *new_var;
+            }
+            p->unk10 |= 0x80;
+        }
+    }
+}
 void func_1000FDF4(u16 arg0) {
     s32 temp_s2;
     s32 i;
@@ -347,7 +365,21 @@ void func_1000FDF4(u16 arg0) {
 //     return phi_return;
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/init_EB00/func_1000FEF0.s")
+s32 func_1000FEF0(u16 arg0, void *arg1, s32 arg2) {
+    u16 id;
+    s32 i;
+
+    if (!arg0) {
+        return -1;
+    }
+    for (i = 0; i < D_80042760; i++) {
+        if ((arg0 == (*(&D_80041FE0[i])).unk24) && ((s32) arg1 == D_80041FE0[i].unk18) &&
+            (arg2 == D_80041FE0[i].unk1C) && ((D_80041FE0[i].unk10 & 0x80) == 0)) {
+            return i;
+        }
+    }
+    return -1;
+}
 // NON-MATCHING: needs a re-work
 // s32 func_1000FEF0(u16 arg0, struct127 *arg1, s32 arg2) {
 //     s32 i;
@@ -369,7 +401,19 @@ void func_1000FDF4(u16 arg0) {
 //     return -1;
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/init_EB00/func_1000FF90.s")
+s32 func_1000FF90(s32 arg0, s32 arg1, s32 arg2) {
+    s32 i;
+
+    for (i = 0; i < D_80042760; i++) {
+        if ((arg0 == D_80041FE0[i].unk14) &&
+            ((arg1 == D_80041FE0[i].unk18) || (arg1 == -1)) &&
+            ((arg2 == D_80041FE0[i].unk1C) || ((u32) arg2 == 0xFFFFFFFFU)) &&
+            ((D_80041FE0[i].unk10 & 0x80) == 0)) {
+            return i;
+        }
+    }
+    return -1;
+}
 void func_1001001C(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     s32 i;
     struct15 *ptr;
@@ -387,7 +431,24 @@ void func_1001001C(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
         } while (i < D_80042760);
     }
 }
-#pragma GLOBAL_ASM("asm/nonmatchings/init_EB00/func_100100E0.s")
+void func_100100E0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
+    s32 count;
+    struct15 *p;
+
+    p = D_80041FE0;
+    count = D_80042760;
+    if (count > 0) {
+        p = D_80041FE0;
+        do {
+            if ((arg0 == p->unk14) && (arg1 == p->unk18) && (arg2 == p->unk1C)) {
+                p->unk14 = arg3;
+                p->unk18 = arg4;
+                p->unk1C = arg5;
+            }
+            p++;
+        } while (p < &D_80041FE0[count]);
+    }
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/init_EB00/func_10010154.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/init_EB00/func_10010344.s")
 void func_10010558(u16 arg0, struct127 *arg1, s32 arg2, s16 arg3, u16 arg4, s32 arg5) {

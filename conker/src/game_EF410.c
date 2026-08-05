@@ -142,7 +142,26 @@ void func_150C2804(s32 arg0, s32 arg1, s32 arg2, s16 arg3, u8 arg4, s32 arg5) {
 #pragma GLOBAL_ASM("asm/nonmatchings/game_EF410/func_150C29F0.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_EF410/func_150C2C00.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_EF410/func_150C2FCC.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_EF410/func_150C308C.s")
+s32 func_150C308C(void *arg0) {
+    u8 ret;
+    struct17 *temp_v0;
+    f32 sum;
+
+    ret = 0;
+    if (*(s16 *)((s32)arg0 + 0x1C) >= 6) {
+        temp_v0 = func_15144B34(D_80082FA4);
+        sum = (temp_v0->unk0 * temp_v0->unk0) + (temp_v0->unk8 * temp_v0->unk8);
+        if (sum < D_800A0310) {
+            ret = 1;
+        } else if (D_800A0314 < func_15144C8C(func_150484A0(temp_v0->unk0, temp_v0->unk8), *(f32 *)((s32)arg0 + 0x160))) {
+            ret = 1;
+        }
+    }
+    if (ret != 0) {
+        *(s16 *)((s32)arg0 + 0x1C) = 5;
+    }
+    return 1;
+}
 // ? func_150C308C(void *arg0) {
 //     u8 sp1F;
 //     f32 temp_f0;

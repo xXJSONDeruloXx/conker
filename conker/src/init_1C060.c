@@ -261,7 +261,58 @@ void n_alEvtqPostEvent(ALEventQueue *evtq, N_ALEvent *event, ALMicroTime delta, 
 //     }
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/init_1C060/func_1001C4F0.s")
+s32 func_1001C4F0(ALEventQueue *evtq, s16 type)
+{
+    N_ALEventListItem *item;
+    N_ALEventListItem *next;
+    N_ALEventListItem *el;
+    N_ALEventListItem *nextCopy;
+    OSIntMask savedMask;
+    s32 firstDelta;
+    s32 cumDelta;
+    ALLink *unlinkEl;
+    ALLink *linkEl;
+    ALLink *after;
+
+    firstDelta = 0;
+    cumDelta = 0;
+    savedMask = osSetIntMask(1);
+    item = (N_ALEventListItem *)evtq->allocList.next;
+    if (item) {
+        do {
+            next = (N_ALEventListItem *)item->node.next;
+            el = item;
+            nextCopy = next;
+            cumDelta += el->delta;
+            if (el->evt.type == type) {
+                if (firstDelta == 0) {
+                    firstDelta = cumDelta;
+                }
+                if (nextCopy) {
+                    nextCopy->delta = nextCopy->delta + el->delta;
+                }
+                unlinkEl = (ALLink *)item;
+                if (unlinkEl->next) {
+                    unlinkEl->next->prev = unlinkEl->prev;
+                }
+                if (unlinkEl->prev) {
+                    unlinkEl->prev->next = unlinkEl->next;
+                }
+                linkEl = (ALLink *)item;
+                after = &evtq->freeList;
+                linkEl->next = after->next;
+                linkEl->prev = after;
+                if (after->next) {
+                    after->next->prev = linkEl;
+                }
+                after->next = linkEl;
+            }
+            item = next;
+        } while (item);
+    }
+    osSetIntMask(savedMask);
+    return firstDelta;
+}
 // s32 func_1001C4F0(void *arg0, s16 arg1) {
 //     void *sp3C;
 //     void *sp38;

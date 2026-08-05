@@ -203,8 +203,59 @@ void _n_freeParam(ALParam *param)
   n_syn->paramList = param;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/n_synthesizer/_n_collectPVoices.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/n_synthesizer/_n_freePVoice.s")
+void _n_collectPVoices(void)
+{
+    N_PVoice *pvoice;
+    ALLink *element;
+    ALLink *ln;
+    ALLink *to;
+    ALLink *element2;
+
+    while ((pvoice = (N_PVoice *)n_syn->pLameList.next) != 0) {
+        element = (ALLink *)pvoice;
+        if (element->next)
+            element->next->prev = element->prev;
+        if (element->prev)
+            element->prev->next = element->next;
+
+        ln = (ALLink *)pvoice;
+        to = &n_syn->pFreeList;
+        ln->next = to->next;
+        ln->prev = to;
+        if (to->next)
+            to->next->prev = ln;
+        to->next = ln;
+
+        element2 = (ALLink *)&pvoice->vvoice;
+        if (element2->next)
+            element2->next->prev = element2->prev;
+        if (element2->prev)
+            element2->prev->next = element2->next;
+
+        pvoice->vvoice = 0;
+        *(s32 *)((u8 *)pvoice + 0xC) = 0;
+    }
+}
+void _n_freePVoice(N_PVoice *pvoice)
+{
+    ALLink *element;
+    ALLink *ln;
+    ALLink *to;
+
+    element = (ALLink *)pvoice;
+    if (element->next)
+        element->next->prev = element->prev;
+    if (element->prev)
+        element->prev->next = element->next;
+
+    ln = (ALLink *)pvoice;
+    to = &n_syn->pLameList;
+    ln->next = to->next;
+    ln->prev = to;
+    if (to->next)
+        to->next->prev = ln;
+    to->next = ln;
+}
 
 s32 _n_timeToSamplesNoRound(s32 micros) {
     f32 tmp = (((f32) micros * (f32) n_syn->outputRate) / D_8002C750) + 0.5f; // 1000000.0f
@@ -216,7 +267,22 @@ s32 _n_timeToSamples( s32 micros)
   return _n_timeToSamplesNoRound( micros) & ~0xf;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/n_synthesizer/__n_nextSampleTime.s")
+static s32 __n_nextSampleTime(ALPlayer **client)
+{
+    u32 delta = 0x7fffffff;     /* max delta for s32 */
+    ALPlayer *cl;
+
+    *client = 0;
+
+    for (cl = n_syn->head; cl != 0; cl = cl->next) {
+        if ((u32)(cl->samplesLeft - n_syn->curSamples) < delta) {
+            *client = cl;
+            delta = cl->samplesLeft - n_syn->curSamples;
+        }
+    }
+
+    return (*client)->samplesLeft;
+}
 // static s32 __n_nextSampleTime(ALPlayer **client)
 // {
 //   ALMicroTime temp,delta = 0x7fffffff;     /* max delta for s32 */

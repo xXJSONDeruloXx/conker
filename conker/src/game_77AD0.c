@@ -473,7 +473,34 @@ void func_1504C854(struct127 *arg0) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_77AD0/func_1504C8BC.s")
+s32 func_1504C8BC(struct127 *arg0) {
+    struct126 *v1 = arg0->unk31C;
+
+    if (v1 == 0) {
+        return 1;
+    }
+    if ((arg0->unk1D4 != 0) || (D_800BE9F0 == 0x33) || (arg0->interaction_state == 0x25)) {
+        ((u8 *)v1)[0x1A8] = 0;
+        return 1;
+    }
+    if ((arg0->unk127 & 1) == D_800CC2B8) {
+        if (((u8 *)v1)[0x1A8] != 0) {
+            *(s16 *)&D_800CC2BA = D_800BE9E4;
+            D_800BE9E4 += ((u8 *)arg0->unk31C)[0x1A8];
+            D_800BE9A4 = (f32) D_800BE9E4 * 0.5f;
+            if (D_800BE9A4 != 0.0f) {
+                D_800BE9A8 = 1.0f / D_800BE9A4;
+            } else {
+                D_800BE9A8 = 0.0f;
+            }
+            ((u8 *)arg0->unk31C)[0x1A8] = 0;
+            return 2;
+        }
+        return 1;
+    }
+    ((u8 *)v1)[0x1A8] = ((u8 *)v1)[0x1A8] + D_800BE9E4;
+    return 0;
+}
 
 void func_1504C9E4(struct127 *arg0, s8 arg1, u8 arg2) {
     u8 phi_a2;

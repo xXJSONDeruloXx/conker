@@ -79,11 +79,38 @@ void func_151F2BA8(void) {
     osSetIntMask(mask);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/game_21FC90/func_151F2BE8.s")
+void func_151F2BE8(void) {
+    u32 mask = osSetIntMask(1);
+    if (D_800E0E04 == 5) {
+        D_800E0E04 = 6;
+    } else {
+        D_800E0E04 = 2;
+    }
+    osSetIntMask(mask);
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/game_21FC90/func_151F2C4C.s")
+void func_151F2C4C(void) {
+    u32 mask = osSetIntMask(1);
+    if (D_800E0E04 == 2) {
+        D_800E0E18 = 5;
+        D_800E0E04 = 7;
+    } else if (D_800E0E04 == 6) {
+        D_800E0E18 = 5;
+        D_800E0E04 = 5;
+    }
+    osSetIntMask(mask);
+}
 
-#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/game_21FC90/func_151F2CDC.s")
+s32 func_151F2CDC(void) {
+    s32 ret = 0;
+    u32 mask = osSetIntMask(1);
+
+    if ((D_800E0E04 == 1) || (D_800E0E04 == 5) || (D_800E0E04 == 6) || (D_800E0E04 == 7) || (D_800E0E04 == 2)) {
+        ret = D_800E0E04;
+    }
+    osSetIntMask(mask);
+    return ret;
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/game_21FC90/func_151F2D6C.s")
 
