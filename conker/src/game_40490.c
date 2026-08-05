@@ -298,7 +298,32 @@ s32 func_150142EC(struct134 *arg0) {
 #pragma GLOBAL_ASM("asm/nonmatchings/game_40490/func_150144B8.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_40490/func_1501474C.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_40490/func_15014B60.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_40490/func_15014F6C.s")
+typedef struct { struct134 *unk0; u32 unk4; u32 unk8; u32 unkC; f32 unk10[4][4]; u8 unk50; u8 unk51; u8 pad52[0x2]; } StructF40490;
+s32 func_15014F6C(struct134 *arg0) {
+    StructF40490 tmp;
+    struct37 *temp_v0;
+    u8 r;
+    s32 v;
+
+    arg0->unk16 |= 4;
+    tmp.unk51 = arg0->unk20;
+    v = (arg0->unk1C & 1) ? 1 : 0;
+    tmp.unk50 = v;
+    tmp.unk0 = arg0;
+    tmp.unk4 = arg0->unk18 & 0xFFFF;
+    tmp.unk8 = ((u32) arg0->unk18 >> 16) & 0xFFFF;
+    r = func_150ADA20();
+    tmp.unkC = r % (tmp.unk8 + 1) + tmp.unk4;
+    func_150A8050(tmp.unk10, *(f32 *) &arg0->unkC, *(f32 *) &arg0->unk10, 0.0f);
+    tmp.unk10[3][0] = (f32) ((s16 *) arg0)[0];
+    tmp.unk10[3][1] = (f32) ((s16 *) arg0)[1];
+    tmp.unk10[3][2] = (f32) ((s16 *) arg0)[2];
+    temp_v0 = func_15149130(0x12C, -1, 0x31, -1, 0, 0x2A, 0x54, 0xFF, 0);
+    if (temp_v0 != NULL) {
+        memcpy(&temp_v0->unk28, &tmp, 0x54);
+    }
+    return 1;
+}
 
 s32 func_150150A4(void) {
     struct17 *temp_v0 = func_1515F1B0();
