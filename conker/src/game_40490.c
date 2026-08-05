@@ -263,7 +263,38 @@ s32 func_150142AC(struct134 *arg0) {
     return 1;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_40490/func_150142EC.s")
+extern f32 D_80096680, D_80096684;
+typedef struct { struct134 *unk0; f32 unk4; f32 unk8; f32 unkC; f32 unk10; f32 unk14; } StructH40490;
+s32 func_150142EC(struct134 *arg0) {
+    StructH40490 tmp;
+    struct37 *temp_v0;
+    f32 a, b, c, d;
+    f32 ret;
+
+    arg0->unk16 |= 4;
+    if (D_80082FA0 >= 2) {
+        return 1;
+    }
+    if ((((u8 *) D_800D2E4C)[0x11] & 4) && (D_800BE9F0 == 0x13)) {
+        return 1;
+    }
+    a = (f32) ((u32) arg0->unk1C & 0xFFFF) * D_80096680;
+    b = (f32) (((u32) arg0->unk1C >> 16) & 0xFFFF) * D_80096680;
+    c = (f32) ((u32) arg0->unk20 & 0xFFFF) * D_80096680;
+    d = (f32) (((u32) arg0->unk20 >> 16) & 0xFFFF) * D_80096680;
+    ret = func_1514462C((s32) arg0);
+    tmp.unk0 = arg0;
+    tmp.unk4 = (a * ret) * D_80096684;
+    tmp.unk8 = (b * ret) * D_80096684;
+    tmp.unkC = c;
+    tmp.unk10 = d;
+    tmp.unk14 = 0.0f;
+    temp_v0 = func_15149130(0x12C, -1, 0x29, -1, 0, 0, 0x18, 0xFF, 0);
+    if (temp_v0 != NULL) {
+        memcpy(&temp_v0->unk28, &tmp, 0x18);
+    }
+    return 1;
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/game_40490/func_150144B8.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_40490/func_1501474C.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_40490/func_15014B60.s")
