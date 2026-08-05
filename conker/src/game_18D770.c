@@ -753,7 +753,19 @@ void func_15162110(s32 arg0) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_18D770/func_151621B8.s")
+void func_151621B8(struct236 *arg0) {
+    struct235 *temp_v0;
+    f32 temp_f0;
+
+    temp_v0 = &arg0->unk28;
+    temp_f0 = sinf(temp_v0->unk18);
+
+    func_1515D4D4(temp_v0->unk0 + (temp_f0 * temp_v0->unkC),
+                  temp_v0->unk4 + (temp_f0 * temp_v0->unk10),
+                  temp_v0->unk8 + (temp_f0 * temp_v0->unk14), 0);
+    temp_v0->unk18 += temp_v0->unk1C * D_800BE9A4;
+    temp_v0->unk18 = func_15144B68(temp_v0->unk18);
+}
 // NON-MATCHING: not quite right here
 // struct235 *func_151621B8(struct236 *arg0) {
 //     struct235 *temp_v0;

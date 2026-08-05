@@ -48312,7 +48312,7 @@
     ],
     "attempts": 1,
     "lastScore": 1.0,
-    "status": "pending",
+    "status": "matched",
     "history": [
       {
         "code": "void func_151621B8(struct236 *arg0) {\n    struct235 *temp_v0;\n    f32 temp_f0;\n\n    temp_v0 = &arg0->unk28;\n    temp_f0 = sinf(temp_v0->unk18);\n\n    func_1515D4D4(temp_v0->unk0 + (temp_f0 * temp_v0->unkC),\n                  temp_v0->unk4 + (temp_f0 * temp_v0->unk10),\n                  temp_v0->unk8 + (temp_f0 * temp_v0->unk14), 0);\n    temp_v0->unk18 += temp_v0->unk1C * D_800BE9A4;\n    temp_v0->unk18 = func_15144B68(temp_v0->unk18);\n}",
