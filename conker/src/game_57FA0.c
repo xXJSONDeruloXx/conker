@@ -70,7 +70,37 @@ s32 func_1502B110(s32 arg0, s32 arg1, s32 arg2, u32 arg3, ...) {
     }
     return ret;
 }
-#pragma GLOBAL_ASM("asm/nonmatchings/game_57FA0/func_1502B224.s")
+s32 func_1502B224(s32 arg0, s32 arg1, s32 hdr, s32 arg3) {
+    s32 size;
+    s32 *ptr;
+    s32 checksum;
+
+    size = ALIGN2(hdr & 0xFFFFFFF);
+    if (arg3 != 0) {
+        if ((u32)arg3 < (u32)size) {
+            size = arg3;
+        }
+    }
+
+    if ((hdr & 0x70000000) == 0x10000000) {
+        ptr = (s32 *)allocate_memory(size, 1, 2, 2);
+        if (ptr == 0) {
+            return 0;
+        }
+        func_10004514(arg0, ptr, ALIGN16(size), 1);
+        checksum = *ptr & 0x7FFFFFFF;
+        size = func_10006240((s32)ptr, arg1, D_8003809C);
+        if (size != checksum) {
+            D_8003C8E0 = 0xC000036;
+            func_150AD770();
+        }
+        func_10004074((s32)ptr);
+        return size;
+    } else {
+        func_10004514(arg0, arg1, ALIGN16(size), 1);
+        return size;
+    }
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/game_57FA0/func_1502B350.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_57FA0/func_1502B4A8.s")
 s32 func_1502B5C8(s32 *arg0, s32 arg1, ...) {

@@ -47215,7 +47215,7 @@
     ],
     "attempts": 11,
     "lastScore": 1.0,
-    "status": "pending",
+    "status": "matched",
     "history": [
       {
         "code": "s32 func_10006240(s32 arg0, s32 arg1, s32 arg2);\n\ns32 func_1502B224(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {\n    s32 size;\n    s32 check;\n    s32 result;\n    void *ptr;\n\n    size = (arg2 & 0x0FFFFFFF) + 1;\n    size &= ~1;\n    if (arg3 != 0) {\n        if ((u32)arg3 < (u32)size) {\n            size = arg3;\n        }\n    }\n    if ((arg2 & 0x70000000) == 0x10000000) {\n        ptr = allocate_memory(size, 1, 2, 2);\n        if (ptr == NULL) {\n            return 0;\n        }\n        func_10004514(arg0, ptr, (size + 0xF) & ~0xF, 1);\n        check = *(s32 *)ptr & 0x7FFFFFFF;\n        result = func_10006240((s32)ptr, arg1, D_8003809C);\n        if (result != check) {\n            D_8003C8E0 = 0x0C000036;\n            func_150AD770();\n        }\n        func_10004074(ptr);\n        return result;\n    }\n    func_10004514(arg0, (void *)arg1, (size + 0xF) & ~0xF, 1);\n    return size;\n}",
