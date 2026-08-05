@@ -51986,9 +51986,37 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 2,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "Gfx *func_150195A0(Gfx *arg0, s16 arg1)\n{\n    struct108 *sp2C;\n    Gfx *temp_v0;\n\n    sp2C = &D_800DBFF0[arg1];\n    if (D_800BEAC0 != 0) {\n        return arg0;\n    }\n    if (D_80084480 != 0) {\n        return arg0;\n    }\n    if ((func_1517EFAC(arg1) != 0) || ((D_800D18A0 & (1 << arg1)) != 0)) {\n        return arg0;\n    }\n    if (D_80082FA0 > 0) {\n        arg0 = func_1515D6D0((s32)func_1510B7B4(arg0, arg1), arg1);\n        func_1510B958(arg1);\n        gSPViewport(arg0++, (((D_800BE628 ^ 0) + (arg1 * 0x180)) + (D_800BE9C0 * 0x10)) + 0x40);\n        arg0 = (Gfx *) func_1501A490((s32) arg0, arg1, 0, 0, 0, 0);\n    }\n    arg0 = func_151135C4(arg0, 1, arg1);\n    if (D_800BE575 == 2) {\n        arg0 = func_151D6778(arg0);\n    }\n    arg0 = func_151674F8(arg0, 6, arg1, 0);\n    arg0 = func_151674F8(arg0, 6, arg1, 1);\n    arg0 = func_15186794(arg0, arg1);\n    arg0 = (Gfx *) func_1501A490((s32) arg0, arg1, 0, 0, 0, 0);\n    arg0 = func_1502BAD0(arg0, 1, arg1);\n    temp_v0 = func_15035FE8(arg0, arg1);\n    arg0 = temp_v0;\n    gSPMatrix(arg0++, &D_80089470, G_MTX_LOAD);\n    if (sp2C->unk5F0 & 1) {\n        arg0 = func_15018E88(arg0, arg1);\n        arg0 = func_151135C4(arg0, 0, arg1);\n        arg0 = func_15018F08(arg0, arg1);\n    } else {\n        arg0 = func_15018F08(arg0, arg1);\n        arg0 = func_151135C4(arg0, 0, arg1);\n        arg0 = func_15018E88(arg0, arg1);\n    }\n    arg0 = func_15188D00(arg0, 0, arg1);\n    arg0 = func_15188D00(arg0, 1, arg1);\n    arg0 = func_1502BAD0(arg0, 2, arg1);\n    arg0 = func_151674F8(arg0, 2, arg1, 0);\n    return func_151674F8(arg0, 2, arg1, 1);\n}",
+        "score": 0.0,
+        "reason": "compile_error",
+        "diffs": [],
+        "timestamp": "2026-08-05T15:46:03.321014+00:00"
+      },
+      {
+        "code": "Gfx *func_150195A0(Gfx *arg0, s16 arg1)\n{\n    struct108 *sp2C;\n    Gfx *temp_v0;\n\n    sp2C = &D_800DBFF0[arg1];\n    if (D_800BEAC0 != 0) {\n        return arg0;\n    }\n    if (D_80084480 != 0) {\n        return arg0;\n    }\n    if ((func_1517EFAC(arg1) != 0) || ((D_800D18A0 & (1 << arg1)) != 0)) {\n        return arg0;\n    }\n    if (D_80082FA0 > 0) {\n        arg0 = func_1515D6D0((s32)func_1510B7B4(arg0, arg1), arg1);\n        func_1510B958(arg1);\n        gSPViewport(arg0++, (((D_800BE628 ^ 0) + (arg1 * 0x180)) + (D_800BE9C0 * 0x10)) + 0x40);\n        arg0 = (Gfx *) func_1501A490((s32) arg0, arg1, 0, 0, 0, 0);\n    }\n    arg0 = func_151135C4(arg0, 1, arg1);\n    if (D_800BE575 == 2) {\n        arg0 = func_151D6778(arg0);\n    }\n    arg0 = func_151674F8(arg0, 6, arg1, 0);\n    arg0 = func_151674F8(arg0, 6, arg1, 1);\n    arg0 = func_15186794(arg0, arg1);\n    arg0 = (Gfx *) func_1501A490((s32) arg0, arg1, 0, 0, 0, 0);\n    arg0 = func_1502BAD0(arg0, 1, arg1);\n    temp_v0 = func_15035FE8(arg0, arg1);\n    arg0 = temp_v0;\n    gSPMatrix(arg0++, &D_80089470, G_MTX_LOAD);\n    if (sp2C->unk5F0 & 1) {\n        arg0 = func_15018E88(arg0, arg1);\n        arg0 = func_151135C4(arg0, 0, arg1);\n        arg0 = func_15018F08(arg0, arg1);\n    } else {\n        arg0 = func_15018F08(arg0, arg1);\n        arg0 = func_151135C4(arg0, 0, arg1);\n        arg0 = func_15018E88(arg0, arg1);\n    }\n    arg0 = func_15188D00(arg0, 0, arg1);\n    arg0 = func_15188D00(arg0, 1, arg1);\n    arg0 = func_1502BAD0(arg0, 2, arg1);\n    arg0 = func_151674F8(arg0, 2, arg1, 0);\n    return func_151674F8(arg0, 2, arg1, 1);\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-05T15:46:49.870717+00:00",
+        "contextPatch": [
+          {
+            "path": "conker/src/game_45B80.c",
+            "oldText": "void* func_151674F8(void *arg0, s32 arg1, s16 arg2, s32 arg3);\n",
+            "newText": "void* func_151674F8(void *arg0, s32 arg1, s16 arg2, s32 arg3);\nGfx *func_15174AA4(Gfx *arg0, s32 arg1, s32 arg2);\nGfx *func_1510B7B4(Gfx *arg0, s32 arg1);\nGfx *func_151135C4(Gfx *arg0, s32 arg1, s16 arg2);\nGfx *func_15186794(Gfx *arg0, s32 arg1);\nGfx *func_15188D00(Gfx *arg0, s32 arg1, s16 arg2);\nGfx *func_151D6778(Gfx *arg0);\nGfx *func_1502BAD0(Gfx *arg0, s32 arg1, s16 arg2);\nGfx *func_15035FE8(Gfx *arg0, s32 arg1);\nextern u8 D_80089470;\n"
+          },
+          {
+            "path": "conker/src/game_45B80.c",
+            "oldText": "void func_15018E88(void *arg0, s16 arg1) {\n    if (D_800BE616 == 0) {\n        func_1517D7B0(&arg0, 1);\n    }\n    arg0 = func_151674F8(arg0, 0, arg1, 0);\n    arg0 = func_151674F8(arg0, 0, arg1, 1);\n    func_15174AA4(arg0, D_800BE9F0, arg1);\n}\n",
+            "newText": "Gfx *func_15018E88(void *arg0, s16 arg1) {\n    if (D_800BE616 == 0) {\n        func_1517D7B0(&arg0, 1);\n    }\n    arg0 = func_151674F8(arg0, 0, arg1, 0);\n    arg0 = func_151674F8(arg0, 0, arg1, 1);\n    return func_15174AA4(arg0, D_800BE9F0, arg1);\n}\n"
+          }
+        ]
+      }
+    ]
   },
   {
     "function": "func_1513783C",

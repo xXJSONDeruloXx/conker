@@ -5,6 +5,15 @@
 
 
 void* func_151674F8(void *arg0, s32 arg1, s16 arg2, s32 arg3);
+Gfx *func_15174AA4(Gfx *arg0, s32 arg1, s32 arg2);
+Gfx *func_1510B7B4(Gfx *arg0, s32 arg1);
+Gfx *func_151135C4(Gfx *arg0, s32 arg1, s16 arg2);
+Gfx *func_15186794(Gfx *arg0, s32 arg1);
+Gfx *func_15188D00(Gfx *arg0, s32 arg1, s16 arg2);
+Gfx *func_151D6778(Gfx *arg0);
+Gfx *func_1502BAD0(Gfx *arg0, s32 arg1, s16 arg2);
+Gfx *func_15035FE8(Gfx *arg0, s32 arg1);
+extern u8 D_80089470;
 
 
 void func_150186D0(void) {
@@ -46,13 +55,13 @@ void func_15018DFC(void) {
     func_1507C8FC();
 }
 
-void func_15018E88(void *arg0, s16 arg1) {
+Gfx *func_15018E88(void *arg0, s16 arg1) {
     if (D_800BE616 == 0) {
         func_1517D7B0(&arg0, 1);
     }
     arg0 = func_151674F8(arg0, 0, arg1, 0);
     arg0 = func_151674F8(arg0, 0, arg1, 1);
-    func_15174AA4(arg0, D_800BE9F0, arg1);
+    return func_15174AA4(arg0, D_800BE9F0, arg1);
 }
 
 void *func_15018F08(void *arg0, s16 arg1) {
@@ -152,7 +161,54 @@ void *func_15019464(Gfx *arg0, s16 arg1) {
 //
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_45B80/func_150195A0.s")
+Gfx *func_150195A0(Gfx *arg0, s16 arg1)
+{
+    struct108 *sp2C;
+    Gfx *temp_v0;
+
+    sp2C = &D_800DBFF0[arg1];
+    if (D_800BEAC0 != 0) {
+        return arg0;
+    }
+    if (D_80084480 != 0) {
+        return arg0;
+    }
+    if ((func_1517EFAC(arg1) != 0) || ((D_800D18A0 & (1 << arg1)) != 0)) {
+        return arg0;
+    }
+    if (D_80082FA0 > 0) {
+        arg0 = func_1515D6D0((s32)func_1510B7B4(arg0, arg1), arg1);
+        func_1510B958(arg1);
+        gSPViewport(arg0++, (((D_800BE628 ^ 0) + (arg1 * 0x180)) + (D_800BE9C0 * 0x10)) + 0x40);
+        arg0 = (Gfx *) func_1501A490((s32) arg0, arg1, 0, 0, 0, 0);
+    }
+    arg0 = func_151135C4(arg0, 1, arg1);
+    if (D_800BE575 == 2) {
+        arg0 = func_151D6778(arg0);
+    }
+    arg0 = func_151674F8(arg0, 6, arg1, 0);
+    arg0 = func_151674F8(arg0, 6, arg1, 1);
+    arg0 = func_15186794(arg0, arg1);
+    arg0 = (Gfx *) func_1501A490((s32) arg0, arg1, 0, 0, 0, 0);
+    arg0 = func_1502BAD0(arg0, 1, arg1);
+    temp_v0 = func_15035FE8(arg0, arg1);
+    arg0 = temp_v0;
+    gSPMatrix(arg0++, &D_80089470, G_MTX_LOAD);
+    if (sp2C->unk5F0 & 1) {
+        arg0 = func_15018E88(arg0, arg1);
+        arg0 = func_151135C4(arg0, 0, arg1);
+        arg0 = func_15018F08(arg0, arg1);
+    } else {
+        arg0 = func_15018F08(arg0, arg1);
+        arg0 = func_151135C4(arg0, 0, arg1);
+        arg0 = func_15018E88(arg0, arg1);
+    }
+    arg0 = func_15188D00(arg0, 0, arg1);
+    arg0 = func_15188D00(arg0, 1, arg1);
+    arg0 = func_1502BAD0(arg0, 2, arg1);
+    arg0 = func_151674F8(arg0, 2, arg1, 0);
+    return func_151674F8(arg0, 2, arg1, 1);
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_45B80/func_150198FC.s")
 
