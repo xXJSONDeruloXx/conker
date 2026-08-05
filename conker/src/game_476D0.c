@@ -89,8 +89,23 @@ Gfx *func_1501A6CC(Gfx *arg0, s32 a, s32 b, s32 c, s32 d) {
     return arg0;
 }
 
-void func_150A7A00(f32 arg0, f32 arg1, s32 arg2, f32 arg3, f32 arg4, f32 arg5, f32* arg6, f32* arg7, f32* arg8, f32* arg9);
-#pragma GLOBAL_ASM("asm/nonmatchings/game_476D0/func_1501A764.s")
+void func_150A7A00(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 *arg4, f32 *arg5, f32 *arg6, f32 *arg7);
+typedef struct { s16 unk0; u8 pad2[6]; s16 unk8; u8 padA[6]; } A764Sub;
+typedef struct { u8 pad0[0xC]; f32 unkC; f32 unk10; u8 pad14[0x20]; f32 unk34; f32 unk38; u8 pad3C[0x8]; A764Sub unk44[19]; u8 pad174[0xC]; } A764Elem;
+#define A764_ELEM(i) (((A764Elem *) D_800BE628)[i])
+void func_1501A764(s16 arg0, f32 arg1, f32 arg2, f32 arg3, f32 *arg4, f32 *arg5, f32 *arg6) {
+    f32 sp34;
+    f32 sp30;
+    f32 sp2C;
+    f32 sp28;
+
+    func_150A7A00((s32) D_800D9D10 + (arg0 << 6), arg1, arg2, arg3, &sp34, &sp30, &sp2C, &sp28);
+    sp28 = 1.0f / sp28;
+    *arg4 = A764_ELEM(arg0).unk34 + ((A764_ELEM(arg0).unkC + 5.0f) * sp34 * sp28);
+    *arg5 = A764_ELEM(arg0).unk38 - ((A764_ELEM(arg0).unk10 + 5.0f) * sp30 * sp28);
+    *arg6 = (((sp2C * sp28) * (f32) A764_ELEM(arg0).unk44[D_800BE9C0].unk0) +
+             (f32) A764_ELEM(arg0).unk44[D_800BE9C0].unk8) * 32.0f;
+}
 // void func_1501A764(s16 arg0, f32 arg1, f32 arg2, f32 arg3, f32 *arg4, f32 *arg5, f32 *arg6) {
 //     f32 sp34;
 //     f32 sp30;
