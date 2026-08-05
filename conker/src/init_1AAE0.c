@@ -382,7 +382,110 @@ void __n_resetPerfChanState(N_ALSeqPlayer *seqp, s32 chan) {
     seqp->chanState[chan].unk8 = 0;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/init_1AAE0/func_1001B7D0.s")
+s32 func_1001BD34();
+void func_10012C5C(void *arg0, s32 arg1, s32 arg2);
+
+typedef struct {
+    void *unk0;
+    s16   unk4;
+    u8    unk6;
+    u8    unk7;
+    u8    unk8;
+    u8    unk9;
+    u8    padA[0x12];
+    s32   unk1C;
+    s32   unk20;
+    s32   unk24;
+    u8    unk28;
+    u8    unk29;
+    u8    unk2A;
+    u8    unk2B;
+    u8    unk2C;
+    u8    unk2D;
+    u8    unk2E;
+    u8    unk2F;
+    u8    unk30;
+    u8    unk31;
+    u8    unk32;
+    u8    unk33;
+    u8    unk34;
+    u8    unk35;
+    u8    unk36;
+    u8    unk37;
+    s16   unk38;
+    u8    pad3A[0x2];
+} B7DChanState;
+
+typedef struct {
+    u8    pad0[0x34];
+    void (*unk34)(void *);
+    s32   unk38;
+} B7DBankCb;
+
+typedef struct {
+    u8            pad0[0x14];
+    B7DBankCb    *unk14;
+    u8            pad18[0x8];
+    ALBank       *unk20;
+    u8            pad24[0x3C];
+    B7DChanState *unk60;
+} B7DSeqp;
+s32 func_1001B7D0(B7DSeqp *arg0, s32 arg1, s32 arg2) {
+    ALSound *sp24;
+    ALInstrument *sp20;
+    s32 sp1C;
+
+    sp20 = (ALInstrument *)func_1001BD34(arg0->unk14, &arg0->unk20->instArray[arg1], -1);
+    if (arg0->unk60[arg2].unk0 != 0) {
+        arg0->unk14->unk34(arg0->unk20->instArray[arg0->unk60[arg2].unk38]);
+        arg0->unk60[arg2].unk0 = 0;
+    }
+    if (sp20 != 0) {
+        for (sp1C = 0; sp1C < sp20->soundCount; sp1C++) {
+            sp24 = sp20->soundArray[sp1C];
+            if ((u32) sp24->envelope < 0x100000) {
+                func_10012C5C(sp24, (s32) sp20, arg0->unk14->unk38);
+            }
+        }
+        sp24 = sp20->soundArray[0];
+    }
+    if (sp20 != 0) {
+        if (sp20->soundCount == 0) {
+            return 0;
+        }
+        if (sp24 != 0) {
+            arg0->unk60[arg2].unk1C = sp24->envelope->attackTime;
+            arg0->unk60[arg2].unk20 = sp24->envelope->decayTime;
+            arg0->unk60[arg2].unk24 = sp24->envelope->releaseTime;
+            arg0->unk60[arg2].unk29 = sp24->envelope->attackVolume;
+            arg0->unk60[arg2].unk2A = sp24->envelope->decayVolume;
+        }
+        arg0->unk60[arg2].unk6 = sp20->pan;
+        arg0->unk60[arg2].unk9 = sp20->volume;
+        arg0->unk60[arg2].unk7 = sp20->priority;
+        arg0->unk60[arg2].unk4 = sp20->bendRange;
+        arg0->unk60[arg2].unk2C = sp20->tremType;
+        arg0->unk60[arg2].unk2D = sp20->tremRate;
+        arg0->unk60[arg2].unk2E = sp20->tremDepth;
+        arg0->unk60[arg2].unk2F = sp20->tremDelay;
+        arg0->unk60[arg2].unk30 = sp20->vibType;
+        arg0->unk60[arg2].unk31 = sp20->vibRate;
+        arg0->unk60[arg2].unk32 = sp20->vibDepth;
+        arg0->unk60[arg2].unk33 = sp20->vibDelay;
+        arg0->unk60[arg2].unk36 = 0;
+        arg0->unk60[arg2].unk0 = sp20;
+    } else {
+        arg0->unk60[arg2].unk36 = 1;
+    }
+    arg0->unk60[arg2].unk2B = 0;
+    arg0->unk60[arg2].unk28 = 0;
+    arg0->unk60[arg2].unk35 = 0;
+    arg0->unk60[arg2].unk38 = arg1;
+    if (sp20 == 0) {
+        return 1;
+    }
+    return 0;
+}
 s32 func_1001BD34(void *arg0, void *arg1, s32 arg2) {
     void *sp1C;
     s32 sp18;
