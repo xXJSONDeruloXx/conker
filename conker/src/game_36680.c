@@ -490,7 +490,29 @@ void func_1500ABA0(s32 arg0) {
 #pragma GLOBAL_ASM("asm/nonmatchings/game_36680/func_1500AF08.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_36680/func_1500B1F4.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_36680/func_1500B3B0.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_36680/func_1500B714.s")
+s32 func_1500B714(s16 arg0, u8 arg1, s32 arg2, s32 arg3, s32 arg4, s16 **arg5) {
+    u16 angle;
+    s32 x;
+    s32 y;
+    s32 z;
+    s32 angle_f;
+
+    angle_f = *(s16 *)&arg0;
+    angle = angle_f;
+
+    x = (arg5[0][0] + arg5[1][0] + arg5[2][0]) / 3;
+    y = (arg5[0][1] + arg5[1][1] + arg5[2][1]) / 3;
+    z = (arg5[0][2] + arg5[1][2] + arg5[2][2]) / 3;
+
+    arg4 = func_1500AF08(arg4, arg2, arg3, (s16)x, (s16)y, (s16)z, 0x80, arg1, arg4);
+
+    if ((f32)(u16)angle_f > 62.5f) {
+        angle = 0x3E;
+    }
+
+    func_1000FA64(0x4D, (s16)x, (s16)y, (s16)z, 0x8000, angle, angle >> 3, 0, 0, 0, 0, 0);
+    return arg4;
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/game_36680/func_1500B8F4.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_36680/func_1500BAB8.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_36680/func_1500BC7C.s")

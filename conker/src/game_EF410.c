@@ -141,7 +141,16 @@ void func_150C2804(s32 arg0, s32 arg1, s32 arg2, s16 arg3, u8 arg4, s32 arg5) {
 #pragma GLOBAL_ASM("asm/nonmatchings/game_EF410/func_150C2898.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_EF410/func_150C29F0.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_EF410/func_150C2C00.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_EF410/func_150C2FCC.s")
+s32 func_150C2FCC(f32 *arg0) {
+    arg0[11] -= arg0[11] * arg0[84];
+    arg0[12] -= arg0[12] * arg0[84];
+    arg0[14] += (arg0[20] * D_800BE9A4) + (((0.5f * arg0[19]) * D_800BE9A4) * D_800BE9A4);
+    arg0[20] += arg0[19] * D_800BE9A4;
+    if ((arg0[11] < 10.0f) || (arg0[12] < 10.0f)) {
+        return 0;
+    }
+    return 1;
+}
 s32 func_150C308C(void *arg0) {
     u8 ret;
     struct17 *temp_v0;

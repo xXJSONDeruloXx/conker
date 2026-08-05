@@ -137,4 +137,27 @@ s32 func_15043B70(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_70200/func_15043BB8.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_70200/func_15043CA4.s")
+s32 func_15043CA4(struct105 *arg0, u8 *arg1, s32 arg2) {
+    s32 v1;
+    s32 sp30;
+    s32 head;
+    s32 ret;
+
+    sp30 = 0;
+    head = arg0->unk8;
+    if (head == arg0->unkC) {
+        return 0;
+    }
+    ret = func_15043AC8((u8 *)arg0->unk0, arg0->unk4, head, (u8 *)&sp30, 4);
+    v1 = sp30;
+    if (arg2 < v1) {
+        arg2 -= 1;
+        ret = func_15043AC8((u8 *)arg0->unk0, arg0->unk4, ret, arg1, arg2);
+        arg1[arg2] = 0;
+        ret = func_15043B70((u8 *)arg0->unk0, arg0->unk4, ret, sp30 - arg2);
+    } else if (v1 != 0) {
+        ret = func_15043AC8((u8 *)arg0->unk0, arg0->unk4, ret, arg1, sp30);
+    }
+    arg0->unk8 = ret;
+    return sp30;
+}

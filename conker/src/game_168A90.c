@@ -21,7 +21,28 @@ extern s32 (*D_80089C28[])(Obj168A90B *, s32);
 
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_168A90/func_1513B5E0.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_168A90/func_1513B798.s")
+void func_1513B798(struct102 *arg0) {
+    s32 idx;
+    u8 done = 0;
+
+    if (*((u8 *)arg0 + 0x10) & 1) {
+        *(s16 *)((u8 *)arg0 + 0x14) -= D_800BE9E4;
+        if (*(s16 *)((u8 *)arg0 + 0x14) < 0) {
+            done = 1;
+        }
+    }
+    if (!done) {
+        idx = *(s8 *)((u8 *)arg0 + 0x11);
+        if (idx != -1) {
+            if (D_80089C18[idx](arg0) == 0) {
+                done = 1;
+            }
+        }
+    }
+    if (done) {
+        func_1516972C(arg0);
+    }
+}
 Gfx *func_1513B83C(Gfx *arg0, Obj168A90B *arg1, s16 arg2) {
     s8 v0;
 

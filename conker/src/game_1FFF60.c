@@ -84,7 +84,41 @@ void func_151D2E14(struct102 *arg0) {
     func_15169824(tmp);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_1FFF60/func_151D2E5C.s")
+void func_151D2E5C(struct16 *arg0, struct223 *arg1, u8 arg2)
+{
+  s32 temp_v0;
+  s32 temp_v1;
+  u8 temp_a2;
+  u8 temp_a3;
+  if (arg2 == 0)
+  {
+    temp_v0 = arg0->unk10;
+    temp_v1 = arg1->unk0;
+    temp_a2 = arg0->unk14;
+    temp_a3 = arg1->unk4.ub;
+    if ((temp_v0 == temp_v1) || (temp_a2 == temp_a3))
+    {
+      func_1516972C((struct102 *) arg0);
+    }
+  }
+  else
+    if (arg2 == 0x2D)
+  {
+    temp_v0 = arg1->unk0;
+    temp_v1 = arg0->unk10;
+    if (temp_v0 == temp_v1)
+    {
+      arg0->unk10 = arg1->unk4.w;
+      arg0->unk14 = arg1->unk9;
+    }
+    else
+      if ((temp_v1 ^ 0) == arg1->unk4.w)
+    {
+      arg0->unk10 = temp_v0;
+      arg0->unk14 = arg1->unk8;
+    }
+  }
+}
 // NON-MATCHING: JUSTREG (mostly)
 // s32 func_151D2E5C(struct16 *arg0, struct223 *arg1, u8 arg2) {
 //     s32 temp_v0;

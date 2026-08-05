@@ -199,7 +199,22 @@ s32 func_15134CEC(void *arg0) {
     return 1;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_161520/func_15134DAC.s")
+void *func_15134DAC(void *arg0, s32 arg1) {
+    void *temp_v1;
+
+    temp_v1 = func_15167A68(0x29, 0, arg1 + 0x80, 1, 0xFF, 1);
+    if (temp_v1 == 0) {
+        return NULL;
+    }
+    memcpy((s32)temp_v1 + 0x18, arg0, 0x3C);
+    *(s16 *)((s32)temp_v1 + 0x54) = -(*(s16 *)((s32)arg0 + 0x28));
+    *(s32 *)((s32)temp_v1 + 0x10) = 1;
+    *(s32 *)((s32)temp_v1 + 0x14) = 0;
+    *(f32 *)((s32)temp_v1 + 0x70) = 0.0f;
+    *(f32 *)((s32)temp_v1 + 0x74) = 0.0f;
+    *(f32 *)((s32)temp_v1 + 0x78) = 0.0f;
+    return temp_v1;
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_161520/func_15134E48.s")
 
@@ -376,7 +391,40 @@ void func_15136A50(s32 arg0, s32 arg1, s32 arg2, s16 arg3, u8 arg4, s32 arg5) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_161520/func_1513783C.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_161520/func_15137C64.s")
+s32 func_15137C64(struct17 *arg0, struct17 *arg1, struct17 *arg2, struct17 *arg3,
+                  struct17 *arg4, struct17 *arg5, struct17 *arg6, struct17 *arg7) {
+    f32 sp2C;
+    f32 sp28;
+
+    if ((arg5 != NULL) && (arg6 != NULL)) {
+        *arg0 = *arg5;
+        *arg1 = *arg6;
+    } else if (arg5 != NULL) {
+        *arg0 = *arg5;
+        *arg1 = *arg5;
+    } else if (arg6 != NULL) {
+        *arg0 = *arg6;
+        *arg1 = *arg6;
+    } else {
+        return 0;
+    }
+
+    if (arg7 == NULL) {
+        arg2->unk0 = arg1->unk0 - arg0->unk0;
+        arg2->unk4 = arg1->unk4 - arg0->unk4;
+        arg2->unk8 = arg1->unk8 - arg0->unk8;
+        if (func_15145128(arg2, arg2, &sp2C, &sp28) == 0) {
+            return 0;
+        }
+    } else {
+        *arg2 = *arg7;
+    }
+
+    if (func_15146078(arg2, arg3, arg4) == 0) {
+        return 2;
+    }
+    return 1;
+}
 
 s32 func_15137E10(struct259 *arg0) {
     arg0->unk74 = ((func_150ADA68() * 50.0f) + 580.0f) * D_800A4828;

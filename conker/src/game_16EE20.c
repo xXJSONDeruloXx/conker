@@ -380,7 +380,17 @@ void func_15143834(s16 arg0, s16 arg1, f32 arg2) {
     func_15143794(arg0, arg1, arg2);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15143874.s")
+void func_15143874(s32 arg0, f32 arg1, f32 *arg2, f32 *arg3) {
+    f32 temp;
+    f32 temp2;
+    u8 idx;
+
+    temp = func_151423D8((u8) arg0);
+    idx = (s16) arg0 - 0x40;
+    temp2 = func_151423D8(idx);
+    *arg2 = arg1 * temp2;
+    *arg3 = arg1 * temp;
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_151438D8.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15143D18.s")
 s32 func_15143DA8(s32 *arg0, s32 min, s32 max) {
@@ -505,7 +515,32 @@ void *func_15144B34(s32 arg0) {
     return (void *)((arg0 * 0x9A0) + (s32)D_800DBFF0 + 0x2F8);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15144B68.s")
+f32 func_15144B68(f32 arg0)
+{
+  f32 new_var;
+  new_var = D_800A56A4;
+  if (1)
+  {
+    f32 v = arg0;
+    if (new_var < v)
+    {
+      do
+      {
+        v -= new_var;
+      }
+      while (new_var < v);
+    }
+    if (v < 0.0f)
+    {
+      do
+      {
+        v += new_var;
+      }
+      while (v < 0.0f);
+    }
+    return v;
+  }
+}
 f32 func_15144BC8(f32 arg0) {
     f32 range = 360.0f;
     f32 val = arg0;
@@ -744,7 +779,21 @@ u8 func_15145C90(s32 arg0) {
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15145EA4.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15146078.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_151462C8.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_151464B8.s")
+u8 func_151464B8(s16 *arg0) {
+    s32 i;
+    s16 mask;
+    s16 field;
+    s32 ret;
+
+    i = 0;
+    mask = 0;
+    for (; i <= D_80082FA0; i++) {
+        mask |= 1 << i;
+    }
+    ret = (arg0[1] & mask) == 0;
+    field = arg0[1];
+    return ret;
+}
 
 void func_15146508(struct127 *arg0, struct127 *arg1) {
     struct193 tmp;
@@ -758,7 +807,17 @@ void func_15146508(struct127 *arg0, struct127 *arg1) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_1514654C.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_1514672C.s")
+s32 func_1514672C(struct17 *arg0) {
+    f32 temp_f2;
+    f32 temp_f0;
+
+    temp_f2 = D_800A56C4;
+block_1514672C:
+    if ((temp_f2 < fabsf(arg0->unk0)) || (temp_f2 < fabsf(arg0->unk8)) || (temp_f0 = arg0->unk4, (temp_f2 < temp_f0)) || (temp_f0 < D_800A56C8)) {
+        return 0;
+    }
+    return 1;
+}
 // NON-MATCHING: JUSTREG: first 3 statements are out of order
 // s32 func_1514672C(struct17 *arg0) {
 //     if ((D_800A56C4 < fabsf(arg0->unk0)) || (D_800A56C4 < fabsf(arg0->unk8)) || (D_800A56C4 < arg0->unk4) || (arg0->unk4 < D_800A56C8)) {

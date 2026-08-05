@@ -170,7 +170,32 @@ s32 func_1501407C(s32 arg0) {
     return 1;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_40490/func_15014094.s")
+s32 func_15014094(struct134 *arg0) {
+    struct {
+        struct134 *unk0;
+        f32 unk4;
+        f32 unk8;
+        s32 unkC;
+        u8 pad10[0x1C];
+        s8 unk2C;
+        u8 pad2D[7];
+    } tmp;
+    struct260 *temp_v0;
+
+    arg0->unk16 |= 4;
+    tmp.unk0 = arg0;
+    tmp.unk4 = func_15144598(arg0);
+    tmp.unk8 = 0.0f;
+
+    func_1510F800(0);
+    tmp.unkC = func_1510FD20(arg0->unk0, arg0->unk4);
+    tmp.unk2C = 0;
+
+    temp_v0 = func_15149130(0x12C, -1, 0x21, -1, 0, 0, (struct37 *)0x34, 0xFF, 1);
+    if (temp_v0 != NULL) {
+        memcpy((void *)((s32)temp_v0 + 0x28), &tmp, 0x34);
+    }
+}
 // NON-MATCHING: kinda right idea, but not executed correctly
 // void func_15014094(struct134 *arg0) {
 //     struct135 tmp;

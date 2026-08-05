@@ -347,4 +347,19 @@ void func_15169824(struct102 *arg0) {
     func_10004074(arg0);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_15169850.s")
+void func_15169850(s32 arg0, u8 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    if (arg1 == 0) {
+        if (*(s32 *)arg0 == *(s32 *)arg2 || *(u8 *)(arg0 + 4) == *(u8 *)arg3) {
+            func_1516972C((struct102 *)arg4);
+        }
+    } else if (arg1 == 0x2D) {
+        s32 v = *(s32 *)arg0;
+        if (v == *(s32 *)arg2) {
+            *(s32 *)arg2 = *(s32 *)(arg0 + 4);
+            *(u8 *)arg3 = *(u8 *)(arg0 + 9);
+        } else if (*(s32 *)(arg0 + 4) == *(s32 *)arg2) {
+            *(s32 *)arg2 = v;
+            *(u8 *)arg3 = *(u8 *)(arg0 + 8);
+        }
+    }
+}

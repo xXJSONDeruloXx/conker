@@ -130,7 +130,26 @@ s32 func_15160684(struct225 *arg0) {
     return 1;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_18D770/func_151606A8.s")
+s32 func_151606A8(struct225 *arg0) {
+    struct227 **p;
+    union { f32 m[16]; f64 _a; } u;
+    f32 sp3C;
+    f32 sp38;
+    f32 sp34;
+
+    p = &arg0->unk18;
+    func_150A8050((f32 (*)[4])&u.m[0], (*p)->unk0, (*p)->unk4, (*p)->unk8);
+
+    u.m[12] = ((struct240 *)*p)->unk10;
+    u.m[13] = ((struct240 *)*p)->unk12;
+    u.m[14] = ((struct240 *)*p)->unk14;
+
+    func_150A7960(&u.m[0], D_800A66B4[0], *(s32 *)&D_800A66B4[1], D_800A66B4[2], &sp34, &sp38, &sp3C);
+    arg0->unk14->unkE = (s16)sp34;
+    arg0->unk14->unk10 = (s16)sp38;
+    arg0->unk14->unk12 = (s16)sp3C;
+    return 1;
+}
 // NON-MATCHING: something along these lines...
 // void func_150A7960(s32, f32, f32, f32, f32*, f32*, f32*);
 // s32 func_151606A8(struct225 *arg0) {
@@ -1133,7 +1152,17 @@ void func_1516387C(s32 arg0, u8 arg1, s8 arg2, s16 arg3, u8 arg4, s32 offset, u8
     func_1516037C(&tmp, arg0, offset, arg6, arg7);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_18D770/func_151638E0.s")
+s32 func_151638E0(struct225 *arg0) {
+    struct227 *temp_v1;
+    s32 sp20[3];
+    f32 sp1C;
+
+    temp_v1 = &arg0->unk18;
+    func_15187FC0(*(s32 *)temp_v1, sp20);
+    func_15188010(*(s32 *)temp_v1, &sp1C);
+    arg0->unk14->unk2F = temp_v1->unk4 + (temp_v1->unk8 * sp1C);
+    return 1;
+}
 // NON-MATCHING: struct isnt quite right..
 // s32 func_151638E0(struct225 *arg0) {
 //     struct227 *temp_v1;
