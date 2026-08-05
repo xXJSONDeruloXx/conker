@@ -48255,9 +48255,18 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "void func_1501A220(s32 arg0, s32 arg1) {\n    s32 phi_s0;\n    s32 i;\n    s32 var_s1;\n    f32 temp_f0;\n    f32 temp_f2;\n    s32 temp_f16;\n\n    D_80082FA0 = arg0;\n    var_s1 = D_80082FA0;\n\n    if (var_s1 == 0) {\n        phi_s0 = 1;\n    } else {\n        phi_s0 = var_s1 + 2;\n    }\n\n    D_800BE628 = allocate_memory(phi_s0 * 0x180, 1, 1, 0);\n    D_800BE62C = allocate_memory(phi_s0 * 16, 1, 1, 0);\n\n    if (D_80082FA0 == 1) {\n        temp_f0 = (f32)D_800BE63C[0] - 2.0f;\n        temp_f2 = temp_f0;\n        temp_f2 *= *(f32 *)&D_800968E0;\n        temp_f16 = temp_f2;\n        D_800BE6B8 = (f32)(temp_f16 - (temp_f16 % 4)) / temp_f0;\n    }\n\n    func_150006E0(D_800BE9F0);\n\n    var_s1 = D_80082FA0;\n    i = 0;\n    if (var_s1 >= 0) {\n        do {\n            func_1501A8C0(i, var_s1, 1023, 0);\n            var_s1 = D_80082FA0;\n            i++;\n        } while (i <= var_s1);\n    }\n\n    if (var_s1 != 0) {\n        func_1501A8C0(i, 0, 1023, 0);\n    }\n\n    D_800BE617 = 1;\n    D_800BE614 = 1;\n    D_800BE635 = 0;\n    func_1510B070(arg1);\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-05T15:47:51.318103+00:00"
+      }
+    ]
   },
   {
     "function": "func_150768DC",
