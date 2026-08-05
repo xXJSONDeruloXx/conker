@@ -7,7 +7,57 @@
 #pragma GLOBAL_ASM("asm/nonmatchings/init_1E530/func_1001E530.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/init_1E530/func_1001ED6C.s")
 // _n_loadOutputBuffer ?
-#pragma GLOBAL_ASM("asm/nonmatchings/init_1E530/func_1001F28C.s")
+typedef struct { s32 unk0; s32 unk4; } A8;
+typedef struct { s32 unk0; u8 pad[0x1C]; s32 unk20[2]; s32 unk28[1]; } A20;
+typedef struct { u8 pad0[0x14]; void *unk14[4]; f32 unk24; s32 unk28; } A24;
+typedef struct { s32 unk0; s32 unk4; u8 pad8[0x10]; s32 unk18; u8 pad1C[0x8]; A24 *unk24; s32 unk28; } A_arg1;
+A8 *func_1001F5A4(A20 *, s32, u32, s32, s32, A8 *);
+f32 func_1001FA78(f32 (*)[4], s32);
+A8 *func_1001F28C(A20 *arg0, A_arg1 *arg1, s32 arg2, s32 arg3, A8 *arg4) {
+    A8 *local54;
+    s32 local50;
+    s32 local4C;
+    s32 local48;
+    s32 local44;
+    f32 local40;
+    f32 local3C;
+    f32 local38;
+    s32 local34;
+    s32 local30;
+    s32 local2C;
+    s16 local2A;
+    A8 *local24;
+
+    local54 = arg4;
+    local48 = 0x2E0;
+    local34 = 0;
+    local2C = 0xB8;
+    if (arg1->unk24 != 0) {
+        local30 = arg1->unk4 - arg1->unk0;
+        local38 = func_1001FA78((f32 (*)[4]) arg1, local2C);
+        local38 = local38 / (f32) local30;
+        local38 = (f32) (s32) (local38 * 32768.0f);
+        local38 = local38 / 32768.0f;
+        local3C = 1.0f - local38;
+        local40 = arg1->unk24->unk24 + (local3C * (f32) local2C);
+        local4C = (s32) local40;
+        arg1->unk24->unk24 = local40 - (f32) local4C;
+        local44 = arg0->unk28[arg2] + (-(arg1->unk4 - arg1->unk18)) * 2;
+        local34 = (local44 & 7) >> 1;
+        local54 = func_1001F5A4(arg0, arg2, local44 - (local34 * 2), local48, local4C + local34, local54);
+        local50 = (s32) (local3C * 32768.0f);
+        local2A = arg3 >> 8;
+        local24 = local54++;
+        local24->unk0 = (osVirtualToPhysical(arg1->unk24->unk14[arg2]) & 0xFFFFFF) | 0x5000000;
+        local24->unk4 = ((arg1->unk24->unk28 & 3) << 30) | ((local50 & 0xFFFF) << 0xE) | (((local48 + (local34 * 2)) & 0xFFF) << 2) | (local2A & 3);
+        arg1->unk24->unk28 = 0;
+        arg1->unk18 = arg1->unk18 + (local4C - local2C);
+    } else {
+        local44 = arg0->unk28[arg2] + (-arg1->unk4) * 2;
+        local54 = func_1001F5A4(arg0, arg2, local44, arg3, 0xB8, local54);
+    }
+    return local54;
+}
 // _n_loadBuffer ?
 #pragma GLOBAL_ASM("asm/nonmatchings/init_1E530/func_1001F5A4.s")
 // void *func_1001F5A4(void *arg0, s32 arg1, u32 arg2, s32 arg3, s32 arg4, void *arg5) {
