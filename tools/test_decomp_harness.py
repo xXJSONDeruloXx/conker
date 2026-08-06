@@ -7,6 +7,7 @@ import argparse
 import contextlib
 import io
 import json
+import os
 import subprocess
 import sys
 import tempfile
@@ -227,6 +228,25 @@ class HarnessTests(unittest.TestCase):
         self.assertTrue(payload["raw_match"])
         self.assertEqual(payload["raw_diffs"], [])
 
+    def test_textual_match_without_encoded_words_is_not_accepted(self) -> None:
+        target = self.root / "target.s"
+        target.write_text("glabel func_1\n    jr $ra\n")
+        generated = "00000000 <func_1>:\n"
+        generated += "   0:\t03e00008\tjr\tra\n"
+        normalizer = Path(__file__).with_name("conker-normalize-asm.py")
+        result = subprocess.run(
+            [sys.executable, str(normalizer), str(target)],
+            input=generated,
+            text=True,
+            capture_output=True,
+            check=True,
+        )
+        payload = json.loads(result.stdout)
+        self.assertFalse(payload["match"])
+        self.assertTrue(payload["normalized_match"])
+        self.assertFalse(payload["raw_available"])
+        self.assertEqual(payload["reason"], "raw_instruction_words_unavailable")
+
     def test_progress_stats_include_live_percentages(self) -> None:
         (self.root / "conker/progress.csv").write_text(
             "version,section,filename,function,offset,length,language\n"
@@ -322,6 +342,65 @@ class HarnessTests(unittest.TestCase):
         finally:
             harness.run_process = real_run_process
         self.assertIn("void func_1(void) {}", (self.root / "conker/src/game.c").read_text())
+
+    def test_diff_preserves_final_instruction_without_separator(self) -> None:
+        (self.root / "conker/build/src").mkdir(parents=True)
+        (self.root / "conker/build/src/test.c.o").touch()
+        target = self.root / "conker/asm/nonmatchings/test/func_1.s"
+        target.parent.mkdir(parents=True)
+        target.write_text(
+            "glabel func_1\n"
+            "    /* 0 0 01004021 */ addu $t0, $t0, $zero\n"
+            "    /* 4 4 03E00008 */ jr $ra\n"
+        )
+        real_tools = Path(__file__).parent
+        (self.root / "tools/conker-diff.sh").write_text(
+            (real_tools / "conker-diff.sh").read_text()
+        )
+        (self.root / "tools/conker-normalize-asm.py").write_text(
+            (real_tools / "conker-normalize-asm.py").read_text()
+        )
+        fake_bin = self.root / "fake-bin"
+        fake_bin.mkdir()
+        (fake_bin / "docker").write_text(
+            "#!/bin/sh\n"
+            "set -eu\n"
+            "command=\"\"\n"
+            "for arg in \"$@\"; do command=\"$arg\"; done\n"
+            "cd \"$FAKE_DOCKER_ROOT\"\n"
+            "PATH=\"$FAKE_DOCKER_BIN:$PATH\" bash -c \"$command\"\n"
+        )
+        (fake_bin / "mips-linux-gnu-objdump").write_text(
+            "#!/bin/sh\n"
+            "cat \"$FAKE_OBJDUMP\"\n"
+        )
+        for path in (fake_bin / "docker", fake_bin / "mips-linux-gnu-objdump"):
+            path.chmod(0o755)
+        objdump = self.root / "objdump.txt"
+        objdump.write_text(
+            "00000000 <func_1>:\n"
+            "   0:\t01004021\taddu\tt0,t0,zero\n"
+            "   4:\t03e00008\tjr\tra\n"
+        )
+        env = os.environ.copy()
+        env.update({
+            "PATH": f"{fake_bin}{os.pathsep}{env['PATH']}",
+            "FAKE_DOCKER_BIN": str(fake_bin),
+            "FAKE_DOCKER_ROOT": str(self.root),
+            "FAKE_OBJDUMP": str(objdump),
+        })
+        result = subprocess.run(
+            ["bash", str(self.root / "tools/conker-diff.sh"), "func_1", "test.c"],
+            cwd=self.root,
+            env=env,
+            text=True,
+            capture_output=True,
+            check=True,
+        )
+        payload = json.loads(result.stdout)
+        self.assertTrue(payload["match"])
+        self.assertEqual(payload["target_instructions"], 2)
+        self.assertEqual(payload["generated_instructions"], 2)
 
 
 if __name__ == "__main__":

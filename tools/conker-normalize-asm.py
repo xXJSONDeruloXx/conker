@@ -453,7 +453,14 @@ def main():
     result["raw_generated_words"] = raw["generated_words"]
     result["raw_score"] = raw["score"]
     result["raw_diffs"] = raw["diffs"]
-    if raw["available"]:
+    if not raw["available"]:
+        # The encoded instruction stream is the acceptance authority. A
+        # textual match without parseable words is not safe to accept: it can
+        # also mean objdump or the target format changed underneath us.
+        result["match"] = False
+        result["score"] = 0.0
+        result["reason"] = "raw_instruction_words_unavailable"
+    else:
         if raw["match"]:
             # The encoded instruction stream is the final authority. This also
             # accepts harmless assembler aliases such as target `not` vs
