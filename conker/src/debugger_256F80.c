@@ -5,8 +5,51 @@
 
 #include "libultra/io/controller.h"
 
+extern u32 osGetCount(void);
+s32 func_160016F4(s32 arg0);
+s32 func_160019A8(s32 direction, void *dramAddr);
+extern u8 __osContLastCmd;
+extern u8 __osMaxControllers;
+extern OSPifRam __osContPifRam;
+extern s32 D_80042A4C;
+void func_160018BC(void);
 
-#pragma GLOBAL_ASM("asm/nonmatchings/debugger_256F80/func_16001700.s")
+s32 func_16001700(void)
+{
+  s32 ret;
+  s32 count;
+  s32 count2;
+  u32 end;
+  s32 *ptr;
+  s32 *ptrEnd;
+  if (__osContLastCmd != 1)
+  {
+    func_160018BC();
+    func_160019A8(1, &__osContPifRam);
+    count = 0;
+    end = osGetCount() + 0x30D40;
+    if (osGetCount() < end)
+    {
+ do { count = func_160016F4(count); } while (osGetCount() < end); } func_160016F4(count); } ptrEnd = (s32 *) (&__osContLastCmd); ptr = (s32 *) (&__osContPifRam); do { ptrEnd = (s32 *) (&__osContLastCmd);
+    *(ptr++) = 0xFF;
+  }
+  while (((u32) ptr) < ((u32) ptrEnd));
+  D_80042A4C = 0;
+  ret = func_160019A8(0, &__osContPifRam);
+  __osContLastCmd = 1;
+  count2 = 0;
+  end = osGetCount() + 0xC3500;
+  if (osGetCount() < end)
+  {
+    do
+    {
+      count2 = func_160016F4(count2);
+    }
+    while (osGetCount() < end);
+  }
+  func_160016F4(count2);
+  return ret;
+}
 void func_16001830(OSContPad *data) {
     u8 *ptr;
     __OSContReadFormat readformat;

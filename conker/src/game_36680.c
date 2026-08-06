@@ -3,6 +3,10 @@
 #include "functions.h"
 #include "variables.h"
 
+extern f32 D_80095C64[];
+extern u8 D_800DDBD0[];
+s32 func_1500AF08(s32, s32, s32, s16, s32, s32, s32, u8, s32);
+
 
 void func_150091D0(void) {
     int tmp0 = 127;
@@ -488,7 +492,41 @@ void func_1500ABA0(s32 arg0) {
 // GOTO hell
 #pragma GLOBAL_ASM("asm/nonmatchings/game_36680/func_1500AD84.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_36680/func_1500AF08.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_36680/func_1500B1F4.s")
+s32 func_1500B1F4(s16 arg0, u8 arg1, s32 arg2, s32 arg3, s32 arg4, s16 **arg5) {
+    s32 i;
+    s32 count;
+    s32 ret;
+    f32 *weights;
+    s16 *p0;
+    s16 *p1;
+    s16 *p2;
+    f32 w0;
+    f32 w1;
+    f32 base;
+
+    i = 0;
+    count = arg0;
+    if (arg0 != 0) {
+        weights = D_80095C64;
+        do {
+            p2 = arg5[2];
+            p1 = arg5[1];
+            p0 = arg5[0];
+            w0 = weights[0];
+            w1 = weights[1];
+            base = (f32)p0[0] + (f32)(p1[0] - p0[0]) * w0;
+            ret = func_1500AF08(arg4, arg2, arg3,
+                                 (s16)(s32)(((f32)p2[0] - base) * w1 + base),
+                                 (s32)(((f32)p0[1] + (f32)(p1[1] - p0[1]) * w0) + ((f32)p2[1] - ((f32)p0[1] + (f32)(p1[1] - p0[1]) * w0)) * w1),
+                                 (s32)(((f32)p0[2] + (f32)(p1[2] - p0[2]) * w0) + ((f32)p2[2] - ((f32)p0[2] + (f32)(p1[2] - p0[2]) * w0)) * w1),
+                                 0x80, arg1, arg4);
+            i++;
+            weights += 2;
+            arg4 = ret;
+        } while (i != count);
+    }
+    return arg4;
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/game_36680/func_1500B3B0.s")
 s32 func_1500B714(s16 arg0, u8 arg1, s32 arg2, s32 arg3, s32 arg4, s16 **arg5) {
     u16 angle;
@@ -513,9 +551,111 @@ s32 func_1500B714(s16 arg0, u8 arg1, s32 arg2, s32 arg3, s32 arg4, s16 **arg5) {
     func_1000FA64(0x4D, (s16)x, (s16)y, (s16)z, 0x8000, angle, angle >> 3, 0, 0, 0, 0, 0);
     return arg4;
 }
-#pragma GLOBAL_ASM("asm/nonmatchings/game_36680/func_1500B8F4.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_36680/func_1500BAB8.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_36680/func_1500BC7C.s")
+void func_1500B8F4(s16 arg0, u8 arg1, s32 arg2, s32 arg3, s32 arg4, s16 **arg5) {
+    s32 i;
+    s32 count;
+    s32 ret;
+    f32 *weights;
+    s16 *p0;
+    s16 *p1;
+    s16 *p2;
+    f32 w0;
+    f32 w1;
+    f32 base;
+
+    i = 0;
+    count = arg0;
+    if (arg0 != 0) {
+        weights = D_80095C64;
+        do {
+            p2 = arg5[2];
+            p1 = arg5[1];
+            p0 = arg5[0];
+            w0 = weights[0];
+            w1 = weights[1];
+            base = (f32)p0[0] + (f32)(p1[0] - p0[0]) * w0;
+            ret = func_1500AF08(arg4, arg2, arg3,
+                                 (s16)(s32)(((f32)p2[0] - base) * w1 + base),
+                                 (s32)(((f32)p0[1] + (f32)(p1[1] - p0[1]) * w0) + ((f32)p2[1] - ((f32)p0[1] + (f32)(p1[1] - p0[1]) * w0)) * w1),
+                                 (s32)(((f32)p0[2] + (f32)(p1[2] - p0[2]) * w0) + ((f32)p2[2] - ((f32)p0[2] + (f32)(p1[2] - p0[2]) * w0)) * w1),
+                                 0, arg1, arg4);
+            i++;
+            weights += 2;
+            arg4 = ret;
+        } while (i != count);
+    }
+    D_800DDBD0[arg2] = 0x57;
+}
+void func_1500BAB8(s16 arg0, u8 arg1, s32 arg2, s32 arg3, s32 arg4, s16 **arg5) {
+    s32 i;
+    s32 count;
+    s32 ret;
+    f32 *weights;
+    s16 *p0;
+    s16 *p1;
+    s16 *p2;
+    f32 w0;
+    f32 w1;
+    f32 base;
+
+    i = 0;
+    count = arg0;
+    if (arg0 != 0) {
+        weights = D_80095C64;
+        do {
+            p2 = arg5[2];
+            p1 = arg5[1];
+            p0 = arg5[0];
+            w0 = weights[0];
+            w1 = weights[1];
+            base = (f32)p0[0] + (f32)(p1[0] - p0[0]) * w0;
+            ret = func_1500AF08(arg4, arg2, arg3,
+                                 (s16)(s32)(((f32)p2[0] - base) * w1 + base),
+                                 (s32)(((f32)p0[1] + (f32)(p1[1] - p0[1]) * w0) + ((f32)p2[1] - ((f32)p0[1] + (f32)(p1[1] - p0[1]) * w0)) * w1),
+                                 (s32)(((f32)p0[2] + (f32)(p1[2] - p0[2]) * w0) + ((f32)p2[2] - ((f32)p0[2] + (f32)(p1[2] - p0[2]) * w0)) * w1),
+                                 0, arg1, arg4);
+            i++;
+            weights += 2;
+            arg4 = ret;
+        } while (i != count);
+    }
+    D_800DDBD0[arg2] = 0x8;
+}
+void func_1500BC7C(s16 arg0, u8 arg1, s32 arg2, s32 arg3, s32 arg4, s16 **arg5) {
+    s32 i;
+    s32 count;
+    s32 ret;
+    f32 *weights;
+    s16 *p0;
+    s16 *p1;
+    s16 *p2;
+    f32 w0;
+    f32 w1;
+    f32 base;
+
+    i = 0;
+    count = arg0;
+    if (arg0 != 0) {
+        weights = D_80095C64;
+        do {
+            p2 = arg5[2];
+            p1 = arg5[1];
+            p0 = arg5[0];
+            w0 = weights[0];
+            w1 = weights[1];
+            base = (f32)p0[0] + (f32)(p1[0] - p0[0]) * w0;
+            ret = func_1500AF08(arg4, arg2, arg3,
+                                 (s16)(s32)(((f32)p2[0] - base) * w1 + base),
+                                 (s32)(((f32)p0[1] + (f32)(p1[1] - p0[1]) * w0) + ((f32)p2[1] - ((f32)p0[1] + (f32)(p1[1] - p0[1]) * w0)) * w1),
+                                 (s32)(((f32)p0[2] + (f32)(p1[2] - p0[2]) * w0) + ((f32)p2[2] - ((f32)p0[2] + (f32)(p1[2] - p0[2]) * w0)) * w1),
+                                 0, arg1, arg4);
+            i++;
+            weights += 2;
+            arg4 = ret;
+        } while (i != count);
+    }
+    D_800DDBD0[arg2] = 0x21;
+}
 
 void func_1500BE40(s32 arg0) {
     D_800DDD10[0] = 0;

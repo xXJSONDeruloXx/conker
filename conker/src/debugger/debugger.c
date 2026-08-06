@@ -3,6 +3,17 @@
 #include "functions.h"
 #include "variables.h"
 
+s32 func_1600160C();
+
+typedef struct {
+    s32 unk0;
+} func_160006CC_sp3C;
+
+extern u8 D_160037F0;
+extern func_160006CC_sp3C D_16003B48;
+
+void func_160006CC(struct118 *arg0);
+
 s32 func_16001B34(u8 *arg0, s32 arg1, ...);
 
 
@@ -167,7 +178,33 @@ void func_16000424(struct118 *arg0) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/debugger/debugger/func_16000590.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/debugger/debugger/func_160006CC.s")
+void func_160006CC(struct118 *arg0) {
+    func_160006CC_sp3C sp3C;
+    u8 *var_s3;
+    u8 *var_s1;
+    s32 temp_s0;
+    u8 var_v0;
+    u8 temp_v0;
+
+    var_s3 = (u8 *)&sp3C;
+    temp_s0 = 0x123;
+    sp3C = D_16003B48;
+    var_s1 = &D_160037F0;
+    func_16001338(0xC0, 0xC0, 0xFF);
+    var_v0 = *(volatile u8 *)&D_160037F0;
+
+    do {
+        var_s3[0] = var_v0;
+        var_s3[1] = var_s1[1];
+        func_160012B0(temp_s0, var_s3);
+        temp_s0 += 3;
+        temp_v0 = var_s1[2];
+        func_16001044(temp_s0, 0, ((s32 *)arg0)[temp_v0 + 1]);
+        var_v0 = var_s1[3];
+        temp_s0 += 0xD;
+        var_s1 += 3;
+    } while (var_v0 != 0);
+}
 void func_1600078C(void)
 {
   s32 temp_s0;
@@ -456,7 +493,25 @@ void func_16001390(s16 arg0, s16 arg1, register s16 arg2, s16 arg3)
 #pragma GLOBAL_ASM("asm/nonmatchings/debugger/debugger/func_160014F0.s")
 
 // splat into framebuffer
-#pragma GLOBAL_ASM("asm/nonmatchings/debugger/debugger/func_1600160C.s")
+s32 func_1600160C(s32 arg0) {
+    s32 row;
+    s32 width;
+    s32 tmp;
+    s32 w2;
+
+    tmp = arg0 & 0xFFE0;
+    row = tmp;
+    width = D_160038A8;
+    if (width != 0x124) {
+        row = (tmp >> 2) + tmp;
+    }
+    w2 = width * 2;
+    row = (row >> 2) * w2;
+    row += (arg0 & 0x1F) << 4;
+    row += width * 4;
+    row += 0x10;
+    return D_8002AAE8[D_16003888] + row;
+}
 
 // contains delay slot
 void func_16001678(void) {

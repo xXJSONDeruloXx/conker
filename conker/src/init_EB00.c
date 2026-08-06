@@ -1,7 +1,14 @@
 #include <ultra64.h>
-
+#define func_1000F85C func_1000F85C_hdr
 #include "functions.h"
+#undef func_1000F85C
 #include "variables.h"
+
+typedef struct {
+    struct31 *unk0;
+    u8 pad4[8];
+} struct_init_EB00_425E8;
+extern struct_init_EB00_425E8 D_800425E8[];
 
 
 s32 func_1000EB00(struct04 *arg0, s32 arg1, s32 *arg2, s32 *arg3, s32 arg6, s32 arg7, u16 *arg8) {
@@ -247,7 +254,20 @@ s32 func_1000F4D8(u16 arg0)
 }
 #pragma GLOBAL_ASM("asm/nonmatchings/init_EB00/func_1000F568.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/init_EB00/func_1000F6B8.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/init_EB00/func_1000F85C.s")
+void func_1000F85C(u16 arg0, s16 arg1, s32 arg2) {
+    if (arg0 < 0x10) {
+        return;
+    }
+    if (func_1000F3D0(arg0) != 0) {
+        if (arg1 == 0x10) {
+            f32 sp1C = alCents2Ratio(arg2);
+            arg2 = *(s32 *)&sp1C;
+        } else if (arg1 == 0x11) {
+            arg1 = 0x10;
+        }
+        func_10017714((s32) D_800425E8[arg0 & 0xF].unk0, arg1, arg2);
+    }
+}
 // NON-MATCHING: not even close
 // void func_1000F85C(s32 arg0, s16 arg1, s32 arg2) {
 //     f32 sp1C;
@@ -701,13 +721,24 @@ void func_10010AA8(struct127 *arg0) {
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/init_EB00/func_10010BE8.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/init_EB00/func_10010E78.s")
+s32 func_10010E78(s32 arg0, s32 arg1, u16 arg2, s16 arg3, u8 arg4,
+                  s32 arg5, s16 arg6, s16 arg7, s16 arg8, s16 arg9,
+                  s16 argA) {
+    s32 sp2C;
+    u32 temp_t1;
+
+    temp_t1 = func_1000F6B8(arg5, arg6, arg7, arg8, &sp2C, (s32) arg9, (s32) argA);
+    temp_t1 = (u32) (arg2 * temp_t1) >> 0xF;
+    if (temp_t1 != 0) {
+        return func_10010BE8((u16) arg0, arg1, temp_t1, sp2C & 0x7F, arg3, (sp2C & 0x80) | arg4, D_80041FD9);
+    }
+    return 0;
+}
 
 void func_10010F30(s32 arg0, u16 arg1, u8 arg2, s16 arg3, u8 arg4) {
     func_10010BE8(0, arg0, arg1, arg2, arg3, arg4, D_80041FD9);
 }
 
-void func_10010E78(s32, s32, u16, s16, u8, s32, s16, s16, s16, s16, s16);
 void func_10010F88(s32 arg0, u16 arg1, s16 arg2, u8 arg3, s32 arg4, s16 arg5, s16 arg6, s16 arg7, s16 arg8, s16 arg9) {
     func_10010E78(0, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9);
 }

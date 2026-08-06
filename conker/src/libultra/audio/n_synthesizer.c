@@ -2,7 +2,169 @@
 
 extern f32 D_8002C750;
 
-#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/n_synthesizer/n_alSynNew.s")
+typedef struct { u32 w0; u32 w1; } Cmd;
+
+static s32 __n_nextSampleTime(ALPlayer **client);
+s32 _n_timeToSamplesNoRound(s32 micros);
+Cmd *func_1001FB40(s32 arg0, Cmd *arg1);
+s32 func_1001E4A0(s16 arg0, s32 arg1, s32 arg2);
+void func_1001E530(s32 arg0, void *arg1, s32 arg2);
+
+typedef struct AuxBusData_s {
+    u8 pad0[0x2];
+    u16 unk2;
+    u8 pad4[0x28];
+    void *unk2C;
+    void *unk30;
+    u8 pad34[0x4];
+} AuxBusData;
+
+typedef struct {
+    u8 pad0[0x14];
+    s32 unk14;
+    s32 unk18;
+    s32 unk1C;
+    u8 pad20[0x20];
+    AuxBusData *unk40;
+} AuxBus;
+
+typedef struct {
+    u8 pad0[0x4];
+    s32 unk4;
+    u8 pad8[0xC];
+} MainBus;
+
+typedef struct {
+    u8 pad0[0x10];
+    s32 unk10;
+    u8 pad14[0xBC];
+} PVoiceArr;
+
+typedef struct UpdElem_s {
+    struct UpdElem_s *unk0;
+    u8 pad4[0x20];
+} UpdElem;
+
+typedef struct {
+    void *unk0;
+    ALLink unk4;
+    ALLink unkC;
+    ALLink unk14;
+    s32 unk1C;
+    s32 unk20;
+    s32 unk24;
+    s32 unk28;
+    s32 unk2C;
+    s32 unk30;
+    s32 unk34;
+    s32 unk38;
+    s32 unk3C;
+    void *unk40;
+    MainBus *unk44;
+    AuxBus *unk48;
+    s32 unk4C;
+    s32 unk50;
+    s32 unk54;
+    s32 unk58;
+} SynN;
+
+typedef struct {
+    u8 pad0[0x4];
+    s32 unk4;
+    s32 unk8;
+    s32 unkC;
+    s32 unk10;
+    s32 unk14;
+    s32 unk18;
+    s32 unk1C;
+    s32 unk20;
+    s32 unk24;
+    s32 unk28;
+    s32 unk2C;
+    u8 unk30[1];
+} SynConfig;
+
+#define SYN ((SynN *)n_syn)
+#define CFG ((SynConfig *)c)
+
+void n_alSynNew(ALSynConfig *c) {
+    s32 i;
+    s32 j;
+    PVoiceArr *pvoice;
+    PVoiceArr *pvoiceBase;
+    s32 heap;
+    UpdElem *updBase;
+    UpdElem *upd;
+    ALLink *link;
+    ALLink *to;
+
+    heap = CFG->unk28;
+    SYN->unk0 = 0;
+    SYN->unk4C = CFG->unk4;
+    SYN->unk20 = 0;
+    SYN->unk1C = 0;
+    SYN->unk54 = CFG->unk2C;
+    SYN->unk58 = 0xB8;
+    SYN->unk24 = CFG->unk10;
+    SYN->unk28 = CFG->unk14;
+    SYN->unk2C = CFG->unk18;
+    SYN->unk30 = CFG->unk1C;
+    SYN->unk34 = CFG->unk20;
+    SYN->unk38 = CFG->unk24;
+    if (CFG->unkC >= 3) {
+        SYN->unk50 = 2;
+    } else if (CFG->unkC <= 0) {
+        SYN->unk50 = 1;
+    } else {
+        SYN->unk50 = CFG->unkC;
+    }
+    SYN->unk48 = alHeapDBAlloc(0, 0, (ALHeap *)heap, SYN->unk50, 0x44);
+    for (i = 0; i < SYN->unk50; i++) {
+        SYN->unk48[i].unk14 = 0;
+        SYN->unk48[i].unk18 = 0;
+        if (CFG->unk30[i]) {
+            SYN->unk48[i].unk1C = func_1001E4A0(i, (s32)c, heap);
+        } else {
+            SYN->unk48[i].unk1C = 0;
+        }
+        SYN->unk48[i].unk40 = alHeapDBAlloc(0, 0, (ALHeap *)heap, 1, 0x38);
+        SYN->unk48[i].unk40->unk2 = 0;
+        SYN->unk48[i].unk40->unk2C = alHeapDBAlloc(0, 0, (ALHeap *)heap, 1, 8);
+        SYN->unk48[i].unk40->unk30 = alHeapDBAlloc(0, 0, (ALHeap *)heap, 1, 8);
+    }
+    SYN->unk44 = alHeapDBAlloc(0, 0, (ALHeap *)heap, 1, 0x14);
+    SYN->unk44->unk4 = (s32)func_1001E530;
+    SYN->unk4.next = 0;
+    SYN->unk4.prev = 0;
+    SYN->unk14.next = 0;
+    SYN->unk14.prev = 0;
+    SYN->unkC.next = 0;
+    SYN->unkC.prev = 0;
+    pvoiceBase = alHeapDBAlloc(0, 0, (ALHeap *)heap, CFG->unk4, 0xD0);
+    for (i = 0; i < CFG->unk4; i++) {
+        pvoice = &pvoiceBase[i];
+        link = (ALLink *)pvoice;
+        to = &SYN->unk4;
+        link->next = to->next;
+        link->prev = to;
+        if (to->next) to->next->prev = link;
+        to->next = link;
+        pvoice->unk10 = 0;
+        alN_PVoiceNew((N_PVoice *)pvoice, (ALDMANew)SYN->unk24, (ALHeap *)heap);
+    }
+    for (j = 0; j < SYN->unk50; j++) {
+        SYN->unk48[j].unk14 = 0;
+        SYN->unk48[j].unk18 = 0;
+    }
+    updBase = alHeapDBAlloc(0, 0, (ALHeap *)heap, CFG->unk8, 0x24);
+    SYN->unk40 = 0;
+    for (i = 0; i < CFG->unk8; i++) {
+        upd = &updBase[i];
+        upd->unk0 = SYN->unk40;
+        SYN->unk40 = upd;
+    }
+    SYN->unk3C = heap;
+}
 // void n_alSynNew(struct07 *arg0) {
 //     s32 sp44;
 //     // s32 sp40;

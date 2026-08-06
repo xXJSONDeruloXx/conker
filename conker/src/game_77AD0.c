@@ -604,7 +604,41 @@ void func_1504CA60(struct127 *arg0) {
 #pragma GLOBAL_ASM("asm/nonmatchings/game_77AD0/func_150511E8.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_77AD0/func_15051558.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_77AD0/func_1505210C.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_77AD0/func_15052260.s")
+void func_15052260(struct127 *arg0) {
+    struct126 *v0 = arg0->unk31C;
+    f32 factor;
+
+    if ((v0->unk6B == 1) || (v0->unk6B == 3)) {
+        factor = D_8009933C;
+    } else {
+        factor = 1.0f;
+    }
+    arg0->unk1CC = arg0->y_position;
+
+    if (v0->unk6B < 4) {
+        arg0->x_position += ((f32) *(s16 *)((u8 *)v0 + 0x6C) - arg0->x_position) * factor;
+        arg0->y_position += ((f32) (*(s16 *)((u8 *)v0 + 0x6E) - 0x50) - arg0->y_position) * factor;
+        arg0->z_position += ((f32) *(s16 *)((u8 *)v0 + 0x70) - arg0->z_position) * factor;
+        func_1505E650(arg0, 0x14, 1.0f, 6.0f, 0.0f, 0.0f, 0);
+        arg0->y_velocity = -10.0f;
+    } else {
+        if ((s32) arg0->unk28 == 0) {
+            v0->unk6B = 0;
+        } else {
+            func_1505E650(arg0, 0x38, 1.0f, 6.0f, 0.0f, 0.0f, 0);
+        }
+        func_1505A770(arg0);
+    }
+
+    arg0->gravity = D_80099340;
+    if (arg0->y_position < arg0->unk118) {
+        arg0->gravity = 0.0f;
+        arg0->y_velocity = 0.0f;
+        arg0->unk31C->unk6B = 0;
+        arg0->unk83 = 0;
+        arg0->in_water = 1;
+    }
+}
 
 void func_15052408(struct127 *arg0) {
     arg0->unkB2 = 0;

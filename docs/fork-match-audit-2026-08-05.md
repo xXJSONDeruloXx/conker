@@ -1,6 +1,6 @@
 # Fork matching and promotion audit
 
-Date: 2026-08-05
+Date: 2026-08-06
 
 This records the fork comparison, match verification, attribution, and
 promotion work performed against the archived upstream repository
@@ -8,7 +8,7 @@ promotion work performed against the archived upstream repository
 
 ## Promoted matches
 
-The default branch now contains 143 verified fork-derived matches from this
+The default branch now contains 171 verified fork-derived matches from this
 promotion series:
 
 | Commit | Source | Count | Attribution |
@@ -17,6 +17,7 @@ promotion series:
 | [`cf2601f8`](https://github.com/xXJSONDeruloXx/conker/commit/cf2601f8aec74e6125478e9b81416487d7abdd3f) | [`sylas94/conker`](https://github.com/sylas94/conker) | 65 | `ssssylassss` |
 | [`7933aed6`](https://github.com/xXJSONDeruloXx/conker/commit/7933aed64619bb58ba96f26f428a58837d9c02cb) | [`NameSpace-64/Conker-s-Bad-Decomp`](https://github.com/NameSpace-64/Conker-s-Bad-Decomp) | 2 | `NameSpace-64`; source credit for `func_150104F0` is `mono21400` |
 | this promotion commit | [`sylas94/conker`](https://github.com/sylas94/conker) | 48 | Ethan Shold (45); `ssssylassss` (3) |
+| this promotion commit | [`sylas94/conker`](https://github.com/sylas94/conker) | 28 | Ethan Shold (16); `ssssylassss` (10); Mark Street (2) |
 
 Every promoted function was independently compiled in this repository. The
 complete US ROM passed both repository gates:
@@ -95,6 +96,53 @@ build/conker.us.z64:         4cbadd3c4e0729dec46af64ad018050eada4f47a
   the commit author. The promotion commits also include the Claude co-author
   trailer used for the porting work.
 
+## Latest byte-exact batch (2026-08-06)
+
+The wider Sylas fork pass found 37 symbols whose linked bytes matched the
+clean master image. Two were already source-backed in this repository. Of the
+35 remaining stubs, 28 compiled byte-identically in the master source context
+and were promoted:
+
+| Source file | Matching functions |
+| --- | --- |
+| `debugger/debugger.c` | `func_160006CC`, `func_1600160C` |
+| `debugger_256F80.c` | `func_16001700` |
+| `game_36680.c` | `func_1500B1F4`, `func_1500B8F4`, `func_1500BAB8`, `func_1500BC7C` |
+| `game_40490.c` | `func_15013000` |
+| `game_75E60.c` | `func_150489B0` |
+| `game_77AD0.c` | `func_15052260` |
+| `game_83300.c` | `func_1505ED34` |
+| `game_C8950.c` | `func_1509B950` |
+| `game_16EE20.c` | `func_15142314`, `func_15142444`, `func_15142B7C`, `func_15142C10`, `func_15142FBC` |
+| `game_1944C0.c` | `func_15168F08` |
+| `libultra/audio/game_21FC90.c` | `func_151F2D6C` |
+| `libultra/audio/n_csq.c` | `__n_alCSeqGetTrackEvent`, `n_alCSeqNew`, `n_alCSeqNextEvent` |
+| `libultra/audio/n_synthesizer.c` | `n_alSynNew` |
+| `libultra/audio/n_synallocvoice.c` | `n_alSynAllocVoice` |
+| `libultra/io/sptask.c` | `_VirtualToPhysicalTask` |
+| `init_B1B0.c` | `func_1000DEC4` |
+| `init_EB00.c` | `func_1000F85C`, `func_10010E78` |
+
+Per-function attribution from `git blame remotes/forks/sylas94/master` is:
+Ethan Shold (`sholdee@gmail.com`), 16; `ssssylassss`
+(`ssssylassss@gmail.com`), 10; and Mark Street
+(`streetster@gmail.com`), 2. The promotion commit carries all three as
+co-authors.
+
+The seven source candidates excluded from this batch because their master-tree
+objects were not exact are `__osPfsRequestData2`, `osPfsIsPlug2`,
+`func_15077F64`, `func_15079228`, `func_150916B4`, `func_1001A508`, and
+`n_alAudioFrame`. They remain available in the preserved Sylas bulk work for
+future surgical passes.
+
+The promoted set adds 9,848 C bytes. It was checked with a force-clean inner
+build, object comparisons, `make replace`, and a fresh outer build:
+
+```text
+conker/build/conker.us.bin: 842e3d348e3c8ae0039e2ab367ad492f9b5266d8
+build/conker.us.z64:         4cbadd3c4e0729dec46af64ad018050eada4f47a
+```
+
 ## Preserved bulk work
 
 The larger, not-yet-individually-verified import remains on the local
@@ -153,14 +201,14 @@ additional independently verified batch was found in this sweep.
 
 ## Current progress snapshot
 
-After the promoted changes, the generated US progress report is:
+After the latest promoted changes, the generated US progress report is:
 
 | Section | C functions | ASM functions | Function coverage | Byte coverage |
 | --- | ---: | ---: | ---: | ---: |
-| init | 299 | 238 | 55.68% | 37.46% |
-| game | 1,410 | 3,902 | 26.54% | 8.35% |
-| debugger | 29 | 13 | 69.05% | 30.63% |
-| **total** | **1,738** | **4,153** | **29.50%** | **10.54%** |
+| init | 308 | 229 | 57.36% | 40.89% |
+| game | 1,426 | 3,886 | 26.84% | 8.58% |
+| debugger | 32 | 10 | 76.19% | 34.93% |
+| **total** | **1,766** | **4,125** | **29.98%** | **11.02%** |
 
 Regenerate this snapshot with:
 

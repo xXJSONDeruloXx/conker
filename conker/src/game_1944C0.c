@@ -3,6 +3,8 @@
 #include "functions.h"
 #include "variables.h"
 
+typedef struct { s8 unk0; s8 unk1; s8 unk2; u8 unk3; u32 unk4; } Struct15168F08;
+
 extern void (*D_8008CB64[])(void);
 extern void (*D_8008CB70[])(void);
 
@@ -224,7 +226,30 @@ void func_15168E34(s32 *arg0, s32 arg1) {
     }
 }
 #pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_15168E54.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_15168F08.s")
+void func_15168F08(Struct15168F08 *arg0, s32 arg1) {
+    s32 i;
+    Struct15168F08 *p;
+    s8 tag;
+
+    i = 0;
+    p = arg0;
+    if (arg0->unk0 == -0x21) {
+        return;
+    }
+    p = &arg0[i];
+    tag = p->unk0;
+    do {
+        i++;
+        if ((p->unk0 == 1) || ((p->unk0 == -0x24) && (p->unk3 == 0xE))) {
+            p->unk4 = p->unk4 & 0xFFFFFF;
+            p->unk4 += arg1;
+        }
+        p = &arg0[i];
+        do {
+            tag = p->unk0;
+        } while (0);
+    } while (p->unk0 != -0x21);
+}
 void func_15168F84(s32 arg0, s32 *arg1, s32 *arg2) {
     if (arg0 == 0) {
         *arg1 = 1;

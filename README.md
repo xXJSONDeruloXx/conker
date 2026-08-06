@@ -1,14 +1,14 @@
 # Conker's Bad Fur Day Decompilation
 
-![Conker's Bad Fur Day (US) Progress](https://img.shields.io/badge/Conker's%20Bad%20Fur%20Day%20(US)-10.54%25-critical) ![all Functions](https://img.shields.io/badge/funcs-1738%2F5891-blue) ![Build Status](https://github.com/mkst/conker/workflows/build/badge.svg)
+![Conker's Bad Fur Day (US) Progress](https://img.shields.io/badge/Conker's%20Bad%20Fur%20Day%20(US)-11.02%25-critical) ![all Functions](https://img.shields.io/badge/funcs-1766%2F5891-blue) ![Build Status](https://github.com/mkst/conker/workflows/build/badge.svg)
 
 | Progress                                                                                                                                           | Functions                                                |
 |----------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------|
-| ![init Progress](https://img.shields.io/badge/init-37.46%25-yellow) | ![init Functions](https://img.shields.io/badge/funcs-299%2F537-blue) |
-| ![game Progress](https://img.shields.io/badge/game-8.35%25-critical) | ![game Functions](https://img.shields.io/badge/funcs-1410%2F5312-blue) |
-| ![debugger Progress](https://img.shields.io/badge/debugger-30.63%25-orange) | ![debugger Functions](https://img.shields.io/badge/funcs-29%2F42-blue) |
+| ![init Progress](https://img.shields.io/badge/init-40.89%25-yellow) | ![init Functions](https://img.shields.io/badge/funcs-308%2F537-blue) |
+| ![game Progress](https://img.shields.io/badge/game-8.58%25-critical) | ![game Functions](https://img.shields.io/badge/funcs-1426%2F5312-blue) |
+| ![debugger Progress](https://img.shields.io/badge/debugger-34.93%25-orange) | ![debugger Functions](https://img.shields.io/badge/funcs-32%2F42-blue) |
 
-Progress snapshot: 2026-08-05, generated from the promoted US build with
+Progress snapshot: 2026-08-06, generated from the promoted US build with
 `make -C conker progress`. See the [fork matching and promotion audit](docs/fork-match-audit-2026-08-05.md)
 for the recent imported matches and fork sweep.
 

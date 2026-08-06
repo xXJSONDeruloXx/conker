@@ -3,6 +3,8 @@
 #include "functions.h"
 #include "variables.h"
 
+void func_1000DEC4(void);
+
 
 struct151 *func_1000B1B0(s32 arg0) {
     s32 i;
@@ -695,7 +697,26 @@ void func_1000DE1C(s32 arg0, s32 arg1) {
         func_1000D96C(0, arg0, arg1);
     }
 }
-#pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000DEC4.s")
+void func_1000DEC4(void)
+{
+  struct137 *var_s0;
+  s32 invalid = -1;
+  s32 temp_v0;
+ var_s0 = D_800419A8; do { temp_v0 = var_s0->unk0; if (invalid == temp_v0) { if (var_s0->unk4 != invalid) { var_s0->unk4 = invalid;
+      }
+    }
+    else
+      if (func_1000853C(temp_v0) == 0)
+    {
+      D_800417B0[var_s0->unk0] = 0;
+      var_s0->unk0 = invalid;
+      var_s0->unk4 = invalid;
+    }
+    var_s0++;
+    ((s32 *) var_s0)[-1] = 0;
+  }
+  while (var_s0 != ((struct137 *) D_80041E58));
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/init_B1B0/func_1000DF68.s")
 
 void func_1000E054(s32 arg0, s32 arg1) {

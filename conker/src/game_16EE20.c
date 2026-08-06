@@ -34,8 +34,30 @@ struct conker15142180 {
 };
 
 
+#define func_15083E90 func_15083E90_s32_proto
 #include "functions.h"
+#undef func_15083E90
 #include "variables.h"
+
+extern s16 D_800DD1C0;
+extern s16 D_800DD1C2;
+extern s16 D_800DD1C4;
+extern s16 D_800DD1C6;
+extern s16 D_800DD1C8;
+extern s16 D_800DD1CA;
+extern s16 D_800DD1CC;
+extern s16 D_800DD1CE;
+extern s32 D_800DD1FC;
+extern s32 D_800DD200;
+extern s32 D_800DD1B0;
+extern s16 D_800DD204;
+extern s16 D_800DD206;
+extern s32 D_800DD208;
+extern s32 D_800DD20C;
+extern s32 D_800DD210;
+extern s32 D_800DD214;
+extern s32 D_800DD218;
+extern s32 D_800DD21C;
 
 extern f32 D_800A5470;
 extern f32 D_800A5474;
@@ -211,7 +233,19 @@ s32 func_151422F8(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     return arg4;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15142314.s")
+void func_15142314(Mtx *arg0, s32 arg1, f32 *arg2) {
+    if (D_800C3E90 != 0) {
+        s16 *ip = (s16 *)((s32)arg0 + arg1 * 0x40);
+        arg2[0] = ((f32)(ip[0xC] << 16) + (f32)ip[0x1C]) * (1.0f / 65536.0f);
+        arg2[1] = ((f32)(ip[0xD] << 16) + (f32)ip[0x1D]) * (1.0f / 65536.0f);
+        arg2[2] = ((f32)(ip[0xE] << 16) + (f32)ip[0x1E]) * (1.0f / 65536.0f);
+    } else {
+        f32 *fp = (f32 *)((s32)arg0 + arg1 * 0x40);
+        arg2[0] = fp[0xC];
+        arg2[1] = fp[0xD];
+        arg2[2] = fp[0xE];
+    }
+}
 f32 func_151423D8(u8 arg0) {
     s32 temp_v1;
     s32 temp_v0 = arg0;
@@ -227,7 +261,31 @@ f32 func_151423D8(u8 arg0) {
     }
     return -D_8009A220[temp_v1];
 }
-#pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15142444.s")
+struct127 *func_15142444(u8 arg0, struct127 *arg1) {
+    s32 temp_v0;
+    struct127 *ret;
+
+    temp_v0 = arg0;
+    if (temp_v0 == 0xFF) {
+        if (arg1->unk1D4 != NULL) {
+            return arg1;
+        }
+        return NULL;
+    }
+
+    if ((arg1 != NULL) && (arg1->interaction_state != 0) && (temp_v0 == arg1->unique_id)) {
+        if (arg1->unk1D4 != NULL) {
+            return arg1;
+        }
+        return NULL;
+    }
+
+    ret = func_15083E90();
+    if ((ret != NULL) && (ret->unk1D4 != NULL)) {
+        return ret;
+    }
+    return NULL;
+}
 void func_151424F4(Mtx *arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7, f32 arg8, f32 arg9, f32 arg10, f32 arg11) {
     f32 mtx[4][4];
 
@@ -313,8 +371,37 @@ f32 func_15142B44(f32 arg0) {
     return ((arg0 + 1.0f) * (arg0 - 1.0f) * arg0) * D_800A5628;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15142B7C.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15142C10.s")
+Gfx *func_15142B7C(Gfx *gfx, s32 arg1, s32 arg2) {
+    if (~D_800DD200 & arg2) {
+        gSPClearGeometryMode(gfx++, arg2);
+        D_800DD200 |= arg2;
+    }
+
+    if (~D_800DD1FC & arg1) {
+        gSPSetGeometryMode(gfx++, arg1);
+        D_800DD1FC |= arg1;
+    }
+
+    return gfx;
+}
+Gfx *func_15142C10(Gfx *gfx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, u8 *arg5) {
+    if ((arg1 != (&D_800DD1C8)[0]) || (arg2 != D_800DD1CA) || (arg3 != D_800DD1CC) ||
+        (arg4 != D_800DD1CE)) {
+        if (*arg5 == 1) {
+            gDPPipeSync(gfx++);
+            *arg5 = 0;
+        }
+
+        gDPSetEnvColor(gfx++, arg1, arg2, arg3, arg4);
+
+        (&D_800DD1C8)[0] = arg1;
+        D_800DD1CA = arg2;
+        D_800DD1CC = arg3;
+        D_800DD1CE = arg4;
+    }
+
+    return gfx;
+}
 extern s16 D_800DD204;
 extern s16 D_800DD206;
 extern s16 D_800DD1C0;
@@ -338,7 +425,21 @@ Gfx *func_15142CF0(Gfx *gdl, s32 m, s32 l, s32 r, s32 g, s32 b, s32 a, u8 *arg7)
     return gdl;
 }
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15142E24.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15142FBC.s")
+Gfx *func_15142FBC(Gfx *gfx, s32 arg1, s32 arg2, u8 *arg3) {
+    if ((arg1 != D_800DD218) || (arg2 != D_800DD21C)) {
+        if (*arg3 == 1) {
+            gDPPipeSync(gfx++);
+            *arg3 = 0;
+        }
+
+        gDPSetOtherMode(gfx++, arg1 | 0xF, arg2);
+
+        D_800DD218 = arg1;
+        D_800DD21C = arg2;
+    }
+
+    return gfx;
+}
 s16 func_15143044(u8 arg0, s32 arg1) {
     return 0x7FFF - arg0;
 }

@@ -2,6 +2,7 @@
 
 extern s32  D_800E0E00;
 extern s32  D_800E0E04;
+extern s32  D_800E0E08;
 extern s32  D_800E0E10;
 extern s16  D_800E0E14;
 extern s16  D_800E0E16;
@@ -112,7 +113,18 @@ s32 func_151F2CDC(void) {
     return ret;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/game_21FC90/func_151F2D6C.s")
+void func_151F2D6C(s32 arg0, s32 arg1) {
+    u32 mask = osSetIntMask(1);
+    if (arg0 < 0) {
+        D_800E0E08 = 0;
+    } else if (arg0 >= 0x8000) {
+        D_800E0E08 = 0x7FFF;
+    } else {
+        D_800E0E08 = arg0;
+    }
+    D_800E0E10 = arg1;
+    osSetIntMask(mask);
+}
 
 void func_151F2DFC(s32 arg0, s32 arg1) {
     if (arg0 >= 0x80) {

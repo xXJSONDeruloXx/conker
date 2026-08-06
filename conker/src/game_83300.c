@@ -3,6 +3,8 @@
 #include "functions.h"
 #include "variables.h"
 
+extern struct255 *D_800CC4A4;
+
 void func_1505D408(struct127 *arg0, struct127 *arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, s32 arg7);
 
 
@@ -1246,7 +1248,50 @@ u32 func_1505E7CC(s32 arg0, struct127 *arg1) {
     return 0;
 }
 #pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_1505E874.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_83300/func_1505ED34.s")
+struct127 *func_1505ED34(void) {
+    s32 i;
+    struct127 *ptr;
+
+    for (i = 0, ptr = D_800CC2D0; (i < 25) && (ptr->interaction_state != 0); i++, ptr++) {
+    }
+
+    if (i == 25) {
+        ptr = D_800CC2D0;
+        i = 0;
+        if ((0x27 != ptr->interaction_state) || (D_800CC4A4 != NULL)) {
+            do {
+                i++;
+                ptr++;
+            } while ((i < 25) && ((0x27 != ptr->interaction_state) || (ptr->unk1D4 != NULL)));
+        }
+
+        if (i != 25) {
+            if (ptr->interaction_state != 0) {
+                func_15060F28(ptr, 0);
+            }
+        }
+    }
+
+    if (i == 25) {
+        for (ptr = D_800CC2D0, i = 0; (i < 25) && (0x27 != ptr->interaction_state); i++, ptr++) {
+        }
+
+        if (i != 25) {
+            if (ptr->interaction_state != 0) {
+                func_15060F28(ptr, 0);
+            }
+        }
+    }
+
+    if (i == 25) {
+        if (ptr->interaction_state != 0) {
+            func_15060F28(ptr, 0);
+        }
+    }
+
+    func_1505F188(ptr);
+    return ptr;
+}
 
 struct127 *func_1505EEB0(s32 state, s32 *arg1) {
     struct127 *ptr;
