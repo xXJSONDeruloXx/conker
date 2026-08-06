@@ -769,7 +769,58 @@ void func_151DB4CC(struct218 *arg0) {
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_2062D0/func_151DB5D0.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_2062D0/func_151DB97C.s")
+typedef struct {
+    u8 unk00;
+    u8 unk01;
+    u8 unk02;
+    u8 unk03;
+    s32 unk04;
+    u8 unk08;
+    u8 unk09;
+    u8 unk0A;
+    u8 unk0B;
+    u8 unk0C;
+    u8 unk0D;
+    u8 pad0E[2];
+    f32 unk10;
+    f32 unk14;
+    f32 unk18;
+} SubB97C;
+
+typedef struct {
+    u8 pad00[0x4C];
+    f32 unk4C;
+    f32 unk50;
+    f32 unk54;
+    s32 unk58;
+    u8 pad5C[0x4C];
+    SubB97C unkA8;
+} StructB97C;
+
+s32 func_151DB97C(StructB97C *arg0, s32 arg1)
+{
+    SubB97C *s0;
+    f32 r3;
+    f32 r2;
+    f32 r1;
+
+    s0 = &arg0->unkA8;
+    if (s0->unk00 & 2) {
+        func_15131918(&arg0->unk58, s0->unk04);
+    }
+    if (s0->unk00 & 1) {
+        s0->unk08 += s0->unk0B * D_800BE9E4;
+        s0->unk09 += s0->unk0C * D_800BE9E4;
+        s0->unk0A += s0->unk0D * D_800BE9E4;
+        r1 = func_151423D8(s0->unk08 - 0x40);
+        r2 = func_151423D8(s0->unk09 - 0x40);
+        r3 = func_151423D8(s0->unk0A - 0x40);
+        arg0->unk4C = s0->unk10 * r1;
+        arg0->unk50 = s0->unk14 * r2;
+        arg0->unk54 = s0->unk18 * r3;
+    }
+    return 1;
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_2062D0/func_151DBAA8.s")
 
