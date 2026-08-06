@@ -206,9 +206,9 @@ After the latest promoted changes, the generated US progress report is:
 | Section | C functions | ASM functions | Function coverage | Byte coverage |
 | --- | ---: | ---: | ---: | ---: |
 | init | 308 | 229 | 57.36% | 40.89% |
-| game | 1,426 | 3,886 | 26.84% | 8.58% |
+| game | 1,428 | 3,896 | 26.82% | 8.59% |
 | debugger | 32 | 10 | 76.19% | 34.93% |
-| **total** | **1,766** | **4,125** | **29.98%** | **11.02%** |
+| **total** | **1,768** | **4,135** | **29.95%** | **11.03%** |
 
 Regenerate this snapshot with:
 
