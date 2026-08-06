@@ -8,7 +8,7 @@ promotion work performed against the archived upstream repository
 
 ## Promoted matches
 
-The default branch now contains 95 verified fork-derived matches from this
+The default branch now contains 143 verified fork-derived matches from this
 promotion series:
 
 | Commit | Source | Count | Attribution |
@@ -16,6 +16,7 @@ promotion series:
 | [`00c30268`](https://github.com/xXJSONDeruloXx/conker/commit/00c30268b9cec8d595896f4613ae2272c43cd023) | [`sylas94/conker`](https://github.com/sylas94/conker) | 28 | `ssssylassss` |
 | [`cf2601f8`](https://github.com/xXJSONDeruloXx/conker/commit/cf2601f8aec74e6125478e9b81416487d7abdd3f) | [`sylas94/conker`](https://github.com/sylas94/conker) | 65 | `ssssylassss` |
 | [`7933aed6`](https://github.com/xXJSONDeruloXx/conker/commit/7933aed64619bb58ba96f26f428a58837d9c02cb) | [`NameSpace-64/Conker-s-Bad-Decomp`](https://github.com/NameSpace-64/Conker-s-Bad-Decomp) | 2 | `NameSpace-64`; source credit for `func_150104F0` is `mono21400` |
+| this promotion commit | [`sylas94/conker`](https://github.com/sylas94/conker) | 48 | Ethan Shold (45); `ssssylassss` (3) |
 
 Every promoted function was independently compiled in this repository. The
 complete US ROM passed both repository gates:
@@ -28,6 +29,59 @@ build/conker.us.z64:         4cbadd3c4e0729dec46af64ad018050eada4f47a
 The verification used a forced-clean inner build, `make replace`, and a fresh
 outer ROM verification. The pre-commit hook repeated the ROM check before the
 last promotion commit was accepted.
+
+## Bulk match promotion
+
+The prepared bulk pass compiled and compared 96 definitions from the Sylas
+fork: 48 matched exactly and 48 remained nonmatching. Only the exact set was
+copied into `master`; the larger candidate snapshot remains available on the
+local `sylas-bulk-experiment` branch for future surgical work.
+
+The 48 promoted definitions are:
+
+| Source file | Matching functions |
+| --- | --- |
+| `game_14FF90.c` | `func_1512623C`, `func_15127EB8` |
+| `game_161520.c` | `func_151347CC`, `func_151355B8`, `func_15136698`, `func_15136AE4`, `func_15138120` |
+| `game_168A90.c` | `func_1513BEB0` |
+| `game_169510.c` | `func_1513E6E8`, `func_1513FFF4` |
+| `game_16DC80.c` | `func_151411E4`, `func_15141250`, `func_1514143C`, `func_15141478`, `func_151416E8`, `func_15141928` |
+| `game_16EE20.c` | `func_15143794`, `func_1514462C` |
+| `game_1897A0.c` | `func_1515D088` |
+| `game_18D770.c` | `func_15161F4C`, `func_15163FEC`, `func_15164134`, `func_151645C4` |
+| `game_1FFF60.c` | `func_151D2C40`, `func_151D3130`, `func_151D324C` |
+| `game_2062D0.c` | `func_151DAA88`, `func_151DAB58` |
+| `game_305D0.c` | `func_15003120` |
+| `game_30E90.c` | `func_15004CE0` |
+| `game_35D20.c` | `func_15008930` |
+| `game_362B0.c` | `func_15008E10` |
+| `game_3BA70.c` | `func_1500E5C0` |
+| `game_3D5C0.c` | `func_15010110` |
+| `game_3D9A0.c` | `func_15010600` |
+| `game_3F820.c` | `func_15012370` |
+| `game_439B0.c` | `func_15016588` |
+| `game_447B0.c` | `func_150174C0` |
+| `game_70200.c` | `func_15043BB8` |
+| `game_76710.c` | `func_15049260` |
+| `game_77AD0.c` | `func_15052760` |
+| `game_981E0.c` | `func_1506C32C`, `func_15071A64`, `func_15074C80` |
+| `game_C8950.c` | `func_1509B5AC`, `func_1509B810`, `func_1509BA04` |
+| `game_DBA60.c` | `func_150AEDF8` |
+
+Attribution was checked against the source fork's history rather than
+assigning every fork change to its owner: `git blame` attributes 45 of these
+definitions to Ethan Shold (`sholdee@gmail.com`) and three to
+`ssssylassss` (`ssssylassss@gmail.com`): `func_1514143C`, `func_150174C0`,
+and `func_15052760`. The promotion commit credits both contributors.
+
+Each promoted function produced an object-level asm-differ score of zero.
+After a forced-clean build, `make replace`, and a fresh outer build, the ROM
+hashes were:
+
+```text
+conker/build/conker.us.bin: 842e3d348e3c8ae0039e2ab367ad492f9b5266d8
+build/conker.us.z64:         4cbadd3c4e0729dec46af64ad018050eada4f47a
+```
 
 ### Attribution details
 
@@ -104,9 +158,9 @@ After the promoted changes, the generated US progress report is:
 | Section | C functions | ASM functions | Function coverage | Byte coverage |
 | --- | ---: | ---: | ---: | ---: |
 | init | 299 | 238 | 55.68% | 37.46% |
-| game | 1,362 | 3,950 | 25.64% | 7.69% |
+| game | 1,410 | 3,902 | 26.54% | 8.35% |
 | debugger | 29 | 13 | 69.05% | 30.63% |
-| **total** | **1,690** | **4,201** | **28.69%** | **9.93%** |
+| **total** | **1,738** | **4,153** | **29.50%** | **10.54%** |
 
 Regenerate this snapshot with:
 

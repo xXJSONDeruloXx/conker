@@ -1,7 +1,23 @@
 #include <ultra64.h>
 
+typedef struct {
+    s32 unk0;
+    s32 unk4;
+    s32 unk8;
+} Func151D2C40Data;
+
+typedef u8 Func151D2C40Frame[0x40];
+
+
 #include "functions.h"
 #include "variables.h"
+
+extern s32 (*D_8008FC40[])(struct224 *, Func151D2C40Data *);
+extern void (*D_8008FC48[])(struct224 *, Func151D2C40Data *);
+extern void (*D_8008FC5C[])(struct224 *);
+extern void (*D_8008FC64[])(struct224 *, struct223 *, u8);
+
+void func_151D33FC(struct224 *arg0, struct223 *arg1);
 
 void func_151D3354(struct224 *arg0);
 void func_151D3308(struct224 *arg0);
@@ -56,7 +72,44 @@ struct224 *func_151D2BA4(void *arg0, struct00 *arg1, s32 arg2, u8 arg3, s32 arg4
 //     return tmp;
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_1FFF60/func_151D2C40.s")
+void func_151D2C40(register struct224 *arg0) {
+    struct127 *obj;
+    struct255 *frames;
+    Func151D2C40Data sp28;
+    s8 index;
+
+    obj = (struct127 *)arg0->unk10;
+    if ((obj->interaction_state == 0) || (obj->id == 0xFF) || (obj->unique_id != arg0->unk14) ||
+        ((frames = obj->unk1D4) == 0) || ((obj->unk74 & 0xF) == 0xF)) {
+        func_1516972C((struct102 *)arg0);
+        return;
+    }
+
+    func_15143134((u8 *)arg0 + 0x18, (u8 *)&sp28 + 4, ((Func151D2C40Frame *)frames)[*(u8 *)((u8 *)arg0 + 0x24)]);
+
+    if (*(u8 *)((u8 *)arg0 + 0x28) & 1) {
+        *(s16 *)((u8 *)arg0 + 0x26) = *(s16 *)((u8 *)arg0 + 0x26) - D_800BE9E4;
+        if (*(s16 *)((u8 *)arg0 + 0x26) < 0) {
+            index = *(s8 *)((u8 *)arg0 + 0x2A);
+            if (index != -1) {
+                D_8008FC48[index](arg0, (Func151D2C40Data *)((u8 *)&sp28 + 4));
+            }
+            *(s32 *)((u8 *)arg0 + 0x2C) = 0;
+            func_1516972C((struct102 *)arg0);
+            return;
+        }
+    }
+
+    index = *(s8 *)((u8 *)arg0 + 0x29);
+    if (index != -1) {
+        if (D_8008FC40[index](arg0, (Func151D2C40Data *)((u8 *)&sp28 + 4)) == 0) {
+            func_1516972C((struct102 *)arg0);
+            return;
+        }
+    }
+
+    *(Func151D2C40Data *)&arg0->unk34 = *(Func151D2C40Data *)((u8 *)&sp28 + 4);
+}
 
 void func_151D2DAC(struct102 *arg0) {
     func_151D3354(arg0);
@@ -161,7 +214,44 @@ struct224 *func_151D2F00(void *arg0, s32 arg1, u8 arg2, s32 arg3) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_1FFF60/func_151D2F90.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_1FFF60/func_151D3130.s")
+void func_151D3130(struct224 *arg0)
+{
+  void (*temp_v0)(struct224 *);
+  struct224 *var_s0;
+  struct224 *temp_s1;
+  s8 temp_v0_2;
+  unsigned int new_var;
+  temp_v0 = D_8008FC5C[*((u8 *) (((u8 *) arg0) + 0x1D))];
+  if (temp_v0 != 0)
+  {
+    temp_v0(arg0);
+  }
+  var_s0 = (struct224 *) arg0->unk24;
+  if (var_s0 != 0)
+  {
+    do
+    {
+      temp_v0_2 = *((s8 *) (((u8 *) var_s0) + 0x2A));
+      new_var = 1;
+      temp_s1 = (struct224 *) var_s0->unk40;
+      if (temp_v0_2 != (-new_var))
+      {
+        D_8008FC48[temp_v0_2](var_s0, (Func151D2C40Data *) (&var_s0->unk34));
+ { }
+      }
+      *((s32 *) var_s0->unk2C) = 0;
+      func_1516972C((struct102 *) var_s0);
+      var_s0 = temp_s1;
+      latch_151D3130:
+      ;
+
+      ;
+      ;
+    }
+    while (temp_s1 != 0);
+  }
+  func_1514EDF0(arg0, arg0->unk10);
+}
 
 void func_151D31F4(struct102 *arg0) {
     func_151D3130(arg0);
@@ -173,7 +263,38 @@ void func_151D3220(struct102 *arg0) {
     func_15169824(arg0);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_1FFF60/func_151D324C.s")
+void func_151D324C(struct224 *arg0, struct223 *arg1, u8 arg2) {
+    void (*temp_v0)(struct224 *, struct223 *, u8);
+    s32 temp_v1;
+    s32 temp_v0_2;
+    u8 temp_a2;
+
+    temp_a2 = arg2;
+    if (temp_a2 == 0) {
+        func_151D33FC(arg0, arg1);
+        temp_a2 = arg2;
+    zero_label_151D324C:
+        ;
+    } else if (temp_a2 == 0x2D) {
+        temp_v0_2 = arg1->unk0;
+        if (arg0->unk10 == temp_v0_2) {
+            arg0->unk10 = arg1->unk4.w;
+            arg0->unk14 = arg1->unk9;
+        } else {
+            if (arg0->unk10 == arg1->unk4.w) {
+                arg0->unk10 = temp_v0_2;
+                arg0->unk14 = arg1->unk8;
+            }
+        trailing_label_151D324C:
+            ;
+        }
+    }
+
+    temp_v0 = D_8008FC64[*(u8 *)((u8 *)arg0 + 0x1D)];
+    if (temp_v0 != NULL) {
+        temp_v0(arg0, arg1, temp_a2);
+    }
+}
 
 void func_151D3308(struct224 *arg0) {
     struct224 *temp_v0;

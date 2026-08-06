@@ -1,7 +1,340 @@
 #include <ultra64.h>
 
+#define func_150ADA20 func_150ADA20_orig
+#define func_1513D668 func_1513D668_void_proto
+#define func_151DA08C func_151DA08C_void_proto
 #include "functions.h"
+#undef func_150ADA20
+#undef func_1513D668
+#undef func_151DA08C
 #include "variables.h"
+
+typedef struct {
+    u8 field_0x00;
+    u8 field_0x01;
+    u8 pad_0x02[0x2];
+    f32 field_0x04;
+    f32 field_0x08;
+} Struct151DAB58Extra;
+
+extern u8 (*D_8008FCD0[])(void);
+extern u8 (*D_8008FD04[])(void);
+extern u8 D_800AB330[];
+extern u8 D_800AB414[];
+extern f32 D_800AB44C;
+extern f32 D_800AB450;
+extern f32 D_800AB454;
+extern f32 D_800AB458;
+extern f32 D_800AB45C;
+extern f32 D_800AB460;
+extern f32 D_800AB470;
+extern f32 D_800AB474;
+extern f32 D_800AB478;
+extern f32 D_800AB47C;
+extern f32 D_800AB4A0;
+extern f32 D_800AB4A4;
+extern f32 D_800AB4A8;
+extern f32 D_800AB4AC;
+extern f32 D_800AB4B0;
+
+struct Sub151D9450 {
+    f32 unk0;
+    u8 unk4;
+    u8 unk5;
+    s8 unk6;
+    s8 unk7;
+    f32 unk8;
+    f32 unkC;
+};
+
+
+typedef struct {
+    u8 unk0;
+    u8 unk1;
+    u8 unk2;
+    u8 unk3;
+    f32 unk4;
+    f32 unk8;
+    f32 unkC;
+    f32 unk10;
+    f32 unk14;
+    u8 unk18;
+    u8 pad19[3];
+} Struct151DA08CExtra;
+
+
+typedef struct {
+    u8 unk0;
+    u8 unk1;
+    s16 unk2;
+    s16 unk4;
+    u8 pad6[2];
+    s32 unk8;
+    s32 unkC;
+    u8 unk10;
+    u8 unk11;
+    u8 unk12;
+    u8 unk13;
+    f32 unk14;
+    f32 unk18;
+    struct17 unk1C;
+    f32 unk28;
+    f32 unk2C;
+    f32 unk30;
+    f32 unk34;
+    f32 unk38;
+    f32 unk3C;
+    s32 unk40;
+    u8 unk44;
+    u8 unk45;
+    u8 unk46;
+    u8 unk47;
+    s32 unk48;
+    u8 unk4C;
+    u8 pad4D[3];
+    s32 unk50;
+    s16 unk54;
+    s16 unk56;
+} Struct151DA08CMain;
+
+
+typedef struct {
+    u8 field_0x00;
+    u8 pad_0x01[0x3];
+    s32 field_0x04;
+    u8 field_0x08;
+    u8 field_0x09;
+    u8 field_0x0A;
+    u8 field_0x0B;
+    u8 field_0x0C;
+    u8 field_0x0D;
+    u8 pad_0x0E[0x2];
+    f32 field_0x10;
+    f32 field_0x14;
+    f32 field_0x18;
+} AxisOscillator;
+
+
+typedef struct {
+    u8 pad_0x00[0x4C];
+    f32 field_0x4C;
+    f32 field_0x50;
+    f32 field_0x54;
+    u8 field_0x58;
+    u8 pad_0x59[0x4F];
+    AxisOscillator field_0xA8;
+    u8 pad_0xC4[0x4C];
+    Struct151DAB58Extra field_0x110;
+} AxisOscillatorOwner;
+
+
+typedef struct {
+    u32 field_0x00;
+} FrameDeltaWord;
+
+typedef struct {
+    u8 unk0;
+    u8 unk1;
+    s16 unk2;
+    s16 unk4;
+    u8 pad6[2];
+    s32 unk8;
+    s32 unkC;
+    u8 unk10;
+    u8 unk11;
+    u8 unk12;
+    u8 unk13;
+    f32 unk14;
+    f32 unk18;
+    struct17 unk1C;
+    f32 unk28;
+    f32 unk2C;
+    f32 unk30;
+    f32 unk34;
+    f32 unk38;
+    f32 unk3C;
+    s32 unk40;
+    u8 unk44;
+    u8 unk45;
+    u8 unk46;
+    u8 unk47;
+    s32 unk48;
+    u8 unk4C;
+    u8 pad4D[3];
+    s32 unk50;
+    s16 unk54;
+    s16 unk56;
+} Struct151DAB58Local;
+
+
+struct three {
+    s32 a;
+    s32 b;
+    s32 c;
+};
+
+
+struct struct218XXX {
+    s16 unk0;
+    s16 unk2;
+    s16 unk4;
+    s16 unk6;
+    struct three unk8;
+    f32 unk14;
+    f32 unk18;
+    f32 unk1C;
+    f32 unk20;
+    f32 unk24;
+    f32 unk28;
+    s16 unk2C;
+    s16 unk2E;
+    s16 unk30;
+    s16 unk32;
+    s16 unk34;
+    s16 unk36;
+    s16 unk38;
+    s16 unk3A;
+    s8 unk3C;
+    u8 pad3D[0x3];
+    f32 unk40;
+    s16 unk44;
+    s16 unk46;
+    s32 unk48;
+};
+
+
+typedef struct {
+    s16 unk0;
+    u8 pad2[2];
+    f32 unk4;
+    struct17 unk8;
+    u8 unk14;
+    u8 unk15;
+    u8 unk16;
+} Struct151D9EB0Sub;
+
+
+typedef struct {
+    f32 unk0;
+    f32 unk4;
+    f32 unk8;
+    f32 unkC;
+    f32 unk10;
+} Struct151DAA88_elem;
+
+
+typedef struct {
+    u8 unk0[0x1];
+    u8 unk1;
+    u8 pad2[0xA];
+    u8 unkC;
+    u8 padD[0x20];
+    s8 unk2D;
+    u8 pad2E[0x66];
+    Struct151DAA88_elem *unk94;
+    u8 *unk98;
+} Struct151DAA88;
+
+
+typedef struct {
+    f32 unk0;
+    u8 pad4[0x17];
+    u8 unk1B;
+    u8 pad1C[0x4];
+    u8 unk20;
+    u8 pad21[0x2B];
+    f32 unk4C;
+    u8 unk50;
+} Struct151DAA88_v1;
+
+
+typedef struct {
+    f32 unk0;
+    f32 unk4;
+    f32 unk8;
+} Vec3151DAA88;
+
+
+typedef struct {
+    f32 unk0;
+    f32 unk4;
+    f32 unk8;
+    f32 unkC;
+    f32 unk10;
+    f32 unk14;
+    u8 unk18;
+    u8 unk19;
+} Struct151D9534Sub;
+
+
+typedef struct {
+    u8 pad0[0x1];
+    u8 unk1;
+    u8 pad2[0xA];
+    u8 unkC;
+    u8 padD[0x1E];
+    u8 unk2B;
+    u8 pad2C[0xC];
+    f32 unk38;
+    f32 unk3C;
+    f32 unk40;
+    f32 unk44;
+    f32 unk48;
+    u8 pad4C[0xC];
+    f32 unk58;
+    f32 unk5C;
+    f32 unk60;
+    f32 unk64;
+    s32 unk68;
+    u8 pad6C[0x14];
+    f32 unk80;
+    struct17 unk84;
+    u8 pad90[0xD];
+    u8 unk9D;
+    u8 pad9E[0xA];
+    Struct151D9534Sub unkA8;
+} Struct151D9534;
+
+
+struct Struct151DBE80 {
+    s8 unk0;
+    s8 unk1;
+    s16 unk2;
+    s16 unk4;
+    u8 pad6[2];
+    s32 unk8;
+    s32 unkC;
+    u8 unk10;
+    u8 unk11;
+    u8 unk12;
+    u8 unk13;
+    f32 unk14;
+    f32 unk18;
+    struct17 unk1C;
+    f32 unk28;
+    f32 unk2C;
+    f32 unk30;
+    f32 unk34;
+    f32 unk38;
+    f32 unk3C;
+    s32 unk40;
+    u8 unk44;
+    u8 unk45;
+    s8 unk46;
+    s8 unk47;
+    s32 unk48;
+    u8 unk4C;
+    u8 pad4D[3];
+    s32 unk50;
+    s16 unk54;
+    u16 unk56;
+};
+
+s32 func_151D9450(void *arg0p, void *arg1);
+u8 func_151D9534(Struct151D9534 *arg0, struct17 *arg1);
+void func_151D9FC0(u8 arg0, f32 arg1, u8 arg2, s32 arg3, s32 arg4, u8 arg5, s32 arg6);
+s32 func_151DA08C(u8 arg0, f32 arg1, f32 arg2, u8 arg3, s16 arg4, s32 arg5, void *arg6, s32 arg7, s32 arg8);
+void func_151DAB58(u8 arg0, f32 arg1, u8 arg2, struct17 *arg3, volatile u8 arg4, u8 arg5, s32 arg6);
 
 
 u8 func_151D8E20(void) {
@@ -203,7 +536,6 @@ s32 func_151DA6A8(void *arg0) {
 }
 #pragma GLOBAL_ASM("asm/nonmatchings/game_2062D0/func_151DA6F8.s")
 extern f32 D_800AB49C;
-extern void func_151DAB58(u8, f32, u8, void *, s32, u8, s32);
 typedef struct { f32 unk00; u8 pad04[4]; u8 unk08; } SubUnk98A938;
 typedef struct {
     f32 unk00;
@@ -249,8 +581,86 @@ s32 func_151DA938(StructAA88 *arg0, s32 arg1, s32 arg2, s32 arg3, f32 arg4, s32 
     p98->unk20 = 4;
     return 1;
 }
-#pragma GLOBAL_ASM("asm/nonmatchings/game_2062D0/func_151DAA88.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_2062D0/func_151DAB58.s")
+s32 func_151DAA88(Struct151DAA88 *arg0, f32 arg1, s32 arg2, s32 arg3, f32 arg4, s32 arg5) {
+    Struct151DAA88_v1 *v1 = (Struct151DAA88_v1 *)arg0->unk98;
+    Struct151DAA88_elem *base = arg0->unk94;
+    Vec3151DAA88 sp34;
+
+    sp34.unk0 = base[arg0->unk2D].unk0;
+    sp34.unk4 = arg4;
+    sp34.unk8 = base[arg0->unk2D].unk8;
+    func_151D9FC0(v1->unk50, v1->unk0 * 11.0f * v1->unk4C, v1->unk1B, arg5, (s32)&sp34, arg0->unkC, arg0->unk1);
+    v1->unk20 = 4;
+    return 1;
+}
+void func_151DAB58(u8 arg0, f32 arg1, u8 arg2, struct17 *arg3, volatile u8 arg4, u8 arg5, s32 arg6) {
+    void *ret;
+    Struct151DAB58Local sp54;
+    Struct151DAB58Extra sp48;
+    s32 temp_v0;
+    s32 temp_v1;
+    s32 temp_t0;
+
+    sp54.unk0 = D_8008FCD0[arg0]();
+    if (arg4 != 0) {
+        temp_v0 = 0x3B;
+    } else {
+        temp_v0 = 0x22;
+    }
+    sp54.unk2 = (temp_v0 << 8) + 3;
+    sp54.unk4 = 0x64;
+    sp54.unk12 = 0;
+    sp54.unk11 = 0;
+    sp54.unk10 = 0;
+    sp54.unk13 = 0xFF;
+    sp54.unk44 = arg2;
+    sp54.unk45 = 0xFF;
+    sp54.unk1C = *arg3;
+    temp_v0 = D_800AB330[arg0] != 0 ? 0x40000000 : 0;
+    sp54.unk40 = temp_v0 | 0x0CDC0009;
+    sp54.unk28 = 0.0f;
+    sp54.unk2C = 0.0f;
+    sp54.unk30 = 0.0f;
+    sp54.unk34 = 1.0f;
+    sp54.unk38 = 1.0f;
+    sp54.unk3C = 1.0f;
+    sp54.unk8 = 0;
+    sp54.unkC = 0;
+    sp54.unk18 = arg1;
+    sp54.unk14 = arg1;
+    sp54.unk46 = 0;
+    sp54.unk47 = 7;
+    sp48.field_0x00 = 0;
+    sp48.field_0x01 = (func_150ADA20() % 3U) + 6;
+    sp48.field_0x04 = (func_150ADA68() * D_800AB4A0) + D_800AB4A4;
+    sp48.field_0x08 = (func_150ADA68() * D_800AB4A8) + D_800AB4AC;
+    sp54.unk1 = 0;
+    sp54.unk48 = 0;
+    sp54.unk4C = 0xFF;
+    sp54.unk50 = 0;
+    sp54.unk54 = 0x20;
+    sp54.unk56 = 7;
+    if (func_150ADA20() & 1) {
+        temp_v1 = 1;
+    } else {
+        temp_v1 = 0;
+    }
+    temp_v0 = *(u8 *)&arg4;
+    if (temp_v0 != 0) {
+        temp_t0 = 3;
+    } else {
+        temp_t0 = 0;
+    }
+    if (temp_v0 != 0) {
+        temp_v0 = 0xFF;
+    } else {
+        temp_v0 = 0;
+    }
+    ret = func_1513D2F0(&sp54, (s32)&D_800A4AA0, 0, 0x14, 0, 0xE, temp_v1 | 2, temp_t0, temp_v0, 0xC, arg5, arg6);
+    if (ret != 0) {
+        memcpy((u8 *)ret + 0x110, &sp48, sizeof(sp48));
+    }
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/game_2062D0/func_151DADA0.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_2062D0/func_151DAE28.s")
 

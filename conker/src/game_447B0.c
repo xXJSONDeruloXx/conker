@@ -3,6 +3,14 @@
 #include "functions.h"
 #include "variables.h"
 
+typedef struct {
+    s16 unk0;
+    u16 unk2;
+    s32 unk4;
+    u16 unk8[8];
+} Struct150174C0;
+
+#define RECORDS (*(Struct150174C0**)&D_800D23C0)
 
 void func_15017300(s16 arg0, s16 arg1) {
     s32 i;
@@ -36,7 +44,18 @@ void func_15017498(void) {
 }
 
 // double-loop
-#pragma GLOBAL_ASM("asm/nonmatchings/game_447B0/func_150174C0.s")
+void func_150174C0(s32 arg0) {
+    s32 i;
+    s32 j;
+
+    for (i = 0; i < (s32)D_80087380; i++) {
+        for (j = 0; j < RECORDS[i].unk2; j++) {
+            if ((RECORDS[i].unk8[j] >> 12) == 2) {
+                RECORDS[i].unk8[j] += arg0;
+            }
+        }
+    }
+}
 
 void func_15017578(s32 arg0) {
     u32 tmp = 0;

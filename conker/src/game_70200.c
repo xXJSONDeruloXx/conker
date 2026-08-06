@@ -1,6 +1,8 @@
 #include <ultra64.h>
 
+#define func_15043BB8 func_15043BB8_header_mismatch
 #include "functions.h"
+#undef func_15043BB8
 #include "variables.h"
 
 #include "libc/stdarg.h"
@@ -135,7 +137,29 @@ s32 func_15043B70(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     return arg2;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_70200/func_15043BB8.s")
+s32 func_15043BB8(struct105 *arg0, u8 *arg1, s32 arg2) {
+    s32 head;
+    s32 tail;
+
+    if (arg2 != 0) {
+        if (arg1 != 0) {
+            arg2 += 4;
+            arg2 = (arg2 + 3) & ~3;
+            tail = arg0->unkC;
+            head = arg0->unk8;
+            if (tail < head) {
+                if (tail + arg2 >= head) {
+                    return 1;
+                }
+            } else if ((tail + arg2) - arg0->unk4 >= head) {
+                return 1;
+            }
+            arg2 -= 4;
+            arg0->unkC = func_15043A20((u8 *)arg0->unk0, arg0->unk4, func_15043A20((u8 *)arg0->unk0, arg0->unk4, tail, (u8 *)&arg2, 4), arg1, arg2);
+        }
+    }
+    return 0;
+}
 
 s32 func_15043CA4(struct105 *arg0, u8 *arg1, s32 arg2) {
     s32 v1;

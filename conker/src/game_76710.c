@@ -1,11 +1,15 @@
 #include <ultra64.h>
+typedef struct { s32 w[9]; } Va36;
+
 
 #include "functions.h"
 #include "variables.h"
 
 
 // wtf?
-#pragma GLOBAL_ASM("asm/nonmatchings/game_76710/func_15049260.s")
+void func_15049260(Va36 arg0) {
+    func_150AAD98(arg0);
+}
 
 void func_150492CC(f32 arg0, f32 arg1, f32 arg2) {
     D_800CC220 = arg0;

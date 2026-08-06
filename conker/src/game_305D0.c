@@ -1,11 +1,45 @@
 #include <ultra64.h>
+typedef struct
+{
+  s32 unk0;
+  s32 unk4;
+  s32 unk8;
+} Struct15003120;
+
 
 #include "functions.h"
 #include "variables.h"
 
 
 // what is this loop doing?
-#pragma GLOBAL_ASM("asm/nonmatchings/game_305D0/func_15003120.s")
+void func_15003120(s32 arg0, s32 arg1, s32 arg2)
+{
+  s32 i;
+  s32 count;
+  s32 new_var;
+  ((s32 *) D_800B0E30[0])[arg0] = arg2;
+  ((u8 *) ((s32 *) D_800B0E34)[0])[arg0] = 0;
+  if (arg2 == 0)
+  {
+    return;
+  }
+  ((s32 *) D_800B0E30[0])[arg0] += arg1;
+  count = 0;
+  i = 0;
+  new_var = ((s32 *) D_800B0E30[0])[arg0];
+  if (((Struct15003120 *) new_var)->unk0 != 0)
+  {
+    do
+    {
+      ((Struct15003120 *) ((s32 *) D_800B0E30[0])[arg0])[i].unk0 += arg1;
+      ((Struct15003120 *) ((s32 *) D_800B0E30[0])[arg0])[i].unk4 += arg1;
+      count++;
+      i++;
+    }
+    while (((Struct15003120 *) ((s32 *) D_800B0E30[0])[arg0])[i].unk0 != 0);
+  }
+  ((u8 *) ((s32 *) D_800B0E34)[0])[arg0] = count;
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_305D0/func_150031EC.s")
 

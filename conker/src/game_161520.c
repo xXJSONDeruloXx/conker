@@ -2,6 +2,108 @@
 #include "functions.h"
 #include "variables.h"
 
+typedef struct {
+    s32 unk0[4];
+} Struct15136698Table;
+extern Struct15136698Table D_80089BAC;
+extern f32 D_800A4624;
+extern f32 D_800A4628;
+extern f32 D_800A462C;
+extern u8 D_800A4058[];
+extern u8 D_800A4068[];
+
+
+typedef struct {
+    s32 unk0;
+    s32 unk4;
+    s32 unk8;
+} Struct15136698Vec;
+
+
+typedef struct {
+    u8 unk0;
+    u8 pad1;
+    s16 unk2;
+    s16 unk4;
+    u8 pad6[2];
+    s32 unk8;
+    s32 unkC;
+    u8 unk10;
+    u8 unk11;
+    u8 unk12;
+    u8 unk13;
+    f32 unk14;
+    f32 unk18;
+    Struct15136698Vec unk1C;
+    f32 unk28;
+    f32 unk2C;
+    f32 unk30;
+    f32 unk34;
+    f32 unk38;
+    f32 unk3C;
+    s32 unk40;
+    u8 unk44;
+    u8 unk45;
+    u8 pad46[0x12];
+} Struct15136698Local;
+
+
+typedef struct {
+    u8 unk00;
+    u8 pad01[3];
+    struct127 *unk04;
+    u8 unk08;
+    u8 pad09[3];
+    f32 unk0C;
+    f32 unk10;
+    f32 unk14;
+    f32 unk18;
+    f32 unk1C;
+    f32 unk20;
+    u8 unk24;
+    u8 pad25;
+    s16 unk26;
+    s16 unk28;
+    s16 unk2A;
+    s16 unk2C;
+    u8 unk2E;
+    u8 unk2F;
+    s8 unk30;
+    u8 pad31[3];
+    f32 unk34;
+    u8 unk38;
+    s8 unk39;
+    u8 pad3A[2];
+} Local15138120;
+
+
+struct arg1_1513555C {
+    s32 unk0;
+    u8 unk4;
+};
+
+
+typedef struct {
+    u8  pad0[0x18];
+    u8  unk18;
+    u8  pad19[0x3];
+    s32 unk1C;
+    u8  pad20[0x1D];
+    u8  unk3D;
+} SubA_151347CC;
+
+
+typedef struct {
+    s32 unk0;
+    union {
+        s32 w4;
+        u8  b4;
+    } u4;
+    u8  unk8;
+    u8  unk9;
+} ArgB_151347CC;
+
+
 void func_15143134(void *, s32, s32);
 
 typedef struct {
@@ -23,7 +125,7 @@ void func_15137F30(Vec3f37F30 *arg0, Vec3f37F30 *arg1, Vec3f37F30 *arg2, Vec3f37
 void func_151D9014(void *arg0, f32 *arg1, u8 arg2, f32 arg3, s16 arg4, u8 arg5, f32 arg6, u8 arg7, f32 arg8, f32 arg9, u8 argA, s32 argB, u8 argC, u8 argD, u8 argE, s32 argF);
 
 s32 func_15134070(struct102 *);
-void func_15138120(struct102 *, s32, s32);
+void func_15138120(struct127 *, s32, u8);
 void func_1504715C(void *, struct102 *);
 void func_151382E0(void *, s32, void *, u8, s32);
 void func_15138424(struct102 *, void *, s32, void *, u8, s32);
@@ -160,7 +262,39 @@ void func_1513477C(struct102 *arg0) {
     D_80089AD4[idx]();
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_161520/func_151347CC.s")
+void func_151347CC(void *arg0, s32 arg1, u8 arg2) {
+    SubA_151347CC *a = (SubA_151347CC *)arg0;
+    ArgB_151347CC *b = (ArgB_151347CC *)arg1;
+    s32 t;
+
+    if ((arg2 == 0) || (arg2 == 0x3)) {
+        if ((b->unk0 == a->unk1C) || (b->u4.b4 == a->unk18)) {
+            func_1516972C((struct102 *)arg0);
+        }
+    } else if (arg2 == 0x11) {
+        if (a->unk3D == 0x5) {
+            if ((b->unk0 == a->unk1C) || (b->u4.b4 == a->unk18)) {
+                func_1516972C((struct102 *)arg0);
+            }
+        }
+    } else if (arg2 == 0x16) {
+        if (arg1 == a->unk1C) {
+            func_1516972C((struct102 *)arg0);
+        }
+    } else if (arg2 == 0x2D) {
+        t = b->unk0;
+        if (a->unk1C == t) {
+            a->unk1C = b->u4.w4;
+            a->unk18 = b->unk9;
+        } else {
+            if (a->unk1C == b->u4.w4) {
+                a->unk1C = t;
+                a->unk18 = b->unk8;
+            }
+        dummy_label_151347CC: ;
+        }
+    }
+}
 
 void func_151348F0(f32 arg0, f32 arg1, s32 arg2, s32 arg3) {
 }
@@ -285,7 +419,22 @@ void func_1513555C(struct102 *arg0, u8 *arg1, u8 arg2) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_161520/func_151355B8.s")
+void func_151355B8(struct102 *arg0, struct arg1_1513555C *arg1, u8 arg2) {
+    switch (arg2) {
+    case 0:
+        if (arg1->unk0 == *(s32 *)&arg0->unk1C || arg0->unk18 == arg1->unk4) {
+            func_1516972C(arg0);
+        }
+        break;
+    case 3:
+        if (arg1->unk0 == *(s32 *)&arg0->unk1C || arg0->unk18 == arg1->unk4) {
+            s32 *p = (s32 *)((u8 *)arg0 + 0x10);
+            *p &= ~1;
+            *p = *p;
+        }
+        break;
+    }
+}
 
 s32 func_15135658(struct259 *arg0) {
     arg0->unk74 = 1.0f;
@@ -306,7 +455,67 @@ f32 func_15135670(s32 arg0) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_161520/func_15136404.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_161520/func_15136698.s")
+s32 func_15136698(f32 arg0, f32 arg1, u8 arg2, u8 arg3, s16 arg4, s32 arg5, Struct15136698Vec *arg6, u8 arg7, u8 arg8, u8 arg9, s32 arg10) {
+    s32 ret;
+    Struct15136698Local sp7C;
+    f32 sp78;
+    Struct15136698Table sp68;
+    s32 sp64;
+    s32 sp60;
+    s32 temp_v0;
+    s32 sp54;
+    s32 sp50;
+
+    sp68 = D_80089BAC;
+    sp78 = arg1;
+    sp7C.unk0 = sp68.unk0[func_150ADA20() & 3];
+    if (arg7 != 0) {
+        temp_v0 = 2;
+    } else {
+        temp_v0 = 1;
+    }
+    sp7C.unk2 = temp_v0 + 0x300;
+    sp7C.unk8 = 0;
+    sp7C.unkC = 0;
+    sp7C.unk10 = 0;
+    sp7C.unk11 = 0;
+    sp7C.unk12 = 0;
+    sp7C.unk13 = 0xFF;
+    sp7C.unk18 = arg0;
+    sp7C.unk14 = arg0;
+    sp7C.unk1C = *arg6;
+    sp7C.unk40 = 0;
+    sp7C.unk28 = 0.0f;
+    sp7C.unk2C = 0.0f;
+    sp7C.unk30 = 0.0f;
+    sp7C.unk34 = 1.0f;
+    sp7C.unk38 = 1.0f;
+    sp7C.unk3C = 1.0f;
+    if (arg4 == -1) {
+        sp7C.unk4 = 0x12C;
+    } else {
+        sp7C.unk4 = arg4 + 0x20;
+        sp7C.unk40 = 1;
+    }
+    sp7C.unk44 = arg2;
+    sp7C.unk45 = arg3;
+    if (arg8 != 0) {
+        sp64 = 3;
+        sp60 = 0xFF;
+    } else {
+        sp64 = 0;
+        sp60 = 0;
+    }
+
+    sp50 = func_150ADA20();
+    sp54 = func_150ADA20();
+    temp_v0 = func_150ADA20();
+    ret = func_1513D594((s32)&sp7C, 0, 0, 0x1A, 0, (sp54 & 1) + (sp50 & 1), temp_v0 & 0xFF, 500.0f, 500.0f, 0, arg5, sp64, sp60, 0, 4, arg9, arg10);
+    if (ret != 0) {
+        memcpy(ret + 0x128, &sp78, sizeof(sp78));
+    }
+    return ret;
+}
 
 s32 func_151368A8(struct102 *arg0) {
     s16 temp_v0 = arg0->unk1C;
@@ -381,7 +590,27 @@ void func_15136A50(s32 arg0, s32 arg1, s32 arg2, s16 arg3, u8 arg4, s32 arg5) {
     func_15134908(sp1C, 0, arg4, arg5);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_161520/func_15136AE4.s")
+void func_15136AE4(f32 a0, f32 a1, f32 a2, f32 a3, f32 a4, f32 a5, u8 *a6) {
+    f32 sp6C[3];
+    f32 sp60[3];
+    f32 r;
+    struct { f32 c; s32 a; u32 b; s32 pad; } sp4C;
+
+    sp6C[0] = a0;
+    sp6C[1] = a1;
+    sp6C[2] = a2;
+    r = (func_150ADA68() * 112.0f + 247.0f) * D_800A4624;
+    sp60[0] = -a3 * r;
+    sp60[1] = -a4 * r;
+    sp60[2] = -a5 * r;
+    sp4C.c = func_150ADA68();
+    sp4C.a = func_150ADA20();
+    sp4C.b = func_150ADA20();
+    func_151D9014(sp6C, sp60, 0, sp4C.c * D_800A4628 + D_800A462C,
+                    (sp4C.a & 0xF) + 25, (sp4C.b % 101) + 155,
+                    func_150ADA68() * 119.0f + 129.0f, 0, 1.0f, 1.0f, 1, 0, 1, 0,
+                    a6[0xC], a6[1]);
+}
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_161520/func_15136C3C.s")
 
@@ -477,7 +706,49 @@ nonzero:
     return 1;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_161520/func_15138120.s")
+void func_15138120(struct127 *arg0, s32 arg1, u8 arg2) {
+    Local15138120 tmp;
+
+    if (D_800A3FD8[(arg1 << 4) + 0xE] != 2) {
+        tmp.unk00 = arg0->unique_id;
+        tmp.unk04 = arg0;
+        if (arg2) {
+            tmp.unk08 = 0xC;
+        } else {
+            tmp.unk08 = 1;
+        }
+        tmp.unk24 = 2;
+        tmp.unk26 = 0x28;
+        tmp.unk28 = 0x10;
+        tmp.unk0C = 0.0f;
+        tmp.unk10 = 0.0f;
+        tmp.unk14 = 0.0f;
+        tmp.unk18 = 0.0f;
+        tmp.unk20 = 0.0f;
+        tmp.unk1C = 20.0f;
+        if ((D_800A4058 == &D_800A3FD8[arg1 << 4]) || (D_800A4068 == &D_800A3FD8[arg1 << 4])) {
+            tmp.unk2A = (arg0->unk94 & 0xE) ? 0x78 : 0xF0;
+        } else {
+            tmp.unk2A = 0x258;
+        }
+        tmp.unk2E = 5;
+        if (D_800A3FD8[(arg1 << 4) + 0xE] == 0) {
+            tmp.unk2F = 5;
+        } else {
+            tmp.unk2F = 6;
+        }
+        tmp.unk30 = -1;
+        tmp.unk38 = 0;
+        tmp.unk39 = -1;
+        tmp.unk34 = 1.0f;
+        tmp.unk2C = func_1000FA64(0x4FE, (s16)(s32)arg0->x_position,
+                                  (s16)(s32)arg0->y_position,
+                                  (s16)(s32)arg0->z_position, 0x5DC0,
+                                  0x258, 0x12C, (s32)func_1000EBC4,
+                                  (void *)0x78, 0, 0, 0);
+        func_15134DAC(&tmp, 0);
+    }
+}
 
 typedef struct {
     s32 a;

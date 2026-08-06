@@ -1,4 +1,10 @@
 #include <ultra64.h>
+typedef struct
+{
+  u8 pad0[0x18];
+  s32 unk18;
+} Struct1515D088Arg0;
+
 
 #include "functions.h"
 #include "variables.h"
@@ -83,7 +89,30 @@ s32 func_1515D030(void *arg0, s32 arg1) {
 //     return phi_v1;
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_1897A0/func_1515D088.s")
+s32 func_1515D088(Struct1515D088Arg0 *arg0)
+{
+  s32 temp_v0_2;
+  struct
+  {
+    void *unk0;
+    f32 unk4;
+    s8 unk8;
+  } sp30;
+  temp_v0_2 = arg0->unk18;
+  sp30.unk8 = (s8) (temp_v0_2 & 0xFFFF);
+  if (((temp_v0_2 & 0xFF) < 0) || ((temp_v0_2 & 0xFF) >= 2))
+  {
+    return 0;
+  }
+  sp30.unk0 = arg0;
+  sp30.unk4 = 0.0f;
+  temp_v0_2 = (s32) func_151491F4(0x12C, -1, 0x11, 0, 0xD, 0xC, 0xFF, 1);
+  if (temp_v0_2 != 0)
+  {
+    memcpy((void *) (temp_v0_2 + 0x28), &sp30, 0xC);
+  }
+  return temp_v0_2;
+}
 // s32 func_1515D088(void *arg0) {
 //     s32 sp3C;
 //     s8 sp38;

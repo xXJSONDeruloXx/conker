@@ -1,4 +1,6 @@
 #include <ultra64.h>
+typedef struct { s8 unk0; s8 unk1; s8 unk2; u8 unk3; u32 unk4; } Struct15004CE0;
+
 
 #include "functions.h"
 #include "variables.h"
@@ -37,4 +39,25 @@ void func_15004A4C(void) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_30E90/func_15004AAC.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_30E90/func_15004BF0.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_30E90/func_15004CE0.s")
+void func_15004CE0(Struct15004CE0 *arg0, u32 arg1) {
+    s32 i = 0;
+    Struct15004CE0 *p = arg0;
+    s8 tag;
+    if (arg0->unk0 == (-0x21)) {
+        return;
+    }
+    p = &arg0[i];
+    tag = p->unk0;
+    do {
+        i++;
+        if (p->unk0 == (-0x24)) {
+            if (p->unk3 == 0xE) {
+                if (p->unk4 < 0x80000000) {
+                    p->unk4 += arg1;
+                }
+            }
+        }
+        p = &arg0[i];
+        do { tag = p->unk0; } while (0);
+    } while (p->unk0 != (-0x21));
+}

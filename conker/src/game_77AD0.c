@@ -3,9 +3,19 @@
 #include "functions.h"
 #include "variables.h"
 
+extern f32 D_80099330;
+extern f32 D_80099334;
+extern f32 D_80099338;
+extern f32 D_8009933C;
+extern f32 D_80099340;
+extern f32 D_80099344;
+extern f32 D_80099348;
+extern f32 D_8009934C;
 
 void func_15052F9C(struct127 *arg0, f32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8, s32 arg9);
 void func_1505327C(struct127 *arg0, f32 arg1, f32 arg2, s32 arg3, s32 arg4);
+s32 func_150535F4(struct127 *arg0);
+void func_15053750(struct127 *arg0);
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_77AD0/func_1504A620.s")
 // NON-MATCHING: work-in-progress...
@@ -651,7 +661,42 @@ void func_1505250C(struct127 *arg0, s32 arg1) {
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_77AD0/func_15052590.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_77AD0/func_15052760.s")
+void func_15052760(struct127 *arg0, s16 arg1) {
+    s32 v0;
+    s32 id;
+    s8 temp;
+    f32 f0;
+
+    arg1 = (arg1 & 0xFFFF) - arg0->unk76;
+    v0 = (arg1 * 100) / D_800CC264;
+    id = arg0->id;
+
+    if (id != 0x29) {
+        if (id == 8) {
+            return;
+        }
+    }
+    if (arg0->unk22C & 8) {
+        return;
+    }
+    f0 = D_80099348;
+    arg1 = 7;
+    if (id == 0xA) {
+        arg1 = 0x28;
+    }
+    if (arg0->unk226 == 0xFF) {
+        temp = v0 >> 8;
+        if ((arg0->unk87 ^ temp) & 0x80) {
+            v0 = 0;
+        }
+        f0 = D_8009934C;
+        arg1 = 4;
+        arg0->unk87 = temp;
+    }
+    if (arg0->unk1E5 != 0) {
+        arg0->unkC4 += ((f32)(v0 / (arg0->unk1E5 * arg1)) - arg0->unkC4) * f0;
+    }
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/game_77AD0/func_150528C8.s")
 
 void func_15052EF0(struct127 *arg0) {

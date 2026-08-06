@@ -1,7 +1,19 @@
 #include <ultra64.h>
 
+struct Obj1513BEB0 {
+    u8 pad0[0x50];
+    s32 unk50;
+};
+
+
 #include "functions.h"
 #include "variables.h"
+
+extern f32 D_800A4A84;
+extern f32 D_800A4A88;
+extern f32 D_800A4A8C;
+extern f32 D_800A4A90;
+extern f32 D_800A4A94;
 
 void func_15109064(struct132 *, s32, u8);
 void func_151BA468(struct132 *, s32, u8);
@@ -102,4 +114,38 @@ s32 func_1513BAD4(s32 arg0, s32 arg1) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_168A90/func_1513BAE8.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_168A90/func_1513BBFC.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_168A90/func_1513BEB0.s")
+s32 func_1513BEB0(struct Obj1513BEB0 *arg0) {
+    f32 *v0;
+
+    v0 = (f32 *)((u8 *)arg0 + arg0->unk50 + 0xF8);
+    v0[2] = v0[2] + D_800A4A84 * D_800BE9A4;
+    v0[2] = func_15144B68(v0[2]);
+    v0[0] = v0[0] + D_800A4A88 * D_800BE9A4;
+    v0[1] = sinf(v0[2]) * D_800A4A8C;
+    v0[3] = v0[3] + D_800A4A90 * D_800BE9A4;
+    v0[4] = v0[4] + D_800A4A94 * D_800BE9A4;
+    v0[3] = func_15144B68(v0[3]);
+    v0[4] = func_15144B68(v0[4]);
+
+    if (4096.0f < v0[0]) {
+        do {
+            v0[0] = v0[0] - 4096.0f;
+        } while (4096.0f < v0[0]);
+    }
+    if (v0[0] < 0.0f) {
+        do {
+            v0[0] = v0[0] + 4096.0f;
+        } while (v0[0] < 0.0f);
+    }
+    if (4096.0f < v0[1]) {
+        do {
+            v0[1] = v0[1] - 4096.0f;
+        } while (4096.0f < v0[1]);
+    }
+    if (v0[1] < 0.0f) {
+        do {
+            v0[1] = v0[1] + 4096.0f;
+        } while (v0[1] < 0.0f);
+    }
+    return 1;
+}

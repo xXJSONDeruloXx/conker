@@ -2,6 +2,7 @@
 #include "functions.h"
 #include "variables.h"
 
+extern u8 D_800D9946[];
 typedef struct {
     u8 unk[3];
     u8 pad3[0x5];
@@ -38,7 +39,30 @@ dummy_label_927029:
     }
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_3D9A0/func_15010600.s")
+void func_15010600(void) {
+    s32 i;
+
+    D_800D9921 = 0;
+    D_800D9920 = 0;
+    D_800D9928 = 0;
+    D_800D9938 = 0;
+    D_800D9929 = 0;
+    for (D_800D9939 = 0, i = 0;;) {
+        D_800D992A[i + 1] = 0;
+        D_800D993A[i + 1] = 0;
+        D_800D992A[i + 2] = 0;
+        D_800D993A[i + 2] = 0;
+        D_800D992A[i + 3] = 0;
+        D_800D993A[i + 3] = 0;
+        i += 4;
+        D_800D992A[i - 4] = 0;
+        D_800D993A[i - 4] = 0;
+        if (&D_800D9946[0] != &D_800D993A[i]) {
+            continue;
+        }
+        break;
+    }
+}
 // NON-MATCHING: addresses are wrong :(
 // void func_15010600(void) {
 //     s32 i;
