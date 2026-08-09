@@ -662,7 +662,56 @@ void func_151DAB58(u8 arg0, f32 arg1, u8 arg2, struct17 *arg3, volatile u8 arg4,
     }
 }
 #pragma GLOBAL_ASM("asm/nonmatchings/game_2062D0/func_151DADA0.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_2062D0/func_151DAE28.s")
+typedef struct {
+    char pad0[0x2C];
+    f32 unk2C;
+    f32 unk30;
+    f32 unk34;
+    f32 unk38;
+    f32 unk3C;
+    char pad40[0xC];
+    f32 unk4C;
+    f32 unk50;
+    char pad54[0x6C];
+    char unkC0[0x40];
+    s16 *unk100[1];
+} Struct151DAE28Candidate;
+
+s16 *func_151DAE28(Struct151DAE28Candidate *arg0, s16 arg1) {
+    s16 *var_v0;
+    s16 *ret;
+    f32 temp_f0;
+    f32 temp_f14;
+    f32 temp_f2;
+    f32 temp_f12;
+    u8 sp37;
+
+    func_151D5D60(arg0->unk100, arg1, 0x40, &var_v0, &sp37);
+    ret = var_v0;
+    if (var_v0) {
+        if (sp37) {
+            memcpy(arg0->unk100[arg1], arg0->unkC0, 0x40);
+            memcpy(arg0->unk100[arg1] + 0x20, arg0->unkC0, 0x40);
+        }
+    } else {
+        return 0;
+    }
+    temp_f0 = arg0->unk2C * arg0->unk4C;
+    temp_f14 = arg0->unk30 * arg0->unk50;
+    temp_f2 = D_800DD1D8[arg1] * temp_f0;
+    temp_f12 = D_800DD1E8[arg1] * temp_f0;
+    var_v0[3] = 0;
+    var_v0[0xB] = 0;
+    var_v0[0x13] = 0;
+    var_v0[0x1B] = 0;
+    var_v0[0] = var_v0[0x18] = arg0->unk34 + temp_f12;
+    var_v0[1] = var_v0[9] = arg0->unk38;
+    var_v0[2] = var_v0[0x1A] = arg0->unk3C - temp_f2;
+    var_v0[8] = var_v0[0x10] = arg0->unk34 - temp_f12;
+    var_v0[0x11] = var_v0[0x19] = arg0->unk38 + temp_f14;
+    var_v0[0xA] = var_v0[0x12] = arg0->unk3C + temp_f2;
+    return ret;
+}
 
 void func_151DB004(struct218 *arg0) {
     arg0->unk14 = (func_150ADA20() % 0x38U) + 80;
