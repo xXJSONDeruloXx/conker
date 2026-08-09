@@ -19957,8 +19957,8 @@
       "has-calls"
     ],
     "attempts": 7,
-    "lastScore": 0.4222222222222222,
-    "status": "skipped",
+    "lastScore": 1.0,
+    "status": "matched",
     "history": [
       {
         "code": "void func_1506D6B4(void) {\n    struct127 *temp_v0;\n    s32 *temp_v1;\n    s32 temp;\n\n    temp_v0 = D_800D154C;\n    if (D_80099D4C == temp_v0->unk118) {\n        return;\n    }\n    if (temp_v0->unk118 < (f32) temp_v0->unk1A6) {\n        return;\n    }\n    temp = 0x29;\n    if (temp_v0->health >= 2) {\n        temp = 0x2C;\n    }\n    temp_v1 = &D_800D1580;\n    *temp_v1 = (temp << 24) | (*temp_v1 & 0xFFFF);\n    func_1506D584();\n}",
