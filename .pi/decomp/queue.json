@@ -50121,9 +50121,25 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 2,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "#define n_alCSeqNextEvent n_alCSeqNextEvent_HDR\n#include <n_libaudio.h>\n#undef n_alCSeqNextEvent\n\n#include \"functions.h\"\n#include \"variables.h\"\n\nvoid n_alCSeqNextEvent(ALCSeq *seq, N_ALEvent *evt, s32 arg2) {\n    u32 i;\n    u32 minDelta;\n    s32 minTrack;\n    u32 ticks;\n\n    minDelta = -1;\n    minTrack = -1;\n    ticks = seq->lastDeltaTicks;\n\n    for (i = 0; i < 16; i++) {\n        if ((seq->validTracks >> i) & 1) {\n            if (seq->deltaFlag) {\n                seq->evtDeltaTicks[i] -= ticks;\n            }\n            if (seq->evtDeltaTicks[i] < minDelta) {\n                minDelta = seq->evtDeltaTicks[i];\n                minTrack = i;\n            }\n        }\n    }\n\n    if (minTrack != -1) {\n        __n_alCSeqGetTrackEvent(seq, minTrack, evt, arg2);\n    } else {\n        evt->type = AL_CSP_LOOPSTART;\n    }\n\n    evt->msg.midi.ticks = minDelta;\n    seq->lastTicks += minDelta;\n    seq->lastDeltaTicks = minDelta;\n\n    if (evt->type != AL_CSP_LOOPSTART) {\n        seq->evtDeltaTicks[minTrack] += __readVarLen(seq, minTrack);\n    }\n    seq->deltaFlag = 1;\n}",
+        "score": 0.0,
+        "reason": "compile_error",
+        "diffs": [],
+        "timestamp": "2026-08-09T19:06:08.329580+00:00"
+      },
+      {
+        "code": "#define n_alCSeqNextEvent n_alCSeqNextEvent_HDR\n#include <n_libaudio.h>\n#undef n_alCSeqNextEvent\n\nu8 __getTrackByte(ALCSeq *seq, s32 track);\nu32 __readVarLen(ALCSeq *seq, s32 track);\nu8 __n_alCSeqGetTrackEvent(ALCSeq *seq, s32 track, N_ALEvent *event, s32 arg3);\n\nvoid n_alCSeqNextEvent(ALCSeq *seq, N_ALEvent *evt, s32 arg2) {\n    u32 i;\n    u32 minDelta;\n    s32 minTrack;\n    u32 ticks;\n\n    minDelta = -1;\n    minTrack = -1;\n    ticks = seq->lastDeltaTicks;\n\n    for (i = 0; i < 16; i++) {\n        if ((seq->validTracks >> i) & 1) {\n            if (seq->deltaFlag) {\n                seq->evtDeltaTicks[i] -= ticks;\n            }\n            if (seq->evtDeltaTicks[i] < minDelta) {\n                minDelta = seq->evtDeltaTicks[i];\n                minTrack = i;\n            }\n        }\n    }\n\n    if (minTrack != -1) {\n        __n_alCSeqGetTrackEvent(seq, minTrack, evt, arg2);\n    } else {\n        evt->type = AL_CSP_LOOPSTART;\n    }\n\n    evt->msg.midi.ticks = minDelta;\n    seq->lastTicks += minDelta;\n    seq->lastDeltaTicks = minDelta;\n\n    if (evt->type != AL_CSP_LOOPSTART) {\n        seq->evtDeltaTicks[minTrack] += __readVarLen(seq, minTrack);\n    }\n    seq->deltaFlag = 1;\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-09T19:06:18.395724+00:00"
+      }
+    ]
   },
   {
     "function": "func_15141E38",
