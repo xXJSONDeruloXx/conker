@@ -734,7 +734,17 @@ void func_151DAB58(u8 arg0, f32 arg1, u8 arg2, struct17 *arg3, volatile u8 arg4,
         memcpy((u8 *)ret + 0x110, &sp48, sizeof(sp48));
     }
 }
-#pragma GLOBAL_ASM("asm/nonmatchings/game_2062D0/func_151DADA0.s")
+s32 func_151DADA0(AxisOscillatorOwner *arg0) {
+    f32 f0;
+    Struct151DAB58Extra *p;
+
+    p = &arg0->field_0x110;
+    p->field_0x00 = p->field_0x00 + (s8)p->field_0x01 * D_800BE9E4;
+    f0 = func_151423D8((u8)(p->field_0x00 - 0x40));
+    arg0->field_0x4C = p->field_0x04 * f0 + 1.0f;
+    arg0->field_0x50 = D_800AB4B0 - p->field_0x08 * f0;
+    return 1;
+}
 typedef struct {
     char pad0[0x2C];
     f32 unk2C;
