@@ -52176,9 +52176,18 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "extern void func_150A7960(f32 *, f32, f32, f32, f32 *, f32 *, f32 *);\n\ntypedef struct {\n    s8 unk0;\n    u8 pad1[3];\n    struct17 unk4;\n    struct17 unk10;\n    f32 unk1C;\n    s8 unk20;\n    u8 pad21[3];\n} Struct150156F4PayloadCandidate;\n\ns32 func_150156F4(struct134 *arg0) {\n    struct17 points[2];\n    f32 mtx[4][4];\n    Struct150156F4PayloadCandidate payload;\n\n    if (D_800BE9F0 == 0xB) {\n        if ((u32)arg0->unk18 < 6U) {\n            return 1;\n        }\n    } else if (D_800BE9F0 == 0x2C) {\n        if ((u32)arg0->unk18 < 7U) {\n            return 1;\n        }\n    } else if (D_800BE9F0 == 0x26) {\n        if ((u32)arg0->unk18 < 2U) {\n            return 1;\n        }\n    }\n    func_150A8050(mtx, *(f32 *)&arg0->unkC, *(f32 *)&arg0->unk10, 0.0f);\n    mtx[3][0] = (f32)arg0->unk0;\n    mtx[3][1] = (f32)(s16)arg0->unk2;\n    mtx[3][2] = (f32)arg0->unk4;\n    func_150A7960(mtx[0], 0.0f, (f32)(s16)arg0->unk8, 0.0f,\n                  &points[1].unk0, &points[1].unk4, &points[1].unk8);\n    points[0].unk0 = (f32)arg0->unk0;\n    points[0].unk4 = (f32)(s16)arg0->unk2;\n    points[0].unk8 = (f32)arg0->unk4;\n    payload.unk0 = arg0->unk18;\n    payload.unk4 = points[points[0].unk4 < points[1].unk4];\n    payload.unk10 = points[points[1].unk4 < points[0].unk4];\n    payload.unk20 = 0;\n    payload.unk1C = fabsf(points[1].unk4 - points[0].unk4);\n    func_151ACBD4(&payload, 0);\n    return 1;\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-09T17:35:11.024747+00:00"
+      }
+    ]
   },
   {
     "function": "func_15168870",

@@ -488,4 +488,50 @@ s32 func_15015644(struct134 *arg0) {
     }
     return 1;
 }
-#pragma GLOBAL_ASM("asm/nonmatchings/game_40490/func_150156F4.s")
+extern void func_150A7960(f32 *, f32, f32, f32, f32 *, f32 *, f32 *);
+
+typedef struct {
+    s8 unk0;
+    u8 pad1[3];
+    struct17 unk4;
+    struct17 unk10;
+    f32 unk1C;
+    s8 unk20;
+    u8 pad21[3];
+} Struct150156F4PayloadCandidate;
+
+s32 func_150156F4(struct134 *arg0) {
+    struct17 points[2];
+    f32 mtx[4][4];
+    Struct150156F4PayloadCandidate payload;
+
+    if (D_800BE9F0 == 0xB) {
+        if ((u32)arg0->unk18 < 6U) {
+            return 1;
+        }
+    } else if (D_800BE9F0 == 0x2C) {
+        if ((u32)arg0->unk18 < 7U) {
+            return 1;
+        }
+    } else if (D_800BE9F0 == 0x26) {
+        if ((u32)arg0->unk18 < 2U) {
+            return 1;
+        }
+    }
+    func_150A8050(mtx, *(f32 *)&arg0->unkC, *(f32 *)&arg0->unk10, 0.0f);
+    mtx[3][0] = (f32)arg0->unk0;
+    mtx[3][1] = (f32)(s16)arg0->unk2;
+    mtx[3][2] = (f32)arg0->unk4;
+    func_150A7960(mtx[0], 0.0f, (f32)(s16)arg0->unk8, 0.0f,
+                  &points[1].unk0, &points[1].unk4, &points[1].unk8);
+    points[0].unk0 = (f32)arg0->unk0;
+    points[0].unk4 = (f32)(s16)arg0->unk2;
+    points[0].unk8 = (f32)arg0->unk4;
+    payload.unk0 = arg0->unk18;
+    payload.unk4 = points[points[0].unk4 < points[1].unk4];
+    payload.unk10 = points[points[1].unk4 < points[0].unk4];
+    payload.unk20 = 0;
+    payload.unk1C = fabsf(points[1].unk4 - points[0].unk4);
+    func_151ACBD4(&payload, 0);
+    return 1;
+}
