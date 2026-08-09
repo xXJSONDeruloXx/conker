@@ -38831,9 +38831,32 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.0353,
+    "status": "pending",
+    "history": [
+      {
+        "code": "typedef struct {\n    u8 pad0[0x8];\n    s32 unk8;\n    u8 padC[0x10];\n    s32 unk1C;\n    s32 unk20;\n    s32 unk24;\n} Input1512DD50;\n\nvoid func_1512DD50(struct108 *arg0) {\n    s32 pad;\n    struct17 tmp;\n    f32 temp_f0;\n    f32 temp_f0_2;\n    f32 temp_f12;\n    f32 temp_f14;\n    f32 temp_f2;\n    struct164 *temp_v0;\n    Input1512DD50 *temp_v1;\n\n    temp_f2 = arg0->unk712;\n    temp_f0 = arg0->unk720 * temp_f2;\n    temp_f12 = arg0->unk724 * temp_f2;\n    temp_f0_2 = arg0->unk728 * temp_f0;\n    temp_f14 = -temp_f0 * arg0->unk72C;\n    arg0->unk874 = (f32)arg0->unk70C - temp_f0_2;\n    arg0->unk878 = (f32)arg0->unk70E - temp_f12;\n    arg0->unk87C = (f32)arg0->unk710 - temp_f14;\n    tmp.unk0 = 2.0f * temp_f0_2;\n    tmp.unk4 = 2.0f * temp_f12;\n    tmp.unk8 = 2.0f * temp_f14;\n    temp_f2 = 1.0f / func_150AD930(&tmp);\n    temp_v0 = (struct164 *)arg0->unk870;\n    temp_v0->unk1C = temp_f2;\n    temp_v0->unk10 = temp_f2 * tmp.unk0;\n    temp_v0->unk14 = temp_f2 * tmp.unk4;\n    temp_v0->unk18 = temp_f2 * tmp.unk8;\n    temp_v1 = (Input1512DD50 *)arg0->unk6FC;\n    temp_v0->unk20 = (f32)temp_v1->unk20;\n    temp_v0->unk24 = (f32)temp_v1->unk8;\n    temp_v0->unk28 = 0.0f;\n    temp_v0->unk2C = 0.0f;\n    temp_v0->unk0 = (s8)temp_v1->unk1C;\n}",
+        "score": 0.0353,
+        "reason": "length_mismatch (target=85, generated=77), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T15:47:27.195128+00:00"
+      },
+      {
+        "code": "typedef struct {\n    u8 pad0[0x8];\n    u32 unk8;\n    u8 padC[0x10];\n    u32 unk1C;\n    u32 unk20;\n    u32 unk24;\n} Input1512DD50;\n\ntypedef struct {\n    u8 unk0;\n    u8 pad1[0xF];\n    f32 unk10;\n    f32 unk14;\n    f32 unk18;\n    f32 unk1C;\n    f32 unk20;\n    f32 unk24;\n    f32 unk28;\n    f32 unk2C;\n} Output1512DD50;\n\nvoid func_1512DD50(struct108 *arg0) {\n    s32 pad;\n    struct17 tmp;\n    f32 temp_f0;\n    f32 temp_f0_2;\n    f32 temp_f12;\n    f32 temp_f14;\n    f32 temp_f2;\n    Output1512DD50 *temp_v0;\n    Input1512DD50 *temp_v1;\n\n    temp_f2 = arg0->unk712;\n    temp_f0 = arg0->unk720 * temp_f2;\n    temp_f12 = arg0->unk724 * temp_f2;\n    temp_f0_2 = arg0->unk728 * temp_f0;\n    temp_f14 = -temp_f0 * arg0->unk72C;\n    arg0->unk874 = (f32)arg0->unk70C - temp_f0_2;\n    arg0->unk878 = (f32)arg0->unk70E - temp_f12;\n    arg0->unk87C = (f32)arg0->unk710 - temp_f14;\n    tmp.unk0 = 2.0f * temp_f0_2;\n    tmp.unk4 = 2.0f * temp_f12;\n    tmp.unk8 = 2.0f * temp_f14;\n    temp_f2 = 1.0f / func_150AD930(&tmp);\n    temp_v0 = (Output1512DD50 *)arg0->unk870;\n    temp_v0->unk1C = temp_f2;\n    temp_v0->unk10 = temp_f2 * tmp.unk0;\n    temp_v0->unk14 = temp_f2 * tmp.unk4;\n    temp_v0->unk18 = temp_f2 * tmp.unk8;\n    temp_v1 = (Input1512DD50 *)arg0->unk6FC;\n    temp_v0->unk20 = (f32)temp_v1->unk20;\n    temp_v0->unk24 = (f32)temp_v1->unk8;\n    temp_v0->unk28 = 0.0f;\n    temp_v0->unk2C = 0.0f;\n    temp_v0->unk0 = temp_v1->unk1C;\n}",
+        "score": 0.0471,
+        "reason": "length_mismatch (target=85, generated=82), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T15:47:56.633908+00:00"
+      },
+      {
+        "code": "typedef struct {\n    u8 pad0[0x8];\n    u32 unk8;\n    u8 padC[0x10];\n    u32 unk1C;\n    u32 unk20;\n    u32 unk24;\n} Input1512DD50;\n\ntypedef struct {\n    u8 unk0;\n    u8 pad1[0xF];\n    f32 unk10;\n    f32 unk14;\n    f32 unk18;\n    f32 unk1C;\n    f32 unk20;\n    f32 unk24;\n    f32 unk28;\n    f32 unk2C;\n} Output1512DD50;\n\nvoid func_1512DD50(struct108 *arg0) {\n    s16 temp_t8;\n    s16 temp_t6;\n    s16 temp_t7;\n    s16 temp_t9;\n    struct17 tmp;\n    f32 sp40;\n    f32 temp_f0;\n    f32 temp_f0_2;\n    f32 temp_f12;\n    f32 temp_f14;\n    f32 temp_f2;\n    f32 temp_f16;\n    f32 temp_f18;\n    Output1512DD50 *temp_v0;\n    Input1512DD50 *temp_v1;\n\n    temp_t8 = arg0->unk710;\n    temp_t6 = arg0->unk70C;\n    temp_t7 = arg0->unk70E;\n    sp40 = (f32)temp_t8;\n    temp_f16 = (f32)temp_t6;\n    temp_f18 = (f32)temp_t7;\n    temp_t9 = arg0->unk712;\n    temp_f2 = (f32)temp_t9;\n    temp_f12 = arg0->unk724;\n    temp_f0_2 = arg0->unk728;\n    temp_f0 = arg0->unk720;\n    temp_f14 = arg0->unk72C;\n    temp_f0 = temp_f0 * temp_f2;\n    temp_f12 = temp_f12 * temp_f2;\n    temp_f0_2 = temp_f0_2 * temp_f0;\n    temp_f14 = -temp_f0 * temp_f14;\n    arg0->unk874 = temp_f16 - temp_f0_2;\n    arg0->unk878 = temp_f18 - temp_f12;\n    arg0->unk87C = sp40 - temp_f14;\n    tmp.unk0 = 2.0f * temp_f0_2;\n    tmp.unk4 = 2.0f * temp_f12;\n    tmp.unk8 = 2.0f * temp_f14;\n    temp_f2 = 1.0f / func_150AD930(&tmp);\n    temp_v0 = (Output1512DD50 *)arg0->unk870;\n    temp_v0->unk1C = temp_f2;\n    temp_v0->unk10 = temp_f2 * tmp.unk0;\n    temp_v0->unk14 = temp_f2 * tmp.unk4;\n    temp_v0->unk18 = temp_f2 * tmp.unk8;\n    temp_v1 = (Input1512DD50 *)arg0->unk6FC;\n    temp_v0->unk20 = (f32)temp_v1->unk20;\n    temp_v0->unk24 = (f32)temp_v1->unk8;\n    temp_v0->unk28 = 0.0f;\n    temp_v0->unk2C = 0.0f;\n    temp_v0->unk0 = temp_v1->unk1C;\n}",
+        "score": 0.0353,
+        "reason": "length_mismatch (target=85, generated=82), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T15:48:41.255137+00:00"
+      }
+    ]
   },
   {
     "function": "func_1507A528",
@@ -43980,9 +44003,92 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 2,
+    "lastScore": 0.0,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_151441A4(s16 *arg0, s16 *arg1, s16 *arg2, s16 *arg3,\n                   u8 arg4, u8 arg5, u8 arg6, u8 arg7,\n                   u8 arg8, u8 arg9, u8 arg10, u8 arg11,\n                   u8 arg12, u8 arg13) {\n    s32 value;\n\n    switch (arg13) {\n    case 0:\n        *arg0 = arg8;\n        *arg1 = arg9;\n        *arg2 = arg10;\n        *arg3 = arg11;\n        break;\n    case 1:\n        *arg3 = 0;\n        value = *arg3;\n        *arg2 = value;\n        *arg1 = value;\n        *arg0 = value;\n        break;\n    case 2:\n        *arg2 = 0;\n        value = *arg2;\n        *arg1 = value;\n        *arg0 = value;\n        *arg3 = arg11;\n        break;\n    case 3:\n        *arg0 = (s16)(((u32)arg4 * (u32)arg12) >> 8);\n        *arg1 = (s16)(((u32)arg5 * (u32)arg12) >> 8);\n        *arg2 = (s16)(((u32)arg6 * (u32)arg12) >> 8);\n        *arg3 = 0;\n        break;\n    case 4:\n        *arg0 = (s16)(((u32)arg4 * (u32)arg12) >> 8);\n        *arg1 = (s16)(((u32)arg5 * (u32)arg12) >> 8);\n        *arg2 = (s16)(((u32)arg6 * (u32)arg12) >> 8);\n        *arg3 = 0;\n        break;\n    default:\n        *arg0 = (s16)(((u32)arg4 * (u32)arg12) >> 8);\n        *arg1 = (s16)(((u32)arg5 * (u32)arg12) >> 8);\n        *arg2 = (s16)(((u32)arg6 * (u32)arg12) >> 8);\n        *arg3 = 0;\n        break;\n    }\n}",
+        "score": 0.8721,
+        "reason": "structural_diffs=11, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 6,
+            "type": "structural",
+            "target": "lui at, HI(jtbl_800A5648)",
+            "generated": "lui at, HI(.rodata)"
+          },
+          {
+            "line": 8,
+            "type": "structural",
+            "target": "lw t6, LO(jtbl_800A5648)(at)",
+            "generated": "lw t6, LO(.rodata)(at)"
+          },
+          {
+            "line": 37,
+            "type": "structural",
+            "target": "sra t4, t3, 8",
+            "generated": "srl t4, t3, 8"
+          },
+          {
+            "line": 42,
+            "type": "structural",
+            "target": "sra t7, t6, 8",
+            "generated": "srl t7, t6, 8"
+          },
+          {
+            "line": 47,
+            "type": "structural",
+            "target": "sra t0, t9, 8",
+            "generated": "srl t0, t9, 8"
+          },
+          {
+            "line": 55,
+            "type": "structural",
+            "target": "sra t3, t2, 8",
+            "generated": "srl t3, t2, 8"
+          },
+          {
+            "line": 60,
+            "type": "structural",
+            "target": "sra t6, t5, 8",
+            "generated": "srl t6, t5, 8"
+          },
+          {
+            "line": 65,
+            "type": "structural",
+            "target": "sra t9, t8, 8",
+            "generated": "srl t9, t8, 8"
+          },
+          {
+            "line": 71,
+            "type": "structural",
+            "target": "sra t2, t1, 8",
+            "generated": "srl t2, t1, 8"
+          },
+          {
+            "line": 76,
+            "type": "structural",
+            "target": "sra t5, t4, 8",
+            "generated": "srl t5, t4, 8"
+          },
+          {
+            "line": 81,
+            "type": "structural",
+            "target": "sra t8, t7, 8",
+            "generated": "srl t8, t7, 8"
+          }
+        ],
+        "timestamp": "2026-08-09T15:43:37.129423+00:00"
+      },
+      {
+        "code": "extern void *jtbl_800A5648[];\n\nvoid func_151441A4(s16 *arg0, s16 *arg1, s16 *arg2, s16 *arg3,\n                   u8 arg4, u8 arg5, u8 arg6, u8 arg7,\n                   u8 arg8, u8 arg9, u8 arg10, u8 arg11,\n                   u8 arg12, u8 arg13) {\n    s32 value;\n\n    if (arg13 < 5) {\n        goto *jtbl_800A5648[arg13];\n    }\n    goto default_case;\n\nraw_case:\n        *arg0 = arg8;\n        *arg1 = arg9;\n        *arg2 = arg10;\n        *arg3 = arg11;\n        return;\n\nzero_case:\n        *arg3 = 0;\n        value = *arg3;\n        *arg2 = value;\n        *arg1 = value;\n        *arg0 = value;\n        return;\n\nzero_with_arg_case:\n        *arg2 = 0;\n        value = *arg2;\n        *arg1 = value;\n        *arg0 = value;\n        *arg3 = arg11;\n        return;\n\nmultiply_case_3:\n        *arg0 = (s16)(((s32)((u32)arg4 * (u32)arg12)) >> 8);\n        *arg1 = (s16)(((s32)((u32)arg5 * (u32)arg12)) >> 8);\n        *arg2 = (s16)(((s32)((u32)arg6 * (u32)arg12)) >> 8);\n        *arg3 = 0;\n        return;\n\nmultiply_case_4:\n        *arg0 = (s16)(((s32)((u32)arg4 * (u32)arg12)) >> 8);\n        *arg1 = (s16)(((s32)((u32)arg5 * (u32)arg12)) >> 8);\n        *arg2 = (s16)(((s32)((u32)arg6 * (u32)arg12)) >> 8);\n        *arg3 = 0;\n        return;\n\ndefault_case:\n        *arg0 = (s16)(((s32)((u32)arg4 * (u32)arg12)) >> 8);\n        *arg1 = (s16)(((s32)((u32)arg5 * (u32)arg12)) >> 8);\n        *arg2 = (s16)(((s32)((u32)arg6 * (u32)arg12)) >> 8);\n        *arg3 = 0;\n}",
+        "score": 0.0,
+        "reason": "compile_error",
+        "diffs": [],
+        "timestamp": "2026-08-09T15:44:41.875106+00:00"
+      }
+    ]
   },
   {
     "function": "func_1513BAE8",
@@ -46179,9 +46285,53 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 6,
+    "lastScore": 0.1842,
+    "status": "pending",
+    "history": [
+      {
+        "code": "extern s32 D_800417C0[];\nextern s32 D_80041880[];\nextern s32 D_80041890[];\nextern s32 D_800418A0[];\n\nvoid func_1000E934(void) {\n    s32 *temp_s4;\n    s32 *temp_s5;\n    s32 *temp_s6;\n    s32 *temp_s7;\n    s32 *temp_fp;\n    s32 *temp_a1;\n    s32 i;\n    s32 j;\n    struct137 *ptr;\n\n    temp_s4 = D_800418B0;\n    temp_s5 = D_800417C0;\n    temp_s6 = (s32 *)D_800417B0;\n    temp_s7 = D_800418A0;\n    temp_fp = D_80041890;\n    temp_a1 = D_80041880;\n    i = 0;\n    do {\n        j = 0;\n        do {\n            j += 4;\n            temp_s4[1] = 0x8000;\n            temp_s5[1] = 0x100;\n            temp_s4[2] = 0x8000;\n            temp_s5[2] = 0x100;\n            temp_s4[3] = 0x8000;\n            temp_s5[3] = 0x100;\n            temp_s4 += 4;\n            temp_s5 += 4;\n            temp_s4[0] = 0x8000;\n            temp_s5[0] = 0x100;\n        } while (j != 0x10);\n        func_10008F24(i & 0xFF);\n        i += 1;\n        temp_s6 += 1;\n        temp_s7 += 1;\n        temp_fp += 1;\n        temp_a1 += 1;\n        temp_s6[-1] = 0;\n        temp_s7[-1] = 0;\n        temp_fp[-1] = 0;\n        temp_a1[-1] = 0;\n    } while (i < 3);\n    bzero(D_800419A8, 0x4B0);\n    D_800419A0 = 0;\n    ptr = D_800419A8;\n    do {\n        ptr[0].unk4 = -1;\n        ptr[1].unk4 = -1;\n        ptr[2].unk4 = -1;\n        ptr[3].unk4 = -1;\n        ptr += 4;\n    } while (ptr != (struct137 *)D_80041E58);\n}",
+        "score": 0.0846,
+        "reason": "length_mismatch (target=88, generated=130), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T15:41:44.715869+00:00"
+      },
+      {
+        "code": "extern s32 D_800417C0[];\nextern s32 D_80041880[];\nextern s32 D_80041890[];\nextern s32 D_800418A0[];\n\nvoid func_1000E934(void) {\n    volatile s32 *temp_s4;\n    volatile s32 *temp_s5;\n    volatile s32 *temp_s6;\n    volatile s32 *temp_s7;\n    volatile s32 *temp_fp;\n    volatile s32 *temp_a1;\n    s32 i;\n    s32 j;\n    volatile struct137 *ptr;\n\n    temp_s4 = D_800418B0;\n    temp_s5 = D_800417C0;\n    temp_s6 = (s32 *)D_800417B0;\n    temp_s7 = D_800418A0;\n    temp_fp = D_80041890;\n    temp_a1 = D_80041880;\n    i = 0;\n    do {\n        j = 0;\n        do {\n            j += 4;\n            temp_s4[1] = 0x8000;\n            temp_s5[1] = 0x100;\n            temp_s4[2] = 0x8000;\n            temp_s5[2] = 0x100;\n            temp_s4[3] = 0x8000;\n            temp_s5[3] = 0x100;\n            temp_s4 += 4;\n            temp_s5 += 4;\n            temp_s4[0] = 0x8000;\n            temp_s5[0] = 0x100;\n        } while (j != 0x10);\n        func_10008F24(i & 0xFF);\n        i += 1;\n        temp_s6 += 1;\n        temp_s7 += 1;\n        temp_fp += 1;\n        temp_a1 += 1;\n        temp_s6[-1] = 0;\n        temp_s7[-1] = 0;\n        temp_fp[-1] = 0;\n        temp_a1[-1] = 0;\n    } while (i < 3);\n    bzero(D_800419A8, 0x4B0);\n    D_800419A0 = 0;\n    ptr = D_800419A8;\n    do {\n        ptr[0].unk4 = -1;\n        ptr[1].unk4 = -1;\n        ptr[2].unk4 = -1;\n        ptr[3].unk4 = -1;\n        ptr += 4;\n    } while (ptr != (struct137 *)D_80041E58);\n}",
+        "score": 0.0846,
+        "reason": "length_mismatch (target=88, generated=130), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T15:42:20.797640+00:00"
+      },
+      {
+        "code": "extern s32 D_800417C0[];\nextern s32 D_80041880[];\nextern s32 D_80041890[];\nextern s32 D_800418A0[];\n\nvoid func_1000E934(void) {\n    volatile s32 *temp_s4;\n    volatile s32 *temp_s5;\n    volatile s32 *temp_s6;\n    volatile s32 *temp_s7;\n    volatile s32 *temp_fp;\n    volatile s32 *temp_a1;\n    s32 i;\n    volatile s32 j;\n    struct137 *ptr;\n\n    temp_s4 = D_800418B0;\n    temp_s5 = D_800417C0;\n    temp_s6 = (s32 *)D_800417B0;\n    temp_s7 = D_800418A0;\n    temp_fp = D_80041890;\n    temp_a1 = D_80041880;\n    i = 0;\n    do {\n        j = 0;\n        do {\n            j += 4;\n            temp_s4[1] = 0x8000;\n            temp_s5[1] = 0x100;\n            temp_s4[2] = 0x8000;\n            temp_s5[2] = 0x100;\n            temp_s4[3] = 0x8000;\n            temp_s5[3] = 0x100;\n            temp_s4 += 4;\n            temp_s5 += 4;\n            temp_s4[0] = 0x8000;\n            temp_s5[0] = 0x100;\n        } while (j != 0x10);\n        func_10008F24(i & 0xFF);\n        i += 1;\n        temp_s6 += 1;\n        temp_s7 += 1;\n        temp_fp += 1;\n        temp_a1 += 1;\n        temp_s6[-1] = 0;\n        temp_s7[-1] = 0;\n        temp_fp[-1] = 0;\n        temp_a1[-1] = 0;\n    } while (i < 3);\n    bzero(D_800419A8, 0x4B0);\n    D_800419A0 = 0;\n    ptr = D_800419A8;\n    do {\n        ptr[0].unk4 = -1;\n        ptr[1].unk4 = -1;\n        ptr[2].unk4 = -1;\n        ptr[3].unk4 = -1;\n        ptr += 4;\n    } while (ptr != (struct137 *)D_80041E58);\n}",
+        "score": 0.1121,
+        "reason": "length_mismatch (target=88, generated=116), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T15:45:28.804940+00:00"
+      },
+      {
+        "code": "extern s32 D_800417C0[];\nextern s32 D_80041880[];\nextern s32 D_80041890[];\nextern s32 D_800418A0[];\n\nvoid func_1000E934(void) {\n    volatile s32 *temp_s4;\n    volatile s32 *temp_s5;\n    volatile s32 *temp_s6;\n    volatile s32 *temp_s7;\n    volatile s32 *temp_fp;\n    volatile s32 *temp_a1;\n    s32 i;\n    s32 j;\n    struct137 *ptr;\n\n    temp_s4 = D_800418B0;\n    temp_s5 = D_800417C0;\n    temp_s6 = (s32 *)D_800417B0;\n    temp_s7 = D_800418A0;\n    temp_fp = D_80041890;\n    temp_a1 = D_80041880;\n    i = 0;\n    do {\n        j = 0;\ninner_loop:\n            j += 4;\n            temp_s4[1] = 0x8000;\n            temp_s5[1] = 0x100;\n            temp_s4[2] = 0x8000;\n            temp_s5[2] = 0x100;\n            temp_s4[3] = 0x8000;\n            temp_s5[3] = 0x100;\n            temp_s4 += 4;\n            temp_s5 += 4;\n            temp_s4[0] = 0x8000;\n            temp_s5[0] = 0x100;\n        if (j != 0x10) {\n            goto inner_loop;\n        }\n        func_10008F24(i & 0xFF);\n        i += 1;\n        temp_s6 += 1;\n        temp_s7 += 1;\n        temp_fp += 1;\n        temp_a1 += 1;\n        temp_s6[-1] = 0;\n        temp_s7[-1] = 0;\n        temp_fp[-1] = 0;\n        temp_a1[-1] = 0;\n    } while (i < 3);\n    bzero(D_800419A8, 0x4B0);\n    D_800419A0 = 0;\n    ptr = D_800419A8;\n    do {\n        ptr[0].unk4 = -1;\n        ptr[1].unk4 = -1;\n        ptr[2].unk4 = -1;\n        ptr[3].unk4 = -1;\n        ptr += 4;\n    } while (ptr != (struct137 *)D_80041E58);\n}",
+        "score": 0.125,
+        "reason": "length_mismatch (target=88, generated=112), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T15:45:51.639502+00:00"
+      },
+      {
+        "code": "extern s32 D_800417C0[];\nextern s32 D_80041880[];\nextern s32 D_80041890[];\nextern s32 D_800418A0[];\n\nvoid func_1000E934(void) {\n    volatile s32 *temp_s4;\n    volatile s32 *temp_s5;\n    volatile s32 *temp_s6;\n    volatile s32 *temp_s7;\n    volatile s32 *temp_fp;\n    volatile s32 *temp_a1;\n    s32 i;\n    register volatile s32 j;\n    struct137 *ptr;\n\n    temp_s4 = D_800418B0;\n    temp_s5 = D_800417C0;\n    temp_s6 = (s32 *)D_800417B0;\n    temp_s7 = D_800418A0;\n    temp_fp = D_80041890;\n    temp_a1 = D_80041880;\n    i = 0;\n    do {\n        j = 0;\ninner_loop:\n            j += 4;\n            temp_s4[1] = 0x8000;\n            temp_s5[1] = 0x100;\n            temp_s4[2] = 0x8000;\n            temp_s5[2] = 0x100;\n            temp_s4[3] = 0x8000;\n            temp_s5[3] = 0x100;\n            temp_s4 += 4;\n            temp_s5 += 4;\n            temp_s4[0] = 0x8000;\n            temp_s5[0] = 0x100;\n        if (j != 0x10) {\n            goto inner_loop;\n        }\n        func_10008F24(i & 0xFF);\n        i += 1;\n        temp_s6 += 1;\n        temp_s7 += 1;\n        temp_fp += 1;\n        temp_a1 += 1;\n        temp_s6[-1] = 0;\n        temp_s7[-1] = 0;\n        temp_fp[-1] = 0;\n        temp_a1[-1] = 0;\n    } while (i < 3);\n    bzero(D_800419A8, 0x4B0);\n    D_800419A0 = 0;\n    ptr = D_800419A8;\n    do {\n        ptr[0].unk4 = -1;\n        ptr[1].unk4 = -1;\n        ptr[2].unk4 = -1;\n        ptr[3].unk4 = -1;\n        ptr += 4;\n    } while (ptr != (struct137 *)D_80041E58);\n}",
+        "score": 0.1121,
+        "reason": "length_mismatch (target=88, generated=116), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T15:46:08.188383+00:00"
+      },
+      {
+        "code": "extern s32 D_800417C0[];\nextern s32 D_80041880[];\nextern s32 D_80041890[];\nextern s32 D_800418A0[];\n\nvoid func_1000E934(void) {\n    volatile s32 *temp_s4;\n    volatile s32 *temp_s5;\n    volatile s32 *temp_s6;\n    volatile s32 *temp_s7;\n    volatile s32 *temp_fp;\n    volatile s32 *temp_a1;\n    s32 i;\n    s32 j;\n    struct137 *ptr;\n\n    temp_s4 = D_800418B0;\n    temp_s5 = D_800417C0;\n    temp_s6 = (s32 *)D_800417B0;\n    temp_s7 = D_800418A0;\n    temp_fp = D_80041890;\n    temp_a1 = D_80041880;\n    i = 0;\n    do {\n        j = 0;\ninner_loop:\n            j += 4;\n            temp_s4[j - 3] = 0x8000;\n            temp_s5[j - 3] = 0x100;\n            temp_s4[j - 2] = 0x8000;\n            temp_s5[j - 2] = 0x100;\n            temp_s4[j - 1] = 0x8000;\n            temp_s5[j - 1] = 0x100;\n            temp_s4 += 4;\n            temp_s5 += 4;\n            temp_s4[0] = 0x8000;\n            temp_s5[0] = 0x100;\n        if (j != 0x10) {\n            goto inner_loop;\n        }\n        func_10008F24(i & 0xFF);\n        i += 1;\n        temp_s6 += 1;\n        temp_s7 += 1;\n        temp_fp += 1;\n        temp_a1 += 1;\n        temp_s6[-1] = 0;\n        temp_s7[-1] = 0;\n        temp_fp[-1] = 0;\n        temp_a1[-1] = 0;\n    } while (i < 3);\n    bzero(D_800419A8, 0x4B0);\n    D_800419A0 = 0;\n    ptr = D_800419A8;\n    do {\n        ptr[0].unk4 = -1;\n        ptr[1].unk4 = -1;\n        ptr[2].unk4 = -1;\n        ptr[3].unk4 = -1;\n        ptr += 4;\n    } while (ptr != (struct137 *)D_80041E58);\n}",
+        "score": 0.1842,
+        "reason": "length_mismatch (target=88, generated=114), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T15:46:23.587778+00:00"
+      }
+    ]
   },
   {
     "function": "func_1515C388",
@@ -48727,9 +48877,81 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 10,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "void *func_10017438(s32 arg0, s16 arg1, u16 arg2, u8 arg3, f32 arg4, u8 arg5, u8 arg6, struct31 **arg7) {\n    struct31 *sp34;\n    struct31 *sp30;\n    s16 sp2E;\n    s32 sp28;\n    N_ALEvent event;\n    s16 sp18;\n\n    sp30 = NULL;\n    sp2E = 0;\n    if (arg1 != 0) {\nloop_1:\n        sp34 = func_10017100(arg0, arg1 - 1);\n        if (sp34 != 0) {\n            D_8002BA2C->target = (s32)sp34;\n            event.type = 0x4000;\n            event.msg.unknown1.unk0 = (N_ALUnknownStruct1 *)sp34;\n            sp34->unk4E = arg3;\n            sp34->unk44 = arg2;\n            sp34->unk30 = arg4;\n            sp34->unk50 = arg5;\n            sp34->unk52 = arg6;\n            sp28 = 0;\n            n_alEvtqPostEvent(&D_8002BA2C->evtq, &event, sp28 + 1, 2);\n            sp30 = sp34;\n        }\n        arg1 = (u16)0;\n        if (arg1 != 0) {\n            if (sp34 != 0) {\n                goto loop_1;\n            }\n        }\n        if (sp30 != 0) {\n            sp30->unk53 |= 1;\n            sp30->unk38 = (struct31 **)arg7;\n            if (sp2E != 0) {\n            }\n        }\n    }\n    if (arg7 != 0) {\n        *arg7 = sp30;\n    }\n    return sp30;\n}",
+        "score": 0.0,
+        "reason": "compile_error",
+        "diffs": [],
+        "timestamp": "2026-08-09T15:51:16.040571+00:00"
+      },
+      {
+        "code": "void *func_10017438(s32 arg0, s16 arg1, u16 arg2, u8 arg3, f32 arg4, u8 arg5, u8 arg6, N_ALUnknownStruct1 **arg7) {\n    N_ALUnknownStruct1 *sp34;\n    N_ALUnknownStruct1 *sp30;\n    s16 sp2E;\n    s32 sp28;\n    N_ALEvent event;\n    s16 sp18;\n\n    sp30 = NULL;\n    sp2E = 0;\n    if (arg1 != 0) {\nloop_1:\n        sp34 = func_10017100(arg0, arg1 - 1);\n        if (sp34 != 0) {\n            D_8002BA2C->target = (s32)sp34;\n            event.type = 0x4000;\n            event.msg.unknown1.unk0 = (N_ALUnknownStruct1 *)sp34;\n            sp34->unk4E = arg3;\n            sp34->unk44 = arg2;\n            sp34->unk30 = arg4;\n            sp34->unk50 = arg5;\n            sp34->unk52 = arg6;\n            sp28 = 0;\n            n_alEvtqPostEvent(&D_8002BA2C->evtq, &event, sp28 + 1, 2);\n            sp30 = sp34;\n        }\n        arg1 = (u16)0;\n        if (arg1 != 0) {\n            if (sp34 != 0) {\n                goto loop_1;\n            }\n        }\n        if (sp30 != 0) {\n            sp30->unk53 |= 1;\n            sp30->unk38 = (s32 *)arg7;\n            if (sp2E != 0) {\n            }\n        }\n    }\n    if (arg7 != 0) {\n        *arg7 = sp30;\n    }\n    return sp30;\n}",
+        "score": 0.0,
+        "reason": "compile_error",
+        "diffs": [],
+        "timestamp": "2026-08-09T15:51:30.557343+00:00"
+      },
+      {
+        "code": "typedef struct {\n    u8 pad0[0x30];\n    f32 unk30;\n    u8 pad34[0x4];\n    s32 *unk38;\n    u8 pad3C[0x8];\n    u16 unk44;\n    u8 pad46[0x9];\n    u8 unk4F;\n    u8 unk50;\n    u8 unk51;\n    u8 pad52;\n    u8 unk53;\n    u8 unk54;\n} AudioNode17438;\n\nvoid *func_10017438(s32 arg0, s16 arg1, u16 arg2, u8 arg3, f32 arg4, u8 arg5, u8 arg6, s32 *arg7) {\n    AudioNode17438 *sp34;\n    AudioNode17438 *sp30;\n    s16 sp2E;\n    s32 sp28;\n    N_ALEvent event;\n    s16 sp18;\n\n    sp30 = NULL;\n    sp2E = 0;\n    if (arg1 != 0) {\nloop_1:\n        sp34 = func_10017100(arg0, arg1 - 1);\n        if (sp34 != 0) {\n            D_8002BA2C->target = (s32)sp34;\n            event.type = 0x4000;\n            event.msg.unknown1.unk0 = (N_ALUnknownStruct1 *)sp34;\n            sp34->unk4E = arg3;\n            sp34->unk44 = arg2;\n            sp34->unk30 = arg4;\n            sp34->unk50 = arg5;\n            sp34->unk52 = arg6;\n            sp28 = 0;\n            n_alEvtqPostEvent(&D_8002BA2C->evtq, &event, sp28 + 1, 2);\n            sp30 = sp34;\n        }\n        arg1 = (u16)0;\n        if (arg1 != 0) {\n            if (sp34 != 0) {\n                goto loop_1;\n            }\n        }\n        if (sp30 != 0) {\n            sp30->unk53 |= 1;\n            sp30->unk38 = arg7;\n            if (sp2E != 0) {\n            }\n        }\n    }\n    if (arg7 != 0) {\n        *arg7 = (s32)sp30;\n    }\n    return sp30;\n}",
+        "score": 0.0,
+        "reason": "compile_error",
+        "diffs": [],
+        "timestamp": "2026-08-09T15:51:58.141521+00:00"
+      },
+      {
+        "code": "typedef struct {\n    u8 pad0[0x30];\n    f32 unk30;\n    u8 pad34[0x4];\n    s32 *unk38;\n    u8 pad3C[0x8];\n    u16 unk44;\n    u8 pad46[0x9];\n    u8 unk4F;\n    u8 unk50;\n    u8 unk51;\n    u8 pad52;\n    u8 unk53;\n    u8 unk54;\n} AudioNode17438;\n\nvoid *func_10017438(s32 arg0, s16 arg1, u16 arg2, u8 arg3, f32 arg4, u8 arg5, u8 arg6, s32 *arg7) {\n    AudioNode17438 *sp34;\n    AudioNode17438 *sp30;\n    s16 sp2E;\n    s32 sp28;\n    N_ALEvent event;\n    s16 sp18;\n\n    sp30 = NULL;\n    sp2E = 0;\n    if (arg1 != 0) {\nloop_1:\n        sp34 = func_10017100(arg0, arg1 - 1);\n        if (sp34 != 0) {\n            D_8002BA2C->target = (s32)sp34;\n            event.type = 0x4000;\n            event.msg.unknown1.unk0 = (N_ALUnknownStruct1 *)sp34;\n            sp34->unk4F = arg3;\n            sp34->unk44 = arg2;\n            sp34->unk30 = arg4;\n            sp34->unk50 = arg5;\n            sp34->unk51 = arg6;\n            sp28 = 0;\n            n_alEvtqPostEvent(&D_8002BA2C->evtq, &event, sp28 + 1, 2);\n            sp30 = sp34;\n        }\n        arg1 = (u16)0;\n        if (arg1 != 0) {\n            if (sp34 != 0) {\n                goto loop_1;\n            }\n        }\n        if (sp30 != 0) {\n            sp30->unk53 |= 1;\n            sp30->unk38 = arg7;\n            if (sp2E != 0) {\n            }\n        }\n    }\n    if (arg7 != 0) {\n        *arg7 = (s32)sp30;\n    }\n    return sp30;\n}",
+        "score": 0.2472,
+        "reason": "length_mismatch (target=87, generated=89), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T15:52:05.319229+00:00"
+      },
+      {
+        "code": "typedef struct {\n    u8 pad0[0x30];\n    f32 unk30;\n    u8 pad34[0x4];\n    s32 *unk38;\n    u8 pad3C[0x8];\n    u16 unk44;\n    u8 pad46[0x9];\n    u8 unk4F;\n    u8 unk50;\n    u8 unk51;\n    u8 pad52;\n    u8 unk53;\n    u8 unk54;\n} AudioNode17438;\n\nvoid *func_10017438(s32 arg0, s16 arg1, u16 arg2, u8 arg3, f32 arg4, u8 arg5, u8 arg6, s32 *arg7) {\n    AudioNode17438 *sp34;\n    AudioNode17438 *sp30;\n    s16 sp2E;\n    s32 sp28;\n    N_ALUnknownStruct1 *sp1C;\n    s16 sp18;\n\n    sp30 = NULL;\n    sp2E = 0;\n    if (arg1 != 0) {\nloop_1:\n        sp34 = func_10017100(arg0, arg1 - 1);\n        if (sp34 != 0) {\n            D_8002BA2C->target = (s32)sp34;\n            sp18 = 0x4000;\n            sp1C = (N_ALUnknownStruct1 *)sp34;\n            sp34->unk4F = arg3;\n            sp34->unk44 = arg2;\n            sp34->unk30 = arg4;\n            sp34->unk50 = arg5;\n            sp34->unk51 = arg6;\n            sp28 = 0;\n            n_alEvtqPostEvent(&D_8002BA2C->evtq, (N_ALEvent *)&sp18, sp28 + 1, 2);\n            sp30 = sp34;\n        }\n        arg1 = (u16)0;\n        if (arg1 != 0) {\n            if (sp34 != 0) {\n                goto loop_1;\n            }\n        }\n        if (sp30 != 0) {\n            sp30->unk53 |= 1;\n            sp30->unk38 = arg7;\n            if (sp2E != 0) {\n            }\n        }\n    }\n    if (arg7 != 0) {\n        *arg7 = (s32)sp30;\n    }\n    return sp30;\n}",
+        "score": 0.2584,
+        "reason": "length_mismatch (target=87, generated=89), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T15:53:03.498086+00:00"
+      },
+      {
+        "code": "typedef struct {\n    u8 pad0[0x30];\n    f32 unk30;\n    u8 pad34[0x4];\n    s32 *unk38;\n    u8 pad3C[0x8];\n    u16 unk44;\n    u8 pad46[0x9];\n    u8 unk4F;\n    u8 unk50;\n    u8 unk51;\n    u8 pad52;\n    u8 unk53;\n    u8 unk54;\n} AudioNode17438;\n\nvoid *func_10017438(s32 arg0, s16 arg1, u16 arg2, u8 arg3, f32 arg4, u8 arg5, u8 arg6, s32 *arg7) {\n    void *sp34;\n    void *sp30;\n    s16 sp2E;\n    s32 sp28;\n    N_ALUnknownStruct1 *sp1C;\n    s16 sp18;\n\n    sp30 = NULL;\n    sp2E = 0;\n    if (arg1 != 0) {\nloop_1:\n        sp34 = func_10017100(arg0, arg1 - 1);\n        if (sp34 != 0) {\n            D_8002BA2C->target = (s32)sp34;\n            sp18 = 0x4000;\n            sp1C = (N_ALUnknownStruct1 *)sp34;\n            ((AudioNode17438 *)sp34)->unk4F = arg3;\n            ((AudioNode17438 *)sp34)->unk44 = arg2;\n            ((AudioNode17438 *)sp34)->unk30 = arg4;\n            ((AudioNode17438 *)sp34)->unk50 = arg5;\n            ((AudioNode17438 *)sp34)->unk51 = arg6;\n            sp28 = 0;\n            n_alEvtqPostEvent(&D_8002BA2C->evtq, (N_ALEvent *)&sp18, sp28 + 1, 2);\n            sp30 = sp34;\n        }\n        arg1 = (u16)0;\n        if (arg1 != 0) {\n            if (sp34 != 0) {\n                goto loop_1;\n            }\n        }\n        if (sp30 != 0) {\n            ((AudioNode17438 *)sp30)->unk53 |= 1;\n            ((AudioNode17438 *)sp30)->unk38 = arg7;\n            if (sp2E != 0) {\n            }\n        }\n    }\n    if (arg7 != 0) {\n        *arg7 = (s32)sp30;\n    }\n    return sp30;\n}",
+        "score": 0.2584,
+        "reason": "length_mismatch (target=87, generated=89), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T15:53:54.299976+00:00"
+      },
+      {
+        "code": "typedef struct {\n    u8 pad0[0x30];\n    f32 unk30;\n    u8 pad34[0x4];\n    s32 *unk38;\n    u8 pad3C[0x8];\n    u16 unk44;\n    u8 pad46[0x9];\n    u8 unk4F;\n    u8 unk50;\n    u8 unk51;\n    u8 pad52;\n    u8 unk53;\n    u8 unk54;\n} AudioNode17438;\n\ntypedef struct {\n    s16 type;\n    void *ptr;\n} AudioEvent17438;\n\nvoid *func_10017438(s32 arg0, s16 arg1, u16 arg2, u8 arg3, f32 arg4, u8 arg5, u8 arg6, s32 *arg7) {\n    void *sp34;\n    void *sp30;\n    s16 sp2E;\n    s32 sp28;\n    AudioEvent17438 event;\n\n    sp30 = NULL;\n    sp2E = 0;\n    if (arg1 != 0) {\nloop_1:\n        sp34 = func_10017100(arg0, arg1 - 1);\n        if (sp34 != 0) {\n            D_8002BA2C->target = (s32)sp34;\n            event.type = 0x4000;\n            event.ptr = sp34;\n            ((AudioNode17438 *)sp34)->unk4F = arg3;\n            ((AudioNode17438 *)sp34)->unk44 = arg2;\n            ((AudioNode17438 *)sp34)->unk30 = arg4;\n            ((AudioNode17438 *)sp34)->unk50 = arg5;\n            ((AudioNode17438 *)sp34)->unk51 = arg6;\n            sp28 = 0;\n            n_alEvtqPostEvent(&D_8002BA2C->evtq, (N_ALEvent *)&event, sp28 + 1, 2);\n            sp30 = sp34;\n        }\n        arg1 = (u16)0;\n        if (arg1 != 0) {\n            if (sp34 != 0) {\n                goto loop_1;\n            }\n        }\n        if (sp30 != 0) {\n            ((AudioNode17438 *)sp30)->unk53 |= 1;\n            ((AudioNode17438 *)sp30)->unk38 = arg7;\n            if (sp2E != 0) {\n            }\n        }\n    }\n    if (arg7 != 0) {\n        *arg7 = (s32)sp30;\n    }\n    return sp30;\n}",
+        "score": 0.2809,
+        "reason": "length_mismatch (target=87, generated=89), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T15:54:06.731328+00:00"
+      },
+      {
+        "code": "typedef struct {\n    u8 pad0[0x30];\n    f32 unk30;\n    u8 pad34[0x4];\n    s32 *unk38;\n    u8 pad3C[0x8];\n    u16 unk44;\n    u8 pad46[0x9];\n    u8 unk4F;\n    u8 unk50;\n    u8 unk51;\n    u8 pad52;\n    u8 unk53;\n    u8 unk54;\n} AudioNode17438;\n\ntypedef struct {\n    s16 type;\n    void *ptr;\n} AudioEvent17438;\n\nvoid *func_10017438(s32 arg0, s16 arg1, u16 arg2, u8 arg3, f32 arg4, u8 arg5, u8 arg6, s32 *arg7) {\n    void *sp34;\n    void *sp30;\n    s16 sp2E;\n    s32 sp28;\n    AudioEvent17438 event;\n    volatile u32 pad0[2];\n\n    sp30 = NULL;\n    sp2E = 0;\n    if (arg1 != 0) {\nloop_1:\n        sp34 = func_10017100(arg0, arg1 - 1);\n        if (sp34 != 0) {\n            D_8002BA2C->target = (s32)sp34;\n            event.type = 0x4000;\n            event.ptr = sp34;\n            ((AudioNode17438 *)sp34)->unk4F = arg3;\n            ((AudioNode17438 *)sp34)->unk44 = arg2;\n            ((AudioNode17438 *)sp34)->unk30 = arg4;\n            ((AudioNode17438 *)sp34)->unk50 = arg5;\n            ((AudioNode17438 *)sp34)->unk51 = arg6;\n            sp28 = 0;\n            n_alEvtqPostEvent(&D_8002BA2C->evtq, (N_ALEvent *)&event, sp28 + 1, 2);\n            sp30 = sp34;\n        }\n        arg1 = (u16)0;\n        if (arg1 != 0) {\n            if (sp34 != 0) {\n                goto loop_1;\n            }\n        }\n        if (sp30 != 0) {\n            ((AudioNode17438 *)sp30)->unk53 |= 1;\n            ((AudioNode17438 *)sp30)->unk38 = arg7;\n            if (sp2E != 0) {\n            }\n        }\n    }\n    if (arg7 != 0) {\n        *arg7 = (s32)sp30;\n    }\n    return sp30;\n}",
+        "score": 0.4887640449438202,
+        "reason": "length_mismatch (target=87, generated=89), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T15:54:23.237188+00:00"
+      },
+      {
+        "code": "typedef struct {\n    u8 pad0[0x30];\n    u8 pad30[0x4];\n    f32 unk34;\n    s32 *unk38;\n    u8 pad3C[0x8];\n    u16 unk44;\n    u8 pad46[0x9];\n    u8 unk4F;\n    u8 unk50;\n    u8 unk51;\n    u8 pad52;\n    u8 unk53;\n    u8 unk54;\n} AudioNode17438;\n\ntypedef struct {\n    s16 type;\n    void *ptr;\n} AudioEvent17438;\n\nvoid *func_10017438(s32 arg0, s16 arg1, u16 arg2, u8 arg3, f32 arg4, u8 arg5, u8 arg6, s32 *arg7) {\n    void *sp34;\n    void *sp30;\n    s16 sp2E;\n    s32 sp28;\n    volatile u32 pad0[2];\n    AudioEvent17438 event;\n\n    sp30 = NULL;\n    sp2E = 0;\n    if (arg1 != 0) {\nloop_1:\n        sp34 = func_10017100(arg0, arg1 - 1);\n        if (sp34 != 0) {\n            D_8002BA2C->target = (s32)sp34;\n            event.type = 0x4000;\n            event.ptr = sp34;\n            ((AudioNode17438 *)sp34)->unk4F = arg3;\n            ((AudioNode17438 *)sp34)->unk44 = arg2;\n            ((AudioNode17438 *)sp34)->unk34 = arg4;\n            ((AudioNode17438 *)sp34)->unk50 = arg5;\n            ((AudioNode17438 *)sp34)->unk51 = arg6;\n            sp28 = 0;\n            n_alEvtqPostEvent(&D_8002BA2C->evtq, (N_ALEvent *)&event, sp28 + 1, 2);\n            sp30 = sp34;\n        }\n        arg1 = (u16)0;\n        if (arg1 != 0 && sp34 != 0) {\n            goto loop_1;\n        }\n        if (sp30 != 0) {\n            ((AudioNode17438 *)sp30)->unk53 |= 1;\n            ((AudioNode17438 *)sp30)->unk38 = arg7;\n            if (sp2E != 0) {\n            }\n        }\n    }\n    if (arg7 != 0) {\n        *arg7 = (s32)sp30;\n    }\n    return sp30;\n}",
+        "score": 0.4887640449438202,
+        "reason": "length_mismatch (target=87, generated=89), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T15:54:59.535691+00:00"
+      },
+      {
+        "code": "typedef struct {\n    u8 pad0[0x30];\n    u8 pad30[0x4];\n    f32 unk34;\n    s32 *unk38;\n    u8 pad3C[0x8];\n    u16 unk44;\n    u8 pad46[0x9];\n    u8 unk4F;\n    u8 unk50;\n    u8 unk51;\n    u8 pad52;\n    u8 unk53;\n    u8 unk54;\n} AudioNode17438;\n\ntypedef struct {\n    s16 type;\n    void *ptr;\n} AudioEvent17438;\n\nvoid *func_10017438(s32 arg0, s16 arg1, u16 arg2, u8 arg3, f32 arg4, u8 arg5, u8 arg6, s32 *arg7) {\n    void *sp34;\n    void *sp30;\n    s16 sp2E;\n    s32 sp28;\n    volatile u32 pad0[2];\n    AudioEvent17438 event;\n\n    sp30 = NULL;\n    sp2E = 0;\n    if (arg1 != 0) {\n        do {\n            sp34 = func_10017100(arg0, arg1 - 1);\n            if (sp34 != 0) {\n                D_8002BA2C->target = (s32)sp34;\n                event.type = 0x4000;\n                event.ptr = sp34;\n                ((AudioNode17438 *)sp34)->unk4F = arg3;\n                ((AudioNode17438 *)sp34)->unk44 = arg2;\n                ((AudioNode17438 *)sp34)->unk34 = arg4;\n                ((AudioNode17438 *)sp34)->unk50 = arg5;\n                ((AudioNode17438 *)sp34)->unk51 = arg6;\n                sp28 = 0;\n                n_alEvtqPostEvent(&D_8002BA2C->evtq, (N_ALEvent *)&event, sp28 + 1, 2);\n                sp30 = sp34;\n            }\n            arg1 = (u16)0;\n        } while (arg1 != 0 && sp34 != 0);\n        if (sp30 != 0) {\n            ((AudioNode17438 *)sp30)->unk53 |= 1;\n            ((AudioNode17438 *)sp30)->unk38 = arg7;\n            if (sp2E != 0) {\n            }\n        }\n    }\n    if (arg7 != 0) {\n        *arg7 = (s32)sp30;\n    }\n    return sp30;\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-09T15:55:30.288867+00:00"
+      }
+    ]
   },
   {
     "function": "func_15141F78",

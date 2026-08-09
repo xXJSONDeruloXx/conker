@@ -233,7 +233,67 @@ s32 func_100173C4(N_ALUnknownEvent2 *arg0) {
     return ret;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/init_15550/func_10017438.s")
+typedef struct {
+    u8 pad0[0x30];
+    u8 pad30[0x4];
+    f32 unk34;
+    s32 *unk38;
+    u8 pad3C[0x8];
+    u16 unk44;
+    u8 pad46[0x9];
+    u8 unk4F;
+    u8 unk50;
+    u8 unk51;
+    u8 pad52;
+    u8 unk53;
+    u8 unk54;
+} AudioNode17438;
+
+typedef struct {
+    s16 type;
+    void *ptr;
+} AudioEvent17438;
+
+void *func_10017438(s32 arg0, s16 arg1, u16 arg2, u8 arg3, f32 arg4, u8 arg5, u8 arg6, s32 *arg7) {
+    void *sp34;
+    void *sp30;
+    s16 sp2E;
+    s32 sp28;
+    volatile u32 pad0[2];
+    AudioEvent17438 event;
+
+    sp30 = NULL;
+    sp2E = 0;
+    if (arg1 != 0) {
+        do {
+            sp34 = func_10017100(arg0, arg1 - 1);
+            if (sp34 != 0) {
+                D_8002BA2C->target = (s32)sp34;
+                event.type = 0x4000;
+                event.ptr = sp34;
+                ((AudioNode17438 *)sp34)->unk4F = arg3;
+                ((AudioNode17438 *)sp34)->unk44 = arg2;
+                ((AudioNode17438 *)sp34)->unk34 = arg4;
+                ((AudioNode17438 *)sp34)->unk50 = arg5;
+                ((AudioNode17438 *)sp34)->unk51 = arg6;
+                sp28 = 0;
+                n_alEvtqPostEvent(&D_8002BA2C->evtq, (N_ALEvent *)&event, sp28 + 1, 2);
+                sp30 = sp34;
+            }
+            arg1 = (u16)0;
+        } while (arg1 != 0 && sp34 != 0);
+        if (sp30 != 0) {
+            ((AudioNode17438 *)sp30)->unk53 |= 1;
+            ((AudioNode17438 *)sp30)->unk38 = arg7;
+            if (sp2E != 0) {
+            }
+        }
+    }
+    if (arg7 != 0) {
+        *arg7 = (s32)sp30;
+    }
+    return sp30;
+}
 // void *func_10017438(s32 arg0, s16 arg1, u16 arg2, u8 arg3, f32 arg4, u8 arg5, u8 arg6, void *arg7) {
 //     void *sp34;
 //     void *sp30;
