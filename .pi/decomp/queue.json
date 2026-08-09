@@ -58111,9 +58111,18 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "u32 func_1000BF60(u32 arg0, u8 arg1, f32 arg2, f32 arg3, f32 arg4) {\n    s32 sp5C;\n    s32 temp;\n    u32 sp54;\n    s32 sp50;\n    s32 sp4C;\n    u32 sp48;\n    s32 mode;\n    s32 sp40;\n    s32 sp3C;\n\n    sp50 = 0;\n    sp5C = arg0 & 3;\n    sp54 = arg0 >> 8;\n    if (!(arg0 & 0x80)) {\n        func_1000E40C(0x22, 0x5DC0);\n        if (D_800C35EA == 1) {\n            func_1000DF68(0x22, 0x14, 1);\n        }\n        arg0 = 0x80;\n        sp50 = 1;\n    }\n\n    if (D_800BE9F0 != 0x1D) {\n        func_10008F24(arg1);\n        return arg0;\n    }\n\n    sp40 = 0;\n    sp3C = 0;\n    func_100114D0(-0x15F, 0, 0x197, 0x7FFF, 0xBB8, 0x12C, &sp48, &sp4C, 0);\n\n    if ((u32)sp4C < 0x4000U) {\n        sp4C = 0x40;\n    } else {\n        sp4C = (u32)sp4C >> 8;\n    }\n\n    if (sp4C != (sp54 >> 8)) {\n        sp40 = 1;\n        func_1000886C(arg1, 6, sp4C);\n    }\n\n    if (sp48 != (sp54 & 0xFF)) {\n        sp3C = 1;\n        func_10008744(arg1, 1, sp48 & 0x7F);\n        func_10008744(arg1, 2, sp48 & 0x7F);\n        func_100086FC(arg1, 1, sp48 >> 7);\n        func_100086FC(arg1, 2, sp48 >> 7);\n    }\n\n    sp54 = (sp48 << 8) | (sp4C << 16);\n\n    func_100114D0(-0x40, 0, 0x21F, 0x7FFF, 0xBB8, 0x12C, &sp48, &sp4C, 0);\n    if (sp40 != 0) {\n        if ((u32)sp4C < 0x4000U) {\n            sp4C = 0x4000;\n        }\n        func_1000886C(arg1, 1, (u32)sp4C >> 8);\n    }\n\n    if (sp3C != 0) {\n        func_10008744(arg1, 0, 0x40);\n        func_100086FC(arg1, 0, 0);\n    }\n\n    func_100114D0(-0x126, 0, 0x290, 0x7FFF, 0xBB8, 0x12C, &sp48, &sp4C, 0);\n    if (sp40 != 0) {\n        if ((u32)sp4C < 0x4000U) {\n            sp4C = 0x4000;\n        }\n        func_1000886C(arg1, 0x18, (u32)sp4C >> 8);\n    }\n\n    if (sp3C != 0) {\n        func_10008744(arg1, 3, sp48 & 0x7F);\n        func_10008744(arg1, 4, sp48 & 0x7F);\n        func_100086FC(arg1, 3, sp48 >> 7);\n        func_100086FC(arg1, 4, sp48 >> 7);\n    }\n\n    mode = D_80041F08;\n    if (sp5C != mode) {\n        switch (mode) {\n        case 1:\n            temp = arg0 & 0x7C;\n            if (temp != 0) {\n                temp = temp - ((D_800BE9E4 >> 1) << 2);\n                if (temp <= 0) {\n                    func_1000E704(0x22, 0, 0xFFFF);\n                    arg0 = 0x81;\n                } else {\n                    arg0 = temp | 0x80;\n                }\n            }\n            func_1000E46C(0x22, 0x64, 0xFE0, 0);\n            break;\n        case 2:\n            arg0 = 0xF8;\n            func_10011FA0((s32 *)4);\n            func_1000E704(0x22, 1, 0xFFFF);\n            func_1000E46C(0x22, 0, 0xFE0, sp50);\n            break;\n        }\n    }\n\n    return arg0 | sp54;\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-09T19:21:37.474715+00:00"
+      }
+    ]
   },
   {
     "function": "func_1505E0C4",
