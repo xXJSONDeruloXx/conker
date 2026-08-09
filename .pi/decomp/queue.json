@@ -26554,9 +26554,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 5,
-    "lastScore": 0.3696,
-    "status": "skipped",
+    "attempts": 7,
+    "lastScore": 1.0,
+    "status": "matched",
     "history": [
       {
         "code": "void func_15079228(void) {\n    struct127 *temp_v1;\n    struct178 *temp_v0;\n    u16 temp_a2;\n\n    temp_v1 = D_800D154C;\n    temp_v0 = &((struct178 *)*(s32 *)D_800D3098)[temp_v1->unk251];\n    temp_a2 = func_1505A630(temp_v1->x_position - temp_v0->unk0, temp_v0->unk4 - temp_v1->z_position, 0);\n    if (temp_a2 == 0) {\n        temp_a2 = 1;\n    }\n    func_1505D024(D_800D154C, D_800D1890, temp_a2, -1);\n    D_800D154C->unk218 -= 5;\n    D_800D154C->unk21C = 1;\n}",
