@@ -54413,9 +54413,18 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "void func_151DAB58(u8 arg0, f32 arg1, u8 arg2, struct17 *arg3, volatile u8 arg4, u8 arg5, s32 arg6) {\n    void *ret;\n    Struct151DAB58Local sp54;\n    Struct151DAB58Extra sp48;\n    s32 temp_v0;\n    s32 temp_v1;\n    s32 temp_t0;\n\n    sp54.unk0 = D_8008FCD0[arg0]();\n    if (arg4 != 0) {\n        temp_v0 = 0x3B;\n    } else {\n        temp_v0 = 0x22;\n    }\n    sp54.unk2 = (temp_v0 << 8) + 3;\n    sp54.unk4 = 0x64;\n    sp54.unk12 = 0;\n    sp54.unk11 = 0;\n    sp54.unk10 = 0;\n    sp54.unk13 = 0xFF;\n    sp54.unk44 = arg2;\n    sp54.unk45 = 0xFF;\n    sp54.unk1C = *arg3;\n    temp_v0 = D_800AB330[arg0] != 0 ? 0x40000000 : 0;\n    sp54.unk40 = temp_v0 | 0x0CDC0009;\n    sp54.unk28 = 0.0f;\n    sp54.unk2C = 0.0f;\n    sp54.unk30 = 0.0f;\n    sp54.unk34 = 1.0f;\n    sp54.unk38 = 1.0f;\n    sp54.unk3C = 1.0f;\n    sp54.unk8 = 0;\n    sp54.unkC = 0;\n    sp54.unk18 = arg1;\n    sp54.unk14 = arg1;\n    sp54.unk46 = 0;\n    sp54.unk47 = 7;\n    sp48.field_0x00 = 0;\n    sp48.field_0x01 = (func_150ADA20() % 3U) + 6;\n    sp48.field_0x04 = (func_150ADA68() * D_800AB4A0) + D_800AB4A4;\n    sp48.field_0x08 = (func_150ADA68() * D_800AB4A8) + D_800AB4AC;\n    sp54.unk1 = 0;\n    sp54.unk48 = 0;\n    sp54.unk4C = 0xFF;\n    sp54.unk50 = 0;\n    sp54.unk54 = 0x20;\n    sp54.unk56 = 7;\n    if (func_150ADA20() & 1) {\n        temp_v1 = 1;\n    } else {\n        temp_v1 = 0;\n    }\n    temp_v0 = *(u8 *)&arg4;\n    if (temp_v0 != 0) {\n        temp_t0 = 3;\n    } else {\n        temp_t0 = 0;\n    }\n    if (temp_v0 != 0) {\n        temp_v0 = 0xFF;\n    } else {\n        temp_v0 = 0;\n    }\n    ret = func_1513D2F0(&sp54, (s32)&D_800A4AA0, 0, 0x14, 0, 0xE, temp_v1 | 2, temp_t0, temp_v0, 0xC, arg5, arg6);\n    if (ret != 0) {\n        memcpy((u8 *)ret + 0x110, &sp48, sizeof(sp48));\n    }\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-09T19:29:44.473459+00:00"
+      }
+    ]
   },
   {
     "function": "func_15055E50",
