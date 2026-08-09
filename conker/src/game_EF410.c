@@ -322,4 +322,80 @@ s32 func_150C3D48(s32 arg0) {
     return arg0 + 0xEDCBA988;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_EF410/func_150C3D5C.s")
+#include <ultra64.h>
+
+#include "functions.h"
+#include "variables.h"
+
+void func_151B9BF0(s32 arg0, s32 arg1, s16 arg2, s16 arg3, s32 arg4, s32 arg5,
+                   s32 arg6, s32 arg7, s32 arg8, s32 arg9, s32 arg10, s32 arg11,
+                   s32 arg12, s32 arg13, s32 arg14, s32 arg15);
+void func_151EF040(s32 arg0, s32 *arg1);
+void func_15171200(s32 arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5,
+                   f32 arg6, f32 arg7, f32 arg8, s32 arg9, s32 arg10, f32 arg11,
+                   s32 arg12, s32 arg13);
+void func_151709B4(s32 arg0, s32 arg1, s32 arg2, s32 arg3, f32 arg4, s32 arg5,
+                   s32 arg6);
+void func_1516D99C(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
+                   s32 arg6, s32 arg7, s32 arg8, s32 arg9, s32 arg10, s32 arg11,
+                   s32 arg12, s32 arg13, s32 arg14, s32 arg15, s32 arg16,
+                   s32 arg17, s32 arg18, s32 arg19, s32 arg20, s32 arg21,
+                   s32 arg22, s32 arg23, s32 arg24, s32 arg25, s32 arg26,
+                   s32 arg27, s32 arg28, s32 arg29, s32 arg30, s32 arg31,
+                   s32 arg32, s32 arg33, s32 arg34, s32 arg35, s32 arg36,
+                   s32 arg37, s32 arg38, s32 arg39, s32 arg40, s32 arg41,
+                   s32 arg42, s32 arg43, s32 arg44, s32 arg45, s32 arg46,
+                   s32 arg47, s32 arg48);
+struct225 *func_151602C0(Header *header, Header2 *header2, s32 arg2, s32 arg3,
+                         s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 offset,
+                         s32 arg9, s32 argA);
+extern f32 D_800A0338;
+extern s32 func_10004074[];
+
+typedef struct {
+    u8 pad0[0x14];
+    f32 unk14;
+    f32 unk18;
+    f32 unk1C;
+} Struct150C3D5CArg;
+
+typedef struct {
+    Header2 header2;
+    Header header;
+    u8 pad12[0xA];
+    s32 check;
+} Struct150C3D5CLocals;
+
+void func_150C3D5C(Struct150C3D5CArg *arg0) {
+    Struct150C3D5CLocals local;
+
+    func_151B9BF0(0x2F, 1, (s16)(s32)arg0->unk14, (s16)(s32)arg0->unk18,
+                  (s32)arg0->unk1C, 0x578, 0x500, 0x320, 0x4B0, 0x200, 0x200,
+                  0x1E, 1, 0, 0xFF, 0);
+
+    ((void (*)(s32, s32 *))func_151EF040)(func_150C3D48(local.check = 0xC23459B8), &local.check);
+    if (local.check != 0x0330C820) {
+        func_10004074[0] = 0x03E00008;
+        func_10004074[1] = 0;
+    }
+
+    func_15171200(3, 0xCB, arg0->unk14, arg0->unk18, arg0->unk1C, 10.0f, 1.0f,
+                  2.0f, 60.0f, 3, 0x3C, D_800A0338, 0xFF, 0);
+    func_151709B4((s32)arg0->unk14, (s32)(arg0->unk18 + 20.0f),
+                  (s32)arg0->unk1C, 0xA, 2000.0f, 0xFF, 0);
+    func_1516D99C((s16)(s32)arg0->unk14, (s16)(s32)arg0->unk18,
+                  (s16)(s32)arg0->unk1C, 0xD, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0,
+                  0, 0xFF, 0, 0, 0, 0x14, 0x14, 2, 0, 0, 0, 0, 0x51, 0x51,
+                  0x51, 0x51, 0xA, 1, 0, 0xFF, 0xA, 0x578, 0x190, 1, 1, 0, 1,
+                  0, 0, 0, 0, 0, 0xFF, 0);
+
+    local.header.unk0 = 3;
+    local.header.unk1 = -1;
+    local.header.unk2 = (func_150ADA20() % 11U) + 0xA;
+    local.header.unk4 = 0;
+    local.header2.unk0 = (s32)arg0->unk14;
+    local.header2.unk4 = (s32)arg0->unk18;
+    local.header2.unk8 = (s32)arg0->unk1C;
+    func_151602C0(&local.header, &local.header2, (func_150ADA20() % 52U) + 0x28,
+                  0xFF, 0xFF, 0x5A, 0xFF, 0, 0, 0xFF, 1);
+}
