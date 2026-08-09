@@ -982,7 +982,88 @@ void func_151DBBD4(struct17 *arg0, s32 arg1, u8 *arg2, u8 arg3, s32 arg4) {
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_2062D0/func_151DBCBC.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_2062D0/func_151DBE80.s")
+struct three151DBE80 {
+    s32 a;
+    s32 b;
+    s32 c;
+};
+
+struct Struct151DBE80Candidate {
+    s8 unk0;
+    s8 unk1;
+    s16 unk2;
+    s16 unk4;
+    u8 pad6[2];
+    s32 unk8;
+    s32 unkC;
+    u8 unk10;
+    u8 unk11;
+    u8 unk12;
+    u8 unk13;
+    f32 unk14;
+    f32 unk18;
+    struct17 unk1C;
+    f32 unk28;
+    f32 unk2C;
+    f32 unk30;
+    f32 unk34;
+    f32 unk38;
+    f32 unk3C;
+    s32 unk40;
+    u8 unk44;
+    u8 unk45;
+    s8 unk46;
+    s8 unk47;
+    s32 unk48;
+    u8 unk4C;
+    u8 pad4D[3];
+    s32 unk50;
+    s16 unk54;
+    u16 unk56;
+};
+
+extern s32 func_1513D668(s32 arg0, s32 arg1, u8 arg2, u8 arg3, u8 arg4,
+                         u8 arg5, s16 arg6, f32 arg7, f32 arg8, s32 arg9,
+                         s32 argA, u8 argB, s32 argC, u8 argD, s32 argE);
+
+void func_151DBE80(u8 arg0, f32 arg1, f32 arg2, s16 arg3, struct17 *arg4,
+                   s32 arg5, u8 arg6, u8 arg7, u8 arg8, s32 arg9) {
+    struct Struct151DBE80Candidate tmp;
+
+    tmp.unk0 = 0x38;
+    tmp.unk2 = ((arg7 != 0) ? 2 : 1) + 0x440000;
+    tmp.unk4 = arg3;
+    tmp.unk8 = 0;
+    tmp.unkC = 0x4000;
+    tmp.unk10 = D_800AB414[arg0 * 3];
+    tmp.unk14 = 1.0f;
+    tmp.unk18 = 1.0f;
+    tmp.unk11 = D_800AB414[arg0 * 3 + 1];
+    tmp.unk12 = D_800AB414[arg0 * 3 + 2];
+    tmp.unk13 = 0xFF;
+    *(struct three151DBE80 *)&tmp.unk1C = *(struct three151DBE80 *)arg4;
+    tmp.unk34 = arg2;
+    tmp.unk40 = 0x466C0001;
+    tmp.unk44 = arg6;
+    tmp.unk45 = 0xFF;
+    tmp.unk1 = 0;
+    tmp.unk46 = 0;
+    tmp.unk47 = 6;
+    tmp.unk48 = 0;
+    tmp.unk4C = 0xFF;
+    tmp.unk50 = 0;
+    tmp.unk54 = 1;
+    tmp.unk56 = 0xFF;
+    tmp.unk38 = 1.0f;
+    tmp.unk3C = 1.0f;
+    tmp.unk28 = 0.0f;
+    tmp.unk2C = 0.0f;
+    tmp.unk30 = 0.0f;
+    func_1513D668((s32)&tmp, 0, 0xB, 0x11, 0,
+                  (func_150ADA20() & 1) + (func_150ADA20() & 1),
+                  (s16)(func_150ADA20() & 0xFF), arg1, arg1, 0, arg5, 0, 0,
+                  arg8, arg9);
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/game_2062D0/func_151DC034.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_2062D0/func_151DC260.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_2062D0/func_151DC484.s")

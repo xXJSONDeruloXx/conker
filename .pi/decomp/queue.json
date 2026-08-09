@@ -50111,9 +50111,18 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "struct three151DBE80 {\n    s32 a;\n    s32 b;\n    s32 c;\n};\n\nstruct Struct151DBE80Candidate {\n    s8 unk0;\n    s8 unk1;\n    s16 unk2;\n    s16 unk4;\n    u8 pad6[2];\n    s32 unk8;\n    s32 unkC;\n    u8 unk10;\n    u8 unk11;\n    u8 unk12;\n    u8 unk13;\n    f32 unk14;\n    f32 unk18;\n    struct17 unk1C;\n    f32 unk28;\n    f32 unk2C;\n    f32 unk30;\n    f32 unk34;\n    f32 unk38;\n    f32 unk3C;\n    s32 unk40;\n    u8 unk44;\n    u8 unk45;\n    s8 unk46;\n    s8 unk47;\n    s32 unk48;\n    u8 unk4C;\n    u8 pad4D[3];\n    s32 unk50;\n    s16 unk54;\n    u16 unk56;\n};\n\nextern s32 func_1513D668(s32 arg0, s32 arg1, u8 arg2, u8 arg3, u8 arg4,\n                         u8 arg5, s16 arg6, f32 arg7, f32 arg8, s32 arg9,\n                         s32 argA, u8 argB, s32 argC, u8 argD, s32 argE);\n\nvoid func_151DBE80(u8 arg0, f32 arg1, f32 arg2, s16 arg3, struct17 *arg4,\n                   s32 arg5, u8 arg6, u8 arg7, u8 arg8, s32 arg9) {\n    struct Struct151DBE80Candidate tmp;\n\n    tmp.unk0 = 0x38;\n    tmp.unk2 = ((arg7 != 0) ? 2 : 1) + 0x440000;\n    tmp.unk4 = arg3;\n    tmp.unk8 = 0;\n    tmp.unkC = 0x4000;\n    tmp.unk10 = D_800AB414[arg0 * 3];\n    tmp.unk14 = 1.0f;\n    tmp.unk18 = 1.0f;\n    tmp.unk11 = D_800AB414[arg0 * 3 + 1];\n    tmp.unk12 = D_800AB414[arg0 * 3 + 2];\n    tmp.unk13 = 0xFF;\n    *(struct three151DBE80 *)&tmp.unk1C = *(struct three151DBE80 *)arg4;\n    tmp.unk34 = arg2;\n    tmp.unk40 = 0x466C0001;\n    tmp.unk44 = arg6;\n    tmp.unk45 = 0xFF;\n    tmp.unk1 = 0;\n    tmp.unk46 = 0;\n    tmp.unk47 = 6;\n    tmp.unk48 = 0;\n    tmp.unk4C = 0xFF;\n    tmp.unk50 = 0;\n    tmp.unk54 = 1;\n    tmp.unk56 = 0xFF;\n    tmp.unk38 = 1.0f;\n    tmp.unk3C = 1.0f;\n    tmp.unk28 = 0.0f;\n    tmp.unk2C = 0.0f;\n    tmp.unk30 = 0.0f;\n    func_1513D668((s32)&tmp, 0, 0xB, 0x11, 0,\n                  (func_150ADA20() & 1) + (func_150ADA20() & 1),\n                  (s16)(func_150ADA20() & 0xFF), arg1, arg1, 0, arg5, 0, 0,\n                  arg8, arg9);\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-09T17:26:10.547365+00:00"
+      }
+    ]
   },
   {
     "function": "func_1000E46C",
