@@ -327,7 +327,61 @@ void func_1513CFD0(s32 arg0, s32 arg1, s32 arg2) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_169510/func_1513CFE4.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_169510/func_1513D2F0.s")
+extern f32 D_800A5184;
+
+void *func_1513D2F0(void *arg0, s32 arg1, u8 arg2, u8 arg3, u8 arg4,
+                    u8 arg5, u8 arg6, s32 arg7, s32 arg8, s32 arg9,
+                    u8 argA, s32 argB) {
+    struct210 *temp_v0;
+    s32 flags;
+    s32 phi_v0;
+    s32 i;
+
+    flags = *(s32 *)((u8 *)arg0 + 0x40);
+    if (flags & 0x800000) {
+        phi_v0 = 0x56;
+    } else if (flags & 0x2000000) {
+        phi_v0 = 0x49;
+    } else {
+        phi_v0 = 0x1C;
+    }
+    temp_v0 = func_15167A68(phi_v0, argB, arg9 + 0x110, 1, argA,
+                            (flags & 0x80000000U) ? 2 : 1);
+    if (temp_v0 == NULL) {
+        return NULL;
+    }
+    memcpy(&temp_v0->unk18.i.unk0, arg0, 0x58);
+    *(u8 *)((u8 *)temp_v0 + 0x70) = arg2;
+    *(u8 *)((u8 *)temp_v0 + 0x71) = arg3;
+    *(u8 *)((u8 *)temp_v0 + 0x72) = arg4;
+    *(u8 *)((u8 *)temp_v0 + 0x73) = arg5;
+    *(u8 *)((u8 *)temp_v0 + 0x74) = 0;
+    bzero(&temp_v0->unk100, 0x10);
+    func_1513FFF4((struct1513FFF4 *)((u8 *)temp_v0 + 0xC0),
+                  *(u8 *)((u8 *)temp_v0 + 0x18), arg6);
+    func_151400D0((s32)((u8 *)temp_v0 + 0xC0), arg1);
+    temp_v0->unk10 = 1;
+    temp_v0->unk14 = 0;
+    *(f32 *)((u8 *)temp_v0 + 0x78) = D_800A5184;
+    *(s32 *)((u8 *)temp_v0 + 0x98) = 0;
+    *(u8 *)((u8 *)temp_v0 + 0x95) = 0;
+    *(u8 *)((u8 *)temp_v0 + 0x94) = 0;
+    *(s32 *)((u8 *)temp_v0 + 0x90) = 0;
+    *(s32 *)((u8 *)temp_v0 + 0x9C) = arg7;
+    *(s32 *)((u8 *)temp_v0 + 0xB8) = arg8;
+    *(u8 *)((u8 *)temp_v0 + 0xA0) = 0;
+    for (i = 0; i < 4; i++) {
+        temp_v0->unkA4[i] = 0;
+    }
+    temp_v0->unkB4 = 0;
+    if (arg7) {
+        for (i = 0; i <= D_80082FA0; i++) {
+            temp_v0->unkA4[i] = func_1515D480(arg7);
+        }
+        temp_v0->unkB4 = func_1515D440();
+    }
+    return temp_v0;
+}
 
 void func_1513D4B8(s32 arg0, s32 arg1, u8 arg2, u8 arg3, u8 arg4, u8 arg5, u8 arg6, s32 arg7, u8 arg8, s32 arg9) {
     func_1513D2F0(arg0, arg1, arg2, arg3, arg4, arg5, arg6, 0, 0, arg7, arg8, arg9);
