@@ -35077,8 +35077,8 @@
       "branchy"
     ],
     "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "lastScore": 1.0,
+    "status": "matched"
   },
   {
     "function": "func_15077F64",
@@ -35969,9 +35969,935 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 11,
+    "lastScore": 0.0759,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_15063254(struct127 *arg0, u8 arg1, u8 arg2, f32 arg3) {\n    struct129 *temp_s1;\n    struct108 *temp_t2;\n    u8 sp50;\n    struct108 *sp48;\n    f32 sp44;\n    f32 sp40;\n    f32 sp3C;\n    f32 sp38;\n    f32 sp34;\n    f32 sp30;\n    u16 sp2C;\n    s32 sp10;\n\n    temp_s1 = arg0->unk144;\n    temp_s1->unk4 = arg1;\n    temp_s1->unk3 = arg2;\n    temp_s1->unk20 = arg3;\n    temp_s1->unk24 = arg3;\n    temp_s1->unk2 = 0;\n    temp_t2 = arg0->camera;\n    sp50 = arg0->unk13F;\n    sp48 = temp_t2;\n    sp3C = arg0->z_position;\n    sp38 = arg0->unkB8;\n    sp34 = arg0->unk40;\n    sp30 = arg0->unkC4;\n    sp2C = arg0->unk76;\n    sp44 = arg0->x_position;\n    sp40 = arg0->y_position;\n    func_15060F28(arg0, 0);\n    sp10 = (((s32)arg0 - (s32)D_800CC2D0) / (s32)sizeof(struct127)) + 1;\n    sp2C = func_15082A44(temp_s1, sp50, 0, 0, sp10);\n    arg0->x_position = sp44;\n    arg0->y_position = sp40;\n    arg0->camera = sp48;\n    arg0->z_position = sp3C;\n    arg0->unkB8 = sp38;\n    arg0->unk40 = sp34;\n    arg0->xz_velocity = sp30;\n    arg0->unk76 = sp2C;\n    arg0->unk7A = sp2C;\n    arg0->old_x_position = sp44;\n    arg0->old_y_position = sp40;\n    arg0->unk1CC = arg0->y_position;\n    arg0->old_z_position = arg0->z_position;\n    arg0->unkC4 = sp30;\n    temp_t2->unk3D4 = arg0->unk31C;\n}",
+        "score": 0.0,
+        "reason": "compile_error",
+        "diffs": [],
+        "timestamp": "2026-08-09T14:57:15.106021+00:00"
+      },
+      {
+        "code": "void func_15063254(struct127 *arg0, u8 arg1, u8 arg2, f32 arg3) {\n    struct129 *temp_s1;\n    struct108 *temp_t2;\n    u8 sp50;\n    struct108 *sp48;\n    f32 sp44;\n    f32 sp40;\n    f32 sp3C;\n    f32 sp38;\n    f32 sp34;\n    f32 sp30;\n    u16 sp2C;\n    s32 sp10;\n\n    temp_s1 = arg0->unk144;\n    temp_s1->unk4 = arg1;\n    temp_s1->unk3 = arg2;\n    temp_s1->unk20 = arg3;\n    temp_s1->unk24 = arg3;\n    temp_s1->unk2 = 0;\n    temp_t2 = arg0->camera;\n    sp50 = arg0->unk13F;\n    sp48 = temp_t2;\n    sp3C = arg0->z_position;\n    sp38 = arg0->unkB8;\n    sp34 = arg0->unk40;\n    sp30 = arg0->unkC4;\n    sp2C = arg0->unk76;\n    sp44 = arg0->x_position;\n    sp40 = arg0->y_position;\n    func_15060F28(arg0, 0);\n    sp10 = (((s32)arg0 - (s32)D_800CC2D0) / (s32)sizeof(struct127)) + 1;\n    func_15082A44(temp_s1, sp50, 0, 0, sp10);\n    arg0->x_position = sp44;\n    arg0->y_position = sp40;\n    arg0->camera = sp48;\n    arg0->z_position = sp3C;\n    arg0->unkB8 = sp38;\n    arg0->unk40 = sp34;\n    arg0->xz_velocity = sp30;\n    arg0->unk76 = sp2C;\n    arg0->unk7A = sp2C;\n    arg0->old_x_position = sp44;\n    arg0->old_y_position = sp40;\n    arg0->unk1CC = arg0->y_position;\n    arg0->old_z_position = arg0->z_position;\n    arg0->unkC4 = sp30;\n    temp_t2->unk3D4 = arg0->unk31C;\n}",
+        "score": 0.0241,
+        "reason": "length_mismatch (target=79, generated=83), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T14:57:24.527133+00:00"
+      },
+      {
+        "code": "void func_15063254(struct127 *arg0, s32 arg1, s32 arg2, f32 arg3) {\n    struct129 *temp_s1;\n    struct108 *temp_t2;\n    u8 sp50;\n    struct108 *sp48;\n    f32 sp44;\n    f32 sp40;\n    f32 sp3C;\n    f32 sp38;\n    f32 sp34;\n    f32 sp30;\n    u16 sp2C;\n    s32 sp10;\n\n    temp_s1 = arg0->unk144;\n    temp_s1->unk4 = arg1;\n    temp_s1->unk3 = arg2;\n    temp_s1->unk20 = arg3;\n    temp_s1->unk24 = arg3;\n    temp_s1->unk2 = 0;\n    temp_t2 = arg0->camera;\n    sp50 = arg0->unk13F;\n    sp48 = temp_t2;\n    sp3C = arg0->z_position;\n    sp38 = arg0->unkB8;\n    sp34 = arg0->unk40;\n    sp30 = arg0->unkC4;\n    sp2C = arg0->unk76;\n    sp44 = arg0->x_position;\n    sp40 = arg0->y_position;\n    func_15060F28(arg0, 0);\n    sp10 = (((s32)arg0 - (s32)D_800CC2D0) / (s32)sizeof(struct127)) + 1;\n    func_15082A44(temp_s1, sp50, 0, 0, sp10);\n    arg0->x_position = sp44;\n    arg0->y_position = sp40;\n    arg0->camera = sp48;\n    arg0->z_position = sp3C;\n    arg0->unkB8 = sp38;\n    arg0->unk40 = sp34;\n    arg0->xz_velocity = sp30;\n    arg0->unk76 = sp2C;\n    arg0->unk7A = sp2C;\n    arg0->old_x_position = sp44;\n    arg0->old_y_position = sp40;\n    arg0->unk1CC = arg0->y_position;\n    arg0->old_z_position = arg0->z_position;\n    arg0->unkC4 = sp30;\n    temp_t2->unk3D4 = arg0->unk31C;\n}",
+        "score": 0.1899,
+        "reason": "structural_diffs=64, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 6,
+            "type": "structural",
+            "target": "lbu t6, 319(s0)",
+            "generated": "lw s1, 324(s0)"
+          },
+          {
+            "line": 8,
+            "type": "structural",
+            "target": "sw t6, 80(sp)",
+            "generated": "sb a1, 4(s1)"
+          },
+          {
+            "line": 9,
+            "type": "structural",
+            "target": "lw s1, 324(s0)",
+            "generated": "sb a2, 3(s1)"
+          },
+          {
+            "line": 10,
+            "type": "structural",
+            "target": "sb a1, 4(s1)",
+            "generated": "swc1 f12, 32(s1)"
+          },
+          {
+            "line": 11,
+            "type": "structural",
+            "target": "sb a2, 3(s1)",
+            "generated": "swc1 f12, 36(s1)"
+          },
+          {
+            "line": 12,
+            "type": "structural",
+            "target": "swc1 f12, 32(s1)",
+            "generated": "sb zero, 2(s1)"
+          },
+          {
+            "line": 13,
+            "type": "structural",
+            "target": "swc1 f12, 36(s1)",
+            "generated": "lbu t6, 319(s0)"
+          },
+          {
+            "line": 14,
+            "type": "structural",
+            "target": "sb zero, 2(s1)",
+            "generated": "lw v0, 792(s0)"
+          },
+          {
+            "line": 15,
+            "type": "structural",
+            "target": "lw t7, 792(s0)",
+            "generated": "move a1, zero"
+          },
+          {
+            "line": 16,
+            "type": "structural",
+            "target": "move a1, zero",
+            "generated": "sb t6, 79(sp)"
+          },
+          {
+            "line": 17,
+            "type": "structural",
+            "target": "sw t7, 72(sp)",
+            "generated": "lwc1 f4, 28(s0)"
+          },
+          {
+            "line": 18,
+            "type": "structural",
+            "target": "lwc1 f4, 28(s0)",
+            "generated": "swc1 f4, 60(sp)"
+          },
+          {
+            "line": 19,
+            "type": "structural",
+            "target": "lwc1 f0, 20(s0)",
+            "generated": "lwc1 f6, 184(s0)"
+          },
+          {
+            "line": 20,
+            "type": "structural",
+            "target": "lwc1 f2, 24(s0)",
+            "generated": "swc1 f6, 56(sp)"
+          },
+          {
+            "line": 21,
+            "type": "structural",
+            "target": "swc1 f4, 60(sp)",
+            "generated": "lwc1 f8, 64(s0)"
+          },
+          {
+            "line": 22,
+            "type": "structural",
+            "target": "lwc1 f6, 184(s0)",
+            "generated": "swc1 f8, 52(sp)"
+          },
+          {
+            "line": 23,
+            "type": "structural",
+            "target": "swc1 f6, 56(sp)",
+            "generated": "lwc1 f0, 196(s0)"
+          },
+          {
+            "line": 24,
+            "type": "structural",
+            "target": "lwc1 f8, 64(s0)",
+            "generated": "lhu v1, 118(s0)"
+          },
+          {
+            "line": 25,
+            "type": "structural",
+            "target": "swc1 f8, 52(sp)",
+            "generated": "lwc1 f2, 20(s0)"
+          },
+          {
+            "line": 26,
+            "type": "structural",
+            "target": "lwc1 f10, 196(s0)",
+            "generated": "lwc1 f14, 24(s0)"
+          }
+        ],
+        "timestamp": "2026-08-09T14:57:41.284217+00:00"
+      },
+      {
+        "code": "void func_15063254(struct127 *arg0, s32 arg1, s32 arg2, f32 arg3) {\n    struct129 *temp_s1;\n    struct108 *temp_t2;\n    s32 sp50;\n    struct108 *sp48;\n    f32 sp44;\n    f32 sp40;\n    f32 sp3C;\n    f32 sp38;\n    f32 sp34;\n    f32 sp30;\n    u16 sp2C;\n    s32 sp10;\n\n    sp50 = arg0->unk13F;\n    temp_s1 = arg0->unk144;\n    temp_s1->unk4 = arg1;\n    temp_s1->unk3 = arg2;\n    temp_s1->unk20 = arg3;\n    temp_s1->unk24 = arg3;\n    temp_s1->unk2 = 0;\n    temp_t2 = arg0->camera;\n    sp48 = temp_t2;\n    sp3C = arg0->z_position;\n    sp38 = arg0->unkB8;\n    sp34 = arg0->unk40;\n    sp30 = arg0->unkC4;\n    sp2C = arg0->unk76;\n    sp44 = arg0->x_position;\n    sp40 = arg0->y_position;\n    func_15060F28(arg0, 0);\n    sp10 = (((s32)arg0 - (s32)D_800CC2D0) / (s32)sizeof(struct127)) + 1;\n    func_15082A44(temp_s1, sp50, 0, 0, sp10);\n    arg0->x_position = sp44;\n    arg0->y_position = sp40;\n    arg0->camera = sp48;\n    arg0->z_position = sp3C;\n    arg0->unkB8 = sp38;\n    arg0->unk40 = sp34;\n    arg0->xz_velocity = sp30;\n    arg0->unk76 = sp2C;\n    arg0->unk7A = sp2C;\n    arg0->old_x_position = sp44;\n    arg0->old_y_position = sp40;\n    arg0->unk1CC = arg0->y_position;\n    arg0->old_z_position = arg0->z_position;\n    arg0->unkC4 = sp30;\n    temp_t2->unk3D4 = arg0->unk31C;\n}",
+        "score": 0.1392,
+        "reason": "structural_diffs=68, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 6,
+            "type": "structural",
+            "target": "lbu t6, 319(s0)",
+            "generated": "lw s1, 324(s0)"
+          },
+          {
+            "line": 7,
+            "type": "structural",
+            "target": "move a0, s0",
+            "generated": "lbu t0, 319(s0)"
+          },
+          {
+            "line": 8,
+            "type": "structural",
+            "target": "sw t6, 80(sp)",
+            "generated": "move a0, s0"
+          },
+          {
+            "line": 9,
+            "type": "structural",
+            "target": "lw s1, 324(s0)",
+            "generated": "sb a1, 4(s1)"
+          },
+          {
+            "line": 10,
+            "type": "structural",
+            "target": "sb a1, 4(s1)",
+            "generated": "sb a2, 3(s1)"
+          },
+          {
+            "line": 11,
+            "type": "structural",
+            "target": "sb a2, 3(s1)",
+            "generated": "swc1 f12, 32(s1)"
+          },
+          {
+            "line": 12,
+            "type": "structural",
+            "target": "swc1 f12, 32(s1)",
+            "generated": "swc1 f12, 36(s1)"
+          },
+          {
+            "line": 13,
+            "type": "structural",
+            "target": "swc1 f12, 36(s1)",
+            "generated": "sb zero, 2(s1)"
+          },
+          {
+            "line": 14,
+            "type": "structural",
+            "target": "sb zero, 2(s1)",
+            "generated": "lwc1 f4, 28(s0)"
+          },
+          {
+            "line": 15,
+            "type": "structural",
+            "target": "lw t7, 792(s0)",
+            "generated": "lw v0, 792(s0)"
+          },
+          {
+            "line": 17,
+            "type": "structural",
+            "target": "sw t7, 72(sp)",
+            "generated": "swc1 f4, 60(sp)"
+          },
+          {
+            "line": 18,
+            "type": "structural",
+            "target": "lwc1 f4, 28(s0)",
+            "generated": "lwc1 f6, 184(s0)"
+          },
+          {
+            "line": 19,
+            "type": "structural",
+            "target": "lwc1 f0, 20(s0)",
+            "generated": "swc1 f6, 56(sp)"
+          },
+          {
+            "line": 20,
+            "type": "structural",
+            "target": "lwc1 f2, 24(s0)",
+            "generated": "lwc1 f8, 64(s0)"
+          },
+          {
+            "line": 21,
+            "type": "structural",
+            "target": "swc1 f4, 60(sp)",
+            "generated": "swc1 f8, 52(sp)"
+          },
+          {
+            "line": 22,
+            "type": "structural",
+            "target": "lwc1 f6, 184(s0)",
+            "generated": "lwc1 f0, 196(s0)"
+          },
+          {
+            "line": 23,
+            "type": "structural",
+            "target": "swc1 f6, 56(sp)",
+            "generated": "lhu v1, 118(s0)"
+          },
+          {
+            "line": 24,
+            "type": "structural",
+            "target": "lwc1 f8, 64(s0)",
+            "generated": "lwc1 f2, 20(s0)"
+          },
+          {
+            "line": 25,
+            "type": "structural",
+            "target": "swc1 f8, 52(sp)",
+            "generated": "lwc1 f14, 24(s0)"
+          },
+          {
+            "line": 26,
+            "type": "structural",
+            "target": "lwc1 f10, 196(s0)",
+            "generated": "sw t0, 76(sp)"
+          }
+        ],
+        "timestamp": "2026-08-09T14:58:06.054802+00:00"
+      },
+      {
+        "code": "void func_15063254(struct127 *arg0, s32 arg1, s32 arg2, f32 arg3) {\n    struct129 *temp_s1;\n    struct108 *temp_t2;\n    volatile s32 sp50;\n    struct108 *sp48;\n    f32 sp44;\n    f32 sp40;\n    f32 sp3C;\n    f32 sp38;\n    f32 sp34;\n    f32 sp30;\n    u16 sp2C;\n    s32 sp10;\n\n    sp50 = arg0->unk13F;\n    temp_s1 = arg0->unk144;\n    temp_s1->unk4 = arg1;\n    temp_s1->unk3 = arg2;\n    temp_s1->unk20 = arg3;\n    temp_s1->unk24 = arg3;\n    temp_s1->unk2 = 0;\n    temp_t2 = arg0->camera;\n    sp48 = temp_t2;\n    sp3C = arg0->z_position;\n    sp38 = arg0->unkB8;\n    sp34 = arg0->unk40;\n    sp30 = arg0->unkC4;\n    sp2C = arg0->unk76;\n    sp44 = arg0->x_position;\n    sp40 = arg0->y_position;\n    func_15060F28(arg0, 0);\n    sp10 = (((s32)arg0 - (s32)D_800CC2D0) / (s32)sizeof(struct127)) + 1;\n    func_15082A44(temp_s1, sp50, 0, 0, sp10);\n    arg0->x_position = sp44;\n    arg0->y_position = sp40;\n    arg0->camera = sp48;\n    arg0->z_position = sp3C;\n    arg0->unkB8 = sp38;\n    arg0->unk40 = sp34;\n    arg0->xz_velocity = sp30;\n    arg0->unk76 = sp2C;\n    arg0->unk7A = sp2C;\n    arg0->old_x_position = sp44;\n    arg0->old_y_position = sp40;\n    arg0->unk1CC = arg0->y_position;\n    arg0->old_z_position = arg0->z_position;\n    arg0->unkC4 = sp30;\n    temp_t2->unk3D4 = arg0->unk31C;\n}",
+        "score": 0.2532,
+        "reason": "structural_diffs=59, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 8,
+            "type": "structural",
+            "target": "sw t6, 80(sp)",
+            "generated": "sw t6, 76(sp)"
+          },
+          {
+            "line": 15,
+            "type": "structural",
+            "target": "lw t7, 792(s0)",
+            "generated": "lwc1 f4, 28(s0)"
+          },
+          {
+            "line": 16,
+            "type": "structural",
+            "target": "move a1, zero",
+            "generated": "lw v0, 792(s0)"
+          },
+          {
+            "line": 17,
+            "type": "structural",
+            "target": "sw t7, 72(sp)",
+            "generated": "move a1, zero"
+          },
+          {
+            "line": 18,
+            "type": "structural",
+            "target": "lwc1 f4, 28(s0)",
+            "generated": "swc1 f4, 60(sp)"
+          },
+          {
+            "line": 19,
+            "type": "structural",
+            "target": "lwc1 f0, 20(s0)",
+            "generated": "lwc1 f6, 184(s0)"
+          },
+          {
+            "line": 20,
+            "type": "structural",
+            "target": "lwc1 f2, 24(s0)",
+            "generated": "swc1 f6, 56(sp)"
+          },
+          {
+            "line": 21,
+            "type": "structural",
+            "target": "swc1 f4, 60(sp)",
+            "generated": "lwc1 f8, 64(s0)"
+          },
+          {
+            "line": 22,
+            "type": "structural",
+            "target": "lwc1 f6, 184(s0)",
+            "generated": "swc1 f8, 52(sp)"
+          },
+          {
+            "line": 23,
+            "type": "structural",
+            "target": "swc1 f6, 56(sp)",
+            "generated": "lwc1 f0, 196(s0)"
+          },
+          {
+            "line": 24,
+            "type": "structural",
+            "target": "lwc1 f8, 64(s0)",
+            "generated": "lhu v1, 118(s0)"
+          },
+          {
+            "line": 25,
+            "type": "structural",
+            "target": "swc1 f8, 52(sp)",
+            "generated": "lwc1 f2, 20(s0)"
+          },
+          {
+            "line": 26,
+            "type": "structural",
+            "target": "lwc1 f10, 196(s0)",
+            "generated": "lwc1 f14, 24(s0)"
+          },
+          {
+            "line": 27,
+            "type": "structural",
+            "target": "swc1 f10, 48(sp)",
+            "generated": "sw v0, 80(sp)"
+          },
+          {
+            "line": 28,
+            "type": "structural",
+            "target": "lhu v0, 118(s0)",
+            "generated": "swc1 f0, 48(sp)"
+          },
+          {
+            "line": 29,
+            "type": "structural",
+            "target": "swc1 f0, 68(sp)",
+            "generated": "sh v1, 46(sp)"
+          },
+          {
+            "line": 30,
+            "type": "structural",
+            "target": "swc1 f2, 64(sp)",
+            "generated": "swc1 f2, 68(sp)"
+          },
+          {
+            "line": 32,
+            "type": "structural",
+            "target": "sw v0, 44(sp)",
+            "generated": "swc1 f14, 64(sp)"
+          },
+          {
+            "line": 38,
+            "type": "structural",
+            "target": "mflo t0",
+            "generated": "lw a1, 76(sp)"
+          },
+          {
+            "line": 39,
+            "type": "structural",
+            "target": "addiu t1, t0, 1",
+            "generated": "mflo t0"
+          }
+        ],
+        "timestamp": "2026-08-09T14:58:20.216422+00:00"
+      },
+      {
+        "code": "void func_15063254(struct127 *arg0, s32 arg1, s32 arg2, f32 arg3) {\n    struct129 *temp_s1;\n    volatile s32 sp50;\n    struct108 *sp48;\n    f32 sp44;\n    f32 sp40;\n    f32 sp3C;\n    f32 sp38;\n    f32 sp34;\n    f32 sp30;\n    u16 sp2C;\n    s32 sp10;\n\n    sp50 = arg0->unk13F;\n    temp_s1 = arg0->unk144;\n    temp_s1->unk4 = arg1;\n    temp_s1->unk3 = arg2;\n    temp_s1->unk20 = arg3;\n    temp_s1->unk24 = arg3;\n    temp_s1->unk2 = 0;\n    sp48 = arg0->camera;\n    sp3C = arg0->z_position;\n    sp38 = arg0->unkB8;\n    sp34 = arg0->unk40;\n    sp30 = arg0->unkC4;\n    sp2C = arg0->unk76;\n    sp44 = arg0->x_position;\n    sp40 = arg0->y_position;\n    func_15060F28(arg0, 0);\n    sp10 = (((s32)arg0 - (s32)D_800CC2D0) / (s32)sizeof(struct127)) + 1;\n    func_15082A44(temp_s1, sp50, 0, 0, sp10);\n    arg0->x_position = sp44;\n    arg0->y_position = sp40;\n    arg0->camera = sp48;\n    arg0->z_position = sp3C;\n    arg0->unkB8 = sp38;\n    arg0->unk40 = sp34;\n    arg0->xz_velocity = sp30;\n    arg0->unk76 = sp2C;\n    arg0->unk7A = sp2C;\n    arg0->old_x_position = sp44;\n    arg0->old_y_position = sp40;\n    arg0->unk1CC = arg0->y_position;\n    arg0->old_z_position = arg0->z_position;\n    arg0->unkC4 = sp30;\n    sp48->unk3D4 = arg0->unk31C;\n}",
+        "score": 0.0602,
+        "reason": "length_mismatch (target=79, generated=83), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T14:58:44.099991+00:00"
+      },
+      {
+        "code": "void func_15063254(struct127 *arg0, s32 arg1, s32 arg2, f32 arg3) {\n    struct129 *temp_s1;\n    struct108 *temp_t2;\n    volatile s32 sp50;\n    struct108 *sp48;\n    f32 sp44;\n    f32 sp40;\n    f32 sp3C;\n    f32 sp38;\n    f32 sp34;\n    f32 sp30;\n    s32 sp2C;\n    s32 sp10;\n\n    sp50 = arg0->unk13F;\n    temp_s1 = arg0->unk144;\n    temp_s1->unk4 = arg1;\n    temp_s1->unk3 = arg2;\n    temp_s1->unk20 = arg3;\n    temp_s1->unk24 = arg3;\n    temp_s1->unk2 = 0;\n    temp_t2 = arg0->camera;\n    sp48 = temp_t2;\n    sp3C = arg0->z_position;\n    sp38 = arg0->unkB8;\n    sp34 = arg0->unk40;\n    sp30 = arg0->unkC4;\n    sp2C = arg0->unk76;\n    sp44 = arg0->x_position;\n    sp40 = arg0->y_position;\n    func_15060F28(arg0, 0);\n    sp10 = (((s32)arg0 - (s32)D_800CC2D0) / (s32)sizeof(struct127)) + 1;\n    func_15082A44(temp_s1, sp50, 0, 0, sp10);\n    arg0->x_position = sp44;\n    arg0->y_position = sp40;\n    arg0->camera = sp48;\n    arg0->z_position = sp3C;\n    arg0->unkB8 = sp38;\n    arg0->unk40 = sp34;\n    arg0->xz_velocity = sp30;\n    arg0->unk76 = sp2C;\n    arg0->unk7A = sp2C;\n    arg0->old_x_position = sp44;\n    arg0->old_y_position = sp40;\n    arg0->unk1CC = arg0->y_position;\n    arg0->old_z_position = arg0->z_position;\n    arg0->unkC4 = sp30;\n    temp_t2->unk3D4 = arg0->unk31C;\n}",
+        "score": 0.2532,
+        "reason": "structural_diffs=59, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 8,
+            "type": "structural",
+            "target": "sw t6, 80(sp)",
+            "generated": "sw t6, 76(sp)"
+          },
+          {
+            "line": 15,
+            "type": "structural",
+            "target": "lw t7, 792(s0)",
+            "generated": "lwc1 f4, 28(s0)"
+          },
+          {
+            "line": 16,
+            "type": "structural",
+            "target": "move a1, zero",
+            "generated": "lw v0, 792(s0)"
+          },
+          {
+            "line": 17,
+            "type": "structural",
+            "target": "sw t7, 72(sp)",
+            "generated": "move a1, zero"
+          },
+          {
+            "line": 18,
+            "type": "structural",
+            "target": "lwc1 f4, 28(s0)",
+            "generated": "swc1 f4, 60(sp)"
+          },
+          {
+            "line": 19,
+            "type": "structural",
+            "target": "lwc1 f0, 20(s0)",
+            "generated": "lwc1 f6, 184(s0)"
+          },
+          {
+            "line": 20,
+            "type": "structural",
+            "target": "lwc1 f2, 24(s0)",
+            "generated": "swc1 f6, 56(sp)"
+          },
+          {
+            "line": 21,
+            "type": "structural",
+            "target": "swc1 f4, 60(sp)",
+            "generated": "lwc1 f8, 64(s0)"
+          },
+          {
+            "line": 22,
+            "type": "structural",
+            "target": "lwc1 f6, 184(s0)",
+            "generated": "swc1 f8, 52(sp)"
+          },
+          {
+            "line": 23,
+            "type": "structural",
+            "target": "swc1 f6, 56(sp)",
+            "generated": "lwc1 f0, 196(s0)"
+          },
+          {
+            "line": 24,
+            "type": "structural",
+            "target": "lwc1 f8, 64(s0)",
+            "generated": "lhu v1, 118(s0)"
+          },
+          {
+            "line": 25,
+            "type": "structural",
+            "target": "swc1 f8, 52(sp)",
+            "generated": "lwc1 f2, 20(s0)"
+          },
+          {
+            "line": 26,
+            "type": "structural",
+            "target": "lwc1 f10, 196(s0)",
+            "generated": "lwc1 f14, 24(s0)"
+          },
+          {
+            "line": 27,
+            "type": "structural",
+            "target": "swc1 f10, 48(sp)",
+            "generated": "sw v0, 80(sp)"
+          },
+          {
+            "line": 28,
+            "type": "structural",
+            "target": "lhu v0, 118(s0)",
+            "generated": "swc1 f0, 48(sp)"
+          },
+          {
+            "line": 29,
+            "type": "structural",
+            "target": "swc1 f0, 68(sp)",
+            "generated": "sw v1, 44(sp)"
+          },
+          {
+            "line": 30,
+            "type": "structural",
+            "target": "swc1 f2, 64(sp)",
+            "generated": "swc1 f2, 68(sp)"
+          },
+          {
+            "line": 32,
+            "type": "structural",
+            "target": "sw v0, 44(sp)",
+            "generated": "swc1 f14, 64(sp)"
+          },
+          {
+            "line": 38,
+            "type": "structural",
+            "target": "mflo t0",
+            "generated": "lw a1, 76(sp)"
+          },
+          {
+            "line": 39,
+            "type": "structural",
+            "target": "addiu t1, t0, 1",
+            "generated": "mflo t0"
+          }
+        ],
+        "timestamp": "2026-08-09T14:59:15.616461+00:00"
+      },
+      {
+        "code": "void func_15063254(struct127 *arg0, s32 arg1, s32 arg2, f32 arg3) {\n    struct129 *temp_s1;\n    struct108 *temp_t2;\n    struct108 *sp48;\n    volatile s32 sp50;\n    f32 sp44;\n    f32 sp40;\n    f32 sp3C;\n    f32 sp38;\n    f32 sp34;\n    f32 sp30;\n    s32 sp2C;\n    s32 sp10;\n\n    sp50 = arg0->unk13F;\n    temp_s1 = arg0->unk144;\n    temp_s1->unk4 = arg1;\n    temp_s1->unk3 = arg2;\n    temp_s1->unk20 = arg3;\n    temp_s1->unk24 = arg3;\n    temp_s1->unk2 = 0;\n    temp_t2 = arg0->camera;\n    sp48 = temp_t2;\n    sp3C = arg0->z_position;\n    sp38 = arg0->unkB8;\n    sp34 = arg0->unk40;\n    sp30 = arg0->unkC4;\n    sp2C = arg0->unk76;\n    sp44 = arg0->x_position;\n    sp40 = arg0->y_position;\n    func_15060F28(arg0, 0);\n    sp10 = (((s32)arg0 - (s32)D_800CC2D0) / (s32)sizeof(struct127)) + 1;\n    func_15082A44(temp_s1, sp50, 0, 0, sp10);\n    arg0->x_position = sp44;\n    arg0->y_position = sp40;\n    arg0->camera = sp48;\n    arg0->z_position = sp3C;\n    arg0->unkB8 = sp38;\n    arg0->unk40 = sp34;\n    arg0->xz_velocity = sp30;\n    arg0->unk76 = sp2C;\n    arg0->unk7A = sp2C;\n    arg0->old_x_position = sp44;\n    arg0->old_y_position = sp40;\n    arg0->unk1CC = arg0->y_position;\n    arg0->old_z_position = arg0->z_position;\n    arg0->unkC4 = sp30;\n    temp_t2->unk3D4 = arg0->unk31C;\n}",
+        "score": 0.2532,
+        "reason": "structural_diffs=59, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 8,
+            "type": "structural",
+            "target": "sw t6, 80(sp)",
+            "generated": "sw t6, 72(sp)"
+          },
+          {
+            "line": 15,
+            "type": "structural",
+            "target": "lw t7, 792(s0)",
+            "generated": "lwc1 f4, 28(s0)"
+          },
+          {
+            "line": 16,
+            "type": "structural",
+            "target": "move a1, zero",
+            "generated": "lw v0, 792(s0)"
+          },
+          {
+            "line": 17,
+            "type": "structural",
+            "target": "sw t7, 72(sp)",
+            "generated": "move a1, zero"
+          },
+          {
+            "line": 18,
+            "type": "structural",
+            "target": "lwc1 f4, 28(s0)",
+            "generated": "swc1 f4, 60(sp)"
+          },
+          {
+            "line": 19,
+            "type": "structural",
+            "target": "lwc1 f0, 20(s0)",
+            "generated": "lwc1 f6, 184(s0)"
+          },
+          {
+            "line": 20,
+            "type": "structural",
+            "target": "lwc1 f2, 24(s0)",
+            "generated": "swc1 f6, 56(sp)"
+          },
+          {
+            "line": 21,
+            "type": "structural",
+            "target": "swc1 f4, 60(sp)",
+            "generated": "lwc1 f8, 64(s0)"
+          },
+          {
+            "line": 22,
+            "type": "structural",
+            "target": "lwc1 f6, 184(s0)",
+            "generated": "swc1 f8, 52(sp)"
+          },
+          {
+            "line": 23,
+            "type": "structural",
+            "target": "swc1 f6, 56(sp)",
+            "generated": "lwc1 f0, 196(s0)"
+          },
+          {
+            "line": 24,
+            "type": "structural",
+            "target": "lwc1 f8, 64(s0)",
+            "generated": "lhu v1, 118(s0)"
+          },
+          {
+            "line": 25,
+            "type": "structural",
+            "target": "swc1 f8, 52(sp)",
+            "generated": "lwc1 f2, 20(s0)"
+          },
+          {
+            "line": 26,
+            "type": "structural",
+            "target": "lwc1 f10, 196(s0)",
+            "generated": "lwc1 f14, 24(s0)"
+          },
+          {
+            "line": 27,
+            "type": "structural",
+            "target": "swc1 f10, 48(sp)",
+            "generated": "sw v0, 80(sp)"
+          },
+          {
+            "line": 28,
+            "type": "structural",
+            "target": "lhu v0, 118(s0)",
+            "generated": "swc1 f0, 48(sp)"
+          },
+          {
+            "line": 29,
+            "type": "structural",
+            "target": "swc1 f0, 68(sp)",
+            "generated": "sw v1, 44(sp)"
+          },
+          {
+            "line": 30,
+            "type": "structural",
+            "target": "swc1 f2, 64(sp)",
+            "generated": "swc1 f2, 68(sp)"
+          },
+          {
+            "line": 32,
+            "type": "structural",
+            "target": "sw v0, 44(sp)",
+            "generated": "swc1 f14, 64(sp)"
+          },
+          {
+            "line": 38,
+            "type": "structural",
+            "target": "mflo t0",
+            "generated": "lw a1, 72(sp)"
+          },
+          {
+            "line": 39,
+            "type": "structural",
+            "target": "addiu t1, t0, 1",
+            "generated": "mflo t0"
+          }
+        ],
+        "timestamp": "2026-08-09T14:59:27.779447+00:00"
+      },
+      {
+        "code": "void func_15063254(struct127 *arg0, s32 arg1, s32 arg2, f32 arg3) {\n    struct129 *temp_s1;\n    struct108 *temp_t2;\n    volatile struct108 *sp48;\n    volatile s32 sp50;\n    f32 sp44;\n    f32 sp40;\n    f32 sp3C;\n    f32 sp38;\n    f32 sp34;\n    f32 sp30;\n    s32 sp2C;\n    s32 sp10;\n\n    sp50 = arg0->unk13F;\n    temp_s1 = arg0->unk144;\n    temp_s1->unk4 = arg1;\n    temp_s1->unk3 = arg2;\n    temp_s1->unk20 = arg3;\n    temp_s1->unk24 = arg3;\n    temp_s1->unk2 = 0;\n    temp_t2 = arg0->camera;\n    sp48 = temp_t2;\n    sp3C = arg0->z_position;\n    sp38 = arg0->unkB8;\n    sp34 = arg0->unk40;\n    sp30 = arg0->unkC4;\n    sp2C = arg0->unk76;\n    sp44 = arg0->x_position;\n    sp40 = arg0->y_position;\n    func_15060F28(arg0, 0);\n    sp10 = (((s32)arg0 - (s32)D_800CC2D0) / (s32)sizeof(struct127)) + 1;\n    func_15082A44(temp_s1, sp50, 0, 0, sp10);\n    arg0->x_position = sp44;\n    arg0->y_position = sp40;\n    arg0->camera = sp48;\n    arg0->z_position = sp3C;\n    arg0->unkB8 = sp38;\n    arg0->unk40 = sp34;\n    arg0->xz_velocity = sp30;\n    arg0->unk76 = sp2C;\n    arg0->unk7A = sp2C;\n    arg0->old_x_position = sp44;\n    arg0->old_y_position = sp40;\n    arg0->unk1CC = arg0->y_position;\n    arg0->old_z_position = arg0->z_position;\n    arg0->unkC4 = sp30;\n    temp_t2->unk3D4 = arg0->unk31C;\n}",
+        "score": 0.2532,
+        "reason": "structural_diffs=59, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 8,
+            "type": "structural",
+            "target": "sw t6, 80(sp)",
+            "generated": "sw t6, 72(sp)"
+          },
+          {
+            "line": 15,
+            "type": "structural",
+            "target": "lw t7, 792(s0)",
+            "generated": "lwc1 f4, 28(s0)"
+          },
+          {
+            "line": 16,
+            "type": "structural",
+            "target": "move a1, zero",
+            "generated": "lw v0, 792(s0)"
+          },
+          {
+            "line": 17,
+            "type": "structural",
+            "target": "sw t7, 72(sp)",
+            "generated": "move a1, zero"
+          },
+          {
+            "line": 18,
+            "type": "structural",
+            "target": "lwc1 f4, 28(s0)",
+            "generated": "swc1 f4, 60(sp)"
+          },
+          {
+            "line": 19,
+            "type": "structural",
+            "target": "lwc1 f0, 20(s0)",
+            "generated": "lwc1 f6, 184(s0)"
+          },
+          {
+            "line": 20,
+            "type": "structural",
+            "target": "lwc1 f2, 24(s0)",
+            "generated": "swc1 f6, 56(sp)"
+          },
+          {
+            "line": 21,
+            "type": "structural",
+            "target": "swc1 f4, 60(sp)",
+            "generated": "lwc1 f8, 64(s0)"
+          },
+          {
+            "line": 22,
+            "type": "structural",
+            "target": "lwc1 f6, 184(s0)",
+            "generated": "swc1 f8, 52(sp)"
+          },
+          {
+            "line": 23,
+            "type": "structural",
+            "target": "swc1 f6, 56(sp)",
+            "generated": "lwc1 f0, 196(s0)"
+          },
+          {
+            "line": 24,
+            "type": "structural",
+            "target": "lwc1 f8, 64(s0)",
+            "generated": "lhu v1, 118(s0)"
+          },
+          {
+            "line": 25,
+            "type": "structural",
+            "target": "swc1 f8, 52(sp)",
+            "generated": "lwc1 f2, 20(s0)"
+          },
+          {
+            "line": 26,
+            "type": "structural",
+            "target": "lwc1 f10, 196(s0)",
+            "generated": "lwc1 f14, 24(s0)"
+          },
+          {
+            "line": 27,
+            "type": "structural",
+            "target": "swc1 f10, 48(sp)",
+            "generated": "sw v0, 80(sp)"
+          },
+          {
+            "line": 28,
+            "type": "structural",
+            "target": "lhu v0, 118(s0)",
+            "generated": "swc1 f0, 48(sp)"
+          },
+          {
+            "line": 29,
+            "type": "structural",
+            "target": "swc1 f0, 68(sp)",
+            "generated": "sw v1, 44(sp)"
+          },
+          {
+            "line": 30,
+            "type": "structural",
+            "target": "swc1 f2, 64(sp)",
+            "generated": "swc1 f2, 68(sp)"
+          },
+          {
+            "line": 32,
+            "type": "structural",
+            "target": "sw v0, 44(sp)",
+            "generated": "swc1 f14, 64(sp)"
+          },
+          {
+            "line": 38,
+            "type": "structural",
+            "target": "mflo t0",
+            "generated": "lw a1, 72(sp)"
+          },
+          {
+            "line": 39,
+            "type": "structural",
+            "target": "addiu t1, t0, 1",
+            "generated": "mflo t0"
+          }
+        ],
+        "timestamp": "2026-08-09T14:59:40.293555+00:00"
+      },
+      {
+        "code": "void func_15063254(struct127 *arg0, s32 arg1, s32 arg2, f32 arg3) {\n    struct129 *temp_s1;\n    struct108 *volatile temp_t2;\n    volatile struct108 *sp48;\n    volatile s32 sp50;\n    f32 sp44;\n    f32 sp40;\n    f32 sp3C;\n    f32 sp38;\n    f32 sp34;\n    f32 sp30;\n    s32 sp2C;\n    s32 sp10;\n\n    sp50 = arg0->unk13F;\n    temp_s1 = arg0->unk144;\n    temp_s1->unk4 = arg1;\n    temp_s1->unk3 = arg2;\n    temp_s1->unk20 = arg3;\n    temp_s1->unk24 = arg3;\n    temp_s1->unk2 = 0;\n    temp_t2 = arg0->camera;\n    sp48 = temp_t2;\n    sp3C = arg0->z_position;\n    sp38 = arg0->unkB8;\n    sp34 = arg0->unk40;\n    sp30 = arg0->unkC4;\n    sp2C = arg0->unk76;\n    sp44 = arg0->x_position;\n    sp40 = arg0->y_position;\n    func_15060F28(arg0, 0);\n    sp10 = (((s32)arg0 - (s32)D_800CC2D0) / (s32)sizeof(struct127)) + 1;\n    func_15082A44(temp_s1, sp50, 0, 0, sp10);\n    arg0->x_position = sp44;\n    arg0->y_position = sp40;\n    arg0->camera = sp48;\n    arg0->z_position = sp3C;\n    arg0->unkB8 = sp38;\n    arg0->unk40 = sp34;\n    arg0->xz_velocity = sp30;\n    arg0->unk76 = sp2C;\n    arg0->unk7A = sp2C;\n    arg0->old_x_position = sp44;\n    arg0->old_y_position = sp40;\n    arg0->unk1CC = arg0->y_position;\n    arg0->old_z_position = arg0->z_position;\n    arg0->unkC4 = sp30;\n    temp_t2->unk3D4 = arg0->unk31C;\n}",
+        "score": 0.0345,
+        "reason": "length_mismatch (target=79, generated=87), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T14:59:49.665421+00:00"
+      },
+      {
+        "code": "void func_15063254(struct127 *arg0, s32 arg1, s32 arg2, f32 arg3) {\n    struct129 *v;\n    s32 idx;\n    struct108 *cam;\n    f32 x;\n    f32 y;\n    f32 z;\n    f32 b8;\n    f32 u40;\n    f32 uc4;\n    s32 angle;\n\n    v = arg0->unk144;\n    idx = arg0->unk13F;\n    v->unk4 = arg1;\n    v->unk3 = arg2;\n    v->unk20 = arg3;\n    v->unk24 = arg3;\n    v->unk2 = 0;\n    cam = arg0->camera;\n    z = arg0->z_position;\n    x = arg0->x_position;\n    y = arg0->y_position;\n    b8 = arg0->unkB8;\n    u40 = arg0->unk40;\n    uc4 = arg0->unkC4;\n    angle = arg0->unk76;\n    func_15060F28(arg0, 0);\n    func_15082A44(v, idx, 0, 0, ((s32)arg0 - (s32)D_800CC2D0) / (s32)sizeof(struct127) + 1);\n    arg0->x_position = x;\n    arg0->y_position = y;\n    arg0->camera = cam;\n    arg0->z_position = z;\n    arg0->unkB8 = b8;\n    arg0->unk40 = u40;\n    arg0->unk76 = angle;\n    arg0->unk7A = angle;\n    arg0->old_x_position = x;\n    arg0->old_y_position = y;\n    arg0->unk1CC = arg0->y_position;\n    arg0->old_z_position = arg0->z_position;\n    arg0->unkC4 = uc4;\n    cam->unk3D4 = (struct127 *)arg0->unk31C;\n}",
+        "score": 0.0759,
+        "reason": "structural_diffs=73, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 0,
+            "type": "structural",
+            "target": "addiu sp, sp, -88",
+            "generated": "addiu sp, sp, -80"
+          },
+          {
+            "line": 3,
+            "type": "structural",
+            "target": "move s0, a0",
+            "generated": "move a3, a1"
+          },
+          {
+            "line": 4,
+            "type": "structural",
+            "target": "sw ra, 36(sp)",
+            "generated": "move s0, a0"
+          },
+          {
+            "line": 5,
+            "type": "structural",
+            "target": "sw s1, 32(sp)",
+            "generated": "sw ra, 36(sp)"
+          },
+          {
+            "line": 6,
+            "type": "structural",
+            "target": "lbu t6, 319(s0)",
+            "generated": "sw s1, 32(sp)"
+          },
+          {
+            "line": 7,
+            "type": "structural",
+            "target": "move a0, s0",
+            "generated": "sw a1, 84(sp)"
+          },
+          {
+            "line": 8,
+            "type": "structural",
+            "target": "sw t6, 80(sp)",
+            "generated": "lw s1, 324(s0)"
+          },
+          {
+            "line": 9,
+            "type": "structural",
+            "target": "lw s1, 324(s0)",
+            "generated": "lbu t6, 319(s0)"
+          },
+          {
+            "line": 10,
+            "type": "structural",
+            "target": "sb a1, 4(s1)",
+            "generated": "move a0, s0"
+          },
+          {
+            "line": 11,
+            "type": "structural",
+            "target": "sb a2, 3(s1)",
+            "generated": "move a1, zero"
+          },
+          {
+            "line": 12,
+            "type": "structural",
+            "target": "swc1 f12, 32(s1)",
+            "generated": "sw t6, 72(sp)"
+          },
+          {
+            "line": 13,
+            "type": "structural",
+            "target": "swc1 f12, 36(s1)",
+            "generated": "sb a3, 4(s1)"
+          },
+          {
+            "line": 14,
+            "type": "structural",
+            "target": "sb zero, 2(s1)",
+            "generated": "sb a2, 3(s1)"
+          },
+          {
+            "line": 15,
+            "type": "structural",
+            "target": "lw t7, 792(s0)",
+            "generated": "swc1 f12, 32(s1)"
+          },
+          {
+            "line": 16,
+            "type": "structural",
+            "target": "move a1, zero",
+            "generated": "swc1 f12, 36(s1)"
+          },
+          {
+            "line": 17,
+            "type": "structural",
+            "target": "sw t7, 72(sp)",
+            "generated": "sb zero, 2(s1)"
+          },
+          {
+            "line": 18,
+            "type": "structural",
+            "target": "lwc1 f4, 28(s0)",
+            "generated": "lw t7, 792(s0)"
+          },
+          {
+            "line": 19,
+            "type": "structural",
+            "target": "lwc1 f0, 20(s0)",
+            "generated": "sw t7, 68(sp)"
+          },
+          {
+            "line": 20,
+            "type": "structural",
+            "target": "lwc1 f2, 24(s0)",
+            "generated": "lwc1 f4, 28(s0)"
+          },
+          {
+            "line": 21,
+            "type": "structural",
+            "target": "swc1 f4, 60(sp)",
+            "generated": "swc1 f4, 56(sp)"
+          }
+        ],
+        "timestamp": "2026-08-09T15:00:21.924648+00:00"
+      }
+    ]
   },
   {
     "function": "func_1513E6E8",
@@ -45081,9 +46007,800 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 9,
+    "lastScore": 0.55,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_15016170(s32 arg0) {\n    s32 idx;\n    s16 tmp;\n\n    bzero(&D_800E0D80, 160);\n    D_800E0D80.unk8 = alHeapDBAlloc(0, 0, arg0, 1, 80);\n    D_800E0D80.unk74 = alHeapDBAlloc(0, 0, arg0, 1, 1088);\n    D_800E0D80.unk5C = alHeapDBAlloc(0, 0, arg0, 1, 8);\n    D_800E0D80.unk96 = 64;\n    D_800E0D80.unkC = 64;\n    D_800E0D80.unk84 = 0;\n    D_800E0D80.unkE = 0x7FFF;\n    D_800E0D80.unk88 = 0x7FFF;\n    D_800E0D80.unk9A = 0;\n    D_800E0D80.unk32 = 0;\n    D_800E0D80.unk30 = 0;\n    D_800E0D80.unk94 = D_800E0D80.unk96;\n    idx = D_800E0D80.unkC;\n    tmp = D_800E0D80.unkE;\n    D_800E0D80.unk10 = (D_8002BC10[idx] * tmp) >> 15;\n    D_800E0D80.unk12 = (D_8002BD0E[-idx] * tmp) >> 15;\n    D_800E0D80.unk24 = 1;\n    D_800E0D80.unk14 = 0x7FFC;\n    D_800E0D80.unk16 = 0;\n    func_151F3C34((s32)func_151F3C4C);\n}",
+        "score": 0.6,
+        "reason": "structural_diffs=32, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 36,
+            "type": "structural",
+            "target": "lh t0, 150(s0)",
+            "generated": "lh t9, 150(s0)"
+          },
+          {
+            "line": 37,
+            "type": "structural",
+            "target": "li t1, 32767",
+            "generated": "li a3, 32767"
+          },
+          {
+            "line": 38,
+            "type": "structural",
+            "target": "li t9, 32767",
+            "generated": "sh a3, 14(s0)"
+          },
+          {
+            "line": 39,
+            "type": "structural",
+            "target": "sh t1, 14(s0)",
+            "generated": "lui t1, HI(D_8002BC10)"
+          },
+          {
+            "line": 40,
+            "type": "structural",
+            "target": "lui t3, HI(D_8002BC10)",
+            "generated": "sll t0, v1, 1"
+          },
+          {
+            "line": 41,
+            "type": "structural",
+            "target": "sll t2, v1, 1",
+            "generated": "sw v0, 92(s0)"
+          },
+          {
+            "line": 42,
+            "type": "structural",
+            "target": "sw v0, 92(s0)",
+            "generated": "sw zero, 132(s0)"
+          },
+          {
+            "line": 43,
+            "type": "structural",
+            "target": "sw zero, 132(s0)",
+            "generated": "sw a3, 136(s0)"
+          },
+          {
+            "line": 44,
+            "type": "structural",
+            "target": "sw t9, 136(s0)",
+            "generated": "sb zero, 154(s0)"
+          },
+          {
+            "line": 45,
+            "type": "structural",
+            "target": "sb zero, 154(s0)",
+            "generated": "sh zero, 50(s0)"
+          },
+          {
+            "line": 46,
+            "type": "structural",
+            "target": "sh zero, 50(s0)",
+            "generated": "sh zero, 48(s0)"
+          },
+          {
+            "line": 47,
+            "type": "structural",
+            "target": "sh zero, 48(s0)",
+            "generated": "addu t1, t1, t0"
+          },
+          {
+            "line": 48,
+            "type": "structural",
+            "target": "addu t3, t3, t2",
+            "generated": "sh t9, 148(s0)"
+          },
+          {
+            "line": 49,
+            "type": "structural",
+            "target": "sh t0, 148(s0)",
+            "generated": "lh a1, 14(s0)"
+          },
+          {
+            "line": 50,
+            "type": "structural",
+            "target": "lh t3, LO(D_8002BC10)(t3)",
+            "generated": "lh t1, LO(D_8002BC10)(t1)"
+          },
+          {
+            "line": 51,
+            "type": "structural",
+            "target": "lh a1, 14(s0)",
+            "generated": "negu t4, v1"
+          },
+          {
+            "line": 52,
+            "type": "structural",
+            "target": "negu t6, t2",
+            "generated": "sll t5, t4, 1"
+          },
+          {
+            "line": 53,
+            "type": "structural",
+            "target": "lui t7, HI(D_8002BD0E)",
+            "generated": "multu t1, a1"
+          },
+          {
+            "line": 54,
+            "type": "structural",
+            "target": "multu t3, a1",
+            "generated": "lui t6, HI(D_8002BD0E)"
+          },
+          {
+            "line": 55,
+            "type": "structural",
+            "target": "addu t7, t7, t6",
+            "generated": "addu t6, t6, t5"
+          }
+        ],
+        "timestamp": "2026-08-09T15:11:17.565852+00:00"
+      },
+      {
+        "code": "void func_15016170(s32 arg0) {\n    s32 idx;\n    s16 tmp;\n\n    bzero(&D_800E0D80, 160);\n    D_800E0D80.unk8 = alHeapDBAlloc(0, 0, arg0, 1, 80);\n    D_800E0D80.unk74 = alHeapDBAlloc(0, 0, arg0, 1, 1088);\n    D_800E0D80.unk5C = alHeapDBAlloc(0, 0, arg0, 1, 8);\n    D_800E0D80.unk96 = 64;\n    D_800E0D80.unkC = 64;\n    D_800E0D80.unk84 = 0;\n    D_800E0D80.unkE = -1;\n    D_800E0D80.unk88 = -1;\n    D_800E0D80.unk9A = 0;\n    D_800E0D80.unk32 = 0;\n    D_800E0D80.unk30 = 0;\n    D_800E0D80.unk94 = D_800E0D80.unk96;\n    idx = D_800E0D80.unkC;\n    tmp = D_800E0D80.unkE;\n    D_800E0D80.unk10 = (D_8002BC10[idx] * tmp) >> 15;\n    D_800E0D80.unk12 = (D_8002BD0E[-idx] * tmp) >> 15;\n    D_800E0D80.unk24 = 1;\n    D_800E0D80.unk14 = 0x7FFC;\n    D_800E0D80.unk16 = 0;\n    func_151F3C34((s32)func_151F3C4C);\n}",
+        "score": 0.6,
+        "reason": "structural_diffs=32, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 36,
+            "type": "structural",
+            "target": "lh t0, 150(s0)",
+            "generated": "lh t9, 150(s0)"
+          },
+          {
+            "line": 37,
+            "type": "structural",
+            "target": "li t1, 32767",
+            "generated": "li a3, -1"
+          },
+          {
+            "line": 38,
+            "type": "structural",
+            "target": "li t9, 32767",
+            "generated": "sh a3, 14(s0)"
+          },
+          {
+            "line": 39,
+            "type": "structural",
+            "target": "sh t1, 14(s0)",
+            "generated": "lui t1, HI(D_8002BC10)"
+          },
+          {
+            "line": 40,
+            "type": "structural",
+            "target": "lui t3, HI(D_8002BC10)",
+            "generated": "sll t0, v1, 1"
+          },
+          {
+            "line": 41,
+            "type": "structural",
+            "target": "sll t2, v1, 1",
+            "generated": "sw v0, 92(s0)"
+          },
+          {
+            "line": 42,
+            "type": "structural",
+            "target": "sw v0, 92(s0)",
+            "generated": "sw zero, 132(s0)"
+          },
+          {
+            "line": 43,
+            "type": "structural",
+            "target": "sw zero, 132(s0)",
+            "generated": "sw a3, 136(s0)"
+          },
+          {
+            "line": 44,
+            "type": "structural",
+            "target": "sw t9, 136(s0)",
+            "generated": "sb zero, 154(s0)"
+          },
+          {
+            "line": 45,
+            "type": "structural",
+            "target": "sb zero, 154(s0)",
+            "generated": "sh zero, 50(s0)"
+          },
+          {
+            "line": 46,
+            "type": "structural",
+            "target": "sh zero, 50(s0)",
+            "generated": "sh zero, 48(s0)"
+          },
+          {
+            "line": 47,
+            "type": "structural",
+            "target": "sh zero, 48(s0)",
+            "generated": "addu t1, t1, t0"
+          },
+          {
+            "line": 48,
+            "type": "structural",
+            "target": "addu t3, t3, t2",
+            "generated": "sh t9, 148(s0)"
+          },
+          {
+            "line": 49,
+            "type": "structural",
+            "target": "sh t0, 148(s0)",
+            "generated": "lh a1, 14(s0)"
+          },
+          {
+            "line": 50,
+            "type": "structural",
+            "target": "lh t3, LO(D_8002BC10)(t3)",
+            "generated": "lh t1, LO(D_8002BC10)(t1)"
+          },
+          {
+            "line": 51,
+            "type": "structural",
+            "target": "lh a1, 14(s0)",
+            "generated": "negu t4, v1"
+          },
+          {
+            "line": 52,
+            "type": "structural",
+            "target": "negu t6, t2",
+            "generated": "sll t5, t4, 1"
+          },
+          {
+            "line": 53,
+            "type": "structural",
+            "target": "lui t7, HI(D_8002BD0E)",
+            "generated": "multu t1, a1"
+          },
+          {
+            "line": 54,
+            "type": "structural",
+            "target": "multu t3, a1",
+            "generated": "lui t6, HI(D_8002BD0E)"
+          },
+          {
+            "line": 55,
+            "type": "structural",
+            "target": "addu t7, t7, t6",
+            "generated": "addu t6, t6, t5"
+          }
+        ],
+        "timestamp": "2026-08-09T15:11:57.721419+00:00"
+      },
+      {
+        "code": "void func_15016170(s32 arg0) {\n    s32 idx;\n    s16 tmp;\n    s32 temp_t1;\n    s32 temp_t9;\n\n    bzero(&D_800E0D80, 160);\n    D_800E0D80.unk8 = alHeapDBAlloc(0, 0, arg0, 1, 80);\n    D_800E0D80.unk74 = alHeapDBAlloc(0, 0, arg0, 1, 1088);\n    D_800E0D80.unk5C = alHeapDBAlloc(0, 0, arg0, 1, 8);\n    D_800E0D80.unk96 = 64;\n    D_800E0D80.unkC = 64;\n    D_800E0D80.unk84 = 0;\n    temp_t1 = 0x7FFF;\n    temp_t9 = 0x7FFF;\n    D_800E0D80.unkE = temp_t1;\n    D_800E0D80.unk88 = temp_t9;\n    D_800E0D80.unk9A = 0;\n    D_800E0D80.unk32 = 0;\n    D_800E0D80.unk30 = 0;\n    D_800E0D80.unk94 = D_800E0D80.unk96;\n    idx = D_800E0D80.unkC;\n    tmp = D_800E0D80.unkE;\n    D_800E0D80.unk10 = (D_8002BC10[idx] * tmp) >> 15;\n    D_800E0D80.unk12 = (D_8002BD0E[-idx] * tmp) >> 15;\n    D_800E0D80.unk24 = 1;\n    D_800E0D80.unk14 = 0x7FFC;\n    D_800E0D80.unk16 = 0;\n    func_151F3C34((s32)func_151F3C4C);\n}",
+        "score": 0.6,
+        "reason": "structural_diffs=32, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 36,
+            "type": "structural",
+            "target": "lh t0, 150(s0)",
+            "generated": "lh t9, 150(s0)"
+          },
+          {
+            "line": 37,
+            "type": "structural",
+            "target": "li t1, 32767",
+            "generated": "li a3, 32767"
+          },
+          {
+            "line": 38,
+            "type": "structural",
+            "target": "li t9, 32767",
+            "generated": "sh a3, 14(s0)"
+          },
+          {
+            "line": 39,
+            "type": "structural",
+            "target": "sh t1, 14(s0)",
+            "generated": "lui t1, HI(D_8002BC10)"
+          },
+          {
+            "line": 40,
+            "type": "structural",
+            "target": "lui t3, HI(D_8002BC10)",
+            "generated": "sll t0, v1, 1"
+          },
+          {
+            "line": 41,
+            "type": "structural",
+            "target": "sll t2, v1, 1",
+            "generated": "sw v0, 92(s0)"
+          },
+          {
+            "line": 42,
+            "type": "structural",
+            "target": "sw v0, 92(s0)",
+            "generated": "sw zero, 132(s0)"
+          },
+          {
+            "line": 43,
+            "type": "structural",
+            "target": "sw zero, 132(s0)",
+            "generated": "sw a3, 136(s0)"
+          },
+          {
+            "line": 44,
+            "type": "structural",
+            "target": "sw t9, 136(s0)",
+            "generated": "sb zero, 154(s0)"
+          },
+          {
+            "line": 45,
+            "type": "structural",
+            "target": "sb zero, 154(s0)",
+            "generated": "sh zero, 50(s0)"
+          },
+          {
+            "line": 46,
+            "type": "structural",
+            "target": "sh zero, 50(s0)",
+            "generated": "sh zero, 48(s0)"
+          },
+          {
+            "line": 47,
+            "type": "structural",
+            "target": "sh zero, 48(s0)",
+            "generated": "addu t1, t1, t0"
+          },
+          {
+            "line": 48,
+            "type": "structural",
+            "target": "addu t3, t3, t2",
+            "generated": "sh t9, 148(s0)"
+          },
+          {
+            "line": 49,
+            "type": "structural",
+            "target": "sh t0, 148(s0)",
+            "generated": "lh a1, 14(s0)"
+          },
+          {
+            "line": 50,
+            "type": "structural",
+            "target": "lh t3, LO(D_8002BC10)(t3)",
+            "generated": "lh t1, LO(D_8002BC10)(t1)"
+          },
+          {
+            "line": 51,
+            "type": "structural",
+            "target": "lh a1, 14(s0)",
+            "generated": "negu t4, v1"
+          },
+          {
+            "line": 52,
+            "type": "structural",
+            "target": "negu t6, t2",
+            "generated": "sll t5, t4, 1"
+          },
+          {
+            "line": 53,
+            "type": "structural",
+            "target": "lui t7, HI(D_8002BD0E)",
+            "generated": "multu t1, a1"
+          },
+          {
+            "line": 54,
+            "type": "structural",
+            "target": "multu t3, a1",
+            "generated": "lui t6, HI(D_8002BD0E)"
+          },
+          {
+            "line": 55,
+            "type": "structural",
+            "target": "addu t7, t7, t6",
+            "generated": "addu t6, t6, t5"
+          }
+        ],
+        "timestamp": "2026-08-09T15:12:10.240133+00:00"
+      },
+      {
+        "code": "void func_15016170(s32 arg0) {\n    s32 idx;\n    s16 tmp;\n    s32 temp_t1;\n    s32 temp_t9;\n\n    bzero(&D_800E0D80, 160);\n    D_800E0D80.unk8 = alHeapDBAlloc(0, 0, arg0, 1, 80);\n    D_800E0D80.unk74 = alHeapDBAlloc(0, 0, arg0, 1, 1088);\n    D_800E0D80.unk5C = alHeapDBAlloc(0, 0, arg0, 1, 8);\n    D_800E0D80.unk96 = 64;\n    D_800E0D80.unk94 = D_800E0D80.unk96;\n    D_800E0D80.unkC = 64;\n    D_800E0D80.unk84 = 0;\n    temp_t1 = 0x7FFF;\n    temp_t9 = 0x7FFF;\n    D_800E0D80.unkE = temp_t1;\n    D_800E0D80.unk88 = temp_t9;\n    D_800E0D80.unk9A = 0;\n    D_800E0D80.unk32 = 0;\n    D_800E0D80.unk30 = 0;\n    idx = D_800E0D80.unkC;\n    tmp = D_800E0D80.unkE;\n    D_800E0D80.unk10 = (D_8002BC10[idx] * tmp) >> 15;\n    D_800E0D80.unk12 = (D_8002BD0E[-idx] * tmp) >> 15;\n    D_800E0D80.unk24 = 1;\n    D_800E0D80.unk14 = 0x7FFC;\n    D_800E0D80.unk16 = 0;\n    func_151F3C34((s32)func_151F3C4C);\n}",
+        "score": 0.6,
+        "reason": "structural_diffs=32, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 36,
+            "type": "structural",
+            "target": "lh t0, 150(s0)",
+            "generated": "lh t9, 150(s0)"
+          },
+          {
+            "line": 37,
+            "type": "structural",
+            "target": "li t1, 32767",
+            "generated": "li a3, 32767"
+          },
+          {
+            "line": 38,
+            "type": "structural",
+            "target": "li t9, 32767",
+            "generated": "sh a3, 14(s0)"
+          },
+          {
+            "line": 39,
+            "type": "structural",
+            "target": "sh t1, 14(s0)",
+            "generated": "lui t1, HI(D_8002BC10)"
+          },
+          {
+            "line": 40,
+            "type": "structural",
+            "target": "lui t3, HI(D_8002BC10)",
+            "generated": "sll t0, v1, 1"
+          },
+          {
+            "line": 41,
+            "type": "structural",
+            "target": "sll t2, v1, 1",
+            "generated": "sw v0, 92(s0)"
+          },
+          {
+            "line": 42,
+            "type": "structural",
+            "target": "sw v0, 92(s0)",
+            "generated": "sw zero, 132(s0)"
+          },
+          {
+            "line": 43,
+            "type": "structural",
+            "target": "sw zero, 132(s0)",
+            "generated": "sw a3, 136(s0)"
+          },
+          {
+            "line": 44,
+            "type": "structural",
+            "target": "sw t9, 136(s0)",
+            "generated": "sb zero, 154(s0)"
+          },
+          {
+            "line": 45,
+            "type": "structural",
+            "target": "sb zero, 154(s0)",
+            "generated": "sh zero, 50(s0)"
+          },
+          {
+            "line": 46,
+            "type": "structural",
+            "target": "sh zero, 50(s0)",
+            "generated": "sh zero, 48(s0)"
+          },
+          {
+            "line": 47,
+            "type": "structural",
+            "target": "sh zero, 48(s0)",
+            "generated": "addu t1, t1, t0"
+          },
+          {
+            "line": 48,
+            "type": "structural",
+            "target": "addu t3, t3, t2",
+            "generated": "sh t9, 148(s0)"
+          },
+          {
+            "line": 49,
+            "type": "structural",
+            "target": "sh t0, 148(s0)",
+            "generated": "lh a1, 14(s0)"
+          },
+          {
+            "line": 50,
+            "type": "structural",
+            "target": "lh t3, LO(D_8002BC10)(t3)",
+            "generated": "lh t1, LO(D_8002BC10)(t1)"
+          },
+          {
+            "line": 51,
+            "type": "structural",
+            "target": "lh a1, 14(s0)",
+            "generated": "negu t4, v1"
+          },
+          {
+            "line": 52,
+            "type": "structural",
+            "target": "negu t6, t2",
+            "generated": "sll t5, t4, 1"
+          },
+          {
+            "line": 53,
+            "type": "structural",
+            "target": "lui t7, HI(D_8002BD0E)",
+            "generated": "multu t1, a1"
+          },
+          {
+            "line": 54,
+            "type": "structural",
+            "target": "multu t3, a1",
+            "generated": "lui t6, HI(D_8002BD0E)"
+          },
+          {
+            "line": 55,
+            "type": "structural",
+            "target": "addu t7, t7, t6",
+            "generated": "addu t6, t6, t5"
+          }
+        ],
+        "timestamp": "2026-08-09T15:12:39.877808+00:00"
+      },
+      {
+        "code": "void func_15016170(s32 arg0) {\n    s32 idx;\n    s16 tmp;\n    s32 temp_t1;\n    s32 temp_t9;\n\n    bzero(&D_800E0D80, 160);\n    D_800E0D80.unk8 = alHeapDBAlloc(0, 0, arg0, 1, 80);\n    D_800E0D80.unk74 = alHeapDBAlloc(0, 0, arg0, 1, 1088);\n    D_800E0D80.unk5C = alHeapDBAlloc(0, 0, arg0, 1, 8);\n    D_800E0D80.unk96 = 64;\n    D_800E0D80.unk94 = D_800E0D80.unk96;\n    D_800E0D80.unkC = 64;\n    D_800E0D80.unk84 = 0;\n    temp_t1 = 0x7FFF;\n    temp_t9 = 0x7FFF;\n    D_800E0D80.unkE = temp_t1;\n    D_800E0D80.unk88 = temp_t9;\n    D_800E0D80.unk9A = 0;\n    D_800E0D80.unk32 = 0;\n    D_800E0D80.unk30 = 0;\n    idx = D_800E0D80.unkC;\n    tmp = D_800E0D80.unkE;\n    D_800E0D80.unk10 = (*(s16 *)((s32)D_8002BC10 + (idx << 1)) * tmp) >> 15;\n    D_800E0D80.unk12 = (*(s16 *)((s32)D_8002BD0E - (idx << 1)) * tmp) >> 15;\n    D_800E0D80.unk24 = 1;\n    D_800E0D80.unk14 = 0x7FFC;\n    D_800E0D80.unk16 = 0;\n    func_151F3C34((s32)func_151F3C4C);\n}",
+        "score": 0.4,
+        "reason": "length_mismatch (target=80, generated=76), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T15:12:54.493774+00:00"
+      },
+      {
+        "code": "void func_15016170(s32 arg0) {\n    s32 idx;\n    s16 tmp;\n    s32 temp_t1;\n    s32 temp_t9;\n    s32 offset;\n    s32 neg_offset;\n\n    bzero(&D_800E0D80, 160);\n    D_800E0D80.unk8 = alHeapDBAlloc(0, 0, arg0, 1, 80);\n    D_800E0D80.unk74 = alHeapDBAlloc(0, 0, arg0, 1, 1088);\n    D_800E0D80.unk5C = alHeapDBAlloc(0, 0, arg0, 1, 8);\n    D_800E0D80.unk96 = 64;\n    D_800E0D80.unk94 = D_800E0D80.unk96;\n    D_800E0D80.unkC = 64;\n    D_800E0D80.unk84 = 0;\n    temp_t1 = 0x7FFF;\n    temp_t9 = 0x7FFF;\n    D_800E0D80.unkE = temp_t1;\n    D_800E0D80.unk88 = temp_t9;\n    D_800E0D80.unk9A = 0;\n    D_800E0D80.unk32 = 0;\n    D_800E0D80.unk30 = 0;\n    idx = D_800E0D80.unkC;\n    tmp = D_800E0D80.unkE;\n    offset = idx << 1;\n    neg_offset = -offset;\n    D_800E0D80.unk10 = (*(s16 *)((s32)D_8002BC10 + offset) * tmp) >> 15;\n    D_800E0D80.unk12 = (*(s16 *)((s32)D_8002BD0E + neg_offset) * tmp) >> 15;\n    D_800E0D80.unk24 = 1;\n    D_800E0D80.unk14 = 0x7FFC;\n    D_800E0D80.unk16 = 0;\n    func_151F3C34((s32)func_151F3C4C);\n}",
+        "score": 0.4,
+        "reason": "length_mismatch (target=80, generated=76), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T15:13:14.526225+00:00"
+      },
+      {
+        "code": "void func_15016170(s32 arg0) {\n    s32 idx;\n    s16 tmp;\n    s32 temp_t1;\n    s32 temp_t9;\n    s32 offset;\n\n    bzero(&D_800E0D80, 160);\n    D_800E0D80.unk8 = alHeapDBAlloc(0, 0, arg0, 1, 80);\n    D_800E0D80.unk74 = alHeapDBAlloc(0, 0, arg0, 1, 1088);\n    D_800E0D80.unk5C = alHeapDBAlloc(0, 0, arg0, 1, 8);\n    D_800E0D80.unk96 = 64;\n    D_800E0D80.unk94 = D_800E0D80.unk96;\n    D_800E0D80.unkC = 64;\n    D_800E0D80.unk84 = 0;\n    temp_t1 = 0x7FFF;\n    temp_t9 = 0x7FFF;\n    D_800E0D80.unkE = temp_t1;\n    D_800E0D80.unk88 = temp_t9;\n    D_800E0D80.unk9A = 0;\n    D_800E0D80.unk32 = 0;\n    D_800E0D80.unk30 = 0;\n    idx = D_800E0D80.unkC;\n    tmp = D_800E0D80.unkE;\n    offset = idx << 1;\n    D_800E0D80.unk10 = (*(s16 *)((s32)D_8002BC10 + offset) * tmp) >> 15;\n    D_800E0D80.unk12 = (*(s16 *)((s32)D_8002BD0E + (-offset)) * tmp) >> 15;\n    D_800E0D80.unk24 = 1;\n    D_800E0D80.unk14 = 0x7FFC;\n    D_800E0D80.unk16 = 0;\n    func_151F3C34((s32)func_151F3C4C);\n}",
+        "score": 0.4,
+        "reason": "length_mismatch (target=80, generated=76), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T15:13:29.137266+00:00"
+      },
+      {
+        "code": "void func_15016170(s32 arg0) {\n\n    bzero(&D_800E0D80, 160);\n    D_800E0D80.unk8 = alHeapDBAlloc(0, 0, arg0, 1, 80);\n    D_800E0D80.unk74 = alHeapDBAlloc(0, 0, arg0, 1, 1088);\n    D_800E0D80.unk5C = alHeapDBAlloc(0, 0, arg0, 1, 8);\n    D_800E0D80.unk96 = 64;\n    D_800E0D80.unk94 = D_800E0D80.unk96;\n    D_800E0D80.unkC = 64;\n    D_800E0D80.unk84 = 0;\n    D_800E0D80.unkE = 0x7FFF;\n    D_800E0D80.unk88 = 0x7FFF;\n    D_800E0D80.unk9A = 0;\n    D_800E0D80.unk32 = 0;\n    D_800E0D80.unk30 = 0;\n    D_800E0D80.unk10 = (D_8002BC10[D_800E0D80.unkC] * D_800E0D80.unkE) >> 15;\n    D_800E0D80.unk12 = (D_8002BD0E[-D_800E0D80.unkC] * D_800E0D80.unkE) >> 15;\n    D_800E0D80.unk24 = 1;\n    D_800E0D80.unk14 = 0x7FFC;\n    D_800E0D80.unk16 = 0;\n    func_151F3C34((s32)func_151F3C4C);\n}",
+        "score": 0.6,
+        "reason": "structural_diffs=32, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 36,
+            "type": "structural",
+            "target": "lh t0, 150(s0)",
+            "generated": "lh t9, 150(s0)"
+          },
+          {
+            "line": 37,
+            "type": "structural",
+            "target": "li t1, 32767",
+            "generated": "li a3, 32767"
+          },
+          {
+            "line": 38,
+            "type": "structural",
+            "target": "li t9, 32767",
+            "generated": "sh a3, 14(s0)"
+          },
+          {
+            "line": 39,
+            "type": "structural",
+            "target": "sh t1, 14(s0)",
+            "generated": "lui t1, HI(D_8002BC10)"
+          },
+          {
+            "line": 40,
+            "type": "structural",
+            "target": "lui t3, HI(D_8002BC10)",
+            "generated": "sll t0, v1, 1"
+          },
+          {
+            "line": 41,
+            "type": "structural",
+            "target": "sll t2, v1, 1",
+            "generated": "sw v0, 92(s0)"
+          },
+          {
+            "line": 42,
+            "type": "structural",
+            "target": "sw v0, 92(s0)",
+            "generated": "sw zero, 132(s0)"
+          },
+          {
+            "line": 43,
+            "type": "structural",
+            "target": "sw zero, 132(s0)",
+            "generated": "sw a3, 136(s0)"
+          },
+          {
+            "line": 44,
+            "type": "structural",
+            "target": "sw t9, 136(s0)",
+            "generated": "sb zero, 154(s0)"
+          },
+          {
+            "line": 45,
+            "type": "structural",
+            "target": "sb zero, 154(s0)",
+            "generated": "sh zero, 50(s0)"
+          },
+          {
+            "line": 46,
+            "type": "structural",
+            "target": "sh zero, 50(s0)",
+            "generated": "sh zero, 48(s0)"
+          },
+          {
+            "line": 47,
+            "type": "structural",
+            "target": "sh zero, 48(s0)",
+            "generated": "addu t1, t1, t0"
+          },
+          {
+            "line": 48,
+            "type": "structural",
+            "target": "addu t3, t3, t2",
+            "generated": "sh t9, 148(s0)"
+          },
+          {
+            "line": 49,
+            "type": "structural",
+            "target": "sh t0, 148(s0)",
+            "generated": "lh t1, LO(D_8002BC10)(t1)"
+          },
+          {
+            "line": 50,
+            "type": "structural",
+            "target": "lh t3, LO(D_8002BC10)(t3)",
+            "generated": "lh a1, 14(s0)"
+          },
+          {
+            "line": 51,
+            "type": "structural",
+            "target": "lh a1, 14(s0)",
+            "generated": "negu t4, v1"
+          },
+          {
+            "line": 52,
+            "type": "structural",
+            "target": "negu t6, t2",
+            "generated": "sll t5, t4, 1"
+          },
+          {
+            "line": 53,
+            "type": "structural",
+            "target": "lui t7, HI(D_8002BD0E)",
+            "generated": "multu t1, a1"
+          },
+          {
+            "line": 54,
+            "type": "structural",
+            "target": "multu t3, a1",
+            "generated": "lui t6, HI(D_8002BD0E)"
+          },
+          {
+            "line": 55,
+            "type": "structural",
+            "target": "addu t7, t7, t6",
+            "generated": "addu t6, t6, t5"
+          }
+        ],
+        "timestamp": "2026-08-09T15:13:44.563631+00:00"
+      },
+      {
+        "code": "void func_15016170(s32 arg0) {\n\n    bzero(&D_800E0D80, 160);\n    D_800E0D80.unk8 = alHeapDBAlloc(0, 0, arg0, 1, 80);\n    D_800E0D80.unk74 = alHeapDBAlloc(0, 0, arg0, 1, 1088);\n    D_800E0D80.unk5C = alHeapDBAlloc(0, 0, arg0, 1, 8);\n    D_800E0D80.unk96 = 64;\n    D_800E0D80.unk94 = D_800E0D80.unk96;\n    D_800E0D80.unkC = D_800E0D80.unk96;\n    D_800E0D80.unk84 = 0;\n    D_800E0D80.unkE = 0x7FFF;\n    D_800E0D80.unk88 = 0x7FFF;\n    D_800E0D80.unk9A = 0;\n    D_800E0D80.unk32 = 0;\n    D_800E0D80.unk30 = 0;\n    D_800E0D80.unk10 = (D_8002BC10[D_800E0D80.unkC] * D_800E0D80.unkE) >> 15;\n    D_800E0D80.unk12 = (D_8002BD0E[-D_800E0D80.unkC] * D_800E0D80.unkE) >> 15;\n    D_800E0D80.unk24 = 1;\n    D_800E0D80.unk14 = 0x7FFC;\n    D_800E0D80.unk16 = 0;\n    func_151F3C34((s32)func_151F3C4C);\n}",
+        "score": 0.55,
+        "reason": "structural_diffs=36, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 32,
+            "type": "structural",
+            "target": "li a2, 64",
+            "generated": "li t9, 64"
+          },
+          {
+            "line": 33,
+            "type": "structural",
+            "target": "sh a2, 12(s0)",
+            "generated": "sh t9, 150(s0)"
+          },
+          {
+            "line": 34,
+            "type": "structural",
+            "target": "lh v1, 12(s0)",
+            "generated": "lh v1, 150(s0)"
+          },
+          {
+            "line": 35,
+            "type": "structural",
+            "target": "sh a2, 150(s0)",
+            "generated": "li a3, 32767"
+          },
+          {
+            "line": 36,
+            "type": "structural",
+            "target": "lh t0, 150(s0)",
+            "generated": "sh a3, 14(s0)"
+          },
+          {
+            "line": 37,
+            "type": "structural",
+            "target": "li t1, 32767",
+            "generated": "sh v1, 12(s0)"
+          },
+          {
+            "line": 38,
+            "type": "structural",
+            "target": "li t9, 32767",
+            "generated": "lh a1, 12(s0)"
+          },
+          {
+            "line": 39,
+            "type": "structural",
+            "target": "sh t1, 14(s0)",
+            "generated": "lui t1, HI(D_8002BC10)"
+          },
+          {
+            "line": 40,
+            "type": "structural",
+            "target": "lui t3, HI(D_8002BC10)",
+            "generated": "sw v0, 92(s0)"
+          },
+          {
+            "line": 41,
+            "type": "structural",
+            "target": "sll t2, v1, 1",
+            "generated": "sll t0, a1, 1"
+          },
+          {
+            "line": 42,
+            "type": "structural",
+            "target": "sw v0, 92(s0)",
+            "generated": "sw zero, 132(s0)"
+          },
+          {
+            "line": 43,
+            "type": "structural",
+            "target": "sw zero, 132(s0)",
+            "generated": "sw a3, 136(s0)"
+          },
+          {
+            "line": 44,
+            "type": "structural",
+            "target": "sw t9, 136(s0)",
+            "generated": "sb zero, 154(s0)"
+          },
+          {
+            "line": 45,
+            "type": "structural",
+            "target": "sb zero, 154(s0)",
+            "generated": "sh zero, 50(s0)"
+          },
+          {
+            "line": 46,
+            "type": "structural",
+            "target": "sh zero, 50(s0)",
+            "generated": "sh zero, 48(s0)"
+          },
+          {
+            "line": 47,
+            "type": "structural",
+            "target": "sh zero, 48(s0)",
+            "generated": "addu t1, t1, t0"
+          },
+          {
+            "line": 48,
+            "type": "structural",
+            "target": "addu t3, t3, t2",
+            "generated": "sh v1, 148(s0)"
+          },
+          {
+            "line": 49,
+            "type": "structural",
+            "target": "sh t0, 148(s0)",
+            "generated": "lh t1, LO(D_8002BC10)(t1)"
+          },
+          {
+            "line": 50,
+            "type": "structural",
+            "target": "lh t3, LO(D_8002BC10)(t3)",
+            "generated": "lh a2, 14(s0)"
+          },
+          {
+            "line": 51,
+            "type": "structural",
+            "target": "lh a1, 14(s0)",
+            "generated": "negu t4, a1"
+          }
+        ],
+        "timestamp": "2026-08-09T15:13:49.149611+00:00"
+      }
+    ]
   },
   {
     "function": "func_15071360",
@@ -47327,9 +49044,842 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 15,
+    "lastScore": 0.3291,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_16000590(struct118 *arg0) {\n    s32 temp_s0;\n    s32 temp_s1;\n    s32 temp_s2;\n    u8 *temp_s3;\n    s32 temp_s4;\n    s32 temp_s5;\n    s32 temp_v0;\n\n    temp_s4 = 0;\n    temp_s5 = ((s32 *)arg0)[0x4B];\n    func_160012B0(3, &D_160047A4);\n    func_16001044(10, 0, temp_s5);\n    temp_s2 = temp_s5 >> 12;\n    temp_s3 = (u8 *)D_16003B30;\n    temp_s0 = 0x2C;\n    temp_s1 = 0;\n    do {\n        if (temp_s2 & 1) {\n            func_160012B0(temp_s0, *(u8 **)(temp_s3 + (temp_s1 * 4)));\n            temp_s0 += 0x20;\n        }\n        temp_s1 += 1;\n        temp_s2 >>= 1;\n    } while (temp_s1 < 6);\n    temp_s1 = 0;\n    if (D_16003B28 == 1) {\n        temp_v0 = 0x4C;\n    } else {\n        temp_v0 = 0x6C;\n        temp_s4 = 0x10;\n    }\n    temp_s2 = temp_s1 + temp_s4;\n    temp_s4 = (s32)&D_160047AC;\n    temp_s3 = (u8 *)arg0 + (temp_v0 * 4);\n    do {\n        func_160012B0(temp_s0, (u8 *)temp_s4);\n        func_16001044(temp_s0 + 2, 1, temp_s2);\n        func_16001044(temp_s0 + 5, 2, *(s32 *)(temp_s3 + 4));\n        temp_s1 += 1;\n        temp_s3 += 8;\n        temp_s0 += 0x20;\n        temp_s2 += 1;\n    } while (temp_s1 < 0x10);\n}",
+        "score": 0.0,
+        "reason": "compile_error",
+        "diffs": [],
+        "timestamp": "2026-08-09T15:04:08.203236+00:00"
+      },
+      {
+        "code": "void func_16000590(struct118 *arg0) {\n    s32 temp_s0;\n    s32 temp_s1;\n    s32 temp_s2;\n    u8 *temp_s3;\n    s32 temp_s4;\n    s32 temp_s5;\n    s32 temp_v0;\n\n    temp_s4 = 0;\n    temp_s5 = ((s32 *)arg0)[0x4B];\n    func_160012B0(3, &D_160047A4);\n    func_16001044(10, 0, temp_s5);\n    temp_s2 = temp_s5 >> 12;\n    temp_s3 = (u8 *)D_16003B30;\n    temp_s0 = 0x2C;\n    temp_s1 = 0;\n    do {\n        if (temp_s2 & 1) {\n            func_160012B0(temp_s0, *(u8 **)(temp_s3 + (temp_s1 * 4)));\n            temp_s0 += 0x20;\n        }\n        temp_s1 += 1;\n        temp_s2 >>= 1;\n    } while (temp_s1 < 6);\n    temp_s1 = 0;\n    if (D_16003B28 == 1) {\n        temp_v0 = 0x4C;\n    } else {\n        temp_v0 = 0x6C;\n        temp_s4 = 0x10;\n    }\n    temp_s2 = temp_s1 + temp_s4;\n    temp_s4 = (s32)&D_160047AC;\n    temp_s3 = (u8 *)arg0 + (temp_v0 * 4);\n    do {\n        func_160012B0(temp_s0, (u8 *)temp_s4);\n        func_16001044(temp_s0 + 2, 1, temp_s2);\n        func_16001044(temp_s0 + 5, 2, *(s32 *)(temp_s3 + 4));\n        temp_s1 += 1;\n        temp_s3 += 8;\n        temp_s0 += 0x20;\n        temp_s2 += 1;\n    } while (temp_s1 < 0x10);\n}",
+        "score": 0.3165,
+        "reason": "length_mismatch (target=79, generated=78), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T15:04:24.900924+00:00"
+      },
+      {
+        "code": "void func_16000590(struct118 *arg0) {\n    s32 temp_s0;\n    s32 temp_s1;\n    s32 temp_s2;\n    u8 *temp_s3;\n    s32 temp_s4;\n    struct118 *temp_s5;\n    s32 temp_v0;\n\n    temp_s4 = 0;\n    temp_s5 = arg0;\n    func_160012B0(3, &D_160047A4);\n    func_16001044(10, 0, ((s32 *)temp_s5)[0x4B]);\n    temp_s2 = ((s32 *)temp_s5)[0x4B] >> 12;\n    temp_s3 = (u8 *)D_16003B30;\n    temp_s0 = 0x2C;\n    temp_s1 = 0;\n    do {\n        if (temp_s2 & 1) {\n            func_160012B0(temp_s0, *(u8 **)(temp_s3 + (temp_s1 * 4)));\n            temp_s0 += 0x20;\n        }\n        temp_s1 += 1;\n        temp_s2 >>= 1;\n    } while (temp_s1 < 6);\n    temp_s1 = 0;\n    if (D_16003B28 == 1) {\n        temp_v0 = 0x4C;\n    } else {\n        temp_v0 = 0x6C;\n        temp_s4 = 0x10;\n    }\n    temp_s2 = temp_s1 + temp_s4;\n    temp_s4 = (s32)&D_160047AC;\n    temp_s3 = (u8 *)temp_s5 + (temp_v0 * 4);\n    do {\n        func_160012B0(temp_s0, (u8 *)temp_s4);\n        func_16001044(temp_s0 + 2, 1, temp_s2);\n        func_16001044(temp_s0 + 5, 2, *(s32 *)(temp_s3 + 4));\n        temp_s1 += 1;\n        temp_s3 += 8;\n        temp_s0 += 0x20;\n        temp_s2 += 1;\n    } while (temp_s1 < 0x10);\n}",
+        "score": 0.0125,
+        "reason": "length_mismatch (target=79, generated=80), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T15:04:54.186519+00:00"
+      },
+      {
+        "code": "void func_16000590(struct118 *arg0) {\n    s32 temp_s0;\n    s32 temp_s1;\n    s32 temp_s2;\n    u8 *temp_s3;\n    s32 temp_s4;\n    register struct118 *temp_s5;\n    s32 temp_v0;\n\n    temp_s4 = 0;\n    temp_s5 = arg0;\n    func_160012B0(3, &D_160047A4);\n    func_16001044(10, 0, ((s32 *)temp_s5)[0x4B]);\n    temp_s2 = ((s32 *)temp_s5)[0x4B] >> 12;\n    temp_s3 = (u8 *)D_16003B30;\n    temp_s0 = 0x2C;\n    temp_s1 = 0;\n    do {\n        if (temp_s2 & 1) {\n            func_160012B0(temp_s0, *(u8 **)(temp_s3 + (temp_s1 * 4)));\n            temp_s0 += 0x20;\n        }\n        temp_s1 += 1;\n        temp_s2 >>= 1;\n    } while (temp_s1 < 6);\n    temp_s1 = 0;\n    if (D_16003B28 == 1) {\n        temp_v0 = 0x4C;\n    } else {\n        temp_v0 = 0x6C;\n        temp_s4 = 0x10;\n    }\n    temp_s2 = temp_s1 + temp_s4;\n    temp_s4 = (s32)&D_160047AC;\n    temp_s3 = (u8 *)temp_s5 + (temp_v0 * 4);\n    do {\n        func_160012B0(temp_s0, (u8 *)temp_s4);\n        func_16001044(temp_s0 + 2, 1, temp_s2);\n        func_16001044(temp_s0 + 5, 2, *(s32 *)(temp_s3 + 4));\n        temp_s1 += 1;\n        temp_s3 += 8;\n        temp_s0 += 0x20;\n        temp_s2 += 1;\n    } while (temp_s1 < 0x10);\n}",
+        "score": 0.0125,
+        "reason": "length_mismatch (target=79, generated=80), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T15:05:09.667946+00:00"
+      },
+      {
+        "code": "void func_16000590(struct118 *arg0) {\n    s32 temp_s0;\n    s32 temp_s1;\n    u32 temp_s2;\n    u8 *temp_s3;\n    s32 temp_s4;\n    u8 *temp_s4_2;\n    register struct118 *temp_s5;\n    s32 temp_v0;\n\n    temp_s4 = 0;\n    temp_s5 = arg0;\n    temp_s2 = ((s32 *)temp_s5)[0x4B];\n    func_160012B0(3, &D_160047A4);\n    func_16001044(10, 0, temp_s2);\n    temp_s2 >>= 12;\n    temp_s3 = (u8 *)D_16003B30;\n    temp_s0 = 0x2C;\n    temp_s1 = 0;\n    do {\n        if (temp_s2 & 1) {\n            func_160012B0(temp_s0, *(u8 **)(temp_s3 + (temp_s1 * 4)));\n            temp_s0 += 0x20;\n        }\n        temp_s1 += 1;\n        temp_s2 >>= 1;\n    } while (temp_s1 < 6);\n    temp_s1 = 0;\n    if (D_16003B28 == 1) {\n        temp_v0 = 0x4C;\n    } else {\n        temp_v0 = 0x6C;\n        temp_s4 = 0x10;\n    }\n    temp_s2 = temp_s1 + temp_s4;\n    temp_s4_2 = D_160047AC;\n    temp_s3 = (u8 *)temp_s5 + (temp_v0 * 4);\n    do {\n        func_160012B0(temp_s0, temp_s4_2);\n        func_16001044(temp_s0 + 2, 1, temp_s2);\n        func_16001044(temp_s0 + 5, 2, *(s32 *)(temp_s3 + 4));\n        temp_s1 += 1;\n        temp_s3 += 8;\n        temp_s0 += 0x20;\n        temp_s2 += 1;\n    } while (temp_s1 < 0x10);\n}",
+        "score": 0.4936708860759494,
+        "reason": "length_mismatch (target=79, generated=78), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T15:05:57.408116+00:00"
+      },
+      {
+        "code": "void func_16000590(register struct118 *arg0) {\n    s32 temp_s0;\n    s32 temp_s1;\n    u32 temp_s2;\n    u8 *temp_s3;\n    s32 temp_s4;\n    u8 *temp_s4_2;\n    struct118 *temp_s5;\n    s32 temp_v0;\n\n    temp_s4 = 0;\n    temp_s5 = arg0;\n    temp_s2 = ((s32 *)temp_s5)[0x4B];\n    func_160012B0(3, &D_160047A4);\n    func_16001044(10, 0, temp_s2);\n    temp_s2 >>= 12;\n    temp_s3 = (u8 *)D_16003B30;\n    temp_s0 = 0x2C;\n    temp_s1 = 0;\n    do {\n        if (temp_s2 & 1) {\n            func_160012B0(temp_s0, *(u8 **)(temp_s3 + (temp_s1 * 4)));\n            temp_s0 += 0x20;\n        }\n        temp_s1 += 1;\n        temp_s2 >>= 1;\n    } while (temp_s1 < 6);\n    temp_s1 = 0;\n    if (D_16003B28 == 1) {\n        temp_v0 = 0x4C;\n    } else {\n        temp_v0 = 0x6C;\n        temp_s4 = 0x10;\n    }\n    temp_s2 = temp_s1 + temp_s4;\n    temp_s4_2 = D_160047AC;\n    temp_s3 = (u8 *)temp_s5 + (temp_v0 * 4);\n    do {\n        func_160012B0(temp_s0, temp_s4_2);\n        func_16001044(temp_s0 + 2, 1, temp_s2);\n        func_16001044(temp_s0 + 5, 2, *(s32 *)(temp_s3 + 4));\n        temp_s1 += 1;\n        temp_s3 += 8;\n        temp_s0 += 0x20;\n        temp_s2 += 1;\n    } while (temp_s1 < 0x10);\n}",
+        "score": 0.4936708860759494,
+        "reason": "length_mismatch (target=79, generated=78), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T15:06:24.419069+00:00"
+      },
+      {
+        "code": "void func_16000590(register struct118 *arg0) {\n    s32 temp_s0;\n    s32 temp_s1;\n    u32 temp_s2;\n    u8 *temp_s3;\n    s32 temp_s4;\n    u8 *temp_s4_2;\n    s32 temp_s5;\n    s32 temp_v0;\n\n    temp_s4 = 0;\n    temp_s5 = (s32)arg0;\n    temp_s2 = *(s32 *)(temp_s5 + 0x12C);\n    func_160012B0(3, &D_160047A4);\n    func_16001044(10, 0, temp_s2);\n    temp_s2 >>= 12;\n    temp_s3 = (u8 *)D_16003B30;\n    temp_s0 = 0x2C;\n    temp_s1 = 0;\n    do {\n        if (temp_s2 & 1) {\n            func_160012B0(temp_s0, *(u8 **)(temp_s3 + (temp_s1 * 4)));\n            temp_s0 += 0x20;\n        }\n        temp_s1 += 1;\n        temp_s2 >>= 1;\n    } while (temp_s1 < 6);\n    temp_s1 = 0;\n    if (D_16003B28 == 1) {\n        temp_v0 = 0x4C;\n    } else {\n        temp_v0 = 0x6C;\n        temp_s4 = 0x10;\n    }\n    temp_s2 = temp_s1 + temp_s4;\n    temp_s4_2 = D_160047AC;\n    temp_s3 = (u8 *)temp_s5 + (temp_v0 * 4);\n    do {\n        func_160012B0(temp_s0, temp_s4_2);\n        func_16001044(temp_s0 + 2, 1, temp_s2);\n        func_16001044(temp_s0 + 5, 2, *(s32 *)(temp_s3 + 4));\n        temp_s1 += 1;\n        temp_s3 += 8;\n        temp_s0 += 0x20;\n        temp_s2 += 1;\n    } while (temp_s1 < 0x10);\n}",
+        "score": 0.4936708860759494,
+        "reason": "length_mismatch (target=79, generated=78), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T15:06:44.263747+00:00"
+      },
+      {
+        "code": "void func_16000590(register struct118 *arg0) {\n    s32 temp_s0;\n    s32 temp_s1;\n    u32 temp_s2;\n    u8 *temp_s3;\n    s32 temp_s4;\n    u8 *temp_s4_2;\n    s32 temp_v0;\n\n    temp_s4 = 0;\n    temp_s2 = *(s32 *)((s32)arg0 + 0x12C);\n    func_160012B0(3, &D_160047A4);\n    func_16001044(10, 0, temp_s2);\n    temp_s2 >>= 12;\n    temp_s3 = (u8 *)D_16003B30;\n    temp_s0 = 0x2C;\n    temp_s1 = 0;\n    do {\n        if (temp_s2 & 1) {\n            func_160012B0(temp_s0, *(u8 **)(temp_s3 + (temp_s1 * 4)));\n            temp_s0 += 0x20;\n        }\n        temp_s1 += 1;\n        temp_s2 >>= 1;\n    } while (temp_s1 < 6);\n    temp_s1 = 0;\n    if (D_16003B28 == 1) {\n        temp_v0 = 0x4C;\n    } else {\n        temp_v0 = 0x6C;\n        temp_s4 = 0x10;\n    }\n    temp_s2 = temp_s1 + temp_s4;\n    temp_s4_2 = D_160047AC;\n    temp_s3 = (u8 *)arg0 + (temp_v0 * 4);\n    do {\n        func_160012B0(temp_s0, temp_s4_2);\n        func_16001044(temp_s0 + 2, 1, temp_s2);\n        func_16001044(temp_s0 + 5, 2, *(s32 *)(temp_s3 + 4));\n        temp_s1 += 1;\n        temp_s3 += 8;\n        temp_s0 += 0x20;\n        temp_s2 += 1;\n    } while (temp_s1 < 0x10);\n}",
+        "score": 0.4936708860759494,
+        "reason": "length_mismatch (target=79, generated=78), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T15:06:52.999293+00:00"
+      },
+      {
+        "code": "void func_16000590(struct118 *arg0) {\n    s32 temp_s0;\n    s32 temp_s1;\n    u32 temp_s2;\n    u8 *temp_s3;\n    s32 temp_s4;\n    u8 *temp_s4_2;\n    s32 temp_v0;\n    u32 phi_s5;\n\n    phi_s5 = (u32)arg0;\n    temp_s4 = 0;\n    temp_s2 = *(s32 *)(phi_s5 + 0x12C);\n    func_160012B0(3, &D_160047A4);\n    func_16001044(10, 0, temp_s2);\n    temp_s2 >>= 12;\n    temp_s3 = (u8 *)D_16003B30;\n    temp_s0 = 0x2C;\n    temp_s1 = 0;\n    do {\n        if (temp_s2 & 1) {\n            func_160012B0(temp_s0, *(u8 **)(temp_s3 + (temp_s1 * 4)));\n            temp_s0 += 0x20;\n        }\n        temp_s1 += 1;\n        temp_s2 >>= 1;\n    } while (temp_s1 < 6);\n    temp_s1 = 0;\n    if (D_16003B28 == 1) {\n        temp_v0 = 0x4C;\n    } else {\n        temp_v0 = 0x6C;\n        temp_s4 = 0x10;\n    }\n    temp_s2 = temp_s1 + temp_s4;\n    temp_s4_2 = D_160047AC;\n    temp_s3 = (u8 *)phi_s5 + (temp_v0 * 4);\n    do {\n        func_160012B0(temp_s0, temp_s4_2);\n        func_16001044(temp_s0 + 2, 1, temp_s2);\n        func_16001044(temp_s0 + 5, 2, *(s32 *)(temp_s3 + 4));\n        temp_s1 += 1;\n        temp_s3 += 8;\n        temp_s0 += 0x20;\n        temp_s2 += 1;\n    } while (temp_s1 < 0x10);\n}",
+        "score": 0.4936708860759494,
+        "reason": "length_mismatch (target=79, generated=78), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T15:08:25.754400+00:00"
+      },
+      {
+        "code": "void func_16000590(struct118 *arg0) {\n    s32 temp_s0;\n    s32 temp_s1;\n    u32 temp_s2;\n    u8 *temp_s3;\n    s32 temp_s4;\n    u8 *temp_s4_2;\n    s32 temp_v0;\n    u32 phi_s5;\n\n    phi_s5 = (u32)arg0;\n    temp_s4 = 0;\n    temp_s2 = *(s32 *)(phi_s5 + 0x12C);\n    func_160012B0(3, &D_160047A4);\n    func_16001044(10, 0, temp_s2);\n    temp_s2 >>= 12;\n    temp_s3 = (u8 *)D_16003B30;\n    temp_s0 = 0x2C;\n    temp_s1 = 0;\n    do {\n        if (temp_s2 & 1) {\n            func_160012B0(temp_s0, *(u8 **)(temp_s3 + (temp_s1 * 4)));\n            temp_s0 += 0x20;\n        }\n        temp_s1 += 1;\n        temp_s2 >>= 1;\n    } while (temp_s1 < 6);\n    temp_s1 = 0;\n    temp_s0 = 0xC3;\n    if (D_16003B28 == 1) {\n        temp_v0 = 0x4C;\n    } else {\n        temp_v0 = 0x6C;\n        temp_s4 = 0x10;\n    }\n    temp_s2 = temp_s1 + temp_s4;\n    temp_s4_2 = D_160047AC;\n    temp_s3 = (u8 *)phi_s5 + (temp_v0 * 4);\n    do {\n        func_160012B0(temp_s0, temp_s4_2);\n        func_16001044(temp_s0 + 2, 1, temp_s2);\n        func_16001044(temp_s0 + 5, 2, *(s32 *)(temp_s3 + 4));\n        temp_s1 += 1;\n        temp_s3 += 8;\n        temp_s0 += 0x20;\n        temp_s2 += 1;\n    } while (temp_s1 < 0x10);\n}",
+        "score": 0.3291,
+        "reason": "structural_diffs=53, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 1,
+            "type": "structural",
+            "target": "sw s5, 40(sp)",
+            "generated": "sw ra, 44(sp)"
+          },
+          {
+            "line": 2,
+            "type": "structural",
+            "target": "move s5, a0",
+            "generated": "sw s4, 40(sp)"
+          },
+          {
+            "line": 3,
+            "type": "structural",
+            "target": "sw ra, 44(sp)",
+            "generated": "sw s3, 36(sp)"
+          },
+          {
+            "line": 4,
+            "type": "structural",
+            "target": "sw s4, 36(sp)",
+            "generated": "sw s2, 32(sp)"
+          },
+          {
+            "line": 5,
+            "type": "structural",
+            "target": "sw s3, 32(sp)",
+            "generated": "sw s1, 28(sp)"
+          },
+          {
+            "line": 6,
+            "type": "structural",
+            "target": "sw s2, 28(sp)",
+            "generated": "sw s0, 24(sp)"
+          },
+          {
+            "line": 7,
+            "type": "structural",
+            "target": "sw s1, 24(sp)",
+            "generated": "sw a0, 48(sp)"
+          },
+          {
+            "line": 8,
+            "type": "structural",
+            "target": "sw s0, 20(sp)",
+            "generated": "lw t6, 48(sp)"
+          },
+          {
+            "line": 11,
+            "type": "structural",
+            "target": "lw s2, 300(s5)",
+            "generated": "addiu a1, a1, LO(D_160047A4)"
+          },
+          {
+            "line": 12,
+            "type": "structural",
+            "target": "addiu a1, a1, LO(D_160047A4)",
+            "generated": "li a0, 3"
+          },
+          {
+            "line": 14,
+            "type": "structural",
+            "target": "li a0, 3",
+            "generated": "lw s2, 300(t6)"
+          },
+          {
+            "line": 19,
+            "type": "structural",
+            "target": "srl t6, s2, 12",
+            "generated": "srl t7, s2, 12"
+          },
+          {
+            "line": 21,
+            "type": "structural",
+            "target": "move s2, t6",
+            "generated": "move s2, t7"
+          },
+          {
+            "line": 23,
+            "type": "structural",
+            "target": "addiu s3, s3, LO(D_16003B30)",
+            "generated": "move s1, zero"
+          },
+          {
+            "line": 24,
+            "type": "structural",
+            "target": "move s1, zero",
+            "generated": "addiu s3, s3, LO(D_16003B30)"
+          },
+          {
+            "line": 25,
+            "type": "structural",
+            "target": "andi t7, s2, 1",
+            "generated": "andi t8, s2, 1"
+          },
+          {
+            "line": 26,
+            "type": "structural",
+            "target": "beqz t7, L0",
+            "generated": "beqz t8, L0"
+          },
+          {
+            "line": 28,
+            "type": "structural",
+            "target": "sll t8, s1, 2",
+            "generated": "sll t9, s1, 2"
+          },
+          {
+            "line": 29,
+            "type": "structural",
+            "target": "addu t9, s3, t8",
+            "generated": "addu t0, t9, s3"
+          },
+          {
+            "line": 31,
+            "type": "structural",
+            "target": "lw a1, 0(t9)",
+            "generated": "lw a1, 0(t0)"
+          }
+        ],
+        "timestamp": "2026-08-09T15:08:49.205159+00:00"
+      },
+      {
+        "code": "void func_16000590(struct118 *arg0) {\n    s32 temp_s0;\n    s32 temp_s1;\n    u32 temp_s2;\n    u8 *temp_s3;\n    s32 temp_s4;\n    u8 *temp_s4_2;\n    s32 temp_v0;\n    register struct118 *temp_s5;\n\n    temp_s5 = arg0;\n    temp_s4 = 0;\n    temp_s2 = *(s32 *)((s32)temp_s5 + 0x12C);\n    func_160012B0(3, &D_160047A4);\n    func_16001044(10, 0, temp_s2);\n    temp_s2 >>= 12;\n    temp_s3 = (u8 *)D_16003B30;\n    temp_s0 = 0x2C;\n    temp_s1 = 0;\n    do {\n        if (temp_s2 & 1) {\n            func_160012B0(temp_s0, *(u8 **)(temp_s3 + (temp_s1 * 4)));\n            temp_s0 += 0x20;\n        }\n        temp_s1 += 1;\n        temp_s2 >>= 1;\n    } while (temp_s1 < 6);\n    temp_s1 = 0;\n    temp_s0 = 0xC3;\n    if (D_16003B28 == 1) {\n        temp_v0 = 0x4C;\n    } else {\n        temp_v0 = 0x6C;\n        temp_s4 = 0x10;\n    }\n    temp_s2 = temp_s1 + temp_s4;\n    temp_s4_2 = D_160047AC;\n    temp_s3 = (u8 *)temp_s5 + (temp_v0 * 4);\n    do {\n        func_160012B0(temp_s0, temp_s4_2);\n        func_16001044(temp_s0 + 2, 1, temp_s2);\n        func_16001044(temp_s0 + 5, 2, *(s32 *)(temp_s3 + 4));\n        temp_s1 += 1;\n        temp_s3 += 8;\n        temp_s0 += 0x20;\n        temp_s2 += 1;\n    } while (temp_s1 < 0x10);\n}",
+        "score": 0.3291,
+        "reason": "structural_diffs=53, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 1,
+            "type": "structural",
+            "target": "sw s5, 40(sp)",
+            "generated": "sw ra, 44(sp)"
+          },
+          {
+            "line": 2,
+            "type": "structural",
+            "target": "move s5, a0",
+            "generated": "sw s4, 40(sp)"
+          },
+          {
+            "line": 3,
+            "type": "structural",
+            "target": "sw ra, 44(sp)",
+            "generated": "sw s3, 36(sp)"
+          },
+          {
+            "line": 4,
+            "type": "structural",
+            "target": "sw s4, 36(sp)",
+            "generated": "sw s2, 32(sp)"
+          },
+          {
+            "line": 5,
+            "type": "structural",
+            "target": "sw s3, 32(sp)",
+            "generated": "sw s1, 28(sp)"
+          },
+          {
+            "line": 6,
+            "type": "structural",
+            "target": "sw s2, 28(sp)",
+            "generated": "sw s0, 24(sp)"
+          },
+          {
+            "line": 7,
+            "type": "structural",
+            "target": "sw s1, 24(sp)",
+            "generated": "sw a0, 48(sp)"
+          },
+          {
+            "line": 8,
+            "type": "structural",
+            "target": "sw s0, 20(sp)",
+            "generated": "lw t6, 48(sp)"
+          },
+          {
+            "line": 11,
+            "type": "structural",
+            "target": "lw s2, 300(s5)",
+            "generated": "addiu a1, a1, LO(D_160047A4)"
+          },
+          {
+            "line": 12,
+            "type": "structural",
+            "target": "addiu a1, a1, LO(D_160047A4)",
+            "generated": "li a0, 3"
+          },
+          {
+            "line": 14,
+            "type": "structural",
+            "target": "li a0, 3",
+            "generated": "lw s2, 300(t6)"
+          },
+          {
+            "line": 19,
+            "type": "structural",
+            "target": "srl t6, s2, 12",
+            "generated": "srl t7, s2, 12"
+          },
+          {
+            "line": 21,
+            "type": "structural",
+            "target": "move s2, t6",
+            "generated": "move s2, t7"
+          },
+          {
+            "line": 23,
+            "type": "structural",
+            "target": "addiu s3, s3, LO(D_16003B30)",
+            "generated": "move s1, zero"
+          },
+          {
+            "line": 24,
+            "type": "structural",
+            "target": "move s1, zero",
+            "generated": "addiu s3, s3, LO(D_16003B30)"
+          },
+          {
+            "line": 25,
+            "type": "structural",
+            "target": "andi t7, s2, 1",
+            "generated": "andi t8, s2, 1"
+          },
+          {
+            "line": 26,
+            "type": "structural",
+            "target": "beqz t7, L0",
+            "generated": "beqz t8, L0"
+          },
+          {
+            "line": 28,
+            "type": "structural",
+            "target": "sll t8, s1, 2",
+            "generated": "sll t9, s1, 2"
+          },
+          {
+            "line": 29,
+            "type": "structural",
+            "target": "addu t9, s3, t8",
+            "generated": "addu t0, t9, s3"
+          },
+          {
+            "line": 31,
+            "type": "structural",
+            "target": "lw a1, 0(t9)",
+            "generated": "lw a1, 0(t0)"
+          }
+        ],
+        "timestamp": "2026-08-09T15:08:58.971325+00:00"
+      },
+      {
+        "code": "void func_16000590(struct118 *arg0) {\n    struct118 *temp_s5;\n    s32 temp_s0;\n    s32 temp_s1;\n    u32 temp_s2;\n    u8 *temp_s3;\n    s32 temp_s4;\n    u8 *temp_s4_2;\n    s32 temp_v0;\n\n    temp_s5 = arg0;\n    temp_s4 = 0;\n    temp_s2 = *(s32 *)((s32)temp_s5 + 0x12C);\n    func_160012B0(3, &D_160047A4);\n    func_16001044(10, 0, temp_s2);\n    temp_s2 >>= 12;\n    temp_s3 = (u8 *)D_16003B30;\n    temp_s0 = 0x2C;\n    temp_s1 = 0;\n    do {\n        if (temp_s2 & 1) {\n            func_160012B0(temp_s0, *(u8 **)(temp_s3 + (temp_s1 * 4)));\n            temp_s0 += 0x20;\n        }\n        temp_s1 += 1;\n        temp_s2 >>= 1;\n    } while (temp_s1 < 6);\n    temp_s1 = 0;\n    temp_s0 = 0xC3;\n    if (D_16003B28 == 1) {\n        temp_v0 = 0x4C;\n    } else {\n        temp_v0 = 0x6C;\n        temp_s4 = 0x10;\n    }\n    temp_s2 = temp_s1 + temp_s4;\n    temp_s4_2 = D_160047AC;\n    temp_s3 = (u8 *)temp_s5 + (temp_v0 * 4);\n    do {\n        func_160012B0(temp_s0, temp_s4_2);\n        func_16001044(temp_s0 + 2, 1, temp_s2);\n        func_16001044(temp_s0 + 5, 2, *(s32 *)(temp_s3 + 4));\n        temp_s1 += 1;\n        temp_s3 += 8;\n        temp_s0 += 0x20;\n        temp_s2 += 1;\n    } while (temp_s1 < 0x10);\n}",
+        "score": 0.3291,
+        "reason": "structural_diffs=53, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 1,
+            "type": "structural",
+            "target": "sw s5, 40(sp)",
+            "generated": "sw ra, 44(sp)"
+          },
+          {
+            "line": 2,
+            "type": "structural",
+            "target": "move s5, a0",
+            "generated": "sw s4, 40(sp)"
+          },
+          {
+            "line": 3,
+            "type": "structural",
+            "target": "sw ra, 44(sp)",
+            "generated": "sw s3, 36(sp)"
+          },
+          {
+            "line": 4,
+            "type": "structural",
+            "target": "sw s4, 36(sp)",
+            "generated": "sw s2, 32(sp)"
+          },
+          {
+            "line": 5,
+            "type": "structural",
+            "target": "sw s3, 32(sp)",
+            "generated": "sw s1, 28(sp)"
+          },
+          {
+            "line": 6,
+            "type": "structural",
+            "target": "sw s2, 28(sp)",
+            "generated": "sw s0, 24(sp)"
+          },
+          {
+            "line": 7,
+            "type": "structural",
+            "target": "sw s1, 24(sp)",
+            "generated": "sw a0, 48(sp)"
+          },
+          {
+            "line": 8,
+            "type": "structural",
+            "target": "sw s0, 20(sp)",
+            "generated": "lw t6, 48(sp)"
+          },
+          {
+            "line": 11,
+            "type": "structural",
+            "target": "lw s2, 300(s5)",
+            "generated": "addiu a1, a1, LO(D_160047A4)"
+          },
+          {
+            "line": 12,
+            "type": "structural",
+            "target": "addiu a1, a1, LO(D_160047A4)",
+            "generated": "li a0, 3"
+          },
+          {
+            "line": 14,
+            "type": "structural",
+            "target": "li a0, 3",
+            "generated": "lw s2, 300(t6)"
+          },
+          {
+            "line": 19,
+            "type": "structural",
+            "target": "srl t6, s2, 12",
+            "generated": "srl t7, s2, 12"
+          },
+          {
+            "line": 21,
+            "type": "structural",
+            "target": "move s2, t6",
+            "generated": "move s2, t7"
+          },
+          {
+            "line": 23,
+            "type": "structural",
+            "target": "addiu s3, s3, LO(D_16003B30)",
+            "generated": "move s1, zero"
+          },
+          {
+            "line": 24,
+            "type": "structural",
+            "target": "move s1, zero",
+            "generated": "addiu s3, s3, LO(D_16003B30)"
+          },
+          {
+            "line": 25,
+            "type": "structural",
+            "target": "andi t7, s2, 1",
+            "generated": "andi t8, s2, 1"
+          },
+          {
+            "line": 26,
+            "type": "structural",
+            "target": "beqz t7, L0",
+            "generated": "beqz t8, L0"
+          },
+          {
+            "line": 28,
+            "type": "structural",
+            "target": "sll t8, s1, 2",
+            "generated": "sll t9, s1, 2"
+          },
+          {
+            "line": 29,
+            "type": "structural",
+            "target": "addu t9, s3, t8",
+            "generated": "addu t0, t9, s3"
+          },
+          {
+            "line": 31,
+            "type": "structural",
+            "target": "lw a1, 0(t9)",
+            "generated": "lw a1, 0(t0)"
+          }
+        ],
+        "timestamp": "2026-08-09T15:09:18.408409+00:00"
+      },
+      {
+        "code": "void func_16000590(struct118 *arg0) {\n    volatile struct118 *temp_s5;\n    s32 temp_s0;\n    s32 temp_s1;\n    u32 temp_s2;\n    u8 *temp_s3;\n    s32 temp_s4;\n    u8 *temp_s4_2;\n    s32 temp_v0;\n\n    temp_s5 = arg0;\n    temp_s4 = 0;\n    temp_s2 = *(s32 *)((s32)temp_s5 + 0x12C);\n    func_160012B0(3, &D_160047A4);\n    func_16001044(10, 0, temp_s2);\n    temp_s2 >>= 12;\n    temp_s3 = (u8 *)D_16003B30;\n    temp_s0 = 0x2C;\n    temp_s1 = 0;\n    do {\n        if (temp_s2 & 1) {\n            func_160012B0(temp_s0, *(u8 **)(temp_s3 + (temp_s1 * 4)));\n            temp_s0 += 0x20;\n        }\n        temp_s1 += 1;\n        temp_s2 >>= 1;\n    } while (temp_s1 < 6);\n    temp_s1 = 0;\n    temp_s0 = 0xC3;\n    if (D_16003B28 == 1) {\n        temp_v0 = 0x4C;\n    } else {\n        temp_v0 = 0x6C;\n        temp_s4 = 0x10;\n    }\n    temp_s2 = temp_s1 + temp_s4;\n    temp_s4_2 = D_160047AC;\n    temp_s3 = (u8 *)temp_s5 + (temp_v0 * 4);\n    do {\n        func_160012B0(temp_s0, temp_s4_2);\n        func_16001044(temp_s0 + 2, 1, temp_s2);\n        func_16001044(temp_s0 + 5, 2, *(s32 *)(temp_s3 + 4));\n        temp_s1 += 1;\n        temp_s3 += 8;\n        temp_s0 += 0x20;\n        temp_s2 += 1;\n    } while (temp_s1 < 0x10);\n}",
+        "score": 0.3291,
+        "reason": "structural_diffs=53, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 1,
+            "type": "structural",
+            "target": "sw s5, 40(sp)",
+            "generated": "sw ra, 44(sp)"
+          },
+          {
+            "line": 2,
+            "type": "structural",
+            "target": "move s5, a0",
+            "generated": "sw s4, 40(sp)"
+          },
+          {
+            "line": 3,
+            "type": "structural",
+            "target": "sw ra, 44(sp)",
+            "generated": "sw s3, 36(sp)"
+          },
+          {
+            "line": 4,
+            "type": "structural",
+            "target": "sw s4, 36(sp)",
+            "generated": "sw s2, 32(sp)"
+          },
+          {
+            "line": 5,
+            "type": "structural",
+            "target": "sw s3, 32(sp)",
+            "generated": "sw s1, 28(sp)"
+          },
+          {
+            "line": 6,
+            "type": "structural",
+            "target": "sw s2, 28(sp)",
+            "generated": "sw s0, 24(sp)"
+          },
+          {
+            "line": 7,
+            "type": "structural",
+            "target": "sw s1, 24(sp)",
+            "generated": "sw a0, 48(sp)"
+          },
+          {
+            "line": 8,
+            "type": "structural",
+            "target": "sw s0, 20(sp)",
+            "generated": "lw t6, 48(sp)"
+          },
+          {
+            "line": 11,
+            "type": "structural",
+            "target": "lw s2, 300(s5)",
+            "generated": "addiu a1, a1, LO(D_160047A4)"
+          },
+          {
+            "line": 12,
+            "type": "structural",
+            "target": "addiu a1, a1, LO(D_160047A4)",
+            "generated": "li a0, 3"
+          },
+          {
+            "line": 14,
+            "type": "structural",
+            "target": "li a0, 3",
+            "generated": "lw s2, 300(t6)"
+          },
+          {
+            "line": 19,
+            "type": "structural",
+            "target": "srl t6, s2, 12",
+            "generated": "srl t7, s2, 12"
+          },
+          {
+            "line": 21,
+            "type": "structural",
+            "target": "move s2, t6",
+            "generated": "move s2, t7"
+          },
+          {
+            "line": 23,
+            "type": "structural",
+            "target": "addiu s3, s3, LO(D_16003B30)",
+            "generated": "move s1, zero"
+          },
+          {
+            "line": 24,
+            "type": "structural",
+            "target": "move s1, zero",
+            "generated": "addiu s3, s3, LO(D_16003B30)"
+          },
+          {
+            "line": 25,
+            "type": "structural",
+            "target": "andi t7, s2, 1",
+            "generated": "andi t8, s2, 1"
+          },
+          {
+            "line": 26,
+            "type": "structural",
+            "target": "beqz t7, L0",
+            "generated": "beqz t8, L0"
+          },
+          {
+            "line": 28,
+            "type": "structural",
+            "target": "sll t8, s1, 2",
+            "generated": "sll t9, s1, 2"
+          },
+          {
+            "line": 29,
+            "type": "structural",
+            "target": "addu t9, s3, t8",
+            "generated": "addu t0, t9, s3"
+          },
+          {
+            "line": 31,
+            "type": "structural",
+            "target": "lw a1, 0(t9)",
+            "generated": "lw a1, 0(t0)"
+          }
+        ],
+        "timestamp": "2026-08-09T15:09:32.910216+00:00"
+      },
+      {
+        "code": "void func_16000590(register struct118 *arg0) {\n    s32 temp_s0;\n    s32 temp_s1;\n    u32 temp_s2;\n    u8 *temp_s3;\n    s32 temp_s4;\n    u8 *temp_s4_2;\n    s32 temp_v0;\n\n    temp_s4 = 0;\n    temp_s2 = *(s32 *)((s32)arg0 + 0x12C);\n    func_160012B0(3, &D_160047A4);\n    func_16001044(10, 0, temp_s2);\n    temp_s2 >>= 12;\n    temp_s3 = (u8 *)D_16003B30;\n    temp_s0 = 0x2C;\n    temp_s1 = 0;\n    do {\n        if (temp_s2 & 1) {\n            func_160012B0(temp_s0, *(u8 **)(temp_s3 + (temp_s1 * 4)));\n            temp_s0 += 0x20;\n        }\n        temp_s1 += 1;\n        temp_s2 >>= 1;\n    } while (temp_s1 < 6);\n    temp_s1 = 0;\n    temp_s0 = 0xC3;\n    if (D_16003B28 == 1) {\n        temp_v0 = 0x4C;\n    } else {\n        temp_v0 = 0x6C;\n        temp_s4 = 0x10;\n    }\n    temp_s2 = temp_s1 + temp_s4;\n    temp_s4_2 = D_160047AC;\n    temp_s3 = (u8 *)arg0 + (temp_v0 * 4);\n    do {\n        func_160012B0(temp_s0, temp_s4_2);\n        func_16001044(temp_s0 + 2, 1, temp_s2);\n        func_16001044(temp_s0 + 5, 2, *(s32 *)(temp_s3 + 4));\n        temp_s1 += 1;\n        temp_s3 += 8;\n        temp_s0 += 0x20;\n        temp_s2 += 1;\n    } while (temp_s1 < 0x10);\n}",
+        "score": 0.3291,
+        "reason": "structural_diffs=53, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 1,
+            "type": "structural",
+            "target": "sw s5, 40(sp)",
+            "generated": "sw ra, 44(sp)"
+          },
+          {
+            "line": 2,
+            "type": "structural",
+            "target": "move s5, a0",
+            "generated": "sw s4, 40(sp)"
+          },
+          {
+            "line": 3,
+            "type": "structural",
+            "target": "sw ra, 44(sp)",
+            "generated": "sw s3, 36(sp)"
+          },
+          {
+            "line": 4,
+            "type": "structural",
+            "target": "sw s4, 36(sp)",
+            "generated": "sw s2, 32(sp)"
+          },
+          {
+            "line": 5,
+            "type": "structural",
+            "target": "sw s3, 32(sp)",
+            "generated": "sw s1, 28(sp)"
+          },
+          {
+            "line": 6,
+            "type": "structural",
+            "target": "sw s2, 28(sp)",
+            "generated": "sw s0, 24(sp)"
+          },
+          {
+            "line": 7,
+            "type": "structural",
+            "target": "sw s1, 24(sp)",
+            "generated": "sw a0, 48(sp)"
+          },
+          {
+            "line": 8,
+            "type": "structural",
+            "target": "sw s0, 20(sp)",
+            "generated": "lw t6, 48(sp)"
+          },
+          {
+            "line": 11,
+            "type": "structural",
+            "target": "lw s2, 300(s5)",
+            "generated": "addiu a1, a1, LO(D_160047A4)"
+          },
+          {
+            "line": 12,
+            "type": "structural",
+            "target": "addiu a1, a1, LO(D_160047A4)",
+            "generated": "li a0, 3"
+          },
+          {
+            "line": 14,
+            "type": "structural",
+            "target": "li a0, 3",
+            "generated": "lw s2, 300(t6)"
+          },
+          {
+            "line": 19,
+            "type": "structural",
+            "target": "srl t6, s2, 12",
+            "generated": "srl t7, s2, 12"
+          },
+          {
+            "line": 21,
+            "type": "structural",
+            "target": "move s2, t6",
+            "generated": "move s2, t7"
+          },
+          {
+            "line": 23,
+            "type": "structural",
+            "target": "addiu s3, s3, LO(D_16003B30)",
+            "generated": "move s1, zero"
+          },
+          {
+            "line": 24,
+            "type": "structural",
+            "target": "move s1, zero",
+            "generated": "addiu s3, s3, LO(D_16003B30)"
+          },
+          {
+            "line": 25,
+            "type": "structural",
+            "target": "andi t7, s2, 1",
+            "generated": "andi t8, s2, 1"
+          },
+          {
+            "line": 26,
+            "type": "structural",
+            "target": "beqz t7, L0",
+            "generated": "beqz t8, L0"
+          },
+          {
+            "line": 28,
+            "type": "structural",
+            "target": "sll t8, s1, 2",
+            "generated": "sll t9, s1, 2"
+          },
+          {
+            "line": 29,
+            "type": "structural",
+            "target": "addu t9, s3, t8",
+            "generated": "addu t0, t9, s3"
+          },
+          {
+            "line": 31,
+            "type": "structural",
+            "target": "lw a1, 0(t9)",
+            "generated": "lw a1, 0(t0)"
+          }
+        ],
+        "timestamp": "2026-08-09T15:09:45.627119+00:00"
+      },
+      {
+        "code": "void func_16000590(register struct118 *arg0) {\n    s32 temp_s5;\n    s32 temp_s0;\n    s32 temp_s1;\n    u32 temp_s2;\n    u8 *temp_s3;\n    s32 temp_s4;\n    u8 *temp_s4_2;\n    s32 temp_v0;\n\n    temp_s5 = (s32)arg0;\n    temp_s4 = 0;\n    temp_s2 = *(s32 *)(temp_s5 + 0x12C);\n    func_160012B0(3, &D_160047A4);\n    func_16001044(10, 0, temp_s2);\n    temp_s2 >>= 12;\n    temp_s3 = (u8 *)D_16003B30;\n    temp_s0 = 0x2C;\n    temp_s1 = 0;\n    do {\n        if (temp_s2 & 1) {\n            func_160012B0(temp_s0, *(u8 **)(temp_s3 + (temp_s1 * 4)));\n            temp_s0 += 0x20;\n        }\n        temp_s1 += 1;\n        temp_s2 >>= 1;\n    } while (temp_s1 < 6);\n    temp_s1 = 0;\n    temp_s0 = 0xC3;\n    if (D_16003B28 == 1) {\n        temp_v0 = 0x4C;\n    } else {\n        temp_v0 = 0x6C;\n        temp_s4 = 0x10;\n    }\n    temp_s2 = temp_s1 + temp_s4;\n    temp_s4_2 = D_160047AC;\n    temp_s3 = (u8 *)temp_s5 + (temp_v0 * 4);\n    do {\n        func_160012B0(temp_s0, temp_s4_2);\n        func_16001044(temp_s0 + 2, 1, temp_s2);\n        func_16001044(temp_s0 + 5, 2, *(s32 *)(temp_s3 + 4));\n        temp_s1 += 1;\n        temp_s3 += 8;\n        temp_s0 += 0x20;\n        temp_s2 += 1;\n    } while (temp_s1 < 0x10);\n}",
+        "score": 0.3291,
+        "reason": "structural_diffs=53, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 1,
+            "type": "structural",
+            "target": "sw s5, 40(sp)",
+            "generated": "sw ra, 44(sp)"
+          },
+          {
+            "line": 2,
+            "type": "structural",
+            "target": "move s5, a0",
+            "generated": "sw s4, 40(sp)"
+          },
+          {
+            "line": 3,
+            "type": "structural",
+            "target": "sw ra, 44(sp)",
+            "generated": "sw s3, 36(sp)"
+          },
+          {
+            "line": 4,
+            "type": "structural",
+            "target": "sw s4, 36(sp)",
+            "generated": "sw s2, 32(sp)"
+          },
+          {
+            "line": 5,
+            "type": "structural",
+            "target": "sw s3, 32(sp)",
+            "generated": "sw s1, 28(sp)"
+          },
+          {
+            "line": 6,
+            "type": "structural",
+            "target": "sw s2, 28(sp)",
+            "generated": "sw s0, 24(sp)"
+          },
+          {
+            "line": 7,
+            "type": "structural",
+            "target": "sw s1, 24(sp)",
+            "generated": "sw a0, 48(sp)"
+          },
+          {
+            "line": 8,
+            "type": "structural",
+            "target": "sw s0, 20(sp)",
+            "generated": "lw t6, 48(sp)"
+          },
+          {
+            "line": 11,
+            "type": "structural",
+            "target": "lw s2, 300(s5)",
+            "generated": "addiu a1, a1, LO(D_160047A4)"
+          },
+          {
+            "line": 12,
+            "type": "structural",
+            "target": "addiu a1, a1, LO(D_160047A4)",
+            "generated": "li a0, 3"
+          },
+          {
+            "line": 14,
+            "type": "structural",
+            "target": "li a0, 3",
+            "generated": "lw s2, 300(t6)"
+          },
+          {
+            "line": 19,
+            "type": "structural",
+            "target": "srl t6, s2, 12",
+            "generated": "srl t7, s2, 12"
+          },
+          {
+            "line": 21,
+            "type": "structural",
+            "target": "move s2, t6",
+            "generated": "move s2, t7"
+          },
+          {
+            "line": 23,
+            "type": "structural",
+            "target": "addiu s3, s3, LO(D_16003B30)",
+            "generated": "move s1, zero"
+          },
+          {
+            "line": 24,
+            "type": "structural",
+            "target": "move s1, zero",
+            "generated": "addiu s3, s3, LO(D_16003B30)"
+          },
+          {
+            "line": 25,
+            "type": "structural",
+            "target": "andi t7, s2, 1",
+            "generated": "andi t8, s2, 1"
+          },
+          {
+            "line": 26,
+            "type": "structural",
+            "target": "beqz t7, L0",
+            "generated": "beqz t8, L0"
+          },
+          {
+            "line": 28,
+            "type": "structural",
+            "target": "sll t8, s1, 2",
+            "generated": "sll t9, s1, 2"
+          },
+          {
+            "line": 29,
+            "type": "structural",
+            "target": "addu t9, s3, t8",
+            "generated": "addu t0, t9, s3"
+          },
+          {
+            "line": 31,
+            "type": "structural",
+            "target": "lw a1, 0(t9)",
+            "generated": "lw a1, 0(t0)"
+          }
+        ],
+        "timestamp": "2026-08-09T15:10:36.458435+00:00"
+      }
+    ]
   },
   {
     "function": "func_1506160C",
