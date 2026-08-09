@@ -822,7 +822,75 @@ s32 func_151DB97C(StructB97C *arg0, s32 arg1)
     return 1;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_2062D0/func_151DBAA8.s")
+struct three151DBAA8 {
+    s32 a;
+    s32 b;
+    s32 c;
+};
+
+struct struct218XXX151DBAA8 {
+    s16 unk0;
+    s16 unk2;
+    s16 unk4;
+    s16 unk6;
+    struct three151DBAA8 unk8;
+    f32 unk14;
+    f32 unk18;
+    f32 unk1C;
+    f32 unk20;
+    f32 unk24;
+    f32 unk28;
+    s16 unk2C;
+    s16 unk2E;
+    s16 unk30;
+    s16 unk32;
+    s16 unk34;
+    s16 unk36;
+    s16 unk38;
+    s16 unk3A;
+    s8 unk3C;
+    u8 pad3D[0x3];
+    f32 unk40;
+    s16 unk44;
+    s16 unk46;
+    s32 unk48;
+};
+
+extern void func_15153F18(struct struct218XXX151DBAA8 *arg0,
+                          struct three151DBAA8 *arg1, s32 arg2, u8 arg3,
+                          s32 arg4);
+
+void func_151DBAA8(struct00 *arg0, s32 arg1, u8 arg2, u8 arg3, s32 arg4) {
+    struct struct218XXX151DBAA8 tmp;
+    struct three151DBAA8 *tmpVec;
+
+    tmpVec = &tmp.unk8;
+    *tmpVec = *(struct three151DBAA8 *)arg0;
+    tmp.unk2C = arg1;
+    tmp.unk2 = 0xFF;
+    tmp.unk4 = -0x40;
+    tmp.unk6 = 0x2E;
+    tmp.unk2E = 0;
+    tmp.unk0 = 0;
+    tmp.unk30 = 3;
+    tmp.unk32 = 2;
+    tmp.unk34 = 0x1E;
+    tmp.unk36 = 0x1E;
+    tmp.unk38 = 0x9B;
+    tmp.unk14 = 5.5f;
+    tmp.unk18 = D_800AB4C0;
+    tmp.unk1C = D_800AB4C4;
+    tmp.unk20 = D_800AB4C8;
+    tmp.unk24 = 10.0f;
+    tmp.unk28 = D_800AB4CC;
+    tmp.unk3A = 0x64;
+    tmp.unk44 = 0x10;
+    tmp.unk46 = 0xF;
+    tmp.unk48 = 0;
+    tmp.unk40 = 0.5f;
+    tmp.unk3C = arg2;
+    func_15153F18(&tmp, tmpVec, 0, arg3, arg4);
+}
 
 // typedef struct {
 //     s16 unk0; // sp24
