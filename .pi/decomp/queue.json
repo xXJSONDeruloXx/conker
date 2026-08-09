@@ -42417,8 +42417,8 @@
       "branchy"
     ],
     "attempts": 9,
-    "lastScore": 0.4211,
-    "status": "pending",
+    "lastScore": 1.0,
+    "status": "matched",
     "history": [
       {
         "code": "extern s32 D_80090298[];\n\nvoid func_151ACBD4(struct179 *, s32);\n\nvoid func_15010110(void) {\n    s32 *temp_s0;\n    s32 *temp_s1;\n    struct179 tmp;\n    s32 i;\n\n    temp_s0 = D_800B0E00;\n    temp_s1 = D_80090298;\n    tmp.unk20 = 0;\n    func_15195AA8(temp_s0[0], temp_s1[0x14], 0, -1, 0, 0, 0, -8);\n    tmp.unk20 = 0;\n    func_15195AA8(temp_s0[1], temp_s1[0x14], 0, -1, 0, 1, 0, -8);\n    temp_s1 = (s32 *)D_800963A0;\n    for (i = 0; i < 6; i++) {\n        tmp.unk4 = *(struct180 *)temp_s1;\n        tmp.unk0 = i + 1;\n        tmp.unk1C = fabsf(tmp.unk4.unk4 - tmp.unk4.unk14);\n        func_151ACBD4(&tmp, 0);\n        temp_s1 += 6;\n    }\n}",
