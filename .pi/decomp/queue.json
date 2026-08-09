@@ -20528,9 +20528,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 4,
-    "lastScore": 0.47435897435897434,
-    "status": "skipped",
+    "attempts": 8,
+    "lastScore": 1.0,
+    "status": "matched",
     "history": [
       {
         "code": "void func_15070C40(s32 arg0) {\n    struct17 tmp;\n    struct127 *temp_a1;\n    struct127 *phi_a0;\n    u8 temp_a3;\n\n    temp_a3 = arg0;\n    temp_a1 = D_800D154C;\n    phi_a0 = temp_a1;\n    tmp.unk0 = temp_a1->x_position;\n    tmp.unk4 = temp_a1->y_position;\n    tmp.unk8 = temp_a1->z_position;\n    if (temp_a1->unk124 != 0) {\n        phi_a0 = &D_800CC2D0[temp_a1->unk124 - 1];\n    }\n    func_15103E40(phi_a0, temp_a1, &tmp, temp_a3, 0, 0xFF, 0);\n}",
