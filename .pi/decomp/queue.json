@@ -54277,8 +54277,8 @@
       "branchy"
     ],
     "attempts": 2,
-    "lastScore": 0.4954954954954955,
-    "status": "pending",
+    "lastScore": 1.0,
+    "status": "matched",
     "history": [
       {
         "code": "void func_151645C4(u8 arg0) {\n    D_800DCDD0 = arg0;\n    if (arg0 != 0) {\n        switch (D_800BE9F0) {\n        case 0xB:\n            func_1511172C(4);\n            break;\n        case 6:\n            func_1515F170(0xA, 1);\n            func_1511172C(4);\n            /* fallthrough */\n        case 0x39:\n            ((u8 *)&D_800DCD20)[0] = D_800886F0[0];\n            ((u8 *)&D_800DCD20)[1] = D_800886F0[1];\n            ((u8 *)&D_800DCD20)[2] = D_800886F0[2];\n            D_800B0DF0->unk5 = D_800886F4[0];\n            D_800B0DF0->unk6 = D_800886F4[1];\n            D_800B0DF0->unk7 = D_800886F4[2];\n            break;\n        case 7:\n        case 0xC:\n            break;\n        }\n    } else {\n        switch (D_800BE9F0) {\n        case 6:\n            func_1515F170(0xA, 0);\n            /* fallthrough */\n        case 7:\n        case 0xC:\n        case 0x39:\n            func_1511172C(6);\n            ((u8 *)&D_800DCD20)[0] = D_800886F8[0];\n            ((u8 *)&D_800DCD20)[1] = D_800886F8[1];\n            ((u8 *)&D_800DCD20)[2] = D_800886F8[2];\n            D_800B0DF0->unk5 = 0xFF;\n            D_800B0DF0->unk6 = 0xFF;\n            D_800B0DF0->unk7 = 0xFF;\n            break;\n        case 0xB:\n            func_1511172C(6);\n            break;\n        case 0x29:\n            func_1511172C(1);\n            break;\n        }\n    }\n}",
