@@ -43873,9 +43873,18 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "void _n_collectPVoices(void)\n{\n    N_PVoice *pvoice;\n    ALLink *element;\n    ALLink *ln;\n    ALLink *to;\n    ALLink *element2;\n\n    while ((pvoice = (N_PVoice *)n_syn->pLameList.next) != 0) {\n        element = (ALLink *)pvoice;\n        if (element->next)\n            element->next->prev = element->prev;\n        if (element->prev)\n            element->prev->next = element->next;\n\n        ln = (ALLink *)pvoice;\n        to = &n_syn->pFreeList;\n        ln->next = to->next;\n        ln->prev = to;\n        if (to->next)\n            to->next->prev = ln;\n        to->next = ln;\n\n        element2 = (ALLink *)&pvoice->vvoice;\n        if (element2->next)\n            element2->next->prev = element2->prev;\n        if (element2->prev)\n            element2->prev->next = element2->next;\n\n        pvoice->vvoice = 0;\n        *(s32 *)((u8 *)pvoice + 0xC) = 0;\n    }\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-09T18:41:59.498244+00:00"
+      }
+    ]
   },
   {
     "function": "func_151D9EB0",
