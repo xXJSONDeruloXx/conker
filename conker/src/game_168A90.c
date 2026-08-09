@@ -112,7 +112,47 @@ s32 func_1513BAD4(s32 arg0, s32 arg1) {
     return 0;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_168A90/func_1513BAE8.s")
+struct Obj1513BAE8 {
+    u8 pad0[0x50];
+    s32 unk50;
+};
+struct102 *func_1513BAE8(void) {
+    struct102 *temp_v0;
+    u8 sp38[0x3C];
+    f32 sp24[5];
+
+    sp38[1] = 2;
+    sp38[2] = 5;
+    *(s16 *)&sp38[4] = 0x12C;
+    *(s32 *)&sp38[0x30] = 9;
+    sp24[0] = 0.0f;
+    sp24[1] = 0.0f;
+    sp24[3] = 0.0f;
+    sp24[4] = 0.0f;
+    sp24[2] = 0.0f;
+    sp38[0] = 0;
+    *(s32 *)&sp38[0x34] = 0x1AE;
+    *(s32 *)&sp38[8] = 1;
+    *(s32 *)&sp38[0xC] = 0x220205;
+    *(s32 *)&sp38[0x10] = 0x40600;
+    sp38[0x24] = 0;
+    sp38[0x25] = 0;
+    *(s32 *)&sp38[0x14] = 1;
+    *(s32 *)&sp38[0x18] = 0x36;
+    *(s32 *)&sp38[0x1C] = 0x80;
+    *(s32 *)&sp38[0x20] = 0x20;
+    sp38[0x38] = 3;
+
+    temp_v0 = func_1513B5E0(sp38, 1, 0x14, 0xFF, 1);
+    if (temp_v0 != NULL) {
+        if (*(s32 *)((u8 *)temp_v0 + 0x50) != 0x1180) {
+            func_1516972C(temp_v0);
+        } else {
+            memcpy((u8 *)temp_v0 + ((struct Obj1513BAE8 *)temp_v0)->unk50 + 0xF8, sp24, 0x14);
+        }
+    }
+    return temp_v0;
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/game_168A90/func_1513BBFC.s")
 s32 func_1513BEB0(struct Obj1513BEB0 *arg0) {
     f32 *v0;
