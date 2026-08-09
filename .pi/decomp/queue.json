@@ -50263,9 +50263,18 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "void func_1000B3D4(struct151 *arg0, struct151 *arg1) {\n    s32 i;\n    s32 limit;\n    struct151 *var_s2;\n    struct151 **slot;\n    struct151 *temp_v0;\n    struct151 *temp_a0;\n\n    var_s2 = NULL;\n    i = 0;\n    limit = 3;\n    if ((&arg1)[0] != NULL) {\n        temp_v0 = (struct151 *)(&arg1)[0]->unk60;\n        if ((temp_v0 != NULL) && (arg0 != temp_v0)) {\n            if (temp_v0->unk4 == arg0->unk4) {\n                arg0->unk4 = -1;\n                return;\n            }\n            temp_v0->unk4 = -1;\n        }\n        (&arg1)[0]->unk60 = (struct00 *)arg0;\n        return;\n    }\n\n    do {\n        if (var_s2 == NULL) {\n            slot = &D_800417B0[i];\n            temp_v0 = *slot;\n            if ((temp_v0 == NULL) || ((temp_v0->unk4 <= 0) && (temp_v0->unk60 == NULL))) {\n                temp_v0 = (struct151 *)func_1000B2F4(0);\n                var_s2 = temp_v0;\n                if (temp_v0 != NULL) {\n                    temp_v0->unk0 = i;\n                    temp_v0->unk60 = (struct00 *)arg0;\n                    *slot = temp_v0;\n                    goto block_20;\n                } else {\n                    arg0->unk4 = -1;\n                    return;\n                }\n            }\n        }\n        if (var_s2 == NULL) {\n            slot = &D_800417B0[i];\n            temp_v0 = *slot;\n            if (temp_v0 != NULL) {\n                temp_a0 = (struct151 *)temp_v0->unk60;\n                if ((temp_a0 != NULL) && (temp_a0->unk4 == 0)) {\n                    var_s2 = (struct151 *)-1;\n                    func_1000B294(temp_a0);\n                    ((struct151 *)(*slot)->unk60)->unk4 = -1;\n                    ((struct151 *)(*slot)->unk60)->unk0 = -1;\n                    (*slot)->unk60 = (struct00 *)arg0;\n                }\n            }\n        }\nblock_20:\n        i++;\n    } while (i != limit);\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-09T16:44:29.513730+00:00"
+      }
+    ]
   },
   {
     "function": "func_10010FFC",
