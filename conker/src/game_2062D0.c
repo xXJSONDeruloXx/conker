@@ -435,7 +435,19 @@ s32 func_151D93F4(void *arg0, void *arg1) {
     return res;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_2062D0/func_151D9450.s")
+s32 func_151D9450(void *arg0p, void *arg1) {
+    struct Sub151D9450 *p;
+
+    p = (struct Sub151D9450 *)((u8 *)arg0p + 0xA8);
+    if (((u8 *)arg0p)[0xC1] & 1) {
+        return 1;
+    }
+    p->unk4 = p->unk4 + p->unk6 * D_800BE9E4;
+    p->unk5 = p->unk5 + p->unk7 * D_800BE9E4;
+    *(f32 *)((u8 *)arg0p + 0x38) = p->unk8 * func_151423D8((u8)(p->unk4 - 0x40)) + p->unk0;
+    *(f32 *)((u8 *)arg0p + 0x3C) = p->unkC * func_151423D8((u8)(p->unk5 - 0x40)) + p->unk0;
+    return 1;
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/game_2062D0/func_151D9534.s")
 
 u8 func_151D97A8(void) {
