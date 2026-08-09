@@ -57295,9 +57295,18 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "u8 __n_alCSeqGetTrackEvent(ALCSeq *seq, s32 track, N_ALEvent *event, s32 arg3) {\n    u32 backup;\n    u8 status;\n    u8 firstByte;\n    u8 loopCount;\n    u8 *ptr;\n    u8 c;\n    u32 flag;\n\n    status = __getTrackByte(seq, track);\n    if (status == AL_MIDI_Meta) {\n        c = __getTrackByte(seq, track);\n        if (c == AL_MIDI_META_TEMPO) {\n            event->type = AL_TEMPO_EVT;\n            event->msg.tempo.status = status;\n            event->msg.tempo.type = c;\n            event->msg.tempo.byte1 = __getTrackByte(seq, track);\n            event->msg.tempo.byte2 = __getTrackByte(seq, track);\n            event->msg.tempo.byte3 = __getTrackByte(seq, track);\n            seq->lastStatus[track] = 0;\n        } else if (c == AL_MIDI_META_EOT) {\n            flag = 1 << track;\n            seq->validTracks ^= flag;\n            if (seq->validTracks != 0) {\n                event->type = AL_CSP_LOOPSTART;\n            } else {\n                event->type = AL_SEQ_END_EVT;\n            }\n        } else if (c == AL_CMIDI_LOOPSTART_CODE) {\n            status = __getTrackByte(seq, track);\n            event->msg.midi.duration = status << 8;\n            status = __getTrackByte(seq, track);\n            event->msg.midi.duration += status;\n            seq->lastStatus[track] = 0;\n            event->type = AL_CSP_LOOPEND;\n        } else if (c == AL_CMIDI_LOOPEND_CODE) {\n            ptr = seq->curLoc[track];\n            firstByte = *ptr++;\n            loopCount = *ptr;\n            if (loopCount == 0 || arg3 == 0) {\n                *ptr = firstByte;\n                seq->curLoc[track] = ptr + 5;\n            } else {\n                if (loopCount != 0xFF) {\n                    *ptr = loopCount - 1;\n                }\n                ptr++;\n                backup = *ptr++ << 24;\n                backup += *ptr++ << 16;\n                backup += *ptr++ << 8;\n                backup += *ptr++;\n                seq->curLoc[track] = ptr - backup;\n            }\n            seq->lastStatus[track] = 0;\n            event->type = AL_CSP_NOTEOFF_EVT;\n        }\n    } else {\n        event->type = AL_SEQ_MIDI_EVT;\n        if (status & 0x80) {\n            event->msg.midi.status = (status & 0xF0) | track;\n            event->msg.midi.byte1 = __getTrackByte(seq, track);\n            seq->lastStatus[track] = event->msg.midi.status;\n        } else {\n            event->msg.midi.status = seq->lastStatus[track];\n            event->msg.midi.byte1 = status;\n        }\n        if ((event->msg.midi.status & 0xF0) != AL_MIDI_ProgramChange &&\n            (event->msg.midi.status & 0xF0) != AL_MIDI_ChannelPressure) {\n            event->msg.midi.byte2 = __getTrackByte(seq, track);\n            if ((event->msg.midi.status & 0xF0) == AL_MIDI_NoteOn) {\n                event->msg.midi.duration = __readVarLen(seq, track);\n            }\n        } else {\n            event->msg.midi.byte2 = 0;\n        }\n    }\n    return 1;\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-09T19:18:34.464464+00:00"
+      }
+    ]
   },
   {
     "function": "func_10001194",
