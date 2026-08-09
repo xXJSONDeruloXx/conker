@@ -52331,9 +52331,25 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 2,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "#include <ultra64.h>\n\n#include \"functions.h\"\n#include \"variables.h\"\n\ntypedef struct Node1509 {\n    u8 pad0[0x18];\n    struct Node1509 *next;\n    struct Node1509 *prev;\n} Node1509;\n\nextern u8 D_800D2E69;\nextern void func_10004074();\nstruct249 *func_1509B704(s16 arg0);\nvoid func_1509B810(Node1509 *arg0);\ns32 func_1509B8FC(s16 arg0);\n\ns32 func_1509B5AC(s32 arg0, s32 arg1) {\n    register struct249 *node;\n\n    node = func_1509B704((s16)arg0);\n    if ((arg1 == 0) && (*(u8 *)((arg0 >> 3) + (s32)D_800D2E4C) & (1 << (arg0 & 7)))) {\n        return 0;\n    }\n\n    if (node == 0) {\n        node = (struct249 *)func_1509B8FC((s16)arg0);\n        func_1509B810((Node1509 *)node);\n        if ((*(u8 *)(((s32)(node->unk0 & (s32)0xFFFF03FF) >> 3) + (s32)D_800D2E4C) & (1 << ((s32)(node->unk0 & (s32)0xFFFF03FF) & 7))) == 0) {\n            D_8003C8E0 = 0x6000000;\n            func_150ADAF0(node, 0);\n            D_8003C8E0 = 0;\n        }\n        if ((arg1 == 0) || (node->unk0 & 0x400)) {\n            node->unk0 |= 0x4000;\n        }\n    } else if (arg1 != 0) {\n        if ((node->unk0 & 0x1000) && !(node->unk0 & 0x800)) {\n            bzero((u8 *)node + ((struct248 *)node)->unkA, ((struct248 *)node)->unk6);\n        }\n    }\n\n    return (s32)node;\n}",
+        "score": 0.0,
+        "reason": "compile_error",
+        "diffs": [],
+        "timestamp": "2026-08-09T19:09:00.234219+00:00"
+      },
+      {
+        "code": "s32 func_1509B5AC(s32 arg0, s32 arg1) {\n    register struct249 *node;\n\n    node = func_1509B704((s16)arg0);\n    if ((arg1 == 0) && (*(u8 *)((arg0 >> 3) + (s32)D_800D2E4C) & (1 << (arg0 & 7)))) {\n        return 0;\n    }\n\n    if (node == 0) {\n        node = (struct249 *)func_1509B8FC((s16)arg0);\n        func_1509B810((Node1509 *)node);\n        if ((*(u8 *)(((s32)(node->unk0 & (s32)0xFFFF03FF) >> 3) + (s32)D_800D2E4C) & (1 << ((s32)(node->unk0 & (s32)0xFFFF03FF) & 7))) == 0) {\n            D_8003C8E0 = 0x6000000;\n            func_150ADAF0(node, 0);\n            D_8003C8E0 = 0;\n        }\n        if ((arg1 == 0) || (node->unk0 & 0x400)) {\n            node->unk0 |= 0x4000;\n        }\n    } else if (arg1 != 0) {\n        if ((node->unk0 & 0x1000) && !(node->unk0 & 0x800)) {\n            bzero((u8 *)node + ((struct248 *)node)->unkA, ((struct248 *)node)->unk6);\n        }\n    }\n\n    return (s32)node;\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-09T19:09:14.444736+00:00"
+      }
+    ]
   },
   {
     "function": "func_15040FCC",
