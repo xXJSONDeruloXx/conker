@@ -47047,9 +47047,18 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "void func_15075938(void) {\n    struct127 *v1;\n    s32 temp_a0;\n    s32 v0;\n    s32 phi_v1;\n    s32 changed;\n    s32 mode;\n    s32 idx;\n\n    changed = 0;\n    v1 = D_800D154C;\n    temp_a0 = v1->unk21E - v1->unk221;\n    if (temp_a0 < 0) {\n        v0 = *(u8 *)((s32)D_800D2108 + (s32)v1->unk13F);\n        temp_a0 = (temp_a0 + v0) - 1;\n    } else {\n        v0 = D_800D2108[v1->unk13F];\n        if ((v0 - 1) <= temp_a0) {\n            temp_a0 = (temp_a0 - v0) + 1;\n        }\n    }\n    if (D_800D1891 == 0xFF) {\n        phi_v1 = v0 - 2;\n    } else {\n        phi_v1 = D_800D1891;\n    }\n    mode = D_800D1892;\n    if (mode == 0) {\n        if (phi_v1 == temp_a0) {\n            changed = 1;\n        }\n    } else if (mode == 1) {\n        if (phi_v1 != temp_a0) {\n            changed = 1;\n        }\n    } else if (mode == 2) {\n        if (phi_v1 < temp_a0) {\n            changed = 1;\n        }\n    } else {\n        if (temp_a0 < phi_v1) {\n            changed = 1;\n        }\n    }\n    if (changed) {\n        func_15075400(D_800D1890);\n    }\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-09T16:25:44.833012+00:00"
+      }
+    ]
   },
   {
     "function": "func_1502B4A8",
