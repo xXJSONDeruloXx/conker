@@ -57587,9 +57587,18 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "void func_1600078C(void)\n{\n  s32 temp_s0;\n  s32 temp_s0_2;\n  s32 y;\n  s32 i;\n  u32 *addr;\n  u32 word;\n  u32 dataStart;\n  u32 prefix;\n  temp_s0 = ((s32 *) D_1600389C)[0x3D];\n  func_16001338(0, 255, 0);\n  func_160012B0(0xB, D_160047B0);\n  addr = (u32 *) (temp_s0 + (D_16003B4C * 4));\n  if ((((((((u32) addr) & 3) & 0xFFFFu) & 0xFFFFu) == 0) && (((u32) addr) >= 0x80000000U)) && (((u32) addr) < 0x80800001U))\n  {\n    dataStart = (u32) (&D_8002D4B0);\n    if (D_16003B4C == 0)\n    {\n      func_16001338(255, 0, 0);\n    }\n    else\n      if ((((u32) addr) >= dataStart) && (((u32) addr) < (dataStart + 0x400)))\n    {\n      func_16001338(128, 128, 255);\n    }\n    else\n      if ((((u32) addr) >= ((u32) (&D_8002D8B0))) && (((u32) addr) < (((u32) (&D_8002D8B0)) + 0x4000)))\n    {\n      func_16001338(255, 128, 128);\n    }\n    else\n    {\n      func_16001338(255, 255, 255);\n    }\n    y = 0x61;\n    i = 0;\n    do\n    {\n      func_16001044(y, 0, addr);\n      func_160012B0(y + 8, D_160047BC);\n      word = *addr;\n      prefix = (word >> 24) & 0xFF;\n      if (prefix == 0x80)\n      {\n        func_16001338(128, 128, 255);\n      }\n      else\n        if (prefix == 0x15)\n      {\n        func_16001338(255, 0, 0);\n      }\n      else\n        if (prefix == 0x16)\n      {\n        func_16001338(128, 255, 128);\n      }\n      else\n        if (prefix == 0x10)\n      {\n        func_16001338(255, 0, 0);\n      }\n      else\n      {\n        func_16001338(255, 255, 255);\n      }\n      func_16001044(y + 0xC, 0, word);\n      temp_s0_2 = y + 0x16;\n      func_160012B0(temp_s0_2, D_160047C0);\n      func_16001338(255, 255, 255);\n      func_16001044(temp_s0_2, 1, word);\n      if ((((u32) addr) >= dataStart) && (((u32) addr) < (dataStart + 0x400)))\n      {\n        func_16001338(128, 128, 255);\n      }\n      else\n        if ((((u32) addr) >= ((u32) (&D_8002D8B0))) && (((u32) addr) < (((u32) (&D_8002D8B0)) + 0x4000)))\n      {\n        func_16001338(255, 128, 128);\n      }\n      else\n      {\n        func_16001338(255, 255, 255);\n      }\n      i += 1;\n      y += 0x20;\n      addr += 1;\n    }\n    while (i != 0x16);\n  }\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-09T19:35:00.812188+00:00"
+      }
+    ]
   },
   {
     "function": "func_10008F90",
