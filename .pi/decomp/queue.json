@@ -55778,9 +55778,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 2,
-    "lastScore": 0.4648,
-    "status": "pending",
+    "attempts": 3,
+    "lastScore": 1.0,
+    "status": "matched",
     "history": [
       {
         "code": "void func_150916B4(s32 x, s32 y, s32 frames, s32 color) {\n    s32 minutes;\n    s32 seconds;\n    s32 totalSec;\n    s32 centi;\n    s32 shift;\n\n    if (frames >= 0x57030) {\n        frames = 0x57030;\n    }\n    centi = (frames % 60) * 100 / 60;\n    if (centi >= 100) {\n        centi = 99;\n    }\n    x -= 8;\n    if (frames >= 0) {\n        totalSec = frames / 60;\n        minutes = totalSec / 60;\n        shift = (minutes >= 10) ? 5 : 0;\n        func_15042D94(x - shift - 8, y, color, (s32) &D_8009DCC0, minutes);\n        seconds = totalSec % 60;\n        func_15042D94(x, y, color, (s32) &D_8009DCC4, seconds);\n        func_15042D94(x + 0x10, y, color, (s32) &D_8009DCCC, centi);\n    } else {\n        func_15042D94(x - 8, y, color, (s32) &D_8009DCD4);\n        func_15042D94(x, y, color, (s32) &D_8009DCD8);\n        func_15042D94(x + 0x10, y, color, (s32) &D_8009DCE0);\n    }\n}",
@@ -55795,6 +55795,13 @@
         "reason": "length_mismatch (target=142, generated=140), raw_opcode_mismatch",
         "diffs": [],
         "timestamp": "2026-08-05T06:22:23.816856+00:00"
+      },
+      {
+        "code": "void func_15042D94(s32, s32, u8, s32 *, ...);\n\nvoid func_150916B4(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {\n    volatile s32 pad[2];\n    s32 seconds;\n    s32 hundredths;\n\n    if (arg2 >= 0x57030) {\n        arg2 = 0x57030;\n    }\n\n    hundredths = ((arg2 % 60) * 100) / 60;\n    if (hundredths >= 100) {\n        hundredths = 99;\n    }\n\n    arg0 -= 8;\n    if (arg2 >= 0) {\n        seconds = arg2 / 60;\n        func_15042D94((arg0 - (((seconds / 60) >= 10) ? 5 : 0)) - 8, arg1, (u8)arg3, &D_8009DCC0, seconds / 60);\n        func_15042D94(arg0, arg1, arg3, &D_8009DCC4, seconds % 60);\n        func_15042D94(arg0 + 0x10, arg1, arg3, &D_8009DCCC, hundredths);\n        return;\n    }\n\n    func_15042D94(arg0 - 8, arg1, (u8)arg3, &D_8009DCD4);\n    func_15042D94(arg0, arg1, arg3, &D_8009DCD8);\n    func_15042D94(arg0 + 0x10, arg1, arg3, &D_8009DCE0);\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-09T17:58:42.002198+00:00"
       }
     ]
   },

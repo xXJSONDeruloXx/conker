@@ -112,7 +112,35 @@ Gfx *func_15091534(Gfx *arg0, s32 arg1, u8 *arg2) {
 //     return arg0;
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_BC510/func_150916B4.s")
+void func_15042D94(s32, s32, u8, s32 *, ...);
+
+void func_150916B4(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    volatile s32 pad[2];
+    s32 seconds;
+    s32 hundredths;
+
+    if (arg2 >= 0x57030) {
+        arg2 = 0x57030;
+    }
+
+    hundredths = ((arg2 % 60) * 100) / 60;
+    if (hundredths >= 100) {
+        hundredths = 99;
+    }
+
+    arg0 -= 8;
+    if (arg2 >= 0) {
+        seconds = arg2 / 60;
+        func_15042D94((arg0 - (((seconds / 60) >= 10) ? 5 : 0)) - 8, arg1, (u8)arg3, &D_8009DCC0, seconds / 60);
+        func_15042D94(arg0, arg1, arg3, &D_8009DCC4, seconds % 60);
+        func_15042D94(arg0 + 0x10, arg1, arg3, &D_8009DCCC, hundredths);
+        return;
+    }
+
+    func_15042D94(arg0 - 8, arg1, (u8)arg3, &D_8009DCD4);
+    func_15042D94(arg0, arg1, arg3, &D_8009DCD8);
+    func_15042D94(arg0 + 0x10, arg1, arg3, &D_8009DCE0);
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/game_BC510/func_150918EC.s")
 
 void func_15093818(s32 arg0) {
