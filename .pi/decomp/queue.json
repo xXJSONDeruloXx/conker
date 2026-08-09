@@ -53964,9 +53964,18 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "#include <os_internal.h>\n#include \"piint.h\"\n\nextern OSThread piThread;\nextern char piThreadStack[];\nextern OSMesgQueue piEventQueue;\nextern OSMesg piEventBuf[];\ns32 osPiRawStartDma(s32 direction, u32 devAddr, void *dramAddr, u32 size);\ns32 osEPiRawStartDma(OSPiHandle *pihandle, s32 direction, u32 devAddr, void *dramAddr, u32 size);\n\nvoid osCreatePiManager(OSPri pri, OSMesgQueue *cmdQ, OSMesg *cmdBuf, s32 cmdMsgCnt) {\n    u32 savedMask;\n    OSPri oldPri;\n    OSPri myPri;\n\n    if (!__osPiDevMgr.active) {\n        osCreateMesgQueue(cmdQ, cmdBuf, cmdMsgCnt);\n        osCreateMesgQueue(&piEventQueue, (OSMesg *)&piEventBuf, 1);\n        if (!__osPiAccessQueueEnabled) {\n            __osPiCreateAccessQueue();\n        }\n        osSetEventMesg(OS_EVENT_PI, &piEventQueue, (OSMesg)0x22222222);\n        oldPri = -1;\n        myPri = osGetThreadPri(NULL);\n        if (myPri < pri) {\n            oldPri = myPri;\n            osSetThreadPri(NULL, pri);\n        }\n        savedMask = __osDisableInt();\n        __osPiDevMgr.active = 1;\n        __osPiDevMgr.thread = &piThread;\n        __osPiDevMgr.cmdQueue = cmdQ;\n        __osPiDevMgr.evtQueue = &piEventQueue;\n        __osPiDevMgr.acsQueue = &__osPiAccessQueue;\n        __osPiDevMgr.dma = osPiRawStartDma;\n        __osPiDevMgr.edma = osEPiRawStartDma;\n        osCreateThread(&piThread, 0, __osDevMgrMain, &__osPiDevMgr, &piThreadStack[OS_PIM_STACKSIZE], pri);\n        osStartThread(&piThread);\n        __osRestoreInt(savedMask);\n        if (oldPri != -1) {\n            osSetThreadPri(NULL, oldPri);\n        }\n    }\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-09T19:55:31.506980+00:00"
+      }
+    ]
   },
   {
     "function": "func_150006E0",
