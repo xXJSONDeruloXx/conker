@@ -54503,9 +54503,18 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "s32 n_alSynAllocVoice(N_ALVoice *voice, ALVoiceConfig *vc) {\n    N_PVoice *pvoice = 0;\n    ALParam *update;\n    s32 stolen;\n\n    voice->priority   = vc->priority;\n    voice->unityPitch = vc->unityPitch;\n    voice->table      = 0;\n    voice->fxBus      = vc->fxBus;\n    voice->state      = AL_STOPPED;\n    voice->pvoice     = 0;\n    voice->unk14      = (void *)vc->unk8;\n\n    stolen = _allocatePVoice(&pvoice, vc->priority);\n\n    if (pvoice != 0) {\n        if (stolen != 0) {\n            *(s32 *)((u8 *)pvoice + 0x90) = 0x228;\n            (*(N_ALVoice **)((u8 *)pvoice + 0x10))->pvoice = 0;\n            *(N_ALVoice **)((u8 *)pvoice + 0x10) = voice;\n            voice->pvoice = pvoice;\n\n            update = __n_allocParam();\n            if (update) {\n                update->delta      = n_syn->paramSamples;\n                update->type       = AL_FILTER_SET_VOLUME;\n                update->data.i     = 0;\n                update->moredata.i = 0x170;\n                n_alEnvmixerParam(voice->pvoice, AL_FILTER_ADD_UPDATE, update);\n            } else {\n            }\n            update = __n_allocParam();\n            if (update) {\n                update->delta = n_syn->paramSamples + ((PVoiceOff *)pvoice)->offset;\n                update->type  = AL_FILTER_STOP_VOICE;\n                update->next  = 0;\n                n_alEnvmixerParam(voice->pvoice, AL_FILTER_ADD_UPDATE, update);\n            } else {\n            }\n        } else {\n            ALLink *element;\n            ALLink *ln;\n            ALLink *to;\n\n            *(s32 *)((u8 *)pvoice + 0x90) = 0;\n            *(N_ALVoice **)((u8 *)pvoice + 0x10) = voice;\n            voice->pvoice = pvoice;\n\n            element = (ALLink *)((u8 *)pvoice + 8);\n            if (element->next) element->next->prev = element->prev;\n            if (element->prev) element->prev->next = element->next;\n\n            ln = (ALLink *)((u8 *)pvoice + 8);\n            to = &((AuxBusElem *)n_syn->auxBus)[vc->fxBus].link;\n            ln->next = to->next;\n            ln->prev = to;\n            if (to->next) to->next->prev = ln;\n            to->next = ln;\n\n            *(s32 *)((u8 *)pvoice + 0x28) = 0;\n        }\n    }\n    return (pvoice != 0);\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-09T19:26:18.195050+00:00"
+      }
+    ]
   },
   {
     "function": "func_151645C4",
