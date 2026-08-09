@@ -44558,9 +44558,18 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "void n_alCSeqNew(ALCSeq *seq, u8 *ptr) {\n    u32 i;\n    u32 offset;\n    u32 flag;\n\n    seq->base = (ALCMidiHdr *)ptr;\n    seq->validTracks = 0;\n    seq->lastDeltaTicks = 0;\n    seq->lastTicks = 0;\n    seq->deltaFlag = 1;\n\n    for (i = 0; i < 16; i++) {\n        seq->lastStatus[i] = 0;\n        seq->curBUPtr[i] = 0;\n        seq->curBULen[i] = 0;\n        offset = seq->base->trackOffset[i];\n        if (offset) {\n            flag = 1 << i;\n            seq->validTracks |= flag;\n            seq->curLoc[i] = ptr + offset;\n            seq->evtDeltaTicks[i] = __readVarLen(seq, i);\n        } else {\n            seq->curLoc[i] = 0;\n        }\n    }\n    seq->qnpt = 1.0f / (f32)seq->base->division;\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-09T18:47:39.808797+00:00"
+      }
+    ]
   },
   {
     "function": "func_10017780",
