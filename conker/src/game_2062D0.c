@@ -512,7 +512,23 @@ u8 func_151D9B34(void) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_2062D0/func_151D9B8C.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_2062D0/func_151D9EB0.s")
+void func_151D9014(void *arg0, f32 *arg1, u8 arg2, f32 arg3, s32 arg4, u8 arg5, f32 arg6, s32 arg7, f32 arg8, f32 arg9, u8 argA, s32 argB, s32 argC, s32 argD, u8 argE, s32 argF);
+void func_151D9EB0(void *arg0) {
+    Struct151D9EB0Sub *sp50;
+    u32 rand;
+    f32 sp54;
+
+    sp50 = (Struct151D9EB0Sub *)((u8 *)arg0 + 0x28);
+    *(s16 *)((u8 *)arg0 + 0x28) = (s16)(*(s16 *)((u8 *)arg0 + 0x28) - D_800BE9E4);
+    if (*(s16 *)((u8 *)arg0 + 0x28) < 0) {
+        sp54 = func_150ADA68();
+        rand = func_150ADA20();
+        func_151D9014(&sp50->unk8, &D_800A5480, sp50->unk16, sp54 * D_800AB464 + D_800AB468,
+                      (rand % 41U) + 0x23, sp50->unk14, sp50->unk4, 0, 1.0f, 1.0f, sp50->unk15, 0, 1, 0,
+                      *((u8 *)arg0 + 0xC), *((u8 *)arg0 + 1));
+        sp50->unk0 = (func_150ADA20() % 111U) + 0x1E;
+    }
+}
 
 void func_151D9FC0(u8 arg0, f32 arg1, u8 arg2, s32 arg3, s32 arg4, u8 arg5, s32 arg6) {
     func_151DBCBC(arg0, arg1 * 0.5f, arg2, arg3, arg4, arg5, arg6);
