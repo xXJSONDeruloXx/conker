@@ -448,7 +448,56 @@ s32 func_151D9450(void *arg0p, void *arg1) {
     *(f32 *)((u8 *)arg0p + 0x3C) = p->unkC * func_151423D8((u8)(p->unk5 - 0x40)) + p->unk0;
     return 1;
 }
-#pragma GLOBAL_ASM("asm/nonmatchings/game_2062D0/func_151D9534.s")
+s32 func_1514672C(struct17 *arg0);
+s32 func_15046C80(f32 *arg0, s32 arg1, f32 arg2, void *arg3);
+u8 func_151D9534(Struct151D9534 *arg0, struct17 *arg1) {
+    volatile u8 sp5F;
+    struct17 sp50;
+    Struct151D9534Sub *temp_v0;
+    f32 sp48;
+    f32 temp_f2;
+
+    sp5F = 1;
+    if (arg0->unk44 < arg1->unk4) {
+        sp50.unk0 = arg0->unk40;
+        sp50.unk4 = arg1->unk4;
+        sp50.unk8 = arg0->unk48;
+        if (func_1514672C(&sp50) == 0) {
+            return 0;
+        }
+        if (func_15046C80((f32 *)&sp50, 0, arg0->unk44, &arg0->unk80) != 0) {
+            sp50.unk4 = arg0->unk80 + 2.0f;
+            if (arg0->unkA8.unk19 & 2) {
+                temp_f2 = D_800AB44C;
+                arg0->unk44 = (arg0->unk3C * D_800AB450) + sp50.unk4;
+                arg0->unk58 = arg0->unk58 * temp_f2;
+                arg0->unk5C = arg0->unk5C * D_800AB454;
+                arg0->unk60 = arg0->unk60 * temp_f2;
+                if (fabsf(arg0->unk5C) < D_800AB458) {
+                    arg0->unk58 = 0.0f;
+                    arg0->unk68 &= ~6;
+                    arg0->unk5C = 0.0f;
+                    arg0->unk60 = 0.0f;
+                    arg0->unk64 = 0.0f;
+                }
+            } else {
+                sp5F = 0;
+                temp_v0 = &arg0->unkA8;
+                sp48 = (arg0->unk38 + arg0->unk3C) * 0.5f;
+                if (arg0->unk9D == 3) {
+                    func_151D9FC0(temp_v0->unk18, temp_v0->unk14 * sp48, arg0->unk2B, (s32)&arg0->unk84, (s32)&sp50, arg0->unkC, arg0->unk1);
+                    return sp5F;
+                }
+                if (func_150ADA20() & 1) {
+                    func_151D9B8C(temp_v0->unk18, (sp48 * D_800AB45C) * temp_v0->unk10, arg0->unk2B, (s32)&arg0->unk84, &sp50, 100, 0, 1, 0, arg0->unkC, arg0->unk1);
+                    return sp5F;
+                }
+                func_151DAB58(temp_v0->unk18, (sp48 * D_800AB460) * temp_v0->unk10, arg0->unk2B, &sp50, 1, arg0->unkC, arg0->unk1);
+            }
+        }
+    }
+    return sp5F;
+}
 
 u8 func_151D97A8(void) {
     s32 tmp[7] = D_800AB350;
