@@ -53625,9 +53625,18 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "typedef struct {\n    f32 x;\n    f32 y;\n    f32 z;\n} Vec3F_15005818;\n\nextern f32 D_800959F0;\nvoid func_1510E7A4(s32, s32, s32, s32, s32, s32, f32, f32, f32, f32, u16, s32, f32, f32);\nvoid func_15123070(struct108 *);\nvoid func_1512D560(struct108 *, s32, struct168 *);\n\nvoid func_15005818(struct108 *arg0, struct168 *arg1, Vec3F_15005818 *arg2) {\n    Vec3F_15005818 *sp48;\n\n    arg0->unk23C = 1;\n    arg0->unk2F8 = arg2->x;\n    arg0->unk2FC = arg2->y;\n    arg0->unk300 = arg2->z;\n    *(struct167 *)((u8 *)arg0 + 0x27C) = *(struct167 *)&arg0->unk2F8;\n    *(struct167 *)&arg0->unk304 = *(struct167 *)&arg0->unk2F8;\n\n    sp48 = (Vec3F_15005818 *)&arg0->unk2F8;\n    func_1510E7A4((s32)((u8 *)arg0 + 0x644), (s32)((u8 *)arg0 + 0x648), (s32)&arg0->unk354,\n                  (s32)((u8 *)arg0 + 0x360), (s32)((u8 *)arg0 + 0x640), 0, arg0->unk2F8, arg0->unk2FC,\n                  arg0->unk300, arg0->unk2FC, 0, 0, D_800959F0, arg0->unk2FC);\n\n    arg0->unk358 = arg0->unk354;\n    arg0->unk35C = arg0->unk354;\n\n    arg0->unk2A4 = arg1->unk14;\n    arg0->unk2A8 = arg1->unk18;\n    *(f32 *)&arg0->unk2AC = arg1->unk1C;\n    *(struct167 *)&arg0->unk2BC = *(struct167 *)&arg0->unk2A4;\n\n    *(struct167 *)&arg0->unk2B0 = *(struct167 *)&arg0->unk2A4;\n\n    arg0->unk374 = sqrtf(((((Vec3F_15005818 *)&arg0->unk2A4)->x - ((Vec3F_15005818 *)&arg0->unk2F8)->x) *\n                          (((Vec3F_15005818 *)&arg0->unk2A4)->x - ((Vec3F_15005818 *)&arg0->unk2F8)->x)) +\n                         ((((Vec3F_15005818 *)&arg0->unk2A4)->z - ((Vec3F_15005818 *)&arg0->unk2F8)->z) *\n                          (((Vec3F_15005818 *)&arg0->unk2A4)->z - ((Vec3F_15005818 *)&arg0->unk2F8)->z)));\n    arg0->unk34C = arg0->unk2FC - arg0->unk354;\n    arg0->unk348 = arg0->unk2FC - arg0->unk354;\n\n    *(struct167 *)&arg0->unk2E0 = *(struct167 *)&arg0->unk2BC;\n    *(struct167 *)&arg0->unk2EC = *(struct167 *)sp48;\n    func_15124B18(arg0);\n    func_15125330(arg0);\n    func_1512523C(arg0);\n    func_15123070(arg0);\n\n    arg0->unk5F0 |= 4;\n    if ((D_800BE9F0 != 0x21) && (D_800C35EA != 1)) {\n        func_1512D560(arg0, 5, 0);\n        *(f32 *)((u8 *)&D_800C3600 + 0xC) = arg0->unk37C;\n        func_1512D560(arg0, 8, (struct168 *)&D_800C3600);\n        func_1512D560(arg0, 6, 0);\n    }\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-09T17:53:26.895914+00:00"
+      }
+    ]
   },
   {
     "function": "func_15040A78",
