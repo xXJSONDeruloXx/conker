@@ -1130,7 +1130,36 @@ void func_15077F34(void) {
     D_800D154C->unk250 = D_800D1891;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_A28B0/func_15077F64.s")
+void func_15056A00(struct127 *arg0, s32 arg1, s32 arg2, u8 arg3);
+typedef struct { char pad_0[0x8]; s16 field_0x8; char pad_1[0x2]; s16 field_0xC; } PathPointWindow;
+void func_15077F64(void) {
+    volatile u16 pad[4];
+    volatile u8 pad2;
+    u8 temp_t6;
+    PathPointWindow *temp_v0;
+    f32 temp_f12;
+    f32 temp_f14;
+    s32 temp_t5;
+    s32 phi_a0;
+    s32 phi_a1;
+
+    temp_t6 = D_800D1890 - 1;
+    temp_v0 = (PathPointWindow *)(((u8 *)D_800D2104[D_800D154C->unk13F]) + (D_800D154C->unk21E * 8));
+    temp_f12 = ((f32)temp_v0->field_0x8) - D_800D154C->x_position;
+    temp_f14 = D_800D154C->z_position - ((f32)temp_v0->field_0xC);
+    D_800D154C->unk78 = func_1505A630(temp_f12, temp_f14, 0);
+    ;
+    phi_a0 = (phi_a1 = (((s32)(D_800D154C->unk78 - D_800D154C->unk76)) >> 8) & 0xFF);
+    if (phi_a0 & 0x80) {
+        phi_a1 = -(phi_a1 & 0xFFu);
+        phi_a0 = phi_a1 & 0xFF;
+        phi_a1 = phi_a0;
+    }
+    if (((u8 *)D_80099A3C)[(temp_t6 * 5) * 2] < phi_a0) {
+        D_800D154C->unk250 = D_800D1891;
+        func_15056A00(D_800D154C, phi_a1, temp_t6 & 0xFF, temp_t6);
+    }
+}
 // NON-MATCHING: what is D_800D2104 ???
 // void func_15056A00(s32, s32, u8);
 // void func_15077F64(void) {
