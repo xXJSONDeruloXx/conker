@@ -97,4 +97,39 @@ s32 func_10021C40(Obj_214F0 *arg0, s32 arg1, void *arg2)
 //     return 0;
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/init_214F0/func_10021E4C.s")
+void *func_10021E4C(Cmd214 *gfx, struct42 *obj, s32 a2, s32 count, s16 arg4, s16 arg5, s32 flags)
+{
+    s32 align;
+    s32 res;
+
+    if (count > 0) {
+        res = ((s32 (*)(s32, s32, s32))obj->unk30)(obj->unk44, count, obj->unk34);
+        if (res == 0) {
+            obj->unk80 = 1;
+            obj->unk62 = 0;
+            obj->unk40 = 0;
+            return gfx;
+        }
+        align = res & 7;
+        count = count + align;
+        {
+            Cmd214 *_a = gfx++;
+            _a->w0 = ((((count - (count & 7)) + 8) & 0xFFF) << 12) | 0x04000000 | (arg5 & 0xFFF);
+            _a->w1 = res - align;
+        }
+    } else {
+        align = 0;
+    }
+    if (flags & 2) {
+        Cmd214 *_a = gfx++;
+        _a->w0 = 0x0F000000;
+        _a->w1 = obj->unk18 & 0x1FFFFFFF;
+    }
+    {
+        Cmd214 *_a = gfx++;
+        _a->w0 = (obj->unk14 & 0x1FFFFFFF & 0x00FFFFFF) | 0x01000000;
+        _a->w1 = ((flags & 0xF) << 28) | (((a2 << 1) & 0xFFF) << 16) | ((align & 0xF) << 12) | (arg4 & 0xFFF);
+    }
+    obj->unk40 = 0;
+    return gfx;
+}

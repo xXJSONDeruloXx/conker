@@ -46918,9 +46918,9 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 2,
-    "lastScore": 0.496,
-    "status": "pending",
+    "attempts": 3,
+    "lastScore": 1.0,
+    "status": "matched",
     "history": [
       {
         "code": "typedef struct { u32 w0; u32 w1; } Cmd214;\nvoid *func_10021E4C(Cmd214 *gfx, struct42 *obj, s32 a2, s32 count, s16 arg4, s16 arg5, s32 flags)\n{\n    s32 align;\n    s32 res;\n\n    if (count > 0) {\n        res = ((s32 (*)(s32, s32, s32))obj->unk30)(obj->unk44, count, obj->unk34);\n        if (res == 0) {\n            obj->unk80 = 1;\n            obj->unk62 = 0;\n            obj->unk40 = 0;\n            return gfx;\n        }\n        align = res & 7;\n        count = count + align;\n        {\n            Cmd214 *_a = gfx++;\n            _a->w0 = ((((count - (count & 7)) + 8) & 0xFFF) << 12) | 0x04000000 | (arg5 & 0xFFF);\n            _a->w1 = res - align;\n        }\n    } else {\n        align = 0;\n    }\n    if (flags & 2) {\n        Cmd214 *_a = gfx++;\n        _a->w0 = 0x0F000000;\n        _a->w1 = obj->unk18 & 0x1FFFFFFF;\n    }\n    {\n        Cmd214 *_a = gfx++;\n        _a->w0 = (obj->unk14 & 0x1FFFFFFF & 0x00FFFFFF) | 0x01000000;\n        _a->w1 = ((flags & 0xF) << 28) | (((a2 << 1) & 0xFFF) << 16) | ((align & 0xF) << 12) | (arg4 & 0xFFF);\n    }\n    obj->unk40 = 0;\n    return gfx;\n}",
