@@ -48801,9 +48801,18 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "void func_150793D8(void) {\n    f32 sp34;\n    f32 sp30;\n    f32 sp2C;\n    volatile s16 pad0;\n    volatile s16 pad1;\n    volatile s16 pad2;\n    s16 x;\n    s16 z;\n\n    x = (s16)(s32)D_800CC2D0->x_position;\n    z = (s16)(s32)D_800CC2D0->z_position;\n    if ((x < -1180) || (x >= 1181) || (z < -1180) || (z >= 1181)) {\n        x = 0;\n        z = 0;\n    }\n\n    func_1505A184(func_150ADA20(), 550.0f, 0.0f, &sp34, &sp30, &sp2C);\n\n    x = (s16)(s32)((f32)x + sp34);\n    z = (s16)(s32)((f32)z + sp30);\n    if (x < -1200) {\n        x = -1200;\n    }\n    if (x >= 1201) {\n        x = 1200;\n    }\n    if (z < -1200) {\n        z = -1200;\n    }\n    if (z >= 1201) {\n        z = 1200;\n    }\n\n    *(s16 *)((u8 *)D_800D2104[D_800D154C->unk13F] + (D_800D1890 * 8) + 8) = x;\n    *(s16 *)((u8 *)D_800D2104[D_800D154C->unk13F] + (D_800D1890 * 8) + 0xC) = z;\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-09T16:47:54.844713+00:00"
+      }
+    ]
   },
   {
     "function": "func_1505327C",
