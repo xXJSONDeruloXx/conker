@@ -36560,9 +36560,18 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "void func_1505D5D0(struct127 *arg0, struct127 *arg1, f32 arg2, f32 arg3,\n                   f32 arg4, f32 arg5, f32 arg6, s32 arg7,\n                   f32 arg8, f32 arg9, f32 arg10, f32 arg11, f32 arg12) {\n    f32 temp_f0;\n    f32 temp_f2;\n    f32 temp_f12;\n    f32 temp_f14;\n    f32 temp_f16;\n    f32 temp_f18;\n\n    temp_f0 = func_1505D34C(arg1->unk40, arg11, arg12, arg1->xz_scale, &arg12);\n    arg8 *= arg1->xz_scale;\n    arg9 *= arg1->y_scale;\n    temp_f16 = arg2 - (arg1->x_position + temp_f0);\n    temp_f18 = arg4 - (arg1->z_position + arg12);\n    temp_f12 = arg3 - (arg1->y_position + (arg10 * arg1->y_scale));\n    temp_f12 *= (arg5 + (arg8 / arg9)) * 0.5f;\n    temp_f2 = (temp_f16 * temp_f16) + (temp_f12 * temp_f12) + (temp_f18 * temp_f18);\n    temp_f0 = arg6 + arg8;\n    if (temp_f2 < (temp_f0 * temp_f0)) {\n        func_1505D408(arg0, arg1, temp_f16, temp_f12, temp_f18, temp_f2, temp_f0, arg7);\n    }\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-09T16:29:29.713538+00:00"
+      }
+    ]
   },
   {
     "function": "func_15000940",
