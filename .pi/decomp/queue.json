@@ -48742,9 +48742,18 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "void func_15053750(struct127 *arg0) {\n    f32 temp_f2;\n    f32 temp_f16;\n    s32 phi_v0;\n\n    temp_f2 = arg0->unk154 - arg0->xz_scale;\n    if (temp_f2 != 0.0f) {\n        temp_f16 = arg0->unk15C;\n        if (fabsf(temp_f2) < temp_f16) {\n            func_15062BDC(arg0, arg0->unk154, arg0->y_scale);\n        } else {\n            if (temp_f2 < 0.0f) {\n                phi_v0 = -1;\n            } else {\n                phi_v0 = 1;\n            }\n            func_15062BDC(arg0, ((f32) phi_v0 * temp_f16) + arg0->xz_scale, arg0->y_scale);\n        }\n    }\n\n    temp_f2 = arg0->unk158 - arg0->y_scale;\n    if (temp_f2 != 0.0f) {\n        temp_f16 = arg0->unk15C;\n        if (fabsf(temp_f2) < temp_f16) {\n            func_15062BDC(arg0, arg0->xz_scale, arg0->unk158);\n        } else {\n            if (temp_f2 < 0.0f) {\n                phi_v0 = -1;\n            } else {\n                phi_v0 = 1;\n            }\n            func_15062BDC(arg0, arg0->xz_scale, ((f32) phi_v0 * temp_f16) + arg0->y_scale);\n        }\n    }\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-09T16:37:51.166135+00:00"
+      }
+    ]
   },
   {
     "function": "func_1501A490",
