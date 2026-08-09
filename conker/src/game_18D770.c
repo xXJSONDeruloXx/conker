@@ -874,7 +874,37 @@ void func_151621B8(struct236 *arg0) {
 // }
 
 // help.
-#pragma GLOBAL_ASM("asm/nonmatchings/game_18D770/func_151623F4.s")
+struct vec3w { s32 unk0; s32 unk4; s32 unk8; };
+struct225 *func_151623F4(struct226 *arg0, u8 arg1, u8 arg2, u8 arg3, s8 arg4, s16 arg5, u8 arg6, s32 arg7) {
+    struct {
+        struct vec3w a;
+        struct vec3w b;
+        f32 c;
+        f32 d;
+    } sp30;
+    Header header;
+    struct225 *temp_v0;
+
+    if (arg1 >= 3) {
+        return NULL;
+    }
+
+    sp30.a = *(struct vec3w *)D_800A670C[arg1];
+    sp30.b = *(struct vec3w *)D_800A6730[arg1];
+
+    sp30.c = 0.0f;
+    sp30.d = D_800A6754[arg1];
+    header.unk0 = arg3;
+    header.unk1 = arg4;
+    header.unk2 = arg5;
+    header.unk4 = arg2;
+
+    temp_v0 = func_1516037C(&header, arg0, 0x20, arg6, arg7);
+    if (temp_v0 != NULL) {
+        memcpy((void *)((s32)temp_v0 + 0x18), &sp30, 0x20);
+    }
+    return temp_v0;
+}
 s32 func_15162510(struct237 *arg0) {
     struct235 *temp_v1;
     f32 temp_f0;

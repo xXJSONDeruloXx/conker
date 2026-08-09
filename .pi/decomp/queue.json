@@ -40263,9 +40263,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 5,
-    "lastScore": 0.4295774647887324,
-    "status": "skipped",
+    "attempts": 7,
+    "lastScore": 1.0,
+    "status": "matched",
     "history": [
       {
         "code": "struct225 *func_151623F4(void *arg0, void *arg1, void *arg2, u8 arg3) {\n    Header header;\n    s32 sp30[3];\n    s32 sp3C[3];\n    s32 *temp_table;\n    u8 sp57 = arg3;\n    u8 sp5F;\n    s8 sp63;\n    s16 sp66;\n    u8 sp5B;\n    s32 sp6C;\n    u8 sp6B;\n    f32 f4;\n    f32 f6;\n    struct225 *result;\n\n    if (sp57 >= 3) {\n        return NULL;\n    }\n\n    temp_table = D_800A670C[sp57];\n    sp30[0] = temp_table[0];\n    sp30[1] = temp_table[1];\n    sp30[2] = temp_table[2];\n\n    temp_table = D_800A6730[sp57];\n    sp3C[0] = temp_table[0];\n    sp3C[1] = temp_table[1];\n    sp3C[2] = temp_table[2];\n\n    f4 = 0.0f;\n    f6 = D_800A6754[sp57];\n\n    sp5F = *(u8 *)((s32)arg0 + 0x5F);\n    sp63 = *(s8 *)((s32)arg0 + 0x63);\n    sp66 = *(s16 *)((s32)arg0 + 0x66);\n    sp5B = *(u8 *)((s32)arg0 + 0x5B);\n    sp6C = *(s32 *)((s32)arg0 + 0x6C);\n    sp6B = *(u8 *)((s32)arg0 + 0x6B);\n\n    header.unk0 = sp5F;\n    header.unk1 = sp63;\n    header.unk2 = sp66;\n    header.unk4 = sp5B;\n\n    result = func_1516037C(&header, (struct226 *)sp3C, 0x20, sp63, sp6C);\n\n    if (result != NULL) {\n        memcpy(result, sp30, 0x20);\n    }\n\n    return result;\n}",
