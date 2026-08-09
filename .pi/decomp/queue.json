@@ -52915,9 +52915,18 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "struct127 *func_1505ED34(void) {\n    s32 i;\n    struct127 *ptr;\n\n    for (i = 0, ptr = D_800CC2D0; (i < 25) && (ptr->interaction_state != 0); i++, ptr++) {\n    }\n\n    if (i == 25) {\n        ptr = D_800CC2D0;\n        i = 0;\n        if ((0x27 != ptr->interaction_state) || (D_800CC4A4 != NULL)) {\n            do {\n                i++;\n                ptr++;\n            } while ((i < 25) && ((0x27 != ptr->interaction_state) || (ptr->unk1D4 != NULL)));\n        }\n\n        if (i != 25) {\n            if (ptr->interaction_state != 0) {\n                func_15060F28(ptr, 0);\n            }\n        }\n    }\n\n    if (i == 25) {\n        for (ptr = D_800CC2D0, i = 0; (i < 25) && (0x27 != ptr->interaction_state); i++, ptr++) {\n        }\n\n        if (i != 25) {\n            if (ptr->interaction_state != 0) {\n                func_15060F28(ptr, 0);\n            }\n        }\n    }\n\n    if (i == 25) {\n        if (ptr->interaction_state != 0) {\n            func_15060F28(ptr, 0);\n        }\n    }\n\n    func_1505F188(ptr);\n    return ptr;\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-09T16:42:23.630611+00:00"
+      }
+    ]
   },
   {
     "function": "func_1506E46C",
