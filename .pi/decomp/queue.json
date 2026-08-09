@@ -49509,9 +49509,18 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "void func_16001390(s16 arg0, s16 arg1, register s16 arg2, s16 arg3)\n{\n  s32 count;\n  u16 *ptr;\n  if (arg2 < arg0)\n  {\n    return;\n  }\n  if (arg3 < arg1)\n  {\n    return;\n  }\n  if (arg0 < 0)\n  {\n    return;\n  }\n  if (arg1 < 0)\n  {\n    return;\n  }\n  arg2++;\n  arg3++;\n  ptr = (u16 *) func_1600160C(0);\n  ptr += arg0 + (arg1 * D_160038A8);\n  arg2 -= arg0;\n  arg3 -= arg1;\n  if (arg3 > 0)\n  {\n    do\n    {\n      count = arg2;\n      if (arg2 > 0)\n      {\n        do\n        {\n          *(ptr++) = D_1600388C;\n          count--;\n        }\n        while (count != 0);\n      }\n      arg3--;\n      ptr += D_160038A8 - arg2;\n    }\n    while (arg3 > 0);\n  }\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-09T19:16:38.137152+00:00"
+      }
+    ]
   },
   {
     "function": "func_15052760",
