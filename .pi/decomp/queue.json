@@ -47270,9 +47270,18 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "extern f32 D_80096654;\nextern f32 D_80096658;\nextern f32 D_8009665C;\nextern f32 D_80096660;\nextern f32 D_80096664;\nextern f32 D_80096668;\nextern f32 D_8009666C;\nextern f32 D_80096670;\nextern f32 D_80096674;\nextern f32 D_80096678;\ns32 func_15149550(void *, s32, s32, u8, u8, s32);\n\ntypedef struct {\n    f32 unk0;\n    f32 unk4;\n    f32 unk8;\n    f32 unkC;\n    f32 unk10;\n    f32 unk14;\n    f32 unk18;\n    f32 unk1C;\n    s16 unk20;\n    s16 unk22;\n    s16 unk24;\n    u8 unk26;\n    u8 unk27;\n    u8 unk28;\n    u8 unk29;\n    s16 unk2A;\n    u8 unk2C;\n    u8 unk2D;\n    u8 unk2E;\n    u8 unk2F;\n    s32 unk30;\n    u8 unk34;\n    f32 unk38;\n    f32 unk3C;\n    f32 unk40;\n    f32 unk44;\n} Struct15013DE8Candidate;\n\ns32 func_15013DE8(struct47 *arg0) {\n    Struct15013DE8Candidate sp30;\n    f32 tmpA;\n    f32 tmpB;\n\n    arg0->unk16 |= 4;\n    tmpA = arg0->unk6 * D_80096654;\n    tmpB = arg0->unk8 * D_80096658;\n    sp30.unk22 = 0x1A4D + ((sp30.unk20 = 0x6231), 0);\n    sp30.unk26 = 0;\n    sp30.unk27 = 0;\n    sp30.unk28 = 0;\n    sp30.unk29 = 0xFF;\n    sp30.unk2A = 0;\n    sp30.unk2D = 0xFF;\n    sp30.unk30 = 0;\n    sp30.unk2E = 0;\n    sp30.unk2F = 0;\n    sp30.unk34 = 0;\n    sp30.unk3C = D_8009665C;\n    sp30.unk0 = arg0->unk0;\n    sp30.unk4 = arg0->unk2;\n    sp30.unk8 = arg0->unk4;\n    sp30.unk24 = 0x12C;\n    sp30.unk38 = 0.0f;\n    sp30.unk40 = D_80096660;\n    sp30.unk44 = D_80096664;\n    sp30.unk2C = (func_150ADA20() % 0x38U) + 0xC8;\n    sp30.unkC = D_80096668 * tmpA;\n    sp30.unk14 = D_8009666C * tmpA;\n    sp30.unk18 = (D_80096674 * tmpB) +\n                 ((sp30.unk10 = D_80096670 * tmpB), 0);\n    sp30.unk1C = D_80096678 * tmpB;\n    func_15149550(&sp30, 0xA, 1, arg0->unk18 ? 2 : 1, 0xFF, 1);\n    return 1;\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-09T17:36:22.281837+00:00"
+      }
+    ]
   },
   {
     "function": "func_15160CDC",
