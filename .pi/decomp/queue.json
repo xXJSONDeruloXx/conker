@@ -50783,8 +50783,8 @@
       "branchy"
     ],
     "attempts": 2,
-    "lastScore": 0.49759615384615385,
-    "status": "pending",
+    "lastScore": 1.0,
+    "status": "matched",
     "history": [
       {
         "code": "void func_15008E10(s32 arg0) {\n    s32 i;\n\n    D_800DDE54[D_800DDE50] = arg0;\n    D_800DDE60[D_800DDE50] = (f32 *) allocate_memory(0x1E0, 1, 0, 0);\n\n    for (i = 0; i < 120; i += 3) {\n        D_800DDE60[D_800DDE50][i] = 0.0f;\n        D_800DDE60[D_800DDE50][i + 2] = D_800DDE60[D_800DDE50][i + 1] = D_800DDE60[D_800DDE50][i];\n    }\n\n    D_800DDE60[D_800DDE50][0x77] = (f32) D_8008D050[arg0].unk14;\n    D_8008D050[arg0].unk17 = 0;\n    D_800DDE50++;\n}",
