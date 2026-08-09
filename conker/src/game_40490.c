@@ -87,7 +87,150 @@ s32 func_1501396C(struct16 *arg0) {
 }
 
 // another struct
-#pragma GLOBAL_ASM("asm/nonmatchings/game_40490/func_150139AC.s")
+extern f32 D_80096648;
+extern f32 D_8009664C;
+extern struct {
+    f32 unk0;
+    f32 unk4;
+    f32 unk8;
+    f32 unkC;
+    f32 unk10;
+    s16 unk14;
+    s16 unk16;
+    f32 unk18;
+    f32 unk1C;
+    f32 unk20;
+    f32 unk24;
+    f32 unk28;
+    f32 unk2C;
+    u8 unk30;
+    u8 unk31;
+    u8 unk32;
+    u8 unk33;
+    u8 unk34;
+    u8 pad35[3];
+} D_80095FA0[];
+
+typedef struct {
+    struct16 *unk0;
+    f32 unk4;
+    f32 unk8;
+    f32 unkC;
+    f32 unk10;
+    f32 unk14;
+    f32 unk18;
+    f32 unk1C;
+    f32 unk20;
+    s16 unk24;
+    s16 unk26;
+    f32 unk28;
+    f32 unk2C;
+    f32 unk30;
+    f32 unk34;
+    f32 unk38;
+    f32 unk3C;
+    u8 unk40;
+    u8 unk41;
+    u8 unk42;
+    u8 pad43;
+    u16 unk44;
+    u8 pad46[2];
+    f32 unk48;
+    u8 pad4C[0x14];
+    s32 unk60;
+    u8 unk64;
+    u8 unk65;
+    u8 pad66[2];
+    s32 unk68;
+    s32 unk6C;
+} Struct150139ACLocalCandidate;
+
+s32 func_150139AC(struct16 *arg0, s32 idx) {
+    Struct150139ACLocalCandidate tmp;
+    struct {
+        f32 unk0;
+        f32 unk4;
+        f32 unk8;
+        f32 unkC;
+        f32 unk10;
+        s16 unk14;
+        s16 unk16;
+        f32 unk18;
+        f32 unk1C;
+        f32 unk20;
+        f32 unk24;
+        f32 unk28;
+        f32 unk2C;
+        u8 unk30;
+        u8 unk31;
+        u8 unk32;
+        u8 unk33;
+        u8 unk34;
+        u8 pad35[3];
+    } *entry;
+    struct260 *temp_v0;
+
+    idx = *(s32 *)&arg0->unk18;
+    arg0->unk16 |= 4;
+    tmp.unk0 = arg0;
+    tmp.unkC = 0.0f;
+    switch (arg0->unk15 & 3) {
+    default:
+        tmp.unk4 = 1.0f;
+        tmp.unk10 = 1000.0f;
+        break;
+    case 2:
+        tmp.unk4 = (f32)(((s16 *)arg0)[5] * ((s16 *)arg0)[3]) * 4.0f;
+        tmp.unk10 = (f32)(((s16 *)arg0)[4] + ((s16 *)arg0)[1]);
+        break;
+    case 0:
+    case 1:
+        tmp.unk4 = (f32)(((s16 *)arg0)[3] * ((s16 *)arg0)[3]) * D_80096648;
+        tmp.unk10 = (f32)(((s16 *)arg0)[4] + ((s16 *)arg0)[1]);
+        break;
+    }
+    entry = &D_80095FA0[idx];
+    tmp.unk14 = entry->unk4;
+    tmp.unk18 = entry->unk8;
+    tmp.unk1C = entry->unkC;
+    tmp.unk20 = entry->unk10;
+    tmp.unk28 = entry->unk18;
+    tmp.unk2C = entry->unk1C;
+    tmp.unk60 = 0;
+    tmp.unk64 = 0;
+    tmp.unk65 = 0;
+    tmp.unk68 = 0;
+    tmp.unk24 = entry->unk14;
+    tmp.unk26 = entry->unk16;
+    tmp.unk30 = entry->unk20;
+    tmp.unk34 = entry->unk24;
+    tmp.unk38 = entry->unk28;
+    tmp.unk3C = entry->unk2C;
+    tmp.unk8 = entry->unk0;
+    tmp.unk40 = entry->unk30;
+    tmp.unk41 = entry->unk31;
+    tmp.unk42 = entry->unk32;
+    tmp.unk48 = D_8009664C;
+    if (entry->unk34 != 0) {
+        func_1510F800(0);
+        tmp.unk6C = func_1510FD20((s32)((s16 *)arg0)[0],
+                                  (s32)((s16 *)arg0)[2]);
+    } else {
+        tmp.unk6C = 0;
+    }
+    if (entry->unk33 != 0) {
+        tmp.unk44 = func_1000FA64(0x4D, ((s16 *)arg0)[0],
+                                   ((s16 *)arg0)[1], ((s16 *)arg0)[2],
+                                   0x5DC0, 0x3E8, 0x12C, 0, NULL, 0, 0, 0);
+    } else {
+        tmp.unk44 = 0;
+    }
+    temp_v0 = func_151491F4(0x12C, -1, 6, 0, 0xA, 0x70, 0xFF, 0);
+    if (temp_v0 != NULL) {
+        memcpy((u8 *)temp_v0 + 0x28, &tmp, sizeof(tmp));
+    }
+    return 1;
+}
 
 s32 func_15013C38(struct16 *arg0) {
     s32 temp_v1;
