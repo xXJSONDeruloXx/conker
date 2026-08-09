@@ -54156,9 +54156,39 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 4,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "void func_15070D24(s32 arg0) {\n    Stack_15070D24 sp4C;\n\n    sp4C.sp84 = D_80099B88;\n    sp4C.sp78 = D_80099B94;\n\n    if (D_800D154C->unk1D4 == 0) {\n        return;\n    }\n\n    if ((D_800D154C->unk74 & 0xF) == 0xF) {\n        return;\n    }\n\n    sp4C.sp70[0] = (func_150ADA68() * 101.0f) + 151.0f;\n    sp4C.sp70[1] = (func_150ADA68() * 4.0f) + 4.0f;\n\n    func_15143134(&sp4C.sp84, sp4C.sp64, (s32)D_800D154C->unk1D4 + 0x40);\n\n    func_15102B38((s32)D_800D154C, 1, (s32)&sp4C.sp84, (s32)&sp4C.sp78, sp4C.sp70,\n                  ((func_150ADA20() + 0U) % 6U) + 5, ((func_150ADA20() + 0U) % 0x9CU) + 0x64,\n                  (func_150ADA68() * 2496.0f) + D_80099F2C,\n                  (s32)sp4C.sp64, 0xFF, 0, -1, 0xFF, 0);\n\n    sp4C.header.unk0 = 3;\n    sp4C.header.unk1 = -1;\n    sp4C.header.unk2 = (func_150ADA20() % 6U) + 0xA;\n    sp4C.header.unk4 = 0;\n\n    sp4C.header2.unk0 = (s32)sp4C.sp64[0];\n    sp4C.header2.unk4 = (s32)sp4C.sp64[1];\n    sp4C.header2.unk8 = (s32)sp4C.sp64[2];\n\n    func_151602C0(&sp4C.header, &sp4C.header2, (func_150ADA20() % 0xC9U) + 0x37, 0xFF, 0xFF, 0xFF, 0xFF, 0, 0, 0xFF, 0);\n}",
+        "score": 0.4375,
+        "reason": "length_mismatch (target=143, generated=144), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T17:50:44.321939+00:00"
+      },
+      {
+        "code": "extern s32 func_150ADA20(void);\n\nvoid func_15070D24(s32 arg0) {\n    Stack_15070D24 sp4C;\n\n    sp4C.sp84 = D_80099B88;\n    sp4C.sp78 = D_80099B94;\n\n    if (D_800D154C->unk1D4 == 0) {\n        return;\n    }\n\n    if ((D_800D154C->unk74 & 0xF) == 0xF) {\n        return;\n    }\n\n    sp4C.sp70[0] = (func_150ADA68() * 101.0f) + 151.0f;\n    sp4C.sp70[1] = (func_150ADA68() * 4.0f) + 4.0f;\n\n    func_15143134(&sp4C.sp84, sp4C.sp64, (s32)D_800D154C->unk1D4 + 0x40);\n\n    func_15102B38((s32)D_800D154C, 1, (s32)&sp4C.sp84, (s32)&sp4C.sp78, sp4C.sp70,\n                  ((func_150ADA20() + 0U) % 6U) + 5, ((func_150ADA20() + 0U) % 0x9CU) + 0x64,\n                  (func_150ADA68() * 2496.0f) + D_80099F2C,\n                  (s32)sp4C.sp64, 0xFF, 0, -1, 0xFF, 0);\n\n    sp4C.header.unk0 = 3;\n    sp4C.header.unk1 = -1;\n    sp4C.header.unk2 = (func_150ADA20() % 6U) + 0xA;\n    sp4C.header.unk4 = 0;\n\n    sp4C.header2.unk0 = (s32)sp4C.sp64[0];\n    sp4C.header2.unk4 = (s32)sp4C.sp64[1];\n    sp4C.header2.unk8 = (s32)sp4C.sp64[2];\n\n    func_151602C0(&sp4C.header, &sp4C.header2, (func_150ADA20() % 0xC9U) + 0x37, 0xFF, 0xFF, 0xFF, 0xFF, 0, 0, 0xFF, 0);\n}",
+        "score": 0.0,
+        "reason": "compile_error",
+        "diffs": [],
+        "timestamp": "2026-08-09T17:51:18.191841+00:00"
+      },
+      {
+        "code": "void func_15070D24(s32 arg0) {\n    Stack_15070D24 sp4C;\n\n    sp4C.sp84 = D_80099B88;\n    sp4C.sp78 = D_80099B94;\n\n    if (D_800D154C->unk1D4 == 0) {\n        return;\n    }\n\n    if ((D_800D154C->unk74 & 0xF) == 0xF) {\n        return;\n    }\n\n    sp4C.sp70[0] = (func_150ADA68() * 101.0f) + 151.0f;\n    sp4C.sp70[1] = (func_150ADA68() * 4.0f) + 4.0f;\n\n    func_15143134(&sp4C.sp84, sp4C.sp64, (s32)D_800D154C->unk1D4 + 0x40);\n\n    func_15102B38((s32)D_800D154C, 1, (s32)&sp4C.sp84, (s32)&sp4C.sp78, sp4C.sp70,\n                  ((func_150ADA20() + 0U) % 6U) + 5, ((func_150ADA20() + 0U) % 0x9CU) + 0x64,\n                  (func_150ADA68() * 2496.0f) + D_80099F2C,\n                  (s32)sp4C.sp64, 0xFF, 0, -1, 0xFF, 0);\n\n    sp4C.header.unk0 = 3;\n    sp4C.header.unk1 = -1;\n    sp4C.header.unk2 = (func_150ADA20() % 6U) + 0xA;\n    sp4C.header.unk4 = 0;\n\n    sp4C.header2.unk0 = (s32)sp4C.sp64[0];\n    sp4C.header2.unk4 = (s32)sp4C.sp64[1];\n    sp4C.header2.unk8 = (s32)sp4C.sp64[2];\n\n    func_151602C0(&sp4C.header, &sp4C.header2, (func_150ADA20() % 0xC9U) + 0x37, 0xFF, 0xFF, 0xFF, 0xFF, 0, 0, 0xFF, 0);\n}",
+        "score": 0.4375,
+        "reason": "length_mismatch (target=143, generated=144), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T17:51:40.672703+00:00"
+      },
+      {
+        "code": "extern void func_15102B38(s32, u8, s32, s32, f32 *, s32, s32, f32, s32, s32, s32, s32, u8, s32);\n\nvoid func_15070D24(s32 arg0) {\n    Stack_15070D24 sp4C;\n\n    sp4C.sp84 = D_80099B88;\n    sp4C.sp78 = D_80099B94;\n\n    if (D_800D154C->unk1D4 == 0) {\n        return;\n    }\n\n    if ((D_800D154C->unk74 & 0xF) == 0xF) {\n        return;\n    }\n\n    sp4C.sp70[0] = (func_150ADA68() * 101.0f) + 151.0f;\n    sp4C.sp70[1] = (func_150ADA68() * 4.0f) + 4.0f;\n\n    func_15143134(&sp4C.sp84, sp4C.sp64, (s32)D_800D154C->unk1D4 + 0x40);\n\n    func_15102B38((s32)D_800D154C, 1, (s32)&sp4C.sp84, (s32)&sp4C.sp78, sp4C.sp70,\n                  ((func_150ADA20() + 0U) % 6U) + 5, ((func_150ADA20() + 0U) % 0x9CU) + 0x64,\n                  (func_150ADA68() * 2496.0f) + D_80099F2C,\n                  (s32)sp4C.sp64, 0xFF, 0, -1, 0xFF, 0);\n\n    sp4C.header.unk0 = 3;\n    sp4C.header.unk1 = -1;\n    sp4C.header.unk2 = (func_150ADA20() % 6U) + 0xA;\n    sp4C.header.unk4 = 0;\n\n    sp4C.header2.unk0 = (s32)sp4C.sp64[0];\n    sp4C.header2.unk4 = (s32)sp4C.sp64[1];\n    sp4C.header2.unk8 = (s32)sp4C.sp64[2];\n\n    func_151602C0(&sp4C.header, &sp4C.header2, (func_150ADA20() % 0xC9U) + 0x37, 0xFF, 0xFF, 0xFF, 0xFF, 0, 0, 0xFF, 0);\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-09T17:52:16.723884+00:00"
+      }
+    ]
   },
   {
     "function": "func_151247C0",

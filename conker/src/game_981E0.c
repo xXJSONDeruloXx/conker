@@ -5,6 +5,8 @@
 #undef func_150ADA20
 #include "variables.h"
 
+extern s32 func_150ADA20(void);
+
 struct func_1506F1A8_stack {
     s32 unk00;
     struct127 *unk04;
@@ -1501,7 +1503,43 @@ void func_15070D00(s32 arg0) {
     func_15070C40(0);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_15070D24.s")
+extern void func_15102B38(s32, u8, s32, s32, f32 *, s32, s32, f32, s32, s32, s32, s32, u8, s32);
+
+void func_15070D24(s32 arg0) {
+    Stack_15070D24 sp4C;
+
+    sp4C.sp84 = D_80099B88;
+    sp4C.sp78 = D_80099B94;
+
+    if (D_800D154C->unk1D4 == 0) {
+        return;
+    }
+
+    if ((D_800D154C->unk74 & 0xF) == 0xF) {
+        return;
+    }
+
+    sp4C.sp70[0] = (func_150ADA68() * 101.0f) + 151.0f;
+    sp4C.sp70[1] = (func_150ADA68() * 4.0f) + 4.0f;
+
+    func_15143134(&sp4C.sp84, sp4C.sp64, (s32)D_800D154C->unk1D4 + 0x40);
+
+    func_15102B38((s32)D_800D154C, 1, (s32)&sp4C.sp84, (s32)&sp4C.sp78, sp4C.sp70,
+                  ((func_150ADA20() + 0U) % 6U) + 5, ((func_150ADA20() + 0U) % 0x9CU) + 0x64,
+                  (func_150ADA68() * 2496.0f) + D_80099F2C,
+                  (s32)sp4C.sp64, 0xFF, 0, -1, 0xFF, 0);
+
+    sp4C.header.unk0 = 3;
+    sp4C.header.unk1 = -1;
+    sp4C.header.unk2 = (func_150ADA20() % 6U) + 0xA;
+    sp4C.header.unk4 = 0;
+
+    sp4C.header2.unk0 = (s32)sp4C.sp64[0];
+    sp4C.header2.unk4 = (s32)sp4C.sp64[1];
+    sp4C.header2.unk8 = (s32)sp4C.sp64[2];
+
+    func_151602C0(&sp4C.header, &sp4C.header2, (func_150ADA20() % 0xC9U) + 0x37, 0xFF, 0xFF, 0xFF, 0xFF, 0, 0, 0xFF, 0);
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/game_981E0/func_15070F60.s")
 void func_15071230(s32 arg0) {
     func_15070F60(0);
