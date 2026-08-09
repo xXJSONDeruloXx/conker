@@ -53217,9 +53217,18 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "void func_1001A030(N_ALCSPlayer *seqp, s32 arg1, s32 chan, s32 arg3) {\n    N_ALSoundState *state;\n\n    seqp->chanState[chan].sustain = arg3;\n\n    for (state = seqp->vAllocHead; state != NULL; state = state->voice.node.next) {\n        if (state->chan == chan && *((u8 *)state + 0x39) != 3) {\n            if ((u32)arg3 >= 0x40) {\n                if (*((u8 *)state + 0x39) == 0) {\n                    *((u8 *)state + 0x39) = 2;\n                }\n            } else if (*((u8 *)state + 0x39) == 2) {\n                *((u8 *)state + 0x39) = 0;\n            } else if (*((u8 *)state + 0x39) == 4) {\n                *((u8 *)state + 0x39) = 3;\n                if (*((u8 *)&seqp->chanState[chan] + 0x28) != 0) {\n                    __n_seqpReleaseVoice(seqp, &state->voice.node.prev,\n                        (*(s32 *)((u8 *)&seqp->chanState[chan] + 0x24) < 0x3E80)\n                            ? 0x3E80\n                            : *(s32 *)((u8 *)&seqp->chanState[chan] + 0x24));\n                } else {\n                    __n_seqpReleaseVoice(seqp, &state->voice.node.prev,\n                        ((*(ALSound **)((u8 *)state + 0x24))->envelope->releaseTime < 0x3E80)\n                            ? 0x3E80\n                            : (*(ALSound **)((u8 *)state + 0x24))->envelope->releaseTime);\n                }\n            }\n        }\n    }\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-09T19:15:19.069989+00:00"
+      }
+    ]
   },
   {
     "function": "func_151462C8",
