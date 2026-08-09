@@ -603,7 +603,46 @@ void func_1504CA60(struct127 *arg0) {
 #pragma GLOBAL_ASM("asm/nonmatchings/game_77AD0/func_1504CB98.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_77AD0/func_150511E8.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_77AD0/func_15051558.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_77AD0/func_1505210C.s")
+f32 func_1505210C(struct127 *arg0, register f32 arg1, register f32 arg2,
+                  f32 *arg3, f32 arg4) {
+    f32 sp34;
+    s32 pad;
+    f32 sp2C;
+    f32 temp_f0;
+    f32 temp_f12;
+    f32 temp_f2;
+
+    arg2 = -arg2;
+    sp2C = arg0->unk40 * D_80099330;
+    sp34 = func_150AD780(sp2C);
+    temp_f0 = func_150AD78C(sp2C);
+    temp_f12 = (arg1 * sp34) + (arg2 * temp_f0);
+    arg2 = (-arg1 * temp_f0) + (arg2 * sp34);
+    arg1 = func_150484A0(temp_f12, 1.0f) * D_80099334;
+    temp_f2 = func_150484A0(arg2, 1.0f) * D_80099338;
+    arg2 = temp_f2;
+    if (arg1 >= 180.0f) {
+        arg1 -= 360.0f;
+    }
+    if (temp_f2 >= 180.0f) {
+        arg2 = temp_f2 - 360.0f;
+    }
+    temp_f0 = -arg4;
+    if (arg4 < arg1) {
+        arg1 = arg4;
+    }
+    if (arg1 < temp_f0) {
+        arg1 = temp_f0;
+    }
+    if (arg4 < arg2) {
+        arg2 = arg4;
+    }
+    if (arg2 < temp_f0) {
+        arg2 = temp_f0;
+    }
+    *arg3 = arg2;
+    return arg1;
+}
 void func_15052260(struct127 *arg0) {
     struct126 *v0 = arg0->unk31C;
     f32 factor;
