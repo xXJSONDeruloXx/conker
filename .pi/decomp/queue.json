@@ -4736,9 +4736,9 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 45,
-    "lastScore": 0.375,
-    "status": "skipped",
+    "attempts": 51,
+    "lastScore": 1.0,
+    "status": "matched",
     "history": [
       {
         "code": "void func_15169040(s32 arg0, u8 arg1) {\n    func_15169070(0, 0x68, arg0, arg1);\n}",

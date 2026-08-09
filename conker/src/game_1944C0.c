@@ -10,7 +10,7 @@ extern void (*D_8008CB70[])(void);
 
 void func_15168A4C(struct12 *arg0, s32 arg1);
 
-void func_15169040(void *, u8);
+void func_15169040(s32, u8);
 
 extern void (*D_8008CA20[])(struct127 *);
 
@@ -438,7 +438,10 @@ void func_15168F84(s32 arg0, s32 *arg1, s32 *arg2) {
     *arg1 = 0x5D;
     *arg2 = 0x60;
 }
-#pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_15169040.s")
+void func_15169070(s32 arg0, s32 arg1, s32 arg2, u8 arg3);
+void func_15169040(s32 arg0, u8 arg1) {
+    func_15169070(0, 0x68, arg0, arg1);
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_15169070.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_15169260.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_1516944C.s")
