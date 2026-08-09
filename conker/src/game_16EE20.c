@@ -1094,7 +1094,33 @@ u8 func_15145C90(s32 arg0) {
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15145DB4.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15145EA4.s")
 #pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15146078.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_151462C8.s")
+extern u8 D_800BE9C0;
+extern u8 D_800D9BD0[][2][8];
+extern s32 D_800D9E10[];
+extern u8 D_800D9E20;
+extern u8 D_800D9E21;
+void *func_1515D914(void *, s16, s32, s32, s32, s32, s32, s32, s32, void *, s32, s32, s32, s32);
+void *func_1515E544(void *, s32, u8, u8, void *);
+void *func_151462C8(void *arg0, s32 *arg1, u8 arg2, void *arg3, u8 arg4, s16 arg5, struct17 *arg6, u8 arg7, s32 arg8)
+{
+  s32 temp_t1;
+  s32 temp_t2;
+  s32 temp_v1;
+  s16 temp_a1;
+  s32 var_t0;
+  s32 var_v1;
+  temp_v1 = arg5 * 4;
+  temp_t1 = *((s32 *) ((((u8 *) arg1) + temp_v1) + 8));
+  if (temp_t1 != 0)
+  {
+    temp_t2 = arg1[6];
+    if (temp_t2 != 0)
+    {
+ do { if (arg2 == 1) { if (arg3 != 0) { if (((((*((s32 *) (((u8 *) arg3) + 0))) == 0) || (arg4 != (*(((u8 *) arg3) + 0x3B)))) || ((*(((u8 *) arg3) + 4)) == 0xFF)) || ((*(((u8 *) arg3) + 0x302)) == 0)) { arg2 = 2; } } else { arg2 = 0; } } switch (arg2) { case 1: arg0 = func_1515E544(arg0, *((s32 *) ((((u8 *) arg3) + temp_v1) + 0x304)), *(((u8 *) arg3) + 0x301), *(((u8 *) arg3) + 0x302), *((void **) (((u8 *) arg3) + 0x314))); break; case 2: arg0 = func_1515E544(arg0, D_800D9E10[arg5], D_800D9E20, D_800D9E21, D_800D9BD0[arg5][D_800BE9C0]); break; do { } while (0); case 0: default: temp_a1 = arg5; var_t0 = (arg7 & 1) ? (2) : (0); if (arg7 & 2) { var_v1 = 0x10; } else { var_v1 = 0; } arg0 = func_1515D914(arg0, temp_a1, (s32) arg6->unk0, (s32) arg6->unk4, (s32) arg6->unk8, arg8, temp_t1, arg1[0], temp_t2, arg1 + 1, arg1[7], 0, (var_v1 | 8) | var_t0, 0); break; } } while (0);
+    }
+  }
+  return arg0;
+}
 u8 func_151464B8(s16 *arg0) {
     s32 i;
     s16 mask;
