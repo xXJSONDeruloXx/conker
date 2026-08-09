@@ -93,4 +93,52 @@ s16 func_16002D2C(s16 *arg0, struct05 *arg1) {
 }
 
 #pragma GLOBAL_ASM("asm/nonmatchings/debugger_257350/func_16002DE4.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/debugger_257350/func_160033A8.s")
+#include "libc/stdlib.h"
+typedef struct { union { long long ll; double d; } v; u8 *s; s32 n0; s32 nz0; s32 n1; s32 nz1; s32 n2; s32 nz2; s32 prec; s32 width; u32 nchar; u32 flags; u8 qual; } DebuggerPft;
+extern u8 D_16003CB8[];
+extern u8 D_16003CCC[];
+void func_160033A8(DebuggerPft *px, u8 code) {
+    char buff[0x18];
+    u8 *digs;
+    s32 base;
+    s32 i;
+    unsigned long long ullval;
+
+    digs = (code == 'X') ? D_16003CCC : D_16003CB8;
+
+    base = (code == 'o') ? 8 : ((code != 'x' && code != 'X') ? 10 : 16);
+    i = 0x18;
+    ullval = px->v.ll;
+
+    if ((code == 'd' || code == 'i') && px->v.ll < 0) {
+        ullval = -ullval;
+    }
+
+    if (ullval != 0 || px->prec != 0) {
+        buff[--i] = digs[ullval % base];
+    }
+
+    px->v.ll = ullval / base;
+
+    while (px->v.ll > 0 && i > 0) {
+        lldiv_t qr;
+
+        qr = lldiv(px->v.ll, base);
+        px->v.ll = qr.quot;
+        buff[--i] = digs[qr.rem];
+    }
+
+    px->n1 = 0x18 - i;
+
+    func_16001AD0(px->s, buff + i, px->n1);
+
+    if (px->n1 < px->prec) {
+        px->nz0 = px->prec - px->n1;
+    }
+
+    if (px->prec < 0 && (px->flags & 0x14) == 0x10) {
+        if ((i = px->width - px->n0 - px->nz0 - px->n1) > 0) {
+            px->nz0 += i;
+        }
+    }
+}
