@@ -49184,9 +49184,18 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "s32 func_15137C64(struct17 *arg0, struct17 *arg1, struct17 *arg2, struct17 *arg3,\n                  struct17 *arg4, struct17 *arg5, struct17 *arg6, struct17 *arg7) {\n    f32 sp2C;\n    f32 sp28;\n\n    if ((arg5 != NULL) && (arg6 != NULL)) {\n        *arg0 = *arg5;\n        *arg1 = *arg6;\n    } else if (arg5 != NULL) {\n        *arg0 = *arg5;\n        *arg1 = *arg5;\n    } else if (arg6 != NULL) {\n        *arg0 = *arg6;\n        *arg1 = *arg6;\n    } else {\n        return 0;\n    }\n\n    if (arg7 == NULL) {\n        arg2->unk0 = arg1->unk0 - arg0->unk0;\n        arg2->unk4 = arg1->unk4 - arg0->unk4;\n        arg2->unk8 = arg1->unk8 - arg0->unk8;\n        if (func_15145128(arg2, arg2, &sp2C, &sp28) == 0) {\n            return 0;\n        }\n    } else {\n        *arg2 = *arg7;\n    }\n\n    if (func_15146078(arg2, arg3, arg4) == 0) {\n        return 2;\n    }\n    return 1;\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-09T16:49:39.477287+00:00"
+      }
+    ]
   },
   {
     "function": "func_151DC260",
