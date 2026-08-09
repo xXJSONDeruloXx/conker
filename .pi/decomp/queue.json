@@ -48886,8 +48886,8 @@
       "branchy"
     ],
     "attempts": 3,
-    "lastScore": 0.0526,
-    "status": "pending",
+    "lastScore": 1.0,
+    "status": "matched",
     "history": [
       {
         "code": "extern u8 D_800D9946;\nextern s32 D_800D9894;\nextern s32 D_800D98D0[];\nextern u8 D_800D9950[];\n\nvoid func_1500E5C0(void) {\n    u8 *ptr0;\n    u8 *end0;\n    u8 *ptr1;\n    u8 *ptr2;\n\n    func_15012470();\n    func_15008A10();\n    func_15012770();\n\n    ptr0 = &D_800E0950;\n    end0 = (u8 *)&D_800E0964;\n    do {\n        ptr0 += 4;\n        ptr0[-4] = 0;\n        ptr0[-3] = 0;\n        ptr0[-2] = 0;\n        ptr0[-1] = 0;\n    } while (ptr0 != end0);\n\n    D_800D9921 = 0;\n    D_800D9920 = 0;\n    D_800D9928 = 0;\n    D_800D9938 = 0;\n    D_800D9929 = 0;\n    D_800D9939 = 0;\n\n    ptr1 = D_800D992A;\n    ptr2 = D_800D993A;\n    end0 = &D_800D9946;\n    do {\n        ptr2 += 4;\n        ptr1[1] = 0;\n        ptr2[-3] = 0;\n        ptr1[2] = 0;\n        ptr2[-2] = 0;\n        ptr1[3] = 0;\n        ptr2[-1] = 0;\n        ptr1 += 4;\n        ptr1[-4] = 0;\n    } while (ptr2 != end0);\n\n    D_800D9890 = 0;\n    D_800D9894 = 0;\n    D_800D98D0[0] = 0;\n    D_800D98D0[1] = 0;\n    D_800D98D0[2] = 0;\n    D_800D98D0[3] = 0;\n    D_80088870 = 0;\n    bzero(D_800BE500, 5);\n    D_800D9950[2] = 0;\n    D_800D9950[1] = 0;\n    D_800D9950[0] = 0;\n    D_80088980 = 0;\n    D_800D9AA0[0] = 0;\n    D_800D9AA0[1] = 0;\n    D_800D9AA0[2] = 0;\n    D_800BE4F0 = 0;\n    D_80088B40 = 0;\n}",
