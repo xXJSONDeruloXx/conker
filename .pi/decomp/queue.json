@@ -46798,9 +46798,18 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "s32 func_1502B9B4(s32 arg0, ...) {\n    va_list args;\n    s32 temp_a1;\n    s32 offset;\n    s32 more;\n    s32 sp54;\n    s32 sp38[7];\n    s32 *ptr;\n\n    more = 1;\n    offset = (s32) D_AB1950;\n    va_start(args, arg0);\n    if (arg0 != 0) {\n        do {\n            temp_a1 = va_arg(args, s32);\n            if (more != 0) {\n                offset += func_1502AC88(offset, temp_a1, &sp54);\n            }\n            arg0--;\n            more = sp54 & 0x0FFFFFFF;\n        } while (arg0 != 0);\n    }\n    if (more != 0) {\n        more = sp54 & 0x0FFFFFFF;\n        more = (more + 1) & -2;\n        if ((sp54 & 0x70000000) == 0x10000000) {\n            ptr = sp38;\n            if (((s32) ptr & 8) != 0) {\n                ptr = (s32 *)((s32) ptr + 8);\n            }\n            func_10004514(offset, ptr, 0x10, 1);\n            more = *ptr;\n        }\n    }\n    return more;\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-09T16:27:39.719953+00:00"
+      }
+    ]
   },
   {
     "function": "func_10021E4C",
