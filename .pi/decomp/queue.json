@@ -53002,9 +53002,18 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "s32 _allocatePVoice(N_PVoice **pvoice, s16 priority) {\n    N_PVoice *pv;\n    N_PVoice *v;\n    s32 stolen = 0;\n\n    if ((pv = (N_PVoice *)n_syn->pLameList.next) != 0) {\n        ALLink *element;\n        ALLink *ln;\n        ALLink *to;\n        *pvoice = pv;\n        element = (ALLink *)pv;\n        if (element->next) element->next->prev = element->prev;\n        if (element->prev) element->prev->next = element->next;\n        ln = (ALLink *)pv;\n        to = &n_syn->pAllocList;\n        ln->next = to->next;\n        ln->prev = to;\n        if (to->next) to->next->prev = ln;\n        to->next = ln;\n    } else if ((pv = (N_PVoice *)n_syn->pFreeList.next) != 0) {\n        ALLink *element;\n        ALLink *ln;\n        ALLink *to;\n        *pvoice = pv;\n        element = (ALLink *)pv;\n        if (element->next) element->next->prev = element->prev;\n        if (element->prev) element->prev->next = element->next;\n        ln = (ALLink *)pv;\n        to = &n_syn->pAllocList;\n        ln->next = to->next;\n        ln->prev = to;\n        if (to->next) to->next->prev = ln;\n        to->next = ln;\n    } else {\n        for (pv = (N_PVoice *)n_syn->pAllocList.next; pv != 0; pv = (N_PVoice *)pv->node.next) {\n            v = pv;\n            if (priority >= (*(N_ALVoice **)((u8 *)v + 0x10))->priority && *(s32 *)((u8 *)v + 0x90) == 0) {\n                *pvoice = v;\n                priority = (*(N_ALVoice **)((u8 *)v + 0x10))->priority;\n                stolen = 1;\n            }\n        }\n    }\n    return stolen;\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-09T19:24:31.851882+00:00"
+      }
+    ]
   },
   {
     "function": "func_10010154",
