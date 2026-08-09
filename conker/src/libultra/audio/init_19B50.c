@@ -167,7 +167,34 @@ void func_1001A45C(N_ALCSPlayer *seqp, u8 chan) {
         }
     }
 }
-#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/init_19B50/func_1001A508.s")
+extern f32 fabsf(f32);
+#pragma intrinsic (fabsf)
+
+void func_1001A704(N_ALCSPlayer *seqp, s32 arg1, s32 chan, s32 arg3);
+
+void func_1001A508(N_ALCSPlayer *seqp, s32 arg1, s32 chan, s32 arg3) {
+    f32 delta;
+
+    if (seqp->chanState[chan].unkF == 0) {
+        seqp->chanState[chan].unkF = 0x88;
+    }
+    if (seqp->chanState[chan].unkE != arg3) {
+        delta = (f32)(arg3 - seqp->chanState[chan].unkD);
+        seqp->chanState[chan].unk10 = delta / (f32)(seqp->chanState[chan].unkF & 0x7F);
+        seqp->chanState[chan].unk10 = fabsf(seqp->chanState[chan].unk10);
+        if (seqp->chanState[chan].unkE == seqp->chanState[chan].unkD) {
+            seqp->chanState[chan].unkE = arg3;
+        } else {
+            seqp->chanState[chan].unkE = arg3;
+            return;
+        }
+        goto call_block;
+    }
+    return;
+call_block:
+    *((u8 *)arg1 + 0x9) = 0xFE;
+    func_1001A704(seqp, arg1, chan, arg3);
+}
 
 void func_1001A704(N_ALCSPlayer *seqp, s32 arg1, s32 chan, s32 arg3) {
     u8 sp2F;
