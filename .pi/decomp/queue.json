@@ -42629,9 +42629,18 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "void func_1504CA60(struct127 *arg0) {\n    f32 phi_f12;\n    f32 temp_f2;\n\n    temp_f2 = arg0->unk180 + 20.0f;\n    arg0->unk1CC = arg0->y_position;\n    phi_f12 = 18.0f;\n    if (30.0f < arg0->unk28) {\n        phi_f12 = 80.0f;\n    }\n    if (arg0->unk81 != 0) {\n        phi_f12 = 80.0f;\n        temp_f2 -= 30.0f;\n        if ((arg0->unk28 < 5.0f) && (arg0->y_velocity < 0.0f)) {\n            arg0->unk81 = 0;\n            arg0->y_velocity = 45.0f;\n        }\n    } else if (arg0->unk28 < 20.0f) {\n        if ((func_150ADA20() & 0x3F) == 0) {\n            arg0->y_velocity = 25.0f;\n        }\n    }\n    func_15058EA4(arg0, temp_f2, 3.8f, temp_f2, -3.5f, 80.0f, -phi_f12);\n    arg0->unk80 = 1;\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-09T16:32:17.980316+00:00"
+      }
+    ]
   },
   {
     "function": "func_1512623C",
