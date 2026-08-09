@@ -53766,9 +53766,18 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "void func_10018790(ALCSeq *seq, ALCSeqMarker *markers, u32 count, u32 base) {\n    N_ALEvent event;\n    ALCSeq tmp;\n    s32 j;\n    s32 i;\n    ALCSeqMarker lclMarker;\n\n    n_alCSeqNew(&tmp, (u8 *)seq->base);\n\n    for (i = 0; i < count; i++) {\n        markers[i].lastTicks = 0;\n    }\n\n    do {\n        lclMarker.validTracks = tmp.validTracks;\n        lclMarker.lastTicks = tmp.lastTicks;\n        lclMarker.lastDeltaTicks = tmp.lastDeltaTicks;\n        for (j = 0; j < 16; j++) {\n            lclMarker.curLoc[j] = tmp.curLoc[j];\n            lclMarker.curBUPtr[j] = tmp.curBUPtr[j];\n            lclMarker.curBULen[j] = tmp.curBULen[j];\n            lclMarker.lastStatus[j] = tmp.lastStatus[j];\n            lclMarker.evtDeltaTicks[j] = tmp.evtDeltaTicks[j];\n        }\n        n_alCSeqNextEvent(&tmp, &event, 0);\n        if (event.type == AL_CSP_LOOPEND) {\n            if ((s32)event.msg.midi.duration >> 8 >= base &&\n                (s32)event.msg.midi.duration >> 8 < base + count) {\n                if (markers[((s32)event.msg.midi.duration >> 8) - base].lastTicks == 0) {\n                    markers[((s32)event.msg.midi.duration >> 8) - base] = lclMarker;\n                    if (--i <= 0) {\n                        return;\n                    }\n                }\n            }\n        }\n    } while (event.type != AL_SEQ_END_EVT);\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-09T19:19:49.983018+00:00"
+      }
+    ]
   },
   {
     "function": "func_1507DB6C",
