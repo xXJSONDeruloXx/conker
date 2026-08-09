@@ -278,7 +278,42 @@ void n_alSynNew(ALSynConfig *c) {
 //     D_8002BA44->unk3C = sp34;
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/n_synthesizer/n_alAudioFrame.s")
+Acmd *n_alAudioFrame(Acmd *cmdList, s32 *cmdLen, s16 *outBuf, s32 outLen) {
+    ALPlayer *client;
+    Cmd *cmdp;
+    s32 sp34;
+    s16 *outp;
+    Cmd *cmd0;
+    Cmd *cmd1;
+
+    cmdp = (Cmd *)cmdList;
+    outp = outBuf;
+    if (n_syn->head == 0) {
+        *cmdLen = 0;
+        return cmdList;
+    }
+    while ((n_syn->paramSamples = __n_nextSampleTime(&client)),
+           ((u32)(n_syn->paramSamples - n_syn->curSamples) < (u32)outLen)) {
+        n_syn->paramSamples = n_syn->paramSamples & ~0xF;
+        client->samplesLeft += _n_timeToSamplesNoRound(client->handler(client));
+    }
+    n_syn->paramSamples = n_syn->paramSamples & ~0xF;
+    while (outLen > 0) {
+        sp34 = (n_syn->maxOutSamples < outLen) ? n_syn->maxOutSamples : outLen;
+        cmdp = func_1001FB40(n_syn->curSamples, cmdp);
+        cmd0 = cmdp++;
+        cmd0->w0 = 0xD000000;
+        cmd1 = cmdp++;
+        cmd1->w0 = 0x62E0000;
+        cmd1->w1 = (u32)outp;
+        outLen = outLen - sp34;
+        outp += sp34 * 2;
+        n_syn->curSamples = n_syn->curSamples + sp34;
+    }
+    *cmdLen = ((u8 *)cmdp - (u8 *)cmdList) >> 3;
+    _n_collectPVoices();
+    return (Acmd *)cmdp;
+}
 // void *n_alAudioFrame(void *arg0, void *arg1, s32 arg2, u32 arg3) {
 //     void *sp3C;
 //     void *sp38;

@@ -53569,9 +53569,18 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "Acmd *n_alAudioFrame(Acmd *cmdList, s32 *cmdLen, s16 *outBuf, s32 outLen) {\n    ALPlayer *client;\n    Cmd *cmdp;\n    s32 sp34;\n    s16 *outp;\n    Cmd *cmd0;\n    Cmd *cmd1;\n\n    cmdp = (Cmd *)cmdList;\n    outp = outBuf;\n    if (n_syn->head == 0) {\n        *cmdLen = 0;\n        return cmdList;\n    }\n    while ((n_syn->paramSamples = __n_nextSampleTime(&client)),\n           ((u32)(n_syn->paramSamples - n_syn->curSamples) < (u32)outLen)) {\n        n_syn->paramSamples = n_syn->paramSamples & ~0xF;\n        client->samplesLeft += _n_timeToSamplesNoRound(client->handler(client));\n    }\n    n_syn->paramSamples = n_syn->paramSamples & ~0xF;\n    while (outLen > 0) {\n        sp34 = (n_syn->maxOutSamples < outLen) ? n_syn->maxOutSamples : outLen;\n        cmdp = func_1001FB40(n_syn->curSamples, cmdp);\n        cmd0 = cmdp++;\n        cmd0->w0 = 0xD000000;\n        cmd1 = cmdp++;\n        cmd1->w0 = 0x62E0000;\n        cmd1->w1 = (u32)outp;\n        outLen = outLen - sp34;\n        outp += sp34 * 2;\n        n_syn->curSamples = n_syn->curSamples + sp34;\n    }\n    *cmdLen = ((u8 *)cmdp - (u8 *)cmdList) >> 3;\n    _n_collectPVoices();\n    return (Acmd *)cmdp;\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-09T18:04:43.374214+00:00"
+      }
+    ]
   },
   {
     "function": "func_150C29F0",
