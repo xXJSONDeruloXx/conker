@@ -52215,9 +52215,25 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 2,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "typedef struct {\n    char pad_0[0x98];\n    s16 field_0x98;\n    s16 field_0x9A;\n    char pad_0x9C[0xC];\n    u16 field_0xA8;\n    char pad_0xAA[0x6];\n    u8 field_0xB0;\n    char pad_0xB1[0x1];\n    s8 field_0xB2;\n} GameAnimObject;\n\ntypedef struct {\n    struct102 *unk0;\n    u8 pad4[0x0];\n    u8 unk4;\n} AnimTableEntry15168870;\n\nextern AnimTableEntry15168870 *D_8008CA4C[];\n\nvoid func_15168870(GameAnimObject *arg0) {\n    s32 temp_v0;\n    s32 temp_v1;\n    u8 temp_a1;\n    s16 temp_a2;\n    void (*func)(struct102 *);\n\n    temp_a2 = arg0->field_0x9A;\n    if (temp_a2 != 0) {\n        temp_a1 = D_8008CA4C[arg0->field_0xB0]->unk4;\n        temp_v1 = temp_a1;\n        temp_v1 <<= 8;\n        arg0->field_0x98 += temp_a2 * D_800BE9E4;\n        temp_v0 = arg0->field_0x98;\n        temp_v1 -= 1;\n        if (temp_v1 < temp_v0) {\n            if (arg0->field_0xA8 & 0x40) {\n                arg0->field_0x98 = temp_v1 - (temp_v0 % temp_v1);\n                arg0->field_0x9A = -temp_a2;\n            } else if (arg0->field_0xA8 & 4) {\n                arg0->field_0x98 = -1;\n            } else {\n                do {\n                    arg0->field_0x98 = temp_v0 - temp_v1;\n                    temp_v0 = arg0->field_0x98;\n                } while (temp_v1 < temp_v0);\n            }\n        } else if (temp_v0 < 0) {\n            if (arg0->field_0xA8 & 0x40) {\n                arg0->field_0x98 = -temp_v0 % temp_v1;\n                arg0->field_0x9A = -temp_a2;\n            } else if (arg0->field_0xA8 & 4) {\n                arg0->field_0x98 = -1;\n            } else {\n                do {\n                    arg0->field_0x98 = temp_v0 + temp_v1;\n                    temp_v0 = arg0->field_0x98;\n                } while (temp_v0 < 0);\n            }\n        }\n    }\n\n    temp_v0 = arg0->field_0xB2;\n    if (temp_v0 != -1) {\n        func = D_8008C9C8[temp_v0];\n        if (func != NULL) {\n            func((struct102 *)arg0);\n        }\n    }\n\n    if (arg0->field_0x98 == -1) {\n        func_1516972C((struct102 *)arg0);\n    }\n}",
+        "score": 0.0,
+        "reason": "compile_error",
+        "diffs": [],
+        "timestamp": "2026-08-09T17:49:37.980416+00:00"
+      },
+      {
+        "code": "typedef struct {\n    char pad_0[0x98];\n    s16 field_0x98;\n    s16 field_0x9A;\n    char pad_0x9C[0xC];\n    u16 field_0xA8;\n    char pad_0xAA[0x6];\n    u8 field_0xB0;\n    char pad_0xB1[0x1];\n    s8 field_0xB2;\n} GameAnimObject;\n\ntypedef struct {\n    struct102 *unk0;\n    u8 unk4;\n} AnimTableEntry15168870;\n\nextern AnimTableEntry15168870 *D_8008CA4C[];\nextern void (*D_8008C9C8[])(struct102 *);\n\nvoid func_15168870(GameAnimObject *arg0) {\n    s32 temp_v0;\n    s32 temp_v1;\n    u8 temp_a1;\n    s16 temp_a2;\n    void (*func)(struct102 *);\n\n    temp_a2 = arg0->field_0x9A;\n    if (temp_a2 != 0) {\n        temp_a1 = D_8008CA4C[arg0->field_0xB0]->unk4;\n        temp_v1 = temp_a1;\n        temp_v1 <<= 8;\n        arg0->field_0x98 += temp_a2 * D_800BE9E4;\n        temp_v0 = arg0->field_0x98;\n        temp_v1 -= 1;\n        if (temp_v1 < temp_v0) {\n            if (arg0->field_0xA8 & 0x40) {\n                arg0->field_0x98 = temp_v1 - (temp_v0 % temp_v1);\n                arg0->field_0x9A = -temp_a2;\n            } else if (arg0->field_0xA8 & 4) {\n                arg0->field_0x98 = -1;\n            } else {\n                do {\n                    arg0->field_0x98 = temp_v0 - temp_v1;\n                    temp_v0 = arg0->field_0x98;\n                } while (temp_v1 < temp_v0);\n            }\n        } else if (temp_v0 < 0) {\n            if (arg0->field_0xA8 & 0x40) {\n                arg0->field_0x98 = -temp_v0 % temp_v1;\n                arg0->field_0x9A = -temp_a2;\n            } else if (arg0->field_0xA8 & 4) {\n                arg0->field_0x98 = -1;\n            } else {\n                do {\n                    arg0->field_0x98 = temp_v0 + temp_v1;\n                    temp_v0 = arg0->field_0x98;\n                } while (temp_v0 < 0);\n            }\n        }\n    }\n\n    temp_v0 = arg0->field_0xB2;\n    if (temp_v0 != -1) {\n        func = D_8008C9C8[temp_v0];\n        if (func != NULL) {\n            func((struct102 *)arg0);\n        }\n    }\n\n    if (arg0->field_0x98 == -1) {\n        func_1516972C((struct102 *)arg0);\n    }\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-09T17:49:46.489632+00:00"
+      }
+    ]
   },
   {
     "function": "func_151F86B0",

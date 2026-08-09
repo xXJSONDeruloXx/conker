@@ -136,7 +136,80 @@ void *func_15168800(void *arg0, u8 arg1, s32 arg2) {
     bcopy(arg0, (void *)((s32)temp_v0 + 0x10), 0xA8);
     return temp_v0;
 }
-#pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_15168870.s")
+typedef struct {
+    char pad_0[0x98];
+    s16 field_0x98;
+    s16 field_0x9A;
+    char pad_0x9C[0xC];
+    u16 field_0xA8;
+    char pad_0xAA[0x6];
+    u8 field_0xB0;
+    char pad_0xB1[0x1];
+    s8 field_0xB2;
+} GameAnimObject;
+
+typedef struct {
+    struct102 *unk0;
+    u8 unk4;
+} AnimTableEntry15168870;
+
+extern AnimTableEntry15168870 *D_8008CA4C[];
+extern void (*D_8008C9C8[])(struct102 *);
+
+void func_15168870(GameAnimObject *arg0) {
+    s32 temp_v0;
+    s32 temp_v1;
+    u8 temp_a1;
+    s16 temp_a2;
+    void (*func)(struct102 *);
+
+    temp_a2 = arg0->field_0x9A;
+    if (temp_a2 != 0) {
+        temp_a1 = D_8008CA4C[arg0->field_0xB0]->unk4;
+        temp_v1 = temp_a1;
+        temp_v1 <<= 8;
+        arg0->field_0x98 += temp_a2 * D_800BE9E4;
+        temp_v0 = arg0->field_0x98;
+        temp_v1 -= 1;
+        if (temp_v1 < temp_v0) {
+            if (arg0->field_0xA8 & 0x40) {
+                arg0->field_0x98 = temp_v1 - (temp_v0 % temp_v1);
+                arg0->field_0x9A = -temp_a2;
+            } else if (arg0->field_0xA8 & 4) {
+                arg0->field_0x98 = -1;
+            } else {
+                do {
+                    arg0->field_0x98 = temp_v0 - temp_v1;
+                    temp_v0 = arg0->field_0x98;
+                } while (temp_v1 < temp_v0);
+            }
+        } else if (temp_v0 < 0) {
+            if (arg0->field_0xA8 & 0x40) {
+                arg0->field_0x98 = -temp_v0 % temp_v1;
+                arg0->field_0x9A = -temp_a2;
+            } else if (arg0->field_0xA8 & 4) {
+                arg0->field_0x98 = -1;
+            } else {
+                do {
+                    arg0->field_0x98 = temp_v0 + temp_v1;
+                    temp_v0 = arg0->field_0x98;
+                } while (temp_v0 < 0);
+            }
+        }
+    }
+
+    temp_v0 = arg0->field_0xB2;
+    if (temp_v0 != -1) {
+        func = D_8008C9C8[temp_v0];
+        if (func != NULL) {
+            func((struct102 *)arg0);
+        }
+    }
+
+    if (arg0->field_0x98 == -1) {
+        func_1516972C((struct102 *)arg0);
+    }
+}
 void func_15168A2C(s32 arg0) {
     func_15168B10(arg0, 0);
 }
