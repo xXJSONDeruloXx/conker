@@ -219,7 +219,37 @@ s32 func_151420F8(struct127 *arg0) {
     }
     return 1;
 }
-#pragma GLOBAL_ASM("asm/nonmatchings/game_16EE20/func_15142180.s")
+void func_15153F18(struct conker15142180 *a0, struct vec15142180 *a1, s32 a2, s32 a3, s32 a4);
+
+void func_15142180(u8 arg0, struct vec15142180 *arg1, s32 arg2, f32 arg3, f32 arg4) {
+    struct conker15142180 sp24;
+
+    sp24.unk08 = *arg1;
+    sp24.unk2C = 3;
+    sp24.unk2E = 3;
+    sp24.unk02 = 0xFF;
+    sp24.unk04 = -0x19;
+    sp24.unk06 = 0xA;
+    sp24.unk14 = 2.5f * arg3;
+    sp24.unk18 = (1.0f + 1.0f) * arg3;
+    sp24.unk1C = D_800A5470;
+    sp24.unk20 = D_800A5474;
+    sp24.unk24 = 3.0f * arg4;
+    sp24.unk28 = 3.5f * arg4;
+    sp24.unk00 = 0;
+    sp24.unk30 = 3;
+    sp24.unk32 = 1;
+    sp24.unk34 = 9;
+    sp24.unk36 = 0xF;
+    sp24.unk38 = 0xB4;
+    sp24.unk3A = 0x4B;
+    sp24.unk40 = 0.0f;
+    sp24.unk44 = 0xC;
+    sp24.unk46 = 0x15;
+    sp24.unk48 = arg2;
+    sp24.unk3C = arg0;
+    func_15153F18(&sp24, &sp24.unk08, 0, 0xFF, 1);
+}
 
 s32 func_151422C0(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     return (arg3 + arg2) >> 1;
