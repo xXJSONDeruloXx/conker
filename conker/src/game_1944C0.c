@@ -290,7 +290,88 @@ void func_15168BE4(void *arg0, u8 arg1, s32 arg2) {
         }
     }
 }
-#pragma GLOBAL_ASM("asm/nonmatchings/game_1944C0/func_15168C4C.s")
+extern s16 D_800DD1C0;
+extern s16 D_800DD1C2;
+extern s16 D_800DD1C4;
+extern s16 D_800DD1C6;
+
+typedef struct {
+    u8 pad0[0x10];
+    Mtx mtx[2];
+    f32 unk90;
+    f32 unk94;
+    f32 unk98;
+    f32 unk9C;
+    f32 unkA0;
+    f32 unkA4;
+    u8 padA8[0x18];
+    f32 unkC0;
+    f32 unkC4;
+    f32 unkC8;
+    u8 padCC[0x4];
+    Gfx *display_list;
+    u8 padD4[0x11];
+    u8 prim_alpha;
+    u8 tile_ult;
+    u8 padE7[0x5];
+    u8 render_mode;
+    u8 combine_mode;
+} Struct15168C4C;
+
+Gfx *func_15142FBC(Gfx *gfx, s32 arg1, s32 arg2, u8 *arg3);
+
+#define WGFX15168C4C(pkt, a, b) \
+{ \
+    Gfx *_g = (Gfx *)(pkt); \
+    _g->words.w0 = (u32)(a); \
+    _g->words.w1 = (u32)(b); \
+}
+
+#define WGSPMATRIX15168C4C(pkt, mtx) WGFX15168C4C(pkt, 0xDA380003, mtx)
+#define WGSPDISPLAYLIST15168C4C(pkt, dl) WGFX15168C4C(pkt, 0xDE000000, dl)
+
+Gfx *func_15168C4C(Gfx *gfx, Struct15168C4C *obj, s32 arg2) {
+    s32 mode1;
+    u8 update;
+    s16 *zero_ptr;
+    s16 *copy_ptr;
+
+    func_15043D90((Mtx *)((u8 *)obj + (D_800BE9C0 << 6) + 0x10), obj->unk9C, obj->unkA0, obj->unkA4,
+        obj->unkC0, obj->unkC4, obj->unkC8, obj->unk90, obj->unk94, obj->unk98);
+
+    zero_ptr = &D_800DD1C4;
+    copy_ptr = &D_800DD1C2;
+
+    gDPPipeSync(gfx++);
+    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, obj->prim_alpha);
+    D_800DD1C6 = obj->prim_alpha;
+    *zero_ptr = 0;
+    *copy_ptr = *zero_ptr;
+    D_800DD1C0 = *copy_ptr;
+    gDPSetEnvColor(gfx++, 0, 0, 0, 0);
+    gDPSetTileSize(gfx++, 0, 2, obj->tile_ult, 0x7E, 0xFE);
+
+    switch (obj->render_mode) {
+    case 1:
+        *(s32 *)((u8 *)&mode1 - 4) = 0x552230;
+        break;
+    case 2:
+        *(s32 *)((u8 *)&mode1 - 4) = 0x504A50;
+        break;
+    }
+
+    *(u8 *)((u8 *)&update - 4) = 0;
+    gfx = func_15142FBC(gfx, 0x8ACA0, *(s32 *)((u8 *)&mode1 - 4), (u8 *)((u8 *)&update - 4));
+
+    if (obj->combine_mode == 1) {
+        gDPSetCombine(gfx++, 0x123824, 0xFF73FFFF);
+    }
+
+    WGSPMATRIX15168C4C(gfx++, (u8 *)obj + (D_800BE9C0 << 6) + 0x10);
+    WGSPDISPLAYLIST15168C4C(gfx++, obj->display_list);
+
+    return gfx;
+}
 void func_15168E34(s32 *arg0, s32 arg1) {
     s32 temp_v0 = *arg0;
 

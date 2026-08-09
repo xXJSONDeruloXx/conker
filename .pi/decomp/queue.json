@@ -49749,9 +49749,25 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 2,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "typedef struct {\n    u8 pad0[0x10];\n    Mtx mtx[2];\n    f32 unk90;\n    f32 unk94;\n    f32 unk98;\n    f32 unk9C;\n    f32 unkA0;\n    f32 unkA4;\n    u8 padA8[0x18];\n    f32 unkC0;\n    f32 unkC4;\n    f32 unkC8;\n    u8 padCC[0x4];\n    Gfx *display_list;\n    u8 padD4[0x11];\n    u8 prim_alpha;\n    u8 tile_ult;\n    u8 padE7[0x5];\n    u8 render_mode;\n    u8 combine_mode;\n} Struct15168C4C;\n\nGfx *func_15142FBC(Gfx *gfx, s32 arg1, s32 arg2, u8 *arg3);\n\n#define WGFX15168C4C(pkt, a, b) \\\n{ \\\n    Gfx *_g = (Gfx *)(pkt); \\\n    _g->words.w0 = (u32)(a); \\\n    _g->words.w1 = (u32)(b); \\\n}\n\n#define WGSPMATRIX15168C4C(pkt, mtx) WGFX15168C4C(pkt, 0xDA380003, mtx)\n#define WGSPDISPLAYLIST15168C4C(pkt, dl) WGFX15168C4C(pkt, 0xDE000000, dl)\n\nGfx *func_15168C4C(Gfx *gfx, Struct15168C4C *obj, s32 arg2) {\n    s32 mode1;\n    u8 update;\n    s16 *zero_ptr;\n    s16 *copy_ptr;\n\n    func_15043D90((Mtx *)((u8 *)obj + (D_800BE9C0 << 6) + 0x10), obj->unk9C, obj->unkA0, obj->unkA4,\n        obj->unkC0, obj->unkC4, obj->unkC8, obj->unk90, obj->unk94, obj->unk98);\n\n    zero_ptr = &D_800DD1C4;\n    copy_ptr = &D_800DD1C2;\n\n    gDPPipeSync(gfx++);\n    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, obj->prim_alpha);\n    D_800DD1C6 = obj->prim_alpha;\n    *zero_ptr = 0;\n    *copy_ptr = *zero_ptr;\n    D_800DD1C0 = *copy_ptr;\n    gDPSetEnvColor(gfx++, 0, 0, 0, 0);\n    gDPSetTileSize(gfx++, 0, 2, obj->tile_ult, 0x7E, 0xFE);\n\n    switch (obj->render_mode) {\n    case 1:\n        *(s32 *)((u8 *)&mode1 - 4) = 0x552230;\n        break;\n    case 2:\n        *(s32 *)((u8 *)&mode1 - 4) = 0x504A50;\n        break;\n    }\n\n    *(u8 *)((u8 *)&update - 4) = 0;\n    gfx = func_15142FBC(gfx, 0x8ACA0, *(s32 *)((u8 *)&mode1 - 4), (u8 *)((u8 *)&update - 4));\n\n    if (obj->combine_mode == 1) {\n        gDPSetCombine(gfx++, 0x123824, 0xFF73FFFF);\n    }\n\n    WGSPMATRIX15168C4C(gfx++, (u8 *)obj + (D_800BE9C0 << 6) + 0x10);\n    WGSPDISPLAYLIST15168C4C(gfx++, obj->display_list);\n\n    return gfx;\n}",
+        "score": 0.0,
+        "reason": "compile_error",
+        "diffs": [],
+        "timestamp": "2026-08-09T18:10:23.345083+00:00"
+      },
+      {
+        "code": "extern s16 D_800DD1C0;\nextern s16 D_800DD1C2;\nextern s16 D_800DD1C4;\nextern s16 D_800DD1C6;\n\ntypedef struct {\n    u8 pad0[0x10];\n    Mtx mtx[2];\n    f32 unk90;\n    f32 unk94;\n    f32 unk98;\n    f32 unk9C;\n    f32 unkA0;\n    f32 unkA4;\n    u8 padA8[0x18];\n    f32 unkC0;\n    f32 unkC4;\n    f32 unkC8;\n    u8 padCC[0x4];\n    Gfx *display_list;\n    u8 padD4[0x11];\n    u8 prim_alpha;\n    u8 tile_ult;\n    u8 padE7[0x5];\n    u8 render_mode;\n    u8 combine_mode;\n} Struct15168C4C;\n\nGfx *func_15142FBC(Gfx *gfx, s32 arg1, s32 arg2, u8 *arg3);\n\n#define WGFX15168C4C(pkt, a, b) \\\n{ \\\n    Gfx *_g = (Gfx *)(pkt); \\\n    _g->words.w0 = (u32)(a); \\\n    _g->words.w1 = (u32)(b); \\\n}\n\n#define WGSPMATRIX15168C4C(pkt, mtx) WGFX15168C4C(pkt, 0xDA380003, mtx)\n#define WGSPDISPLAYLIST15168C4C(pkt, dl) WGFX15168C4C(pkt, 0xDE000000, dl)\n\nGfx *func_15168C4C(Gfx *gfx, Struct15168C4C *obj, s32 arg2) {\n    s32 mode1;\n    u8 update;\n    s16 *zero_ptr;\n    s16 *copy_ptr;\n\n    func_15043D90((Mtx *)((u8 *)obj + (D_800BE9C0 << 6) + 0x10), obj->unk9C, obj->unkA0, obj->unkA4,\n        obj->unkC0, obj->unkC4, obj->unkC8, obj->unk90, obj->unk94, obj->unk98);\n\n    zero_ptr = &D_800DD1C4;\n    copy_ptr = &D_800DD1C2;\n\n    gDPPipeSync(gfx++);\n    gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, obj->prim_alpha);\n    D_800DD1C6 = obj->prim_alpha;\n    *zero_ptr = 0;\n    *copy_ptr = *zero_ptr;\n    D_800DD1C0 = *copy_ptr;\n    gDPSetEnvColor(gfx++, 0, 0, 0, 0);\n    gDPSetTileSize(gfx++, 0, 2, obj->tile_ult, 0x7E, 0xFE);\n\n    switch (obj->render_mode) {\n    case 1:\n        *(s32 *)((u8 *)&mode1 - 4) = 0x552230;\n        break;\n    case 2:\n        *(s32 *)((u8 *)&mode1 - 4) = 0x504A50;\n        break;\n    }\n\n    *(u8 *)((u8 *)&update - 4) = 0;\n    gfx = func_15142FBC(gfx, 0x8ACA0, *(s32 *)((u8 *)&mode1 - 4), (u8 *)((u8 *)&update - 4));\n\n    if (obj->combine_mode == 1) {\n        gDPSetCombine(gfx++, 0x123824, 0xFF73FFFF);\n    }\n\n    WGSPMATRIX15168C4C(gfx++, (u8 *)obj + (D_800BE9C0 << 6) + 0x10);\n    WGSPDISPLAYLIST15168C4C(gfx++, obj->display_list);\n\n    return gfx;\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-09T18:10:31.027582+00:00"
+      }
+    ]
   },
   {
     "function": "func_150440A0",
