@@ -50852,9 +50852,9 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 2,
-    "lastScore": 0.4956521739130435,
-    "status": "pending",
+    "attempts": 3,
+    "lastScore": 1.0,
+    "status": "matched",
     "history": [
       {
         "code": "void __n_seqpStopOsc(OscSeqp *arg0, N_ALVoiceState *arg1) {\n    OscNode *sp2C;\n    OscNode *sp28;\n    s16 sp26;\n    OscNode *sp20;\n    OscNode *sp1C;\n    OscNode **sp18;\n\n    sp2C = arg0->unk50;\n    if (sp2C != 0) {\n        do {\n            sp28 = sp2C->unk0;\n            sp26 = sp2C->unkC;\n            if (sp26 == 0x17 || sp26 == 0x18) {\n                if (sp2C->unk10 == arg1) {\n                    arg0->unk78(sp2C->unk14);\n                    sp20 = sp2C;\n                    if (sp20->unk0 != 0) {\n                        sp20->unk0->unk4 = sp20->unk4;\n                    }\n                    if (sp20->unk4 != 0) {\n                        sp20->unk4->unk0 = sp20->unk0;\n                    }\n                    if (sp28 != 0) {\n                        sp28->unk8 += sp2C->unk8;\n                    }\n                    sp1C = sp2C;\n                    sp18 = &arg0->unk48;\n                    sp1C->unk0 = *sp18;\n                    sp1C->unk4 = (OscNode *)sp18;\n                    if (*sp18 != 0) {\n                        (*sp18)->unk4 = sp1C;\n                    }\n                    *sp18 = sp1C;\n                    if (sp26 == 0x17) {\n                        arg1->flags &= 0xFE;\n                    } else {\n                        arg1->flags &= 0xFD;\n                    }\n                    if (arg1->flags == 0) {\n                        return;\n                    }\n                }\n            }\n            sp2C = sp28;\n        } while (sp2C != 0);\n    }\n}",
@@ -50869,6 +50869,13 @@
         "reason": "length_mismatch (target=115, generated=114), raw_opcode_mismatch",
         "diffs": [],
         "timestamp": "2026-08-05T06:28:45.627845+00:00"
+      },
+      {
+        "code": "typedef struct OscNode { struct OscNode *unk0; struct OscNode *unk4; s32 unk8; s16 unkC; u8 padE[0x2]; void *unk10; void *unk14; } OscNode;\ntypedef struct { u8 pad0[0x48]; OscNode *unk48; u8 pad4C[0x4]; OscNode *unk50; u8 pad54[0x24]; void (*unk78)(void *); } OscSeqp;\nvoid __n_seqpStopOsc(OscSeqp *arg0, N_ALVoiceState *arg1) {\n    OscNode *sp2C;\n    OscNode *sp28;\n    s16 sp26;\n    OscNode *sp20;\n    OscNode *sp1C;\n    OscNode **sp18;\n\n    sp2C = arg0->unk50;\n    if (sp2C != 0) {\n        do {\n            sp28 = sp2C->unk0;\n            sp26 = sp2C->unkC;\n            if (sp26 == 0x17 || sp26 == 0x18) {\n                if (sp2C->unk10 == arg1) {\n                    arg0->unk78(sp2C->unk14);\n                    sp20 = sp2C;\n                    if (sp20->unk0 != 0) {\n                        sp20->unk0->unk4 = sp20->unk4;\n                    }\n                    if (sp20->unk4 != 0) {\n                        sp20->unk4->unk0 = sp20->unk0;\n                    }\n                    if (sp28 != 0) {\n                        sp28->unk8 += sp2C->unk8;\n                    }\n                    sp1C = sp2C;\n                    sp18 = &arg0->unk48;\n                    sp1C->unk0 = *sp18;\n                    sp1C->unk4 = (OscNode *)sp18;\n                    if (*sp18 != 0) {\n                        (*sp18)->unk4 = sp1C;\n                    }\n                    *sp18 = sp1C;\n                    if (sp26 == 0x17) {\n                        arg1->flags &= 0xFE;\n                    } else {\n                        arg1->flags &= 0xFD;\n                    }\n                    if (arg1->flags == 0) {\n                        return;\n                    }\n                }\n            }\n            sp2C = sp28;\n        } while (sp2C != 0);\n    }\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-09T17:48:30.930754+00:00"
       }
     ]
   },

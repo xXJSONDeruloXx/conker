@@ -585,4 +585,53 @@ void func_1001BE1C(void *arg0, s32 *arg1, s32 arg2) {
 //     }
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/init_1AAE0/__n_seqpStopOsc.s")
+typedef struct OscNode { struct OscNode *unk0; struct OscNode *unk4; s32 unk8; s16 unkC; u8 padE[0x2]; void *unk10; void *unk14; } OscNode;
+typedef struct { u8 pad0[0x48]; OscNode *unk48; u8 pad4C[0x4]; OscNode *unk50; u8 pad54[0x24]; void (*unk78)(void *); } OscSeqp;
+void __n_seqpStopOsc(OscSeqp *arg0, N_ALVoiceState *arg1) {
+    OscNode *sp2C;
+    OscNode *sp28;
+    s16 sp26;
+    OscNode *sp20;
+    OscNode *sp1C;
+    OscNode **sp18;
+
+    sp2C = arg0->unk50;
+    if (sp2C != 0) {
+        do {
+            sp28 = sp2C->unk0;
+            sp26 = sp2C->unkC;
+            if (sp26 == 0x17 || sp26 == 0x18) {
+                if (sp2C->unk10 == arg1) {
+                    arg0->unk78(sp2C->unk14);
+                    sp20 = sp2C;
+                    if (sp20->unk0 != 0) {
+                        sp20->unk0->unk4 = sp20->unk4;
+                    }
+                    if (sp20->unk4 != 0) {
+                        sp20->unk4->unk0 = sp20->unk0;
+                    }
+                    if (sp28 != 0) {
+                        sp28->unk8 += sp2C->unk8;
+                    }
+                    sp1C = sp2C;
+                    sp18 = &arg0->unk48;
+                    sp1C->unk0 = *sp18;
+                    sp1C->unk4 = (OscNode *)sp18;
+                    if (*sp18 != 0) {
+                        (*sp18)->unk4 = sp1C;
+                    }
+                    *sp18 = sp1C;
+                    if (sp26 == 0x17) {
+                        arg1->flags &= 0xFE;
+                    } else {
+                        arg1->flags &= 0xFD;
+                    }
+                    if (arg1->flags == 0) {
+                        return;
+                    }
+                }
+            }
+            sp2C = sp28;
+        } while (sp2C != 0);
+    }
+}
