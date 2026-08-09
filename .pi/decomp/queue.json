@@ -39728,9 +39728,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 5,
-    "lastScore": 0.47959183673469385,
-    "status": "skipped",
+    "attempts": 7,
+    "lastScore": 1.0,
+    "status": "matched",
     "history": [
       {
         "code": "void func_1500A6D8(s32 arg0, s32 arg1) {\n    u8 sp24[6];\n    u8 sp30[0x18];\n    struct220 sp48;\n    s32 temp_v0;\n    s32 phi_v0;\n\n    sp24[0] = D_80082BEC[0];\n    sp24[1] = D_80082BEC[1];\n    sp24[2] = D_80082BEC[2];\n    sp24[3] = D_80082BEC[3];\n    sp24[4] = D_80082BEC[4];\n    sp24[5] = D_80082BEC[5];\n    phi_v0 = 0;\n    if (D_800BE9F0 == 6) {\n        phi_v0 = 1;\n    }\n    if (func_150B060C(sp24[(phi_v0 * 3) + arg1 - 0x49], sp30, arg1) != 0) {\n        sp48.unk0 = 0;\n        sp48.unk1 = 0x17;\n        sp48.unk2 = 0x12C;\n        sp48.unk4 = 0;\n        temp_v0 = (s32)func_1516037C(&sp48, arg0, 0x18, 0xFF, 1);\n        if (temp_v0 != 0) {\n            memcpy((void *)(temp_v0 + 0x18), sp30, 0x18);\n        }\n    }\n}",

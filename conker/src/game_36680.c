@@ -350,7 +350,28 @@ void func_1500A68C(s32 arg0, s32 arg1) {
     func_15162740(arg0, 21, 6, 0, 300, 2, 255, 1);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_36680/func_1500A6D8.s")
+extern struct220 D_80082BEC;
+s32 func_150B060C(u8 arg0, void *arg1, s32 arg2);
+void func_1500A6D8(s32 arg0, s32 arg1) {
+    struct220 sp48;
+    u8 sp30[0x18];
+    s32 phi_v0;
+    struct220 sp24;
+    void *temp_v0;
+
+    sp24 = D_80082BEC;
+    phi_v0 = (D_800BE9F0 == 6) ? 1 : 0;
+    if (func_150B060C(*((u8*)&sp24 + (phi_v0 * 3) + arg1 - 0x49), &sp30, arg1) != 0) {
+        sp48.unk0 = 0;
+        sp48.unk1 = 23;
+        sp48.unk2 = 300;
+        sp48.unk4 = 0;
+        temp_v0 = (void*)func_1516037C(&sp48, arg0, 24, 255, 1);
+        if (temp_v0 != 0) {
+            memcpy((s8*)temp_v0 + 0x18, &sp30, 0x18);
+        }
+    }
+}
 // void func_1500A6D8(s32 arg0, s32 arg1) {
 //     s8 sp4C;
 //     s16 sp4A;
