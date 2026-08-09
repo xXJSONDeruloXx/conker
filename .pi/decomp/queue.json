@@ -49152,9 +49152,18 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "void func_15052760(struct127 *arg0, s16 arg1) {\n    s32 v0;\n    s32 id;\n    s8 temp;\n    f32 f0;\n\n    arg1 = (arg1 & 0xFFFF) - arg0->unk76;\n    v0 = (arg1 * 100) / D_800CC264;\n    id = arg0->id;\n\n    if (id != 0x29) {\n        if (id == 8) {\n            return;\n        }\n    }\n    if (arg0->unk22C & 8) {\n        return;\n    }\n    f0 = D_80099348;\n    arg1 = 7;\n    if (id == 0xA) {\n        arg1 = 0x28;\n    }\n    if (arg0->unk226 == 0xFF) {\n        temp = v0 >> 8;\n        if ((arg0->unk87 ^ temp) & 0x80) {\n            v0 = 0;\n        }\n        f0 = D_8009934C;\n        arg1 = 4;\n        arg0->unk87 = temp;\n    }\n    if (arg0->unk1E5 != 0) {\n        arg0->unkC4 += ((f32)(v0 / (arg0->unk1E5 * arg1)) - arg0->unkC4) * f0;\n    }\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-09T16:39:19.218456+00:00"
+      }
+    ]
   },
   {
     "function": "func_15137C64",
