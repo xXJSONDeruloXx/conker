@@ -49202,9 +49202,18 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "u8 func_150599C8(struct127 *arg0, u8 arg1, u16 arg2) {\n    s16 temp_a3;\n    s16 temp_t6;\n    s16 temp_t8;\n    s32 temp_v0;\n    s32 temp_lo;\n    s16 phi_v1;\n\n    temp_v0 = (s32) (((arg1 << 8) + arg0->unk1E8) * D_800CC264) / 0x64;\n    temp_a3 = arg2 - arg0->unk7A;\n    if (arg0->unk1EA != 0) {\n        temp_lo = (s32) (arg0->unk1EA * D_800CC264) / 0x64;\n        temp_t6 = arg0->unk1EC + temp_lo;\n        temp_t8 = arg0->unk1EC - temp_lo;\n        if (temp_t6 < temp_a3) {\n            temp_a3 = temp_t6;\n        }\n        if (temp_a3 < temp_t8) {\n            temp_a3 = temp_t8;\n        }\n    }\n\n    phi_v1 = temp_a3;\n    if (temp_a3 < 0) {\n        temp_a3 = temp_a3 ^ 0xFFFF;\n    }\n    if (temp_a3 < temp_v0) {\n        temp_v0 = temp_a3;\n    }\n    if ((arg0->unkF4 & 1) == 0) {\n        if (arg0->unk80 != 0) {\n            if (phi_v1 < 0) {\n                arg0->unk7A -= temp_v0;\n            } else {\n                arg0->unk7A += temp_v0;\n            }\n        }\n    }\n    return temp_a3 >> 8;\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-09T19:13:41.951874+00:00"
+      }
+    ]
   },
   {
     "function": "func_15103910",
