@@ -42652,9 +42652,25 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 2,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "typedef struct {\n    u8 pad0[0x114];\n    s16 unk114;\n} struct_1512623C_arg1;\n\nvoid func_1512623C(struct127 *arg0, struct_1512623C_arg1 *arg1, s32 arg2, f32 *arg3, f32 *arg4, f32 *arg5, s32 arg6) {\n    s32 temp_v0;\n    f32 sp38[3];\n    f32 sp2C[3];\n    s32 index;\n    volatile s32 pad[2];\n\n    temp_v0 = 1;\n    if (arg0->unk1D4 != NULL) {\n        temp_v0 = 0;\n        if (arg6 != 0) {\n            index = 3;\n            sp38[0] = 0.0f;\n            sp38[1] = 20.0f;\n            sp38[2] = 0.0f;\n        } else if (arg2 == 0x1B) {\n            index = 4;\n            sp38[1] = 116.0f;\n            sp38[0] = 0.0f;\n            sp38[2] = 130.0f;\n        } else {\n            temp_v0 = 1;\n        }\n\n        if (temp_v0 == 0) {\n            arg2 = (s32)arg0->unk1D4;\n            arg2 += index << 6;\n            func_15143134(sp38, sp2C, arg2);\n            *arg3 = sp2C[0];\n            *arg4 = sp2C[1];\n            *arg5 = sp2C[2];\n        }\n    }\n\n    if (temp_v0 != 0) {\n        *arg3 = arg0->x_position;\n        *arg4 = arg0->y_position + (arg1->unk114 * 0.75f);\n        *arg5 = arg0->z_position;\n    }\n}",
+        "score": 0.0,
+        "reason": "compile_error",
+        "diffs": [],
+        "timestamp": "2026-08-09T16:33:50.936769+00:00"
+      },
+      {
+        "code": "void func_1512623C(struct127 *arg0, struct_1512623C_arg1 *arg1, s32 arg2, f32 *arg3, f32 *arg4, f32 *arg5, s32 arg6) {\n    s32 temp_v0;\n    f32 sp38[3];\n    f32 sp2C[3];\n    s32 index;\n    volatile s32 pad[2];\n\n    temp_v0 = 1;\n    if (arg0->unk1D4 != NULL) {\n        temp_v0 = 0;\n        if (arg6 != 0) {\n            index = 3;\n            sp38[0] = 0.0f;\n            sp38[1] = 20.0f;\n            sp38[2] = 0.0f;\n        } else if (arg2 == 0x1B) {\n            index = 4;\n            sp38[1] = 116.0f;\n            sp38[0] = 0.0f;\n            sp38[2] = 130.0f;\n        } else {\n            temp_v0 = 1;\n        }\n\n        if (temp_v0 == 0) {\n            arg2 = (s32)arg0->unk1D4;\n            arg2 += index << 6;\n            func_15143134(sp38, sp2C, arg2);\n            *arg3 = sp2C[0];\n            *arg4 = sp2C[1];\n            *arg5 = sp2C[2];\n        }\n    }\n\n    if (temp_v0 != 0) {\n        *arg3 = arg0->x_position;\n        *arg4 = arg0->y_position + (arg1->unk114 * 0.75f);\n        *arg5 = arg0->z_position;\n    }\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-09T16:33:58.452488+00:00"
+      }
+    ]
   },
   {
     "function": "func_15135BF8",
