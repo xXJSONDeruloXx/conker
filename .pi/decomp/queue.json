@@ -39942,8 +39942,8 @@
       "branchy"
     ],
     "attempts": 10,
-    "lastScore": 0.4716981132075472,
-    "status": "skipped",
+    "lastScore": 1.0,
+    "status": "matched",
     "history": [
       {
         "code": "void __n_initFromBank(N_ALSeqPlayer *seqp, ALBank *bank) {\n    ALInstrument *inst;\n    s32 i;\n\n    inst = NULL;\n    i = 1;\n    if (inst == NULL) {\n        do {\n            inst = bank->instArray[i];\n            i++;\n        } while (inst == NULL);\n    }\n    i = 0;\n    if (seqp->maxChannels > 0) {\n        do {\n            __n_resetPerfChanState(seqp, i);\n            i++;\n        } while (i < seqp->maxChannels);\n    }\n    if (bank->percussion != NULL) {\n        __n_resetPerfChanState(seqp, i);\n    }\n}",
