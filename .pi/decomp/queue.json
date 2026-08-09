@@ -53217,9 +53217,18 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "void func_1506F1A8(s32 arg0) {\n    struct func_1506F1A8_stack sp1C;\n    struct127 *obj;\n\n    obj = D_800D154C;\n    sp1C.unk04 = obj;\n    sp1C.unk08 = obj->unique_id;\n    sp1C.unk14 = 80.0f;\n    sp1C.unk20 = 102.0f;\n    sp1C.unk24 = D_80099DAC;\n    sp1C.unk28 = D_80099DB0;\n    sp1C.unk2C = 1200.0f;\n    sp1C.unk40 = D_80099DB4;\n    sp1C.unk30 = 26.0f;\n    sp1C.unk34 = D_80099DB8;\n    sp1C.unk44 = -187.0f;\n    sp1C.unk48 = D_80099DBC;\n    sp1C.unk58 = D_80099DC0;\n    sp1C.unk5C = D_80099DC4;\n    sp1C.unk64 = D_80099DC8;\n    sp1C.unk6C = D_80099DCC;\n    sp1C.unk68 = D_80099DD0;\n    sp1C.unk70 = D_80099DD4;\n    sp1C.unk74 = D_80099DD8;\n    sp1C.unk78 = D_80099DDC;\n    sp1C.unk7C = D_80099DE0;\n    sp1C.unk80 = D_80099DE4;\n    sp1C.unk84 = D_80099DE8;\n    sp1C.unk88 = D_80099DEC;\n    sp1C.unk90 = D_80099DF0;\n    sp1C.unk98 = D_80099DF4;\n    sp1C.unkA8 = D_80099DF8;\n    sp1C.unkAC = D_80099DFC;\n    sp1C.unkBC = 14.0f;\n    sp1C.unkC0 = 9.0f;\n    sp1C.unkCC = 25.0f;\n    sp1C.unkD0 = D_80099E00;\n    sp1C.unkD4 = D_80099E04;\n    sp1C.unkEC = D_80099E08;\n    sp1C.unk09 = 0xC;\n    sp1C.unk3E = 0xC8;\n    sp1C.unkF0 = D_80099E0C;\n    sp1C.unk38 = -1;\n    sp1C.unk39 = 2;\n    sp1C.unk3A = -1;\n    sp1C.unk4C = -1;\n    sp1C.unk00 = 0xF;\n    sp1C.unk54 = 1;\n    sp1C.unk50 = 0x3C;\n    sp1C.unk51 = 0xFF;\n    sp1C.unk52 = 0xEB;\n    sp1C.unk53 = 0x52;\n    sp1C.unkFC = 402.0f;\n    sp1C.unk60 = 0x1E;\n    sp1C.unk62 = 0xF;\n    sp1C.unk8C = 0xC;\n    sp1C.unk8E = 0x15;\n    sp1C.unk94 = 0x50;\n    sp1C.unk95 = 0x78;\n    sp1C.unkB0 = 4;\n    sp1C.unkB4 = 2;\n    sp1C.unkB8 = 0x1E;\n    sp1C.unkBA = 0x11;\n    sp1C.unk0C = 0.0f;\n    sp1C.unk10 = 0.0f;\n    sp1C.unk18 = 0.0f;\n    sp1C.unk1C = 0.0f;\n    sp1C.unk3B = 0;\n    sp1C.unk3C = 0;\n    sp1C.unk3D = 0;\n    sp1C.unk9C = 0.0f;\n    sp1C.unkA0 = 5.0f;\n    sp1C.unkA4 = 100.0f;\n    sp1C.unkC4 = 0.5f;\n    sp1C.unkC8 = 0.5f;\n    sp1C.unkD8 = 0x50;\n    sp1C.unkDA = 0x78;\n    sp1C.unkDC = 0x10;\n    sp1C.unkDE = 0xF;\n    sp1C.unkE0 = 0.0f;\n    sp1C.unkE4 = 5.0f;\n    sp1C.unkE8 = 100.0f;\n    sp1C.unkF4 = 0x28;\n    sp1C.unkF6 = 0xF;\n    sp1C.unkF8 = 0x50;\n    sp1C.unkFA = 0x50;\n    sp1C.unk118 = 0x14;\n    sp1C.unk11A = 0xC;\n    sp1C.unk100 = D_80099E10;\n    sp1C.unk104 = D_80099E14;\n    sp1C.unk108 = D_80099E18;\n    sp1C.unk10C = 45.0f;\n    sp1C.unk110 = D_80099E1C;\n    sp1C.unk114 = D_80099E20;\n    func_151994B8(0, &sp1C, 0xFF, 0);\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-09T18:36:04.241124+00:00"
+      }
+    ]
   },
   {
     "function": "func_15070898",
