@@ -48553,9 +48553,288 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 5,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "extern u8 D_800DCA20;\nextern f32 D_800DCA24;\nextern u8 D_800DCA28;\nextern f32 D_800DCA2C;\n\nvoid func_1500E738(void) {\n    s32 value;\n    u32 index;\n\n    value = D_80082FA0;\n    if (value == 0) {\n        D_800DCA20 = 0;\n        D_800DCA24 = 1.0f;\n    } else if (value == 1) {\n        D_800DCA20 = 1;\n        D_800DCA24 = 0.5f;\n    } else if ((value == 2) || (value == 3)) {\n        D_800DCA20 = 2;\n        D_800DCA24 = 0.25f;\n    }\n\n    index = D_8008FD8C - 1;\n    if (index == 0) {\n        D_800DCA28 = 1;\n        D_800DCA2C = 0.5f;\n    } else if (index == 1) {\n        D_800DCA28 = 2;\n        D_800DCA2C = 0.25f;\n    } else if (index == 2) {\n        D_800DCA28 = 3;\n        D_800DCA2C = 0.125f;\n    } else if (index == 3) {\n        D_800DCA28 = 4;\n        D_800DCA2C = 0.0625f;\n    } else {\n        D_800DCA28 = 0;\n        D_800DCA2C = 1.0f;\n    }\n}",
+        "score": 0.0581,
+        "reason": "length_mismatch (target=86, generated=80), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T16:56:02.095346+00:00"
+      },
+      {
+        "code": "extern u8 D_800DCA20;\nextern f32 D_800DCA24;\nextern u8 D_800DCA28;\nextern f32 D_800DCA2C;\n\nvoid func_1500E738(void) {\n    s32 value;\n    u32 index;\n\n    value = D_80082FA0;\n    if (value != 0) {\n        if (value == 1) {\n            D_800DCA20 = 1;\n            D_800DCA24 = 0.5f;\n        } else if ((value == 2) || (value == 3)) {\n            D_800DCA20 = 2;\n            D_800DCA24 = 0.25f;\n        }\n    } else {\n        D_800DCA20 = 0;\n        D_800DCA24 = 1.0f;\n    }\n\n    switch (D_8008FD8C) {\n        case 1:\n            D_800DCA28 = 1;\n            D_800DCA2C = 0.5f;\n            break;\n        case 2:\n            D_800DCA28 = 2;\n            D_800DCA2C = 0.25f;\n            break;\n        case 3:\n            D_800DCA28 = 3;\n            D_800DCA2C = 0.125f;\n            break;\n        case 4:\n            D_800DCA28 = 4;\n            D_800DCA2C = 0.0625f;\n            break;\n        default:\n            D_800DCA28 = 0;\n            D_800DCA2C = 1.0f;\n    }\n}",
+        "score": 0.1744,
+        "reason": "length_mismatch (target=86, generated=83), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T16:56:36.923934+00:00"
+      },
+      {
+        "code": "extern u8 D_800DCA20;\nextern f32 D_800DCA24;\nextern u8 D_800DCA28;\nextern f32 D_800DCA2C;\n\nvoid func_1500E738(void) {\n    s32 value;\n    volatile s8 *index_ptr;\n\n    value = D_80082FA0;\n    index_ptr = &D_8008FD8C;\n    switch (value) {\n        case 0:\n            D_800DCA20 = 0;\n            D_800DCA24 = 1.0f;\n            break;\n        case 1:\n            D_800DCA20 = 1;\n            D_800DCA24 = 0.5f;\n            break;\n        case 2:\n        case 3:\n            D_800DCA20 = 2;\n            D_800DCA24 = 0.25f;\n            break;\n        default:\n            break;\n    }\n\n    switch (*index_ptr) {\n        case 1:\n            D_800DCA28 = 1;\n            D_800DCA2C = 0.5f;\n            break;\n        case 2:\n            D_800DCA28 = 2;\n            D_800DCA2C = 0.25f;\n            break;\n        case 3:\n            D_800DCA28 = 3;\n            D_800DCA2C = 0.125f;\n            break;\n        case 4:\n            D_800DCA28 = 4;\n            D_800DCA2C = 0.0625f;\n            break;\n        default:\n            D_800DCA28 = 0;\n            D_800DCA2C = 1.0f;\n    }\n}",
+        "score": 0.4302,
+        "reason": "structural_diffs=49, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 2,
+            "type": "structural",
+            "target": "lui at, HI(D_800DCA20)",
+            "generated": "lui t8, HI(D_8008FD8C)"
+          },
+          {
+            "line": 3,
+            "type": "structural",
+            "target": "lui t8, HI(D_8008FD8C)",
+            "generated": "lui at, HI(D_800DCA20)"
+          },
+          {
+            "line": 5,
+            "type": "structural",
+            "target": "nop",
+            "generated": "addiu t8, t8, LO(D_8008FD8C)"
+          },
+          {
+            "line": 16,
+            "type": "structural",
+            "target": "nop",
+            "generated": "lb v0, 0(t8)"
+          },
+          {
+            "line": 21,
+            "type": "structural",
+            "target": "b L3",
+            "generated": "b L4"
+          },
+          {
+            "line": 28,
+            "type": "structural",
+            "target": "b L3",
+            "generated": "b L4"
+          },
+          {
+            "line": 36,
+            "type": "structural",
+            "target": "lb t8, LO(D_8008FD8C)(t8)",
+            "generated": "lb v0, 0(t8)"
+          },
+          {
+            "line": 37,
+            "type": "structural",
+            "target": "addiu t9, t8, -1",
+            "generated": "li at, 1"
+          },
+          {
+            "line": 38,
+            "type": "structural",
+            "target": "sltiu at, t9, 16",
+            "generated": "li t9, 1"
+          },
+          {
+            "line": 39,
+            "type": "structural",
+            "target": "beqz at, L4",
+            "generated": "beq v0, at, L5"
+          },
+          {
+            "line": 40,
+            "type": "structural",
+            "target": "sll t9, t9, 2",
+            "generated": "li at, 2"
+          },
+          {
+            "line": 41,
+            "type": "structural",
+            "target": "lui at, HI(jtbl_800961D0)",
+            "generated": "beq v0, at, L6"
+          },
+          {
+            "line": 42,
+            "type": "structural",
+            "target": "addu at, at, t9",
+            "generated": "li t0, 2"
+          },
+          {
+            "line": 43,
+            "type": "structural",
+            "target": "lw t9, LO(jtbl_800961D0)(at)",
+            "generated": "li at, 3"
+          },
+          {
+            "line": 44,
+            "type": "structural",
+            "target": "jr t9",
+            "generated": "beq v0, at, L7"
+          },
+          {
+            "line": 45,
+            "type": "structural",
+            "target": "nop",
+            "generated": "li t1, 3"
+          },
+          {
+            "line": 46,
+            "type": "structural",
+            "target": "li t0, 1",
+            "generated": "li at, 4"
+          },
+          {
+            "line": 47,
+            "type": "structural",
+            "target": "lui at, HI(D_800DCA28)",
+            "generated": "beq v0, at, L8"
+          },
+          {
+            "line": 48,
+            "type": "structural",
+            "target": "sb t0, LO(D_800DCA28)(at)",
+            "generated": "li t2, 4"
+          },
+          {
+            "line": 49,
+            "type": "structural",
+            "target": "lui at, 16128",
+            "generated": "b L9"
+          }
+        ],
+        "timestamp": "2026-08-09T16:57:04.973636+00:00"
+      },
+      {
+        "code": "extern u8 D_800DCA20;\nextern f32 D_800DCA24;\nextern u8 D_800DCA28;\nextern f32 D_800DCA2C;\n\nvoid func_1500E738(void) {\n    s32 value;\n    volatile s8 *index_ptr;\n\n    value = D_80082FA0;\n    index_ptr = &D_8008FD8C;\n    switch (value) {\n        case 0:\n            D_800DCA20 = 0;\n            D_800DCA24 = 1.0f;\n            break;\n        case 1:\n            D_800DCA20 = 1;\n            D_800DCA24 = 0.5f;\n            break;\n        case 2:\n        case 3:\n            D_800DCA20 = 2;\n            D_800DCA24 = 0.25f;\n            break;\n        default:\n            break;\n    }\n\n    switch (*index_ptr - 1) {\n        case 0:\n            D_800DCA28 = 1;\n            D_800DCA2C = 0.5f;\n            break;\n        case 1:\n            D_800DCA28 = 2;\n            D_800DCA2C = 0.25f;\n            break;\n        case 2:\n            D_800DCA28 = 3;\n            D_800DCA2C = 0.125f;\n            break;\n        case 3:\n            D_800DCA28 = 4;\n            D_800DCA2C = 0.0625f;\n            break;\n        case 4:\n        case 5:\n        case 6:\n        case 7:\n        case 8:\n        case 9:\n        case 10:\n        case 11:\n        case 12:\n        case 13:\n        case 14:\n        case 15:\n        default:\n            D_800DCA28 = 0;\n            D_800DCA2C = 1.0f;\n    }\n}",
+        "score": 0.7326,
+        "reason": "structural_diffs=23, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 2,
+            "type": "structural",
+            "target": "lui at, HI(D_800DCA20)",
+            "generated": "lui t8, HI(D_8008FD8C)"
+          },
+          {
+            "line": 3,
+            "type": "structural",
+            "target": "lui t8, HI(D_8008FD8C)",
+            "generated": "lui at, HI(D_800DCA20)"
+          },
+          {
+            "line": 5,
+            "type": "structural",
+            "target": "nop",
+            "generated": "addiu t8, t8, LO(D_8008FD8C)"
+          },
+          {
+            "line": 16,
+            "type": "structural",
+            "target": "nop",
+            "generated": "lb t9, 0(t8)"
+          },
+          {
+            "line": 21,
+            "type": "structural",
+            "target": "b L3",
+            "generated": "b L4"
+          },
+          {
+            "line": 28,
+            "type": "structural",
+            "target": "b L3",
+            "generated": "b L4"
+          },
+          {
+            "line": 36,
+            "type": "structural",
+            "target": "lb t8, LO(D_8008FD8C)(t8)",
+            "generated": "lb t9, 0(t8)"
+          },
+          {
+            "line": 37,
+            "type": "structural",
+            "target": "addiu t9, t8, -1",
+            "generated": "addiu t0, t9, -1"
+          },
+          {
+            "line": 38,
+            "type": "structural",
+            "target": "sltiu at, t9, 16",
+            "generated": "sltiu at, t0, 16"
+          },
+          {
+            "line": 39,
+            "type": "structural",
+            "target": "beqz at, L4",
+            "generated": "beqz at, L5"
+          },
+          {
+            "line": 40,
+            "type": "structural",
+            "target": "sll t9, t9, 2",
+            "generated": "sll t0, t0, 2"
+          },
+          {
+            "line": 41,
+            "type": "structural",
+            "target": "lui at, HI(jtbl_800961D0)",
+            "generated": "lui at, HI(.rodata)"
+          },
+          {
+            "line": 42,
+            "type": "structural",
+            "target": "addu at, at, t9",
+            "generated": "addu at, at, t0"
+          },
+          {
+            "line": 43,
+            "type": "structural",
+            "target": "lw t9, LO(jtbl_800961D0)(at)",
+            "generated": "lw t0, LO(.rodata)(at)"
+          },
+          {
+            "line": 44,
+            "type": "structural",
+            "target": "jr t9",
+            "generated": "jr t0"
+          },
+          {
+            "line": 46,
+            "type": "structural",
+            "target": "li t0, 1",
+            "generated": "li t1, 1"
+          },
+          {
+            "line": 48,
+            "type": "structural",
+            "target": "sb t0, LO(D_800DCA28)(at)",
+            "generated": "sb t1, LO(D_800DCA28)(at)"
+          },
+          {
+            "line": 54,
+            "type": "structural",
+            "target": "li t1, 2",
+            "generated": "li t2, 2"
+          },
+          {
+            "line": 56,
+            "type": "structural",
+            "target": "sb t1, LO(D_800DCA28)(at)",
+            "generated": "sb t2, LO(D_800DCA28)(at)"
+          },
+          {
+            "line": 62,
+            "type": "structural",
+            "target": "li t2, 3",
+            "generated": "li t3, 3"
+          }
+        ],
+        "timestamp": "2026-08-09T16:57:25.711307+00:00"
+      },
+      {
+        "code": "extern u8 D_800DCA20;\nextern f32 D_800DCA24;\nextern u8 D_800DCA28;\nextern f32 D_800DCA2C;\n\nvoid func_1500E738(void) {\n    s32 value;\n\n    value = D_80082FA0;\n    switch (value) {\n        case 0:\n            D_800DCA20 = 0;\n            D_800DCA24 = 1.0f;\n            break;\n        case 1:\n            D_800DCA20 = 1;\n            D_800DCA24 = 0.5f;\n            break;\n        case 2:\n        case 3:\n            D_800DCA20 = 2;\n            D_800DCA24 = 0.25f;\n            break;\n        default:\n            break;\n    }\n\n    switch (D_8008FD8C - 1) {\n        case 0:\n            D_800DCA28 = 1;\n            D_800DCA2C = 0.5f;\n            break;\n        case 1:\n            D_800DCA28 = 2;\n            D_800DCA2C = 0.25f;\n            break;\n        case 2:\n            D_800DCA28 = 3;\n            D_800DCA2C = 0.125f;\n            break;\n        case 3:\n            D_800DCA28 = 4;\n            D_800DCA2C = 0.0625f;\n            break;\n        case 4:\n        case 5:\n        case 6:\n        case 7:\n        case 8:\n        case 9:\n        case 10:\n        case 11:\n        case 12:\n        case 13:\n        case 14:\n        case 15:\n        default:\n            D_800DCA28 = 0;\n            D_800DCA2C = 1.0f;\n    }\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-09T16:57:49.673703+00:00"
+      }
+    ]
   },
   {
     "function": "func_1500E5C0",
