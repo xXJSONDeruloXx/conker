@@ -44003,9 +44003,9 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 2,
-    "lastScore": 0.0,
-    "status": "pending",
+    "attempts": 3,
+    "lastScore": 1.0,
+    "status": "matched",
     "history": [
       {
         "code": "void func_151441A4(s16 *arg0, s16 *arg1, s16 *arg2, s16 *arg3,\n                   u8 arg4, u8 arg5, u8 arg6, u8 arg7,\n                   u8 arg8, u8 arg9, u8 arg10, u8 arg11,\n                   u8 arg12, u8 arg13) {\n    s32 value;\n\n    switch (arg13) {\n    case 0:\n        *arg0 = arg8;\n        *arg1 = arg9;\n        *arg2 = arg10;\n        *arg3 = arg11;\n        break;\n    case 1:\n        *arg3 = 0;\n        value = *arg3;\n        *arg2 = value;\n        *arg1 = value;\n        *arg0 = value;\n        break;\n    case 2:\n        *arg2 = 0;\n        value = *arg2;\n        *arg1 = value;\n        *arg0 = value;\n        *arg3 = arg11;\n        break;\n    case 3:\n        *arg0 = (s16)(((u32)arg4 * (u32)arg12) >> 8);\n        *arg1 = (s16)(((u32)arg5 * (u32)arg12) >> 8);\n        *arg2 = (s16)(((u32)arg6 * (u32)arg12) >> 8);\n        *arg3 = 0;\n        break;\n    case 4:\n        *arg0 = (s16)(((u32)arg4 * (u32)arg12) >> 8);\n        *arg1 = (s16)(((u32)arg5 * (u32)arg12) >> 8);\n        *arg2 = (s16)(((u32)arg6 * (u32)arg12) >> 8);\n        *arg3 = 0;\n        break;\n    default:\n        *arg0 = (s16)(((u32)arg4 * (u32)arg12) >> 8);\n        *arg1 = (s16)(((u32)arg5 * (u32)arg12) >> 8);\n        *arg2 = (s16)(((u32)arg6 * (u32)arg12) >> 8);\n        *arg3 = 0;\n        break;\n    }\n}",
@@ -44087,6 +44087,13 @@
         "reason": "compile_error",
         "diffs": [],
         "timestamp": "2026-08-09T15:44:41.875106+00:00"
+      },
+      {
+        "code": "void func_151441A4(s16 *arg0, s16 *arg1, s16 *arg2, s16 *arg3,\n                   u8 arg4, u8 arg5, u8 arg6, u8 arg7,\n                   u8 arg8, u8 arg9, u8 arg10, u8 arg11,\n                   u8 arg12, u8 arg13) {\n    s32 value;\n\n    switch (arg13) {\n    case 0:\n        *arg0 = arg8;\n        *arg1 = arg9;\n        *arg2 = arg10;\n        *arg3 = arg11;\n        break;\n    case 1:\n        *arg3 = 0;\n        value = *arg3;\n        *arg2 = value;\n        *arg1 = value;\n        *arg0 = value;\n        break;\n    case 2:\n        *arg2 = 0;\n        value = *arg2;\n        *arg1 = value;\n        *arg0 = value;\n        *arg3 = arg11;\n        break;\n    case 3:\n        *arg0 = (s16)(((s32)((u32)arg4 * (u32)arg12)) >> 8);\n        *arg1 = (s16)(((s32)((u32)arg5 * (u32)arg12)) >> 8);\n        *arg2 = (s16)(((s32)((u32)arg6 * (u32)arg12)) >> 8);\n        *arg3 = 0;\n        break;\n    case 4:\n        *arg0 = (s16)(((s32)((u32)arg4 * (u32)arg12)) >> 8);\n        *arg1 = (s16)(((s32)((u32)arg5 * (u32)arg12)) >> 8);\n        *arg2 = (s16)(((s32)((u32)arg6 * (u32)arg12)) >> 8);\n        *arg3 = 0;\n        break;\n    default:\n        *arg0 = (s16)(((s32)((u32)arg4 * (u32)arg12)) >> 8);\n        *arg1 = (s16)(((s32)((u32)arg5 * (u32)arg12)) >> 8);\n        *arg2 = (s16)(((s32)((u32)arg6 * (u32)arg12)) >> 8);\n        *arg3 = 0;\n        break;\n    }\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-09T16:19:12.294122+00:00"
       }
     ]
   },
