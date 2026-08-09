@@ -54798,9 +54798,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 7,
-    "lastScore": 0.4405,
-    "status": "pending",
+    "attempts": 8,
+    "lastScore": 1.0,
+    "status": "matched",
     "history": [
       {
         "code": "void func_1500E470(s32 arg0) {\n    u8 tmp;\n\n    D_800DD190 = -1;\n    bzero(&D_800DD198, 24);\n    D_800DD404 = 0xFF;\n    D_800DD405 = 0;\n    D_800DD406 = 0;\n    D_800E0930 = 0;\n    D_800E0934 = 0;\n    D_800E0940 = 0;\n    D_8008CD00 = 0;\n    D_80088B60 = 0;\n    D_800BE4E0 = 0;\n    D_800E0A10 = func_15012720();\n    func_15012370();\n    func_151EF640(64);\n    func_151732E0(arg0);\n    func_15004FE0(arg0);\n    func_150127B0();\n    func_1519582C();\n    func_15008BE0();\n    func_15008B90();\n    func_1500E5C0();\n    if (D_800B0DF0->unkA) {\n        D_80082D90[D_800B0DF0->unkA]();\n    }\n    func_1500ABA0(arg0);\n    func_1500BEC0();\n    func_1500AC14();\n    func_151872B0(arg0);\n    func_15178EB0();\n    func_15012FE0();\n    tmp = (D_800D2E4C->unk4 & 128) == 0;\n    func_151645C4(tmp);\n}",
@@ -55455,6 +55455,13 @@
           }
         ],
         "timestamp": "2026-08-09T15:32:05.008814+00:00"
+      },
+      {
+        "code": "void func_15004FE0(s32 arg0);\nvoid func_1500AC14(void);\nvoid func_1500BEC0(void);\nvoid func_1500E5C0(void);\nvoid func_15012370(void);\nvoid func_150127B0(void);\nvoid func_15012FE0(void);\nvoid func_151645C4(s32 arg0);\nvoid func_151732E0(s32 arg0);\nvoid func_15178EB0(void);\nvoid func_151872B0(s32 arg0);\nvoid func_1519582C(void);\nvoid func_151EF640(s32 arg0);\n\nvoid func_1500E470(s32 arg0) {\n    D_800DD190 = -1;\n    bzero(&D_800DD198, 24);\n    D_800DD404 = 0xFF;\n    D_800DD405 = 0;\n    D_800DD406 = 0;\n    D_800E0930 = 0;\n    D_800E0934 = 0;\n    D_800E0940 = 0;\n    D_8008CD00 = 0;\n    D_80088B60 = 0;\n    D_800BE4E0 = 0;\n    goto block_0;\nblock_0:\n    D_800E0A10 = func_15012720();\n    goto block_1;\nblock_1:\n    func_15012370();\n\n    func_151EF640(64);\n    func_151732E0(arg0);\n    func_15004FE0(arg0);\n    func_150127B0();\n\n    func_1519582C();\n    func_15008BE0();\n    func_15008B90();\n    func_1500E5C0();\n\n    if (D_800B0DF0->unkA) {\n        D_80082D90[D_800B0DF0->unkA]();\n    }\n    func_1500ABA0(arg0);\n    func_1500BEC0();\n    func_1500AC14();\n    func_151872B0(arg0);\n    func_15178EB0();\n    func_15012FE0();\n\n    {\n        register u8 tmp;\n\n        tmp = !(((u8 *)D_800D2E4C)[4] & 128);\n        func_151645C4(tmp);\n    }\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-09T17:16:52.612748+00:00"
       }
     ]
   },
