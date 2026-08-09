@@ -104,7 +104,19 @@ void func_15134908(void *, s32, u8, s32);
 //     func_15151A38(&sp18, arg0 & 0xFF, 1);
 // }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_EF410/func_150C2424.s")
+extern f32 D_800A0268;
+extern f32 D_800A026C;
+void func_1514C470(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, u8 arg7, s32 arg8, f32 arg9, s32 arg10, u8 arg11);
+void func_150C2424(u8 arg0) {
+    s32 new_var;
+    f32 *new_var2;
+    new_var2 = &D_800A0268;
+    new_var = 0;
+    func_1514C470(*new_var2, (s32)(-490.0f), -328.0f, *new_var2, -490.0f, 328.0f,
+                  (func_150ADA68() * 8.0f) + 8.0f, 1, new_var, 0.0f, 0, arg0);
+    func_1514C470(D_800A026C, -560.0f, -580.0f, 8117.0f, -560.0f, -580.0f,
+                  (func_150ADA68() * 3.0f) + 4.0f, 3, 0, 0.0f, 0, arg0);
+}
 s32 func_150C251C(void *arg0) {
     void *temp_v0 = *(void **)((s32)arg0 + 0x98);
     s32 temp_v1 = *(s16 *)((s32)arg0 + 0x1C) << 3;
