@@ -63,6 +63,8 @@ s32 func_10015878(N_ALSndPlayer *sp) {
 // jump table
 #pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/init_15550/_n_handleEvent.s")
 
+void func_10016F80(void *arg0, s32 arg1, u16 arg2);
+
 void func_10016E90(N_ALUnknownStruct1 *arg0) {
     if ((arg0->unk53 & 4) != 0) {
         n_alSynStopVoice(&arg0->unk10);
@@ -86,7 +88,51 @@ void func_10016F00(struct154 *arg0) {
     n_alEvtqPostEvent(&D_8002BA2C->evtq, &event, 33333, 2);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/init_15550/func_10016F80.s")
+void func_10016F80(void *arg0, s32 arg1, u16 arg2) {
+    void *sp3C;
+    void *sp38;
+    void *sp34;
+    void *sp30;
+    void *sp2C;
+    s32 sp28;
+    void *sp24;
+    void *sp20;
+    void *sp1C;
+
+    sp28 = osSetIntMask(1);
+    sp3C = *(void **)((u8 *)arg0 + 8);
+    if (sp3C != 0) {
+        do {
+            sp38 = *(void **)sp3C;
+            sp34 = sp3C;
+            sp30 = sp38;
+            sp2C = (void *)((u8 *)sp34 + 0xC);
+            if ((*(s32 *)((u8 *)sp2C + 4) == arg1) &&
+                ((*(u16 *)sp2C & arg2) != 0)) {
+                if (sp30 != 0) {
+                    *(s32 *)((u8 *)sp30 + 8) += *(s32 *)((u8 *)sp34 + 8);
+                }
+                sp24 = sp3C;
+                if (*(void **)sp24 != 0) {
+                    *(void **)((u8 *)*(void **)sp24 + 4) = *(void **)((u8 *)sp24 + 4);
+                }
+                if (*(void **)((u8 *)sp24 + 4) != 0) {
+                    *(void **)*(void **)((u8 *)sp24 + 4) = *(void **)sp24;
+                }
+                sp20 = sp3C;
+                sp1C = arg0;
+                *(void **)sp20 = *(void **)sp1C;
+                *(void **)((u8 *)sp20 + 4) = sp1C;
+                if (*(void **)sp1C != 0) {
+                    *(void **)((u8 *)*(void **)sp1C + 4) = sp20;
+                }
+                *(void **)sp1C = sp20;
+            }
+            sp3C = sp38;
+        } while (sp3C != 0);
+    }
+    osSetIntMask(sp28);
+}
 // void func_10016F80(void *arg0, s32 arg1, u16 arg2) {
 //     void *sp3C;
 //     void *sp38;

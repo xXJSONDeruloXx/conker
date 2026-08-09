@@ -50495,9 +50495,25 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 2,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "void func_10016F80(void *arg0, s32 arg1, u16 arg2) {\n    void *sp3C;\n    void *sp38;\n    void *sp34;\n    void *sp30;\n    void *sp2C;\n    s32 sp28;\n    void *sp24;\n    void *sp20;\n    void *sp1C;\n\n    sp28 = osSetIntMask(1);\n    sp3C = *(void **)((u8 *)arg0 + 8);\n    if (sp3C != 0) {\n        do {\n            sp38 = *(void **)sp3C;\n            sp34 = sp3C;\n            sp30 = sp38;\n            sp2C = (void *)((u8 *)sp34 + 0xC);\n            if ((*(s32 *)((u8 *)sp2C + 4) == arg1) &&\n                ((*(u16 *)sp2C & arg2) != 0)) {\n                if (sp30 != 0) {\n                    *(s32 *)((u8 *)sp30 + 8) += *(s32 *)((u8 *)sp34 + 8);\n                }\n                sp24 = sp3C;\n                if (*(void **)sp24 != 0) {\n                    *(void **)((u8 *)*(void **)sp24 + 4) = *(void **)((u8 *)sp24 + 4);\n                }\n                if (*(void **)((u8 *)sp24 + 4) != 0) {\n                    *(void **)*(void **)((u8 *)sp24 + 4) = *(void **)sp24;\n                }\n                sp20 = sp3C;\n                sp1C = arg0;\n                *(void **)sp20 = *(void **)sp1C;\n                *(void **)((u8 *)sp20 + 4) = sp1C;\n                if (*(void **)sp1C != 0) {\n                    *(void **)((u8 *)*(void **)sp1C + 4) = sp20;\n                }\n                *(void **)sp1C = sp20;\n            }\n            sp3C = sp38;\n        } while (sp3C != 0);\n    }\n    osSetIntMask(sp28);\n}",
+        "score": 0.0,
+        "reason": "compile_error",
+        "diffs": [],
+        "timestamp": "2026-08-09T17:03:13.093023+00:00"
+      },
+      {
+        "code": "void func_10016F80(void *arg0, s32 arg1, u16 arg2) {\n    void *sp3C;\n    void *sp38;\n    void *sp34;\n    void *sp30;\n    void *sp2C;\n    s32 sp28;\n    void *sp24;\n    void *sp20;\n    void *sp1C;\n\n    sp28 = osSetIntMask(1);\n    sp3C = *(void **)((u8 *)arg0 + 8);\n    if (sp3C != 0) {\n        do {\n            sp38 = *(void **)sp3C;\n            sp34 = sp3C;\n            sp30 = sp38;\n            sp2C = (void *)((u8 *)sp34 + 0xC);\n            if ((*(s32 *)((u8 *)sp2C + 4) == arg1) &&\n                ((*(u16 *)sp2C & arg2) != 0)) {\n                if (sp30 != 0) {\n                    *(s32 *)((u8 *)sp30 + 8) += *(s32 *)((u8 *)sp34 + 8);\n                }\n                sp24 = sp3C;\n                if (*(void **)sp24 != 0) {\n                    *(void **)((u8 *)*(void **)sp24 + 4) = *(void **)((u8 *)sp24 + 4);\n                }\n                if (*(void **)((u8 *)sp24 + 4) != 0) {\n                    *(void **)*(void **)((u8 *)sp24 + 4) = *(void **)sp24;\n                }\n                sp20 = sp3C;\n                sp1C = arg0;\n                *(void **)sp20 = *(void **)sp1C;\n                *(void **)((u8 *)sp20 + 4) = sp1C;\n                if (*(void **)sp1C != 0) {\n                    *(void **)((u8 *)*(void **)sp1C + 4) = sp20;\n                }\n                *(void **)sp1C = sp20;\n            }\n            sp3C = sp38;\n        } while (sp3C != 0);\n    }\n    osSetIntMask(sp28);\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-09T17:03:28.278825+00:00"
+      }
+    ]
   },
   {
     "function": "func_1513BEB0",
