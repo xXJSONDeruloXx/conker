@@ -509,7 +509,80 @@ void func_151D9FC0(u8 arg0, f32 arg1, u8 arg2, s32 arg3, s32 arg4, u8 arg5, s32 
     }
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_2062D0/func_151DA08C.s")
+s32 func_1513D668(s32 arg0, s32 arg1, u8 arg2, u8 arg3, u8 arg4, u8 arg5, s16 arg6, f32 arg7, f32 arg8, s32 arg9, s32 argA, u8 argB, s32 argC, u8 argD, s32 argE);
+
+s32 func_151DA08C(u8 arg0, f32 arg1, f32 arg2, u8 arg3, s16 arg4, s32 arg5, void *arg6, s32 arg7, s32 arg8) {
+    s32 ret;
+    Struct151DA08CMain main;
+    Struct151DA08CExtra extra;
+    s32 temp_v0;
+    s32 rand2;
+    s32 rand1;
+
+    extra.unk0 = 0;
+    extra.unk1 = 0;
+    extra.unk10 = arg1;
+    extra.unk2 = (func_150ADA20() % 5U) + 2;
+    extra.unk3 = (func_150ADA20() % 5U) + 2;
+    extra.unk4 = ((func_150ADA68() * D_800AB470) + D_800AB474) * extra.unk10;
+    extra.unk8 = ((func_150ADA68() * D_800AB478) + D_800AB47C) * extra.unk10;
+    extra.unk18 = arg0;
+    extra.unkC = 0.0f;
+    main.unk0 = D_8008FD04[(u8)arg0]();
+    main.unk2 = 3;
+    main.unk8 = 0;
+    main.unkC = 0;
+    main.unk10 = 0;
+    main.unk11 = 0;
+    main.unk12 = 0;
+    main.unk13 = 0xFF;
+    main.unk18 = arg1;
+    main.unk14 = arg1;
+    main.unk1C = *(struct17 *)arg6;
+    main.unk40 = 0x0CDC0008;
+    main.unk34 = 1.0f;
+    main.unk38 = 1.0f;
+    main.unk3C = 1.0f;
+    main.unk28 = 0.0f;
+    main.unk2C = 0.0f;
+    main.unk30 = 0.0f;
+    if (arg4 == -1) {
+        main.unk4 = 0x12C;
+        extra.unk14 = 1.0f;
+        main.unk54 = 1;
+        main.unk56 = 0xFF;
+    } else {
+        main.unk4 = arg4;
+        main.unk40 = 0x0CDC0009;
+        extra.unk14 = arg2;
+        if (arg4 >= 0x100) {
+            main.unk54 = 0xFF;
+        } else {
+            main.unk54 = arg4;
+        }
+        if (arg4 >= 0x100) {
+            main.unk56 = 1;
+        } else {
+            main.unk56 = 0xFF / arg4;
+        }
+    }
+    main.unk44 = arg3;
+    main.unk45 = 0xFF;
+    main.unk1 = 0;
+    main.unk46 = 4;
+    main.unk47 = 5;
+    main.unk48 = 0;
+    main.unk4C = 0xFF;
+    main.unk50 = 0;
+    rand1 = func_150ADA20();
+    rand2 = func_150ADA20();
+    temp_v0 = func_150ADA20();
+    ret = func_1513D668((s32)&main, 0, 0xE, 0x13, 0, (rand2 & 1) + (rand1 & 1), temp_v0 & 0xFF, 500.0f, 500.0f, 0, arg5, 0, 0x1C, 0xFF, 0);
+    if (ret != 0) {
+        memcpy((void *)(ret + 0x128), &extra, sizeof(extra));
+    }
+    return ret;
+}
 #pragma GLOBAL_ASM("asm/nonmatchings/game_2062D0/func_151DA368.s")
 // TODO when we know what arg0 is...
 s32 func_151DA6A8(void *arg0) {
