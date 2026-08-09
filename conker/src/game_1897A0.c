@@ -10,7 +10,22 @@ typedef struct
 #include "variables.h"
 
 
-#pragma GLOBAL_ASM("asm/nonmatchings/game_1897A0/func_1515C2F0.s")
+typedef struct { u8 pad0[0x10]; s32 unk10; } Struct1515C2F0Arg0;
+typedef struct { u8 pad0[0x98]; void *unk98; } Struct1515C2F0Ret;
+extern Struct1515C2F0Ret *func_15147A80(void *, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32);
+void *func_1515C2F0(Struct1515C2F0Arg0 *arg0, s32 arg1, void *arg2, s32 arg3, u8 arg4, s32 arg5) {
+    Struct1515C2F0Ret *temp_v0;
+    Struct1515C2F0Ret *sp3C;
+
+    arg0->unk10 = 0xA;
+    temp_v0 = func_15147A80(arg0, arg1 + 0x40, 0x10, 8, 8, 8, 0, 0, arg3, arg4, arg5);
+    if (temp_v0 == 0) {
+        return NULL;
+    }
+    sp3C = temp_v0;
+    memcpy(temp_v0->unk98, arg2, 0x3C);
+    return sp3C;
+}
 // void *func_1515C2F0(void *arg0, void *arg1, s32 arg2, s32 arg3, u8 arg4, s32 arg5) {
 //     void *sp3C;
 //     void *temp_v0;
