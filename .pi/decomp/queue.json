@@ -57727,9 +57727,18 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "void n_alSynNew(ALSynConfig *c) {\n    s32 i;\n    s32 j;\n    PVoiceArr *pvoice;\n    PVoiceArr *pvoiceBase;\n    s32 heap;\n    UpdElem *updBase;\n    UpdElem *upd;\n    ALLink *link;\n    ALLink *to;\n\n    heap = CFG->unk28;\n    SYN->unk0 = 0;\n    SYN->unk4C = CFG->unk4;\n    SYN->unk20 = 0;\n    SYN->unk1C = 0;\n    SYN->unk54 = CFG->unk2C;\n    SYN->unk58 = 0xB8;\n    SYN->unk24 = CFG->unk10;\n    SYN->unk28 = CFG->unk14;\n    SYN->unk2C = CFG->unk18;\n    SYN->unk30 = CFG->unk1C;\n    SYN->unk34 = CFG->unk20;\n    SYN->unk38 = CFG->unk24;\n    if (CFG->unkC >= 3) {\n        SYN->unk50 = 2;\n    } else if (CFG->unkC <= 0) {\n        SYN->unk50 = 1;\n    } else {\n        SYN->unk50 = CFG->unkC;\n    }\n    SYN->unk48 = alHeapDBAlloc(0, 0, (ALHeap *)heap, SYN->unk50, 0x44);\n    for (i = 0; i < SYN->unk50; i++) {\n        SYN->unk48[i].unk14 = 0;\n        SYN->unk48[i].unk18 = 0;\n        if (CFG->unk30[i]) {\n            SYN->unk48[i].unk1C = func_1001E4A0(i, (s32)c, heap);\n        } else {\n            SYN->unk48[i].unk1C = 0;\n        }\n        SYN->unk48[i].unk40 = alHeapDBAlloc(0, 0, (ALHeap *)heap, 1, 0x38);\n        SYN->unk48[i].unk40->unk2 = 0;\n        SYN->unk48[i].unk40->unk2C = alHeapDBAlloc(0, 0, (ALHeap *)heap, 1, 8);\n        SYN->unk48[i].unk40->unk30 = alHeapDBAlloc(0, 0, (ALHeap *)heap, 1, 8);\n    }\n    SYN->unk44 = alHeapDBAlloc(0, 0, (ALHeap *)heap, 1, 0x14);\n    SYN->unk44->unk4 = (s32)func_1001E530;\n    SYN->unk4.next = 0;\n    SYN->unk4.prev = 0;\n    SYN->unk14.next = 0;\n    SYN->unk14.prev = 0;\n    SYN->unkC.next = 0;\n    SYN->unkC.prev = 0;\n    pvoiceBase = alHeapDBAlloc(0, 0, (ALHeap *)heap, CFG->unk4, 0xD0);\n    for (i = 0; i < CFG->unk4; i++) {\n        pvoice = &pvoiceBase[i];\n        link = (ALLink *)pvoice;\n        to = &SYN->unk4;\n        link->next = to->next;\n        link->prev = to;\n        if (to->next) to->next->prev = link;\n        to->next = link;\n        pvoice->unk10 = 0;\n        alN_PVoiceNew((N_PVoice *)pvoice, (ALDMANew)SYN->unk24, (ALHeap *)heap);\n    }\n    for (j = 0; j < SYN->unk50; j++) {\n        SYN->unk48[j].unk14 = 0;\n        SYN->unk48[j].unk18 = 0;\n    }\n    updBase = alHeapDBAlloc(0, 0, (ALHeap *)heap, CFG->unk8, 0x24);\n    SYN->unk40 = 0;\n    for (i = 0; i < CFG->unk8; i++) {\n        upd = &updBase[i];\n        upd->unk0 = SYN->unk40;\n        SYN->unk40 = upd;\n    }\n    SYN->unk3C = heap;\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-09T19:32:09.648466+00:00"
+      }
+    ]
   },
   {
     "function": "func_160021FC",
