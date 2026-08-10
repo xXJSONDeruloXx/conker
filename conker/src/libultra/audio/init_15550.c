@@ -36,7 +36,70 @@ void func_10015550(N_ALCSPlayer *csp, s32 arg1) {
     n_alEvtqPostEvent(&csp->evtq, &event, 0, 2);
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/init_15550/func_100155A0.s")
+typedef struct {
+    s32 unk0;
+    s32 unk4;
+    s32 unk8;
+    ALHeap *unkC;
+    s32 unk10;
+    u16 unk14;
+} N_ALSndpConfig2Candidate;
+
+typedef struct N_ALVoiceLinkCandidate {
+    struct N_ALVoiceLinkCandidate *unk0;
+    struct N_ALVoiceLinkCandidate **unk4;
+    u8 pad8[0x50];
+} N_ALVoiceLinkCandidate;
+
+typedef struct {
+    u8 pad0[0x54];
+    s32 unk54;
+} SndExtCandidate;
+
+extern u16 *D_800428B8;
+s32 func_10015878(N_ALSndPlayer *sp);
+
+void func_100155A0(N_ALSndpConfig2Candidate *arg0) {
+    u32 i;
+    void *alloc;
+    N_ALEvent event;
+    N_ALVoiceLinkCandidate *base;
+    N_ALVoiceLinkCandidate *el;
+    N_ALVoiceLinkCandidate *after;
+
+    D_8002BA2C->maxSounds = arg0->unk8;
+    D_8002BA2C->target = 0;
+    D_8002BA2C->drvr = n_syn;
+    D_8002BA2C->frameTime = 0x3E80;
+    alloc = alHeapDBAlloc(0, 0, arg0->unkC, arg0->unk0, 0x58);
+    D_8002BA2C->sndState = alloc;
+    ((SndExtCandidate *)D_8002BA2C)->unk54 = arg0->unk10;
+    alloc = alHeapDBAlloc(0, 0, arg0->unkC, arg0->unk4, 0x1C);
+    n_alEvtqNew(&D_8002BA2C->evtq, alloc, arg0->unk4);
+    D_8002BA28 = (N_ALUnknownStruct1 *)D_8002BA2C->sndState;
+    for (i = 1; i < arg0->unk0; i++) {
+        base = (N_ALVoiceLinkCandidate *)D_8002BA2C->sndState;
+        el = &base[i];
+        after = &base[i] - 1;
+        el->unk0 = after->unk0;
+        el->unk4 = &after->unk0;
+        if (after->unk0 != 0) {
+            after->unk0->unk4 = &el->unk0;
+        }
+        after->unk0 = el;
+    }
+    D_800428B8 = alHeapDBAlloc(0, 0, arg0->unkC, 2, arg0->unk14);
+    for (i = 0; i < arg0->unk14; i++) {
+        D_800428B8[i] = 0x7FFF;
+    }
+    D_8002BA2C->node.next = NULL;
+    D_8002BA2C->node.handler = (ALVoiceHandler)func_10015878;
+    D_8002BA2C->node.clientData = D_8002BA2C;
+    n_alSynAddPlayer(&D_8002BA2C->node);
+    event.type = 32;
+    n_alEvtqPostEvent(&D_8002BA2C->evtq, &event, D_8002BA2C->frameTime, 3);
+    D_8002BA2C->nextDelta = n_alEvtqNextEvent(&D_8002BA2C->evtq, &D_8002BA2C->nextEvent);
+}
 
 s32 func_10015878(N_ALSndPlayer *sp) {
     N_ALSndPlayer *alsp;

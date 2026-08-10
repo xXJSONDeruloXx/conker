@@ -55389,9 +55389,32 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "void func_100155A0(N_ALSndpConfig2 *arg0) {\n    u32 i;\n    void *alloc;\n    N_ALEvent event;\n    N_ALVoiceLink *base;\n    N_ALVoiceLink *el;\n    N_ALVoiceLink *after;\n\n    D_8002BA2C->maxSounds = arg0->unk8;\n    D_8002BA2C->target = 0;\n    D_8002BA2C->drvr = n_syn;\n    D_8002BA2C->frameTime = 0x3E80;\n    alloc = alHeapDBAlloc(0, 0, arg0->unkC, arg0->unk0, 0x58);\n    D_8002BA2C->sndState = alloc;\n    ((SndExt *)D_8002BA2C)->unk54 = arg0->unk10;\n    alloc = alHeapDBAlloc(0, 0, arg0->unkC, arg0->unk4, 0x1C);\n    n_alEvtqNew(&D_8002BA2C->evtq, alloc, arg0->unk4);\n    D_8002BA28 = (N_ALUnknownStruct1 *)D_8002BA2C->sndState;\n    for (i = 1; i < arg0->unk0; i++) {\n        base = (N_ALVoiceLink *)D_8002BA2C->sndState;\n        el = &base[i];\n        after = &base[i] - 1;\n        el->unk0 = after->unk0;\n        el->unk4 = &after->unk0;\n        if (after->unk0 != 0) {\n            after->unk0->unk4 = &el->unk0;\n        }\n        after->unk0 = el;\n    }\n    D_800428B8 = alHeapDBAlloc(0, 0, arg0->unkC, 2, arg0->unk14);\n    for (i = 0; i < arg0->unk14; i++) {\n        D_800428B8[i] = 0x7FFF;\n    }\n    D_8002BA2C->node.next = NULL;\n    D_8002BA2C->node.handler = (ALVoiceHandler)func_10015878;\n    D_8002BA2C->node.clientData = D_8002BA2C;\n    n_alSynAddPlayer(&D_8002BA2C->node);\n    event.type = 32;\n    n_alEvtqPostEvent(&D_8002BA2C->evtq, &event, D_8002BA2C->frameTime, 3);\n    D_8002BA2C->nextDelta = n_alEvtqNextEvent(&D_8002BA2C->evtq, &D_8002BA2C->nextEvent);\n}",
+        "score": 0.0,
+        "reason": "compile_error",
+        "diffs": [],
+        "timestamp": "2026-08-09T20:52:34.201641+00:00"
+      },
+      {
+        "code": "typedef struct {\n    s32 unk0;\n    s32 unk4;\n    s32 unk8;\n    ALHeap *unkC;\n    s32 unk10;\n    u16 unk14;\n} N_ALSndpConfig2Candidate;\n\ntypedef struct {\n    struct N_ALVoiceLinkCandidate *unk0;\n    struct N_ALVoiceLinkCandidate **unk4;\n    u8 pad8[0x50];\n} N_ALVoiceLinkCandidate;\n\ntypedef struct {\n    u8 pad0[0x54];\n    s32 unk54;\n} SndExtCandidate;\n\nextern u16 *D_800428B8;\nvoid func_10015878(N_ALSndPlayer *sp);\n\nvoid func_100155A0(N_ALSndpConfig2Candidate *arg0) {\n    u32 i;\n    void *alloc;\n    N_ALEvent event;\n    N_ALVoiceLinkCandidate *base;\n    N_ALVoiceLinkCandidate *el;\n    N_ALVoiceLinkCandidate *after;\n\n    D_8002BA2C->maxSounds = arg0->unk8;\n    D_8002BA2C->target = 0;\n    D_8002BA2C->drvr = n_syn;\n    D_8002BA2C->frameTime = 0x3E80;\n    alloc = alHeapDBAlloc(0, 0, arg0->unkC, arg0->unk0, 0x58);\n    D_8002BA2C->sndState = alloc;\n    ((SndExtCandidate *)D_8002BA2C)->unk54 = arg0->unk10;\n    alloc = alHeapDBAlloc(0, 0, arg0->unkC, arg0->unk4, 0x1C);\n    n_alEvtqNew(&D_8002BA2C->evtq, alloc, arg0->unk4);\n    D_8002BA28 = (N_ALUnknownStruct1 *)D_8002BA2C->sndState;\n    for (i = 1; i < arg0->unk0; i++) {\n        base = (N_ALVoiceLinkCandidate *)D_8002BA2C->sndState;\n        el = &base[i];\n        after = &base[i] - 1;\n        el->unk0 = after->unk0;\n        el->unk4 = &after->unk0;\n        if (after->unk0 != 0) {\n            after->unk0->unk4 = &el->unk0;\n        }\n        after->unk0 = el;\n    }\n    D_800428B8 = alHeapDBAlloc(0, 0, arg0->unkC, 2, arg0->unk14);\n    for (i = 0; i < arg0->unk14; i++) {\n        D_800428B8[i] = 0x7FFF;\n    }\n    D_8002BA2C->node.next = NULL;\n    D_8002BA2C->node.handler = (ALVoiceHandler)func_10015878;\n    D_8002BA2C->node.clientData = D_8002BA2C;\n    n_alSynAddPlayer(&D_8002BA2C->node);\n    event.type = 32;\n    n_alEvtqPostEvent(&D_8002BA2C->evtq, &event, D_8002BA2C->frameTime, 3);\n    D_8002BA2C->nextDelta = n_alEvtqNextEvent(&D_8002BA2C->evtq, &D_8002BA2C->nextEvent);\n}",
+        "score": 0.0,
+        "reason": "compile_error",
+        "diffs": [],
+        "timestamp": "2026-08-10T03:06:50.609207+00:00"
+      },
+      {
+        "code": "typedef struct {\n    s32 unk0;\n    s32 unk4;\n    s32 unk8;\n    ALHeap *unkC;\n    s32 unk10;\n    u16 unk14;\n} N_ALSndpConfig2Candidate;\n\ntypedef struct N_ALVoiceLinkCandidate {\n    struct N_ALVoiceLinkCandidate *unk0;\n    struct N_ALVoiceLinkCandidate **unk4;\n    u8 pad8[0x50];\n} N_ALVoiceLinkCandidate;\n\ntypedef struct {\n    u8 pad0[0x54];\n    s32 unk54;\n} SndExtCandidate;\n\nextern u16 *D_800428B8;\ns32 func_10015878(N_ALSndPlayer *sp);\n\nvoid func_100155A0(N_ALSndpConfig2Candidate *arg0) {\n    u32 i;\n    void *alloc;\n    N_ALEvent event;\n    N_ALVoiceLinkCandidate *base;\n    N_ALVoiceLinkCandidate *el;\n    N_ALVoiceLinkCandidate *after;\n\n    D_8002BA2C->maxSounds = arg0->unk8;\n    D_8002BA2C->target = 0;\n    D_8002BA2C->drvr = n_syn;\n    D_8002BA2C->frameTime = 0x3E80;\n    alloc = alHeapDBAlloc(0, 0, arg0->unkC, arg0->unk0, 0x58);\n    D_8002BA2C->sndState = alloc;\n    ((SndExtCandidate *)D_8002BA2C)->unk54 = arg0->unk10;\n    alloc = alHeapDBAlloc(0, 0, arg0->unkC, arg0->unk4, 0x1C);\n    n_alEvtqNew(&D_8002BA2C->evtq, alloc, arg0->unk4);\n    D_8002BA28 = (N_ALUnknownStruct1 *)D_8002BA2C->sndState;\n    for (i = 1; i < arg0->unk0; i++) {\n        base = (N_ALVoiceLinkCandidate *)D_8002BA2C->sndState;\n        el = &base[i];\n        after = &base[i] - 1;\n        el->unk0 = after->unk0;\n        el->unk4 = &after->unk0;\n        if (after->unk0 != 0) {\n            after->unk0->unk4 = &el->unk0;\n        }\n        after->unk0 = el;\n    }\n    D_800428B8 = alHeapDBAlloc(0, 0, arg0->unkC, 2, arg0->unk14);\n    for (i = 0; i < arg0->unk14; i++) {\n        D_800428B8[i] = 0x7FFF;\n    }\n    D_8002BA2C->node.next = NULL;\n    D_8002BA2C->node.handler = (ALVoiceHandler)func_10015878;\n    D_8002BA2C->node.clientData = D_8002BA2C;\n    n_alSynAddPlayer(&D_8002BA2C->node);\n    event.type = 32;\n    n_alEvtqPostEvent(&D_8002BA2C->evtq, &event, D_8002BA2C->frameTime, 3);\n    D_8002BA2C->nextDelta = n_alEvtqNextEvent(&D_8002BA2C->evtq, &D_8002BA2C->nextEvent);\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-10T03:07:03.446021+00:00"
+      }
+    ]
   },
   {
     "function": "func_15052F9C",
