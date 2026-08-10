@@ -39860,9 +39860,9 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 1,
-    "lastScore": 0.018518518518518545,
-    "status": "pending",
+    "attempts": 24,
+    "lastScore": 1.0,
+    "status": "matched",
     "history": [
       {
         "code": "void func_15072F10(s32 arg0) {\n    struct127 *obj = D_800D154C;\n}",
@@ -39871,6 +39871,167 @@
         "diffs": [],
         "timestamp": "2026-06-12T21:32:08.847Z",
         "contextPatch": []
+      },
+      {
+        "code": "extern f32 D_8009A094;\n\nvoid func_150E1570(struct127 *arg0, f32 arg1, f32 arg2, f32 arg3,\n                   f32 arg4, f32 arg5, f32 arg6, u8 arg7, s32 arg8);\n\nvoid func_15072F10(s32 arg0) {\n    f32 sp44;\n    f32 sp48;\n    f32 sp4C;\n    struct127 *temp_s0;\n    struct126 *temp_v0;\n    s32 temp_v1;\n\n    temp_s0 = D_800D154C;\n    temp_v0 = temp_s0->unk31C;\n    temp_v1 = temp_s0->unk1D1;\n    temp_v1 = (temp_v1 * 3) << 3;\n    temp_v1 += temp_s0->unk1D1;\n    temp_v1 <<= 3;\n    temp_v1 = (f32)temp_v1;\n    temp_v1 = temp_s0->unk1D1 * 200;\n    temp_v0->unk24--;\n    func_1505A184((temp_s0->unk7A - temp_v0->unk12) & 0xFFFF,\n                  2000.0f, (f32)temp_v1 * 0.0055f,\n                  &sp4C, &sp44, &sp48);\n    sp4C = (sp4C * D_8009A094) + temp_s0->x_position;\n    sp48 = (sp48 * D_8009A094) + temp_s0->z_position;\n    sp44 = (sp44 * D_8009A094) + temp_s0->y_position;\n    func_150E1570(D_800D154C,\n                  temp_s0->x_position,\n                  temp_s0->y_position + (f32)temp_s0->unkD6,\n                  temp_s0->z_position,\n                  sp4C, sp44, sp48,\n                  D_800C3E78, 0x12);\n}",
+        "score": 0.0,
+        "reason": "compile_error",
+        "diffs": [],
+        "timestamp": "2026-08-09T15:58:21.994891+00:00"
+      },
+      {
+        "code": "extern f32 D_8009A094;\n\nvoid func_150E1570(struct127 *arg0, f32 arg1, f32 arg2, f32 arg3,\n                   f32 arg4, f32 arg5, f32 arg6, u8 arg7, s32 arg8);\n\ntypedef struct {\n    u8 pad0[0x24];\n    s16 unk24;\n} Struct126_15072F10;\n\nvoid func_15072F10(s32 arg0) {\n    f32 sp44;\n    f32 sp48;\n    f32 sp4C;\n    struct127 *temp_s0;\n    Struct126_15072F10 *temp_v0;\n    s32 temp_v1;\n\n    temp_s0 = D_800D154C;\n    temp_v0 = (Struct126_15072F10 *)temp_s0->unk31C;\n    temp_v1 = temp_s0->unk1D1;\n    temp_v1 = (temp_v1 * 3) << 3;\n    temp_v1 += temp_s0->unk1D1;\n    temp_v1 <<= 3;\n    temp_v1 = (f32)temp_v1;\n    temp_v1 = temp_s0->unk1D1 * 200;\n    temp_v0->unk24--;\n    func_1505A184((temp_s0->unk7A - temp_v0->unk12) & 0xFFFF,\n                  2000.0f, (f32)temp_v1 * 0.0055f,\n                  &sp4C, &sp44, &sp48);\n    sp4C = (sp4C * D_8009A094) + temp_s0->x_position;\n    sp48 = (sp48 * D_8009A094) + temp_s0->z_position;\n    sp44 = (sp44 * D_8009A094) + temp_s0->y_position;\n    func_150E1570(D_800D154C,\n                  temp_s0->x_position,\n                  temp_s0->y_position + (f32)temp_s0->unkD6,\n                  temp_s0->z_position,\n                  sp4C, sp44, sp48,\n                  D_800C3E78, 0x12);\n}",
+        "score": 0.0,
+        "reason": "compile_error",
+        "diffs": [],
+        "timestamp": "2026-08-09T15:58:33.093509+00:00"
+      },
+      {
+        "code": "extern f32 D_8009A094;\n\nvoid func_150E1570(struct127 *arg0, f32 arg1, f32 arg2, f32 arg3,\n                   f32 arg4, f32 arg5, f32 arg6, u8 arg7, s32 arg8);\n\ntypedef struct {\n    u8 pad0[0x12];\n    s16 unk12;\n    u8 pad14[0x10];\n    s16 unk24;\n} Struct126_15072F10;\n\nvoid func_15072F10(s32 arg0) {\n    f32 sp44;\n    f32 sp48;\n    f32 sp4C;\n    struct127 *temp_s0;\n    Struct126_15072F10 *temp_v0;\n    s32 temp_v1;\n\n    temp_s0 = D_800D154C;\n    temp_v0 = (Struct126_15072F10 *)temp_s0->unk31C;\n    temp_v1 = temp_s0->unk1D1;\n    temp_v1 = (temp_v1 * 3) << 3;\n    temp_v1 += temp_s0->unk1D1;\n    temp_v1 <<= 3;\n    temp_v1 = (f32)temp_v1;\n    temp_v1 = temp_s0->unk1D1 * 200;\n    temp_v0->unk24--;\n    func_1505A184((temp_s0->unk7A - temp_v0->unk12) & 0xFFFF,\n                  2000.0f, (f32)temp_v1 * 0.0055f,\n                  &sp4C, &sp44, &sp48);\n    sp4C = (sp4C * D_8009A094) + temp_s0->x_position;\n    sp48 = (sp48 * D_8009A094) + temp_s0->z_position;\n    sp44 = (sp44 * D_8009A094) + temp_s0->y_position;\n    func_150E1570(D_800D154C,\n                  temp_s0->x_position,\n                  temp_s0->y_position + (f32)temp_s0->unkD6,\n                  temp_s0->z_position,\n                  sp4C, sp44, sp48,\n                  D_800C3E78, 0x12);\n}",
+        "score": 0.0123,
+        "reason": "length_mismatch (target=81, generated=76), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T15:58:49.691973+00:00"
+      },
+      {
+        "code": "extern f32 D_8009A094;\n\nvoid func_150E1570(struct127 *arg0, f32 arg1, f32 arg2, f32 arg3,\n                   f32 arg4, f32 arg5, f32 arg6, u8 arg7, s32 arg8);\n\ntypedef struct {\n    u8 pad0[0x12];\n    s16 unk12;\n    u8 pad14[0x10];\n    s16 unk24;\n} Struct126_15072F10;\n\nvoid func_15072F10(void) {\n    f32 sp44;\n    f32 sp48;\n    f32 sp4C;\n    struct127 *temp_s0;\n    struct127 *volatile *temp_t0;\n    Struct126_15072F10 *temp_v0;\n    s32 temp_v1;\n    s32 temp_t6;\n\n    temp_t0 = (struct127 *volatile *)&D_800D154C;\n    temp_s0 = *temp_t0;\n    temp_v0 = (Struct126_15072F10 *)temp_s0->unk31C;\n    temp_v1 = temp_s0->unk1D1;\n    temp_t6 = (temp_v1 * 3) << 3;\n    temp_t6 += temp_v1;\n    temp_v1 = temp_t6 << 3;\n    temp_v0->unk24--;\n    func_1505A184((temp_s0->unk7A - temp_v0->unk12) & 0xFFFF,\n                  2000.0f, (f32)temp_v1 * 0.005493164f,\n                  &sp4C, &sp44, &sp48);\n    sp4C = (sp4C * D_8009A094) + temp_s0->x_position;\n    sp48 = (sp48 * D_8009A094) + temp_s0->z_position;\n    sp44 = (sp44 * D_8009A094) + temp_s0->y_position;\n    func_150E1570(D_800D154C,\n                  temp_s0->x_position,\n                  temp_s0->y_position + (f32)temp_s0->unkD6,\n                  temp_s0->z_position,\n                  sp4C, sp44, sp48,\n                  D_800C3E78, 0x12);\n}",
+        "score": 0.0123,
+        "reason": "length_mismatch (target=81, generated=76), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T15:59:33.121669+00:00"
+      },
+      {
+        "code": "extern f32 D_8009A094;\n\nvoid func_150E1570(struct127 *arg0, f32 arg1, f32 arg2, f32 arg3,\n                   f32 arg4, f32 arg5, f32 arg6, u8 arg7, s32 arg8);\n\ntypedef struct {\n    u8 pad0[0x12];\n    s16 unk12;\n    u8 pad14[0x10];\n    s16 unk24;\n} Struct126_15072F10;\n\nvoid func_15072F10(void) {\n    f32 sp44;\n    f32 sp48;\n    f32 sp4C;\n    struct127 *temp_s0;\n    struct127 *volatile *temp_t0;\n    Struct126_15072F10 *temp_v0;\n    s32 temp_v1;\n    s32 temp_t6;\n\n    temp_t0 = (struct127 *volatile *)&D_800D154C;\n    temp_s0 = *temp_t0;\n    temp_v0 = (Struct126_15072F10 *)temp_s0->unk31C;\n    temp_v1 = temp_s0->unk1D1;\n    temp_t6 = (temp_v1 * 3) << 3;\n    temp_t6 += temp_v1;\n    temp_v1 = temp_t6 << 3;\n    temp_v0->unk24--;\n    func_1505A184((temp_s0->unk7A - temp_v0->unk12) & 0xFFFF,\n                  2000.0f, (f32)temp_v1 * 0.005493164f,\n                  &sp4C, &sp44, &sp48);\n    sp4C = (sp4C * D_8009A094) + D_800D154C->x_position;\n    sp48 = (sp48 * D_8009A094) + D_800D154C->z_position;\n    sp44 = (sp44 * D_8009A094) + D_800D154C->y_position;\n    func_150E1570(D_800D154C,\n                  D_800D154C->x_position,\n                  D_800D154C->y_position + (f32)D_800D154C->unkD6,\n                  D_800D154C->z_position,\n                  sp4C, sp44, sp48,\n                  D_800C3E78, 0x12);\n}",
+        "score": 0.0247,
+        "reason": "length_mismatch (target=81, generated=74), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T16:00:05.497360+00:00"
+      },
+      {
+        "code": "extern f32 D_8009A094;\n\nvoid func_150E1570(struct127 *arg0, f32 arg1, f32 arg2, f32 arg3,\n                   f32 arg4, f32 arg5, f32 arg6, u8 arg7, s32 arg8);\n\ntypedef struct {\n    u8 pad0[0x12];\n    s16 unk12;\n    u8 pad14[0x10];\n    s16 unk24;\n} Struct126_15072F10;\n\nvoid func_15072F10(void) {\n    f32 sp44;\n    f32 sp48;\n    f32 sp4C;\n    struct127 *temp_s0;\n    struct127 *volatile *temp_t0;\n    Struct126_15072F10 *temp_v0;\n    s32 temp_v1;\n    s32 temp_t6;\n\n    temp_t0 = (struct127 *volatile *)&D_800D154C;\n    temp_s0 = *temp_t0;\n    temp_v0 = (Struct126_15072F10 *)temp_s0->unk31C;\n    temp_v1 = temp_s0->unk1D1;\n    temp_t6 = (temp_v1 * 3) << 3;\n    temp_t6 += temp_v1;\n    temp_v1 = temp_t6 << 3;\n    temp_v0->unk24--;\n    func_1505A184((temp_s0->unk7A - temp_v0->unk12) & 0xFFFF,\n                  2000.0f, (f32)temp_v1 * 0.005493164f,\n                  &sp4C, &sp44, &sp48);\n    temp_s0 = D_800D154C;\n    sp4C = (sp4C * D_8009A094) + temp_s0->x_position;\n    sp48 = (sp48 * D_8009A094) + temp_s0->z_position;\n    sp44 = (sp44 * D_8009A094) + temp_s0->y_position;\n    func_150E1570(temp_s0,\n                  temp_s0->x_position,\n                  temp_s0->y_position + (f32)temp_s0->unkD6,\n                  temp_s0->z_position,\n                  sp4C, sp44, sp48,\n                  D_800C3E78, 0x12);\n}",
+        "score": 0.0247,
+        "reason": "length_mismatch (target=81, generated=76), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T16:00:40.327370+00:00"
+      },
+      {
+        "code": "extern f32 D_8009A094;\n\nvoid func_150E1570(struct127 *arg0, f32 arg1, f32 arg2, f32 arg3,\n                   f32 arg4, f32 arg5, f32 arg6, u8 arg7, s32 arg8);\n\ntypedef struct {\n    u8 pad0[0x12];\n    s16 unk12;\n    u8 pad14[0x10];\n    s16 unk24;\n} Struct126_15072F10;\n\nvoid func_15072F10(void) {\n    struct17 tmp;\n    struct127 *temp_s0;\n    struct127 *volatile *temp_t0;\n    Struct126_15072F10 *temp_v0;\n    s32 temp_v1;\n    s32 temp_t6;\n\n    temp_t0 = (struct127 *volatile *)&D_800D154C;\n    temp_s0 = *temp_t0;\n    temp_v0 = (Struct126_15072F10 *)temp_s0->unk31C;\n    temp_v1 = temp_s0->unk1D1;\n    temp_t6 = (temp_v1 * 3) << 3;\n    temp_t6 += temp_v1;\n    temp_v1 = temp_t6 << 3;\n    temp_v0->unk24--;\n    func_1505A184((temp_s0->unk7A - temp_v0->unk12) & 0xFFFF,\n                  2000.0f, (f32)temp_v1 * 0.005493164f,\n                  &tmp.unk8, &tmp.unk4, &tmp.unk0);\n    temp_s0 = D_800D154C;\n    tmp.unk8 = (tmp.unk8 * D_8009A094) + temp_s0->x_position;\n    tmp.unk4 = (tmp.unk4 * D_8009A094) + temp_s0->z_position;\n    tmp.unk0 = (tmp.unk0 * D_8009A094) + temp_s0->y_position;\n    func_150E1570(temp_s0,\n                  temp_s0->x_position,\n                  temp_s0->y_position + (f32)temp_s0->unkD6,\n                  temp_s0->z_position,\n                  tmp.unk8, tmp.unk0, tmp.unk4,\n                  D_800C3E78, 0x12);\n}",
+        "score": 0.0247,
+        "reason": "length_mismatch (target=81, generated=76), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T16:01:30.452782+00:00"
+      },
+      {
+        "code": "extern f32 D_8009A094;\n\nvoid func_150E1570(struct127 *arg0, f32 arg1, f32 arg2, f32 arg3,\n                   f32 arg4, f32 arg5, f32 arg6, u8 arg7, s32 arg8);\n\ntypedef struct {\n    u8 pad0[0x12];\n    s16 unk12;\n    u8 pad14[0x10];\n    s16 unk24;\n} Struct126_15072F10;\n\nvoid func_15072F10(void) {\n    struct17 tmp;\n    register struct127 *temp_s0;\n    struct127 *volatile *temp_t0;\n    Struct126_15072F10 *temp_v0;\n    s32 temp_v1;\n    s32 temp_t6;\n\n    temp_t0 = (struct127 *volatile *)&D_800D154C;\n    temp_s0 = *temp_t0;\n    temp_v0 = (Struct126_15072F10 *)temp_s0->unk31C;\n    temp_v1 = temp_s0->unk1D1;\n    temp_t6 = (temp_v1 * 3) << 3;\n    temp_t6 += temp_v1;\n    temp_v1 = temp_t6 << 3;\n    temp_v0->unk24--;\n    func_1505A184((temp_s0->unk7A - temp_v0->unk12) & 0xFFFF,\n                  2000.0f, (f32)temp_v1 * 0.005493164f,\n                  &tmp.unk8, &tmp.unk4, &tmp.unk0);\n    temp_s0 = D_800D154C;\n    tmp.unk8 = (tmp.unk8 * D_8009A094) + temp_s0->x_position;\n    tmp.unk4 = (tmp.unk4 * D_8009A094) + temp_s0->z_position;\n    tmp.unk0 = (tmp.unk0 * D_8009A094) + temp_s0->y_position;\n    func_150E1570(temp_s0,\n                  temp_s0->x_position,\n                  temp_s0->y_position + (f32)temp_s0->unkD6,\n                  temp_s0->z_position,\n                  tmp.unk8, tmp.unk0, tmp.unk4,\n                  D_800C3E78, 0x12);\n}",
+        "score": 0.0247,
+        "reason": "length_mismatch (target=81, generated=76), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T16:01:47.128206+00:00"
+      },
+      {
+        "code": "extern f32 D_8009A094;\n\nvoid func_150E1570(struct127 *arg0, f32 arg1, f32 arg2, f32 arg3,\n                   f32 arg4, f32 arg5, f32 arg6, u8 arg7, s32 arg8);\n\ntypedef struct {\n    u8 pad0[0x12];\n    s16 unk12;\n    u8 pad14[0x10];\n    s16 unk24;\n} Struct126_15072F10;\n\nvoid func_15072F10(void) {\n    register struct127 *temp_s0;\n    struct127 *volatile *temp_t0;\n    Struct126_15072F10 *temp_v0;\n    s32 temp_v1;\n    s32 temp_t6;\n    struct17 tmp;\n\n    temp_t0 = (struct127 *volatile *)&D_800D154C;\n    temp_s0 = *temp_t0;\n    temp_v0 = (Struct126_15072F10 *)temp_s0->unk31C;\n    temp_v1 = temp_s0->unk1D1;\n    temp_t6 = (temp_v1 * 3) << 3;\n    temp_t6 += temp_v1;\n    temp_v1 = temp_t6 << 3;\n    temp_v0->unk24--;\n    func_1505A184((temp_s0->unk7A - temp_v0->unk12) & 0xFFFF,\n                  2000.0f, (f32)temp_v1 * 0.005493164f,\n                  &tmp.unk8, &tmp.unk4, &tmp.unk0);\n    temp_s0 = D_800D154C;\n    tmp.unk8 = (tmp.unk8 * D_8009A094) + temp_s0->x_position;\n    tmp.unk4 = (tmp.unk4 * D_8009A094) + temp_s0->z_position;\n    tmp.unk0 = (tmp.unk0 * D_8009A094) + temp_s0->y_position;\n    func_150E1570(temp_s0,\n                  temp_s0->x_position,\n                  temp_s0->y_position + (f32)temp_s0->unkD6,\n                  temp_s0->z_position,\n                  tmp.unk8, tmp.unk0, tmp.unk4,\n                  D_800C3E78, 0x12);\n}",
+        "score": 0.0247,
+        "reason": "length_mismatch (target=81, generated=76), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T16:02:32.989565+00:00"
+      },
+      {
+        "code": "extern void func_150E1570(struct127 *, f32, f32, f32, f32, f32, f32, s32, s32);\nvoid func_15072F10(void) {\n    f32 sp4C;\n    f32 sp48;\n    f32 sp44;\n    s16 temp;\n\n    temp = (s16)(D_800D154C->unk1D1 * 200);\n    *(s16 *)((u8 *)D_800D154C->unk31C + 0x24) -= 1;\n    func_1505A184((u16)(D_800D154C->unk7A - D_800D154C->unk31C->unk12), 2000.0f, (f32)temp * 0.0054931640625f, &sp4C, &sp48, &sp44);\n    sp4C = sp4C * D_8009A094 + D_800D154C->x_position;\n    sp48 = sp48 * D_8009A094 + D_800D154C->z_position;\n    sp44 = sp44 * D_8009A094 + D_800D154C->y_position;\n    func_150E1570(D_800D154C, D_800D154C->x_position, D_800D154C->y_position + (f32)D_800D154C->unkD6, D_800D154C->z_position, sp4C, sp44, sp48, D_800C3E78, 0x12);\n}",
+        "score": 0.4876543209876543,
+        "reason": "length_mismatch (target=81, generated=79), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T21:37:14.105249+00:00"
+      },
+      {
+        "code": "extern void func_150E1570(struct127 *, f32, f32, f32, f32, f32, f32, s32, s32);\nvoid func_15072F10(void) {\n    f32 sp4C;\n    f32 sp48;\n    f32 sp44;\n    s16 temp;\n\n    temp = (s16)(D_800D154C->unk1D1 * 200);\n    *(s16 *)((u8 *)D_800D154C->unk31C + 0x24) -= 1;\n    func_1505A184((u16)(D_800D154C->unk7A - D_800D154C->unk31C->unk12), 2000.0f, (f32)temp * 0.0054931640625f, &sp4C, &sp48, &sp44);\n    sp4C = sp4C * D_8009A094 + D_800D154C->x_position;\n    sp48 = sp48 * D_8009A094 + D_800D154C->z_position;\n    sp44 = sp44 * D_8009A094 + D_800D154C->y_position;\n    func_150E1570(D_800D154C, D_800D154C->x_position, D_800D154C->y_position + (f32)D_800D154C->unkD6, D_800D154C->z_position, sp4C, sp44, sp48, D_800C3E78, 0x12);\n}\nvoid func_1507304C(void) {\n}",
+        "score": 0.4876543209876543,
+        "reason": "length_mismatch (target=81, generated=79), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T21:38:07.890900+00:00"
+      },
+      {
+        "code": "extern void func_150E1570(struct127 *, f32, f32, f32, f32, f32, f32, s32, s32);\nvoid func_15072F10(void) {\n    f32 sp4C;\n    f32 sp48;\n    f32 sp44;\n    s16 temp;\n\n    temp = (s16)(D_800D154C->unk1D1 * 200);\n    *(s16 *)((u8 *)D_800D154C->unk31C + 0x24) -= 1;\n    func_1505A184((u16)(D_800D154C->unk7A - D_800D154C->unk31C->unk12), 2000.0f, (f32)temp * 0.0054931640625f, &sp4C, &sp48, &sp44);\n    sp4C = sp4C * D_8009A094 + D_800D154C->x_position;\n    sp48 = sp48 * D_8009A094 + D_800D154C->z_position;\n    sp44 = sp44 * D_8009A094 + D_800D154C->y_position;\n    func_150E1570(D_800D154C, D_800D154C->x_position, D_800D154C->y_position + (f32)D_800D154C->unkD6, D_800D154C->z_position, sp4C, sp44, sp48, D_800C3E78, 0x12);\n}",
+        "score": 0.4876543209876543,
+        "reason": "length_mismatch (target=81, generated=79), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T21:38:25.607760+00:00"
+      },
+      {
+        "code": "extern void func_150E1570(struct127 *, f32, f32, f32, f32, f32, f32, s32, s32);\nvoid func_15072F10(void) {\n    f32 sp4C;\n    f32 sp48;\n    f32 sp44;\n    s16 temp;\n\n    temp = (s16)(D_800D154C->unk1D1 * 200);\n    *(s16 *)((u8 *)D_800D154C->unk31C + 0x24) -= 1;\n    func_1505A184((u16)(D_800D154C->unk7A - D_800D154C->unk31C->unk12), 2000.0f, (f32)temp * 0.0054931640625f, &sp4C, &sp48, &sp44);\n    sp4C = sp4C * D_8009A094 + D_800D154C->x_position;\n    sp48 = sp48 * D_8009A094 + D_800D154C->z_position;\n    sp44 = sp44 * D_8009A094 + D_800D154C->y_position;\n    func_150E1570(D_800D154C, D_800D154C->x_position, D_800D154C->y_position + (f32)D_800D154C->unkD6, D_800D154C->z_position, sp4C, sp44, sp48, D_800C3E78, 0x12);\n}\nvoid func_1507304C(void) {\n}",
+        "score": 0.4876543209876543,
+        "reason": "length_mismatch (target=81, generated=79), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T22:14:21.039240+00:00"
+      },
+      {
+        "code": "extern void func_150E1570(struct127 *, f32, f32, f32, f32, f32, f32, s32, s32);\n\nvoid func_15072F10(void) {\n    f32 sp4C;\n    f32 sp48;\n    f32 sp44;\n    s16 temp;\n\n    temp = (s16)(D_800D154C->unk1D1 * 200);\n    *(s16 *)((u8 *)D_800D154C->unk31C + 0x24) -= 1;\n    func_1505A184((u16)(D_800D154C->unk7A - D_800D154C->unk31C->unk12), 2000.0f, (f32)temp * 0.0054931640625f, &sp4C, &sp48, &sp44);\n    sp4C = sp4C * D_8009A094 + D_800D154C->x_position;\n    sp48 = sp48 * D_8009A094 + D_800D154C->z_position;\n    sp44 = sp44 * D_8009A094 + D_800D154C->y_position;\n    func_150E1570(D_800D154C, D_800D154C->x_position, D_800D154C->y_position + (f32)D_800D154C->unkD6, D_800D154C->z_position, sp4C, sp44, sp48, D_800C3E78, 0x12);\n}",
+        "score": 0.4876543209876543,
+        "reason": "length_mismatch (target=81, generated=79), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T23:57:21.560024+00:00"
+      },
+      {
+        "code": "extern void func_150E1570(struct127 *, f32, f32, f32, f32, f32, f32, s32, s32);\n\nvoid func_15072F10(void) {\n    f32 sp4C;\n    f32 sp48;\n    f32 sp44;\n    s16 temp;\n\n    temp = (s16)(D_800D154C->unk1D1 * 200);\n    *(s16 *)((u8 *)D_800D154C->unk31C + 0x24) -= 1;\n    func_1505A184((u16)(D_800D154C->unk7A - D_800D154C->unk31C->unk12), 2000.0f, (f32)temp * 0.0054931640625f, &sp4C, &sp48, &sp44);\n    sp4C = sp4C * D_8009A094 + D_800D154C->x_position;\n    sp48 = sp48 * D_8009A094 + D_800D154C->z_position;\n    sp44 = sp44 * D_8009A094 + D_800D154C->y_position;\n    func_150E1570(D_800D154C, D_800D154C->x_position, D_800D154C->y_position + (f32)D_800D154C->unkD6, D_800D154C->z_position, sp4C, sp44, sp48, D_800C3E78, 0x12);\n    return;\n}",
+        "score": 0.4876543209876543,
+        "reason": "length_mismatch (target=81, generated=79), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T23:59:36.984209+00:00"
+      },
+      {
+        "code": "extern void func_150E1570(struct127 *, f32, f32, f32, f32, f32, f32, s32, s32);\n\nvoid func_15072F10(void) {\n    f32 sp4C;\n    f32 sp48;\n    f32 sp44;\n    s16 temp;\n\n    temp = (s16)(D_800D154C->unk1D1 * 200);\n    *(s16 *)((u8 *)D_800D154C->unk31C + 0x24) -= 1;\n    func_1505A184((u16)(D_800D154C->unk7A - D_800D154C->unk31C->unk12), 2000.0f, (f32)temp * 0.0054931640625f, &sp4C, &sp48, &sp44);\n    sp4C = sp4C * D_8009A094 + D_800D154C->x_position;\n    sp48 = sp48 * D_8009A094 + D_800D154C->z_position;\n    sp44 = sp44 * D_8009A094 + D_800D154C->y_position;\n    func_150E1570(D_800D154C, D_800D154C->x_position, D_800D154C->y_position + (f32)D_800D154C->unkD6, D_800D154C->z_position, sp4C, sp44, sp48, D_800C3E78, 0x12);\n    return;\n    return;\n}",
+        "score": 0.4876543209876543,
+        "reason": "length_mismatch (target=81, generated=79), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-10T00:35:16.003469+00:00"
+      },
+      {
+        "code": "#include <ultra64.h>\n#include \"functions.h\"\n#include \"variables.h\"\n\nvoid func_15072F10(void) {\n    f32 sp4C;\n    f32 sp48;\n    f32 sp44;\n    s16 temp;\n\n    temp = (s16)(D_800D154C->unk1D1 * 200);\n    *(s16 *)((u8 *)D_800D154C->unk31C + 0x24) -= 1;\n    func_1505A184((u16)(D_800D154C->unk7A - D_800D154C->unk31C->unk12), 2000.0f, (f32)temp * 0.0054931640625f, &sp4C, &sp48, &sp44);\n    sp4C = sp4C * D_8009A094 + D_800D154C->x_position;\n    sp48 = sp48 * D_8009A094 + D_800D154C->z_position;\n    sp44 = sp44 * D_8009A094 + D_800D154C->y_position;\n    func_150E1570(D_800D154C, D_800D154C->x_position, D_800D154C->y_position + (f32)D_800D154C->unkD6, D_800D154C->z_position, sp4C, sp44, sp48, D_800C3E78, 0x12);\n}",
+        "score": 0.46551724137931033,
+        "reason": "length_mismatch (target=81, generated=87), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-10T01:50:18.832985+00:00"
+      },
+      {
+        "code": "#include <ultra64.h>\n#include \"functions.h\"\n#include \"variables.h\"\n\nvoid func_150E1570(struct127 *, f32, f32, f32, f32, f32, f32, u8, s32);\n\nvoid func_15072F10(void) {\n    f32 sp4C;\n    f32 sp48;\n    f32 sp44;\n    s16 temp;\n\n    temp = (s16)(D_800D154C->unk1D1 * 200);\n    *(s16 *)((u8 *)D_800D154C->unk31C + 0x24) -= 1;\n    func_1505A184((u16)(D_800D154C->unk7A - D_800D154C->unk31C->unk12), 2000.0f, (f32)temp * 0.0054931640625f, &sp4C, &sp48, &sp44);\n    sp4C = sp4C * D_8009A094 + D_800D154C->x_position;\n    sp48 = sp48 * D_8009A094 + D_800D154C->z_position;\n    sp44 = sp44 * D_8009A094 + D_800D154C->y_position;\n    func_150E1570(D_800D154C, D_800D154C->x_position, D_800D154C->y_position + (f32)D_800D154C->unkD6, D_800D154C->z_position, sp4C, sp44, sp48, D_800C3E78, 0x12);\n}",
+        "score": 0.4876543209876543,
+        "reason": "length_mismatch (target=81, generated=79), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-10T01:50:51.773835+00:00"
+      },
+      {
+        "code": "#include <ultra64.h>\n#include \"functions.h\"\n#include \"variables.h\"\n\nvoid func_150E1570(struct127 *, f32, f32, f32, f32, f32, f32, u8, s32);\n\nvoid func_15072F10(void) {\n    f32 sp4C;\n    f32 sp48;\n    f32 sp44;\n    s16 temp;\n\n    temp = (s16)(D_800D154C->unk1D1 * 200);\n    *(s16 *)((u8 *)D_800D154C->unk31C + 0x24) -= 1;\n    func_1505A184((u16)(D_800D154C->unk7A - D_800D154C->unk31C->unk12), 2000.0f, (f32)temp * 0.0054931640625f, &sp4C, &sp48, &sp44);\n    sp4C = sp4C * D_8009A094 + D_800D154C->x_position;\n    sp48 = sp48 * D_8009A094 + D_800D154C->z_position;\n    sp44 = sp44 * D_8009A094 + D_800D154C->y_position;\n    func_150E1570(D_800D154C, D_800D154C->x_position, D_800D154C->y_position + (f32)D_800D154C->unkD6, D_800D154C->z_position, sp4C, sp44, sp48, D_800C3E78, 0x12);\n}\n\nvoid func_1507304C(void) {\n}",
+        "score": 0.4876543209876543,
+        "reason": "length_mismatch (target=81, generated=79), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-10T02:11:40.001645+00:00"
+      },
+      {
+        "code": "#include <ultra64.h>\n#include \"functions.h\"\n#include \"variables.h\"\n\nvoid func_150E1570(struct127 *, f32, f32, f32, f32, f32, f32, u8, s32);\n\nvoid func_15072F10(void) {\n    f32 sp4C;\n    f32 sp48;\n    f32 sp44;\n    s16 temp;\n\n    temp = (s16)(D_800D154C->unk1D1 * 200);\n    *(s16 *)((u8 *)D_800D154C->unk31C + 0x24) -= 1;\n    func_1505A184((u16)(D_800D154C->unk7A - D_800D154C->unk31C->unk12), 2000.0f, (f32)temp * 0.0054931640625f, &sp4C, &sp48, &sp44);\n    sp4C = sp4C * D_8009A094 + D_800D154C->x_position;\n    sp48 = sp48 * D_8009A094 + D_800D154C->z_position;\n    sp44 = sp44 * D_8009A094 + D_800D154C->y_position;\n    func_150E1570(D_800D154C, D_800D154C->x_position, D_800D154C->y_position + (f32)D_800D154C->unkD6, D_800D154C->z_position, sp4C, sp44, sp48, D_800C3E78, 0x12);\n}",
+        "score": 0.4876543209876543,
+        "reason": "length_mismatch (target=81, generated=79), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-10T04:49:45.364349+00:00"
+      },
+      {
+        "code": "void func_15072F10(void) {\n    f32 sp4C;\n    f32 sp48;\n    f32 sp44;\n    s16 temp;\n\n    temp = (s16)(D_800D154C->unk1D1 * 200);\n    *(s16 *)((u8 *)D_800D154C->unk31C + 0x24) -= 1;\n    func_1505A184((u16)(D_800D154C->unk7A - D_800D154C->unk31C->unk12), 2000.0f, (f32)temp * 0.0054931640625f, &sp4C, &sp48, &sp44);\n    sp4C = sp4C * D_8009A094 + D_800D154C->x_position;\n    sp48 = sp48 * D_8009A094 + D_800D154C->z_position;\n    sp44 = sp44 * D_8009A094 + D_800D154C->y_position;\n    func_150E1570(D_800D154C, D_800D154C->x_position, D_800D154C->y_position + (f32)D_800D154C->unkD6, D_800D154C->z_position, sp4C, sp44, sp48, D_800C3E78, 0x12);\n}",
+        "score": 0.46551724137931033,
+        "reason": "length_mismatch (target=81, generated=87), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-10T05:50:13.966312+00:00"
+      },
+      {
+        "code": "void func_150E1570(struct127 *arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, u8 arg7, s32 arg8);\n\nvoid func_15072F10(void) {\n    f32 sp4C;\n    f32 sp48;\n    f32 sp44;\n    s16 temp;\n\n    temp = (s16)(D_800D154C->unk1D1 * 200);\n    *(s16 *)((u8 *)D_800D154C->unk31C + 0x24) -= 1;\n    func_1505A184((u16)(D_800D154C->unk7A - D_800D154C->unk31C->unk12), 2000.0f, (f32)temp * 0.0054931640625f, &sp4C, &sp48, &sp44);\n    sp4C = sp4C * D_8009A094 + D_800D154C->x_position;\n    sp48 = sp48 * D_8009A094 + D_800D154C->z_position;\n    sp44 = sp44 * D_8009A094 + D_800D154C->y_position;\n    func_150E1570(D_800D154C, D_800D154C->x_position, D_800D154C->y_position + (f32)D_800D154C->unkD6, D_800D154C->z_position, sp4C, sp44, sp48, D_800C3E78, 0x12);\n}",
+        "score": 0.4876543209876543,
+        "reason": "length_mismatch (target=81, generated=79), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-10T05:50:51.590637+00:00"
+      },
+      {
+        "code": "void func_150E1570(struct127 *arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, u8 arg7, s32 arg8);\n\nvoid func_15072F10(void) {\n    f32 sp4C;\n    f32 sp48;\n    f32 sp44;\n    s16 temp;\n\n    temp = (s16)(D_800D154C->unk1D1 * 200);\n    *(s16 *)((u8 *)D_800D154C->unk31C + 0x24) -= 1;\n    func_1505A184((u16)(D_800D154C->unk7A - D_800D154C->unk31C->unk12), 2000.0f, (f32)temp * 0.0054931640625f, &sp4C, &sp48, &sp44);\n    sp4C = sp4C * D_8009A094 + D_800D154C->x_position;\n    sp48 = sp48 * D_8009A094 + D_800D154C->z_position;\n    sp44 = sp44 * D_8009A094 + D_800D154C->y_position;\n    func_150E1570(D_800D154C, D_800D154C->x_position, D_800D154C->y_position + (f32)D_800D154C->unkD6, D_800D154C->z_position, sp4C, sp44, sp48, D_800C3E78, 0x12);\n}\n\nvoid func_1507304C(void) {\n}",
+        "score": 0.4876543209876543,
+        "reason": "length_mismatch (target=81, generated=79), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-10T05:54:01.259265+00:00"
       }
     ]
   },
