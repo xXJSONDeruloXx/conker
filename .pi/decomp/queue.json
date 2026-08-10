@@ -54381,9 +54381,18 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "#include <os_internal.h>\n#include \"controller.h\"\n\ns32 corrupted2(OSPfs *pfs, __OSInodeUnit startpage, __OSInodeCache *usedTbl)\n{\n    s32 j;\n    s32 offset;\n    s32 count;\n    u8 bank;\n    s32 startPage;\n    s32 ret;\n\n    count = 0;\n    ret = 0;\n    offset = startpage.inode_t.page / 4 + (startpage.inode_t.bank % 8) * 32;\n    for (bank = 0; bank < pfs->banks; bank++) {\n        startPage = (bank > 0) ? 1 : pfs->inode_start_page;\n        if (bank != startpage.inode_t.bank) {\n            if ((usedTbl->map[offset] & (1 << (bank % 8))) == 0) {\n                continue;\n            }\n        }\n        if (bank != usedTbl->bank) {\n            ret = __osPfsRWInode(pfs, &usedTbl->inode, 0, bank);\n            if ((ret != 0) && (ret != 3)) {\n                return ret;\n            }\n            usedTbl->bank = bank;\n        }\n        for (j = startPage; (count < 2) && (j < 128); j++) {\n            if (usedTbl->inode.inode_page[j].ipage == startpage.ipage) {\n                count++;\n            }\n        }\n        if (count >= 2) {\n            return 2;\n        }\n    }\n    return count;\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-10T03:12:22.216555+00:00"
+      }
+    ]
   },
   {
     "function": "func_1513E83C",

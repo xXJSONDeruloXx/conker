@@ -46,4 +46,43 @@ s32 corrupted_init2(OSPfs *pfs, __OSInodeCache *usedTbl)
     return 0;
 }
 
-#pragma GLOBAL_ASM("asm/nonmatchings/libultra/io/pfschecker2/corrupted2.s")
+#include <os_internal.h>
+#include "controller.h"
+
+s32 corrupted2(OSPfs *pfs, __OSInodeUnit startpage, __OSInodeCache *usedTbl)
+{
+    s32 j;
+    s32 offset;
+    s32 count;
+    u8 bank;
+    s32 startPage;
+    s32 ret;
+
+    count = 0;
+    ret = 0;
+    offset = startpage.inode_t.page / 4 + (startpage.inode_t.bank % 8) * 32;
+    for (bank = 0; bank < pfs->banks; bank++) {
+        startPage = (bank > 0) ? 1 : pfs->inode_start_page;
+        if (bank != startpage.inode_t.bank) {
+            if ((usedTbl->map[offset] & (1 << (bank % 8))) == 0) {
+                continue;
+            }
+        }
+        if (bank != usedTbl->bank) {
+            ret = __osPfsRWInode(pfs, &usedTbl->inode, 0, bank);
+            if ((ret != 0) && (ret != 3)) {
+                return ret;
+            }
+            usedTbl->bank = bank;
+        }
+        for (j = startPage; (count < 2) && (j < 128); j++) {
+            if (usedTbl->inode.inode_page[j].ipage == startpage.ipage) {
+                count++;
+            }
+        }
+        if (count >= 2) {
+            return 2;
+        }
+    }
+    return count;
+}
