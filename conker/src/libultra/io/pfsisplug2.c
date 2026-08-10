@@ -8,7 +8,54 @@ extern u8 _osLastSentSiCmd;   // D_80042A50
 extern u8 _osContNumControllers; // D_80042A51 (__osMaxControllers) ?
 // extern u8 __osMaxControllers; // D_80042A51
 
-#pragma GLOBAL_ASM("asm/nonmatchings/libultra/io/pfsisplug2/osPfsIsPlug2.s")
+extern u32 D_800429D0[];
+extern u8 __osMaxControllers;
+
+s32 osPfsIsPlug2(OSMesgQueue *queue, u8 *pattern)
+{
+    s32 ret;
+    OSMesg dummy;
+    u8 bitpattern;
+    OSContStatus data[MAXCONTROLLERS];
+    s32 channel;
+    u8 bits;
+    s32 crc_error_cnt;
+
+    ret = 0;
+    bits = 0;
+    crc_error_cnt = 3;
+    __osSiGetAccess();
+    while (TRUE)
+    {
+        __osPfsRequestData(CONT_CMD_REQUEST_STATUS);
+        ret = __osSiRawStartDma(OS_WRITE, D_800429D0);
+        osRecvMesg(queue, &dummy, OS_MESG_BLOCK);
+        ret = __osSiRawStartDma(OS_READ, D_800429D0);
+        osRecvMesg(queue, &dummy, OS_MESG_BLOCK);
+        __osPfsGetInitData(&bitpattern, data);
+        for (channel = 0; channel < __osMaxControllers; channel++)
+        {
+            if ((data[channel].status & CONT_ADDR_CRC_ER) == 0)
+            {
+                crc_error_cnt--;
+                break;
+            }
+        }
+        if (__osMaxControllers == channel)
+            crc_error_cnt = 0;
+        if (crc_error_cnt < 1)
+        {
+            for (channel = 0; channel < __osMaxControllers; channel++)
+            {
+                if (data[channel].errno == 0 && (data[channel].status & CONT_CARD_ON) != 0)
+                    bits |= 1 << channel;
+            }
+            __osSiRelAccess();
+            *pattern = bits;
+            return ret;
+        }
+    }
+}
 // s32 osPfsIsPlug2(OSMesgQueue *queue, u8 *pattern)
 // {
 //     s32 ret;

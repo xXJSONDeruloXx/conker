@@ -54837,9 +54837,67 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 7,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "s32 osPfsIsPlug2(OSMesgQueue *queue, u8 *pattern) {\n    s32 ret;\n    OSMesg dummy;\n    u8 bitpattern;\n    OSContStatus data[MAXCONTROLLERS];\n    int channel;\n    u8 bits;\n    int crc_error_cnt;\n\n    ret = 0;\n    bits = 0;\n    crc_error_cnt = 3;\n    __osSiGetAccess();\n    while (TRUE) {\n        __osPfsRequestData(CONT_CMD_REQUEST_STATUS);\n        ret = __osSiRawStartDma(OS_WRITE, &__osPfsPifRam);\n        osRecvMesg(queue, &dummy, OS_MESG_BLOCK);\n        ret = __osSiRawStartDma(OS_READ, &__osPfsPifRam);\n        osRecvMesg(queue, &dummy, OS_MESG_BLOCK);\n        __osPfsGetInitData(&bitpattern, data);\n        for (channel = 0; channel < _osContNumControllers; channel++) {\n            if ((data[channel].status & CONT_ADDR_CRC_ER) == 0) {\n                crc_error_cnt--;\n                break;\n            }\n        }\n        if (_osContNumControllers == channel) {\n            crc_error_cnt = 0;\n        }\n        if (crc_error_cnt < 1) {\n            for (channel = 0; channel < _osContNumControllers; channel++) {\n                if (data[channel].errno == 0 &&\n                    (data[channel].status & CONT_CARD_ON) != 0) {\n                    bits |= 1 << channel;\n                }\n            }\n            __osSiRelAccess();\n            *pattern = bits;\n            return ret;\n        }\n    }\n}",
+        "score": 0.0096,
+        "reason": "length_mismatch (target=104, generated=99), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T17:24:25.174861+00:00"
+      },
+      {
+        "code": "s32 osPfsIsPlug2(OSMesgQueue *queue, u8 *pattern)\n{\n    s32 ret;\n    OSMesg dummy;\n    u8 bitpattern;\n    OSContStatus data[MAXCONTROLLERS];\n    s32 channel;\n    u8 bits;\n    s32 crc_error_cnt;\n\n    ret = 0;\n    bits = 0;\n    crc_error_cnt = 3;\n    __osSiGetAccess();\n    while (TRUE)\n    {\n        __osPfsRequestData(CONT_CMD_REQUEST_STATUS);\n        ret = __osSiRawStartDma(OS_WRITE, D_800429D0);\n        osRecvMesg(queue, &dummy, OS_MESG_BLOCK);\n        ret = __osSiRawStartDma(OS_READ, D_800429D0);\n        osRecvMesg(queue, &dummy, OS_MESG_BLOCK);\n        __osPfsGetInitData(&bitpattern, data);\n        for (channel = 0; channel < __osMaxControllers; channel++)\n        {\n            if ((data[channel].status & CONT_ADDR_CRC_ER) == 0)\n            {\n                crc_error_cnt--;\n                break;\n            }\n        }\n        if (__osMaxControllers == channel)\n            crc_error_cnt = 0;\n        if (crc_error_cnt < 1)\n        {\n            for (channel = 0; channel < __osMaxControllers; channel++)\n            {\n                if (data[channel].errno == 0 && (data[channel].status & CONT_CARD_ON) != 0)\n                    bits |= 1 << channel;\n            }\n            __osSiRelAccess();\n            *pattern = bits;\n            return ret;\n        }\n    }\n}",
+        "score": 0.0,
+        "reason": "compile_error",
+        "diffs": [],
+        "timestamp": "2026-08-09T21:00:22.677695+00:00"
+      },
+      {
+        "code": "extern OSPifRam __osPfsPifRam;\n\ns32 osPfsIsPlug2(OSMesgQueue *queue, u8 *pattern)\n{\n    s32 ret;\n    OSMesg dummy;\n    u8 bitpattern;\n    OSContStatus data[MAXCONTROLLERS];\n    s32 channel;\n    u8 bits;\n    s32 crc_error_cnt;\n\n    ret = 0;\n    bits = 0;\n    crc_error_cnt = 3;\n    __osSiGetAccess();\n    while (TRUE)\n    {\n        __osPfsRequestData(CONT_CMD_REQUEST_STATUS);\n        ret = __osSiRawStartDma(OS_WRITE, &__osPfsPifRam);\n        osRecvMesg(queue, &dummy, OS_MESG_BLOCK);\n        ret = __osSiRawStartDma(OS_READ, &__osPfsPifRam);\n        osRecvMesg(queue, &dummy, OS_MESG_BLOCK);\n        __osPfsGetInitData(&bitpattern, data);\n        for (channel = 0; channel < __osMaxControllers; channel++)\n        {\n            if ((data[channel].status & CONT_ADDR_CRC_ER) == 0)\n            {\n                crc_error_cnt--;\n                break;\n            }\n        }\n        if (__osMaxControllers == channel)\n            crc_error_cnt = 0;\n        if (crc_error_cnt < 1)\n        {\n            for (channel = 0; channel < __osMaxControllers; channel++)\n            {\n                if (data[channel].errno == 0 && (data[channel].status & CONT_CARD_ON) != 0)\n                    bits |= 1 << channel;\n            }\n            __osSiRelAccess();\n            *pattern = bits;\n            return ret;\n        }\n    }\n}",
+        "score": 0.0096,
+        "reason": "length_mismatch (target=104, generated=99), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T21:00:35.851055+00:00"
+      },
+      {
+        "code": "#include \"libc/stdlib.h\"\ntypedef struct { union { long long ll; double d; } v; u8 *s; s32 n0; s32 nz0; s32 n1; s32 nz1; s32 n2; s32 nz2; s32 prec; s32 width; u32 nchar; u32 flags; u8 qual; } DebuggerPft;\nextern u8 D_16003CB8[];\nextern u8 D_16003CCC[];\nvoid func_160033A8(DebuggerPft *px, u8 code) {\n    char buff[0x18];\n    u8 *digs;\n    s32 base;\n    s32 i;\n    unsigned long long ullval;\n\n    digs = (code == 'X') ? D_16003CCC : D_16003CB8;\n\n    base = (code == 'o') ? 8 : ((code != 'x' && code != 'X') ? 10 : 16);\n    i = 0x18;\n    ullval = px->v.ll;\n\n    if ((code == 'd' || code == 'i') && px->v.ll < 0) {\n        ullval = -ullval;\n    }\n\n    if (ullval != 0 || px->prec != 0) {\n        buff[--i] = digs[ullval % base];\n    }\n\n    px->v.ll = ullval / base;\n\n    while (px->v.ll > 0 && i > 0) {\n        lldiv_t qr;\n\n        qr = lldiv(px->v.ll, base);\n        px->v.ll = qr.quot;\n        buff[--i] = digs[qr.rem];\n    }\n\n    px->n1 = 0x18 - i;\n\n    func_16001AD0(px->s, buff + i, px->n1);\n\n    if (px->n1 < px->prec) {\n        px->nz0 = px->prec - px->n1;\n    }\n\n    if (px->prec < 0 && (px->flags & 0x14) == 0x10) {\n        if ((i = px->width - px->n0 - px->nz0 - px->n1) > 0) {\n            px->nz0 += i;\n        }\n    }\n}",
+        "score": 0.0,
+        "reason": "raw_instruction_words_unavailable",
+        "diffs": [],
+        "timestamp": "2026-08-09T21:42:26.613024+00:00"
+      },
+      {
+        "code": "extern u32 D_800429D0[];\nextern void __osPfsRequestData(u8);\nextern void __osPfsGetInitData(u8 *, OSContStatus *);\ns32 osPfsIsPlug2(OSMesgQueue *queue, u8 *pattern)\n{\n    s32 ret;\n    OSMesg dummy;\n    u8 bitpattern;\n    OSContStatus data[MAXCONTROLLERS];\n    s32 channel;\n    u8 bits;\n    s32 crc_error_cnt;\n\n    ret = 0;\n    bits = 0;\n    crc_error_cnt = 3;\n    __osSiGetAccess();\n    while (TRUE)\n    {\n        __osPfsRequestData(CONT_CMD_REQUEST_STATUS);\n        ret = __osSiRawStartDma(OS_WRITE, D_800429D0);\n        osRecvMesg(queue, &dummy, OS_MESG_BLOCK);\n        ret = __osSiRawStartDma(OS_READ, D_800429D0);\n        osRecvMesg(queue, &dummy, OS_MESG_BLOCK);\n        __osPfsGetInitData(&bitpattern, data);\n        for (channel = 0; channel < __osMaxControllers; channel++)\n        {\n            if ((data[channel].status & CONT_ADDR_CRC_ER) == 0)\n            {\n                crc_error_cnt--;\n                break;\n            }\n        }\n        if (__osMaxControllers == channel)\n            crc_error_cnt = 0;\n        if (crc_error_cnt < 1)\n        {\n            for (channel = 0; channel < __osMaxControllers; channel++)\n            {\n                if (data[channel].errno == 0 && (data[channel].status & CONT_CARD_ON) != 0)\n                    bits |= 1 << channel;\n            }\n            __osSiRelAccess();\n            *pattern = bits;\n            return ret;\n        }\n    }\n}",
+        "score": 0.0096,
+        "reason": "length_mismatch (target=104, generated=99), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-09T21:42:40.765252+00:00"
+      },
+      {
+        "code": "extern u32 D_800429D0[];\nextern u8 __osMaxControllers;\n\ns32 osPfsIsPlug2(OSMesgQueue *queue, u8 *pattern)\n{\n    s32 ret;\n    OSMesg dummy;\n    u8 bitpattern;\n    OSContStatus data[MAXCONTROLLERS];\n    s32 channel;\n    u8 bits;\n    s32 crc_error_cnt;\n\n    ret = 0;\n    bits = 0;\n    crc_error_cnt = 3;\n    __osSiGetAccess();\n    while (TRUE)\n    {\n        __osPfsRequestData(CONT_CMD_REQUEST_STATUS);\n        ret = __osSiRawStartDma(OS_WRITE, D_800429D0);\n        osRecvMesg(queue, &dummy, OS_MESG_BLOCK);\n        ret = __osSiRawStartDma(OS_READ, D_800429D0);\n        osRecvMesg(queue, &dummy, OS_MESG_BLOCK);\n        __osPfsGetInitData(&bitpattern, data);\n        for (channel = 0; channel < __osMaxControllers; channel++)\n        {\n            if ((data[channel].status & CONT_ADDR_CRC_ER) == 0)\n            {\n                crc_error_cnt--;\n                break;\n            }\n        }\n        if (__osMaxControllers == channel)\n            crc_error_cnt = 0;\n        if (crc_error_cnt < 1)\n        {\n            for (channel = 0; channel < __osMaxControllers; channel++)\n            {\n                if (data[channel].errno == 0 && (data[channel].status & CONT_CARD_ON) != 0)\n                    bits |= 1 << channel;\n            }\n            __osSiRelAccess();\n            *pattern = bits;\n            return ret;\n        }\n    }\n}",
+        "score": 0.0096,
+        "reason": "length_mismatch (target=104, generated=99), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-10T02:56:02.898700+00:00"
+      },
+      {
+        "code": "extern u32 D_800429D0[];\nextern u8 __osMaxControllers;\n\ns32 osPfsIsPlug2(OSMesgQueue *queue, u8 *pattern)\n{\n    s32 ret;\n    OSMesg dummy;\n    u8 bitpattern;\n    OSContStatus data[MAXCONTROLLERS];\n    s32 channel;\n    u8 bits;\n    s32 crc_error_cnt;\n\n    ret = 0;\n    bits = 0;\n    crc_error_cnt = 3;\n    __osSiGetAccess();\n    while (TRUE)\n    {\n        __osPfsRequestData(CONT_CMD_REQUEST_STATUS);\n        ret = __osSiRawStartDma(OS_WRITE, D_800429D0);\n        osRecvMesg(queue, &dummy, OS_MESG_BLOCK);\n        ret = __osSiRawStartDma(OS_READ, D_800429D0);\n        osRecvMesg(queue, &dummy, OS_MESG_BLOCK);\n        __osPfsGetInitData(&bitpattern, data);\n        for (channel = 0; channel < __osMaxControllers; channel++)\n        {\n            if ((data[channel].status & CONT_ADDR_CRC_ER) == 0)\n            {\n                crc_error_cnt--;\n                break;\n            }\n        }\n        if (__osMaxControllers == channel)\n            crc_error_cnt = 0;\n        if (crc_error_cnt < 1)\n        {\n            for (channel = 0; channel < __osMaxControllers; channel++)\n            {\n                if (data[channel].errno == 0 && (data[channel].status & CONT_CARD_ON) != 0)\n                    bits |= 1 << channel;\n            }\n            __osSiRelAccess();\n            *pattern = bits;\n            return ret;\n        }\n    }\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-10T02:56:39.178532+00:00",
+        "contextPatch": [
+          {
+            "path": "conker/Makefile",
+            "oldText": "$(BUILD_DIR)/$(SRC_DIR)/libultra/io/aisetfreq.c.o: OPT_FLAGS := -O1\n",
+            "newText": "$(BUILD_DIR)/$(SRC_DIR)/libultra/io/aisetfreq.c.o: OPT_FLAGS := -O1\n$(BUILD_DIR)/$(SRC_DIR)/libultra/io/pfsisplug2.c.o: OPT_FLAGS := -O1\n"
+          }
+        ]
+      }
+    ]
   },
   {
     "function": "func_15048C30",
