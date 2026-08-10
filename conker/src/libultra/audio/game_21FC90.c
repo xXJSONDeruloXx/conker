@@ -150,7 +150,66 @@ void func_151F2E4C(s32 arg0, s32 arg1) {
 
 #pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/game_21FC90/func_151F2E88.s")
 
-#pragma GLOBAL_ASM("asm/nonmatchings/libultra/audio/game_21FC90/func_151F39E4.s")
+extern s16 D_8002BC10[];
+extern s16 D_8002BD0E[];
+extern u8 D_800428C1;
+extern u8 D_800428C2;
+extern s16 _getVol(s16, s32, s16, u16);
+
+typedef struct {
+    char pad0[0xC];
+    s16 unkC;
+    s16 unkE;
+    s16 unk10;
+    s16 unk12;
+    char pad14[4];
+    u16 unk18;
+    s16 unk1A;
+    s16 unk1C;
+    u16 unk1E;
+    s16 unk20;
+    s16 unk22;
+    s16 unk24;
+    char pad26[2];
+    s32 unk28;
+    s32 unk2C;
+    char pad30[0x58];
+    s32 unk88;
+    char pad8C[4];
+    u32 unk90;
+    s16 unk94;
+} Voice39E4;
+
+void func_151F39E4(Voice39E4 *arg0) {
+    if ((arg0->unkE != arg0->unk88) || (arg0->unkC != arg0->unk94)) {
+        if (arg0->unk28 >= arg0->unk2C) {
+            arg0->unk1C = (D_8002BC10[arg0->unkC] * arg0->unkE) >> 15;
+            arg0->unk22 = (D_8002BD0E[-arg0->unkC] * arg0->unkE) >> 15;
+            arg0->unk28 = arg0->unk2C;
+            arg0->unk10 = arg0->unk1C;
+            arg0->unk12 = arg0->unk22;
+        } else {
+            arg0->unk10 = _getVol(arg0->unk10, arg0->unk28, arg0->unk1A, arg0->unk18);
+            arg0->unk12 = _getVol(arg0->unk12, arg0->unk28, arg0->unk20, arg0->unk1E);
+        }
+        if (arg0->unk10 == 0) arg0->unk10 = 1;
+        if (arg0->unk12 == 0) arg0->unk12 = 1;
+        arg0->unkE = arg0->unk88;
+        if ((arg0->unkE == 0) && (arg0->unk90 != 0)) func_151F2BA8();
+        if (arg0->unkC != arg0->unk94) {
+            if (D_800428C2 != 0) {
+                arg0->unkC = (arg0->unk94 >> 1) + 0x20;
+            } else if (D_800428C1 != 0) {
+                arg0->unkC = 0x40;
+            } else {
+                arg0->unkC = arg0->unk94;
+            }
+        }
+        arg0->unk28 = 0;
+        arg0->unk2C = ((arg0->unk90 + 0xB7) / 0xB8) * 0xB8;
+        arg0->unk24 = 1;
+    }
+}
 
 void func_151F3C1C(s32 arg0) {
     D_800E0E00 = arg0;

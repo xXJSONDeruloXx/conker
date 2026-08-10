@@ -54154,9 +54154,18 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 1,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "extern s16 D_8002BC10[];\nextern s16 D_8002BD0E[];\nextern u8 D_800428C1;\nextern u8 D_800428C2;\nextern s16 _getVol(s16, s32, s16, u16);\n\ntypedef struct {\n    char pad0[0xC];\n    s16 unkC;\n    s16 unkE;\n    s16 unk10;\n    s16 unk12;\n    char pad14[4];\n    u16 unk18;\n    s16 unk1A;\n    s16 unk1C;\n    u16 unk1E;\n    s16 unk20;\n    s16 unk22;\n    s16 unk24;\n    char pad26[2];\n    s32 unk28;\n    s32 unk2C;\n    char pad30[0x58];\n    s32 unk88;\n    char pad8C[4];\n    u32 unk90;\n    s16 unk94;\n} Voice39E4;\n\nvoid func_151F39E4(Voice39E4 *arg0) {\n    if ((arg0->unkE != arg0->unk88) || (arg0->unkC != arg0->unk94)) {\n        if (arg0->unk28 >= arg0->unk2C) {\n            arg0->unk1C = (D_8002BC10[arg0->unkC] * arg0->unkE) >> 15;\n            arg0->unk22 = (D_8002BD0E[-arg0->unkC] * arg0->unkE) >> 15;\n            arg0->unk28 = arg0->unk2C;\n            arg0->unk10 = arg0->unk1C;\n            arg0->unk12 = arg0->unk22;\n        } else {\n            arg0->unk10 = _getVol(arg0->unk10, arg0->unk28, arg0->unk1A, arg0->unk18);\n            arg0->unk12 = _getVol(arg0->unk12, arg0->unk28, arg0->unk20, arg0->unk1E);\n        }\n        if (arg0->unk10 == 0) arg0->unk10 = 1;\n        if (arg0->unk12 == 0) arg0->unk12 = 1;\n        arg0->unkE = arg0->unk88;\n        if ((arg0->unkE == 0) && (arg0->unk90 != 0)) func_151F2BA8();\n        if (arg0->unkC != arg0->unk94) {\n            if (D_800428C2 != 0) {\n                arg0->unkC = (arg0->unk94 >> 1) + 0x20;\n            } else if (D_800428C1 != 0) {\n                arg0->unkC = 0x40;\n            } else {\n                arg0->unkC = arg0->unk94;\n            }\n        }\n        arg0->unk28 = 0;\n        arg0->unk2C = ((arg0->unk90 + 0xB7) / 0xB8) * 0xB8;\n        arg0->unk24 = 1;\n    }\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-10T03:04:24.572589+00:00"
+      }
+    ]
   },
   {
     "function": "func_1504BE2C",
