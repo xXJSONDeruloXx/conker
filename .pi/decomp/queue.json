@@ -41230,9 +41230,216 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 4,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "#include <ultra64.h>\n#include \"functions.h\"\n#include \"variables.h\"\n\nextern f32 D_800A0258;\nextern f32 D_800A025C;\nextern f32 D_800A0260;\nextern f32 D_800A0264;\nvoid func_15151A38(void *, u8, s32);\n\ntypedef struct {\n    f32 unk0;\n    f32 unk4;\n    f32 unk8;\n    f32 unkC;\n    f32 unk10;\n    f32 unk14;\n    f32 unk18;\n    f32 unk1C;\n    f32 unk20;\n    s16 unk24;\n    s16 unk26;\n    s16 unk28;\n    s16 unk2A;\n    s16 unk2C;\n    s16 unk2E;\n    s16 unk30;\n    s16 unk32;\n    s16 unk34;\n    s16 unk36;\n    u8 unk38;\n    u8 unk39;\n    u8 unk3A;\n    u8 pad3B;\n    s32 unk3C;\n    s32 unk40;\n    s32 unk44;\n    s32 unk48;\n    s32 unk4C;\n    s32 unk50;\n    u8 unk54;\n    u8 unk55;\n    u8 unk56;\n    u8 pad57;\n    s32 unk58;\n    s32 unk5C;\n    s32 unk60;\n    s32 unk64;\n    s32 unk68;\n    s32 unk6C;\n    s32 unk70;\n    s32 unk74;\n    s32 unk78;\n    u8 unk7C;\n    u8 unk7D;\n    u8 pad7E[2];\n    s16 unk80;\n    s16 unk82;\n    s32 unk84;\n} Struct150C2290Arg;\n\nvoid func_150C2290(u8 arg0) {\n    Struct150C2290Arg sp18;\n\n    sp18.unk0 = D_800A0258;\n    sp18.unk4 = 40.0f;\n    sp18.unk8 = D_800A025C;\n    sp18.unk1C = 100.0f;\n    sp18.unk20 = 57.5f;\n    sp18.unkC = D_800A0260;\n    sp18.unk10 = 39.0f;\n    sp18.unk24 = 2;\n    sp18.unk26 = 3;\n    sp18.unk28 = -0x29;\n    sp18.unk2C = -0x16;\n    sp18.unk2A = 0x15;\n    sp18.unk2E = 0x16;\n    sp18.unk30 = 7;\n    sp18.unk32 = 0;\n    sp18.unk34 = 0x30;\n    sp18.unk36 = 0x15;\n    sp18.unk38 = 0xB;\n    sp18.unk39 = 1;\n    sp18.unk3A = 0x28;\n    sp18.unk3C = 1;\n    sp18.unk40 = 4;\n    sp18.unk44 = 0;\n    sp18.unk48 = 0;\n    sp18.unk4C = 0;\n    sp18.unk50 = 0;\n    sp18.unk54 = 0xFF;\n    sp18.unk55 = 0xFF;\n    sp18.unk56 = 0;\n    sp18.unk58 = 3;\n    sp18.unk5C = 0xFF;\n    sp18.unk60 = 0;\n    sp18.unk64 = 0x220005;\n    sp18.unk68 = 0x1D0600;\n    sp18.unk6C = 1;\n    sp18.unk70 = 0x3B;\n    sp18.unk74 = 0x80;\n    sp18.unk78 = 0x20;\n    sp18.unk7C = 0;\n    sp18.unk7D = 7;\n    sp18.unk80 = 0xC;\n    sp18.unk82 = 0x15;\n    sp18.unk14 = D_800A0264;\n    sp18.unk18 = 1.0f;\n    func_15151A38(&sp18, arg0, 1);\n}",
+        "score": 0.9208,
+        "reason": "structural_diffs=8, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 39,
+            "type": "structural",
+            "target": "lui at, 16256",
+            "generated": "sb t5, 80(sp)"
+          },
+          {
+            "line": 40,
+            "type": "structural",
+            "target": "sb t5, 80(sp)",
+            "generated": "li t7, 40"
+          },
+          {
+            "line": 41,
+            "type": "structural",
+            "target": "li t7, 40",
+            "generated": "li t8, 1"
+          },
+          {
+            "line": 42,
+            "type": "structural",
+            "target": "li t8, 1",
+            "generated": "li t9, 4"
+          },
+          {
+            "line": 43,
+            "type": "structural",
+            "target": "li t9, 4",
+            "generated": "li t0, 255"
+          },
+          {
+            "line": 44,
+            "type": "structural",
+            "target": "li t0, 255",
+            "generated": "li t1, 255"
+          },
+          {
+            "line": 45,
+            "type": "structural",
+            "target": "li t1, 255",
+            "generated": "li t2, 3"
+          },
+          {
+            "line": 46,
+            "type": "structural",
+            "target": "li t2, 3",
+            "generated": "lui at, 16256"
+          }
+        ],
+        "timestamp": "2026-08-10T00:19:16.214696+00:00"
+      },
+      {
+        "code": "#include <ultra64.h>\n#include \"functions.h\"\n#include \"variables.h\"\n\nextern f32 D_800A0258;\nextern f32 D_800A025C;\nextern f32 D_800A0260;\nextern f32 D_800A0264;\nvoid func_15151A38(void *, u8, s32);\n\ntypedef struct {\n    f32 unk0;\n    f32 unk4;\n    f32 unk8;\n    f32 unkC;\n    f32 unk10;\n    f32 unk14;\n    f32 unk18;\n    f32 unk1C;\n    f32 unk20;\n    s16 unk24;\n    s16 unk26;\n    s16 unk28;\n    s16 unk2A;\n    s16 unk2C;\n    s16 unk2E;\n    s16 unk30;\n    s16 unk32;\n    s16 unk34;\n    s16 unk36;\n    u8 unk38;\n    u8 unk39;\n    u8 unk3A;\n    u8 pad3B;\n    s32 unk3C;\n    s32 unk40;\n    s32 unk44;\n    s32 unk48;\n    s32 unk4C;\n    s32 unk50;\n    u8 unk54;\n    u8 unk55;\n    u8 unk56;\n    u8 pad57;\n    s32 unk58;\n    s32 unk5C;\n    s32 unk60;\n    s32 unk64;\n    s32 unk68;\n    s32 unk6C;\n    s32 unk70;\n    s32 unk74;\n    s32 unk78;\n    u8 unk7C;\n    u8 unk7D;\n    u8 pad7E[2];\n    s16 unk80;\n    s16 unk82;\n    s32 unk84;\n} Struct150C2290Arg;\n\nvoid func_150C2290(u8 arg0) {\n    Struct150C2290Arg sp18;\n\n    sp18.unk0 = D_800A0258;\n    sp18.unk4 = 40.0f;\n    sp18.unk8 = D_800A025C;\n    sp18.unk1C = 100.0f;\n    sp18.unk20 = 57.5f;\n    sp18.unkC = D_800A0260;\n    sp18.unk10 = 39.0f;\n    sp18.unk24 = 2;\n    sp18.unk26 = 3;\n    sp18.unk28 = -0x29;\n    sp18.unk2C = -0x16;\n    sp18.unk2A = 0x15;\n    sp18.unk2E = 0x16;\n    sp18.unk30 = 7;\n    sp18.unk32 = 0;\n    sp18.unk34 = 0x30;\n    sp18.unk36 = 0x15;\n    sp18.unk18 = 1.0f;\n    sp18.unk38 = 0xB;\n    sp18.unk39 = 1;\n    sp18.unk3A = 0x28;\n    sp18.unk3C = 1;\n    sp18.unk40 = 4;\n    sp18.unk44 = 0;\n    sp18.unk48 = 0;\n    sp18.unk4C = 0;\n    sp18.unk50 = 0;\n    sp18.unk54 = 0xFF;\n    sp18.unk55 = 0xFF;\n    sp18.unk56 = 0;\n    sp18.unk58 = 3;\n    sp18.unk5C = 0xFF;\n    sp18.unk60 = 0;\n    sp18.unk64 = 0x220005;\n    sp18.unk68 = 0x1D0600;\n    sp18.unk6C = 1;\n    sp18.unk70 = 0x3B;\n    sp18.unk74 = 0x80;\n    sp18.unk78 = 0x20;\n    sp18.unk7C = 0;\n    sp18.unk7D = 7;\n    sp18.unk80 = 0xC;\n    sp18.unk82 = 0x15;\n    sp18.unk14 = D_800A0264;\n    func_15151A38(&sp18, arg0, 1);\n}",
+        "score": 0.8713,
+        "reason": "structural_diffs=13, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 25,
+            "type": "structural",
+            "target": "lui at, HI(D_800A0264)",
+            "generated": "lui at, 16256"
+          },
+          {
+            "line": 27,
+            "type": "structural",
+            "target": "lwc1 f6, LO(D_800A0264)(at)",
+            "generated": "mtc1 at, f6"
+          },
+          {
+            "line": 39,
+            "type": "structural",
+            "target": "lui at, 16256",
+            "generated": "sb t5, 80(sp)"
+          },
+          {
+            "line": 40,
+            "type": "structural",
+            "target": "sb t5, 80(sp)",
+            "generated": "li t7, 40"
+          },
+          {
+            "line": 41,
+            "type": "structural",
+            "target": "li t7, 40",
+            "generated": "li t8, 1"
+          },
+          {
+            "line": 42,
+            "type": "structural",
+            "target": "li t8, 1",
+            "generated": "li t9, 4"
+          },
+          {
+            "line": 43,
+            "type": "structural",
+            "target": "li t9, 4",
+            "generated": "li t0, 255"
+          },
+          {
+            "line": 44,
+            "type": "structural",
+            "target": "li t0, 255",
+            "generated": "li t1, 255"
+          },
+          {
+            "line": 45,
+            "type": "structural",
+            "target": "li t1, 255",
+            "generated": "li t2, 3"
+          },
+          {
+            "line": 46,
+            "type": "structural",
+            "target": "li t2, 3",
+            "generated": "lui at, HI(D_800A0264)"
+          },
+          {
+            "line": 48,
+            "type": "structural",
+            "target": "mtc1 at, f8",
+            "generated": "lwc1 f8, LO(D_800A0264)(at)"
+          },
+          {
+            "line": 94,
+            "type": "structural",
+            "target": "swc1 f6, 44(sp)",
+            "generated": "swc1 f6, 48(sp)"
+          },
+          {
+            "line": 96,
+            "type": "structural",
+            "target": "swc1 f8, 48(sp)",
+            "generated": "swc1 f8, 44(sp)"
+          }
+        ],
+        "timestamp": "2026-08-10T00:19:38.043791+00:00"
+      },
+      {
+        "code": "#include <ultra64.h>\n#include \"functions.h\"\n#include \"variables.h\"\n\nextern f32 D_800A0258;\nextern f32 D_800A025C;\nextern f32 D_800A0260;\nextern f32 D_800A0264;\nvoid func_15151A38(void *, u8, s32);\n\ntypedef struct {\n    f32 unk0;\n    f32 unk4;\n    f32 unk8;\n    f32 unkC;\n    f32 unk10;\n    f32 unk14;\n    f32 unk18;\n    f32 unk1C;\n    f32 unk20;\n    s16 unk24;\n    s16 unk26;\n    s16 unk28;\n    s16 unk2A;\n    s16 unk2C;\n    s16 unk2E;\n    s16 unk30;\n    s16 unk32;\n    s16 unk34;\n    s16 unk36;\n    u8 unk38;\n    u8 unk39;\n    u8 unk3A;\n    u8 pad3B;\n    s32 unk3C;\n    s32 unk40;\n    s32 unk44;\n    s32 unk48;\n    s32 unk4C;\n    s32 unk50;\n    u8 unk54;\n    u8 unk55;\n    u8 unk56;\n    u8 pad57;\n    s32 unk58;\n    s32 unk5C;\n    s32 unk60;\n    s32 unk64;\n    s32 unk68;\n    s32 unk6C;\n    s32 unk70;\n    s32 unk74;\n    s32 unk78;\n    u8 unk7C;\n    u8 unk7D;\n    u8 pad7E[2];\n    s16 unk80;\n    s16 unk82;\n    s32 unk84;\n} Struct150C2290Arg;\n\nvoid func_150C2290(u8 arg0) {\n    Struct150C2290Arg sp18;\n\n    sp18.unk0 = D_800A0258;\n    sp18.unk4 = 40.0f;\n    sp18.unk8 = D_800A025C;\n    sp18.unk1C = 100.0f;\n    sp18.unk20 = 57.5f;\n    sp18.unkC = D_800A0260;\n    sp18.unk10 = 39.0f;\n    sp18.unk24 = 2;\n    sp18.unk26 = 3;\n    sp18.unk28 = -0x29;\n    sp18.unk2C = -0x16;\n    sp18.unk2A = 0x15;\n    sp18.unk2E = 0x16;\n    sp18.unk30 = 7;\n    sp18.unk32 = 0;\n    sp18.unk34 = 0x30;\n    sp18.unk36 = 0x15;\n    sp18.unk38 = 0xB;\n    sp18.unk39 = 1;\n    sp18.unk3A = 0x28;\n    sp18.unk3C = 1;\n    sp18.unk40 = 4;\n    sp18.unk44 = 0;\n    sp18.unk48 = 0;\n    sp18.unk4C = 0;\n    sp18.unk50 = 0;\n    sp18.unk54 = 0xFF;\n    sp18.unk55 = 0xFF;\n    sp18.unk56 = 0;\n    sp18.unk58 = 3;\n    sp18.unk5C = 0xFF;\n    sp18.unk60 = 0;\n    sp18.unk64 = 0x220005;\n    sp18.unk68 = 0x1D0600;\n    sp18.unk6C = 1;\n    sp18.unk70 = 0x3B;\n    sp18.unk74 = 0x80;\n    sp18.unk78 = 0x20;\n    sp18.unk7C = 0;\n    sp18.unk7D = 7;\n    sp18.unk80 = 0xC;\n    sp18.unk82 = 0x15;\n    sp18.unk14 = D_800A0264;\n    sp18.unk18 = 1.0f;\n    func_15151A38(&sp18, arg0, 1);\n}",
+        "score": 0.9208,
+        "reason": "structural_diffs=8, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 39,
+            "type": "structural",
+            "target": "lui at, 16256",
+            "generated": "sb t5, 80(sp)"
+          },
+          {
+            "line": 40,
+            "type": "structural",
+            "target": "sb t5, 80(sp)",
+            "generated": "li t7, 40"
+          },
+          {
+            "line": 41,
+            "type": "structural",
+            "target": "li t7, 40",
+            "generated": "li t8, 1"
+          },
+          {
+            "line": 42,
+            "type": "structural",
+            "target": "li t8, 1",
+            "generated": "li t9, 4"
+          },
+          {
+            "line": 43,
+            "type": "structural",
+            "target": "li t9, 4",
+            "generated": "li t0, 255"
+          },
+          {
+            "line": 44,
+            "type": "structural",
+            "target": "li t0, 255",
+            "generated": "li t1, 255"
+          },
+          {
+            "line": 45,
+            "type": "structural",
+            "target": "li t1, 255",
+            "generated": "li t2, 3"
+          },
+          {
+            "line": 46,
+            "type": "structural",
+            "target": "li t2, 3",
+            "generated": "lui at, 16256"
+          }
+        ],
+        "timestamp": "2026-08-10T00:21:06.869148+00:00"
+      },
+      {
+        "code": "#include <ultra64.h>\n#include \"functions.h\"\n#include \"variables.h\"\n\nextern f32 D_800A0258;\nextern f32 D_800A025C;\nextern f32 D_800A0260;\nextern f32 D_800A0264;\nvoid func_15151A38(void *, u8, s32);\n\ntypedef struct {\n    f32 unk0;\n    f32 unk4;\n    f32 unk8;\n    f32 unkC;\n    f32 unk10;\n    f32 unk14;\n    f32 unk18;\n    f32 unk1C;\n    f32 unk20;\n    s16 unk24;\n    s16 unk26;\n    s16 unk28;\n    s16 unk2A;\n    s16 unk2C;\n    s16 unk2E;\n    s16 unk30;\n    s16 unk32;\n    s16 unk34;\n    s16 unk36;\n    u8 unk38;\n    u8 unk39;\n    u8 unk3A;\n    u8 pad3B;\n    s32 unk3C;\n    s32 unk40;\n    s32 unk44;\n    s32 unk48;\n    s32 unk4C;\n    s32 unk50;\n    u8 unk54;\n    u8 unk55;\n    u8 unk56;\n    u8 pad57;\n    s32 unk58;\n    s32 unk5C;\n    s32 unk60;\n    s32 unk64;\n    s32 unk68;\n    s32 unk6C;\n    s32 unk70;\n    s32 unk74;\n    s32 unk78;\n    u8 unk7C;\n    u8 unk7D;\n    u8 pad7E[2];\n    s16 unk80;\n    s16 unk82;\n    s32 unk84;\n} Struct150C2290Arg;\n\nvoid func_150C2290(u8 arg0) {\n    Struct150C2290Arg sp18;\n\n    sp18.unk0 = D_800A0258;\n    sp18.unk4 = 40.0f;\n    sp18.unk8 = D_800A025C;\n    sp18.unk1C = 100.0f;\n    sp18.unk20 = 57.5f;\n    sp18.unkC = D_800A0260;\n    sp18.unk10 = 39.0f;\n    sp18.unk24 = 2;\n    sp18.unk26 = 3;\n    sp18.unk28 = -0x29;\n    sp18.unk2C = -0x16;\n    sp18.unk2A = 0x15;\n    sp18.unk2E = 0x16;\n    sp18.unk30 = 7;\n    sp18.unk32 = 0;\n    sp18.unk34 = 0x30;\n    sp18.unk36 = 0x15;\n    sp18.unk14 = D_800A0264;\n    sp18.unk18 = 1.0f;\n    sp18.unk38 = 0xB;\n    sp18.unk39 = 1;\n    sp18.unk3A = 0x28;\n    sp18.unk3C = 1;\n    sp18.unk40 = 4;\n    sp18.unk44 = 0;\n    sp18.unk48 = 0;\n    sp18.unk4C = 0;\n    sp18.unk50 = 0;\n    sp18.unk54 = 0xFF;\n    sp18.unk55 = 0xFF;\n    sp18.unk56 = 0;\n    sp18.unk58 = 3;\n    sp18.unk5C = 0xFF;\n    sp18.unk60 = 0;\n    sp18.unk64 = 0x220005;\n    sp18.unk68 = 0x1D0600;\n    sp18.unk6C = 1;\n    sp18.unk70 = 0x3B;\n    sp18.unk74 = 0x80;\n    sp18.unk78 = 0x20;\n    sp18.unk7C = 0;\n    sp18.unk7D = 7;\n    sp18.unk80 = 0xC;\n    sp18.unk82 = 0x15;\n    func_15151A38(&sp18, arg0, 1);\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-10T00:21:24.894977+00:00"
+      }
+    ]
   },
   {
     "function": "func_15160A58",

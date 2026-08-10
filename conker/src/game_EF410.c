@@ -9,7 +9,116 @@ void func_15134908(void *, s32, u8, s32);
 
 
 #pragma GLOBAL_ASM("asm/nonmatchings/game_EF410/func_150C1F60.s")
-#pragma GLOBAL_ASM("asm/nonmatchings/game_EF410/func_150C2290.s")
+#include <ultra64.h>
+#include "functions.h"
+#include "variables.h"
+
+extern f32 D_800A0258;
+extern f32 D_800A025C;
+extern f32 D_800A0260;
+extern f32 D_800A0264;
+void func_15151A38(void *, u8, s32);
+
+typedef struct {
+    f32 unk0;
+    f32 unk4;
+    f32 unk8;
+    f32 unkC;
+    f32 unk10;
+    f32 unk14;
+    f32 unk18;
+    f32 unk1C;
+    f32 unk20;
+    s16 unk24;
+    s16 unk26;
+    s16 unk28;
+    s16 unk2A;
+    s16 unk2C;
+    s16 unk2E;
+    s16 unk30;
+    s16 unk32;
+    s16 unk34;
+    s16 unk36;
+    u8 unk38;
+    u8 unk39;
+    u8 unk3A;
+    u8 pad3B;
+    s32 unk3C;
+    s32 unk40;
+    s32 unk44;
+    s32 unk48;
+    s32 unk4C;
+    s32 unk50;
+    u8 unk54;
+    u8 unk55;
+    u8 unk56;
+    u8 pad57;
+    s32 unk58;
+    s32 unk5C;
+    s32 unk60;
+    s32 unk64;
+    s32 unk68;
+    s32 unk6C;
+    s32 unk70;
+    s32 unk74;
+    s32 unk78;
+    u8 unk7C;
+    u8 unk7D;
+    u8 pad7E[2];
+    s16 unk80;
+    s16 unk82;
+    s32 unk84;
+} Struct150C2290Arg;
+
+void func_150C2290(u8 arg0) {
+    Struct150C2290Arg sp18;
+
+    sp18.unk0 = D_800A0258;
+    sp18.unk4 = 40.0f;
+    sp18.unk8 = D_800A025C;
+    sp18.unk1C = 100.0f;
+    sp18.unk20 = 57.5f;
+    sp18.unkC = D_800A0260;
+    sp18.unk10 = 39.0f;
+    sp18.unk24 = 2;
+    sp18.unk26 = 3;
+    sp18.unk28 = -0x29;
+    sp18.unk2C = -0x16;
+    sp18.unk2A = 0x15;
+    sp18.unk2E = 0x16;
+    sp18.unk30 = 7;
+    sp18.unk32 = 0;
+    sp18.unk34 = 0x30;
+    sp18.unk36 = 0x15;
+    sp18.unk14 = D_800A0264;
+    sp18.unk18 = 1.0f;
+    sp18.unk38 = 0xB;
+    sp18.unk39 = 1;
+    sp18.unk3A = 0x28;
+    sp18.unk3C = 1;
+    sp18.unk40 = 4;
+    sp18.unk44 = 0;
+    sp18.unk48 = 0;
+    sp18.unk4C = 0;
+    sp18.unk50 = 0;
+    sp18.unk54 = 0xFF;
+    sp18.unk55 = 0xFF;
+    sp18.unk56 = 0;
+    sp18.unk58 = 3;
+    sp18.unk5C = 0xFF;
+    sp18.unk60 = 0;
+    sp18.unk64 = 0x220005;
+    sp18.unk68 = 0x1D0600;
+    sp18.unk6C = 1;
+    sp18.unk70 = 0x3B;
+    sp18.unk74 = 0x80;
+    sp18.unk78 = 0x20;
+    sp18.unk7C = 0;
+    sp18.unk7D = 7;
+    sp18.unk80 = 0xC;
+    sp18.unk82 = 0x15;
+    func_15151A38(&sp18, arg0, 1);
+}
 // TODO: figure out this struct!
 // void func_150C2290(s32 arg0) {
 //     s16 sp9A;
