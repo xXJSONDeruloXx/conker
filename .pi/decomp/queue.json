@@ -53955,9 +53955,39 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "#include <os_internal.h>\n#include \"controller.h\"\n\ns32 corrupted_init2(OSPfs *pfs, __OSInodeCache *cache)\n{\n    int i;\n    int n;\n    int offset;\n    u8 bank;\n    __OSInodeUnit tpage;\n    __OSInode tmp_inode;\n    s32 ret;\n\n    for (i = 0; i < ARRLEN(cache->map); i++)\n        cache->map[i] = 0;\n    cache->bank = -1;\n    for (bank = 0; bank < pfs->banks; bank++)\n    {\n        if (bank > 0)\n            offset = 1;\n        else\n            offset = pfs->inode_start_page;\n\n        ret = __osPfsRWInode(pfs, &tmp_inode, OS_READ, bank);\n        if (ret != 0 && ret != PFS_ERR_INCONSISTENT)\n            return ret;\n        for (i = offset; i < ARRLEN(tmp_inode.inode_page); i++)\n        {\n            tpage = tmp_inode.inode_page[i];\n            if (tpage.ipage >= pfs->inode_start_page && tpage.inode_t.bank != bank)\n            {\n                n = (tpage.inode_t.page / 4) + ((tpage.inode_t.bank % PFS_ONE_PAGE) * BLOCKSIZE);\n                cache->map[n] |= 1 << (bank % PFS_ONE_PAGE);\n            }\n        }\n    }\n    return 0;\n}",
+        "score": 0.0,
+        "reason": "length_mismatch (target=109, generated=179), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-10T03:10:16.623674+00:00"
+      },
+      {
+        "code": "#include <os_internal.h>\n#include \"controller.h\"\n\ns32 corrupted_init2(OSPfs *pfs, __OSInodeCache *usedTbl)\n{\n    s32 i;\n    s32 offset;\n    s32 startPage;\n    u8 bank;\n    __OSInodeUnit inodePage;\n    __OSInode inode;\n    s32 ret;\n\n    for (i = 0; i < 256; i++) {\n        usedTbl->map[i] = 0;\n    }\n    usedTbl->bank = 0xFF;\n    for (bank = 0; bank < pfs->banks; bank++) {\n        if (bank > 0) {\n            startPage = 1;\n        } else {\n            startPage = pfs->inode_start_page;\n        }\n        ret = __osPfsRWInode(pfs, &inode, 0, bank);\n        if ((ret != 0) && (ret != 3)) {\n            return ret;\n        }\n        for (i = startPage; i < 128; i++) {\n            inodePage = inode.inode_page[i];\n            if (inodePage.ipage < pfs->inode_start_page) {\n                continue;\n            }\n            if (inodePage.inode_t.bank != bank) {\n                offset = inodePage.inode_t.page / 4 + (inodePage.inode_t.bank % 8) * 32;\n                usedTbl->map[offset] |= 1 << (bank % 8);\n            }\n        }\n    }\n    return 0;\n}",
+        "score": 0.0058,
+        "reason": "length_mismatch (target=109, generated=173), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-10T03:10:37.073328+00:00"
+      },
+      {
+        "code": "#include <os_internal.h>\n#include \"controller.h\"\n\ns32 corrupted_init2(OSPfs *pfs, __OSInodeCache *usedTbl)\n{\n    s32 i;\n    s32 offset;\n    s32 startPage;\n    u8 bank;\n    __OSInodeUnit inodePage;\n    __OSInode inode;\n    s32 ret;\n\n    for (i = 0; i < 256; i++) {\n        usedTbl->map[i] = 0;\n    }\n    usedTbl->bank = 0xFF;\n    for (bank = 0; bank < pfs->banks; bank++) {\n        if (bank > 0) {\n            startPage = 1;\n        } else {\n            startPage = pfs->inode_start_page;\n        }\n        ret = __osPfsRWInode(pfs, &inode, 0, bank);\n        if ((ret != 0) && (ret != 3)) {\n            return ret;\n        }\n        for (i = startPage; i < 128; i++) {\n            inodePage = inode.inode_page[i];\n            if (inodePage.ipage < pfs->inode_start_page) {\n                continue;\n            }\n            if (inodePage.inode_t.bank != bank) {\n                offset = inodePage.inode_t.page / 4 + (inodePage.inode_t.bank % 8) * 32;\n                usedTbl->map[offset] |= 1 << (bank % 8);\n            }\n        }\n    }\n    return 0;\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-10T03:11:03.544354+00:00",
+        "contextPatch": [
+          {
+            "path": "conker/Makefile",
+            "oldText": "$(BUILD_DIR)/$(SRC_DIR)/libultra/io/pfsisplug2.c.o: OPT_FLAGS := -O1\n",
+            "newText": "$(BUILD_DIR)/$(SRC_DIR)/libultra/io/pfsisplug2.c.o: OPT_FLAGS := -O1\n$(BUILD_DIR)/$(SRC_DIR)/libultra/io/pfschecker2.c.o: OPT_FLAGS := -O1\n"
+          }
+        ]
+      }
+    ]
   },
   {
     "function": "func_10009400",
