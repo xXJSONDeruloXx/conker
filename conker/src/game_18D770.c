@@ -153,7 +153,53 @@ void func_151603FC(struct225 *arg0) {
 }
 
 // requires jump table
-#pragma GLOBAL_ASM("asm/nonmatchings/game_18D770/func_151604A0.s")
+extern void (*D_8008B150[])(struct225 *);
+
+void func_151604A0(struct225 *arg0, u8 *arg1, u8 arg2) {
+    s32 pad;
+    void (*fn)(struct225 *);
+    struct17 sp34;
+
+    switch (arg2) {
+    case 0x17:
+    case 0x18:
+    case 0x1C:
+    case 0x1F:
+    case 0x22:
+        if (*arg1 != *(u8 *)((s32)arg0 + 0x12)) {
+            return;
+        }
+        switch (arg2) {
+        case 0x00:
+            break;
+        case 0x17:
+            arg0->unk14->unk9 = 0;
+            break;
+        case 0x18:
+            arg0->unk14->unk9 = 1;
+            break;
+        case 0x1C:
+            sp34.unk0 = arg0->unk14->unkE;
+            sp34.unk4 = arg0->unk14->unk10;
+            sp34.unk8 = arg0->unk14->unk12;
+            func_151618BC(16000, 0, 0, 0, &sp34, 500, 1000);
+            break;
+        case 0x1F:
+            arg0->unkF = 11;
+            arg0->unk14->unk9 = 0;
+            break;
+        case 0x22:
+            func_1516972C(arg0);
+            break;
+        }
+        break;
+    default:
+        if (D_8008B150[arg0->unk12] != NULL) {
+            D_8008B150[arg0->unk12](arg0);
+        }
+        break;
+    }
+}
 
 s32 func_15160600(struct225 *arg0) {
     arg0->unk14->unk2F = func_151422DC(0, &D_800A6690, 0, 0xFF, 0xFF, &D_800A6698, 575);

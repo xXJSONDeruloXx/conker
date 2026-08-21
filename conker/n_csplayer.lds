@@ -19,6 +19,16 @@
 .L1500E850_game_data = func_1500E738 + 0x118;
 .L1500E870 = func_1500E738 + 0x138;
 
+/* Keep the game_18D770 switch tables and case labels tied to its C replacement. */
+.L151604E4_game_data = func_151604A0 + 0x44;
+.L15160514_game_data = func_151604A0 + 0x74;
+.L15160520_game_data = func_151604A0 + 0x80;
+.L15160530_game_data = func_151604A0 + 0x90;
+.L151605A4_game_data = func_151604A0 + 0x104;
+.L151605B8_game_data = func_151604A0 + 0x118;
+.L151605C8 = func_151604A0 + 0x128;
+.L151605EC = func_151604A0 + 0x14C;
+
 SECTIONS
 {
     .n_csplayer_rodata 0x8002C4CC (NOLOAD) : SUBALIGN(4)
@@ -34,5 +44,10 @@ SECTIONS
     .game_3BA70_rodata 0x800961D0 (NOLOAD) : SUBALIGN(4)
     {
         *game_3BA70.c.o(.rodata);
+    }
+
+    .game_18D770_rodata 0x800A6A18 (NOLOAD) : SUBALIGN(4)
+    {
+        *game_18D770.c.o(.rodata);
     }
 }

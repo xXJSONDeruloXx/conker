@@ -98455,9 +98455,857 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 24,
+    "lastScore": 1.0,
+    "status": "matched",
+    "history": [
+      {
+        "code": "extern void (*D_8008B150[])(struct225 *);\n\nvoid func_151604A0(struct225 *arg0, u8 *arg1, s32 arg2) {\n    void (*fn)(struct225 *);\n    struct17 sp34;\n\n    arg2 &= 0xFF;\n    switch (arg2) {\n    case 0x17:\n    case 0x18:\n    case 0x1C:\n    case 0x1F:\n    case 0x22:\n        if (*arg1 != arg0->unk12) {\n            return;\n        }\n        switch (arg2) {\n        case 0x17:\n            arg0->unk14->unk9 = 0;\n            break;\n        case 0x18:\n            arg0->unk14->unk9 = 1;\n            break;\n        case 0x1C:\n            sp34.unk0 = arg0->unk14->unkE;\n            sp34.unk4 = arg0->unk14->unk10;\n            sp34.unk8 = arg0->unk14->unk12;\n            func_151618BC(16000, 0, 0, 0, &sp34, 500, 1000);\n            break;\n        case 0x1F:\n            arg0->unkF = 11;\n            arg0->unk14->unk9 = 0;\n            break;\n        case 0x22:\n            func_1516972C(arg0);\n            break;\n        }\n        break;\n    default:\n        fn = D_8008B150[arg0->unk12];\n        if (fn == NULL) {\n            return;\n        }\n        fn(arg0);\n        break;\n    }\n}",
+        "score": 0.0341,
+        "reason": "length_mismatch (target=88, generated=85), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-21T22:30:27.433453+00:00"
+      },
+      {
+        "code": "extern void (*D_8008B150[])(struct225 *);\n\nvoid func_151604A0(struct225 *arg0, u8 *arg1, s32 arg2) {\n    void (*fn)(struct225 *);\n    struct17 sp34;\n\n    arg2 &= 0xFF;\n    switch (arg2) {\n    case 0x17:\n    case 0x18:\n    case 0x1C:\n    case 0x1F:\n    case 0x22:\n        if (*arg1 != arg0->unk12) {\n            return;\n        }\n        switch (arg2) {\n        case 0x00:\n        case 0x01:\n        case 0x02:\n        case 0x03:\n        case 0x04:\n        case 0x05:\n        case 0x06:\n        case 0x07:\n        case 0x08:\n        case 0x09:\n        case 0x0A:\n        case 0x0B:\n        case 0x0C:\n        case 0x0D:\n        case 0x0E:\n        case 0x0F:\n        case 0x10:\n        case 0x11:\n        case 0x12:\n        case 0x13:\n        case 0x14:\n        case 0x15:\n        case 0x16:\n            break;\n        case 0x17:\n            arg0->unk14->unk9 = 0;\n            break;\n        case 0x18:\n            arg0->unk14->unk9 = 1;\n            break;\n        case 0x19:\n        case 0x1A:\n        case 0x1B:\n            break;\n        case 0x1C:\n            sp34.unk0 = arg0->unk14->unkE;\n            sp34.unk4 = arg0->unk14->unk10;\n            sp34.unk8 = arg0->unk14->unk12;\n            func_151618BC(16000, 0, 0, 0, &sp34, 500, 1000);\n            break;\n        case 0x1D:\n        case 0x1E:\n            break;\n        case 0x1F:\n            arg0->unkF = 11;\n            arg0->unk14->unk9 = 0;\n            break;\n        case 0x20:\n        case 0x21:\n            break;\n        case 0x22:\n            func_1516972C(arg0);\n            break;\n        }\n        break;\n    default:\n        fn = D_8008B150[arg0->unk12];\n        if (fn == NULL) {\n            return;\n        }\n        fn(arg0);\n        break;\n    }\n}",
+        "score": 0.0449,
+        "reason": "length_mismatch (target=88, generated=89), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-21T22:44:15.972480+00:00"
+      },
+      {
+        "code": "extern void (*D_8008B150[])(struct225 *);\n\nvoid func_151604A0(struct225 *arg0, u8 *arg1, u8 arg2) {\n    void (*fn)(struct225 *);\n    struct17 sp34;\n\n    switch (arg2) {\n    case 0x17:\n    case 0x18:\n    case 0x1C:\n    case 0x1F:\n    case 0x22:\n        if (*arg1 != arg0->unk12) {\n            return;\n        }\n        switch (arg2) {\n        case 0x00:\n        case 0x01:\n        case 0x02:\n        case 0x03:\n        case 0x04:\n        case 0x05:\n        case 0x06:\n        case 0x07:\n        case 0x08:\n        case 0x09:\n        case 0x0A:\n        case 0x0B:\n        case 0x0C:\n        case 0x0D:\n        case 0x0E:\n        case 0x0F:\n        case 0x10:\n        case 0x11:\n        case 0x12:\n        case 0x13:\n        case 0x14:\n        case 0x15:\n        case 0x16:\n            break;\n        case 0x17:\n            arg0->unk14->unk9 = 0;\n            break;\n        case 0x18:\n            arg0->unk14->unk9 = 1;\n            break;\n        case 0x19:\n        case 0x1A:\n        case 0x1B:\n            break;\n        case 0x1C:\n            sp34.unk0 = arg0->unk14->unkE;\n            sp34.unk4 = arg0->unk14->unk10;\n            sp34.unk8 = arg0->unk14->unk12;\n            func_151618BC(16000, 0, 0, 0, &sp34, 500, 1000);\n            break;\n        case 0x1D:\n        case 0x1E:\n            break;\n        case 0x1F:\n            arg0->unkF = 11;\n            arg0->unk14->unk9 = 0;\n            break;\n        case 0x20:\n        case 0x21:\n            break;\n        case 0x22:\n            func_1516972C(arg0);\n            break;\n        }\n        break;\n    default:\n        fn = D_8008B150[arg0->unk12];\n        if (fn == NULL) {\n            return;\n        }\n        fn(arg0);\n        break;\n    }\n}",
+        "score": 0.0217,
+        "reason": "length_mismatch (target=88, generated=92), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-21T22:46:07.129771+00:00"
+      },
+      {
+        "code": "extern void (*D_8008B150[])(struct225 *);\n\nvoid func_151604A0(struct225 *arg0, u8 *arg1, u8 arg2) {\n    void (*fn)(struct225 *);\n    f32 sp3C;\n    f32 sp38;\n    f32 sp34;\n    struct226 *temp;\n\n    switch (arg2) {\n    case 0x17:\n    case 0x18:\n    case 0x1C:\n    case 0x1F:\n    case 0x22:\n        if (*arg1 != arg0->unk12) {\n            return;\n        }\n        switch (arg2) {\n        case 0x00:\n        case 0x01:\n        case 0x02:\n        case 0x03:\n        case 0x04:\n        case 0x05:\n        case 0x06:\n        case 0x07:\n        case 0x08:\n        case 0x09:\n        case 0x0A:\n        case 0x0B:\n        case 0x0C:\n        case 0x0D:\n        case 0x0E:\n        case 0x0F:\n        case 0x10:\n        case 0x11:\n        case 0x12:\n        case 0x13:\n        case 0x14:\n        case 0x15:\n        case 0x16:\n            break;\n        case 0x17:\n            arg0->unk14->unk9 = 0;\n            break;\n        case 0x18:\n            arg0->unk14->unk9 = 1;\n            break;\n        case 0x19:\n        case 0x1A:\n        case 0x1B:\n            break;\n        case 0x1C:\n            temp = arg0->unk14;\n            sp34 = temp->unkE;\n            sp38 = temp->unk10;\n            sp3C = temp->unk12;\n            func_151618BC(16000, 0, 0, 0, &sp34, 500, 1000);\n            break;\n        case 0x1D:\n        case 0x1E:\n            break;\n        case 0x1F:\n            arg0->unkF = 11;\n            arg0->unk14->unk9 = 0;\n            break;\n        case 0x20:\n        case 0x21:\n            break;\n        case 0x22:\n            func_1516972C(arg0);\n            break;\n        }\n        break;\n    default:\n        fn = D_8008B150[arg0->unk12];\n        if (fn == NULL) {\n            return;\n        }\n        fn(arg0);\n        break;\n    }\n}",
+        "score": 0.0227,
+        "reason": "length_mismatch (target=88, generated=81), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-21T22:53:08.445262+00:00"
+      },
+      {
+        "code": "extern void (*D_8008B150[])(struct225 *);\n\nvoid func_151604A0(struct225 *arg0, u8 *arg1, u8 arg2) {\n    f32 sp3C;\n    f32 sp38;\n    f32 sp34;\n    void (*fn)(struct225 *);\n\n    switch (arg2) {\n    case 0x17:\n    case 0x18:\n    case 0x1C:\n    case 0x1F:\n    case 0x22:\n        if (*arg1 != arg0->unk12) {\n            return;\n        }\n        switch (arg2) {\n        case 0x00:\n        case 0x01:\n        case 0x02:\n        case 0x03:\n        case 0x04:\n        case 0x05:\n        case 0x06:\n        case 0x07:\n        case 0x08:\n        case 0x09:\n        case 0x0A:\n        case 0x0B:\n        case 0x0C:\n        case 0x0D:\n        case 0x0E:\n        case 0x0F:\n        case 0x10:\n        case 0x11:\n        case 0x12:\n        case 0x13:\n        case 0x14:\n        case 0x15:\n        case 0x16:\n            break;\n        case 0x17:\n            arg0->unk14->unk9 = 0;\n            break;\n        case 0x18:\n            arg0->unk14->unk9 = 1;\n            break;\n        case 0x19:\n        case 0x1A:\n        case 0x1B:\n            break;\n        case 0x1C:\n            sp34 = arg0->unk14->unkE;\n            sp38 = arg0->unk14->unk10;\n            sp3C = arg0->unk14->unk12;\n            func_151618BC(16000, 0, 0, 0, &sp34, 500, 1000);\n            break;\n        case 0x1D:\n        case 0x1E:\n            break;\n        case 0x1F:\n            arg0->unkF = 11;\n            arg0->unk14->unk9 = 0;\n            break;\n        case 0x20:\n        case 0x21:\n            break;\n        case 0x22:\n            func_1516972C(arg0);\n            break;\n        }\n        break;\n    default:\n        fn = D_8008B150[arg0->unk12];\n        if (fn == NULL) {\n            return;\n        }\n        fn(arg0);\n        break;\n    }\n}",
+        "score": 0.0227,
+        "reason": "length_mismatch (target=88, generated=81), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-21T22:57:36.390380+00:00"
+      },
+      {
+        "code": "extern void (*D_8008B150[])(struct225 *);\n\nvoid func_151604A0(struct225 *arg0, u8 *arg1, u8 arg2) {\n    f32 sp3C;\n    f32 sp38;\n    f32 sp34;\n\n    switch (arg2) {\n    case 0x17:\n    case 0x18:\n    case 0x1C:\n    case 0x1F:\n    case 0x22:\n        if (*arg1 != arg0->unk12) {\n            return;\n        }\n        switch (arg2) {\n        case 0x00:\n        case 0x01:\n        case 0x02:\n        case 0x03:\n        case 0x04:\n        case 0x05:\n        case 0x06:\n        case 0x07:\n        case 0x08:\n        case 0x09:\n        case 0x0A:\n        case 0x0B:\n        case 0x0C:\n        case 0x0D:\n        case 0x0E:\n        case 0x0F:\n        case 0x10:\n        case 0x11:\n        case 0x12:\n        case 0x13:\n        case 0x14:\n        case 0x15:\n        case 0x16:\n            break;\n        case 0x17:\n            arg0->unk14->unk9 = 0;\n            break;\n        case 0x18:\n            arg0->unk14->unk9 = 1;\n            break;\n        case 0x19:\n        case 0x1A:\n        case 0x1B:\n            break;\n        case 0x1C:\n            sp34 = arg0->unk14->unkE;\n            sp38 = arg0->unk14->unk10;\n            sp3C = arg0->unk14->unk12;\n            func_151618BC(16000, 0, 0, 0, &sp34, 500, 1000);\n            break;\n        case 0x1D:\n        case 0x1E:\n            break;\n        case 0x1F:\n            arg0->unkF = 11;\n            arg0->unk14->unk9 = 0;\n            break;\n        case 0x20:\n        case 0x21:\n            break;\n        case 0x22:\n            func_1516972C(arg0);\n            break;\n        }\n        break;\n    default:\n        if (D_8008B150[arg0->unk12] != NULL) {\n            D_8008B150[arg0->unk12](arg0);\n        }\n        break;\n    }\n}",
+        "score": 0.0227,
+        "reason": "length_mismatch (target=88, generated=81), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-21T23:03:07.140909+00:00"
+      },
+      {
+        "code": "extern void (*D_8008B150[])(struct225 *);\n\nvoid func_151604A0(struct225 *arg0, u8 *arg1, u8 arg2) {\n    f32 sp3C;\n    f32 sp38;\n    f32 sp34;\n    void (*fn)(struct225 *);\n\n    switch (arg2) {\n    case 0x17:\n    case 0x18:\n    case 0x1C:\n    case 0x1F:\n    case 0x22:\n        if (*arg1 != arg0->unk12) {\n            return;\n        }\n        switch (arg2) {\n        case 0x17:\n            arg0->unk14->unk9 = 0;\n            break;\n        case 0x18:\n            arg0->unk14->unk9 = 1;\n            break;\n        case 0x1C:\n            sp34 = arg0->unk14->unkE;\n            sp38 = arg0->unk14->unk10;\n            sp3C = arg0->unk14->unk12;\n            func_151618BC(16000, 0, 0, 0, &sp34, 500, 1000);\n            break;\n        case 0x1F:\n            arg0->unkF = 11;\n            arg0->unk14->unk9 = 0;\n            break;\n        case 0x22:\n            func_1516972C(arg0);\n            break;\n        break;\n    default:\n        fn = D_8008B150[arg0->unk12];\n        if (fn == NULL) {\n            return;\n        }\n        fn(arg0);\n        break;\n    }\n}",
+        "score": 0.0,
+        "reason": "compile_error",
+        "diffs": [],
+        "timestamp": "2026-08-21T23:03:39.203744+00:00"
+      },
+      {
+        "code": "extern void (*D_8008B150[])(struct225 *);\n\nvoid func_151604A0(struct225 *arg0, u8 *arg1, u8 arg2) {\n    f32 sp3C;\n    f32 sp38;\n    f32 sp34;\n    void (*fn)(struct225 *);\n\n    switch (arg2) {\n    case 0x17:\n    case 0x18:\n    case 0x1C:\n    case 0x1F:\n    case 0x22:\n        if (*arg1 != arg0->unk12) {\n            return;\n        }\n        switch (arg2) {\n        case 0x17:\n            arg0->unk14->unk9 = 0;\n            break;\n        case 0x18:\n            arg0->unk14->unk9 = 1;\n            break;\n        case 0x1C:\n            sp34 = arg0->unk14->unkE;\n            sp38 = arg0->unk14->unk10;\n            sp3C = arg0->unk14->unk12;\n            func_151618BC(16000, 0, 0, 0, &sp34, 500, 1000);\n            break;\n        case 0x1F:\n            arg0->unkF = 11;\n            arg0->unk14->unk9 = 0;\n            break;\n        case 0x22:\n            func_1516972C(arg0);\n            break;\n        break;\n    default:\n        fn = D_8008B150[arg0->unk12];\n        if (fn == NULL) {\n            return;\n        }\n        fn(arg0);\n        break;\n    }\n}",
+        "score": 0.0,
+        "reason": "compile_error",
+        "diffs": [],
+        "timestamp": "2026-08-21T23:03:52.397879+00:00"
+      },
+      {
+        "code": "extern void (*D_8008B150[])(struct225 *);\n\nvoid func_151604A0(struct225 *arg0, u8 *arg1, u8 arg2) {\n    f32 sp3C;\n    f32 sp38;\n    f32 sp34;\n    void (*fn)(struct225 *);\n\n    switch (arg2) {\n    case 0x17:\n    case 0x18:\n    case 0x1C:\n    case 0x1F:\n    case 0x22:\n        if (*arg1 != arg0->unk12) {\n            return;\n        }\n        switch (arg2) {\n        case 0x17:\n            arg0->unk14->unk9 = 0;\n            break;\n        case 0x18:\n            arg0->unk14->unk9 = 1;\n            break;\n        case 0x1C:\n            sp34 = arg0->unk14->unkE;\n            sp38 = arg0->unk14->unk10;\n            sp3C = arg0->unk14->unk12;\n            func_151618BC(16000, 0, 0, 0, &sp34, 500, 1000);\n            break;\n        case 0x1F:\n            arg0->unkF = 11;\n            arg0->unk14->unk9 = 0;\n            break;\n        case 0x22:\n            func_1516972C(arg0);\n            break;\n        }\n        break;\n    default:\n        fn = D_8008B150[arg0->unk12];\n        if (fn == NULL) {\n            return;\n        }\n        fn(arg0);\n        break;\n    }\n}",
+        "score": 0.3523,
+        "reason": "length_mismatch (target=88, generated=77), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-21T23:04:15.582080+00:00"
+      },
+      {
+        "code": "extern void (*D_8008B150[])(struct225 *);\n\nvoid func_151604A0(struct225 *arg0, u8 *arg1, u8 arg2) {\n    f32 sp3C;\n    f32 sp38;\n    f32 sp34;\n    void (*fn)(struct225 *);\n\n    switch (arg2) {\n    case 0x17:\n    case 0x18:\n    case 0x1C:\n    case 0x1F:\n    case 0x22:\n        if (*arg1 != arg0->unk12) {\n            return;\n        }\n        switch (arg2) {\n        case 0x00:\n        case 0x17:\n            arg0->unk14->unk9 = 0;\n            break;\n        case 0x18:\n            arg0->unk14->unk9 = 1;\n            break;\n        case 0x1C:\n            sp34 = arg0->unk14->unkE;\n            sp38 = arg0->unk14->unk10;\n            sp3C = arg0->unk14->unk12;\n            func_151618BC(16000, 0, 0, 0, &sp34, 500, 1000);\n            break;\n        case 0x1F:\n            arg0->unkF = 11;\n            arg0->unk14->unk9 = 0;\n            break;\n        case 0x22:\n            func_1516972C(arg0);\n            break;\n        }\n        break;\n    default:\n        fn = D_8008B150[arg0->unk12];\n        if (fn == NULL) {\n            return;\n        }\n        fn(arg0);\n        break;\n    }\n}",
+        "score": 0.3864,
+        "reason": "length_mismatch (target=88, generated=77), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-21T23:04:59.266817+00:00"
+      },
+      {
+        "code": "extern void (*D_8008B150[])(struct225 *);\n\nvoid func_151604A0(struct225 *arg0, u8 *arg1, u8 arg2) {\n    f32 sp3C;\n    f32 sp38;\n    f32 sp34;\n    void (*fn)(struct225 *);\n\n    switch (arg2) {\n    case 0x17:\n    case 0x18:\n    case 0x1C:\n    case 0x1F:\n    case 0x22:\n        if (*arg1 != arg0->unk12) {\n            return;\n        }\n        switch (arg2) {\n        case 0x00:\n        case 0x17:\n            arg0->unk14->unk9 = 0;\n            break;\n        case 0x18:\n            arg0->unk14->unk9 = 1;\n            break;\n        case 0x1C:\n            sp34 = arg0->unk14->unkE;\n            sp38 = arg0->unk14->unk10;\n            sp3C = arg0->unk14->unk12;\n            func_151618BC(16000, 0, 0, 0, &sp34, 500, 1000);\n            break;\n        case 0x1F:\n            arg0->unkF = 11;\n            arg0->unk14->unk9 = 0;\n            break;\n        case 0x22:\n            func_1516972C(arg0);\n            break;\n        }\n        break;\n    default:\n        fn = D_8008B150[arg0->unk12];\n        if (fn == NULL) {\n            return;\n        }\n        fn(arg0);\n        break;\n    }\n}",
+        "score": 0.3864,
+        "reason": "length_mismatch (target=88, generated=77), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-21T23:07:16.131387+00:00"
+      },
+      {
+        "code": "extern void (*D_8008B150[])(struct225 *);\n\nvoid func_151604A0(struct225 *arg0, u8 *arg1, u8 arg2) {\n    struct17 sp34;\n    void (*fn)(struct225 *);\n\n    switch (arg2) {\n    case 0x17:\n    case 0x18:\n    case 0x1C:\n    case 0x1F:\n    case 0x22:\n        if (*arg1 != arg0->unk12) {\n            return;\n        }\n        switch (arg2) {\n        case 0x00:\n            break;\n        case 0x17:\n            arg0->unk14->unk9 = 0;\n            break;\n        case 0x18:\n            arg0->unk14->unk9 = 1;\n            break;\n        case 0x1C:\n            sp34.unk0 = arg0->unk14->unkE;\n            sp34.unk4 = arg0->unk14->unk10;\n            sp34.unk8 = arg0->unk14->unk12;\n            func_151618BC(16000, 0, 0, 0, &sp34, 500, 1000);\n            break;\n        case 0x1F:\n            arg0->unkF = 11;\n            arg0->unk14->unk9 = 0;\n            break;\n        case 0x22:\n            func_1516972C(arg0);\n            break;\n        }\n        break;\n    default:\n        fn = D_8008B150[arg0->unk12];\n        if (fn == NULL) {\n            return;\n        }\n        fn(arg0);\n        break;\n    }\n}",
+        "score": 0.8864,
+        "reason": "structural_diffs=10, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 12,
+            "type": "structural",
+            "target": "lui at, HI(jtbl_800A6A18)",
+            "generated": "lui at, HI(.rodata)"
+          },
+          {
+            "line": 14,
+            "type": "structural",
+            "target": "lw t7, LO(jtbl_800A6A18)(at)",
+            "generated": "lw t7, LO(.rodata)(at)"
+          },
+          {
+            "line": 17,
+            "type": "structural",
+            "target": "lbu t8, 0(a1)",
+            "generated": "lbu t8, 18(s0)"
+          },
+          {
+            "line": 18,
+            "type": "structural",
+            "target": "lbu t9, 18(s0)",
+            "generated": "lbu t9, 0(a1)"
+          },
+          {
+            "line": 24,
+            "type": "structural",
+            "target": "lui at, HI(jtbl_800A6A48)",
+            "generated": "lui at, HI(.rodata)"
+          },
+          {
+            "line": 26,
+            "type": "structural",
+            "target": "lw t0, LO(jtbl_800A6A48)(at)",
+            "generated": "lw t0, 48(at)"
+          },
+          {
+            "line": 37,
+            "type": "structural",
+            "target": "addiu t0, sp, 52",
+            "generated": "addiu t0, sp, 60"
+          },
+          {
+            "line": 47,
+            "type": "structural",
+            "target": "swc1 f6, 52(sp)",
+            "generated": "swc1 f6, 60(sp)"
+          },
+          {
+            "line": 53,
+            "type": "structural",
+            "target": "swc1 f10, 56(sp)",
+            "generated": "swc1 f10, 64(sp)"
+          },
+          {
+            "line": 62,
+            "type": "structural",
+            "target": "swc1 f18, 60(sp)",
+            "generated": "swc1 f18, 68(sp)"
+          }
+        ],
+        "timestamp": "2026-08-21T23:09:16.797016+00:00"
+      },
+      {
+        "code": "extern void (*D_8008B150[])(struct225 *);\n\nvoid func_151604A0(struct225 *arg0, u8 *arg1, u8 arg2) {\n    struct17 sp34;\n\n    switch (arg2) {\n    case 0x17:\n    case 0x18:\n    case 0x1C:\n    case 0x1F:\n    case 0x22:\n        if (*arg1 != arg0->unk12) {\n            return;\n        }\n        switch (arg2) {\n        case 0x00:\n            break;\n        case 0x17:\n            arg0->unk14->unk9 = 0;\n            break;\n        case 0x18:\n            arg0->unk14->unk9 = 1;\n            break;\n        case 0x1C:\n            sp34.unk0 = arg0->unk14->unkE;\n            sp34.unk4 = arg0->unk14->unk10;\n            sp34.unk8 = arg0->unk14->unk12;\n            func_151618BC(16000, 0, 0, 0, &sp34, 500, 1000);\n            break;\n        case 0x1F:\n            arg0->unkF = 11;\n            arg0->unk14->unk9 = 0;\n            break;\n        case 0x22:\n            func_1516972C(arg0);\n            break;\n        }\n        break;\n    default:\n        if (D_8008B150[arg0->unk12] != NULL) {\n            D_8008B150[arg0->unk12](arg0);\n        }\n        break;\n    }\n}",
+        "score": 0.8977,
+        "reason": "structural_diffs=9, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 0,
+            "type": "structural",
+            "target": "addiu sp, sp, -72",
+            "generated": "addiu sp, sp, -64"
+          },
+          {
+            "line": 2,
+            "type": "structural",
+            "target": "sw a2, 80(sp)",
+            "generated": "sw a2, 72(sp)"
+          },
+          {
+            "line": 12,
+            "type": "structural",
+            "target": "lui at, HI(jtbl_800A6A18)",
+            "generated": "lui at, HI(.rodata)"
+          },
+          {
+            "line": 14,
+            "type": "structural",
+            "target": "lw t7, LO(jtbl_800A6A18)(at)",
+            "generated": "lw t7, LO(.rodata)(at)"
+          },
+          {
+            "line": 17,
+            "type": "structural",
+            "target": "lbu t8, 0(a1)",
+            "generated": "lbu t8, 18(s0)"
+          },
+          {
+            "line": 18,
+            "type": "structural",
+            "target": "lbu t9, 18(s0)",
+            "generated": "lbu t9, 0(a1)"
+          },
+          {
+            "line": 24,
+            "type": "structural",
+            "target": "lui at, HI(jtbl_800A6A48)",
+            "generated": "lui at, HI(.rodata)"
+          },
+          {
+            "line": 26,
+            "type": "structural",
+            "target": "lw t0, LO(jtbl_800A6A48)(at)",
+            "generated": "lw t0, 48(at)"
+          },
+          {
+            "line": 85,
+            "type": "structural",
+            "target": "addiu sp, sp, 72",
+            "generated": "addiu sp, sp, 64"
+          }
+        ],
+        "timestamp": "2026-08-21T23:10:17.581379+00:00"
+      },
+      {
+        "code": "extern void (*D_8008B150[])(struct225 *);\n\nvoid func_151604A0(struct225 *arg0, u8 *arg1, u8 arg2) {\n    struct17 sp34;\n    void (*fn)(struct225 *);\n\n    switch (arg2) {\n    case 0x17:\n    case 0x18:\n    case 0x1C:\n    case 0x1F:\n    case 0x22:\n        if (arg0->unk12 != *arg1) {\n            return;\n        }\n        switch (arg2) {\n        case 0x00:\n            break;\n        case 0x17:\n            arg0->unk14->unk9 = 0;\n            break;\n        case 0x18:\n            arg0->unk14->unk9 = 1;\n            break;\n        case 0x1C:\n            sp34.unk0 = arg0->unk14->unkE;\n            sp34.unk4 = arg0->unk14->unk10;\n            sp34.unk8 = arg0->unk14->unk12;\n            func_151618BC(16000, 0, 0, 0, &sp34, 500, 1000);\n            break;\n        case 0x1F:\n            arg0->unkF = 11;\n            arg0->unk14->unk9 = 0;\n            break;\n        case 0x22:\n            func_1516972C(arg0);\n            break;\n        }\n        break;\n    default:\n        fn = D_8008B150[arg0->unk12];\n        if (fn == NULL) {\n            return;\n        }\n        fn(arg0);\n        break;\n    }\n}",
+        "score": 0.8864,
+        "reason": "structural_diffs=10, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 12,
+            "type": "structural",
+            "target": "lui at, HI(jtbl_800A6A18)",
+            "generated": "lui at, HI(.rodata)"
+          },
+          {
+            "line": 14,
+            "type": "structural",
+            "target": "lw t7, LO(jtbl_800A6A18)(at)",
+            "generated": "lw t7, LO(.rodata)(at)"
+          },
+          {
+            "line": 17,
+            "type": "structural",
+            "target": "lbu t8, 0(a1)",
+            "generated": "lbu t8, 18(s0)"
+          },
+          {
+            "line": 18,
+            "type": "structural",
+            "target": "lbu t9, 18(s0)",
+            "generated": "lbu t9, 0(a1)"
+          },
+          {
+            "line": 24,
+            "type": "structural",
+            "target": "lui at, HI(jtbl_800A6A48)",
+            "generated": "lui at, HI(.rodata)"
+          },
+          {
+            "line": 26,
+            "type": "structural",
+            "target": "lw t0, LO(jtbl_800A6A48)(at)",
+            "generated": "lw t0, 48(at)"
+          },
+          {
+            "line": 37,
+            "type": "structural",
+            "target": "addiu t0, sp, 52",
+            "generated": "addiu t0, sp, 60"
+          },
+          {
+            "line": 47,
+            "type": "structural",
+            "target": "swc1 f6, 52(sp)",
+            "generated": "swc1 f6, 60(sp)"
+          },
+          {
+            "line": 53,
+            "type": "structural",
+            "target": "swc1 f10, 56(sp)",
+            "generated": "swc1 f10, 64(sp)"
+          },
+          {
+            "line": 62,
+            "type": "structural",
+            "target": "swc1 f18, 60(sp)",
+            "generated": "swc1 f18, 68(sp)"
+          }
+        ],
+        "timestamp": "2026-08-21T23:10:50.460650+00:00"
+      },
+      {
+        "code": "extern void (*D_8008B150[])(struct225 *);\n\nvoid func_151604A0(struct225 *arg0, u8 *arg1, u8 arg2) {\n    void (*fn)(struct225 *);\n    struct17 sp34;\n\n    switch (arg2) {\n    case 0x17:\n    case 0x18:\n    case 0x1C:\n    case 0x1F:\n    case 0x22:\n        if (*arg1 != arg0->unk12) {\n            return;\n        }\n        switch (arg2) {\n        case 0x00:\n            break;\n        case 0x17:\n            arg0->unk14->unk9 = 0;\n            break;\n        case 0x18:\n            arg0->unk14->unk9 = 1;\n            break;\n        case 0x1C:\n            sp34.unk0 = arg0->unk14->unkE;\n            sp34.unk4 = arg0->unk14->unk10;\n            sp34.unk8 = arg0->unk14->unk12;\n            func_151618BC(16000, 0, 0, 0, &sp34, 500, 1000);\n            break;\n        case 0x1F:\n            arg0->unkF = 11;\n            arg0->unk14->unk9 = 0;\n            break;\n        case 0x22:\n            func_1516972C(arg0);\n            break;\n        }\n        break;\n    default:\n        fn = D_8008B150[arg0->unk12];\n        if (fn == NULL) {\n            return;\n        }\n        fn(arg0);\n        break;\n    }\n}",
+        "score": 0.8864,
+        "reason": "structural_diffs=10, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 12,
+            "type": "structural",
+            "target": "lui at, HI(jtbl_800A6A18)",
+            "generated": "lui at, HI(.rodata)"
+          },
+          {
+            "line": 14,
+            "type": "structural",
+            "target": "lw t7, LO(jtbl_800A6A18)(at)",
+            "generated": "lw t7, LO(.rodata)(at)"
+          },
+          {
+            "line": 17,
+            "type": "structural",
+            "target": "lbu t8, 0(a1)",
+            "generated": "lbu t8, 18(s0)"
+          },
+          {
+            "line": 18,
+            "type": "structural",
+            "target": "lbu t9, 18(s0)",
+            "generated": "lbu t9, 0(a1)"
+          },
+          {
+            "line": 24,
+            "type": "structural",
+            "target": "lui at, HI(jtbl_800A6A48)",
+            "generated": "lui at, HI(.rodata)"
+          },
+          {
+            "line": 26,
+            "type": "structural",
+            "target": "lw t0, LO(jtbl_800A6A48)(at)",
+            "generated": "lw t0, 48(at)"
+          },
+          {
+            "line": 37,
+            "type": "structural",
+            "target": "addiu t0, sp, 52",
+            "generated": "addiu t0, sp, 56"
+          },
+          {
+            "line": 47,
+            "type": "structural",
+            "target": "swc1 f6, 52(sp)",
+            "generated": "swc1 f6, 56(sp)"
+          },
+          {
+            "line": 53,
+            "type": "structural",
+            "target": "swc1 f10, 56(sp)",
+            "generated": "swc1 f10, 60(sp)"
+          },
+          {
+            "line": 62,
+            "type": "structural",
+            "target": "swc1 f18, 60(sp)",
+            "generated": "swc1 f18, 64(sp)"
+          }
+        ],
+        "timestamp": "2026-08-21T23:13:08.505451+00:00"
+      },
+      {
+        "code": "extern void (*D_8008B150[])(struct225 *);\n\nvoid func_151604A0(struct225 *arg0, u8 *arg1, u8 arg2) {\n    s32 pad;\n    struct17 sp34;\n\n    switch (arg2) {\n    case 0x17:\n    case 0x18:\n    case 0x1C:\n    case 0x1F:\n    case 0x22:\n        if (*arg1 != arg0->unk12) {\n            return;\n        }\n        switch (arg2) {\n        case 0x00:\n            break;\n        case 0x17:\n            arg0->unk14->unk9 = 0;\n            break;\n        case 0x18:\n            arg0->unk14->unk9 = 1;\n            break;\n        case 0x1C:\n            sp34.unk0 = arg0->unk14->unkE;\n            sp34.unk4 = arg0->unk14->unk10;\n            sp34.unk8 = arg0->unk14->unk12;\n            func_151618BC(16000, 0, 0, 0, &sp34, 500, 1000);\n            break;\n        case 0x1F:\n            arg0->unkF = 11;\n            arg0->unk14->unk9 = 0;\n            break;\n        case 0x22:\n            func_1516972C(arg0);\n            break;\n        }\n        break;\n    default:\n        if (D_8008B150[arg0->unk12] != NULL) {\n            D_8008B150[arg0->unk12](arg0);\n        }\n        break;\n    }\n}",
+        "score": 0.8864,
+        "reason": "structural_diffs=10, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 12,
+            "type": "structural",
+            "target": "lui at, HI(jtbl_800A6A18)",
+            "generated": "lui at, HI(.rodata)"
+          },
+          {
+            "line": 14,
+            "type": "structural",
+            "target": "lw t7, LO(jtbl_800A6A18)(at)",
+            "generated": "lw t7, LO(.rodata)(at)"
+          },
+          {
+            "line": 17,
+            "type": "structural",
+            "target": "lbu t8, 0(a1)",
+            "generated": "lbu t8, 18(s0)"
+          },
+          {
+            "line": 18,
+            "type": "structural",
+            "target": "lbu t9, 18(s0)",
+            "generated": "lbu t9, 0(a1)"
+          },
+          {
+            "line": 24,
+            "type": "structural",
+            "target": "lui at, HI(jtbl_800A6A48)",
+            "generated": "lui at, HI(.rodata)"
+          },
+          {
+            "line": 26,
+            "type": "structural",
+            "target": "lw t0, LO(jtbl_800A6A48)(at)",
+            "generated": "lw t0, 48(at)"
+          },
+          {
+            "line": 37,
+            "type": "structural",
+            "target": "addiu t0, sp, 52",
+            "generated": "addiu t0, sp, 56"
+          },
+          {
+            "line": 47,
+            "type": "structural",
+            "target": "swc1 f6, 52(sp)",
+            "generated": "swc1 f6, 56(sp)"
+          },
+          {
+            "line": 53,
+            "type": "structural",
+            "target": "swc1 f10, 56(sp)",
+            "generated": "swc1 f10, 60(sp)"
+          },
+          {
+            "line": 62,
+            "type": "structural",
+            "target": "swc1 f18, 60(sp)",
+            "generated": "swc1 f18, 64(sp)"
+          }
+        ],
+        "timestamp": "2026-08-21T23:14:38.654891+00:00"
+      },
+      {
+        "code": "extern void (*D_8008B150[])(struct225 *);\n\nvoid func_151604A0(struct225 *arg0, u8 *arg1, u8 arg2) {\n    struct17 sp34;\n    s32 pad;\n\n    switch (arg2) {\n    case 0x17:\n    case 0x18:\n    case 0x1C:\n    case 0x1F:\n    case 0x22:\n        if (*arg1 != arg0->unk12) {\n            return;\n        }\n        switch (arg2) {\n        case 0x00:\n            break;\n        case 0x17:\n            arg0->unk14->unk9 = 0;\n            break;\n        case 0x18:\n            arg0->unk14->unk9 = 1;\n            break;\n        case 0x1C:\n            sp34.unk0 = arg0->unk14->unkE;\n            sp34.unk4 = arg0->unk14->unk10;\n            sp34.unk8 = arg0->unk14->unk12;\n            func_151618BC(16000, 0, 0, 0, &sp34, 500, 1000);\n            break;\n        case 0x1F:\n            arg0->unkF = 11;\n            arg0->unk14->unk9 = 0;\n            break;\n        case 0x22:\n            func_1516972C(arg0);\n            break;\n        }\n        break;\n    default:\n        if (D_8008B150[arg0->unk12] != NULL) {\n            D_8008B150[arg0->unk12](arg0);\n        }\n        break;\n    }\n}",
+        "score": 0.8864,
+        "reason": "structural_diffs=10, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 12,
+            "type": "structural",
+            "target": "lui at, HI(jtbl_800A6A18)",
+            "generated": "lui at, HI(.rodata)"
+          },
+          {
+            "line": 14,
+            "type": "structural",
+            "target": "lw t7, LO(jtbl_800A6A18)(at)",
+            "generated": "lw t7, LO(.rodata)(at)"
+          },
+          {
+            "line": 17,
+            "type": "structural",
+            "target": "lbu t8, 0(a1)",
+            "generated": "lbu t8, 18(s0)"
+          },
+          {
+            "line": 18,
+            "type": "structural",
+            "target": "lbu t9, 18(s0)",
+            "generated": "lbu t9, 0(a1)"
+          },
+          {
+            "line": 24,
+            "type": "structural",
+            "target": "lui at, HI(jtbl_800A6A48)",
+            "generated": "lui at, HI(.rodata)"
+          },
+          {
+            "line": 26,
+            "type": "structural",
+            "target": "lw t0, LO(jtbl_800A6A48)(at)",
+            "generated": "lw t0, 48(at)"
+          },
+          {
+            "line": 37,
+            "type": "structural",
+            "target": "addiu t0, sp, 52",
+            "generated": "addiu t0, sp, 60"
+          },
+          {
+            "line": 47,
+            "type": "structural",
+            "target": "swc1 f6, 52(sp)",
+            "generated": "swc1 f6, 60(sp)"
+          },
+          {
+            "line": 53,
+            "type": "structural",
+            "target": "swc1 f10, 56(sp)",
+            "generated": "swc1 f10, 64(sp)"
+          },
+          {
+            "line": 62,
+            "type": "structural",
+            "target": "swc1 f18, 60(sp)",
+            "generated": "swc1 f18, 68(sp)"
+          }
+        ],
+        "timestamp": "2026-08-21T23:15:25.113123+00:00"
+      },
+      {
+        "code": "extern void (*D_8008B150[])(struct225 *);\n\nvoid func_151604A0(struct225 *arg0, u8 *arg1, u8 arg2) {\n    s32 pad;\n    struct17 sp34;\n    s32 pad1;\n\n    switch (arg2) {\n    case 0x17:\n    case 0x18:\n    case 0x1C:\n    case 0x1F:\n    case 0x22:\n        if (*arg1 != arg0->unk12) {\n            return;\n        }\n        switch (arg2) {\n        case 0x00:\n            break;\n        case 0x17:\n            arg0->unk14->unk9 = 0;\n            break;\n        case 0x18:\n            arg0->unk14->unk9 = 1;\n            break;\n        case 0x1C:\n            sp34.unk0 = arg0->unk14->unkE;\n            sp34.unk4 = arg0->unk14->unk10;\n            sp34.unk8 = arg0->unk14->unk12;\n            func_151618BC(16000, 0, 0, 0, &sp34, 500, 1000);\n            break;\n        case 0x1F:\n            arg0->unkF = 11;\n            arg0->unk14->unk9 = 0;\n            break;\n        case 0x22:\n            func_1516972C(arg0);\n            break;\n        }\n        break;\n    default:\n        if (D_8008B150[arg0->unk12] != NULL) {\n            D_8008B150[arg0->unk12](arg0);\n        }\n        break;\n    }\n}",
+        "score": 0.8864,
+        "reason": "structural_diffs=10, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 12,
+            "type": "structural",
+            "target": "lui at, HI(jtbl_800A6A18)",
+            "generated": "lui at, HI(.rodata)"
+          },
+          {
+            "line": 14,
+            "type": "structural",
+            "target": "lw t7, LO(jtbl_800A6A18)(at)",
+            "generated": "lw t7, LO(.rodata)(at)"
+          },
+          {
+            "line": 17,
+            "type": "structural",
+            "target": "lbu t8, 0(a1)",
+            "generated": "lbu t8, 18(s0)"
+          },
+          {
+            "line": 18,
+            "type": "structural",
+            "target": "lbu t9, 18(s0)",
+            "generated": "lbu t9, 0(a1)"
+          },
+          {
+            "line": 24,
+            "type": "structural",
+            "target": "lui at, HI(jtbl_800A6A48)",
+            "generated": "lui at, HI(.rodata)"
+          },
+          {
+            "line": 26,
+            "type": "structural",
+            "target": "lw t0, LO(jtbl_800A6A48)(at)",
+            "generated": "lw t0, 48(at)"
+          },
+          {
+            "line": 37,
+            "type": "structural",
+            "target": "addiu t0, sp, 52",
+            "generated": "addiu t0, sp, 56"
+          },
+          {
+            "line": 47,
+            "type": "structural",
+            "target": "swc1 f6, 52(sp)",
+            "generated": "swc1 f6, 56(sp)"
+          },
+          {
+            "line": 53,
+            "type": "structural",
+            "target": "swc1 f10, 56(sp)",
+            "generated": "swc1 f10, 60(sp)"
+          },
+          {
+            "line": 62,
+            "type": "structural",
+            "target": "swc1 f18, 60(sp)",
+            "generated": "swc1 f18, 64(sp)"
+          }
+        ],
+        "timestamp": "2026-08-21T23:17:45.594831+00:00"
+      },
+      {
+        "code": "extern void (*D_8008B150[])(struct225 *);\n\nvoid func_151604A0(struct225 *arg0, u8 *arg1, u8 arg2) {\n    struct17 sp34;\n    s32 pad;\n    s32 pad1;\n\n    switch (arg2) {\n    case 0x17:\n    case 0x18:\n    case 0x1C:\n    case 0x1F:\n    case 0x22:\n        if (*arg1 != arg0->unk12) {\n            return;\n        }\n        switch (arg2) {\n        case 0x00:\n            break;\n        case 0x17:\n            arg0->unk14->unk9 = 0;\n            break;\n        case 0x18:\n            arg0->unk14->unk9 = 1;\n            break;\n        case 0x1C:\n            sp34.unk0 = arg0->unk14->unkE;\n            sp34.unk4 = arg0->unk14->unk10;\n            sp34.unk8 = arg0->unk14->unk12;\n            func_151618BC(16000, 0, 0, 0, &sp34, 500, 1000);\n            break;\n        case 0x1F:\n            arg0->unkF = 11;\n            arg0->unk14->unk9 = 0;\n            break;\n        case 0x22:\n            func_1516972C(arg0);\n            break;\n        }\n        break;\n    default:\n        if (D_8008B150[arg0->unk12] != NULL) {\n            D_8008B150[arg0->unk12](arg0);\n        }\n        break;\n    }\n}",
+        "score": 0.8864,
+        "reason": "structural_diffs=10, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 12,
+            "type": "structural",
+            "target": "lui at, HI(jtbl_800A6A18)",
+            "generated": "lui at, HI(.rodata)"
+          },
+          {
+            "line": 14,
+            "type": "structural",
+            "target": "lw t7, LO(jtbl_800A6A18)(at)",
+            "generated": "lw t7, LO(.rodata)(at)"
+          },
+          {
+            "line": 17,
+            "type": "structural",
+            "target": "lbu t8, 0(a1)",
+            "generated": "lbu t8, 18(s0)"
+          },
+          {
+            "line": 18,
+            "type": "structural",
+            "target": "lbu t9, 18(s0)",
+            "generated": "lbu t9, 0(a1)"
+          },
+          {
+            "line": 24,
+            "type": "structural",
+            "target": "lui at, HI(jtbl_800A6A48)",
+            "generated": "lui at, HI(.rodata)"
+          },
+          {
+            "line": 26,
+            "type": "structural",
+            "target": "lw t0, LO(jtbl_800A6A48)(at)",
+            "generated": "lw t0, 48(at)"
+          },
+          {
+            "line": 37,
+            "type": "structural",
+            "target": "addiu t0, sp, 52",
+            "generated": "addiu t0, sp, 60"
+          },
+          {
+            "line": 47,
+            "type": "structural",
+            "target": "swc1 f6, 52(sp)",
+            "generated": "swc1 f6, 60(sp)"
+          },
+          {
+            "line": 53,
+            "type": "structural",
+            "target": "swc1 f10, 56(sp)",
+            "generated": "swc1 f10, 64(sp)"
+          },
+          {
+            "line": 62,
+            "type": "structural",
+            "target": "swc1 f18, 60(sp)",
+            "generated": "swc1 f18, 68(sp)"
+          }
+        ],
+        "timestamp": "2026-08-21T23:17:47.268226+00:00"
+      },
+      {
+        "code": "extern void (*D_8008B150[])(struct225 *);\n\nvoid func_151604A0(struct225 *arg0, u8 *arg1, u8 arg2) {\n    s32 pad;\n    s32 pad1;\n    struct17 sp34;\n\n    switch (arg2) {\n    case 0x17:\n    case 0x18:\n    case 0x1C:\n    case 0x1F:\n    case 0x22:\n        if (*arg1 != arg0->unk12) {\n            return;\n        }\n        switch (arg2) {\n        case 0x00:\n            break;\n        case 0x17:\n            arg0->unk14->unk9 = 0;\n            break;\n        case 0x18:\n            arg0->unk14->unk9 = 1;\n            break;\n        case 0x1C:\n            sp34.unk0 = arg0->unk14->unkE;\n            sp34.unk4 = arg0->unk14->unk10;\n            sp34.unk8 = arg0->unk14->unk12;\n            func_151618BC(16000, 0, 0, 0, &sp34, 500, 1000);\n            break;\n        case 0x1F:\n            arg0->unkF = 11;\n            arg0->unk14->unk9 = 0;\n            break;\n        case 0x22:\n            func_1516972C(arg0);\n            break;\n        }\n        break;\n    default:\n        if (D_8008B150[arg0->unk12] != NULL) {\n            D_8008B150[arg0->unk12](arg0);\n        }\n        break;\n    }\n}",
+        "score": 0.9318,
+        "reason": "structural_diffs=6, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 12,
+            "type": "structural",
+            "target": "lui at, HI(jtbl_800A6A18)",
+            "generated": "lui at, HI(.rodata)"
+          },
+          {
+            "line": 14,
+            "type": "structural",
+            "target": "lw t7, LO(jtbl_800A6A18)(at)",
+            "generated": "lw t7, LO(.rodata)(at)"
+          },
+          {
+            "line": 17,
+            "type": "structural",
+            "target": "lbu t8, 0(a1)",
+            "generated": "lbu t8, 18(s0)"
+          },
+          {
+            "line": 18,
+            "type": "structural",
+            "target": "lbu t9, 18(s0)",
+            "generated": "lbu t9, 0(a1)"
+          },
+          {
+            "line": 24,
+            "type": "structural",
+            "target": "lui at, HI(jtbl_800A6A48)",
+            "generated": "lui at, HI(.rodata)"
+          },
+          {
+            "line": 26,
+            "type": "structural",
+            "target": "lw t0, LO(jtbl_800A6A48)(at)",
+            "generated": "lw t0, 48(at)"
+          }
+        ],
+        "timestamp": "2026-08-21T23:17:48.900890+00:00"
+      },
+      {
+        "code": "extern void (*D_8008B150[])(struct225 *);\n\nvoid func_151604A0(struct225 *arg0, u8 *arg1, u8 arg2) {\n    s32 pad;\n    void (*fn)(struct225 *);\n    struct17 sp34;\n\n    switch (arg2) {\n    case 0x17:\n    case 0x18:\n    case 0x1C:\n    case 0x1F:\n    case 0x22:\n        if (*arg1 != arg0->unk12) {\n            return;\n        }\n        switch (arg2) {\n        case 0x00:\n            break;\n        case 0x17:\n            arg0->unk14->unk9 = 0;\n            break;\n        case 0x18:\n            arg0->unk14->unk9 = 1;\n            break;\n        case 0x1C:\n            sp34.unk0 = arg0->unk14->unkE;\n            sp34.unk4 = arg0->unk14->unk10;\n            sp34.unk8 = arg0->unk14->unk12;\n            func_151618BC(16000, 0, 0, 0, &sp34, 500, 1000);\n            break;\n        case 0x1F:\n            arg0->unkF = 11;\n            arg0->unk14->unk9 = 0;\n            break;\n        case 0x22:\n            func_1516972C(arg0);\n            break;\n        }\n        break;\n    default:\n        if (D_8008B150[arg0->unk12] != NULL) {\n            D_8008B150[arg0->unk12](arg0);\n        }\n        break;\n    }\n}",
+        "score": 0.9318,
+        "reason": "structural_diffs=6, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 12,
+            "type": "structural",
+            "target": "lui at, HI(jtbl_800A6A18)",
+            "generated": "lui at, HI(.rodata)"
+          },
+          {
+            "line": 14,
+            "type": "structural",
+            "target": "lw t7, LO(jtbl_800A6A18)(at)",
+            "generated": "lw t7, LO(.rodata)(at)"
+          },
+          {
+            "line": 17,
+            "type": "structural",
+            "target": "lbu t8, 0(a1)",
+            "generated": "lbu t8, 18(s0)"
+          },
+          {
+            "line": 18,
+            "type": "structural",
+            "target": "lbu t9, 18(s0)",
+            "generated": "lbu t9, 0(a1)"
+          },
+          {
+            "line": 24,
+            "type": "structural",
+            "target": "lui at, HI(jtbl_800A6A48)",
+            "generated": "lui at, HI(.rodata)"
+          },
+          {
+            "line": 26,
+            "type": "structural",
+            "target": "lw t0, LO(jtbl_800A6A48)(at)",
+            "generated": "lw t0, 48(at)"
+          }
+        ],
+        "timestamp": "2026-08-21T23:17:50.602818+00:00"
+      },
+      {
+        "code": "extern void (*D_8008B150[])(struct225 *);\n\nvoid func_151604A0(struct225 *arg0, u8 *arg1, u8 arg2) {\n    void (*fn)(struct225 *);\n    struct17 sp34;\n    s32 pad;\n\n    switch (arg2) {\n    case 0x17:\n    case 0x18:\n    case 0x1C:\n    case 0x1F:\n    case 0x22:\n        if (*arg1 != arg0->unk12) {\n            return;\n        }\n        switch (arg2) {\n        case 0x00:\n            break;\n        case 0x17:\n            arg0->unk14->unk9 = 0;\n            break;\n        case 0x18:\n            arg0->unk14->unk9 = 1;\n            break;\n        case 0x1C:\n            sp34.unk0 = arg0->unk14->unkE;\n            sp34.unk4 = arg0->unk14->unk10;\n            sp34.unk8 = arg0->unk14->unk12;\n            func_151618BC(16000, 0, 0, 0, &sp34, 500, 1000);\n            break;\n        case 0x1F:\n            arg0->unkF = 11;\n            arg0->unk14->unk9 = 0;\n            break;\n        case 0x22:\n            func_1516972C(arg0);\n            break;\n        }\n        break;\n    default:\n        if (D_8008B150[arg0->unk12] != NULL) {\n            D_8008B150[arg0->unk12](arg0);\n        }\n        break;\n    }\n}",
+        "score": 0.8864,
+        "reason": "structural_diffs=10, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 12,
+            "type": "structural",
+            "target": "lui at, HI(jtbl_800A6A18)",
+            "generated": "lui at, HI(.rodata)"
+          },
+          {
+            "line": 14,
+            "type": "structural",
+            "target": "lw t7, LO(jtbl_800A6A18)(at)",
+            "generated": "lw t7, LO(.rodata)(at)"
+          },
+          {
+            "line": 17,
+            "type": "structural",
+            "target": "lbu t8, 0(a1)",
+            "generated": "lbu t8, 18(s0)"
+          },
+          {
+            "line": 18,
+            "type": "structural",
+            "target": "lbu t9, 18(s0)",
+            "generated": "lbu t9, 0(a1)"
+          },
+          {
+            "line": 24,
+            "type": "structural",
+            "target": "lui at, HI(jtbl_800A6A48)",
+            "generated": "lui at, HI(.rodata)"
+          },
+          {
+            "line": 26,
+            "type": "structural",
+            "target": "lw t0, LO(jtbl_800A6A48)(at)",
+            "generated": "lw t0, 48(at)"
+          },
+          {
+            "line": 37,
+            "type": "structural",
+            "target": "addiu t0, sp, 52",
+            "generated": "addiu t0, sp, 56"
+          },
+          {
+            "line": 47,
+            "type": "structural",
+            "target": "swc1 f6, 52(sp)",
+            "generated": "swc1 f6, 56(sp)"
+          },
+          {
+            "line": 53,
+            "type": "structural",
+            "target": "swc1 f10, 56(sp)",
+            "generated": "swc1 f10, 60(sp)"
+          },
+          {
+            "line": 62,
+            "type": "structural",
+            "target": "swc1 f18, 60(sp)",
+            "generated": "swc1 f18, 64(sp)"
+          }
+        ],
+        "timestamp": "2026-08-21T23:17:52.542874+00:00"
+      },
+      {
+        "code": "extern void (*D_8008B150[])(struct225 *);\n\nvoid func_151604A0(struct225 *arg0, u8 *arg1, u8 arg2) {\n    struct17 sp34;\n    void (*fn)(struct225 *);\n    s32 pad;\n\n    switch (arg2) {\n    case 0x17:\n    case 0x18:\n    case 0x1C:\n    case 0x1F:\n    case 0x22:\n        if (*arg1 != arg0->unk12) {\n            return;\n        }\n        switch (arg2) {\n        case 0x00:\n            break;\n        case 0x17:\n            arg0->unk14->unk9 = 0;\n            break;\n        case 0x18:\n            arg0->unk14->unk9 = 1;\n            break;\n        case 0x1C:\n            sp34.unk0 = arg0->unk14->unkE;\n            sp34.unk4 = arg0->unk14->unk10;\n            sp34.unk8 = arg0->unk14->unk12;\n            func_151618BC(16000, 0, 0, 0, &sp34, 500, 1000);\n            break;\n        case 0x1F:\n            arg0->unkF = 11;\n            arg0->unk14->unk9 = 0;\n            break;\n        case 0x22:\n            func_1516972C(arg0);\n            break;\n        }\n        break;\n    default:\n        if (D_8008B150[arg0->unk12] != NULL) {\n            D_8008B150[arg0->unk12](arg0);\n        }\n        break;\n    }\n}",
+        "score": 0.8864,
+        "reason": "structural_diffs=10, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 12,
+            "type": "structural",
+            "target": "lui at, HI(jtbl_800A6A18)",
+            "generated": "lui at, HI(.rodata)"
+          },
+          {
+            "line": 14,
+            "type": "structural",
+            "target": "lw t7, LO(jtbl_800A6A18)(at)",
+            "generated": "lw t7, LO(.rodata)(at)"
+          },
+          {
+            "line": 17,
+            "type": "structural",
+            "target": "lbu t8, 0(a1)",
+            "generated": "lbu t8, 18(s0)"
+          },
+          {
+            "line": 18,
+            "type": "structural",
+            "target": "lbu t9, 18(s0)",
+            "generated": "lbu t9, 0(a1)"
+          },
+          {
+            "line": 24,
+            "type": "structural",
+            "target": "lui at, HI(jtbl_800A6A48)",
+            "generated": "lui at, HI(.rodata)"
+          },
+          {
+            "line": 26,
+            "type": "structural",
+            "target": "lw t0, LO(jtbl_800A6A48)(at)",
+            "generated": "lw t0, 48(at)"
+          },
+          {
+            "line": 37,
+            "type": "structural",
+            "target": "addiu t0, sp, 52",
+            "generated": "addiu t0, sp, 60"
+          },
+          {
+            "line": 47,
+            "type": "structural",
+            "target": "swc1 f6, 52(sp)",
+            "generated": "swc1 f6, 60(sp)"
+          },
+          {
+            "line": 53,
+            "type": "structural",
+            "target": "swc1 f10, 56(sp)",
+            "generated": "swc1 f10, 64(sp)"
+          },
+          {
+            "line": 62,
+            "type": "structural",
+            "target": "swc1 f18, 60(sp)",
+            "generated": "swc1 f18, 68(sp)"
+          }
+        ],
+        "timestamp": "2026-08-21T23:17:54.268307+00:00"
+      },
+      {
+        "code": "extern void (*D_8008B150[])(struct225 *);\n\nvoid func_151604A0(struct225 *arg0, u8 *arg1, u8 arg2) {\n    s32 pad;\n    void (*fn)(struct225 *);\n    struct17 sp34;\n\n    switch (arg2) {\n    case 0x17:\n    case 0x18:\n    case 0x1C:\n    case 0x1F:\n    case 0x22:\n        if (*arg1 != *(u8 *)((s32)arg0 + 0x12)) {\n            return;\n        }\n        switch (arg2) {\n        case 0x00:\n            break;\n        case 0x17:\n            arg0->unk14->unk9 = 0;\n            break;\n        case 0x18:\n            arg0->unk14->unk9 = 1;\n            break;\n        case 0x1C:\n            sp34.unk0 = arg0->unk14->unkE;\n            sp34.unk4 = arg0->unk14->unk10;\n            sp34.unk8 = arg0->unk14->unk12;\n            func_151618BC(16000, 0, 0, 0, &sp34, 500, 1000);\n            break;\n        case 0x1F:\n            arg0->unkF = 11;\n            arg0->unk14->unk9 = 0;\n            break;\n        case 0x22:\n            func_1516972C(arg0);\n            break;\n        }\n        break;\n    default:\n        if (D_8008B150[arg0->unk12] != NULL) {\n            D_8008B150[arg0->unk12](arg0);\n        }\n        break;\n    }\n}",
+        "score": 1.0,
+        "reason": "match",
+        "diffs": [],
+        "timestamp": "2026-08-21T23:18:37.819440+00:00"
+      }
+    ]
   },
   {
     "function": "func_15141C0C",
