@@ -51560,9 +51560,257 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 9,
+    "lastScore": 0.8889,
+    "status": "pending",
+    "history": [
+      {
+        "code": "extern void func_15143134(void *, s32, s32);\n\ns32 func_15160B74(struct225 *arg0) {\n    u8 sp37;\n    f32 sp20;\n    f32 sp24;\n    f32 sp28;\n    struct127 *temp_v0;\n    struct255 *temp_t0;\n\n    sp37 = 1;\n    temp_v0 = (struct127 *)arg0->unk18;\n    if (temp_v0->interaction_state == 0) {\n        return 0;\n    }\n    if (*(u8 *)((s32)arg0 + 0x1C) != temp_v0->unique_id) {\n        return 0;\n    }\n    temp_t0 = temp_v0->unk1D4;\n    if ((temp_t0 != NULL) && ((temp_v0->unk74 & 0xF) != 0xF)) {\n        func_15143134((void *)((s32)arg0 + 0x20), &sp20,\n                      (void *)((s32)temp_t0 + (*(u8 *)((s32)arg0 + 0x1D) << 6)));\n        arg0->unk14->unkE = (s16)sp20;\n        arg0->unk14->unk10 = (s16)sp24;\n        arg0->unk14->unk12 = (s16)sp28;\n    } else {\n        arg0->unk14->unkE = (s16)temp_v0->x_position;\n        arg0->unk14->unk10 = (s16)temp_v0->y_position;\n        arg0->unk14->unk12 = (s16)temp_v0->z_position;\n    }\n    {\n        s8 temp_v1 = *(s8 *)((s32)arg0 + 0x2C);\n\n        if (temp_v1 != -1) {\n            sp37 = D_8008B1F8[temp_v1](arg0);\n        }\n    }\n    return sp37;\n}",
+        "score": 0.0444,
+        "reason": "length_mismatch (target=90, generated=85), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-22T01:30:06.549859+00:00"
+      },
+      {
+        "code": "extern void func_15143134(void *, s32, s32);\n\ns32 func_15160B74(struct225 *arg0) {\n    u8 sp37;\n    f32 sp20;\n    f32 sp24;\n    f32 sp28;\n    struct127 *temp_v0;\n    struct255 *temp_t0;\n    u8 *payload;\n\n    temp_v0 = (struct127 *)arg0->unk18;\n    sp37 = 1;\n    payload = (u8 *)&arg0->unk18;\n    if (temp_v0->interaction_state == 0) {\n        return 0;\n    }\n    if (payload[4] != temp_v0->unique_id) {\n        return 0;\n    }\n    temp_t0 = temp_v0->unk1D4;\n    if ((temp_t0 != NULL) && ((temp_v0->unk74 & 0xF) != 15)) {\n        func_15143134(payload + 8, &sp20,\n                      (void *)((s32)temp_t0 + (payload[5] << 6)));\n        arg0->unk14->unkE = (s16)sp20;\n        arg0->unk14->unk10 = (s16)sp24;\n        arg0->unk14->unk12 = (s16)sp28;\n    } else {\n        arg0->unk14->unkE = (s16)temp_v0->x_position;\n        arg0->unk14->unk10 = (s16)temp_v0->y_position;\n        arg0->unk14->unk12 = (s16)temp_v0->z_position;\n    }\n    {\n        s8 temp_v1 = *(s8 *)(payload + 0x14);\n\n        if (temp_v1 != -1) {\n            sp37 = D_8008B1F8[temp_v1](arg0);\n        }\n    }\n    return sp37;\n}",
+        "score": 0.4,
+        "reason": "length_mismatch (target=90, generated=88), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-22T01:33:01.864971+00:00"
+      },
+      {
+        "code": "extern void func_15143134(void *, s32, s32);\n\ns32 func_15160B74(struct225 *arg0) {\n    f32 sp20;\n    f32 sp24;\n    f32 sp28;\n    u8 sp37;\n    struct127 *temp_v0;\n    struct255 *temp_t0;\n    u8 *payload;\n\n    temp_v0 = (struct127 *)arg0->unk18;\n    sp37 = 1;\n    payload = (u8 *)&arg0->unk18;\n    if (temp_v0->interaction_state == 0) {\n        return 0;\n    }\n    if (payload[4] != temp_v0->unique_id) {\n        return 0;\n    }\n    temp_t0 = temp_v0->unk1D4;\n    if ((temp_t0 != NULL) && ((temp_v0->unk74 & 0xF) != 15)) {\n        func_15143134(payload + 8, &sp20,\n                      (void *)((s32)temp_t0 + (payload[5] << 6)));\n        arg0->unk14->unkE = (s16)sp20;\n        arg0->unk14->unk10 = (s16)sp24;\n        arg0->unk14->unk12 = (s16)sp28;\n    } else {\n        arg0->unk14->unkE = (s16)temp_v0->x_position;\n        arg0->unk14->unk10 = (s16)temp_v0->y_position;\n        arg0->unk14->unk12 = (s16)temp_v0->z_position;\n    }\n    {\n        s8 temp_v1 = *(s8 *)(payload + 0x14);\n\n        if (temp_v1 != -1) {\n            sp37 = D_8008B1F8[temp_v1](arg0);\n        }\n    }\n    return sp37;\n}",
+        "score": 0.4,
+        "reason": "length_mismatch (target=90, generated=88), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-22T01:35:56.340448+00:00"
+      },
+      {
+        "code": "extern void func_15143134(void *, s32, s32);\n\ns32 func_15160B74(struct225 *arg0) {\n    f32 sp20[3];\n    u8 sp37;\n    struct127 *temp_v0;\n    struct255 *temp_t0;\n    u8 *payload;\n\n    temp_v0 = (struct127 *)arg0->unk18;\n    sp37 = 1;\n    payload = (u8 *)&arg0->unk18;\n    if (temp_v0->interaction_state == 0) {\n        return 0;\n    }\n    if (payload[4] != temp_v0->unique_id) {\n        return 0;\n    }\n    temp_t0 = temp_v0->unk1D4;\n    if ((temp_t0 != NULL) && ((temp_v0->unk74 & 0xF) != 15)) {\n        func_15143134(payload + 8, sp20,\n                      (void *)((s32)temp_t0 + (payload[5] << 6)));\n        arg0->unk14->unkE = (s16)sp20[0];\n        arg0->unk14->unk10 = (s16)sp20[1];\n        arg0->unk14->unk12 = (s16)sp20[2];\n    } else {\n        arg0->unk14->unkE = (s16)temp_v0->x_position;\n        arg0->unk14->unk10 = (s16)temp_v0->y_position;\n        arg0->unk14->unk12 = (s16)temp_v0->z_position;\n    }\n    {\n        s8 temp_v1 = *(s8 *)(payload + 0x14);\n\n        if (temp_v1 != -1) {\n            sp37 = D_8008B1F8[temp_v1](arg0);\n        }\n    }\n    return sp37;\n}",
+        "score": 0.4,
+        "reason": "length_mismatch (target=90, generated=88), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-22T01:36:56.143804+00:00"
+      },
+      {
+        "code": "extern void func_15143134(void *, s32, s32);\n\ns32 func_15160B74(struct225 *arg0) {\n    u8 sp37;\n    f32 sp20;\n    f32 sp24;\n    f32 sp28;\n    struct127 *temp_v0;\n    struct255 *temp_t0;\n    u8 *payload;\n\n    temp_v0 = (struct127 *)arg0->unk18;\n    sp37 = 1;\n    payload = (u8 *)&arg0->unk18;\n    if (temp_v0->interaction_state == 0) {\n        return 0;\n    }\n    if (payload[4] != temp_v0->unique_id) {\n        return 0;\n    }\n    temp_t0 = temp_v0->unk1D4;\n    if ((temp_t0 != NULL) && ((temp_v0->unk74 & 0xF) != 15)) {\n        func_15143134(payload + 8, &sp20,\n                      (void *)((s32)temp_t0 + (payload[5] << 6)));\n        arg0->unk14->unkE = (s16)sp20;\n        arg0->unk14->unk10 = (s16)sp24;\n        arg0->unk14->unk12 = (s16)sp28;\n    } else {\n        arg0->unk14->unkE = (s16)temp_v0->x_position;\n        arg0->unk14->unk10 = (s16)temp_v0->y_position;\n        arg0->unk14->unk12 = (s16)temp_v0->z_position;\n    }\n    if (*(s8 *)(payload + 0x14) != -1) {\n        sp37 = D_8008B1F8[*(s8 *)(payload + 0x14)](arg0);\n    }\n    return sp37;\n}",
+        "score": 0.3778,
+        "reason": "length_mismatch (target=90, generated=88), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-22T01:41:34.689150+00:00"
+      },
+      {
+        "code": "extern void func_15143134(void *, s32, s32);\n\ns32 func_15160B74(struct225 *arg0)\n{\n  f32 sp24;\n  f32 sp28;\n  u8 sp37;\n  struct127 *temp_v0;\n  struct255 *temp_t0;\n  u8 *payload;\n  s8 temp_v1;\n  temp_v0 = (struct127 *) arg0->unk18;\n  sp37 = 1;\n  payload = (u8 *) (&arg0->unk18);\n  if (temp_v0->interaction_state == 0)\n  {\n    return 0;\n  }\n  if (payload[4] != temp_v0->unique_id)\n  {\n    return 0;\n  }\n  temp_t0 = temp_v0->unk1D4;\n  if ((temp_t0 != 0) && ((temp_v0->unk74 & 0xF) != 15))\n  {\n    f32 sp20;\n    func_15143134(payload + 8, &sp20, (void *) (((s32) temp_t0) + (payload[5] << 6)));\n    arg0->unk14->unkE = (s16) sp20;\n    arg0->unk14->unk10 = (s16) sp24;\n    arg0->unk14->unk12 = (s16) sp28;\n  }\n  else\n  {\n    arg0->unk14->unkE = (s16) temp_v0->x_position;\n    arg0->unk14->unk10 = (s16) temp_v0->y_position;\n    arg0->unk14->unk12 = (s16) temp_v0->z_position;\n  }\n  temp_v1 = *((s8 *) (payload + 0x14));\n  if (temp_v1 != (-1))\n  {\n    sp37 = D_8008B1F8[temp_v1](arg0);\n  }\n  return sp37;\n}",
+        "score": 0.8889,
+        "reason": "structural_diffs=10, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 0,
+            "type": "structural",
+            "target": "addiu sp, sp, -56",
+            "generated": "addiu sp, sp, -64"
+          },
+          {
+            "line": 8,
+            "type": "structural",
+            "target": "lbu t7, 4(v1)",
+            "generated": "lbu t7, 59(v0)"
+          },
+          {
+            "line": 11,
+            "type": "structural",
+            "target": "lbu t7, 4(v1)",
+            "generated": "lbu t7, 59(v0)"
+          },
+          {
+            "line": 12,
+            "type": "structural",
+            "target": "lbu t8, 59(v0)",
+            "generated": "lbu t8, 4(v1)"
+          },
+          {
+            "line": 28,
+            "type": "structural",
+            "target": "sw a3, 56(sp)",
+            "generated": "sw a3, 64(sp)"
+          },
+          {
+            "line": 30,
+            "type": "structural",
+            "target": "addu a2, t0, t4",
+            "generated": "addu a2, t4, t0"
+          },
+          {
+            "line": 34,
+            "type": "structural",
+            "target": "lw a3, 56(sp)",
+            "generated": "lw a3, 64(sp)"
+          },
+          {
+            "line": 42,
+            "type": "structural",
+            "target": "lwc1 f8, 36(sp)",
+            "generated": "lwc1 f8, 60(sp)"
+          },
+          {
+            "line": 48,
+            "type": "structural",
+            "target": "lwc1 f16, 40(sp)",
+            "generated": "lwc1 f16, 56(sp)"
+          },
+          {
+            "line": 87,
+            "type": "structural",
+            "target": "addiu sp, sp, 56",
+            "generated": "addiu sp, sp, 64"
+          }
+        ],
+        "timestamp": "2026-08-22T01:55:00.700884+00:00"
+      },
+      {
+        "code": "extern void func_15143134(void *, s32, s32);\n\ns32 func_15160B74(struct225 *arg0)\n{\n  u8 sp37;\n  struct127 *temp_v0;\n  struct255 *temp_t0;\n  u8 *payload;\n  s8 temp_v1;\n  temp_v0 = (struct127 *) arg0->unk18;\n  sp37 = 1;\n  payload = (u8 *) (&arg0->unk18);\n  if (temp_v0->interaction_state == 0)\n  {\n    return 0;\n  }\n  if (payload[4] != temp_v0->unique_id)\n  {\n    return 0;\n  }\n  temp_t0 = temp_v0->unk1D4;\n  if ((temp_t0 != 0) && ((temp_v0->unk74 & 0xF) != 15))\n  {\n    f32 sp24;\n    f32 sp28;\n    f32 sp20;\n\n    func_15143134(payload + 8, &sp20, (void *) (((payload[5] << 6)) + temp_t0));\n    arg0->unk14->unkE = (s16) sp20;\n    arg0->unk14->unk10 = (s16) sp24;\n    arg0->unk14->unk12 = (s16) sp28;\n  }\n  else\n  {\n    arg0->unk14->unkE = (s16) temp_v0->x_position;\n    arg0->unk14->unk10 = (s16) temp_v0->y_position;\n    arg0->unk14->unk12 = (s16) temp_v0->z_position;\n  }\n  temp_v1 = *((s8 *) (payload + 0x14));\n  if (temp_v1 != (-1))\n  {\n    sp37 = D_8008B1F8[temp_v1](arg0);\n  }\n  return sp37;\n}",
+        "score": 0.2105,
+        "reason": "length_mismatch (target=90, generated=95), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-22T01:56:39.588343+00:00"
+      },
+      {
+        "code": "extern void func_15143134(void *, s32, s32);\n\ns32 func_15160B74(struct225 *arg0)\n{\n  f32 sp24;\n  f32 sp28;\n  u8 sp37;\n  struct127 *temp_v0;\n  struct255 *temp_t0;\n  u8 *payload;\n  s8 temp_v1;\n  temp_v0 = (struct127 *) arg0->unk18;\n  sp37 = 1;\n  payload = (u8 *) (&arg0->unk18);\n  if (temp_v0->interaction_state == 0)\n  {\n    return 0;\n  }\n  if (payload[4] != temp_v0->unique_id)\n  {\n    return 0;\n  }\n  temp_t0 = temp_v0->unk1D4;\n  if ((temp_t0 != 0) && ((temp_v0->unk74 & 0xF) != 15))\n  {\n    f32 sp20;\n    func_15143134(payload + 8, &sp20, (void *) (((payload[5] << 6)) + ((s32) temp_t0)));\n    arg0->unk14->unkE = (s16) sp20;\n    arg0->unk14->unk10 = (s16) sp24;\n    arg0->unk14->unk12 = (s16) sp28;\n  }\n  else\n  {\n    arg0->unk14->unkE = (s16) temp_v0->x_position;\n    arg0->unk14->unk10 = (s16) temp_v0->y_position;\n    arg0->unk14->unk12 = (s16) temp_v0->z_position;\n  }\n  temp_v1 = *((s8 *) (payload + 0x14));\n  if (temp_v1 != (-1))\n  {\n    sp37 = D_8008B1F8[temp_v1](arg0);\n  }\n  return sp37;\n}",
+        "score": 0.8889,
+        "reason": "structural_diffs=10, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 0,
+            "type": "structural",
+            "target": "addiu sp, sp, -56",
+            "generated": "addiu sp, sp, -64"
+          },
+          {
+            "line": 8,
+            "type": "structural",
+            "target": "lbu t7, 4(v1)",
+            "generated": "lbu t7, 59(v0)"
+          },
+          {
+            "line": 11,
+            "type": "structural",
+            "target": "lbu t7, 4(v1)",
+            "generated": "lbu t7, 59(v0)"
+          },
+          {
+            "line": 12,
+            "type": "structural",
+            "target": "lbu t8, 59(v0)",
+            "generated": "lbu t8, 4(v1)"
+          },
+          {
+            "line": 28,
+            "type": "structural",
+            "target": "sw a3, 56(sp)",
+            "generated": "sw a3, 64(sp)"
+          },
+          {
+            "line": 30,
+            "type": "structural",
+            "target": "addu a2, t0, t4",
+            "generated": "addu a2, t4, t0"
+          },
+          {
+            "line": 34,
+            "type": "structural",
+            "target": "lw a3, 56(sp)",
+            "generated": "lw a3, 64(sp)"
+          },
+          {
+            "line": 42,
+            "type": "structural",
+            "target": "lwc1 f8, 36(sp)",
+            "generated": "lwc1 f8, 60(sp)"
+          },
+          {
+            "line": 48,
+            "type": "structural",
+            "target": "lwc1 f16, 40(sp)",
+            "generated": "lwc1 f16, 56(sp)"
+          },
+          {
+            "line": 87,
+            "type": "structural",
+            "target": "addiu sp, sp, 56",
+            "generated": "addiu sp, sp, 64"
+          }
+        ],
+        "timestamp": "2026-08-22T01:57:06.340215+00:00"
+      },
+      {
+        "code": "extern void func_15143134(void *, s32, s32);\n\ns32 func_15160B74(struct225 *arg0)\n{\n  f32 sp24;\n  f32 sp28;\n  u8 sp37;\n  struct127 *temp_v0;\n  struct255 *temp_t0;\n  u8 *payload;\n  s8 temp_v1;\n  temp_v0 = (struct127 *) arg0->unk18;\n  sp37 = 1;\n  payload = (u8 *) (&arg0->unk18);\n  if (temp_v0->interaction_state == 0)\n  {\n    return 0;\n  }\n  if (temp_v0->unique_id != payload[4])\n  {\n    return 0;\n  }\n  temp_t0 = temp_v0->unk1D4;\n  if ((temp_t0 != 0) && ((temp_v0->unk74 & 0xF) != 15))\n  {\n    f32 sp20;\n    func_15143134(payload + 8, &sp20, (void *) (((s32) temp_t0) + (payload[5] << 6)));\n    arg0->unk14->unkE = (s16) sp20;\n    arg0->unk14->unk10 = (s16) sp24;\n    arg0->unk14->unk12 = (s16) sp28;\n  }\n  else\n  {\n    arg0->unk14->unkE = (s16) temp_v0->x_position;\n    arg0->unk14->unk10 = (s16) temp_v0->y_position;\n    arg0->unk14->unk12 = (s16) temp_v0->z_position;\n  }\n  temp_v1 = *((s8 *) (payload + 0x14));\n  if (temp_v1 != (-1))\n  {\n    sp37 = D_8008B1F8[temp_v1](arg0);\n  }\n  return sp37;\n}",
+        "score": 0.8889,
+        "reason": "structural_diffs=10, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 0,
+            "type": "structural",
+            "target": "addiu sp, sp, -56",
+            "generated": "addiu sp, sp, -64"
+          },
+          {
+            "line": 8,
+            "type": "structural",
+            "target": "lbu t7, 4(v1)",
+            "generated": "lbu t7, 59(v0)"
+          },
+          {
+            "line": 11,
+            "type": "structural",
+            "target": "lbu t7, 4(v1)",
+            "generated": "lbu t7, 59(v0)"
+          },
+          {
+            "line": 12,
+            "type": "structural",
+            "target": "lbu t8, 59(v0)",
+            "generated": "lbu t8, 4(v1)"
+          },
+          {
+            "line": 28,
+            "type": "structural",
+            "target": "sw a3, 56(sp)",
+            "generated": "sw a3, 64(sp)"
+          },
+          {
+            "line": 30,
+            "type": "structural",
+            "target": "addu a2, t0, t4",
+            "generated": "addu a2, t4, t0"
+          },
+          {
+            "line": 34,
+            "type": "structural",
+            "target": "lw a3, 56(sp)",
+            "generated": "lw a3, 64(sp)"
+          },
+          {
+            "line": 42,
+            "type": "structural",
+            "target": "lwc1 f8, 36(sp)",
+            "generated": "lwc1 f8, 60(sp)"
+          },
+          {
+            "line": 48,
+            "type": "structural",
+            "target": "lwc1 f16, 40(sp)",
+            "generated": "lwc1 f16, 56(sp)"
+          },
+          {
+            "line": 87,
+            "type": "structural",
+            "target": "addiu sp, sp, 56",
+            "generated": "addiu sp, sp, 64"
+          }
+        ],
+        "timestamp": "2026-08-22T02:15:27.881077+00:00"
+      }
+    ]
   },
   {
     "function": "func_15015644",
