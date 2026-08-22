@@ -104098,8 +104098,8 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 6,
-    "lastScore": 0.4,
+    "attempts": 8,
+    "lastScore": 0.1453,
     "status": "pending",
     "history": [
       {
@@ -104627,6 +104627,20 @@
           }
         ],
         "timestamp": "2026-08-09T22:36:02.473890+00:00"
+      },
+      {
+        "code": "struct225 *func_1516295C(s32 arg0, u8 arg1, u8 arg2, u8 arg3, s16 arg4, s8 arg5, s8 arg6, s8 arg7, s8 arg8, s8 arg9, s32 argA, u8 argB, s32 argC) {\n    struct225 *temp_v0;\n    Header header;\n    struct238 src;\n    f32 temp_f0;\n    f32 temp_f12;\n    f32 temp_f16;\n    f32 temp_f18;\n    f32 temp_f2;\n    f32 temp_f8;\n\n    if (arg1 >= 5) {\n        return 0;\n    }\n\n    temp_f2 = D_800A6880[arg1];\n    temp_f12 = D_800A6894[arg1];\n    temp_f8 = D_800A68A8[arg1];\n    temp_f0 = D_800A68BC[arg1];\n    temp_f18 = D_800A68D0[arg1];\n    temp_f16 = D_800A68E4[arg1];\n\n    src.unk0 = temp_f2;\n    src.unk4 = temp_f12;\n    src.unk8 = temp_f2 - temp_f12;\n    src.unkC = temp_f8;\n    src.unk10 = temp_f0;\n    src.unk14 = temp_f18 + temp_f0;\n    src.unk18 = temp_f18 + temp_f0 + temp_f16;\n    src.unk1C = temp_f18 + temp_f0 + temp_f16 + temp_f18;\n\n    src.unk25 = arg6;\n    src.unk26 = arg7;\n    src.unk27 = arg8;\n    src.unk28 = arg9;\n\n    if (src.unkC < temp_f0) {\n        src.unk24 = 0;\n    } else if (src.unkC < src.unk14) {\n        src.unk24 = 1;\n    } else if (src.unkC < src.unk18) {\n        src.unk24 = 2;\n    } else if (src.unkC < src.unk1C) {\n        src.unk24 = 3;\n    } else {\n        src.unk24 = 4;\n    }\n\n    header.unk0 = arg3;\n    header.unk1 = arg5;\n    header.unk2 = arg4;\n    header.unk4 = arg2;\n\n    src.unk20 = 1.0f / temp_f18;\n\n    temp_v0 = func_1516037C(&header, arg0, argA + 0x30, argB, argC);\n    if (temp_v0 != NULL) {\n        memcpy(&temp_v0->unk18, &src, 0x30);\n    }\n    return temp_v0;\n}",
+        "score": 0.0513,
+        "reason": "length_mismatch (target=115, generated=117), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-22T04:28:30.219948+00:00"
+      },
+      {
+        "code": "struct225 *func_1516295C(s32 arg0, u8 arg1, u8 arg2, u8 arg3, s16 arg4, s8 arg5, s8 arg6, s8 arg7, s8 arg8, s8 arg9, s32 argA, u8 argB, s32 argC) {\n    struct225 *temp_v0;\n    Header header;\n    struct238 src;\n    f32 temp_f0;\n    f32 temp_f12;\n    f32 temp_f16;\n    f32 temp_f18;\n    f32 temp_f2;\n    f32 temp_f8;\n\n    if (arg1 >= 5) {\n        return 0;\n    }\n\n    src.unk25 = arg6;\n    src.unk26 = arg7;\n    src.unk27 = arg8;\n    src.unk28 = arg9;\n\n    temp_f2 = D_800A6880[arg1];\n    temp_f12 = D_800A6894[arg1];\n    temp_f8 = D_800A68A8[arg1];\n    temp_f0 = D_800A68BC[arg1];\n    temp_f18 = D_800A68D0[arg1];\n    temp_f16 = D_800A68E4[arg1];\n\n    src.unk0 = temp_f2;\n    src.unk4 = temp_f12;\n    src.unk8 = temp_f2 - temp_f12;\n    src.unkC = temp_f8;\n    src.unk10 = temp_f0;\n    src.unk14 = temp_f18 + temp_f0;\n    src.unk18 = temp_f18 + temp_f0 + temp_f16;\n    src.unk1C = temp_f18 + temp_f0 + temp_f16 + temp_f18;\n\n    if (src.unkC < temp_f0) {\n        src.unk24 = 0;\n    } else if (src.unkC < src.unk14) {\n        src.unk24 = 1;\n    } else if (src.unkC < src.unk18) {\n        src.unk24 = 2;\n    } else if (src.unkC < src.unk1C) {\n        src.unk24 = 3;\n    } else {\n        src.unk24 = 4;\n    }\n\n    header.unk0 = arg3;\n    header.unk1 = arg5;\n    header.unk2 = arg4;\n    header.unk4 = arg2;\n\n    src.unk20 = 1.0f / temp_f18;\n\n    temp_v0 = func_1516037C(&header, arg0, argA + 0x30, argB, argC);\n    if (temp_v0 != NULL) {\n        memcpy(&temp_v0->unk18, &src, 0x30);\n    }\n    return temp_v0;\n}",
+        "score": 0.1453,
+        "reason": "length_mismatch (target=115, generated=117), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-22T04:33:40.764532+00:00"
       }
     ]
   },
