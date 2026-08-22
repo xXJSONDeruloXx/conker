@@ -50097,8 +50097,8 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 8,
-    "lastScore": 0.1889,
+    "attempts": 9,
+    "lastScore": 0.4667,
     "status": "pending",
     "history": [
       {
@@ -50174,6 +50174,35 @@
         "reason": "length_mismatch (target=90, generated=85), raw_opcode_mismatch",
         "diffs": [],
         "timestamp": "2026-08-22T19:28:25.502Z",
+        "contextPatch": []
+      },
+      {
+        "code": "void func_1513E13C(struct210 *arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, u8 arg6) {\n    f32 sp48;\n    f32 sp30;\n    f32 sp1C;\n    f32 temp_f0;\n    f32 temp_f12;\n    f32 temp_f14;\n    f32 temp_f16;\n    struct210 *new_var;\n    f32 temp_f18;\n    f32 temp_f2;\n    s16 var_v0;\n\n    sp48 = func_151423D8(arg6 - 0x40);\n    temp_f0 = func_151423D8(arg6);\n    temp_f14 = arg4 * temp_f0;\n    temp_f12 = arg5 * sp48;\n    temp_f18 = arg1 + temp_f14;\n    arg0->unk40 = temp_f18 - temp_f12;\n    new_var = arg0;\n    var_v0 = arg2;\n    new_var->unk42 = var_v0;\n    temp_f16 = arg5 * temp_f0;\n    temp_f2 = arg4 * sp48;\n    sp1C = arg3 + temp_f16;\n    new_var->unk44 = sp1C + temp_f2;\n    sp30 = arg1 - temp_f14;\n    new_var->unk50 = sp30 - temp_f12;\n    new_var->unk52 = var_v0;\n    new_var->unk54 = sp1C - temp_f2;\n    new_var->unk62 = var_v0;\n    new_var->unk60 = sp30 + temp_f12;\n    sp30 = arg3 - temp_f16;\n    new_var->unk72 = var_v0;\n    new_var->unk64 = sp30 - temp_f2;\n    new_var->unk70 = temp_f18 + temp_f12;\n    new_var->unk74 = sp30 + temp_f2;\n}",
+        "score": 0.4667,
+        "reason": "structural_diffs=48, raw_opcode_mismatch",
+        "diffs": [
+          "structural: target=addiu sp, sp, -80 got=addiu sp, sp, -96",
+          "structural: target=sw a1, 84(sp) got=sw a1, 100(sp)",
+          "structural: target=sw a0, 80(sp) got=sw a0, 96(sp)",
+          "structural: target=sw a2, 88(sp) got=sw a2, 104(sp)",
+          "structural: target=sw a3, 92(sp) got=sw a3, 108(sp)",
+          "structural: target=lbu a0, 107(sp) got=lbu a0, 123(sp)",
+          "structural: target=sw a1, 80(sp) got=sw a1, 96(sp)",
+          "structural: target=swc1 f0, 72(sp) got=swc1 f0, 92(sp)",
+          "structural: target=lbu a0, 107(sp) got=lbu a0, 123(sp)",
+          "structural: target=lwc1 f4, 96(sp) got=lwc1 f4, 112(sp)",
+          "structural: target=lwc1 f8, 100(sp) got=lwc1 f8, 116(sp)",
+          "structural: target=lwc1 f10, 72(sp) got=lwc1 f10, 92(sp)",
+          "structural: target=lwc1 f6, 84(sp) got=lwc1 f6, 100(sp)",
+          "structural: target=lw a1, 80(sp) got=lw a1, 96(sp)",
+          "structural: target=mul.s f12, f8, f10 got=mul.s f2, f8, f10",
+          "structural: target=add.s f18, f6, f14 got=add.s f16, f6, f14",
+          "structural: target=sub.s f4, f18, f12 got=sub.s f4, f16, f2",
+          "structural: target=lwc1 f8, 88(sp) got=lwc1 f8, 104(sp)",
+          "structural: target=lwc1 f4, 100(sp) got=lwc1 f4, 116(sp)",
+          "structural: target=lwc1 f10, 96(sp) got=lwc1 f10, 112(sp)"
+        ],
+        "timestamp": "2026-08-22T22:25:54.669Z",
         "contextPatch": []
       }
     ]
