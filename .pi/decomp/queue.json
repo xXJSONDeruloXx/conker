@@ -52768,8 +52768,8 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 19,
-    "lastScore": 0.3778,
+    "attempts": 20,
+    "lastScore": 0.8667,
     "status": "pending",
     "history": [
       {
@@ -53610,6 +53610,86 @@
         "reason": "length_mismatch (target=90, generated=88), raw_opcode_mismatch",
         "diffs": [],
         "timestamp": "2026-08-22T02:51:03.296544+00:00"
+      },
+      {
+        "code": "extern void func_15143134(void *, s32, s32);\n\ns32 func_15160B74(struct225 *arg0)\n{\n  struct127 *temp_v0;\n  struct255 *temp_t0;\n  u8 *payload;\n  s8 temp_v1;\n  u8 sp37;\n  temp_v0 = (struct127 *) arg0->unk18;\n  sp37 = 1;\n  payload = (u8 *) (&arg0->unk18);\n  if (temp_v0->interaction_state == 0)\n  {\n    return 0;\n  }\n  if (payload[4] != temp_v0->unique_id)\n  {\n    return 0;\n  }\n  temp_t0 = temp_v0->unk1D4;\n  if ((temp_t0 != 0) && ((temp_v0->unk74 & 0xF) != 15))\n  {\n    f32 sp20[3];\n\n    func_15143134(payload + 8, sp20, (void *) (((s32) temp_t0) + (payload[5] << 6)));\n    arg0->unk14->unkE = (s16) sp20[0];\n    arg0->unk14->unk10 = (s16) sp20[1];\n    arg0->unk14->unk12 = (s16) sp20[2];\n  }\n  else\n  {\n    arg0->unk14->unkE = (s16) temp_v0->x_position;\n    arg0->unk14->unk10 = (s16) temp_v0->y_position;\n    arg0->unk14->unk12 = (s16) temp_v0->z_position;\n  }\n  temp_v1 = *((s8 *) (payload + 0x14));\n  if (temp_v1 != (-1))\n  {\n    sp37 = D_8008B1F8[temp_v1](arg0);\n  }\n  return sp37;\n}",
+        "score": 0.8667,
+        "reason": "structural_diffs=12, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 8,
+            "type": "structural",
+            "target": "lbu t7, 4(v1)",
+            "generated": "lbu t7, 59(v0)"
+          },
+          {
+            "line": 11,
+            "type": "structural",
+            "target": "lbu t7, 4(v1)",
+            "generated": "lbu t7, 59(v0)"
+          },
+          {
+            "line": 12,
+            "type": "structural",
+            "target": "lbu t8, 59(v0)",
+            "generated": "lbu t8, 4(v1)"
+          },
+          {
+            "line": 25,
+            "type": "structural",
+            "target": "addiu a1, sp, 32",
+            "generated": "addiu a1, sp, 28"
+          },
+          {
+            "line": 27,
+            "type": "structural",
+            "target": "sb t1, 55(sp)",
+            "generated": "sb t1, 42(sp)"
+          },
+          {
+            "line": 30,
+            "type": "structural",
+            "target": "addu a2, t0, t4",
+            "generated": "addu a2, t4, t0"
+          },
+          {
+            "line": 32,
+            "type": "structural",
+            "target": "sw v1, 28(sp)",
+            "generated": "sw v1, 24(sp)"
+          },
+          {
+            "line": 33,
+            "type": "structural",
+            "target": "lwc1 f4, 32(sp)",
+            "generated": "lwc1 f4, 28(sp)"
+          },
+          {
+            "line": 35,
+            "type": "structural",
+            "target": "lw v1, 28(sp)",
+            "generated": "lw v1, 24(sp)"
+          },
+          {
+            "line": 38,
+            "type": "structural",
+            "target": "lbu t1, 55(sp)",
+            "generated": "lbu t1, 42(sp)"
+          },
+          {
+            "line": 42,
+            "type": "structural",
+            "target": "lwc1 f8, 36(sp)",
+            "generated": "lwc1 f8, 32(sp)"
+          },
+          {
+            "line": 48,
+            "type": "structural",
+            "target": "lwc1 f16, 40(sp)",
+            "generated": "lwc1 f16, 36(sp)"
+          }
+        ],
+        "timestamp": "2026-08-22T06:54:33.668601+00:00"
       }
     ]
   },
