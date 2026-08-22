@@ -55942,8 +55942,8 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 70,
-    "lastScore": 0.7381,
+    "attempts": 71,
+    "lastScore": 0.7857,
     "status": "pending",
     "history": [
       {
@@ -62487,6 +62487,116 @@
           }
         ],
         "timestamp": "2026-08-22T03:08:25.542289+00:00"
+      },
+      {
+        "code": "s32 func_1000B060(f32 arg0, f32 arg1, s32 arg2)\n{\n  s16 phi_v1_2;\n  s16 phi_a1;\n  f32 sp18;\n  f64 temp_f6;\n  s32 temp_t9;\n  char new_var;\n  phi_a1 = 128;\n  sp18 = sqrtf((arg0 * arg0) + (arg1 * arg1));\n  temp_t9 = (s8) (phi_v1_2 + arg2);\n  if (D_8002C214 < sp18)\n  {\n    sp18 = arg0 / sp18;\n  }\n  temp_f6 = func_150487E0(sp18);\n  temp_f6 *= D_8002C218;\n  phi_v1_2 = temp_f6;\n  if (0.0f < arg1)\n  {\n    if (((s16) temp_f6) < 0)\n    {\n      phi_v1_2 = (-128) - ((s16) temp_f6);\n    }\n    else\n    {\n      phi_v1_2 = 128 - ((s16) temp_f6);\n    }\n  }\n  temp_t9 = ((s8) (phi_v1_2 + arg2)) ^ 0;\n  new_var = temp_t9;\n  phi_v1_2 = new_var;\n  if ((new_var >= 96) || (new_var < (-96)))\n  {\n    phi_v1_2 = 0;\n  }\n  else\n    if (new_var >= 32)\n  {\n    phi_v1_2 = 95 - new_var;\n  }\n  else\n    if (new_var < (-32))\n  {\n    phi_v1_2 = (-95) - new_var;\n  }\n  else\n  {\n    phi_a1 = 0;\n    phi_v1_2 = new_var * 2;\n  }\n  return (phi_v1_2 + 64) | phi_a1;\n}",
+        "score": 0.7857,
+        "reason": "structural_diffs=17, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 24,
+            "type": "structural",
+            "target": "mul.d f4, f16, f18",
+            "generated": "mul.d f2, f16, f18"
+          },
+          {
+            "line": 25,
+            "type": "structural",
+            "target": "mtc1 zero, f8",
+            "generated": "mtc1 zero, f6"
+          },
+          {
+            "line": 28,
+            "type": "structural",
+            "target": "c.lt.s f8, f14",
+            "generated": "c.lt.s f6, f14"
+          },
+          {
+            "line": 30,
+            "type": "structural",
+            "target": "trunc.w.d f6, f4",
+            "generated": "trunc.w.d f4, f2"
+          },
+          {
+            "line": 31,
+            "type": "structural",
+            "target": "mfc1 a0, f6",
+            "generated": "mfc1 a0, f4"
+          },
+          {
+            "line": 55,
+            "type": "structural",
+            "target": "move v1, t9",
+            "generated": "move v0, t9"
+          },
+          {
+            "line": 58,
+            "type": "structural",
+            "target": "slti at, v1, 32",
+            "generated": "slti at, v0, 32"
+          },
+          {
+            "line": 61,
+            "type": "structural",
+            "target": "slti at, v1, 32",
+            "generated": "slti at, v0, 32"
+          },
+          {
+            "line": 64,
+            "type": "structural",
+            "target": "subu v1, t0, v1",
+            "generated": "subu v1, t0, v0"
+          },
+          {
+            "line": 68,
+            "type": "structural",
+            "target": "slti at, v1, -32",
+            "generated": "slti at, v0, -32"
+          },
+          {
+            "line": 70,
+            "type": "structural",
+            "target": "li t3, -95",
+            "generated": "move v1, v0"
+          },
+          {
+            "line": 71,
+            "type": "structural",
+            "target": "subu v1, t3, v1",
+            "generated": "li t3, -95"
+          },
+          {
+            "line": 72,
+            "type": "structural",
+            "target": "sll t4, v1, 16",
+            "generated": "subu v1, t3, v0"
+          },
+          {
+            "line": 73,
+            "type": "structural",
+            "target": "b L5",
+            "generated": "sll t4, v1, 16"
+          },
+          {
+            "line": 74,
+            "type": "structural",
+            "target": "sra v1, t4, 16",
+            "generated": "b L5"
+          },
+          {
+            "line": 75,
+            "type": "structural",
+            "target": "addu v1, v1, v1",
+            "generated": "sra v1, t4, 16"
+          },
+          {
+            "line": 76,
+            "type": "structural",
+            "target": "sll t6, v1, 16",
+            "generated": "sll t6, v1, 17"
+          }
+        ],
+        "timestamp": "2026-08-22T04:19:18.074816+00:00"
       }
     ]
   },
@@ -91306,8 +91416,8 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 87,
-    "lastScore": 0.625,
+    "attempts": 88,
+    "lastScore": 0.6,
     "status": "pending",
     "history": [
       {
@@ -101356,6 +101466,134 @@
           }
         ],
         "timestamp": "2026-08-22T00:55:34.670407+00:00"
+      },
+      {
+        "code": "void func_15016170(void *arg0)\n{\n  s16 new_var;\n  s32 sp4;\n  bzero(&D_800E0D80, 160);\n  D_800E0D80.unk8 = alHeapDBAlloc(0, 0, arg0, 1, 80);\n  D_800E0D80.unk74 = alHeapDBAlloc(0, 0, arg0, 1, 1088);\n  D_800E0D80.unk5C = alHeapDBAlloc(0, 0, arg0, 1, 8);\n  D_800E0D80.unkC = 64;\n  D_800E0D80.unk96 = 64;\n  D_800E0D80.unk94 = D_800E0D80.unk96;\n  D_800E0D80.unkE = 0x7FFF;\n  D_800E0D80.unk84 = 0;\n  D_800E0D80.unk88 = 0x7FFF;\n  D_800E0D80.unk9A = 0;\n  D_800E0D80.unk32 = 0;\n  D_800E0D80.unk30 = 0;\n  D_800E0D80.unk10 = (((((D_8002BC10[D_800E0D80.unkC] * D_800E0D80.unkE) >> 15) & 0xFFFFu) & 0xFFFFu) & 0xFFFFu) & 0xFFFFu;\n  new_var = D_8002BD0E[-D_800E0D80.unkC];\n  sp4 = ((((((new_var * D_800E0D80.unkE) >> 15) & 0xFFFFu) & 0xFFFFu) & 0xFFFFu) & 0xFFFFu) & 0xFFFFu;\n  D_800E0D80.unk24 = 1;\n  D_800E0D80.unk14 = 0x7FFC;\n  D_800E0D80.unk16 = 0;\n  D_800E0D80.unk12 = sp4;\n  func_151F3C34((s32) func_151F3C4C);\n}",
+        "score": 0.6,
+        "reason": "structural_diffs=32, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 32,
+            "type": "structural",
+            "target": "li a2, 64",
+            "generated": "li t0, 64"
+          },
+          {
+            "line": 33,
+            "type": "structural",
+            "target": "sh a2, 12(s0)",
+            "generated": "sh t0, 12(s0)"
+          },
+          {
+            "line": 35,
+            "type": "structural",
+            "target": "sh a2, 150(s0)",
+            "generated": "sh t0, 150(s0)"
+          },
+          {
+            "line": 36,
+            "type": "structural",
+            "target": "lh t0, 150(s0)",
+            "generated": "lh t9, 150(s0)"
+          },
+          {
+            "line": 38,
+            "type": "structural",
+            "target": "li t9, 32767",
+            "generated": "sh t1, 14(s0)"
+          },
+          {
+            "line": 39,
+            "type": "structural",
+            "target": "sh t1, 14(s0)",
+            "generated": "lui t3, HI(D_8002BC10)"
+          },
+          {
+            "line": 40,
+            "type": "structural",
+            "target": "lui t3, HI(D_8002BC10)",
+            "generated": "sll t2, v1, 1"
+          },
+          {
+            "line": 41,
+            "type": "structural",
+            "target": "sll t2, v1, 1",
+            "generated": "sw v0, 92(s0)"
+          },
+          {
+            "line": 42,
+            "type": "structural",
+            "target": "sw v0, 92(s0)",
+            "generated": "sw zero, 132(s0)"
+          },
+          {
+            "line": 43,
+            "type": "structural",
+            "target": "sw zero, 132(s0)",
+            "generated": "sw t1, 136(s0)"
+          },
+          {
+            "line": 44,
+            "type": "structural",
+            "target": "sw t9, 136(s0)",
+            "generated": "sb zero, 154(s0)"
+          },
+          {
+            "line": 45,
+            "type": "structural",
+            "target": "sb zero, 154(s0)",
+            "generated": "sh zero, 50(s0)"
+          },
+          {
+            "line": 46,
+            "type": "structural",
+            "target": "sh zero, 50(s0)",
+            "generated": "sh zero, 48(s0)"
+          },
+          {
+            "line": 47,
+            "type": "structural",
+            "target": "sh zero, 48(s0)",
+            "generated": "addu t3, t3, t2"
+          },
+          {
+            "line": 48,
+            "type": "structural",
+            "target": "addu t3, t3, t2",
+            "generated": "sh t9, 148(s0)"
+          },
+          {
+            "line": 49,
+            "type": "structural",
+            "target": "sh t0, 148(s0)",
+            "generated": "lh t3, LO(D_8002BC10)(t3)"
+          },
+          {
+            "line": 50,
+            "type": "structural",
+            "target": "lh t3, LO(D_8002BC10)(t3)",
+            "generated": "lh a1, 14(s0)"
+          },
+          {
+            "line": 51,
+            "type": "structural",
+            "target": "lh a1, 14(s0)",
+            "generated": "negu t2, v1"
+          },
+          {
+            "line": 52,
+            "type": "structural",
+            "target": "negu t6, t2",
+            "generated": "lui a2, HI(D_8002BD0E)"
+          },
+          {
+            "line": 53,
+            "type": "structural",
+            "target": "lui t7, HI(D_8002BD0E)",
+            "generated": "multu t3, a1"
+          }
+        ],
+        "timestamp": "2026-08-22T04:19:56.112474+00:00"
       }
     ]
   },
