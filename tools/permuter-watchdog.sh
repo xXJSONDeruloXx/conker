@@ -21,6 +21,7 @@ file_for() {
     func_15016170) echo "game_43620.c" ;;
     func_1516295C) echo "game_18D770.c" ;;
     func_151415D4) echo "game_16DC80.c" ;;
+    guMtxCatF) echo "game_21D5F0.c" ;;
     *) echo "" ;;
   esac
 }
