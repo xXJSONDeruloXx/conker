@@ -77271,7 +77271,7 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 6,
+    "attempts": 8,
     "lastScore": 0.0109,
     "status": "pending",
     "history": [
@@ -77372,6 +77372,34 @@
         "reason": "length_mismatch (target=90, generated=93), raw_opcode_mismatch",
         "diffs": [],
         "timestamp": "2026-08-22T19:51:51.943Z",
+        "contextPatch": [
+          {
+            "newText": "f32 func_1505DF10(struct127 *arg0, u8 arg1, s16 *arg2, f32 *arg3, f32 *arg4, s32 arg5) {",
+            "oldText": "f32 func_1505DF10(struct127 *arg0, u8 arg1, s16 *arg2, f32 *arg3, f32 *arg4) {",
+            "path": "conker/src/game_83300.c"
+          }
+        ]
+      },
+      {
+        "code": "s32 func_1505DDA8(struct127 *arg0, u8 arg1, u16 arg2, f32 arg3) {\n    f32 sp64;\n    f32 sp68;\n    u16 sp6C;\n    struct127 *ptr;\n    f32 range;\n    s32 diff;\n    s32 count;\n    u8 i;\n\n    count = D_80082FA0;\n    if (count >= 0) {\n        i = 0;\n        do {\n            ptr = D_800CC2D0 + i;\n            if (ptr->interaction_state != 0) {\n                range = (arg0->xz_velocity * arg3) * 0.5f;\n                if (func_1505DF10(arg0, i, &sp6C, &sp68, &sp64, 0) < (range * range)) {\n                    diff = (arg0->unk76 - sp6C) + (arg2 / 2);\n                    if ((u16) diff < arg2) {\n                        return (s8) i;\n                    }\n                }\n            }\n            i++;\n        } while (i <= D_80082FA0);\n    }\n    return -1;\n}",
+        "score": 0.0109,
+        "reason": "length_mismatch (target=90, generated=92), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-22T20:09:52.426Z",
+        "contextPatch": [
+          {
+            "newText": "f32 func_1505DF10(struct127 *arg0, u8 arg1, s16 *arg2, f32 *arg3, f32 *arg4, s32 arg5) {",
+            "oldText": "f32 func_1505DF10(struct127 *arg0, u8 arg1, s16 *arg2, f32 *arg3, f32 *arg4) {",
+            "path": "conker/src/game_83300.c"
+          }
+        ]
+      },
+      {
+        "code": "s32 func_1505DDA8(struct127 *arg0, u8 arg1, u16 arg2, f32 arg3) {\n    u16 sp6C;\n    f32 sp68;\n    f32 sp64;\n    struct127 *ptr;\n    f32 range;\n    s32 diff;\n    u8 i;\n\n    if (D_80082FA0 >= 0) {\n        i = 0;\n        do {\n            ptr = D_800CC2D0 + i;\n            if (ptr->interaction_state != 0) {\n                range = (arg0->xz_velocity * arg3) * 0.5f;\n                if (func_1505DF10(arg0, i, (s16 *) &sp6C, &sp68, &sp64, 0) < (range * range)) {\n                    diff = (arg0->unk76 - sp6C) + (arg2 / 2);\n                    if ((u16) diff < arg2) {\n                        return (s8) i;\n                    }\n                }\n            }\n            i++;\n        } while (i <= *(volatile s32 *) (u32) &D_80082FA0);\n    }\n    return -1;\n}",
+        "score": 0.0108,
+        "reason": "length_mismatch (target=90, generated=93), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-22T20:14:51.762Z",
         "contextPatch": [
           {
             "newText": "f32 func_1505DF10(struct127 *arg0, u8 arg1, s16 *arg2, f32 *arg3, f32 *arg4, s32 arg5) {",
@@ -77495,9 +77523,35 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 0,
-    "lastScore": 0,
-    "status": "pending"
+    "attempts": 3,
+    "lastScore": 0.022,
+    "status": "pending",
+    "history": [
+      {
+        "code": "void func_10011310(void) {\n    struct49 *tmp;\n    struct49 *end;\n    struct120 *entry;\n    struct31 *handle;\n    struct49 *dst;\n    s32 count;\n    s32 out;\n    s32 i;\n    s32 removed;\n\n    count = D_80041F50;\n    i = 0;\n    removed = 0;\n    out = count;\n    if (count > 0) {\n        tmp = (struct49 *) &D_80041F10[0];\n        dst = (struct49 *) &D_80041F10[0];\n        do {\n            if ((u8) tmp->unk2 > 0) {\n                tmp->unk2 = tmp->unk2 - 1;\n                end = (struct49 *) &D_80041F10[count];\n            } else {\n                removed = 1;\n                out = out - 1;\n                entry = &D_800425E0[(u8) tmp->unk3];\n                if (*(u16 *) tmp == entry->unk0) {\n                    handle = entry->unk8;\n                    entry->unk0 = 0;\n                    entry->unk4 = 0;\n                    if (handle != NULL) {\n                        func_10017594(handle);\n                        count = D_80041F50;\n                    }\n                    entry->unk8 = NULL;\n                }\n                end = (struct49 *) &D_80041F10[count];\n            }\n            if ((struct49 *) &D_80041F10[i] != tmp) {\n                dst[i] = *tmp;\n            }\n            if (removed != 0) {\n                i++;\n            }\n            tmp++;\n        } while (tmp < end);\n    }\n    D_80041F50 = out;\n}",
+        "score": 0.011,
+        "reason": "length_mismatch (target=91, generated=79), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-22T20:26:39.345Z",
+        "contextPatch": []
+      },
+      {
+        "code": "void func_10011310(void) {\n    struct49 *tmp;\n    struct49 *end;\n    struct120 *entry;\n    struct31 *handle;\n    struct49 *start;\n    s32 count;\n    s32 out;\n    s32 i;\n    s32 removed;\n\n    count = D_80041F50;\n    i = 0;\n    removed = 0;\n    out = count;\n    if (count > 0) {\n        tmp = (struct49 *) D_80041F10;\n        start = (struct49 *) D_80041F10;\n        do {\n            if (*((u8 *) tmp + 2) > 0) {\n                *((u8 *) tmp + 2) = *((u8 *) tmp + 2) - 1;\n                end = (struct49 *) &D_80041F10[count];\n            } else {\n                removed = 1;\n                entry = &D_800425E0[*((u8 *) tmp + 3)];\n                if (*(u16 *) tmp == entry->unk0) {\n                    handle = entry->unk8;\n                    entry->unk0 = 0;\n                    entry->unk4 = 0;\n                    if (handle != NULL) {\n                        func_10017594(handle);\n                        count = D_80041F50;\n                    }\n                    entry->unk8 = NULL;\n                }\n                end = (struct49 *) D_80041F10 + count;\n                out = out - 1;\n            }\n            if ((struct49 *) &D_80041F10[i] != tmp) {\n                *(start + i) = *tmp;\n            }\n            if (removed != 0) {\n                i++;\n            }\n            tmp++;\n        } while (tmp < end);\n    }\n    D_80041F50 = out;\n}",
+        "score": 0.011,
+        "reason": "length_mismatch (target=91, generated=78), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-22T20:30:18.066Z",
+        "contextPatch": []
+      },
+      {
+        "code": "void func_10011310(void) {\n    struct49 *tmp;\n    struct49 *end;\n    struct120 *entry;\n    struct31 *handle;\n    struct49 *start;\n    s32 count;\n    s32 out;\n    s32 i;\n    s32 removed;\n\n    count = D_80041F50;\n    i = 0;\n    removed = 0;\n    out = count;\n    if (count > 0) {\n        tmp = (struct49 *) D_80041F10;\n        start = (struct49 *) D_80041F10;\n        do {\n            if (*((u8 *) tmp + 2) > 0) {\n                *((u8 *) tmp + 2) = *((u8 *) tmp + 2) - 1;\n                end = (struct49 *) &D_80041F10[count];\n            } else {\n                removed = 1;\n                entry = &D_800425E0[*((u8 *) tmp + 3)];\n                if (*(u16 *) tmp == entry->unk0) {\n                    handle = entry->unk8;\n                    entry->unk0 = 0;\n                    entry->unk4 = 0;\n                    if (handle != NULL) {\n                        func_10017594(handle);\n                        count = D_80041F50;\n                    }\n                    entry->unk8 = NULL;\n                }\n                end = (struct49 *) D_80041F10 + count;\n                out = out - 1;\n            }\n            if ((struct49 *) &D_80041F10[i] != tmp) {\n                *(struct49 *) ((u32) start + (i << 2)) = *tmp;\n            }\n            if (removed != 0) {\n                i++;\n            }\n            tmp++;\n        } while (tmp < end);\n    }\n    D_80041F50 = out;\n}",
+        "score": 0.022,
+        "reason": "length_mismatch (target=91, generated=84), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-22T20:32:55.907Z",
+        "contextPatch": []
+      }
+    ]
   },
   {
     "function": "func_1000E2F4",
