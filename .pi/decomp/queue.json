@@ -55644,7 +55644,7 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 64,
+    "attempts": 68,
     "lastScore": 0.6548,
     "status": "pending",
     "history": [
@@ -61663,6 +61663,276 @@
           }
         ],
         "timestamp": "2026-08-22T01:20:56.473955+00:00"
+      },
+      {
+        "code": "s32 func_1000B060(f32 arg0, f32 arg1, s32 arg2)\n{\n  s16 phi_v1_2;\n  s16 phi_a1;\n  f32 sp18;\n  f64 temp_f6;\n  s32 temp_t9;\n  char new_var;\n  phi_a1 = 128;\n  sp18 = sqrtf((arg0 * arg0) + (arg1 * arg1));\n  if (D_8002C214 < sp18)\n  {\n    sp18 = arg0 / sp18;\n  }\n  temp_f6 = func_150487E0(sp18);\n  temp_f6 *= D_8002C218;\n  phi_v1_2 = temp_f6;\n  if (0.0f < arg1)\n  {\n    if (((s16) temp_f6) < 0)\n    {\n      phi_v1_2 = (-128) - ((s16) temp_f6);\n    }\n    else\n    {\n      phi_v1_2 = 128 - ((s16) temp_f6);\n    }\n  }\n  temp_t9 = (s8) (phi_v1_2 + arg2);\n  new_var = temp_t9;\n  phi_v1_2 = new_var;\n  if ((new_var >= 96) || (new_var < (-96)))\n  {\n    phi_v1_2 = 0;\n  }\n  else\n    if (new_var >= 32)\n  {\n    phi_v1_2 = 95 - new_var;\n  }\n  else\n    if (new_var < (-32))\n  {\n    temp_t9 = (s8) (phi_v1_2 + arg2);\n    phi_v1_2 = (-95) - new_var;\n  }\n  else\n  {\n    phi_a1 = 0;\n    phi_v1_2 = new_var * 2;\n  }\n  return (phi_v1_2 + 64) | phi_a1;\n}",
+        "score": 0.7381,
+        "reason": "structural_diffs=21, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 24,
+            "type": "structural",
+            "target": "mul.d f4, f16, f18",
+            "generated": "mul.d f2, f16, f18"
+          },
+          {
+            "line": 25,
+            "type": "structural",
+            "target": "mtc1 zero, f8",
+            "generated": "mtc1 zero, f6"
+          },
+          {
+            "line": 28,
+            "type": "structural",
+            "target": "c.lt.s f8, f14",
+            "generated": "c.lt.s f6, f14"
+          },
+          {
+            "line": 30,
+            "type": "structural",
+            "target": "trunc.w.d f6, f4",
+            "generated": "trunc.w.d f4, f2"
+          },
+          {
+            "line": 31,
+            "type": "structural",
+            "target": "mfc1 a0, f6",
+            "generated": "mfc1 a0, f4"
+          },
+          {
+            "line": 51,
+            "type": "structural",
+            "target": "sll t8, t7, 24",
+            "generated": "sll a0, t7, 24"
+          },
+          {
+            "line": 52,
+            "type": "structural",
+            "target": "sra t9, t8, 24",
+            "generated": "sra t8, a0, 24"
+          },
+          {
+            "line": 53,
+            "type": "structural",
+            "target": "slti at, t9, 96",
+            "generated": "slti at, t8, 96"
+          },
+          {
+            "line": 55,
+            "type": "structural",
+            "target": "move v1, t9",
+            "generated": "move a0, t8"
+          },
+          {
+            "line": 56,
+            "type": "structural",
+            "target": "slti at, t9, -96",
+            "generated": "slti at, t8, -96"
+          },
+          {
+            "line": 58,
+            "type": "structural",
+            "target": "slti at, v1, 32",
+            "generated": "slti at, a0, 32"
+          },
+          {
+            "line": 61,
+            "type": "structural",
+            "target": "slti at, v1, 32",
+            "generated": "slti at, a0, 32"
+          },
+          {
+            "line": 64,
+            "type": "structural",
+            "target": "subu v1, t0, v1",
+            "generated": "subu v1, t0, a0"
+          },
+          {
+            "line": 68,
+            "type": "structural",
+            "target": "slti at, v1, -32",
+            "generated": "slti at, a0, -32"
+          },
+          {
+            "line": 70,
+            "type": "structural",
+            "target": "li t3, -95",
+            "generated": "move v1, a0"
+          },
+          {
+            "line": 71,
+            "type": "structural",
+            "target": "subu v1, t3, v1",
+            "generated": "li t3, -95"
+          },
+          {
+            "line": 72,
+            "type": "structural",
+            "target": "sll t4, v1, 16",
+            "generated": "subu v1, t3, a0"
+          },
+          {
+            "line": 73,
+            "type": "structural",
+            "target": "b L5",
+            "generated": "sll t4, v1, 16"
+          },
+          {
+            "line": 74,
+            "type": "structural",
+            "target": "sra v1, t4, 16",
+            "generated": "b L5"
+          },
+          {
+            "line": 75,
+            "type": "structural",
+            "target": "addu v1, v1, v1",
+            "generated": "sra v1, t4, 16"
+          }
+        ],
+        "timestamp": "2026-08-22T03:00:10.468061+00:00"
+      },
+      {
+        "code": "s32 func_1000B060(f32 arg0, f32 arg1, s32 arg2)\n{\n  s16 phi_v1_2;\n  s16 phi_a1;\n  f32 sp18;\n  f64 temp_f6;\n  char new_var;\n  phi_a1 = 128;\n  sp18 = sqrtf((arg0 * arg0) + (arg1 * arg1));\n  if (D_8002C214 < sp18)\n  {\n    sp18 = arg0 / sp18;\n  }\n  temp_f6 = func_150487E0(sp18) * D_8002C218;\n  phi_v1_2 = temp_f6;\n  if (0.0f < arg1)\n  {\n    if (((s16) temp_f6) < 0)\n    {\n      phi_v1_2 = (-128) - ((s16) temp_f6);\n    }\n    else\n    {\n      phi_v1_2 = 128 - ((s16) temp_f6);\n    }\n  }\n  new_var = (s8) (phi_v1_2 + arg2);\n  phi_v1_2 = new_var;\n  if ((new_var >= 96) || (new_var < (-96)))\n  {\n    phi_v1_2 = 0;\n  }\n  else\n    if (new_var >= 32)\n  {\n    phi_v1_2 = 95 - new_var;\n  }\n  else\n    if (new_var < (-32))\n  {\n    temp_t9 = (s8) (phi_v1_2 + arg2);\n    phi_v1_2 = (-95) - new_var;\n  }\n  else\n  {\n    phi_a1 = 0;\n    phi_v1_2 = new_var * 2;\n  }\n  return (phi_v1_2 + 64) | phi_a1;\n}",
+        "score": 0.0,
+        "reason": "compile_error",
+        "diffs": [],
+        "timestamp": "2026-08-22T03:01:59.477709+00:00"
+      },
+      {
+        "code": "s32 func_1000B060(f32 arg0, f32 arg1, s32 arg2)\n{\n  s16 phi_v1_2;\n  s16 phi_a1;\n  f32 sp18;\n  f64 temp_f6;\n  char new_var;\n  phi_a1 = 128;\n  sp18 = sqrtf((arg0 * arg0) + (arg1 * arg1));\n  if (D_8002C214 < sp18)\n  {\n    sp18 = arg0 / sp18;\n  }\n  temp_f6 = func_150487E0(sp18) * D_8002C218;\n  phi_v1_2 = temp_f6;\n  if (0.0f < arg1)\n  {\n    if (((s16) temp_f6) < 0)\n    {\n      phi_v1_2 = (-128) - ((s16) temp_f6);\n    }\n    else\n    {\n      phi_v1_2 = 128 - ((s16) temp_f6);\n    }\n  }\n  new_var = (s8) (phi_v1_2 + arg2);\n  phi_v1_2 = new_var;\n  if ((new_var >= 96) || (new_var < (-96)))\n  {\n    phi_v1_2 = 0;\n  }\n  else\n    if (new_var >= 32)\n  {\n    phi_v1_2 = 95 - new_var;\n  }\n  else\n    if (new_var < (-32))\n  {\n    temp_t9 = (s8) (phi_v1_2 + arg2);\n    phi_v1_2 = (-95) - new_var;\n  }\n  else\n  {\n    phi_a1 = 0;\n    phi_v1_2 = new_var * 2;\n  }\n  return (phi_v1_2 + 64) | phi_a1;\n}",
+        "score": 0.0,
+        "reason": "compile_error",
+        "diffs": [],
+        "timestamp": "2026-08-22T03:02:21.901346+00:00"
+      },
+      {
+        "code": "s32 func_1000B060(f32 arg0, f32 arg1, s32 arg2)\n{\n  s16 phi_v1_2;\n  s16 phi_a1;\n  f32 sp18;\n  f64 temp_f6;\n  char new_var;\n  phi_a1 = 128;\n  sp18 = sqrtf((arg0 * arg0) + (arg1 * arg1));\n  if (D_8002C214 < sp18)\n  {\n    sp18 = arg0 / sp18;\n  }\n  temp_f6 = func_150487E0(sp18) * D_8002C218;\n  phi_v1_2 = temp_f6;\n  if (0.0f < arg1)\n  {\n    if (((s16) temp_f6) < 0)\n    {\n      phi_v1_2 = (-128) - ((s16) temp_f6);\n    }\n    else\n    {\n      phi_v1_2 = 128 - ((s16) temp_f6);\n    }\n  }\n  new_var = (s8) (phi_v1_2 + arg2);\n  phi_v1_2 = new_var;\n  if ((new_var >= 96) || (new_var < (-96)))\n  {\n    phi_v1_2 = 0;\n  }\n  else\n    if (new_var >= 32)\n  {\n    phi_v1_2 = 95 - new_var;\n  }\n  else\n    if (new_var < (-32))\n  {\n    phi_v1_2 = (-95) - new_var;\n  }\n  else\n  {\n    phi_a1 = 0;\n    phi_v1_2 = new_var * 2;\n  }\n  return (phi_v1_2 + 64) | phi_a1;\n}",
+        "score": 0.6548,
+        "reason": "structural_diffs=28, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 24,
+            "type": "structural",
+            "target": "mul.d f4, f16, f18",
+            "generated": "mul.d f2, f16, f18"
+          },
+          {
+            "line": 25,
+            "type": "structural",
+            "target": "mtc1 zero, f8",
+            "generated": "mtc1 zero, f6"
+          },
+          {
+            "line": 28,
+            "type": "structural",
+            "target": "c.lt.s f8, f14",
+            "generated": "c.lt.s f6, f14"
+          },
+          {
+            "line": 30,
+            "type": "structural",
+            "target": "trunc.w.d f6, f4",
+            "generated": "trunc.w.d f4, f2"
+          },
+          {
+            "line": 31,
+            "type": "structural",
+            "target": "mfc1 a0, f6",
+            "generated": "mfc1 a0, f4"
+          },
+          {
+            "line": 50,
+            "type": "structural",
+            "target": "addu t7, v1, t5",
+            "generated": "addu v0, v1, t5"
+          },
+          {
+            "line": 51,
+            "type": "structural",
+            "target": "sll t8, t7, 24",
+            "generated": "sll t6, v0, 24"
+          },
+          {
+            "line": 52,
+            "type": "structural",
+            "target": "sra t9, t8, 24",
+            "generated": "sra t7, t6, 24"
+          },
+          {
+            "line": 53,
+            "type": "structural",
+            "target": "slti at, t9, 96",
+            "generated": "slti at, t7, 96"
+          },
+          {
+            "line": 55,
+            "type": "structural",
+            "target": "move v1, t9",
+            "generated": "move v0, t7"
+          },
+          {
+            "line": 56,
+            "type": "structural",
+            "target": "slti at, t9, -96",
+            "generated": "slti at, t7, -96"
+          },
+          {
+            "line": 58,
+            "type": "structural",
+            "target": "slti at, v1, 32",
+            "generated": "slti at, v0, 32"
+          },
+          {
+            "line": 61,
+            "type": "structural",
+            "target": "slti at, v1, 32",
+            "generated": "slti at, v0, 32"
+          },
+          {
+            "line": 63,
+            "type": "structural",
+            "target": "li t0, 95",
+            "generated": "li t8, 95"
+          },
+          {
+            "line": 64,
+            "type": "structural",
+            "target": "subu v1, t0, v1",
+            "generated": "subu v1, t8, v0"
+          },
+          {
+            "line": 65,
+            "type": "structural",
+            "target": "sll t1, v1, 16",
+            "generated": "sll t9, v1, 16"
+          },
+          {
+            "line": 67,
+            "type": "structural",
+            "target": "sra v1, t1, 16",
+            "generated": "sra v1, t9, 16"
+          },
+          {
+            "line": 68,
+            "type": "structural",
+            "target": "slti at, v1, -32",
+            "generated": "slti at, v0, -32"
+          },
+          {
+            "line": 70,
+            "type": "structural",
+            "target": "li t3, -95",
+            "generated": "move v1, v0"
+          },
+          {
+            "line": 71,
+            "type": "structural",
+            "target": "subu v1, t3, v1",
+            "generated": "li t1, -95"
+          }
+        ],
+        "timestamp": "2026-08-22T03:04:02.014369+00:00"
       }
     ]
   },
