@@ -50097,7 +50097,7 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 2,
+    "attempts": 3,
     "lastScore": 0.1889,
     "status": "pending",
     "history": [
@@ -50114,6 +50114,14 @@
         "reason": "length_mismatch (target=90, generated=85), raw_opcode_mismatch",
         "diffs": [],
         "timestamp": "2026-08-22T18:38:13.520Z",
+        "contextPatch": []
+      },
+      {
+        "code": "void func_1513E13C(struct210 *arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, u8 arg6) {\n    volatile f32 sp48;\n    volatile f32 sp30;\n    volatile f32 sp1C;\n    f32 temp_f0;\n    f32 temp_f12;\n    f32 temp_f14;\n    f32 temp_f16;\n    f32 temp_f18;\n    f32 temp_f2;\n    s32 temp_f10;\n\n    sp48 = func_151423D8(arg6 - 0x40);\n    temp_f0 = func_151423D8(arg6);\n    temp_f12 = arg5 * sp48;\n    temp_f14 = arg4 * temp_f0;\n    temp_f18 = arg1 + temp_f14;\n    arg0->unk40 = temp_f18 - temp_f12;\n    temp_f10 = arg2;\n    arg0->unk42 = temp_f10;\n    temp_f16 = arg5 * temp_f0;\n    temp_f2 = arg4 * sp48;\n    sp1C = arg3 + temp_f16;\n    arg0->unk44 = sp1C + temp_f2;\n    sp30 = arg1 - temp_f14;\n    arg0->unk52 = temp_f10;\n    arg0->unk50 = sp30 - temp_f12;\n    arg0->unk54 = sp1C - temp_f2;\n    arg0->unk62 = temp_f10;\n    arg0->unk60 = sp30 + temp_f12;\n    arg0->unk72 = temp_f10;\n    arg0->unk70 = temp_f18 + temp_f12;\n    sp30 = arg3 - temp_f16;\n    arg0->unk64 = sp30 - temp_f2;\n    arg0->unk74 = sp30 + temp_f2;\n}",
+        "score": 0.1613,
+        "reason": "length_mismatch (target=90, generated=93), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-22T18:59:00.092Z",
         "contextPatch": []
       }
     ]
@@ -105061,7 +105069,7 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 9,
+    "attempts": 10,
     "lastScore": 0.5667,
     "status": "pending",
     "history": [
@@ -105252,6 +105260,14 @@
           "structural: target=lw t0, 976(a0) got=lw t8, 976(a0)"
         ],
         "timestamp": "2026-08-22T18:48:45.163Z",
+        "contextPatch": []
+      },
+      {
+        "code": "void func_15123568(struct108 *arg0) {\n    s32 state;\n    s32 var;\n    s32 timer;\n    s32 diff;\n\n    state = 4;\n    if ((arg0->unk3D4->unk120 == state) && (arg0->unk2C != 0x40) && (*(u8 *) ((u8 *) arg0 + 0x92C) == 0)) {\n        *(f32 *) ((u8 *) arg0 + 0x7C0) = D_800A34D8;\n        arg0->unk1B4 = 1;\n        func_15124B18(arg0);\n        arg0->unk198 = 0.0f;\n        arg0->unk190 = 0.0f;\n        return;\n    }\n    timer = *(s32 *) ((u8 *) arg0 + 0x7B8);\n    if (timer > 0) {\n        diff = timer - D_800BE9E4;\n        *(s32 *) ((u8 *) arg0 + 0x7B8) = diff;\n        if (diff < 0) {\n            *(s32 *) ((u8 *) arg0 + 0x7B8) = 0;\n        }\n        return;\n    }\n    if (((arg0->unk84 & 4) == 0) || ((arg0->unk36A & 8) == 0) || (arg0->unkDC == state)) {\n        return;\n    }\n    if ((arg0->unk6C8 != 0) && (*(s32 *) ((u8 *) arg0 + 0x6FC) != state)) {\n        return;\n    }\n    if ((arg0->unk3D0->in_water == 1) && (arg0->unk1B4 == 1)) {\n        return;\n    }\n    if (arg0->unk1B4 != 1) {\n        var = arg0->unk1B4 - 1;\n        do {\n            arg0->unk1B4 = var;\n            timer = arg0->unk1B4;\n            if (timer <= 0) {\n                arg0->unk1B4 = 3;\n                timer = arg0->unk1B4;\n            }\n            var = timer - 1;\n        } while (((1 << timer) & arg0->unk1E0) == 0);\n        func_15124B18(arg0);\n        func_15125608(arg0);\n        *(s32 *) ((u8 *) arg0 + 0x7B8) = 0x14;\n    }\n}",
+        "score": 0.3667,
+        "reason": "length_mismatch (target=90, generated=89), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-22T18:50:41.078Z",
         "contextPatch": []
       }
     ]
