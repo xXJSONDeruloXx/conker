@@ -50097,7 +50097,7 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 1,
+    "attempts": 2,
     "lastScore": 0.1889,
     "status": "pending",
     "history": [
@@ -50107,6 +50107,14 @@
         "reason": "length_mismatch (target=90, generated=85), raw_opcode_mismatch",
         "diffs": [],
         "timestamp": "2026-08-09T19:43:09.752203+00:00"
+      },
+      {
+        "code": "void func_1513E13C(struct210 *arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, u8 arg6) {\n    f32 sp48;\n    f32 sp30;\n    f32 sp1C;\n    f32 temp_f0;\n    f32 temp_f12;\n    f32 temp_f14;\n    f32 temp_f16;\n    f32 temp_f18;\n    f32 temp_f2;\n    s16 var_v0;\n\n    sp48 = func_151423D8(arg6 - 0x40);\n    temp_f0 = func_151423D8(arg6);\n    temp_f14 = arg4 * temp_f0;\n    temp_f12 = arg5 * sp48;\n    temp_f18 = arg1 + temp_f14;\n    arg0->unk40 = temp_f18 - temp_f12;\n    var_v0 = arg2;\n    arg0->unk42 = var_v0;\n    temp_f16 = arg5 * temp_f0;\n    temp_f2 = arg4 * sp48;\n    sp1C = arg3 + temp_f16;\n    arg0->unk44 = sp1C + temp_f2;\n    sp30 = arg1 - temp_f14;\n    arg0->unk50 = sp30 - temp_f12;\n    arg0->unk52 = var_v0;\n    arg0->unk54 = sp1C - temp_f2;\n    arg0->unk62 = var_v0;\n    arg0->unk60 = sp30 + temp_f12;\n    sp30 = arg3 - temp_f16;\n    arg0->unk72 = var_v0;\n    arg0->unk70 = temp_f18 + temp_f12;\n    arg0->unk64 = sp30 - temp_f2;\n    arg0->unk74 = sp30 + temp_f2;\n}",
+        "score": 0.1889,
+        "reason": "length_mismatch (target=90, generated=85), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-22T18:38:13.520Z",
+        "contextPatch": []
       }
     ]
   },
@@ -105053,7 +105061,7 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 6,
+    "attempts": 9,
     "lastScore": 0.5667,
     "status": "pending",
     "history": [
@@ -105157,6 +105165,93 @@
           "structural: target=lw t0, 976(a0) got=lw t8, 976(a0)"
         ],
         "timestamp": "2026-08-22T18:24:17.133Z",
+        "contextPatch": []
+      },
+      {
+        "code": "void func_15123568(struct108 *arg0) {\n    s32 var;\n    s32 timer;\n    s32 diff;\n\n    if ((arg0->unk3D4->unk120 == 4) && (arg0->unk2C != 0x40) && (*(u8 *) ((u8 *) arg0 + 0x92C) == 0)) {\n        *(f32 *) ((u8 *) arg0 + 0x7C0) = D_800A34D8;\n        arg0->unk1B4 = 1 & 0xFFFFFFFF;\n        func_15124B18(arg0);\n        arg0->unk198 = 0.0f;\n        arg0->unk190 = 0.0f;\n        return;\n    }\n    timer = *(s32 *) ((u8 *) arg0 + 0x7B8);\n    if (timer > 0) {\n        diff = timer - D_800BE9E4;\n        *(s32 *) ((u8 *) arg0 + 0x7B8) = diff;\n        if (diff < 0) {\n            *(s32 *) ((u8 *) arg0 + 0x7B8) = 0;\n        }\n        return;\n    }\n    if (((arg0->unk84 & 4) == 0) || ((arg0->unk36A & 8) == 0) || (arg0->unkDC == 4)) {\n        return;\n    }\n    if ((arg0->unk6C8 != 0) && (*(s32 *) ((u8 *) arg0 + 0x6FC) != (4 & 0xFFFFFFFF))) {\n        return;\n    }\n    if ((arg0->unk3D0->in_water == 1) && (arg0->unk1B4 == 1)) {\n        return;\n    }\n    if (arg0->unk1B4 != 1) {\n        var = arg0->unk1B4 - 1;\n        do {\n            arg0->unk1B4 = var;\n            timer = arg0->unk1B4;\n            if (timer <= 0) {\n                arg0->unk1B4 = 3 & 0xFFFFFFFF;\n                timer = arg0->unk1B4;\n            }\n            var = timer - 1;\n        } while (((1 << timer) & arg0->unk1E0) == 0);\n        func_15124B18(arg0);\n        func_15125608(arg0);\n        *(s32 *) ((u8 *) arg0 + 0x7B8) = 0x14;\n    }\n}",
+        "score": 0.5667,
+        "reason": "structural_diffs=39, raw_opcode_mismatch",
+        "diffs": [
+          "structural: target=li a1, 1 got=li v1, 1",
+          "structural: target=sh a1, 436(a0) got=sh v1, 436(a0)",
+          "structural: target=lw t3, 132(a0) got=lw t1, 132(a0)",
+          "structural: target=subu t1, v0, t0 got=subu v1, v0, t0",
+          "structural: target=bgez t1, L1 got=bgez v1, L1",
+          "structural: target=sw t1, 1976(a0) got=sw v1, 1976(a0)",
+          "structural: target=lw t3, 132(a0) got=lw t1, 132(a0)",
+          "structural: target=andi t4, t3, 4 got=andi t2, t1, 4",
+          "structural: target=beqzl t4, L3 got=beqzl t2, L3",
+          "structural: target=lhu t5, 874(a0) got=lhu t3, 874(a0)",
+          "structural: target=andi t6, t5, 8 got=andi t4, t3, 8",
+          "structural: target=beqzl t6, L3 got=beqzl t4, L3",
+          "structural: target=lw t7, 220(a0) got=lw t5, 220(a0)",
+          "structural: target=beql v1, t7, L3 got=beql v1, t5, L3",
+          "structural: target=lw t8, 1736(a0) got=lw t6, 1736(a0)",
+          "structural: target=beqzl t8, L4 got=beqzl t6, L4",
+          "structural: target=lw t0, 976(a0) got=lw t8, 976(a0)",
+          "structural: target=lw t9, 1788(a0) got=lw t7, 1788(a0)",
+          "structural: target=bnel t9, at, L3 got=bnel t7, at, L3",
+          "structural: target=lw t0, 976(a0) got=lw t8, 976(a0)"
+        ],
+        "timestamp": "2026-08-22T18:26:00.310Z",
+        "contextPatch": []
+      },
+      {
+        "code": "void func_15123568(struct108 *arg0) {\n    s32 diff;\n    s32 var;\n    s32 timer;\n\n    if ((arg0->unk3D4->unk120 == 4) && (arg0->unk2C != 0x40) && (*(u8 *) ((u8 *) arg0 + 0x92C) == 0)) {\n        *(f32 *) ((u8 *) arg0 + 0x7C0) = D_800A34D8;\n        arg0->unk1B4 = 1;\n        func_15124B18(arg0);\n        arg0->unk198 = 0.0f;\n        arg0->unk190 = 0.0f;\n        return;\n    }\n    timer = *(s32 *) ((u8 *) arg0 + 0x7B8);\n    if (timer > 0) {\n        diff = timer - D_800BE9E4;\n        *(s32 *) ((u8 *) arg0 + 0x7B8) = diff;\n        if (diff < 0) {\n            *(s32 *) ((u8 *) arg0 + 0x7B8) = 0;\n        }\n        return;\n    }\n    if (((arg0->unk84 & 4) == 0) || ((arg0->unk36A & 8) == 0) || (arg0->unkDC == 4)) {\n        return;\n    }\n    if ((arg0->unk6C8 != 0) && (*(s32 *) ((u8 *) arg0 + 0x6FC) != (4 & 0xFFFFFFFF))) {\n        return;\n    }\n    if ((arg0->unk3D0->in_water == 1) && (arg0->unk1B4 == 1)) {\n        return;\n    }\n    if (arg0->unk1B4 != 1) {\n        var = arg0->unk1B4 - 1;\n        do {\n            arg0->unk1B4 = var;\n            timer = arg0->unk1B4;\n            if (timer <= 0) {\n                arg0->unk1B4 = 3;\n                timer = arg0->unk1B4;\n            }\n            var = timer - 1;\n        } while (((1 << timer) & arg0->unk1E0) == 0);\n        func_15124B18(arg0);\n        func_15125608(arg0);\n        *(s32 *) ((u8 *) arg0 + 0x7B8) = 0x14;\n    }\n}",
+        "score": 0.5667,
+        "reason": "structural_diffs=39, raw_opcode_mismatch",
+        "diffs": [
+          "structural: target=li a1, 1 got=li v1, 1",
+          "structural: target=sh a1, 436(a0) got=sh v1, 436(a0)",
+          "structural: target=lw t3, 132(a0) got=lw t1, 132(a0)",
+          "structural: target=subu t1, v0, t0 got=subu v1, v0, t0",
+          "structural: target=bgez t1, L1 got=bgez v1, L1",
+          "structural: target=sw t1, 1976(a0) got=sw v1, 1976(a0)",
+          "structural: target=lw t3, 132(a0) got=lw t1, 132(a0)",
+          "structural: target=andi t4, t3, 4 got=andi t2, t1, 4",
+          "structural: target=beqzl t4, L3 got=beqzl t2, L3",
+          "structural: target=lhu t5, 874(a0) got=lhu t3, 874(a0)",
+          "structural: target=andi t6, t5, 8 got=andi t4, t3, 8",
+          "structural: target=beqzl t6, L3 got=beqzl t4, L3",
+          "structural: target=lw t7, 220(a0) got=lw t5, 220(a0)",
+          "structural: target=beql v1, t7, L3 got=beql v1, t5, L3",
+          "structural: target=lw t8, 1736(a0) got=lw t6, 1736(a0)",
+          "structural: target=beqzl t8, L4 got=beqzl t6, L4",
+          "structural: target=lw t0, 976(a0) got=lw t8, 976(a0)",
+          "structural: target=lw t9, 1788(a0) got=lw t7, 1788(a0)",
+          "structural: target=bnel t9, at, L3 got=bnel t7, at, L3",
+          "structural: target=lw t0, 976(a0) got=lw t8, 976(a0)"
+        ],
+        "timestamp": "2026-08-22T18:26:51.949Z",
+        "contextPatch": []
+      },
+      {
+        "code": "void func_15123568(struct108 *arg0) {\n    s32 var;\n    s32 timer;\n    s32 diff;\n\n    if ((arg0->unk3D4->unk120 == 4) && (arg0->unk2C != 0x40) && (*(u8 *) ((u8 *) arg0 + 0x92C) == 0)) {\n        *(f32 *) ((u8 *) arg0 + 0x7C0) = D_800A34D8;\n        arg0->unk1B4 = 1;\n        func_15124B18(arg0);\n        arg0->unk198 = 0.0f;\n        arg0->unk190 = 0.0f;\n        return;\n    }\n    timer = *(s32 *) ((u8 *) arg0 + 0x7B8);\n    if (timer > 0) {\n        diff = timer - D_800BE9E4;\n        *(s32 *) ((u8 *) arg0 + 0x7B8) = diff;\n        if (diff < 0) {\n            *(s32 *) ((u8 *) arg0 + 0x7B8) = 0;\n        }\n        return;\n    }\n    if (((arg0->unk84 & 4) == 0) || ((arg0->unk36A & 8) == 0) || (arg0->unkDC == 4)) {\n        return;\n    }\n    if ((arg0->unk6C8 != 0) && (*(s32 *) ((u8 *) arg0 + 0x6FC) != (4 & 0xFFFFFFFF))) {\n        return;\n    }\n    if ((arg0->unk3D0->in_water == 1) && (arg0->unk1B4 == 1)) {\n        return;\n    }\n    if (arg0->unk1B4 != 1) {\n        var = arg0->unk1B4 - 1;\n        do {\n            var = timer - 1;\n            arg0->unk1B4 = var;\n            timer = arg0->unk1B4;\n            if (timer <= 0) {\n                arg0->unk1B4 = 3;\n                timer = arg0->unk1B4;\n            }\n            var = timer - 1;\n        } while (((1 << timer) & arg0->unk1E0) == 0);\n        func_15124B18(arg0);\n        func_15125608(arg0);\n        *(s32 *) ((u8 *) arg0 + 0x7B8) = 0x14;\n    }\n}",
+        "score": 0.5556,
+        "reason": "structural_diffs=40, raw_opcode_mismatch",
+        "diffs": [
+          "structural: target=li a1, 1 got=li v1, 1",
+          "structural: target=sh a1, 436(a0) got=sh v1, 436(a0)",
+          "structural: target=lw t3, 132(a0) got=lw t1, 132(a0)",
+          "structural: target=subu t1, v0, t0 got=subu v1, v0, t0",
+          "structural: target=bgez t1, L1 got=bgez v1, L1",
+          "structural: target=sw t1, 1976(a0) got=sw v1, 1976(a0)",
+          "structural: target=lw t3, 132(a0) got=lw t1, 132(a0)",
+          "structural: target=andi t4, t3, 4 got=andi t2, t1, 4",
+          "structural: target=beqzl t4, L3 got=beqzl t2, L3",
+          "structural: target=lhu t5, 874(a0) got=lhu t3, 874(a0)",
+          "structural: target=andi t6, t5, 8 got=andi t4, t3, 8",
+          "structural: target=beqzl t6, L3 got=beqzl t4, L3",
+          "structural: target=lw t7, 220(a0) got=lw t5, 220(a0)",
+          "structural: target=beql v1, t7, L3 got=beql v1, t5, L3",
+          "structural: target=lw t8, 1736(a0) got=lw t6, 1736(a0)",
+          "structural: target=beqzl t8, L4 got=beqzl t6, L4",
+          "structural: target=lw t0, 976(a0) got=lw t8, 976(a0)",
+          "structural: target=lw t9, 1788(a0) got=lw t7, 1788(a0)",
+          "structural: target=bnel t9, at, L3 got=bnel t7, at, L3",
+          "structural: target=lw t0, 976(a0) got=lw t8, 976(a0)"
+        ],
+        "timestamp": "2026-08-22T18:48:45.163Z",
         "contextPatch": []
       }
     ]
