@@ -29751,8 +29751,8 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 6,
-    "lastScore": 0.49,
+    "attempts": 10,
+    "lastScore": 0.48,
     "status": "skipped",
     "history": [
       {
@@ -29796,6 +29796,34 @@
         "reason": "length_mismatch (target=50, generated=49)",
         "diffs": [],
         "timestamp": "2026-06-04T04:00:30.969Z"
+      },
+      {
+        "code": "extern s32 D_80091514;\nextern s32 D_800915B0;\nextern s32 D_80091564[];\nextern u8 D_80090B60[];\n\ns32 func_1514306C(s32 arg0, s32 arg1, s32 arg2, u8 arg3) {\n    s32 v1;\n\n    switch (arg3) {\n    case 1:\n        v1 = 0;\n        break;\n    case 2:\n        v1 = D_80091564[arg1];\n        break;\n    case 3:\n        v1 = D_80091514;\n        break;\n    case 4:\n        v1 = D_800915B0;\n        break;\n    case 5:\n        v1 = arg1;\n        break;\n    case 6:\n        v1 = *(s32 *)arg0;\n        if ((unsigned)v1 >= 0x10000000) {\n            v1 = *(s32 *)(v1 + (arg2 << 2));\n        }\n        break;\n    default:\n        v1 = *(s32 *)(&D_80090B60[arg1 * 12] + arg2);\n        break;\n    }\n    return v1;\n}",
+        "score": 0.34,
+        "reason": "length_mismatch (target=50, generated=45), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-22T06:03:18.325262+00:00"
+      },
+      {
+        "code": "extern s32 D_80091514;\nextern s32 D_800915B0;\nextern s32 D_80091564[];\nextern u8 D_80090B60[];\n\ns32 func_1514306C(s32 arg0, s32 arg1, s32 arg2, u8 arg3) {\n    s32 v1;\n\n    switch (arg3) {\n    case 4:\n        v1 = D_800915B0;\n        break;\n    case 3:\n        v1 = D_80091514;\n        break;\n    case 1:\n        v1 = 0;\n        break;\n    case 2:\n        v1 = D_80091564[arg1];\n        break;\n    case 5:\n        v1 = arg1;\n        break;\n    case 6:\n        v1 = *(s32 *)arg0;\n        if ((unsigned)v1 >= 0x10000000) {\n            v1 = *(s32 *)(v1 + (arg2 << 2));\n        }\n        break;\n    default:\n        v1 = *(s32 *)(&D_80090B60[arg1 * 12] + arg2);\n        break;\n    }\n    return v1;\n}",
+        "score": 0.45,
+        "reason": "length_mismatch (target=50, generated=45), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-22T06:04:01.126247+00:00"
+      },
+      {
+        "code": "extern s32 D_80091514;\nextern s32 D_800915B0;\nextern s32 D_80091564[];\nextern u8 D_80090B60[][12];\n\ns32 func_1514306C(s32 arg0, s32 arg1, s32 arg2, u8 arg3) {\n    s32 v1;\n    s32 temp;\n\n    switch (arg3) {\n    case 4:\n        v1 = D_800915B0;\n        break;\n    case 3:\n        v1 = D_80091514;\n        break;\n    case 1:\n        v1 = 0;\n        break;\n    case 2:\n        v1 = D_80091564[arg1];\n        break;\n    case 5:\n        v1 = arg1;\n        break;\n    case 6:\n        temp = *(s32 *)arg0;\n        if ((unsigned)temp < 0x10000000) {\n            v1 = temp;\n        } else {\n            v1 = *(s32 *)(temp + (arg2 << 2));\n        }\n        break;\n    default:\n        v1 = *(s32 *)(D_80090B60[arg1] + (arg2 << 2));\n        break;\n    }\n    return v1;\n}",
+        "score": 0.48,
+        "reason": "length_mismatch (target=50, generated=48), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-22T06:05:59.097437+00:00"
+      },
+      {
+        "code": "extern s32 D_80091514;\nextern s32 D_800915B0;\nextern s32 D_80091564[];\nextern u8 D_80090B60[][12];\n\ns32 func_1514306C(s32 arg0, s32 arg1, s32 arg2, u8 arg3) {\n    s32 v1;\n    s32 temp;\n\n    switch (arg3) {\n    case 4:\n        v1 = D_800915B0;\n        break;\n    case 3:\n        v1 = D_80091514;\n        break;\n    case 1:\n        v1 = 0;\n        break;\n    case 2:\n        v1 = D_80091564[arg1];\n        break;\n    case 5:\n        v1 = arg1;\n        break;\n    case 6:\n        temp = *(s32 *)arg0;\n        if ((unsigned)temp >= 0x10000000) {\n            v1 = *(s32 *)(temp + (arg2 << 2));\n        } else {\n            v1 = temp;\n        }\n        break;\n    default:\n        v1 = *(s32 *)(D_80090B60[arg1] + (arg2 << 2));\n        break;\n    }\n    return v1;\n}",
+        "score": 0.48,
+        "reason": "length_mismatch (target=50, generated=48), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-22T06:06:47.644613+00:00"
       }
     ]
   },
