@@ -39578,8 +39578,8 @@
     "tags": [
       "branchy"
     ],
-    "attempts": 23,
-    "lastScore": 0.5405,
+    "attempts": 25,
+    "lastScore": 0.1757,
     "status": "pending",
     "history": [
       {
@@ -40832,6 +40832,141 @@
           }
         ],
         "timestamp": "2026-08-22T07:29:28.963740+00:00"
+      },
+      {
+        "code": "void func_151670C0(void) {\n    struct102 *temp;\n    s32 i;\n    s32 j;\n\n    for (i = 0; i < 2; i++) {\n        for (j = 0; j < 0x65; j++) {\n            if (D_8008B4A8[j].unk0 != 0) {\n                temp = ((struct102 **)(D_800DCE50 + (((i * 4 - i) * 4 + i) * 32)))[j];\n                if (temp != 0) {\n                    D_800DD190++;\n                    do {\n                        ((struct102 **)D_800DD198)[D_800DD190] = (struct102 *)temp->unk8;\n                        D_8008B4A8[j].unk0(temp);\n                        temp = ((struct102 **)D_800DD198)[D_800DD190];\n                    } while (temp != 0);\n                    D_800DD190--;\n                }\n            }\n        }\n    }\n}",
+        "score": 0.5405,
+        "reason": "structural_diffs=34, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 2,
+            "type": "structural",
+            "target": "sw fp, 56(sp)",
+            "generated": "sw s8, 56(sp)"
+          },
+          {
+            "line": 18,
+            "type": "structural",
+            "target": "li fp, 101",
+            "generated": "li s8, 101"
+          },
+          {
+            "line": 24,
+            "type": "structural",
+            "target": "subu t7, t7, s6",
+            "generated": "subu t8, t7, s6"
+          },
+          {
+            "line": 26,
+            "type": "structural",
+            "target": "sll t7, t7, 2",
+            "generated": "sll t9, t8, 2"
+          },
+          {
+            "line": 27,
+            "type": "structural",
+            "target": "addu t7, t7, s6",
+            "generated": "addu t0, t9, s6"
+          },
+          {
+            "line": 28,
+            "type": "structural",
+            "target": "sll t7, t7, 5",
+            "generated": "sll t1, t0, 5"
+          },
+          {
+            "line": 29,
+            "type": "structural",
+            "target": "addu t8, s7, t7",
+            "generated": "addu t2, s7, t1"
+          },
+          {
+            "line": 30,
+            "type": "structural",
+            "target": "sll t9, s5, 2",
+            "generated": "sll t3, s5, 2"
+          },
+          {
+            "line": 31,
+            "type": "structural",
+            "target": "lb t1, 0(s3)",
+            "generated": "addu t4, t2, t3"
+          },
+          {
+            "line": 32,
+            "type": "structural",
+            "target": "addu t0, t8, t9",
+            "generated": "lw s0, 0(t4)"
+          },
+          {
+            "line": 33,
+            "type": "structural",
+            "target": "lw s0, 0(t0)",
+            "generated": "beqzl s0, L1"
+          },
+          {
+            "line": 34,
+            "type": "structural",
+            "target": "addiu t2, t1, 1",
+            "generated": "addiu s5, s5, 1"
+          },
+          {
+            "line": 35,
+            "type": "structural",
+            "target": "sb t2, 0(s3)",
+            "generated": "lb t5, 0(s3)"
+          },
+          {
+            "line": 36,
+            "type": "structural",
+            "target": "beqzl s0, L1",
+            "generated": "addiu t6, t5, 1"
+          },
+          {
+            "line": 37,
+            "type": "structural",
+            "target": "lb t8, 0(s3)",
+            "generated": "sb t6, 0(s3)"
+          },
+          {
+            "line": 38,
+            "type": "structural",
+            "target": "lb t3, 0(s3)",
+            "generated": "lb t7, 0(s3)"
+          },
+          {
+            "line": 39,
+            "type": "structural",
+            "target": "sll t4, t3, 2",
+            "generated": "sll t8, t7, 2"
+          },
+          {
+            "line": 40,
+            "type": "structural",
+            "target": "addu s1, s4, t4",
+            "generated": "addu s1, s4, t8"
+          },
+          {
+            "line": 41,
+            "type": "structural",
+            "target": "lw t9, 0(s2)",
+            "generated": "lw t9, 8(s0)"
+          },
+          {
+            "line": 42,
+            "type": "structural",
+            "target": "lw t5, 8(s0)",
+            "generated": "move a0, s0"
+          }
+        ],
+        "timestamp": "2026-08-22T07:34:18.923952+00:00"
+      },
+      {
+        "code": "void func_151670C0(void) {\n    s32 j;\n    s32 i;\n    s32 idx190;\n    struct102 *temp;\n\n    for (i = 0; i < 2; i++) {\n        for (j = 0; j < 0x65; j++) {\n            if (D_8008B4A8[j].unk0 != 0) {\n                temp = ((struct102 **)(D_800DCE50 + (((i * 4 - i) * 4 + i) * 32)))[j];\n                if (temp != 0) {\n                    idx190 = ++D_800DD190;\n                    do {\n                        ((struct102 **)D_800DD198)[idx190] = (struct102 *)temp->unk8;\n                        D_8008B4A8[j].unk0(temp);\n                        temp = ((struct102 **)D_800DD198)[idx190];\n                    } while (temp != 0);\n                    D_800DD190--;\n                }\n            }\n        }\n    }\n}",
+        "score": 0.1757,
+        "reason": "length_mismatch (target=74, generated=72), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-22T07:34:24.810753+00:00"
       }
     ]
   },
