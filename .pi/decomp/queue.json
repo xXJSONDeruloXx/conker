@@ -25292,8 +25292,8 @@
     "instructions": 69,
     "difficulty": "medium",
     "tags": [],
-    "attempts": 117,
-    "lastScore": 0.5942,
+    "attempts": 120,
+    "lastScore": 0.0,
     "status": "pending",
     "history": [
       {
@@ -28675,6 +28675,269 @@
           }
         ],
         "timestamp": "2026-08-22T05:24:34.468586+00:00"
+      },
+      {
+        "code": "s32 func_151415D4(void *arg0)\n{\n  f32 new_var;\n  f32 *tbl;\n  f32 x;\n  f32 dur;\n  tbl = (f32 *) (((s32) arg0) + 0x170);\n  if ((*((f32 *) (((s32) arg0) + 0x17C))) < (*((f32 *) (((s32) arg0) + 0x180))))\n  {\n    *((f32 *) (((s32) arg0) + 0x158)) = tbl[1];\n  }\n  else\n  {\n    x = tbl[3];\n    if (x < tbl[5])\n    {\n      {\n        f32 dx;\n        dx = x - tbl[4];\n        *((f32 *) (((s32) arg0) + 0x158)) = tbl[1] + (tbl[2] * (dx * tbl[8]));\n      }\n      goto dummy_label_559689;\n      dummy_label_559689:\n      ;\n\n      ;\n    }\n    else\n      if (x < tbl[6])\n    {\n      if (1)\n      {\n      }\n      *((f32 *) (((s32) arg0) + 0x158)) = tbl[0];\n    }\n    else\n    {\n      new_var = tbl[6];\n      *((f32 *) (((s32) arg0) + 0x158)) = tbl[1] + (tbl[2] * (1.0f - ((x - new_var) * tbl[8])));\n    }\n  }\n  dur = tbl[7];\n  tbl[3] += D_800BE9A4;\n  while (dur < tbl[3])\n  {\n    tbl[3] -= dur;\n  }\n\n  return 1;\n}",
+        "score": 0.6232,
+        "reason": "structural_diffs=26, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 6,
+            "type": "structural",
+            "target": "lwc1 f2, 12(v0)",
+            "generated": "lwc1 f0, 12(v0)"
+          },
+          {
+            "line": 11,
+            "type": "structural",
+            "target": "lwc1 f2, 12(v0)",
+            "generated": "lwc1 f0, 12(v0)"
+          },
+          {
+            "line": 13,
+            "type": "structural",
+            "target": "c.lt.s f2, f10",
+            "generated": "c.lt.s f0, f10"
+          },
+          {
+            "line": 18,
+            "type": "structural",
+            "target": "lwc1 f4, 32(v0)",
+            "generated": "lwc1 f18, 32(v0)"
+          },
+          {
+            "line": 19,
+            "type": "structural",
+            "target": "lwc1 f8, 8(v0)",
+            "generated": "lwc1 f6, 8(v0)"
+          },
+          {
+            "line": 20,
+            "type": "structural",
+            "target": "sub.s f18, f2, f16",
+            "generated": "sub.s f2, f0, f16"
+          },
+          {
+            "line": 21,
+            "type": "structural",
+            "target": "lwc1 f6, 4(v0)",
+            "generated": "lwc1 f10, 4(v0)"
+          },
+          {
+            "line": 22,
+            "type": "structural",
+            "target": "mul.s f0, f18, f4",
+            "generated": "mul.s f4, f18, f2"
+          },
+          {
+            "line": 24,
+            "type": "structural",
+            "target": "mul.s f10, f8, f0",
+            "generated": "mul.s f8, f4, f6"
+          },
+          {
+            "line": 25,
+            "type": "structural",
+            "target": "add.s f16, f6, f10",
+            "generated": "add.s f16, f8, f10"
+          },
+          {
+            "line": 30,
+            "type": "structural",
+            "target": "c.lt.s f2, f12",
+            "generated": "c.lt.s f0, f12"
+          },
+          {
+            "line": 33,
+            "type": "structural",
+            "target": "sub.s f4, f2, f12",
+            "generated": "sub.s f6, f0, f12"
+          },
+          {
+            "line": 37,
+            "type": "structural",
+            "target": "sub.s f4, f2, f12",
+            "generated": "sub.s f6, f0, f12"
+          },
+          {
+            "line": 38,
+            "type": "structural",
+            "target": "lwc1 f8, 32(v0)",
+            "generated": "lwc1 f4, 32(v0)"
+          },
+          {
+            "line": 41,
+            "type": "structural",
+            "target": "mul.s f6, f4, f8",
+            "generated": "mul.s f8, f4, f6"
+          },
+          {
+            "line": 43,
+            "type": "structural",
+            "target": "lwc1 f16, 4(v0)",
+            "generated": "lwc1 f6, 4(v0)"
+          },
+          {
+            "line": 44,
+            "type": "structural",
+            "target": "sub.s f0, f10, f6",
+            "generated": "sub.s f16, f10, f8"
+          },
+          {
+            "line": 45,
+            "type": "structural",
+            "target": "mul.s f4, f18, f0",
+            "generated": "mul.s f4, f16, f18"
+          },
+          {
+            "line": 46,
+            "type": "structural",
+            "target": "add.s f8, f16, f4",
+            "generated": "add.s f10, f4, f6"
+          },
+          {
+            "line": 47,
+            "type": "structural",
+            "target": "swc1 f8, 344(a0)",
+            "generated": "swc1 f10, 344(a0)"
+          }
+        ],
+        "timestamp": "2026-08-22T05:37:31.160458+00:00"
+      },
+      {
+        "code": "s32 func_151415D4(void *arg0)\n{\n  f32 new_var;\n  f32 x;\n  f32 dur;\n  f32 *tbl;\n  tbl = (f32 *) (((s32) arg0) + 0x170);\n  if ((*((f32 *) (((s32) arg0) + 0x17C))) < (*((f32 *) (((s32) arg0) + 0x180))))\n  {\n    *((f32 *) (((s32) arg0) + 0x158)) = tbl[1];\n  }\n  else\n  {\n    x = tbl[3];\n    if (x < tbl[5])\n    {\n      {\n        f32 dx;\n        dx = x - tbl[4];\n        *((f32 *) (((s32) arg0) + 0x158)) = tbl[1] + (tbl[2] * (dx * tbl[8]));\n      }\n      goto dummy_label_559689;\n      dummy_label_559689:\n      ;\n\n      ;\n    }\n    else\n      if (x < tbl[6])\n    {\n      if (1)\n      {\n      }\n      *((f32 *) (((s32) arg0) + 0x158)) = tbl[0];\n    }\n    else\n    {\n      new_var = tbl[6];\n      *((f32 *) (((s32) arg0) + 0x158)) = tbl[1] + (tbl[2] * (1.0f - ((x - new_var) * tbl[8])));\n    }\n  }\n  dur = tbl[7];\n  tbl[3] += D_800BE9A4;\n  while (dur < tbl[3])\n  {\n    tbl[3] -= dur;\n  }\n\n  return 1;\n}",
+        "score": 0.6232,
+        "reason": "structural_diffs=26, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 6,
+            "type": "structural",
+            "target": "lwc1 f2, 12(v0)",
+            "generated": "lwc1 f0, 12(v0)"
+          },
+          {
+            "line": 11,
+            "type": "structural",
+            "target": "lwc1 f2, 12(v0)",
+            "generated": "lwc1 f0, 12(v0)"
+          },
+          {
+            "line": 13,
+            "type": "structural",
+            "target": "c.lt.s f2, f10",
+            "generated": "c.lt.s f0, f10"
+          },
+          {
+            "line": 18,
+            "type": "structural",
+            "target": "lwc1 f4, 32(v0)",
+            "generated": "lwc1 f18, 32(v0)"
+          },
+          {
+            "line": 19,
+            "type": "structural",
+            "target": "lwc1 f8, 8(v0)",
+            "generated": "lwc1 f6, 8(v0)"
+          },
+          {
+            "line": 20,
+            "type": "structural",
+            "target": "sub.s f18, f2, f16",
+            "generated": "sub.s f2, f0, f16"
+          },
+          {
+            "line": 21,
+            "type": "structural",
+            "target": "lwc1 f6, 4(v0)",
+            "generated": "lwc1 f10, 4(v0)"
+          },
+          {
+            "line": 22,
+            "type": "structural",
+            "target": "mul.s f0, f18, f4",
+            "generated": "mul.s f4, f18, f2"
+          },
+          {
+            "line": 24,
+            "type": "structural",
+            "target": "mul.s f10, f8, f0",
+            "generated": "mul.s f8, f4, f6"
+          },
+          {
+            "line": 25,
+            "type": "structural",
+            "target": "add.s f16, f6, f10",
+            "generated": "add.s f16, f8, f10"
+          },
+          {
+            "line": 30,
+            "type": "structural",
+            "target": "c.lt.s f2, f12",
+            "generated": "c.lt.s f0, f12"
+          },
+          {
+            "line": 33,
+            "type": "structural",
+            "target": "sub.s f4, f2, f12",
+            "generated": "sub.s f6, f0, f12"
+          },
+          {
+            "line": 37,
+            "type": "structural",
+            "target": "sub.s f4, f2, f12",
+            "generated": "sub.s f6, f0, f12"
+          },
+          {
+            "line": 38,
+            "type": "structural",
+            "target": "lwc1 f8, 32(v0)",
+            "generated": "lwc1 f4, 32(v0)"
+          },
+          {
+            "line": 41,
+            "type": "structural",
+            "target": "mul.s f6, f4, f8",
+            "generated": "mul.s f8, f4, f6"
+          },
+          {
+            "line": 43,
+            "type": "structural",
+            "target": "lwc1 f16, 4(v0)",
+            "generated": "lwc1 f6, 4(v0)"
+          },
+          {
+            "line": 44,
+            "type": "structural",
+            "target": "sub.s f0, f10, f6",
+            "generated": "sub.s f16, f10, f8"
+          },
+          {
+            "line": 45,
+            "type": "structural",
+            "target": "mul.s f4, f18, f0",
+            "generated": "mul.s f4, f16, f18"
+          },
+          {
+            "line": 46,
+            "type": "structural",
+            "target": "add.s f8, f16, f4",
+            "generated": "add.s f10, f4, f6"
+          },
+          {
+            "line": 47,
+            "type": "structural",
+            "target": "swc1 f8, 344(a0)",
+            "generated": "swc1 f10, 344(a0)"
+          }
+        ],
+        "timestamp": "2026-08-22T05:38:59.744420+00:00"
+      },
+      {
+        "code": "s32 func_151415D4(void *arg0, f32 arg1)\n{\n  f32 new_var;\n  f32 *tbl;\n  f32 x;\n  f32 dur;\n  tbl = (f32 *) (((s32) arg0) + 0x170);\n  if ((*((f32 *) (((s32) arg0) + 0x17C))) < (*((f32 *) (((s32) arg0) + 0x180))))\n  {\n    *((f32 *) (((s32) arg0) + 0x158)) = tbl[1];\n  }\n  else\n  {\n    x = tbl[3];\n    if (x < tbl[5])\n    {\n      {\n        f32 dx;\n        dx = x - tbl[4];\n        *((f32 *) (((s32) arg0) + 0x158)) = tbl[1] + (tbl[2] * (dx * tbl[8]));\n      }\n      goto dummy_label_559689;\n      dummy_label_559689:\n      ;\n\n      ;\n    }\n    else\n      if (x < tbl[6])\n    {\n      if (1)\n      {\n      }\n      *((f32 *) (((s32) arg0) + 0x158)) = tbl[0];\n    }\n    else\n    {\n      new_var = tbl[6];\n      *((f32 *) (((s32) arg0) + 0x158)) = tbl[1] + (tbl[2] * (1.0f - ((x - new_var) * tbl[8])));\n    }\n  }\n  dur = tbl[7];\n  tbl[3] += D_800BE9A4;\n  while (dur < tbl[3])\n  {\n    tbl[3] -= dur;\n  }\n\n  return 1;\n}",
+        "score": 0.0,
+        "reason": "length_mismatch (target=69, generated=70), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-22T05:42:13.645615+00:00"
       }
     ]
   },
