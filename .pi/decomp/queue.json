@@ -50097,7 +50097,7 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 6,
+    "attempts": 8,
     "lastScore": 0.1889,
     "status": "pending",
     "history": [
@@ -50158,6 +50158,22 @@
         "reason": "length_mismatch (target=90, generated=85), raw_opcode_mismatch",
         "diffs": [],
         "timestamp": "2026-08-22T19:10:27.856Z",
+        "contextPatch": []
+      },
+      {
+        "code": "void func_1513E13C(struct210 *arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, u8 arg6) {\n    f32 sp48;\n    f32 temp_f0;\n    f32 temp_f12;\n    f32 temp_f14;\n    f32 temp_f16;\n    f32 temp_f18;\n    f32 temp_f2;\n    s32 temp_f10;\n\n    sp48 = func_151423D8(arg6 - 0x40);\n    temp_f0 = func_151423D8(arg6);\n    temp_f14 = arg4 * temp_f0;\n    temp_f12 = arg5 * sp48;\n    temp_f18 = arg1 + temp_f14;\n    arg0->unk40 = temp_f18 - temp_f12;\n    temp_f10 = arg2;\n    arg0->unk42 = temp_f10;\n    temp_f16 = arg5 * temp_f0;\n    temp_f2 = arg4 * sp48;\n    arg0->unk44 = (arg3 + temp_f16) + temp_f2;\n    arg0->unk50 = (arg1 - temp_f14) - temp_f12;\n    goto dummy_label;\n    dummy_label:\n    arg0->unk52 = temp_f10;\n    arg0->unk54 = (arg3 + temp_f16) - temp_f2;\n    arg0->unk62 = temp_f10;\n    arg0->unk60 = (arg1 - temp_f14) + temp_f12;\n    arg0->unk72 = temp_f10;\n    arg0->unk70 = temp_f18 + temp_f12;\n    arg0->unk64 = (arg3 - temp_f16) - temp_f2;\n    arg0->unk74 = (arg3 - temp_f16) + temp_f2;\n}",
+        "score": 0.1556,
+        "reason": "length_mismatch (target=90, generated=86), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-22T19:14:45.691Z",
+        "contextPatch": []
+      },
+      {
+        "code": "void func_1513E13C(struct210 *arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, u8 arg6) {\n    f32 sp48;\n    f32 temp_f0;\n    f32 temp_f12;\n    f32 temp_f14;\n    f32 temp_f16;\n    f32 temp_f18;\n    f32 temp_f2;\n    s32 temp_f10;\n\n    sp48 = func_151423D8(arg6 - 0x40);\n    temp_f0 = func_151423D8(arg6);\n    temp_f14 = arg4 * temp_f0;\n    temp_f12 = arg5 * sp48;\n    temp_f18 = arg1 + temp_f14;\n    arg0->unk40 = temp_f18 - temp_f12;\n    temp_f10 = arg2;\n    arg0->unk42 = temp_f10;\n    temp_f16 = arg5 * temp_f0;\n    temp_f2 = arg4 * sp48;\n    arg0->unk44 = (arg3 + temp_f16) + temp_f2;\n    arg0->unk52 = temp_f10;\n    arg0->unk50 = (arg1 - temp_f14) - temp_f12;\n    arg0->unk54 = (arg3 + temp_f16) - temp_f2;\n    arg0->unk62 = temp_f10;\n    arg0->unk60 = (arg1 - temp_f14) + temp_f12;\n    arg0->unk72 = temp_f10;\n    arg0->unk70 = temp_f18 + temp_f12;\n    arg0->unk64 = (arg3 - temp_f16) - temp_f2;\n    arg0->unk74 = (arg3 - temp_f16) + temp_f2;\n}",
+        "score": 0.0778,
+        "reason": "length_mismatch (target=90, generated=85), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-22T19:28:25.502Z",
         "contextPatch": []
       }
     ]
@@ -77255,7 +77271,7 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 5,
+    "attempts": 6,
     "lastScore": 0.0109,
     "status": "pending",
     "history": [
@@ -77330,6 +77346,32 @@
         "reason": "length_mismatch (target=90, generated=94), raw_opcode_mismatch",
         "diffs": [],
         "timestamp": "2026-08-22T17:41:20.890Z",
+        "contextPatch": [
+          {
+            "newText": "f32 func_1505DF10(struct127 *arg0, u8 arg1, s16 *arg2, f32 *arg3, f32 *arg4, s32 arg5) {",
+            "oldText": "f32 func_1505DF10(struct127 *arg0, u8 arg1, s16 *arg2, f32 *arg3, f32 *arg4) {",
+            "path": "conker/src/game_83300.c"
+          }
+        ]
+      },
+      {
+        "code": "#include <ultra64.h>\n#include \"functions.h\"\n#include \"variables.h\"\n#include \"macros.h\"\n#include \"libc/stdarg.h\"\n\n\ns32 func_1505DDA8(struct127 *arg0, u8 arg1, u16 arg2, f32 arg3) {\n    u16 sp6C;\n    f32 sp68;\n    f32 sp64;\n    struct127 *ptr;\n    f32 range;\n    s32 diff;\n    u8 i;\n\n    if (D_80082FA0 >= 0) {\n        i = 0;\n        do {\n            ptr = D_800CC2D0 + i;\n            if (ptr->interaction_state != 0) {\n                range = (arg0->xz_velocity * arg3) * 0.5f;\n                if (func_1505DF10(arg0, 0, (s16 *) &sp6C, &sp68, &sp64, 0) < (range * range)) {\n                    diff = (arg0->unk76 - sp6C) + (arg2 / 2);\n                    if ((u16) (arg0->unk76 - sp6C) + (arg2 / 2) < arg2) {\n                        return (s8) i;\n                    }\n                }\n                ;\n            }\n            i++;\n        } while (i <= D_80082FA0);\n    }\n    return -1;\n}",
+        "score": 0.4,
+        "reason": "transmuter_best=18",
+        "diffs": [
+          "transmuter: initial=67→best=18, iters=2076, compiled=1586, errors=414, forks=65",
+          "fork_rules: refer-to-var, temp-for-expr, empty-stmt, modify-condition, delete-stmt, insert-block, expand-expr, add-mask, cast-expr",
+          "last_fork_rule: refer-to-var",
+          "config: timeout=300s, maxCompiles=2000, concurrency=7, profile=ido, isolate=true, reduce=false, depth=1"
+        ],
+        "timestamp": "2026-08-22T19:36:06.031Z"
+      },
+      {
+        "code": "s32 func_1505DDA8(struct127 *arg0, u8 arg1, u16 arg2, f32 arg3) {\n    u16 sp6C;\n    f32 sp68;\n    f32 sp64;\n    struct127 *ptr;\n    f32 range;\n    s32 diff;\n    u8 i;\n\n    if (*(volatile s32 *) &D_80082FA0 >= 0) {\n        i = 0;\n        do {\n            ptr = D_800CC2D0 + i;\n            if (ptr->interaction_state != 0) {\n                range = (arg0->xz_velocity * arg3) * 0.5f;\n                if (func_1505DF10(arg0, i, (s16 *) &sp6C, &sp68, &sp64, 0) < (range * range)) {\n                    diff = (arg0->unk76 - sp6C) + (arg2 / 2);\n                    if ((u16) diff < arg2) {\n                        return (s8) i;\n                    }\n                }\n            }\n            i++;\n        } while (i <= *(volatile s32 *) &D_80082FA0);\n    }\n    return -1;\n}",
+        "score": 0.0108,
+        "reason": "length_mismatch (target=90, generated=93), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-22T19:51:51.943Z",
         "contextPatch": [
           {
             "newText": "f32 func_1505DF10(struct127 *arg0, u8 arg1, s16 *arg2, f32 *arg3, f32 *arg4, s32 arg5) {",
