@@ -77271,8 +77271,8 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 12,
-    "lastScore": 0.0109,
+    "attempts": 15,
+    "lastScore": 0.0217,
     "status": "pending",
     "history": [
       {
@@ -77456,6 +77456,48 @@
         "reason": "length_mismatch (target=90, generated=93), raw_opcode_mismatch",
         "diffs": [],
         "timestamp": "2026-08-22T21:44:02.357Z",
+        "contextPatch": [
+          {
+            "newText": "f32 func_1505DF10(struct127 *arg0, u8 arg1, s16 *arg2, f32 *arg3, f32 *arg4, s32 arg5) {",
+            "oldText": "f32 func_1505DF10(struct127 *arg0, u8 arg1, s16 *arg2, f32 *arg3, f32 *arg4) {",
+            "path": "conker/src/game_83300.c"
+          }
+        ]
+      },
+      {
+        "code": "s32 func_1505DDA8(struct127 *arg0, u8 arg1, u16 arg2, f32 arg3) {\n    u16 sp6C;\n    f32 sp68;\n    f32 sp64;\n    struct127 *ptr;\n    s32 diff;\n    u8 i;\n\n    if ((*((volatile s32 *) (&D_80082FA0))) >= 0) {\n        i = 0;\n        do {\n            ptr = D_800CC2D0 + i;\n            if (ptr->interaction_state != 0) {\n                if (func_1505DF10(arg0, i, (s16 *) (&sp6C), &sp68, &sp64, 0) < ((((arg0->xz_velocity * arg3) * 0.5f) * 1.0f) * (((arg0->xz_velocity * arg3) * 0.5f) * 1.0f))) {\n                    diff = (arg0->unk76 - sp6C) + (arg2 / 2);\n                    if (((u16) diff) < arg2) {\n                        return (s8) i;\n                    }\n                }\n            }\n            i++;\n        } while (i <= (*((volatile s32 *) (&D_80082FA0))));\n    }\n    return -1;\n}",
+        "score": 0.0217,
+        "reason": "length_mismatch (target=90, generated=92), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-22T21:46:36.861Z",
+        "contextPatch": [
+          {
+            "newText": "f32 func_1505DF10(struct127 *arg0, u8 arg1, s16 *arg2, f32 *arg3, f32 *arg4, s32 arg5) {",
+            "oldText": "f32 func_1505DF10(struct127 *arg0, u8 arg1, s16 *arg2, f32 *arg3, f32 *arg4) {",
+            "path": "conker/src/game_83300.c"
+          }
+        ]
+      },
+      {
+        "code": "s32 func_1505DDA8(struct127 *arg0, u8 arg1, u16 arg2, f32 arg3) {\n    u16 sp6C;\n    f32 sp68;\n    f32 sp64;\n    struct127 *ptr;\n    f32 range;\n    s32 diff;\n    u8 i;\n\n    if ((*((volatile s32 *) (&D_80082FA0))) >= 0) {\n        i = 0;\n        do {\n            ptr = D_800CC2D0 + i;\n            if (ptr->interaction_state != 0) {\n                range = arg0->xz_velocity * arg3;\n                range = range * 0.5f;\n                if (func_1505DF10(arg0, i, (s16 *) (&sp6C), &sp68, &sp64, 0) < (range * range)) {\n                    diff = (arg0->unk76 - sp6C) + (arg2 / 2);\n                    if (((u16) diff) < arg2) {\n                        return (s8) i;\n                    }\n                }\n            }\n            i++;\n        } while (i <= (*((volatile s32 *) (&D_80082FA0))));\n    }\n    return -1;\n}",
+        "score": 0.0108,
+        "reason": "length_mismatch (target=90, generated=93), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-22T21:49:27.840Z",
+        "contextPatch": [
+          {
+            "newText": "f32 func_1505DF10(struct127 *arg0, u8 arg1, s16 *arg2, f32 *arg3, f32 *arg4, s32 arg5) {",
+            "oldText": "f32 func_1505DF10(struct127 *arg0, u8 arg1, s16 *arg2, f32 *arg3, f32 *arg4) {",
+            "path": "conker/src/game_83300.c"
+          }
+        ]
+      },
+      {
+        "code": "s32 func_1505DDA8(struct127 *arg0, u8 arg1, u16 arg2, f32 arg3) {\n    u16 sp6C;\n    f32 sp68;\n    f32 sp64;\n    struct127 *ptr;\n    s32 diff;\n    u8 i;\n\n    if ((*((volatile s32 *) (&D_80082FA0))) >= 0) {\n        i = 0;\n        do {\n            ptr = D_800CC2D0 + i;\n            if (ptr->interaction_state != 0) {\n                if ((((arg0->xz_velocity * arg3) * 0.5f) * ((arg0->xz_velocity * arg3) * 0.5f)) > func_1505DF10(arg0, i, (s16 *) (&sp6C), &sp68, &sp64, 0)) {\n                    diff = (arg0->unk76 - sp6C) + (arg2 / 2);\n                    if (((u16) diff) < arg2) {\n                        return (s8) i;\n                    }\n                }\n            }\n            i++;\n        } while (i <= (*((volatile s32 *) (&D_80082FA0))));\n    }\n    return -1;\n}",
+        "score": 0.0217,
+        "reason": "length_mismatch (target=90, generated=92), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-22T21:51:02.368Z",
         "contextPatch": [
           {
             "newText": "f32 func_1505DF10(struct127 *arg0, u8 arg1, s16 *arg2, f32 *arg3, f32 *arg4, s32 arg5) {",
