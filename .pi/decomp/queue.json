@@ -77270,7 +77270,7 @@
     "instructions": 135,
     "difficulty": "hard",
     "tags": [],
-    "attempts": 59,
+    "attempts": 61,
     "lastScore": 0.8148,
     "status": "pending",
     "history": [
@@ -82348,6 +82348,148 @@
           }
         ],
         "timestamp": "2026-08-22T07:15:02.836857+00:00"
+      },
+      {
+        "code": "void func_15058F24(struct127 *arg0, f32 arg1) {\n    register f32 temp_f14;\n    f32 temp_f0;\n    register f32 temp_f12;\n    f32 tmp;\n    f32 temp_f16;\n\n    temp_f0 = arg1;\n    temp_f16 = 0.5f - arg1;\n    if (arg1 >= 0.5f) {\n        arg1 -= 0.5f;\n    }\n    temp_f14 = arg0->unk118 + 9.0f;\n    if ((arg0->y_position < temp_f14) || (arg0->in_water >= 0x64)) {\n        if (arg0->in_water == 0) {\n            arg0->y_position = temp_f14;\n            arg0->in_water = (u8)0x64U;\n            arg0->gravity = temp_f16 * -6.0f;\n            arg0->y_velocity *= temp_f0;\n        } else {\n            if ((temp_f14 + 100.0f) < arg0->y_position) {\n                arg0->in_water = (u8)0U;\n            }\n            if (temp_f16 < 0.0f) {\n                arg0->gravity = temp_f16 * -6.0f;\n            } else {\n                temp_f12 = arg0->y_position - ((temp_f14 + 10.0f) - (120.0f * arg1));\n                if ((fabsf(temp_f12) < 2.0f) && (fabsf(arg0->y_velocity) < 2.0f)) {\n                    tmp = temp_f12 * D_800994A4;\n                    arg0->gravity = 1.0f;\n                    arg0->y_velocity = 0.0f;\n                    arg0->y_position -= tmp;\n                } else {\n                    if (temp_f12 > 0.0f) {\n                        if (arg0->y_velocity > 0.0f) {\n                            arg0->gravity = temp_f16 * 6.0f;\n                            arg0->y_velocity *= 0.5f;\n                        }\n                    } else {\n                        temp_f12 = temp_f16 * 80.0f;\n                        if (arg0->y_velocity > temp_f12) {\n                            arg0->y_velocity = temp_f12;\n                        }\n                        arg0->gravity = temp_f16 * -6.0f;\n                    }\n                }\n            }\n        }\n        temp_f12 = -100.0f * arg1;\n        if (arg0->y_velocity < temp_f12) {\n            arg0->y_velocity = temp_f12;\n        }\n    }\n}",
+        "score": 0.0,
+        "reason": "compile_error",
+        "diffs": [],
+        "timestamp": "2026-08-22T07:18:48.499967+00:00",
+        "contextPatch": [
+          {
+            "path": "conker/src/game_83300.c",
+            "oldText": "void func_15058F24(struct127 *arg0, f32, f32);",
+            "newText": "void func_15058F24();"
+          }
+        ]
+      },
+      {
+        "code": "void func_15058F24(struct127 *arg0, f32 arg1, register f32 arg2) {\n    register f32 temp_f14;\n    f32 temp_f0;\n    register f32 temp_f12;\n    f32 tmp;\n    f32 temp_f16;\n\n    temp_f0 = arg1;\n    temp_f16 = 0.5f - arg1;\n    if (arg1 >= 0.5f) {\n        arg1 -= 0.5f;\n    }\n    temp_f14 = arg0->unk118 + 9.0f;\n    if ((arg0->y_position < temp_f14) || (arg0->in_water >= 0x64)) {\n        if (arg0->in_water == 0) {\n            arg0->y_position = temp_f14;\n            arg0->in_water = (u8)0x64U;\n            arg0->gravity = temp_f16 * -6.0f;\n            arg0->y_velocity *= temp_f0;\n        } else {\n            if ((temp_f14 + 100.0f) < arg0->y_position) {\n                arg0->in_water = (u8)0U;\n            }\n            if (temp_f16 < 0.0f) {\n                arg0->gravity = temp_f16 * -6.0f;\n            } else {\n                temp_f12 = arg0->y_position - ((temp_f14 + 10.0f) - (120.0f * arg1));\n                if ((fabsf(temp_f12) < 2.0f) && (fabsf(arg0->y_velocity) < 2.0f)) {\n                    tmp = temp_f12 * D_800994A4;\n                    arg0->gravity = 1.0f;\n                    arg0->y_velocity = 0.0f;\n                    arg0->y_position -= tmp;\n                } else {\n                    if (temp_f12 > 0.0f) {\n                        if (arg0->y_velocity > 0.0f) {\n                            arg0->gravity = temp_f16 * 6.0f;\n                            arg0->y_velocity *= 0.5f;\n                        }\n                    } else {\n                        temp_f12 = temp_f16 * 80.0f;\n                        if (arg0->y_velocity > temp_f12) {\n                            arg0->y_velocity = temp_f12;\n                        }\n                        arg0->gravity = temp_f16 * -6.0f;\n                    }\n                }\n            }\n        }\n        temp_f12 = -100.0f * arg1;\n        if (arg0->y_velocity < temp_f12) {\n            arg0->y_velocity = temp_f12;\n        }\n    }\n}",
+        "score": 0.8148,
+        "reason": "structural_diffs=25, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 5,
+            "type": "structural",
+            "target": "lui at, 16656",
+            "generated": "sw a2, 24(sp)"
+          },
+          {
+            "line": 7,
+            "type": "structural",
+            "target": "mtc1 at, f6",
+            "generated": "lui at, 16656"
+          },
+          {
+            "line": 8,
+            "type": "structural",
+            "target": "mov.s f12, f20",
+            "generated": "mtc1 at, f6"
+          },
+          {
+            "line": 9,
+            "type": "structural",
+            "target": "sub.s f16, f0, f20",
+            "generated": "mov.s f12, f20"
+          },
+          {
+            "line": 10,
+            "type": "structural",
+            "target": "bc1fl L0",
+            "generated": "bc1f L0"
+          },
+          {
+            "line": 11,
+            "type": "structural",
+            "target": "lwc1 f4, 280(a0)",
+            "generated": "sub.s f16, f0, f20"
+          },
+          {
+            "line": 85,
+            "type": "structural",
+            "target": "mtc1 at, f10",
+            "generated": "mtc1 at, f8"
+          },
+          {
+            "line": 86,
+            "type": "structural",
+            "target": "mul.s f8, f12, f6",
+            "generated": "mul.s f14, f12, f6"
+          },
+          {
+            "line": 89,
+            "type": "structural",
+            "target": "swc1 f10, 36(a0)",
+            "generated": "swc1 f8, 36(a0)"
+          },
+          {
+            "line": 90,
+            "type": "structural",
+            "target": "sub.s f4, f2, f8",
+            "generated": "sub.s f4, f2, f14"
+          },
+          {
+            "line": 97,
+            "type": "structural",
+            "target": "mtc1 at, f6",
+            "generated": "mtc1 at, f10"
+          },
+          {
+            "line": 102,
+            "type": "structural",
+            "target": "mtc1 at, f6",
+            "generated": "mtc1 at, f10"
+          },
+          {
+            "line": 104,
+            "type": "structural",
+            "target": "mtc1 at, f4",
+            "generated": "mtc1 at, f8"
+          },
+          {
+            "line": 105,
+            "type": "structural",
+            "target": "mul.s f8, f16, f6",
+            "generated": "mul.s f6, f16, f10"
+          },
+          {
+            "line": 107,
+            "type": "structural",
+            "target": "mul.s f10, f0, f4",
+            "generated": "mul.s f4, f0, f8"
+          },
+          {
+            "line": 108,
+            "type": "structural",
+            "target": "swc1 f8, 36(a0)",
+            "generated": "swc1 f6, 36(a0)"
+          },
+          {
+            "line": 109,
+            "type": "structural",
+            "target": "swc1 f10, 32(a0)",
+            "generated": "swc1 f4, 32(a0)"
+          },
+          {
+            "line": 112,
+            "type": "structural",
+            "target": "mtc1 at, f6",
+            "generated": "mtc1 at, f10"
+          },
+          {
+            "line": 114,
+            "type": "structural",
+            "target": "mtc1 at, f8",
+            "generated": "mtc1 at, f6"
+          },
+          {
+            "line": 115,
+            "type": "structural",
+            "target": "mul.s f2, f16, f6",
+            "generated": "mul.s f2, f16, f10"
+          }
+        ],
+        "timestamp": "2026-08-22T07:19:38.428990+00:00"
       }
     ]
   },
