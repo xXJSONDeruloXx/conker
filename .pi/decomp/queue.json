@@ -77523,8 +77523,8 @@
       "has-calls",
       "branchy"
     ],
-    "attempts": 3,
-    "lastScore": 0.022,
+    "attempts": 6,
+    "lastScore": 0.044,
     "status": "pending",
     "history": [
       {
@@ -77549,6 +77549,42 @@
         "reason": "length_mismatch (target=91, generated=84), raw_opcode_mismatch",
         "diffs": [],
         "timestamp": "2026-08-22T20:32:55.907Z",
+        "contextPatch": []
+      },
+      {
+        "code": "#include <ultra64.h>\n#include \"functions.h\"\n#include \"variables.h\"\n#include \"macros.h\"\n#include \"libc/stdarg.h\"\n\n\nvoid func_10011310(void) {\n    struct49 *tmp;\n    struct49 *end;\n    struct120 *entry;\n    struct31 *handle;\n    struct49 *start;\n    s32 count;\n    s32 out;\n    s32 i;\n    s32 removed;\n\n    count = D_80041F50;\n    i = removed = 0;\n    out = count;\n    if (count > 0) {\n        tmp = (struct49 *) D_80041F10;\n        start = (struct49 *) D_80041F10;\n        do {\n            if (*((u8 *) tmp + 2) > 0) {\n                if (1) {\n                    *((u8 *) tmp + 2) = *((u8 *) tmp + 2) - 1;\n                }\n                end = (struct49 *) &D_80041F10[count];\n            } else {\n                removed = 1;\n                entry = &D_800425E0[*((u8 *) tmp + 3)];\n                do {\n                    if (*(u16 *) tmp == entry->unk0) {\n                    handle = entry->unk8;\n                    entry->unk0 = 0;\n                    entry->unk4 = 0;\n                    if (handle != NULL) {\n                        func_10017594(handle);\n                        count = D_80041F50;\n                    }\n                    entry->unk8 = NULL;\n                }\n                } while(0);\n                end = (struct49 *) D_80041F10 + count;\n                out = out - 1;\n            }\n            if ((struct49 *) &D_80041F10[i] != tmp) {\n                if (1) {\n                    *(struct49 *) ((u32) start + (i << 2)) = *tmp;\n                }\n            }\n            if (removed != 0) {\n                i++;\n            }\n            tmp++;\n        } while (tmp < end);\n    }\n    D_80041F50 = (out & 0x7F);\n}",
+        "score": -0.43333333333333335,
+        "reason": "transmuter_best=43",
+        "diffs": [
+          "transmuter: initial=58→best=43, iters=2019, compiled=1109, errors=891, forks=54",
+          "fork_rules: insert-block, chain-assignment, add-mask, delete-stmt, randomize-type, refer-to-var, self-assignment, duplicate-assignment, mult-zero, reorder-stmts",
+          "last_fork_rule: insert-block",
+          "config: timeout=300s, maxCompiles=2000, concurrency=7, profile=ido, isolate=true, reduce=false, depth=1"
+        ],
+        "timestamp": "2026-08-22T20:36:22.788Z"
+      },
+      {
+        "code": "void func_10011310(void) {\n    struct49 *tmp;\n    struct49 *end;\n    struct120 *entry;\n    struct31 *handle;\n    struct49 *start;\n    s32 count;\n    s32 out;\n    s32 i;\n    s32 removed;\n\n    count = D_80041F50;\n    i = 0;\n    removed = 0;\n    out = count;\n    if (count > 0) {\n        tmp = (struct49 *) D_80041F10;\n        start = (struct49 *) D_80041F10;\n        do {\n            if (*((u8 *) tmp + 2) > 0) {\n                *((u8 *) tmp + 2) = *((u8 *) tmp + 2) - 1;\n                end = (struct49 *) ((u32) D_80041F10 + (count << 2));\n            } else {\n                removed = 1;\n                entry = &D_800425E0[*((u8 *) tmp + 3)];\n                if (*(u16 *) tmp == entry->unk0) {\n                    handle = entry->unk8;\n                    entry->unk0 = 0;\n                    entry->unk4 = 0;\n                    if (handle != NULL) {\n                        func_10017594(handle);\n                        count = D_80041F50;\n                    }\n                    entry->unk8 = NULL;\n                }\n                end = (struct49 *) &D_80041F10[count];\n                out = out - 1;\n            }\n            if ((struct49 *) ((u32) D_80041F10 + (i << 2)) != tmp) {\n                *(struct49 *) ((u32) start + (i << 2)) = *tmp;\n            }\n            if (removed != 0) {\n                i++;\n            }\n            tmp++;\n        } while (tmp < end);\n    }\n    D_80041F50 = out;\n}",
+        "score": 0.011,
+        "reason": "length_mismatch (target=91, generated=83), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-22T20:41:09.858Z",
+        "contextPatch": []
+      },
+      {
+        "code": "void func_10011310(void) {\n    struct49 *tmp;\n    struct49 *end;\n    struct120 *entry;\n    struct31 *handle;\n    struct49 *start;\n    s32 count;\n    s32 out;\n    s32 i;\n    s32 removed;\n\n    count = D_80041F50;\n    i = 0;\n    removed = 0;\n    out = count;\n    if (count > 0) {\n        tmp = (struct49 *) D_80041F10;\n        start = (struct49 *) D_80041F10;\n        do {\n            if (*((u8 *) tmp + 2) > 0) {\n                *((u8 *) tmp + 2) = *((u8 *) tmp + 2) - 1;\n                end = (struct49 *) &D_80041F10[count];\n            } else {\n                removed = 1;\n                entry = &D_800425E0[*((u8 *) tmp + 3)];\n                if (*(u16 *) tmp == entry->unk0) {\n                    handle = entry->unk8;\n                    entry->unk0 = 0;\n                    entry->unk4 = 0;\n                    if (handle != NULL) {\n                        func_10017594(handle);\n                        count = D_80041F50;\n                    }\n                    entry->unk8 = NULL;\n                }\n                end = (struct49 *) D_80041F10 + count;\n                out = out - 1;\n            }\n            if ((struct49 *) &D_80041F10[i] != tmp) {\n                *(struct49 *) ((u32) start + (i << 2)) = *tmp;\n            }\n            if (removed != 0) {\n                i++;\n            } else {\n                removed = 0;\n            }\n            tmp++;\n        } while (tmp < end);\n    }\n    D_80041F50 = out;\n}",
+        "score": 0.022,
+        "reason": "length_mismatch (target=91, generated=86), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-22T20:43:32.568Z",
+        "contextPatch": []
+      },
+      {
+        "code": "void func_10011310(void) {\n    struct49 *tmp;\n    struct49 *end;\n    struct120 *entry;\n    struct31 *handle;\n    struct49 *start;\n    s32 count;\n    s32 out;\n    s32 i;\n    s32 removed;\n\n    count = D_80041F50;\n    i = 0;\n    removed = 0;\n    out = count;\n    if (count > 0) {\n        tmp = (struct49 *) D_80041F10;\n        start = (struct49 *) D_80041F10;\n        do {\n            if (*((u8 *) tmp + 2) > 0) {\n                *((u8 *) tmp + 2) = *((u8 *) tmp + 2) - 1;\n                end = (struct49 *) &D_80041F10[count];\n            } else {\n                removed = 1;\n                entry = &D_800425E0[*((u8 *) tmp + 3)];\n                if (*(u16 *) tmp == entry->unk0) {\n                    handle = entry->unk8;\n                    entry->unk0 = 0;\n                    entry->unk4 = 0;\n                    if (handle != NULL) {\n                        func_10017594(handle);\n                        count = D_80041F50;\n                    }\n                    entry->unk8 = NULL;\n                }\n                end = (struct49 *) D_80041F10 + count;\n                out -= 1;\n            }\n            if ((struct49 *) &D_80041F10[i & 0xFF] != tmp) {\n                *(struct49 *) ((u32) start + ((i << 1) << 1)) = *tmp;\n            }\n            do {\n                if (removed != 0) {\n                    i++;\n                } else {\n                    removed = 0;\n                }\n                tmp++;\n            } while (0);\n        } while (tmp < end);\n    }\n    D_80041F50 = out;\n}",
+        "score": 0.044,
+        "reason": "length_mismatch (target=91, generated=86), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-22T20:58:41.620Z",
         "contextPatch": []
       }
     ]
