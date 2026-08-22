@@ -44850,8 +44850,8 @@
     "instructions": 92,
     "difficulty": "hard",
     "tags": [],
-    "attempts": 15,
-    "lastScore": 0.9674,
+    "attempts": 18,
+    "lastScore": 0.9348,
     "status": "pending",
     "history": [
       {
@@ -45248,6 +45248,138 @@
           }
         ],
         "timestamp": "2026-08-22T06:47:30.357845+00:00"
+      },
+      {
+        "code": "void guMtxCatF(f32 mf[4][4], f32 nf[4][4], f32 res[4][4]) {    s32 j;\n    s32 k;\n    f32 temp[4][4];\n    s32 i;\n\n\n    for (i = 0; i < 4; i++) {\n        for (j = 0; j < 4; j++) {\n            temp[i][j] = 0.0f;\n            for (k = 0; k < 4; k++) {\n                temp[i][j] += mf[i][k] * nf[k][j];\n            }\n        }\n    }\n    for (i = 0; i < 4; i++) {\n        for (j = 0; j < 4; j++) {\n            res[i][j] = temp[i][j];\n        }\n    }\n}",
+        "score": 0.9348,
+        "reason": "structural_diffs=6, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 2,
+            "type": "structural",
+            "target": "addiu v1, sp, 28",
+            "generated": "addiu v1, sp, 32"
+          },
+          {
+            "line": 3,
+            "type": "structural",
+            "target": "addiu t3, sp, 92",
+            "generated": "move a3, a0"
+          },
+          {
+            "line": 4,
+            "type": "structural",
+            "target": "move a3, a0",
+            "generated": "move t0, a1"
+          },
+          {
+            "line": 5,
+            "type": "structural",
+            "target": "move t0, a1",
+            "generated": "addiu t3, sp, 96"
+          },
+          {
+            "line": 75,
+            "type": "structural",
+            "target": "addiu a0, sp, 28",
+            "generated": "addiu a0, sp, 32"
+          },
+          {
+            "line": 76,
+            "type": "structural",
+            "target": "addiu v0, sp, 92",
+            "generated": "addiu v0, sp, 96"
+          }
+        ],
+        "timestamp": "2026-08-22T06:49:54.901623+00:00"
+      },
+      {
+        "code": "void guMtxCatF(f32 mf[4][4], f32 nf[4][4], f32 res[4][4]) {    f32 temp[4][4];\n    s32 k;\n    s32 j;\n    s32 i;\n\n\n    for (i = 0; i < 4; i++) {\n        for (j = 0; j < 4; j++) {\n            temp[i][j] = 0.0f;\n            for (k = 0; k < 4; k++) {\n                temp[i][j] += mf[i][k] * nf[k][j];\n            }\n        }\n    }\n    for (i = 0; i < 4; i++) {\n        for (j = 0; j < 4; j++) {\n            res[i][j] = temp[i][j];\n        }\n    }\n}",
+        "score": 0.9348,
+        "reason": "structural_diffs=6, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 2,
+            "type": "structural",
+            "target": "addiu v1, sp, 28",
+            "generated": "addiu v1, sp, 40"
+          },
+          {
+            "line": 3,
+            "type": "structural",
+            "target": "addiu t3, sp, 92",
+            "generated": "move a3, a0"
+          },
+          {
+            "line": 4,
+            "type": "structural",
+            "target": "move a3, a0",
+            "generated": "move t0, a1"
+          },
+          {
+            "line": 5,
+            "type": "structural",
+            "target": "move t0, a1",
+            "generated": "addiu t3, sp, 104"
+          },
+          {
+            "line": 75,
+            "type": "structural",
+            "target": "addiu a0, sp, 28",
+            "generated": "addiu a0, sp, 40"
+          },
+          {
+            "line": 76,
+            "type": "structural",
+            "target": "addiu v0, sp, 92",
+            "generated": "addiu v0, sp, 104"
+          }
+        ],
+        "timestamp": "2026-08-22T06:49:59.270148+00:00"
+      },
+      {
+        "code": "void guMtxCatF(f32 mf[4][4], f32 nf[4][4], f32 res[4][4]) {    s32 i;\n    f32 temp[4][4];\n    s32 j;\n    s32 k;\n\n\n    for (i = 0; i < 4; i++) {\n        for (j = 0; j < 4; j++) {\n            temp[i][j] = 0.0f;\n            for (k = 0; k < 4; k++) {\n                temp[i][j] += mf[i][k] * nf[k][j];\n            }\n        }\n    }\n    for (i = 0; i < 4; i++) {\n        for (j = 0; j < 4; j++) {\n            res[i][j] = temp[i][j];\n        }\n    }\n}",
+        "score": 0.9348,
+        "reason": "structural_diffs=6, raw_opcode_mismatch",
+        "diffs": [
+          {
+            "line": 2,
+            "type": "structural",
+            "target": "addiu v1, sp, 28",
+            "generated": "addiu v1, sp, 36"
+          },
+          {
+            "line": 3,
+            "type": "structural",
+            "target": "addiu t3, sp, 92",
+            "generated": "move a3, a0"
+          },
+          {
+            "line": 4,
+            "type": "structural",
+            "target": "move a3, a0",
+            "generated": "move t0, a1"
+          },
+          {
+            "line": 5,
+            "type": "structural",
+            "target": "move t0, a1",
+            "generated": "addiu t3, sp, 100"
+          },
+          {
+            "line": 75,
+            "type": "structural",
+            "target": "addiu a0, sp, 28",
+            "generated": "addiu a0, sp, 36"
+          },
+          {
+            "line": 76,
+            "type": "structural",
+            "target": "addiu v0, sp, 92",
+            "generated": "addiu v0, sp, 100"
+          }
+        ],
+        "timestamp": "2026-08-22T06:50:02.974639+00:00"
       }
     ]
   },
