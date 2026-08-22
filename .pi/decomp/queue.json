@@ -50097,7 +50097,7 @@
     "tags": [
       "has-calls"
     ],
-    "attempts": 3,
+    "attempts": 6,
     "lastScore": 0.1889,
     "status": "pending",
     "history": [
@@ -50122,6 +50122,42 @@
         "reason": "length_mismatch (target=90, generated=93), raw_opcode_mismatch",
         "diffs": [],
         "timestamp": "2026-08-22T18:59:00.092Z",
+        "contextPatch": []
+      },
+      {
+        "code": "void func_1513E13C(struct210 *arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, u8 arg6) {\n    f32 sp48;\n    f32 temp_f0;\n    f32 temp_f12;\n    f32 temp_f14;\n    f32 temp_f16;\n    f32 temp_f2;\n    s32 temp_f10;\n\n    sp48 = func_151423D8(arg6 - 0x40);\n    temp_f0 = func_151423D8(arg6);\n    temp_f14 = arg4 * temp_f0;\n    temp_f12 = arg5 * sp48;\n    arg0->unk40 = (arg1 + temp_f14) - temp_f12;\n    temp_f10 = arg2;\n    arg0->unk42 = temp_f10;\n    temp_f16 = arg5 * temp_f0;\n    temp_f2 = arg4 * sp48;\n    arg0->unk44 = (arg3 + temp_f16) + temp_f2;\n    arg0->unk50 = (arg1 - temp_f14) - temp_f12;\n    arg0->unk52 = temp_f10;\n    arg0->unk54 = (arg3 + temp_f16) - temp_f2;\n    arg0->unk62 = temp_f10;\n    arg0->unk60 = (arg1 - temp_f14) + temp_f12;\n    arg0->unk72 = temp_f10;\n    arg0->unk70 = (arg1 + temp_f14) + temp_f12;\n    arg0->unk64 = (arg3 - temp_f16) - temp_f2;\n    arg0->unk74 = (arg3 - temp_f16) + temp_f2;\n}",
+        "score": 0.0778,
+        "reason": "length_mismatch (target=90, generated=85), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-22T19:00:36.898Z",
+        "contextPatch": []
+      },
+      {
+        "code": "void func_1513E13C(struct210 *arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, u8 arg6) {\n    f32 sp48;\n    f32 temp_f0;\n    f32 temp_f12;\n    f32 temp_f14;\n    f32 temp_f16;\n    f32 temp_f18;\n    f32 temp_f2;\n    s32 temp_f10;\n\n    sp48 = func_151423D8(arg6 - 0x40);\n    temp_f0 = func_151423D8(arg6);\n    temp_f14 = arg4 * temp_f0;\n    temp_f12 = arg5 * sp48;\n    temp_f18 = arg1 + temp_f14;\n    arg0->unk40 = temp_f18 - temp_f12;\n    temp_f10 = arg2;\n    arg0->unk42 = temp_f10;\n    temp_f16 = arg5 * temp_f0;\n    temp_f2 = arg4 * sp48;\n    arg0->unk44 = (arg3 + temp_f16) + temp_f2;\n    arg0->unk50 = (arg1 - temp_f14) - temp_f12;\n    arg0->unk52 = temp_f10;\n    arg0->unk54 = (arg3 + temp_f16) - temp_f2;\n    arg0->unk62 = temp_f10;\n    arg0->unk60 = (arg1 - temp_f14) + temp_f12;\n    arg0->unk72 = temp_f10;\n    arg0->unk70 = temp_f18 + temp_f12;\n    arg0->unk64 = (arg3 - temp_f16) - temp_f2;\n    arg0->unk74 = (arg3 - temp_f16) + temp_f2;\n}",
+        "score": 0.0778,
+        "reason": "length_mismatch (target=90, generated=85), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-22T19:02:04.903Z",
+        "contextPatch": []
+      },
+      {
+        "code": "#include <ultra64.h>\n#include \"functions.h\"\n#include \"variables.h\"\n#include \"macros.h\"\n#include \"libc/stdarg.h\"\n\n\nvoid func_1513E13C(struct210 *arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, u8 arg6) {\n    f32 sp48;\n    f32 temp_f0;\n    f32 temp_f12;\n    f32 temp_f14;\n    f32 temp_f16;\n    f32 temp_f18;\n    f32 temp_f2;\n    f32 *_ptr503 = &temp_f2;\n    s32 temp_f10;\n\n    sp48 = func_151423D8(arg6 - 0x40);\n    temp_f0 = func_151423D8(arg6);\n    temp_f14 = arg4 * temp_f0;\n    temp_f12 = arg5 * sp48;\n    temp_f18 = arg1 + temp_f14;\n    arg0->unk40 = temp_f18 - temp_f12;\n    temp_f10 = arg2;\n    arg0->unk42 = temp_f10;\n    temp_f16 = arg5 * temp_f0;\n    temp_f2 = arg4 * sp48;\n    arg0->unk44 = (arg3 + temp_f16) + temp_f2;\n    arg0->unk50 = (arg1 - temp_f14) - temp_f12;\n    arg0->unk52 = temp_f10;\n    arg0->unk54 = (arg3 + temp_f16) - temp_f2;\n    arg0->unk62 = temp_f10;\n    arg0->unk60 = (arg1 - temp_f14) + temp_f12;\n    arg0->unk72 = temp_f10;\n    arg0->unk64 = (arg3 - temp_f16) - (*_ptr503);\n    arg0->unk70 = temp_f18 + temp_f12;\n    arg0->unk74 = (arg3 - temp_f16) + temp_f2;\n}",
+        "score": -0.8,
+        "reason": "transmuter_best=54",
+        "diffs": [
+          "transmuter: initial=81→best=54, iters=2004, compiled=1231, errors=769, forks=101",
+          "fork_rules: refer-to-var, comma-expr, pad-var-decl, commutative-swap, duplicate-assignment, expand-expr, randomize-type, delete-stmt, reorder-stmts, temp-for-expr, reorder-decls, cast-expr, self-assignment, mult-zero, add-mask",
+          "last_fork_rule: refer-to-var",
+          "config: timeout=300s, maxCompiles=2000, concurrency=7, profile=ido, isolate=true, reduce=false, depth=1"
+        ],
+        "timestamp": "2026-08-22T19:04:14.830Z"
+      },
+      {
+        "code": "void func_1513E13C(struct210 *arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, u8 arg6) {\n    f32 sp48;\n    f32 sp30;\n    f32 sp1C;\n    f32 temp_f0;\n    f32 temp_f12;\n    f32 temp_f14;\n    f32 temp_f16;\n    f32 temp_f2;\n    s32 temp_f10;\n\n    sp48 = func_151423D8(arg6 - 0x40);\n    temp_f0 = func_151423D8(arg6);\n    temp_f14 = arg4 * temp_f0;\n    temp_f12 = arg5 * sp48;\n    arg0->unk40 = (arg1 + temp_f14) - temp_f12;\n    temp_f10 = arg2;\n    arg0->unk42 = temp_f10;\n    temp_f16 = arg5 * temp_f0;\n    temp_f2 = arg4 * sp48;\n    sp1C = arg3 + temp_f16;\n    arg0->unk44 = sp1C + temp_f2;\n    arg0->unk50 = (arg1 - temp_f14) - temp_f12;\n    arg0->unk52 = temp_f10;\n    arg0->unk54 = sp1C - temp_f2;\n    arg0->unk62 = temp_f10;\n    arg0->unk60 = (arg1 - temp_f14) + temp_f12;\n    arg0->unk72 = temp_f10;\n    arg0->unk70 = (arg1 + temp_f14) + temp_f12;\n    sp30 = arg3 - temp_f16;\n    arg0->unk64 = sp30 - temp_f2;\n    arg0->unk74 = sp30 + temp_f2;\n}",
+        "score": 0.1889,
+        "reason": "length_mismatch (target=90, generated=85), raw_opcode_mismatch",
+        "diffs": [],
+        "timestamp": "2026-08-22T19:10:27.856Z",
         "contextPatch": []
       }
     ]
